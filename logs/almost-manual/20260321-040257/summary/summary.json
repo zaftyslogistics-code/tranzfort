@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260321-040257",
+  "mode": "supplier",
+  "device_id": "89P7MZVWV4Z9C6GE",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260321-040257",
+  "status": "PASS",
+  "completed_steps": [
+    "adb_devices",
+    "tranzfort_analyze",
+    "admin_analyze",
+    "tranzfort_tests",
+    "admin_tests",
+    "adb_logcat_clear",
+    "tranzfort_build_debug_apk",
+    "tranzfort_install_apk",
+    "tranzfort_force_stop",
+    "tranzfort_launch",
+    "adb_package_dump"
+  ],
+  "failed_steps": [],
+  "runner_error_path": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260321-040257\\summary\\runner-error.txt",
+  "docs": [
+    "docs/almost-manual-testing.md"
+  ],
+  "scripts": [
+    "scripts/testing/run_almost_manual.ps1",
+    "scripts/testing/run_phase_c_baseline.ps1"
+  ]
+}

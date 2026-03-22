@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260319-051218",
+  "mode": "full",
+  "device_id": "89P7MZVWV4Z9C6GE",
+  "docs": {
+    "master_plan": "docs/almost-manual-testing.md"
+  },
+  "apps": {
+    "trucker": {
+      "expected_profile_id": "7aa7562b-c9fc-42f9-b7dc-0f9c1429c8cb",
+      "cwd": "TranZfort",
+      "package": "com.tranzfort.app",
+      "auth_mode": "manual_google_sign_in"
+    },
+    "supplier": {
+      "identity": "coolandwildsome@gmail.com",
+      "cwd": "TranZfort",
+      "package": "com.tranzfort.app",
+      "auth_mode": "manual_live_sign_in"
+    },
+    "admin": {
+      "password_source": "not_requested",
+      "email": "zaftyslogistics@gmail.com",
+      "cwd": "Admin",
+      "package": "com.tranzfort.admin",
+      "apk": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\Admin\\build\\app\\outputs\\flutter-apk\\app-debug.apk"
+    }
+  }
+}

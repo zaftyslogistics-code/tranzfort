@@ -1,0 +1,3 @@
+Sign in to the user app with the supplier identity.
+Execute the supplier walkthrough from docs/almost-manual-testing.md.
+Record failures and evidence paths.

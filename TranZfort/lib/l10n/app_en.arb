@@ -1,0 +1,2377 @@
+{
+  "appTitle": "TranZfort",
+  "splashLoadingWorkspace": "Loading your workspace...",
+  "authGoogleFailureMessage": "We could not continue with Google right now. Retry shortly or use email sign-in instead.",
+  "authWelcomeTitle": "Welcome to TranZfort",
+  "authWelcomeSubtitle": "Choose Google or email sign-in to continue into your supplier or trucker workspace.",
+  "splashSetupTitle": "Set up device access",
+  "splashSetupSubtitle": "Allow notifications, voice guidance, and location access now so your first login and verification flow can continue smoothly.",
+  "splashSetupEnableVoiceAction": "Enable voice guidance",
+  "splashSetupOpenLocationSettingsAction": "Open location settings",
+  "authContinueWithGoogle": "Continue with Google",
+  "authContinueWithPassword": "Continue with email and password",
+  "authTermsOfService": "Terms of service",
+  "authTermsInfoMessage": "TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.",
+  "authPasswordTitle": "Email and password",
+  "authPasswordSubtitle": "Sign in with your email and password, or create a new TranZfort account to continue.",
+  "authPasswordLabel": "Password",
+  "authPasswordConfirmLabel": "Confirm password",
+  "authPasswordHint": "Enter at least 8 characters",
+  "authPasswordModeSignIn": "Sign in",
+  "authPasswordModeSignUp": "Create account",
+  "authPasswordSwitchToSignIn": "Already have an account? Sign in",
+  "authPasswordSwitchToSignUp": "New to TranZfort? Create account",
+  "authPasswordSignInAction": "Sign in with password",
+  "authPasswordSignUpAction": "Create account",
+  "authPasswordInvalidEmailMessage": "Enter a valid email address.",
+  "authPasswordTooShortMessage": "Enter a password with at least 8 characters.",
+  "authPasswordConfirmMismatchMessage": "The password confirmation does not match.",
+  "authPasswordSignInFailureMessage": "We could not sign you in with email and password right now. Retry shortly or use another sign-in method.",
+  "authPasswordSignUpFailureMessage": "We could not create your account right now. Retry shortly with the same details.",
+  "authPasswordSignUpSuccessMessage": "Your account was created. If email confirmation is required, finish that step and then sign in with your new password.",
+  "authPasswordCheckEmailTitle": "Check your email",
+  "authPasswordCheckEmailSubtitle": "We sent a verification link to {email}. Open that email, finish verification, and then return here to sign in.",
+  "@authPasswordCheckEmailSubtitle": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "authPasswordResendVerificationAction": "Resend verification email",
+  "authPasswordResendVerificationSuccessMessage": "We sent a fresh verification email to {email}. Open it, finish verification, and then sign in.",
+  "@authPasswordResendVerificationSuccessMessage": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "authPasswordResendVerificationFailureMessage": "We could not resend the verification email right now. Retry shortly or use a different email.",
+  "authPasswordBackToSignInAction": "Back to sign in",
+  "authPasswordUseDifferentEmailAction": "Use a different email",
+  "onboardingSelectRoleError": "Select whether you are joining as a supplier or trucker.",
+  "onboardingRoleWorkspaceFailure": "We could not prepare your role workspace right now. Retry shortly after selecting your role again.",
+  "onboardingRoleSaveFailure": "We could not save your role right now. Retry shortly.",
+  "onboardingChooseRoleTitle": "Choose role",
+  "onboardingRoleQuestion": "Which role fits your work?",
+  "onboardingRoleSubtitle": "Your role decides the tools, dashboard, and workflows TranZfort will prepare for you.",
+  "onboardingSupplierTitle": "Supplier",
+  "onboardingSupplierSubtitle": "Post loads, review bookings, manage trips, and track delivery follow-through.",
+  "onboardingTruckerTitle": "Trucker",
+  "onboardingTruckerSubtitle": "Find loads, manage fleet readiness, and execute active trips from one place.",
+  "onboardingContinue": "Continue",
+  "onboardingProfileSaveFailure": "We could not save your profile right now. Review the details and retry shortly.",
+  "onboardingCompleteProfileTitle": "Complete profile",
+  "onboardingCompleteProfileHeading": "Finish your basic profile",
+  "onboardingCompleteProfileSubtitle": "Add the core contact details that will follow you through verification and daily operations.",
+  "onboardingFullNameLabel": "Full name",
+  "onboardingFullNameHint": "Enter your full name",
+  "onboardingMobileLabel": "Mobile number",
+  "onboardingTermsAcceptance": "By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.",
+  "onboardingSaveAndContinue": "Save and continue",
+  "commonRetry": "Retry",
+  "shellTooltipVoiceAssistance": "Voice assistance",
+  "supplierQuickActionNotifications": "Notifications",
+  "supplierMyLoadsTitle": "My loads",
+  "supplierMyLoadsSubtitle": "Monitor active supplier loads, booking demand, and completed load history from one place.",
+  "supplierMyLoadsTabActive": "Active",
+  "supplierMyLoadsTabCompleted": "Completed",
+  "supplierMyLoadsLoadFailureTitle": "Unable to load your supplier loads",
+  "supplierMyLoadsFailureMessage": "We could not load your supplier loads right now. Retry shortly to refresh the latest load list.",
+  "supplierMyLoadsEmptyActiveTitle": "No active loads yet",
+  "supplierMyLoadsEmptyCompletedTitle": "No completed loads yet",
+  "supplierMyLoadsEmptyActiveSubtitle": "Post your first load to start receiving booking requests and execution updates here.",
+  "supplierMyLoadsEmptyCompletedSubtitle": "Completed, cancelled, expired, and externally filled loads will appear here once active work is closed out.",
+  "supplierMyLoadsOpenActiveLoads": "Open active loads",
+  "supplierMyLoadsMoreUnavailableTitle": "Unable to load more supplier loads",
+  "supplierMyLoadsPaginationFailureMessage": "We could not load more supplier loads right now. Retry shortly to refresh the latest load history.",
+  "supplierMyLoadsLoadingMore": "Loading more loads...",
+  "supplierMyLoadsLoadMore": "Load more loads",
+  "supplierLoadCardPickupDate": "Pickup {value}",
+  "supplierLoadCardTrucks": "{booked}/{needed} trucks booked",
+  "supplierLoadCardTrackLoad": "Track load",
+  "supplierLoadCardViewHistory": "View history",
+  "supplierLoadCardViewDetails": "View details",
+  "supplierRecentLoadsTitle": "Recent loads",
+  "supplierDashboardWelcomeBack": "Welcome back, {name}",
+  "@supplierDashboardWelcomeBack": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "supplierDashboardHeroSubtitle": "Track supplier verification, review Super Load readiness, and keep your latest loads and execution activity in view.",
+  "supplierDashboardOverviewTitle": "Dashboard overview",
+  "supplierDashboardSuperLoadReadinessTitle": "Super Load readiness",
+  "supplierDashboardQuickActionsTitle": "Quick actions",
+  "supplierDashboardQuickActionChatLabel": "Chat",
+  "supplierDashboardPostLoadAction": "Post Load",
+  "supplierDashboardHeroSummaryBody": "Keep your supplier verification current, monitor active loads, and follow the latest Super Load readiness signals visible in this workspace.",
+  "supplierDashboardStatsActiveLoadsLabel": "Active loads",
+  "supplierDashboardStatsActiveLoadsHelper": "Loads currently open for supplier-side tracking.",
+  "supplierDashboardStatsPendingBookingsLabel": "Pending bookings",
+  "supplierDashboardStatsPendingBookingsHelper": "Booking requests that still need supplier attention.",
+  "supplierDashboardStatsInTransitTripsLabel": "Trips in transit",
+  "supplierDashboardStatsInTransitTripsHelper": "Linked trips currently moving against your loads.",
+  "supplierDashboardStatsCompletedTripsLabel": "Completed trips",
+  "supplierDashboardStatsCompletedTripsHelper": "Trips that have reached their recorded completion state.",
+  "supplierDashboardOpenMyLoadsAction": "Open my loads",
+  "supplierDashboardLoadFailureTitle": "Unable to load your supplier dashboard",
+  "supplierDashboardLoadFailureMessage": "We could not load your supplier dashboard right now. Retry shortly to refresh the latest overview metrics.",
+  "supplierDashboardAccountStateUnavailableTitle": "Supplier account state unavailable",
+  "supplierDashboardAccountStateUnavailableMessage": "We could not load your current supplier account state right now. Retry shortly to restore the latest verification and company details.",
+  "supplierDashboardRecentLoadsUnavailableTitle": "Recent loads unavailable",
+  "supplierDashboardRecentLoadsUnavailableMessage": "We could not load your recent supplier loads right now. Retry shortly to refresh the latest load list.",
+  "supplierDashboardNoLoadsPostedTitle": "No loads posted yet",
+  "supplierDashboardNoLoadsPostedSubtitle": "Post your first supplier load to start receiving booking requests and linked trip activity.",
+  "shellTabHome": "Home",
+  "shellTitleSupplierDashboard": "Supplier dashboard",
+  "shellTabLoads": "Loads",
+  "shellTitleMyLoads": "My Loads",
+  "shellTabTrips": "Trips",
+  "shellQuickActionTrips": "Trips",
+  "shellDashboardTitle": "Dashboard",
+  "shellTabFind": "Find",
+  "shellTitleFindLoads": "Find Loads",
+  "shellDrawerSupplierWorkspace": "Supplier workspace",
+  "shellDrawerTruckerWorkspace": "Trucker workspace",
+  "shellDrawerDashboard": "Dashboard",
+  "shellDrawerAssistant": "Guided help",
+  "shellDrawerFleet": "Fleet",
+  "shellDrawerMessages": "Messages",
+  "navNotifications": "Notifications",
+  "shellDrawerSupport": "Support",
+  "shellDrawerProfile": "Profile",
+  "shellDrawerLanguage": "Language",
+  "shellDrawerSignOut": "Sign out",
+  "shellSignOutFailureMessage": "We could not sign you out right now. Retry shortly.",
+  "shellMessagesTitle": "Messages",
+  "shellMessagesSupplierSubtitle": "Track load-linked conversations with truckers and reply quickly from one place.",
+  "shellMessagesTruckerSubtitle": "Stay on top of supplier updates, route context, and booking follow-through in one inbox.",
+  "shellMessagesSupplierGroupedInbox": "Grouped inbox",
+  "shellMessagesTruckerFlatInbox": "Flat inbox",
+  "shellMessagesUnreadThreads": "{count} unread threads",
+  "@shellMessagesUnreadThreads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shellMessagesLoadFailureTitle": "Could not load messages",
+  "shellMessagesEmptyTitle": "No conversations yet",
+  "shellMessagesSupplierEmptySubtitle": "Load-linked trucker conversations will appear here after the first message arrives.",
+  "shellMessagesTruckerEmptySubtitle": "Start a chat by booking a load and your supplier conversations will show here.",
+  "shellMessagesActiveConversations": "{count} active conversations • {preview}",
+  "@shellMessagesActiveConversations": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "preview": {}
+    }
+  },
+  "shellMessagesUnreadStatus": "Unread",
+  "shellMessagesReadStatus": "Read",
+  "shellMessagesHideTruckerConversations": "Hide trucker conversations",
+  "shellMessagesLatestBy": "Latest by {name} • {timestamp}",
+  "@shellMessagesLatestBy": {
+    "placeholders": {
+      "name": {},
+      "timestamp": {}
+    }
+  },
+  "truckerChatSupplierAction": "Chat with supplier",
+  "truckerLoadChatStartFailureMessage": "We could not start this supplier chat right now. Retry shortly from the load detail.",
+  "truckerTripChatStartFailureMessage": "We could not start this supplier chat right now. Retry shortly from the trip detail.",
+  "truckerChatLockedLabel": "Chat unavailable: {reason}",
+  "@truckerChatLockedLabel": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "chatTitleFallback": "Conversation",
+  "chatTooltipCall": "Call",
+  "chatReportSourceLabel": "Chat • {source}",
+  "@chatReportSourceLabel": {
+    "placeholders": {
+      "source": {}
+    }
+  },
+  "chatMenuMarkConversationRead": "Mark conversation read",
+  "chatMenuRefreshThread": "Refresh thread",
+  "chatMenuReportSpamOrAbuse": "Report spam or abuse",
+  "chatConversationUnavailableTitle": "Conversation unavailable",
+  "chatConversationUnavailableSubtitle": "We could not find this conversation right now. Refresh or return to your inbox.",
+  "chatBackToInboxAction": "Back to messages",
+  "chatBookingActionUnavailableTitle": "Booking action unavailable",
+  "chatBookingActionFailureMessage": "The latest booking action could not be completed from this chat. Review the booking state and retry shortly.",
+  "chatApproveBookingDialogTitle": "Approve booking?",
+  "chatApproveBookingDialogMessage": "This will approve the trucker booking request from the chat context.",
+  "chatRejectBookingDialogTitle": "Reject booking?",
+  "chatRejectBookingDialogMessage": "This will reject the trucker booking request from the chat context.",
+  "chatActionCancel": "Cancel",
+  "chatActionApprove": "Approve",
+  "chatActionReject": "Reject",
+  "chatBookingApprovedSuccess": "Booking approved!",
+  "chatBookingRejectedSuccess": "Booking rejected.",
+  "chatTextSendFailureMessage": "We could not send your message right now. Retry shortly from this chat.",
+  "chatVoiceStartFailureMessage": "We could not start voice recording right now. Retry shortly from this chat.",
+  "chatVoiceUploadFailureMessage": "We could not upload this voice message right now. Retry shortly from this chat.",
+  "chatVoiceSendFailureMessage": "We could not send this voice message right now. Retry shortly from this chat.",
+  "chatApproveBookingFailureMessage": "We could not approve this booking right now. Retry shortly from this chat.",
+  "chatRejectBookingFailureMessage": "We could not reject this booking right now. Retry shortly from this chat.",
+  "chatLoadContextTitle": "Load context",
+  "chatCollapseLoadContextTooltip": "Collapse load context",
+  "chatExpandLoadContextTooltip": "Expand load context",
+  "chatMaterialLabel": "Material: {value}",
+  "@chatMaterialLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatPriceLabel": "Price: {value}",
+  "@chatPriceLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatPickupLabel": "Pickup: {value}",
+  "@chatPickupLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatLoadStatusActive": "Active",
+  "chatBookingStatusApproved": "Approved",
+  "chatBookingStatusUnknown": "Unknown",
+  "chatMessagesLoadFailureTitle": "Unable to load messages",
+  "chatMessagesLoadFailureMessage": "We could not load this conversation right now. Retry shortly to refresh the latest messages and booking context.",
+  "chatNoMessagesTitle": "No messages yet",
+  "chatNoMessagesSubtitle": "Send a message to start this conversation.",
+  "chatSystemUpdateFallback": "System update",
+  "chatSendingLabel": "sending...",
+  "chatPauseVoiceMessageTooltip": "Pause voice message",
+  "chatPlayVoiceMessageTooltip": "Play voice message",
+  "chatVoiceMessageLabel": "Voice message",
+  "chatVoicePlaybackUnavailable": "Voice playback is unavailable right now.",
+  "chatVoicePlaybackFailed": "We could not play this voice message right now.",
+  "chatLocationSharedFallback": "Shared location",
+  "chatMapPreviewUnavailable": "Map preview unavailable",
+  "chatOpenInMapsAction": "Open in Maps",
+  "chatDocumentSharedFallback": "Shared document",
+  "chatAttachmentSavedSubtitle": "Attachment saved to this conversation.",
+  "chatOpenDocumentAction": "Open document",
+  "chatRouteSummaryFallback": "Route summary",
+  "chatViewRouteAction": "View route",
+  "chatTruckDetailsSharedFallback": "Truck details",
+  "chatTruckTyresLabel": "{value} tyres",
+  "@chatTruckTyresLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatTypeMessageHint": "Type a message...",
+  "chatStopRecordingTooltip": "Stop recording",
+  "chatVoiceRecordingTooltip": "Voice recording",
+  "chatSendAction": "Send",
+  "commonHearSummary": "Hear summary",
+  "commonVoiceMuted": "Voice guidance is muted on this device.",
+  "commonVoiceUnavailable": "Voice guidance is unavailable right now.",
+  "notificationsTitle": "Notifications",
+  "notificationsMarkedAllReadSuccess": "All notifications marked as read",
+  "notificationsMarkAllRead": "Mark All Read",
+  "notificationsLoadFailureTitle": "Unable to load notifications",
+  "notificationsMarkAllReadFailureMessage": "We could not mark all notifications as read right now. Retry shortly from the notifications screen.",
+  "notificationsLoadFailureMessage": "We could not load your notifications right now. Retry shortly to refresh the latest alerts and updates.",
+  "notificationsEmptyTitle": "All caught up!",
+  "notificationsEmptySubtitle": "No new notifications.",
+  "notificationsOverviewTitle": "Overview",
+  "notificationsUnreadCountLabel": "{count} unread",
+  "@notificationsUnreadCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsHighPriorityCountLabel": "{count} high priority",
+  "@notificationsHighPriorityCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsLoadMore": "Load More",
+  "notificationsTtsSummary": "Notifications screen. You have {unreadCount} unread notifications and {highPriorityUnreadCount} high priority alerts pending review.",
+  "@notificationsTtsSummary": {
+    "placeholders": {
+      "unreadCount": {
+        "type": "int"
+      },
+      "highPriorityUnreadCount": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsGroupToday": "Today",
+  "notificationsGroupYesterday": "Yesterday",
+  "notificationsPriorityHighLabel": "HIGH",
+  "notificationsBodyFallback": "Open the linked workflow for full context.",
+  "notificationFallbackVerificationUpdate": "Verification update",
+  "notificationFallbackBookingUpdate": "Booking update",
+  "notificationFallbackTripUpdate": "Trip update",
+  "notificationFallbackProofUpdate": "Proof update",
+  "notificationFallbackSuperLoadUpdate": "Super Load update",
+  "notificationFallbackMessageReceived": "New message",
+  "notificationFallbackSupportUpdate": "Support update",
+  "notificationFallbackDisputeUpdate": "Dispute update",
+  "notificationFallbackAccountUpdate": "Account update",
+  "notificationFallbackSystemNotice": "System notice",
+  "notificationFallbackLoadExpiryWarning": "Load expiry warning",
+  "navProfile": "Profile",
+  "navSupport": "Support",
+  "navDeleteAccount": "Delete account",
+  "deleteAccountRequestedOnLabel": "Deletion requested on",
+  "deleteAccountGracePeriodEndsLabel": "Grace period ends",
+  "deleteAccountGracePeriodPassedLabel": "Grace-period end date has passed. Permanent deletion processing may happen at any time.",
+  "deleteAccountGracePeriodLessThanOneDayLabel": "Less than 1 day remains before the grace period ends.",
+  "deleteAccountGracePeriodRemainingDaysLabel": "{count} day{plural} remain before the grace period ends.",
+  "@deleteAccountGracePeriodRemainingDaysLabel": {
+    "placeholders": {
+      "count": {},
+      "plural": {}
+    }
+  },
+  "deleteAccountLifecycleFailureMessage": "The account deletion lifecycle is temporarily unavailable. Retry shortly to refresh the latest deletion status.",
+  "deleteAccountCancelFailureMessage": "We could not cancel this deletion request right now. Retry shortly from the deletion lifecycle screen.",
+  "deleteAccountRequestFailureMessage": "We could not process this deletion request right now. Review the current account status and retry shortly.",
+  "deleteAccountAcceptedSignOutFailureMessage": "Deletion was accepted, but we could not complete sign out right now. Retry shortly to refresh your account session.",
+  "deleteAccountBlockedSummaryMessage": "This deletion request cannot proceed yet because another account dependency still needs attention.",
+  "deleteAccountCancelledMessage": "Your deletion request was cancelled. Account access can be restored while the lifecycle returns to active.",
+  "deleteAccountAcceptedMessage": "Your deletion request was accepted. You have been signed out while the account enters pending cleanup.",
+  "deleteAccountBlockerRecoveryGuidanceActiveTrips": "Finish or cancel every active trip first, then retry the deletion request.",
+  "deleteAccountBlockerRecoveryGuidanceDispute": "Wait until the unresolved dispute is reviewed or resolved before requesting deletion again.",
+  "deleteAccountBlockerRecoveryGuidanceCompliance": "Some records still need to stay on the platform for compliance or retention policy. Use support if you need clarification on the hold.",
+  "deleteAccountBlockerRecoveryGuidanceDefault": "Resolve the blocking dependency first, then request deletion again.",
+  "deleteAccountBlockerActionOpenTrips": "Open trips",
+  "deleteAccountBlockerActionOpenSupport": "Open support",
+  "deleteAccountBlockerTitleActiveTrips": "Finish active trips first",
+  "deleteAccountBlockerTitleDispute": "Resolve the open dispute first",
+  "deleteAccountBlockerTitleCompliance": "Wait for the compliance hold to clear",
+  "deleteAccountBlockerTitleDefault": "Resolve the blocker first",
+  "deleteAccountBlockerBodyActiveTrips": "This account still has active trip work attached to it. Review the current trip list, complete any legitimate active work, and then retry the deletion request.",
+  "deleteAccountBlockerBodyDispute": "This account still has an unresolved dispute or review dependency. Use support to follow the current case until the blocking dispute is resolved.",
+  "deleteAccountBlockerBodyCompliance": "This account is still under a compliance or retention hold. Support can clarify the current hold, but the platform cannot bypass the retention requirement.",
+  "deleteAccountBlockerBodyDefault": "Review the current blocker carefully and resolve it before retrying the deletion request.",
+  "deleteAccountSupportTitle": "Need help first?",
+  "deleteAccountSupportBodyPendingCleanup": "Use support if you need clarification on the pending-cleanup status, the grace-period timeline, or whether cancellation is the right next step for this account.",
+  "deleteAccountSupportBodyDefault": "Use support if you expect blockers like active trips, unresolved disputes, or compliance holds and need clarification before retrying the deletion request.",
+  "deleteAccountSupportDetailPendingCleanup": "Support can clarify the current lifecycle state, but they may still need to follow retention and compliance policy before permanent deletion is processed.",
+  "deleteAccountSupportDetailDefault": "Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.",
+  "deleteAccountWhatHappensNextTitle": "What happens next",
+  "deleteAccountWhatHappensNextBodyPendingCleanup": "Your account is already in the pending-cleanup state. Cancel the request if you want to restore the account to active before permanent deletion is processed.",
+  "deleteAccountWhatHappensNextBodyDefault": "If no blockers exist, your account is moved to deactivated pending cleanup and you are signed out safely.",
+  "deleteAccountWhatHappensNextDetailPendingCleanup": "If you cancel now, the account deletion status returns to active and normal access is restored.",
+  "deleteAccountWhatHappensNextDetailDefault": "If blockers exist, the platform keeps your account active and tells you which dependency must be resolved first.",
+  "deleteAccountWhatHappensNextFootnotePendingCleanup": "Support may still retain internal records according to policy, but the user-facing deletion request will be cancelled.",
+  "deleteAccountWhatHappensNextFootnoteDefault": "The deletion request can now be cancelled while the account is in the pending-cleanup lifecycle before permanent deletion is processed.",
+  "deleteAccountLifecycleUnavailableTitle": "Account deletion lifecycle unavailable",
+  "deleteAccountCancelledTitle": "Deletion request cancelled",
+  "deleteAccountAlreadyRequestedTitle": "Deletion already requested",
+  "deleteAccountAlreadyRequestedMessage": "This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.",
+  "deleteAccountCancelRequestTitle": "Cancel deletion request",
+  "deleteAccountCancellingButton": "Cancelling deletion...",
+  "deleteAccountCancelRequestButton": "Cancel deletion request",
+  "deleteAccountUnavailableTitle": "Account deletion unavailable",
+  "deleteAccountBlockedTitle": "Deletion blocked",
+  "deleteAccountConfirmRequestTitle": "Confirm deletion request",
+  "deleteAccountRequestingButton": "Requesting deletion...",
+  "deleteAccountScreenTitle": "Delete Account",
+  "deleteAccountHeroTitlePendingCleanup": "Account deletion pending cleanup",
+  "deleteAccountHeroTitleDefault": "Request account deletion",
+  "deleteAccountHeroSubtitlePendingCleanup": "Your account is currently deactivated pending cleanup. You can still cancel this request during the grace-period lifecycle while the account is not permanently deleted.",
+  "deleteAccountHeroSubtitleDefault": "This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.",
+  "deleteAccountHeroBodyPendingCleanup": "The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.",
+  "deleteAccountHeroBodyDefault": "Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.",
+  "accountSignOutFailureMessage": "We could not sign you out right now. Retry shortly from this screen.",
+  "accountRoleSupplier": "Supplier",
+  "accountRoleTrucker": "Trucker",
+  "accountRoleUnknown": "Unknown",
+  "accountStatusTitle": "Account status",
+  "accountProfileStatusLabel": "Profile status",
+  "accountProfileStatusComplete": "Complete",
+  "accountProfileStatusNeedsAttention": "Needs attention",
+  "accountAccountStateLabel": "Account state",
+  "accountStateDeactivatedPendingCleanup": "Deactivated pending cleanup",
+  "accountStateRestricted": "Restricted",
+  "accountStateActive": "Active",
+  "accountStateUnknown": "Unknown",
+  "accountLoadFailureTitle": "Account details unavailable",
+  "accountLoadFailureMessage": "We could not load your account details right now. Retry shortly from this screen.",
+  "accountManageTitle": "Manage account",
+  "accountVerificationLabel": "Verification",
+  "accountFleetLabel": "Fleet",
+  "accountSettingsLabel": "Settings",
+  "accountSessionTitle": "Current session",
+  "accountSignedInAsLabel": "Signed in as",
+  "accountCurrentAuthenticatedSession": "Current authenticated session",
+  "accountSignOutAction": "Sign out",
+  "profileTitle": "Profile",
+  "profileLoadFailureTitle": "Profile unavailable",
+  "profileLoadFailureMessage": "We could not load your profile right now. Retry shortly from this screen.",
+  "profileSummaryTitle": "Profile summary",
+  "profileNameLabel": "Name",
+  "profileValueNotSet": "Not set",
+  "profilePhoneLabel": "Phone",
+  "profileValueNotProvided": "Not provided",
+  "profileEmailLabel": "Email",
+  "profileRoleLabel": "Role",
+  "profileReadinessTitle": "Profile readiness",
+  "profileCompletenessLabel": "Completeness",
+  "profileCompletenessComplete": "Complete",
+  "profileCompletenessNeedsUpdates": "Needs updates",
+  "profileDeletionStatusLabel": "Deletion status",
+  "profileOpenFleetReadiness": "Open fleet readiness",
+  "profileRequestAccountDeletion": "Request account deletion",
+  "profileTtsSummary": "Profile screen. Role is {roleLabel}. Trust and safety status is {trustStatus}. Account deletion status is {deletionStatus}. You can open deletion follow-up or support guidance from this screen if needed.",
+  "@profileTtsSummary": {
+    "placeholders": {
+      "roleLabel": {},
+      "trustStatus": {},
+      "deletionStatus": {}
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsPreferencesTitle": "Preferences",
+  "settingsRoleContextLabel": "Role context",
+  "settingsTtsSummary": "Settings screen. Language is set to {selectedLanguageLabel}. Voice guidance is manual right now. Notifications are enabled through the in-app inbox.{roleSentence}",
+  "@settingsTtsSummary": {
+    "placeholders": {
+      "selectedLanguageLabel": {},
+      "roleSentence": {}
+    }
+  },
+  "settingsVoiceAssistanceLabel": "Voice assistance",
+  "settingsVoiceAssistanceValue": "Manual contextual summaries are available from supported screens.",
+  "settingsNotificationsLabel": "Notifications",
+  "settingsNotificationsValue": "In-app inbox and push status controls are available here.",
+  "settingsConnectedSurfacesTitle": "Connected surfaces",
+  "settingsPushNotificationsTitle": "Push notifications",
+  "settingsPushStatusLabel": "Status",
+  "settingsPushRequestPermission": "Request permission",
+  "settingsPushRefreshStatus": "Refresh status",
+  "settingsPushStatusUnavailableTitle": "Push notification status unavailable",
+  "settingsPushStatusUnavailableMessage": "Unable to read device notification permission right now. Refresh after Firebase/device support is available.",
+  "settingsPushStatusAllowed": "Allowed",
+  "settingsPushStatusAllowedQuietly": "Allowed quietly",
+  "settingsPushStatusBlocked": "Blocked in system settings",
+  "settingsPushStatusNotRequested": "Not requested yet",
+  "settingsPushStatusUnavailable": "Unavailable on this device/build",
+  "settingsPushGuidanceAllowed": "Foreground and opened push flows are enabled when Firebase delivery is configured.",
+  "settingsPushGuidanceAllowedQuietly": "Push is allowed quietly. You can promote alerts in the device notification settings if needed.",
+  "settingsPushGuidanceBlocked": "Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.",
+  "settingsPushGuidanceNotRequested": "Push permission has not been requested yet on this device session.",
+  "settingsPushGuidanceUnavailable": "Push runtime is unavailable here until Firebase/device support is fully configured.",
+  "supportActiveTicketCount": "{count} ticket{s}",
+  "supportScreenTitle": "Support and dispute follow-up",
+  "supportHeroTitle": "Review your latest support activity",
+  "supportHeroSubtitleSupplier": "Use support to review dispute progress, payment follow-ups, and the latest visible ticket updates linked to your supplier activity.",
+  "supportHeroSubtitleTrucker": "Use support to review dispute progress, freight follow-ups, and the latest visible ticket updates linked to your trucker activity.",
+  "supportNoActiveTickets": "No active tickets",
+  "supportCreateTicketAction": "Create support ticket",
+  "supportIntroMessage": "Follow your latest support and dispute tickets here, review visible workflow updates, and reply with any clarification or proof support requested.",
+  "supportTicketSummaryTitle": "Support summary",
+  "supportEscalationPathLabel": "Escalation path",
+  "supportEscalationPathSupplier": "Supplier support",
+  "supportEscalationPathTrucker": "Trucker support",
+  "supportCurrentTrustStatusLabel": "Current trust status",
+  "supportMyTicketsTitle": "My tickets",
+  "supportSelectedTicketAndReplyTitle": "Selected ticket and reply",
+  "supportSelectTicketTitle": "Select a ticket",
+  "supportSelectTicketSubtitle": "Choose a support ticket from the list to review its visible thread, workflow state, and reply options.",
+  "supportTicketsUnavailableTitle": "Support tickets unavailable",
+  "supportNoTicketsTitle": "No support tickets yet",
+  "supportNoTicketsSubtitle": "Create a support ticket to start a new support or dispute follow-up and track future updates here.",
+  "supportLoadingOlderTickets": "Loading older tickets...",
+  "supportLoadOlderTickets": "Load older tickets",
+  "supportTicketsLoadFailureMessage": "We could not load your support tickets right now. Retry shortly to refresh your latest support and dispute activity.",
+  "supportOpenTripAction": "Open trip",
+  "supportOpenLoadAction": "Open load",
+  "supportViewingThisTicket": "Viewing this ticket",
+  "supportOpenTicketAction": "Open ticket",
+  "supportDetailUnavailableTitle": "Ticket detail unavailable",
+  "supportDetailUnavailableMessage": "We could not load this ticket detail right now. Retry shortly to refresh the latest visible thread and workflow status.",
+  "supportTicketUnavailableTitle": "Ticket unavailable",
+  "supportTicketUnavailableSubtitle": "This support ticket is unavailable right now for the current account.",
+  "supportTicketStatusOpen": "Open",
+  "supportTicketStatusInProgress": "In progress",
+  "supportTicketStatusWaitingForYou": "Waiting for you",
+  "supportTicketStatusResolved": "Resolved",
+  "supportTicketStatusClosed": "Closed",
+  "supportTicketStatusUnknown": "Unknown",
+  "supportTicketPriorityLow": "low",
+  "supportTicketPriorityMedium": "medium",
+  "supportTicketPriorityHigh": "high",
+  "supportTicketPriorityUrgent": "urgent",
+  "supportTicketPriorityNotSet": "not set",
+  "supportTicketTitleTripDisputeReview": "Trip dispute review",
+  "supportTicketTitleLoadedQuantityMismatchReport": "Loaded quantity mismatch report",
+  "supportTicketTitleUnloadedQuantityMismatchReport": "Unloaded quantity mismatch report",
+  "supportTicketTitleDocumentMismatchReport": "Document mismatch report",
+  "supportTicketTitleSpamOrScamReport": "Spam or scam report",
+  "supportTicketTitleAbusiveBehaviorReport": "Abusive behavior report",
+  "supportTicketTitleFakePayoutProofReport": "Fake payout proof report",
+  "supportTicketTitleNonPaymentReport": "Non-payment report",
+  "supportTicketTitleDelayOrNoShowReport": "Delay or no-show report",
+  "supportTicketTitleDamageOrShortageReport": "Damage or shortage report",
+  "supportTicketTitleOtherReport": "Other report",
+  "supportDisputeCategoryTripDispute": "Trip dispute",
+  "supportDisputeCategoryLoadedQuantityMismatch": "Loaded quantity mismatch",
+  "supportDisputeCategoryUnloadedQuantityMismatch": "Unloaded quantity mismatch",
+  "supportDisputeCategoryDocumentMismatch": "Document mismatch",
+  "supportDisputeCategoryNonPayment": "Non-payment",
+  "supportDisputeCategoryFakePayoutProof": "Fake payout proof",
+  "supportDisputeCategoryDelayOrNoShow": "Delay or no-show",
+  "supportDisputeCategoryDamageOrShortage": "Damage or shortage",
+  "supportDisputeCategoryAbusiveBehavior": "Abusive behavior",
+  "supportDisputeCategorySpamOrScam": "Spam or scam",
+  "supportDisputeCategoryOther": "Other",
+  "supportUpdatedAt": "Updated at: {value}",
+  "@supportUpdatedAt": {"placeholders": {"value": {}}},
+  "supportTicketReference": "Ticket reference: {value}",
+  "@supportTicketReference": {"placeholders": {"value": {}}},
+  "supportTripReference": "Trip reference: {value}",
+  "@supportTripReference": {"placeholders": {"value": {}}},
+  "supportOpenedAt": "Opened at: {value}",
+  "@supportOpenedAt": {"placeholders": {"value": {}}},
+  "supportDisputeCategoryLabel": "Dispute category: {category}",
+  "@supportDisputeCategoryLabel": {"placeholders": {"category": {}}},
+  "supportTicketIdValue": "Ticket id: {id}",
+  "@supportTicketIdValue": {"placeholders": {"id": {}}},
+  "supportPriorityValue": "Priority: {priority}",
+  "@supportPriorityValue": {"placeholders": {"priority": {}}},
+  "supportLastUpdatedValue": "Last updated: {value}",
+  "@supportLastUpdatedValue": {"placeholders": {"value": {}}},
+  "supportRelatedTripValue": "Related trip: {value}",
+  "@supportRelatedTripValue": {"placeholders": {"value": {}}},
+  "supportRelatedLoadValue": "Related load: {value}",
+  "@supportRelatedLoadValue": {"placeholders": {"value": {}}},
+  "supportOpenRelatedTripAction": "Open related trip",
+  "supportOpenRelatedLoadAction": "Open related load",
+  "supportWorkflowGuidanceOpen": "Support has received this ticket and review should begin shortly. Use visible replies to add any missing context if needed.",
+  "supportWorkflowGuidanceInProgress": "Support or operations are actively reviewing this ticket. Watch for visible replies and be ready to clarify the timeline or proof if more detail is requested.",
+  "supportWorkflowGuidanceWaitingForUser": "Support is waiting on your clarification or proof. Reply on this ticket so the review can continue without unnecessary delay.",
+  "supportWorkflowGuidanceResolved": "This ticket has reached a final support outcome. Review the recorded resolution before opening any fresh follow-up.",
+  "supportWorkflowGuidanceUnknown": "Review the latest visible ticket updates for the current workflow state.",
+  "supportDisputeBannerTitleClosed": "Dispute review closed",
+  "supportDisputeBannerTitleWaiting": "Dispute waiting for your reply",
+  "supportDisputeBannerTitleInProgress": "Dispute review in progress",
+  "supportDisputeBannerMessageClosed": "Category: {category}. This trip dispute has reached a final support outcome. Both sides can still follow the recorded ticket context, but raw evidence access may remain restricted.",
+  "@supportDisputeBannerMessageClosed": {"placeholders": {"category": {}}},
+  "supportDisputeBannerMessageWaiting": "Category: {category}. This trip dispute is waiting on your clarification or proof. Both sides can follow visible status updates, but raw evidence access may remain restricted during review.",
+  "@supportDisputeBannerMessageWaiting": {"placeholders": {"category": {}}},
+  "supportDisputeBannerMessageInProgress": "Category: {category}. This trip dispute is under active support review. Both sides can follow visible status updates, but raw evidence access may remain restricted during review.",
+  "@supportDisputeBannerMessageInProgress": {"placeholders": {"category": {}}},
+  "supportEvidenceVisibilitySummaryClosed": "Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this ticket.",
+  "supportEvidenceVisibilitySummaryInProgress": "Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible on this ticket.",
+  "supportRestrictedEvidenceMessageClosed": "Raw attachments and sensitive proof may remain restricted even after the review outcome is recorded on the ticket.",
+  "supportRestrictedEvidenceMessageInProgress": "Raw attachments and sensitive proof may remain restricted while this review stays active on the ticket.",
+  "supportAdditionalProofGuidanceClosed": "If you believe important proof was not considered before closure, start a fresh support follow-up only when you have a genuinely new issue or clarification to raise.",
+  "supportAdditionalProofGuidanceInProgress": "If your dispute depends on additional documents or screenshots beyond the current single-image flow, describe those missing proofs clearly in your visible reply so support knows what else to review.",
+  "supportAttachmentVisibilityMessageClosed": "Evidence attached to this reply. Raw file access may remain restricted even after the review outcome is recorded on this ticket.",
+  "supportAttachmentVisibilityMessageInProgress": "Evidence attached to this reply. Raw file access may remain restricted during review.",
+  "supportAttachmentGuidanceMessageClosed": "If you still need to reference other supporting proofs after closure, open a fresh follow-up only when you have genuinely new context that was not captured on this ticket.",
+  "supportAttachmentGuidanceMessageInProgress": "If other supporting proofs are not attached here, summarize them in visible reply text so support can request or review them safely.",
+  "supportSupportTeamLabel": "Support team",
+  "supportYouLabel": "You",
+  "supportEmptyThreadSubtitleOpen": "No visible thread has been posted on this support ticket yet.",
+  "supportEmptyThreadSubtitleInProgress": "No visible thread is available yet while this ticket remains under active review.",
+  "supportEmptyThreadSubtitleWaiting": "No visible thread is available yet. Reply on this ticket so the review can continue.",
+  "supportEmptyThreadSubtitleResolved": "No visible thread was recorded before this ticket was resolved or closed.",
+  "supportEmptyThreadSubtitleUnknown": "No visible thread is available for this support ticket yet.",
+  "supportEvidenceVisibilityTitle": "Evidence visibility",
+  "supportVisibleThreadSummaryTitle": "Visible thread summary",
+  "supportVisibleRepliesCount": "Visible replies: {count}",
+  "@supportVisibleRepliesCount": {"placeholders": {"count": {"type": "int"}}},
+  "supportLastVisibleUpdateNone": "Last visible update: No visible replies yet.",
+  "supportLastVisibleUpdate": "Last visible update: {value}",
+  "@supportLastVisibleUpdate": {"placeholders": {"value": {}}},
+  "supportLatestVisibleSenderNone": "Latest visible sender: No visible sender yet.",
+  "supportLatestVisibleSender": "Latest visible sender: {value}",
+  "@supportLatestVisibleSender": {"placeholders": {"value": {}}},
+  "supportVisibleAttachmentSummaryPresent": "Visible attachment summary: One or more visible replies include an attachment reference.",
+  "supportVisibleAttachmentSummaryAbsent": "Visible attachment summary: No visible replies include an attachment reference yet.",
+  "supportNoVisibleThreadTitle": "No visible thread yet",
+  "supportCurrentWorkflowTitle": "Current workflow",
+  "supportResolutionOutcomeTitle": "Resolution outcome",
+  "supportResolvedOn": "Resolved on: {value}",
+  "@supportResolvedOn": {"placeholders": {"value": {}}},
+  "supportWaitingForReplyTitle": "Support is waiting for your reply",
+  "supportWaitingForReplyMessage": "Reply on this ticket with the requested clarification or proof so the review can continue.",
+  "supportReplyGuidanceTitle": "Reply guidance",
+  "supportRepliesClosedTitle": "Replies are closed for this ticket",
+  "supportRepliesClosedMessage": "This ticket has reached a final support outcome and does not accept further replies.",
+  "supportReplyStatusReply": "Reply",
+  "supportReplyStatusSubmitted": "Submitted",
+  "supportNoMessageTextProvided": "No message text provided.",
+  "supportTrustStatusLoading": "Loading trust status",
+  "supportResolutionValue": "Resolution: {value}",
+  "@supportResolutionValue": {"placeholders": {"value": {}}},
+  "supportReplyGuidancePrimaryOpenDispute": "Use your visible reply to explain the dispute timeline, what proof is already attached, and what support should review first.",
+  "supportReplyGuidancePrimaryOpenDefault": "Use your reply to explain the current blocker clearly so support can continue the review.",
+  "supportReplyGuidancePrimaryInProgressDispute": "Keep your next reply focused on the dispute timeline, proof gaps, and the clearest follow-up support should review.",
+  "supportReplyGuidancePrimaryInProgressDefault": "Reply with the next operational detail or clarification support asked for so the review can continue.",
+  "supportReplyGuidancePrimaryWaitingDispute": "Reply with the missing clarification or proof support requested so the dispute review can continue without unnecessary delay.",
+  "supportReplyGuidancePrimaryWaitingDefault": "Reply with the missing clarification support requested so the ticket can continue moving.",
+  "supportReplyGuidancePrimaryResolved": "This ticket is already resolved. Start a fresh follow-up only if a genuinely new issue appears.",
+  "supportReplyGuidancePrimaryUnknown": "Reply with the clearest next detail you can share if support requests more information.",
+  "supportReplyGuidanceSecondaryOpenInProgressDispute": "If proof is missing from the current single-image flow, summarize the rest clearly in visible text so support knows what else to request or review.",
+  "supportReplyGuidanceSecondaryOpenInProgressDefault": "Keep the reply concise, specific, and tied to the load or trip context support is reviewing.",
+  "supportReplyGuidanceSecondaryWaitingDispute": "If more than one proof matters, attach the strongest one first and summarize the remaining context in your visible reply.",
+  "supportReplyGuidanceSecondaryWaitingDefault": "Answer the latest support prompt directly so the next review step is clear.",
+  "supportReplyGuidanceSecondaryResolved": "Keep the recorded resolution for reference and use a new ticket only for genuinely new follow-up.",
+  "supportReplyGuidanceSecondaryUnknown": "Keep your reply clear and limited to the facts support can verify next.",
+  "supportTicketTitleWithPriority": "{title} • {priority} priority",
+  "@supportTicketTitleWithPriority": {"placeholders": {"title": {}, "priority": {}}},
+  "supportFallbackLabel": "Support",
+  "supportTrustStatusNormal": "Normal",
+  "supportTrustStatusWarned": "Warned",
+  "supportTrustStatusRestricted": "Restricted",
+  "supportTrustStatusSuspended": "Suspended",
+  "supportTrustStatusBanned": "Banned",
+  "supportTrustStatusUnknown": "Unknown",
+  "supportTrustBadge": "Trust: {status}",
+  "trustSafetyLabel": "Trust & safety",
+  "trustSafetyWarningTitle": "Trust & safety warning active",
+  "trustSafetyWarningMessage": "Your account has a warning on record. Marketplace and support surfaces remain available, but you should avoid further violations and use support if you need clarification on the warning or next-step expectations.",
+  "trustSafetyRestrictionTitle": "Trust & safety restriction active",
+  "trustSafetyRestrictionFallback": "Some platform actions may be limited while this restriction remains active. Use support to confirm which actions are limited and what changes may be required before the restriction can be reviewed.",
+  "trustSafetySuspensionTitle": "Trust & safety suspension active",
+  "trustSafetySuspensionFallback": "Access to key platform actions may be paused while this suspension remains active. Use support for policy-allowed review updates or reinstatement guidance once the required next steps are complete.",
+  "trustSafetyBanTitle": "Trust & safety ban active",
+  "trustSafetyBanFallback": "This account is blocked from normal platform use. Use support only for policy-allowed clarification or final review outcome questions.",
+  "trustSafetyOpenSupport": "Open support",
+  "trustSafetyHealthyMessageLine1": "Your account currently has no active trust or safety enforcement. Keep delivery proofs, payout confirmations, and marketplace communication accurate so this status remains normal.",
+  "trustSafetyHealthyMessageLine2": "If policy or moderation questions ever appear on this account, open support for clarification before retrying blocked actions.",
+  "trustSafetyCurrentStatus": "Current status: {displayLabel}. {fallback}",
+  "@trustSafetyCurrentStatus": {
+    "placeholders": {
+      "displayLabel": {},
+      "fallback": {}
+    }
+  },
+  "trustSafetyCurrentStatusWithReason": "Current status: {displayLabel}. Reason summary: {reasonSummary}. {fallback}",
+  "@trustSafetyCurrentStatusWithReason": {
+    "placeholders": {
+      "displayLabel": {},
+      "reasonSummary": {},
+      "fallback": {}
+    }
+  },
+  "settingsLanguageLabel": "Language",
+  "settingsLanguageHelper": "English is the launch default. Hindi is ready and can be selected here.",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageHindi": "Hindi",
+  "settingsLanguageSavedEnglish": "Language saved: English",
+  "settingsLanguageSavedHindi": "Language saved: Hindi",
+  "settingsLanguageSaveFailed": "We could not save your language preference right now. Retry shortly from settings.",
+  "settingsLanguageSaving": "Saving language preference...",
+  "truckerDashboardHeroSubtitle": "Use your trucker dashboard as the command center for freight discovery, readiness, and active work visibility.",
+  "truckerDashboardWelcomeBack": "Welcome back, {fullName}",
+  "@truckerDashboardWelcomeBack": {
+    "placeholders": {
+      "fullName": {}
+    }
+  },
+  "truckerDashboardTitle": "Trucker Dashboard",
+  "truckerDashboardOverviewTitle": "Dashboard overview",
+  "truckerDashboardQuickActionsTitle": "Quick actions",
+  "truckerDashboardQuickActionTripsLabel": "My Trips",
+  "truckerDashboardQuickActionChatLabel": "Chat",
+  "truckerDashboardRecentActivityTitle": "Recent activity",
+  "truckerDashboardReadinessNextStepsTitle": "Readiness and next steps",
+  "truckerDashboardReadinessUnavailableTitle": "Readiness state unavailable",
+  "truckerDashboardReadinessFailureMessage": "Your trucker readiness state is temporarily unavailable. Retry shortly to refresh verification and fleet readiness.",
+  "truckerDashboardVerificationPendingTitle": "Verification pending",
+  "truckerDashboardVerificationPendingDescription": "You can browse loads while review is pending, but chat and call stay locked until verification is complete.",
+  "truckerDashboardOpenVerificationAction": "Open verification",
+  "truckerDashboardVerificationCompleteTitle": "Verification complete",
+  "truckerDashboardVerificationCompleteDescription": "Your trucker verification is complete. Chat and call stay unlocked on open loads while your readiness remains healthy.",
+  "truckerDashboardReviewVerificationAction": "Review verification",
+  "truckerDashboardVerificationNeedsAttentionTitle": "Verification needs attention",
+  "truckerDashboardVerificationNeedsAttentionDescription": "Your verification was rejected. Browsing stays open, but communication and assignment readiness remain blocked.",
+  "truckerDashboardFixVerificationAction": "Fix verification",
+  "truckerDashboardCompleteFleetVerificationTitle": "Complete fleet and verification setup",
+  "truckerDashboardCompleteFleetVerificationMessage": "You can browse the marketplace now, but chat, call, and booking stay locked until you finish Aadhaar, PAN, profile photo, and get at least one truck approved.",
+  "truckerDashboardOpenFleetVerificationAction": "Open fleet and verification",
+  "truckerDashboardAddApproveFirstTruckTitle": "Add and approve your first truck",
+  "truckerDashboardAddApproveFirstTruckMessage": "Marketplace browsing is available now, but your first approved truck is required before full trucker verification can complete.",
+  "truckerDashboardOpenFleetAction": "Open fleet",
+  "truckerDashboardCompleteVerificationTitle": "Complete trucker verification",
+  "truckerDashboardCompleteVerificationMessage": "You can browse the marketplace now. Finish Aadhaar, PAN, profile photo, and at least one approved truck to unlock chat and call.",
+  "truckerDashboardLoadFailureTitle": "Unable to load your trucker dashboard",
+  "truckerDashboardLoadFailureMessage": "We could not load your trucker dashboard right now. Retry shortly to refresh the latest KPIs and activity summary.",
+  "truckerDashboardSetupInProgress": "Setup in progress",
+  "truckerDashboardVerificationStatusVerified": "Verified",
+  "truckerDashboardVerificationStatusPending": "Pending",
+  "truckerDashboardVerificationStatusRejected": "Rejected",
+  "truckerDashboardVerificationStatusUnverified": "Unverified",
+  "truckerDashboardVerificationStatusUnknown": "Unknown",
+  "truckerDashboardApprovedTruckCount": "{count, plural, =1 {# approved truck} other {# approved trucks}}",
+  "@truckerDashboardApprovedTruckCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardHeroSummary": "Dashboard-first remains the trucker home rule: understand readiness, scan active work, then jump into freight discovery from here.",
+  "truckerDashboardStatActiveBidsLabel": "Active bids",
+  "truckerDashboardStatActiveBidsHelper": "Submitted requests still waiting for supplier decision",
+  "truckerDashboardStatUpcomingTripsLabel": "Upcoming trips",
+  "truckerDashboardStatUpcomingTripsHelper": "Assigned and pickup-stage work approaching execution",
+  "truckerDashboardStatInTransitLabel": "In-transit",
+  "truckerDashboardStatInTransitHelper": "Trips currently moving on the road",
+  "truckerDashboardStatCompletedLabel": "Completed",
+  "truckerDashboardStatCompletedHelper": "Trips already closed in your trucker history",
+  "truckerDashboardRecentActivityUnavailableTitle": "Recent activity unavailable",
+  "truckerDashboardRecentActivityUnavailableMessage": "We could not load your latest booking, trip, and fleet activity right now.",
+  "truckerDashboardNoRecentActivityTitle": "No recent activity yet",
+  "truckerDashboardNoRecentActivitySubtitle": "Your booking requests, trip movement, and fleet review updates will appear here once work begins.",
+  "truckerDashboardBookingActivityTitle": "Booking activity",
+  "truckerDashboardBookingActivitySubtitle": "{count, plural, one {{count} active bid waiting for supplier review} other {{count} active bids waiting for supplier review}}",
+  "@truckerDashboardBookingActivitySubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTripActivityTitle": "Trip activity",
+  "truckerDashboardTripActivitySubtitle": "{upcomingTrips} upcoming • {inTransitTrips} in transit • {completedTrips} completed",
+  "@truckerDashboardTripActivitySubtitle": {
+    "placeholders": {
+      "upcomingTrips": {
+        "type": "int"
+      },
+      "inTransitTrips": {
+        "type": "int"
+      },
+      "completedTrips": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardFleetReviewActivityTitle": "Fleet review activity",
+  "truckerDashboardFleetReviewActivitySubtitle": "{pendingTrucks} pending • {rejectedTrucks} rejected • {pendingReapprovalTrucks} pending reapproval",
+  "@truckerDashboardFleetReviewActivitySubtitle": {
+    "placeholders": {
+      "pendingTrucks": {
+        "type": "int"
+      },
+      "rejectedTrucks": {
+        "type": "int"
+      },
+      "pendingReapprovalTrucks": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardStatusOpen": "open",
+  "truckerDashboardStatusClear": "clear",
+  "truckerDashboardStatusMoving": "moving",
+  "truckerDashboardStatusTracked": "tracked",
+  "truckerDashboardStatusAttention": "attention",
+  "truckerDashboardReadinessSummaryUnavailableTitle": "Trucker readiness unavailable",
+  "truckerDashboardReadinessSummaryUnavailableMessage": "We could not load your readiness summary right now.",
+  "truckerDashboardProfileSetupInProgressTitle": "Profile setup still in progress",
+  "truckerDashboardProfileSetupInProgressSubtitle": "Your dashboard will show readiness details once your trucker profile finishes loading.",
+  "truckerDashboardVerificationStatusTitle": "Verification status",
+  "truckerDashboardVerificationReadyMessage": "Chat and call are unlocked on open loads because your verification is complete.",
+  "truckerDashboardVerificationLockedMessage": "Browsing is open now. Chat and call unlock only after verification and at least one approved truck.",
+  "truckerDashboardDlLabel": "DL: {value}",
+  "@truckerDashboardDlLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerDashboardFleetReadinessTitle": "Fleet readiness",
+  "truckerDashboardApprovedTrucksSummary": "{approvedTrucks}/{totalTrucks} approved trucks",
+  "@truckerDashboardApprovedTrucksSummary": {
+    "placeholders": {
+      "approvedTrucks": {
+        "type": "int"
+      },
+      "totalTrucks": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardReadyStatus": "ready",
+  "truckerDashboardActionNeededStatus": "action needed",
+  "truckerDashboardFleetReadyMessage": "You have at least one approved truck available for verification-dependent workflows.",
+  "truckerDashboardFleetNeedFirstTruckMessage": "Add and approve your first truck in the fleet slice to complete trucker readiness.",
+  "truckerDashboardTruckAwaitingReview": "{count} awaiting review",
+  "@truckerDashboardTruckAwaitingReview": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckRejected": "{count} rejected",
+  "@truckerDashboardTruckRejected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckPendingReapproval": "{count} pending reapproval",
+  "@truckerDashboardTruckPendingReapproval": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckLifecycleAttention": "Truck lifecycle attention: {segments}. Non-approved trucks stay blocked for new booking workflows until review is cleared.",
+  "@truckerDashboardTruckLifecycleAttention": {
+    "placeholders": {
+      "segments": {}
+    }
+  },
+  "truckerTripsTitle": "My trips",
+  "truckerTripsSubtitle": "Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.",
+  "truckerTripsStageAssigned": "Assigned",
+  "truckerTripsStagePickupPending": "Pickup pending",
+  "truckerTripsStagePickedUp": "Picked up",
+  "truckerTripsStageInTransit": "In transit",
+  "truckerTripsStageDelivered": "Delivered",
+  "truckerTripsStageProofSubmitted": "Proof submitted",
+  "truckerTripsStageCompleted": "Completed",
+  "truckerTripsStageDisputed": "Disputed",
+  "truckerTripsStageCancelled": "Cancelled",
+  "truckerTripsStageUnknown": "Unknown",
+  "truckerTripsProofStatusPodUploaded": "POD uploaded",
+  "truckerTripsProofStatusLrUploaded": "LR uploaded",
+  "truckerTripsProofStatusAwaitingPod": "Awaiting POD",
+  "truckerTripsProofStatusProofSubmitted": "Proof submitted",
+  "truckerTripsProofStatusProofPending": "Proof pending",
+  "truckerTripsTabActive": "Active",
+  "truckerTripsTabCompleted": "Completed",
+  "truckerTripsLoadFailureTitle": "Unable to load trips",
+  "truckerTripsLoadFailureMessage": "We could not load your trips right now. Retry shortly to refresh the latest execution timeline.",
+  "truckerTripsEmptyActiveTitle": "No trips yet",
+  "truckerTripsEmptyCompletedTitle": "No completed trips yet",
+  "truckerTripsEmptyActiveSubtitle": "Book a load and wait for supplier approval to start your first trip.",
+  "truckerTripsEmptyCompletedSubtitle": "Completed and cancelled trips will appear here after execution closes.",
+  "truckerTripsEmptyActiveAction": "Find loads",
+  "truckerTripsEmptyCompletedAction": "View active trips",
+  "truckerTripDetailNotFoundTitle": "Trip not found",
+  "truckerTripDetailNotFoundSubtitle": "This assigned trip is no longer available or you no longer have access to it.",
+  "truckerTripDetailBackToTripsAction": "Back to my trips",
+  "truckerTripsTimeContextAssigned": "Assigned {date}",
+  "@truckerTripsTimeContextAssigned": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextDelivered": "Delivered {date}",
+  "@truckerTripsTimeContextDelivered": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextPodUploaded": "POD uploaded {date}",
+  "@truckerTripsTimeContextPodUploaded": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextCompleted": "Completed {date}",
+  "@truckerTripsTimeContextCompleted": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTruckLabel": "Truck {truckNumber}",
+  "@truckerTripsTruckLabel": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
+  "truckerFleetHeroTitle": "Manage truck readiness",
+  "truckerFleetHeroSubtitle": "Track truck approval, review rejection guidance, and keep RC details current so booking-ready trucks stay available.",
+  "truckerFleetEditingTruckAction": "Editing truck",
+  "truckerFleetAddTruckAction": "Add truck",
+  "truckerFleetTruckCount": "{count, plural, one {{count} truck} other {{count} trucks}}",
+  "@truckerFleetTruckCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetApprovedCount": "{count} approved",
+  "@truckerFleetApprovedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetActionAttentionTitle": "Truck action needs attention",
+  "truckerFleetActionFailureMessage": "The latest truck action could not be completed right now. Review the truck details and retry shortly.",
+  "truckerFleetEditTruckTitle": "Edit truck",
+  "truckerFleetAddOrUpdateTruckTitle": "Add or update truck",
+  "truckerFleetTruckNumberLabel": "Truck number",
+  "truckerFleetTruckNumberHint": "MH12AB1234",
+  "truckerFleetBodyTypeLabel": "Body type",
+  "truckerFleetBodyTypeOption": "{value}",
+  "@truckerFleetBodyTypeOption": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetTyresLabel": "Tyres",
+  "truckerFleetTyresOption": "{tyres} tyres",
+  "@truckerFleetTyresOption": {
+    "placeholders": {
+      "tyres": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetCapacityLabel": "Capacity (tonnes)",
+  "truckerFleetCapacityHint": "25",
+  "truckerFleetRcDocumentTitle": "RC document",
+  "truckerFleetRcUploadedSubtitle": "RC image uploaded and linked to this truck draft.",
+  "truckerFleetRcRequiredSubtitle": "Upload the truck RC before saving this truck.",
+  "truckerFleetUploadedStatus": "uploaded",
+  "truckerFleetRequiredStatus": "required",
+  "truckerFleetStoredPath": "Stored path: {path}",
+  "@truckerFleetStoredPath": {
+    "placeholders": {
+      "path": {}
+    }
+  },
+  "truckerFleetReplaceRcAction": "Replace RC document",
+  "truckerFleetUploadRcAction": "Upload RC document",
+  "truckerFleetRcUploadedSuccess": "RC uploaded successfully",
+  "truckerFleetRcUpdatedSuccess": "RC document updated successfully",
+  "truckerFleetSaveTruckUpdatesAction": "Save truck updates",
+  "truckerFleetSaveTruckAction": "Save truck",
+  "truckerFleetTruckUpdatedSuccess": "Truck updated successfully",
+  "truckerFleetTruckAddedSuccess": "Truck added successfully",
+  "truckerFleetMyTrucksTitle": "My trucks",
+  "truckerFleetUnavailableTitle": "Fleet unavailable",
+  "truckerFleetLoadFailureMessage": "We could not load your fleet right now. Retry shortly to refresh the latest truck readiness and approval state.",
+  "truckerFleetNoTrucksTitle": "No trucks added yet",
+  "truckerFleetNoTrucksSubtitle": "Add your first truck with its RC document so trucker verification can progress toward approval.",
+  "truckerFleetSelectRcSourceTitle": "Upload RC document",
+  "truckerFleetTakePhotoAction": "Take photo",
+  "truckerFleetChooseGalleryAction": "Choose from gallery",
+  "truckerFleetRcUploadFailureMessage": "We could not upload the RC document right now. Try another image or retry shortly.",
+  "truckerFleetSaveFailureMessage": "We could not save this truck right now. Review the truck details and retry shortly.",
+  "truckerFleetTruckCardSubtitle": "{bodyType} • {tyres} tyres • {capacityTonnes}T",
+  "@truckerFleetTruckCardSubtitle": {
+    "placeholders": {
+      "bodyType": {},
+      "tyres": {},
+      "capacityTonnes": {}
+    }
+  },
+  "truckerFleetModelLabel": "Model: {value}",
+  "@truckerFleetModelLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetReviewSummaryLabel": "Review summary: {value}",
+  "@truckerFleetReviewSummaryLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetNextStepLabel": "Next step: {value}",
+  "@truckerFleetNextStepLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetBlockedBookingMessage": "This truck is blocked for approval-dependent booking workflows until review clears.",
+  "truckerFleetFixResubmitAction": "Fix and resubmit truck",
+  "truckerFleetEditTruckAction": "Edit truck",
+  "truckerFleetStatusPendingLabel": "Pending review",
+  "truckerFleetStatusVerifiedLabel": "Approved",
+  "truckerFleetStatusRejectedLabel": "Rejected",
+  "truckerFleetStatusEditedPendingReapprovalLabel": "Pending reapproval",
+  "truckerFleetStatusArchivedLabel": "Archived",
+  "truckerFleetStatusUnknownLabel": "Unknown",
+  "truckerFleetStatusPendingMessage": "Your truck is waiting for admin review. Approval is required before this truck can be used for booking.",
+  "truckerFleetStatusVerifiedMessage": "This truck is approved and available for verification-dependent workflows.",
+  "truckerFleetStatusRejectedFallback": "This truck was rejected. Review the guidance below and update the affected details or RC document.",
+  "truckerFleetStatusEditedPendingReapprovalMessage": "This truck stays visible, but recent edits sent it back for reapproval before it can be used again.",
+  "truckerFleetStatusArchivedMessage": "This truck is archived and no longer available for normal booking workflows.",
+  "truckerFleetStatusUnknownMessage": "Truck review state is currently unavailable.",
+  "truckerFindLoadsHeroSubtitle": "Scan compact freight cards, keep filters tight, and move quickly from route interest to load evaluation.",
+  "truckerFindLoadsAdvancedFiltersAction": "Advanced filters",
+  "truckerFindLoadsOriginHint": "Origin city",
+  "truckerFindLoadsDestinationHint": "Destination city",
+  "truckerFindLoadsMaterialHint": "Material",
+  "truckerFindLoadsSortByLabel": "Sort by",
+  "truckerFindLoadsSortNewest": "Newest",
+  "truckerFindLoadsSortPriceHighToLow": "Price High→Low",
+  "truckerFindLoadsSortPriceLowToHigh": "Price Low→High",
+  "truckerFindLoadsSortPickupDate": "Pickup Date",
+  "truckerFindLoadsMarketplaceTabsTitle": "Marketplace tabs",
+  "truckerFindLoadsAllLoadsTab": "All Loads",
+  "truckerFindLoadsSuperLoadsTab": "Super Loads",
+  "truckerFindLoadsLoadFailureTitle": "Unable to load freight",
+  "truckerFindLoadsLoadFailureMessage": "We could not load marketplace freight right now. Retry shortly to refresh the latest load search results.",
+  "truckerFindLoadsEmptyTitle": "No loads found",
+  "truckerFindLoadsEmptySubtitle": "Try adjusting your city, material, or advanced filters to widen the marketplace search.",
+  "truckerFindLoadsLoadMoreFailureTitle": "More loads unavailable",
+  "truckerFindLoadsLoadMoreFailureMessage": "We could not load more freight right now. Retry shortly to continue the marketplace search.",
+  "truckerFindLoadsSummaryFrom": "From {city}",
+  "@truckerFindLoadsSummaryFrom": {
+    "placeholders": {
+      "city": {}
+    }
+  },
+  "truckerFindLoadsSummaryTo": "To {city}",
+  "@truckerFindLoadsSummaryTo": {
+    "placeholders": {
+      "city": {}
+    }
+  },
+  "truckerFindLoadsSummaryTyres": "{value} tyre",
+  "@truckerFindLoadsSummaryTyres": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFindLoadsSummaryPriceRange": "₹{minPrice}-{maxPrice}",
+  "@truckerFindLoadsSummaryPriceRange": {
+    "placeholders": {
+      "minPrice": {},
+      "maxPrice": {}
+    }
+  },
+  "truckerFindLoadsSummarySuperLoads": "Super Loads",
+  "truckerFindLoadsSummaryAllLoads": "Showing all loads • {resultCount} result(s)",
+  "@truckerFindLoadsSummaryAllLoads": {
+    "placeholders": {
+      "resultCount": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFindLoadsSummaryFiltered": "{pieces} • {resultCount} result(s)",
+  "@truckerFindLoadsSummaryFiltered": {
+    "placeholders": {
+      "pieces": {},
+      "resultCount": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFindLoadsResetFiltersAction": "Reset filters",
+  "truckerFindLoadsAnyBodyFallback": "Any body",
+  "truckerFindLoadsStatusActive": "Active",
+  "truckerFindLoadsStatusAssignedPartial": "Assigned Partial",
+  "truckerFindLoadsStatusUnknown": "Unknown",
+  "truckerFindLoadsStatusUnknownFallback": "Unknown status",
+  "@truckerFindLoadsStatusUnknownFallback": {
+    "placeholders": {}
+  },
+  "truckerFindLoadsPriceAdvancePickup": "₹{priceAmount} • {advancePercentage}% adv • {pickupDate}",
+  "@truckerFindLoadsPriceAdvancePickup": {
+    "placeholders": {
+      "priceAmount": {},
+      "advancePercentage": {
+        "type": "int"
+      },
+      "pickupDate": {}
+    }
+  },
+  "truckerFindLoadsTruckMatchAvailable": "Truck match available",
+  "truckerFindLoadsNoApprovedTruckMatch": "No approved truck match yet",
+  "truckerFindLoadsTripCostUnavailable": "Trip cost unavailable",
+  "truckerFindLoadsDistanceUnavailable": "Distance unavailable • Tyres {tyres}",
+  "@truckerFindLoadsDistanceUnavailable": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "truckerFindLoadsDistanceAvailable": "Distance {distanceKm} km • Tyres {tyres}",
+  "@truckerFindLoadsDistanceAvailable": {
+    "placeholders": {
+      "distanceKm": {},
+      "tyres": {}
+    }
+  },
+  "truckerFindLoadsTyresAny": "Any",
+  "truckerFindLoadsSuperLoadBanner": "Super Load • Payment Guarantee",
+  "truckerFindLoadsViewDetailsAction": "View details",
+  "truckerFindLoadsAdvancedFiltersTitle": "Advanced filters",
+  "truckerFindLoadsTruckBodyTypeLabel": "Truck body type",
+  "truckerFindLoadsBodyTypeOpen": "Open",
+  "truckerFindLoadsBodyTypeTrailer": "Trailer",
+  "truckerFindLoadsBodyTypeContainer": "Container",
+  "truckerFindLoadsBodyTypeTanker": "Tanker",
+  "truckerFindLoadsBodyTypeUnknown": "Unknown",
+  "truckerFindLoadsTyreRequirementTitle": "Tyre requirement",
+  "truckerFindLoadsMinPriceLabel": "Min price (₹)",
+  "truckerFindLoadsMaxPriceLabel": "Max price (₹)",
+  "truckerFindLoadsApplyFiltersAction": "Apply filters",
+  "truckerFindLoadsResetAdvancedFiltersAction": "Reset advanced filters",
+  "supplierPostLoadTitle": "Post Load",
+  "supplierPostLoadHeroTitle": "Create a supplier load",
+  "supplierPostLoadHeroSubtitle": "Use one clean scrolling form to define route, cargo, vehicle requirements, pricing, and pickup timing.",
+  "supplierPostLoadHeroHelper": "Manual city entry still works if route services do not return a preview. Your form data stays intact on validation or submission failure.",
+  "supplierPostLoadPostingBlockedTitle": "Posting is blocked",
+  "supplierPostLoadOpenVerificationAction": "Open verification",
+  "supplierPostLoadRouteTimingTitle": "Route and timing",
+  "supplierPostLoadOriginCityLabel": "Origin city",
+  "supplierPostLoadSearchCityHint": "Search city",
+  "supplierPostLoadOriginExactLocationLabel": "Origin exact location",
+  "supplierPostLoadOriginExactLocationHint": "Warehouse / pickup point",
+  "supplierPostLoadDestinationCityLabel": "Destination city",
+  "supplierPostLoadDestinationExactLocationLabel": "Destination exact location",
+  "supplierPostLoadDestinationExactLocationHint": "Drop point / delivery point",
+  "supplierPostLoadPickupDateLabel": "Pickup date",
+  "supplierPostLoadRoutePreviewTitle": "Route preview",
+  "supplierPostLoadDistanceLabel": "Distance: {value} km",
+  "@supplierPostLoadDistanceLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "supplierPostLoadDriveTimeLabel": "Est. drive time: {minutes} min",
+  "@supplierPostLoadDriveTimeLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierPostLoadRoutePreviewUnavailableTitle": "Route preview unavailable",
+  "supplierPostLoadRoutePreviewUnavailableMessage": "Route distance and duration could not be derived right now. You can still continue with manual city-based posting.",
+  "supplierPostLoadCargoDetailsTitle": "Cargo details",
+  "supplierPostLoadMaterialLabel": "Material",
+  "supplierPostLoadWeightLabel": "Weight (tonnes)",
+  "supplierPostLoadWeightHint": "22",
+  "supplierPostLoadVehicleRequirementsTitle": "Vehicle requirements",
+  "supplierPostLoadTruckBodyTypeLabel": "Truck body type",
+  "supplierPostLoadTyreRequirementTitle": "Tyre requirement",
+  "supplierPostLoadAnyTyresLabel": "Any",
+  "supplierPostLoadTrucksNeededTitle": "Trucks needed",
+  "supplierPostLoadTrucksNeededLabel": "Trucks needed",
+  "supplierPostLoadTrucksNeededHint": "1",
+  "supplierPostLoadPricingScheduleTitle": "Pricing and schedule",
+  "supplierPostLoadPriceAmountLabel": "Price amount (₹)",
+  "supplierPostLoadPriceAmountHint": "54000",
+  "supplierPostLoadPriceTypeTitle": "Price type",
+  "supplierPostLoadPriceTypeFixed": "Fixed",
+  "supplierPostLoadPriceTypeNegotiable": "Per Ton",
+  "supplierPostLoadPriceTypeUnknown": "Unknown",
+  "supplierPostLoadAdvancePercentageLabel": "Advance percentage: {value}%",
+  "@supplierPostLoadAdvancePercentageLabel": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierPostLoadAdvanceBalanceLabel": "Advance: ₹{advanceAmount} • Balance: ₹{balanceAmount}",
+  "@supplierPostLoadAdvanceBalanceLabel": {
+    "placeholders": {
+      "advanceAmount": {},
+      "balanceAmount": {}
+    }
+  },
+  "supplierPostLoadReviewSummaryTitle": "Review summary",
+  "supplierPostLoadOriginPending": "Origin pending",
+  "supplierPostLoadDestinationPending": "Destination pending",
+  "supplierPostLoadRouteSummary": "{origin} → {destination}",
+  "@supplierPostLoadRouteSummary": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "supplierPostLoadCargoSummary": "{material} • {weightTonnes}T • {trucksNeeded} truck(s)",
+  "@supplierPostLoadCargoSummary": {
+    "placeholders": {
+      "material": {},
+      "weightTonnes": {},
+      "trucksNeeded": {}
+    }
+  },
+  "supplierPostLoadPriceSummary": "Price: ₹{priceAmount} • {priceType}",
+  "@supplierPostLoadPriceSummary": {
+    "placeholders": {
+      "priceAmount": {},
+      "priceType": {}
+    }
+  },
+  "supplierPostLoadPickupSummary": "Pickup: {pickupDate}",
+  "@supplierPostLoadPickupSummary": {
+    "placeholders": {
+      "pickupDate": {}
+    }
+  },
+  "supplierPostLoadSubmissionFailedTitle": "Submission failed",
+  "supplierPostLoadCompleteVerificationAction": "Complete verification to post load",
+  "supplierPostLoadSubmitAction": "Post Load",
+  "supplierPostLoadCreatedSuccess": "Load created successfully",
+  "supplierPostLoadSubmissionFailureMessage": "We could not prepare this load submission right now. Review the load details and retry shortly.",
+  "supplierPostLoadSubmitFailureMessage": "We could not create this load right now. Review the load details and retry shortly.",
+  "supplierPostLoadVerificationCheckingMessage": "Checking supplier verification before enabling load posting.",
+  "supplierPostLoadVerificationUnavailableMessage": "Unable to confirm supplier verification right now. Retry shortly or open verification to review your trust status.",
+  "supplierPostLoadProfileUnavailableMessage": "Supplier profile is unavailable right now. Retry shortly before posting this load.",
+  "supplierPostLoadVerificationRequiredMessage": "Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.",
+  "supplierPostLoadSuggestionSubtitle": "{label} • {source}",
+  "@supplierPostLoadSuggestionSubtitle": {
+    "placeholders": {
+      "label": {},
+      "source": {}
+    }
+  },
+  "supplierDashboardVerificationStatusVerified": "Verified",
+  "supplierDashboardVerificationStatusPending": "Pending",
+  "supplierDashboardVerificationStatusRejected": "Rejected",
+  "supplierDashboardVerificationStatusUnknown": "Unknown",
+  "supplierVerificationPendingTitle": "Verification pending",
+  "supplierVerificationPendingMessage": "Your verification is under review. Keep documents ready in case the support team asks for clarification.",
+  "supplierVerificationRejectedTitle": "Verification needs attention",
+  "supplierVerificationCompleteDescription": "Your supplier verification is complete. You can keep posting loads and monitoring readiness from this dashboard.",
+  "supplierVerificationNeedsAttentionTitle": "Verification needs attention",
+  "supplierVerificationNeedsAttentionDescription": "Review the latest verification feedback, update the required documents, and resubmit when you are ready.",
+  "supplierOpenVerification": "Open verification",
+  "supplierReviewVerification": "Review verification",
+  "supplierDashboardVerificationStatusUnknownFallback": "Unknown verification status",
+  "@supplierDashboardVerificationStatusUnknownFallback": {
+    "placeholders": {}
+  },
+  "supplierFixVerification": "Fix verification",
+  "supplierCompleteSetupTitle": "Complete your supplier setup",
+  "supplierCompleteSetupMessage": "Complete supplier verification and add your company details before using the full supplier workspace.",
+  "supplierCompleteVerification": "Complete verification",
+  "supplierDashboardSuperLoadReadinessIntro": "Super Load eligibility is still partially admin-managed in the current app. This surface shows only the readiness facts the current profile model can confirm honestly.",
+  "supplierDashboardSuperLoadVerificationComplete": "Verification complete",
+  "supplierDashboardSuperLoadVerificationRequired": "Verification still required",
+  "supplierDashboardSuperLoadBusinessLicenceOnFile": "Business licence on file",
+  "supplierDashboardSuperLoadBusinessLicenceMissing": "Business licence missing",
+  "supplierDashboardSuperLoadCompanyAgeUnavailable": "Company-age readiness unavailable in current app data",
+  "supplierDashboardSuperLoadReadinessSummaryReady": "Your current profile can confirm supplier verification and the business licence prerequisite, but final Super Load eligibility still cannot be determined here because company-age/readiness fields are not yet present in the current source model.",
+  "supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence": "Your supplier verification is complete, but the business licence prerequisite is still missing from the current profile. Final Super Load eligibility remains blocked until that verification requirement is satisfied.",
+  "supplierDashboardSuperLoadReadinessSummaryMissingVerification": "Your current profile can confirm a business licence on file, but supplier verification is still incomplete. Final Super Load eligibility remains blocked until verification is completed and company-age/readiness fields exist in the current source model.",
+  "supplierDashboardSuperLoadReadinessSummaryPendingVerification": "Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.",
+  "supplierDashboardSuperLoadReadinessSummaryRejectedVerification": "Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.",
+  "supplierDashboardSuperLoadReadinessSummaryNeedsAttention": "Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.",
+  "supplierDashboardSuperLoadNextStepReady": "Next best action: keep your verification details accurate, monitor your loads normally, and use support only if you need follow-up on Super Load review or policy questions.",
+  "supplierDashboardSuperLoadNextStepBusinessLicence": "Next best action: update or upload the business licence through verification first, then re-check this readiness surface.",
+  "supplierDashboardSuperLoadNextStepVerification": "Next best action: complete supplier verification so the platform can confirm your trust baseline before any future Super Load review.",
+  "supplierDashboardSuperLoadNextStepPendingVerification": "Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.",
+  "supplierDashboardSuperLoadNextStepRejectedVerification": "Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.",
+  "supplierDashboardSuperLoadNextStepNeedsAttention": "Next best action: complete supplier verification and business licence requirements first, then return here for the remaining readiness summary.",
+  "supplierDashboardLoadStatusActive": "Active",
+  "supplierLoadStatusAssignedPartial": "Assigned partial",
+  "supplierLoadStatusAssignedFull": "Assigned full",
+  "supplierLoadStatusInTransit": "In transit",
+  "supplierLoadStatusCompleted": "Completed",
+  "supplierLoadStatusUnknown": "Unknown",
+  "supplierLoadStatusFilledOutsideApp": "Filled outside app",
+  "supplierLoadStatusCancelled": "Cancelled",
+  "supplierLoadStatusExpired": "Expired",
+  "supplierLoadStatusDeactivated": "Deactivated",
+  "supplierDashboardTrucksBooked": "{booked}/{needed} trucks booked",
+  "@supplierDashboardTrucksBooked": {
+    "placeholders": {
+      "booked": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierDashboardLoadPickup": "Pickup {value}",
+  "@supplierDashboardLoadPickup": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "supplierDashboardOpenLoadsWorkspace": "Open loads workspace",
+  "supplierDashboardSuperLoadStatusRequestSubmitted": "Request submitted",
+  "supplierDashboardSuperLoadStatusUnderReview": "Under review",
+  "supplierDashboardSuperLoadStatusApproved": "Approved • payment pending",
+  "supplierDashboardSuperLoadStatusRejected": "Rejected",
+  "supplierDashboardSuperLoadStatusExpiredOrClosed": "Closed",
+  "supplierDashboardSuperLoadStatusActive": "Active",
+  "supplierDashboardSuperLoadStatusNotActive": "Not requested",
+  "supplierDashboardSuperLoadBadge": "Super Load • {status}",
+  "@supplierDashboardSuperLoadBadge": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierDashboardSuperLoadGuidanceRequestSubmitted": "This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.",
+  "supplierDashboardSuperLoadGuidanceUnderReview": "This Super Load request is under admin review. Keep load details stable while review is in progress.",
+  "supplierDashboardSuperLoadGuidanceApproved": "This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.",
+  "supplierDashboardSuperLoadGuidanceRejected": "This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.",
+  "supplierDashboardSuperLoadGuidanceExpiredOrClosed": "This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.",
+  "supplierDashboardSuperLoadGuidanceActive": "This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.",
+  "supplierDashboardSuperLoadGuidanceNotActive": "Super Load state is not active for this load.",
+  "supplierLinkedTripAssignedLabel": "Assigned: {date}",
+  "@supplierLinkedTripAssignedLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierLinkedTripProofLabel": "Proof status: {status}",
+  "@supplierLinkedTripProofLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierLinkedTripTrackAction": "Track trip",
+  "supplierTripDetailTitle": "Trip Detail",
+  "supplierTripDetailLoadFailureTitle": "Unable to load supplier trip detail",
+  "supplierTripDetailLoadFailureMessage": "We could not load this supplier trip detail right now. Retry shortly to refresh the latest trip status and proof review context.",
+  "supplierTripDetailRatingFailureMessage": "The supplier rating state is temporarily unavailable. Retry shortly before submitting a rating.",
+  "supplierTripDetailRatingSubmitFailureMessage": "We could not submit this supplier rating right now. Review the rating and retry shortly.",
+  "supplierTripDetailActionFailureMessage": "The latest supplier trip action could not be completed right now. Retry shortly after the trip detail refreshes.",
+  "supplierTripDetailActionSubmitFailureMessage": "We could not complete that supplier trip action right now. Retry shortly after checking the latest trip status.",
+  "supplierTripDetailRatingSectionTitle": "Rate this trip",
+  "supplierTripDetailRatingAlreadySubmitted": "You already rated this trip.",
+  "supplierTripDetailRatingSubmittedOn": "Submitted on {date}",
+  "@supplierTripDetailRatingSubmittedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailRatingPrompt": "Delivery is complete. Rate the trucker for this trip.",
+  "supplierTripDetailCommentLabel": "Comment (optional)",
+  "supplierTripDetailCommentHint": "Share anything useful about the trip outcome",
+  "supplierTripDetailRatingUnavailableTitle": "Rating unavailable",
+  "supplierTripDetailSubmitRatingAction": "Submit Rating",
+  "supplierTripDetailRatingSubmittedSuccess": "Rating submitted successfully.",
+  "supplierTripDetailRatingStarTooltip": "{count} star{s}",
+  "@supplierTripDetailRatingStarTooltip": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "s": {}
+    }
+  },
+  "supplierTripDetailHeroSubtitle": "Trip {tripId} • Truck {truckNumber}",
+  "@supplierTripDetailHeroSubtitle": {
+    "placeholders": {
+      "tripId": {},
+      "truckNumber": {}
+    }
+  },
+  "supplierTripDetailMaterialTruckerSummary": "{material} • Trucker {truckerName}",
+  "@supplierTripDetailMaterialTruckerSummary": {
+    "placeholders": {
+      "material": {},
+      "truckerName": {}
+    }
+  },
+  "supplierTripDetailNextStepTitle": "Next step",
+  "supplierTripDetailNextStepReviewTitle": "Review and confirm delivery",
+  "supplierTripDetailNextStepReviewMessage": "The trucker has uploaded POD. Review the proof and confirm delivery to close the trip.",
+  "supplierTripDetailNextStepCompletedTitle": "Trip completed",
+  "supplierTripDetailNextStepCompletedMessage": "Delivery has been confirmed. Rating and post-trip follow-up continue from this completed state.",
+  "supplierTripDetailNextStepDisputedTitle": "Dispute in progress",
+  "supplierTripDetailNextStepDisputedMessage": "This trip is under dispute review and awaits support or operations resolution.",
+  "supplierTripDetailNextStepDefaultTitle": "Track execution",
+  "supplierTripDetailNextStepDefaultMessage": "Review the current trip status, timestamps, and proof progress from this supplier execution view.",
+  "supplierTripDetailDisputeStatusTitle": "Dispute status",
+  "supplierTripDetailDisputeStateRaised": "Current state: Dispute raised",
+  "supplierTripDetailDisputeCategorySummary": "Category: {category}",
+  "@supplierTripDetailDisputeCategorySummary": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeCategoryLabel": "{category}",
+  "@supplierTripDetailDisputeCategoryLabel": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeStatusLabel": "{status}",
+  "@supplierTripDetailDisputeStatusLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierTripDetailDisputeCurrentStateLabel": "Current state: {status}",
+  "@supplierTripDetailDisputeCurrentStateLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierTripDetailDisputeLastUpdatedLabel": "Last updated: {date}",
+  "@supplierTripDetailDisputeLastUpdatedLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailActionUnavailableTitle": "Supplier trip action unavailable",
+  "supplierTripDetailProofDocumentsTitle": "Proof documents",
+  "supplierTripDetailPodPhotoTitle": "POD photo",
+  "supplierTripDetailPreviewUnavailable": "Unable to open preview",
+  "supplierTripDetailOpenPodPhotoAction": "Open POD Photo",
+  "supplierTripDetailOpenLrDocumentAction": "Open LR Document",
+  "supplierTripDetailActionsTitle": "Actions",
+  "supplierTripDetailConfirmDeliveryAction": "Confirm Delivery",
+  "supplierTripDetailConfirmDeliverySuccess": "Delivery confirmed. The trip is now completed.",
+  "supplierTripDetailDisputePodAction": "Dispute POD",
+  "supplierTripDetailReportSourceLabel": "Supplier trip • {routeLabel}",
+  "@supplierTripDetailReportSourceLabel": {
+    "placeholders": {
+      "routeLabel": {}
+    }
+  },
+  "supplierTripDetailRouteScheduleTitle": "Route and schedule",
+  "supplierTripDetailOriginLabel": "Origin: {origin}",
+  "@supplierTripDetailOriginLabel": {
+    "placeholders": {
+      "origin": {}
+    }
+  },
+  "supplierTripDetailDestinationLabel": "Destination: {destination}",
+  "@supplierTripDetailDestinationLabel": {
+    "placeholders": {
+      "destination": {}
+    }
+  },
+  "supplierTripDetailDistanceLabel": "Distance: {distance} km",
+  "@supplierTripDetailDistanceLabel": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "supplierTripDetailDriveTimeLabel": "Drive time: {minutes} min",
+  "@supplierTripDetailDriveTimeLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierTripDetailPickupDateLabel": "Pickup date: {date}",
+  "@supplierTripDetailPickupDateLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailAssignedLabel": "Assigned: {dateTime}",
+  "@supplierTripDetailAssignedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailDeliveredLabel": "Delivered: {dateTime}",
+  "@supplierTripDetailDeliveredLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailPodUploadedLabel": "POD uploaded: {dateTime}",
+  "@supplierTripDetailPodUploadedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailCompletedLabel": "Completed: {dateTime}",
+  "@supplierTripDetailCompletedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailTruckerTruckTitle": "Trucker and truck",
+  "supplierTripDetailTruckerLabel": "Trucker: {name}",
+  "@supplierTripDetailTruckerLabel": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "supplierTripDetailTruckNumberLabel": "Truck number: {truckNumber}",
+  "@supplierTripDetailTruckNumberLabel": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
+  "supplierTripDetailBodyTypeLabel": "Body type: {bodyType}",
+  "@supplierTripDetailBodyTypeLabel": {
+    "placeholders": {
+      "bodyType": {}
+    }
+  },
+  "supplierTripDetailTyresLabel": "Tyres: {tyres}",
+  "@supplierTripDetailTyresLabel": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "supplierTripDetailPending": "Pending",
+  "supplierTripDetailStageAssigned": "Assigned",
+  "supplierTripDetailStagePickupPending": "Pickup pending",
+  "supplierTripDetailStagePickedUp": "Picked up",
+  "supplierTripDetailStageInTransit": "In transit",
+  "supplierTripDetailStageDelivered": "Delivered",
+  "supplierTripDetailStageProofSubmitted": "Proof submitted",
+  "supplierTripDetailStageCompleted": "Completed",
+  "supplierTripDetailStageDisputed": "Disputed",
+  "supplierTripDetailStageCancelled": "Cancelled",
+  "supplierTripDetailStageUnknown": "Unknown",
+  "supplierTripDetailVerificationStatusVerified": "Verified",
+  "supplierTripDetailVerificationStatusPending": "Pending",
+  "supplierTripDetailVerificationStatusRejected": "Rejected",
+  "supplierTripDetailVerificationStatusUnknown": "Unknown",
+  "supplierTripDetailDisputeCategoryFallback": "Trip dispute",
+  "supplierTripDetailDisputeStatusFallback": "Open",
+  "supplierTripDetailDisputeStatusGuidanceOpen": "Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.",
+  "supplierTripDetailDisputeStatusGuidanceInProgress": "Support or operations are actively reviewing the dispute. Watch the related support ticket for visible updates or clarification requests.",
+  "supplierTripDetailDisputeStatusGuidanceWaitingForUser": "Support is waiting for your clarification or additional context. Reply on the related support ticket so the review can continue.",
+  "supplierTripDetailDisputeStatusGuidanceResolved": "This dispute has reached a final review state. Check the linked support ticket outcome before raising any fresh follow-up issue.",
+  "supplierTripDetailDisputeStatusGuidanceDefault": "Keep following the related support ticket for the latest visible review updates.",
+  "supplierTripDetailDisputeBannerWaitingTitle": "Dispute review waiting for your reply",
+  "supplierTripDetailDisputeBannerClosedTitle": "Dispute review closed",
+  "supplierTripDetailDisputeBannerInProgressTitle": "Dispute review in progress",
+  "supplierTripDetailDisputeBannerNoSummaryMessage": "A dispute has been raised on this trip. Support and operations are reviewing the delivery context, while raw evidence access may remain restricted during review.",
+  "supplierTripDetailDisputeBannerWaitingMessage": "Category: {category}. This trip dispute is waiting on your clarification or proof, while raw evidence access may remain restricted during review.",
+  "@supplierTripDetailDisputeBannerWaitingMessage": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeBannerClosedMessage": "Category: {category}. This trip dispute has reached a final review outcome. Recorded status updates remain visible, while raw evidence access may remain restricted.",
+  "@supplierTripDetailDisputeBannerClosedMessage": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeBannerInProgressMessage": "Category: {category}. Status: {status}. Support and operations are reviewing this trip dispute, while raw evidence access may remain restricted during review.",
+  "@supplierTripDetailDisputeBannerInProgressMessage": {
+    "placeholders": {
+      "category": {},
+      "status": {}
+    }
+  },
+  "supplierTripDetailSharedVisibilityClosed": "Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this trip dispute.",
+  "supplierTripDetailSharedVisibilityInProgress": "Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible during review.",
+  "supplierTripDetailActionGuidanceClosed": "This dispute has reached a final review state. Check the recorded outcome on the linked support ticket before opening any genuinely new follow-up issue.",
+  "supplierTripDetailActionGuidanceInProgress": "No further delivery-confirmation action is available while this dispute stays under review. Follow the linked support ticket if support requests clarification or additional context.",
+  "supplierTripDetailProofGuidanceClosed": "If you believe important proof was not considered before closure, start a fresh support follow-up only when you have genuinely new dispute context to raise.",
+  "supplierTripDetailProofGuidanceInProgress": "If this dispute depends on additional documents beyond the current single-image flow, summarize those missing proofs clearly in the related support ticket replies.",
+  "verificationTitle": "Verification",
+  "verificationTitleSupplier": "Supplier Verification",
+  "verificationTitleTrucker": "Trucker Verification",
+  "verificationLoadFailureTitle": "Unable to load verification state",
+  "verificationLoadFailureMessage": "We could not load your verification status right now. Retry shortly to refresh the latest verification state.",
+  "verificationDetailsUnavailableTitle": "Verification details unavailable",
+  "verificationDetailsUnavailableSubtitle": "We could not find the current verification record for this account. Please retry shortly.",
+  "verificationHeroPendingSupplierTitle": "Supplier verification under review",
+  "verificationHeroPendingTruckerTitle": "Trucker verification under review",
+  "verificationHeroVerifiedSupplierTitle": "Supplier verification complete",
+  "verificationHeroVerifiedTruckerTitle": "Trucker verification complete",
+  "verificationHeroRejectedSupplierTitle": "Resubmit supplier verification",
+  "verificationHeroRejectedTruckerTitle": "Resubmit trucker verification",
+  "verificationHeroInitialSupplierTitle": "Complete supplier trust setup",
+  "verificationHeroInitialTruckerTitle": "Complete trucker trust setup",
+  "verificationHeroPendingSubtitle": "Your verification packet is already under review. We will notify you when approval is complete.",
+  "verificationHeroVerifiedSubtitle": "Your verification packet is already approved. You can review the captured documents and readiness details below.",
+  "verificationHeroRejectedWithFeedbackSubtitle": "Review the rejected document markers below, replace any affected items, and resubmit when you are ready.",
+  "verificationHeroRejectedFallbackSubtitle": "Review the rejection summary, replace any affected items, and resubmit the full packet when you are ready.",
+  "verificationHeroInitialSupplierSubtitle": "Upload the required business and identity documents, capture supplier verification location, and submit them for review from this single verification surface.",
+  "verificationHeroInitialTruckerSubtitle": "Upload identity documents, confirm truck readiness, and submit the full verification packet for review from this single setup surface.",
+  "verificationResubmitForReviewAction": "Resubmit for review",
+  "verificationSubmitForReviewAction": "Submit for review",
+  "verificationResubmittedSuccess": "Verification resubmitted for review",
+  "verificationSubmittedSuccess": "Verification submitted for review",
+  "verificationSubmitFailureMessage": "We could not submit this verification packet right now. Review the current checklist and retry shortly.",
+  "verificationWhatHappensNextTitle": "What happens next",
+  "verificationWhatHappensNextMessage": "Your verification packet is queued for review. You do not need to resubmit anything unless our team rejects the case with a correction request.",
+  "verificationTimelinePacketSubmittedTitle": "Packet submitted",
+  "verificationTimelinePacketSubmittedTimestamp": "Completed",
+  "verificationTimelinePacketSubmittedDescription": "Your current documents and readiness data are already attached to the verification case.",
+  "verificationTimelineReviewInProgressTitle": "Review in progress",
+  "verificationTimelineReviewInProgressTimestamp": "Now",
+  "verificationTimelineReviewInProgressDescription": "Our operations team is reviewing the submitted identity, business, and readiness evidence.",
+  "verificationTimelineNotifiedTitle": "You will be notified",
+  "verificationTimelineNotifiedTimestamp": "Next",
+  "verificationTimelineNotifiedDescription": "We will update your verification state here once the review is approved or sent back for corrections.",
+  "verificationActionNeedsAttentionTitle": "Verification action needs attention",
+  "verificationActionFailureMessage": "The latest verification action could not be completed right now. Review the current checklist and retry shortly.",
+  "verificationLatestRejectionReasonTitle": "Latest rejection reason",
+  "verificationNextStepTitle": "Next step",
+  "verificationLocationTitle": "Verification location",
+  "verificationLocationCapturedTitle": "Location captured",
+  "verificationLocationRequiredTitle": "Location still required",
+  "verificationLocationRequiredMessage": "Supplier verification needs a city-level location capture before submission can proceed.",
+  "verificationLocationCapturedStatus": "captured",
+  "verificationLocationRequiredStatus": "required",
+  "verificationLocationCapturedFooter": "Captured location remains attached to the supplier verification packet for review.",
+  "verificationLocationCaptureGuidanceFooter": "We attempt GPS capture and resolve to the nearest city-level location when possible.",
+  "verificationRefreshLocationAction": "Refresh location",
+  "verificationCaptureLocationAction": "Capture location",
+  "verificationLocationCapturedSuccess": "Verification location captured",
+  "verificationLocationFailureMessage": "We could not capture the verification location right now. Retry shortly from this verification screen.",
+  "verificationManualLocationAction": "Enter location manually",
+  "verificationManualLocationTitle": "Add verification location manually",
+  "verificationManualLocationCityLabel": "City",
+  "verificationManualLocationStateLabel": "State (optional)",
+  "verificationManualLocationSaveAction": "Save location",
+  "verificationDocTypeAadhaarFront": "Aadhaar front",
+  "verificationDocTypeAadhaarBack": "Aadhaar back",
+  "verificationDocTypePan": "PAN card",
+  "verificationDocTypeProfilePhoto": "Profile photo",
+  "verificationDocTypeBusinessLicence": "Business licence",
+  "verificationDocTypeGstCertificate": "GST certificate",
+  "verificationDocumentChecklistTitle": "Document checklist",
+  "verificationDocumentUploadedSuccess": "{label} uploaded successfully",
+  "@verificationDocumentUploadedSuccess": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "verificationDocumentUploadFailureMessage": "We could not upload that verification document right now. Try another image or retry shortly.",
+  "verificationReadinessSupplierTitle": "Verification readiness",
+  "verificationReadinessTruckerTitle": "Verification and truck readiness",
+  "verificationCurrentStateTitle": "Current verification state",
+  "verificationStatusVerified": "Verified",
+  "verificationStatusPending": "Pending",
+  "verificationStatusRejected": "Rejected",
+  "verificationStatusUnverified": "Unverified",
+  "verificationStatusUnknown": "Unknown",
+  "verificationCurrentStateSupplierFooter": "Supplier verification keeps load-posting readiness and trust visibility aligned to one authoritative state.",
+  "verificationCurrentStateTruckerFooter": "Trucker verification unlocks chat and call on open loads once identity documents and truck readiness are complete.",
+  "verificationBusinessReadinessTitle": "Business readiness",
+  "verificationTruckReadinessTitle": "Truck readiness",
+  "verificationCompanyNameNeedsAttention": "Company name still needs attention",
+  "approvedTruckCountLabel": "{count} approved truck{s}",
+  "verificationCheckProfileStatus": "check profile",
+  "verificationCapturedStatus": "captured",
+  "verificationReadyStatus": "ready",
+  "verificationActionNeededStatus": "action needed",
+  "verificationBusinessReadinessFooter": "Business licence is required for supplier verification. GST certificate remains optional.",
+  "verificationTruckReadyFooter": "You already have at least one approved truck available for verification-dependent workflows.",
+  "verificationTruckRequiredFooter": "At least one approved truck is still required before trucker verification can be submitted.",
+  "verificationPacketDetailsSectionTitle": "Verification packet details",
+  "verificationIdentityPacketSectionTitle": "Identity packet details",
+  "verificationReadyTruckCountLabel": "{count} ready {count, plural, =1{truck} other{trucks}}",
+  "@verificationReadyTruckCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "verificationTruckReadyWithRcFooter": "You already have at least one complete truck packet with RC document attached.",
+  "verificationTruckRequiredWithRcFooter": "Add one truck with its RC document before submitting trucker verification.",
+  "verificationTruckPacketStillRequiredTitle": "A truck packet is still required",
+  "verificationTruckPacketStillRequiredMessage": "Open your fleet to add the first truck or upload the RC document so trucker verification can be submitted as one packet.",
+  "verificationTruckPacketRequiredBadge": "Truck packet required",
+  "verificationTruckApprovalRequiredTitle": "Truck approval is still required",
+  "verificationTruckApprovalRequiredMessage": "Open your fleet to add the first truck, review rejection guidance, or resubmit edited truck details for approval.",
+  "verificationOpenFleetAction": "Open fleet",
+  "verificationUnlocksTitle": "What this unlocks",
+  "verificationUnlocksSupplierMessage": "Once verified, your supplier account becomes trust-ready for broader marketplace and account workflows.",
+  "verificationUnlocksTruckerMessage": "Once verified, chat and call stay unlocked on open loads and your trucker account becomes assignment-ready.",
+  "verificationSourceOfTruthBadge": "Verification source of truth",
+  "verificationChatAndCallGatingBadge": "Chat and call gating",
+  "verificationApprovedTruckRequiredBadge": "Approved truck required",
+  "verificationBackToAccountAction": "Back to account",
+  "verificationUploadSourceTitle": "Upload {documentLabel}",
+  "verificationTakePhotoAction": "Take photo",
+  "verificationChooseFromGalleryAction": "Choose from gallery",
+  "verificationRejectionSummaryWithMarkers": "{summary}\n\nRejected documents are marked below with document-specific correction notes.",
+  "verificationRejectionSummaryPacketLevel": "{summary}\n\nCurrent review feedback is returned as one packet-level reason when document-specific review markers are not provided.",
+  "verificationPendingBannerTitle": "Verification pending",
+  "verificationPendingBannerDescription": "Your verification packet is already under review. You can keep browsing while review is pending.",
+  "verificationCompleteBannerTitle": "Verification complete",
+  "verificationCompleteBannerDescription": "Your account is already verified. You can still review the uploaded document checklist below.",
+  "verificationNeedsAttentionBannerTitle": "Verification needs attention",
+  "verificationNeedsAttentionBannerDescription": "Review the rejection summary, replace any affected documents, and resubmit the packet when ready.",
+  "verificationNotSubmittedTitle": "Verification not submitted yet",
+  "verificationNotSubmittedSupplierMessage": "Upload Aadhaar, PAN, profile photo, and business licence before submitting supplier verification.",
+  "verificationNotSubmittedTruckerMessage": "Upload Aadhaar, PAN, profile photo, and ensure at least one approved truck exists before submitting trucker verification.",
+  "verificationRequiredUploadedLabel": "{uploaded}/{required} required uploaded",
+  "verificationPrerequisitesSatisfiedMessage": "All current client-side verification prerequisites are satisfied for submission.",
+  "verificationDocumentStatusPending": "pending",
+  "verificationDocumentStatusVerified": "verified",
+  "verificationDocumentStatusRejected": "rejected",
+  "verificationDocumentStatusUploaded": "uploaded",
+  "verificationDocumentStatusRequired": "required",
+  "verificationDocumentStatusOptional": "optional",
+  "verificationDocumentCorrectionFallback": "This document needs correction before verification can be resubmitted.",
+  "verificationDocumentUploadedSubtitle": "Document uploaded and linked to your verification record.",
+  "verificationDocumentRequiredSubtitle": "Required before verification can be submitted.",
+  "verificationDocumentOptionalSubtitle": "Optional for the current verification packet.",
+  "verificationReviewNoteLabel": "Review note: {reason}",
+  "verificationStoredPathLabel": "Stored path: {path}",
+  "verificationDocumentMissingMessage": "This document is still missing from the current packet.",
+  "verificationReplaceDocumentAction": "Replace document",
+  "verificationUploadDocumentAction": "Upload document",
+  "truckerTripDetailTitle": "Trip Detail",
+  "truckerTripDetailLoadFailureTitle": "Unable to load trip detail",
+  "truckerTripDetailLoadFailureMessage": "We could not load this trip detail right now. Retry shortly to refresh the latest trip status and actions.",
+  "truckerTripDetailRatingFailureMessage": "Your trip rating state is temporarily unavailable. Retry shortly before submitting a rating.",
+  "truckerTripDetailRatingSubmitFailureMessage": "We could not submit your rating right now. Review the rating and retry shortly.",
+  "truckerTripDetailActionFailureMessage": "The latest trip action could not be completed right now. Retry shortly after the trip detail refreshes.",
+  "truckerTripDetailActionSubmitFailureMessage": "We could not complete that trip action right now. Retry shortly after checking the latest trip status.",
+  "truckerTripDetailLrUploadFailureMessage": "We could not upload the LR proof right now. Try another image or retry shortly.",
+  "truckerTripDetailPodUploadFailureMessage": "We could not upload the POD proof right now. Try another image or retry shortly.",
+  "truckerTripDetailRatingSectionTitle": "Rate this trip",
+  "truckerTripDetailRatingAlreadySubmitted": "You already rated this trip.",
+  "truckerTripDetailRatingSubmittedOn": "Submitted on {date}",
+  "truckerTripDetailRatingPrompt": "Delivery is complete. Rate the supplier for this trip.",
+  "truckerTripDetailCommentLabel": "Comment (optional)",
+  "truckerTripDetailCommentHint": "Share anything useful about the trip outcome",
+  "truckerTripDetailRatingUnavailableTitle": "Rating unavailable",
+  "truckerTripDetailSubmitRatingAction": "Submit Rating",
+  "truckerTripDetailRatingSubmittedSuccess": "Rating submitted successfully.",
+  "truckerTripDetailRatingStarTooltip": "{count} star{s}",
+  "truckerTripDetailAutoCompleteDueNow": "Auto-complete is due now.",
+  "truckerTripDetailAutoCompleteDuration": "{hours}h {minutes}m",
+  "truckerTripDetailAutoCompleteIn": "Auto-complete in: {duration}",
+  "truckerTripDetailVerificationStatusVerified": "Verified",
+  "truckerTripDetailVerificationStatusPending": "Pending",
+  "truckerTripDetailVerificationStatusRejected": "Rejected",
+  "truckerTripDetailVerificationStatusUnknown": "Unknown",
+  "truckerTripDetailStageAssigned": "Assigned",
+  "truckerTripDetailStagePickupPending": "Pickup pending",
+  "truckerTripDetailStagePickedUp": "Picked up",
+  "truckerTripDetailStageInTransit": "In transit",
+  "truckerTripDetailStageDelivered": "Delivered",
+  "truckerTripDetailStageProofSubmitted": "Proof submitted",
+  "truckerTripDetailStageCompleted": "Completed",
+  "truckerTripDetailStageDisputed": "Disputed",
+  "truckerTripDetailStageCancelled": "Cancelled",
+  "truckerTripDetailProofStatusPodUploaded": "POD uploaded",
+  "truckerTripDetailProofStatusLrUploaded": "LR uploaded",
+  "truckerTripDetailProofStatusAwaitingPod": "Awaiting POD",
+  "truckerTripDetailProofStatusProofSubmitted": "Proof submitted",
+  "truckerTripDetailProofStatusProofPending": "Proof pending",
+  "truckerTripDetailHeroSubtitle": "Trip {tripId} • Truck {truckNumber}",
+  "truckerTripDetailMaterialPickupSummary": "{material} • Pickup {pickupDate}",
+  "truckerTripDetailNextStepTitle": "Next step",
+  "truckerTripDetailActionUnavailableTitle": "Trip action unavailable",
+  "truckerTripDetailActionsTitle": "Actions",
+  "truckerTripDetailReplaceLrUploadAction": "Replace LR Upload",
+  "truckerTripDetailUploadLrOptionalAction": "Upload LR (Optional)",
+  "truckerTripDetailUploadLrImageTitle": "Upload LR image",
+  "truckerTripDetailLrUploadedSuccess": "LR uploaded successfully.",
+  "truckerTripDetailUploadPodPhotoAction": "Upload POD Photo",
+  "truckerTripDetailUploadPodPhotoTitle": "Upload POD photo",
+  "truckerTripDetailPodUploadedSuccess": "POD uploaded successfully. Supplier confirmation is now pending.",
+  "truckerTripDetailCallSupplierAction": "Call Supplier",
+  "truckerTripDetailOpenInGoogleMapsAction": "Open in Google Maps",
+  "truckerTripDetailReportSourceLabel": "Trucker trip • {originLabel} → {destinationLabel}",
+  "truckerTripDetailReviewCountdownTitle": "Delivery review countdown",
+  "truckerTripDetailReviewCountdownMessage": "Supplier confirmation is pending. This trip auto-completes 48 hours after POD upload if no action is taken.",
+  "truckerTripDetailDisputeStatusTitle": "Dispute status",
+  "truckerTripDetailDisputeStateRaised": "Current state: Dispute raised",
+  "truckerTripDetailDisputeCurrentStateLabel": "Current state: {status}",
+  "truckerTripDetailDisputeCategoryLabel": "{category}",
+  "truckerTripDetailDisputeLastUpdatedLabel": "Last updated: {date}",
+  "truckerTripDetailDisputeStatusGuidanceOpen": "Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.",
+  "truckerTripDetailDisputeStatusGuidanceInProgress": "Support or operations are actively reviewing the dispute. Watch the related support ticket for visible updates or clarification requests.",
+  "truckerTripDetailDisputeStatusGuidanceWaitingForUser": "Support is waiting for your clarification or additional context. Reply on the related support ticket so the review can continue.",
+  "truckerTripDetailDisputeStatusGuidanceResolved": "This dispute has reached a final review state. Check the linked support ticket outcome before raising any fresh follow-up issue.",
+  "truckerTripDetailDisputeStatusGuidanceDefault": "Keep following the related support ticket for the latest visible review updates.",
+  "truckerTripDetailDisputeBannerWaitingTitle": "Dispute waiting for your reply",
+  "truckerTripDetailDisputeBannerClosedTitle": "Dispute review closed",
+  "truckerTripDetailDisputeBannerInProgressTitle": "Dispute in progress",
+  "truckerTripDetailDisputeBannerNoSummaryMessage": "A dispute has been raised on this trip. The trip stays open while support or operations review the submitted proof and delivery context. Both sides can see dispute status, but sensitive evidence may remain restricted during review.",
+  "truckerTripDetailDisputeBannerWaitingMessage": "A dispute has been raised on this trip under {category} and is waiting on your clarification or proof. Sensitive evidence may remain restricted during review.",
+  "truckerTripDetailDisputeBannerClosedMessage": "A dispute raised on this trip under {category} has reached a final review outcome. Recorded status updates remain visible, while sensitive evidence may remain restricted.",
+  "truckerTripDetailDisputeBannerInProgressMessage": "A dispute has been raised on this trip under {category}. The trip stays open while support or operations review the delivery context, and sensitive evidence may remain restricted during review.",
+  "truckerTripDetailDisputeActionGuidanceClosed": "This dispute has reached a final review state. Keep this trip detail for the recorded outcome and start a fresh follow-up only if a genuinely new issue appears.",
+  "truckerTripDetailDisputeActionGuidanceInProgress": "No further trip-stage action is available until the dispute is resolved. Keep this trip detail for status updates and follow any support instructions if requested.",
+  "truckerTripDetailSharedVisibilityClosed": "Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this trip dispute.",
+  "truckerTripDetailSharedVisibilityInProgress": "Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible during review.",
+  "truckerTripDetailProofGuidanceClosed": "If you believe important proof was not considered before closure, start a fresh support follow-up only when you have genuinely new dispute context to raise.",
+  "truckerTripDetailProofGuidanceInProgress": "If additional supporting proofs are not attached in the current single-image flow, keep the related support replies clear so support and operations know what else to review.",
+  "truckerTripDetailCancelledTitle": "Trip cancelled",
+  "truckerTripDetailCancelledMessage": "This trip was cancelled before completion. No further execution actions are available, and this detail now serves as a record of the cancelled movement.",
+  "truckerTripDetailCancellationSummaryTitle": "Cancellation summary",
+  "truckerTripDetailCancellationCurrentState": "Current state: cancelled",
+  "truckerTripDetailRouteLabel": "Route: {route}",
+  "truckerTripDetailMaterialLabel": "Material: {material}",
+  "truckerTripDetailAssignedOnLabel": "Assigned on: {dateTime}",
+  "truckerTripDetailCancellationFollowupMessage": "If support or operations share follow-up instructions, use this trip reference and the existing trip timeline for context.",
+  "truckerTripDetailTripSummaryTitle": "Trip summary",
+  "truckerTripDetailTripSummaryMessage": "This trip is complete and closed out from the execution workflow.",
+  "truckerTripDetailCompletedOnLabel": "Completed on: {dateTime}",
+  "truckerTripDetailRouteScheduleTitle": "Route and schedule",
+  "truckerTripDetailOriginLabel": "Origin: {origin}",
+  "truckerTripDetailDestinationLabel": "Destination: {destination}",
+  "truckerTripDetailDistanceLabel": "Distance: {distance} km",
+  "truckerTripDetailDriveTimeLabel": "Drive time: {minutes} min",
+  "truckerTripDetailAssignedLabel": "Assigned: {dateTime}",
+  "truckerTripDetailStartedLabel": "Started: {dateTime}",
+  "truckerTripDetailDeliveredLabel": "Delivered: {dateTime}",
+  "truckerTripDetailPodUploadedLabel": "POD uploaded: {dateTime}",
+  "truckerTripDetailCompletedLabel": "Completed: {dateTime}",
+  "truckerTripDetailTruckSupplierTitle": "Truck and supplier",
+  "truckerTripDetailTruckNumberLabel": "Truck number: {truckNumber}",
+  "truckerTripDetailBodyTypeLabel": "Body type: {bodyType}",
+  "truckerTripDetailTyresLabel": "Tyres: {tyres}",
+  "truckerTripDetailSupplierLabel": "Supplier: {name}",
+  "truckerTripDetailCompanyLabel": "Company: {companyName}",
+  "truckerTripDetailMobileLabel": "Mobile: {mobile}",
+  "truckerTripDetailTakePhotoAction": "Take photo",
+  "truckerTripDetailChooseFromGalleryAction": "Choose from gallery",
+  "truckerTripDetailHeadToPickupAction": "Head to pickup",
+  "truckerTripDetailHeadToPickupSuccess": "Pickup movement started. The supplier can now see that you are heading to pickup.",
+  "truckerTripDetailCargoLoadedAction": "Cargo Loaded",
+  "truckerTripDetailCargoLoadedSuccess": "Cargo loading has been confirmed for this trip.",
+  "truckerTripDetailStartTripAction": "Start Trip",
+  "truckerTripDetailStartTripSuccess": "Trip started successfully. This load is now in transit.",
+  "truckerTripDetailMarkDeliveredAction": "Mark Delivered",
+  "truckerTripDetailMarkDeliveredSuccess": "Delivery recorded. Upload POD in the next step to complete the proof flow.",
+  "truckerTripDetailNextStepAssignedTitle": "Head to pickup",
+  "truckerTripDetailNextStepAssignedMessage": "This trip is assigned and waiting for the pickup movement to begin.",
+  "truckerTripDetailNextStepPickupPendingTitle": "Confirm loading",
+  "truckerTripDetailNextStepPickupPendingMessage": "The trip is at pickup and waiting for cargo loading confirmation.",
+  "truckerTripDetailNextStepPickedUpTitle": "Start the trip",
+  "truckerTripDetailNextStepPickedUpMessage": "Cargo is loaded and the next operational milestone is moving into transit.",
+  "truckerTripDetailNextStepInTransitTitle": "Reach destination",
+  "truckerTripDetailNextStepInTransitMessage": "The trip is in transit and the next milestone is delivery confirmation.",
+  "truckerTripDetailNextStepDeliveredTitle": "Upload POD",
+  "truckerTripDetailNextStepDeliveredMessage": "Delivery is recorded and proof of delivery is the next required step.",
+  "truckerTripDetailNextStepProofSubmittedTitle": "Await supplier confirmation",
+  "truckerTripDetailNextStepProofSubmittedMessage": "Proof is submitted and the trip is waiting for supplier review or auto-completion.",
+  "truckerTripDetailNextStepCompletedTitle": "Trip completed",
+  "truckerTripDetailNextStepCompletedMessage": "Execution is closed and this trip now serves as a historical record.",
+  "truckerTripDetailNextStepDisputedTitle": "Dispute in progress",
+  "truckerTripDetailNextStepDisputedMessage": "A dispute is active on this trip and operational review is required before closure.",
+  "truckerTripDetailNextStepCancelledTitle": "Trip cancelled",
+  "truckerTripDetailNextStepCancelledMessage": "This trip was cancelled before normal completion and no further execution steps remain.",
+  "truckerTripDetailNextStepDefaultTitle": "Check execution status",
+  "truckerTripDetailNextStepDefaultMessage": "Review the current trip state and recent timestamps to understand the latest movement.",
+  "truckerTripDetailPending": "Pending",
+  "supplierRaiseDisputeTitle": "Raise Dispute",
+  "supplierRaiseDisputeTripUnavailableTitle": "Trip detail unavailable",
+  "supplierRaiseDisputeTripLoadFailureMessage": "We could not load this trip detail right now. Retry shortly to review the latest dispute context.",
+  "supplierRaiseDisputeHeroTitle": "Dispute delivery proof",
+  "supplierRaiseDisputeHeroSubtitle": "Explain what is wrong with the submitted POD so the dispute can be opened against the current trip and routed into support review.",
+  "supplierRaiseDisputeTripBadge": "Trip {tripId}",
+  "supplierRaiseDisputeHeroSummary": "{routeLabel} • {material}",
+  "supplierRaiseDisputeHeroGuidance": "Select the dispute category that best matches the issue, add a written explanation, and optionally attach one supporting evidence image for support review.",
+  "supplierRaiseDisputePartialContextUnavailableTitle": "Some trip detail context is unavailable",
+  "supplierRaiseDisputeTripContextFailureMessage": "Some dispute context is temporarily unavailable. Retry shortly to refresh the latest trip detail and proof review state.",
+  "supplierRaiseDisputeSummaryTitle": "Dispute summary",
+  "supplierRaiseDisputeTripRouteLabel": "Trip route: {routeLabel}",
+  "supplierRaiseDisputeTruckLabel": "Truck: {truckNumber}",
+  "supplierRaiseDisputeTruckerLabel": "Trucker: {truckerName}",
+  "supplierRaiseDisputeCurrentStageLabel": "Current stage: {stageLabel}",
+  "supplierRaiseDisputeSubmissionBlockedTitle": "Dispute submission blocked",
+  "supplierRaiseDisputeSubmissionBlockedMessage": "You can only raise this POD dispute while the trip is in proof submitted state.",
+  "supplierRaiseDisputeSubmissionUnavailableTitle": "Dispute submission unavailable",
+  "supplierRaiseDisputeSubmitFailureMessage": "We could not submit this dispute right now. Review the dispute details and retry shortly.",
+  "supplierRaiseDisputeProblemTitle": "What is wrong with the POD?",
+  "supplierRaiseDisputeCategoryLabel": "Dispute category",
+  "supplierRaiseDisputeReasonLabel": "Dispute reason",
+  "supplierRaiseDisputeReasonHint": "Explain what is wrong with the submitted proof and what support should review.",
+  "supplierRaiseDisputeHelpfulDetailsTitle": "Helpful details to include",
+  "supplierRaiseDisputeHelpfulDetailsMessage": "The current dispute flow still accepts one optional image. Use these prompts to capture any second or third proof in your written explanation.",
+  "supplierRaiseDisputeEvidenceOptionalTitle": "Evidence (optional)",
+  "supplierRaiseDisputeNoEvidenceAttached": "No evidence image attached yet. You can attach one supporting image in the current flow.",
+  "supplierRaiseDisputeEvidenceAttached": "One supporting evidence image is attached for review.",
+  "supplierRaiseDisputeVisibleToOtherPartyMessage": "Visible to the other party: dispute category and status only. Raw evidence may stay restricted during review.",
+  "supplierRaiseDisputeUseCameraAction": "Use camera",
+  "supplierRaiseDisputeChoosePhotoAction": "Choose photo",
+  "supplierRaiseDisputeRemoveEvidenceAction": "Remove evidence",
+  "supplierRaiseDisputeSubmitAction": "Submit dispute",
+  "supplierRaiseDisputeCategoryError": "Select a valid dispute category",
+  "supplierRaiseDisputeReasonError": "Explain the POD problem in at least 10 characters",
+  "supplierRaiseDisputeSubmittedSuccess": "Dispute submitted. Support ticket created for review.",
+  "supplierRaiseDisputeAttachmentAttachedSuccess": "Evidence attached successfully",
+  "supplierRaiseDisputeAttachmentFailureMessage": "We could not attach that evidence image right now. Try another image or retry shortly.",
+  "supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch": "Recommended evidence: the loaded bilty or loading proof that shows the dispatched quantity. Only one image can be attached right now.",
+  "supplierRaiseDisputeEvidenceGuidanceUnloadedQuantityMismatch": "Recommended evidence: the unloaded bilty, weighbridge slip, or unloading proof showing the received quantity. Only one image can be attached right now.",
+  "supplierRaiseDisputeEvidenceGuidanceDocumentMismatch": "Recommended evidence: the clearest POD, bilty, or related proof image showing the document mismatch. Only one image can be attached right now.",
+  "supplierRaiseDisputeEvidenceGuidanceNonPayment": "Recommended evidence: one proof image that best supports the non-payment claim. Full payment workflow evidence still remains limited in the current flow.",
+  "supplierRaiseDisputeEvidenceGuidanceFakePayoutProof": "Recommended evidence: one payout-proof image that best shows the fake or inconsistent payment claim.",
+  "supplierRaiseDisputeEvidenceGuidanceDelayOrNoShow": "Recommended evidence: one supporting image or screenshot that best shows the delay or no-show context.",
+  "supplierRaiseDisputeEvidenceGuidanceDamageOrShortage": "Recommended evidence: one image that best shows the damage, shortage, or affected goods at delivery.",
+  "supplierRaiseDisputeEvidenceGuidanceAbusiveBehavior": "Recommended evidence: one supporting image or screenshot if it is safe and relevant to the abusive-behavior claim.",
+  "supplierRaiseDisputeEvidenceGuidanceSpamOrScam": "Recommended evidence: one screenshot or proof image that best supports the spam or scam report.",
+  "supplierRaiseDisputeEvidenceGuidanceOther": "Provide a clear explanation of the dispute and attach the single most relevant supporting image if needed.",
+  "supplierRaiseDisputeEvidenceGuidanceFallback": "Attach the single most relevant supporting image available for this dispute category.",
+  "supplierRaiseDisputeBestImageGuidanceDocumentCategory": "Choose the clearest single document image where quantities, signatures, stamps, or POD details are readable in one frame.",
+  "supplierRaiseDisputeBestImageGuidancePaymentCategory": "Choose the single screenshot or payout-proof image that most clearly shows the mismatch, missing payment, or fake confirmation.",
+  "supplierRaiseDisputeBestImageGuidanceTimelineCategory": "Choose the single screenshot or photo that gives the strongest timeline or behavior context in one image.",
+  "supplierRaiseDisputeBestImageGuidanceDamageCategory": "Choose the single image that best shows the damaged goods, shortage, or delivered condition at handover.",
+  "supplierRaiseDisputeBestImageGuidanceOther": "Choose the one image that gives support the strongest proof of the issue you describe in your written reason.",
+  "supplierRaiseDisputeBestImageGuidanceFallback": "Choose the one clearest image that gives support the strongest proof to review first.",
+  "supplierRaiseDisputePromptDispatchQuantityShownOnProof": "Dispatch quantity shown on proof:",
+  "supplierRaiseDisputePromptQuantityActuallyChallenged": "Quantity actually challenged:",
+  "supplierRaiseDisputePromptOtherLoadingProofNotAttached": "Other loading proof not attached but reviewed by support:",
+  "supplierRaiseDisputePromptQuantityReceivedAtUnloading": "Quantity received at unloading:",
+  "supplierRaiseDisputePromptQuantityExpectedFromDispatchProof": "Quantity expected from dispatch proof:",
+  "supplierRaiseDisputePromptExtraUnloadProofNotAttached": "Extra unload proof not attached but available:",
+  "supplierRaiseDisputePromptDocumentFieldDoesNotMatch": "Document field that does not match:",
+  "supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe": "Correct trip or POD detail should be:",
+  "supplierRaiseDisputePromptOtherRelatedDocumentNotAttached": "Other related document not attached but relevant:",
+  "supplierRaiseDisputePromptAmountStillUnpaid": "Amount still unpaid:",
+  "supplierRaiseDisputePromptPaymentDueDateOrMilestone": "Payment due date or milestone:",
+  "supplierRaiseDisputePromptOtherPaymentProofNotAttached": "Other payment proof not attached but relevant:",
+  "supplierRaiseDisputePromptWhyPayoutProofLooksFake": "Why the payout proof looks fake or inconsistent:",
+  "supplierRaiseDisputePromptWhatPaymentStatusShouldBe": "What payment status should be instead:",
+  "supplierRaiseDisputePromptOtherProofOrChatContextNotAttached": "Other proof or chat context not attached:",
+  "supplierRaiseDisputePromptExpectedReportingOrArrivalTime": "Expected reporting or arrival time:",
+  "supplierRaiseDisputePromptActualDelayOrNoShowOutcome": "Actual delay or no-show outcome:",
+  "supplierRaiseDisputePromptOtherTimingProofNotAttached": "Other timing proof not attached but relevant:",
+  "supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage": "Goods affected by damage or shortage:",
+  "supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed": "Quantity or condition difference noticed:",
+  "supplierRaiseDisputePromptOtherSupportingProofNotAttached": "Other supporting proof not attached but relevant:",
+  "supplierRaiseDisputePromptWhatHappenedDuringIncident": "What happened during the incident:",
+  "supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred": "When or where the behavior occurred:",
+  "supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred": "What scam or spam behavior occurred:",
+  "supplierRaiseDisputePromptWhatMisleadingClaimWasMade": "What misleading claim was made:",
+  "supplierRaiseDisputePromptMainIssueSupportShouldReview": "Main issue support should review:",
+  "supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded": "What outcome or correction is needed:",
+  "supplierRaiseDisputePromptStrongestMissingProofNotAttached": "Strongest missing proof not attached:",
+  "supplierRaiseDisputeChecklistLoadedReadableQuantity": "Keep the dispatched quantity readable in the uploaded image.",
+  "supplierRaiseDisputeChecklistLoadedPreferBilty": "Include the bilty, loading slip, or marked proof instead of a distant photo.",
+  "supplierRaiseDisputeChecklistLoadedUseWrittenReason": "Use the written reason to describe any additional document context not visible in the image.",
+  "supplierRaiseDisputeChecklistUnloadedKeepReceivedQuantity": "Keep the received quantity or unload record readable in the image.",
+  "supplierRaiseDisputeChecklistUnloadedPreferWeighbridge": "Prefer a weighbridge slip, unload bilty, or marked proof over a generic cargo photo.",
+  "supplierRaiseDisputeChecklistUnloadedUseWrittenReason": "Use the written reason to explain any missing second document that cannot fit in the current single-image flow.",
+  "supplierRaiseDisputeChecklistDocumentReadableFields": "Make sure key document fields are readable in one frame.",
+  "supplierRaiseDisputeChecklistDocumentPreferSpecificPage": "Prefer the specific POD or bilty page where the mismatch appears.",
+  "supplierRaiseDisputeChecklistDocumentUseWrittenReason": "Use the written reason to describe what field or proof does not match the trip.",
+  "supplierRaiseDisputeChecklistPaymentPreferClearestScreenshot": "Prefer the clearest single payout-related screenshot or proof image.",
+  "supplierRaiseDisputeChecklistPaymentUseWrittenReason": "Use the written reason to explain what payment is still missing and when it was due.",
+  "supplierRaiseDisputeChecklistPaymentUploadStrongestFirst": "If multiple proofs exist, upload the strongest one first and summarize the rest in text.",
+  "supplierRaiseDisputeChecklistFakePreferScreenshot": "Prefer the payout screenshot or proof image that most clearly appears fake or inconsistent.",
+  "supplierRaiseDisputeChecklistFakeUseWrittenReason": "Use the written reason to explain what is suspicious about the proof.",
+  "supplierRaiseDisputeChecklistFakeSummarizeChatContext": "If supporting chat context exists, summarize it in text when it cannot fit in the single-image flow.",
+  "supplierRaiseDisputeChecklistDelayChooseClearestTiming": "Choose the clearest screenshot or photo showing the missed timing or no-show context.",
+  "supplierRaiseDisputeChecklistDelayUseWrittenReason": "Use the written reason to explain the expected time and the actual outcome.",
+  "supplierRaiseDisputeChecklistDelayKeepFocusedImage": "Keep the uploaded image focused on timing/location evidence instead of unrelated media.",
+  "supplierRaiseDisputeChecklistDamageChooseImage": "Choose the image that most clearly shows the damage or shortage at delivery.",
+  "supplierRaiseDisputeChecklistDamageKeepAffectedGoods": "Keep the affected goods or missing quantity context visible in the frame.",
+  "supplierRaiseDisputeChecklistDamageUseWrittenReason": "Use the written reason to explain what cannot be shown in the single uploaded image.",
+  "supplierRaiseDisputeChecklistAbusiveUploadIfSafe": "Upload evidence only if it is safe and relevant to the case.",
+  "supplierRaiseDisputeChecklistAbusivePreferClearestScreenshot": "Prefer the clearest screenshot or image tied directly to the abusive incident.",
+  "supplierRaiseDisputeChecklistAbusiveUseWrittenReason": "Use the written reason to explain the sequence of events without adding sensitive internal notes.",
+  "supplierRaiseDisputeChecklistSpamChooseScreenshot": "Choose the screenshot or image that most clearly shows the scam or spam behavior.",
+  "supplierRaiseDisputeChecklistSpamPreferStrongestProof": "Prefer the strongest proof of deception instead of a partial conversation fragment.",
+  "supplierRaiseDisputeChecklistSpamUseWrittenReason": "Use the written reason to summarize any extra scam context that cannot fit in one image.",
+  "supplierRaiseDisputeChecklistOtherChooseStrongestImage": "Choose the one strongest image that supports your explanation.",
+  "supplierRaiseDisputeChecklistOtherKeepIssueReadable": "Keep the issue-specific detail readable in the uploaded image.",
+  "supplierRaiseDisputeChecklistOtherUseWrittenReason": "Use the written reason to explain the rest of the evidence that cannot fit in the current flow.",
+  "supplierRaiseDisputeChecklistFallbackChooseClearestImage": "Choose the one clearest supporting image available.",
+  "supplierRaiseDisputeChecklistFallbackKeepReadableProof": "Keep the important proof readable in the frame.",
+  "supplierRaiseDisputeChecklistFallbackUseWrittenReason": "Use the written reason to describe any additional evidence not visible in the image.",
+  "reportIssueTitle": "Report Issue",
+  "reportIssueHeroTitle": "Report spam, scam, or abuse",
+  "reportIssueHeroSubtitle": "Open a trust-safety ticket tied to the current operational context so support can review the issue quickly.",
+  "reportIssueHeroMessage": "Attach one evidence image if you have it. The report still submits through the live support-ticket workflow using the linked load/trip context, and can also capture fake payout-proof or non-payment issues.",
+  "reportIssueSubmissionUnavailableTitle": "Report submission unavailable",
+  "reportIssueFailureMessage": "This report could not be prepared or submitted right now. Review the linked context and try again shortly.",
+  "reportIssueLinkedContextTitle": "Linked context",
+  "reportIssueSourceLabel": "Source: {sourceLabel}",
+  "reportIssueRelatedLoadLabel": "Related load: {value}",
+  "reportIssueRelatedTripLabel": "Related trip: {value}",
+  "reportIssueNotLinked": "Not linked",
+  "reportIssueDetailsTitle": "Report details",
+  "reportIssueTypeLabel": "Issue type",
+  "reportIssueWhatHappenedLabel": "What happened?",
+  "reportIssueWhatHappenedHint": "Explain the spam, fake proof, non-payment, payout deception, or abusive behavior that support should review.",
+  "reportIssueHelpfulDetailsTitle": "Helpful details to include",
+  "reportIssueEvidenceOptionalTitle": "Evidence (required)",
+  "reportIssueNoEvidenceAttached": "Attach one evidence image before submitting this report.",
+  "reportIssueEvidenceAttached": "One evidence image is attached for review.",
+  "reportIssueUseCameraAction": "Use camera",
+  "reportIssueChoosePhotoAction": "Choose photo",
+  "reportIssueRemoveEvidenceAction": "Remove evidence",
+  "reportIssueSubmitAction": "Submit report",
+  "reportIssueSubmittedSuccess": "Report submitted successfully",
+  "reportIssueSubmitFailureMessage": "We could not submit this report right now. Review the details and retry shortly.",
+  "reportIssueAttachmentAttachedSuccess": "Evidence attached successfully",
+  "reportIssueAttachmentFailureMessage": "We could not attach that evidence image right now. Try another image or retry shortly.",
+  "reportIssueCategorySpamOrScamLabel": "Spam or scam",
+  "reportIssueCategoryAbusiveBehaviorLabel": "Abusive behavior",
+  "reportIssueCategoryFakePayoutProofLabel": "Fake payout proof",
+  "reportIssueCategoryNonPaymentLabel": "Non-payment",
+  "reportIssueCategoryGuidanceSpamOrScam": "Explain the spam, scam, or misleading behavior clearly and attach one evidence image that helps support review the report.",
+  "reportIssueCategoryGuidanceAbusiveBehavior": "Describe the abusive or unsafe behavior clearly, including where it happened and any context support should review.",
+  "reportIssueCategoryGuidanceFakePayoutProof": "Explain why the payout proof looks fake or misleading and attach one evidence image with the most useful payment context you can share.",
+  "reportIssueCategoryGuidanceNonPayment": "Describe the non-payment issue clearly, including what was due, what follow-up already happened, and attach one evidence image with the strongest payment proof you can share.",
+  "supportCreateTicketScreenTitle": "Create support ticket",
+  "supportCreateTicketHeroTitle": "Open a support request",
+  "supportCreateTicketHeroSubtitle": "Describe your issue clearly so support can route it faster and keep your follow-up thread linked to the right context.",
+  "supportCreateTicketHeroMessage": "You can optionally include a related load or trip id if the issue is tied to a specific operational flow. You can also attach one evidence image if it helps support review the issue faster.",
+  "supportCreateTicketFailureTitle": "Support request needs attention",
+  "supportCreateTicketFailureMessage": "Your support request could not be prepared or submitted right now. Review the issue details and try again shortly.",
+  "supportCreateTicketDetailsTitle": "Ticket details",
+  "supportComposeCategoryLabel": "Category",
+  "supportComposeCategoryGeneral": "General",
+  "supportComposeCategoryAccount": "Account",
+  "supportComposeCategoryLoad": "Load",
+  "supportComposeCategoryTrip": "Trip",
+  "supportComposeCategoryPayment": "Payment",
+  "supportComposeCategoryTechnical": "Technical",
+  "supportComposeCategoryOther": "Other",
+  "supportCreateTicketRelatedLoadIdLabel": "Related load id (optional)",
+  "supportCreateTicketRelatedLoadIdHint": "load-123",
+  "supportCreateTicketRelatedTripIdLabel": "Related trip id (optional)",
+  "supportCreateTicketRelatedTripIdHint": "trip-123",
+  "supportCreateTicketDescriptionLabel": "Describe the issue",
+  "supportCreateTicketDescriptionHint": "Explain what happened, what is blocked, and what follow-up you need.",
+  "supportComposeAttachmentOptionalTitle": "Attachment (optional)",
+  "supportComposeNoAttachment": "No evidence image attached yet.",
+  "supportComposeAttachmentAttached": "One evidence image is attached for support review.",
+  "supportComposeRemoveAttachmentAction": "Remove attachment",
+  "supportComposeAttachmentAddedSuccess": "Attachment added successfully",
+  "supportComposeAttachmentFailureMessage": "We could not attach that evidence image right now. Try another image or retry shortly.",
+  "supportCreateTicketSubmitAction": "Submit ticket",
+  "supportCreateTicketSubmittedSuccess": "Support ticket created successfully",
+  "supportCreateTicketSubmitFailureMessage": "We could not create this support ticket right now. Review the details and retry shortly.",
+  "supportReplyFailureTitle": "Reply needs attention",
+  "supportReplyFailureMessage": "Your latest support reply could not be prepared or submitted right now. Review the message and try again shortly.",
+  "supportReplyLabel": "Reply to support",
+  "supportReplyHint": "Add the next detail or response support requested.",
+  "supportReplySendAction": "Send reply",
+  "supportReplySentSuccess": "Reply sent successfully",
+  "supportReplySubmitFailureMessage": "We could not send your reply right now. Review the message and retry shortly.",
+  "supplierTripsSectionTitle": "Supplier trips",
+  "supplierTripsSectionSubtitle": "Track active movements and recent trip outcomes from one supplier execution surface.",
+  "supplierTripsTabActive": "Active",
+  "supplierTripsTabCompleted": "Completed",
+  "supplierTripsLoadFailureTitle": "Unable to load supplier trips",
+  "supplierTripsLoadFailureMessage": "We could not load your supplier trips right now. Retry shortly to refresh the latest trip list and statuses.",
+  "supplierTripsEmptyActiveTitle": "No active trips yet",
+  "supplierTripsEmptyCompletedTitle": "No completed trips yet",
+  "supplierTripsEmptyActiveSubtitle": "Trips will appear here once a load moves into assigned execution.",
+  "supplierTripsEmptyCompletedSubtitle": "Completed supplier trips will appear here once deliveries are closed out.",
+  "supplierTripsEmptyActiveAction": "Open my loads",
+  "supplierTripsEmptyCompletedAction": "View active trips",
+  "supplierTripsAssignedLabel": "Assigned {date}",
+  "supplierTripsTruckerTruckLabel": "Trucker {truckerId} • Truck {truckId}",
+  "supplierTripsTrackTripAction": "Track trip",
+  "supplierTripDetailNotFoundTitle": "Trip not found",
+  "supplierTripDetailNotFoundSubtitle": "This supplier trip is no longer available or you no longer have access to it.",
+  "supplierTripDetailBackToTripsAction": "Back to supplier trips",
+  "supplierTripDetailStubScreenTitle": "Trip detail",
+  "supplierTripDetailStubCardTitle": "Supplier trip detail",
+  "supplierTripDetailStubReference": "Trip reference: {tripId}",
+  "supplierTripDetailStubMessage": "Detailed supplier trip execution screens will expand in the next trip-detail slice. Navigation is already wired from the supplier trips list.",
+  "assistantHeroTitleWithName": "Guided help for {firstName}",
+  "assistantHeroSubtitleSupplier": "Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.",
+  "assistantHeroSubtitleTrucker": "Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.",
+  "assistantWorkflowGuidanceSupplier": "Supplier workflow guidance",
+  "assistantWorkflowGuidanceTrucker": "Trucker workflow guidance",
+  "assistantProfileComplete": "Profile complete",
+  "assistantProfileIncomplete": "Profile incomplete",
+  "assistantRecommendedNextActionsTitle": "Recommended next actions",
+  "assistantOpenSupplierTripsAction": "Open supplier trips",
+  "assistantFindLoadsAction": "Find loads",
+  "assistantOpenTripsAction": "Open trips",
+  "assistantOpenMessagesAction": "Open messages",
+  "assistantGuidedHelpTitle": "Guided help",
+  "assistantBestForLabel": "Best for",
+  "assistantBestForSupplier": "Posting loads, checking active load execution, reviewing conversations, and opening support quickly.",
+  "assistantBestForTrucker": "Finding loads, checking trip execution, reviewing conversations, and opening support quickly.",
+  "assistantVoiceBehaviorLabel": "Voice behavior",
+  "assistantVoiceBehaviorValue": "Manual entry only right now. Full conversational bot, STT, and auto-speak remain in the dedicated communication and localization phases.",
+  "assistantCurrentRoleLabel": "Current role",
+  "assistantMoreActionsTitle": "More actions",
+  "assistantOpenNotificationsAction": "Open notifications",
+  "assistantOpenSupportAction": "Open support",
+  "shellAccessRestrictedTitle": "Access restricted",
+  "shellAccessRestrictedDeactivatedSubtitle": "Your account is deactivated pending cleanup. Signing you out safely...",
+  "shellAccessRestrictedBannedSubtitle": "Your account access is restricted. Signing you out safely...",
+  "shellAccountDeactivatedMessage": "Account deactivated",
+  "shellAccountBannedMessage": "Account banned",
+  "shellRouteNotFoundTitle": "Route not found",
+  "shellMessagesLoadFailureMessage": "We could not load your messages right now. Retry shortly to refresh the latest conversations.",
+  "shellMessagesBookingStatusSubmitted": "Submitted",
+  "shellMessagesBookingStatusApproved": "Approved",
+  "shellMessagesBookingStatusRejected": "Rejected",
+  "shellMessagesBookingStatusPending": "Pending",
+  "shellMessagesBookingStatusUnknown": "Unknown",
+  "truckerLoadDetailTitle": "Load Detail",
+  "truckerLoadDetailLoadNotFoundTitle": "Load not found",
+  "truckerLoadDetailLoadNotFoundSubtitle": "This marketplace load is no longer available or you no longer have access to it.",
+  "truckerLoadDetailBackToFindLoadsAction": "Back to find loads",
+  "truckerLoadDetailLoadFailureTitle": "Unable to load freight detail",
+  "truckerLoadDetailLoadFailureMessage": "We could not load this freight detail right now. Retry shortly to refresh the current route, pricing, and booking context.",
+  "truckerLoadDetailSupportUnavailableTitle": "Some supporting load details are unavailable",
+  "truckerLoadDetailSupportFailureMessage": "Some supporting load details are temporarily unavailable. Retry shortly to refresh the latest freight context.",
+  "truckerLoadDetailActionFailureTitle": "Action unavailable",
+  "truckerLoadDetailActionFailureMessage": "The latest load action could not be completed right now. Review the current load details and retry shortly.",
+  "truckerLoadDetailBookingSubmitFailureMessage": "We could not submit this booking request right now. Review the selected truck and retry shortly.",
+  "truckerLoadDetailHeroSubtitle": "Load {loadId} • Pickup {pickupDate}",
+  "truckerLoadDetailPriceBadge": "₹{priceAmount} • {priceType}",
+  "truckerLoadDetailTruckMatchAvailable": "Truck match available",
+  "truckerLoadDetailNoApprovedTruckMatchYet": "No approved truck match yet",
+  "truckerLoadDetailMaterialSummary": "{material} • {weightTonnes}T • Advance {advancePercentage}%",
+  "truckerLoadDetailSuperLoadGuarantee": "Super Load • Payment Guarantee",
+  "truckerLoadDetailRoutePriceSummaryTitle": "Route and price summary",
+  "truckerLoadDetailOriginLabel": "Origin: {origin}",
+  "truckerLoadDetailDestinationLabel": "Destination: {destination}",
+  "truckerLoadDetailPickupLabel": "Pickup: {pickupDate}",
+  "truckerLoadDetailPriceLabel": "Price: ₹{priceAmount} • {priceType}",
+  "truckerLoadDetailDistanceLabel": "Distance: {distance} km",
+  "truckerLoadDetailDriveTimeLabel": "Estimated drive time: {minutes} min",
+  "truckerLoadDetailTruckRequirementTitle": "Truck requirement summary",
+  "truckerLoadDetailBodyTypeLabel": "Body type: {bodyType}",
+  "truckerLoadDetailTyresLabel": "Tyres: {tyres}",
+  "truckerLoadDetailTrucksNeededLabel": "Trucks needed: {booked}/{needed} booked",
+  "truckerLoadDetailAnyOption": "Any",
+  "truckerLoadDetailNoApprovedTruckSelected": "No approved truck selected",
+  "truckerLoadDetailSelectedTruckMatches": "Selected truck matches this load",
+  "truckerLoadDetailSelectedTruckMayNotMatch": "Selected truck may not match this load",
+  "truckerLoadDetailCargoScheduleTitle": "Cargo and schedule details",
+  "truckerLoadDetailMaterialLabel": "Material: {material}",
+  "truckerLoadDetailWeightLabel": "Weight: {weight} tonnes",
+  "truckerLoadDetailOriginCityLabel": "Origin city: {city}",
+  "truckerLoadDetailDestinationCityLabel": "Destination city: {city}",
+  "truckerLoadDetailTripCostEstimateTitle": "Trip cost estimate",
+  "truckerLoadDetailTripCostUnavailableTitle": "Trip cost unavailable",
+  "truckerLoadDetailTripCostUnavailableMessage": "Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.",
+  "truckerLoadDetailDieselLabel": "Diesel: ₹{amount}",
+  "truckerLoadDetailTollsLabel": "Tolls: ₹{amount}",
+  "truckerLoadDetailMileageUsedLabel": "Mileage used: {value} km/L",
+  "truckerLoadDetailDieselPriceLabel": "Diesel price: ₹{value}/L",
+  "truckerLoadDetailEstimatedTollPlazasLabel": "Estimated toll plazas: {count}",
+  "truckerLoadDetailSupplierSummaryTitle": "Supplier summary",
+  "truckerLoadDetailContactOwnerLabel": "Contact owner: {name}",
+  "truckerLoadDetailVerifiedSupplier": "Verified supplier",
+  "truckerLoadDetailSupplierProfile": "Supplier profile",
+  "truckerLoadDetailNextStepTitle": "Next step",
+  "truckerLoadDetailStatusActive": "Active",
+  "truckerLoadDetailStatusAssignedPartial": "Assigned partial",
+  "truckerLoadDetailStatusUnknown": "Unknown",
+  "truckerLoadDetailBookingStatusLabel": "Booking status: {status}",
+  "@truckerLoadDetailBookingStatusLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "truckerLoadDetailBookingFeedbackTitle": "Booking feedback",
+  "truckerLoadDetailBookingBlockedTitle": "Booking is blocked",
+  "truckerLoadDetailMessageSupplierAction": "Message supplier",
+  "truckerLoadDetailCallSupplierAction": "Call supplier",
+  "truckerLoadDetailUsingTruckLabel": "Using {truckNumber}",
+  "truckerLoadDetailSelectedTruckSummary": "This load will be booked with {truckNumber} • {bodyType} • {tyres} tyres.",
+  "truckerLoadDetailApprovedTruckLabel": "Approved truck for this request",
+  "truckerLoadDetailTruckOptionLabel": "{truckNumber} • {bodyType} • {tyres} tyres",
+  "truckerLoadDetailNoApprovedTrucksAvailable": "No approved trucks are available yet.",
+  "truckerLoadDetailAddTruckFirstAction": "Add a Truck First",
+  "truckerLoadDetailRequestSubmittedAction": "Request Submitted",
+  "truckerLoadDetailBookedAction": "Booked",
+  "truckerLoadDetailBookThisLoadAction": "Book This Load",
+  "truckerLoadDetailLoadBookedSuccess": "Load booked! Waiting for supplier approval",
+  "truckerLoadDetailShareLoadAction": "Share load",
+  "truckerLoadDetailShareLoadTitle": "Share load",
+  "truckerLoadDetailShareLoadMessage": "Share a safe summary-first load card without exposing direct phone numbers or private operational notes.",
+  "truckerLoadDetailSystemShareAction": "System share",
+  "truckerLoadDetailShareToWhatsAppAction": "Share to WhatsApp",
+  "truckerLoadDetailWhatsAppUnavailableMessage": "WhatsApp is unavailable on this device. Use system share instead.",
+  "truckerLoadDetailOpenInGoogleMapsAction": "Open in Google Maps",
+  "truckerLoadDetailReportSpamOrAbuseAction": "Report spam or abuse",
+  "truckerLoadDetailReportSourceLabel": "Trucker load • {routeLabel}",
+  "truckerLoadDetailVerificationRequiredMessage": "Complete trucker verification before booking loads or starting supplier chat. Verification requires approved identity documents and profile review.",
+  "truckerLoadDetailTruckApprovalRequiredMessage": "Add and approve at least one truck before booking this load or unlocking supplier chat.",
+  "truckerLoadDetailAddTruckDialogTitle": "Add a truck first",
+  "truckerLoadDetailAddTruckDialogMessage": "You need at least one approved truck before you can book this load. Open Fleet now to add or complete truck approval?",
+  "truckerLoadDetailNotNowAction": "Not now",
+  "truckerLoadDetailOpenFleetAction": "Open Fleet",
+  "truckerLoadDetailConfirmBookingTitle": "Confirm load booking",
+  "truckerLoadDetailConfirmBookingMessage": "Book {material} {routeLabel} with {truckNumber}?",
+  "truckerLoadDetailCancelAction": "Cancel",
+  "authTtsSplashWelcome": "Welcome to TranZfort. I will help you finish a quick setup before you continue.",
+  "authSessionRefreshFailureMessage": "We could not refresh your session right now. Please continue and try again if needed.",
+  "authNotificationPermissionFailureMessage": "Notification permission could not be enabled right now.",
+  "authTtsVoiceGuidanceEnabled": "Voice guidance is now enabled.",
+  "authConfigIncompleteTitle": "Setup incomplete",
+  "authConfigIncompleteMessage": "Some app configuration is missing. Sign-in may not work until setup is completed.",
+  "authTtsSignInPrompt": "Choose how you want to sign in to TranZfort.",
+  "authTtsOnboardingRolePrompt": "Choose your role to continue onboarding.",
+  "postLoadValidationOriginCityRequired": "Select the origin city",
+  "postLoadValidationOriginLocationRequired": "Enter the pickup location",
+  "postLoadValidationDestinationCityRequired": "Select the destination city",
+  "postLoadValidationDestinationLocationRequired": "Enter the drop location",
+  "postLoadValidationMaterialRequired": "Enter the material name",
+  "postLoadValidationWeightRange": "Enter a weight between 0 and 100 tonnes",
+  "postLoadValidationTrucksNeeded": "At least one truck is required",
+  "postLoadValidationPricePositive": "Enter a valid price greater than zero",
+  "postLoadValidationPriceType": "Select a valid price type",
+  "postLoadValidationPickupDatePast": "Pickup date cannot be in the past",
+  "settingsRoleSentenceHi": "Current role: {roleLabel}.",
+  "@settingsRoleSentenceHi": {
+    "placeholders": {
+      "roleLabel": {}
+    }
+  },
+  "settingsRoleSentenceEn": "Current role: {roleLabel}.",
+  "@settingsRoleSentenceEn": {
+    "placeholders": {
+      "roleLabel": {}
+    }
+  },
+  "pushIssuePermissionRequestFailed": "Permission request failed.",
+  "pushIssueLocalInitFailed": "Local notification setup failed.",
+  "pushIssueDisplayFailed": "Notification display failed.",
+  "pushIssueTokenSyncFailed": "Token sync failed.",
+  "truckerFleetReturnToVerificationTitle": "Return to verification",
+  "truckerFleetReturnToVerificationMessage": "Add or update your truck, then return to verification to continue.",
+  "truckerFleetBackToVerificationAction": "Back to verification",
+  "truckerFleetTruckSavedReturnMessage": "Truck saved. Return to verification to continue.",
+  "truckerLoadDetailProfileLoadingMessage": "Checking your profile. Please wait...",
+  "supplierLoadDetailNotFoundTitle": "Load not found",
+  "supplierLoadDetailNotFoundSubtitle": "This load detail is not available right now. Return to My Loads and try again.",
+  "supplierLoadDetailLoadFailureTitle": "Unable to load load detail",
+  "supplierLoadDetailFailureMessage": "Could not load this load detail. Please try again.",
+  "supplierLoadDetailScreenTitle": "Load detail",
+  "supplierLoadDetailHeroSubtitle": "Load ID: {loadId} • Pickup: {pickupDate}",
+  "@supplierLoadDetailHeroSubtitle": {
+    "placeholders": {
+      "loadId": {},
+      "pickupDate": {}
+    }
+  },
+  "supplierLoadDetailLinkedExecutionUnavailableTitle": "Linked execution data unavailable",
+  "supplierLoadSupportFailureMessage": "Could not refresh bookings or trips right now. Please retry.",
+  "supplierLoadDetailStatusAndActionsTitle": "Status and actions",
+  "supplierLoadDetailCurrentStatus": "Current status: {status}",
+  "@supplierLoadDetailCurrentStatus": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierLoadDetailActionsSubtitle": "Use these actions only after checking the latest status.",
+  "supplierLoadDetailActionUnavailableTitle": "Action unavailable",
+  "supplierLoadActionFailureMessage": "We could not complete that load action right now. Please try again.",
+  "supplierLoadDetailCancelAction": "Cancel load",
+  "supplierLoadDetailCancelledSuccess": "Load cancelled successfully",
+  "supplierLoadCancelFailureMessage": "Could not cancel this load right now. Please try again.",
+  "supplierLoadDetailCloseFilledOutsideAction": "Close as filled outside app",
+  "supplierLoadDetailClosedFilledOutsideSuccess": "Load marked as filled outside the app",
+  "supplierLoadCloseFailureMessage": "Could not close this load right now. Please try again.",
+  "supplierLoadDetailRouteAndScheduleTitle": "Route and schedule",
+  "supplierLoadDetailOriginCity": "Origin city: {value}",
+  "@supplierLoadDetailOriginCity": {"placeholders": {"value": {}}},
+  "supplierLoadDetailOriginPoint": "Origin point: {value}",
+  "@supplierLoadDetailOriginPoint": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDestinationCity": "Destination city: {value}",
+  "@supplierLoadDetailDestinationCity": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDestinationPoint": "Destination point: {value}",
+  "@supplierLoadDetailDestinationPoint": {"placeholders": {"value": {}}},
+  "supplierLoadDetailPickupDate": "Pickup date: {value}",
+  "@supplierLoadDetailPickupDate": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDistance": "Distance: {value}",
+  "@supplierLoadDetailDistance": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDriveTime": "Drive time: {value}",
+  "@supplierLoadDetailDriveTime": {"placeholders": {"value": {}}},
+  "supplierLoadDetailRoutePreviewUnavailableTitle": "Route preview unavailable",
+  "supplierLoadDetailRoutePreviewUnavailableMessage": "Route preview details are unavailable for this load right now.",
+  "supplierLoadDetailOpenInGoogleMaps": "Open in Google Maps",
+  "supplierLoadDetailCargoAndRequirementsTitle": "Cargo and requirements",
+  "supplierLoadDetailMaterial": "Material: {value}",
+  "@supplierLoadDetailMaterial": {"placeholders": {"value": {}}},
+  "supplierLoadDetailWeight": "Weight: {value}",
+  "@supplierLoadDetailWeight": {"placeholders": {"value": {}}},
+  "supplierLoadDetailAnyValue": "Any",
+  "supplierLoadDetailBodyType": "Body type: {value}",
+  "@supplierLoadDetailBodyType": {"placeholders": {"value": {}}},
+  "supplierLoadDetailTyres": "Tyres: {value}",
+  "@supplierLoadDetailTyres": {"placeholders": {"value": {}}},
+  "supplierLoadDetailBookingAndTripLinkageTitle": "Booking and trip linkage",
+  "supplierLoadDetailBookingLinkageEmptyDescription": "No booking requests or linked trips are available on this load yet.",
+  "supplierLoadDetailBookingLinkageDescription": "See booking requests and linked trips together.",
+  "supplierLoadDetailNoBookingRequestsTitle": "No booking requests yet",
+  "supplierLoadDetailNoBookingRequestsSubtitle": "Booking requests will appear here once truckers respond to this load.",
+  "supplierLoadDetailLinkedTripsTitle": "Linked trips",
+  "supplierLoadDetailNoLinkedTripsTitle": "No linked trips yet",
+  "supplierLoadDetailNoLinkedTripsSubtitle": "Trips will appear here after you approve a booking.",
+  "supplierLoadDetailActivityTimelineTitle": "Activity timeline",
+  "supplierLoadDetailTimelineCreatedTitle": "Load created",
+  "supplierLoadDetailTimelineCreatedDescription": "This load was created.",
+  "supplierLoadDetailTimelinePublishedTitle": "Load published",
+  "supplierLoadDetailTimelinePublishedDescription": "This load is published and visible to truckers.",
+  "supplierLoadDetailTimelineUpdatedTitle": "Status updated",
+  "supplierLoadDetailTimelineUpdatedDescription": "Current status: {status}.",
+  "@supplierLoadDetailTimelineUpdatedDescription": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierBookingVerifiedLabel": "Verified",
+  "supplierBookingRatingLabel": "Rating: {rating}",
+  "@supplierBookingRatingLabel": {"placeholders": {"rating": {}}},
+  "supplierBookingTyres": "{tyres} tyres",
+  "@supplierBookingTyres": {"placeholders": {"tyres": {}}},
+  "supplierBookingSubmittedAt": "{truckLabel} • Submitted {submittedAt}",
+  "@supplierBookingSubmittedAt": {
+    "placeholders": {
+      "truckLabel": {},
+      "submittedAt": {}
+    }
+  },
+  "supplierBookingDecisionRecorded": "Decision recorded {decidedAt}",
+  "@supplierBookingDecisionRecorded": {"placeholders": {"decidedAt": {}}},
+  "supplierLinkedTripSubtitle": "{material} • Trucker {truckerId} • Truck {truckId}",
+  "@supplierLinkedTripSubtitle": {
+    "placeholders": {
+      "material": {},
+      "truckerId": {},
+      "truckId": {}
+    }
+  },
+  "supplierBookingApprovedSuccessMessage": "Booking approved successfully",
+  "supplierLoadApproveBookingFailureMessage": "Could not approve this booking right now. Please try again.",
+  "supplierBookingRejectedSuccessMessage": "Booking rejected successfully",
+  "supplierLoadRejectBookingFailureMessage": "Could not reject this booking right now. Please try again.",
+  "supplierBookingApproveDialogTitle": "Approve booking",
+  "supplierBookingApproveDialogMessage": "Approve booking for {material} from {origin} to {destination}?",
+  "@supplierBookingApproveDialogMessage": {
+    "placeholders": {
+      "material": {},
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "supplierBookingRejectDialogTitle": "Reject booking",
+  "supplierBookingRejectDialogSubtitle": "Add a short reason before rejecting this booking.",
+  "supplierBookingRejectReasonLabel": "Reason",
+  "supplierBookingRejectReasonHint": "Example: vehicle mismatch or route timing issue",
+  "verificationFieldCompanyName": "Company name",
+  "verificationFieldAadhaarNumber": "Aadhaar number",
+  "verificationFieldPanNumber": "PAN number",
+  "verificationFieldBusinessLicenceNumber": "Business licence number",
+  "verificationFieldGstNumber": "GST number",
+  "verificationFieldGstOptional": "Optional",
+  "verificationSavePacketAction": "Save details",
+  "verificationSaveSuccessMessage": "Verification details saved",
+  "verificationSaveFailureMessage": "Could not save verification details",
+  "verificationLockedVerifiedGuidance": "Your verification is already approved, so these fields are locked.",
+  "verificationLockedPendingGuidance": "Your verification is under review, so these fields are locked until a decision is made.",
+  "verificationUnlockedSupplierGuidance": "Enter your business and identity details, then upload the required documents.",
+  "verificationUnlockedTruckerGuidance": "Enter your identity details and keep at least one truck ready for verification.",
+  "verificationBlockedAlreadyComplete": "Verification is already complete.",
+  "verificationBlockedUnderReview": "Your verification is already under review.",
+  "verificationBlockedMissingIdentity": "Add your Aadhaar and PAN numbers first.",
+  "verificationBlockedMissingCompanyName": "Enter your company name first.",
+  "verificationBlockedMissingBusinessNumbers": "Enter your business licence details first.",
+  "verificationBlockedMissingDocument": "Upload {documentType} to continue.",
+  "@verificationBlockedMissingDocument": {"placeholders": {"documentType": {}}},
+  "verificationBlockedMissingLocation": "Add your verification location first.",
+  "verificationBlockedMissingTruck": "Add at least one truck before submitting verification.",
+  "verificationReadyTruckCount": "Verification-ready trucks: {count}",
+  "@verificationReadyTruckCount": {"placeholders": {"count": {}}}
+}

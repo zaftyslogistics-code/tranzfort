@@ -1,0 +1,22 @@
+{
+  "timestamp": "20260319-051218",
+  "mode": "full",
+  "device_id": "89P7MZVWV4Z9C6GE",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260319-051218",
+  "status": "FAIL",
+  "completed_steps": [
+    "adb_devices"
+  ],
+  "failed_steps": [
+    "tranzfort_analyze",
+    "runner_unhandled_error"
+  ],
+  "runner_error_path": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260319-051218\\summary\\runner-error.txt",
+  "docs": [
+    "docs/almost-manual-testing.md"
+  ],
+  "scripts": [
+    "scripts/testing/run_almost_manual.ps1",
+    "scripts/testing/run_phase_c_baseline.ps1"
+  ]
+}

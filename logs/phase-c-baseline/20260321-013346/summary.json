@@ -1,0 +1,10 @@
+{
+  "timestamp": "20260321-013346",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\phase-c-baseline\\20260321-013346",
+  "failedSteps": [
+    "tranzfort_tests"
+  ],
+  "status": "FAIL",
+  "tranzfort_apk": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\TranZfort\\build\\app\\outputs\\flutter-apk\\app-debug.apk",
+  "admin_apk": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\Admin\\build\\app\\outputs\\flutter-apk\\app-debug.apk"
+}

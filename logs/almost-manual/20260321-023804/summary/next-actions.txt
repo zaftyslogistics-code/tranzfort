@@ -1,0 +1,3 @@
+Use Google sign-in and choose the account mapped to profile id 7aa7562b-c9fc-42f9-b7dc-0f9c1429c8cb.
+Execute the trucker walkthrough from docs/almost-manual-testing.md.
+Record failures and evidence paths.

@@ -1,0 +1,2 @@
+Execute supplier -> trucker -> admin cross-role validation on the same object chain where possible.
+Record contradictions between roles immediately.

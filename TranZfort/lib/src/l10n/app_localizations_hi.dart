@@ -1,0 +1,6352 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Hindi (`hi`).
+class AppLocalizationsHi extends AppLocalizations {
+  AppLocalizationsHi([String locale = 'hi']) : super(locale);
+
+  @override
+  String get appTitle => 'TranZfort';
+
+  @override
+  String get splashLoadingWorkspace => 'आपका workspace लोड हो रहा है...';
+
+  @override
+  String get authGoogleFailureMessage =>
+      'अभी Google से continue नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या उसकी जगह email sign-in इस्तेमाल करें।';
+
+  @override
+  String get authWelcomeTitle => 'TranZfort में आपका स्वागत है';
+
+  @override
+  String get authWelcomeSubtitle =>
+      'Supplier या trucker workspace में आगे बढ़ने के लिए Google या email sign-in चुनें।';
+
+  @override
+  String get splashSetupTitle => 'Device access सेट करें';
+
+  @override
+  String get splashSetupSubtitle =>
+      'Notifications, voice guidance, और location access अभी allow करें ताकि first login और verification flow smoothly आगे बढ़ सके।';
+
+  @override
+  String get splashSetupEnableVoiceAction => 'Voice guidance enable करें';
+
+  @override
+  String get splashSetupOpenLocationSettingsAction => 'Location settings खोलें';
+
+  @override
+  String get authContinueWithGoogle => 'Google से continue करें';
+
+  @override
+  String get authContinueWithPassword => 'Email और password से continue करें';
+
+  @override
+  String get authTermsOfService => 'सेवा की शर्तें';
+
+  @override
+  String get authTermsInfoMessage =>
+      'TranZfort access अभी verified supplier और trucker workflows तक सीमित है। आगे बढ़कर आप platform terms से सहमत होते हैं।';
+
+  @override
+  String get authPasswordTitle => 'Email और password';
+
+  @override
+  String get authPasswordSubtitle =>
+      'अपने email और password से sign in करें, या आगे बढ़ने के लिए नया TranZfort account बनाएँ।';
+
+  @override
+  String get authPasswordLabel => 'Password';
+
+  @override
+  String get authPasswordConfirmLabel => 'Password की पुष्टि करें';
+
+  @override
+  String get authPasswordHint => 'कम से कम 8 characters दर्ज करें';
+
+  @override
+  String get authPasswordModeSignIn => 'Sign in';
+
+  @override
+  String get authPasswordModeSignUp => 'Account बनाएँ';
+
+  @override
+  String get authPasswordSwitchToSignIn => 'पहले से account है? Sign in करें';
+
+  @override
+  String get authPasswordSwitchToSignUp => 'TranZfort पर नए हैं? Account बनाएँ';
+
+  @override
+  String get authPasswordSignInAction => 'Password से sign in करें';
+
+  @override
+  String get authPasswordSignUpAction => 'Account बनाएँ';
+
+  @override
+  String get authPasswordInvalidEmailMessage => 'वैध email address दर्ज करें।';
+
+  @override
+  String get authPasswordTooShortMessage =>
+      'कम से कम 8 characters वाला password दर्ज करें।';
+
+  @override
+  String get authPasswordConfirmMismatchMessage =>
+      'Password confirmation मेल नहीं खाती।';
+
+  @override
+  String get authPasswordSignInFailureMessage =>
+      'अभी email और password से sign in नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या कोई दूसरा sign-in तरीका इस्तेमाल करें।';
+
+  @override
+  String get authPasswordSignUpFailureMessage =>
+      'अभी आपका account नहीं बन सका। यही details लेकर थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get authPasswordSignUpSuccessMessage =>
+      'आपका account बन गया। अगर email confirmation required हो, तो उसे पूरा करें और फिर अपने नए password से sign in करें।';
+
+  @override
+  String get authPasswordCheckEmailTitle => 'अपना email देखें';
+
+  @override
+  String authPasswordCheckEmailSubtitle(Object email) {
+    return 'हमने $email पर verification link भेजा है। उस email को खोलें, verification पूरा करें, और फिर यहां वापस आकर sign in करें।';
+  }
+
+  @override
+  String get authPasswordResendVerificationAction =>
+      'Verification email फिर भेजें';
+
+  @override
+  String authPasswordResendVerificationSuccessMessage(Object email) {
+    return 'हमने $email पर एक नया verification email भेजा है। उसे खोलें, verification पूरा करें, और फिर sign in करें।';
+  }
+
+  @override
+  String get authPasswordResendVerificationFailureMessage =>
+      'अभी verification email फिर नहीं भेजा जा सका। थोड़ी देर बाद फिर कोशिश करें या कोई दूसरा email इस्तेमाल करें।';
+
+  @override
+  String get authPasswordBackToSignInAction => 'Sign in पर वापस जाएँ';
+
+  @override
+  String get authPasswordUseDifferentEmailAction =>
+      'कोई दूसरा email इस्तेमाल करें';
+
+  @override
+  String get onboardingSelectRoleError =>
+      'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
+
+  @override
+  String get onboardingRoleWorkspaceFailure =>
+      'अभी आपका role workspace तैयार नहीं हो सका। अपना role फिर चुनकर थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get onboardingRoleSaveFailure =>
+      'अभी आपका role save नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get onboardingChooseRoleTitle => 'Role चुनें';
+
+  @override
+  String get onboardingRoleQuestion => 'आपके काम के लिए कौन-सा role सही है?';
+
+  @override
+  String get onboardingRoleSubtitle =>
+      'आपका role तय करेगा कि TranZfort आपके लिए कौन-से tools, dashboard और workflows तैयार करेगा।';
+
+  @override
+  String get onboardingSupplierTitle => 'Supplier';
+
+  @override
+  String get onboardingSupplierSubtitle =>
+      'Loads post करें, bookings review करें, trips manage करें और delivery follow-through ट्रैक करें।';
+
+  @override
+  String get onboardingTruckerTitle => 'Trucker';
+
+  @override
+  String get onboardingTruckerSubtitle =>
+      'Loads खोजें, fleet readiness manage करें और active trips एक जगह से चलाएँ।';
+
+  @override
+  String get onboardingContinue => 'आगे बढ़ें';
+
+  @override
+  String get onboardingProfileSaveFailure =>
+      'अभी आपकी profile save नहीं हो सकी। Details जांचकर थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get onboardingCompleteProfileTitle => 'Profile पूरी करें';
+
+  @override
+  String get onboardingCompleteProfileHeading => 'अपनी basic profile पूरी करें';
+
+  @override
+  String get onboardingCompleteProfileSubtitle =>
+      'वह मुख्य contact details जोड़ें जो verification और daily operations में काम आएँगी।';
+
+  @override
+  String get onboardingFullNameLabel => 'पूरा नाम';
+
+  @override
+  String get onboardingFullNameHint => 'अपना पूरा नाम दर्ज करें';
+
+  @override
+  String get onboardingMobileLabel => 'Mobile number';
+
+  @override
+  String get onboardingTermsAcceptance =>
+      'आगे बढ़कर आप पुष्टि करते हैं कि आपकी basic profile details सही हैं और आप platform terms से सहमत हैं।';
+
+  @override
+  String get onboardingSaveAndContinue => 'Save करके आगे बढ़ें';
+
+  @override
+  String get commonRetry => 'फिर कोशिश करें';
+
+  @override
+  String get shellTooltipVoiceAssistance => 'Voice assistance';
+
+  @override
+  String get supplierQuickActionNotifications => 'Notifications';
+
+  @override
+  String get supplierMyLoadsTitle => 'मेरे लोड्स';
+
+  @override
+  String get supplierMyLoadsSubtitle =>
+      'एक ही जगह से active supplier loads, booking demand, और completed load history देखें।';
+
+  @override
+  String get supplierMyLoadsTabActive => 'सक्रिय';
+
+  @override
+  String get supplierMyLoadsTabCompleted => 'पूर्ण';
+
+  @override
+  String get supplierMyLoadsLoadFailureTitle =>
+      'आपके supplier loads लोड नहीं हो सके';
+
+  @override
+  String get supplierMyLoadsFailureMessage =>
+      'अभी आपके supplier loads लोड नहीं हो सके। Latest load list refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierMyLoadsEmptyActiveTitle => 'अभी कोई active load नहीं है';
+
+  @override
+  String get supplierMyLoadsEmptyCompletedTitle =>
+      'अभी कोई completed load नहीं है';
+
+  @override
+  String get supplierMyLoadsEmptyActiveSubtitle =>
+      'अपना पहला load post करें ताकि booking requests और execution updates यहाँ दिखने लगें।';
+
+  @override
+  String get supplierMyLoadsEmptyCompletedSubtitle =>
+      'Completed, cancelled, expired, और app के बाहर filled loads active work close होने पर यहाँ दिखाई देंगी।';
+
+  @override
+  String get supplierMyLoadsOpenActiveLoads => 'Active loads खोलें';
+
+  @override
+  String get supplierMyLoadsMoreUnavailableTitle =>
+      'और supplier loads लोड नहीं हो सके';
+
+  @override
+  String get supplierMyLoadsPaginationFailureMessage =>
+      'अभी और supplier loads लोड नहीं हो सके। Latest load history refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierMyLoadsLoadingMore => 'और loads लोड हो रही हैं...';
+
+  @override
+  String get supplierMyLoadsLoadMore => 'और loads लोड करें';
+
+  @override
+  String supplierLoadCardPickupDate(Object value) {
+    return 'Pickup $value';
+  }
+
+  @override
+  String supplierLoadCardTrucks(Object booked, Object needed) {
+    return '$booked/$needed ट्रक बुक हुए';
+  }
+
+  @override
+  String get supplierLoadCardTrackLoad => 'Load ट्रैक करें';
+
+  @override
+  String get supplierLoadCardViewHistory => 'History देखें';
+
+  @override
+  String get supplierLoadCardViewDetails => 'Details देखें';
+
+  @override
+  String get supplierRecentLoadsTitle => 'Recent loads';
+
+  @override
+  String supplierDashboardWelcomeBack(Object name) {
+    return 'फिर से स्वागत है, $name';
+  }
+
+  @override
+  String get supplierDashboardHeroSubtitle =>
+      'Supplier verification ट्रैक करें, Super Load readiness रिव्यू करें, और अपने latest loads व execution activity को सामने रखें।';
+
+  @override
+  String get supplierDashboardOverviewTitle => 'Dashboard overview';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessTitle => 'Super Load readiness';
+
+  @override
+  String get supplierDashboardQuickActionsTitle => 'Quick actions';
+
+  @override
+  String get supplierDashboardQuickActionChatLabel => 'Chat';
+
+  @override
+  String get supplierDashboardPostLoadAction => 'Post Load';
+
+  @override
+  String get supplierDashboardHeroSummaryBody =>
+      'अपनी supplier verification current रखें, active loads मॉनिटर करें, और इसी workspace में दिख रहे latest Super Load readiness signals पर नज़र रखें।';
+
+  @override
+  String get supplierDashboardStatsActiveLoadsLabel => 'Active loads';
+
+  @override
+  String get supplierDashboardStatsActiveLoadsHelper =>
+      'वे loads जो अभी supplier-side tracking के लिए open हैं।';
+
+  @override
+  String get supplierDashboardStatsPendingBookingsLabel => 'Pending bookings';
+
+  @override
+  String get supplierDashboardStatsPendingBookingsHelper =>
+      'वे booking requests जिन्हें अभी supplier attention चाहिए।';
+
+  @override
+  String get supplierDashboardStatsInTransitTripsLabel => 'Trips in transit';
+
+  @override
+  String get supplierDashboardStatsInTransitTripsHelper =>
+      'वे linked trips जो अभी आपके loads के खिलाफ चल रही हैं।';
+
+  @override
+  String get supplierDashboardStatsCompletedTripsLabel => 'Completed trips';
+
+  @override
+  String get supplierDashboardStatsCompletedTripsHelper =>
+      'वे trips जो recorded completion state तक पहुँच चुकी हैं।';
+
+  @override
+  String get supplierDashboardOpenMyLoadsAction => 'Open my loads';
+
+  @override
+  String get supplierDashboardLoadFailureTitle =>
+      'आपका supplier dashboard लोड नहीं हो सका';
+
+  @override
+  String get supplierDashboardLoadFailureMessage =>
+      'अभी आपका supplier dashboard लोड नहीं हो सका। Latest overview metrics refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierDashboardAccountStateUnavailableTitle =>
+      'Supplier account state उपलब्ध नहीं है';
+
+  @override
+  String get supplierDashboardAccountStateUnavailableMessage =>
+      'अभी आपकी current supplier account state लोड नहीं हो सकी। Latest verification और company details restore करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierDashboardRecentLoadsUnavailableTitle =>
+      'Recent loads उपलब्ध नहीं हैं';
+
+  @override
+  String get supplierDashboardRecentLoadsUnavailableMessage =>
+      'अभी आपके recent supplier loads लोड नहीं हो सके। Latest load list refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierDashboardNoLoadsPostedTitle =>
+      'अभी कोई load post नहीं किया गया';
+
+  @override
+  String get supplierDashboardNoLoadsPostedSubtitle =>
+      'अपना पहला supplier load post करें ताकि booking requests और linked trip activity शुरू हो सके।';
+
+  @override
+  String get shellTabHome => 'Home';
+
+  @override
+  String get shellTitleSupplierDashboard => 'Supplier dashboard';
+
+  @override
+  String get shellTabLoads => 'Loads';
+
+  @override
+  String get shellTitleMyLoads => 'My Loads';
+
+  @override
+  String get shellTabTrips => 'Trips';
+
+  @override
+  String get shellQuickActionTrips => 'Trips';
+
+  @override
+  String get shellDashboardTitle => 'Dashboard';
+
+  @override
+  String get shellTabFind => 'Find';
+
+  @override
+  String get shellTitleFindLoads => 'Find Loads';
+
+  @override
+  String get shellDrawerSupplierWorkspace => 'Supplier workspace';
+
+  @override
+  String get shellDrawerTruckerWorkspace => 'Trucker workspace';
+
+  @override
+  String get shellDrawerDashboard => 'Dashboard';
+
+  @override
+  String get shellDrawerAssistant => 'Guided help';
+
+  @override
+  String get shellDrawerFleet => 'Fleet';
+
+  @override
+  String get shellDrawerMessages => 'Messages';
+
+  @override
+  String get navNotifications => 'Notifications';
+
+  @override
+  String get shellDrawerSupport => 'सहायता';
+
+  @override
+  String get shellDrawerProfile => 'प्रोफ़ाइल';
+
+  @override
+  String get shellDrawerLanguage => 'Language';
+
+  @override
+  String get shellDrawerSignOut => 'Sign out';
+
+  @override
+  String get shellSignOutFailureMessage =>
+      'अभी sign out नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get shellMessagesTitle => 'Messages';
+
+  @override
+  String get shellMessagesSupplierSubtitle =>
+      'एक ही जगह से load-linked trucker conversations ट्रैक करें और जल्दी reply दें।';
+
+  @override
+  String get shellMessagesTruckerSubtitle =>
+      'एक inbox में supplier updates, route context और booking follow-through पर नज़र रखें।';
+
+  @override
+  String get shellMessagesSupplierGroupedInbox => 'Grouped inbox';
+
+  @override
+  String get shellMessagesTruckerFlatInbox => 'Flat inbox';
+
+  @override
+  String shellMessagesUnreadThreads(int count) {
+    return '$count unread threads';
+  }
+
+  @override
+  String get shellMessagesLoadFailureTitle => 'Messages लोड नहीं हो सके';
+
+  @override
+  String get shellMessagesEmptyTitle => 'अभी कोई conversation नहीं है';
+
+  @override
+  String get shellMessagesSupplierEmptySubtitle =>
+      'पहला message आने के बाद यहाँ load-linked trucker conversations दिखेंगी।';
+
+  @override
+  String get shellMessagesTruckerEmptySubtitle =>
+      'किसी load पर chat शुरू करें और आपकी supplier conversations यहाँ दिखेंगी।';
+
+  @override
+  String shellMessagesActiveConversations(int count, Object preview) {
+    return '$count active conversations • $preview';
+  }
+
+  @override
+  String get shellMessagesUnreadStatus => 'Unread';
+
+  @override
+  String get shellMessagesReadStatus => 'Read';
+
+  @override
+  String get shellMessagesHideTruckerConversations =>
+      'Trucker conversations छिपाएँ';
+
+  @override
+  String shellMessagesLatestBy(Object name, Object timestamp) {
+    return 'Latest by $name • $timestamp';
+  }
+
+  @override
+  String get truckerChatSupplierAction => 'Supplier से chat करें';
+
+  @override
+  String get truckerLoadChatStartFailureMessage =>
+      'अभी यह supplier chat शुरू नहीं हो सकी। थोड़ी देर बाद load detail से फिर कोशिश करें।';
+
+  @override
+  String get truckerTripChatStartFailureMessage =>
+      'अभी यह supplier chat शुरू नहीं हो सकी। थोड़ी देर बाद trip detail से फिर कोशिश करें।';
+
+  @override
+  String truckerChatLockedLabel(Object reason) {
+    return 'Chat उपलब्ध नहीं है: $reason';
+  }
+
+  @override
+  String get chatTitleFallback => 'Conversation';
+
+  @override
+  String get chatTooltipCall => 'Call';
+
+  @override
+  String chatReportSourceLabel(Object source) {
+    return 'Chat • $source';
+  }
+
+  @override
+  String get chatMenuMarkConversationRead => 'Conversation को read mark करें';
+
+  @override
+  String get chatMenuRefreshThread => 'Thread refresh करें';
+
+  @override
+  String get chatMenuReportSpamOrAbuse => 'Spam या abuse report करें';
+
+  @override
+  String get chatConversationUnavailableTitle => 'Conversation उपलब्ध नहीं है';
+
+  @override
+  String get chatConversationUnavailableSubtitle =>
+      'अभी यह conversation नहीं मिल सकी। Refresh करें या inbox पर लौटें।';
+
+  @override
+  String get chatBackToInboxAction => 'Back to messages';
+
+  @override
+  String get chatBookingActionUnavailableTitle =>
+      'Booking action उपलब्ध नहीं है';
+
+  @override
+  String get chatBookingActionFailureMessage =>
+      'अभी इस chat से latest booking action पूरा नहीं हो सका। Booking state review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get chatApproveBookingDialogTitle => 'Booking approve करें?';
+
+  @override
+  String get chatApproveBookingDialogMessage =>
+      'यह chat context से trucker booking request approve करेगा।';
+
+  @override
+  String get chatRejectBookingDialogTitle => 'Booking reject करें?';
+
+  @override
+  String get chatRejectBookingDialogMessage =>
+      'यह chat context से trucker booking request reject करेगा।';
+
+  @override
+  String get chatActionCancel => 'Cancel';
+
+  @override
+  String get chatActionApprove => 'Approve';
+
+  @override
+  String get chatActionReject => 'Reject';
+
+  @override
+  String get chatBookingApprovedSuccess => 'Booking approve हो गई!';
+
+  @override
+  String get chatBookingRejectedSuccess => 'Booking reject हो गई।';
+
+  @override
+  String get chatTextSendFailureMessage =>
+      'अभी आपका message भेजा नहीं जा सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatVoiceStartFailureMessage =>
+      'अभी voice recording शुरू नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatVoiceUploadFailureMessage =>
+      'अभी यह voice message upload नहीं हो सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatVoiceSendFailureMessage =>
+      'अभी यह voice message भेजा नहीं जा सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatApproveBookingFailureMessage =>
+      'अभी यह booking approve नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatRejectBookingFailureMessage =>
+      'अभी यह booking reject नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
+
+  @override
+  String get chatLoadContextTitle => 'Load context';
+
+  @override
+  String get chatCollapseLoadContextTooltip => 'Load context collapse करें';
+
+  @override
+  String get chatExpandLoadContextTooltip => 'Load context expand करें';
+
+  @override
+  String chatMaterialLabel(Object value) {
+    return 'Material: $value';
+  }
+
+  @override
+  String chatPriceLabel(Object value) {
+    return 'Price: $value';
+  }
+
+  @override
+  String chatPickupLabel(Object value) {
+    return 'Pickup: $value';
+  }
+
+  @override
+  String get chatLoadStatusActive => 'Active';
+
+  @override
+  String get chatBookingStatusApproved => 'Approved';
+
+  @override
+  String get chatBookingStatusUnknown => 'Unknown';
+
+  @override
+  String get chatMessagesLoadFailureTitle => 'Messages लोड नहीं हो सके';
+
+  @override
+  String get chatMessagesLoadFailureMessage =>
+      'अभी यह conversation लोड नहीं हो सकी। Latest messages और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get chatNoMessagesTitle => 'अभी कोई message नहीं है';
+
+  @override
+  String get chatNoMessagesSubtitle =>
+      'यह conversation शुरू करने के लिए message भेजें।';
+
+  @override
+  String get chatSystemUpdateFallback => 'System update';
+
+  @override
+  String get chatSendingLabel => 'भेजा जा रहा है...';
+
+  @override
+  String get chatPauseVoiceMessageTooltip => 'Voice message pause करें';
+
+  @override
+  String get chatPlayVoiceMessageTooltip => 'Voice message चलाएँ';
+
+  @override
+  String get chatVoiceMessageLabel => 'Voice message';
+
+  @override
+  String get chatVoicePlaybackUnavailable =>
+      'अभी voice playback उपलब्ध नहीं है।';
+
+  @override
+  String get chatVoicePlaybackFailed => 'अभी यह voice message चल नहीं सकी।';
+
+  @override
+  String get chatLocationSharedFallback => 'Shared location';
+
+  @override
+  String get chatMapPreviewUnavailable => 'Map preview उपलब्ध नहीं है';
+
+  @override
+  String get chatOpenInMapsAction => 'Maps में खोलें';
+
+  @override
+  String get chatDocumentSharedFallback => 'Shared document';
+
+  @override
+  String get chatAttachmentSavedSubtitle =>
+      'Attachment इस conversation में सेव है।';
+
+  @override
+  String get chatOpenDocumentAction => 'Document खोलें';
+
+  @override
+  String get chatRouteSummaryFallback => 'Route summary';
+
+  @override
+  String get chatViewRouteAction => 'Route देखें';
+
+  @override
+  String get chatTruckDetailsSharedFallback => 'Truck details';
+
+  @override
+  String chatTruckTyresLabel(Object value) {
+    return '$value tyres';
+  }
+
+  @override
+  String get chatTypeMessageHint => 'Message टाइप करें...';
+
+  @override
+  String get chatStopRecordingTooltip => 'Recording रोकें';
+
+  @override
+  String get chatVoiceRecordingTooltip => 'Voice recording';
+
+  @override
+  String get chatSendAction => 'Send';
+
+  @override
+  String get commonHearSummary => 'Hear summary';
+
+  @override
+  String get commonVoiceMuted => 'इस device पर voice guidance muted है।';
+
+  @override
+  String get commonVoiceUnavailable => 'अभी voice guidance उपलब्ध नहीं है।';
+
+  @override
+  String get notificationsTitle => 'Notifications';
+
+  @override
+  String get notificationsMarkedAllReadSuccess =>
+      'सभी notifications को read mark कर दिया गया';
+
+  @override
+  String get notificationsMarkAllRead => 'Mark All Read';
+
+  @override
+  String get notificationsLoadFailureTitle => 'Notifications लोड नहीं हो सकीं';
+
+  @override
+  String get notificationsMarkAllReadFailureMessage =>
+      'अभी सभी notifications को read mark नहीं किया जा सका। थोड़ी देर बाद notifications screen से फिर कोशिश करें।';
+
+  @override
+  String get notificationsLoadFailureMessage =>
+      'अभी आपकी notifications लोड नहीं हो सकीं। नए alerts और updates refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get notificationsEmptyTitle => 'आप पूरी तरह up to date हैं!';
+
+  @override
+  String get notificationsEmptySubtitle => 'कोई नई notifications नहीं हैं।';
+
+  @override
+  String get notificationsOverviewTitle => 'Overview';
+
+  @override
+  String notificationsUnreadCountLabel(int count) {
+    return '$count unread';
+  }
+
+  @override
+  String notificationsHighPriorityCountLabel(int count) {
+    return '$count high priority';
+  }
+
+  @override
+  String get notificationsLoadMore => 'Load More';
+
+  @override
+  String notificationsTtsSummary(int unreadCount, int highPriorityUnreadCount) {
+    return 'Notifications screen. आपके पास $unreadCount unread notifications हैं और $highPriorityUnreadCount high priority alerts review के लिए pending हैं।';
+  }
+
+  @override
+  String get notificationsGroupToday => 'Today';
+
+  @override
+  String get notificationsGroupYesterday => 'Yesterday';
+
+  @override
+  String get notificationsPriorityHighLabel => 'HIGH';
+
+  @override
+  String get notificationsBodyFallback =>
+      'पूरे context के लिए linked workflow खोलें।';
+
+  @override
+  String get notificationFallbackVerificationUpdate => 'Verification update';
+
+  @override
+  String get notificationFallbackBookingUpdate => 'Booking update';
+
+  @override
+  String get notificationFallbackTripUpdate => 'Trip update';
+
+  @override
+  String get notificationFallbackProofUpdate => 'Proof update';
+
+  @override
+  String get notificationFallbackSuperLoadUpdate => 'Super Load update';
+
+  @override
+  String get notificationFallbackMessageReceived => 'New message';
+
+  @override
+  String get notificationFallbackSupportUpdate => 'Support update';
+
+  @override
+  String get notificationFallbackDisputeUpdate => 'Dispute update';
+
+  @override
+  String get notificationFallbackAccountUpdate => 'Account update';
+
+  @override
+  String get notificationFallbackSystemNotice => 'System notice';
+
+  @override
+  String get notificationFallbackLoadExpiryWarning => 'Load expiry warning';
+
+  @override
+  String get navProfile => 'Profile';
+
+  @override
+  String get navSupport => 'Support';
+
+  @override
+  String get navDeleteAccount => 'Delete account';
+
+  @override
+  String get deleteAccountRequestedOnLabel => 'Deletion requested on';
+
+  @override
+  String get deleteAccountGracePeriodEndsLabel => 'Grace period ends';
+
+  @override
+  String get deleteAccountGracePeriodPassedLabel =>
+      'Grace-period end date has passed. Permanent deletion processing may happen at any time.';
+
+  @override
+  String get deleteAccountGracePeriodLessThanOneDayLabel =>
+      'Less than 1 day remains before the grace period ends.';
+
+  @override
+  String deleteAccountGracePeriodRemainingDaysLabel(
+    Object count,
+    Object plural,
+  ) {
+    return '$count day$plural remain before the grace period ends.';
+  }
+
+  @override
+  String get deleteAccountLifecycleFailureMessage =>
+      'The account deletion lifecycle is temporarily unavailable. Retry shortly to refresh the latest deletion status.';
+
+  @override
+  String get deleteAccountCancelFailureMessage =>
+      'We could not cancel this deletion request right now. Retry shortly from the deletion lifecycle screen.';
+
+  @override
+  String get deleteAccountRequestFailureMessage =>
+      'We could not process this deletion request right now. Review the current account status and retry shortly.';
+
+  @override
+  String get deleteAccountAcceptedSignOutFailureMessage =>
+      'Deletion was accepted, but we could not complete sign out right now. Retry shortly to refresh your account session.';
+
+  @override
+  String get deleteAccountBlockedSummaryMessage =>
+      'This deletion request cannot proceed yet because another account dependency still needs attention.';
+
+  @override
+  String get deleteAccountCancelledMessage =>
+      'Your deletion request was cancelled. Account access can be restored while the lifecycle returns to active.';
+
+  @override
+  String get deleteAccountAcceptedMessage =>
+      'Your deletion request was accepted. You have been signed out while the account enters pending cleanup.';
+
+  @override
+  String get deleteAccountBlockerRecoveryGuidanceActiveTrips =>
+      'Finish or cancel every active trip first, then retry the deletion request.';
+
+  @override
+  String get deleteAccountBlockerRecoveryGuidanceDispute =>
+      'Wait until the unresolved dispute is reviewed or resolved before requesting deletion again.';
+
+  @override
+  String get deleteAccountBlockerRecoveryGuidanceCompliance =>
+      'Some records still need to stay on the platform for compliance or retention policy. Use support if you need clarification on the hold.';
+
+  @override
+  String get deleteAccountBlockerRecoveryGuidanceDefault =>
+      'Resolve the blocking dependency first, then request deletion again.';
+
+  @override
+  String get deleteAccountBlockerActionOpenTrips => 'Open trips';
+
+  @override
+  String get deleteAccountBlockerActionOpenSupport => 'Open support';
+
+  @override
+  String get deleteAccountBlockerTitleActiveTrips =>
+      'Finish active trips first';
+
+  @override
+  String get deleteAccountBlockerTitleDispute =>
+      'Resolve the open dispute first';
+
+  @override
+  String get deleteAccountBlockerTitleCompliance =>
+      'Wait for the compliance hold to clear';
+
+  @override
+  String get deleteAccountBlockerTitleDefault => 'Resolve the blocker first';
+
+  @override
+  String get deleteAccountBlockerBodyActiveTrips =>
+      'This account still has active trip work attached to it. Review the current trip list, complete any legitimate active work, and then retry the deletion request.';
+
+  @override
+  String get deleteAccountBlockerBodyDispute =>
+      'This account still has an unresolved dispute or review dependency. Use support to follow the current case until the blocking dispute is resolved.';
+
+  @override
+  String get deleteAccountBlockerBodyCompliance =>
+      'This account is still under a compliance or retention hold. Support can clarify the current hold, but the platform cannot bypass the retention requirement.';
+
+  @override
+  String get deleteAccountBlockerBodyDefault =>
+      'Review the current blocker carefully and resolve it before retrying the deletion request.';
+
+  @override
+  String get deleteAccountSupportTitle => 'Need help first?';
+
+  @override
+  String get deleteAccountSupportBodyPendingCleanup =>
+      'Use support if you need clarification on the pending-cleanup status, the grace-period timeline, or whether cancellation is the right next step for this account.';
+
+  @override
+  String get deleteAccountSupportBodyDefault =>
+      'Use support if you expect blockers like active trips, unresolved disputes, or compliance holds and need clarification before retrying the deletion request.';
+
+  @override
+  String get deleteAccountSupportDetailPendingCleanup =>
+      'Support can clarify the current lifecycle state, but they may still need to follow retention and compliance policy before permanent deletion is processed.';
+
+  @override
+  String get deleteAccountSupportDetailDefault =>
+      'Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.';
+
+  @override
+  String get deleteAccountWhatHappensNextTitle => 'What happens next';
+
+  @override
+  String get deleteAccountWhatHappensNextBodyPendingCleanup =>
+      'Your account is already in the pending-cleanup state. Cancel the request if you want to restore the account to active before permanent deletion is processed.';
+
+  @override
+  String get deleteAccountWhatHappensNextBodyDefault =>
+      'If no blockers exist, your account is moved to deactivated pending cleanup and you are signed out safely.';
+
+  @override
+  String get deleteAccountWhatHappensNextDetailPendingCleanup =>
+      'If you cancel now, the account deletion status returns to active and normal access is restored.';
+
+  @override
+  String get deleteAccountWhatHappensNextDetailDefault =>
+      'If blockers exist, the platform keeps your account active and tells you which dependency must be resolved first.';
+
+  @override
+  String get deleteAccountWhatHappensNextFootnotePendingCleanup =>
+      'Support may still retain internal records according to policy, but the user-facing deletion request will be cancelled.';
+
+  @override
+  String get deleteAccountWhatHappensNextFootnoteDefault =>
+      'The deletion request can now be cancelled while the account is in the pending-cleanup lifecycle before permanent deletion is processed.';
+
+  @override
+  String get deleteAccountLifecycleUnavailableTitle =>
+      'Account deletion lifecycle unavailable';
+
+  @override
+  String get deleteAccountCancelledTitle => 'Deletion request cancelled';
+
+  @override
+  String get deleteAccountAlreadyRequestedTitle => 'Deletion already requested';
+
+  @override
+  String get deleteAccountAlreadyRequestedMessage =>
+      'This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.';
+
+  @override
+  String get deleteAccountCancelRequestTitle => 'Cancel deletion request';
+
+  @override
+  String get deleteAccountCancellingButton => 'Cancelling deletion...';
+
+  @override
+  String get deleteAccountCancelRequestButton => 'Cancel deletion request';
+
+  @override
+  String get deleteAccountUnavailableTitle => 'Account deletion unavailable';
+
+  @override
+  String get deleteAccountBlockedTitle => 'Deletion blocked';
+
+  @override
+  String get deleteAccountConfirmRequestTitle => 'Confirm deletion request';
+
+  @override
+  String get deleteAccountRequestingButton => 'Requesting deletion...';
+
+  @override
+  String get deleteAccountScreenTitle => 'Delete Account';
+
+  @override
+  String get deleteAccountHeroTitlePendingCleanup =>
+      'Account deletion pending cleanup';
+
+  @override
+  String get deleteAccountHeroTitleDefault => 'Request account deletion';
+
+  @override
+  String get deleteAccountHeroSubtitlePendingCleanup =>
+      'Your account is currently deactivated pending cleanup. You can still cancel this request during the grace-period lifecycle while the account is not permanently deleted.';
+
+  @override
+  String get deleteAccountHeroSubtitleDefault =>
+      'This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.';
+
+  @override
+  String get deleteAccountHeroBodyPendingCleanup =>
+      'The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.';
+
+  @override
+  String get deleteAccountHeroBodyDefault =>
+      'Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.';
+
+  @override
+  String get accountSignOutFailureMessage =>
+      'अभी आपको sign out नहीं किया जा सका। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
+
+  @override
+  String get accountRoleSupplier => 'Supplier';
+
+  @override
+  String get accountRoleTrucker => 'Trucker';
+
+  @override
+  String get accountRoleUnknown => 'Unknown';
+
+  @override
+  String get accountStatusTitle => 'Account status';
+
+  @override
+  String get accountProfileStatusLabel => 'Profile status';
+
+  @override
+  String get accountProfileStatusComplete => 'Complete';
+
+  @override
+  String get accountProfileStatusNeedsAttention => 'Needs attention';
+
+  @override
+  String get accountAccountStateLabel => 'Account state';
+
+  @override
+  String get accountStateDeactivatedPendingCleanup =>
+      'Deactivated pending cleanup';
+
+  @override
+  String get accountStateRestricted => 'Restricted';
+
+  @override
+  String get accountStateActive => 'Active';
+
+  @override
+  String get accountStateUnknown => 'Unknown';
+
+  @override
+  String get accountLoadFailureTitle => 'Account details उपलब्ध नहीं हैं';
+
+  @override
+  String get accountLoadFailureMessage =>
+      'अभी आपकी account details लोड नहीं हो सकीं। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
+
+  @override
+  String get accountManageTitle => 'Manage account';
+
+  @override
+  String get accountVerificationLabel => 'Verification';
+
+  @override
+  String get accountFleetLabel => 'Fleet';
+
+  @override
+  String get accountSettingsLabel => 'Settings';
+
+  @override
+  String get accountSessionTitle => 'Current session';
+
+  @override
+  String get accountSignedInAsLabel => 'Signed in as';
+
+  @override
+  String get accountCurrentAuthenticatedSession =>
+      'Current authenticated session';
+
+  @override
+  String get accountSignOutAction => 'Sign out';
+
+  @override
+  String get profileTitle => 'Profile';
+
+  @override
+  String get profileLoadFailureTitle => 'Profile उपलब्ध नहीं है';
+
+  @override
+  String get profileLoadFailureMessage =>
+      'अभी आपकी profile लोड नहीं हो सकी। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
+
+  @override
+  String get profileSummaryTitle => 'Profile summary';
+
+  @override
+  String get profileNameLabel => 'Name';
+
+  @override
+  String get profileValueNotSet => 'Not set';
+
+  @override
+  String get profilePhoneLabel => 'Phone';
+
+  @override
+  String get profileValueNotProvided => 'Not provided';
+
+  @override
+  String get profileEmailLabel => 'Email';
+
+  @override
+  String get profileRoleLabel => 'Role';
+
+  @override
+  String get profileReadinessTitle => 'Profile readiness';
+
+  @override
+  String get profileCompletenessLabel => 'Completeness';
+
+  @override
+  String get profileCompletenessComplete => 'Complete';
+
+  @override
+  String get profileCompletenessNeedsUpdates => 'Needs updates';
+
+  @override
+  String get profileDeletionStatusLabel => 'Deletion status';
+
+  @override
+  String get profileOpenFleetReadiness => 'Open fleet readiness';
+
+  @override
+  String get profileRequestAccountDeletion => 'Request account deletion';
+
+  @override
+  String profileTtsSummary(
+    Object roleLabel,
+    Object trustStatus,
+    Object deletionStatus,
+  ) {
+    return 'Profile screen. Role $roleLabel है. Trust and safety status $trustStatus है. Account deletion status $deletionStatus है. ज़रूरत हो तो इसी screen से deletion follow-up या support guidance खोली जा सकती है.';
+  }
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsPreferencesTitle => 'Preferences';
+
+  @override
+  String get settingsRoleContextLabel => 'Role context';
+
+  @override
+  String settingsTtsSummary(Object selectedLanguageLabel, Object roleSentence) {
+    return 'Settings screen. Language $selectedLanguageLabel पर set है. Voice guidance अभी manual है. Notifications in-app inbox के through enabled हैं.$roleSentence';
+  }
+
+  @override
+  String get settingsVoiceAssistanceLabel => 'Voice assistance';
+
+  @override
+  String get settingsVoiceAssistanceValue =>
+      'Supported screens पर manual contextual summaries उपलब्ध हैं।';
+
+  @override
+  String get settingsNotificationsLabel => 'Notifications';
+
+  @override
+  String get settingsNotificationsValue =>
+      'In-app inbox और push status controls यहाँ उपलब्ध हैं।';
+
+  @override
+  String get settingsConnectedSurfacesTitle => 'Connected surfaces';
+
+  @override
+  String get settingsPushNotificationsTitle => 'Push notifications';
+
+  @override
+  String get settingsPushStatusLabel => 'Status';
+
+  @override
+  String get settingsPushRequestPermission => 'Request permission';
+
+  @override
+  String get settingsPushRefreshStatus => 'Refresh status';
+
+  @override
+  String get settingsPushStatusUnavailableTitle =>
+      'Push notification status उपलब्ध नहीं है';
+
+  @override
+  String get settingsPushStatusUnavailableMessage =>
+      'अभी device notification permission नहीं पढ़ी जा सकी। Firebase/device support उपलब्ध होने के बाद refresh करें।';
+
+  @override
+  String get settingsPushStatusAllowed => 'Allowed';
+
+  @override
+  String get settingsPushStatusAllowedQuietly => 'Allowed quietly';
+
+  @override
+  String get settingsPushStatusBlocked => 'Blocked in system settings';
+
+  @override
+  String get settingsPushStatusNotRequested => 'Not requested yet';
+
+  @override
+  String get settingsPushStatusUnavailable =>
+      'Unavailable on this device/build';
+
+  @override
+  String get settingsPushGuidanceAllowed =>
+      'Firebase delivery configured होने पर foreground और opened push flows enabled रहते हैं।';
+
+  @override
+  String get settingsPushGuidanceAllowedQuietly =>
+      'Push quietly allowed है। ज़रूरत हो तो device notification settings में alerts promote कर सकते हैं।';
+
+  @override
+  String get settingsPushGuidanceBlocked =>
+      'Push notifications blocked हैं। Alerts फिर से enable करने के लिए TranZfort की device notification settings खोलें।';
+
+  @override
+  String get settingsPushGuidanceNotRequested =>
+      'इस device session पर push permission अभी request नहीं की गई है।';
+
+  @override
+  String get settingsPushGuidanceUnavailable =>
+      'Firebase/device support पूरी तरह configured होने तक यहाँ push runtime उपलब्ध नहीं है।';
+
+  @override
+  String supportActiveTicketCount(Object count, Object s) {
+    return '$count ticket$s';
+  }
+
+  @override
+  String get supportScreenTitle => 'सपोर्ट और dispute follow-up';
+
+  @override
+  String get supportHeroTitle => 'अपनी latest support activity review करें';
+
+  @override
+  String get supportHeroSubtitleSupplier =>
+      'Supplier activity से जुड़े dispute progress, payment follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।';
+
+  @override
+  String get supportHeroSubtitleTrucker =>
+      'Trucker activity से जुड़े dispute progress, freight follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।';
+
+  @override
+  String get supportNoActiveTickets => 'कोई active ticket नहीं';
+
+  @override
+  String get supportCreateTicketAction => 'सपोर्ट टिकट बनाएँ';
+
+  @override
+  String get supportIntroMessage =>
+      'अपनी latest support और dispute tickets यहाँ follow करें, visible workflow updates review करें, और support द्वारा मांगी गई clarification या proof के साथ reply करें।';
+
+  @override
+  String get supportTicketSummaryTitle => 'सपोर्ट सारांश';
+
+  @override
+  String get supportEscalationPathLabel => 'Escalation path';
+
+  @override
+  String get supportEscalationPathSupplier => 'Supplier support';
+
+  @override
+  String get supportEscalationPathTrucker => 'Trucker support';
+
+  @override
+  String get supportCurrentTrustStatusLabel => 'वर्तमान trust status';
+
+  @override
+  String get supportMyTicketsTitle => 'मेरी tickets';
+
+  @override
+  String get supportSelectedTicketAndReplyTitle => 'चुनी गई ticket और reply';
+
+  @override
+  String get supportSelectTicketTitle => 'एक ticket चुनें';
+
+  @override
+  String get supportSelectTicketSubtitle =>
+      'Visible thread, workflow state, और reply options review करने के लिए list से एक support ticket चुनें।';
+
+  @override
+  String get supportTicketsUnavailableTitle =>
+      'Support tickets अभी उपलब्ध नहीं हैं';
+
+  @override
+  String get supportNoTicketsTitle => 'अभी कोई support ticket नहीं है';
+
+  @override
+  String get supportNoTicketsSubtitle =>
+      'नई support या dispute follow-up शुरू करने और future updates यहीं track करने के लिए support ticket बनाएँ।';
+
+  @override
+  String get supportLoadingOlderTickets => 'पुरानी tickets लोड हो रही हैं...';
+
+  @override
+  String get supportLoadOlderTickets => 'पुरानी tickets लोड करें';
+
+  @override
+  String get supportTicketsLoadFailureMessage =>
+      'अभी आपकी support tickets लोड नहीं हो सकीं। Latest support और dispute activity refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportOpenTripAction => 'ट्रिप खोलें';
+
+  @override
+  String get supportOpenLoadAction => 'लोड खोलें';
+
+  @override
+  String get supportViewingThisTicket => 'यह ticket देखी जा रही है';
+
+  @override
+  String get supportOpenTicketAction => 'Ticket खोलें';
+
+  @override
+  String get supportDetailUnavailableTitle => 'Ticket detail उपलब्ध नहीं है';
+
+  @override
+  String get supportDetailUnavailableMessage =>
+      'अभी यह ticket detail लोड नहीं हो सकी। Latest visible thread और workflow status refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportTicketUnavailableTitle => 'Ticket उपलब्ध नहीं है';
+
+  @override
+  String get supportTicketUnavailableSubtitle =>
+      'यह support ticket अभी इस account के लिए उपलब्ध नहीं है।';
+
+  @override
+  String get supportTicketStatusOpen => 'Open';
+
+  @override
+  String get supportTicketStatusInProgress => 'Review में';
+
+  @override
+  String get supportTicketStatusWaitingForYou => 'आपके reply का इंतजार';
+
+  @override
+  String get supportTicketStatusResolved => 'Resolved';
+
+  @override
+  String get supportTicketStatusClosed => 'Closed';
+
+  @override
+  String get supportTicketStatusUnknown => 'Unknown';
+
+  @override
+  String get supportTicketPriorityLow => 'low';
+
+  @override
+  String get supportTicketPriorityMedium => 'medium';
+
+  @override
+  String get supportTicketPriorityHigh => 'high';
+
+  @override
+  String get supportTicketPriorityUrgent => 'urgent';
+
+  @override
+  String get supportTicketPriorityNotSet => 'set नहीं है';
+
+  @override
+  String get supportTicketTitleTripDisputeReview => 'Trip dispute review';
+
+  @override
+  String get supportTicketTitleLoadedQuantityMismatchReport =>
+      'Loaded quantity mismatch report';
+
+  @override
+  String get supportTicketTitleUnloadedQuantityMismatchReport =>
+      'Unloaded quantity mismatch report';
+
+  @override
+  String get supportTicketTitleDocumentMismatchReport =>
+      'Document mismatch report';
+
+  @override
+  String get supportTicketTitleSpamOrScamReport => 'Spam या scam report';
+
+  @override
+  String get supportTicketTitleAbusiveBehaviorReport =>
+      'Abusive behavior report';
+
+  @override
+  String get supportTicketTitleFakePayoutProofReport =>
+      'Fake payout proof report';
+
+  @override
+  String get supportTicketTitleNonPaymentReport => 'Non-payment report';
+
+  @override
+  String get supportTicketTitleDelayOrNoShowReport => 'Delay या no-show report';
+
+  @override
+  String get supportTicketTitleDamageOrShortageReport =>
+      'Damage या shortage report';
+
+  @override
+  String get supportTicketTitleOtherReport => 'Other report';
+
+  @override
+  String get supportDisputeCategoryTripDispute => 'Trip dispute';
+
+  @override
+  String get supportDisputeCategoryLoadedQuantityMismatch =>
+      'Loaded quantity mismatch';
+
+  @override
+  String get supportDisputeCategoryUnloadedQuantityMismatch =>
+      'Unloaded quantity mismatch';
+
+  @override
+  String get supportDisputeCategoryDocumentMismatch => 'Document mismatch';
+
+  @override
+  String get supportDisputeCategoryNonPayment => 'Non-payment';
+
+  @override
+  String get supportDisputeCategoryFakePayoutProof => 'Fake payout proof';
+
+  @override
+  String get supportDisputeCategoryDelayOrNoShow => 'Delay या no-show';
+
+  @override
+  String get supportDisputeCategoryDamageOrShortage => 'Damage या shortage';
+
+  @override
+  String get supportDisputeCategoryAbusiveBehavior => 'Abusive behavior';
+
+  @override
+  String get supportDisputeCategorySpamOrScam => 'Spam या scam';
+
+  @override
+  String get supportDisputeCategoryOther => 'Other';
+
+  @override
+  String supportUpdatedAt(Object value) {
+    return 'Updated at: $value';
+  }
+
+  @override
+  String supportTicketReference(Object value) {
+    return 'Ticket reference: $value';
+  }
+
+  @override
+  String supportTripReference(Object value) {
+    return 'Trip reference: $value';
+  }
+
+  @override
+  String supportOpenedAt(Object value) {
+    return 'Opened at: $value';
+  }
+
+  @override
+  String supportDisputeCategoryLabel(Object category) {
+    return 'Dispute category: $category';
+  }
+
+  @override
+  String supportTicketIdValue(Object id) {
+    return 'Ticket id: $id';
+  }
+
+  @override
+  String supportPriorityValue(Object priority) {
+    return 'Priority: $priority';
+  }
+
+  @override
+  String supportLastUpdatedValue(Object value) {
+    return 'Last updated: $value';
+  }
+
+  @override
+  String supportRelatedTripValue(Object value) {
+    return 'Related trip: $value';
+  }
+
+  @override
+  String supportRelatedLoadValue(Object value) {
+    return 'Related load: $value';
+  }
+
+  @override
+  String get supportOpenRelatedTripAction => 'Related trip खोलें';
+
+  @override
+  String get supportOpenRelatedLoadAction => 'Related load खोलें';
+
+  @override
+  String get supportWorkflowGuidanceOpen =>
+      'Support को यह ticket मिल चुकी है और review जल्द शुरू होनी चाहिए। ज़रूरत हो तो visible replies में missing context जोड़ें।';
+
+  @override
+  String get supportWorkflowGuidanceInProgress =>
+      'Support या operations इस ticket को actively review कर रहे हैं। Visible replies देखते रहें और ज़रूरत पड़ने पर timeline या proof साफ़ रखें।';
+
+  @override
+  String get supportWorkflowGuidanceWaitingForUser =>
+      'Support आपके clarification या proof का इंतजार कर रही है। इस ticket पर reply करें ताकि review बिना अनावश्यक देरी के जारी रहे।';
+
+  @override
+  String get supportWorkflowGuidanceResolved =>
+      'यह ticket final support outcome तक पहुँच चुकी है। नया follow-up खोलने से पहले recorded resolution review करें।';
+
+  @override
+  String get supportWorkflowGuidanceUnknown =>
+      'Current workflow state के लिए latest visible ticket updates review करें।';
+
+  @override
+  String get supportDisputeBannerTitleClosed => 'Dispute review closed';
+
+  @override
+  String get supportDisputeBannerTitleWaiting =>
+      'Dispute आपके reply का इंतजार कर रही है';
+
+  @override
+  String get supportDisputeBannerTitleInProgress =>
+      'Dispute review in progress';
+
+  @override
+  String supportDisputeBannerMessageClosed(Object category) {
+    return 'Category: $category. यह trip dispute final support outcome तक पहुँच चुकी है। दोनों sides recorded ticket context follow कर सकती हैं, लेकिन raw evidence access restricted रह सकती है।';
+  }
+
+  @override
+  String supportDisputeBannerMessageWaiting(Object category) {
+    return 'Category: $category. यह trip dispute आपके clarification या proof का इंतजार कर रही है। दोनों sides visible status updates follow कर सकती हैं, लेकिन review के दौरान raw evidence access restricted रह सकती है।';
+  }
+
+  @override
+  String supportDisputeBannerMessageInProgress(Object category) {
+    return 'Category: $category. यह trip dispute active support review में है। दोनों sides visible status updates follow कर सकती हैं, लेकिन review के दौरान raw evidence access restricted रह सकती है।';
+  }
+
+  @override
+  String get supportEvidenceVisibilitySummaryClosed =>
+      'दोनों parties recorded dispute category, final workflow state, और visible support replies को इस ticket पर अभी भी follow कर सकती हैं।';
+
+  @override
+  String get supportEvidenceVisibilitySummaryInProgress =>
+      'दोनों parties dispute category, workflow status, और support replies को follow कर सकती हैं जो इस ticket पर intentionally visible रखी गई हैं।';
+
+  @override
+  String get supportRestrictedEvidenceMessageClosed =>
+      'Review outcome record होने के बाद भी raw attachments और sensitive proof restricted रह सकती हैं।';
+
+  @override
+  String get supportRestrictedEvidenceMessageInProgress =>
+      'जब तक यह review active है, raw attachments और sensitive proof restricted रह सकती हैं।';
+
+  @override
+  String get supportAdditionalProofGuidanceClosed =>
+      'अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई issue या clarification हो।';
+
+  @override
+  String get supportAdditionalProofGuidanceInProgress =>
+      'अगर आपकी dispute current single-image flow से आगे additional documents या screenshots पर निर्भर है, तो missing proofs को visible reply में साफ़ लिखें ताकि support जान सके कि और क्या review करना है।';
+
+  @override
+  String get supportAttachmentVisibilityMessageClosed =>
+      'इस reply में evidence attached है। Review outcome record होने के बाद भी raw file access restricted रह सकती है।';
+
+  @override
+  String get supportAttachmentVisibilityMessageInProgress =>
+      'इस reply में evidence attached है। Review के दौरान raw file access restricted रह सकती है।';
+
+  @override
+  String get supportAttachmentGuidanceMessageClosed =>
+      'अगर closure के बाद भी दूसरे supporting proofs का reference देना है, तो fresh follow-up तभी खोलें जब आपके पास वास्तव में नई context हो जो इस ticket पर capture नहीं हुई थी।';
+
+  @override
+  String get supportAttachmentGuidanceMessageInProgress =>
+      'अगर दूसरे supporting proofs यहाँ attached नहीं हैं, तो उन्हें visible reply text में summarize करें ताकि support उन्हें safely request या review कर सके।';
+
+  @override
+  String get supportSupportTeamLabel => 'Support team';
+
+  @override
+  String get supportYouLabel => 'You';
+
+  @override
+  String get supportEmptyThreadSubtitleOpen =>
+      'इस support ticket पर अभी कोई visible thread post नहीं की गई है।';
+
+  @override
+  String get supportEmptyThreadSubtitleInProgress =>
+      'जब तक यह ticket active review में है, visible thread अभी उपलब्ध नहीं है।';
+
+  @override
+  String get supportEmptyThreadSubtitleWaiting =>
+      'Visible thread अभी उपलब्ध नहीं है। इस ticket पर reply करें ताकि review जारी रह सके।';
+
+  @override
+  String get supportEmptyThreadSubtitleResolved =>
+      'इस ticket के resolved या closed होने से पहले कोई visible thread record नहीं की गई थी।';
+
+  @override
+  String get supportEmptyThreadSubtitleUnknown =>
+      'इस support ticket के लिए अभी कोई visible thread उपलब्ध नहीं है।';
+
+  @override
+  String get supportEvidenceVisibilityTitle => 'Evidence visibility';
+
+  @override
+  String get supportVisibleThreadSummaryTitle => 'Visible thread summary';
+
+  @override
+  String supportVisibleRepliesCount(int count) {
+    return 'Visible replies: $count';
+  }
+
+  @override
+  String get supportLastVisibleUpdateNone =>
+      'Last visible update: अभी कोई visible reply नहीं है।';
+
+  @override
+  String supportLastVisibleUpdate(Object value) {
+    return 'Last visible update: $value';
+  }
+
+  @override
+  String get supportLatestVisibleSenderNone =>
+      'Latest visible sender: अभी कोई visible sender नहीं है।';
+
+  @override
+  String supportLatestVisibleSender(Object value) {
+    return 'Latest visible sender: $value';
+  }
+
+  @override
+  String get supportVisibleAttachmentSummaryPresent =>
+      'Visible attachment summary: एक या अधिक visible replies में attachment reference शामिल है।';
+
+  @override
+  String get supportVisibleAttachmentSummaryAbsent =>
+      'Visible attachment summary: अभी किसी visible reply में attachment reference नहीं है।';
+
+  @override
+  String get supportNoVisibleThreadTitle => 'अभी कोई visible thread नहीं है';
+
+  @override
+  String get supportCurrentWorkflowTitle => 'Current workflow';
+
+  @override
+  String get supportResolutionOutcomeTitle => 'Resolution outcome';
+
+  @override
+  String supportResolvedOn(Object value) {
+    return 'Resolved on: $value';
+  }
+
+  @override
+  String get supportWaitingForReplyTitle =>
+      'Support आपके reply का इंतजार कर रही है';
+
+  @override
+  String get supportWaitingForReplyMessage =>
+      'इस ticket पर requested clarification या proof के साथ reply करें ताकि review जारी रह सके।';
+
+  @override
+  String get supportReplyGuidanceTitle => 'Reply guidance';
+
+  @override
+  String get supportRepliesClosedTitle => 'इस ticket के लिए replies बंद हैं';
+
+  @override
+  String get supportRepliesClosedMessage =>
+      'यह ticket final support outcome तक पहुँच चुकी है और अब further replies स्वीकार नहीं करती।';
+
+  @override
+  String get supportReplyStatusReply => 'Reply';
+
+  @override
+  String get supportReplyStatusSubmitted => 'Submitted';
+
+  @override
+  String get supportNoMessageTextProvided => 'कोई message text उपलब्ध नहीं है।';
+
+  @override
+  String get supportTrustStatusLoading => 'Trust status लोड हो रही है';
+
+  @override
+  String supportResolutionValue(Object value) {
+    return 'Resolution: $value';
+  }
+
+  @override
+  String get supportReplyGuidancePrimaryOpenDispute =>
+      'अपनी visible reply में dispute timeline, पहले से attached proof, और support को सबसे पहले क्या review करना चाहिए यह साफ़ लिखें।';
+
+  @override
+  String get supportReplyGuidancePrimaryOpenDefault =>
+      'अपनी reply में current blocker साफ़ लिखें ताकि support review जारी रख सके।';
+
+  @override
+  String get supportReplyGuidancePrimaryInProgressDispute =>
+      'अपनी अगली reply को dispute timeline, proof gaps, और support को किस follow-up पर ध्यान देना चाहिए इस पर केंद्रित रखें।';
+
+  @override
+  String get supportReplyGuidancePrimaryInProgressDefault =>
+      'Support ने जो अगला operational detail या clarification मांगी है, वही reply करें ताकि review जारी रह सके।';
+
+  @override
+  String get supportReplyGuidancePrimaryWaitingDispute =>
+      'Support ने जो missing clarification या proof मांगी है, उसे reply करें ताकि dispute review बिना अनावश्यक देरी के जारी रह सके।';
+
+  @override
+  String get supportReplyGuidancePrimaryWaitingDefault =>
+      'Support ने जो missing clarification मांगी है, उसे reply करें ताकि ticket आगे बढ़ सके।';
+
+  @override
+  String get supportReplyGuidancePrimaryResolved =>
+      'यह ticket पहले ही resolved है। Fresh follow-up तभी शुरू करें जब वास्तव में नई issue सामने आए।';
+
+  @override
+  String get supportReplyGuidancePrimaryUnknown =>
+      'अगर support और जानकारी मांगे तो सबसे साफ़ अगला detail reply करें जो आप साझा कर सकते हैं।';
+
+  @override
+  String get supportReplyGuidanceSecondaryOpenInProgressDispute =>
+      'अगर proof current single-image flow में missing है, तो बाकी context को visible text में साफ़ summarize करें ताकि support जान सके कि और क्या request या review करना है।';
+
+  @override
+  String get supportReplyGuidanceSecondaryOpenInProgressDefault =>
+      'Reply को concise, specific, और उस load या trip context से जुड़ा रखें जिसे support review कर रही है।';
+
+  @override
+  String get supportReplyGuidanceSecondaryWaitingDispute =>
+      'अगर एक से ज़्यादा proof महत्वपूर्ण हैं, तो पहले सबसे मजबूत proof attach करें और बाकी context को visible reply में summarize करें।';
+
+  @override
+  String get supportReplyGuidanceSecondaryWaitingDefault =>
+      'Latest support prompt का सीधा जवाब दें ताकि अगला review step साफ़ हो।';
+
+  @override
+  String get supportReplyGuidanceSecondaryResolved =>
+      'Recorded resolution को reference के लिए रखें और नया ticket केवल genuinely new follow-up के लिए उपयोग करें।';
+
+  @override
+  String get supportReplyGuidanceSecondaryUnknown =>
+      'अपनी reply को साफ़ और उन्हीं facts तक सीमित रखें जिन्हें support अगले step में verify कर सकती है।';
+
+  @override
+  String supportTicketTitleWithPriority(Object title, Object priority) {
+    return '$title • $priority priority';
+  }
+
+  @override
+  String get supportFallbackLabel => 'Support';
+
+  @override
+  String get supportTrustStatusNormal => 'Normal';
+
+  @override
+  String get supportTrustStatusWarned => 'Warned';
+
+  @override
+  String get supportTrustStatusRestricted => 'Restricted';
+
+  @override
+  String get supportTrustStatusSuspended => 'Suspended';
+
+  @override
+  String get supportTrustStatusBanned => 'Banned';
+
+  @override
+  String get supportTrustStatusUnknown => 'Unknown';
+
+  @override
+  String supportTrustBadge(Object status) {
+    return 'Trust: $status';
+  }
+
+  @override
+  String get trustSafetyLabel => 'Trust & safety';
+
+  @override
+  String get trustSafetyWarningTitle => 'Trust & safety warning active';
+
+  @override
+  String get trustSafetyWarningMessage =>
+      'आपके account पर warning दर्ज है। Marketplace और support surfaces उपलब्ध हैं, लेकिन आगे violations से बचें और warning या next-step expectations की clarity के लिए support का उपयोग करें।';
+
+  @override
+  String get trustSafetyRestrictionTitle => 'Trust & safety restriction active';
+
+  @override
+  String get trustSafetyRestrictionFallback =>
+      'यह restriction active रहने तक कुछ platform actions limited हो सकती हैं। कौन-सी actions limited हैं और review से पहले क्या changes ज़रूरी हैं, यह confirm करने के लिए support का उपयोग करें।';
+
+  @override
+  String get trustSafetySuspensionTitle => 'Trust & safety suspension active';
+
+  @override
+  String get trustSafetySuspensionFallback =>
+      'यह suspension active रहने तक key platform actions paused हो सकती हैं। Required next steps पूरी होने के बाद policy-allowed review updates या reinstatement guidance के लिए support का उपयोग करें।';
+
+  @override
+  String get trustSafetyBanTitle => 'Trust & safety ban active';
+
+  @override
+  String get trustSafetyBanFallback =>
+      'यह account सामान्य platform use के लिए blocked है। केवल policy-allowed clarification या final review outcome questions के लिए support का उपयोग करें।';
+
+  @override
+  String get trustSafetyOpenSupport => 'Open support';
+
+  @override
+  String get trustSafetyHealthyMessageLine1 =>
+      'आपके account पर अभी कोई active trust या safety enforcement नहीं है। यह status normal बना रहे, इसके लिए delivery proofs, payout confirmations और marketplace communication सही रखें।';
+
+  @override
+  String get trustSafetyHealthyMessageLine2 =>
+      'अगर इस account पर कभी policy या moderation questions आएँ, तो blocked actions दोबारा try करने से पहले clarification के लिए support खोलें।';
+
+  @override
+  String trustSafetyCurrentStatus(Object displayLabel, Object fallback) {
+    return 'Current status: $displayLabel. $fallback';
+  }
+
+  @override
+  String trustSafetyCurrentStatusWithReason(
+    Object displayLabel,
+    Object reasonSummary,
+    Object fallback,
+  ) {
+    return 'Current status: $displayLabel. Reason summary: $reasonSummary. $fallback';
+  }
+
+  @override
+  String get settingsLanguageLabel => 'भाषा';
+
+  @override
+  String get settingsLanguageHelper =>
+      'लॉन्च पर डिफ़ॉल्ट भाषा English है। Hindi यहाँ से चुनी जा सकती है।';
+
+  @override
+  String get settingsLanguageEnglish => 'English';
+
+  @override
+  String get settingsLanguageHindi => 'हिंदी';
+
+  @override
+  String get settingsLanguageSavedEnglish => 'भाषा सेव हुई: English';
+
+  @override
+  String get settingsLanguageSavedHindi => 'भाषा सेव हुई: हिंदी';
+
+  @override
+  String get settingsLanguageSaveFailed =>
+      'अभी आपकी भाषा पसंद सेव नहीं हो सकी। थोड़ी देर बाद settings से फिर कोशिश करें।';
+
+  @override
+  String get settingsLanguageSaving => 'भाषा पसंद सेव की जा रही है...';
+
+  @override
+  String get truckerDashboardHeroSubtitle =>
+      'अपने trucker dashboard को freight discovery, readiness और active work visibility के command center की तरह इस्तेमाल करें।';
+
+  @override
+  String truckerDashboardWelcomeBack(Object fullName) {
+    return 'वापसी पर स्वागत है, $fullName';
+  }
+
+  @override
+  String get truckerDashboardTitle => 'Trucker Dashboard';
+
+  @override
+  String get truckerDashboardOverviewTitle => 'Dashboard overview';
+
+  @override
+  String get truckerDashboardQuickActionsTitle => 'Quick actions';
+
+  @override
+  String get truckerDashboardQuickActionTripsLabel => 'My Trips';
+
+  @override
+  String get truckerDashboardQuickActionChatLabel => 'Chat';
+
+  @override
+  String get truckerDashboardRecentActivityTitle => 'Recent activity';
+
+  @override
+  String get truckerDashboardReadinessNextStepsTitle =>
+      'Readiness and next steps';
+
+  @override
+  String get truckerDashboardReadinessUnavailableTitle =>
+      'Readiness state उपलब्ध नहीं है';
+
+  @override
+  String get truckerDashboardReadinessFailureMessage =>
+      'अभी आपकी trucker readiness state उपलब्ध नहीं है। Verification और fleet readiness refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerDashboardVerificationPendingTitle => 'Verification pending';
+
+  @override
+  String get truckerDashboardVerificationPendingDescription =>
+      'Review pending रहने तक आप loads browse कर सकते हैं, लेकिन verification पूरा होने तक chat और call locked रहेंगे।';
+
+  @override
+  String get truckerDashboardOpenVerificationAction => 'Open verification';
+
+  @override
+  String get truckerDashboardVerificationCompleteTitle =>
+      'Verification complete';
+
+  @override
+  String get truckerDashboardVerificationCompleteDescription =>
+      'आपकी trucker verification पूरी हो गई है। जब तक आपकी readiness healthy रहती है, open loads पर chat और call unlocked रहेंगे।';
+
+  @override
+  String get truckerDashboardReviewVerificationAction => 'Review verification';
+
+  @override
+  String get truckerDashboardVerificationNeedsAttentionTitle =>
+      'Verification needs attention';
+
+  @override
+  String get truckerDashboardVerificationNeedsAttentionDescription =>
+      'आपकी verification reject हो गई थी। Browsing खुली रहती है, लेकिन communication और assignment readiness blocked रहती है।';
+
+  @override
+  String get truckerDashboardFixVerificationAction => 'Fix verification';
+
+  @override
+  String get truckerDashboardCompleteFleetVerificationTitle =>
+      'Fleet और verification setup पूरा करें';
+
+  @override
+  String get truckerDashboardCompleteFleetVerificationMessage =>
+      'अभी आप marketplace browse कर सकते हैं, लेकिन Aadhaar, PAN, profile photo पूरा करने और कम-से-कम एक truck approve होने तक chat, call और booking locked रहेंगे।';
+
+  @override
+  String get truckerDashboardOpenFleetVerificationAction =>
+      'Open fleet and verification';
+
+  @override
+  String get truckerDashboardAddApproveFirstTruckTitle =>
+      'अपना पहला truck जोड़ें और approve कराएँ';
+
+  @override
+  String get truckerDashboardAddApproveFirstTruckMessage =>
+      'अभी marketplace browsing उपलब्ध है, लेकिन पूरी trucker verification complete होने से पहले आपका पहला approved truck जरूरी है।';
+
+  @override
+  String get truckerDashboardOpenFleetAction => 'Open fleet';
+
+  @override
+  String get truckerDashboardCompleteVerificationTitle =>
+      'Trucker verification पूरी करें';
+
+  @override
+  String get truckerDashboardCompleteVerificationMessage =>
+      'अभी आप marketplace browse कर सकते हैं। Chat और call unlock करने के लिए Aadhaar, PAN, profile photo और कम-से-कम एक approved truck पूरा करें।';
+
+  @override
+  String get truckerDashboardLoadFailureTitle =>
+      'अभी आपका trucker dashboard लोड नहीं हो सका';
+
+  @override
+  String get truckerDashboardLoadFailureMessage =>
+      'अभी आपका trucker dashboard लोड नहीं हो सका। Latest KPIs और activity summary refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerDashboardSetupInProgress => 'Setup in progress';
+
+  @override
+  String get truckerDashboardVerificationStatusVerified => 'सत्यापित';
+
+  @override
+  String get truckerDashboardVerificationStatusPending => 'लंबित';
+
+  @override
+  String get truckerDashboardVerificationStatusRejected => 'अस्वीकृत';
+
+  @override
+  String get truckerDashboardVerificationStatusUnverified => 'सत्यापित नहीं';
+
+  @override
+  String get truckerDashboardVerificationStatusUnknown => 'अज्ञात';
+
+  @override
+  String truckerDashboardApprovedTruckCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count approved trucks',
+      one: '$count approved truck',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get truckerDashboardHeroSummary =>
+      'Trucker के लिए home rule dashboard-first है: readiness समझें, active work देखें, फिर यहीं से freight discovery पर जाएँ।';
+
+  @override
+  String get truckerDashboardStatActiveBidsLabel => 'Active bids';
+
+  @override
+  String get truckerDashboardStatActiveBidsHelper =>
+      'Submitted requests जो अभी supplier decision का इंतज़ार कर रही हैं';
+
+  @override
+  String get truckerDashboardStatUpcomingTripsLabel => 'Upcoming trips';
+
+  @override
+  String get truckerDashboardStatUpcomingTripsHelper =>
+      'Assigned और pickup-stage work जो execution के करीब है';
+
+  @override
+  String get truckerDashboardStatInTransitLabel => 'In-transit';
+
+  @override
+  String get truckerDashboardStatInTransitHelper =>
+      'Trips जो अभी road पर चल रही हैं';
+
+  @override
+  String get truckerDashboardStatCompletedLabel => 'Completed';
+
+  @override
+  String get truckerDashboardStatCompletedHelper =>
+      'Trips जो आपकी trucker history में पहले ही close हो चुकी हैं';
+
+  @override
+  String get truckerDashboardRecentActivityUnavailableTitle =>
+      'Recent activity उपलब्ध नहीं है';
+
+  @override
+  String get truckerDashboardRecentActivityUnavailableMessage =>
+      'अभी आपकी latest booking, trip और fleet activity लोड नहीं हो सकी।';
+
+  @override
+  String get truckerDashboardNoRecentActivityTitle =>
+      'अभी कोई recent activity नहीं है';
+
+  @override
+  String get truckerDashboardNoRecentActivitySubtitle =>
+      'काम शुरू होने पर आपकी booking requests, trip movement और fleet review updates यहाँ दिखेंगी।';
+
+  @override
+  String get truckerDashboardBookingActivityTitle => 'Booking activity';
+
+  @override
+  String truckerDashboardBookingActivitySubtitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count active bids supplier review का इंतज़ार कर रही हैं',
+      one: '$count active bid supplier review का इंतज़ार कर रही है',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get truckerDashboardTripActivityTitle => 'Trip activity';
+
+  @override
+  String truckerDashboardTripActivitySubtitle(
+    int upcomingTrips,
+    int inTransitTrips,
+    int completedTrips,
+  ) {
+    return '$upcomingTrips upcoming • $inTransitTrips in transit • $completedTrips completed';
+  }
+
+  @override
+  String get truckerDashboardFleetReviewActivityTitle =>
+      'Fleet review activity';
+
+  @override
+  String truckerDashboardFleetReviewActivitySubtitle(
+    int pendingTrucks,
+    int rejectedTrucks,
+    int pendingReapprovalTrucks,
+  ) {
+    return '$pendingTrucks pending • $rejectedTrucks rejected • $pendingReapprovalTrucks pending reapproval';
+  }
+
+  @override
+  String get truckerDashboardStatusOpen => 'open';
+
+  @override
+  String get truckerDashboardStatusClear => 'clear';
+
+  @override
+  String get truckerDashboardStatusMoving => 'moving';
+
+  @override
+  String get truckerDashboardStatusTracked => 'tracked';
+
+  @override
+  String get truckerDashboardStatusAttention => 'attention';
+
+  @override
+  String get truckerDashboardReadinessSummaryUnavailableTitle =>
+      'Trucker readiness उपलब्ध नहीं है';
+
+  @override
+  String get truckerDashboardReadinessSummaryUnavailableMessage =>
+      'अभी आपकी readiness summary लोड नहीं हो सकी।';
+
+  @override
+  String get truckerDashboardProfileSetupInProgressTitle =>
+      'Profile setup अभी जारी है';
+
+  @override
+  String get truckerDashboardProfileSetupInProgressSubtitle =>
+      'आपकी trucker profile पूरी तरह लोड होने के बाद dashboard readiness details दिखाएगा।';
+
+  @override
+  String get truckerDashboardVerificationStatusTitle => 'Verification status';
+
+  @override
+  String get truckerDashboardVerificationReadyMessage =>
+      'आपकी verification पूरी होने के कारण open loads पर chat और call unlocked हैं।';
+
+  @override
+  String get truckerDashboardVerificationLockedMessage =>
+      'Browsing अभी खुली है। Chat और call तभी unlock होंगे जब verification और कम-से-कम एक approved truck पूरा होगा।';
+
+  @override
+  String truckerDashboardDlLabel(Object value) {
+    return 'DL: $value';
+  }
+
+  @override
+  String get truckerDashboardFleetReadinessTitle => 'Fleet readiness';
+
+  @override
+  String truckerDashboardApprovedTrucksSummary(
+    int approvedTrucks,
+    int totalTrucks,
+  ) {
+    return '$approvedTrucks/$totalTrucks approved trucks';
+  }
+
+  @override
+  String get truckerDashboardReadyStatus => 'ready';
+
+  @override
+  String get truckerDashboardActionNeededStatus => 'action needed';
+
+  @override
+  String get truckerDashboardFleetReadyMessage =>
+      'Verification-dependent workflows के लिए आपके पास कम-से-कम एक approved truck उपलब्ध है।';
+
+  @override
+  String get truckerDashboardFleetNeedFirstTruckMessage =>
+      'Trucker readiness पूरी करने के लिए fleet slice में अपना पहला truck जोड़ें और approve कराएँ।';
+
+  @override
+  String truckerDashboardTruckAwaitingReview(int count) {
+    return '$count awaiting review';
+  }
+
+  @override
+  String truckerDashboardTruckRejected(int count) {
+    return '$count rejected';
+  }
+
+  @override
+  String truckerDashboardTruckPendingReapproval(int count) {
+    return '$count pending reapproval';
+  }
+
+  @override
+  String truckerDashboardTruckLifecycleAttention(Object segments) {
+    return 'Truck lifecycle attention: $segments. Review clear होने तक non-approved trucks नई booking workflows के लिए blocked रहती हैं।';
+  }
+
+  @override
+  String get truckerTripsTitle => 'My trips';
+
+  @override
+  String get truckerTripsSubtitle =>
+      'Assigned trips track करें, proof deadlines monitor करें, और सही trip stage पर सही action लें।';
+
+  @override
+  String get truckerTripsStageAssigned => 'Assigned';
+
+  @override
+  String get truckerTripsStagePickupPending => 'Pickup pending';
+
+  @override
+  String get truckerTripsStagePickedUp => 'Picked up';
+
+  @override
+  String get truckerTripsStageInTransit => 'In transit';
+
+  @override
+  String get truckerTripsStageDelivered => 'Delivered';
+
+  @override
+  String get truckerTripsStageProofSubmitted => 'Proof submitted';
+
+  @override
+  String get truckerTripsStageCompleted => 'Completed';
+
+  @override
+  String get truckerTripsStageDisputed => 'Disputed';
+
+  @override
+  String get truckerTripsStageCancelled => 'Cancelled';
+
+  @override
+  String get truckerTripsStageUnknown => 'Unknown';
+
+  @override
+  String get truckerTripsProofStatusPodUploaded => 'POD uploaded';
+
+  @override
+  String get truckerTripsProofStatusLrUploaded => 'LR uploaded';
+
+  @override
+  String get truckerTripsProofStatusAwaitingPod => 'Awaiting POD';
+
+  @override
+  String get truckerTripsProofStatusProofSubmitted => 'Proof submitted';
+
+  @override
+  String get truckerTripsProofStatusProofPending => 'Proof pending';
+
+  @override
+  String get truckerTripsTabActive => 'Active';
+
+  @override
+  String get truckerTripsTabCompleted => 'Completed';
+
+  @override
+  String get truckerTripsLoadFailureTitle => 'Trips लोड नहीं हो सकीं';
+
+  @override
+  String get truckerTripsLoadFailureMessage =>
+      'अभी आपकी trips लोड नहीं हो सकीं। Latest execution timeline refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripsEmptyActiveTitle => 'अभी कोई trip नहीं है';
+
+  @override
+  String get truckerTripsEmptyCompletedTitle =>
+      'अभी कोई completed trip नहीं है';
+
+  @override
+  String get truckerTripsEmptyActiveSubtitle =>
+      'अपनी पहली trip शुरू करने के लिए load book करें और supplier approval का इंतज़ार करें।';
+
+  @override
+  String get truckerTripsEmptyCompletedSubtitle =>
+      'Execution close होने के बाद completed और cancelled trips यहाँ दिखेंगी।';
+
+  @override
+  String get truckerTripsEmptyActiveAction => 'Find loads';
+
+  @override
+  String get truckerTripsEmptyCompletedAction => 'View active trips';
+
+  @override
+  String get truckerTripDetailNotFoundTitle => 'Trip not found';
+
+  @override
+  String get truckerTripDetailNotFoundSubtitle =>
+      'यह assigned trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
+
+  @override
+  String get truckerTripDetailBackToTripsAction => 'Back to my trips';
+
+  @override
+  String truckerTripsTimeContextAssigned(Object date) {
+    return 'Assigned $date';
+  }
+
+  @override
+  String truckerTripsTimeContextDelivered(Object date) {
+    return 'Delivered $date';
+  }
+
+  @override
+  String truckerTripsTimeContextPodUploaded(Object date) {
+    return 'POD uploaded $date';
+  }
+
+  @override
+  String truckerTripsTimeContextCompleted(Object date) {
+    return 'Completed $date';
+  }
+
+  @override
+  String truckerTripsTruckLabel(Object truckNumber) {
+    return 'Truck $truckNumber';
+  }
+
+  @override
+  String get truckerFleetHeroTitle => 'Truck readiness manage करें';
+
+  @override
+  String get truckerFleetHeroSubtitle =>
+      'Truck approval ट्रैक करें, rejection guidance review करें और RC details updated रखें ताकि booking-ready trucks उपलब्ध रहें।';
+
+  @override
+  String get truckerFleetEditingTruckAction => 'Editing truck';
+
+  @override
+  String get truckerFleetAddTruckAction => 'Add truck';
+
+  @override
+  String truckerFleetTruckCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count trucks',
+      one: '$count truck',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String truckerFleetApprovedCount(int count) {
+    return '$count approved';
+  }
+
+  @override
+  String get truckerFleetActionAttentionTitle => 'Truck action needs attention';
+
+  @override
+  String get truckerFleetActionFailureMessage =>
+      'अभी latest truck action पूरी नहीं हो सकी। Truck details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerFleetEditTruckTitle => 'Edit truck';
+
+  @override
+  String get truckerFleetAddOrUpdateTruckTitle => 'Add or update truck';
+
+  @override
+  String get truckerFleetTruckNumberLabel => 'Truck number';
+
+  @override
+  String get truckerFleetTruckNumberHint => 'MH12AB1234';
+
+  @override
+  String get truckerFleetBodyTypeLabel => 'Body type';
+
+  @override
+  String truckerFleetBodyTypeOption(Object value) {
+    return '$value';
+  }
+
+  @override
+  String get truckerFleetTyresLabel => 'Tyres';
+
+  @override
+  String truckerFleetTyresOption(int tyres) {
+    return '$tyres tyres';
+  }
+
+  @override
+  String get truckerFleetCapacityLabel => 'Capacity (tonnes)';
+
+  @override
+  String get truckerFleetCapacityHint => '25';
+
+  @override
+  String get truckerFleetRcDocumentTitle => 'RC document';
+
+  @override
+  String get truckerFleetRcUploadedSubtitle =>
+      'RC image upload होकर इस truck draft से linked है।';
+
+  @override
+  String get truckerFleetRcRequiredSubtitle =>
+      'इस truck को save करने से पहले truck RC upload करें।';
+
+  @override
+  String get truckerFleetUploadedStatus => 'uploaded';
+
+  @override
+  String get truckerFleetRequiredStatus => 'required';
+
+  @override
+  String truckerFleetStoredPath(Object path) {
+    return 'Stored path: $path';
+  }
+
+  @override
+  String get truckerFleetReplaceRcAction => 'Replace RC document';
+
+  @override
+  String get truckerFleetUploadRcAction => 'Upload RC document';
+
+  @override
+  String get truckerFleetRcUploadedSuccess => 'RC सफलतापूर्वक upload हो गई';
+
+  @override
+  String get truckerFleetRcUpdatedSuccess =>
+      'RC document सफलतापूर्वक update हो गई';
+
+  @override
+  String get truckerFleetSaveTruckUpdatesAction => 'Save truck updates';
+
+  @override
+  String get truckerFleetSaveTruckAction => 'Save truck';
+
+  @override
+  String get truckerFleetTruckUpdatedSuccess =>
+      'Truck सफलतापूर्वक update हो गया';
+
+  @override
+  String get truckerFleetTruckAddedSuccess => 'Truck सफलतापूर्वक जोड़ दिया गया';
+
+  @override
+  String get truckerFleetMyTrucksTitle => 'My trucks';
+
+  @override
+  String get truckerFleetUnavailableTitle => 'Fleet उपलब्ध नहीं है';
+
+  @override
+  String get truckerFleetLoadFailureMessage =>
+      'अभी आपकी fleet लोड नहीं हो सकी। Latest truck readiness और approval state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerFleetNoTrucksTitle => 'अभी कोई truck नहीं जोड़ी गई';
+
+  @override
+  String get truckerFleetNoTrucksSubtitle =>
+      'अपना पहला truck उसकी RC document के साथ जोड़ें ताकि trucker verification approval की ओर बढ़ सके।';
+
+  @override
+  String get truckerFleetSelectRcSourceTitle => 'Upload RC document';
+
+  @override
+  String get truckerFleetTakePhotoAction => 'Take photo';
+
+  @override
+  String get truckerFleetChooseGalleryAction => 'Choose from gallery';
+
+  @override
+  String get truckerFleetRcUploadFailureMessage =>
+      'अभी RC document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerFleetSaveFailureMessage =>
+      'अभी यह truck save नहीं हो सकी। Truck details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String truckerFleetTruckCardSubtitle(
+    Object bodyType,
+    Object tyres,
+    Object capacityTonnes,
+  ) {
+    return '$bodyType • $tyres tyres • ${capacityTonnes}T';
+  }
+
+  @override
+  String truckerFleetModelLabel(Object value) {
+    return 'Model: $value';
+  }
+
+  @override
+  String truckerFleetReviewSummaryLabel(Object value) {
+    return 'Review summary: $value';
+  }
+
+  @override
+  String truckerFleetNextStepLabel(Object value) {
+    return 'Next step: $value';
+  }
+
+  @override
+  String get truckerFleetBlockedBookingMessage =>
+      'Review clear होने तक यह truck approval-dependent booking workflows के लिए blocked है।';
+
+  @override
+  String get truckerFleetFixResubmitAction => 'Fix and resubmit truck';
+
+  @override
+  String get truckerFleetEditTruckAction => 'Edit truck';
+
+  @override
+  String get truckerFleetStatusPendingLabel => 'Pending review';
+
+  @override
+  String get truckerFleetStatusVerifiedLabel => 'Approved';
+
+  @override
+  String get truckerFleetStatusRejectedLabel => 'Rejected';
+
+  @override
+  String get truckerFleetStatusEditedPendingReapprovalLabel =>
+      'Pending reapproval';
+
+  @override
+  String get truckerFleetStatusArchivedLabel => 'Archived';
+
+  @override
+  String get truckerFleetStatusUnknownLabel => 'Unknown';
+
+  @override
+  String get truckerFleetStatusPendingMessage =>
+      'आपका truck admin review का इंतज़ार कर रहा है। Booking में इस्तेमाल करने से पहले approval ज़रूरी है।';
+
+  @override
+  String get truckerFleetStatusVerifiedMessage =>
+      'यह truck approved है और verification-dependent workflows के लिए उपलब्ध है।';
+
+  @override
+  String get truckerFleetStatusRejectedFallback =>
+      'यह truck reject हुई थी। नीचे दी गई guidance review करें और affected details या RC document update करें।';
+
+  @override
+  String get truckerFleetStatusEditedPendingReapprovalMessage =>
+      'यह truck visible रहती है, लेकिन recent edits के कारण दोबारा approval से पहले reapproval में चली गई है।';
+
+  @override
+  String get truckerFleetStatusArchivedMessage =>
+      'यह truck archived है और सामान्य booking workflows के लिए अब उपलब्ध नहीं है।';
+
+  @override
+  String get truckerFleetStatusUnknownMessage =>
+      'Truck review state अभी उपलब्ध नहीं है।';
+
+  @override
+  String get truckerFindLoadsHeroSubtitle =>
+      'Compact freight cards देखें, filters को tight रखें और route interest से load evaluation तक जल्दी बढ़ें।';
+
+  @override
+  String get truckerFindLoadsAdvancedFiltersAction => 'Advanced filters';
+
+  @override
+  String get truckerFindLoadsOriginHint => 'Origin city';
+
+  @override
+  String get truckerFindLoadsDestinationHint => 'Destination city';
+
+  @override
+  String get truckerFindLoadsMaterialHint => 'Material';
+
+  @override
+  String get truckerFindLoadsSortByLabel => 'Sort by';
+
+  @override
+  String get truckerFindLoadsSortNewest => 'Newest';
+
+  @override
+  String get truckerFindLoadsSortPriceHighToLow => 'Price High→Low';
+
+  @override
+  String get truckerFindLoadsSortPriceLowToHigh => 'Price Low→High';
+
+  @override
+  String get truckerFindLoadsSortPickupDate => 'Pickup Date';
+
+  @override
+  String get truckerFindLoadsMarketplaceTabsTitle => 'Marketplace tabs';
+
+  @override
+  String get truckerFindLoadsAllLoadsTab => 'All Loads';
+
+  @override
+  String get truckerFindLoadsSuperLoadsTab => 'Super Loads';
+
+  @override
+  String get truckerFindLoadsLoadFailureTitle => 'Freight लोड नहीं हो सकी';
+
+  @override
+  String get truckerFindLoadsLoadFailureMessage =>
+      'अभी marketplace freight लोड नहीं हो सकी। Latest load search results refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerFindLoadsEmptyTitle => 'कोई load नहीं मिली';
+
+  @override
+  String get truckerFindLoadsEmptySubtitle =>
+      'Marketplace search को widen करने के लिए अपनी city, material या advanced filters adjust करें।';
+
+  @override
+  String get truckerFindLoadsLoadMoreFailureTitle => 'और loads उपलब्ध नहीं हैं';
+
+  @override
+  String get truckerFindLoadsLoadMoreFailureMessage =>
+      'अभी और freight लोड नहीं हो सकी। Marketplace search जारी रखने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String truckerFindLoadsSummaryFrom(Object city) {
+    return 'From $city';
+  }
+
+  @override
+  String truckerFindLoadsSummaryTo(Object city) {
+    return 'To $city';
+  }
+
+  @override
+  String truckerFindLoadsSummaryTyres(Object value) {
+    return '$value tyre';
+  }
+
+  @override
+  String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice) {
+    return '₹$minPrice-$maxPrice';
+  }
+
+  @override
+  String get truckerFindLoadsSummarySuperLoads => 'Super Loads';
+
+  @override
+  String truckerFindLoadsSummaryAllLoads(int resultCount) {
+    return 'Showing all loads • $resultCount result(s)';
+  }
+
+  @override
+  String truckerFindLoadsSummaryFiltered(Object pieces, int resultCount) {
+    return '$pieces • $resultCount result(s)';
+  }
+
+  @override
+  String get truckerFindLoadsResetFiltersAction => 'Reset filters';
+
+  @override
+  String get truckerFindLoadsAnyBodyFallback => 'Any body';
+
+  @override
+  String get truckerFindLoadsStatusActive => 'Active';
+
+  @override
+  String get truckerFindLoadsStatusAssignedPartial => 'Assigned Partial';
+
+  @override
+  String get truckerFindLoadsStatusUnknown => 'Unknown';
+
+  @override
+  String get truckerFindLoadsStatusUnknownFallback => 'Unknown status';
+
+  @override
+  String truckerFindLoadsPriceAdvancePickup(
+    Object priceAmount,
+    int advancePercentage,
+    Object pickupDate,
+  ) {
+    return '₹$priceAmount • $advancePercentage% adv • $pickupDate';
+  }
+
+  @override
+  String get truckerFindLoadsTruckMatchAvailable => 'Truck match available';
+
+  @override
+  String get truckerFindLoadsNoApprovedTruckMatch =>
+      'No approved truck match yet';
+
+  @override
+  String get truckerFindLoadsTripCostUnavailable => 'Trip cost उपलब्ध नहीं है';
+
+  @override
+  String truckerFindLoadsDistanceUnavailable(Object tyres) {
+    return 'Distance उपलब्ध नहीं है • Tyres $tyres';
+  }
+
+  @override
+  String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres) {
+    return 'Distance $distanceKm km • Tyres $tyres';
+  }
+
+  @override
+  String get truckerFindLoadsTyresAny => 'Any';
+
+  @override
+  String get truckerFindLoadsSuperLoadBanner =>
+      'Super Load • Payment Guarantee';
+
+  @override
+  String get truckerFindLoadsViewDetailsAction => 'View details';
+
+  @override
+  String get truckerFindLoadsAdvancedFiltersTitle => 'Advanced filters';
+
+  @override
+  String get truckerFindLoadsTruckBodyTypeLabel => 'Truck body type';
+
+  @override
+  String get truckerFindLoadsBodyTypeOpen => 'Open';
+
+  @override
+  String get truckerFindLoadsBodyTypeTrailer => 'Trailer';
+
+  @override
+  String get truckerFindLoadsBodyTypeContainer => 'Container';
+
+  @override
+  String get truckerFindLoadsBodyTypeTanker => 'Tanker';
+
+  @override
+  String get truckerFindLoadsBodyTypeUnknown => 'Unknown';
+
+  @override
+  String get truckerFindLoadsTyreRequirementTitle => 'Tyre requirement';
+
+  @override
+  String get truckerFindLoadsMinPriceLabel => 'Min price (₹)';
+
+  @override
+  String get truckerFindLoadsMaxPriceLabel => 'Max price (₹)';
+
+  @override
+  String get truckerFindLoadsApplyFiltersAction => 'Apply filters';
+
+  @override
+  String get truckerFindLoadsResetAdvancedFiltersAction =>
+      'Reset advanced filters';
+
+  @override
+  String get supplierPostLoadTitle => 'Post Load';
+
+  @override
+  String get supplierPostLoadHeroTitle => 'Create a supplier load';
+
+  @override
+  String get supplierPostLoadHeroSubtitle =>
+      'Route, cargo, vehicle requirements, pricing और pickup timing define करने के लिए एक clean scrolling form का उपयोग करें।';
+
+  @override
+  String get supplierPostLoadHeroHelper =>
+      'अगर route services preview नहीं लौटातीं तब भी manual city entry काम करती है। Validation या submission failure पर आपका form data सुरक्षित रहता है।';
+
+  @override
+  String get supplierPostLoadPostingBlockedTitle => 'Posting is blocked';
+
+  @override
+  String get supplierPostLoadOpenVerificationAction => 'Open verification';
+
+  @override
+  String get supplierPostLoadRouteTimingTitle => 'Route and timing';
+
+  @override
+  String get supplierPostLoadOriginCityLabel => 'Origin city';
+
+  @override
+  String get supplierPostLoadSearchCityHint => 'Search city';
+
+  @override
+  String get supplierPostLoadOriginExactLocationLabel =>
+      'Origin exact location';
+
+  @override
+  String get supplierPostLoadOriginExactLocationHint =>
+      'Warehouse / pickup point';
+
+  @override
+  String get supplierPostLoadDestinationCityLabel => 'Destination city';
+
+  @override
+  String get supplierPostLoadDestinationExactLocationLabel =>
+      'Destination exact location';
+
+  @override
+  String get supplierPostLoadDestinationExactLocationHint =>
+      'Drop point / delivery point';
+
+  @override
+  String get supplierPostLoadPickupDateLabel => 'Pickup date';
+
+  @override
+  String get supplierPostLoadRoutePreviewTitle => 'Route preview';
+
+  @override
+  String supplierPostLoadDistanceLabel(Object value) {
+    return 'Distance: $value km';
+  }
+
+  @override
+  String supplierPostLoadDriveTimeLabel(int minutes) {
+    return 'Est. drive time: $minutes min';
+  }
+
+  @override
+  String get supplierPostLoadRoutePreviewUnavailableTitle =>
+      'Route preview unavailable';
+
+  @override
+  String get supplierPostLoadRoutePreviewUnavailableMessage =>
+      'अभी route distance और duration derive नहीं हो सके। आप manual city-based posting के साथ फिर भी आगे बढ़ सकते हैं।';
+
+  @override
+  String get supplierPostLoadCargoDetailsTitle => 'Cargo details';
+
+  @override
+  String get supplierPostLoadMaterialLabel => 'Material';
+
+  @override
+  String get supplierPostLoadWeightLabel => 'Weight (tonnes)';
+
+  @override
+  String get supplierPostLoadWeightHint => '22';
+
+  @override
+  String get supplierPostLoadVehicleRequirementsTitle => 'Vehicle requirements';
+
+  @override
+  String get supplierPostLoadTruckBodyTypeLabel => 'Truck body type';
+
+  @override
+  String get supplierPostLoadTyreRequirementTitle => 'Tyre requirement';
+
+  @override
+  String get supplierPostLoadAnyTyresLabel => 'Any';
+
+  @override
+  String get supplierPostLoadTrucksNeededTitle => 'Trucks needed';
+
+  @override
+  String get supplierPostLoadTrucksNeededLabel => 'Trucks needed';
+
+  @override
+  String get supplierPostLoadTrucksNeededHint => '1';
+
+  @override
+  String get supplierPostLoadPricingScheduleTitle => 'Pricing and schedule';
+
+  @override
+  String get supplierPostLoadPriceAmountLabel => 'Price amount (₹)';
+
+  @override
+  String get supplierPostLoadPriceAmountHint => '54000';
+
+  @override
+  String get supplierPostLoadPriceTypeTitle => 'Price type';
+
+  @override
+  String get supplierPostLoadPriceTypeFixed => 'Fixed';
+
+  @override
+  String get supplierPostLoadPriceTypeNegotiable => 'Per Ton';
+
+  @override
+  String get supplierPostLoadPriceTypeUnknown => 'Unknown';
+
+  @override
+  String supplierPostLoadAdvancePercentageLabel(int value) {
+    return 'Advance percentage: $value%';
+  }
+
+  @override
+  String supplierPostLoadAdvanceBalanceLabel(
+    Object advanceAmount,
+    Object balanceAmount,
+  ) {
+    return 'Advance: ₹$advanceAmount • Balance: ₹$balanceAmount';
+  }
+
+  @override
+  String get supplierPostLoadReviewSummaryTitle => 'Review summary';
+
+  @override
+  String get supplierPostLoadOriginPending => 'Origin pending';
+
+  @override
+  String get supplierPostLoadDestinationPending => 'Destination pending';
+
+  @override
+  String supplierPostLoadRouteSummary(Object origin, Object destination) {
+    return '$origin → $destination';
+  }
+
+  @override
+  String supplierPostLoadCargoSummary(
+    Object material,
+    Object weightTonnes,
+    Object trucksNeeded,
+  ) {
+    return '$material • ${weightTonnes}T • $trucksNeeded truck(s)';
+  }
+
+  @override
+  String supplierPostLoadPriceSummary(Object priceAmount, Object priceType) {
+    return 'Price: ₹$priceAmount • $priceType';
+  }
+
+  @override
+  String supplierPostLoadPickupSummary(Object pickupDate) {
+    return 'Pickup: $pickupDate';
+  }
+
+  @override
+  String get supplierPostLoadSubmissionFailedTitle => 'Submission failed';
+
+  @override
+  String get supplierPostLoadCompleteVerificationAction =>
+      'Complete verification to post load';
+
+  @override
+  String get supplierPostLoadSubmitAction => 'Post Load';
+
+  @override
+  String get supplierPostLoadCreatedSuccess => 'Load created successfully';
+
+  @override
+  String get supplierPostLoadSubmissionFailureMessage =>
+      'अभी यह load submission तैयार नहीं हो सकी। Load details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierPostLoadSubmitFailureMessage =>
+      'अभी यह load create नहीं हो सकी। Load details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierPostLoadVerificationCheckingMessage =>
+      'Load posting enable करने से पहले supplier verification जांची जा रही है।';
+
+  @override
+  String get supplierPostLoadVerificationUnavailableMessage =>
+      'अभी supplier verification confirm नहीं हो सकी। थोड़ी देर बाद फिर कोशिश करें या अपनी trust status review करने के लिए verification खोलें।';
+
+  @override
+  String get supplierPostLoadProfileUnavailableMessage =>
+      'अभी supplier profile उपलब्ध नहीं है। यह load post करने से पहले थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierPostLoadVerificationRequiredMessage =>
+      'Loads post करने से पहले supplier verification पूरी करें। Identity और business documents upload करें, फिर उन्हें review के लिए submit करें।';
+
+  @override
+  String supplierPostLoadSuggestionSubtitle(Object label, Object source) {
+    return '$label • $source';
+  }
+
+  @override
+  String get supplierDashboardVerificationStatusVerified => 'Verified';
+
+  @override
+  String get supplierDashboardVerificationStatusPending => 'Pending';
+
+  @override
+  String get supplierDashboardVerificationStatusRejected => 'Rejected';
+
+  @override
+  String get supplierDashboardVerificationStatusUnknown => 'Unknown';
+
+  @override
+  String get supplierVerificationPendingTitle => 'Verification pending';
+
+  @override
+  String get supplierVerificationPendingMessage =>
+      'Your verification is under review. Keep documents ready in case the support team asks for clarification.';
+
+  @override
+  String get supplierVerificationRejectedTitle =>
+      'Verification needs attention';
+
+  @override
+  String get supplierVerificationCompleteDescription =>
+      'आपकी supplier verification complete है। आप this dashboard से loads post करना और readiness monitor करना जारी रख सकते हैं।';
+
+  @override
+  String get supplierVerificationNeedsAttentionTitle =>
+      'Verification needs attention';
+
+  @override
+  String get supplierVerificationNeedsAttentionDescription =>
+      'Latest verification feedback review करें, जरूरी documents update करें, और तैयार होने पर फिर submit करें।';
+
+  @override
+  String get supplierOpenVerification => 'Open verification';
+
+  @override
+  String get supplierReviewVerification => 'Review verification';
+
+  @override
+  String get supplierDashboardVerificationStatusUnknownFallback =>
+      'Unknown verification status';
+
+  @override
+  String get supplierFixVerification => 'Fix verification';
+
+  @override
+  String get supplierCompleteSetupTitle => 'Complete your supplier setup';
+
+  @override
+  String get supplierCompleteSetupMessage =>
+      'Full supplier workspace use करने से पहले supplier verification पूरी करें और अपनी company details जोड़ें।';
+
+  @override
+  String get supplierCompleteVerification => 'Complete verification';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessIntro =>
+      'Super Load eligibility अभी भी current app में आंशिक रूप से admin-managed है। यह surface केवल वही readiness facts दिखाती है जिन्हें current profile model ईमानदारी से confirm कर सकती है।';
+
+  @override
+  String get supplierDashboardSuperLoadVerificationComplete =>
+      'Verification complete';
+
+  @override
+  String get supplierDashboardSuperLoadVerificationRequired =>
+      'Verification still required';
+
+  @override
+  String get supplierDashboardSuperLoadBusinessLicenceOnFile =>
+      'Business licence on file';
+
+  @override
+  String get supplierDashboardSuperLoadBusinessLicenceMissing =>
+      'Business licence missing';
+
+  @override
+  String get supplierDashboardSuperLoadCompanyAgeUnavailable =>
+      'Company-age readiness unavailable in current app data';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryReady =>
+      'आपकी current profile supplier verification और business licence prerequisite को confirm कर सकती है, लेकिन final Super Load eligibility यहाँ अभी भी तय नहीं की जा सकती क्योंकि current source model में company-age/readiness fields अभी मौजूद नहीं हैं।';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence =>
+      'आपकी supplier verification complete है, लेकिन business licence prerequisite अभी current profile में missing है। जब तक यह verification requirement पूरी नहीं होती, final Super Load eligibility blocked रहेगी।';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryMissingVerification =>
+      'आपकी current profile business licence on file को confirm कर सकती है, लेकिन supplier verification अभी incomplete है। Final Super Load eligibility तब तक blocked रहेगी जब तक verification पूरी नहीं होती और current source model में company-age/readiness fields नहीं जुड़तीं।';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryPendingVerification =>
+      'आपकी supplier verification अभी review में है। जब तक यह review complete नहीं होती, Super Load readiness आगे नहीं बढ़ सकती, और company-age/readiness fields आने तक final eligibility admin-managed ही रहेगी।';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryRejectedVerification =>
+      'Super Load readiness आगे बढ़ने से पहले आपकी supplier verification में correction चाहिए। Latest verification feedback review करें, required documents अपडेट करें, और packet resubmit होने के बाद इस readiness surface को फिर से देखें।';
+
+  @override
+  String get supplierDashboardSuperLoadReadinessSummaryNeedsAttention =>
+      'Super Load readiness eligibility के करीब आने से पहले supplier verification और business licence prerequisite दोनों पर अभी ध्यान देना जरूरी है। उसके बाद भी final eligibility admin-managed रहेगी जब तक current source model में company-age/readiness fields मौजूद नहीं होतीं।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepReady =>
+      'Next best action: अपनी verification details सही रखें, अपने loads को सामान्य रूप से monitor करें, और Super Load review या policy questions पर follow-up चाहिए तो ही support का उपयोग करें।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepBusinessLicence =>
+      'Next best action: पहले verification के माध्यम से business licence update या upload करें, फिर इस readiness surface को दोबारा जांचें।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepVerification =>
+      'Next best action: supplier verification पूरी करें ताकि platform किसी future Super Load review से पहले आपके trust baseline को confirm कर सके।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepPendingVerification =>
+      'Next best action: current verification review को monitor करें, business documents को stable रखें, और approval pending रहने के दौरान clarification चाहिए तो ही support का उपयोग करें।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepRejectedVerification =>
+      'Next best action: पहले rejected verification items को ठीक करें, packet को review के लिए resubmit करें, और फिर refreshed readiness summary के लिए यहाँ लौटें।';
+
+  @override
+  String get supplierDashboardSuperLoadNextStepNeedsAttention =>
+      'Next best action: पहले supplier verification और business licence requirements पूरी करें, फिर remaining readiness summary के लिए यहाँ लौटें।';
+
+  @override
+  String get supplierDashboardLoadStatusActive => 'सक्रिय';
+
+  @override
+  String get supplierLoadStatusAssignedPartial => 'आंशिक रूप से असाइन';
+
+  @override
+  String get supplierLoadStatusAssignedFull => 'पूरी तरह असाइन';
+
+  @override
+  String get supplierLoadStatusInTransit => 'रास्ते में';
+
+  @override
+  String get supplierLoadStatusCompleted => 'पूर्ण';
+
+  @override
+  String get supplierLoadStatusUnknown => 'Unknown';
+
+  @override
+  String get supplierLoadStatusFilledOutsideApp => 'ऐप के बाहर भरा गया';
+
+  @override
+  String get supplierLoadStatusCancelled => 'रद्द';
+
+  @override
+  String get supplierLoadStatusExpired => 'समाप्त';
+
+  @override
+  String get supplierLoadStatusDeactivated => 'निष्क्रिय';
+
+  @override
+  String supplierDashboardTrucksBooked(int booked, int needed) {
+    return '$booked/$needed ट्रक बुक हुए';
+  }
+
+  @override
+  String supplierDashboardLoadPickup(Object value) {
+    return 'Pickup $value';
+  }
+
+  @override
+  String get supplierDashboardOpenLoadsWorkspace => 'Open loads workspace';
+
+  @override
+  String get supplierDashboardSuperLoadStatusRequestSubmitted =>
+      'Request submitted';
+
+  @override
+  String get supplierDashboardSuperLoadStatusUnderReview => 'Under review';
+
+  @override
+  String get supplierDashboardSuperLoadStatusApproved =>
+      'Approved • payment pending';
+
+  @override
+  String get supplierDashboardSuperLoadStatusRejected => 'Rejected';
+
+  @override
+  String get supplierDashboardSuperLoadStatusExpiredOrClosed => 'Closed';
+
+  @override
+  String get supplierDashboardSuperLoadStatusActive => 'Active';
+
+  @override
+  String get supplierDashboardSuperLoadStatusNotActive => 'Not requested';
+
+  @override
+  String supplierDashboardSuperLoadBadge(Object status) {
+    return 'Super Load • $status';
+  }
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceRequestSubmitted =>
+      'यह Super Load request submit हो चुकी है और admin review का इंतज़ार कर रही है। Dedicated supplier-side eligibility controls अभी pending हैं, इसलिए current state admin-managed है।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceUnderReview =>
+      'यह Super Load request admin review में है। Review progress में रहने तक load details stable रखें।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceApproved =>
+      'यह Super Load request approved है, लेकिन activation अभी भी off-platform payment confirmation step पर निर्भर है।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceRejected =>
+      'यह Super Load request approve नहीं हुई। Dedicated supplier readiness surface अभी pending है, इसलिए follow-up चाहिए तो support का उपयोग करें।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceExpiredOrClosed =>
+      'यह Super Load lifecycle बंद हो चुकी है। Current load status review करें और follow-up चाहिए तो support का उपयोग करें।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceActive =>
+      'यह load current lifecycle में Super Load के रूप में marked है। Dedicated supplier-side eligibility controls अभी भी expand की जा रही हैं।';
+
+  @override
+  String get supplierDashboardSuperLoadGuidanceNotActive =>
+      'इस load के लिए Super Load state active नहीं है।';
+
+  @override
+  String supplierLinkedTripAssignedLabel(Object date) {
+    return 'Assigned: $date';
+  }
+
+  @override
+  String supplierLinkedTripProofLabel(Object status) {
+    return 'Proof status: $status';
+  }
+
+  @override
+  String get supplierLinkedTripTrackAction => 'Track trip';
+
+  @override
+  String get supplierTripDetailTitle => 'Trip Detail';
+
+  @override
+  String get supplierTripDetailLoadFailureTitle =>
+      'Unable to load supplier trip detail';
+
+  @override
+  String get supplierTripDetailLoadFailureMessage =>
+      'अभी यह supplier trip detail load नहीं हो सकी। Latest trip status और proof review context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripDetailRatingFailureMessage =>
+      'Supplier rating state अभी उपलब्ध नहीं है। Rating submit करने से पहले थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripDetailRatingSubmitFailureMessage =>
+      'अभी यह supplier rating submit नहीं हो सकी। Rating review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripDetailActionFailureMessage =>
+      'Latest supplier trip action अभी पूरी नहीं हो सकी। Trip detail refresh होने के बाद थोड़ी देर में फिर कोशिश करें।';
+
+  @override
+  String get supplierTripDetailActionSubmitFailureMessage =>
+      'अभी यह supplier trip action पूरी नहीं हो सकी। Latest trip status जांचकर थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripDetailRatingSectionTitle => 'Rate this trip';
+
+  @override
+  String get supplierTripDetailRatingAlreadySubmitted =>
+      'You already rated this trip.';
+
+  @override
+  String supplierTripDetailRatingSubmittedOn(Object date) {
+    return 'Submitted on $date';
+  }
+
+  @override
+  String get supplierTripDetailRatingPrompt =>
+      'Delivery complete हो चुकी है। इस trip के लिए trucker को rate करें।';
+
+  @override
+  String get supplierTripDetailCommentLabel => 'Comment (optional)';
+
+  @override
+  String get supplierTripDetailCommentHint =>
+      'Trip outcome के बारे में useful feedback साझा करें';
+
+  @override
+  String get supplierTripDetailRatingUnavailableTitle => 'Rating unavailable';
+
+  @override
+  String get supplierTripDetailSubmitRatingAction => 'Submit Rating';
+
+  @override
+  String get supplierTripDetailRatingSubmittedSuccess =>
+      'Rating submitted successfully.';
+
+  @override
+  String supplierTripDetailRatingStarTooltip(int count, Object s) {
+    return '$count star$s';
+  }
+
+  @override
+  String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
+    return 'Trip $tripId • Truck $truckNumber';
+  }
+
+  @override
+  String supplierTripDetailMaterialTruckerSummary(
+    Object material,
+    Object truckerName,
+  ) {
+    return '$material • Trucker $truckerName';
+  }
+
+  @override
+  String get supplierTripDetailNextStepTitle => 'Next step';
+
+  @override
+  String get supplierTripDetailNextStepReviewTitle =>
+      'Review and confirm delivery';
+
+  @override
+  String get supplierTripDetailNextStepReviewMessage =>
+      'Trucker ने POD upload कर दिया है। Proof review करें और trip close करने के लिए delivery confirm करें।';
+
+  @override
+  String get supplierTripDetailNextStepCompletedTitle => 'Trip completed';
+
+  @override
+  String get supplierTripDetailNextStepCompletedMessage =>
+      'Delivery confirm हो चुकी है। Rating और post-trip follow-up इसी completed state से जारी रहते हैं।';
+
+  @override
+  String get supplierTripDetailNextStepDisputedTitle => 'Dispute in progress';
+
+  @override
+  String get supplierTripDetailNextStepDisputedMessage =>
+      'यह trip dispute review में है और support या operations resolution का इंतजार कर रही है।';
+
+  @override
+  String get supplierTripDetailNextStepDefaultTitle => 'Track execution';
+
+  @override
+  String get supplierTripDetailNextStepDefaultMessage =>
+      'इस supplier execution view से current trip status, timestamps और proof progress review करें।';
+
+  @override
+  String get supplierTripDetailDisputeStatusTitle => 'Dispute status';
+
+  @override
+  String get supplierTripDetailDisputeStateRaised =>
+      'Current state: Dispute raised';
+
+  @override
+  String supplierTripDetailDisputeCategorySummary(Object category) {
+    return 'Category: $category';
+  }
+
+  @override
+  String supplierTripDetailDisputeCategoryLabel(Object category) {
+    return '$category';
+  }
+
+  @override
+  String supplierTripDetailDisputeStatusLabel(Object status) {
+    return '$status';
+  }
+
+  @override
+  String supplierTripDetailDisputeCurrentStateLabel(Object status) {
+    return 'Current state: $status';
+  }
+
+  @override
+  String supplierTripDetailDisputeLastUpdatedLabel(Object date) {
+    return 'Last updated: $date';
+  }
+
+  @override
+  String get supplierTripDetailActionUnavailableTitle =>
+      'Supplier trip action unavailable';
+
+  @override
+  String get supplierTripDetailProofDocumentsTitle => 'Proof documents';
+
+  @override
+  String get supplierTripDetailPodPhotoTitle => 'POD photo';
+
+  @override
+  String get supplierTripDetailPreviewUnavailable => 'Unable to open preview';
+
+  @override
+  String get supplierTripDetailOpenPodPhotoAction => 'Open POD Photo';
+
+  @override
+  String get supplierTripDetailOpenLrDocumentAction => 'Open LR Document';
+
+  @override
+  String get supplierTripDetailActionsTitle => 'Actions';
+
+  @override
+  String get supplierTripDetailConfirmDeliveryAction => 'Confirm Delivery';
+
+  @override
+  String get supplierTripDetailConfirmDeliverySuccess =>
+      'Delivery confirmed. The trip is now completed.';
+
+  @override
+  String get supplierTripDetailDisputePodAction => 'Dispute POD';
+
+  @override
+  String supplierTripDetailReportSourceLabel(Object routeLabel) {
+    return 'Supplier trip • $routeLabel';
+  }
+
+  @override
+  String get supplierTripDetailRouteScheduleTitle => 'Route and schedule';
+
+  @override
+  String supplierTripDetailOriginLabel(Object origin) {
+    return 'Origin: $origin';
+  }
+
+  @override
+  String supplierTripDetailDestinationLabel(Object destination) {
+    return 'Destination: $destination';
+  }
+
+  @override
+  String supplierTripDetailDistanceLabel(Object distance) {
+    return 'Distance: $distance km';
+  }
+
+  @override
+  String supplierTripDetailDriveTimeLabel(int minutes) {
+    return 'Drive time: $minutes min';
+  }
+
+  @override
+  String supplierTripDetailPickupDateLabel(Object date) {
+    return 'Pickup date: $date';
+  }
+
+  @override
+  String supplierTripDetailAssignedLabel(Object dateTime) {
+    return 'Assigned: $dateTime';
+  }
+
+  @override
+  String supplierTripDetailDeliveredLabel(Object dateTime) {
+    return 'Delivered: $dateTime';
+  }
+
+  @override
+  String supplierTripDetailPodUploadedLabel(Object dateTime) {
+    return 'POD uploaded: $dateTime';
+  }
+
+  @override
+  String supplierTripDetailCompletedLabel(Object dateTime) {
+    return 'Completed: $dateTime';
+  }
+
+  @override
+  String get supplierTripDetailTruckerTruckTitle => 'Trucker and truck';
+
+  @override
+  String supplierTripDetailTruckerLabel(Object name) {
+    return 'Trucker: $name';
+  }
+
+  @override
+  String supplierTripDetailTruckNumberLabel(Object truckNumber) {
+    return 'Truck number: $truckNumber';
+  }
+
+  @override
+  String supplierTripDetailBodyTypeLabel(Object bodyType) {
+    return 'Body type: $bodyType';
+  }
+
+  @override
+  String supplierTripDetailTyresLabel(Object tyres) {
+    return 'Tyres: $tyres';
+  }
+
+  @override
+  String get supplierTripDetailPending => 'Pending';
+
+  @override
+  String get supplierTripDetailStageAssigned => 'Assigned';
+
+  @override
+  String get supplierTripDetailStagePickupPending => 'Pickup pending';
+
+  @override
+  String get supplierTripDetailStagePickedUp => 'Picked up';
+
+  @override
+  String get supplierTripDetailStageInTransit => 'In transit';
+
+  @override
+  String get supplierTripDetailStageDelivered => 'Delivered';
+
+  @override
+  String get supplierTripDetailStageProofSubmitted => 'Proof submitted';
+
+  @override
+  String get supplierTripDetailStageCompleted => 'Completed';
+
+  @override
+  String get supplierTripDetailStageDisputed => 'Disputed';
+
+  @override
+  String get supplierTripDetailStageCancelled => 'Cancelled';
+
+  @override
+  String get supplierTripDetailStageUnknown => 'Unknown';
+
+  @override
+  String get supplierTripDetailVerificationStatusVerified => 'Verified';
+
+  @override
+  String get supplierTripDetailVerificationStatusPending => 'Pending';
+
+  @override
+  String get supplierTripDetailVerificationStatusRejected => 'Rejected';
+
+  @override
+  String get supplierTripDetailVerificationStatusUnknown => 'Unknown';
+
+  @override
+  String get supplierTripDetailDisputeCategoryFallback => 'Trip dispute';
+
+  @override
+  String get supplierTripDetailDisputeStatusFallback => 'Open';
+
+  @override
+  String get supplierTripDetailDisputeStatusGuidanceOpen =>
+      'Support को यह dispute मिल चुकी है और review जल्द शुरू होनी चाहिए। अगर और proof context चाहिए हो तो related support replies साफ रखें।';
+
+  @override
+  String get supplierTripDetailDisputeStatusGuidanceInProgress =>
+      'Support या operations इस dispute को actively review कर रहे हैं। Visible updates या clarification requests के लिए related support ticket देखें।';
+
+  @override
+  String get supplierTripDetailDisputeStatusGuidanceWaitingForUser =>
+      'Support आपके clarification या additional context का इंतजार कर रही है। Review जारी रखने के लिए related support ticket पर reply करें।';
+
+  @override
+  String get supplierTripDetailDisputeStatusGuidanceResolved =>
+      'यह dispute final review state तक पहुंच चुकी है। कोई नया follow-up issue उठाने से पहले linked support ticket outcome देखें।';
+
+  @override
+  String get supplierTripDetailDisputeStatusGuidanceDefault =>
+      'Latest visible review updates के लिए related support ticket को follow करते रहें।';
+
+  @override
+  String get supplierTripDetailDisputeBannerWaitingTitle =>
+      'Dispute review waiting for your reply';
+
+  @override
+  String get supplierTripDetailDisputeBannerClosedTitle =>
+      'Dispute review closed';
+
+  @override
+  String get supplierTripDetailDisputeBannerInProgressTitle =>
+      'Dispute review in progress';
+
+  @override
+  String get supplierTripDetailDisputeBannerNoSummaryMessage =>
+      'इस trip पर dispute raise की गई है। Support और operations delivery context review कर रहे हैं, जबकि raw evidence access review के दौरान restricted रह सकती है।';
+
+  @override
+  String supplierTripDetailDisputeBannerWaitingMessage(Object category) {
+    return 'Category: $category. यह trip dispute आपके clarification या proof का इंतजार कर रही है, जबकि raw evidence access review के दौरान restricted रह सकती है।';
+  }
+
+  @override
+  String supplierTripDetailDisputeBannerClosedMessage(Object category) {
+    return 'Category: $category. यह trip dispute final review outcome तक पहुंच चुकी है। Recorded status updates visible रहती हैं, जबकि raw evidence access restricted रह सकती है।';
+  }
+
+  @override
+  String supplierTripDetailDisputeBannerInProgressMessage(
+    Object category,
+    Object status,
+  ) {
+    return 'Category: $category. Status: $status. Support और operations इस trip dispute को review कर रहे हैं, जबकि raw evidence access review के दौरान restricted रह सकती है।';
+  }
+
+  @override
+  String get supplierTripDetailSharedVisibilityClosed =>
+      'दोनों parties recorded dispute category, final workflow state और visible support replies को इस trip dispute पर अभी भी follow कर सकती हैं।';
+
+  @override
+  String get supplierTripDetailSharedVisibilityInProgress =>
+      'दोनों parties dispute category, workflow status और support replies को follow कर सकती हैं जो review के दौरान intentionally visible रखी गई हैं।';
+
+  @override
+  String get supplierTripDetailActionGuidanceClosed =>
+      'यह dispute final review state तक पहुंच चुकी है। किसी genuinely नए follow-up issue को खोलने से पहले linked support ticket पर recorded outcome देखें।';
+
+  @override
+  String get supplierTripDetailActionGuidanceInProgress =>
+      'जब तक यह dispute review में है, तब तक delivery-confirmation action उपलब्ध नहीं है। अगर support clarification या additional context मांगे तो linked support ticket follow करें।';
+
+  @override
+  String get supplierTripDetailProofGuidanceClosed =>
+      'अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई dispute context हो।';
+
+  @override
+  String get supplierTripDetailProofGuidanceInProgress =>
+      'अगर यह dispute current single-image flow से आगे additional documents पर निर्भर करती है, तो उन missing proofs को related support ticket replies में साफ summarize करें।';
+
+  @override
+  String get verificationTitle => 'Verification';
+
+  @override
+  String get verificationTitleSupplier => 'Supplier Verification';
+
+  @override
+  String get verificationTitleTrucker => 'Trucker Verification';
+
+  @override
+  String get verificationLoadFailureTitle =>
+      'Unable to load verification state';
+
+  @override
+  String get verificationLoadFailureMessage =>
+      'अभी आपका verification status load नहीं हो सका। Latest verification state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationDetailsUnavailableTitle =>
+      'Verification details unavailable';
+
+  @override
+  String get verificationDetailsUnavailableSubtitle =>
+      'हम इस account के लिए current verification record नहीं ढूंढ सके। कृपया थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationHeroPendingSupplierTitle =>
+      'Supplier verification under review';
+
+  @override
+  String get verificationHeroPendingTruckerTitle =>
+      'Trucker verification under review';
+
+  @override
+  String get verificationHeroVerifiedSupplierTitle =>
+      'Supplier verification complete';
+
+  @override
+  String get verificationHeroVerifiedTruckerTitle =>
+      'Trucker verification complete';
+
+  @override
+  String get verificationHeroRejectedSupplierTitle =>
+      'Resubmit supplier verification';
+
+  @override
+  String get verificationHeroRejectedTruckerTitle =>
+      'Resubmit trucker verification';
+
+  @override
+  String get verificationHeroInitialSupplierTitle =>
+      'Complete supplier trust setup';
+
+  @override
+  String get verificationHeroInitialTruckerTitle =>
+      'Complete trucker trust setup';
+
+  @override
+  String get verificationHeroPendingSubtitle =>
+      'आपका verification packet पहले से review में है। Approval complete होने पर हम आपको notify करेंगे।';
+
+  @override
+  String get verificationHeroVerifiedSubtitle =>
+      'आपका verification packet पहले से approved है। आप नीचे captured documents और readiness details review कर सकते हैं।';
+
+  @override
+  String get verificationHeroRejectedWithFeedbackSubtitle =>
+      'नीचे rejected document markers review करें, affected items replace करें, और ready होने पर resubmit करें।';
+
+  @override
+  String get verificationHeroRejectedFallbackSubtitle =>
+      'Rejection summary review करें, affected items replace करें, और ready होने पर पूरा packet resubmit करें।';
+
+  @override
+  String get verificationHeroInitialSupplierSubtitle =>
+      'Required business और identity documents upload करें, supplier verification location capture करें, और इस single verification surface से review के लिए submit करें।';
+
+  @override
+  String get verificationHeroInitialTruckerSubtitle =>
+      'Identity documents upload करें, truck readiness confirm करें, और इस single setup surface से full verification packet review के लिए submit करें।';
+
+  @override
+  String get verificationResubmitForReviewAction => 'Resubmit for review';
+
+  @override
+  String get verificationSubmitForReviewAction => 'Submit for review';
+
+  @override
+  String get verificationResubmittedSuccess =>
+      'Verification resubmitted for review';
+
+  @override
+  String get verificationSubmittedSuccess =>
+      'Verification submitted for review';
+
+  @override
+  String get verificationSubmitFailureMessage =>
+      'अभी यह verification packet submit नहीं हो सकी। Current checklist review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationWhatHappensNextTitle => 'What happens next';
+
+  @override
+  String get verificationWhatHappensNextMessage =>
+      'आपका verification packet review queue में है। जब तक हमारी team correction request के साथ case reject न करे, आपको कुछ भी resubmit करने की जरूरत नहीं है।';
+
+  @override
+  String get verificationTimelinePacketSubmittedTitle => 'Packet submitted';
+
+  @override
+  String get verificationTimelinePacketSubmittedTimestamp => 'Completed';
+
+  @override
+  String get verificationTimelinePacketSubmittedDescription =>
+      'आपके current documents और readiness data पहले से verification case से attached हैं।';
+
+  @override
+  String get verificationTimelineReviewInProgressTitle => 'Review in progress';
+
+  @override
+  String get verificationTimelineReviewInProgressTimestamp => 'Now';
+
+  @override
+  String get verificationTimelineReviewInProgressDescription =>
+      'हमारी operations team submitted identity, business और readiness evidence review कर रही है।';
+
+  @override
+  String get verificationTimelineNotifiedTitle => 'You will be notified';
+
+  @override
+  String get verificationTimelineNotifiedTimestamp => 'Next';
+
+  @override
+  String get verificationTimelineNotifiedDescription =>
+      'Review approve होने या correction के लिए वापस भेजे जाने पर हम आपका verification state यहीं update करेंगे।';
+
+  @override
+  String get verificationActionNeedsAttentionTitle =>
+      'Verification action needs attention';
+
+  @override
+  String get verificationActionFailureMessage =>
+      'Latest verification action अभी पूरी नहीं हो सकी। Current checklist review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationLatestRejectionReasonTitle =>
+      'Latest rejection reason';
+
+  @override
+  String get verificationNextStepTitle => 'Next step';
+
+  @override
+  String get verificationLocationTitle => 'Verification location';
+
+  @override
+  String get verificationLocationCapturedTitle => 'Location captured';
+
+  @override
+  String get verificationLocationRequiredTitle => 'Location still required';
+
+  @override
+  String get verificationLocationRequiredMessage =>
+      'Supplier verification के लिए submission से पहले city-level location capture जरूरी है।';
+
+  @override
+  String get verificationLocationCapturedStatus => 'captured';
+
+  @override
+  String get verificationLocationRequiredStatus => 'required';
+
+  @override
+  String get verificationLocationCapturedFooter =>
+      'Captured location supplier verification packet के साथ review के लिए attached रहती है।';
+
+  @override
+  String get verificationLocationCaptureGuidanceFooter =>
+      'हम GPS capture की कोशिश करते हैं और संभव होने पर nearest city-level location resolve करते हैं।';
+
+  @override
+  String get verificationRefreshLocationAction => 'Refresh location';
+
+  @override
+  String get verificationCaptureLocationAction => 'Location capture करें';
+
+  @override
+  String get verificationLocationCapturedSuccess =>
+      'Verification location captured';
+
+  @override
+  String get verificationLocationFailureMessage =>
+      'अभी verification location capture नहीं हो सकी। इसी verification screen से थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationManualLocationAction => 'Location manually जोड़ें';
+
+  @override
+  String get verificationManualLocationTitle =>
+      'Verification location manually जोड़ें';
+
+  @override
+  String get verificationManualLocationCityLabel => 'City';
+
+  @override
+  String get verificationManualLocationStateLabel => 'State (optional)';
+
+  @override
+  String get verificationManualLocationSaveAction => 'Location save करें';
+
+  @override
+  String get verificationDocTypeAadhaarFront => 'आधार सामने';
+
+  @override
+  String get verificationDocTypeAadhaarBack => 'आधार पीछे';
+
+  @override
+  String get verificationDocTypePan => 'PAN कार्ड';
+
+  @override
+  String get verificationDocTypeProfilePhoto => 'प्रोफ़ाइल फोटो';
+
+  @override
+  String get verificationDocTypeBusinessLicence => 'Business licence';
+
+  @override
+  String get verificationDocTypeGstCertificate => 'GST certificate';
+
+  @override
+  String get verificationDocumentChecklistTitle => 'Document checklist';
+
+  @override
+  String verificationDocumentUploadedSuccess(Object label) {
+    return '$label uploaded successfully';
+  }
+
+  @override
+  String get verificationDocumentUploadFailureMessage =>
+      'अभी वह verification document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get verificationReadinessSupplierTitle => 'Verification readiness';
+
+  @override
+  String get verificationReadinessTruckerTitle =>
+      'Verification and truck readiness';
+
+  @override
+  String get verificationCurrentStateTitle => 'Current verification state';
+
+  @override
+  String get verificationStatusVerified => 'Verified';
+
+  @override
+  String get verificationStatusPending => 'Pending';
+
+  @override
+  String get verificationStatusRejected => 'Rejected';
+
+  @override
+  String get verificationStatusUnverified => 'Unverified';
+
+  @override
+  String get verificationStatusUnknown => 'Unknown';
+
+  @override
+  String get verificationCurrentStateSupplierFooter =>
+      'Supplier verification load-posting readiness और trust visibility को एक authoritative state से aligned रखती है।';
+
+  @override
+  String get verificationCurrentStateTruckerFooter =>
+      'Trucker verification open loads पर chat और call unlock करती है जब identity documents और truck readiness complete हो जाते हैं।';
+
+  @override
+  String get verificationBusinessReadinessTitle => 'Business readiness';
+
+  @override
+  String get verificationTruckReadinessTitle => 'Truck readiness';
+
+  @override
+  String get verificationCompanyNameNeedsAttention =>
+      'Company name still needs attention';
+
+  @override
+  String approvedTruckCountLabel(Object count, Object s) {
+    return '$count approved truck$s';
+  }
+
+  @override
+  String get verificationCheckProfileStatus => 'check profile';
+
+  @override
+  String get verificationCapturedStatus => 'captured';
+
+  @override
+  String get verificationReadyStatus => 'ready';
+
+  @override
+  String get verificationActionNeededStatus => 'action needed';
+
+  @override
+  String get verificationBusinessReadinessFooter =>
+      'Supplier verification के लिए business licence जरूरी है। GST certificate optional रहता है।';
+
+  @override
+  String get verificationTruckReadyFooter =>
+      'Verification-dependent workflows के लिए आपके पास पहले से कम-से-कम एक approved truck उपलब्ध है।';
+
+  @override
+  String get verificationTruckRequiredFooter =>
+      'Trucker verification submit करने से पहले कम-से-कम एक approved truck अभी भी जरूरी है।';
+
+  @override
+  String get verificationPacketDetailsSectionTitle =>
+      'Verification packet विवरण';
+
+  @override
+  String get verificationIdentityPacketSectionTitle => 'पहचान packet विवरण';
+
+  @override
+  String verificationReadyTruckCountLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'trucks',
+      one: 'truck',
+    );
+    return '$count तैयार $_temp0';
+  }
+
+  @override
+  String get verificationTruckReadyWithRcFooter =>
+      'आपके पास पहले से कम-से-कम एक पूरा truck packet RC document के साथ मौजूद है।';
+
+  @override
+  String get verificationTruckRequiredWithRcFooter =>
+      'Trucker verification submit करने से पहले एक truck और उसका RC document जोड़ें।';
+
+  @override
+  String get verificationTruckPacketStillRequiredTitle =>
+      'Truck packet अभी भी जरूरी है';
+
+  @override
+  String get verificationTruckPacketStillRequiredMessage =>
+      'पहला truck जोड़ने या RC document upload करने के लिए fleet खोलें ताकि trucker verification एक ही packet के रूप में submit हो सके।';
+
+  @override
+  String get verificationTruckPacketRequiredBadge => 'Truck packet जरूरी';
+
+  @override
+  String get verificationTruckApprovalRequiredTitle =>
+      'Truck approval is still required';
+
+  @override
+  String get verificationTruckApprovalRequiredMessage =>
+      'अपना पहला truck जोड़ने, rejection guidance review करने, या edited truck details approval के लिए resubmit करने के लिए fleet खोलें।';
+
+  @override
+  String get verificationOpenFleetAction => 'Open fleet';
+
+  @override
+  String get verificationUnlocksTitle => 'What this unlocks';
+
+  @override
+  String get verificationUnlocksSupplierMessage =>
+      'Verified होने के बाद आपका supplier account broader marketplace और account workflows के लिए trust-ready हो जाता है।';
+
+  @override
+  String get verificationUnlocksTruckerMessage =>
+      'Verified होने के बाद open loads पर chat और call unlocked रहते हैं और आपका trucker account assignment-ready हो जाता है।';
+
+  @override
+  String get verificationSourceOfTruthBadge => 'Verification source of truth';
+
+  @override
+  String get verificationChatAndCallGatingBadge => 'Chat and call gating';
+
+  @override
+  String get verificationApprovedTruckRequiredBadge =>
+      'Approved truck required';
+
+  @override
+  String get verificationBackToAccountAction => 'Back to account';
+
+  @override
+  String verificationUploadSourceTitle(Object documentLabel) {
+    return 'Upload $documentLabel';
+  }
+
+  @override
+  String get verificationTakePhotoAction => 'Take photo';
+
+  @override
+  String get verificationChooseFromGalleryAction => 'Choose from gallery';
+
+  @override
+  String verificationRejectionSummaryWithMarkers(Object summary) {
+    return '$summary\n\nRejected documents नीचे document-specific correction notes के साथ marked हैं।';
+  }
+
+  @override
+  String verificationRejectionSummaryPacketLevel(Object summary) {
+    return '$summary\n\nजब document-specific review markers उपलब्ध नहीं होते, तब current review feedback एक packet-level reason के रूप में लौटती है।';
+  }
+
+  @override
+  String get verificationPendingBannerTitle => 'Verification pending';
+
+  @override
+  String get verificationPendingBannerDescription =>
+      'आपका verification packet पहले से review में है। Review pending रहने तक आप browsing जारी रख सकते हैं।';
+
+  @override
+  String get verificationCompleteBannerTitle => 'Verification complete';
+
+  @override
+  String get verificationCompleteBannerDescription =>
+      'आपका account पहले से verified है। आप नीचे uploaded document checklist फिर भी review कर सकते हैं।';
+
+  @override
+  String get verificationNeedsAttentionBannerTitle =>
+      'Verification needs attention';
+
+  @override
+  String get verificationNeedsAttentionBannerDescription =>
+      'Rejection summary review करें, affected documents replace करें, और ready होने पर packet resubmit करें।';
+
+  @override
+  String get verificationNotSubmittedTitle => 'Verification not submitted yet';
+
+  @override
+  String get verificationNotSubmittedSupplierMessage =>
+      'Supplier verification submit करने से पहले Aadhaar, PAN, profile photo और business licence upload करें।';
+
+  @override
+  String get verificationNotSubmittedTruckerMessage =>
+      'Trucker verification submit करने से पहले Aadhaar, PAN, profile photo upload करें और सुनिश्चित करें कि कम-से-कम एक approved truck मौजूद हो।';
+
+  @override
+  String verificationRequiredUploadedLabel(Object required, Object uploaded) {
+    return '$uploaded/$required required uploaded';
+  }
+
+  @override
+  String get verificationPrerequisitesSatisfiedMessage =>
+      'Submission के लिए current client-side verification prerequisites पूरी हो चुकी हैं।';
+
+  @override
+  String get verificationDocumentStatusPending => 'pending';
+
+  @override
+  String get verificationDocumentStatusVerified => 'verified';
+
+  @override
+  String get verificationDocumentStatusRejected => 'rejected';
+
+  @override
+  String get verificationDocumentStatusUploaded => 'uploaded';
+
+  @override
+  String get verificationDocumentStatusRequired => 'required';
+
+  @override
+  String get verificationDocumentStatusOptional => 'optional';
+
+  @override
+  String get verificationDocumentCorrectionFallback =>
+      'Verification resubmit होने से पहले इस document में correction जरूरी है।';
+
+  @override
+  String get verificationDocumentUploadedSubtitle =>
+      'Document upload हो चुकी है और आपकी verification record से linked है।';
+
+  @override
+  String get verificationDocumentRequiredSubtitle =>
+      'Verification submit होने से पहले यह required है।';
+
+  @override
+  String get verificationDocumentOptionalSubtitle =>
+      'Current verification packet के लिए optional है।';
+
+  @override
+  String verificationReviewNoteLabel(Object reason) {
+    return 'Review note: $reason';
+  }
+
+  @override
+  String verificationStoredPathLabel(Object path) {
+    return 'Stored path: $path';
+  }
+
+  @override
+  String get verificationDocumentMissingMessage =>
+      'यह document current packet में अभी भी missing है।';
+
+  @override
+  String get verificationReplaceDocumentAction => 'Replace document';
+
+  @override
+  String get verificationUploadDocumentAction => 'Upload document';
+
+  @override
+  String get truckerTripDetailTitle => 'Trip Detail';
+
+  @override
+  String get truckerTripDetailLoadFailureTitle => 'Unable to load trip detail';
+
+  @override
+  String get truckerTripDetailLoadFailureMessage =>
+      'अभी यह trip detail load नहीं हो सकी। Latest trip status और actions refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailRatingFailureMessage =>
+      'आपकी trip rating state अभी उपलब्ध नहीं है। Rating submit करने से पहले थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailRatingSubmitFailureMessage =>
+      'अभी आपकी rating submit नहीं हो सकी। Rating review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailActionFailureMessage =>
+      'Latest trip action अभी पूरी नहीं हो सकी। Trip detail refresh होने के बाद थोड़ी देर में फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailActionSubmitFailureMessage =>
+      'अभी वह trip action पूरी नहीं हो सकी। Latest trip status जांचकर थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailLrUploadFailureMessage =>
+      'अभी LR proof upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailPodUploadFailureMessage =>
+      'अभी POD proof upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerTripDetailRatingSectionTitle => 'Rate this trip';
+
+  @override
+  String get truckerTripDetailRatingAlreadySubmitted =>
+      'You already rated this trip.';
+
+  @override
+  String truckerTripDetailRatingSubmittedOn(Object date) {
+    return 'Submitted on $date';
+  }
+
+  @override
+  String get truckerTripDetailRatingPrompt =>
+      'Delivery complete हो चुकी है। इस trip के लिए supplier को rate करें।';
+
+  @override
+  String get truckerTripDetailCommentLabel => 'Comment (optional)';
+
+  @override
+  String get truckerTripDetailCommentHint =>
+      'Trip outcome के बारे में useful feedback साझा करें';
+
+  @override
+  String get truckerTripDetailRatingUnavailableTitle => 'Rating unavailable';
+
+  @override
+  String get truckerTripDetailSubmitRatingAction => 'Submit Rating';
+
+  @override
+  String get truckerTripDetailRatingSubmittedSuccess =>
+      'Rating submitted successfully.';
+
+  @override
+  String truckerTripDetailRatingStarTooltip(Object count, Object s) {
+    return '$count star$s';
+  }
+
+  @override
+  String get truckerTripDetailAutoCompleteDueNow => 'Auto-complete is due now.';
+
+  @override
+  String truckerTripDetailAutoCompleteDuration(Object hours, Object minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
+  String truckerTripDetailAutoCompleteIn(Object duration) {
+    return 'Auto-complete in: $duration';
+  }
+
+  @override
+  String get truckerTripDetailVerificationStatusVerified => 'Verified';
+
+  @override
+  String get truckerTripDetailVerificationStatusPending => 'Pending';
+
+  @override
+  String get truckerTripDetailVerificationStatusRejected => 'Rejected';
+
+  @override
+  String get truckerTripDetailVerificationStatusUnknown => 'Unknown';
+
+  @override
+  String get truckerTripDetailStageAssigned => 'Assigned';
+
+  @override
+  String get truckerTripDetailStagePickupPending => 'Pickup pending';
+
+  @override
+  String get truckerTripDetailStagePickedUp => 'Picked up';
+
+  @override
+  String get truckerTripDetailStageInTransit => 'In transit';
+
+  @override
+  String get truckerTripDetailStageDelivered => 'Delivered';
+
+  @override
+  String get truckerTripDetailStageProofSubmitted => 'Proof submitted';
+
+  @override
+  String get truckerTripDetailStageCompleted => 'Completed';
+
+  @override
+  String get truckerTripDetailStageDisputed => 'Disputed';
+
+  @override
+  String get truckerTripDetailStageCancelled => 'Cancelled';
+
+  @override
+  String get truckerTripDetailProofStatusPodUploaded => 'POD uploaded';
+
+  @override
+  String get truckerTripDetailProofStatusLrUploaded => 'LR uploaded';
+
+  @override
+  String get truckerTripDetailProofStatusAwaitingPod => 'Awaiting POD';
+
+  @override
+  String get truckerTripDetailProofStatusProofSubmitted => 'Proof submitted';
+
+  @override
+  String get truckerTripDetailProofStatusProofPending => 'Proof pending';
+
+  @override
+  String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
+    return 'Trip $tripId • Truck $truckNumber';
+  }
+
+  @override
+  String truckerTripDetailMaterialPickupSummary(
+    Object material,
+    Object pickupDate,
+  ) {
+    return '$material • Pickup $pickupDate';
+  }
+
+  @override
+  String get truckerTripDetailNextStepTitle => 'Next step';
+
+  @override
+  String get truckerTripDetailActionUnavailableTitle =>
+      'Trip action unavailable';
+
+  @override
+  String get truckerTripDetailActionsTitle => 'Actions';
+
+  @override
+  String get truckerTripDetailReplaceLrUploadAction => 'Replace LR Upload';
+
+  @override
+  String get truckerTripDetailUploadLrOptionalAction => 'Upload LR (Optional)';
+
+  @override
+  String get truckerTripDetailUploadLrImageTitle => 'Upload LR image';
+
+  @override
+  String get truckerTripDetailLrUploadedSuccess => 'LR uploaded successfully.';
+
+  @override
+  String get truckerTripDetailUploadPodPhotoAction => 'Upload POD Photo';
+
+  @override
+  String get truckerTripDetailUploadPodPhotoTitle => 'Upload POD photo';
+
+  @override
+  String get truckerTripDetailPodUploadedSuccess =>
+      'POD uploaded successfully. Supplier confirmation is now pending.';
+
+  @override
+  String get truckerTripDetailCallSupplierAction => 'Call Supplier';
+
+  @override
+  String get truckerTripDetailOpenInGoogleMapsAction => 'Open in Google Maps';
+
+  @override
+  String truckerTripDetailReportSourceLabel(
+    Object destinationLabel,
+    Object originLabel,
+  ) {
+    return 'Trucker trip • $originLabel → $destinationLabel';
+  }
+
+  @override
+  String get truckerTripDetailReviewCountdownTitle =>
+      'Delivery review countdown';
+
+  @override
+  String get truckerTripDetailReviewCountdownMessage =>
+      'Supplier confirmation pending है। अगर कोई action नहीं ली जाती, तो POD upload के 48 घंटे बाद यह trip auto-complete हो जाती है।';
+
+  @override
+  String get truckerTripDetailDisputeStatusTitle => 'Dispute status';
+
+  @override
+  String get truckerTripDetailDisputeStateRaised =>
+      'Current state: Dispute raised';
+
+  @override
+  String truckerTripDetailDisputeCurrentStateLabel(Object status) {
+    return 'Current state: $status';
+  }
+
+  @override
+  String truckerTripDetailDisputeCategoryLabel(Object category) {
+    return '$category';
+  }
+
+  @override
+  String truckerTripDetailDisputeLastUpdatedLabel(Object date) {
+    return 'Last updated: $date';
+  }
+
+  @override
+  String get truckerTripDetailDisputeStatusGuidanceOpen =>
+      'Support को यह dispute मिल चुकी है और review जल्द शुरू होनी चाहिए। अगर और proof context चाहिए हो तो related support replies साफ रखें।';
+
+  @override
+  String get truckerTripDetailDisputeStatusGuidanceInProgress =>
+      'Support या operations इस dispute को actively review कर रहे हैं। Visible updates या clarification requests के लिए related support ticket देखें।';
+
+  @override
+  String get truckerTripDetailDisputeStatusGuidanceWaitingForUser =>
+      'Support आपके clarification या additional context का इंतजार कर रही है। Review जारी रखने के लिए related support ticket पर reply करें।';
+
+  @override
+  String get truckerTripDetailDisputeStatusGuidanceResolved =>
+      'यह dispute final review state तक पहुंच चुकी है। कोई नया follow-up issue उठाने से पहले linked support ticket outcome देखें।';
+
+  @override
+  String get truckerTripDetailDisputeStatusGuidanceDefault =>
+      'Latest visible review updates के लिए related support ticket को follow करते रहें।';
+
+  @override
+  String get truckerTripDetailDisputeBannerWaitingTitle =>
+      'Dispute waiting for your reply';
+
+  @override
+  String get truckerTripDetailDisputeBannerClosedTitle =>
+      'Dispute review closed';
+
+  @override
+  String get truckerTripDetailDisputeBannerInProgressTitle =>
+      'Dispute in progress';
+
+  @override
+  String get truckerTripDetailDisputeBannerNoSummaryMessage =>
+      'इस trip पर dispute raise की गई है। Submitted proof और delivery context को support या operations review कर रहे हैं। दोनों sides dispute status देख सकती हैं, लेकिन sensitive evidence review के दौरान restricted रह सकती है।';
+
+  @override
+  String truckerTripDetailDisputeBannerWaitingMessage(Object category) {
+    return 'इस trip पर $category के तहत dispute raise की गई है और यह आपके clarification या proof का इंतजार कर रही है। Sensitive evidence review के दौरान restricted रह सकती है।';
+  }
+
+  @override
+  String truckerTripDetailDisputeBannerClosedMessage(Object category) {
+    return 'इस trip पर $category के तहत raise की गई dispute final review outcome तक पहुंच चुकी है। Recorded status updates visible रहती हैं, जबकि sensitive evidence restricted रह सकती है।';
+  }
+
+  @override
+  String truckerTripDetailDisputeBannerInProgressMessage(Object category) {
+    return 'इस trip पर $category के तहत dispute raise की गई है। Delivery context को support या operations review कर रहे हैं, और sensitive evidence review के दौरान restricted रह सकती है।';
+  }
+
+  @override
+  String get truckerTripDetailDisputeActionGuidanceClosed =>
+      'यह dispute final review state तक पहुंच चुकी है। Recorded outcome के लिए इस trip detail को रखें और genuinely नई issue दिखे तभी fresh follow-up शुरू करें।';
+
+  @override
+  String get truckerTripDetailDisputeActionGuidanceInProgress =>
+      'जब तक dispute resolve नहीं होती, तब तक कोई further trip-stage action उपलब्ध नहीं है। Status updates के लिए इस trip detail को रखें और support निर्देश दे तो उन्हें follow करें।';
+
+  @override
+  String get truckerTripDetailSharedVisibilityClosed =>
+      'दोनों parties recorded dispute category, final workflow state और visible support replies को इस trip dispute पर अभी भी follow कर सकती हैं।';
+
+  @override
+  String get truckerTripDetailSharedVisibilityInProgress =>
+      'दोनों parties dispute category, workflow status और support replies को follow कर सकती हैं जो review के दौरान intentionally visible रखी गई हैं।';
+
+  @override
+  String get truckerTripDetailProofGuidanceClosed =>
+      'अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई dispute context हो।';
+
+  @override
+  String get truckerTripDetailProofGuidanceInProgress =>
+      'अगर additional supporting proofs current single-image flow में attached नहीं हैं, तो related support replies साफ रखें ताकि support और operations समझ सकें कि और क्या review करना है।';
+
+  @override
+  String get truckerTripDetailCancelledTitle => 'Trip cancelled';
+
+  @override
+  String get truckerTripDetailCancelledMessage =>
+      'यह trip completion से पहले cancel हो गई थी। कोई further execution action उपलब्ध नहीं है, और यह detail अब cancelled movement का record है।';
+
+  @override
+  String get truckerTripDetailCancellationSummaryTitle =>
+      'Cancellation summary';
+
+  @override
+  String get truckerTripDetailCancellationCurrentState =>
+      'Current state: cancelled';
+
+  @override
+  String truckerTripDetailRouteLabel(Object route) {
+    return 'Route: $route';
+  }
+
+  @override
+  String truckerTripDetailMaterialLabel(Object material) {
+    return 'Material: $material';
+  }
+
+  @override
+  String truckerTripDetailAssignedOnLabel(Object dateTime) {
+    return 'Assigned on: $dateTime';
+  }
+
+  @override
+  String get truckerTripDetailCancellationFollowupMessage =>
+      'अगर support या operations follow-up instructions साझा करें, तो context के लिए इस trip reference और existing trip timeline का इस्तेमाल करें।';
+
+  @override
+  String get truckerTripDetailTripSummaryTitle => 'Trip summary';
+
+  @override
+  String get truckerTripDetailTripSummaryMessage =>
+      'यह trip complete हो चुकी है और execution workflow से close out हो गई है।';
+
+  @override
+  String truckerTripDetailCompletedOnLabel(Object dateTime) {
+    return 'Completed on: $dateTime';
+  }
+
+  @override
+  String get truckerTripDetailRouteScheduleTitle => 'Route and schedule';
+
+  @override
+  String truckerTripDetailOriginLabel(Object origin) {
+    return 'Origin: $origin';
+  }
+
+  @override
+  String truckerTripDetailDestinationLabel(Object destination) {
+    return 'Destination: $destination';
+  }
+
+  @override
+  String truckerTripDetailDistanceLabel(Object distance) {
+    return 'Distance: $distance km';
+  }
+
+  @override
+  String truckerTripDetailDriveTimeLabel(Object minutes) {
+    return 'Drive time: $minutes min';
+  }
+
+  @override
+  String truckerTripDetailAssignedLabel(Object dateTime) {
+    return 'Assigned: $dateTime';
+  }
+
+  @override
+  String truckerTripDetailStartedLabel(Object dateTime) {
+    return 'Started: $dateTime';
+  }
+
+  @override
+  String truckerTripDetailDeliveredLabel(Object dateTime) {
+    return 'Delivered: $dateTime';
+  }
+
+  @override
+  String truckerTripDetailPodUploadedLabel(Object dateTime) {
+    return 'POD uploaded: $dateTime';
+  }
+
+  @override
+  String truckerTripDetailCompletedLabel(Object dateTime) {
+    return 'Completed: $dateTime';
+  }
+
+  @override
+  String get truckerTripDetailTruckSupplierTitle => 'Truck and supplier';
+
+  @override
+  String truckerTripDetailTruckNumberLabel(Object truckNumber) {
+    return 'Truck number: $truckNumber';
+  }
+
+  @override
+  String truckerTripDetailBodyTypeLabel(Object bodyType) {
+    return 'Body type: $bodyType';
+  }
+
+  @override
+  String truckerTripDetailTyresLabel(Object tyres) {
+    return 'Tyres: $tyres';
+  }
+
+  @override
+  String truckerTripDetailSupplierLabel(Object name) {
+    return 'Supplier: $name';
+  }
+
+  @override
+  String truckerTripDetailCompanyLabel(Object companyName) {
+    return 'Company: $companyName';
+  }
+
+  @override
+  String truckerTripDetailMobileLabel(Object mobile) {
+    return 'Mobile: $mobile';
+  }
+
+  @override
+  String get truckerTripDetailTakePhotoAction => 'Take photo';
+
+  @override
+  String get truckerTripDetailChooseFromGalleryAction => 'Choose from gallery';
+
+  @override
+  String get truckerTripDetailHeadToPickupAction => 'Head to pickup';
+
+  @override
+  String get truckerTripDetailHeadToPickupSuccess =>
+      'Pickup movement शुरू हो गई है। Supplier अब देख सकती है कि आप pickup की ओर जा रहे हैं।';
+
+  @override
+  String get truckerTripDetailCargoLoadedAction => 'Cargo Loaded';
+
+  @override
+  String get truckerTripDetailCargoLoadedSuccess =>
+      'इस trip के लिए cargo loading confirm हो गई है।';
+
+  @override
+  String get truckerTripDetailStartTripAction => 'Start Trip';
+
+  @override
+  String get truckerTripDetailStartTripSuccess =>
+      'Trip successfully शुरू हो गई है। यह load अब in transit है।';
+
+  @override
+  String get truckerTripDetailMarkDeliveredAction => 'Mark Delivered';
+
+  @override
+  String get truckerTripDetailMarkDeliveredSuccess =>
+      'Delivery record हो गई है। Proof flow complete करने के लिए अगले step में POD upload करें।';
+
+  @override
+  String get truckerTripDetailNextStepAssignedTitle => 'Head to pickup';
+
+  @override
+  String get truckerTripDetailNextStepAssignedMessage =>
+      'यह trip assigned है और pickup movement शुरू होने का इंतजार कर रही है।';
+
+  @override
+  String get truckerTripDetailNextStepPickupPendingTitle => 'Confirm loading';
+
+  @override
+  String get truckerTripDetailNextStepPickupPendingMessage =>
+      'Trip pickup पर है और cargo loading confirmation का इंतजार कर रही है।';
+
+  @override
+  String get truckerTripDetailNextStepPickedUpTitle => 'Start the trip';
+
+  @override
+  String get truckerTripDetailNextStepPickedUpMessage =>
+      'Cargo load हो चुकी है और अगला operational milestone transit में जाना है।';
+
+  @override
+  String get truckerTripDetailNextStepInTransitTitle => 'Reach destination';
+
+  @override
+  String get truckerTripDetailNextStepInTransitMessage =>
+      'Trip in transit है और अगला milestone delivery confirmation है।';
+
+  @override
+  String get truckerTripDetailNextStepDeliveredTitle => 'Upload POD';
+
+  @override
+  String get truckerTripDetailNextStepDeliveredMessage =>
+      'Delivery record हो चुकी है और proof of delivery अगला required step है।';
+
+  @override
+  String get truckerTripDetailNextStepProofSubmittedTitle =>
+      'Await supplier confirmation';
+
+  @override
+  String get truckerTripDetailNextStepProofSubmittedMessage =>
+      'Proof submit हो चुकी है और trip supplier review या auto-completion का इंतजार कर रही है।';
+
+  @override
+  String get truckerTripDetailNextStepCompletedTitle => 'Trip completed';
+
+  @override
+  String get truckerTripDetailNextStepCompletedMessage =>
+      'Execution close हो चुकी है और यह trip अब historical record है।';
+
+  @override
+  String get truckerTripDetailNextStepDisputedTitle => 'Dispute in progress';
+
+  @override
+  String get truckerTripDetailNextStepDisputedMessage =>
+      'इस trip पर dispute active है और closure से पहले operational review जरूरी है।';
+
+  @override
+  String get truckerTripDetailNextStepCancelledTitle => 'Trip cancelled';
+
+  @override
+  String get truckerTripDetailNextStepCancelledMessage =>
+      'यह trip normal completion से पहले cancel हो गई थी और अब कोई further execution steps नहीं बचीं।';
+
+  @override
+  String get truckerTripDetailNextStepDefaultTitle => 'Check execution status';
+
+  @override
+  String get truckerTripDetailNextStepDefaultMessage =>
+      'Latest movement समझने के लिए current trip state और recent timestamps review करें।';
+
+  @override
+  String get truckerTripDetailPending => 'Pending';
+
+  @override
+  String get supplierRaiseDisputeTitle => 'Raise Dispute';
+
+  @override
+  String get supplierRaiseDisputeTripUnavailableTitle =>
+      'Trip detail unavailable';
+
+  @override
+  String get supplierRaiseDisputeTripLoadFailureMessage =>
+      'अभी यह trip detail load नहीं हो सकी। Latest dispute context review करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierRaiseDisputeHeroTitle => 'Dispute delivery proof';
+
+  @override
+  String get supplierRaiseDisputeHeroSubtitle =>
+      'Submitted POD में क्या गलत है यह समझाएँ, ताकि current trip के खिलाफ dispute खोली जा सके और support review में भेजी जा सके।';
+
+  @override
+  String supplierRaiseDisputeTripBadge(Object tripId) {
+    return 'Trip $tripId';
+  }
+
+  @override
+  String supplierRaiseDisputeHeroSummary(Object material, Object routeLabel) {
+    return '$routeLabel • $material';
+  }
+
+  @override
+  String get supplierRaiseDisputeHeroGuidance =>
+      'जो issue सबसे सही बैठती हो वह dispute category चुनें, written explanation जोड़ें, और जरूरत हो तो support review के लिए एक supporting evidence image attach करें।';
+
+  @override
+  String get supplierRaiseDisputePartialContextUnavailableTitle =>
+      'Some trip detail context is unavailable';
+
+  @override
+  String get supplierRaiseDisputeTripContextFailureMessage =>
+      'कुछ dispute context अभी उपलब्ध नहीं है। Latest trip detail और proof review state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierRaiseDisputeSummaryTitle => 'Dispute summary';
+
+  @override
+  String supplierRaiseDisputeTripRouteLabel(Object routeLabel) {
+    return 'Trip route: $routeLabel';
+  }
+
+  @override
+  String supplierRaiseDisputeTruckLabel(Object truckNumber) {
+    return 'Truck: $truckNumber';
+  }
+
+  @override
+  String supplierRaiseDisputeTruckerLabel(Object truckerName) {
+    return 'Trucker: $truckerName';
+  }
+
+  @override
+  String supplierRaiseDisputeCurrentStageLabel(Object stageLabel) {
+    return 'Current stage: $stageLabel';
+  }
+
+  @override
+  String get supplierRaiseDisputeSubmissionBlockedTitle =>
+      'Dispute submission blocked';
+
+  @override
+  String get supplierRaiseDisputeSubmissionBlockedMessage =>
+      'आप यह POD dispute तभी raise कर सकते हैं जब trip proof submitted state में हो।';
+
+  @override
+  String get supplierRaiseDisputeSubmissionUnavailableTitle =>
+      'Dispute submission unavailable';
+
+  @override
+  String get supplierRaiseDisputeSubmitFailureMessage =>
+      'अभी यह dispute submit नहीं हो सकी। Dispute details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierRaiseDisputeProblemTitle => 'What is wrong with the POD?';
+
+  @override
+  String get supplierRaiseDisputeCategoryLabel => 'Dispute category';
+
+  @override
+  String get supplierRaiseDisputeReasonLabel => 'Dispute reason';
+
+  @override
+  String get supplierRaiseDisputeReasonHint =>
+      'बताएँ कि submitted proof में क्या गलत है और support को क्या review करना चाहिए।';
+
+  @override
+  String get supplierRaiseDisputeHelpfulDetailsTitle =>
+      'Helpful details to include';
+
+  @override
+  String get supplierRaiseDisputeHelpfulDetailsMessage =>
+      'Current dispute flow अभी भी एक optional image स्वीकार करती है। इन prompts का उपयोग करके अपने written explanation में दूसरी या तीसरी proof capture करें।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceOptionalTitle => 'Evidence (optional)';
+
+  @override
+  String get supplierRaiseDisputeNoEvidenceAttached =>
+      'अभी कोई evidence image attached नहीं है। Current flow में आप एक supporting image attach कर सकते हैं।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceAttached =>
+      'Review के लिए एक supporting evidence image attached है।';
+
+  @override
+  String get supplierRaiseDisputeVisibleToOtherPartyMessage =>
+      'दूसरी party को visible: सिर्फ dispute category और status. Raw evidence review के दौरान restricted रह सकती है।';
+
+  @override
+  String get supplierRaiseDisputeUseCameraAction => 'Use camera';
+
+  @override
+  String get supplierRaiseDisputeChoosePhotoAction => 'Choose photo';
+
+  @override
+  String get supplierRaiseDisputeRemoveEvidenceAction => 'Remove evidence';
+
+  @override
+  String get supplierRaiseDisputeSubmitAction => 'Submit dispute';
+
+  @override
+  String get supplierRaiseDisputeCategoryError =>
+      'Select a valid dispute category';
+
+  @override
+  String get supplierRaiseDisputeReasonError =>
+      'Explain the POD problem in at least 10 characters';
+
+  @override
+  String get supplierRaiseDisputeSubmittedSuccess =>
+      'Dispute submitted. Support ticket created for review.';
+
+  @override
+  String get supplierRaiseDisputeAttachmentAttachedSuccess =>
+      'Evidence attached successfully';
+
+  @override
+  String get supplierRaiseDisputeAttachmentFailureMessage =>
+      'अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch =>
+      'Recommended evidence: loaded bilty या loading proof जो dispatched quantity दिखाए। अभी सिर्फ एक image attach की जा सकती है।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceUnloadedQuantityMismatch =>
+      'Recommended evidence: unloaded bilty, weighbridge slip, या unloading proof जो received quantity दिखाए। अभी सिर्फ एक image attach की जा सकती है।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceDocumentMismatch =>
+      'Recommended evidence: सबसे clear POD, bilty, या related proof image जो document mismatch दिखाए। अभी सिर्फ एक image attach की जा सकती है।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceNonPayment =>
+      'Recommended evidence: एक proof image जो non-payment claim को सबसे अच्छे से support करे। Full payment workflow evidence अभी current flow में limited है।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceFakePayoutProof =>
+      'Recommended evidence: एक payout-proof image जो fake या inconsistent payment claim को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceDelayOrNoShow =>
+      'Recommended evidence: एक supporting image या screenshot जो delay या no-show context को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceDamageOrShortage =>
+      'Recommended evidence: एक image जो delivery पर damage, shortage, या affected goods को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceAbusiveBehavior =>
+      'Recommended evidence: एक supporting image या screenshot, अगर वह abusive-behavior claim के लिए safe और relevant हो।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceSpamOrScam =>
+      'Recommended evidence: एक screenshot या proof image जो spam या scam report को सबसे अच्छे से support करे।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceOther =>
+      'Dispute की clear explanation दें और जरूरत हो तो सबसे relevant supporting image attach करें।';
+
+  @override
+  String get supplierRaiseDisputeEvidenceGuidanceFallback =>
+      'इस dispute category के लिए उपलब्ध सबसे relevant supporting image attach करें।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidanceDocumentCategory =>
+      'सबसे clear single document image चुनें जहाँ quantities, signatures, stamps, या POD details एक frame में readable हों।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidancePaymentCategory =>
+      'वह single screenshot या payout-proof image चुनें जो mismatch, missing payment, या fake confirmation को सबसे साफ दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidanceTimelineCategory =>
+      'वह single screenshot या photo चुनें जो strongest timeline या behavior context एक image में दे।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidanceDamageCategory =>
+      'वह single image चुनें जो handover के समय damaged goods, shortage, या delivered condition को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidanceOther =>
+      'वह एक image चुनें जो आपके written reason में बताए गए issue की strongest proof support को दे।';
+
+  @override
+  String get supplierRaiseDisputeBestImageGuidanceFallback =>
+      'वह एक सबसे clear image चुनें जो support को पहले review करने के लिए strongest proof दे।';
+
+  @override
+  String get supplierRaiseDisputePromptDispatchQuantityShownOnProof =>
+      'Dispatch quantity shown on proof:';
+
+  @override
+  String get supplierRaiseDisputePromptQuantityActuallyChallenged =>
+      'Quantity actually challenged:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherLoadingProofNotAttached =>
+      'Other loading proof not attached but reviewed by support:';
+
+  @override
+  String get supplierRaiseDisputePromptQuantityReceivedAtUnloading =>
+      'Quantity received at unloading:';
+
+  @override
+  String get supplierRaiseDisputePromptQuantityExpectedFromDispatchProof =>
+      'Quantity expected from dispatch proof:';
+
+  @override
+  String get supplierRaiseDisputePromptExtraUnloadProofNotAttached =>
+      'Extra unload proof not attached but available:';
+
+  @override
+  String get supplierRaiseDisputePromptDocumentFieldDoesNotMatch =>
+      'Document field that does not match:';
+
+  @override
+  String get supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe =>
+      'Correct trip or POD detail should be:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherRelatedDocumentNotAttached =>
+      'Other related document not attached but relevant:';
+
+  @override
+  String get supplierRaiseDisputePromptAmountStillUnpaid =>
+      'Amount still unpaid:';
+
+  @override
+  String get supplierRaiseDisputePromptPaymentDueDateOrMilestone =>
+      'Payment due date or milestone:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherPaymentProofNotAttached =>
+      'Other payment proof not attached but relevant:';
+
+  @override
+  String get supplierRaiseDisputePromptWhyPayoutProofLooksFake =>
+      'Why the payout proof looks fake or inconsistent:';
+
+  @override
+  String get supplierRaiseDisputePromptWhatPaymentStatusShouldBe =>
+      'What payment status should be instead:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherProofOrChatContextNotAttached =>
+      'Other proof or chat context not attached:';
+
+  @override
+  String get supplierRaiseDisputePromptExpectedReportingOrArrivalTime =>
+      'Expected reporting or arrival time:';
+
+  @override
+  String get supplierRaiseDisputePromptActualDelayOrNoShowOutcome =>
+      'Actual delay or no-show outcome:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherTimingProofNotAttached =>
+      'Other timing proof not attached but relevant:';
+
+  @override
+  String get supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage =>
+      'Goods affected by damage or shortage:';
+
+  @override
+  String get supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed =>
+      'Quantity or condition difference noticed:';
+
+  @override
+  String get supplierRaiseDisputePromptOtherSupportingProofNotAttached =>
+      'Other supporting proof not attached but relevant:';
+
+  @override
+  String get supplierRaiseDisputePromptWhatHappenedDuringIncident =>
+      'What happened during the incident:';
+
+  @override
+  String get supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred =>
+      'When or where the behavior occurred:';
+
+  @override
+  String get supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred =>
+      'What scam or spam behavior occurred:';
+
+  @override
+  String get supplierRaiseDisputePromptWhatMisleadingClaimWasMade =>
+      'What misleading claim was made:';
+
+  @override
+  String get supplierRaiseDisputePromptMainIssueSupportShouldReview =>
+      'Main issue support should review:';
+
+  @override
+  String get supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded =>
+      'What outcome or correction is needed:';
+
+  @override
+  String get supplierRaiseDisputePromptStrongestMissingProofNotAttached =>
+      'Strongest missing proof not attached:';
+
+  @override
+  String get supplierRaiseDisputeChecklistLoadedReadableQuantity =>
+      'Uploaded image में dispatched quantity readable रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistLoadedPreferBilty =>
+      'दूरी की photo की बजाय bilty, loading slip, या marked proof शामिल करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistLoadedUseWrittenReason =>
+      'Image में visible न हो सकने वाली additional document context को written reason में लिखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistUnloadedKeepReceivedQuantity =>
+      'Image में received quantity या unload record readable रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistUnloadedPreferWeighbridge =>
+      'Generic cargo photo की बजाय weighbridge slip, unload bilty, या marked proof को prefer करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistUnloadedUseWrittenReason =>
+      'Current single-image flow में fit न होने वाले second document को written reason में explain करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDocumentReadableFields =>
+      'यह सुनिश्चित करें कि key document fields एक frame में readable हों।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDocumentPreferSpecificPage =>
+      'वह specific POD या bilty page prefer करें जहाँ mismatch दिखाई देती है।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDocumentUseWrittenReason =>
+      'Written reason में बताएं कि कौन-सा field या proof trip से match नहीं कर रही।';
+
+  @override
+  String get supplierRaiseDisputeChecklistPaymentPreferClearestScreenshot =>
+      'सबसे clear payout-related screenshot या proof image prefer करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistPaymentUseWrittenReason =>
+      'Written reason में बताएं कि कौन-सा payment अभी भी missing है और वह कब due थी।';
+
+  @override
+  String get supplierRaiseDisputeChecklistPaymentUploadStrongestFirst =>
+      'अगर multiple proofs हैं, तो strongest proof पहले upload करें और बाकी को text में summarize करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFakePreferScreenshot =>
+      'वह payout screenshot या proof image prefer करें जो सबसे साफ fake या inconsistent लगे।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFakeUseWrittenReason =>
+      'Written reason में बताएं कि proof में क्या suspicious है।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFakeSummarizeChatContext =>
+      'अगर supporting chat context है, तो उसे text में summarize करें जब वह single-image flow में fit न हो सके।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDelayChooseClearestTiming =>
+      'वह clearest screenshot या photo चुनें जो missed timing या no-show context दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDelayUseWrittenReason =>
+      'Written reason में expected time और actual outcome explain करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDelayKeepFocusedImage =>
+      'Uploaded image को unrelated media की बजाय timing/location evidence पर focused रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDamageChooseImage =>
+      'वह image चुनें जो delivery पर damage या shortage को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDamageKeepAffectedGoods =>
+      'Frame में affected goods या missing quantity context visible रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistDamageUseWrittenReason =>
+      'Written reason में बताएं कि single uploaded image में क्या नहीं दिखाया जा सकता।';
+
+  @override
+  String get supplierRaiseDisputeChecklistAbusiveUploadIfSafe =>
+      'Evidence सिर्फ तभी upload करें जब वह safe और case के लिए relevant हो।';
+
+  @override
+  String get supplierRaiseDisputeChecklistAbusivePreferClearestScreenshot =>
+      'उस clearest screenshot या image को prefer करें जो abusive incident से directly जुड़ी हो।';
+
+  @override
+  String get supplierRaiseDisputeChecklistAbusiveUseWrittenReason =>
+      'Written reason में events का sequence explain करें, बिना sensitive internal notes जोड़े।';
+
+  @override
+  String get supplierRaiseDisputeChecklistSpamChooseScreenshot =>
+      'वह screenshot या image चुनें जो scam या spam behavior को सबसे अच्छे से दिखाए।';
+
+  @override
+  String get supplierRaiseDisputeChecklistSpamPreferStrongestProof =>
+      'Partial conversation fragment की बजाय strongest proof of deception prefer करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistSpamUseWrittenReason =>
+      'Written reason में extra scam context summarize करें जो एक image में fit नहीं हो सकती।';
+
+  @override
+  String get supplierRaiseDisputeChecklistOtherChooseStrongestImage =>
+      'वह एक strongest image चुनें जो आपकी explanation को support करे।';
+
+  @override
+  String get supplierRaiseDisputeChecklistOtherKeepIssueReadable =>
+      'Uploaded image में issue-specific detail readable रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistOtherUseWrittenReason =>
+      'Current flow में fit न होने वाली बाकी evidence को written reason में explain करें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFallbackChooseClearestImage =>
+      'उपलब्ध सबसे clear supporting image चुनें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFallbackKeepReadableProof =>
+      'Frame में important proof readable रखें।';
+
+  @override
+  String get supplierRaiseDisputeChecklistFallbackUseWrittenReason =>
+      'Image में visible न होने वाली additional evidence को written reason में describe करें।';
+
+  @override
+  String get reportIssueTitle => 'Report Issue';
+
+  @override
+  String get reportIssueHeroTitle => 'Report spam, scam, or abuse';
+
+  @override
+  String get reportIssueHeroSubtitle =>
+      'Current operational context से जुड़ा trust-safety ticket खोलें ताकि support issue को जल्दी review कर सके।';
+
+  @override
+  String get reportIssueHeroMessage =>
+      'अगर आपके पास हो तो एक evidence image attach करें। Report अभी भी linked load/trip context का उपयोग करके live support-ticket workflow से submit होती है, और fake payout-proof या non-payment issues भी capture कर सकती है।';
+
+  @override
+  String get reportIssueSubmissionUnavailableTitle =>
+      'Report submission unavailable';
+
+  @override
+  String get reportIssueFailureMessage =>
+      'अभी यह report तैयार या submit नहीं हो सकी। Linked context review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get reportIssueLinkedContextTitle => 'Linked context';
+
+  @override
+  String reportIssueSourceLabel(Object sourceLabel) {
+    return 'Source: $sourceLabel';
+  }
+
+  @override
+  String reportIssueRelatedLoadLabel(Object value) {
+    return 'Related load: $value';
+  }
+
+  @override
+  String reportIssueRelatedTripLabel(Object value) {
+    return 'Related trip: $value';
+  }
+
+  @override
+  String get reportIssueNotLinked => 'Not linked';
+
+  @override
+  String get reportIssueDetailsTitle => 'Report details';
+
+  @override
+  String get reportIssueTypeLabel => 'Issue type';
+
+  @override
+  String get reportIssueWhatHappenedLabel => 'What happened?';
+
+  @override
+  String get reportIssueWhatHappenedHint =>
+      'बताएँ कि spam, fake proof, non-payment, payout deception, या abusive behavior में क्या हुआ जिसे support को review करना चाहिए।';
+
+  @override
+  String get reportIssueHelpfulDetailsTitle => 'Helpful details to include';
+
+  @override
+  String get reportIssueEvidenceOptionalTitle => 'Evidence (required)';
+
+  @override
+  String get reportIssueNoEvidenceAttached =>
+      'Attach one evidence image before submitting this report.';
+
+  @override
+  String get reportIssueEvidenceAttached =>
+      'One evidence image is attached for review.';
+
+  @override
+  String get reportIssueUseCameraAction => 'Use camera';
+
+  @override
+  String get reportIssueChoosePhotoAction => 'Choose photo';
+
+  @override
+  String get reportIssueRemoveEvidenceAction => 'Remove evidence';
+
+  @override
+  String get reportIssueSubmitAction => 'Submit report';
+
+  @override
+  String get reportIssueSubmittedSuccess => 'Report submitted successfully';
+
+  @override
+  String get reportIssueSubmitFailureMessage =>
+      'अभी यह report submit नहीं हो सकी। Details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get reportIssueAttachmentAttachedSuccess =>
+      'Evidence attached successfully';
+
+  @override
+  String get reportIssueAttachmentFailureMessage =>
+      'अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get reportIssueCategorySpamOrScamLabel => 'Spam or scam';
+
+  @override
+  String get reportIssueCategoryAbusiveBehaviorLabel => 'Abusive behavior';
+
+  @override
+  String get reportIssueCategoryFakePayoutProofLabel => 'Fake payout proof';
+
+  @override
+  String get reportIssueCategoryNonPaymentLabel => 'Non-payment';
+
+  @override
+  String get reportIssueCategoryGuidanceSpamOrScam =>
+      'Spam, scam, या misleading behavior को साफ़ लिखें और एक evidence image attach करें जो support को report review करने में मदद करे।';
+
+  @override
+  String get reportIssueCategoryGuidanceAbusiveBehavior =>
+      'Abusive या unsafe behavior को साफ़ लिखें, जिसमें यह भी शामिल हो कि वह कहाँ हुआ और support को कौन-सा context review करना चाहिए।';
+
+  @override
+  String get reportIssueCategoryGuidanceFakePayoutProof =>
+      'बताएँ कि payout proof fake या misleading क्यों लगती है और एक evidence image attach करें जिसमें सबसे उपयोगी payment context दिखता हो।';
+
+  @override
+  String get reportIssueCategoryGuidanceNonPayment =>
+      'Non-payment issue को साफ़ लिखें, जिसमें क्या due था, पहले क्या follow-up हुआ, और एक evidence image attach करें जिसमें सबसे मजबूत payment proof हो।';
+
+  @override
+  String get supportCreateTicketScreenTitle => 'सपोर्ट टिकट बनाएँ';
+
+  @override
+  String get supportCreateTicketHeroTitle => 'सपोर्ट अनुरोध खोलें';
+
+  @override
+  String get supportCreateTicketHeroSubtitle =>
+      'अपनी समस्या साफ़-साफ़ लिखें ताकि support उसे जल्दी route कर सके और आपका follow-up सही context से जुड़ा रहे।';
+
+  @override
+  String get supportCreateTicketHeroMessage =>
+      'अगर समस्या किसी खास operational flow से जुड़ी है तो आप वैकल्पिक रूप से related load या trip id जोड़ सकते हैं। अगर इससे review तेज़ होगी तो आप एक evidence image भी attach कर सकते हैं।';
+
+  @override
+  String get supportCreateTicketFailureTitle => 'सपोर्ट अनुरोध पर ध्यान चाहिए';
+
+  @override
+  String get supportCreateTicketFailureMessage =>
+      'अभी आपका support request तैयार या submit नहीं हो सका। Issue details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportCreateTicketDetailsTitle => 'टिकट विवरण';
+
+  @override
+  String get supportComposeCategoryLabel => 'श्रेणी';
+
+  @override
+  String get supportComposeCategoryGeneral => 'सामान्य';
+
+  @override
+  String get supportComposeCategoryAccount => 'खाता';
+
+  @override
+  String get supportComposeCategoryLoad => 'लोड';
+
+  @override
+  String get supportComposeCategoryTrip => 'ट्रिप';
+
+  @override
+  String get supportComposeCategoryPayment => 'भुगतान';
+
+  @override
+  String get supportComposeCategoryTechnical => 'तकनीकी';
+
+  @override
+  String get supportComposeCategoryOther => 'अन्य';
+
+  @override
+  String get supportCreateTicketRelatedLoadIdLabel =>
+      'संबंधित load id (वैकल्पिक)';
+
+  @override
+  String get supportCreateTicketRelatedLoadIdHint => 'load-123';
+
+  @override
+  String get supportCreateTicketRelatedTripIdLabel =>
+      'संबंधित trip id (वैकल्पिक)';
+
+  @override
+  String get supportCreateTicketRelatedTripIdHint => 'trip-123';
+
+  @override
+  String get supportCreateTicketDescriptionLabel => 'समस्या का विवरण दें';
+
+  @override
+  String get supportCreateTicketDescriptionHint =>
+      'बताएँ क्या हुआ, क्या ब्लॉक है, और आपको किस follow-up की ज़रूरत है।';
+
+  @override
+  String get supportComposeAttachmentOptionalTitle => 'अटैचमेंट (वैकल्पिक)';
+
+  @override
+  String get supportComposeNoAttachment =>
+      'अभी कोई evidence image attach नहीं है।';
+
+  @override
+  String get supportComposeAttachmentAttached =>
+      'सपोर्ट review के लिए एक evidence image attach है।';
+
+  @override
+  String get supportComposeRemoveAttachmentAction => 'अटैचमेंट हटाएँ';
+
+  @override
+  String get supportComposeAttachmentAddedSuccess =>
+      'अटैचमेंट सफलतापूर्वक जोड़ा गया';
+
+  @override
+  String get supportComposeAttachmentFailureMessage =>
+      'अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportCreateTicketSubmitAction => 'टिकट सबमिट करें';
+
+  @override
+  String get supportCreateTicketSubmittedSuccess =>
+      'सपोर्ट टिकट सफलतापूर्वक बनाया गया';
+
+  @override
+  String get supportCreateTicketSubmitFailureMessage =>
+      'अभी यह support ticket बनाई नहीं जा सकी। Details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportReplyFailureTitle => 'रिप्लाई पर ध्यान चाहिए';
+
+  @override
+  String get supportReplyFailureMessage =>
+      'अभी आपकी latest support reply तैयार या submit नहीं हो सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportReplyLabel => 'सपोर्ट को रिप्लाई करें';
+
+  @override
+  String get supportReplyHint =>
+      'Support ने जो अगला detail या response मांगा है, वह जोड़ें।';
+
+  @override
+  String get supportReplySendAction => 'रिप्लाई भेजें';
+
+  @override
+  String get supportReplySentSuccess => 'रिप्लाई सफलतापूर्वक भेजी गई';
+
+  @override
+  String get supportReplySubmitFailureMessage =>
+      'अभी आपकी reply भेजी नहीं जा सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripsSectionTitle => 'सप्लायर ट्रिप्स';
+
+  @override
+  String get supplierTripsSectionSubtitle =>
+      'एक ही supplier execution surface से active movements और recent trip outcomes ट्रैक करें।';
+
+  @override
+  String get supplierTripsTabActive => 'सक्रिय';
+
+  @override
+  String get supplierTripsTabCompleted => 'पूर्ण';
+
+  @override
+  String get supplierTripsLoadFailureTitle =>
+      'सप्लायर ट्रिप्स लोड नहीं हो सकीं';
+
+  @override
+  String get supplierTripsLoadFailureMessage =>
+      'अभी आपकी supplier trips लोड नहीं हो सकीं। Latest trip list और statuses refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supplierTripsEmptyActiveTitle => 'अभी कोई सक्रिय ट्रिप नहीं है';
+
+  @override
+  String get supplierTripsEmptyCompletedTitle => 'अभी कोई पूर्ण ट्रिप नहीं है';
+
+  @override
+  String get supplierTripsEmptyActiveSubtitle =>
+      'जब कोई load assigned execution में जाएगी, तब trips यहाँ दिखाई देंगी।';
+
+  @override
+  String get supplierTripsEmptyCompletedSubtitle =>
+      'जब deliveries close out हो जाएँगी, तब completed supplier trips यहाँ दिखाई देंगी।';
+
+  @override
+  String get supplierTripsEmptyActiveAction => 'मेरे लोड्स खोलें';
+
+  @override
+  String get supplierTripsEmptyCompletedAction => 'सक्रिय ट्रिप्स देखें';
+
+  @override
+  String supplierTripsAssignedLabel(Object date) {
+    return 'असाइन किया गया $date';
+  }
+
+  @override
+  String supplierTripsTruckerTruckLabel(Object truckId, Object truckerId) {
+    return 'ट्रकर $truckerId • ट्रक $truckId';
+  }
+
+  @override
+  String get supplierTripsTrackTripAction => 'ट्रिप ट्रैक करें';
+
+  @override
+  String get supplierTripDetailNotFoundTitle => 'Trip not found';
+
+  @override
+  String get supplierTripDetailNotFoundSubtitle =>
+      'यह supplier trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
+
+  @override
+  String get supplierTripDetailBackToTripsAction => 'Back to supplier trips';
+
+  @override
+  String get supplierTripDetailStubScreenTitle => 'ट्रिप विवरण';
+
+  @override
+  String get supplierTripDetailStubCardTitle => 'सप्लायर ट्रिप विवरण';
+
+  @override
+  String supplierTripDetailStubReference(Object tripId) {
+    return 'ट्रिप रेफरेंस: $tripId';
+  }
+
+  @override
+  String get supplierTripDetailStubMessage =>
+      'Detailed supplier trip execution screens अगले trip-detail slice में और विस्तृत होंगी। Navigation पहले से supplier trips list से wired है।';
+
+  @override
+  String assistantHeroTitleWithName(Object firstName) {
+    return '$firstName के लिए Guided help';
+  }
+
+  @override
+  String get assistantHeroSubtitleSupplier =>
+      'लोड पोस्ट करने, active load execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।';
+
+  @override
+  String get assistantHeroSubtitleTrucker =>
+      'लोड ढूँढने, trip execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।';
+
+  @override
+  String get assistantWorkflowGuidanceSupplier => 'Supplier workflow guidance';
+
+  @override
+  String get assistantWorkflowGuidanceTrucker => 'Trucker workflow guidance';
+
+  @override
+  String get assistantProfileComplete => 'प्रोफ़ाइल पूर्ण';
+
+  @override
+  String get assistantProfileIncomplete => 'प्रोफ़ाइल अपूर्ण';
+
+  @override
+  String get assistantRecommendedNextActionsTitle => 'सुझाए गए अगले actions';
+
+  @override
+  String get assistantOpenSupplierTripsAction => 'सप्लायर ट्रिप्स खोलें';
+
+  @override
+  String get assistantFindLoadsAction => 'लोड्स ढूँढें';
+
+  @override
+  String get assistantOpenTripsAction => 'ट्रिप्स खोलें';
+
+  @override
+  String get assistantOpenMessagesAction => 'मेसेजेस खोलें';
+
+  @override
+  String get assistantGuidedHelpTitle => 'Guided help';
+
+  @override
+  String get assistantBestForLabel => 'किसके लिए बेहतर';
+
+  @override
+  String get assistantBestForSupplier =>
+      'लोड पोस्ट करना, active load execution देखना, conversations review करना, और support जल्दी खोलना।';
+
+  @override
+  String get assistantBestForTrucker =>
+      'लोड ढूँढना, trip execution देखना, conversations review करना, और support जल्दी खोलना।';
+
+  @override
+  String get assistantVoiceBehaviorLabel => 'Voice behavior';
+
+  @override
+  String get assistantVoiceBehaviorValue =>
+      'अभी केवल manual entry उपलब्ध है। Full conversational bot, STT, और auto-speak dedicated communication और localization phases में अभी pending हैं।';
+
+  @override
+  String get assistantCurrentRoleLabel => 'वर्तमान भूमिका';
+
+  @override
+  String get assistantMoreActionsTitle => 'More actions';
+
+  @override
+  String get assistantOpenNotificationsAction => 'नोटिफिकेशन्स खोलें';
+
+  @override
+  String get assistantOpenSupportAction => 'सपोर्ट खोलें';
+
+  @override
+  String get shellAccessRestrictedTitle => 'एक्सेस प्रतिबंधित';
+
+  @override
+  String get shellAccessRestrictedDeactivatedSubtitle =>
+      'आपका account cleanup pending होने तक deactivated है। आपको सुरक्षित रूप से sign out किया जा रहा है...';
+
+  @override
+  String get shellAccessRestrictedBannedSubtitle =>
+      'आपके account access पर प्रतिबंध है। आपको सुरक्षित रूप से sign out किया जा रहा है...';
+
+  @override
+  String get shellAccountDeactivatedMessage => 'Account deactivated';
+
+  @override
+  String get shellAccountBannedMessage => 'Account banned';
+
+  @override
+  String get shellRouteNotFoundTitle => 'Route नहीं मिला';
+
+  @override
+  String get shellMessagesLoadFailureMessage =>
+      'अभी आपके messages लोड नहीं हो सके। Latest conversations refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get shellMessagesBookingStatusSubmitted => 'Submitted';
+
+  @override
+  String get shellMessagesBookingStatusApproved => 'Approved';
+
+  @override
+  String get shellMessagesBookingStatusRejected => 'Rejected';
+
+  @override
+  String get shellMessagesBookingStatusPending => 'Pending';
+
+  @override
+  String get shellMessagesBookingStatusUnknown => 'Unknown';
+
+  @override
+  String get truckerLoadDetailTitle => 'Load Detail';
+
+  @override
+  String get truckerLoadDetailLoadNotFoundTitle => 'Load not found';
+
+  @override
+  String get truckerLoadDetailLoadNotFoundSubtitle =>
+      'यह marketplace load अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
+
+  @override
+  String get truckerLoadDetailBackToFindLoadsAction => 'Back to find loads';
+
+  @override
+  String get truckerLoadDetailLoadFailureTitle =>
+      'Unable to load freight detail';
+
+  @override
+  String get truckerLoadDetailLoadFailureMessage =>
+      'अभी यह freight detail load नहीं हो सकी। Current route, pricing, और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerLoadDetailSupportUnavailableTitle =>
+      'Some supporting load details are unavailable';
+
+  @override
+  String get truckerLoadDetailSupportFailureMessage =>
+      'कुछ supporting load details अभी उपलब्ध नहीं हैं। Latest freight context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerLoadDetailActionFailureTitle => 'Action unavailable';
+
+  @override
+  String get truckerLoadDetailActionFailureMessage =>
+      'Latest load action अभी पूरी नहीं हो सकी। Current booking state review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerLoadDetailBookingSubmitFailureMessage =>
+      'अभी यह booking request submit नहीं हो सकी। Selected truck review करें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
+    return 'Load $loadId • Pickup $pickupDate';
+  }
+
+  @override
+  String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType) {
+    return '₹$priceAmount • $priceType';
+  }
+
+  @override
+  String get truckerLoadDetailTruckMatchAvailable => 'Truck match available';
+
+  @override
+  String get truckerLoadDetailNoApprovedTruckMatchYet =>
+      'No approved truck match yet';
+
+  @override
+  String truckerLoadDetailMaterialSummary(
+    Object advancePercentage,
+    Object material,
+    Object weightTonnes,
+  ) {
+    return '$material • ${weightTonnes}T • Advance $advancePercentage%';
+  }
+
+  @override
+  String get truckerLoadDetailSuperLoadGuarantee =>
+      'Super Load • Payment Guarantee';
+
+  @override
+  String get truckerLoadDetailRoutePriceSummaryTitle =>
+      'Route and price summary';
+
+  @override
+  String truckerLoadDetailOriginLabel(Object origin) {
+    return 'Origin: $origin';
+  }
+
+  @override
+  String truckerLoadDetailDestinationLabel(Object destination) {
+    return 'Destination: $destination';
+  }
+
+  @override
+  String truckerLoadDetailPickupLabel(Object pickupDate) {
+    return 'Pickup: $pickupDate';
+  }
+
+  @override
+  String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType) {
+    return 'Price: ₹$priceAmount • $priceType';
+  }
+
+  @override
+  String truckerLoadDetailDistanceLabel(Object distance) {
+    return 'Distance: $distance km';
+  }
+
+  @override
+  String truckerLoadDetailDriveTimeLabel(Object minutes) {
+    return 'Estimated drive time: $minutes min';
+  }
+
+  @override
+  String get truckerLoadDetailTruckRequirementTitle =>
+      'Truck requirement summary';
+
+  @override
+  String truckerLoadDetailBodyTypeLabel(Object bodyType) {
+    return 'Body type: $bodyType';
+  }
+
+  @override
+  String truckerLoadDetailTyresLabel(Object tyres) {
+    return 'Tyres: $tyres';
+  }
+
+  @override
+  String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed) {
+    return 'Trucks needed: $booked/$needed booked';
+  }
+
+  @override
+  String get truckerLoadDetailAnyOption => 'Any';
+
+  @override
+  String get truckerLoadDetailNoApprovedTruckSelected =>
+      'No approved truck selected';
+
+  @override
+  String get truckerLoadDetailSelectedTruckMatches =>
+      'Selected truck matches this load';
+
+  @override
+  String get truckerLoadDetailSelectedTruckMayNotMatch =>
+      'Selected truck may not match this load';
+
+  @override
+  String get truckerLoadDetailCargoScheduleTitle =>
+      'Cargo and schedule details';
+
+  @override
+  String truckerLoadDetailMaterialLabel(Object material) {
+    return 'Material: $material';
+  }
+
+  @override
+  String truckerLoadDetailWeightLabel(Object weight) {
+    return 'Weight: $weight tonnes';
+  }
+
+  @override
+  String truckerLoadDetailOriginCityLabel(Object city) {
+    return 'Origin city: $city';
+  }
+
+  @override
+  String truckerLoadDetailDestinationCityLabel(Object city) {
+    return 'Destination city: $city';
+  }
+
+  @override
+  String get truckerLoadDetailTripCostEstimateTitle => 'Trip cost estimate';
+
+  @override
+  String get truckerLoadDetailTripCostUnavailableTitle =>
+      'Trip cost unavailable';
+
+  @override
+  String get truckerLoadDetailTripCostUnavailableMessage =>
+      'अभी इस load के लिए distance उपलब्ध नहीं है, इसलिए trip cost estimate calculate नहीं हो सकती।';
+
+  @override
+  String truckerLoadDetailDieselLabel(Object amount) {
+    return 'Diesel: ₹$amount';
+  }
+
+  @override
+  String truckerLoadDetailTollsLabel(Object amount) {
+    return 'Tolls: ₹$amount';
+  }
+
+  @override
+  String truckerLoadDetailMileageUsedLabel(Object value) {
+    return 'Mileage used: $value km/L';
+  }
+
+  @override
+  String truckerLoadDetailDieselPriceLabel(Object value) {
+    return 'Diesel price: ₹$value/L';
+  }
+
+  @override
+  String truckerLoadDetailEstimatedTollPlazasLabel(Object count) {
+    return 'Estimated toll plazas: $count';
+  }
+
+  @override
+  String get truckerLoadDetailSupplierSummaryTitle => 'Supplier summary';
+
+  @override
+  String truckerLoadDetailContactOwnerLabel(Object name) {
+    return 'Contact owner: $name';
+  }
+
+  @override
+  String get truckerLoadDetailVerifiedSupplier => 'Verified supplier';
+
+  @override
+  String get truckerLoadDetailSupplierProfile => 'Supplier profile';
+
+  @override
+  String get truckerLoadDetailNextStepTitle => 'Next step';
+
+  @override
+  String get truckerLoadDetailStatusActive => 'सक्रिय';
+
+  @override
+  String get truckerLoadDetailStatusAssignedPartial => 'आंशिक रूप से सौंपा गया';
+
+  @override
+  String get truckerLoadDetailStatusUnknown => 'अज्ञात';
+
+  @override
+  String truckerLoadDetailBookingStatusLabel(Object status) {
+    return 'बुकिंग स्थिति: $status';
+  }
+
+  @override
+  String get truckerLoadDetailBookingFeedbackTitle => 'Booking feedback';
+
+  @override
+  String get truckerLoadDetailBookingBlockedTitle => 'Booking is blocked';
+
+  @override
+  String get truckerLoadDetailMessageSupplierAction => 'Message supplier';
+
+  @override
+  String get truckerLoadDetailCallSupplierAction => 'Call supplier';
+
+  @override
+  String truckerLoadDetailUsingTruckLabel(Object truckNumber) {
+    return 'Using $truckNumber';
+  }
+
+  @override
+  String truckerLoadDetailSelectedTruckSummary(
+    Object bodyType,
+    Object truckNumber,
+    Object tyres,
+  ) {
+    return 'This load will be booked with $truckNumber • $bodyType • $tyres tyres.';
+  }
+
+  @override
+  String get truckerLoadDetailApprovedTruckLabel =>
+      'Approved truck for this request';
+
+  @override
+  String truckerLoadDetailTruckOptionLabel(
+    Object bodyType,
+    Object truckNumber,
+    Object tyres,
+  ) {
+    return '$truckNumber • $bodyType • $tyres tyres';
+  }
+
+  @override
+  String get truckerLoadDetailNoApprovedTrucksAvailable =>
+      'अभी तक कोई अनुमोदित ट्रक उपलब्ध नहीं है।';
+
+  @override
+  String get truckerLoadDetailAddTruckFirstAction => 'पहले एक ट्रक जोड़ें';
+
+  @override
+  String get truckerLoadDetailRequestSubmittedAction => 'अनुरोध सबमिट किया गया';
+
+  @override
+  String get truckerLoadDetailBookedAction => 'बुक किया गया';
+
+  @override
+  String get truckerLoadDetailBookThisLoadAction => 'इस लोड को बुक करें';
+
+  @override
+  String get truckerLoadDetailLoadBookedSuccess =>
+      'लोड बुक किया गया! सप्लायर की मंजूरी की प्रतीक्षा कर रहा है';
+
+  @override
+  String get truckerLoadDetailShareLoadAction => 'लोड साझा करें';
+
+  @override
+  String get truckerLoadDetailShareLoadTitle => 'लोड साझा करें';
+
+  @override
+  String get truckerLoadDetailShareLoadMessage =>
+      'सीधे फोन नंबर या निजी ऑपरेशनल नोट्स को उजागर किए बिना सुरक्षित सारांश-पहले लोड कार्ड साझा करें।';
+
+  @override
+  String get truckerLoadDetailSystemShareAction => 'सिस्टम साझा करें';
+
+  @override
+  String get truckerLoadDetailShareToWhatsAppAction => 'व्हाट्सएप पर साझा करें';
+
+  @override
+  String get truckerLoadDetailWhatsAppUnavailableMessage =>
+      'इस डिवाइस पर व्हाट्सएप उपलब्ध नहीं है। इसके बजाय सिस्टम साझा का उपयोग करें।';
+
+  @override
+  String get truckerLoadDetailOpenInGoogleMapsAction => 'गूगल मैप्स में खोलें';
+
+  @override
+  String get truckerLoadDetailReportSpamOrAbuseAction =>
+      'स्पैम या दुरुपयोग रिपोर्ट करें';
+
+  @override
+  String truckerLoadDetailReportSourceLabel(Object routeLabel) {
+    return 'ट्रक लोड • $routeLabel';
+  }
+
+  @override
+  String get truckerLoadDetailVerificationRequiredMessage =>
+      'लोड बुक करने या सप्लायर चैट शुरू करने से पहले ट्रकर सत्यापन पूरा करें। सत्यापन के लिए अनुमोदित पहचान दस्तावेज और प्रोफाइल समीक्षा आवश्यक है।';
+
+  @override
+  String get truckerLoadDetailTruckApprovalRequiredMessage =>
+      'इस लोड को बुक करने या सप्लायर चैट अनलॉक करने से पहले कम से कम एक ट्रक जोड़ें और अनुमोदित करें।';
+
+  @override
+  String get truckerLoadDetailAddTruckDialogTitle => 'पहले एक ट्रक जोड़ें';
+
+  @override
+  String get truckerLoadDetailAddTruckDialogMessage =>
+      'इस लोड को बुक करने से पहले आपको कम से कम एक अनुमोदित ट्रक चाहिए। ट्रक जोड़ने या अनुमोदन पूरा करने के लिए अभी फ्लीट खोलें?';
+
+  @override
+  String get truckerLoadDetailNotNowAction => 'अब नहीं';
+
+  @override
+  String get truckerLoadDetailOpenFleetAction => 'फ्लीट खोलें';
+
+  @override
+  String get truckerLoadDetailConfirmBookingTitle =>
+      'लोड बुकिंग की पुष्टि करें';
+
+  @override
+  String truckerLoadDetailConfirmBookingMessage(
+    Object material,
+    Object routeLabel,
+    Object truckNumber,
+  ) {
+    return '$truckNumber के साथ $material $routeLabel बुक करें?';
+  }
+
+  @override
+  String get truckerLoadDetailCancelAction => 'रद्द करें';
+
+  @override
+  String get authTtsSplashWelcome =>
+      'TranZfort में आपका स्वागत है। आगे बढ़ने से पहले मैं आपकी छोटी सी सेटअप में मदद करूंगा।';
+
+  @override
+  String get authSessionRefreshFailureMessage =>
+      'हम आपका सत्र अभी रीफ्रेश नहीं कर सके। जरूरत हो तो आगे बढ़ें और बाद में फिर प्रयास करें।';
+
+  @override
+  String get authNotificationPermissionFailureMessage =>
+      'नोटिफिकेशन अनुमति अभी सक्षम नहीं हो सकी।';
+
+  @override
+  String get authTtsVoiceGuidanceEnabled => 'वॉइस गाइडेंस अब चालू है।';
+
+  @override
+  String get authConfigIncompleteTitle => 'सेटअप अधूरा है';
+
+  @override
+  String get authConfigIncompleteMessage =>
+      'ऐप की कुछ सेटिंग अधूरी है। सेटअप पूरा होने तक साइन-इन ठीक से काम नहीं कर सकता।';
+
+  @override
+  String get authTtsSignInPrompt =>
+      'TranZfort में साइन-इन करने का तरीका चुनें।';
+
+  @override
+  String get authTtsOnboardingRolePrompt =>
+      'ऑनबोर्डिंग जारी रखने के लिए अपनी भूमिका चुनें।';
+
+  @override
+  String get postLoadValidationOriginCityRequired => 'मूल शहर चुनें';
+
+  @override
+  String get postLoadValidationOriginLocationRequired =>
+      'पिकअप स्थान दर्ज करें';
+
+  @override
+  String get postLoadValidationDestinationCityRequired => 'गंतव्य शहर चुनें';
+
+  @override
+  String get postLoadValidationDestinationLocationRequired =>
+      'ड्रॉप स्थान दर्ज करें';
+
+  @override
+  String get postLoadValidationMaterialRequired => 'सामग्री का नाम दर्ज करें';
+
+  @override
+  String get postLoadValidationWeightRange =>
+      '0 से 100 टन के बीच वजन दर्ज करें';
+
+  @override
+  String get postLoadValidationTrucksNeeded => 'कम से कम एक ट्रक आवश्यक है';
+
+  @override
+  String get postLoadValidationPricePositive =>
+      'शून्य से अधिक सही कीमत दर्ज करें';
+
+  @override
+  String get postLoadValidationPriceType => 'सही कीमत प्रकार चुनें';
+
+  @override
+  String get postLoadValidationPickupDatePast =>
+      'पिकअप तारीख पिछली नहीं हो सकती';
+
+  @override
+  String settingsRoleSentenceHi(Object roleLabel) {
+    return 'वर्तमान भूमिका: $roleLabel।';
+  }
+
+  @override
+  String settingsRoleSentenceEn(Object roleLabel) {
+    return 'वर्तमान भूमिका: $roleLabel।';
+  }
+
+  @override
+  String get pushIssuePermissionRequestFailed => 'अनुमति अनुरोध विफल हुआ।';
+
+  @override
+  String get pushIssueLocalInitFailed => 'लोकल नोटिफिकेशन सेटअप विफल हुआ।';
+
+  @override
+  String get pushIssueDisplayFailed => 'नोटिफिकेशन दिखाना विफल हुआ।';
+
+  @override
+  String get pushIssueTokenSyncFailed => 'टोकन सिंक विफल हुआ।';
+
+  @override
+  String get truckerFleetReturnToVerificationTitle => 'वेरिफिकेशन पर लौटें';
+
+  @override
+  String get truckerFleetReturnToVerificationMessage =>
+      'अपना ट्रक जोड़ें या अपडेट करें, फिर आगे बढ़ने के लिए वेरिफिकेशन पर लौटें।';
+
+  @override
+  String get truckerFleetBackToVerificationAction => 'वापस वेरिफिकेशन पर';
+
+  @override
+  String get truckerFleetTruckSavedReturnMessage =>
+      'ट्रक सेव हो गया। आगे बढ़ने के लिए वेरिफिकेशन पर लौटें।';
+
+  @override
+  String get truckerLoadDetailProfileLoadingMessage =>
+      'आपकी प्रोफाइल जांची जा रही है। कृपया प्रतीक्षा करें...';
+
+  @override
+  String get supplierLoadDetailNotFoundTitle => 'लोड नहीं मिला';
+
+  @override
+  String get supplierLoadDetailNotFoundSubtitle =>
+      'यह लोड विवरण अभी उपलब्ध नहीं है। My Loads पर लौटें और फिर प्रयास करें।';
+
+  @override
+  String get supplierLoadDetailLoadFailureTitle => 'लोड विवरण लोड नहीं हो सका';
+
+  @override
+  String get supplierLoadDetailFailureMessage =>
+      'लोड विवरण नहीं खुल पाया। कृपया फिर से कोशिश करें।';
+
+  @override
+  String get supplierLoadDetailScreenTitle => 'लोड विवरण';
+
+  @override
+  String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
+    return 'लोड ID: $loadId • पिकअप: $pickupDate';
+  }
+
+  @override
+  String get supplierLoadDetailLinkedExecutionUnavailableTitle =>
+      'लिंक्ड निष्पादन डेटा उपलब्ध नहीं है';
+
+  @override
+  String get supplierLoadSupportFailureMessage =>
+      'बुकिंग या ट्रिप अभी रीफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।';
+
+  @override
+  String get supplierLoadDetailStatusAndActionsTitle => 'स्थिति और कार्रवाई';
+
+  @override
+  String supplierLoadDetailCurrentStatus(Object status) {
+    return 'वर्तमान स्थिति: $status';
+  }
+
+  @override
+  String get supplierLoadDetailActionsSubtitle =>
+      'कार्रवाई करने से पहले नवीनतम स्थिति देखें।';
+
+  @override
+  String get supplierLoadDetailActionUnavailableTitle =>
+      'कार्रवाई उपलब्ध नहीं है';
+
+  @override
+  String get supplierLoadActionFailureMessage =>
+      'यह लोड कार्रवाई अभी पूरी नहीं हो सकी। कृपया फिर प्रयास करें।';
+
+  @override
+  String get supplierLoadDetailCancelAction => 'लोड रद्द करें';
+
+  @override
+  String get supplierLoadDetailCancelledSuccess =>
+      'लोड सफलतापूर्वक रद्द किया गया';
+
+  @override
+  String get supplierLoadCancelFailureMessage =>
+      'यह लोड अभी रद्द नहीं हो सका। कृपया फिर प्रयास करें।';
+
+  @override
+  String get supplierLoadDetailCloseFilledOutsideAction =>
+      'ऐप के बाहर भरा हुआ दिखाकर बंद करें';
+
+  @override
+  String get supplierLoadDetailClosedFilledOutsideSuccess =>
+      'लोड को ऐप के बाहर भरा हुआ चिन्हित किया गया';
+
+  @override
+  String get supplierLoadCloseFailureMessage =>
+      'यह लोड अभी बंद नहीं हो सका। कृपया फिर प्रयास करें।';
+
+  @override
+  String get supplierLoadDetailRouteAndScheduleTitle => 'रूट और शेड्यूल';
+
+  @override
+  String supplierLoadDetailOriginCity(Object value) {
+    return 'मूल शहर: $value';
+  }
+
+  @override
+  String supplierLoadDetailOriginPoint(Object value) {
+    return 'मूल स्थान: $value';
+  }
+
+  @override
+  String supplierLoadDetailDestinationCity(Object value) {
+    return 'गंतव्य शहर: $value';
+  }
+
+  @override
+  String supplierLoadDetailDestinationPoint(Object value) {
+    return 'गंतव्य स्थान: $value';
+  }
+
+  @override
+  String supplierLoadDetailPickupDate(Object value) {
+    return 'पिकअप तारीख: $value';
+  }
+
+  @override
+  String supplierLoadDetailDistance(Object value) {
+    return 'दूरी: $value';
+  }
+
+  @override
+  String supplierLoadDetailDriveTime(Object value) {
+    return 'ड्राइव समय: $value';
+  }
+
+  @override
+  String get supplierLoadDetailRoutePreviewUnavailableTitle =>
+      'रूट प्रीव्यू उपलब्ध नहीं है';
+
+  @override
+  String get supplierLoadDetailRoutePreviewUnavailableMessage =>
+      'इस लोड का रूट प्रीव्यू अभी उपलब्ध नहीं है।';
+
+  @override
+  String get supplierLoadDetailOpenInGoogleMaps => 'Google Maps में खोलें';
+
+  @override
+  String get supplierLoadDetailCargoAndRequirementsTitle =>
+      'कार्गो और आवश्यकताएं';
+
+  @override
+  String supplierLoadDetailMaterial(Object value) {
+    return 'सामग्री: $value';
+  }
+
+  @override
+  String supplierLoadDetailWeight(Object value) {
+    return 'वजन: $value';
+  }
+
+  @override
+  String get supplierLoadDetailAnyValue => 'कोई भी';
+
+  @override
+  String supplierLoadDetailBodyType(Object value) {
+    return 'बॉडी टाइप: $value';
+  }
+
+  @override
+  String supplierLoadDetailTyres(Object value) {
+    return 'टायर: $value';
+  }
+
+  @override
+  String get supplierLoadDetailBookingAndTripLinkageTitle =>
+      'बुकिंग और ट्रिप लिंक';
+
+  @override
+  String get supplierLoadDetailBookingLinkageEmptyDescription =>
+      'इस लोड पर अभी कोई बुकिंग अनुरोध या लिंक्ड ट्रिप नहीं हैं।';
+
+  @override
+  String get supplierLoadDetailBookingLinkageDescription =>
+      'बुकिंग अनुरोध और लिंक्ड ट्रिप यहां साथ में देखें।';
+
+  @override
+  String get supplierLoadDetailNoBookingRequestsTitle =>
+      'अभी कोई बुकिंग अनुरोध नहीं';
+
+  @override
+  String get supplierLoadDetailNoBookingRequestsSubtitle =>
+      'ट्रकर प्रतिक्रिया देंगे तो बुकिंग अनुरोध यहां दिखेंगे।';
+
+  @override
+  String get supplierLoadDetailLinkedTripsTitle => 'लिंक्ड ट्रिप';
+
+  @override
+  String get supplierLoadDetailNoLinkedTripsTitle =>
+      'अभी कोई लिंक्ड ट्रिप नहीं';
+
+  @override
+  String get supplierLoadDetailNoLinkedTripsSubtitle =>
+      'बुकिंग स्वीकृत होने के बाद ट्रिप यहां दिखेंगी।';
+
+  @override
+  String get supplierLoadDetailActivityTimelineTitle => 'गतिविधि टाइमलाइन';
+
+  @override
+  String get supplierLoadDetailTimelineCreatedTitle => 'लोड बनाया गया';
+
+  @override
+  String get supplierLoadDetailTimelineCreatedDescription =>
+      'यह लोड बनाया गया।';
+
+  @override
+  String get supplierLoadDetailTimelinePublishedTitle => 'लोड प्रकाशित';
+
+  @override
+  String get supplierLoadDetailTimelinePublishedDescription =>
+      'यह लोड प्रकाशित है और ट्रकर को दिख रहा है।';
+
+  @override
+  String get supplierLoadDetailTimelineUpdatedTitle => 'स्थिति अपडेट';
+
+  @override
+  String supplierLoadDetailTimelineUpdatedDescription(Object status) {
+    return 'वर्तमान स्थिति: $status।';
+  }
+
+  @override
+  String get supplierBookingVerifiedLabel => 'सत्यापित';
+
+  @override
+  String supplierBookingRatingLabel(Object rating) {
+    return 'रेटिंग: $rating';
+  }
+
+  @override
+  String supplierBookingTyres(Object tyres) {
+    return '$tyres टायर';
+  }
+
+  @override
+  String supplierBookingSubmittedAt(Object truckLabel, Object submittedAt) {
+    return '$truckLabel • जमा किया गया $submittedAt';
+  }
+
+  @override
+  String supplierBookingDecisionRecorded(Object decidedAt) {
+    return 'निर्णय दर्ज किया गया $decidedAt';
+  }
+
+  @override
+  String supplierLinkedTripSubtitle(
+    Object material,
+    Object truckerId,
+    Object truckId,
+  ) {
+    return '$material • ट्रकर $truckerId • ट्रक $truckId';
+  }
+
+  @override
+  String get supplierBookingApprovedSuccessMessage =>
+      'बुकिंग सफलतापूर्वक स्वीकृत हुई';
+
+  @override
+  String get supplierLoadApproveBookingFailureMessage =>
+      'यह बुकिंग अभी स्वीकृत नहीं हो सकी। कृपया फिर प्रयास करें।';
+
+  @override
+  String get supplierBookingRejectedSuccessMessage =>
+      'बुकिंग सफलतापूर्वक अस्वीकृत हुई';
+
+  @override
+  String get supplierLoadRejectBookingFailureMessage =>
+      'यह बुकिंग अभी अस्वीकृत नहीं हो सकी। कृपया फिर प्रयास करें।';
+
+  @override
+  String get supplierBookingApproveDialogTitle => 'बुकिंग स्वीकृत करें';
+
+  @override
+  String supplierBookingApproveDialogMessage(
+    Object material,
+    Object origin,
+    Object destination,
+  ) {
+    return '$material के लिए $origin से $destination तक की बुकिंग स्वीकृत करें?';
+  }
+
+  @override
+  String get supplierBookingRejectDialogTitle => 'बुकिंग अस्वीकृत करें';
+
+  @override
+  String get supplierBookingRejectDialogSubtitle =>
+      'बुकिंग अस्वीकृत करने से पहले छोटा कारण लिखें।';
+
+  @override
+  String get supplierBookingRejectReasonLabel => 'कारण';
+
+  @override
+  String get supplierBookingRejectReasonHint =>
+      'उदाहरण: वाहन मेल नहीं खाता या समय समस्या';
+
+  @override
+  String get verificationFieldCompanyName => 'कंपनी का नाम';
+
+  @override
+  String get verificationFieldAadhaarNumber => 'आधार नंबर';
+
+  @override
+  String get verificationFieldPanNumber => 'पैन नंबर';
+
+  @override
+  String get verificationFieldBusinessLicenceNumber => 'बिजनेस लाइसेंस नंबर';
+
+  @override
+  String get verificationFieldGstNumber => 'GST नंबर';
+
+  @override
+  String get verificationFieldGstOptional => 'वैकल्पिक';
+
+  @override
+  String get verificationSavePacketAction => 'विवरण सेव करें';
+
+  @override
+  String get verificationSaveSuccessMessage => 'वेरिफिकेशन विवरण सेव हो गया';
+
+  @override
+  String get verificationSaveFailureMessage =>
+      'वेरिफिकेशन विवरण सेव नहीं हो सका';
+
+  @override
+  String get verificationLockedVerifiedGuidance =>
+      'आपका वेरिफिकेशन पहले से स्वीकृत है, इसलिए ये फ़ील्ड लॉक हैं।';
+
+  @override
+  String get verificationLockedPendingGuidance =>
+      'आपका वेरिफिकेशन समीक्षा में है, इसलिए निर्णय होने तक ये फ़ील्ड लॉक हैं।';
+
+  @override
+  String get verificationUnlockedSupplierGuidance =>
+      'अपने बिजनेस और पहचान विवरण भरें, फिर आवश्यक दस्तावेज़ अपलोड करें।';
+
+  @override
+  String get verificationUnlockedTruckerGuidance =>
+      'अपने पहचान विवरण भरें और कम से कम एक ट्रक वेरिफिकेशन के लिए तैयार रखें।';
+
+  @override
+  String get verificationBlockedAlreadyComplete =>
+      'वेरिफिकेशन पहले से पूरा है।';
+
+  @override
+  String get verificationBlockedUnderReview =>
+      'आपका वेरिफिकेशन पहले से समीक्षा में है।';
+
+  @override
+  String get verificationBlockedMissingIdentity =>
+      'पहले अपना आधार और पैन नंबर जोड़ें।';
+
+  @override
+  String get verificationBlockedMissingCompanyName =>
+      'पहले अपनी कंपनी का नाम भरें।';
+
+  @override
+  String get verificationBlockedMissingBusinessNumbers =>
+      'पहले बिजनेस लाइसेंस विवरण भरें।';
+
+  @override
+  String verificationBlockedMissingDocument(Object documentType) {
+    return 'जारी रखने के लिए $documentType अपलोड करें।';
+  }
+
+  @override
+  String get verificationBlockedMissingLocation =>
+      'पहले अपना वेरिफिकेशन स्थान जोड़ें।';
+
+  @override
+  String get verificationBlockedMissingTruck =>
+      'वेरिफिकेशन जमा करने से पहले कम से कम एक ट्रक जोड़ें।';
+
+  @override
+  String verificationReadyTruckCount(Object count) {
+    return 'वेरिफिकेशन-रेडी ट्रक: $count';
+  }
+}

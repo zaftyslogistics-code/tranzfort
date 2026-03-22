@@ -1,31 +1,23 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-final supabaseConfiguredProvider = Provider<bool>((ref) => false);
-
+/// Supabase configuration loader.
+/// Reads from .env file. Never hardcode keys in code.
 class SupabaseConfig {
   final String url;
   final String anonKey;
 
   const SupabaseConfig({required this.url, required this.anonKey});
 
-  bool get isConfigured {
-    if (url.isEmpty || anonKey.isEmpty) return false;
-
-    final normalizedUrl = url.trim();
-    final normalizedKey = anonKey.trim();
-
-    if (normalizedUrl.contains('YOUR_SUPABASE_URL')) return false;
-    if (normalizedKey.contains('YOUR_SUPABASE_ANON_KEY')) return false;
-
-    final parsed = Uri.tryParse(normalizedUrl);
-    return parsed != null &&
-        (parsed.scheme == 'https' || parsed.scheme == 'http') &&
-        parsed.host.isNotEmpty;
-  }
+  bool get isConfigured =>
+      url.isNotEmpty &&
+      anonKey.isNotEmpty &&
+      !url.contains('YOUR_SUPABASE_URL') &&
+      Uri.tryParse(url)?.hasScheme == true;
 
   factory SupabaseConfig.fromEnvironment() {
-    const url = String.fromEnvironment('SUPABASE_URL');
-    const anonKey = String.fromEnvironment('SUPABASE_ANON_KEY');
-    return const SupabaseConfig(url: url, anonKey: anonKey);
+    return SupabaseConfig(
+      url: dotenv.env['SUPABASE_URL'] ?? '',
+      anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
+    );
   }
 }

@@ -1,0 +1,3 @@
+Sign in to Admin using the approved admin account.
+Validate dashboard, verification queue/detail, users, support, ops, Super Ops, load management, and audit logs.
+Record failures against docs/almost-manual-testing.md.

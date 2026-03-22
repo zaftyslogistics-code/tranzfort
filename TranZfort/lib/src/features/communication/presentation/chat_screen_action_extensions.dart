@@ -1,0 +1,306 @@
+part of 'chat_screen.dart';
+
+mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
+  Future<void> _sendTextMessage(BuildContext context) async {
+    final state = this as _ChatScreenState;
+    final text = state.messageController.text.trim();
+    if (text.isEmpty) {
+      return;
+    }
+
+    final pendingId = 'pending-${DateTime.now().microsecondsSinceEpoch}';
+    final pendingMessage = _PendingChatMessage(
+      tempId: pendingId,
+      message: ChatMessage(
+        id: pendingId,
+        conversationId: widget.conversationId,
+        senderProfileId: ref.read(currentAuthStateProvider).hasSession ? 'me' : null,
+        type: ChatMessageType.text,
+        textBody: text,
+        attachmentPath: null,
+        structuredPayload: null,
+        isRead: false,
+        readAt: null,
+        createdAt: DateTime.now(),
+        isFromCurrentUser: true,
+      ),
+    );
+    state.setState(() {
+      state.pendingMessages.add(pendingMessage);
+    });
+    _scrollToBottom();
+
+    final result = await ref.read(sendMessageProvider.notifier).sendTextMessage(
+          conversationId: widget.conversationId,
+          text: text,
+        );
+    _removePendingMessage(pendingMessage.tempId);
+    if (!mounted) {
+      return;
+    }
+    if (result.isFailure) {
+      AppSnackbar.show(
+        context: this.context,
+        message: _chatTextSendFailureMessage(),
+        variant: AppSnackbarVariant.error,
+      );
+      return;
+    }
+    _scrollToBottom();
+  }
+
+  Future<void> _toggleVoiceRecording(BuildContext context) async {
+    final state = this as _ChatScreenState;
+    if (state.isRecordingVoice) {
+      await _stopAndSendVoiceRecording(context);
+      return;
+    }
+    await _startVoiceRecording(context);
+  }
+
+  Future<void> _startVoiceRecording(BuildContext context) async {
+    final state = this as _ChatScreenState;
+    final result = await state.voiceMessageService.startRecording(
+          conversationId: widget.conversationId,
+        );
+    if (!mounted) {
+      return;
+    }
+    if (result.isFailure) {
+      AppSnackbar.show(
+        context: this.context,
+        message: _chatVoiceStartFailureMessage(),
+        variant: AppSnackbarVariant.error,
+      );
+      return;
+    }
+    state.setState(() {
+      state.updateIsRecordingVoice(true);
+      state.updateRecordingElapsedSeconds(0);
+    });
+    state.recordingTimer?.cancel();
+    state.updateRecordingTimer(Timer.periodic(const Duration(seconds: 1), (_) {
+      if (!mounted) {
+        return;
+      }
+      state.setState(() {
+        state.updateRecordingElapsedSeconds(state.recordingElapsedSeconds + 1);
+      });
+    }));
+  }
+
+  Future<void> _stopAndSendVoiceRecording(BuildContext context) async {
+    final state = this as _ChatScreenState;
+    state.recordingTimer?.cancel();
+    state.setState(() {
+      state.updateIsRecordingVoice(false);
+    });
+    final uploadResult = await state.voiceMessageService.stopAndUpload(
+          conversationId: widget.conversationId,
+        );
+    if (!mounted) {
+      return;
+    }
+    if (uploadResult.isFailure) {
+      state.setState(() {
+        state.updateRecordingElapsedSeconds(0);
+      });
+      AppSnackbar.show(
+        context: this.context,
+        message: _chatVoiceUploadFailureMessage(),
+        variant: AppSnackbarVariant.error,
+      );
+      return;
+    }
+
+    final upload = uploadResult.valueOrNull!;
+    final sendResult = await ref.read(sendMessageProvider.notifier).sendVoiceMessage(
+          conversationId: widget.conversationId,
+          messageId: upload.messageId,
+          attachmentPath: upload.attachmentPath,
+          structuredPayload: {
+            'voice_duration_seconds': upload.durationSeconds,
+          },
+        );
+    if (!mounted) {
+      return;
+    }
+    state.setState(() {
+      state.updateRecordingElapsedSeconds(0);
+    });
+    if (sendResult.isFailure) {
+      AppSnackbar.show(
+        context: this.context,
+        message: _chatVoiceSendFailureMessage(),
+        variant: AppSnackbarVariant.error,
+      );
+      return;
+    }
+    _scrollToBottom();
+  }
+
+  List<_RenderedChatMessage> _buildRenderedMessages(List<ChatMessage> persistedMessages) {
+    final state = this as _ChatScreenState;
+    final rendered = persistedMessages
+        .map((message) => _RenderedChatMessage(message: message, isSending: false))
+        .toList(growable: true)
+      ..addAll(
+        state.pendingMessages.map(
+          (pending) => _RenderedChatMessage(message: pending.message, isSending: true),
+        ),
+      )
+      ..sort((a, b) => a.message.createdAt.compareTo(b.message.createdAt));
+    return rendered;
+  }
+
+  void _removePendingMessage(String tempId) {
+    final state = this as _ChatScreenState;
+    if (!mounted) {
+      return;
+    }
+    state.setState(() {
+      state.pendingMessages.removeWhere((pending) => pending.tempId == tempId);
+    });
+  }
+
+  Future<void> _approveBooking(BuildContext context, String bookingId, String loadId) async {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(l10n.chatApproveBookingDialogTitle),
+            content: Text(l10n.chatApproveBookingDialogMessage),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(l10n.chatActionCancel),
+              ),
+              PrimaryButton(
+                label: l10n.chatActionApprove,
+                onPressed: () => Navigator.of(context).pop(true),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    if (!confirmed || !mounted) {
+      return;
+    }
+
+    final result = await ref.read(loadDetailProvider(loadId).notifier).approveBookingRequest(bookingId);
+    if (!mounted) {
+      return;
+    }
+    if (result.isSuccess) {
+      await ref.read(inboxProvider.notifier).load();
+      if (!mounted) {
+        return;
+      }
+      AppSnackbar.show(
+        context: this.context,
+        message: l10n.chatBookingApprovedSuccess,
+        variant: AppSnackbarVariant.success,
+      );
+      return;
+    }
+    AppSnackbar.show(
+      context: this.context,
+      message: _chatApproveBookingFailureMessage(),
+      variant: AppSnackbarVariant.error,
+    );
+  }
+
+  Future<void> _rejectBooking(BuildContext context, String bookingId, String loadId) async {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final confirmed = await showDialog<bool>(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(l10n.chatRejectBookingDialogTitle),
+            content: Text(l10n.chatRejectBookingDialogMessage),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text(l10n.chatActionCancel),
+              ),
+              PrimaryButton(
+                label: l10n.chatActionReject,
+                onPressed: () => Navigator.of(context).pop(true),
+              ),
+            ],
+          ),
+        ) ??
+        false;
+    if (!confirmed || !mounted) {
+      return;
+    }
+
+    final result = await ref.read(loadDetailProvider(loadId).notifier).rejectBookingRequest(bookingId);
+    if (!mounted) {
+      return;
+    }
+    if (result.isSuccess) {
+      await ref.read(inboxProvider.notifier).load();
+      if (!mounted) {
+        return;
+      }
+      AppSnackbar.show(
+        context: this.context,
+        message: l10n.chatBookingRejectedSuccess,
+        variant: AppSnackbarVariant.success,
+      );
+      return;
+    }
+    AppSnackbar.show(
+      context: this.context,
+      message: _chatRejectBookingFailureMessage(),
+      variant: AppSnackbarVariant.error,
+    );
+  }
+
+  String _chatTextSendFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatTextSendFailureMessage;
+  }
+
+  String _chatVoiceStartFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatVoiceStartFailureMessage;
+  }
+
+  String _chatVoiceUploadFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatVoiceUploadFailureMessage;
+  }
+
+  String _chatVoiceSendFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatVoiceSendFailureMessage;
+  }
+
+  String _chatApproveBookingFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatApproveBookingFailureMessage;
+  }
+
+  String _chatRejectBookingFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatRejectBookingFailureMessage;
+  }
+
+  String _chatBookingActionFailureMessage() {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.chatBookingActionFailureMessage;
+  }
+
+  void _scrollToBottom() {
+    final state = this as _ChatScreenState;
+    if (!state.scrollController.hasClients) {
+      return;
+    }
+    state.scrollController.animateTo(
+      state.scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeOut,
+    );
+  }
+}

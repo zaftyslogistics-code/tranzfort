@@ -2,124 +2,469 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/navigation/app_routes.dart';
+import '../../../core/providers/app_locale_providers.dart';
+import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../shared/widgets/empty_state_view.dart';
-import '../providers/notifications_provider.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/status_components.dart';
+import '../../shell/presentation/shell_components.dart';
+import '../data/notification_repository.dart';
+import '../data/notification_route_resolver.dart';
+import '../data/notification_tts_service.dart';
+import '../providers/notification_providers.dart';
 
 class NotificationsScreen extends ConsumerWidget {
   const NotificationsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notificationsAsync = ref.watch(notificationsProvider);
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final state = ref.watch(notificationsProvider);
+    final unreadCount = ref.watch(unreadNotificationCountProvider);
+    final highPriorityUnreadCount = state.notifications
+        .where((item) => !item.isRead && item.priority == AppNotificationPriority.high)
+        .length;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Notifications'),
+        title: Text(l10n.notificationsTitle),
         actions: [
-          IconButton(
-            onPressed: () {
-              ref.read(notificationActionProvider.notifier).markAllRead();
-            },
-            icon: const Icon(Icons.done_all),
-            tooltip: 'Mark all as read',
-          ),
+          if (state.notifications.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(right: AppSpacing.sm),
+              child: TextButton(
+                onPressed: unreadCount == 0
+                    ? null
+                    : () async {
+                        final result = await ref.read(notificationsProvider.notifier).markAllRead();
+                        if (!context.mounted || result.isFailure) {
+                          if (!context.mounted || result.failureOrNull == null) {
+                            return;
+                          }
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            AppSnackbar.build(
+                              context: context,
+                              message: _notificationsMarkAllReadFailureMessage(context),
+                              variant: AppSnackbarVariant.error,
+                            ),
+                          );
+                          return;
+                        }
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          AppSnackbar.build(
+                            context: context,
+                            message: l10n.notificationsMarkedAllReadSuccess,
+                            variant: AppSnackbarVariant.success,
+                          ),
+                        );
+                      },
+                child: Text(l10n.notificationsMarkAllRead),
+              ),
+            ),
         ],
       ),
-      body: notificationsAsync.when(
-        data: (notifications) {
-          if (notifications.isEmpty) {
-            return const EmptyStateView(
-              icon: Icons.notifications_none,
-              title: 'All caught up!',
-              subtitle: 'You have no new notifications.',
-            );
-          }
-
-          return RefreshIndicator(
-            onRefresh: () => ref.refresh(notificationsProvider.future),
-            child: ListView.separated(
-              padding: const EdgeInsets.all(16),
-              itemCount: notifications.length,
-              separatorBuilder: (context, index) => const SizedBox(height: 12),
-              itemBuilder: (context, index) {
-                final notif = notifications[index];
-                final isRead = notif['is_read'] == true;
-                final createdAt = DateTime.tryParse((notif['created_at'] ?? '').toString());
-                
-                return ListTile(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    side: BorderSide(
-                      color: isRead ? AppColors.neutralLight : AppColors.primaryLight.withValues(alpha: 0.5),
-                    ),
-                  ),
-                  tileColor: isRead ? AppColors.surface : AppColors.primary.withValues(alpha: 0.05),
-                  leading: CircleAvatar(
-                    backgroundColor: isRead ? AppColors.neutralLight : AppColors.primaryLight.withValues(alpha: 0.2),
-                    child: Icon(
-                      Icons.notifications,
-                      color: isRead ? AppColors.neutral : AppColors.primary,
-                    ),
-                  ),
-                  title: Text(
-                    (notif['title'] ?? '').toString(),
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: isRead ? FontWeight.normal : FontWeight.bold,
-                    ),
-                  ),
-                  subtitle: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 4),
-                      Text(
-                        (notif['body'] ?? '').toString(),
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: isRead ? AppColors.neutral : AppColors.onSurface,
-                        ),
-                      ),
-                      if (createdAt != null) ...[
-                        const SizedBox(height: 8),
-                        Text(
-                          _timeAgo(createdAt),
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: AppColors.neutral,
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
-                  onTap: () {
-                    if (!isRead) {
-                      ref.read(notificationActionProvider.notifier).markRead(notif['id'].toString());
-                    }
-                    
-                    // Route handling logic based on notification data
-                    final data = notif['data'] as Map<String, dynamic>? ?? {};
-                    if (data.containsKey('load_id')) {
-                      context.push('/load-detail/${data['load_id']}');
-                    } else if (data.containsKey('trip_id')) {
-                      context.push('/trip-detail/${data['trip_id']}');
-                    } else if (data.containsKey('conversation_id')) {
-                      context.push('/chat/${data['conversation_id']}');
-                    }
-                  },
-                );
-              },
-            ),
-          );
-        },
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => const Center(child: Text('Failed to load notifications')),
+      body: _NotificationsBody(
+        state: state,
+        unreadCount: unreadCount,
+        highPriorityUnreadCount: highPriorityUnreadCount,
       ),
     );
   }
+}
 
-  String _timeAgo(DateTime dateTime) {
-    final diff = DateTime.now().difference(dateTime);
-    if (diff.inDays > 0) return '${diff.inDays}d ago';
-    if (diff.inHours > 0) return '${diff.inHours}h ago';
-    if (diff.inMinutes > 0) return '${diff.inMinutes}m ago';
-    return 'Just now';
+String _notificationsMarkAllReadFailureMessage(BuildContext context) {
+  final AppLocalizations l10n = AppLocalizations.of(context);
+  return l10n.notificationsMarkAllReadFailureMessage;
+}
+
+String _notificationsTtsSummary({
+  required BuildContext context,
+  required String languageCode,
+  required int unreadCount,
+  required int highPriorityUnreadCount,
+}) {
+  final AppLocalizations l10n = AppLocalizations.of(context);
+  return l10n.notificationsTtsSummary(unreadCount, highPriorityUnreadCount);
+}
+
+class _NotificationsBody extends ConsumerWidget {
+  final NotificationsState state;
+  final int unreadCount;
+  final int highPriorityUnreadCount;
+
+  const _NotificationsBody({
+    required this.state,
+    required this.unreadCount,
+    required this.highPriorityUnreadCount,
+  });
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final languageCode = ref.watch(appLocaleProvider).locale.languageCode;
+    if (state.isLoading) {
+      return const Padding(
+        padding: EdgeInsets.all(AppSpacing.lg),
+        child: LoadingShimmer(height: 96, itemCount: 4),
+      );
+    }
+
+    if (state.failure != null && state.notifications.isEmpty) {
+      return Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: WarningBlock(
+          title: l10n.notificationsLoadFailureTitle,
+          message: _notificationsFailureMessage(context),
+        ),
+      );
+    }
+
+    if (state.notifications.isEmpty) {
+      final role = ref.watch(currentAuthStateProvider).role;
+      final isSupplier = role == AppUserRole.supplier;
+      return EmptyStateView(
+        icon: Icons.notifications_none_outlined,
+        title: l10n.notificationsEmptyTitle,
+        subtitle: l10n.notificationsEmptySubtitle,
+        actionLabel: isSupplier ? l10n.supplierTripsEmptyActiveAction : l10n.truckerTripsEmptyActiveAction,
+        onAction: () => context.go(isSupplier ? AppRoutes.myLoadsPath : AppRoutes.findLoadsPath),
+      );
+    }
+
+    final groupedNotifications = _groupNotifications(context, state.notifications, l10n);
+    return ListView(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.xl,
+        AppSpacing.lg,
+        AppSpacing.bottomNavSafe + AppSpacing.xl,
+      ),
+      children: [
+        SectionCard(
+          title: l10n.notificationsOverviewTitle,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Wrap(
+                spacing: AppSpacing.md,
+                runSpacing: AppSpacing.md,
+                children: [
+                  StatusBadge(
+                    label: l10n.notificationsUnreadCountLabel(unreadCount),
+                    icon: Icons.notifications_active_outlined,
+                    palette: unreadCount == 0
+                        ? const StatusPalette(
+                            foreground: AppColors.neutral,
+                            background: AppColors.neutralBg,
+                          )
+                        : const StatusPalette(
+                            foreground: AppColors.info,
+                            background: AppColors.infoBg,
+                          ),
+                  ),
+                  StatusBadge(
+                    label: l10n.notificationsHighPriorityCountLabel(highPriorityUnreadCount),
+                    icon: Icons.priority_high_outlined,
+                    palette: highPriorityUnreadCount == 0
+                        ? const StatusPalette(
+                            foreground: AppColors.neutral,
+                            background: AppColors.neutralBg,
+                          )
+                        : const StatusPalette(
+                            foreground: AppColors.warning,
+                            background: AppColors.warningBg,
+                          ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.md),
+              SizedBox(
+                width: double.infinity,
+                child: OutlineButton(
+                  label: l10n.commonHearSummary,
+                  onPressed: () async {
+                    final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
+                          languageCode: languageCode,
+                          message: _notificationsTtsSummary(
+                            context: context,
+                            languageCode: languageCode,
+                            unreadCount: unreadCount,
+                            highPriorityUnreadCount: highPriorityUnreadCount,
+                          ),
+                        );
+                    if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
+                      return;
+                    }
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      AppSnackbar.build(
+                        context: context,
+                        message: outcome == ContextualTtsOutcome.muted ? l10n.commonVoiceMuted : l10n.commonVoiceUnavailable,
+                        variant: outcome == ContextualTtsOutcome.muted ? AppSnackbarVariant.info : AppSnackbarVariant.error,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        for (final group in groupedNotifications) ...[
+          SectionCard(
+            title: group.label,
+            child: Column(
+              children: [
+                for (var index = 0; index < group.notifications.length; index++) ...[
+                  _NotificationRow(notification: group.notifications[index]),
+                  if (index != group.notifications.length - 1)
+                    const Divider(height: AppSpacing.xl),
+                ],
+              ],
+            ),
+          ),
+          if (group != groupedNotifications.last) const SizedBox(height: AppSpacing.sectionGap),
+        ],
+        if (state.isLoadingMore)
+          const Padding(
+            padding: EdgeInsets.only(top: AppSpacing.md),
+            child: Center(child: CircularProgressIndicator()),
+          )
+        else if (state.hasMore)
+          Padding(
+            padding: const EdgeInsets.only(top: AppSpacing.md),
+            child: OutlineButton(
+              label: l10n.notificationsLoadMore,
+              onPressed: () => ref.read(notificationsProvider.notifier).loadMore(),
+            ),
+          ),
+      ],
+    );
   }
+
+  String _notificationsFailureMessage(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    return l10n.notificationsLoadFailureMessage;
+  }
+}
+
+class _NotificationRow extends ConsumerWidget {
+  final AppNotification notification;
+
+  const _NotificationRow({required this.notification});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final role = ref.watch(currentAuthStateProvider).role;
+    final theme = Theme.of(context);
+    final titleStyle = theme.textTheme.titleSmall?.copyWith(
+      fontWeight: !notification.isRead || notification.priority == AppNotificationPriority.high
+          ? FontWeight.w700
+          : FontWeight.w600,
+    );
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(AppRadius.card),
+      onTap: () async {
+        if (!notification.isRead) {
+          await ref.read(notificationsProvider.notifier).markRead(notification.id);
+        }
+
+        await ref.read(notificationTtsServiceProvider).speakNotificationOpen(notification, role);
+
+        if (!context.mounted) {
+          return;
+        }
+
+        context.go(resolveNotificationRoute(notification, role));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: _iconBackground(notification),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(_iconFor(notification.type), color: _iconForeground(notification), size: 20),
+            ),
+            const SizedBox(width: AppSpacing.md),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!notification.isRead)
+                        Container(
+                          width: 10,
+                          height: 10,
+                          margin: const EdgeInsets.only(top: 6, right: AppSpacing.sm),
+                          decoration: const BoxDecoration(
+                            color: AppColors.info,
+                            shape: BoxShape.circle,
+                          ),
+                        ),
+                      Expanded(
+                        child: Text(
+                          notification.titleText ?? _fallbackTitle(notification.type, l10n),
+                          style: titleStyle,
+                        ),
+                      ),
+                      if (notification.priority == AppNotificationPriority.high)
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 4),
+                          decoration: BoxDecoration(
+                            color: AppColors.warningBg,
+                            borderRadius: BorderRadius.circular(999),
+                          ),
+                          child: Text(
+                            l10n.notificationsPriorityHighLabel,
+                            style: theme.textTheme.labelSmall?.copyWith(
+                              color: AppColors.warning,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(
+                    notification.bodyText ?? l10n.notificationsBodyFallback,
+                    style: theme.textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
+                  ),
+                  const SizedBox(height: AppSpacing.sm),
+                  Text(
+                    _formatNotificationTimestamp(context, notification.createdAt),
+                    style: theme.textTheme.bodySmall,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _NotificationGroup {
+  final String label;
+  final List<AppNotification> notifications;
+
+  const _NotificationGroup({
+    required this.label,
+    required this.notifications,
+  });
+}
+
+List<_NotificationGroup> _groupNotifications(
+  BuildContext context,
+  List<AppNotification> notifications,
+  AppLocalizations l10n,
+) {
+  final now = DateTime.now();
+  final Map<String, List<AppNotification>> grouped = <String, List<AppNotification>>{};
+  final List<String> order = <String>[];
+
+  for (final notification in notifications) {
+    final localDate = notification.createdAt.toLocal();
+    final label = _groupLabel(context, localDate, now, l10n);
+    if (!grouped.containsKey(label)) {
+      grouped[label] = <AppNotification>[];
+      order.add(label);
+    }
+    grouped[label]!.add(notification);
+  }
+
+  return order
+      .map(
+        (label) => _NotificationGroup(
+          label: label,
+          notifications: grouped[label]!,
+        ),
+      )
+      .toList(growable: false);
+}
+
+String _groupLabel(BuildContext context, DateTime date, DateTime now, AppLocalizations l10n) {
+  final today = DateTime(now.year, now.month, now.day);
+  final target = DateTime(date.year, date.month, date.day);
+  final diff = today.difference(target).inDays;
+  if (diff == 0) {
+    return l10n.notificationsGroupToday;
+  }
+  if (diff == 1) {
+    return l10n.notificationsGroupYesterday;
+  }
+  return MaterialLocalizations.of(context).formatMediumDate(date);
+}
+
+String _formatNotificationTimestamp(BuildContext context, DateTime date) {
+  return MaterialLocalizations.of(context).formatTimeOfDay(
+    TimeOfDay.fromDateTime(date.toLocal()),
+    alwaysUse24HourFormat: MediaQuery.maybeOf(context)?.alwaysUse24HourFormat ?? false,
+  );
+}
+
+String _fallbackTitle(AppNotificationType type, AppLocalizations l10n) {
+  return switch (type) {
+    AppNotificationType.verificationUpdate => l10n.notificationFallbackVerificationUpdate,
+    AppNotificationType.bookingUpdate => l10n.notificationFallbackBookingUpdate,
+    AppNotificationType.tripUpdate => l10n.notificationFallbackTripUpdate,
+    AppNotificationType.proofUpdate => l10n.notificationFallbackProofUpdate,
+    AppNotificationType.superLoadUpdate => l10n.notificationFallbackSuperLoadUpdate,
+    AppNotificationType.messageReceived => l10n.notificationFallbackMessageReceived,
+    AppNotificationType.supportUpdate => l10n.notificationFallbackSupportUpdate,
+    AppNotificationType.disputeUpdate => l10n.notificationFallbackDisputeUpdate,
+    AppNotificationType.accountUpdate => l10n.notificationFallbackAccountUpdate,
+    AppNotificationType.systemNotice => l10n.notificationFallbackSystemNotice,
+    AppNotificationType.loadExpiryWarning => l10n.notificationFallbackLoadExpiryWarning,
+  };
+}
+
+IconData _iconFor(AppNotificationType type) {
+  return switch (type) {
+    AppNotificationType.verificationUpdate => Icons.verified_outlined,
+    AppNotificationType.bookingUpdate => Icons.assignment_turned_in_outlined,
+    AppNotificationType.tripUpdate => Icons.alt_route_outlined,
+    AppNotificationType.proofUpdate => Icons.fact_check_outlined,
+    AppNotificationType.superLoadUpdate => Icons.workspace_premium_outlined,
+    AppNotificationType.messageReceived => Icons.chat_bubble_outline,
+    AppNotificationType.supportUpdate => Icons.support_agent_outlined,
+    AppNotificationType.disputeUpdate => Icons.gavel_outlined,
+    AppNotificationType.accountUpdate => Icons.manage_accounts_outlined,
+    AppNotificationType.systemNotice => Icons.notifications_outlined,
+    AppNotificationType.loadExpiryWarning => Icons.schedule_outlined,
+  };
+}
+
+Color _iconForeground(AppNotification notification) {
+  if (notification.priority == AppNotificationPriority.high) {
+    return AppColors.warning;
+  }
+  if (!notification.isRead) {
+    return AppColors.info;
+  }
+  return AppColors.primary;
+}
+
+Color _iconBackground(AppNotification notification) {
+  if (notification.priority == AppNotificationPriority.high) {
+    return AppColors.warningBg;
+  }
+  if (!notification.isRead) {
+    return AppColors.infoBg;
+  }
+  return AppColors.neutralBg;
 }

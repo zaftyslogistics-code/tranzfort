@@ -1,0 +1,179 @@
+# TranZfort App - Git Ignore Configuration
+# Excludes sensitive files, build artifacts, and documentation directories
+
+# ============================================================================
+# SENSITIVE FILES - NEVER COMMIT
+# ============================================================================
+# Environment files
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.staging
+
+# Credentials and secrets
+*.pem
+*.key
+*.p12
+*.pfx
+service-account*.json
+credentials.json
+google-services.json
+GoogleService-Info.plist
+
+# API keys and tokens
+**/supabase_config.dart
+**/maps_config.dart
+**/firebase_config.dart
+
+# ============================================================================
+# DOCUMENTATION DIRECTORIES - EXCLUDED PER USER REQUEST
+# ============================================================================
+docs/
+old-app/
+
+# ============================================================================
+# FLUTTER / DART BUILD ARTIFACTS
+# ============================================================================
+# Build outputs
+build/
+**/build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+
+# ============================================================================
+# PLATFORM-SPECIFIC BUILD DIRECTORIES
+# ============================================================================
+# Android
+**/android/.gradle/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+**/android/key.properties
+**/android/local.properties
+**/android/gradle/wrapper/gradle-wrapper.jar
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/**/*.keystore
+**/android/**/*.jks
+
+# iOS
+**/ios/.generated/
+**/ios/Flutter/App.framework/
+**/ios/Flutter/Flutter.framework/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/app.flx
+**/ios/Flutter/app.zip
+**/ios/Flutter/flutter_assets/
+**/ios/ServiceDefinitions.json
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/Pods/
+**/ios/Podfile.lock
+**/ios/.symlinks/
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/Flutter.podspec
+
+# macOS
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral/
+**/macos/Pods/
+**/macos/Podfile.lock
+
+# Windows
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+**/windows/Flutter/ephemeral/
+
+# Linux
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+**/linux/Flutter/ephemeral/
+
+# Web
+**/web/flutter_bootstrap.js
+**/web/flutter.js
+**/web/canvaskit/
+
+# ============================================================================
+# IDE AND EDITOR FILES
+# ============================================================================
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+*.swp
+*.swo
+*~
+
+# Xcode
+*.xcworkspace/
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+
+# ============================================================================
+# LOGS AND TEMPORARY FILES
+# ============================================================================
+*.log
+*.tmp
+*.temp
+*.bak
+*.cache
+crashlytics-build.properties
+
+# Test outputs
+test_failures.txt
+voice_test_output.txt
+missing_l10n_keys.txt
+
+# ============================================================================
+# DEPENDENCY DIRECTORIES
+# ============================================================================
+node_modules/
+/vendor/
+
+# ============================================================================
+# SUPABASE LOCAL DEVELOPMENT
+# ============================================================================
+supabase/.temp/
+supabase/config.toml.bak
+
+# ============================================================================
+# OS-SPECIFIC FILES
+# ============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.nfs*

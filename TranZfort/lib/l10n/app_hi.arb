@@ -1,0 +1,2341 @@
+{
+  "appTitle": "TranZfort",
+  "splashLoadingWorkspace": "आपका workspace लोड हो रहा है...",
+  "authGoogleFailureMessage": "अभी Google से continue नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या उसकी जगह email sign-in इस्तेमाल करें।",
+  "authWelcomeTitle": "TranZfort में आपका स्वागत है",
+  "authWelcomeSubtitle": "Supplier या trucker workspace में आगे बढ़ने के लिए Google या email sign-in चुनें।",
+  "splashSetupTitle": "Device access सेट करें",
+  "splashSetupSubtitle": "Notifications, voice guidance, और location access अभी allow करें ताकि first login और verification flow smoothly आगे बढ़ सके।",
+  "splashSetupEnableVoiceAction": "Voice guidance enable करें",
+  "splashSetupOpenLocationSettingsAction": "Location settings खोलें",
+  "authContinueWithGoogle": "Google से continue करें",
+  "authContinueWithPassword": "Email और password से continue करें",
+  "authTermsOfService": "सेवा की शर्तें",
+  "authTermsInfoMessage": "TranZfort access अभी verified supplier और trucker workflows तक सीमित है। आगे बढ़कर आप platform terms से सहमत होते हैं।",
+  "authPasswordTitle": "Email और password",
+  "authPasswordSubtitle": "अपने email और password से sign in करें, या आगे बढ़ने के लिए नया TranZfort account बनाएँ।",
+  "authPasswordLabel": "Password",
+  "authPasswordConfirmLabel": "Password की पुष्टि करें",
+  "authPasswordHint": "कम से कम 8 characters दर्ज करें",
+  "authPasswordModeSignIn": "Sign in",
+  "authPasswordModeSignUp": "Account बनाएँ",
+  "authPasswordSwitchToSignIn": "पहले से account है? Sign in करें",
+  "authPasswordSwitchToSignUp": "TranZfort पर नए हैं? Account बनाएँ",
+  "authPasswordSignInAction": "Password से sign in करें",
+  "authPasswordSignUpAction": "Account बनाएँ",
+  "authPasswordInvalidEmailMessage": "वैध email address दर्ज करें।",
+  "authPasswordTooShortMessage": "कम से कम 8 characters वाला password दर्ज करें।",
+  "authPasswordConfirmMismatchMessage": "Password confirmation मेल नहीं खाती।",
+  "authPasswordSignInFailureMessage": "अभी email और password से sign in नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या कोई दूसरा sign-in तरीका इस्तेमाल करें।",
+  "authPasswordSignUpFailureMessage": "अभी आपका account नहीं बन सका। यही details लेकर थोड़ी देर बाद फिर कोशिश करें।",
+  "authPasswordSignUpSuccessMessage": "आपका account बन गया। अगर email confirmation required हो, तो उसे पूरा करें और फिर अपने नए password से sign in करें।",
+  "authPasswordCheckEmailTitle": "अपना email देखें",
+  "authPasswordCheckEmailSubtitle": "हमने {email} पर verification link भेजा है। उस email को खोलें, verification पूरा करें, और फिर यहां वापस आकर sign in करें।",
+  "@authPasswordCheckEmailSubtitle": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "authPasswordResendVerificationAction": "Verification email फिर भेजें",
+  "authPasswordResendVerificationSuccessMessage": "हमने {email} पर एक नया verification email भेजा है। उसे खोलें, verification पूरा करें, और फिर sign in करें।",
+  "@authPasswordResendVerificationSuccessMessage": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "authPasswordResendVerificationFailureMessage": "अभी verification email फिर नहीं भेजा जा सका। थोड़ी देर बाद फिर कोशिश करें या कोई दूसरा email इस्तेमाल करें।",
+  "authPasswordBackToSignInAction": "Sign in पर वापस जाएँ",
+  "authPasswordUseDifferentEmailAction": "कोई दूसरा email इस्तेमाल करें",
+  "onboardingSelectRoleError": "चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।",
+  "onboardingRoleWorkspaceFailure": "अभी आपका role workspace तैयार नहीं हो सका। अपना role फिर चुनकर थोड़ी देर बाद फिर कोशिश करें।",
+  "onboardingRoleSaveFailure": "अभी आपका role save नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।",
+  "onboardingChooseRoleTitle": "Role चुनें",
+  "onboardingRoleQuestion": "आपके काम के लिए कौन-सा role सही है?",
+  "onboardingRoleSubtitle": "आपका role तय करेगा कि TranZfort आपके लिए कौन-से tools, dashboard और workflows तैयार करेगा।",
+  "onboardingSupplierTitle": "Supplier",
+  "onboardingSupplierSubtitle": "Loads post करें, bookings review करें, trips manage करें और delivery follow-through ट्रैक करें।",
+  "onboardingTruckerTitle": "Trucker",
+  "onboardingTruckerSubtitle": "Loads खोजें, fleet readiness manage करें और active trips एक जगह से चलाएँ।",
+  "onboardingContinue": "आगे बढ़ें",
+  "onboardingProfileSaveFailure": "अभी आपकी profile save नहीं हो सकी। Details जांचकर थोड़ी देर बाद फिर कोशिश करें।",
+  "onboardingCompleteProfileTitle": "Profile पूरी करें",
+  "onboardingCompleteProfileHeading": "अपनी basic profile पूरी करें",
+  "onboardingCompleteProfileSubtitle": "वह मुख्य contact details जोड़ें जो verification और daily operations में काम आएँगी।",
+  "onboardingFullNameLabel": "पूरा नाम",
+  "onboardingFullNameHint": "अपना पूरा नाम दर्ज करें",
+  "onboardingMobileLabel": "Mobile number",
+  "onboardingTermsAcceptance": "आगे बढ़कर आप पुष्टि करते हैं कि आपकी basic profile details सही हैं और आप platform terms से सहमत हैं।",
+  "onboardingSaveAndContinue": "Save करके आगे बढ़ें",
+  "commonRetry": "फिर कोशिश करें",
+  "shellTooltipVoiceAssistance": "Voice assistance",
+  "supplierQuickActionNotifications": "Notifications",
+  "supplierMyLoadsTitle": "मेरे लोड्स",
+  "supplierMyLoadsSubtitle": "एक ही जगह से active supplier loads, booking demand, और completed load history देखें।",
+  "supplierMyLoadsTabActive": "सक्रिय",
+  "supplierMyLoadsTabCompleted": "पूर्ण",
+  "supplierMyLoadsLoadFailureTitle": "आपके supplier loads लोड नहीं हो सके",
+  "supplierMyLoadsFailureMessage": "अभी आपके supplier loads लोड नहीं हो सके। Latest load list refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierMyLoadsEmptyActiveTitle": "अभी कोई active load नहीं है",
+  "supplierMyLoadsEmptyCompletedTitle": "अभी कोई completed load नहीं है",
+  "supplierMyLoadsEmptyActiveSubtitle": "अपना पहला load post करें ताकि booking requests और execution updates यहाँ दिखने लगें।",
+  "supplierMyLoadsEmptyCompletedSubtitle": "Completed, cancelled, expired, और app के बाहर filled loads active work close होने पर यहाँ दिखाई देंगी।",
+  "supplierMyLoadsOpenActiveLoads": "Active loads खोलें",
+  "supplierMyLoadsMoreUnavailableTitle": "और supplier loads लोड नहीं हो सके",
+  "supplierMyLoadsPaginationFailureMessage": "अभी और supplier loads लोड नहीं हो सके। Latest load history refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierMyLoadsLoadingMore": "और loads लोड हो रही हैं...",
+  "supplierMyLoadsLoadMore": "और loads लोड करें",
+  "supplierLoadCardPickupDate": "Pickup {value}",
+  "supplierLoadCardTrucks": "{booked}/{needed} ट्रक बुक हुए",
+  "supplierLoadCardTrackLoad": "Load ट्रैक करें",
+  "supplierLoadCardViewHistory": "History देखें",
+  "supplierLoadCardViewDetails": "Details देखें",
+  "supplierRecentLoadsTitle": "Recent loads",
+  "supplierDashboardWelcomeBack": "फिर से स्वागत है, {name}",
+  "@supplierDashboardWelcomeBack": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "supplierDashboardHeroSubtitle": "Supplier verification ट्रैक करें, Super Load readiness रिव्यू करें, और अपने latest loads व execution activity को सामने रखें।",
+  "supplierDashboardOverviewTitle": "Dashboard overview",
+  "supplierDashboardSuperLoadReadinessTitle": "Super Load readiness",
+  "supplierDashboardQuickActionsTitle": "Quick actions",
+  "supplierDashboardQuickActionChatLabel": "Chat",
+  "supplierDashboardPostLoadAction": "Post Load",
+  "supplierDashboardHeroSummaryBody": "अपनी supplier verification current रखें, active loads मॉनिटर करें, और इसी workspace में दिख रहे latest Super Load readiness signals पर नज़र रखें।",
+  "supplierDashboardStatsActiveLoadsLabel": "Active loads",
+  "supplierDashboardStatsActiveLoadsHelper": "वे loads जो अभी supplier-side tracking के लिए open हैं।",
+  "supplierDashboardStatsPendingBookingsLabel": "Pending bookings",
+  "supplierDashboardStatsPendingBookingsHelper": "वे booking requests जिन्हें अभी supplier attention चाहिए।",
+  "supplierDashboardStatsInTransitTripsLabel": "Trips in transit",
+  "supplierDashboardStatsInTransitTripsHelper": "वे linked trips जो अभी आपके loads के खिलाफ चल रही हैं।",
+  "supplierDashboardStatsCompletedTripsLabel": "Completed trips",
+  "supplierDashboardStatsCompletedTripsHelper": "वे trips जो recorded completion state तक पहुँच चुकी हैं।",
+  "supplierDashboardOpenMyLoadsAction": "Open my loads",
+  "supplierDashboardLoadFailureTitle": "आपका supplier dashboard लोड नहीं हो सका",
+  "supplierDashboardLoadFailureMessage": "अभी आपका supplier dashboard लोड नहीं हो सका। Latest overview metrics refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierDashboardAccountStateUnavailableTitle": "Supplier account state उपलब्ध नहीं है",
+  "supplierDashboardAccountStateUnavailableMessage": "अभी आपकी current supplier account state लोड नहीं हो सकी। Latest verification और company details restore करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierDashboardRecentLoadsUnavailableTitle": "Recent loads उपलब्ध नहीं हैं",
+  "supplierDashboardRecentLoadsUnavailableMessage": "अभी आपके recent supplier loads लोड नहीं हो सके। Latest load list refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierDashboardNoLoadsPostedTitle": "अभी कोई load post नहीं किया गया",
+  "supplierDashboardNoLoadsPostedSubtitle": "अपना पहला supplier load post करें ताकि booking requests और linked trip activity शुरू हो सके।",
+  "shellTabHome": "Home",
+  "shellTitleSupplierDashboard": "Supplier dashboard",
+  "shellTabLoads": "Loads",
+  "shellTitleMyLoads": "My Loads",
+  "shellTabTrips": "Trips",
+  "shellQuickActionTrips": "Trips",
+  "shellDashboardTitle": "Dashboard",
+  "shellTabFind": "Find",
+  "shellTitleFindLoads": "Find Loads",
+  "shellDrawerSupplierWorkspace": "Supplier workspace",
+  "shellDrawerTruckerWorkspace": "Trucker workspace",
+  "shellDrawerDashboard": "Dashboard",
+  "shellDrawerAssistant": "Guided help",
+  "shellDrawerFleet": "Fleet",
+  "shellDrawerMessages": "Messages",
+  "navNotifications": "Notifications",
+  "shellDrawerSupport": "सहायता",
+  "shellDrawerProfile": "प्रोफ़ाइल",
+  "shellDrawerLanguage": "Language",
+  "shellDrawerSignOut": "Sign out",
+  "shellSignOutFailureMessage": "अभी sign out नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।",
+  "shellMessagesTitle": "Messages",
+  "shellMessagesSupplierSubtitle": "एक ही जगह से load-linked trucker conversations ट्रैक करें और जल्दी reply दें।",
+  "shellMessagesTruckerSubtitle": "एक inbox में supplier updates, route context और booking follow-through पर नज़र रखें।",
+  "shellMessagesSupplierGroupedInbox": "Grouped inbox",
+  "shellMessagesTruckerFlatInbox": "Flat inbox",
+  "shellMessagesUnreadThreads": "{count} unread threads",
+  "@shellMessagesUnreadThreads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shellMessagesLoadFailureTitle": "Messages लोड नहीं हो सके",
+  "shellMessagesEmptyTitle": "अभी कोई conversation नहीं है",
+  "shellMessagesSupplierEmptySubtitle": "पहला message आने के बाद यहाँ load-linked trucker conversations दिखेंगी।",
+  "shellMessagesTruckerEmptySubtitle": "किसी load पर chat शुरू करें और आपकी supplier conversations यहाँ दिखेंगी।",
+  "shellMessagesActiveConversations": "{count} active conversations • {preview}",
+  "@shellMessagesActiveConversations": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "preview": {}
+    }
+  },
+  "shellMessagesUnreadStatus": "Unread",
+  "shellMessagesReadStatus": "Read",
+  "shellMessagesHideTruckerConversations": "Trucker conversations छिपाएँ",
+  "shellMessagesLatestBy": "Latest by {name} • {timestamp}",
+  "@shellMessagesLatestBy": {
+    "placeholders": {
+      "name": {},
+      "timestamp": {}
+    }
+  },
+  "truckerChatSupplierAction": "Supplier से chat करें",
+  "truckerLoadChatStartFailureMessage": "अभी यह supplier chat शुरू नहीं हो सकी। थोड़ी देर बाद load detail से फिर कोशिश करें।",
+  "truckerTripChatStartFailureMessage": "अभी यह supplier chat शुरू नहीं हो सकी। थोड़ी देर बाद trip detail से फिर कोशिश करें।",
+  "truckerChatLockedLabel": "Chat उपलब्ध नहीं है: {reason}",
+  "@truckerChatLockedLabel": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "chatTitleFallback": "Conversation",
+  "chatTooltipCall": "Call",
+  "chatReportSourceLabel": "Chat • {source}",
+  "@chatReportSourceLabel": {
+    "placeholders": {
+      "source": {}
+    }
+  },
+  "chatMenuMarkConversationRead": "Conversation को read mark करें",
+  "chatMenuRefreshThread": "Thread refresh करें",
+  "chatMenuReportSpamOrAbuse": "Spam या abuse report करें",
+  "chatConversationUnavailableTitle": "Conversation उपलब्ध नहीं है",
+  "chatConversationUnavailableSubtitle": "अभी यह conversation नहीं मिल सकी। Refresh करें या inbox पर लौटें।",
+  "chatBackToInboxAction": "Back to messages",
+  "chatBookingActionUnavailableTitle": "Booking action उपलब्ध नहीं है",
+  "chatBookingActionFailureMessage": "अभी इस chat से latest booking action पूरा नहीं हो सका। Booking state review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "chatApproveBookingDialogTitle": "Booking approve करें?",
+  "chatApproveBookingDialogMessage": "यह chat context से trucker booking request approve करेगा।",
+  "chatRejectBookingDialogTitle": "Booking reject करें?",
+  "chatRejectBookingDialogMessage": "यह chat context से trucker booking request reject करेगा।",
+  "chatActionCancel": "Cancel",
+  "chatActionApprove": "Approve",
+  "chatActionReject": "Reject",
+  "chatBookingApprovedSuccess": "Booking approve हो गई!",
+  "chatBookingRejectedSuccess": "Booking reject हो गई।",
+  "chatTextSendFailureMessage": "अभी आपका message भेजा नहीं जा सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatVoiceStartFailureMessage": "अभी voice recording शुरू नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatVoiceUploadFailureMessage": "अभी यह voice message upload नहीं हो सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatVoiceSendFailureMessage": "अभी यह voice message भेजा नहीं जा सका। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatApproveBookingFailureMessage": "अभी यह booking approve नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatRejectBookingFailureMessage": "अभी यह booking reject नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।",
+  "chatLoadContextTitle": "Load context",
+  "chatCollapseLoadContextTooltip": "Load context collapse करें",
+  "chatExpandLoadContextTooltip": "Load context expand करें",
+  "chatMaterialLabel": "Material: {value}",
+  "@chatMaterialLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatPriceLabel": "Price: {value}",
+  "@chatPriceLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatPickupLabel": "Pickup: {value}",
+  "@chatPickupLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatLoadStatusActive": "Active",
+  "chatBookingStatusApproved": "Approved",
+  "chatBookingStatusUnknown": "Unknown",
+  "chatMessagesLoadFailureTitle": "Messages लोड नहीं हो सके",
+  "chatMessagesLoadFailureMessage": "अभी यह conversation लोड नहीं हो सकी। Latest messages और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "chatNoMessagesTitle": "अभी कोई message नहीं है",
+  "chatNoMessagesSubtitle": "यह conversation शुरू करने के लिए message भेजें।",
+  "chatSystemUpdateFallback": "System update",
+  "chatSendingLabel": "भेजा जा रहा है...",
+  "chatPauseVoiceMessageTooltip": "Voice message pause करें",
+  "chatPlayVoiceMessageTooltip": "Voice message चलाएँ",
+  "chatVoiceMessageLabel": "Voice message",
+  "chatVoicePlaybackUnavailable": "अभी voice playback उपलब्ध नहीं है।",
+  "chatVoicePlaybackFailed": "अभी यह voice message चल नहीं सकी।",
+  "chatLocationSharedFallback": "Shared location",
+  "chatMapPreviewUnavailable": "Map preview उपलब्ध नहीं है",
+  "chatOpenInMapsAction": "Maps में खोलें",
+  "chatDocumentSharedFallback": "Shared document",
+  "chatAttachmentSavedSubtitle": "Attachment इस conversation में सेव है।",
+  "chatOpenDocumentAction": "Document खोलें",
+  "chatRouteSummaryFallback": "Route summary",
+  "chatViewRouteAction": "Route देखें",
+  "chatTruckDetailsSharedFallback": "Truck details",
+  "chatTruckTyresLabel": "{value} tyres",
+  "@chatTruckTyresLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "chatTypeMessageHint": "Message टाइप करें...",
+  "chatStopRecordingTooltip": "Recording रोकें",
+  "chatVoiceRecordingTooltip": "Voice recording",
+  "chatSendAction": "Send",
+  "commonHearSummary": "Hear summary",
+  "commonVoiceMuted": "इस device पर voice guidance muted है।",
+  "commonVoiceUnavailable": "अभी voice guidance उपलब्ध नहीं है।",
+  "notificationsTitle": "Notifications",
+  "notificationsMarkedAllReadSuccess": "सभी notifications को read mark कर दिया गया",
+  "notificationsMarkAllRead": "Mark All Read",
+  "notificationsLoadFailureTitle": "Notifications लोड नहीं हो सकीं",
+  "notificationsMarkAllReadFailureMessage": "अभी सभी notifications को read mark नहीं किया जा सका। थोड़ी देर बाद notifications screen से फिर कोशिश करें।",
+  "notificationsLoadFailureMessage": "अभी आपकी notifications लोड नहीं हो सकीं। नए alerts और updates refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "notificationsEmptyTitle": "आप पूरी तरह up to date हैं!",
+  "notificationsEmptySubtitle": "कोई नई notifications नहीं हैं।",
+  "notificationsOverviewTitle": "Overview",
+  "notificationsUnreadCountLabel": "{count} unread",
+  "@notificationsUnreadCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsHighPriorityCountLabel": "{count} high priority",
+  "@notificationsHighPriorityCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsLoadMore": "Load More",
+  "notificationsTtsSummary": "Notifications screen. आपके पास {unreadCount} unread notifications हैं और {highPriorityUnreadCount} high priority alerts review के लिए pending हैं।",
+  "@notificationsTtsSummary": {
+    "placeholders": {
+      "unreadCount": {
+        "type": "int"
+      },
+      "highPriorityUnreadCount": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsGroupToday": "Today",
+  "notificationsGroupYesterday": "Yesterday",
+  "notificationsPriorityHighLabel": "HIGH",
+  "notificationsBodyFallback": "पूरे context के लिए linked workflow खोलें।",
+  "notificationFallbackVerificationUpdate": "Verification update",
+  "notificationFallbackBookingUpdate": "Booking update",
+  "notificationFallbackTripUpdate": "Trip update",
+  "notificationFallbackProofUpdate": "Proof update",
+  "notificationFallbackSuperLoadUpdate": "Super Load update",
+  "notificationFallbackMessageReceived": "New message",
+  "notificationFallbackSupportUpdate": "Support update",
+  "notificationFallbackDisputeUpdate": "Dispute update",
+  "notificationFallbackAccountUpdate": "Account update",
+  "notificationFallbackSystemNotice": "System notice",
+  "notificationFallbackLoadExpiryWarning": "Load expiry warning",
+  "navProfile": "Profile",
+  "navSupport": "Support",
+  "navDeleteAccount": "Delete account",
+  "deleteAccountRequestedOnLabel": "Deletion requested on",
+  "deleteAccountGracePeriodEndsLabel": "Grace period ends",
+  "deleteAccountGracePeriodPassedLabel": "Grace-period end date has passed. Permanent deletion processing may happen at any time.",
+  "deleteAccountGracePeriodLessThanOneDayLabel": "Less than 1 day remains before the grace period ends.",
+  "deleteAccountGracePeriodRemainingDaysLabel": "{count} day{plural} remain before the grace period ends.",
+  "@deleteAccountGracePeriodRemainingDaysLabel": {
+    "placeholders": {
+      "count": {},
+      "plural": {}
+    }
+  },
+  "deleteAccountLifecycleFailureMessage": "The account deletion lifecycle is temporarily unavailable. Retry shortly to refresh the latest deletion status.",
+  "deleteAccountCancelFailureMessage": "We could not cancel this deletion request right now. Retry shortly from the deletion lifecycle screen.",
+  "deleteAccountRequestFailureMessage": "We could not process this deletion request right now. Review the current account status and retry shortly.",
+  "deleteAccountAcceptedSignOutFailureMessage": "Deletion was accepted, but we could not complete sign out right now. Retry shortly to refresh your account session.",
+  "deleteAccountBlockedSummaryMessage": "This deletion request cannot proceed yet because another account dependency still needs attention.",
+  "deleteAccountCancelledMessage": "Your deletion request was cancelled. Account access can be restored while the lifecycle returns to active.",
+  "deleteAccountAcceptedMessage": "Your deletion request was accepted. You have been signed out while the account enters pending cleanup.",
+  "deleteAccountBlockerRecoveryGuidanceActiveTrips": "Finish or cancel every active trip first, then retry the deletion request.",
+  "deleteAccountBlockerRecoveryGuidanceDispute": "Wait until the unresolved dispute is reviewed or resolved before requesting deletion again.",
+  "deleteAccountBlockerRecoveryGuidanceCompliance": "Some records still need to stay on the platform for compliance or retention policy. Use support if you need clarification on the hold.",
+  "deleteAccountBlockerRecoveryGuidanceDefault": "Resolve the blocking dependency first, then request deletion again.",
+  "deleteAccountBlockerActionOpenTrips": "Open trips",
+  "deleteAccountBlockerActionOpenSupport": "Open support",
+  "deleteAccountBlockerTitleActiveTrips": "Finish active trips first",
+  "deleteAccountBlockerTitleDispute": "Resolve the open dispute first",
+  "deleteAccountBlockerTitleCompliance": "Wait for the compliance hold to clear",
+  "deleteAccountBlockerTitleDefault": "Resolve the blocker first",
+  "deleteAccountBlockerBodyActiveTrips": "This account still has active trip work attached to it. Review the current trip list, complete any legitimate active work, and then retry the deletion request.",
+  "deleteAccountBlockerBodyDispute": "This account still has an unresolved dispute or review dependency. Use support to follow the current case until the blocking dispute is resolved.",
+  "deleteAccountBlockerBodyCompliance": "This account is still under a compliance or retention hold. Support can clarify the current hold, but the platform cannot bypass the retention requirement.",
+  "deleteAccountBlockerBodyDefault": "Review the current blocker carefully and resolve it before retrying the deletion request.",
+  "deleteAccountSupportTitle": "Need help first?",
+  "deleteAccountSupportBodyPendingCleanup": "Use support if you need clarification on the pending-cleanup status, the grace-period timeline, or whether cancellation is the right next step for this account.",
+  "deleteAccountSupportBodyDefault": "Use support if you expect blockers like active trips, unresolved disputes, or compliance holds and need clarification before retrying the deletion request.",
+  "deleteAccountSupportDetailPendingCleanup": "Support can clarify the current lifecycle state, but they may still need to follow retention and compliance policy before permanent deletion is processed.",
+  "deleteAccountSupportDetailDefault": "Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.",
+  "deleteAccountWhatHappensNextTitle": "What happens next",
+  "deleteAccountWhatHappensNextBodyPendingCleanup": "Your account is already in the pending-cleanup state. Cancel the request if you want to restore the account to active before permanent deletion is processed.",
+  "deleteAccountWhatHappensNextBodyDefault": "If no blockers exist, your account is moved to deactivated pending cleanup and you are signed out safely.",
+  "deleteAccountWhatHappensNextDetailPendingCleanup": "If you cancel now, the account deletion status returns to active and normal access is restored.",
+  "deleteAccountWhatHappensNextDetailDefault": "If blockers exist, the platform keeps your account active and tells you which dependency must be resolved first.",
+  "deleteAccountWhatHappensNextFootnotePendingCleanup": "Support may still retain internal records according to policy, but the user-facing deletion request will be cancelled.",
+  "deleteAccountWhatHappensNextFootnoteDefault": "The deletion request can now be cancelled while the account is in the pending-cleanup lifecycle before permanent deletion is processed.",
+  "deleteAccountLifecycleUnavailableTitle": "Account deletion lifecycle unavailable",
+  "deleteAccountCancelledTitle": "Deletion request cancelled",
+  "deleteAccountAlreadyRequestedTitle": "Deletion already requested",
+  "deleteAccountAlreadyRequestedMessage": "This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.",
+  "deleteAccountCancelRequestTitle": "Cancel deletion request",
+  "deleteAccountCancellingButton": "Cancelling deletion...",
+  "deleteAccountCancelRequestButton": "Cancel deletion request",
+  "deleteAccountUnavailableTitle": "Account deletion unavailable",
+  "deleteAccountBlockedTitle": "Deletion blocked",
+  "deleteAccountConfirmRequestTitle": "Confirm deletion request",
+  "deleteAccountRequestingButton": "Requesting deletion...",
+  "deleteAccountScreenTitle": "Delete Account",
+  "deleteAccountHeroTitlePendingCleanup": "Account deletion pending cleanup",
+  "deleteAccountHeroTitleDefault": "Request account deletion",
+  "deleteAccountHeroSubtitlePendingCleanup": "Your account is currently deactivated pending cleanup. You can still cancel this request during the grace-period lifecycle while the account is not permanently deleted.",
+  "deleteAccountHeroSubtitleDefault": "This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.",
+  "deleteAccountHeroBodyPendingCleanup": "The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.",
+  "deleteAccountHeroBodyDefault": "Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.",
+  "accountSignOutFailureMessage": "अभी आपको sign out नहीं किया जा सका। थोड़ी देर बाद इसी screen से फिर कोशिश करें।",
+  "accountRoleSupplier": "Supplier",
+  "accountRoleTrucker": "Trucker",
+  "accountRoleUnknown": "Unknown",
+  "accountStatusTitle": "Account status",
+  "accountProfileStatusLabel": "Profile status",
+  "accountProfileStatusComplete": "Complete",
+  "accountProfileStatusNeedsAttention": "Needs attention",
+  "accountAccountStateLabel": "Account state",
+  "accountStateDeactivatedPendingCleanup": "Deactivated pending cleanup",
+  "accountStateRestricted": "Restricted",
+  "accountStateActive": "Active",
+  "accountStateUnknown": "Unknown",
+  "accountLoadFailureTitle": "Account details उपलब्ध नहीं हैं",
+  "accountLoadFailureMessage": "अभी आपकी account details लोड नहीं हो सकीं। थोड़ी देर बाद इसी screen से फिर कोशिश करें।",
+  "accountManageTitle": "Manage account",
+  "accountVerificationLabel": "Verification",
+  "accountFleetLabel": "Fleet",
+  "accountSettingsLabel": "Settings",
+  "accountSessionTitle": "Current session",
+  "accountSignedInAsLabel": "Signed in as",
+  "accountCurrentAuthenticatedSession": "Current authenticated session",
+  "accountSignOutAction": "Sign out",
+  "profileTitle": "Profile",
+  "profileLoadFailureTitle": "Profile उपलब्ध नहीं है",
+  "profileLoadFailureMessage": "अभी आपकी profile लोड नहीं हो सकी। थोड़ी देर बाद इसी screen से फिर कोशिश करें।",
+  "profileSummaryTitle": "Profile summary",
+  "profileNameLabel": "Name",
+  "profileValueNotSet": "Not set",
+  "profilePhoneLabel": "Phone",
+  "profileValueNotProvided": "Not provided",
+  "profileEmailLabel": "Email",
+  "profileRoleLabel": "Role",
+  "profileReadinessTitle": "Profile readiness",
+  "profileCompletenessLabel": "Completeness",
+  "profileCompletenessComplete": "Complete",
+  "profileCompletenessNeedsUpdates": "Needs updates",
+  "profileDeletionStatusLabel": "Deletion status",
+  "profileOpenFleetReadiness": "Open fleet readiness",
+  "profileRequestAccountDeletion": "Request account deletion",
+  "profileTtsSummary": "Profile screen. Role {roleLabel} है. Trust and safety status {trustStatus} है. Account deletion status {deletionStatus} है. ज़रूरत हो तो इसी screen से deletion follow-up या support guidance खोली जा सकती है.",
+  "@profileTtsSummary": {
+    "placeholders": {
+      "roleLabel": {},
+      "trustStatus": {},
+      "deletionStatus": {}
+    }
+  },
+  "settingsTitle": "Settings",
+  "settingsPreferencesTitle": "Preferences",
+  "settingsRoleContextLabel": "Role context",
+  "settingsTtsSummary": "Settings screen. Language {selectedLanguageLabel} पर set है. Voice guidance अभी manual है. Notifications in-app inbox के through enabled हैं.{roleSentence}",
+  "@settingsTtsSummary": {
+    "placeholders": {
+      "selectedLanguageLabel": {},
+      "roleSentence": {}
+    }
+  },
+  "settingsVoiceAssistanceLabel": "Voice assistance",
+  "settingsVoiceAssistanceValue": "Supported screens पर manual contextual summaries उपलब्ध हैं।",
+  "settingsNotificationsLabel": "Notifications",
+  "settingsNotificationsValue": "In-app inbox और push status controls यहाँ उपलब्ध हैं।",
+  "settingsConnectedSurfacesTitle": "Connected surfaces",
+  "settingsPushNotificationsTitle": "Push notifications",
+  "settingsPushStatusLabel": "Status",
+  "settingsPushRequestPermission": "Request permission",
+  "settingsPushRefreshStatus": "Refresh status",
+  "settingsPushStatusUnavailableTitle": "Push notification status उपलब्ध नहीं है",
+  "settingsPushStatusUnavailableMessage": "अभी device notification permission नहीं पढ़ी जा सकी। Firebase/device support उपलब्ध होने के बाद refresh करें।",
+  "settingsPushStatusAllowed": "Allowed",
+  "settingsPushStatusAllowedQuietly": "Allowed quietly",
+  "settingsPushStatusBlocked": "Blocked in system settings",
+  "settingsPushStatusNotRequested": "Not requested yet",
+  "settingsPushStatusUnavailable": "Unavailable on this device/build",
+  "settingsPushGuidanceAllowed": "Firebase delivery configured होने पर foreground और opened push flows enabled रहते हैं।",
+  "settingsPushGuidanceAllowedQuietly": "Push quietly allowed है। ज़रूरत हो तो device notification settings में alerts promote कर सकते हैं।",
+  "settingsPushGuidanceBlocked": "Push notifications blocked हैं। Alerts फिर से enable करने के लिए TranZfort की device notification settings खोलें।",
+  "settingsPushGuidanceNotRequested": "इस device session पर push permission अभी request नहीं की गई है।",
+  "settingsPushGuidanceUnavailable": "Firebase/device support पूरी तरह configured होने तक यहाँ push runtime उपलब्ध नहीं है।",
+  "supportActiveTicketCount": "{count} ticket{s}",
+  "supportScreenTitle": "सपोर्ट और dispute follow-up",
+  "supportHeroTitle": "अपनी latest support activity review करें",
+  "supportHeroSubtitleSupplier": "Supplier activity से जुड़े dispute progress, payment follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।",
+  "supportHeroSubtitleTrucker": "Trucker activity से जुड़े dispute progress, freight follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।",
+  "supportNoActiveTickets": "कोई active ticket नहीं",
+  "supportCreateTicketAction": "सपोर्ट टिकट बनाएँ",
+  "supportIntroMessage": "अपनी latest support और dispute tickets यहाँ follow करें, visible workflow updates review करें, और support द्वारा मांगी गई clarification या proof के साथ reply करें।",
+  "supportTicketSummaryTitle": "सपोर्ट सारांश",
+  "supportEscalationPathLabel": "Escalation path",
+  "supportEscalationPathSupplier": "Supplier support",
+  "supportEscalationPathTrucker": "Trucker support",
+  "supportCurrentTrustStatusLabel": "वर्तमान trust status",
+  "supportMyTicketsTitle": "मेरी tickets",
+  "supportSelectedTicketAndReplyTitle": "चुनी गई ticket और reply",
+  "supportSelectTicketTitle": "एक ticket चुनें",
+  "supportSelectTicketSubtitle": "Visible thread, workflow state, और reply options review करने के लिए list से एक support ticket चुनें।",
+  "supportTicketsUnavailableTitle": "Support tickets अभी उपलब्ध नहीं हैं",
+  "supportNoTicketsTitle": "अभी कोई support ticket नहीं है",
+  "supportNoTicketsSubtitle": "नई support या dispute follow-up शुरू करने और future updates यहीं track करने के लिए support ticket बनाएँ।",
+  "supportLoadingOlderTickets": "पुरानी tickets लोड हो रही हैं...",
+  "supportLoadOlderTickets": "पुरानी tickets लोड करें",
+  "supportTicketsLoadFailureMessage": "अभी आपकी support tickets लोड नहीं हो सकीं। Latest support और dispute activity refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supportOpenTripAction": "ट्रिप खोलें",
+  "supportOpenLoadAction": "लोड खोलें",
+  "supportViewingThisTicket": "यह ticket देखी जा रही है",
+  "supportOpenTicketAction": "Ticket खोलें",
+  "supportDetailUnavailableTitle": "Ticket detail उपलब्ध नहीं है",
+  "supportDetailUnavailableMessage": "अभी यह ticket detail लोड नहीं हो सकी। Latest visible thread और workflow status refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supportTicketUnavailableTitle": "Ticket उपलब्ध नहीं है",
+  "supportTicketUnavailableSubtitle": "यह support ticket अभी इस account के लिए उपलब्ध नहीं है।",
+  "supportTicketStatusOpen": "Open",
+  "supportTicketStatusInProgress": "Review में",
+  "supportTicketStatusWaitingForYou": "आपके reply का इंतजार",
+  "supportTicketStatusResolved": "Resolved",
+  "supportTicketStatusClosed": "Closed",
+  "supportTicketStatusUnknown": "Unknown",
+  "supportTicketPriorityLow": "low",
+  "supportTicketPriorityMedium": "medium",
+  "supportTicketPriorityHigh": "high",
+  "supportTicketPriorityUrgent": "urgent",
+  "supportTicketPriorityNotSet": "set नहीं है",
+  "supportTicketTitleTripDisputeReview": "Trip dispute review",
+  "supportTicketTitleLoadedQuantityMismatchReport": "Loaded quantity mismatch report",
+  "supportTicketTitleUnloadedQuantityMismatchReport": "Unloaded quantity mismatch report",
+  "supportTicketTitleDocumentMismatchReport": "Document mismatch report",
+  "supportTicketTitleSpamOrScamReport": "Spam या scam report",
+  "supportTicketTitleAbusiveBehaviorReport": "Abusive behavior report",
+  "supportTicketTitleFakePayoutProofReport": "Fake payout proof report",
+  "supportTicketTitleNonPaymentReport": "Non-payment report",
+  "supportTicketTitleDelayOrNoShowReport": "Delay या no-show report",
+  "supportTicketTitleDamageOrShortageReport": "Damage या shortage report",
+  "supportTicketTitleOtherReport": "Other report",
+  "supportDisputeCategoryTripDispute": "Trip dispute",
+  "supportDisputeCategoryLoadedQuantityMismatch": "Loaded quantity mismatch",
+  "supportDisputeCategoryUnloadedQuantityMismatch": "Unloaded quantity mismatch",
+  "supportDisputeCategoryDocumentMismatch": "Document mismatch",
+  "supportDisputeCategoryNonPayment": "Non-payment",
+  "supportDisputeCategoryFakePayoutProof": "Fake payout proof",
+  "supportDisputeCategoryDelayOrNoShow": "Delay या no-show",
+  "supportDisputeCategoryDamageOrShortage": "Damage या shortage",
+  "supportDisputeCategoryAbusiveBehavior": "Abusive behavior",
+  "supportDisputeCategorySpamOrScam": "Spam या scam",
+  "supportDisputeCategoryOther": "Other",
+  "supportUpdatedAt": "Updated at: {value}",
+  "@supportUpdatedAt": {"placeholders": {"value": {}}},
+  "supportTicketReference": "Ticket reference: {value}",
+  "@supportTicketReference": {"placeholders": {"value": {}}},
+  "supportTripReference": "Trip reference: {value}",
+  "@supportTripReference": {"placeholders": {"value": {}}},
+  "supportOpenedAt": "Opened at: {value}",
+  "@supportOpenedAt": {"placeholders": {"value": {}}},
+  "supportDisputeCategoryLabel": "Dispute category: {category}",
+  "@supportDisputeCategoryLabel": {"placeholders": {"category": {}}},
+  "supportTicketIdValue": "Ticket id: {id}",
+  "@supportTicketIdValue": {"placeholders": {"id": {}}},
+  "supportPriorityValue": "Priority: {priority}",
+  "@supportPriorityValue": {"placeholders": {"priority": {}}},
+  "supportLastUpdatedValue": "Last updated: {value}",
+  "@supportLastUpdatedValue": {"placeholders": {"value": {}}},
+  "supportRelatedTripValue": "Related trip: {value}",
+  "@supportRelatedTripValue": {"placeholders": {"value": {}}},
+  "supportRelatedLoadValue": "Related load: {value}",
+  "@supportRelatedLoadValue": {"placeholders": {"value": {}}},
+  "supportOpenRelatedTripAction": "Related trip खोलें",
+  "supportOpenRelatedLoadAction": "Related load खोलें",
+  "supportWorkflowGuidanceOpen": "Support को यह ticket मिल चुकी है और review जल्द शुरू होनी चाहिए। ज़रूरत हो तो visible replies में missing context जोड़ें।",
+  "supportWorkflowGuidanceInProgress": "Support या operations इस ticket को actively review कर रहे हैं। Visible replies देखते रहें और ज़रूरत पड़ने पर timeline या proof साफ़ रखें।",
+  "supportWorkflowGuidanceWaitingForUser": "Support आपके clarification या proof का इंतजार कर रही है। इस ticket पर reply करें ताकि review बिना अनावश्यक देरी के जारी रहे।",
+  "supportWorkflowGuidanceResolved": "यह ticket final support outcome तक पहुँच चुकी है। नया follow-up खोलने से पहले recorded resolution review करें।",
+  "supportWorkflowGuidanceUnknown": "Current workflow state के लिए latest visible ticket updates review करें।",
+  "supportDisputeBannerTitleClosed": "Dispute review closed",
+  "supportDisputeBannerTitleWaiting": "Dispute आपके reply का इंतजार कर रही है",
+  "supportDisputeBannerTitleInProgress": "Dispute review in progress",
+  "supportDisputeBannerMessageClosed": "Category: {category}. यह trip dispute final support outcome तक पहुँच चुकी है। दोनों sides recorded ticket context follow कर सकती हैं, लेकिन raw evidence access restricted रह सकती है।",
+  "@supportDisputeBannerMessageClosed": {"placeholders": {"category": {}}},
+  "supportDisputeBannerMessageWaiting": "Category: {category}. यह trip dispute आपके clarification या proof का इंतजार कर रही है। दोनों sides visible status updates follow कर सकती हैं, लेकिन review के दौरान raw evidence access restricted रह सकती है।",
+  "@supportDisputeBannerMessageWaiting": {"placeholders": {"category": {}}},
+  "supportDisputeBannerMessageInProgress": "Category: {category}. यह trip dispute active support review में है। दोनों sides visible status updates follow कर सकती हैं, लेकिन review के दौरान raw evidence access restricted रह सकती है।",
+  "@supportDisputeBannerMessageInProgress": {"placeholders": {"category": {}}},
+  "supportEvidenceVisibilitySummaryClosed": "दोनों parties recorded dispute category, final workflow state, और visible support replies को इस ticket पर अभी भी follow कर सकती हैं।",
+  "supportEvidenceVisibilitySummaryInProgress": "दोनों parties dispute category, workflow status, और support replies को follow कर सकती हैं जो इस ticket पर intentionally visible रखी गई हैं।",
+  "supportRestrictedEvidenceMessageClosed": "Review outcome record होने के बाद भी raw attachments और sensitive proof restricted रह सकती हैं।",
+  "supportRestrictedEvidenceMessageInProgress": "जब तक यह review active है, raw attachments और sensitive proof restricted रह सकती हैं।",
+  "supportAdditionalProofGuidanceClosed": "अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई issue या clarification हो।",
+  "supportAdditionalProofGuidanceInProgress": "अगर आपकी dispute current single-image flow से आगे additional documents या screenshots पर निर्भर है, तो missing proofs को visible reply में साफ़ लिखें ताकि support जान सके कि और क्या review करना है।",
+  "supportAttachmentVisibilityMessageClosed": "इस reply में evidence attached है। Review outcome record होने के बाद भी raw file access restricted रह सकती है।",
+  "supportAttachmentVisibilityMessageInProgress": "इस reply में evidence attached है। Review के दौरान raw file access restricted रह सकती है।",
+  "supportAttachmentGuidanceMessageClosed": "अगर closure के बाद भी दूसरे supporting proofs का reference देना है, तो fresh follow-up तभी खोलें जब आपके पास वास्तव में नई context हो जो इस ticket पर capture नहीं हुई थी।",
+  "supportAttachmentGuidanceMessageInProgress": "अगर दूसरे supporting proofs यहाँ attached नहीं हैं, तो उन्हें visible reply text में summarize करें ताकि support उन्हें safely request या review कर सके।",
+  "supportSupportTeamLabel": "Support team",
+  "supportYouLabel": "You",
+  "supportEmptyThreadSubtitleOpen": "इस support ticket पर अभी कोई visible thread post नहीं की गई है।",
+  "supportEmptyThreadSubtitleInProgress": "जब तक यह ticket active review में है, visible thread अभी उपलब्ध नहीं है।",
+  "supportEmptyThreadSubtitleWaiting": "Visible thread अभी उपलब्ध नहीं है। इस ticket पर reply करें ताकि review जारी रह सके।",
+  "supportEmptyThreadSubtitleResolved": "इस ticket के resolved या closed होने से पहले कोई visible thread record नहीं की गई थी।",
+  "supportEmptyThreadSubtitleUnknown": "इस support ticket के लिए अभी कोई visible thread उपलब्ध नहीं है।",
+  "supportEvidenceVisibilityTitle": "Evidence visibility",
+  "supportVisibleThreadSummaryTitle": "Visible thread summary",
+  "supportVisibleRepliesCount": "Visible replies: {count}",
+  "@supportVisibleRepliesCount": {"placeholders": {"count": {"type": "int"}}},
+  "supportLastVisibleUpdateNone": "Last visible update: अभी कोई visible reply नहीं है।",
+  "supportLastVisibleUpdate": "Last visible update: {value}",
+  "@supportLastVisibleUpdate": {"placeholders": {"value": {}}},
+  "supportLatestVisibleSenderNone": "Latest visible sender: अभी कोई visible sender नहीं है।",
+  "supportLatestVisibleSender": "Latest visible sender: {value}",
+  "@supportLatestVisibleSender": {"placeholders": {"value": {}}},
+  "supportVisibleAttachmentSummaryPresent": "Visible attachment summary: एक या अधिक visible replies में attachment reference शामिल है।",
+  "supportVisibleAttachmentSummaryAbsent": "Visible attachment summary: अभी किसी visible reply में attachment reference नहीं है।",
+  "supportNoVisibleThreadTitle": "अभी कोई visible thread नहीं है",
+  "supportCurrentWorkflowTitle": "Current workflow",
+  "supportResolutionOutcomeTitle": "Resolution outcome",
+  "supportResolvedOn": "Resolved on: {value}",
+  "@supportResolvedOn": {"placeholders": {"value": {}}},
+  "supportWaitingForReplyTitle": "Support आपके reply का इंतजार कर रही है",
+  "supportWaitingForReplyMessage": "इस ticket पर requested clarification या proof के साथ reply करें ताकि review जारी रह सके।",
+  "supportReplyGuidanceTitle": "Reply guidance",
+  "supportRepliesClosedTitle": "इस ticket के लिए replies बंद हैं",
+  "supportRepliesClosedMessage": "यह ticket final support outcome तक पहुँच चुकी है और अब further replies स्वीकार नहीं करती।",
+  "supportReplyStatusReply": "Reply",
+  "supportReplyStatusSubmitted": "Submitted",
+  "supportNoMessageTextProvided": "कोई message text उपलब्ध नहीं है।",
+  "supportTrustStatusLoading": "Trust status लोड हो रही है",
+  "supportResolutionValue": "Resolution: {value}",
+  "@supportResolutionValue": {"placeholders": {"value": {}}},
+  "supportReplyGuidancePrimaryOpenDispute": "अपनी visible reply में dispute timeline, पहले से attached proof, और support को सबसे पहले क्या review करना चाहिए यह साफ़ लिखें।",
+  "supportReplyGuidancePrimaryOpenDefault": "अपनी reply में current blocker साफ़ लिखें ताकि support review जारी रख सके।",
+  "supportReplyGuidancePrimaryInProgressDispute": "अपनी अगली reply को dispute timeline, proof gaps, और support को किस follow-up पर ध्यान देना चाहिए इस पर केंद्रित रखें।",
+  "supportReplyGuidancePrimaryInProgressDefault": "Support ने जो अगला operational detail या clarification मांगी है, वही reply करें ताकि review जारी रह सके।",
+  "supportReplyGuidancePrimaryWaitingDispute": "Support ने जो missing clarification या proof मांगी है, उसे reply करें ताकि dispute review बिना अनावश्यक देरी के जारी रह सके।",
+  "supportReplyGuidancePrimaryWaitingDefault": "Support ने जो missing clarification मांगी है, उसे reply करें ताकि ticket आगे बढ़ सके।",
+  "supportReplyGuidancePrimaryResolved": "यह ticket पहले ही resolved है। Fresh follow-up तभी शुरू करें जब वास्तव में नई issue सामने आए।",
+  "supportReplyGuidancePrimaryUnknown": "अगर support और जानकारी मांगे तो सबसे साफ़ अगला detail reply करें जो आप साझा कर सकते हैं।",
+  "supportReplyGuidanceSecondaryOpenInProgressDispute": "अगर proof current single-image flow में missing है, तो बाकी context को visible text में साफ़ summarize करें ताकि support जान सके कि और क्या request या review करना है।",
+  "supportReplyGuidanceSecondaryOpenInProgressDefault": "Reply को concise, specific, और उस load या trip context से जुड़ा रखें जिसे support review कर रही है।",
+  "supportReplyGuidanceSecondaryWaitingDispute": "अगर एक से ज़्यादा proof महत्वपूर्ण हैं, तो पहले सबसे मजबूत proof attach करें और बाकी context को visible reply में summarize करें।",
+  "supportReplyGuidanceSecondaryWaitingDefault": "Latest support prompt का सीधा जवाब दें ताकि अगला review step साफ़ हो।",
+  "supportReplyGuidanceSecondaryResolved": "Recorded resolution को reference के लिए रखें और नया ticket केवल genuinely new follow-up के लिए उपयोग करें।",
+  "supportReplyGuidanceSecondaryUnknown": "अपनी reply को साफ़ और उन्हीं facts तक सीमित रखें जिन्हें support अगले step में verify कर सकती है।",
+  "supportTicketTitleWithPriority": "{title} • {priority} priority",
+  "@supportTicketTitleWithPriority": {"placeholders": {"title": {}, "priority": {}}},
+  "supportFallbackLabel": "Support",
+  "supportTrustStatusNormal": "Normal",
+  "supportTrustStatusWarned": "Warned",
+  "supportTrustStatusRestricted": "Restricted",
+  "supportTrustStatusSuspended": "Suspended",
+  "supportTrustStatusBanned": "Banned",
+  "supportTrustStatusUnknown": "Unknown",
+  "supportTrustBadge": "Trust: {status}",
+  "trustSafetyLabel": "Trust & safety",
+  "trustSafetyWarningTitle": "Trust & safety warning active",
+  "trustSafetyWarningMessage": "आपके account पर warning दर्ज है। Marketplace और support surfaces उपलब्ध हैं, लेकिन आगे violations से बचें और warning या next-step expectations की clarity के लिए support का उपयोग करें।",
+  "trustSafetyRestrictionTitle": "Trust & safety restriction active",
+  "trustSafetyRestrictionFallback": "यह restriction active रहने तक कुछ platform actions limited हो सकती हैं। कौन-सी actions limited हैं और review से पहले क्या changes ज़रूरी हैं, यह confirm करने के लिए support का उपयोग करें।",
+  "trustSafetySuspensionTitle": "Trust & safety suspension active",
+  "trustSafetySuspensionFallback": "यह suspension active रहने तक key platform actions paused हो सकती हैं। Required next steps पूरी होने के बाद policy-allowed review updates या reinstatement guidance के लिए support का उपयोग करें।",
+  "trustSafetyBanTitle": "Trust & safety ban active",
+  "trustSafetyBanFallback": "यह account सामान्य platform use के लिए blocked है। केवल policy-allowed clarification या final review outcome questions के लिए support का उपयोग करें।",
+  "trustSafetyOpenSupport": "Open support",
+  "trustSafetyHealthyMessageLine1": "आपके account पर अभी कोई active trust या safety enforcement नहीं है। यह status normal बना रहे, इसके लिए delivery proofs, payout confirmations और marketplace communication सही रखें।",
+  "trustSafetyHealthyMessageLine2": "अगर इस account पर कभी policy या moderation questions आएँ, तो blocked actions दोबारा try करने से पहले clarification के लिए support खोलें।",
+  "trustSafetyCurrentStatus": "Current status: {displayLabel}. {fallback}",
+  "@trustSafetyCurrentStatus": {
+    "placeholders": {
+      "displayLabel": {},
+      "fallback": {}
+    }
+  },
+  "trustSafetyCurrentStatusWithReason": "Current status: {displayLabel}. Reason summary: {reasonSummary}. {fallback}",
+  "@trustSafetyCurrentStatusWithReason": {
+    "placeholders": {
+      "displayLabel": {},
+      "reasonSummary": {},
+      "fallback": {}
+    }
+  },
+  "settingsLanguageLabel": "भाषा",
+  "settingsLanguageHelper": "लॉन्च पर डिफ़ॉल्ट भाषा English है। Hindi यहाँ से चुनी जा सकती है।",
+  "settingsLanguageEnglish": "English",
+  "settingsLanguageHindi": "हिंदी",
+  "settingsLanguageSavedEnglish": "भाषा सेव हुई: English",
+  "settingsLanguageSavedHindi": "भाषा सेव हुई: हिंदी",
+  "settingsLanguageSaveFailed": "अभी आपकी भाषा पसंद सेव नहीं हो सकी। थोड़ी देर बाद settings से फिर कोशिश करें।",
+  "settingsLanguageSaving": "भाषा पसंद सेव की जा रही है...",
+  "truckerDashboardHeroSubtitle": "अपने trucker dashboard को freight discovery, readiness और active work visibility के command center की तरह इस्तेमाल करें।",
+  "truckerDashboardWelcomeBack": "वापसी पर स्वागत है, {fullName}",
+  "@truckerDashboardWelcomeBack": {
+    "placeholders": {
+      "fullName": {}
+    }
+  },
+  "truckerDashboardTitle": "Trucker Dashboard",
+  "truckerDashboardOverviewTitle": "Dashboard overview",
+  "truckerDashboardQuickActionsTitle": "Quick actions",
+  "truckerDashboardQuickActionTripsLabel": "My Trips",
+  "truckerDashboardQuickActionChatLabel": "Chat",
+  "truckerDashboardRecentActivityTitle": "Recent activity",
+  "truckerDashboardReadinessNextStepsTitle": "Readiness and next steps",
+  "truckerDashboardReadinessUnavailableTitle": "Readiness state उपलब्ध नहीं है",
+  "truckerDashboardReadinessFailureMessage": "अभी आपकी trucker readiness state उपलब्ध नहीं है। Verification और fleet readiness refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerDashboardVerificationPendingTitle": "Verification pending",
+  "truckerDashboardVerificationPendingDescription": "Review pending रहने तक आप loads browse कर सकते हैं, लेकिन verification पूरा होने तक chat और call locked रहेंगे।",
+  "truckerDashboardOpenVerificationAction": "Open verification",
+  "truckerDashboardVerificationCompleteTitle": "Verification complete",
+  "truckerDashboardVerificationCompleteDescription": "आपकी trucker verification पूरी हो गई है। जब तक आपकी readiness healthy रहती है, open loads पर chat और call unlocked रहेंगे।",
+  "truckerDashboardReviewVerificationAction": "Review verification",
+  "truckerDashboardVerificationNeedsAttentionTitle": "Verification needs attention",
+  "truckerDashboardVerificationNeedsAttentionDescription": "आपकी verification reject हो गई थी। Browsing खुली रहती है, लेकिन communication और assignment readiness blocked रहती है।",
+  "truckerDashboardFixVerificationAction": "Fix verification",
+  "truckerDashboardCompleteFleetVerificationTitle": "Fleet और verification setup पूरा करें",
+  "truckerDashboardCompleteFleetVerificationMessage": "अभी आप marketplace browse कर सकते हैं, लेकिन Aadhaar, PAN, profile photo पूरा करने और कम-से-कम एक truck approve होने तक chat, call और booking locked रहेंगे।",
+  "truckerDashboardOpenFleetVerificationAction": "Open fleet and verification",
+  "truckerDashboardAddApproveFirstTruckTitle": "अपना पहला truck जोड़ें और approve कराएँ",
+  "truckerDashboardAddApproveFirstTruckMessage": "अभी marketplace browsing उपलब्ध है, लेकिन पूरी trucker verification complete होने से पहले आपका पहला approved truck जरूरी है।",
+  "truckerDashboardOpenFleetAction": "Open fleet",
+  "truckerDashboardCompleteVerificationTitle": "Trucker verification पूरी करें",
+  "truckerDashboardCompleteVerificationMessage": "अभी आप marketplace browse कर सकते हैं। Chat और call unlock करने के लिए Aadhaar, PAN, profile photo और कम-से-कम एक approved truck पूरा करें।",
+  "truckerDashboardLoadFailureTitle": "अभी आपका trucker dashboard लोड नहीं हो सका",
+  "truckerDashboardLoadFailureMessage": "अभी आपका trucker dashboard लोड नहीं हो सका। Latest KPIs और activity summary refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerDashboardSetupInProgress": "Setup in progress",
+  "truckerDashboardVerificationStatusVerified": "सत्यापित",
+  "truckerDashboardVerificationStatusPending": "लंबित",
+  "truckerDashboardVerificationStatusRejected": "अस्वीकृत",
+  "truckerDashboardVerificationStatusUnverified": "सत्यापित नहीं",
+  "truckerDashboardVerificationStatusUnknown": "अज्ञात",
+  "truckerDashboardApprovedTruckCount": "{count, plural, one {{count} approved truck} other {{count} approved trucks}}",
+  "@truckerDashboardApprovedTruckCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardHeroSummary": "Trucker के लिए home rule dashboard-first है: readiness समझें, active work देखें, फिर यहीं से freight discovery पर जाएँ।",
+  "truckerDashboardStatActiveBidsLabel": "Active bids",
+  "truckerDashboardStatActiveBidsHelper": "Submitted requests जो अभी supplier decision का इंतज़ार कर रही हैं",
+  "truckerDashboardStatUpcomingTripsLabel": "Upcoming trips",
+  "truckerDashboardStatUpcomingTripsHelper": "Assigned और pickup-stage work जो execution के करीब है",
+  "truckerDashboardStatInTransitLabel": "In-transit",
+  "truckerDashboardStatInTransitHelper": "Trips जो अभी road पर चल रही हैं",
+  "truckerDashboardStatCompletedLabel": "Completed",
+  "truckerDashboardStatCompletedHelper": "Trips जो आपकी trucker history में पहले ही close हो चुकी हैं",
+  "truckerDashboardRecentActivityUnavailableTitle": "Recent activity उपलब्ध नहीं है",
+  "truckerDashboardRecentActivityUnavailableMessage": "अभी आपकी latest booking, trip और fleet activity लोड नहीं हो सकी।",
+  "truckerDashboardNoRecentActivityTitle": "अभी कोई recent activity नहीं है",
+  "truckerDashboardNoRecentActivitySubtitle": "काम शुरू होने पर आपकी booking requests, trip movement और fleet review updates यहाँ दिखेंगी।",
+  "truckerDashboardBookingActivityTitle": "Booking activity",
+  "truckerDashboardBookingActivitySubtitle": "{count, plural, one {{count} active bid supplier review का इंतज़ार कर रही है} other {{count} active bids supplier review का इंतज़ार कर रही हैं}}",
+  "@truckerDashboardBookingActivitySubtitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTripActivityTitle": "Trip activity",
+  "truckerDashboardTripActivitySubtitle": "{upcomingTrips} upcoming • {inTransitTrips} in transit • {completedTrips} completed",
+  "@truckerDashboardTripActivitySubtitle": {
+    "placeholders": {
+      "upcomingTrips": {
+        "type": "int"
+      },
+      "inTransitTrips": {
+        "type": "int"
+      },
+      "completedTrips": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardFleetReviewActivityTitle": "Fleet review activity",
+  "truckerDashboardFleetReviewActivitySubtitle": "{pendingTrucks} pending • {rejectedTrucks} rejected • {pendingReapprovalTrucks} pending reapproval",
+  "@truckerDashboardFleetReviewActivitySubtitle": {
+    "placeholders": {
+      "pendingTrucks": {
+        "type": "int"
+      },
+      "rejectedTrucks": {
+        "type": "int"
+      },
+      "pendingReapprovalTrucks": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardStatusOpen": "open",
+  "truckerDashboardStatusClear": "clear",
+  "truckerDashboardStatusMoving": "moving",
+  "truckerDashboardStatusTracked": "tracked",
+  "truckerDashboardStatusAttention": "attention",
+  "truckerDashboardReadinessSummaryUnavailableTitle": "Trucker readiness उपलब्ध नहीं है",
+  "truckerDashboardReadinessSummaryUnavailableMessage": "अभी आपकी readiness summary लोड नहीं हो सकी।",
+  "truckerDashboardProfileSetupInProgressTitle": "Profile setup अभी जारी है",
+  "truckerDashboardProfileSetupInProgressSubtitle": "आपकी trucker profile पूरी तरह लोड होने के बाद dashboard readiness details दिखाएगा।",
+  "truckerDashboardVerificationStatusTitle": "Verification status",
+  "truckerDashboardVerificationReadyMessage": "आपकी verification पूरी होने के कारण open loads पर chat और call unlocked हैं।",
+  "truckerDashboardVerificationLockedMessage": "Browsing अभी खुली है। Chat और call तभी unlock होंगे जब verification और कम-से-कम एक approved truck पूरा होगा।",
+  "truckerDashboardDlLabel": "DL: {value}",
+  "@truckerDashboardDlLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerDashboardFleetReadinessTitle": "Fleet readiness",
+  "truckerDashboardApprovedTrucksSummary": "{approvedTrucks}/{totalTrucks} approved trucks",
+  "@truckerDashboardApprovedTrucksSummary": {
+    "placeholders": {
+      "approvedTrucks": {
+        "type": "int"
+      },
+      "totalTrucks": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardReadyStatus": "ready",
+  "truckerDashboardActionNeededStatus": "action needed",
+  "truckerDashboardFleetReadyMessage": "Verification-dependent workflows के लिए आपके पास कम-से-कम एक approved truck उपलब्ध है।",
+  "truckerDashboardFleetNeedFirstTruckMessage": "Trucker readiness पूरी करने के लिए fleet slice में अपना पहला truck जोड़ें और approve कराएँ।",
+  "truckerDashboardTruckAwaitingReview": "{count} awaiting review",
+  "@truckerDashboardTruckAwaitingReview": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckRejected": "{count} rejected",
+  "@truckerDashboardTruckRejected": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckPendingReapproval": "{count} pending reapproval",
+  "@truckerDashboardTruckPendingReapproval": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerDashboardTruckLifecycleAttention": "Truck lifecycle attention: {segments}. Review clear होने तक non-approved trucks नई booking workflows के लिए blocked रहती हैं।",
+  "@truckerDashboardTruckLifecycleAttention": {
+    "placeholders": {
+      "segments": {}
+    }
+  },
+  "truckerTripsTitle": "My trips",
+  "truckerTripsSubtitle": "Assigned trips track करें, proof deadlines monitor करें, और सही trip stage पर सही action लें।",
+  "truckerTripsStageAssigned": "Assigned",
+  "truckerTripsStagePickupPending": "Pickup pending",
+  "truckerTripsStagePickedUp": "Picked up",
+  "truckerTripsStageInTransit": "In transit",
+  "truckerTripsStageDelivered": "Delivered",
+  "truckerTripsStageProofSubmitted": "Proof submitted",
+  "truckerTripsStageCompleted": "Completed",
+  "truckerTripsStageDisputed": "Disputed",
+  "truckerTripsStageCancelled": "Cancelled",
+  "truckerTripsStageUnknown": "Unknown",
+  "truckerTripsProofStatusPodUploaded": "POD uploaded",
+  "truckerTripsProofStatusLrUploaded": "LR uploaded",
+  "truckerTripsProofStatusAwaitingPod": "Awaiting POD",
+  "truckerTripsProofStatusProofSubmitted": "Proof submitted",
+  "truckerTripsProofStatusProofPending": "Proof pending",
+  "truckerTripsTabActive": "Active",
+  "truckerTripsTabCompleted": "Completed",
+  "truckerTripsLoadFailureTitle": "Trips लोड नहीं हो सकीं",
+  "truckerTripsLoadFailureMessage": "अभी आपकी trips लोड नहीं हो सकीं। Latest execution timeline refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripsEmptyActiveTitle": "अभी कोई trip नहीं है",
+  "truckerTripsEmptyCompletedTitle": "अभी कोई completed trip नहीं है",
+  "truckerTripsEmptyActiveSubtitle": "अपनी पहली trip शुरू करने के लिए load book करें और supplier approval का इंतज़ार करें।",
+  "truckerTripsEmptyCompletedSubtitle": "Execution close होने के बाद completed और cancelled trips यहाँ दिखेंगी।",
+  "truckerTripsEmptyActiveAction": "Find loads",
+  "truckerTripsEmptyCompletedAction": "View active trips",
+  "truckerTripDetailNotFoundTitle": "Trip not found",
+  "truckerTripDetailNotFoundSubtitle": "यह assigned trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।",
+  "truckerTripDetailBackToTripsAction": "Back to my trips",
+  "truckerTripsTimeContextAssigned": "Assigned {date}",
+  "@truckerTripsTimeContextAssigned": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextDelivered": "Delivered {date}",
+  "@truckerTripsTimeContextDelivered": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextPodUploaded": "POD uploaded {date}",
+  "@truckerTripsTimeContextPodUploaded": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTimeContextCompleted": "Completed {date}",
+  "@truckerTripsTimeContextCompleted": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "truckerTripsTruckLabel": "Truck {truckNumber}",
+  "@truckerTripsTruckLabel": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
+  "truckerFleetHeroTitle": "Truck readiness manage करें",
+  "truckerFleetHeroSubtitle": "Truck approval ट्रैक करें, rejection guidance review करें और RC details updated रखें ताकि booking-ready trucks उपलब्ध रहें।",
+  "truckerFleetEditingTruckAction": "Editing truck",
+  "truckerFleetAddTruckAction": "Add truck",
+  "truckerFleetTruckCount": "{count, plural, one {{count} truck} other {{count} trucks}}",
+  "@truckerFleetTruckCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetApprovedCount": "{count} approved",
+  "@truckerFleetApprovedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetActionAttentionTitle": "Truck action needs attention",
+  "truckerFleetActionFailureMessage": "अभी latest truck action पूरी नहीं हो सकी। Truck details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFleetEditTruckTitle": "Edit truck",
+  "truckerFleetAddOrUpdateTruckTitle": "Add or update truck",
+  "truckerFleetTruckNumberLabel": "Truck number",
+  "truckerFleetTruckNumberHint": "MH12AB1234",
+  "truckerFleetBodyTypeLabel": "Body type",
+  "truckerFleetBodyTypeOption": "{value}",
+  "truckerFleetTyresLabel": "Tyres",
+  "truckerFleetTyresOption": "{tyres} tyres",
+  "@truckerFleetTyresOption": {
+    "placeholders": {
+      "tyres": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFleetCapacityLabel": "Capacity (tonnes)",
+  "truckerFleetCapacityHint": "25",
+  "truckerFleetRcDocumentTitle": "RC document",
+  "truckerFleetRcUploadedSubtitle": "RC image upload होकर इस truck draft से linked है।",
+  "truckerFleetRcRequiredSubtitle": "इस truck को save करने से पहले truck RC upload करें।",
+  "truckerFleetUploadedStatus": "uploaded",
+  "truckerFleetRequiredStatus": "required",
+  "truckerFleetStoredPath": "Stored path: {path}",
+  "@truckerFleetStoredPath": {
+    "placeholders": {
+      "path": {}
+    }
+  },
+  "truckerFleetReplaceRcAction": "Replace RC document",
+  "truckerFleetUploadRcAction": "Upload RC document",
+  "truckerFleetRcUploadedSuccess": "RC सफलतापूर्वक upload हो गई",
+  "truckerFleetRcUpdatedSuccess": "RC document सफलतापूर्वक update हो गई",
+  "truckerFleetSaveTruckUpdatesAction": "Save truck updates",
+  "truckerFleetSaveTruckAction": "Save truck",
+  "truckerFleetTruckUpdatedSuccess": "Truck सफलतापूर्वक update हो गया",
+  "truckerFleetTruckAddedSuccess": "Truck सफलतापूर्वक जोड़ दिया गया",
+  "truckerFleetMyTrucksTitle": "My trucks",
+  "truckerFleetUnavailableTitle": "Fleet उपलब्ध नहीं है",
+  "truckerFleetLoadFailureMessage": "अभी आपकी fleet लोड नहीं हो सकी। Latest truck readiness और approval state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFleetNoTrucksTitle": "अभी कोई truck नहीं जोड़ी गई",
+  "truckerFleetNoTrucksSubtitle": "अपना पहला truck उसकी RC document के साथ जोड़ें ताकि trucker verification approval की ओर बढ़ सके।",
+  "truckerFleetSelectRcSourceTitle": "Upload RC document",
+  "truckerFleetTakePhotoAction": "Take photo",
+  "truckerFleetChooseGalleryAction": "Choose from gallery",
+  "truckerFleetRcUploadFailureMessage": "अभी RC document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFleetSaveFailureMessage": "अभी यह truck save नहीं हो सकी। Truck details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFleetTruckCardSubtitle": "{bodyType} • {tyres} tyres • {capacityTonnes}T",
+  "@truckerFleetTruckCardSubtitle": {
+    "placeholders": {
+      "bodyType": {},
+      "tyres": {},
+      "capacityTonnes": {}
+    }
+  },
+  "truckerFleetModelLabel": "Model: {value}",
+  "@truckerFleetModelLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetReviewSummaryLabel": "Review summary: {value}",
+  "@truckerFleetReviewSummaryLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetNextStepLabel": "Next step: {value}",
+  "@truckerFleetNextStepLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFleetBlockedBookingMessage": "Review clear होने तक यह truck approval-dependent booking workflows के लिए blocked है।",
+  "truckerFleetFixResubmitAction": "Fix and resubmit truck",
+  "truckerFleetEditTruckAction": "Edit truck",
+  "truckerFleetStatusPendingLabel": "Pending review",
+  "truckerFleetStatusVerifiedLabel": "Approved",
+  "truckerFleetStatusRejectedLabel": "Rejected",
+  "truckerFleetStatusEditedPendingReapprovalLabel": "Pending reapproval",
+  "truckerFleetStatusArchivedLabel": "Archived",
+  "truckerFleetStatusUnknownLabel": "Unknown",
+  "truckerFleetStatusPendingMessage": "आपका truck admin review का इंतज़ार कर रहा है। Booking में इस्तेमाल करने से पहले approval ज़रूरी है।",
+  "truckerFleetStatusVerifiedMessage": "यह truck approved है और verification-dependent workflows के लिए उपलब्ध है।",
+  "truckerFleetStatusRejectedFallback": "यह truck reject हुई थी। नीचे दी गई guidance review करें और affected details या RC document update करें।",
+  "truckerFleetStatusEditedPendingReapprovalMessage": "यह truck visible रहती है, लेकिन recent edits के कारण दोबारा approval से पहले reapproval में चली गई है।",
+  "truckerFleetStatusArchivedMessage": "यह truck archived है और सामान्य booking workflows के लिए अब उपलब्ध नहीं है।",
+  "truckerFleetStatusUnknownMessage": "Truck review state अभी उपलब्ध नहीं है।",
+  "truckerFindLoadsHeroSubtitle": "Compact freight cards देखें, filters को tight रखें और route interest से load evaluation तक जल्दी बढ़ें।",
+  "truckerFindLoadsAdvancedFiltersAction": "Advanced filters",
+  "truckerFindLoadsOriginHint": "Origin city",
+  "truckerFindLoadsDestinationHint": "Destination city",
+  "truckerFindLoadsMaterialHint": "Material",
+  "truckerFindLoadsSortByLabel": "Sort by",
+  "truckerFindLoadsSortNewest": "Newest",
+  "truckerFindLoadsSortPriceHighToLow": "Price High→Low",
+  "truckerFindLoadsSortPriceLowToHigh": "Price Low→High",
+  "truckerFindLoadsSortPickupDate": "Pickup Date",
+  "truckerFindLoadsMarketplaceTabsTitle": "Marketplace tabs",
+  "truckerFindLoadsAllLoadsTab": "All Loads",
+  "truckerFindLoadsSuperLoadsTab": "Super Loads",
+  "truckerFindLoadsLoadFailureTitle": "Freight लोड नहीं हो सकी",
+  "truckerFindLoadsLoadFailureMessage": "अभी marketplace freight लोड नहीं हो सकी। Latest load search results refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFindLoadsEmptyTitle": "कोई load नहीं मिली",
+  "truckerFindLoadsEmptySubtitle": "Marketplace search को widen करने के लिए अपनी city, material या advanced filters adjust करें।",
+  "truckerFindLoadsLoadMoreFailureTitle": "और loads उपलब्ध नहीं हैं",
+  "truckerFindLoadsLoadMoreFailureMessage": "अभी और freight लोड नहीं हो सकी। Marketplace search जारी रखने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerFindLoadsSummaryFrom": "From {city}",
+  "@truckerFindLoadsSummaryFrom": {
+    "placeholders": {
+      "city": {}
+    }
+  },
+  "truckerFindLoadsSummaryTo": "To {city}",
+  "@truckerFindLoadsSummaryTo": {
+    "placeholders": {
+      "city": {}
+    }
+  },
+  "truckerFindLoadsSummaryTyres": "{value} tyre",
+  "@truckerFindLoadsSummaryTyres": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "truckerFindLoadsSummaryPriceRange": "₹{minPrice}-{maxPrice}",
+  "@truckerFindLoadsSummaryPriceRange": {
+    "placeholders": {
+      "minPrice": {},
+      "maxPrice": {}
+    }
+  },
+  "truckerFindLoadsSummarySuperLoads": "Super Loads",
+  "truckerFindLoadsSummaryAllLoads": "Showing all loads • {resultCount} result(s)",
+  "@truckerFindLoadsSummaryAllLoads": {
+    "placeholders": {
+      "resultCount": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFindLoadsSummaryFiltered": "{pieces} • {resultCount} result(s)",
+  "@truckerFindLoadsSummaryFiltered": {
+    "placeholders": {
+      "pieces": {},
+      "resultCount": {
+        "type": "int"
+      }
+    }
+  },
+  "truckerFindLoadsResetFiltersAction": "Reset filters",
+  "truckerFindLoadsAnyBodyFallback": "Any body",
+  "truckerFindLoadsStatusActive": "Active",
+  "truckerFindLoadsStatusAssignedPartial": "Assigned Partial",
+  "truckerFindLoadsStatusUnknown": "Unknown",
+  "truckerFindLoadsStatusUnknownFallback": "Unknown status",
+  "truckerFindLoadsPriceAdvancePickup": "₹{priceAmount} • {advancePercentage}% adv • {pickupDate}",
+  "@truckerFindLoadsPriceAdvancePickup": {
+    "placeholders": {
+      "priceAmount": {},
+      "advancePercentage": {
+        "type": "int"
+      },
+      "pickupDate": {}
+    }
+  },
+  "truckerFindLoadsTruckMatchAvailable": "Truck match available",
+  "truckerFindLoadsNoApprovedTruckMatch": "No approved truck match yet",
+  "truckerFindLoadsTripCostUnavailable": "Trip cost उपलब्ध नहीं है",
+  "truckerFindLoadsDistanceUnavailable": "Distance उपलब्ध नहीं है • Tyres {tyres}",
+  "@truckerFindLoadsDistanceUnavailable": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "truckerFindLoadsDistanceAvailable": "Distance {distanceKm} km • Tyres {tyres}",
+  "@truckerFindLoadsDistanceAvailable": {
+    "placeholders": {
+      "distanceKm": {},
+      "tyres": {}
+    }
+  },
+  "truckerFindLoadsTyresAny": "Any",
+  "truckerFindLoadsSuperLoadBanner": "Super Load • Payment Guarantee",
+  "truckerFindLoadsViewDetailsAction": "View details",
+  "truckerFindLoadsAdvancedFiltersTitle": "Advanced filters",
+  "truckerFindLoadsTruckBodyTypeLabel": "Truck body type",
+  "truckerFindLoadsBodyTypeOpen": "Open",
+  "truckerFindLoadsBodyTypeTrailer": "Trailer",
+  "truckerFindLoadsBodyTypeContainer": "Container",
+  "truckerFindLoadsBodyTypeTanker": "Tanker",
+  "truckerFindLoadsBodyTypeUnknown": "Unknown",
+  "truckerFindLoadsTyreRequirementTitle": "Tyre requirement",
+  "truckerFindLoadsMinPriceLabel": "Min price (₹)",
+  "truckerFindLoadsMaxPriceLabel": "Max price (₹)",
+  "truckerFindLoadsApplyFiltersAction": "Apply filters",
+  "truckerFindLoadsResetAdvancedFiltersAction": "Reset advanced filters",
+  "supplierPostLoadTitle": "Post Load",
+  "supplierPostLoadHeroTitle": "Create a supplier load",
+  "supplierPostLoadHeroSubtitle": "Route, cargo, vehicle requirements, pricing और pickup timing define करने के लिए एक clean scrolling form का उपयोग करें।",
+  "supplierPostLoadHeroHelper": "अगर route services preview नहीं लौटातीं तब भी manual city entry काम करती है। Validation या submission failure पर आपका form data सुरक्षित रहता है।",
+  "supplierPostLoadPostingBlockedTitle": "Posting is blocked",
+  "supplierPostLoadOpenVerificationAction": "Open verification",
+  "supplierPostLoadRouteTimingTitle": "Route and timing",
+  "supplierPostLoadOriginCityLabel": "Origin city",
+  "supplierPostLoadSearchCityHint": "Search city",
+  "supplierPostLoadOriginExactLocationLabel": "Origin exact location",
+  "supplierPostLoadOriginExactLocationHint": "Warehouse / pickup point",
+  "supplierPostLoadDestinationCityLabel": "Destination city",
+  "supplierPostLoadDestinationExactLocationLabel": "Destination exact location",
+  "supplierPostLoadDestinationExactLocationHint": "Drop point / delivery point",
+  "supplierPostLoadPickupDateLabel": "Pickup date",
+  "supplierPostLoadRoutePreviewTitle": "Route preview",
+  "supplierPostLoadDistanceLabel": "Distance: {value} km",
+  "@supplierPostLoadDistanceLabel": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "supplierPostLoadDriveTimeLabel": "Est. drive time: {minutes} min",
+  "@supplierPostLoadDriveTimeLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierPostLoadRoutePreviewUnavailableTitle": "Route preview unavailable",
+  "supplierPostLoadRoutePreviewUnavailableMessage": "अभी route distance और duration derive नहीं हो सके। आप manual city-based posting के साथ फिर भी आगे बढ़ सकते हैं।",
+  "supplierPostLoadCargoDetailsTitle": "Cargo details",
+  "supplierPostLoadMaterialLabel": "Material",
+  "supplierPostLoadWeightLabel": "Weight (tonnes)",
+  "supplierPostLoadWeightHint": "22",
+  "supplierPostLoadVehicleRequirementsTitle": "Vehicle requirements",
+  "supplierPostLoadTruckBodyTypeLabel": "Truck body type",
+  "supplierPostLoadTyreRequirementTitle": "Tyre requirement",
+  "supplierPostLoadAnyTyresLabel": "Any",
+  "supplierPostLoadTrucksNeededTitle": "Trucks needed",
+  "supplierPostLoadTrucksNeededLabel": "Trucks needed",
+  "supplierPostLoadTrucksNeededHint": "1",
+  "supplierPostLoadPricingScheduleTitle": "Pricing and schedule",
+  "supplierPostLoadPriceAmountLabel": "Price amount (₹)",
+  "supplierPostLoadPriceAmountHint": "54000",
+  "supplierPostLoadPriceTypeTitle": "Price type",
+  "supplierPostLoadPriceTypeFixed": "Fixed",
+  "supplierPostLoadPriceTypeNegotiable": "Per Ton",
+  "supplierPostLoadPriceTypeUnknown": "Unknown",
+  "supplierPostLoadAdvancePercentageLabel": "Advance percentage: {value}%",
+  "@supplierPostLoadAdvancePercentageLabel": {
+    "placeholders": {
+      "value": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierPostLoadAdvanceBalanceLabel": "Advance: ₹{advanceAmount} • Balance: ₹{balanceAmount}",
+  "@supplierPostLoadAdvanceBalanceLabel": {
+    "placeholders": {
+      "advanceAmount": {},
+      "balanceAmount": {}
+    }
+  },
+  "supplierPostLoadReviewSummaryTitle": "Review summary",
+  "supplierPostLoadOriginPending": "Origin pending",
+  "supplierPostLoadDestinationPending": "Destination pending",
+  "supplierPostLoadRouteSummary": "{origin} → {destination}",
+  "@supplierPostLoadRouteSummary": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "supplierPostLoadCargoSummary": "{material} • {weightTonnes}T • {trucksNeeded} truck(s)",
+  "@supplierPostLoadCargoSummary": {
+    "placeholders": {
+      "material": {},
+      "weightTonnes": {},
+      "trucksNeeded": {}
+    }
+  },
+  "supplierPostLoadPriceSummary": "Price: ₹{priceAmount} • {priceType}",
+  "@supplierPostLoadPriceSummary": {
+    "placeholders": {
+      "priceAmount": {},
+      "priceType": {}
+    }
+  },
+  "supplierPostLoadPickupSummary": "Pickup: {pickupDate}",
+  "@supplierPostLoadPickupSummary": {
+    "placeholders": {
+      "pickupDate": {}
+    }
+  },
+  "supplierPostLoadSubmissionFailedTitle": "Submission failed",
+  "supplierPostLoadCompleteVerificationAction": "Complete verification to post load",
+  "supplierPostLoadSubmitAction": "Post Load",
+  "supplierPostLoadCreatedSuccess": "Load created successfully",
+  "supplierPostLoadSubmissionFailureMessage": "अभी यह load submission तैयार नहीं हो सकी। Load details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierPostLoadSubmitFailureMessage": "अभी यह load create नहीं हो सकी। Load details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierPostLoadVerificationCheckingMessage": "Load posting enable करने से पहले supplier verification जांची जा रही है।",
+  "supplierPostLoadVerificationUnavailableMessage": "अभी supplier verification confirm नहीं हो सकी। थोड़ी देर बाद फिर कोशिश करें या अपनी trust status review करने के लिए verification खोलें।",
+  "supplierPostLoadProfileUnavailableMessage": "अभी supplier profile उपलब्ध नहीं है। यह load post करने से पहले थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierPostLoadVerificationRequiredMessage": "Loads post करने से पहले supplier verification पूरी करें। Identity और business documents upload करें, फिर उन्हें review के लिए submit करें।",
+  "supplierPostLoadSuggestionSubtitle": "{label} • {source}",
+  "@supplierPostLoadSuggestionSubtitle": {
+    "placeholders": {
+      "label": {},
+      "source": {}
+    }
+  },
+  "supplierDashboardVerificationStatusVerified": "Verified",
+  "supplierDashboardVerificationStatusPending": "Pending",
+  "supplierDashboardVerificationStatusRejected": "Rejected",
+  "supplierVerificationPendingTitle": "Verification pending",
+  "supplierVerificationPendingDescription": "आपकी supplier verification review में है। Review pending रहने तक आप loads तैयार करते रह सकते हैं।",
+  "supplierVerificationCompleteTitle": "Verification complete",
+  "supplierVerificationCompleteDescription": "आपकी supplier verification complete है। आप this dashboard से loads post करना और readiness monitor करना जारी रख सकते हैं।",
+  "supplierVerificationNeedsAttentionTitle": "Verification needs attention",
+  "supplierVerificationNeedsAttentionDescription": "Latest verification feedback review करें, जरूरी documents update करें, और तैयार होने पर फिर submit करें।",
+  "supplierOpenVerification": "Open verification",
+  "supplierReviewVerification": "Review verification",
+  "supplierFixVerification": "Fix verification",
+  "supplierCompleteSetupTitle": "Complete your supplier setup",
+  "supplierCompleteSetupMessage": "Full supplier workspace use करने से पहले supplier verification पूरी करें और अपनी company details जोड़ें।",
+  "supplierCompleteVerification": "Complete verification",
+  "supplierDashboardSuperLoadReadinessIntro": "Super Load eligibility अभी भी current app में आंशिक रूप से admin-managed है। यह surface केवल वही readiness facts दिखाती है जिन्हें current profile model ईमानदारी से confirm कर सकती है।",
+  "supplierDashboardSuperLoadVerificationComplete": "Verification complete",
+  "supplierDashboardSuperLoadVerificationRequired": "Verification still required",
+  "supplierDashboardSuperLoadBusinessLicenceOnFile": "Business licence on file",
+  "supplierDashboardSuperLoadBusinessLicenceMissing": "Business licence missing",
+  "supplierDashboardSuperLoadCompanyAgeUnavailable": "Company-age readiness unavailable in current app data",
+  "supplierDashboardSuperLoadReadinessSummaryReady": "आपकी current profile supplier verification और business licence prerequisite को confirm कर सकती है, लेकिन final Super Load eligibility यहाँ अभी भी तय नहीं की जा सकती क्योंकि current source model में company-age/readiness fields अभी मौजूद नहीं हैं।",
+  "supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence": "आपकी supplier verification complete है, लेकिन business licence prerequisite अभी current profile में missing है। जब तक यह verification requirement पूरी नहीं होती, final Super Load eligibility blocked रहेगी।",
+  "supplierDashboardSuperLoadReadinessSummaryMissingVerification": "आपकी current profile business licence on file को confirm कर सकती है, लेकिन supplier verification अभी incomplete है। Final Super Load eligibility तब तक blocked रहेगी जब तक verification पूरी नहीं होती और current source model में company-age/readiness fields नहीं जुड़तीं।",
+  "supplierDashboardSuperLoadReadinessSummaryPendingVerification": "आपकी supplier verification अभी review में है। जब तक यह review complete नहीं होती, Super Load readiness आगे नहीं बढ़ सकती, और company-age/readiness fields आने तक final eligibility admin-managed ही रहेगी।",
+  "supplierDashboardSuperLoadReadinessSummaryRejectedVerification": "Super Load readiness आगे बढ़ने से पहले आपकी supplier verification में correction चाहिए। Latest verification feedback review करें, required documents अपडेट करें, और packet resubmit होने के बाद इस readiness surface को फिर से देखें।",
+  "supplierDashboardSuperLoadReadinessSummaryNeedsAttention": "Super Load readiness eligibility के करीब आने से पहले supplier verification और business licence prerequisite दोनों पर अभी ध्यान देना जरूरी है। उसके बाद भी final eligibility admin-managed रहेगी जब तक current source model में company-age/readiness fields मौजूद नहीं होतीं।",
+  "supplierDashboardSuperLoadNextStepReady": "Next best action: अपनी verification details सही रखें, अपने loads को सामान्य रूप से monitor करें, और Super Load review या policy questions पर follow-up चाहिए तो ही support का उपयोग करें।",
+  "supplierDashboardSuperLoadNextStepBusinessLicence": "Next best action: पहले verification के माध्यम से business licence update या upload करें, फिर इस readiness surface को दोबारा जांचें।",
+  "supplierDashboardSuperLoadNextStepVerification": "Next best action: supplier verification पूरी करें ताकि platform किसी future Super Load review से पहले आपके trust baseline को confirm कर सके।",
+  "supplierDashboardSuperLoadNextStepPendingVerification": "Next best action: current verification review को monitor करें, business documents को stable रखें, और approval pending रहने के दौरान clarification चाहिए तो ही support का उपयोग करें।",
+  "supplierDashboardSuperLoadNextStepRejectedVerification": "Next best action: पहले rejected verification items को ठीक करें, packet को review के लिए resubmit करें, और फिर refreshed readiness summary के लिए यहाँ लौटें।",
+  "supplierDashboardSuperLoadNextStepNeedsAttention": "Next best action: पहले supplier verification और business licence requirements पूरी करें, फिर remaining readiness summary के लिए यहाँ लौटें।",
+  "supplierDashboardLoadStatusActive": "सक्रिय",
+  "supplierLoadStatusAssignedPartial": "आंशिक रूप से असाइन",
+  "supplierLoadStatusAssignedFull": "पूरी तरह असाइन",
+  "supplierLoadStatusInTransit": "रास्ते में",
+  "supplierLoadStatusCompleted": "पूर्ण",
+  "supplierLoadStatusUnknown": "Unknown",
+  "supplierLoadStatusFilledOutsideApp": "ऐप के बाहर भरा गया",
+  "supplierLoadStatusCancelled": "रद्द",
+  "supplierLoadStatusExpired": "समाप्त",
+  "supplierLoadStatusDeactivated": "निष्क्रिय",
+  "supplierDashboardTrucksBooked": "{booked}/{needed} ट्रक बुक हुए",
+  "@supplierDashboardTrucksBooked": {
+    "placeholders": {
+      "booked": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierDashboardLoadPickup": "Pickup {value}",
+  "@supplierDashboardLoadPickup": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  "supplierDashboardOpenLoadsWorkspace": "Open loads workspace",
+  "supplierDashboardSuperLoadStatusRequestSubmitted": "Request submitted",
+  "supplierDashboardSuperLoadStatusUnderReview": "Under review",
+  "supplierDashboardSuperLoadStatusApproved": "Approved • payment pending",
+  "supplierDashboardSuperLoadStatusRejected": "Rejected",
+  "supplierDashboardSuperLoadStatusExpiredOrClosed": "Closed",
+  "supplierDashboardSuperLoadStatusActive": "Active",
+  "supplierDashboardSuperLoadStatusNotActive": "Not requested",
+  "supplierDashboardSuperLoadBadge": "Super Load • {status}",
+  "@supplierDashboardSuperLoadBadge": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierDashboardSuperLoadGuidanceRequestSubmitted": "यह Super Load request submit हो चुकी है और admin review का इंतज़ार कर रही है। Dedicated supplier-side eligibility controls अभी pending हैं, इसलिए current state admin-managed है।",
+  "supplierDashboardSuperLoadGuidanceUnderReview": "यह Super Load request admin review में है। Review progress में रहने तक load details stable रखें।",
+  "supplierDashboardSuperLoadGuidanceApproved": "यह Super Load request approved है, लेकिन activation अभी भी off-platform payment confirmation step पर निर्भर है।",
+  "supplierDashboardSuperLoadGuidanceRejected": "यह Super Load request approve नहीं हुई। Dedicated supplier readiness surface अभी pending है, इसलिए follow-up चाहिए तो support का उपयोग करें।",
+  "supplierDashboardSuperLoadGuidanceExpiredOrClosed": "यह Super Load lifecycle बंद हो चुकी है। Current load status review करें और follow-up चाहिए तो support का उपयोग करें।",
+  "supplierDashboardSuperLoadGuidanceActive": "यह load current lifecycle में Super Load के रूप में marked है। Dedicated supplier-side eligibility controls अभी भी expand की जा रही हैं।",
+  "supplierDashboardSuperLoadGuidanceNotActive": "इस load के लिए Super Load state active नहीं है।",
+  "supplierTripDetailTitle": "Trip Detail",
+  "supplierTripDetailLoadFailureTitle": "Unable to load supplier trip detail",
+  "supplierTripDetailLoadFailureMessage": "अभी यह supplier trip detail load नहीं हो सकी। Latest trip status और proof review context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripDetailRatingFailureMessage": "Supplier rating state अभी उपलब्ध नहीं है। Rating submit करने से पहले थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripDetailRatingSubmitFailureMessage": "अभी यह supplier rating submit नहीं हो सकी। Rating review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripDetailActionFailureMessage": "Latest supplier trip action अभी पूरी नहीं हो सकी। Trip detail refresh होने के बाद थोड़ी देर में फिर कोशिश करें।",
+  "supplierTripDetailActionSubmitFailureMessage": "अभी यह supplier trip action पूरी नहीं हो सकी। Latest trip status जांचकर थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripDetailRatingSectionTitle": "Rate this trip",
+  "supplierTripDetailRatingAlreadySubmitted": "You already rated this trip.",
+  "supplierTripDetailRatingSubmittedOn": "Submitted on {date}",
+  "@supplierTripDetailRatingSubmittedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailRatingPrompt": "Delivery complete हो चुकी है। इस trip के लिए trucker को rate करें।",
+  "supplierTripDetailCommentLabel": "Comment (optional)",
+  "supplierTripDetailCommentHint": "Trip outcome के बारे में useful feedback साझा करें",
+  "supplierTripDetailRatingUnavailableTitle": "Rating unavailable",
+  "supplierTripDetailSubmitRatingAction": "Submit Rating",
+  "supplierTripDetailRatingSubmittedSuccess": "Rating submitted successfully.",
+  "supplierTripDetailRatingStarTooltip": "{count} star{s}",
+  "@supplierTripDetailRatingStarTooltip": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "s": {}
+    }
+  },
+  "supplierTripDetailHeroSubtitle": "Trip {tripId} • Truck {truckNumber}",
+  "@supplierTripDetailHeroSubtitle": {
+    "placeholders": {
+      "tripId": {},
+      "truckNumber": {}
+    }
+  },
+  "supplierTripDetailMaterialTruckerSummary": "{material} • Trucker {truckerName}",
+  "@supplierTripDetailMaterialTruckerSummary": {
+    "placeholders": {
+      "material": {},
+      "truckerName": {}
+    }
+  },
+  "supplierTripDetailNextStepTitle": "Next step",
+  "supplierTripDetailNextStepReviewTitle": "Review and confirm delivery",
+  "supplierTripDetailNextStepReviewMessage": "Trucker ने POD upload कर दिया है। Proof review करें और trip close करने के लिए delivery confirm करें।",
+  "supplierTripDetailNextStepCompletedTitle": "Trip completed",
+  "supplierTripDetailNextStepCompletedMessage": "Delivery confirm हो चुकी है। Rating और post-trip follow-up इसी completed state से जारी रहते हैं।",
+  "supplierTripDetailNextStepDisputedTitle": "Dispute in progress",
+  "supplierTripDetailNextStepDisputedMessage": "यह trip dispute review में है और support या operations resolution का इंतजार कर रही है।",
+  "supplierTripDetailNextStepDefaultTitle": "Track execution",
+  "supplierTripDetailNextStepDefaultMessage": "इस supplier execution view से current trip status, timestamps और proof progress review करें।",
+  "supplierTripDetailDisputeStatusTitle": "Dispute status",
+  "supplierTripDetailDisputeStateRaised": "Current state: Dispute raised",
+  "supplierTripDetailDisputeCategorySummary": "Category: {category}",
+  "@supplierTripDetailDisputeCategorySummary": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeCategoryLabel": "{category}",
+  "@supplierTripDetailDisputeCategoryLabel": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeStatusLabel": "{status}",
+  "@supplierTripDetailDisputeStatusLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierTripDetailDisputeCurrentStateLabel": "Current state: {status}",
+  "@supplierTripDetailDisputeCurrentStateLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierTripDetailDisputeLastUpdatedLabel": "Last updated: {date}",
+  "@supplierTripDetailDisputeLastUpdatedLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailActionUnavailableTitle": "Supplier trip action unavailable",
+  "supplierTripDetailProofDocumentsTitle": "Proof documents",
+  "supplierTripDetailPodPhotoTitle": "POD photo",
+  "supplierTripDetailPreviewUnavailable": "Unable to open preview",
+  "supplierTripDetailOpenPodPhotoAction": "Open POD Photo",
+  "supplierTripDetailOpenLrDocumentAction": "Open LR Document",
+  "supplierTripDetailActionsTitle": "Actions",
+  "supplierTripDetailConfirmDeliveryAction": "Confirm Delivery",
+  "supplierTripDetailConfirmDeliverySuccess": "Delivery confirmed. The trip is now completed.",
+  "supplierTripDetailDisputePodAction": "Dispute POD",
+  "supplierTripDetailReportSourceLabel": "Supplier trip • {routeLabel}",
+  "@supplierTripDetailReportSourceLabel": {
+    "placeholders": {
+      "routeLabel": {}
+    }
+  },
+  "supplierTripDetailRouteScheduleTitle": "Route and schedule",
+  "supplierTripDetailOriginLabel": "Origin: {origin}",
+  "@supplierTripDetailOriginLabel": {
+    "placeholders": {
+      "origin": {}
+    }
+  },
+  "supplierTripDetailDestinationLabel": "Destination: {destination}",
+  "@supplierTripDetailDestinationLabel": {
+    "placeholders": {
+      "destination": {}
+    }
+  },
+  "supplierTripDetailDistanceLabel": "Distance: {distance} km",
+  "@supplierTripDetailDistanceLabel": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "supplierTripDetailDriveTimeLabel": "Drive time: {minutes} min",
+  "@supplierTripDetailDriveTimeLabel": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierTripDetailPickupDateLabel": "Pickup date: {date}",
+  "@supplierTripDetailPickupDateLabel": {
+    "placeholders": {
+      "date": {}
+    }
+  },
+  "supplierTripDetailAssignedLabel": "Assigned: {dateTime}",
+  "@supplierTripDetailAssignedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailDeliveredLabel": "Delivered: {dateTime}",
+  "@supplierTripDetailDeliveredLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailPodUploadedLabel": "POD uploaded: {dateTime}",
+  "@supplierTripDetailPodUploadedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailCompletedLabel": "Completed: {dateTime}",
+  "@supplierTripDetailCompletedLabel": {
+    "placeholders": {
+      "dateTime": {}
+    }
+  },
+  "supplierTripDetailTruckerTruckTitle": "Trucker and truck",
+  "supplierTripDetailTruckerLabel": "Trucker: {name}",
+  "@supplierTripDetailTruckerLabel": {
+    "placeholders": {
+      "name": {}
+    }
+  },
+  "supplierTripDetailTruckNumberLabel": "Truck number: {truckNumber}",
+  "@supplierTripDetailTruckNumberLabel": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
+  "supplierTripDetailBodyTypeLabel": "Body type: {bodyType}",
+  "@supplierTripDetailBodyTypeLabel": {
+    "placeholders": {
+      "bodyType": {}
+    }
+  },
+  "supplierTripDetailTyresLabel": "Tyres: {tyres}",
+  "@supplierTripDetailTyresLabel": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "supplierTripDetailPending": "Pending",
+  "supplierTripDetailStageAssigned": "Assigned",
+  "supplierTripDetailStagePickupPending": "Pickup pending",
+  "supplierTripDetailStagePickedUp": "Picked up",
+  "supplierTripDetailStageInTransit": "In transit",
+  "supplierTripDetailStageDelivered": "Delivered",
+  "supplierTripDetailStageProofSubmitted": "Proof submitted",
+  "supplierTripDetailStageCompleted": "Completed",
+  "supplierTripDetailStageDisputed": "Disputed",
+  "supplierTripDetailStageCancelled": "Cancelled",
+  "supplierTripDetailStageUnknown": "Unknown",
+  "supplierTripDetailVerificationStatusVerified": "Verified",
+  "supplierTripDetailVerificationStatusPending": "Pending",
+  "supplierTripDetailVerificationStatusRejected": "Rejected",
+  "supplierTripDetailVerificationStatusUnknown": "Unknown",
+  "supplierTripDetailDisputeCategoryFallback": "Trip dispute",
+  "supplierTripDetailDisputeStatusFallback": "Open",
+  "supplierTripDetailDisputeStatusGuidanceOpen": "Support को यह dispute मिल चुकी है और review जल्द शुरू होनी चाहिए। अगर और proof context चाहिए हो तो related support replies साफ रखें।",
+  "supplierTripDetailDisputeStatusGuidanceInProgress": "Support या operations इस dispute को actively review कर रहे हैं। Visible updates या clarification requests के लिए related support ticket देखें।",
+  "supplierTripDetailDisputeStatusGuidanceWaitingForUser": "Support आपके clarification या additional context का इंतजार कर रही है। Review जारी रखने के लिए related support ticket पर reply करें।",
+  "supplierTripDetailDisputeStatusGuidanceResolved": "यह dispute final review state तक पहुंच चुकी है। कोई नया follow-up issue उठाने से पहले linked support ticket outcome देखें।",
+  "supplierTripDetailDisputeStatusGuidanceDefault": "Latest visible review updates के लिए related support ticket को follow करते रहें।",
+  "supplierTripDetailDisputeBannerWaitingTitle": "Dispute review waiting for your reply",
+  "supplierTripDetailDisputeBannerClosedTitle": "Dispute review closed",
+  "supplierTripDetailDisputeBannerInProgressTitle": "Dispute review in progress",
+  "supplierTripDetailDisputeBannerNoSummaryMessage": "इस trip पर dispute raise की गई है। Support और operations delivery context review कर रहे हैं, जबकि raw evidence access review के दौरान restricted रह सकती है।",
+  "supplierTripDetailDisputeBannerWaitingMessage": "Category: {category}. यह trip dispute आपके clarification या proof का इंतजार कर रही है, जबकि raw evidence access review के दौरान restricted रह सकती है।",
+  "@supplierTripDetailDisputeBannerWaitingMessage": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeBannerClosedMessage": "Category: {category}. यह trip dispute final review outcome तक पहुंच चुकी है। Recorded status updates visible रहती हैं, जबकि raw evidence access restricted रह सकती है।",
+  "@supplierTripDetailDisputeBannerClosedMessage": {
+    "placeholders": {
+      "category": {}
+    }
+  },
+  "supplierTripDetailDisputeBannerInProgressMessage": "Category: {category}. Status: {status}. Support और operations इस trip dispute को review कर रहे हैं, जबकि raw evidence access review के दौरान restricted रह सकती है।",
+  "@supplierTripDetailDisputeBannerInProgressMessage": {
+    "placeholders": {
+      "category": {},
+      "status": {}
+    }
+  },
+  "supplierTripDetailSharedVisibilityClosed": "दोनों parties recorded dispute category, final workflow state और visible support replies को इस trip dispute पर अभी भी follow कर सकती हैं।",
+  "supplierTripDetailSharedVisibilityInProgress": "दोनों parties dispute category, workflow status और support replies को follow कर सकती हैं जो review के दौरान intentionally visible रखी गई हैं।",
+  "supplierTripDetailActionGuidanceClosed": "यह dispute final review state तक पहुंच चुकी है। किसी genuinely नए follow-up issue को खोलने से पहले linked support ticket पर recorded outcome देखें।",
+  "supplierTripDetailActionGuidanceInProgress": "जब तक यह dispute review में है, तब तक delivery-confirmation action उपलब्ध नहीं है। अगर support clarification या additional context मांगे तो linked support ticket follow करें।",
+  "supplierTripDetailProofGuidanceClosed": "अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई dispute context हो।",
+  "supplierTripDetailProofGuidanceInProgress": "अगर यह dispute current single-image flow से आगे additional documents पर निर्भर करती है, तो उन missing proofs को related support ticket replies में साफ summarize करें।",
+  "verificationTitle": "Verification",
+  "verificationTitleSupplier": "Supplier Verification",
+  "verificationTitleTrucker": "Trucker Verification",
+  "verificationLoadFailureTitle": "Unable to load verification state",
+  "verificationLoadFailureMessage": "अभी आपका verification status load नहीं हो सका। Latest verification state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationDetailsUnavailableTitle": "Verification details unavailable",
+  "verificationDetailsUnavailableSubtitle": "हम इस account के लिए current verification record नहीं ढूंढ सके। कृपया थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationHeroPendingSupplierTitle": "Supplier verification under review",
+  "verificationHeroPendingTruckerTitle": "Trucker verification under review",
+  "verificationHeroVerifiedSupplierTitle": "Supplier verification complete",
+  "verificationHeroVerifiedTruckerTitle": "Trucker verification complete",
+  "verificationHeroRejectedSupplierTitle": "Resubmit supplier verification",
+  "verificationHeroRejectedTruckerTitle": "Resubmit trucker verification",
+  "verificationHeroInitialSupplierTitle": "Complete supplier trust setup",
+  "verificationHeroInitialTruckerTitle": "Complete trucker trust setup",
+  "verificationHeroPendingSubtitle": "आपका verification packet पहले से review में है। Approval complete होने पर हम आपको notify करेंगे।",
+  "verificationHeroVerifiedSubtitle": "आपका verification packet पहले से approved है। आप नीचे captured documents और readiness details review कर सकते हैं।",
+  "verificationHeroRejectedWithFeedbackSubtitle": "नीचे rejected document markers review करें, affected items replace करें, और ready होने पर resubmit करें।",
+  "verificationHeroRejectedFallbackSubtitle": "Rejection summary review करें, affected items replace करें, और ready होने पर पूरा packet resubmit करें।",
+  "verificationHeroInitialSupplierSubtitle": "Required business और identity documents upload करें, supplier verification location capture करें, और इस single verification surface से review के लिए submit करें।",
+  "verificationHeroInitialTruckerSubtitle": "Identity documents upload करें, truck readiness confirm करें, और इस single setup surface से full verification packet review के लिए submit करें।",
+  "verificationResubmitForReviewAction": "Resubmit for review",
+  "verificationSubmitForReviewAction": "Submit for review",
+  "verificationResubmittedSuccess": "Verification resubmitted for review",
+  "verificationSubmittedSuccess": "Verification submitted for review",
+  "verificationSubmitFailureMessage": "अभी यह verification packet submit नहीं हो सकी। Current checklist review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationWhatHappensNextTitle": "What happens next",
+  "verificationWhatHappensNextMessage": "आपका verification packet review queue में है। जब तक हमारी team correction request के साथ case reject न करे, आपको कुछ भी resubmit करने की जरूरत नहीं है।",
+  "verificationTimelinePacketSubmittedTitle": "Packet submitted",
+  "verificationTimelinePacketSubmittedTimestamp": "Completed",
+  "verificationTimelinePacketSubmittedDescription": "आपके current documents और readiness data पहले से verification case से attached हैं।",
+  "verificationTimelineReviewInProgressTitle": "Review in progress",
+  "verificationTimelineReviewInProgressTimestamp": "Now",
+  "verificationTimelineReviewInProgressDescription": "हमारी operations team submitted identity, business और readiness evidence review कर रही है।",
+  "verificationTimelineNotifiedTitle": "You will be notified",
+  "verificationTimelineNotifiedTimestamp": "Next",
+  "verificationTimelineNotifiedDescription": "Review approve होने या correction के लिए वापस भेजे जाने पर हम आपका verification state यहीं update करेंगे।",
+  "verificationActionNeedsAttentionTitle": "Verification action needs attention",
+  "verificationActionFailureMessage": "Latest verification action अभी पूरी नहीं हो सकी। Current checklist review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationLatestRejectionReasonTitle": "Latest rejection reason",
+  "verificationNextStepTitle": "Next step",
+  "verificationLocationTitle": "Verification location",
+  "verificationLocationCapturedTitle": "Location captured",
+  "verificationLocationRequiredTitle": "Location still required",
+  "verificationLocationRequiredMessage": "Supplier verification के लिए submission से पहले city-level location capture जरूरी है।",
+  "verificationLocationCapturedStatus": "captured",
+  "verificationLocationRequiredStatus": "required",
+  "verificationLocationCapturedFooter": "Captured location supplier verification packet के साथ review के लिए attached रहती है।",
+  "verificationLocationCaptureGuidanceFooter": "हम GPS capture की कोशिश करते हैं और संभव होने पर nearest city-level location resolve करते हैं।",
+  "verificationRefreshLocationAction": "Refresh location",
+  "verificationCaptureLocationAction": "Location capture करें",
+  "verificationLocationCapturedSuccess": "Verification location captured",
+  "verificationLocationFailureMessage": "अभी verification location capture नहीं हो सकी। इसी verification screen से थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationManualLocationAction": "Location manually जोड़ें",
+  "verificationManualLocationTitle": "Verification location manually जोड़ें",
+  "verificationManualLocationCityLabel": "City",
+  "verificationManualLocationStateLabel": "State (optional)",
+  "verificationManualLocationSaveAction": "Location save करें",
+  "verificationDocTypeAadhaarFront": "आधार सामने",
+  "verificationDocTypeAadhaarBack": "आधार पीछे",
+  "verificationDocTypePan": "PAN कार्ड",
+  "verificationDocTypeProfilePhoto": "प्रोफ़ाइल फोटो",
+  "verificationDocTypeBusinessLicence": "Business licence",
+  "verificationDocTypeGstCertificate": "GST certificate",
+  "verificationDocumentChecklistTitle": "Document checklist",
+  "verificationDocumentUploadedSuccess": "{label} uploaded successfully",
+  "@verificationDocumentUploadedSuccess": {
+    "placeholders": {
+      "label": {}
+    }
+  },
+  "verificationDocumentUploadFailureMessage": "अभी वह verification document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "verificationReadinessSupplierTitle": "Verification readiness",
+  "verificationReadinessTruckerTitle": "Verification and truck readiness",
+  "verificationCurrentStateTitle": "Current verification state",
+  "verificationStatusVerified": "Verified",
+  "verificationStatusPending": "Pending",
+  "verificationStatusRejected": "Rejected",
+  "verificationStatusUnverified": "Unverified",
+  "verificationStatusUnknown": "Unknown",
+  "verificationCurrentStateSupplierFooter": "Supplier verification load-posting readiness और trust visibility को एक authoritative state से aligned रखती है।",
+  "verificationCurrentStateTruckerFooter": "Trucker verification open loads पर chat और call unlock करती है जब identity documents और truck readiness complete हो जाते हैं।",
+  "verificationBusinessReadinessTitle": "Business readiness",
+  "verificationTruckReadinessTitle": "Truck readiness",
+  "verificationCompanyNameNeedsAttention": "Company name still needs attention",
+  "approvedTruckCountLabel": "{count} approved truck{s}",
+  "verificationCheckProfileStatus": "check profile",
+  "verificationCapturedStatus": "captured",
+  "verificationReadyStatus": "ready",
+  "verificationActionNeededStatus": "action needed",
+  "verificationBusinessReadinessFooter": "Supplier verification के लिए business licence जरूरी है। GST certificate optional रहता है।",
+  "verificationTruckReadyFooter": "Verification-dependent workflows के लिए आपके पास पहले से कम-से-कम एक approved truck उपलब्ध है।",
+  "verificationTruckRequiredFooter": "Trucker verification submit करने से पहले कम-से-कम एक approved truck अभी भी जरूरी है।",
+  "verificationPacketDetailsSectionTitle": "Verification packet विवरण",
+  "verificationIdentityPacketSectionTitle": "पहचान packet विवरण",
+  "verificationReadyTruckCountLabel": "{count} तैयार {count, plural, =1{truck} other{trucks}}",
+  "@verificationReadyTruckCountLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "verificationTruckReadyWithRcFooter": "आपके पास पहले से कम-से-कम एक पूरा truck packet RC document के साथ मौजूद है।",
+  "verificationTruckRequiredWithRcFooter": "Trucker verification submit करने से पहले एक truck और उसका RC document जोड़ें।",
+  "verificationTruckPacketStillRequiredTitle": "Truck packet अभी भी जरूरी है",
+  "verificationTruckPacketStillRequiredMessage": "पहला truck जोड़ने या RC document upload करने के लिए fleet खोलें ताकि trucker verification एक ही packet के रूप में submit हो सके।",
+  "verificationTruckPacketRequiredBadge": "Truck packet जरूरी",
+  "verificationTruckApprovalRequiredTitle": "Truck approval is still required",
+  "verificationTruckApprovalRequiredMessage": "अपना पहला truck जोड़ने, rejection guidance review करने, या edited truck details approval के लिए resubmit करने के लिए fleet खोलें।",
+  "verificationOpenFleetAction": "Open fleet",
+  "verificationUnlocksTitle": "What this unlocks",
+  "verificationUnlocksSupplierMessage": "Verified होने के बाद आपका supplier account broader marketplace और account workflows के लिए trust-ready हो जाता है।",
+  "verificationUnlocksTruckerMessage": "Verified होने के बाद open loads पर chat और call unlocked रहते हैं और आपका trucker account assignment-ready हो जाता है।",
+  "verificationSourceOfTruthBadge": "Verification source of truth",
+  "verificationChatAndCallGatingBadge": "Chat and call gating",
+  "verificationApprovedTruckRequiredBadge": "Approved truck required",
+  "verificationBackToAccountAction": "Back to account",
+  "verificationUploadSourceTitle": "Upload {documentLabel}",
+  "verificationTakePhotoAction": "Take photo",
+  "verificationChooseFromGalleryAction": "Choose from gallery",
+  "verificationRejectionSummaryWithMarkers": "{summary}\n\nRejected documents नीचे document-specific correction notes के साथ marked हैं।",
+  "verificationRejectionSummaryPacketLevel": "{summary}\n\nजब document-specific review markers उपलब्ध नहीं होते, तब current review feedback एक packet-level reason के रूप में लौटती है।",
+  "verificationPendingBannerTitle": "Verification pending",
+  "verificationPendingBannerDescription": "आपका verification packet पहले से review में है। Review pending रहने तक आप browsing जारी रख सकते हैं।",
+  "verificationCompleteBannerTitle": "Verification complete",
+  "verificationCompleteBannerDescription": "आपका account पहले से verified है। आप नीचे uploaded document checklist फिर भी review कर सकते हैं।",
+  "verificationNeedsAttentionBannerTitle": "Verification needs attention",
+  "verificationNeedsAttentionBannerDescription": "Rejection summary review करें, affected documents replace करें, और ready होने पर packet resubmit करें।",
+  "verificationNotSubmittedTitle": "Verification not submitted yet",
+  "verificationNotSubmittedSupplierMessage": "Supplier verification submit करने से पहले Aadhaar, PAN, profile photo और business licence upload करें।",
+  "verificationNotSubmittedTruckerMessage": "Trucker verification submit करने से पहले Aadhaar, PAN, profile photo upload करें और सुनिश्चित करें कि कम-से-कम एक approved truck मौजूद हो।",
+  "verificationRequiredUploadedLabel": "{uploaded}/{required} required uploaded",
+  "verificationPrerequisitesSatisfiedMessage": "Submission के लिए current client-side verification prerequisites पूरी हो चुकी हैं।",
+  "verificationDocumentStatusPending": "pending",
+  "verificationDocumentStatusVerified": "verified",
+  "verificationDocumentStatusRejected": "rejected",
+  "verificationDocumentStatusUploaded": "uploaded",
+  "verificationDocumentStatusRequired": "required",
+  "verificationDocumentStatusOptional": "optional",
+  "verificationDocumentCorrectionFallback": "Verification resubmit होने से पहले इस document में correction जरूरी है।",
+  "verificationDocumentUploadedSubtitle": "Document upload हो चुकी है और आपकी verification record से linked है।",
+  "verificationDocumentRequiredSubtitle": "Verification submit होने से पहले यह required है।",
+  "verificationDocumentOptionalSubtitle": "Current verification packet के लिए optional है।",
+  "verificationReviewNoteLabel": "Review note: {reason}",
+  "verificationStoredPathLabel": "Stored path: {path}",
+  "verificationDocumentMissingMessage": "यह document current packet में अभी भी missing है।",
+  "verificationReplaceDocumentAction": "Replace document",
+  "verificationUploadDocumentAction": "Upload document",
+  "truckerTripDetailTitle": "Trip Detail",
+  "truckerTripDetailLoadFailureTitle": "Unable to load trip detail",
+  "truckerTripDetailLoadFailureMessage": "अभी यह trip detail load नहीं हो सकी। Latest trip status और actions refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailRatingFailureMessage": "आपकी trip rating state अभी उपलब्ध नहीं है। Rating submit करने से पहले थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailRatingSubmitFailureMessage": "अभी आपकी rating submit नहीं हो सकी। Rating review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailActionFailureMessage": "Latest trip action अभी पूरी नहीं हो सकी। Trip detail refresh होने के बाद थोड़ी देर में फिर कोशिश करें।",
+  "truckerTripDetailActionSubmitFailureMessage": "अभी वह trip action पूरी नहीं हो सकी। Latest trip status जांचकर थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailLrUploadFailureMessage": "अभी LR proof upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailPodUploadFailureMessage": "अभी POD proof upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerTripDetailRatingSectionTitle": "Rate this trip",
+  "truckerTripDetailRatingAlreadySubmitted": "You already rated this trip.",
+  "truckerTripDetailRatingSubmittedOn": "Submitted on {date}",
+  "truckerTripDetailRatingPrompt": "Delivery complete हो चुकी है। इस trip के लिए supplier को rate करें।",
+  "truckerTripDetailCommentLabel": "Comment (optional)",
+  "truckerTripDetailCommentHint": "Trip outcome के बारे में useful feedback साझा करें",
+  "truckerTripDetailRatingUnavailableTitle": "Rating unavailable",
+  "truckerTripDetailSubmitRatingAction": "Submit Rating",
+  "truckerTripDetailRatingSubmittedSuccess": "Rating submitted successfully.",
+  "truckerTripDetailRatingStarTooltip": "{count} star{s}",
+  "truckerTripDetailAutoCompleteDueNow": "Auto-complete is due now.",
+  "truckerTripDetailAutoCompleteDuration": "{hours}h {minutes}m",
+  "truckerTripDetailAutoCompleteIn": "Auto-complete in: {duration}",
+  "truckerTripDetailVerificationStatusVerified": "Verified",
+  "truckerTripDetailVerificationStatusPending": "Pending",
+  "truckerTripDetailVerificationStatusRejected": "Rejected",
+  "truckerTripDetailVerificationStatusUnknown": "Unknown",
+  "truckerTripDetailStageAssigned": "Assigned",
+  "truckerTripDetailStagePickupPending": "Pickup pending",
+  "truckerTripDetailStagePickedUp": "Picked up",
+  "truckerTripDetailStageInTransit": "In transit",
+  "truckerTripDetailStageDelivered": "Delivered",
+  "truckerTripDetailStageProofSubmitted": "Proof submitted",
+  "truckerTripDetailStageCompleted": "Completed",
+  "truckerTripDetailStageDisputed": "Disputed",
+  "truckerTripDetailStageCancelled": "Cancelled",
+  "truckerTripDetailProofStatusPodUploaded": "POD uploaded",
+  "truckerTripDetailProofStatusLrUploaded": "LR uploaded",
+  "truckerTripDetailProofStatusAwaitingPod": "Awaiting POD",
+  "truckerTripDetailProofStatusProofSubmitted": "Proof submitted",
+  "truckerTripDetailProofStatusProofPending": "Proof pending",
+  "truckerTripDetailHeroSubtitle": "Trip {tripId} • Truck {truckNumber}",
+  "truckerTripDetailMaterialPickupSummary": "{material} • Pickup {pickupDate}",
+  "truckerTripDetailNextStepTitle": "Next step",
+  "truckerTripDetailActionUnavailableTitle": "Trip action unavailable",
+  "truckerTripDetailActionsTitle": "Actions",
+  "truckerTripDetailReplaceLrUploadAction": "Replace LR Upload",
+  "truckerTripDetailUploadLrOptionalAction": "Upload LR (Optional)",
+  "truckerTripDetailUploadLrImageTitle": "Upload LR image",
+  "truckerTripDetailLrUploadedSuccess": "LR uploaded successfully.",
+  "truckerTripDetailUploadPodPhotoAction": "Upload POD Photo",
+  "truckerTripDetailUploadPodPhotoTitle": "Upload POD photo",
+  "truckerTripDetailPodUploadedSuccess": "POD uploaded successfully. Supplier confirmation is now pending.",
+  "truckerTripDetailCallSupplierAction": "Call Supplier",
+  "truckerTripDetailOpenInGoogleMapsAction": "Open in Google Maps",
+  "truckerTripDetailReportSourceLabel": "Trucker trip • {originLabel} → {destinationLabel}",
+  "truckerTripDetailReviewCountdownTitle": "Delivery review countdown",
+  "truckerTripDetailReviewCountdownMessage": "Supplier confirmation pending है। अगर कोई action नहीं ली जाती, तो POD upload के 48 घंटे बाद यह trip auto-complete हो जाती है।",
+  "truckerTripDetailDisputeStatusTitle": "Dispute status",
+  "truckerTripDetailDisputeStateRaised": "Current state: Dispute raised",
+  "truckerTripDetailDisputeCurrentStateLabel": "Current state: {status}",
+  "truckerTripDetailDisputeCategoryLabel": "{category}",
+  "truckerTripDetailDisputeLastUpdatedLabel": "Last updated: {date}",
+  "truckerTripDetailDisputeStatusGuidanceOpen": "Support को यह dispute मिल चुकी है और review जल्द शुरू होनी चाहिए। अगर और proof context चाहिए हो तो related support replies साफ रखें।",
+  "truckerTripDetailDisputeStatusGuidanceInProgress": "Support या operations इस dispute को actively review कर रहे हैं। Visible updates या clarification requests के लिए related support ticket देखें।",
+  "truckerTripDetailDisputeStatusGuidanceWaitingForUser": "Support आपके clarification या additional context का इंतजार कर रही है। Review जारी रखने के लिए related support ticket पर reply करें।",
+  "truckerTripDetailDisputeStatusGuidanceResolved": "यह dispute final review state तक पहुंच चुकी है। कोई नया follow-up issue उठाने से पहले linked support ticket outcome देखें।",
+  "truckerTripDetailDisputeStatusGuidanceDefault": "Latest visible review updates के लिए related support ticket को follow करते रहें।",
+  "truckerTripDetailDisputeBannerWaitingTitle": "Dispute waiting for your reply",
+  "truckerTripDetailDisputeBannerClosedTitle": "Dispute review closed",
+  "truckerTripDetailDisputeBannerInProgressTitle": "Dispute in progress",
+  "truckerTripDetailDisputeBannerNoSummaryMessage": "इस trip पर dispute raise की गई है। Submitted proof और delivery context को support या operations review कर रहे हैं। दोनों sides dispute status देख सकती हैं, लेकिन sensitive evidence review के दौरान restricted रह सकती है।",
+  "truckerTripDetailDisputeBannerWaitingMessage": "इस trip पर {category} के तहत dispute raise की गई है और यह आपके clarification या proof का इंतजार कर रही है। Sensitive evidence review के दौरान restricted रह सकती है।",
+  "truckerTripDetailDisputeBannerClosedMessage": "इस trip पर {category} के तहत raise की गई dispute final review outcome तक पहुंच चुकी है। Recorded status updates visible रहती हैं, जबकि sensitive evidence restricted रह सकती है।",
+  "truckerTripDetailDisputeBannerInProgressMessage": "इस trip पर {category} के तहत dispute raise की गई है। Delivery context को support या operations review कर रहे हैं, और sensitive evidence review के दौरान restricted रह सकती है।",
+  "truckerTripDetailDisputeActionGuidanceClosed": "यह dispute final review state तक पहुंच चुकी है। Recorded outcome के लिए इस trip detail को रखें और genuinely नई issue दिखे तभी fresh follow-up शुरू करें।",
+  "truckerTripDetailDisputeActionGuidanceInProgress": "जब तक dispute resolve नहीं होती, तब तक कोई further trip-stage action उपलब्ध नहीं है। Status updates के लिए इस trip detail को रखें और support निर्देश दे तो उन्हें follow करें।",
+  "truckerTripDetailSharedVisibilityClosed": "दोनों parties recorded dispute category, final workflow state और visible support replies को इस trip dispute पर अभी भी follow कर सकती हैं।",
+  "truckerTripDetailSharedVisibilityInProgress": "दोनों parties dispute category, workflow status और support replies को follow कर सकती हैं जो review के दौरान intentionally visible रखी गई हैं।",
+  "truckerTripDetailProofGuidanceClosed": "अगर आपको लगता है कि closure से पहले important proof consider नहीं हुई, तो fresh support follow-up तभी शुरू करें जब आपके पास वास्तव में नई dispute context हो।",
+  "truckerTripDetailProofGuidanceInProgress": "अगर additional supporting proofs current single-image flow में attached नहीं हैं, तो related support replies साफ रखें ताकि support और operations समझ सकें कि और क्या review करना है।",
+  "truckerTripDetailCancelledTitle": "Trip cancelled",
+  "truckerTripDetailCancelledMessage": "यह trip completion से पहले cancel हो गई थी। कोई further execution action उपलब्ध नहीं है, और यह detail अब cancelled movement का record है।",
+  "truckerTripDetailCancellationSummaryTitle": "Cancellation summary",
+  "truckerTripDetailCancellationCurrentState": "Current state: cancelled",
+  "truckerTripDetailRouteLabel": "Route: {route}",
+  "truckerTripDetailMaterialLabel": "Material: {material}",
+  "truckerTripDetailAssignedOnLabel": "Assigned on: {dateTime}",
+  "truckerTripDetailCancellationFollowupMessage": "अगर support या operations follow-up instructions साझा करें, तो context के लिए इस trip reference और existing trip timeline का इस्तेमाल करें।",
+  "truckerTripDetailTripSummaryTitle": "Trip summary",
+  "truckerTripDetailTripSummaryMessage": "यह trip complete हो चुकी है और execution workflow से close out हो गई है।",
+  "truckerTripDetailCompletedOnLabel": "Completed on: {dateTime}",
+  "truckerTripDetailRouteScheduleTitle": "Route and schedule",
+  "truckerTripDetailOriginLabel": "Origin: {origin}",
+  "truckerTripDetailDestinationLabel": "Destination: {destination}",
+  "truckerTripDetailDistanceLabel": "Distance: {distance} km",
+  "truckerTripDetailDriveTimeLabel": "Drive time: {minutes} min",
+  "truckerTripDetailAssignedLabel": "Assigned: {dateTime}",
+  "truckerTripDetailStartedLabel": "Started: {dateTime}",
+  "truckerTripDetailDeliveredLabel": "Delivered: {dateTime}",
+  "truckerTripDetailPodUploadedLabel": "POD uploaded: {dateTime}",
+  "truckerTripDetailCompletedLabel": "Completed: {dateTime}",
+  "truckerTripDetailTruckSupplierTitle": "Truck and supplier",
+  "truckerTripDetailTruckNumberLabel": "Truck number: {truckNumber}",
+  "truckerTripDetailBodyTypeLabel": "Body type: {bodyType}",
+  "truckerTripDetailTyresLabel": "Tyres: {tyres}",
+  "truckerTripDetailSupplierLabel": "Supplier: {name}",
+  "truckerTripDetailCompanyLabel": "Company: {companyName}",
+  "truckerTripDetailMobileLabel": "Mobile: {mobile}",
+  "truckerTripDetailTakePhotoAction": "Take photo",
+  "truckerTripDetailChooseFromGalleryAction": "Choose from gallery",
+  "truckerTripDetailHeadToPickupAction": "Head to pickup",
+  "truckerTripDetailHeadToPickupSuccess": "Pickup movement शुरू हो गई है। Supplier अब देख सकती है कि आप pickup की ओर जा रहे हैं।",
+  "truckerTripDetailCargoLoadedAction": "Cargo Loaded",
+  "truckerTripDetailCargoLoadedSuccess": "इस trip के लिए cargo loading confirm हो गई है।",
+  "truckerTripDetailStartTripAction": "Start Trip",
+  "truckerTripDetailStartTripSuccess": "Trip successfully शुरू हो गई है। यह load अब in transit है।",
+  "truckerTripDetailMarkDeliveredAction": "Mark Delivered",
+  "truckerTripDetailMarkDeliveredSuccess": "Delivery record हो गई है। Proof flow complete करने के लिए अगले step में POD upload करें।",
+  "truckerTripDetailNextStepAssignedTitle": "Head to pickup",
+  "truckerTripDetailNextStepAssignedMessage": "यह trip assigned है और pickup movement शुरू होने का इंतजार कर रही है।",
+  "truckerTripDetailNextStepPickupPendingTitle": "Confirm loading",
+  "truckerTripDetailNextStepPickupPendingMessage": "Trip pickup पर है और cargo loading confirmation का इंतजार कर रही है।",
+  "truckerTripDetailNextStepPickedUpTitle": "Start the trip",
+  "truckerTripDetailNextStepPickedUpMessage": "Cargo load हो चुकी है और अगला operational milestone transit में जाना है।",
+  "truckerTripDetailNextStepInTransitTitle": "Reach destination",
+  "truckerTripDetailNextStepInTransitMessage": "Trip in transit है और अगला milestone delivery confirmation है।",
+  "truckerTripDetailNextStepDeliveredTitle": "Upload POD",
+  "truckerTripDetailNextStepDeliveredMessage": "Delivery record हो चुकी है और proof of delivery अगला required step है।",
+  "truckerTripDetailNextStepProofSubmittedTitle": "Await supplier confirmation",
+  "truckerTripDetailNextStepProofSubmittedMessage": "Proof submit हो चुकी है और trip supplier review या auto-completion का इंतजार कर रही है।",
+  "truckerTripDetailNextStepCompletedTitle": "Trip completed",
+  "truckerTripDetailNextStepCompletedMessage": "Execution close हो चुकी है और यह trip अब historical record है।",
+  "truckerTripDetailNextStepDisputedTitle": "Dispute in progress",
+  "truckerTripDetailNextStepDisputedMessage": "इस trip पर dispute active है और closure से पहले operational review जरूरी है।",
+  "truckerTripDetailNextStepCancelledTitle": "Trip cancelled",
+  "truckerTripDetailNextStepCancelledMessage": "यह trip normal completion से पहले cancel हो गई थी और अब कोई further execution steps नहीं बचीं।",
+  "truckerTripDetailNextStepDefaultTitle": "Check execution status",
+  "truckerTripDetailNextStepDefaultMessage": "Latest movement समझने के लिए current trip state और recent timestamps review करें।",
+  "truckerTripDetailPending": "Pending",
+  "supplierRaiseDisputeTitle": "Raise Dispute",
+  "supplierRaiseDisputeTripUnavailableTitle": "Trip detail unavailable",
+  "supplierRaiseDisputeTripLoadFailureMessage": "अभी यह trip detail load नहीं हो सकी। Latest dispute context review करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierRaiseDisputeHeroTitle": "Dispute delivery proof",
+  "supplierRaiseDisputeHeroSubtitle": "Submitted POD में क्या गलत है यह समझाएँ, ताकि current trip के खिलाफ dispute खोली जा सके और support review में भेजी जा सके।",
+  "supplierRaiseDisputeTripBadge": "Trip {tripId}",
+  "supplierRaiseDisputeHeroSummary": "{routeLabel} • {material}",
+  "supplierRaiseDisputeHeroGuidance": "जो issue सबसे सही बैठती हो वह dispute category चुनें, written explanation जोड़ें, और जरूरत हो तो support review के लिए एक supporting evidence image attach करें।",
+  "supplierRaiseDisputePartialContextUnavailableTitle": "Some trip detail context is unavailable",
+  "supplierRaiseDisputeTripContextFailureMessage": "कुछ dispute context अभी उपलब्ध नहीं है। Latest trip detail और proof review state refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierRaiseDisputeSummaryTitle": "Dispute summary",
+  "supplierRaiseDisputeTripRouteLabel": "Trip route: {routeLabel}",
+  "supplierRaiseDisputeTruckLabel": "Truck: {truckNumber}",
+  "supplierRaiseDisputeTruckerLabel": "Trucker: {truckerName}",
+  "supplierRaiseDisputeCurrentStageLabel": "Current stage: {stageLabel}",
+  "supplierRaiseDisputeSubmissionBlockedTitle": "Dispute submission blocked",
+  "supplierRaiseDisputeSubmissionBlockedMessage": "आप यह POD dispute तभी raise कर सकते हैं जब trip proof submitted state में हो।",
+  "supplierRaiseDisputeSubmissionUnavailableTitle": "Dispute submission unavailable",
+  "supplierRaiseDisputeSubmitFailureMessage": "अभी यह dispute submit नहीं हो सकी। Dispute details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierRaiseDisputeProblemTitle": "What is wrong with the POD?",
+  "supplierRaiseDisputeCategoryLabel": "Dispute category",
+  "supplierRaiseDisputeReasonLabel": "Dispute reason",
+  "supplierRaiseDisputeReasonHint": "बताएँ कि submitted proof में क्या गलत है और support को क्या review करना चाहिए।",
+  "supplierRaiseDisputeHelpfulDetailsTitle": "Helpful details to include",
+  "supplierRaiseDisputeHelpfulDetailsMessage": "Current dispute flow अभी भी एक optional image स्वीकार करती है। इन prompts का उपयोग करके अपने written explanation में दूसरी या तीसरी proof capture करें।",
+  "supplierRaiseDisputeEvidenceOptionalTitle": "Evidence (optional)",
+  "supplierRaiseDisputeNoEvidenceAttached": "अभी कोई evidence image attached नहीं है। Current flow में आप एक supporting image attach कर सकते हैं।",
+  "supplierRaiseDisputeEvidenceAttached": "Review के लिए एक supporting evidence image attached है।",
+  "supplierRaiseDisputeVisibleToOtherPartyMessage": "दूसरी party को visible: सिर्फ dispute category और status. Raw evidence review के दौरान restricted रह सकती है।",
+  "supplierRaiseDisputeUseCameraAction": "Use camera",
+  "supplierRaiseDisputeChoosePhotoAction": "Choose photo",
+  "supplierRaiseDisputeRemoveEvidenceAction": "Remove evidence",
+  "supplierRaiseDisputeSubmitAction": "Submit dispute",
+  "supplierRaiseDisputeCategoryError": "Select a valid dispute category",
+  "supplierRaiseDisputeReasonError": "Explain the POD problem in at least 10 characters",
+  "supplierRaiseDisputeSubmittedSuccess": "Dispute submitted. Support ticket created for review.",
+  "supplierRaiseDisputeAttachmentAttachedSuccess": "Evidence attached successfully",
+  "supplierRaiseDisputeAttachmentFailureMessage": "अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch": "Recommended evidence: loaded bilty या loading proof जो dispatched quantity दिखाए। अभी सिर्फ एक image attach की जा सकती है।",
+  "supplierRaiseDisputeEvidenceGuidanceUnloadedQuantityMismatch": "Recommended evidence: unloaded bilty, weighbridge slip, या unloading proof जो received quantity दिखाए। अभी सिर्फ एक image attach की जा सकती है।",
+  "supplierRaiseDisputeEvidenceGuidanceDocumentMismatch": "Recommended evidence: सबसे clear POD, bilty, या related proof image जो document mismatch दिखाए। अभी सिर्फ एक image attach की जा सकती है।",
+  "supplierRaiseDisputeEvidenceGuidanceNonPayment": "Recommended evidence: एक proof image जो non-payment claim को सबसे अच्छे से support करे। Full payment workflow evidence अभी current flow में limited है।",
+  "supplierRaiseDisputeEvidenceGuidanceFakePayoutProof": "Recommended evidence: एक payout-proof image जो fake या inconsistent payment claim को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeEvidenceGuidanceDelayOrNoShow": "Recommended evidence: एक supporting image या screenshot जो delay या no-show context को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeEvidenceGuidanceDamageOrShortage": "Recommended evidence: एक image जो delivery पर damage, shortage, या affected goods को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeEvidenceGuidanceAbusiveBehavior": "Recommended evidence: एक supporting image या screenshot, अगर वह abusive-behavior claim के लिए safe और relevant हो।",
+  "supplierRaiseDisputeEvidenceGuidanceSpamOrScam": "Recommended evidence: एक screenshot या proof image जो spam या scam report को सबसे अच्छे से support करे।",
+  "supplierRaiseDisputeEvidenceGuidanceOther": "Dispute की clear explanation दें और जरूरत हो तो सबसे relevant supporting image attach करें।",
+  "supplierRaiseDisputeEvidenceGuidanceFallback": "इस dispute category के लिए उपलब्ध सबसे relevant supporting image attach करें।",
+  "supplierRaiseDisputeBestImageGuidanceDocumentCategory": "सबसे clear single document image चुनें जहाँ quantities, signatures, stamps, या POD details एक frame में readable हों।",
+  "supplierRaiseDisputeBestImageGuidancePaymentCategory": "वह single screenshot या payout-proof image चुनें जो mismatch, missing payment, या fake confirmation को सबसे साफ दिखाए।",
+  "supplierRaiseDisputeBestImageGuidanceTimelineCategory": "वह single screenshot या photo चुनें जो strongest timeline या behavior context एक image में दे।",
+  "supplierRaiseDisputeBestImageGuidanceDamageCategory": "वह single image चुनें जो handover के समय damaged goods, shortage, या delivered condition को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeBestImageGuidanceOther": "वह एक image चुनें जो आपके written reason में बताए गए issue की strongest proof support को दे।",
+  "supplierRaiseDisputeBestImageGuidanceFallback": "वह एक सबसे clear image चुनें जो support को पहले review करने के लिए strongest proof दे।",
+  "supplierRaiseDisputePromptDispatchQuantityShownOnProof": "Dispatch quantity shown on proof:",
+  "supplierRaiseDisputePromptQuantityActuallyChallenged": "Quantity actually challenged:",
+  "supplierRaiseDisputePromptOtherLoadingProofNotAttached": "Other loading proof not attached but reviewed by support:",
+  "supplierRaiseDisputePromptQuantityReceivedAtUnloading": "Quantity received at unloading:",
+  "supplierRaiseDisputePromptQuantityExpectedFromDispatchProof": "Quantity expected from dispatch proof:",
+  "supplierRaiseDisputePromptExtraUnloadProofNotAttached": "Extra unload proof not attached but available:",
+  "supplierRaiseDisputePromptDocumentFieldDoesNotMatch": "Document field that does not match:",
+  "supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe": "Correct trip or POD detail should be:",
+  "supplierRaiseDisputePromptOtherRelatedDocumentNotAttached": "Other related document not attached but relevant:",
+  "supplierRaiseDisputePromptAmountStillUnpaid": "Amount still unpaid:",
+  "supplierRaiseDisputePromptPaymentDueDateOrMilestone": "Payment due date or milestone:",
+  "supplierRaiseDisputePromptOtherPaymentProofNotAttached": "Other payment proof not attached but relevant:",
+  "supplierRaiseDisputePromptWhyPayoutProofLooksFake": "Why the payout proof looks fake or inconsistent:",
+  "supplierRaiseDisputePromptWhatPaymentStatusShouldBe": "What payment status should be instead:",
+  "supplierRaiseDisputePromptOtherProofOrChatContextNotAttached": "Other proof or chat context not attached:",
+  "supplierRaiseDisputePromptExpectedReportingOrArrivalTime": "Expected reporting or arrival time:",
+  "supplierRaiseDisputePromptActualDelayOrNoShowOutcome": "Actual delay or no-show outcome:",
+  "supplierRaiseDisputePromptOtherTimingProofNotAttached": "Other timing proof not attached but relevant:",
+  "supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage": "Goods affected by damage or shortage:",
+  "supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed": "Quantity or condition difference noticed:",
+  "supplierRaiseDisputePromptOtherSupportingProofNotAttached": "Other supporting proof not attached but relevant:",
+  "supplierRaiseDisputePromptWhatHappenedDuringIncident": "What happened during the incident:",
+  "supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred": "When or where the behavior occurred:",
+  "supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred": "What scam or spam behavior occurred:",
+  "supplierRaiseDisputePromptWhatMisleadingClaimWasMade": "What misleading claim was made:",
+  "supplierRaiseDisputePromptMainIssueSupportShouldReview": "Main issue support should review:",
+  "supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded": "What outcome or correction is needed:",
+  "supplierRaiseDisputePromptStrongestMissingProofNotAttached": "Strongest missing proof not attached:",
+  "supplierRaiseDisputeChecklistLoadedReadableQuantity": "Uploaded image में dispatched quantity readable रखें।",
+  "supplierRaiseDisputeChecklistLoadedPreferBilty": "दूरी की photo की बजाय bilty, loading slip, या marked proof शामिल करें।",
+  "supplierRaiseDisputeChecklistLoadedUseWrittenReason": "Image में visible न हो सकने वाली additional document context को written reason में लिखें।",
+  "supplierRaiseDisputeChecklistUnloadedKeepReceivedQuantity": "Image में received quantity या unload record readable रखें।",
+  "supplierRaiseDisputeChecklistUnloadedPreferWeighbridge": "Generic cargo photo की बजाय weighbridge slip, unload bilty, या marked proof को prefer करें।",
+  "supplierRaiseDisputeChecklistUnloadedUseWrittenReason": "Current single-image flow में fit न होने वाले second document को written reason में explain करें।",
+  "supplierRaiseDisputeChecklistDocumentReadableFields": "यह सुनिश्चित करें कि key document fields एक frame में readable हों।",
+  "supplierRaiseDisputeChecklistDocumentPreferSpecificPage": "वह specific POD या bilty page prefer करें जहाँ mismatch दिखाई देती है।",
+  "supplierRaiseDisputeChecklistDocumentUseWrittenReason": "Written reason में बताएं कि कौन-सा field या proof trip से match नहीं कर रही।",
+  "supplierRaiseDisputeChecklistPaymentPreferClearestScreenshot": "सबसे clear payout-related screenshot या proof image prefer करें।",
+  "supplierRaiseDisputeChecklistPaymentUseWrittenReason": "Written reason में बताएं कि कौन-सा payment अभी भी missing है और वह कब due थी।",
+  "supplierRaiseDisputeChecklistPaymentUploadStrongestFirst": "अगर multiple proofs हैं, तो strongest proof पहले upload करें और बाकी को text में summarize करें।",
+  "supplierRaiseDisputeChecklistFakePreferScreenshot": "वह payout screenshot या proof image prefer करें जो सबसे साफ fake या inconsistent लगे।",
+  "supplierRaiseDisputeChecklistFakeUseWrittenReason": "Written reason में बताएं कि proof में क्या suspicious है।",
+  "supplierRaiseDisputeChecklistFakeSummarizeChatContext": "अगर supporting chat context है, तो उसे text में summarize करें जब वह single-image flow में fit न हो सके।",
+  "supplierRaiseDisputeChecklistDelayChooseClearestTiming": "वह clearest screenshot या photo चुनें जो missed timing या no-show context दिखाए।",
+  "supplierRaiseDisputeChecklistDelayUseWrittenReason": "Written reason में expected time और actual outcome explain करें।",
+  "supplierRaiseDisputeChecklistDelayKeepFocusedImage": "Uploaded image को unrelated media की बजाय timing/location evidence पर focused रखें।",
+  "supplierRaiseDisputeChecklistDamageChooseImage": "वह image चुनें जो delivery पर damage या shortage को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeChecklistDamageKeepAffectedGoods": "Frame में affected goods या missing quantity context visible रखें।",
+  "supplierRaiseDisputeChecklistDamageUseWrittenReason": "Written reason में बताएं कि single uploaded image में क्या नहीं दिखाया जा सकता।",
+  "supplierRaiseDisputeChecklistAbusiveUploadIfSafe": "Evidence सिर्फ तभी upload करें जब वह safe और case के लिए relevant हो।",
+  "supplierRaiseDisputeChecklistAbusivePreferClearestScreenshot": "उस clearest screenshot या image को prefer करें जो abusive incident से directly जुड़ी हो।",
+  "supplierRaiseDisputeChecklistAbusiveUseWrittenReason": "Written reason में events का sequence explain करें, बिना sensitive internal notes जोड़े।",
+  "supplierRaiseDisputeChecklistSpamChooseScreenshot": "वह screenshot या image चुनें जो scam या spam behavior को सबसे अच्छे से दिखाए।",
+  "supplierRaiseDisputeChecklistSpamPreferStrongestProof": "Partial conversation fragment की बजाय strongest proof of deception prefer करें।",
+  "supplierRaiseDisputeChecklistSpamUseWrittenReason": "Written reason में extra scam context summarize करें जो एक image में fit नहीं हो सकती।",
+  "supplierRaiseDisputeChecklistOtherChooseStrongestImage": "वह एक strongest image चुनें जो आपकी explanation को support करे।",
+  "supplierRaiseDisputeChecklistOtherKeepIssueReadable": "Uploaded image में issue-specific detail readable रखें।",
+  "supplierRaiseDisputeChecklistOtherUseWrittenReason": "Current flow में fit न होने वाली बाकी evidence को written reason में explain करें।",
+  "supplierRaiseDisputeChecklistFallbackChooseClearestImage": "उपलब्ध सबसे clear supporting image चुनें।",
+  "supplierRaiseDisputeChecklistFallbackKeepReadableProof": "Frame में important proof readable रखें।",
+  "supplierRaiseDisputeChecklistFallbackUseWrittenReason": "Image में visible न होने वाली additional evidence को written reason में describe करें।",
+  "reportIssueTitle": "Report Issue",
+  "reportIssueHeroTitle": "Report spam, scam, or abuse",
+  "reportIssueHeroSubtitle": "Current operational context से जुड़ा trust-safety ticket खोलें ताकि support issue को जल्दी review कर सके।",
+  "reportIssueHeroMessage": "अगर आपके पास हो तो एक evidence image attach करें। Report अभी भी linked load/trip context का उपयोग करके live support-ticket workflow से submit होती है, और fake payout-proof या non-payment issues भी capture कर सकती है।",
+  "reportIssueSubmissionUnavailableTitle": "Report submission unavailable",
+  "reportIssueFailureMessage": "अभी यह report तैयार या submit नहीं हो सकी। Linked context review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "reportIssueLinkedContextTitle": "Linked context",
+  "reportIssueSourceLabel": "Source: {sourceLabel}",
+  "reportIssueRelatedLoadLabel": "Related load: {value}",
+  "reportIssueRelatedTripLabel": "Related trip: {value}",
+  "reportIssueNotLinked": "Not linked",
+  "reportIssueDetailsTitle": "Report details",
+  "reportIssueTypeLabel": "Issue type",
+  "reportIssueWhatHappenedLabel": "What happened?",
+  "reportIssueWhatHappenedHint": "बताएँ कि spam, fake proof, non-payment, payout deception, या abusive behavior में क्या हुआ जिसे support को review करना चाहिए।",
+  "reportIssueHelpfulDetailsTitle": "Helpful details to include",
+  "reportIssueEvidenceOptionalTitle": "Evidence (required)",
+  "reportIssueNoEvidenceAttached": "Attach one evidence image before submitting this report.",
+  "reportIssueEvidenceAttached": "One evidence image is attached for review.",
+  "reportIssueUseCameraAction": "Use camera",
+  "reportIssueChoosePhotoAction": "Choose photo",
+  "reportIssueRemoveEvidenceAction": "Remove evidence",
+  "reportIssueSubmitAction": "Submit report",
+  "reportIssueSubmittedSuccess": "Report submitted successfully",
+  "reportIssueSubmitFailureMessage": "अभी यह report submit नहीं हो सकी। Details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "reportIssueAttachmentAttachedSuccess": "Evidence attached successfully",
+  "reportIssueAttachmentFailureMessage": "अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "reportIssueCategorySpamOrScamLabel": "Spam or scam",
+  "reportIssueCategoryAbusiveBehaviorLabel": "Abusive behavior",
+  "reportIssueCategoryFakePayoutProofLabel": "Fake payout proof",
+  "reportIssueCategoryNonPaymentLabel": "Non-payment",
+  "reportIssueCategoryGuidanceSpamOrScam": "Spam, scam, या misleading behavior को साफ़ लिखें और एक evidence image attach करें जो support को report review करने में मदद करे।",
+  "reportIssueCategoryGuidanceAbusiveBehavior": "Abusive या unsafe behavior को साफ़ लिखें, जिसमें यह भी शामिल हो कि वह कहाँ हुआ और support को कौन-सा context review करना चाहिए।",
+  "reportIssueCategoryGuidanceFakePayoutProof": "बताएँ कि payout proof fake या misleading क्यों लगती है और एक evidence image attach करें जिसमें सबसे उपयोगी payment context दिखता हो।",
+  "reportIssueCategoryGuidanceNonPayment": "Non-payment issue को साफ़ लिखें, जिसमें क्या due था, पहले क्या follow-up हुआ, और एक evidence image attach करें जिसमें सबसे मजबूत payment proof हो।",
+  "supportCreateTicketScreenTitle": "सपोर्ट टिकट बनाएँ",
+  "supportCreateTicketHeroTitle": "सपोर्ट अनुरोध खोलें",
+  "supportCreateTicketHeroSubtitle": "अपनी समस्या साफ़-साफ़ लिखें ताकि support उसे जल्दी route कर सके और आपका follow-up सही context से जुड़ा रहे।",
+  "supportCreateTicketHeroMessage": "अगर समस्या किसी खास operational flow से जुड़ी है तो आप वैकल्पिक रूप से related load या trip id जोड़ सकते हैं। अगर इससे review तेज़ होगी तो आप एक evidence image भी attach कर सकते हैं।",
+  "supportCreateTicketFailureTitle": "सपोर्ट अनुरोध पर ध्यान चाहिए",
+  "supportCreateTicketFailureMessage": "अभी आपका support request तैयार या submit नहीं हो सका। Issue details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supportCreateTicketDetailsTitle": "टिकट विवरण",
+  "supportComposeCategoryLabel": "श्रेणी",
+  "supportComposeCategoryGeneral": "सामान्य",
+  "supportComposeCategoryAccount": "खाता",
+  "supportComposeCategoryLoad": "लोड",
+  "supportComposeCategoryTrip": "ट्रिप",
+  "supportComposeCategoryPayment": "भुगतान",
+  "supportComposeCategoryTechnical": "तकनीकी",
+  "supportComposeCategoryOther": "अन्य",
+  "supportCreateTicketRelatedLoadIdLabel": "संबंधित load id (वैकल्पिक)",
+  "supportCreateTicketRelatedLoadIdHint": "load-123",
+  "supportCreateTicketRelatedTripIdLabel": "संबंधित trip id (वैकल्पिक)",
+  "supportCreateTicketRelatedTripIdHint": "trip-123",
+  "supportCreateTicketDescriptionLabel": "समस्या का विवरण दें",
+  "supportCreateTicketDescriptionHint": "बताएँ क्या हुआ, क्या ब्लॉक है, और आपको किस follow-up की ज़रूरत है।",
+  "supportComposeAttachmentOptionalTitle": "अटैचमेंट (वैकल्पिक)",
+  "supportComposeNoAttachment": "अभी कोई evidence image attach नहीं है।",
+  "supportComposeAttachmentAttached": "सपोर्ट review के लिए एक evidence image attach है।",
+  "supportComposeRemoveAttachmentAction": "अटैचमेंट हटाएँ",
+  "supportComposeAttachmentAddedSuccess": "अटैचमेंट सफलतापूर्वक जोड़ा गया",
+  "supportComposeAttachmentFailureMessage": "अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
+  "supportCreateTicketSubmitAction": "टिकट सबमिट करें",
+  "supportCreateTicketSubmittedSuccess": "सपोर्ट टिकट सफलतापूर्वक बनाया गया",
+  "supportCreateTicketSubmitFailureMessage": "अभी यह support ticket बनाई नहीं जा सकी। Details review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supportReplyFailureTitle": "रिप्लाई पर ध्यान चाहिए",
+  "supportReplyFailureMessage": "अभी आपकी latest support reply तैयार या submit नहीं हो सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supportReplyLabel": "सपोर्ट को रिप्लाई करें",
+  "supportReplyHint": "Support ने जो अगला detail या response मांगा है, वह जोड़ें।",
+  "supportReplySendAction": "रिप्लाई भेजें",
+  "supportReplySentSuccess": "रिप्लाई सफलतापूर्वक भेजी गई",
+  "supportReplySubmitFailureMessage": "अभी आपकी reply भेजी नहीं जा सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripsSectionTitle": "सप्लायर ट्रिप्स",
+  "supplierTripsSectionSubtitle": "एक ही supplier execution surface से active movements और recent trip outcomes ट्रैक करें।",
+  "supplierTripsTabActive": "सक्रिय",
+  "supplierTripsTabCompleted": "पूर्ण",
+  "supplierTripsLoadFailureTitle": "सप्लायर ट्रिप्स लोड नहीं हो सकीं",
+  "supplierTripsLoadFailureMessage": "अभी आपकी supplier trips लोड नहीं हो सकीं। Latest trip list और statuses refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "supplierTripsEmptyActiveTitle": "अभी कोई सक्रिय ट्रिप नहीं है",
+  "supplierTripsEmptyCompletedTitle": "अभी कोई पूर्ण ट्रिप नहीं है",
+  "supplierTripsEmptyActiveSubtitle": "जब कोई load assigned execution में जाएगी, तब trips यहाँ दिखाई देंगी।",
+  "supplierTripsEmptyCompletedSubtitle": "जब deliveries close out हो जाएँगी, तब completed supplier trips यहाँ दिखाई देंगी।",
+  "supplierTripsEmptyActiveAction": "मेरे लोड्स खोलें",
+  "supplierTripsEmptyCompletedAction": "सक्रिय ट्रिप्स देखें",
+  "supplierTripsAssignedLabel": "असाइन किया गया {date}",
+  "supplierTripsTruckerTruckLabel": "ट्रकर {truckerId} • ट्रक {truckId}",
+  "supplierTripsTrackTripAction": "ट्रिप ट्रैक करें",
+  "supplierTripDetailNotFoundTitle": "Trip not found",
+  "supplierTripDetailNotFoundSubtitle": "यह supplier trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।",
+  "supplierTripDetailBackToTripsAction": "Back to supplier trips",
+  "supplierTripDetailStubScreenTitle": "ट्रिप विवरण",
+  "supplierTripDetailStubCardTitle": "सप्लायर ट्रिप विवरण",
+  "supplierTripDetailStubReference": "ट्रिप रेफरेंस: {tripId}",
+  "supplierTripDetailStubMessage": "Detailed supplier trip execution screens अगले trip-detail slice में और विस्तृत होंगी। Navigation पहले से supplier trips list से wired है।",
+  "assistantHeroTitleWithName": "{firstName} के लिए Guided help",
+  "assistantHeroSubtitleSupplier": "लोड पोस्ट करने, active load execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।",
+  "assistantHeroSubtitleTrucker": "लोड ढूँढने, trip execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।",
+  "assistantWorkflowGuidanceSupplier": "Supplier workflow guidance",
+  "assistantWorkflowGuidanceTrucker": "Trucker workflow guidance",
+  "assistantProfileComplete": "प्रोफ़ाइल पूर्ण",
+  "assistantProfileIncomplete": "प्रोफ़ाइल अपूर्ण",
+  "assistantRecommendedNextActionsTitle": "सुझाए गए अगले actions",
+  "assistantOpenSupplierTripsAction": "सप्लायर ट्रिप्स खोलें",
+  "assistantFindLoadsAction": "लोड्स ढूँढें",
+  "assistantOpenTripsAction": "ट्रिप्स खोलें",
+  "assistantOpenMessagesAction": "मेसेजेस खोलें",
+  "assistantGuidedHelpTitle": "Guided help",
+  "assistantBestForLabel": "किसके लिए बेहतर",
+  "assistantBestForSupplier": "लोड पोस्ट करना, active load execution देखना, conversations review करना, और support जल्दी खोलना।",
+  "assistantBestForTrucker": "लोड ढूँढना, trip execution देखना, conversations review करना, और support जल्दी खोलना।",
+  "assistantVoiceBehaviorLabel": "Voice behavior",
+  "assistantVoiceBehaviorValue": "अभी केवल manual entry उपलब्ध है। Full conversational bot, STT, और auto-speak dedicated communication और localization phases में अभी pending हैं।",
+  "assistantCurrentRoleLabel": "वर्तमान भूमिका",
+  "assistantMoreActionsTitle": "More actions",
+  "assistantOpenNotificationsAction": "नोटिफिकेशन्स खोलें",
+  "assistantOpenSupportAction": "सपोर्ट खोलें",
+  "shellAccessRestrictedTitle": "एक्सेस प्रतिबंधित",
+  "shellAccessRestrictedDeactivatedSubtitle": "आपका account cleanup pending होने तक deactivated है। आपको सुरक्षित रूप से sign out किया जा रहा है...",
+  "shellAccessRestrictedBannedSubtitle": "आपके account access पर प्रतिबंध है। आपको सुरक्षित रूप से sign out किया जा रहा है...",
+  "shellAccountDeactivatedMessage": "Account deactivated",
+  "shellAccountBannedMessage": "Account banned",
+  "shellRouteNotFoundTitle": "Route नहीं मिला",
+  "shellMessagesLoadFailureMessage": "अभी आपके messages लोड नहीं हो सके। Latest conversations refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "shellMessagesBookingStatusSubmitted": "Submitted",
+  "shellMessagesBookingStatusApproved": "Approved",
+  "shellMessagesBookingStatusRejected": "Rejected",
+  "shellMessagesBookingStatusPending": "Pending",
+  "shellMessagesBookingStatusUnknown": "Unknown",
+  "truckerLoadDetailTitle": "Load Detail",
+  "truckerLoadDetailLoadNotFoundTitle": "Load not found",
+  "truckerLoadDetailLoadNotFoundSubtitle": "यह marketplace load अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।",
+  "truckerLoadDetailBackToFindLoadsAction": "Back to find loads",
+  "truckerLoadDetailLoadFailureTitle": "Unable to load freight detail",
+  "truckerLoadDetailLoadFailureMessage": "अभी यह freight detail load नहीं हो सकी। Current route, pricing, और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerLoadDetailSupportUnavailableTitle": "Some supporting load details are unavailable",
+  "truckerLoadDetailSupportFailureMessage": "कुछ supporting load details अभी उपलब्ध नहीं हैं। Latest freight context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerLoadDetailActionFailureTitle": "Action unavailable",
+  "truckerLoadDetailActionFailureMessage": "Latest load action अभी पूरी नहीं हो सकी। Current booking state review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerLoadDetailBookingSubmitFailureMessage": "अभी यह booking request submit नहीं हो सकी। Selected truck review करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerLoadDetailHeroSubtitle": "Load {loadId} • Pickup {pickupDate}",
+  "truckerLoadDetailPriceBadge": "₹{priceAmount} • {priceType}",
+  "truckerLoadDetailTruckMatchAvailable": "Truck match available",
+  "truckerLoadDetailNoApprovedTruckMatchYet": "No approved truck match yet",
+  "truckerLoadDetailMaterialSummary": "{material} • {weightTonnes}T • Advance {advancePercentage}%",
+  "truckerLoadDetailSuperLoadGuarantee": "Super Load • Payment Guarantee",
+  "truckerLoadDetailRoutePriceSummaryTitle": "Route and price summary",
+  "truckerLoadDetailOriginLabel": "Origin: {origin}",
+  "truckerLoadDetailDestinationLabel": "Destination: {destination}",
+  "truckerLoadDetailPickupLabel": "Pickup: {pickupDate}",
+  "truckerLoadDetailPriceLabel": "Price: ₹{priceAmount} • {priceType}",
+  "truckerLoadDetailDistanceLabel": "Distance: {distance} km",
+  "truckerLoadDetailDriveTimeLabel": "Estimated drive time: {minutes} min",
+  "truckerLoadDetailTruckRequirementTitle": "Truck requirement summary",
+  "truckerLoadDetailBodyTypeLabel": "Body type: {bodyType}",
+  "truckerLoadDetailTyresLabel": "Tyres: {tyres}",
+  "truckerLoadDetailTrucksNeededLabel": "Trucks needed: {booked}/{needed} booked",
+  "truckerLoadDetailAnyOption": "Any",
+  "truckerLoadDetailNoApprovedTruckSelected": "No approved truck selected",
+  "truckerLoadDetailSelectedTruckMatches": "Selected truck matches this load",
+  "truckerLoadDetailSelectedTruckMayNotMatch": "Selected truck may not match this load",
+  "truckerLoadDetailCargoScheduleTitle": "Cargo and schedule details",
+  "truckerLoadDetailMaterialLabel": "Material: {material}",
+  "truckerLoadDetailWeightLabel": "Weight: {weight} tonnes",
+  "truckerLoadDetailOriginCityLabel": "Origin city: {city}",
+  "truckerLoadDetailDestinationCityLabel": "Destination city: {city}",
+  "truckerLoadDetailTripCostEstimateTitle": "Trip cost estimate",
+  "truckerLoadDetailTripCostUnavailableTitle": "Trip cost unavailable",
+  "truckerLoadDetailTripCostUnavailableMessage": "अभी इस load के लिए distance उपलब्ध नहीं है, इसलिए trip cost estimate calculate नहीं हो सकती।",
+  "truckerLoadDetailDieselLabel": "Diesel: ₹{amount}",
+  "truckerLoadDetailTollsLabel": "Tolls: ₹{amount}",
+  "truckerLoadDetailMileageUsedLabel": "Mileage used: {value} km/L",
+  "truckerLoadDetailDieselPriceLabel": "Diesel price: ₹{value}/L",
+  "truckerLoadDetailEstimatedTollPlazasLabel": "Estimated toll plazas: {count}",
+  "truckerLoadDetailNextStepTitle": "Next step",
+  "truckerLoadDetailStatusActive": "सक्रिय",
+  "truckerLoadDetailStatusAssignedPartial": "आंशिक रूप से सौंपा गया",
+  "truckerLoadDetailStatusUnknown": "अज्ञात",
+  "truckerLoadDetailBookingStatusLabel": "बुकिंग स्थिति: {status}",
+  "@truckerLoadDetailBookingStatusLabel": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "truckerLoadDetailBookingFeedbackTitle": "Booking feedback",
+  "truckerLoadDetailBookingBlockedTitle": "Booking is blocked",
+  "truckerLoadDetailNoApprovedTrucksAvailable": "अभी तक कोई अनुमोदित ट्रक उपलब्ध नहीं है।",
+  "truckerLoadDetailAddTruckFirstAction": "पहले एक ट्रक जोड़ें",
+  "truckerLoadDetailRequestSubmittedAction": "अनुरोध सबमिट किया गया",
+  "truckerLoadDetailBookedAction": "बुक किया गया",
+  "truckerLoadDetailBookThisLoadAction": "इस लोड को बुक करें",
+  "truckerLoadDetailLoadBookedSuccess": "लोड बुक किया गया! सप्लायर की मंजूरी की प्रतीक्षा कर रहा है",
+  "truckerLoadDetailShareLoadAction": "लोड साझा करें",
+  "truckerLoadDetailShareLoadTitle": "लोड साझा करें",
+  "truckerLoadDetailShareLoadMessage": "सीधे फोन नंबर या निजी ऑपरेशनल नोट्स को उजागर किए बिना सुरक्षित सारांश-पहले लोड कार्ड साझा करें।",
+  "truckerLoadDetailSystemShareAction": "सिस्टम साझा करें",
+  "truckerLoadDetailShareToWhatsAppAction": "व्हाट्सएप पर साझा करें",
+  "truckerLoadDetailWhatsAppUnavailableMessage": "इस डिवाइस पर व्हाट्सएप उपलब्ध नहीं है। इसके बजाय सिस्टम साझा का उपयोग करें।",
+  "truckerLoadDetailOpenInGoogleMapsAction": "गूगल मैप्स में खोलें",
+  "truckerLoadDetailReportSpamOrAbuseAction": "स्पैम या दुरुपयोग रिपोर्ट करें",
+  "truckerLoadDetailReportSourceLabel": "ट्रक लोड • {routeLabel}",
+  "truckerLoadDetailVerificationRequiredMessage": "लोड बुक करने या सप्लायर चैट शुरू करने से पहले ट्रकर सत्यापन पूरा करें। सत्यापन के लिए अनुमोदित पहचान दस्तावेज और प्रोफाइल समीक्षा आवश्यक है।",
+  "truckerLoadDetailTruckApprovalRequiredMessage": "इस लोड को बुक करने या सप्लायर चैट अनलॉक करने से पहले कम से कम एक ट्रक जोड़ें और अनुमोदित करें।",
+  "truckerLoadDetailAddTruckDialogTitle": "पहले एक ट्रक जोड़ें",
+  "truckerLoadDetailAddTruckDialogMessage": "इस लोड को बुक करने से पहले आपको कम से कम एक अनुमोदित ट्रक चाहिए। ट्रक जोड़ने या अनुमोदन पूरा करने के लिए अभी फ्लीट खोलें?",
+  "truckerLoadDetailNotNowAction": "अब नहीं",
+  "truckerLoadDetailOpenFleetAction": "फ्लीट खोलें",
+  "truckerLoadDetailConfirmBookingTitle": "लोड बुकिंग की पुष्टि करें",
+  "truckerLoadDetailConfirmBookingMessage": "{truckNumber} के साथ {material} {routeLabel} बुक करें?",
+  "truckerLoadDetailCancelAction": "रद्द करें",
+  "authTtsSplashWelcome": "TranZfort में आपका स्वागत है। आगे बढ़ने से पहले मैं आपकी छोटी सी सेटअप में मदद करूंगा।",
+  "authSessionRefreshFailureMessage": "हम आपका सत्र अभी रीफ्रेश नहीं कर सके। जरूरत हो तो आगे बढ़ें और बाद में फिर प्रयास करें।",
+  "authNotificationPermissionFailureMessage": "नोटिफिकेशन अनुमति अभी सक्षम नहीं हो सकी।",
+  "authTtsVoiceGuidanceEnabled": "वॉइस गाइडेंस अब चालू है।",
+  "authConfigIncompleteTitle": "सेटअप अधूरा है",
+  "authConfigIncompleteMessage": "ऐप की कुछ सेटिंग अधूरी है। सेटअप पूरा होने तक साइन-इन ठीक से काम नहीं कर सकता।",
+  "authTtsSignInPrompt": "TranZfort में साइन-इन करने का तरीका चुनें।",
+  "authTtsOnboardingRolePrompt": "ऑनबोर्डिंग जारी रखने के लिए अपनी भूमिका चुनें।",
+  "postLoadValidationOriginCityRequired": "मूल शहर चुनें",
+  "postLoadValidationOriginLocationRequired": "पिकअप स्थान दर्ज करें",
+  "postLoadValidationDestinationCityRequired": "गंतव्य शहर चुनें",
+  "postLoadValidationDestinationLocationRequired": "ड्रॉप स्थान दर्ज करें",
+  "postLoadValidationMaterialRequired": "सामग्री का नाम दर्ज करें",
+  "postLoadValidationWeightRange": "0 से 100 टन के बीच वजन दर्ज करें",
+  "postLoadValidationTrucksNeeded": "कम से कम एक ट्रक आवश्यक है",
+  "postLoadValidationPricePositive": "शून्य से अधिक सही कीमत दर्ज करें",
+  "postLoadValidationPriceType": "सही कीमत प्रकार चुनें",
+  "postLoadValidationPickupDatePast": "पिकअप तारीख पिछली नहीं हो सकती",
+  "settingsRoleSentenceHi": "वर्तमान भूमिका: {roleLabel}।",
+  "@settingsRoleSentenceHi": {
+    "placeholders": {
+      "roleLabel": {}
+    }
+  },
+  "settingsRoleSentenceEn": "वर्तमान भूमिका: {roleLabel}।",
+  "@settingsRoleSentenceEn": {
+    "placeholders": {
+      "roleLabel": {}
+    }
+  },
+  "pushIssuePermissionRequestFailed": "अनुमति अनुरोध विफल हुआ।",
+  "pushIssueLocalInitFailed": "लोकल नोटिफिकेशन सेटअप विफल हुआ।",
+  "pushIssueDisplayFailed": "नोटिफिकेशन दिखाना विफल हुआ।",
+  "pushIssueTokenSyncFailed": "टोकन सिंक विफल हुआ।",
+  "truckerFleetReturnToVerificationTitle": "वेरिफिकेशन पर लौटें",
+  "truckerFleetReturnToVerificationMessage": "अपना ट्रक जोड़ें या अपडेट करें, फिर आगे बढ़ने के लिए वेरिफिकेशन पर लौटें।",
+  "truckerFleetBackToVerificationAction": "वापस वेरिफिकेशन पर",
+  "truckerFleetTruckSavedReturnMessage": "ट्रक सेव हो गया। आगे बढ़ने के लिए वेरिफिकेशन पर लौटें।",
+  "truckerLoadDetailProfileLoadingMessage": "आपकी प्रोफाइल जांची जा रही है। कृपया प्रतीक्षा करें...",
+  "supplierLoadDetailNotFoundTitle": "लोड नहीं मिला",
+  "supplierLoadDetailNotFoundSubtitle": "यह लोड विवरण अभी उपलब्ध नहीं है। My Loads पर लौटें और फिर प्रयास करें।",
+  "supplierLoadDetailLoadFailureTitle": "लोड विवरण लोड नहीं हो सका",
+  "supplierLoadDetailFailureMessage": "लोड विवरण नहीं खुल पाया। कृपया फिर से कोशिश करें।",
+  "supplierLoadDetailScreenTitle": "लोड विवरण",
+  "supplierLoadDetailHeroSubtitle": "लोड ID: {loadId} • पिकअप: {pickupDate}",
+  "@supplierLoadDetailHeroSubtitle": {
+    "placeholders": {
+      "loadId": {},
+      "pickupDate": {}
+    }
+  },
+  "supplierLoadDetailLinkedExecutionUnavailableTitle": "लिंक्ड निष्पादन डेटा उपलब्ध नहीं है",
+  "supplierLoadSupportFailureMessage": "बुकिंग या ट्रिप अभी रीफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।",
+  "supplierLoadDetailStatusAndActionsTitle": "स्थिति और कार्रवाई",
+  "supplierLoadDetailCurrentStatus": "वर्तमान स्थिति: {status}",
+  "@supplierLoadDetailCurrentStatus": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierLoadDetailActionsSubtitle": "कार्रवाई करने से पहले नवीनतम स्थिति देखें।",
+  "supplierLoadDetailActionUnavailableTitle": "कार्रवाई उपलब्ध नहीं है",
+  "supplierLoadActionFailureMessage": "यह लोड कार्रवाई अभी पूरी नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "supplierLoadDetailCancelAction": "लोड रद्द करें",
+  "supplierLoadDetailCancelledSuccess": "लोड सफलतापूर्वक रद्द किया गया",
+  "supplierLoadCancelFailureMessage": "यह लोड अभी रद्द नहीं हो सका। कृपया फिर प्रयास करें।",
+  "supplierLoadDetailCloseFilledOutsideAction": "ऐप के बाहर भरा हुआ दिखाकर बंद करें",
+  "supplierLoadDetailClosedFilledOutsideSuccess": "लोड को ऐप के बाहर भरा हुआ चिन्हित किया गया",
+  "supplierLoadCloseFailureMessage": "यह लोड अभी बंद नहीं हो सका। कृपया फिर प्रयास करें।",
+  "supplierLoadDetailRouteAndScheduleTitle": "रूट और शेड्यूल",
+  "supplierLoadDetailOriginCity": "मूल शहर: {value}",
+  "@supplierLoadDetailOriginCity": {"placeholders": {"value": {}}},
+  "supplierLoadDetailOriginPoint": "मूल स्थान: {value}",
+  "@supplierLoadDetailOriginPoint": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDestinationCity": "गंतव्य शहर: {value}",
+  "@supplierLoadDetailDestinationCity": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDestinationPoint": "गंतव्य स्थान: {value}",
+  "@supplierLoadDetailDestinationPoint": {"placeholders": {"value": {}}},
+  "supplierLoadDetailPickupDate": "पिकअप तारीख: {value}",
+  "@supplierLoadDetailPickupDate": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDistance": "दूरी: {value}",
+  "@supplierLoadDetailDistance": {"placeholders": {"value": {}}},
+  "supplierLoadDetailDriveTime": "ड्राइव समय: {value}",
+  "@supplierLoadDetailDriveTime": {"placeholders": {"value": {}}},
+  "supplierLoadDetailRoutePreviewUnavailableTitle": "रूट प्रीव्यू उपलब्ध नहीं है",
+  "supplierLoadDetailRoutePreviewUnavailableMessage": "इस लोड का रूट प्रीव्यू अभी उपलब्ध नहीं है।",
+  "supplierLoadDetailOpenInGoogleMaps": "Google Maps में खोलें",
+  "supplierLoadDetailCargoAndRequirementsTitle": "कार्गो और आवश्यकताएं",
+  "supplierLoadDetailMaterial": "सामग्री: {value}",
+  "@supplierLoadDetailMaterial": {"placeholders": {"value": {}}},
+  "supplierLoadDetailWeight": "वजन: {value}",
+  "@supplierLoadDetailWeight": {"placeholders": {"value": {}}},
+  "supplierLoadDetailAnyValue": "कोई भी",
+  "supplierLoadDetailBodyType": "बॉडी टाइप: {value}",
+  "@supplierLoadDetailBodyType": {"placeholders": {"value": {}}},
+  "supplierLoadDetailTyres": "टायर: {value}",
+  "@supplierLoadDetailTyres": {"placeholders": {"value": {}}},
+  "supplierLoadDetailBookingAndTripLinkageTitle": "बुकिंग और ट्रिप लिंक",
+  "supplierLoadDetailBookingLinkageEmptyDescription": "इस लोड पर अभी कोई बुकिंग अनुरोध या लिंक्ड ट्रिप नहीं हैं।",
+  "supplierLoadDetailBookingLinkageDescription": "बुकिंग अनुरोध और लिंक्ड ट्रिप यहां साथ में देखें।",
+  "supplierLoadDetailNoBookingRequestsTitle": "अभी कोई बुकिंग अनुरोध नहीं",
+  "supplierLoadDetailNoBookingRequestsSubtitle": "ट्रकर प्रतिक्रिया देंगे तो बुकिंग अनुरोध यहां दिखेंगे।",
+  "supplierLoadDetailLinkedTripsTitle": "लिंक्ड ट्रिप",
+  "supplierLoadDetailNoLinkedTripsTitle": "अभी कोई लिंक्ड ट्रिप नहीं",
+  "supplierLoadDetailNoLinkedTripsSubtitle": "बुकिंग स्वीकृत होने के बाद ट्रिप यहां दिखेंगी।",
+  "supplierLoadDetailActivityTimelineTitle": "गतिविधि टाइमलाइन",
+  "supplierLoadDetailTimelineCreatedTitle": "लोड बनाया गया",
+  "supplierLoadDetailTimelineCreatedDescription": "यह लोड बनाया गया।",
+  "supplierLoadDetailTimelinePublishedTitle": "लोड प्रकाशित",
+  "supplierLoadDetailTimelinePublishedDescription": "यह लोड प्रकाशित है और ट्रकर को दिख रहा है।",
+  "supplierLoadDetailTimelineUpdatedTitle": "स्थिति अपडेट",
+  "supplierLoadDetailTimelineUpdatedDescription": "वर्तमान स्थिति: {status}।",
+  "@supplierLoadDetailTimelineUpdatedDescription": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "supplierBookingVerifiedLabel": "सत्यापित",
+  "supplierBookingRatingLabel": "रेटिंग: {rating}",
+  "@supplierBookingRatingLabel": {"placeholders": {"rating": {}}},
+  "supplierBookingTyres": "{tyres} टायर",
+  "@supplierBookingTyres": {"placeholders": {"tyres": {}}},
+  "supplierBookingSubmittedAt": "{truckLabel} • जमा किया गया {submittedAt}",
+  "@supplierBookingSubmittedAt": {
+    "placeholders": {
+      "truckLabel": {},
+      "submittedAt": {}
+    }
+  },
+  "supplierBookingDecisionRecorded": "निर्णय दर्ज किया गया {decidedAt}",
+  "@supplierBookingDecisionRecorded": {"placeholders": {"decidedAt": {}}},
+  "supplierLinkedTripSubtitle": "{material} • ट्रकर {truckerId} • ट्रक {truckId}",
+  "@supplierLinkedTripSubtitle": {
+    "placeholders": {
+      "material": {},
+      "truckerId": {},
+      "truckId": {}
+    }
+  },
+  "supplierBookingApprovedSuccessMessage": "बुकिंग सफलतापूर्वक स्वीकृत हुई",
+  "supplierLoadApproveBookingFailureMessage": "यह बुकिंग अभी स्वीकृत नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "supplierBookingRejectedSuccessMessage": "बुकिंग सफलतापूर्वक अस्वीकृत हुई",
+  "supplierLoadRejectBookingFailureMessage": "यह बुकिंग अभी अस्वीकृत नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "supplierBookingApproveDialogTitle": "बुकिंग स्वीकृत करें",
+  "supplierBookingApproveDialogMessage": "{material} के लिए {origin} से {destination} तक की बुकिंग स्वीकृत करें?",
+  "@supplierBookingApproveDialogMessage": {
+    "placeholders": {
+      "material": {},
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "supplierBookingRejectDialogTitle": "बुकिंग अस्वीकृत करें",
+  "supplierBookingRejectDialogSubtitle": "बुकिंग अस्वीकृत करने से पहले छोटा कारण लिखें।",
+  "supplierBookingRejectReasonLabel": "कारण",
+  "supplierBookingRejectReasonHint": "उदाहरण: वाहन मेल नहीं खाता या समय समस्या",
+  "verificationFieldCompanyName": "कंपनी का नाम",
+  "verificationFieldAadhaarNumber": "आधार नंबर",
+  "verificationFieldPanNumber": "पैन नंबर",
+  "verificationFieldBusinessLicenceNumber": "बिजनेस लाइसेंस नंबर",
+  "verificationFieldGstNumber": "GST नंबर",
+  "verificationFieldGstOptional": "वैकल्पिक",
+  "verificationSavePacketAction": "विवरण सेव करें",
+  "verificationSaveSuccessMessage": "वेरिफिकेशन विवरण सेव हो गया",
+  "verificationSaveFailureMessage": "वेरिफिकेशन विवरण सेव नहीं हो सका",
+  "verificationLockedVerifiedGuidance": "आपका वेरिफिकेशन पहले से स्वीकृत है, इसलिए ये फ़ील्ड लॉक हैं।",
+  "verificationLockedPendingGuidance": "आपका वेरिफिकेशन समीक्षा में है, इसलिए निर्णय होने तक ये फ़ील्ड लॉक हैं।",
+  "verificationUnlockedSupplierGuidance": "अपने बिजनेस और पहचान विवरण भरें, फिर आवश्यक दस्तावेज़ अपलोड करें।",
+  "verificationUnlockedTruckerGuidance": "अपने पहचान विवरण भरें और कम से कम एक ट्रक वेरिफिकेशन के लिए तैयार रखें।",
+  "verificationBlockedAlreadyComplete": "वेरिफिकेशन पहले से पूरा है।",
+  "verificationBlockedUnderReview": "आपका वेरिफिकेशन पहले से समीक्षा में है।",
+  "verificationBlockedMissingIdentity": "पहले अपना आधार और पैन नंबर जोड़ें।",
+  "verificationBlockedMissingCompanyName": "पहले अपनी कंपनी का नाम भरें।",
+  "verificationBlockedMissingBusinessNumbers": "पहले बिजनेस लाइसेंस विवरण भरें।",
+  "verificationBlockedMissingDocument": "जारी रखने के लिए {documentType} अपलोड करें।",
+  "@verificationBlockedMissingDocument": {"placeholders": {"documentType": {}}},
+  "verificationBlockedMissingLocation": "पहले अपना वेरिफिकेशन स्थान जोड़ें।",
+  "verificationBlockedMissingTruck": "वेरिफिकेशन जमा करने से पहले कम से कम एक ट्रक जोड़ें।",
+  "verificationReadyTruckCount": "वेरिफिकेशन-रेडी ट्रक: {count}",
+  "@verificationReadyTruckCount": {"placeholders": {"count": {}}}
+}
