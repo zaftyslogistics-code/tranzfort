@@ -12,6 +12,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../data/supplier_profile_repository.dart';
 import '../data/supplier_location_services.dart';
+import '../providers/my_loads_provider.dart';
 import '../providers/post_load_provider.dart';
 import '../providers/supplier_providers.dart';
 
@@ -386,6 +387,9 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
                   }
 
                   if (result.isSuccess) {
+                    ref.invalidate(myLoadsProvider);
+                    ref.invalidate(supplierRecentLoadsProvider);
+                    ref.invalidate(supplierDashboardProvider);
                     messenger.showSnackBar(
                       AppSnackbar.build(
                         context: context,

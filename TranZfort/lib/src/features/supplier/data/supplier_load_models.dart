@@ -71,10 +71,18 @@ class CreateLoadDto {
       'p_required_tyres': requiredTyres == null || requiredTyres!.isEmpty ? null : requiredTyres,
       'p_trucks_needed': trucksNeeded,
       'p_price_amount': priceAmount,
-      'p_price_type': priceType.trim(),
+      'p_price_type': _backendPriceType(priceType),
       'p_advance_percentage': advancePercentage,
       'p_pickup_date': pickupDate.toIso8601String().split('T').first,
     };
+  }
+
+  static String _backendPriceType(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized == 'per_ton') {
+      return 'negotiable';
+    }
+    return normalized;
   }
 
   static String? _nullableString(String? value) {
@@ -508,7 +516,7 @@ class LoadListItemDto {
       trucksNeeded: _readInt(map['trucks_needed']),
       trucksBooked: _readInt(map['trucks_booked']),
       priceAmount: (map['price_amount'] ?? 0) as num,
-      priceType: (map['price_type'] ?? 'negotiable').toString(),
+      priceType: _uiPriceType((map['price_type'] ?? 'negotiable').toString()),
       pickupDate: (map['pickup_date'] ?? '').toString(),
       status: (map['status'] ?? 'draft').toString(),
       requiredBodyType: map['required_body_type']?.toString(),
@@ -538,6 +546,14 @@ class LoadListItemDto {
       superStatus: superStatus,
       publishedAt: publishedAt == null || publishedAt!.isEmpty ? null : DateTime.parse(publishedAt!),
     );
+  }
+
+  static String _uiPriceType(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized == 'negotiable') {
+      return 'per_ton';
+    }
+    return normalized;
   }
 
   static int _readInt(Object? value) {

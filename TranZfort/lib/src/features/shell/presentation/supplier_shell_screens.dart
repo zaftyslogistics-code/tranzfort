@@ -50,7 +50,8 @@ class SupplierDashboardScreen extends ConsumerWidget {
         ...?topBannerSection,
         HeroActionCard(
           title: _heroTitle(context, profile),
-          subtitle: l10n.supplierDashboardHeroSubtitle,
+          subtitle: '',
+          compact: true,
           primaryAction: GradientButton(
             label: !profileResolved
                 ? l10n.navSupport
@@ -196,16 +197,8 @@ class SupplierDashboardScreen extends ConsumerWidget {
       );
     }
 
-    if (verificationStatus == 'verified' && profile.hasCompanyName) {
-      return _SupplierVerificationBannerWithAction(
-        banner: VerificationBanner(
-          status: VerificationBannerStatus.approved,
-          title: l10n.supplierDashboardVerificationStatusVerified,
-          description: l10n.supplierVerificationCompleteDescription,
-        ),
-        actionLabel: l10n.supplierReviewVerification,
-        onTap: () => context.go(AppRoutes.supplierVerificationPath),
-      );
+    if (verificationStatus == 'verified' && profile.canAccessWorkspace) {
+      return null;
     }
 
     if (verificationStatus == 'rejected') {

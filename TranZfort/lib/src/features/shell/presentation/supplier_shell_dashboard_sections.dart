@@ -49,6 +49,7 @@ String _localizedSupplierPriceType(AppLocalizations l10n, String value) {
   switch (value.trim().toLowerCase()) {
     case 'fixed':
       return l10n.supplierPostLoadPriceTypeFixed;
+    case 'per_ton':
     case 'negotiable':
       return l10n.supplierPostLoadPriceTypeNegotiable;
     default:
@@ -370,11 +371,6 @@ class _HeroSummary extends StatelessWidget {
               ),
           ],
         ),
-        const SizedBox(height: AppSpacing.lg),
-        Text(
-          l10n.supplierDashboardHeroSummaryBody,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
       ],
     );
   }
@@ -424,25 +420,21 @@ class _DashboardStatsSection extends StatelessWidget {
           label: l10n.supplierDashboardStatsActiveLoadsLabel,
           value: '${stats.activeLoads}',
           accent: AppColors.primary,
-          helperText: l10n.supplierDashboardStatsActiveLoadsHelper,
         ),
         StatCard(
           label: l10n.supplierDashboardStatsPendingBookingsLabel,
           value: '${stats.pendingBookings}',
           accent: AppColors.secondary,
-          helperText: l10n.supplierDashboardStatsPendingBookingsHelper,
         ),
         StatCard(
           label: l10n.supplierDashboardStatsInTransitTripsLabel,
           value: '${stats.inTransitTrips}',
           accent: AppColors.info,
-          helperText: l10n.supplierDashboardStatsInTransitTripsHelper,
         ),
         StatCard(
           label: l10n.supplierDashboardStatsCompletedTripsLabel,
           value: '${stats.completedTrips}',
           accent: AppColors.success,
-          helperText: l10n.supplierDashboardStatsCompletedTripsHelper,
         ),
       ],
     );
@@ -467,11 +459,6 @@ class _SuperLoadReadinessSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          l10n.supplierDashboardSuperLoadReadinessIntro,
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        const SizedBox(height: AppSpacing.md),
         StatusBadge(
           label: isVerified
               ? l10n.supplierDashboardSuperLoadVerificationComplete
@@ -511,26 +498,6 @@ class _SuperLoadReadinessSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.md),
-        Text(
-          _superLoadReadinessSummary(
-            l10n,
-            verificationStatus: verificationStatus,
-            hasWorkspaceSetup: hasWorkspaceSetup,
-            hasBusinessLicence: hasBusinessLicence,
-          ),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Text(
-          _superLoadNextStepGuidance(
-            l10n,
-            verificationStatus: verificationStatus,
-            hasWorkspaceSetup: hasWorkspaceSetup,
-            hasBusinessLicence: hasBusinessLicence,
-          ),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-        const SizedBox(height: AppSpacing.md),
         Row(
           children: [
             Expanded(
@@ -556,54 +523,6 @@ class _SuperLoadReadinessSection extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String _superLoadReadinessSummary(
-    AppLocalizations l10n, {
-    required String verificationStatus,
-    required bool hasWorkspaceSetup,
-    required bool hasBusinessLicence,
-  }) {
-    if (hasWorkspaceSetup && hasBusinessLicence) {
-      return l10n.supplierDashboardSuperLoadReadinessSummaryReady;
-    }
-    if (verificationStatus == 'verified') {
-      return l10n.supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence;
-    }
-    if (verificationStatus == 'pending') {
-      return l10n.supplierDashboardSuperLoadReadinessSummaryPendingVerification;
-    }
-    if (verificationStatus == 'rejected') {
-      return l10n.supplierDashboardSuperLoadReadinessSummaryRejectedVerification;
-    }
-    if (hasBusinessLicence) {
-      return l10n.supplierDashboardSuperLoadReadinessSummaryMissingVerification;
-    }
-    return l10n.supplierDashboardSuperLoadReadinessSummaryNeedsAttention;
-  }
-
-  String _superLoadNextStepGuidance(
-    AppLocalizations l10n, {
-    required String verificationStatus,
-    required bool hasWorkspaceSetup,
-    required bool hasBusinessLicence,
-  }) {
-    if (hasWorkspaceSetup && hasBusinessLicence) {
-      return l10n.supplierDashboardSuperLoadNextStepReady;
-    }
-    if (verificationStatus == 'verified') {
-      return l10n.supplierDashboardSuperLoadNextStepBusinessLicence;
-    }
-    if (verificationStatus == 'pending') {
-      return l10n.supplierDashboardSuperLoadNextStepPendingVerification;
-    }
-    if (verificationStatus == 'rejected') {
-      return l10n.supplierDashboardSuperLoadNextStepRejectedVerification;
-    }
-    if (hasBusinessLicence) {
-      return l10n.supplierDashboardSuperLoadNextStepVerification;
-    }
-    return l10n.supplierDashboardSuperLoadNextStepNeedsAttention;
   }
 }
 

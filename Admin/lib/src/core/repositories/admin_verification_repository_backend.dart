@@ -238,7 +238,8 @@ class SupabaseAdminVerificationBackend implements AdminVerificationBackend {
     }
 
     try {
-      return await activeClient.storage.from('verification-documents').createSignedUrl(normalizedPath, 3600);
+      final bucket = normalizedPath.contains('/rc/') ? 'truck-documents' : 'verification-documents';
+      return await activeClient.storage.from(bucket).createSignedUrl(normalizedPath, 3600);
     } catch (error, stackTrace) {
       debugPrint('createVerificationDocumentSignedUrl failed for $normalizedPath: $error\n$stackTrace');
       return null;
@@ -264,6 +265,7 @@ class SupabaseAdminVerificationBackend implements AdminVerificationBackend {
             'p_truck_id': subjectId,
             'p_next_status': 'verified',
             'p_reason': null,
+            'p_feedback_json': null,
           },
         );
       } else {

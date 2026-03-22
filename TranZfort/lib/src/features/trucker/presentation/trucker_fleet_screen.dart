@@ -14,6 +14,7 @@ import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../data/trucker_fleet_repository.dart';
 import '../providers/trucker_fleet_provider.dart';
+import '../providers/trucker_providers.dart';
 import 'package:go_router/go_router.dart';
 import '../../../core/navigation/app_routes.dart';
 
@@ -209,6 +210,10 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                         final result = await ref.read(truckerFleetProvider.notifier).save();
                         if (!context.mounted) {
                           return;
+                        }
+                        if (result.isSuccess) {
+                          ref.invalidate(truckerProfileProvider);
+                          ref.invalidate(truckerDashboardProvider);
                         }
                         AppSnackbar.show(
                           context: context,

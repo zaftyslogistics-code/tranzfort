@@ -3274,7 +3274,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsLanguageHelper.
   ///
   /// In en, this message translates to:
-  /// **'English is the launch default. Hindi is ready and can be selected here.'**
+  /// **'Hindi is the launch default. You can switch to English here.'**
   String get settingsLanguageHelper;
 
   /// No description provided for @settingsLanguageEnglish.

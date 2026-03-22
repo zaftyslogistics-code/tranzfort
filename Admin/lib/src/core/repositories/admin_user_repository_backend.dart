@@ -85,7 +85,8 @@ class SupabaseAdminUserBackend implements AdminUserBackend {
     }
 
     try {
-      return await activeClient.storage.from('verification-documents').createSignedUrl(normalizedPath, 3600);
+      final bucket = normalizedPath.contains('/rc/') ? 'truck-documents' : 'verification-documents';
+      return await activeClient.storage.from(bucket).createSignedUrl(normalizedPath, 3600);
     } catch (error, stackTrace) {
       debugPrint('createVerificationDocumentSignedUrl failed for $normalizedPath: $error\n$stackTrace');
       return null;
@@ -125,8 +126,30 @@ class SupabaseAdminUserBackend implements AdminUserBackend {
           .order('created_at', ascending: false)
           .limit(10);
       return rows.map<Map<String, dynamic>>((row) => Map<String, dynamic>.from(row)).toList(growable: false);
-    } catch (error, stackTrace) {
-      Error.throwWithStackTrace(error, stackTrace);
+    } catch (_) {
+      try {
+        final legacyRows = await activeClient
+            .from('audit_logs')
+            .select('id, action, entity_type, entity_id, metadata, created_at')
+            .eq('entity_id', userId)
+            .order('created_at', ascending: false)
+            .limit(10);
+        return legacyRows.map<Map<String, dynamic>>((row) {
+          final resolvedRow = Map<String, dynamic>.from(row);
+          final metadata = resolvedRow['metadata'];
+          final metadataMap = metadata is Map<String, dynamic> ? metadata : <String, dynamic>{};
+          return <String, dynamic>{
+            'id': resolvedRow['id'],
+            'action_type': resolvedRow['action'],
+            'summary_text': (metadataMap['summary_text'] ?? metadataMap['summary'] ?? resolvedRow['action'] ?? '').toString(),
+            'target_object_type': (resolvedRow['entity_type'] ?? '').toString(),
+            'target_object_id': (resolvedRow['entity_id'] ?? '').toString(),
+            'created_at': resolvedRow['created_at'],
+          };
+        }).toList(growable: false);
+      } catch (error, stackTrace) {
+        Error.throwWithStackTrace(error, stackTrace);
+      }
     }
   }
 

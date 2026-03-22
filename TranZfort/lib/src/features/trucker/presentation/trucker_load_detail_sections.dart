@@ -82,21 +82,15 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                       background: AppColors.neutralBg,
                     ),
                   ),
-                  StatusBadge(
-                    label: anyMatch
-                        ? l10n.truckerLoadDetailTruckMatchAvailable
-                        : l10n.truckerLoadDetailNoApprovedTruckMatchYet,
-                    icon: anyMatch ? Icons.verified_outlined : Icons.warning_amber_outlined,
-                    palette: anyMatch
-                        ? const StatusPalette(
-                            foreground: AppColors.success,
-                            background: AppColors.successBg,
-                          )
-                        : const StatusPalette(
-                            foreground: AppColors.warning,
-                            background: AppColors.warningBg,
-                          ),
-                  ),
+                  if (anyMatch)
+                    StatusBadge(
+                      label: l10n.truckerLoadDetailTruckMatchAvailable,
+                      icon: Icons.verified_outlined,
+                      palette: const StatusPalette(
+                        foreground: AppColors.success,
+                        background: AppColors.successBg,
+                      ),
+                    ),
                 ],
               ),
               const SizedBox(height: AppSpacing.lg),

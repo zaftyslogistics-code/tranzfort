@@ -1,4 +1,5 @@
 import 'package:admin/src/core/repositories/admin_verification_repository.dart';
+import 'package:admin/src/core/repositories/admin_user_repository.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -93,6 +94,7 @@ void main() {
       addTearDown(container.dispose);
 
       final repository = container.read(adminVerificationRepositoryProvider);
+      final userRepository = container.read(adminUserRepositoryProvider);
       final page = await _fetchFirstNonEmptyQueue(repository);
 
       final totalCount = page.counts.suppliers + page.counts.truckers + page.counts.trucks;
@@ -112,6 +114,14 @@ void main() {
       expect(detail.subjectType, item.subjectType);
       expect(detail.subjectMetadata, isNotEmpty);
       expect(detail.documents, isNotEmpty);
+
+      if (detail.subjectType == 'truck') {
+        expect(detail.profileLinkId, isNotEmpty);
+        final ownerDetail = await userRepository.getUserDetail(detail.profileLinkId);
+        expect(ownerDetail, isNotNull);
+        expect(ownerDetail!.profile.id, detail.profileLinkId);
+        expect(ownerDetail.profile.role, 'trucker');
+      }
 
       await client.auth.signOut(scope: SignOutScope.local);
     });

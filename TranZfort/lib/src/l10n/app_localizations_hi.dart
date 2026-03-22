@@ -296,57 +296,57 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierDashboardHeroSubtitle =>
-      'Supplier verification ट्रैक करें, Super Load readiness रिव्यू करें, और अपने latest loads व execution activity को सामने रखें।';
+      'अपने लोड और गतिविधि पर नज़र रखें।';
 
   @override
-  String get supplierDashboardOverviewTitle => 'Dashboard overview';
+  String get supplierDashboardOverviewTitle => 'डैशबोर्ड ओवरव्यू';
 
   @override
-  String get supplierDashboardSuperLoadReadinessTitle => 'Super Load readiness';
+  String get supplierDashboardSuperLoadReadinessTitle => 'सुपर लोड तैयारी';
 
   @override
-  String get supplierDashboardQuickActionsTitle => 'Quick actions';
+  String get supplierDashboardQuickActionsTitle => 'क्विक एक्शन';
 
   @override
-  String get supplierDashboardQuickActionChatLabel => 'Chat';
+  String get supplierDashboardQuickActionChatLabel => 'चैट';
 
   @override
   String get supplierDashboardPostLoadAction => 'Post Load';
 
   @override
   String get supplierDashboardHeroSummaryBody =>
-      'अपनी supplier verification current रखें, active loads मॉनिटर करें, और इसी workspace में दिख रहे latest Super Load readiness signals पर नज़र रखें।';
+      'अपने वेरिफिकेशन और लाइव लोड्स पर नज़र रखें।';
 
   @override
-  String get supplierDashboardStatsActiveLoadsLabel => 'Active loads';
+  String get supplierDashboardStatsActiveLoadsLabel => 'एक्टिव लोड्स';
 
   @override
   String get supplierDashboardStatsActiveLoadsHelper =>
       'वे loads जो अभी supplier-side tracking के लिए open हैं।';
 
   @override
-  String get supplierDashboardStatsPendingBookingsLabel => 'Pending bookings';
+  String get supplierDashboardStatsPendingBookingsLabel => 'पेंडिंग बुकिंग्स';
 
   @override
   String get supplierDashboardStatsPendingBookingsHelper =>
       'वे booking requests जिन्हें अभी supplier attention चाहिए।';
 
   @override
-  String get supplierDashboardStatsInTransitTripsLabel => 'Trips in transit';
+  String get supplierDashboardStatsInTransitTripsLabel => 'चल रही ट्रिप्स';
 
   @override
   String get supplierDashboardStatsInTransitTripsHelper =>
       'वे linked trips जो अभी आपके loads के खिलाफ चल रही हैं।';
 
   @override
-  String get supplierDashboardStatsCompletedTripsLabel => 'Completed trips';
+  String get supplierDashboardStatsCompletedTripsLabel => 'पूरी हुई ट्रिप्स';
 
   @override
   String get supplierDashboardStatsCompletedTripsHelper =>
       'वे trips जो recorded completion state तक पहुँच चुकी हैं।';
 
   @override
-  String get supplierDashboardOpenMyLoadsAction => 'Open my loads';
+  String get supplierDashboardOpenMyLoadsAction => 'मेरे लोड्स खोलें';
 
   @override
   String get supplierDashboardLoadFailureTitle =>
@@ -358,7 +358,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierDashboardAccountStateUnavailableTitle =>
-      'Supplier account state उपलब्ध नहीं है';
+      'सप्लायर अकाउंट स्टेट उपलब्ध नहीं है';
 
   @override
   String get supplierDashboardAccountStateUnavailableMessage =>
@@ -366,7 +366,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierDashboardRecentLoadsUnavailableTitle =>
-      'Recent loads उपलब्ध नहीं हैं';
+      'रीसेंट लोड्स उपलब्ध नहीं हैं';
 
   @override
   String get supplierDashboardRecentLoadsUnavailableMessage =>
@@ -381,52 +381,52 @@ class AppLocalizationsHi extends AppLocalizations {
       'अपना पहला supplier load post करें ताकि booking requests और linked trip activity शुरू हो सके।';
 
   @override
-  String get shellTabHome => 'Home';
+  String get shellTabHome => 'होम';
 
   @override
-  String get shellTitleSupplierDashboard => 'Supplier dashboard';
+  String get shellTitleSupplierDashboard => 'सप्लायर डैशबोर्ड';
 
   @override
-  String get shellTabLoads => 'Loads';
+  String get shellTabLoads => 'लोड्स';
 
   @override
-  String get shellTitleMyLoads => 'My Loads';
+  String get shellTitleMyLoads => 'मेरे लोड्स';
 
   @override
-  String get shellTabTrips => 'Trips';
+  String get shellTabTrips => 'ट्रिप्स';
 
   @override
-  String get shellQuickActionTrips => 'Trips';
+  String get shellQuickActionTrips => 'ट्रिप्स';
 
   @override
-  String get shellDashboardTitle => 'Dashboard';
+  String get shellDashboardTitle => 'डैशबोर्ड';
 
   @override
-  String get shellTabFind => 'Find';
+  String get shellTabFind => 'खोजें';
 
   @override
-  String get shellTitleFindLoads => 'Find Loads';
+  String get shellTitleFindLoads => 'लोड्स खोजें';
 
   @override
-  String get shellDrawerSupplierWorkspace => 'Supplier workspace';
+  String get shellDrawerSupplierWorkspace => 'सप्लायर वर्कस्पेस';
 
   @override
-  String get shellDrawerTruckerWorkspace => 'Trucker workspace';
+  String get shellDrawerTruckerWorkspace => 'ट्रकर वर्कस्पेस';
 
   @override
-  String get shellDrawerDashboard => 'Dashboard';
+  String get shellDrawerDashboard => 'डैशबोर्ड';
 
   @override
   String get shellDrawerAssistant => 'Guided help';
 
   @override
-  String get shellDrawerFleet => 'Fleet';
+  String get shellDrawerFleet => 'फ्लीट';
 
   @override
-  String get shellDrawerMessages => 'Messages';
+  String get shellDrawerMessages => 'मैसेजेस';
 
   @override
-  String get navNotifications => 'Notifications';
+  String get navNotifications => 'नोटिफिकेशन्स';
 
   @override
   String get shellDrawerSupport => 'सहायता';
@@ -435,10 +435,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shellDrawerProfile => 'प्रोफ़ाइल';
 
   @override
-  String get shellDrawerLanguage => 'Language';
+  String get shellDrawerLanguage => 'भाषा';
 
   @override
-  String get shellDrawerSignOut => 'Sign out';
+  String get shellDrawerSignOut => 'साइन आउट';
 
   @override
   String get shellSignOutFailureMessage =>
@@ -1178,13 +1178,13 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get settingsTitle => 'Settings';
+  String get settingsTitle => 'सेटिंग्स';
 
   @override
-  String get settingsPreferencesTitle => 'Preferences';
+  String get settingsPreferencesTitle => 'प्रेफरेंसेस';
 
   @override
-  String get settingsRoleContextLabel => 'Role context';
+  String get settingsRoleContextLabel => 'रोल कॉन्टेक्स्ट';
 
   @override
   String settingsTtsSummary(Object selectedLanguageLabel, Object roleSentence) {
@@ -1877,7 +1877,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get settingsLanguageHelper =>
-      'लॉन्च पर डिफ़ॉल्ट भाषा English है। Hindi यहाँ से चुनी जा सकती है।';
+      'लॉन्च पर डिफ़ॉल्ट भाषा हिंदी है। चाहें तो यहाँ से English चुन सकते हैं।';
 
   @override
   String get settingsLanguageEnglish => 'English';
@@ -3028,7 +3028,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierDashboardSuperLoadReadinessIntro =>
-      'Super Load eligibility अभी भी current app में आंशिक रूप से admin-managed है। यह surface केवल वही readiness facts दिखाती है जिन्हें current profile model ईमानदारी से confirm कर सकती है।';
+      'सुपर लोड के लिए अभी उपलब्ध तैयारी स्टेटस देखें।';
 
   @override
   String get supplierDashboardSuperLoadVerificationComplete =>

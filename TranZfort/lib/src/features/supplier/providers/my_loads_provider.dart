@@ -5,7 +5,9 @@ import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
 
 const List<String> supplierActiveLoadStatuses = <String>[
+  'draft',
   'active',
+  'booked',
   'assigned_partial',
   'assigned_full',
   'in_transit',

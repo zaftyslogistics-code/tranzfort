@@ -132,20 +132,15 @@ class TruckerDashboardScreen extends ConsumerWidget {
       return const LoadingShimmer(height: 92, itemCount: 1);
     }
 
+    if (profile != null && profile.isVerified && profile.hasApprovedTruck) {
+      return null;
+    }
+
     if (verificationStatus == 'pending') {
       return _CompactDashboardBanner(
         status: VerificationBannerStatus.pending,
         title: l10n.truckerDashboardVerificationPendingTitle,
         actionLabel: l10n.truckerDashboardOpenVerificationAction,
-        onTap: () => context.go(AppRoutes.truckerVerificationPath),
-      );
-    }
-
-    if (verificationStatus == 'verified') {
-      return _CompactDashboardBanner(
-        status: VerificationBannerStatus.approved,
-        title: l10n.truckerDashboardVerificationCompleteTitle,
-        actionLabel: l10n.truckerDashboardReviewVerificationAction,
         onTap: () => context.go(AppRoutes.truckerVerificationPath),
       );
     }
@@ -362,25 +357,21 @@ class _DashboardStatsSection extends StatelessWidget {
           label: l10n.truckerDashboardStatActiveBidsLabel,
           value: '${stats.activeBids}',
           accent: AppColors.secondary,
-          helperText: l10n.truckerDashboardStatActiveBidsHelper,
         ),
         StatCard(
           label: l10n.truckerDashboardStatUpcomingTripsLabel,
           value: '${stats.upcomingTrips}',
           accent: AppColors.warning,
-          helperText: l10n.truckerDashboardStatUpcomingTripsHelper,
         ),
         StatCard(
           label: l10n.truckerDashboardStatInTransitLabel,
           value: '${stats.inTransitTrips}',
           accent: AppColors.info,
-          helperText: l10n.truckerDashboardStatInTransitHelper,
         ),
         StatCard(
           label: l10n.truckerDashboardStatCompletedLabel,
           value: '${stats.completedTrips}',
           accent: AppColors.success,
-          helperText: l10n.truckerDashboardStatCompletedHelper,
         ),
       ],
     );
@@ -504,21 +495,9 @@ class _ReadinessSection extends StatelessWidget {
           title: l10n.truckerDashboardVerificationStatusTitle,
           subtitle: _localizedTruckerDashboardVerificationStatus(l10n, profile.verificationStatus),
           trailing: StatusChip(label: _localizedTruckerDashboardVerificationStatus(l10n, profile.verificationStatus)),
-          footer: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                profile.isVerified
-                    ? l10n.truckerDashboardVerificationReadyMessage
-                    : l10n.truckerDashboardVerificationLockedMessage,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              if ((profile.dlNumber ?? '').trim().isNotEmpty) ...[
-                const SizedBox(height: AppSpacing.xs),
-                Text(l10n.truckerDashboardDlLabel(profile.dlNumber!), style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ],
-          ),
+          footer: (profile.dlNumber ?? '').trim().isEmpty
+              ? null
+              : Text(l10n.truckerDashboardDlLabel(profile.dlNumber!), style: Theme.of(context).textTheme.bodySmall),
         ),
         const SizedBox(height: AppSpacing.md),
         StandardListCard(
@@ -531,32 +510,15 @@ class _ReadinessSection extends StatelessWidget {
           trailing: StatusChip(
             label: resolvedStats.hasApprovedTruck ? l10n.truckerDashboardReadyStatus : l10n.truckerDashboardActionNeededStatus,
           ),
-          footer: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                _fleetReadinessMessage(resolvedStats, l10n),
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              if (resolvedStats.hasTruckLifecycleAttention) ...[
-                const SizedBox(height: AppSpacing.xs),
-                Text(
+          footer: resolvedStats.hasTruckLifecycleAttention
+              ? Text(
                   _truckLifecycleAttentionMessage(resolvedStats, l10n),
                   style: Theme.of(context).textTheme.bodySmall,
-                ),
-              ],
-            ],
-          ),
+                )
+              : null,
         ),
       ],
     );
-  }
-
-  String _fleetReadinessMessage(TruckerDashboardStats stats, AppLocalizations l10n) {
-    if (stats.hasApprovedTruck) {
-      return l10n.truckerDashboardFleetReadyMessage;
-    }
-    return l10n.truckerDashboardFleetNeedFirstTruckMessage;
   }
 
   String _truckLifecycleAttentionMessage(TruckerDashboardStats stats, AppLocalizations l10n) {

@@ -268,6 +268,11 @@ class UserAppDrawerContent extends ConsumerWidget {
                   onTap: () => _go(context, AppRoutes.profilePath),
                 ),
                 DrawerNavItem(
+                  icon: Icons.settings_outlined,
+                  label: l10n.settingsTitle,
+                  onTap: () => _go(context, AppRoutes.settingsPath),
+                ),
+                DrawerNavItem(
                   icon: Icons.translate_outlined,
                   label: l10n.shellDrawerLanguage,
                   onTap: () => _go(context, AppRoutes.settingsPath),

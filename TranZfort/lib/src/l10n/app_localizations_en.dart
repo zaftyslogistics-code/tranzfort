@@ -1873,7 +1873,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsLanguageHelper =>
-      'English is the launch default. Hindi is ready and can be selected here.';
+      'Hindi is the launch default. You can switch to English here.';
 
   @override
   String get settingsLanguageEnglish => 'English';

@@ -463,22 +463,17 @@ class _MarketplaceLoadCard extends StatelessWidget {
             ),
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          const SizedBox(height: AppSpacing.xs),
-          StatusBadge(
-            label: hasMatchingTruck
-                ? l10n.truckerFindLoadsTruckMatchAvailable
-                : l10n.truckerFindLoadsNoApprovedTruckMatch,
-            icon: hasMatchingTruck ? Icons.verified_outlined : Icons.warning_amber_outlined,
-            palette: hasMatchingTruck
-                ? const StatusPalette(
-                    foreground: AppColors.success,
-                    background: AppColors.successBg,
-                  )
-                : const StatusPalette(
-                    foreground: AppColors.warning,
-                    background: AppColors.warningBg,
-                  ),
-          ),
+          if (hasMatchingTruck) ...[
+            const SizedBox(height: AppSpacing.xs),
+            StatusBadge(
+              label: l10n.truckerFindLoadsTruckMatchAvailable,
+              icon: Icons.verified_outlined,
+              palette: const StatusPalette(
+                foreground: AppColors.success,
+                background: AppColors.successBg,
+              ),
+            ),
+          ],
           const SizedBox(height: AppSpacing.xs),
           Text(
             costEstimate?.compactLabel ?? l10n.truckerFindLoadsTripCostUnavailable,

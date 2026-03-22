@@ -47,7 +47,8 @@ class TruckDocumentUploadService {
       );
     }
 
-    final storagePath = '$normalizedOwnerId/$normalizedTruckId/rc/rc.jpg';
+    final timestamp = DateTime.now().toUtc().millisecondsSinceEpoch;
+    final storagePath = '$normalizedOwnerId/$normalizedTruckId/rc/rc_$timestamp.jpg';
     return ImageUploadWorkflow.pickCompressAndUpload(
       client: _client,
       source: source,
@@ -71,7 +72,7 @@ class TruckDocumentUploadService {
           bytes,
           fileOptions: const FileOptions(
             contentType: 'image/jpeg',
-            upsert: true,
+            upsert: false,
           ),
         );
   }
