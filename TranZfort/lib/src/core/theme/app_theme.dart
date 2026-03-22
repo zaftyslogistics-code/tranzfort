@@ -45,7 +45,11 @@ class AppTheme {
       cardTheme: CardThemeData(
         color: AppColors.cardSurface,
         elevation: 0,
+        shadowColor: Colors.black.withValues(alpha: 0.08),
+        surfaceTintColor: Colors.transparent,
+        margin: const EdgeInsets.all(0),
         shape: RoundedRectangleBorder(
+          side: const BorderSide(color: AppColors.divider, width: 0.5),
           borderRadius: BorderRadius.circular(AppRadius.card),
         ),
       ),
@@ -103,7 +107,7 @@ class AppTheme {
         hintStyle: AppTypography.bodyPrimary.copyWith(color: AppColors.textMuted),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-        backgroundColor: AppColors.cardSurface,
+        backgroundColor: AppColors.raisedSurface,
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.textMuted,
         type: BottomNavigationBarType.fixed,
@@ -124,7 +128,8 @@ class AppTheme {
         ),
       ),
       bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.cardSurface,
+        backgroundColor: AppColors.raisedSurface,
+        elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(AppRadius.bottomSheet),

@@ -18,7 +18,9 @@ class AppColors {
 
   // ─── User App Surfaces ───
   static const Color canvas = Color(0xFFFAFAF8);
-  static const Color cardSurface = Color(0xFFFFFFFF);
+  static const Color canvasTop = Color(0xFFFDFDFC);
+  static const Color canvasBottom = Color(0xFFF3F1EE);
+  static const Color cardSurface = Color(0xFFFFFEFC);
   static const Color raisedSurface = Color(0xFFFFFFFF);
   static const Color subtleSurface = Color(0xFFF5F3F0);
   static const Color divider = Color(0xFFE7E5E4);
@@ -63,19 +65,30 @@ class AppColors {
     ],
   );
 
-  // ─── Shadows ───
+  static const LinearGradient canvasWash = LinearGradient(
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+    colors: [canvasTop, canvasBottom],
+  );
+
   static List<BoxShadow> get cardShadow => [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.06),
-          blurRadius: 8,
-          offset: const Offset(0, 2),
+          color: Colors.black.withValues(alpha: 0.07),
+          blurRadius: 12,
+          offset: const Offset(0, 4),
+        ),
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.03),
+          blurRadius: 20,
+          spreadRadius: -8,
+          offset: const Offset(0, 8),
         ),
       ];
 
   static List<BoxShadow> get cardPressedShadow => [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.04),
-          blurRadius: 4,
+          color: Colors.black.withValues(alpha: 0.05),
+          blurRadius: 8,
           offset: const Offset(0, 1),
         ),
       ];

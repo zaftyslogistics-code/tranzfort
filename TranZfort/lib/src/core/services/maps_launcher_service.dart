@@ -16,14 +16,16 @@ class MapsLauncherService {
     required double? destinationLng,
     required String destinationLabel,
   }) {
-    if (originLat == null || originLng == null) {
-      return null;
-    }
     final destination = destinationLat != null && destinationLng != null
         ? '$destinationLat,$destinationLng'
         : destinationLabel.trim();
     if (destination.isEmpty) {
       return null;
+    }
+    if (originLat == null || originLng == null) {
+      return Uri.parse(
+        'https://www.google.com/maps/search/?api=1&query=${Uri.encodeComponent(destination)}',
+      );
     }
     return Uri.parse(
       'https://www.google.com/maps/dir/?api=1&origin=$originLat,$originLng&destination=${Uri.encodeComponent(destination)}',

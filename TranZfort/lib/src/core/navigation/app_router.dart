@@ -17,11 +17,13 @@ import '../../features/trucker/presentation/trucker_dashboard_screen.dart';
 import '../../features/trucker/presentation/trucker_fleet_screen.dart';
 import '../../features/trucker/presentation/trucker_find_loads_screen.dart';
 import '../../features/trucker/presentation/trucker_load_detail_screen.dart';
+import '../../features/trucker/presentation/trucker_route_preview_screen.dart';
 import '../../features/trucker/presentation/trucker_trip_detail_screen.dart';
 import '../../features/trucker/presentation/trucker_trips_screen.dart';
 import '../../features/verification/presentation/verification_screen.dart';
 import '../../features/shell/presentation/shell_destinations.dart';
 import '../../features/shell/presentation/supplier_shell_screens.dart';
+import '../services/maps_launcher_service.dart';
 import '../providers/app_state_providers.dart';
 import 'auth_router_refresh_notifier.dart';
 import '../../features/shell/presentation/user_app_shell.dart';
@@ -260,6 +262,20 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 return SupplierLoadDetailScreen(loadId: loadId);
               }
               return TruckerLoadDetailScreen(loadId: loadId);
+            },
+          ),
+          GoRoute(
+            path: AppRoutes.routePreviewPath,
+            name: AppRoutes.routePreview,
+            builder: (context, state) {
+              final extra = state.extra;
+              if (extra is! TruckerRoutePreviewArgs) {
+                return const TruckerDashboardScreen();
+              }
+              return TruckerRoutePreviewScreen(
+                args: extra,
+                mapsLauncher: ref.read(mapsLauncherServiceProvider),
+              );
             },
           ),
           GoRoute(

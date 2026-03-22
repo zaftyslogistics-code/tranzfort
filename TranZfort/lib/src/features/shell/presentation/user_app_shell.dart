@@ -48,20 +48,14 @@ class UserAppShell extends ConsumerWidget {
                 ),
                 Builder(
                   builder: (scaffoldContext) {
+                    final authState = ref.watch(currentAuthStateProvider);
+                    final avatarUrl = authState.profile?.avatarUrl;
                     return Padding(
                       padding: const EdgeInsets.only(right: AppSpacing.sm),
                       child: IconButton(
                         tooltip: l10n.navProfile,
                         onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
-                        icon: const CircleAvatar(
-                          radius: 16,
-                          backgroundColor: AppColors.subtleSurface,
-                          child: Icon(
-                            Icons.person_outline,
-                            size: 18,
-                            color: AppColors.primary,
-                          ),
-                        ),
+                        icon: _AvatarCircle(avatarUrl: avatarUrl, radius: 16),
                       ),
                     );
                   },
@@ -111,6 +105,13 @@ class UserAppShell extends ConsumerWidget {
           activeIcon: Icons.alt_route,
           title: l10n.shellQuickActionTrips,
         ),
+        _ShellTab(
+          route: AppRoutes.messagesPath,
+          label: l10n.shellDrawerMessages,
+          icon: Icons.chat_bubble_outline,
+          activeIcon: Icons.chat_bubble,
+          title: l10n.shellMessagesTitle,
+        ),
       ];
     }
 
@@ -136,6 +137,13 @@ class UserAppShell extends ConsumerWidget {
         activeIcon: Icons.alt_route,
         title: l10n.shellQuickActionTrips,
       ),
+      _ShellTab(
+        route: AppRoutes.messagesPath,
+        label: l10n.shellDrawerMessages,
+        icon: Icons.chat_bubble_outline,
+        activeIcon: Icons.chat_bubble,
+        title: l10n.shellMessagesTitle,
+      ),
     ];
   }
 
@@ -147,6 +155,13 @@ class UserAppShell extends ConsumerWidget {
     final index = tabs.indexWhere((tab) => location == tab.route);
     if (index != -1) {
       return index;
+    }
+
+    if (location.startsWith('${AppRoutes.chatPath}/')) {
+      final messagesIndex = tabs.indexWhere((tab) => tab.route == AppRoutes.messagesPath);
+      if (messagesIndex != -1) {
+        return messagesIndex;
+      }
     }
 
     if (role == AppUserRole.supplier && location == AppRoutes.postLoadPath) {
@@ -187,6 +202,9 @@ class UserAppDrawerContent extends ConsumerWidget {
         : l10n.shellDrawerTruckerWorkspace;
     final unreadConversationCount = ref.watch(inboxProvider).conversations.where((conversation) => conversation.hasUnread).length;
     final unreadNotificationCount = ref.watch(unreadNotificationCountProvider);
+    final authState = ref.watch(currentAuthStateProvider);
+    final avatarUrl = authState.profile?.avatarUrl;
+    final fullName = authState.profile?.fullName ?? '';
 
     return SafeArea(
       child: Column(
@@ -201,14 +219,10 @@ class UserAppDrawerContent extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CircleAvatar(
-                  radius: 28,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.local_shipping_outlined, color: AppColors.primary),
-                ),
+                _AvatarCircle(avatarUrl: avatarUrl, radius: 28, fallbackIcon: Icons.local_shipping_outlined),
                 const SizedBox(height: AppSpacing.lg),
                 Text(
-                  'TranZfort',
+                  fullName.isNotEmpty ? fullName : 'TranZfort',
                   style: textTheme.titleLarge?.copyWith(color: Colors.white),
                 ),
                 const SizedBox(height: AppSpacing.xs),
@@ -296,27 +310,28 @@ class UserAppDrawerContent extends ConsumerWidget {
   }
 
   Future<void> _signOut(BuildContext context, WidgetRef ref) async {
-    Navigator.of(context).pop();
+    final router = GoRouter.of(context);
 
     final result = await ref.read(authRepositoryProvider).signOutAndClearLocalState();
-    if (!context.mounted) {
-      return;
-    }
-
     if (result.isFailure) {
-      final l10n = AppLocalizations.of(context);
-      AppSnackbar.show(
-        context: context,
-        message: l10n.shellSignOutFailureMessage,
-        variant: AppSnackbarVariant.error,
-      );
+      if (context.mounted) {
+        final l10n = AppLocalizations.of(context);
+        AppSnackbar.show(
+          context: context,
+          message: l10n.shellSignOutFailureMessage,
+          variant: AppSnackbarVariant.error,
+        );
+      }
       return;
     }
 
+    if (context.mounted && Navigator.of(context).canPop()) {
+      Navigator.of(context).pop();
+    }
     ref.invalidate(authStateProvider);
     ref.invalidate(currentAuthStateProvider);
     ref.invalidate(profileCompletenessProvider);
-    context.go(AppRoutes.authPath);
+    router.go(AppRoutes.authPath);
   }
 
 }
@@ -408,6 +423,44 @@ class ShellCountBadge extends StatelessWidget {
               fontSize: compact ? 9 : 10,
             ),
       ),
+    );
+  }
+}
+
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final IconData? fallbackIcon;
+
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    this.fallbackIcon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final url = avatarUrl?.trim();
+    final iconSize = radius * 1.125;
+
+    if (url == null || url.isEmpty) {
+      return CircleAvatar(
+        radius: radius,
+        backgroundColor: AppColors.subtleSurface,
+        child: Icon(
+          fallbackIcon ?? Icons.person_outline,
+          size: iconSize,
+          color: AppColors.primary,
+        ),
+      );
+    }
+
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: AppColors.subtleSurface,
+      backgroundImage: NetworkImage(url),
+      onBackgroundImageError: (_, _) {},
+      child: null,
     );
   }
 }

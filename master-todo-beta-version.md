@@ -8,6 +8,19 @@
 
 ---
 
+## Git Repository Details
+
+| Field | Value |
+|-------|-------|
+| **Repository URL** | `https://github.com/zaftyslogistics-code/tranzfort.git` |
+| **GitHub User ID** | `zaftyslogistics-code` |
+| **GitHub Email** | `zaftyslogistics@gmail.com` |
+| **Current Branch** | `feature/codebase-refactoring` |
+| **First Commit** | `3cb2bb8` (Initial commit: TranZfort logistics platform) |
+| **Excluded from Git** | `docs/`, `old-app/`, `.env`, sensitive credentials |
+
+---
+
 ## Executive Summary (March 22)
 
 | Phase | Status | Notes |

@@ -9,6 +9,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'src/core/config/supabase_config.dart';
 import 'src/core/navigation/app_router.dart';
 import 'src/core/providers/app_locale_providers.dart';
+import 'src/core/theme/app_colors.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/l10n/app_localizations.dart';
 import 'src/features/notifications/data/push_token_service.dart';
@@ -182,6 +183,12 @@ class TranZfortApp extends ConsumerWidget {
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
+      builder: (context, child) {
+        return DecoratedBox(
+          decoration: const BoxDecoration(gradient: AppColors.canvasWash),
+          child: child ?? const SizedBox.shrink(),
+        );
+      },
       locale: localeState.locale,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,

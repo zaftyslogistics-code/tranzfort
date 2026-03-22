@@ -17,7 +17,7 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     final response = await _client
         .from('trips')
         .select(
-          'id, load_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material), trucks(truck_number)',
+          'id, load_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, origin_lat, origin_lng, destination_label, destination_lat, destination_lng, material), trucks(truck_number)',
         )
         .eq('trucker_id', truckerId)
         .inFilter('stage', stages)

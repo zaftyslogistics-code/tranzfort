@@ -12,6 +12,7 @@ class UserProfile {
   final String trustSafetyStatus;
   final String? trustSafetyReasonSummary;
   final DateTime? dataDeletionRequestedAt;
+  final String? avatarUrl;
 
   const UserProfile({
     required this.id,
@@ -25,6 +26,7 @@ class UserProfile {
     required this.trustSafetyStatus,
     this.trustSafetyReasonSummary,
     this.dataDeletionRequestedAt,
+    this.avatarUrl,
   });
 
   bool get hasName => fullName.trim().length >= 2;
@@ -59,6 +61,7 @@ class UserProfile {
       trustSafetyStatus: (map['trust_safety_status'] ?? 'normal').toString(),
       trustSafetyReasonSummary: _nullableText(map['ban_reason']),
       dataDeletionRequestedAt: _parseDateTime(map['data_deletion_requested_at']),
+      avatarUrl: _nullableText(map['avatar_url']),
     );
   }
 

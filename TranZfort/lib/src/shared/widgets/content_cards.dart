@@ -74,25 +74,40 @@ class StatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border(
-          top: BorderSide(color: accent, width: 4),
-        ),
+        border: Border.all(color: AppColors.divider),
         boxShadow: AppShadows.card,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(value, style: Theme.of(context).textTheme.displayLarge),
-          const SizedBox(height: AppSpacing.xs),
-          Text(label, style: Theme.of(context).textTheme.bodyLarge),
-          if (helperText != null) ...[
-            const SizedBox(height: AppSpacing.xs),
-            Text(helperText!, style: Theme.of(context).textTheme.bodySmall),
-          ],
+          Container(
+            height: 4,
+            decoration: BoxDecoration(
+              color: accent,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(AppRadius.card),
+                topRight: Radius.circular(AppRadius.card),
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(value, style: Theme.of(context).textTheme.displayLarge),
+                const SizedBox(height: AppSpacing.xs),
+                Text(label, style: Theme.of(context).textTheme.bodyLarge),
+                if (helperText != null) ...[
+                  const SizedBox(height: AppSpacing.xs),
+                  Text(helperText!, style: Theme.of(context).textTheme.bodySmall),
+                ],
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -129,40 +144,57 @@ class StandardListCard extends StatelessWidget {
             color: AppColors.cardSurface,
             borderRadius: BorderRadius.circular(AppRadius.card),
             boxShadow: AppShadows.card,
-            border: Border(
-              left: BorderSide(color: accent, width: 4),
-            ),
+            border: Border.all(color: AppColors.divider),
           ),
-          child: Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                child: Container(
+                  width: 4,
+                  decoration: BoxDecoration(
+                    color: accent,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(AppRadius.card),
+                      bottomLeft: Radius.circular(AppRadius.card),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(AppSpacing.lg),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(title, style: Theme.of(context).textTheme.titleMedium),
-                          const SizedBox(height: AppSpacing.xs),
-                          Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(title, style: Theme.of(context).textTheme.titleMedium),
+                              const SizedBox(height: AppSpacing.xs),
+                              Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                            ],
+                          ),
+                        ),
+                        if (trailing != null) ...[
+                          const SizedBox(width: AppSpacing.md),
+                          trailing!,
                         ],
-                      ),
+                      ],
                     ),
-                    if (trailing != null) ...[
-                      const SizedBox(width: AppSpacing.md),
-                      trailing!,
+                    if (footer != null) ...[
+                      const SizedBox(height: AppSpacing.md),
+                      footer!,
                     ],
                   ],
                 ),
-                if (footer != null) ...[
-                  const SizedBox(height: AppSpacing.md),
-                  footer!,
-                ],
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

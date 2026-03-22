@@ -32,8 +32,8 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
   late final TextEditingController _originController;
   late final TextEditingController _destinationController;
   late final TextEditingController _materialController;
-  bool _filtersCollapsed = false;
-  double _lastScrollOffset = 0;
+  bool _quickAdvancedExpanded = false;
+  bool _showScrollToTop = false;
 
   List<TruckerCitySuggestion> _originSuggestions = const <TruckerCitySuggestion>[];
   List<TruckerCitySuggestion> _destinationSuggestions = const <TruckerCitySuggestion>[];
@@ -65,15 +65,10 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
     }
     final position = _scrollController.position;
     final offset = position.pixels;
-    final delta = offset - _lastScrollOffset;
-    final shouldCollapse = delta > 8 && offset > 48;
-    final shouldExpand = delta < -8 || offset <= 24;
-    if (shouldCollapse && !_filtersCollapsed) {
-      setState(() => _filtersCollapsed = true);
-    } else if (shouldExpand && _filtersCollapsed) {
-      setState(() => _filtersCollapsed = false);
+    final shouldShowScrollToTop = offset > 420;
+    if (shouldShowScrollToTop != _showScrollToTop) {
+      setState(() => _showScrollToTop = shouldShowScrollToTop);
     }
-    _lastScrollOffset = offset;
     if (position.pixels >= position.maxScrollExtent - 240) {
       ref.read(findLoadsProvider.notifier).loadMore();
     }
@@ -88,209 +83,256 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
     final tripCostingService = ref.watch(tripCostingServiceProvider);
     final approvedTrucks = ref.watch(truckerApprovedTrucksProvider).valueOrNull ?? const <TruckerApprovedTruck>[];
 
-    return ListView(
-      controller: _scrollController,
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.xl,
-        AppSpacing.lg,
-        AppSpacing.bottomNavSafe + AppSpacing.xl,
-      ),
+    return Stack(
       children: [
-        AnimatedSwitcher(
-          duration: const Duration(milliseconds: 220),
-          switchInCurve: Curves.easeOut,
-          switchOutCurve: Curves.easeIn,
-          child: _filtersCollapsed
-              ? const SizedBox.shrink()
-              : Column(
-                  key: const ValueKey('expanded-filters'),
-                  children: [
-                    HeroActionCard(
-                      title: l10n.shellTitleFindLoads,
-                      subtitle: l10n.truckerFindLoadsHeroSubtitle,
-                      primaryAction: GradientButton(
-                        label: l10n.truckerFindLoadsAdvancedFiltersAction,
-                        onPressed: () => _openAdvancedFilters(context, filters),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        CustomScrollView(
+          controller: _scrollController,
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.xl,
+                AppSpacing.lg,
+                AppSpacing.md,
+              ),
+              sliver: SliverToBoxAdapter(
+                child: HeroActionCard(
+                  title: l10n.shellTitleFindLoads,
+                  subtitle: l10n.truckerFindLoadsHeroSubtitle,
+                  compact: true,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          AppSearchField(
-                            controller: _originController,
-                            hintText: l10n.truckerFindLoadsOriginHint,
-                            onChanged: _searchOrigin,
-                            onClear: () {
-                              _originController.clear();
-                              _searchOrigin('');
-                              _applyQuickFilters(originCity: '');
-                            },
-                          ),
-                          if (_originSuggestions.isNotEmpty) ...[
-                            const SizedBox(height: AppSpacing.sm),
-                            _SuggestionList(
-                              suggestions: _originSuggestions,
-                              onSelected: (suggestion) {
-                                _originController.text = suggestion.city;
-                                setState(() => _originSuggestions = const <TruckerCitySuggestion>[]);
-                                _applyQuickFilters(originCity: suggestion.city);
+                          Expanded(
+                            child: AppSearchField(
+                              controller: _originController,
+                              hintText: l10n.truckerFindLoadsOriginHint,
+                              onChanged: _searchOrigin,
+                              onClear: () {
+                                _originController.clear();
+                                _searchOrigin('');
+                                _applyQuickFilters(originCity: '');
                               },
                             ),
-                          ],
-                          const SizedBox(height: AppSpacing.md),
-                          AppSearchField(
-                            controller: _destinationController,
-                            hintText: l10n.truckerFindLoadsDestinationHint,
-                            onChanged: _searchDestination,
-                            onClear: () {
-                              _destinationController.clear();
-                              _searchDestination('');
-                              _applyQuickFilters(destinationCity: '');
-                            },
                           ),
-                          if (_destinationSuggestions.isNotEmpty) ...[
-                            const SizedBox(height: AppSpacing.sm),
-                            _SuggestionList(
-                              suggestions: _destinationSuggestions,
-                              onSelected: (suggestion) {
-                                _destinationController.text = suggestion.city;
-                                setState(() => _destinationSuggestions = const <TruckerCitySuggestion>[]);
-                                _applyQuickFilters(destinationCity: suggestion.city);
+                          const SizedBox(width: AppSpacing.sm),
+                          Expanded(
+                            child: AppSearchField(
+                              controller: _destinationController,
+                              hintText: l10n.truckerFindLoadsDestinationHint,
+                              onChanged: _searchDestination,
+                              onClear: () {
+                                _destinationController.clear();
+                                _searchDestination('');
+                                _applyQuickFilters(destinationCity: '');
                               },
                             ),
-                          ],
-                          const SizedBox(height: AppSpacing.md),
-                          AppSearchField(
-                            controller: _materialController,
-                            hintText: l10n.truckerFindLoadsMaterialHint,
-                            onChanged: (value) => _applyQuickFilters(material: value),
-                            onClear: () {
-                              _materialController.clear();
-                              _applyQuickFilters(material: '');
-                            },
-                          ),
-                          const SizedBox(height: AppSpacing.md),
-                          AppDropdown<MarketplaceSortOption>(
-                            label: l10n.truckerFindLoadsSortByLabel,
-                            value: filters.sortOption,
-                            items: [
-                              DropdownMenuItem(value: MarketplaceSortOption.newest, child: Text(l10n.truckerFindLoadsSortNewest)),
-                              DropdownMenuItem(
-                                value: MarketplaceSortOption.priceHighToLow,
-                                child: Text(l10n.truckerFindLoadsSortPriceHighToLow),
-                              ),
-                              DropdownMenuItem(
-                                value: MarketplaceSortOption.priceLowToHigh,
-                                child: Text(l10n.truckerFindLoadsSortPriceLowToHigh),
-                              ),
-                              DropdownMenuItem(value: MarketplaceSortOption.pickupDate, child: Text(l10n.truckerFindLoadsSortPickupDate)),
-                            ],
-                            onChanged: (value) {
-                              if (value != null) {
-                                ref.read(findLoadsProvider.notifier).updateFilters(filters.copyWith(sortOption: value));
-                              }
-                            },
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: AppSpacing.sectionGap),
-                    DetailSectionCard(
-                      title: l10n.truckerFindLoadsMarketplaceTabsTitle,
-                      children: [
-                        FilterChipBar(
-                          items: [
-                            FilterChipItem(
-                              label: l10n.truckerFindLoadsAllLoadsTab,
-                              selected: state.selectedTab == FindLoadsTab.all,
-                              onTap: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.all),
-                            ),
-                            FilterChipItem(
-                              label: l10n.truckerFindLoadsSuperLoadsTab,
-                              selected: state.selectedTab == FindLoadsTab.superLoads,
-                              onTap: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.superLoads),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: AppSpacing.md),
-                        _ActiveFilterSummary(
-                          filters: state.filters,
-                          resultCount: state.loads.length,
-                          onReset: () {
-                            _originController.clear();
-                            _destinationController.clear();
-                            _materialController.clear();
-                            setState(() {
-                              _originSuggestions = const <TruckerCitySuggestion>[];
-                              _destinationSuggestions = const <TruckerCitySuggestion>[];
-                            });
-                            ref.read(findLoadsProvider.notifier).resetFilters();
+                      if (_originSuggestions.isNotEmpty) ...[
+                        const SizedBox(height: AppSpacing.sm),
+                        _SuggestionList(
+                          suggestions: _originSuggestions,
+                          onSelected: (suggestion) {
+                            _originController.text = suggestion.city;
+                            setState(() => _originSuggestions = const <TruckerCitySuggestion>[]);
+                            _applyQuickFilters(originCity: suggestion.city);
                           },
                         ),
                       ],
-                    ),
-                    const SizedBox(height: AppSpacing.sectionGap),
-                  ],
+                      if (_destinationSuggestions.isNotEmpty) ...[
+                        const SizedBox(height: AppSpacing.sm),
+                        _SuggestionList(
+                          suggestions: _destinationSuggestions,
+                          onSelected: (suggestion) {
+                            _destinationController.text = suggestion.city;
+                            setState(() => _destinationSuggestions = const <TruckerCitySuggestion>[]);
+                            _applyQuickFilters(destinationCity: suggestion.city);
+                          },
+                        ),
+                      ],
+                      const SizedBox(height: AppSpacing.sm),
+                      TextActionButton(
+                        label: _quickAdvancedExpanded
+                            ? '${l10n.truckerFindLoadsAdvancedFiltersAction} ▲'
+                            : '${l10n.truckerFindLoadsAdvancedFiltersAction} ▼',
+                        onPressed: () => setState(() => _quickAdvancedExpanded = !_quickAdvancedExpanded),
+                      ),
+                      AnimatedCrossFade(
+                        firstChild: const SizedBox.shrink(),
+                        secondChild: Column(
+                          children: [
+                            const SizedBox(height: AppSpacing.sm),
+                            AppSearchField(
+                              controller: _materialController,
+                              hintText: l10n.truckerFindLoadsMaterialHint,
+                              onChanged: (value) => _applyQuickFilters(material: value),
+                              onClear: () {
+                                _materialController.clear();
+                                _applyQuickFilters(material: '');
+                              },
+                            ),
+                            const SizedBox(height: AppSpacing.sm),
+                            AppDropdown<MarketplaceSortOption>(
+                              label: l10n.truckerFindLoadsSortByLabel,
+                              value: filters.sortOption,
+                              items: [
+                                DropdownMenuItem(value: MarketplaceSortOption.newest, child: Text(l10n.truckerFindLoadsSortNewest)),
+                                DropdownMenuItem(
+                                  value: MarketplaceSortOption.priceHighToLow,
+                                  child: Text(l10n.truckerFindLoadsSortPriceHighToLow),
+                                ),
+                                DropdownMenuItem(
+                                  value: MarketplaceSortOption.priceLowToHigh,
+                                  child: Text(l10n.truckerFindLoadsSortPriceLowToHigh),
+                                ),
+                                DropdownMenuItem(value: MarketplaceSortOption.pickupDate, child: Text(l10n.truckerFindLoadsSortPickupDate)),
+                              ],
+                              onChanged: (value) {
+                                if (value != null) {
+                                  ref.read(findLoadsProvider.notifier).updateFilters(filters.copyWith(sortOption: value));
+                                }
+                              },
+                            ),
+                            const SizedBox(height: AppSpacing.sm),
+                            OutlineButton(
+                              label: l10n.truckerFindLoadsAdvancedFiltersAction,
+                              onPressed: () => _openAdvancedFilters(context, filters),
+                            ),
+                          ],
+                        ),
+                        crossFadeState: _quickAdvancedExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 180),
+                      ),
+                    ],
+                  ),
                 ),
-        ),
-        if (state.isInitialLoading)
-          const LoadingShimmer(height: 120, itemCount: 5)
-        else if (state.failure != null && state.loads.isEmpty)
-          WarningBlock(
-            title: l10n.truckerFindLoadsLoadFailureTitle,
-            message: l10n.truckerFindLoadsLoadFailureMessage,
-            action: OutlineButton(
-              label: l10n.commonRetry,
-              onPressed: () => ref.read(findLoadsProvider.notifier).loadInitial(),
+              ),
             ),
-          )
-        else if (state.loads.isEmpty)
-          EmptyStateView(
-            icon: Icons.search_off_outlined,
-            title: l10n.truckerFindLoadsEmptyTitle,
-            subtitle: l10n.truckerFindLoadsEmptySubtitle,
-            actionLabel: state.filters.hasActiveFilters ? l10n.truckerFindLoadsResetFiltersAction : null,
-            onAction: state.filters.hasActiveFilters
-                ? () {
-                    _originController.clear();
-                    _destinationController.clear();
-                    _materialController.clear();
-                    setState(() {
-                      _originSuggestions = const <TruckerCitySuggestion>[];
-                      _destinationSuggestions = const <TruckerCitySuggestion>[];
-                    });
-                    ref.read(findLoadsProvider.notifier).resetFilters();
-                  }
-                : null,
-          )
-        else
-          ...[
-            for (var index = 0; index < state.loads.length; index++) ...[
-              _MarketplaceLoadCard(
-                load: state.loads[index],
-                approvedTrucks: approvedTrucks,
-                dieselPriceMap: dieselPriceMap,
-                tripCostingService: tripCostingService,
-              ),
-              if (index != state.loads.length - 1) const SizedBox(height: AppSpacing.md),
-            ],
-            if (state.isLoadingMore) ...[
-              const SizedBox(height: AppSpacing.md),
-              const LoadingShimmer(height: 90, itemCount: 1),
-            ],
-            if (state.failure != null && state.loads.isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.md),
-              WarningBlock(
-                title: l10n.truckerFindLoadsLoadMoreFailureTitle,
-                message: l10n.truckerFindLoadsLoadMoreFailureMessage,
-                action: OutlineButton(
-                  label: l10n.commonRetry,
-                  onPressed: () => ref.read(findLoadsProvider.notifier).loadMore(),
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _PinnedHeaderDelegate(
+                height: filters.hasActiveFilters ? 104 : 56,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.xs, AppSpacing.lg, AppSpacing.xs),
+                  child: _FindLoadsTabsHeader(
+                    state: state,
+                    onReset: () {
+                      _originController.clear();
+                      _destinationController.clear();
+                      _materialController.clear();
+                      setState(() {
+                        _originSuggestions = const <TruckerCitySuggestion>[];
+                        _destinationSuggestions = const <TruckerCitySuggestion>[];
+                      });
+                      ref.read(findLoadsProvider.notifier).resetFilters();
+                    },
+                    onSelectAll: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.all),
+                    onSelectSuperLoads: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.superLoads),
+                  ),
                 ),
               ),
-            ],
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.sm,
+                AppSpacing.lg,
+                AppSpacing.bottomNavSafe + AppSpacing.xl,
+              ),
+              sliver: state.isInitialLoading
+                  ? const SliverToBoxAdapter(
+                      child: LoadingShimmer(height: 120, itemCount: 5),
+                    )
+                  : state.failure != null && state.loads.isEmpty
+                      ? SliverToBoxAdapter(
+                          child: WarningBlock(
+                            title: l10n.truckerFindLoadsLoadFailureTitle,
+                            message: l10n.truckerFindLoadsLoadFailureMessage,
+                            action: OutlineButton(
+                              label: l10n.commonRetry,
+                              onPressed: () => ref.read(findLoadsProvider.notifier).loadInitial(),
+                            ),
+                          ),
+                        )
+                      : state.loads.isEmpty
+                          ? SliverToBoxAdapter(
+                              child: EmptyStateView(
+                                icon: Icons.search_off_outlined,
+                                title: l10n.truckerFindLoadsEmptyTitle,
+                                subtitle: l10n.truckerFindLoadsEmptySubtitle,
+                                actionLabel: state.filters.hasActiveFilters ? l10n.truckerFindLoadsResetFiltersAction : null,
+                                onAction: state.filters.hasActiveFilters
+                                    ? () {
+                                        _originController.clear();
+                                        _destinationController.clear();
+                                        _materialController.clear();
+                                        setState(() {
+                                          _originSuggestions = const <TruckerCitySuggestion>[];
+                                          _destinationSuggestions = const <TruckerCitySuggestion>[];
+                                        });
+                                        ref.read(findLoadsProvider.notifier).resetFilters();
+                                      }
+                                    : null,
+                              ),
+                            )
+                          : SliverList(
+                              delegate: SliverChildListDelegate([
+                                for (var index = 0; index < state.loads.length; index++) ...[
+                                  _MarketplaceLoadCard(
+                                    load: state.loads[index],
+                                    approvedTrucks: approvedTrucks,
+                                    dieselPriceMap: dieselPriceMap,
+                                    tripCostingService: tripCostingService,
+                                  ),
+                                  if (index != state.loads.length - 1) const SizedBox(height: AppSpacing.md),
+                                ],
+                                if (state.isLoadingMore) ...[
+                                  const SizedBox(height: AppSpacing.md),
+                                  const LoadingShimmer(height: 90, itemCount: 1),
+                                ],
+                                if (state.failure != null && state.loads.isNotEmpty) ...[
+                                  const SizedBox(height: AppSpacing.md),
+                                  WarningBlock(
+                                    title: l10n.truckerFindLoadsLoadMoreFailureTitle,
+                                    message: l10n.truckerFindLoadsLoadMoreFailureMessage,
+                                    action: OutlineButton(
+                                      label: l10n.commonRetry,
+                                      onPressed: () => ref.read(findLoadsProvider.notifier).loadMore(),
+                                    ),
+                                  ),
+                                ],
+                              ]),
+                            ),
+            ),
           ],
+        ),
+        if (_showScrollToTop)
+          Positioned(
+            right: AppSpacing.lg,
+            bottom: AppSpacing.bottomNavSafe + AppSpacing.xl,
+            child: FloatingActionButton.small(
+              onPressed: _scrollToTop,
+              backgroundColor: AppColors.primary,
+              foregroundColor: AppColors.textOnPrimary,
+              child: const Icon(Icons.keyboard_arrow_up),
+            ),
+          ),
       ],
+    );
+  }
+
+  void _scrollToTop() {
+    if (!_scrollController.hasClients) {
+      return;
+    }
+    _scrollController.animateTo(
+      0,
+      duration: const Duration(milliseconds: 320),
+      curve: Curves.easeOutCubic,
     );
   }
 
@@ -343,6 +385,154 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
     }
 
     ref.read(findLoadsProvider.notifier).updateFilters(result);
+  }
+}
+
+class _FindLoadsTabsHeader extends StatelessWidget {
+  final FindLoadsState state;
+  final VoidCallback onReset;
+  final VoidCallback onSelectAll;
+  final VoidCallback onSelectSuperLoads;
+
+  const _FindLoadsTabsHeader({
+    required this.state,
+    required this.onReset,
+    required this.onSelectAll,
+    required this.onSelectSuperLoads,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: AppColors.divider),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: AppSpacing.xs,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: 36,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: _LoadFeedTabButton(
+                      label: l10n.truckerFindLoadsAllLoadsTab,
+                      selected: state.selectedTab == FindLoadsTab.all,
+                      onTap: onSelectAll,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(
+                    child: _LoadFeedTabButton(
+                      label: l10n.truckerFindLoadsSuperLoadsTab,
+                      selected: state.selectedTab == FindLoadsTab.superLoads,
+                      onTap: onSelectSuperLoads,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (state.filters.hasActiveFilters) ...[
+              const SizedBox(height: AppSpacing.xs),
+              _ActiveFilterSummary(
+                filters: state.filters,
+                resultCount: state.loads.length,
+                onReset: onReset,
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _LoadFeedTabButton extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _LoadFeedTabButton({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Material(
+      color: selected ? AppColors.primary : Colors.transparent,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        side: BorderSide(
+          color: selected ? AppColors.primary : AppColors.textPrimary,
+          width: 1,
+        ),
+      ),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: theme.textTheme.labelMedium?.copyWith(
+                color: selected ? AppColors.textOnPrimary : AppColors.textPrimary,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
+  final double height;
+  final Widget child;
+
+  const _PinnedHeaderDelegate({
+    required this.height,
+    required this.child,
+  });
+
+  @override
+  double get minExtent => height;
+
+  @override
+  double get maxExtent => height;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: AppColors.canvasWash,
+      ),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: child,
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant _PinnedHeaderDelegate oldDelegate) {
+    return height != oldDelegate.height || child != oldDelegate.child;
   }
 }
 
@@ -437,9 +627,9 @@ class _MarketplaceLoadCard extends StatelessWidget {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final palette = statusPaletteFor(load.status);
     final tonnes = load.weightTonnes % 1 == 0 ? load.weightTonnes.toStringAsFixed(0) : load.weightTonnes.toStringAsFixed(1);
-    final hasMatchingTruck = approvedTrucks.any((truck) => truckMatchesLoad(truck, load));
     final dieselPrice = dieselPriceMap[(load.originState ?? '').trim().toLowerCase()];
     final routeSnapshot = load.routeSnapshot;
+    final totalLoadValue = load.priceAmount * load.weightTonnes;
     final costEstimate = tripCostingService.estimate(
       distanceKm: routeSnapshot?.distanceKm,
       loadWeightTonnes: load.weightTonnes,
@@ -449,65 +639,94 @@ class _MarketplaceLoadCard extends StatelessWidget {
     return StandardListCard(
       accent: palette.foreground,
       title: '${load.originCity} → ${load.destinationCity}',
-      subtitle: '${load.material} • ${tonnes}T • ${_localizedBodyType(l10n, load.requiredBodyType)}',
+      subtitle: routeSnapshot == null
+          ? '${load.originLabel} • ${load.destinationLabel}'
+          : '${routeSnapshot.distanceKm.toStringAsFixed(0)} km • ${_durationCompact(routeSnapshot.durationMinutes)}',
       trailing: StatusChip(label: _localizedLoadStatus(l10n, load.status)),
       onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.md,
+                    vertical: AppSpacing.sm,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.infoBg,
+                    borderRadius: BorderRadius.circular(AppRadius.button),
+                    border: Border.all(color: AppColors.divider),
+                  ),
+                  child: Text(
+                    '₹${load.priceAmount.toStringAsFixed(0)} / T',
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.w800,
+                        ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppSpacing.sm,
+                  vertical: AppSpacing.xs,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.subtleSurface,
+                  borderRadius: BorderRadius.circular(AppRadius.chip),
+                  border: Border.all(color: AppColors.divider),
+                ),
+                child: Text(
+                  _relativeAge(load.createdAt),
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: AppColors.textSecondary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            'Total load value: ₹${totalLoadValue.toStringAsFixed(0)}',
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.primary,
+                  fontWeight: FontWeight.w700,
+                ),
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            costEstimate?.compactLabel ?? l10n.truckerFindLoadsTripCostUnavailable,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: costEstimate == null ? AppColors.textMuted : AppColors.textSecondary,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Wrap(
+            spacing: AppSpacing.xs,
+            runSpacing: AppSpacing.xs,
+            children: [
+              _LoadMetaChip(icon: Icons.inventory_2_outlined, label: load.material),
+              _LoadMetaChip(icon: Icons.scale_outlined, label: '${tonnes}T'),
+              _LoadMetaChip(icon: Icons.local_shipping_outlined, label: _localizedBodyType(l10n, load.requiredBodyType)),
+            ],
+          ),
+          const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.truckerFindLoadsPriceAdvancePickup(
               load.priceAmount.toStringAsFixed(0),
               load.advancePercentage,
               _formatDate(load.pickupDate),
             ),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          if (hasMatchingTruck) ...[
-            const SizedBox(height: AppSpacing.xs),
-            StatusBadge(
-              label: l10n.truckerFindLoadsTruckMatchAvailable,
-              icon: Icons.verified_outlined,
-              palette: const StatusPalette(
-                foreground: AppColors.success,
-                background: AppColors.successBg,
-              ),
-            ),
-          ],
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            costEstimate?.compactLabel ?? l10n.truckerFindLoadsTripCostUnavailable,
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: costEstimate == null ? AppColors.textMuted : AppColors.primary,
-                  fontWeight: FontWeight.w600,
+                  color: AppColors.textSecondary,
                 ),
           ),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            routeSnapshot == null
-                ? l10n.truckerFindLoadsDistanceUnavailable(
-                    load.requiredTyres.isEmpty ? l10n.truckerFindLoadsTyresAny : load.requiredTyres.join('/'),
-                  )
-                : l10n.truckerFindLoadsDistanceAvailable(
-                    routeSnapshot.distanceKm.toStringAsFixed(0),
-                    load.requiredTyres.isEmpty ? l10n.truckerFindLoadsTyresAny : load.requiredTyres.join('/'),
-                  ),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-          if (load.isSuperLoad) ...[
-            const SizedBox(height: AppSpacing.sm),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-              decoration: BoxDecoration(
-                color: AppColors.superLoadBg,
-                borderRadius: BorderRadius.circular(AppRadius.chip),
-              ),
-              child: Text(
-                l10n.truckerFindLoadsSuperLoadBanner,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(color: AppColors.superLoadText),
-              ),
-            ),
-          ],
           const SizedBox(height: AppSpacing.md),
           TextActionButton(
             label: l10n.truckerFindLoadsViewDetailsAction,
@@ -518,8 +737,76 @@ class _MarketplaceLoadCard extends StatelessWidget {
     );
   }
 
+  String _relativeAge(DateTime createdAt) {
+    final age = DateTime.now().difference(createdAt);
+    if (age.inDays > 0) {
+      return '${age.inDays}d';
+    }
+    if (age.inHours > 0) {
+      return '${age.inHours}h';
+    }
+    if (age.inMinutes > 0) {
+      return '${age.inMinutes}m';
+    }
+    return 'now';
+  }
+
+  String _durationCompact(int minutes) {
+    if (minutes <= 0) {
+      return '0m';
+    }
+    final hours = minutes ~/ 60;
+    final mins = minutes % 60;
+    if (hours <= 0) {
+      return '${mins}m';
+    }
+    if (mins == 0) {
+      return '${hours}h';
+    }
+    return '${hours}h ${mins}m';
+  }
+
   String _formatDate(DateTime date) {
     return '${date.day}/${date.month}/${date.year}';
+  }
+}
+
+class _LoadMetaChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _LoadMetaChip({
+    required this.icon,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.subtleSurface,
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        border: Border.all(color: AppColors.divider),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: AppColors.textSecondary),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  color: AppColors.textSecondary,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

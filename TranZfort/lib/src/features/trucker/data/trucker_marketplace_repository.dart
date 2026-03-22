@@ -14,9 +14,13 @@ class MarketplaceLoadItem {
   final String originLabel;
   final String originCity;
   final String? originState;
+  final double? originLat;
+  final double? originLng;
   final String destinationLabel;
   final String destinationCity;
   final String? destinationState;
+  final double? destinationLat;
+  final double? destinationLng;
   final double? routeDistanceKm;
   final int? routeDurationMinutes;
   final String? routeSnapshotSource;
@@ -40,9 +44,13 @@ class MarketplaceLoadItem {
     required this.originLabel,
     required this.originCity,
     required this.originState,
+    required this.originLat,
+    required this.originLng,
     required this.destinationLabel,
     required this.destinationCity,
     required this.destinationState,
+    required this.destinationLat,
+    required this.destinationLng,
     required this.routeDistanceKm,
     required this.routeDurationMinutes,
     this.routeSnapshotSource,
@@ -68,9 +76,13 @@ class MarketplaceLoadItem {
       originLabel: (map['origin_label'] ?? '').toString(),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: _nullableString(map['origin_state']),
+      originLat: _readDouble(map['origin_lat']),
+      originLng: _readDouble(map['origin_lng']),
       destinationLabel: (map['destination_label'] ?? '').toString(),
       destinationCity: (map['destination_city'] ?? '').toString(),
       destinationState: _nullableString(map['destination_state']),
+      destinationLat: _readDouble(map['destination_lat']),
+      destinationLng: _readDouble(map['destination_lng']),
       routeDistanceKm: _readDouble(map['route_distance_km']),
       routeDurationMinutes: _readIntNullable(map['route_duration_minutes']),
       routeSnapshotSource: _nullableString(map['route_snapshot_source']),
@@ -243,7 +255,7 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     var filteredQuery = _client
         .from('loads')
         .select(
-          'id, origin_label, origin_city, origin_state, destination_label, destination_city, destination_state, route_distance_km, route_duration_minutes, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id',
+          'id, origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id',
         )
         .isFilter('parent_load_id', null)
         .inFilter('status', const ['active', 'assigned_partial']);

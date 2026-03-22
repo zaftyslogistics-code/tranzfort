@@ -18,6 +18,7 @@ class AppRoutes {
   static const trips = 'trips';
   static const supplierTrips = 'supplier-trips';
   static const loadDetail = 'load-detail';
+  static const routePreview = 'route-preview';
   static const tripDetail = 'trip-detail';
   static const fleet = 'fleet';
   static const messages = 'messages';
@@ -51,6 +52,7 @@ class AppRoutes {
   static const tripsPath = '/trips';
   static const supplierTripsPath = '/supplier-trips';
   static const loadDetailPath = '/load-detail';
+  static const routePreviewPath = '/route-preview';
   static const tripDetailPath = '/trip-detail';
   static const fleetPath = '/fleet';
   static const messagesPath = '/messages';

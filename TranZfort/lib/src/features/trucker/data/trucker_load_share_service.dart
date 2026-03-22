@@ -99,6 +99,7 @@ class TruckerLoadShareService {
     switch (value.trim().toLowerCase()) {
       case 'fixed':
         return l10n.supplierPostLoadPriceTypeFixed;
+      case 'per_ton':
       case 'negotiable':
         return l10n.supplierPostLoadPriceTypeNegotiable;
       default:

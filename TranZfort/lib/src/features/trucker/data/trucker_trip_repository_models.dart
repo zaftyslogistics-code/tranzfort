@@ -4,6 +4,12 @@ class TruckerTrip {
   final String id;
   final String loadId;
   final String routeLabel;
+  final String? originLabel;
+  final String? destinationLabel;
+  final double? originLat;
+  final double? originLng;
+  final double? destinationLat;
+  final double? destinationLng;
   final String material;
   final String stage;
   final String truckId;
@@ -19,6 +25,12 @@ class TruckerTrip {
     required this.id,
     required this.loadId,
     required this.routeLabel,
+    this.originLabel,
+    this.destinationLabel,
+    this.originLat,
+    this.originLng,
+    this.destinationLat,
+    this.destinationLng,
     required this.material,
     required this.stage,
     required this.truckId,
@@ -243,6 +255,12 @@ class TruckerTripDetail {
       id: id,
       loadId: loadId,
       routeLabel: routeLabel,
+      originLabel: originLabel,
+      destinationLabel: destinationLabel,
+      originLat: originLat,
+      originLng: originLng,
+      destinationLat: destinationLat,
+      destinationLng: destinationLng,
       material: material,
       stage: stage,
       truckId: truckId,

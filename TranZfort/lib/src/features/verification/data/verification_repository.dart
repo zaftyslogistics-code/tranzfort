@@ -195,12 +195,17 @@ class VerificationRepository {
           if (type == VerificationDocumentType.gstCertificate) 'gst_certificate_document_path': normalizedPath,
         });
       } else {
-        await _backend.updateProfileFields(userId, {
+        final profileUpdates = <String, dynamic>{
           if (type == VerificationDocumentType.aadhaarFront) 'aadhaar_front_document_path': normalizedPath,
           if (type == VerificationDocumentType.aadhaarBack) 'aadhaar_back_document_path': normalizedPath,
           if (type == VerificationDocumentType.pan) 'pan_document_path': normalizedPath,
           if (type == VerificationDocumentType.profilePhoto) 'profile_photo_document_path': normalizedPath,
-        });
+        };
+        // Sync profile photo to avatar_url for display purposes
+        if (type == VerificationDocumentType.profilePhoto) {
+          profileUpdates['avatar_url'] = normalizedPath;
+        }
+        await _backend.updateProfileFields(userId, profileUpdates);
       }
       return const Success<void>(null);
     } catch (error, stackTrace) {

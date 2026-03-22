@@ -124,7 +124,7 @@ CreateLoadDto _sampleCreateLoadDto() {
     requiredTyres: const [10, 12],
     trucksNeeded: 2,
     priceAmount: 54000,
-    priceType: 'negotiable',
+    priceType: 'per_ton',
     advancePercentage: 20,
     pickupDate: tomorrow,
   );

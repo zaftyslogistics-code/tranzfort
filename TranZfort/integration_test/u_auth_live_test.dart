@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -57,16 +59,48 @@ Future<Map<String, dynamic>?> _loadProfile(SupabaseClient client, String userId)
       .maybeSingle();
 }
 
+bool _isRetryableError(Object error) {
+  if (error is SocketException || error is HttpException) {
+    return true;
+  }
+
+  final message = error.toString().toLowerCase();
+  return message.contains('failed host lookup') ||
+      message.contains('software caused connection abort') ||
+      message.contains('authretryablefetchexception') ||
+      message.contains('clientexception');
+}
+
+Future<T> _withRetry<T>(Future<T> Function() action) async {
+  const maxAttempts = 6;
+
+  for (var attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      return await action();
+    } catch (error) {
+      final canRetry = attempt < maxAttempts && _isRetryableError(error);
+      if (!canRetry) {
+        rethrow;
+      }
+      await Future<void>.delayed(Duration(milliseconds: 1200 * attempt));
+    }
+  }
+
+  throw StateError('Retry flow reached unreachable state.');
+}
+
 Future<void> _assertSignInAndRole({
   required SupabaseClient client,
   required String email,
   required String expectedRole,
 }) async {
-  await client.auth.signOut(scope: SignOutScope.local);
+  await _withRetry(() => client.auth.signOut(scope: SignOutScope.local));
 
-  final auth = await client.auth.signInWithPassword(
-    email: email,
-    password: _testPasscode(),
+  final auth = await _withRetry(
+    () => client.auth.signInWithPassword(
+      email: email,
+      password: _testPasscode(),
+    ),
   );
 
   expect(auth.session, isNotNull);
@@ -74,11 +108,11 @@ Future<void> _assertSignInAndRole({
   expect(client.auth.currentSession, isNotNull);
   expect(client.auth.currentUser?.email, email);
 
-  final profile = await _loadProfile(client, auth.user!.id);
+  final profile = await _withRetry(() => _loadProfile(client, auth.user!.id));
   expect(profile, isNotNull);
   expect(profile?['user_role_type'], expectedRole);
 
-  await client.auth.signOut(scope: SignOutScope.local);
+  await _withRetry(() => client.auth.signOut(scope: SignOutScope.local));
   expect(client.auth.currentSession, isNull);
 }
 

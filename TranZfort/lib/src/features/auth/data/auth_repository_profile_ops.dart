@@ -14,7 +14,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
 
       final response = await _client
           .from('profiles')
-          .select('id, full_name, mobile, email, user_role_type, preferred_language, is_banned, account_deletion_status, trust_safety_status, ban_reason, data_deletion_requested_at')
+          .select('id, full_name, mobile, email, user_role_type, preferred_language, is_banned, account_deletion_status, trust_safety_status, ban_reason, data_deletion_requested_at, avatar_url')
           .eq('id', user.id)
           .maybeSingle()
           .timeout(const Duration(seconds: 8));
