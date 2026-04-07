@@ -12,7 +12,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
-  String get splashLoadingWorkspace => 'आपका workspace लोड हो रहा है...';
+  String get splashLoadingWorkspace => 'आपका कार्यक्षेत्र लोड हो रहा है...';
 
   @override
   String get authGoogleFailureMessage =>
@@ -23,10 +23,23 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get authWelcomeSubtitle =>
-      'Supplier या trucker workspace में आगे बढ़ने के लिए Google या email sign-in चुनें।';
+      'अपने सप्लायर या ट्रकर कार्यक्षेत्र में जाने के लिए Google या email sign-in चुनें।';
 
   @override
-  String get splashSetupTitle => 'Device access सेट करें';
+  String get authEmailHint => 'you@example.com';
+
+  @override
+  String get authSignInDividerLabel => 'या';
+
+  @override
+  String get authForgotPasswordAction => 'पासवर्ड भूल गए?';
+
+  @override
+  String get authConfigIncompleteSignInMessage =>
+      'इस build में Supabase configured नहीं है, इसलिए sign-in और live account data तब तक उपलब्ध नहीं होंगे जब तक environment ठीक नहीं किया जाता।';
+
+  @override
+  String get splashSetupTitle => 'डिवाइस access सेट करें';
 
   @override
   String get splashSetupSubtitle =>
@@ -156,28 +169,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboardingRoleSubtitle =>
-      'आपका role तय करेगा कि TranZfort आपके लिए कौन-से tools, dashboard और workflows तैयार करेगा।';
+      'आपकी भूमिका तय करेगी कि TranZfort आपके लिए कौन-से tools, डैशबोर्ड और workflows तैयार करेगा।';
 
   @override
   String get onboardingSupplierTitle => 'Supplier';
 
   @override
   String get onboardingSupplierSubtitle =>
-      'Loads post करें, bookings review करें, trips manage करें और delivery follow-through ट्रैक करें।';
+      'लोड्स पोस्ट करें, बुकिंग्स रिव्यू करें, ट्रिप्स मैनेज करें और डिलीवरी फॉलो-थ्रू ट्रैक करें।';
 
   @override
   String get onboardingTruckerTitle => 'Trucker';
 
   @override
   String get onboardingTruckerSubtitle =>
-      'Loads खोजें, fleet readiness manage करें और active trips एक जगह से चलाएँ।';
+      'लोड्स खोजें, फ्लीट रेडिनेस मैनेज करें और सक्रिय ट्रिप्स एक जगह से चलाएँ।';
 
   @override
   String get onboardingContinue => 'आगे बढ़ें';
 
   @override
   String get onboardingProfileSaveFailure =>
-      'अभी आपकी profile save नहीं हो सकी। Details जांचकर थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी प्रोफ़ाइल सेव नहीं हो सकी। विवरण जांचकर थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get onboardingCompleteProfileTitle => 'Profile पूरी करें';
@@ -187,7 +200,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboardingCompleteProfileSubtitle =>
-      'वह मुख्य contact details जोड़ें जो verification और daily operations में काम आएँगी।';
+      'वह मुख्य संपर्क विवरण जोड़ें जो सत्यापन और दैनिक संचालन में काम आएँगी।';
 
   @override
   String get onboardingFullNameLabel => 'पूरा नाम';
@@ -209,17 +222,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonRetry => 'फिर कोशिश करें';
 
   @override
-  String get shellTooltipVoiceAssistance => 'Voice assistance';
+  String get shellTooltipVoiceAssistance => 'आवाज सहायता';
 
   @override
-  String get supplierQuickActionNotifications => 'Notifications';
+  String get supplierQuickActionNotifications => 'सूचनाएँ';
 
   @override
   String get supplierMyLoadsTitle => 'मेरे लोड्स';
 
   @override
   String get supplierMyLoadsSubtitle =>
-      'एक ही जगह से active supplier loads, booking demand, और completed load history देखें।';
+      'एक ही जगह से सक्रिय सप्लायर लोड्स, बुकिंग डिमांड, और पूर्ण लोड इतिहास देखें।';
 
   @override
   String get supplierMyLoadsTabActive => 'सक्रिय';
@@ -229,29 +242,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierMyLoadsLoadFailureTitle =>
-      'आपके supplier loads लोड नहीं हो सके';
+      'आपके सप्लायर लोड्स लोड नहीं हो सके';
 
   @override
   String get supplierMyLoadsFailureMessage =>
-      'अभी आपके supplier loads लोड नहीं हो सके। Latest load list refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपके सप्लायर लोड्स लोड नहीं हो सके। नवीनतम लोड सूची रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get supplierMyLoadsEmptyActiveTitle => 'अभी कोई active load नहीं है';
+  String get supplierMyLoadsEmptyActiveTitle => 'अभी कोई सक्रिय लोड नहीं है';
 
   @override
-  String get supplierMyLoadsEmptyCompletedTitle =>
-      'अभी कोई completed load नहीं है';
+  String get supplierMyLoadsEmptyCompletedTitle => 'अभी कोई पूर्ण लोड नहीं है';
 
   @override
   String get supplierMyLoadsEmptyActiveSubtitle =>
-      'अपना पहला load post करें ताकि booking requests और execution updates यहाँ दिखने लगें।';
+      'अपना पहला लोड पोस्ट करें ताकि बुकिंग अनुरोध और कार्यान्वयन अपडेट्स यहाँ दिखने लगें।';
 
   @override
   String get supplierMyLoadsEmptyCompletedSubtitle =>
-      'Completed, cancelled, expired, और app के बाहर filled loads active work close होने पर यहाँ दिखाई देंगी।';
+      'पूर्ण, रद्द, समाप्त, और ऐप के बाहर भरे लोड सक्रिय कार्य बंद होने पर यहाँ दिखाई देंगे।';
 
   @override
-  String get supplierMyLoadsOpenActiveLoads => 'Active loads खोलें';
+  String get supplierMyLoadsOpenActiveLoads => 'सक्रिय लोड्स खोलें';
 
   @override
   String get supplierMyLoadsMoreUnavailableTitle =>
@@ -278,16 +290,16 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get supplierLoadCardTrackLoad => 'Load ट्रैक करें';
+  String get supplierLoadCardTrackLoad => 'लोड ट्रैक करें';
 
   @override
-  String get supplierLoadCardViewHistory => 'History देखें';
+  String get supplierLoadCardViewHistory => 'इतिहास देखें';
 
   @override
-  String get supplierLoadCardViewDetails => 'Details देखें';
+  String get supplierLoadCardViewDetails => 'विवरण देखें';
 
   @override
-  String get supplierRecentLoadsTitle => 'Recent loads';
+  String get supplierRecentLoadsTitle => 'हाल के लोड्स';
 
   @override
   String supplierDashboardWelcomeBack(Object name) {
@@ -305,7 +317,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierDashboardSuperLoadReadinessTitle => 'सुपर लोड तैयारी';
 
   @override
-  String get supplierDashboardQuickActionsTitle => 'क्विक एक्शन';
+  String get supplierDashboardQuickActionsTitle => 'त्वरित कार्रवाइयाँ';
 
   @override
   String get supplierDashboardQuickActionChatLabel => 'चैट';
@@ -318,32 +330,32 @@ class AppLocalizationsHi extends AppLocalizations {
       'अपने वेरिफिकेशन और लाइव लोड्स पर नज़र रखें।';
 
   @override
-  String get supplierDashboardStatsActiveLoadsLabel => 'एक्टिव लोड्स';
+  String get supplierDashboardStatsActiveLoadsLabel => 'सक्रिय लोड्स';
 
   @override
   String get supplierDashboardStatsActiveLoadsHelper =>
-      'वे loads जो अभी supplier-side tracking के लिए open हैं।';
+      'वे लोड्स जो अभी सप्लायर-साइड ट्रैकिंग के लिए खुले हैं।';
 
   @override
-  String get supplierDashboardStatsPendingBookingsLabel => 'पेंडिंग बुकिंग्स';
+  String get supplierDashboardStatsPendingBookingsLabel => 'लंबित बुकिंग्स';
 
   @override
   String get supplierDashboardStatsPendingBookingsHelper =>
-      'वे booking requests जिन्हें अभी supplier attention चाहिए।';
+      'वे बुकिंग अनुरोध जिन्हें अभी सप्लायर ध्यान चाहिए।';
 
   @override
   String get supplierDashboardStatsInTransitTripsLabel => 'चल रही ट्रिप्स';
 
   @override
   String get supplierDashboardStatsInTransitTripsHelper =>
-      'वे linked trips जो अभी आपके loads के खिलाफ चल रही हैं।';
+      'वे लिंक्ड ट्रिप्स जो अभी आपके लोड्स के खिलाफ चल रही हैं।';
 
   @override
   String get supplierDashboardStatsCompletedTripsLabel => 'पूरी हुई ट्रिप्स';
 
   @override
   String get supplierDashboardStatsCompletedTripsHelper =>
-      'वे trips जो recorded completion state तक पहुँच चुकी हैं।';
+      'वे ट्रिप्स जो रिकॉर्डेड पूर्णता स्थिति तक पहुँच चुकी हैं।';
 
   @override
   String get supplierDashboardOpenMyLoadsAction => 'मेरे लोड्स खोलें';
@@ -417,16 +429,16 @@ class AppLocalizationsHi extends AppLocalizations {
   String get shellDrawerDashboard => 'डैशबोर्ड';
 
   @override
-  String get shellDrawerAssistant => 'Guided help';
+  String get shellDrawerAssistant => 'मार्गदर्शित सहायता';
 
   @override
   String get shellDrawerFleet => 'फ्लीट';
 
   @override
-  String get shellDrawerMessages => 'मैसेजेस';
+  String get shellDrawerMessages => 'संदेश';
 
   @override
-  String get navNotifications => 'नोटिफिकेशन्स';
+  String get navNotifications => 'सूचनाएँ';
 
   @override
   String get shellDrawerSupport => 'सहायता';
@@ -442,62 +454,61 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get shellSignOutFailureMessage =>
-      'अभी sign out नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी साइन आउट नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get shellMessagesTitle => 'Messages';
+  String get shellMessagesTitle => 'संदेश';
 
   @override
   String get shellMessagesSupplierSubtitle =>
-      'एक ही जगह से load-linked trucker conversations ट्रैक करें और जल्दी reply दें।';
+      'एक ही जगह से लोड-लिंक्ड ट्रकर बातचीत ट्रैक करें और जल्दी जवाब दें।';
 
   @override
   String get shellMessagesTruckerSubtitle =>
-      'एक inbox में supplier updates, route context और booking follow-through पर नज़र रखें।';
+      'एक इनबॉक्स में सप्लायर अपडेट्स, रूट संदर्भ और बुकिंग फॉलो-थ्रू पर नज़र रखें।';
 
   @override
-  String get shellMessagesSupplierGroupedInbox => 'Grouped inbox';
+  String get shellMessagesSupplierGroupedInbox => 'ग्रुप्ड इनबॉक्स';
 
   @override
-  String get shellMessagesTruckerFlatInbox => 'Flat inbox';
+  String get shellMessagesTruckerFlatInbox => 'फ्लैट इनबॉक्स';
 
   @override
   String shellMessagesUnreadThreads(int count) {
-    return '$count unread threads';
+    return '$count अनरीड थ्रेड्स';
   }
 
   @override
-  String get shellMessagesLoadFailureTitle => 'Messages लोड नहीं हो सके';
+  String get shellMessagesLoadFailureTitle => 'संदेश लोड नहीं हो सके';
 
   @override
-  String get shellMessagesEmptyTitle => 'अभी कोई conversation नहीं है';
+  String get shellMessagesEmptyTitle => 'अभी कोई बातचीत नहीं है';
 
   @override
   String get shellMessagesSupplierEmptySubtitle =>
-      'पहला message आने के बाद यहाँ load-linked trucker conversations दिखेंगी।';
+      'पहला संदेश आने के बाद यहाँ लोड-लिंक्ड ट्रकर बातचीत दिखेंगी।';
 
   @override
   String get shellMessagesTruckerEmptySubtitle =>
-      'किसी load पर chat शुरू करें और आपकी supplier conversations यहाँ दिखेंगी।';
+      'किसी लोड पर चैट शुरू करें और आपकी सप्लायर बातचीत यहाँ दिखेंगी।';
 
   @override
   String shellMessagesActiveConversations(int count, Object preview) {
-    return '$count active conversations • $preview';
+    return '$count active conversations - $preview';
   }
 
   @override
-  String get shellMessagesUnreadStatus => 'Unread';
+  String get shellMessagesUnreadStatus => 'अनरीड';
 
   @override
-  String get shellMessagesReadStatus => 'Read';
+  String get shellMessagesReadStatus => 'पढ़ा';
 
   @override
-  String get shellMessagesHideTruckerConversations =>
-      'Trucker conversations छिपाएँ';
+  String get shellMessagesHideTruckerConversations => 'ट्रकर बातचीत छिपाएँ';
 
   @override
   String shellMessagesLatestBy(Object name, Object timestamp) {
-    return 'Latest by $name • $timestamp';
+    return 'Latest by $name - $timestamp';
   }
 
   @override
@@ -524,7 +535,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String chatReportSourceLabel(Object source) {
-    return 'Chat • $source';
+    return 'Chat - $source';
   }
 
   @override
@@ -544,7 +555,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी यह conversation नहीं मिल सकी। Refresh करें या inbox पर लौटें।';
 
   @override
-  String get chatBackToInboxAction => 'Back to messages';
+  String get chatBackToInboxAction => 'संदेशों पर वापस जाएं';
 
   @override
   String get chatBookingActionUnavailableTitle =>
@@ -569,13 +580,13 @@ class AppLocalizationsHi extends AppLocalizations {
       'यह chat context से trucker booking request reject करेगा।';
 
   @override
-  String get chatActionCancel => 'Cancel';
+  String get chatActionCancel => 'रद्द करें';
 
   @override
-  String get chatActionApprove => 'Approve';
+  String get chatActionApprove => 'स्वीकृत करें';
 
   @override
-  String get chatActionReject => 'Reject';
+  String get chatActionReject => 'अस्वीकृत करें';
 
   @override
   String get chatBookingApprovedSuccess => 'Booking approve हो गई!';
@@ -608,54 +619,54 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी यह booking reject नहीं हो सकी। थोड़ी देर बाद इसी chat से फिर कोशिश करें।';
 
   @override
-  String get chatLoadContextTitle => 'Load context';
+  String get chatLoadContextTitle => 'लोड संदर्भ';
 
   @override
-  String get chatCollapseLoadContextTooltip => 'Load context collapse करें';
+  String get chatCollapseLoadContextTooltip => 'लोड संदर्भ संक्षिप्त करें';
 
   @override
-  String get chatExpandLoadContextTooltip => 'Load context expand करें';
+  String get chatExpandLoadContextTooltip => 'लोड संदर्भ विस्तृत करें';
 
   @override
   String chatMaterialLabel(Object value) {
-    return 'Material: $value';
+    return 'सामग्री: $value';
   }
 
   @override
   String chatPriceLabel(Object value) {
-    return 'Price: $value';
+    return 'मूल्य: $value';
   }
 
   @override
   String chatPickupLabel(Object value) {
-    return 'Pickup: $value';
+    return 'पिकअप: $value';
   }
 
   @override
-  String get chatLoadStatusActive => 'Active';
+  String get chatLoadStatusActive => 'सक्रिय';
 
   @override
-  String get chatBookingStatusApproved => 'Approved';
+  String get chatBookingStatusApproved => 'स्वीकृत';
 
   @override
-  String get chatBookingStatusUnknown => 'Unknown';
+  String get chatBookingStatusUnknown => 'अज्ञात';
 
   @override
-  String get chatMessagesLoadFailureTitle => 'Messages लोड नहीं हो सके';
+  String get chatMessagesLoadFailureTitle => 'संदेश लोड नहीं हो सके';
 
   @override
   String get chatMessagesLoadFailureMessage =>
-      'अभी यह conversation लोड नहीं हो सकी। Latest messages और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी यह बातचीत लोड नहीं हो सकी। नवीनतम संदेश और बुकिंग संदर्भ रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get chatNoMessagesTitle => 'अभी कोई message नहीं है';
+  String get chatNoMessagesTitle => 'अभी कोई संदेश नहीं है';
 
   @override
   String get chatNoMessagesSubtitle =>
-      'यह conversation शुरू करने के लिए message भेजें।';
+      'यह बातचीत शुरू करने के लिए संदेश भेजें।';
 
   @override
-  String get chatSystemUpdateFallback => 'System update';
+  String get chatSystemUpdateFallback => 'सिस्टम अपडेट';
 
   @override
   String get chatSendingLabel => 'भेजा जा रहा है...';
@@ -667,7 +678,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chatPlayVoiceMessageTooltip => 'Voice message चलाएँ';
 
   @override
-  String get chatVoiceMessageLabel => 'Voice message';
+  String get chatVoiceMessageLabel => 'आवाज़ संदेश';
 
   @override
   String get chatVoicePlaybackUnavailable =>
@@ -677,7 +688,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chatVoicePlaybackFailed => 'अभी यह voice message चल नहीं सकी।';
 
   @override
-  String get chatLocationSharedFallback => 'Shared location';
+  String get chatLocationSharedFallback => 'स्थान साझा किया गया';
 
   @override
   String get chatMapPreviewUnavailable => 'Map preview उपलब्ध नहीं है';
@@ -686,403 +697,407 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chatOpenInMapsAction => 'Maps में खोलें';
 
   @override
-  String get chatDocumentSharedFallback => 'Shared document';
+  String get chatDocumentSharedFallback => 'दस्तावेज़ साझा किया गया';
 
   @override
   String get chatAttachmentSavedSubtitle =>
       'Attachment इस conversation में सेव है।';
 
   @override
-  String get chatOpenDocumentAction => 'Document खोलें';
+  String get chatOpenDocumentAction => 'दस्तावेज़ खोलें';
 
   @override
-  String get chatRouteSummaryFallback => 'Route summary';
+  String get chatRouteSummaryFallback => 'मार्ग सारांश';
 
   @override
-  String get chatViewRouteAction => 'Route देखें';
+  String get chatViewRouteAction => 'मार्ग देखें';
 
   @override
-  String get chatTruckDetailsSharedFallback => 'Truck details';
+  String get chatTruckDetailsSharedFallback => 'ट्रक विवरण';
 
   @override
   String chatTruckTyresLabel(Object value) {
-    return '$value tyres';
+    return '$value टायर';
   }
 
   @override
-  String get chatTypeMessageHint => 'Message टाइप करें...';
+  String get chatTypeMessageHint => 'संदेश टाइप करें...';
 
   @override
-  String get chatStopRecordingTooltip => 'Recording रोकें';
+  String get chatStopRecordingTooltip => 'रिकॉर्डिंग रोकें';
 
   @override
-  String get chatVoiceRecordingTooltip => 'Voice recording';
+  String get chatVoiceRecordingTooltip => 'आवाज रिकॉर्डिंग';
 
   @override
-  String get chatSendAction => 'Send';
+  String get chatSendAction => 'भेजें';
 
   @override
-  String get commonHearSummary => 'Hear summary';
+  String get commonHearSummary => 'सारांश सुनें';
 
   @override
-  String get commonVoiceMuted => 'इस device पर voice guidance muted है।';
+  String get commonVoiceMuted => 'इस डिवाइस पर आवाज मार्गदर्शन म्यूट है।';
 
   @override
-  String get commonVoiceUnavailable => 'अभी voice guidance उपलब्ध नहीं है।';
+  String get commonVoiceUnavailable => 'अभी आवाज मार्गदर्शन उपलब्ध नहीं है।';
 
   @override
-  String get notificationsTitle => 'Notifications';
+  String get notificationsTitle => 'सूचनाएँ';
 
   @override
   String get notificationsMarkedAllReadSuccess =>
-      'सभी notifications को read mark कर दिया गया';
+      'सभी सूचनाओं को पढ़ा मार्क कर दिया गया';
 
   @override
-  String get notificationsMarkAllRead => 'Mark All Read';
+  String get notificationsMarkAllRead => 'सभी पढ़ें';
 
   @override
-  String get notificationsLoadFailureTitle => 'Notifications लोड नहीं हो सकीं';
+  String get notificationsLoadFailureTitle => 'सूचनाएँ लोड नहीं हो सकीं';
 
   @override
   String get notificationsMarkAllReadFailureMessage =>
-      'अभी सभी notifications को read mark नहीं किया जा सका। थोड़ी देर बाद notifications screen से फिर कोशिश करें।';
+      'अभी सभी सूचनाओं को पढ़ा मार्क नहीं किया जा सका। थोड़ी देर बाद सूचना स्क्रीन से फिर कोशिश करें।';
 
   @override
   String get notificationsLoadFailureMessage =>
-      'अभी आपकी notifications लोड नहीं हो सकीं। नए alerts और updates refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी सूचनाएँ लोड नहीं हो सकीं। नए अलर्ट और अपडेट्स रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get notificationsEmptyTitle => 'आप पूरी तरह up to date हैं!';
 
   @override
-  String get notificationsEmptySubtitle => 'कोई नई notifications नहीं हैं।';
+  String get notificationsEmptySubtitle => 'कोई नई सूचनाएँ नहीं हैं।';
 
   @override
-  String get notificationsOverviewTitle => 'Overview';
+  String get notificationsOverviewTitle => 'अवलोकन';
 
   @override
   String notificationsUnreadCountLabel(int count) {
-    return '$count unread';
+    return '$count अनरीड';
   }
 
   @override
   String notificationsHighPriorityCountLabel(int count) {
-    return '$count high priority';
+    return '$count उच्च प्राथमिकता';
   }
 
   @override
-  String get notificationsLoadMore => 'Load More';
+  String get notificationsLoadMore => 'और लोड करें';
 
   @override
   String notificationsTtsSummary(int unreadCount, int highPriorityUnreadCount) {
-    return 'Notifications screen. आपके पास $unreadCount unread notifications हैं और $highPriorityUnreadCount high priority alerts review के लिए pending हैं।';
+    return 'सूचना स्क्रीन। आपके पास $unreadCount अनरीड सूचनाएँ हैं और $highPriorityUnreadCount उच्च प्राथमिकता अलर्ट समीक्षा के लिए लंबित हैं।';
   }
 
   @override
-  String get notificationsGroupToday => 'Today';
+  String get notificationsGroupToday => 'आज';
 
   @override
-  String get notificationsGroupYesterday => 'Yesterday';
+  String get notificationsGroupYesterday => 'कल';
 
   @override
-  String get notificationsPriorityHighLabel => 'HIGH';
+  String get notificationsPriorityHighLabel => 'उच्च';
 
   @override
   String get notificationsBodyFallback =>
-      'पूरे context के लिए linked workflow खोलें।';
+      'पूरे संदर्भ के लिए लिंक्ड वर्कफ़्लो खोलें।';
 
   @override
-  String get notificationFallbackVerificationUpdate => 'Verification update';
+  String get notificationFallbackVerificationUpdate => 'सत्यापन अपडेट';
 
   @override
-  String get notificationFallbackBookingUpdate => 'Booking update';
+  String get notificationFallbackBookingUpdate => 'बुकिंग अपडेट';
 
   @override
-  String get notificationFallbackTripUpdate => 'Trip update';
+  String get notificationFallbackTripUpdate => 'ट्रिप अपडेट';
 
   @override
-  String get notificationFallbackProofUpdate => 'Proof update';
+  String get notificationFallbackProofUpdate => 'प्रमाण अपडेट';
 
   @override
-  String get notificationFallbackSuperLoadUpdate => 'Super Load update';
+  String get notificationFallbackSuperLoadUpdate => 'Super Load अपडेट';
 
   @override
-  String get notificationFallbackMessageReceived => 'New message';
+  String get notificationFallbackMessageReceived => 'नया संदेश';
 
   @override
-  String get notificationFallbackSupportUpdate => 'Support update';
+  String get notificationFallbackSupportUpdate => 'सहायता अपडेट';
 
   @override
-  String get notificationFallbackDisputeUpdate => 'Dispute update';
+  String get notificationFallbackDisputeUpdate => 'विवाद अपडेट';
 
   @override
-  String get notificationFallbackAccountUpdate => 'Account update';
+  String get notificationFallbackAccountUpdate => 'खाता अपडेट';
 
   @override
-  String get notificationFallbackSystemNotice => 'System notice';
+  String get notificationFallbackSystemNotice => 'सिस्टम सूचना';
 
   @override
-  String get notificationFallbackLoadExpiryWarning => 'Load expiry warning';
+  String get notificationFallbackLoadExpiryWarning => 'लोड समाप्ति चेतावनी';
 
   @override
-  String get navProfile => 'Profile';
+  String get navProfile => 'प्रोफ़ाइल';
 
   @override
-  String get navSupport => 'Support';
+  String get navSupport => 'सहायता';
 
   @override
-  String get navDeleteAccount => 'Delete account';
+  String get navDeleteAccount => 'खाता हटाएँ';
 
   @override
-  String get deleteAccountRequestedOnLabel => 'Deletion requested on';
+  String get deleteAccountRequestedOnLabel => 'Deletion अनुरोध किया गया';
 
   @override
-  String get deleteAccountGracePeriodEndsLabel => 'Grace period ends';
+  String get deleteAccountGracePeriodEndsLabel => 'Grace period समाप्ति';
 
   @override
   String get deleteAccountGracePeriodPassedLabel =>
-      'Grace-period end date has passed. Permanent deletion processing may happen at any time.';
+      'Grace-period की अंतिम तारीख बीत चुकी है। स्थायी deletion प्रक्रिया किसी भी समय हो सकती है।';
 
   @override
   String get deleteAccountGracePeriodLessThanOneDayLabel =>
-      'Less than 1 day remains before the grace period ends.';
+      'Grace period समाप्त होने में 1 दिन से कम बाकी है।';
 
   @override
-  String deleteAccountGracePeriodRemainingDaysLabel(
-    Object count,
-    Object plural,
-  ) {
-    return '$count day$plural remain before the grace period ends.';
+  String deleteAccountGracePeriodRemainingDaysLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Grace period समाप्त होने में $count दिन बाकी हैं।',
+      one: 'Grace period समाप्त होने में $count दिन बाकी है।',
+    );
+    return '$_temp0';
   }
 
   @override
   String get deleteAccountLifecycleFailureMessage =>
-      'The account deletion lifecycle is temporarily unavailable. Retry shortly to refresh the latest deletion status.';
+      'खाता deletion lifecycle अभी अस्थायी रूप से उपलब्ध नहीं है। नवीनतम deletion स्थिति रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get deleteAccountCancelFailureMessage =>
-      'We could not cancel this deletion request right now. Retry shortly from the deletion lifecycle screen.';
+      'अभी यह deletion अनुरोध रद्द नहीं हो सका। Deletion lifecycle स्क्रीन से थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get deleteAccountRequestFailureMessage =>
-      'We could not process this deletion request right now. Review the current account status and retry shortly.';
+      'अभी यह deletion अनुरोध प्रक्रिया नहीं हो सका। वर्तमान खाता स्थिति देखें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get deleteAccountAcceptedSignOutFailureMessage =>
-      'Deletion was accepted, but we could not complete sign out right now. Retry shortly to refresh your account session.';
+      'Deletion स्वीकार हो गया, लेकिन अभी साइन आउट पूरा नहीं हो सका। खाता सत्र रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get deleteAccountBlockedSummaryMessage =>
-      'This deletion request cannot proceed yet because another account dependency still needs attention.';
+      'यह deletion अनुरोध अभी आगे नहीं बढ़ सकता क्योंकि एक और खाता निर्भरता पर अभी ध्यान देना बाकी है।';
 
   @override
   String get deleteAccountCancelledMessage =>
-      'Your deletion request was cancelled. Account access can be restored while the lifecycle returns to active.';
+      'आपका deletion अनुरोध रद्द कर दिया गया। Lifecycle सक्रिय होने तक खाता पहुँच बहाल की जा सकती है।';
 
   @override
   String get deleteAccountAcceptedMessage =>
-      'Your deletion request was accepted. You have been signed out while the account enters pending cleanup.';
+      'आपका deletion अनुरोध स्वीकार हो गया। खाता cleanup की प्रतीक्षा में आने पर आपको साइन आउट कर दिया गया है।';
 
   @override
   String get deleteAccountBlockerRecoveryGuidanceActiveTrips =>
-      'Finish or cancel every active trip first, then retry the deletion request.';
+      'पहले हर सक्रिय ट्रिप पूरी करें या रद्द करें, फिर deletion अनुरोध दोबारा दें।';
 
   @override
   String get deleteAccountBlockerRecoveryGuidanceDispute =>
-      'Wait until the unresolved dispute is reviewed or resolved before requesting deletion again.';
+      'दोबारा deletion अनुरोध देने से पहले अनसुलझे विवाद की समीक्षा या समाधान होने तक प्रतीक्षा करें।';
 
   @override
   String get deleteAccountBlockerRecoveryGuidanceCompliance =>
-      'Some records still need to stay on the platform for compliance or retention policy. Use support if you need clarification on the hold.';
+      'कुछ रिकॉर्ड अभी compliance या retention नीति के लिए प्लेटफ़ॉर्म पर रहने चाहिए। रोक के बारे में स्पष्टीकरण के लिए सहायता का उपयोग करें।';
 
   @override
   String get deleteAccountBlockerRecoveryGuidanceDefault =>
-      'Resolve the blocking dependency first, then request deletion again.';
+      'पहले अवरोधक निर्भरता हल करें, फिर दोबारा deletion अनुरोध दें।';
 
   @override
-  String get deleteAccountBlockerActionOpenTrips => 'Open trips';
+  String get deleteAccountBlockerActionOpenTrips => 'ट्रिप्स खोलें';
 
   @override
-  String get deleteAccountBlockerActionOpenSupport => 'Open support';
+  String get deleteAccountBlockerActionOpenSupport => 'सहायता खोलें';
 
   @override
   String get deleteAccountBlockerTitleActiveTrips =>
-      'Finish active trips first';
+      'पहले सक्रिय ट्रिप्स पूरी करें';
 
   @override
-  String get deleteAccountBlockerTitleDispute =>
-      'Resolve the open dispute first';
+  String get deleteAccountBlockerTitleDispute => 'पहले खुला विवाद हल करें';
 
   @override
   String get deleteAccountBlockerTitleCompliance =>
-      'Wait for the compliance hold to clear';
+      'Compliance रोक हटने की प्रतीक्षा करें';
 
   @override
-  String get deleteAccountBlockerTitleDefault => 'Resolve the blocker first';
+  String get deleteAccountBlockerTitleDefault => 'पहले अवरोधक हल करें';
 
   @override
   String get deleteAccountBlockerBodyActiveTrips =>
-      'This account still has active trip work attached to it. Review the current trip list, complete any legitimate active work, and then retry the deletion request.';
+      'इस खाते से अभी भी सक्रिय ट्रिप कार्य जुड़ा है। वर्तमान ट्रिप सूची देखें, कोई भी वैध सक्रिय कार्य पूरा करें, और फिर deletion अनुरोध दोबारा दें।';
 
   @override
   String get deleteAccountBlockerBodyDispute =>
-      'This account still has an unresolved dispute or review dependency. Use support to follow the current case until the blocking dispute is resolved.';
+      'इस खाते पर अभी भी एक अनसुलझा विवाद या समीक्षा निर्भरता है। अवरोधक विवाद हल होने तक वर्तमान केस follow करने के लिए सहायता का उपयोग करें।';
 
   @override
   String get deleteAccountBlockerBodyCompliance =>
-      'This account is still under a compliance or retention hold. Support can clarify the current hold, but the platform cannot bypass the retention requirement.';
+      'यह खाता अभी भी compliance या retention रोक के तहत है। सहायता वर्तमान रोक स्पष्ट कर सकती है, लेकिन प्लेटफ़ॉर्म retention आवश्यकता को बायपास नहीं कर सकता।';
 
   @override
   String get deleteAccountBlockerBodyDefault =>
-      'Review the current blocker carefully and resolve it before retrying the deletion request.';
+      'वर्तमान अवरोधक की ध्यानपूर्वक समीक्षा करें और deletion अनुरोध दोबारा देने से पहले इसे हल करें।';
 
   @override
-  String get deleteAccountSupportTitle => 'Need help first?';
+  String get deleteAccountSupportTitle => 'पहले मदद चाहिए?';
 
   @override
   String get deleteAccountSupportBodyPendingCleanup =>
-      'Use support if you need clarification on the pending-cleanup status, the grace-period timeline, or whether cancellation is the right next step for this account.';
+      'अगर pending-cleanup स्थिति, grace-period समयरेखा, या इस खाते के लिए रद्दीकरण सही अगला कदम है, इसके बारे में स्पष्टीकरण चाहिए तो सहायता का उपयोग करें।';
 
   @override
   String get deleteAccountSupportBodyDefault =>
-      'Use support if you expect blockers like active trips, unresolved disputes, or compliance holds and need clarification before retrying the deletion request.';
+      'अगर आपको सक्रिय ट्रिप्स, अनसुलझे विवाद, या compliance रोक जैसे अवरोधक होने की उम्मीद है और deletion अनुरोध दोबारा देने से पहले स्पष्टीकरण चाहिए तो सहायता का उपयोग करें।';
 
   @override
   String get deleteAccountSupportDetailPendingCleanup =>
-      'Support can clarify the current lifecycle state, but they may still need to follow retention and compliance policy before permanent deletion is processed.';
+      'सहायता वर्तमान lifecycle स्थिति स्पष्ट कर सकती है, लेकिन स्थायी deletion प्रक्रिया से पहले उन्हें retention और compliance नीति का पालन करना पड़ सकता है।';
 
   @override
   String get deleteAccountSupportDetailDefault =>
-      'Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.';
+      'सहायता वर्तमान अवरोधक या retention आवश्यकता समझा सकती है, लेकिन वे आवश्यक cleanup, विवाद समीक्षा, या compliance नीति को बायपास नहीं कर सकती।';
 
   @override
-  String get deleteAccountWhatHappensNextTitle => 'What happens next';
+  String get deleteAccountWhatHappensNextTitle => 'आगे क्या होगा';
 
   @override
   String get deleteAccountWhatHappensNextBodyPendingCleanup =>
-      'Your account is already in the pending-cleanup state. Cancel the request if you want to restore the account to active before permanent deletion is processed.';
+      'आपका खाता पहले से pending-cleanup स्थिति में है। अगर स्थायी deletion प्रक्रिया से पहले खाता सक्रिय बहाल करना चाहते हैं तो अनुरोध रद्द करें।';
 
   @override
   String get deleteAccountWhatHappensNextBodyDefault =>
-      'If no blockers exist, your account is moved to deactivated pending cleanup and you are signed out safely.';
+      'अगर कोई अवरोधक नहीं है, तो आपका खाता निष्क्रिय pending cleanup में चला जाता है और आपको सुरक्षित रूप से साइन आउट कर दिया जाता है।';
 
   @override
   String get deleteAccountWhatHappensNextDetailPendingCleanup =>
-      'If you cancel now, the account deletion status returns to active and normal access is restored.';
+      'अगर अभी रद्द करते हैं, तो खाता deletion स्थिति सक्रिय हो जाती है और सामान्य पहुँच बहाल हो जाती है।';
 
   @override
   String get deleteAccountWhatHappensNextDetailDefault =>
-      'If blockers exist, the platform keeps your account active and tells you which dependency must be resolved first.';
+      'अगर अवरोधक हैं, तो प्लेटफ़ॉर्म आपका खाता सक्रिय रखता है और बताता है कि कौन-सी निर्भरता पहले हल करनी होगी।';
 
   @override
   String get deleteAccountWhatHappensNextFootnotePendingCleanup =>
-      'Support may still retain internal records according to policy, but the user-facing deletion request will be cancelled.';
+      'सहायता नीति के अनुसार आंतरिक रिकॉर्ड रख सकती है, लेकिन उपयोगकर्ता का deletion अनुरोध रद्द कर दिया जाएगा।';
 
   @override
   String get deleteAccountWhatHappensNextFootnoteDefault =>
-      'The deletion request can now be cancelled while the account is in the pending-cleanup lifecycle before permanent deletion is processed.';
+      'स्थायी deletion प्रक्रिया से पहले जब तक खाता pending-cleanup lifecycle में है, deletion अनुरोध रद्द किया जा सकता है।';
 
   @override
   String get deleteAccountLifecycleUnavailableTitle =>
-      'Account deletion lifecycle unavailable';
+      'खाता deletion lifecycle उपलब्ध नहीं है';
 
   @override
-  String get deleteAccountCancelledTitle => 'Deletion request cancelled';
+  String get deleteAccountCancelledTitle => 'Deletion अनुरोध रद्द हो गया';
 
   @override
-  String get deleteAccountAlreadyRequestedTitle => 'Deletion already requested';
+  String get deleteAccountAlreadyRequestedTitle =>
+      'Deletion पहले से अनुरोधित है';
 
   @override
   String get deleteAccountAlreadyRequestedMessage =>
-      'This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.';
+      'यह खाता वर्तमान में निष्क्रिय pending cleanup में है। Grace-period lifecycle के दौरान पहुँच बहाल करनी हो तो नीचे अनुरोध रद्द करें।';
 
   @override
-  String get deleteAccountCancelRequestTitle => 'Cancel deletion request';
+  String get deleteAccountCancelRequestTitle => 'Deletion अनुरोध रद्द करें';
 
   @override
-  String get deleteAccountCancellingButton => 'Cancelling deletion...';
+  String get deleteAccountCancellingButton => 'Deletion रद्द हो रहा है...';
 
   @override
-  String get deleteAccountCancelRequestButton => 'Cancel deletion request';
+  String get deleteAccountCancelRequestButton => 'Deletion अनुरोध रद्द करें';
 
   @override
-  String get deleteAccountUnavailableTitle => 'Account deletion unavailable';
+  String get deleteAccountUnavailableTitle => 'खाता deletion उपलब्ध नहीं है';
 
   @override
-  String get deleteAccountBlockedTitle => 'Deletion blocked';
+  String get deleteAccountBlockedTitle => 'Deletion अवरुद्ध है';
 
   @override
-  String get deleteAccountConfirmRequestTitle => 'Confirm deletion request';
+  String get deleteAccountConfirmRequestTitle =>
+      'Deletion अनुरोध की पुष्टि करें';
 
   @override
-  String get deleteAccountRequestingButton => 'Requesting deletion...';
+  String get deleteAccountRequestingButton => 'Deletion अनुरोध हो रहा है...';
 
   @override
-  String get deleteAccountScreenTitle => 'Delete Account';
+  String get deleteAccountScreenTitle => 'खाता हटाएँ';
 
   @override
   String get deleteAccountHeroTitlePendingCleanup =>
-      'Account deletion pending cleanup';
+      'खाता deletion cleanup की प्रतीक्षा में';
 
   @override
-  String get deleteAccountHeroTitleDefault => 'Request account deletion';
+  String get deleteAccountHeroTitleDefault => 'खाता deletion का अनुरोध करें';
 
   @override
   String get deleteAccountHeroSubtitlePendingCleanup =>
-      'Your account is currently deactivated pending cleanup. You can still cancel this request during the grace-period lifecycle while the account is not permanently deleted.';
+      'आपका खाता वर्तमान में निष्क्रिय pending cleanup में है। जब तक खाता स्थायी रूप से हटाया नहीं जाता, grace-period lifecycle के दौरान आप यह अनुरोध रद्द कर सकते हैं।';
 
   @override
   String get deleteAccountHeroSubtitleDefault =>
-      'This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.';
+      'अगर कोई सक्रिय अवरोधक नहीं है तो यह कार्रवाई आपका खाता तुरंत निष्क्रिय कर सकती है। आगे बढ़ने से पहले परिणामों की ध्यानपूर्वक समीक्षा करें।';
 
   @override
   String get deleteAccountHeroBodyPendingCleanup =>
-      'The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.';
+      'Deletion अनुरोध पहले ही स्वीकार हो चुका है और खाता pending-cleanup स्थिति में है। स्थायी deletion प्रक्रिया से पहले सामान्य खाता पहुँच बहाल करनी हो तो अनुरोध रद्द करें।';
 
   @override
   String get deleteAccountHeroBodyDefault =>
-      'Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.';
+      'Deletion आगे बढ़ने से पहले, प्लेटफ़ॉर्म सक्रिय ट्रिप्स, अनसुलझे विवाद, और compliance या सत्यापन रिकॉर्ड जिन्हें अभी रखना ज़रूरी है, की जाँच करता है।';
 
   @override
   String get accountSignOutFailureMessage =>
       'अभी आपको sign out नहीं किया जा सका। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
 
   @override
-  String get accountRoleSupplier => 'Supplier';
+  String get accountRoleSupplier => 'सप्लायर';
 
   @override
-  String get accountRoleTrucker => 'Trucker';
+  String get accountRoleTrucker => 'ट्रकर';
 
   @override
-  String get accountRoleUnknown => 'Unknown';
+  String get accountRoleUnknown => 'अज्ञात';
 
   @override
-  String get accountStatusTitle => 'Account status';
+  String get accountStatusTitle => 'खाता स्थिति';
 
   @override
-  String get accountProfileStatusLabel => 'Profile status';
+  String get accountProfileStatusLabel => 'प्रोफ़ाइल स्थिति';
 
   @override
-  String get accountProfileStatusComplete => 'Complete';
+  String get accountProfileStatusComplete => 'पूर्ण';
 
   @override
-  String get accountProfileStatusNeedsAttention => 'Needs attention';
+  String get accountProfileStatusNeedsAttention => 'ध्यान देना आवश्यक';
 
   @override
-  String get accountAccountStateLabel => 'Account state';
+  String get accountAccountStateLabel => 'खाता स्थिति';
 
   @override
   String get accountStateDeactivatedPendingCleanup =>
-      'Deactivated pending cleanup';
+      'निष्क्रिय, cleanup लंबित';
 
   @override
-  String get accountStateRestricted => 'Restricted';
+  String get accountStateRestricted => 'प्रतिबंधित';
 
   @override
-  String get accountStateActive => 'Active';
+  String get accountStateActive => 'सक्रिय';
 
   @override
-  String get accountStateUnknown => 'Unknown';
+  String get accountStateUnknown => 'अज्ञात';
 
   @override
   String get accountLoadFailureTitle => 'Account details उपलब्ध नहीं हैं';
@@ -1092,32 +1107,31 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी आपकी account details लोड नहीं हो सकीं। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
 
   @override
-  String get accountManageTitle => 'Manage account';
+  String get accountManageTitle => 'खाता प्रबंधित करें';
 
   @override
-  String get accountVerificationLabel => 'Verification';
+  String get accountVerificationLabel => 'सत्यापन';
 
   @override
-  String get accountFleetLabel => 'Fleet';
+  String get accountFleetLabel => 'फ्लीट';
 
   @override
-  String get accountSettingsLabel => 'Settings';
+  String get accountSettingsLabel => 'सेटिंग्स';
 
   @override
-  String get accountSessionTitle => 'Current session';
+  String get accountSessionTitle => 'वर्तमान सत्र';
 
   @override
-  String get accountSignedInAsLabel => 'Signed in as';
+  String get accountSignedInAsLabel => 'इस रूप में साइन इन';
 
   @override
-  String get accountCurrentAuthenticatedSession =>
-      'Current authenticated session';
+  String get accountCurrentAuthenticatedSession => 'वर्तमान प्रमाणित सत्र';
 
   @override
-  String get accountSignOutAction => 'Sign out';
+  String get accountSignOutAction => 'साइन आउट';
 
   @override
-  String get profileTitle => 'Profile';
+  String get profileTitle => 'प्रोफ़ाइल';
 
   @override
   String get profileLoadFailureTitle => 'Profile उपलब्ध नहीं है';
@@ -1127,46 +1141,46 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी आपकी profile लोड नहीं हो सकी। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
 
   @override
-  String get profileSummaryTitle => 'Profile summary';
+  String get profileSummaryTitle => 'प्रोफ़ाइल सारांश';
 
   @override
-  String get profileNameLabel => 'Name';
+  String get profileNameLabel => 'नाम';
 
   @override
-  String get profileValueNotSet => 'Not set';
+  String get profileValueNotSet => 'सेट नहीं है';
 
   @override
-  String get profilePhoneLabel => 'Phone';
+  String get profilePhoneLabel => 'फ़ोन';
 
   @override
-  String get profileValueNotProvided => 'Not provided';
+  String get profileValueNotProvided => 'उपलब्ध नहीं';
 
   @override
   String get profileEmailLabel => 'Email';
 
   @override
-  String get profileRoleLabel => 'Role';
+  String get profileRoleLabel => 'भूमिका';
 
   @override
-  String get profileReadinessTitle => 'Profile readiness';
+  String get profileReadinessTitle => 'प्रोफ़ाइल तैयारी';
 
   @override
-  String get profileCompletenessLabel => 'Completeness';
+  String get profileCompletenessLabel => 'पूर्णता';
 
   @override
-  String get profileCompletenessComplete => 'Complete';
+  String get profileCompletenessComplete => 'पूर्ण';
 
   @override
-  String get profileCompletenessNeedsUpdates => 'Needs updates';
+  String get profileCompletenessNeedsUpdates => 'अपडेट ज़रूरी';
 
   @override
-  String get profileDeletionStatusLabel => 'Deletion status';
+  String get profileDeletionStatusLabel => 'Deletion स्थिति';
 
   @override
-  String get profileOpenFleetReadiness => 'Open fleet readiness';
+  String get profileOpenFleetReadiness => 'फ्लीट तैयारी खोलें';
 
   @override
-  String get profileRequestAccountDeletion => 'Request account deletion';
+  String get profileRequestAccountDeletion => 'खाता deletion का अनुरोध करें';
 
   @override
   String profileTtsSummary(
@@ -1181,80 +1195,79 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsTitle => 'सेटिंग्स';
 
   @override
-  String get settingsPreferencesTitle => 'प्रेफरेंसेस';
+  String get settingsPreferencesTitle => 'प्राथमिकताएँ';
 
   @override
-  String get settingsRoleContextLabel => 'रोल कॉन्टेक्स्ट';
+  String get settingsRoleContextLabel => 'भूमिका संदर्भ';
 
   @override
   String settingsTtsSummary(Object selectedLanguageLabel, Object roleSentence) {
-    return 'Settings screen. Language $selectedLanguageLabel पर set है. Voice guidance अभी manual है. Notifications in-app inbox के through enabled हैं.$roleSentence';
+    return 'सेटिंग्स स्क्रीन। भाषा $selectedLanguageLabel पर सेट है। आवाज मार्गदर्शन अभी मैनुअल है। सूचनाएँ इन-ऐप इनबॉक्स के माध्यम से सक्षम हैं।$roleSentence';
   }
 
   @override
-  String get settingsVoiceAssistanceLabel => 'Voice assistance';
+  String get settingsVoiceAssistanceLabel => 'आवाज सहायता';
 
   @override
   String get settingsVoiceAssistanceValue =>
-      'Supported screens पर manual contextual summaries उपलब्ध हैं।';
+      'समर्थित स्क्रीन पर मैनुअल संदर्भित सारांश उपलब्ध हैं।';
 
   @override
-  String get settingsNotificationsLabel => 'Notifications';
+  String get settingsNotificationsLabel => 'सूचनाएँ';
 
   @override
   String get settingsNotificationsValue =>
-      'In-app inbox और push status controls यहाँ उपलब्ध हैं।';
+      'इन-ऐप इनबॉक्स और पुश स्थिति नियंत्रण यहाँ उपलब्ध हैं।';
 
   @override
-  String get settingsConnectedSurfacesTitle => 'Connected surfaces';
+  String get settingsConnectedSurfacesTitle => 'जुड़े सतह';
 
   @override
-  String get settingsPushNotificationsTitle => 'Push notifications';
+  String get settingsPushNotificationsTitle => 'पुश सूचनाएँ';
 
   @override
-  String get settingsPushStatusLabel => 'Status';
+  String get settingsPushStatusLabel => 'स्थिति';
 
   @override
-  String get settingsPushRequestPermission => 'Request permission';
+  String get settingsPushRequestPermission => 'अनुमति अनुरोध';
 
   @override
-  String get settingsPushRefreshStatus => 'Refresh status';
+  String get settingsPushRefreshStatus => 'स्थिति रीफ्रेश';
 
   @override
   String get settingsPushStatusUnavailableTitle =>
-      'Push notification status उपलब्ध नहीं है';
+      'पुश सूचना स्थिति उपलब्ध नहीं है';
 
   @override
   String get settingsPushStatusUnavailableMessage =>
-      'अभी device notification permission नहीं पढ़ी जा सकी। Firebase/device support उपलब्ध होने के बाद refresh करें।';
+      'अभी डिवाइस सूचना अनुमति नहीं पढ़ी जा सकी। फायरबेस/डिवाइस सहायता उपलब्ध होने के बाद रीफ्रेश करें।';
 
   @override
-  String get settingsPushStatusAllowed => 'Allowed';
+  String get settingsPushStatusAllowed => 'अनुमति दी गई';
 
   @override
-  String get settingsPushStatusAllowedQuietly => 'Allowed quietly';
+  String get settingsPushStatusAllowedQuietly => 'शांत रूप से अनुमति दी गई';
 
   @override
-  String get settingsPushStatusBlocked => 'Blocked in system settings';
+  String get settingsPushStatusBlocked => 'सिस्टम सेटिंग्स में ब्लॉक है';
 
   @override
-  String get settingsPushStatusNotRequested => 'Not requested yet';
+  String get settingsPushStatusNotRequested => 'अभी तक अनुरोध नहीं किया गया';
 
   @override
-  String get settingsPushStatusUnavailable =>
-      'Unavailable on this device/build';
+  String get settingsPushStatusUnavailable => 'इस डिवाइस/build पर उपलब्ध नहीं';
 
   @override
   String get settingsPushGuidanceAllowed =>
-      'Firebase delivery configured होने पर foreground और opened push flows enabled रहते हैं।';
+      'फायरबेस डिलीवरी कॉन्फ़िगर होने पर अग्रभूमि और खुली पुश प्रवाह सक्षम रहते हैं।';
 
   @override
   String get settingsPushGuidanceAllowedQuietly =>
-      'Push quietly allowed है। ज़रूरत हो तो device notification settings में alerts promote कर सकते हैं।';
+      'पुश शांत रूप से अनुमति दी गई है। ज़रूरत हो तो डिवाइस सूचना सेटिंग्स में अलर्ट प्रमोट कर सकते हैं।';
 
   @override
   String get settingsPushGuidanceBlocked =>
-      'Push notifications blocked हैं। Alerts फिर से enable करने के लिए TranZfort की device notification settings खोलें।';
+      'पुश सूचनाएँ ब्लॉक हैं। अलर्ट फिर से सक्षम करने के लिए TranZfort की डिवाइस सूचना सेटिंग्स खोलें।';
 
   @override
   String get settingsPushGuidanceNotRequested =>
@@ -1270,24 +1283,24 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get supportScreenTitle => 'सपोर्ट और dispute follow-up';
+  String get supportScreenTitle => 'सहायता और विवाद फॉलो-अप';
 
   @override
-  String get supportHeroTitle => 'अपनी latest support activity review करें';
+  String get supportHeroTitle => 'अपनी नवीनतम सहायता गतिविधि समीक्षा करें';
 
   @override
   String get supportHeroSubtitleSupplier =>
-      'Supplier activity से जुड़े dispute progress, payment follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।';
+      'सप्लायर गतिविधि से जुड़े विवाद प्रगति, भुगतान फॉलो-अप, और नवीनतम दृश्यमान टिकट अपडेट्स समीक्षा करने के लिए सहायता का उपयोग करें।';
 
   @override
   String get supportHeroSubtitleTrucker =>
-      'Trucker activity से जुड़े dispute progress, freight follow-ups, और latest visible ticket updates review करने के लिए support का उपयोग करें।';
+      'ट्रकर गतिविधि से जुड़े विवाद प्रगति, फ्रेट फॉलो-अप, और नवीनतम दृश्यमान टिकट अपडेट्स समीक्षा करने के लिए सहायता का उपयोग करें।';
 
   @override
-  String get supportNoActiveTickets => 'कोई active ticket नहीं';
+  String get supportNoActiveTickets => 'कोई सक्रिय टिकट नहीं';
 
   @override
-  String get supportCreateTicketAction => 'सपोर्ट टिकट बनाएँ';
+  String get supportCreateTicketAction => 'सहायता टिकट बनाएँ';
 
   @override
   String get supportIntroMessage =>
@@ -1369,7 +1382,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'यह support ticket अभी इस account के लिए उपलब्ध नहीं है।';
 
   @override
-  String get supportTicketStatusOpen => 'Open';
+  String get supportTicketStatusOpen => 'खुली';
 
   @override
   String get supportTicketStatusInProgress => 'Review में';
@@ -1378,87 +1391,85 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supportTicketStatusWaitingForYou => 'आपके reply का इंतजार';
 
   @override
-  String get supportTicketStatusResolved => 'Resolved';
+  String get supportTicketStatusResolved => 'समाधान हो गया';
 
   @override
-  String get supportTicketStatusClosed => 'Closed';
+  String get supportTicketStatusClosed => 'बंद';
 
   @override
-  String get supportTicketStatusUnknown => 'Unknown';
+  String get supportTicketStatusUnknown => 'अज्ञात';
 
   @override
-  String get supportTicketPriorityLow => 'low';
+  String get supportTicketPriorityLow => 'कम';
 
   @override
-  String get supportTicketPriorityMedium => 'medium';
+  String get supportTicketPriorityMedium => 'मध्यम';
 
   @override
-  String get supportTicketPriorityHigh => 'high';
+  String get supportTicketPriorityHigh => 'उच्च';
 
   @override
-  String get supportTicketPriorityUrgent => 'urgent';
+  String get supportTicketPriorityUrgent => 'अत्यावश्यक';
 
   @override
   String get supportTicketPriorityNotSet => 'set नहीं है';
 
   @override
-  String get supportTicketTitleTripDisputeReview => 'Trip dispute review';
+  String get supportTicketTitleTripDisputeReview => 'ट्रिप विवाद समीक्षा';
 
   @override
   String get supportTicketTitleLoadedQuantityMismatchReport =>
-      'Loaded quantity mismatch report';
+      'लोडेड मात्रा बेमेल रिपोर्ट';
 
   @override
   String get supportTicketTitleUnloadedQuantityMismatchReport =>
-      'Unloaded quantity mismatch report';
+      'अनलोडेड मात्रा बेमेल रिपोर्ट';
 
   @override
   String get supportTicketTitleDocumentMismatchReport =>
-      'Document mismatch report';
+      'दस्तावेज बेमेल रिपोर्ट';
 
   @override
-  String get supportTicketTitleSpamOrScamReport => 'Spam या scam report';
+  String get supportTicketTitleSpamOrScamReport => 'स्पैम या स्कैम रिपोर्ट';
 
   @override
-  String get supportTicketTitleAbusiveBehaviorReport =>
-      'Abusive behavior report';
+  String get supportTicketTitleAbusiveBehaviorReport => 'दुर्व्यवहार रिपोर्ट';
 
   @override
   String get supportTicketTitleFakePayoutProofReport =>
-      'Fake payout proof report';
+      'नकली भुगतान प्रमाण रिपोर्ट';
 
   @override
-  String get supportTicketTitleNonPaymentReport => 'Non-payment report';
+  String get supportTicketTitleNonPaymentReport => 'गैर-भुगतान रिपोर्ट';
 
   @override
-  String get supportTicketTitleDelayOrNoShowReport => 'Delay या no-show report';
+  String get supportTicketTitleDelayOrNoShowReport => 'देरी या नो-शो रिपोर्ट';
 
   @override
-  String get supportTicketTitleDamageOrShortageReport =>
-      'Damage या shortage report';
+  String get supportTicketTitleDamageOrShortageReport => 'क्षति या कमी रिपोर्ट';
 
   @override
-  String get supportTicketTitleOtherReport => 'Other report';
+  String get supportTicketTitleOtherReport => 'अन्य रिपोर्ट';
 
   @override
-  String get supportDisputeCategoryTripDispute => 'Trip dispute';
+  String get supportDisputeCategoryTripDispute => 'ट्रिप विवाद';
 
   @override
   String get supportDisputeCategoryLoadedQuantityMismatch =>
-      'Loaded quantity mismatch';
+      'लोडेड मात्रा बेमेल';
 
   @override
   String get supportDisputeCategoryUnloadedQuantityMismatch =>
-      'Unloaded quantity mismatch';
+      'अनलोडेड मात्रा बेमेल';
 
   @override
-  String get supportDisputeCategoryDocumentMismatch => 'Document mismatch';
+  String get supportDisputeCategoryDocumentMismatch => 'दस्तावेज बेमेल';
 
   @override
-  String get supportDisputeCategoryNonPayment => 'Non-payment';
+  String get supportDisputeCategoryNonPayment => 'गैर-भुगतान';
 
   @override
-  String get supportDisputeCategoryFakePayoutProof => 'Fake payout proof';
+  String get supportDisputeCategoryFakePayoutProof => 'नकली भुगतान प्रमाण';
 
   @override
   String get supportDisputeCategoryDelayOrNoShow => 'Delay या no-show';
@@ -1467,13 +1478,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supportDisputeCategoryDamageOrShortage => 'Damage या shortage';
 
   @override
-  String get supportDisputeCategoryAbusiveBehavior => 'Abusive behavior';
+  String get supportDisputeCategoryAbusiveBehavior => 'दुर्व्यवहार';
 
   @override
   String get supportDisputeCategorySpamOrScam => 'Spam या scam';
 
   @override
-  String get supportDisputeCategoryOther => 'Other';
+  String get supportDisputeCategoryOther => 'अन्य';
 
   @override
   String supportUpdatedAt(Object value) {
@@ -1787,29 +1798,29 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supportTicketTitleWithPriority(Object title, Object priority) {
-    return '$title • $priority priority';
+    return '$title - $priority priority';
   }
 
   @override
   String get supportFallbackLabel => 'Support';
 
   @override
-  String get supportTrustStatusNormal => 'Normal';
+  String get supportTrustStatusNormal => 'सामान्य';
 
   @override
-  String get supportTrustStatusWarned => 'Warned';
+  String get supportTrustStatusWarned => 'चेतावनी प्राप्त';
 
   @override
-  String get supportTrustStatusRestricted => 'Restricted';
+  String get supportTrustStatusRestricted => 'प्रतिबंधित';
 
   @override
-  String get supportTrustStatusSuspended => 'Suspended';
+  String get supportTrustStatusSuspended => 'निलंबित';
 
   @override
-  String get supportTrustStatusBanned => 'Banned';
+  String get supportTrustStatusBanned => 'प्रतिबंधित';
 
   @override
-  String get supportTrustStatusUnknown => 'Unknown';
+  String get supportTrustStatusUnknown => 'अज्ञात';
 
   @override
   String supportTrustBadge(Object status) {
@@ -1908,44 +1919,43 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get truckerDashboardTitle => 'Trucker Dashboard';
+  String get truckerDashboardTitle => 'ट्रकर डैशबोर्ड';
 
   @override
-  String get truckerDashboardOverviewTitle => 'Dashboard overview';
+  String get truckerDashboardOverviewTitle => 'डैशबोर्ड अवलोकन';
 
   @override
-  String get truckerDashboardQuickActionsTitle => 'Quick actions';
+  String get truckerDashboardQuickActionsTitle => 'त्वरित कार्रवाइयाँ';
 
   @override
-  String get truckerDashboardQuickActionTripsLabel => 'My Trips';
+  String get truckerDashboardQuickActionTripsLabel => 'मेरी ट्रिप्स';
 
   @override
-  String get truckerDashboardQuickActionChatLabel => 'Chat';
+  String get truckerDashboardQuickActionChatLabel => 'चैट';
 
   @override
-  String get truckerDashboardRecentActivityTitle => 'Recent activity';
+  String get truckerDashboardRecentActivityTitle => 'हाल की गतिविधि';
 
   @override
-  String get truckerDashboardReadinessNextStepsTitle =>
-      'Readiness and next steps';
+  String get truckerDashboardReadinessNextStepsTitle => 'तैयारी और अगले कदम';
 
   @override
   String get truckerDashboardReadinessUnavailableTitle =>
-      'Readiness state उपलब्ध नहीं है';
+      'तैयारी स्थिति उपलब्ध नहीं है';
 
   @override
   String get truckerDashboardReadinessFailureMessage =>
-      'अभी आपकी trucker readiness state उपलब्ध नहीं है। Verification और fleet readiness refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी ट्रकर तैयारी स्थिति उपलब्ध नहीं है। सत्यापन और फ्लीट तैयारी रीफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get truckerDashboardVerificationPendingTitle => 'Verification pending';
+  String get truckerDashboardVerificationPendingTitle => 'सत्यापन लंबित';
 
   @override
   String get truckerDashboardVerificationPendingDescription =>
-      'Review pending रहने तक आप loads browse कर सकते हैं, लेकिन verification पूरा होने तक chat और call locked रहेंगे।';
+      'समीक्षा लंबित रहने तक आप लोड्स ब्राउज़ कर सकते हैं, लेकिन सत्यापन पूरा होने तक चैट और कॉल लॉक्ड रहेंगे।';
 
   @override
-  String get truckerDashboardOpenVerificationAction => 'Open verification';
+  String get truckerDashboardOpenVerificationAction => 'सत्यापन खोलें';
 
   @override
   String get truckerDashboardVerificationCompleteTitle =>
@@ -2108,7 +2118,7 @@ class AppLocalizationsHi extends AppLocalizations {
     int inTransitTrips,
     int completedTrips,
   ) {
-    return '$upcomingTrips upcoming • $inTransitTrips in transit • $completedTrips completed';
+    return '$upcomingTrips upcoming - $inTransitTrips in transit - $completedTrips completed';
   }
 
   @override
@@ -2121,7 +2131,7 @@ class AppLocalizationsHi extends AppLocalizations {
     int rejectedTrucks,
     int pendingReapprovalTrucks,
   ) {
-    return '$pendingTrucks pending • $rejectedTrucks rejected • $pendingReapprovalTrucks pending reapproval';
+    return '$pendingTrucks pending - $rejectedTrucks rejected - $pendingReapprovalTrucks pending reapproval';
   }
 
   @override
@@ -2224,55 +2234,55 @@ class AppLocalizationsHi extends AppLocalizations {
       'Assigned trips track करें, proof deadlines monitor करें, और सही trip stage पर सही action लें।';
 
   @override
-  String get truckerTripsStageAssigned => 'Assigned';
+  String get truckerTripsStageAssigned => 'असाइन किया गया';
 
   @override
-  String get truckerTripsStagePickupPending => 'Pickup pending';
+  String get truckerTripsStagePickupPending => 'पिकअप लंबित';
 
   @override
-  String get truckerTripsStagePickedUp => 'Picked up';
+  String get truckerTripsStagePickedUp => 'पिक किया गया';
 
   @override
-  String get truckerTripsStageInTransit => 'In transit';
+  String get truckerTripsStageInTransit => 'रास्ते में';
 
   @override
-  String get truckerTripsStageDelivered => 'Delivered';
+  String get truckerTripsStageDelivered => 'डिलीवर किया गया';
 
   @override
-  String get truckerTripsStageProofSubmitted => 'Proof submitted';
+  String get truckerTripsStageProofSubmitted => 'प्रूफ जमा किया गया';
 
   @override
-  String get truckerTripsStageCompleted => 'Completed';
+  String get truckerTripsStageCompleted => 'पूर्ण';
 
   @override
-  String get truckerTripsStageDisputed => 'Disputed';
+  String get truckerTripsStageDisputed => 'विवादित';
 
   @override
-  String get truckerTripsStageCancelled => 'Cancelled';
+  String get truckerTripsStageCancelled => 'रद्द';
 
   @override
-  String get truckerTripsStageUnknown => 'Unknown';
+  String get truckerTripsStageUnknown => 'अज्ञात';
 
   @override
-  String get truckerTripsProofStatusPodUploaded => 'POD uploaded';
+  String get truckerTripsProofStatusPodUploaded => 'पीओडी अपलोड किया गया';
 
   @override
-  String get truckerTripsProofStatusLrUploaded => 'LR uploaded';
+  String get truckerTripsProofStatusLrUploaded => 'एलआर अपलोड किया गया';
 
   @override
-  String get truckerTripsProofStatusAwaitingPod => 'Awaiting POD';
+  String get truckerTripsProofStatusAwaitingPod => 'पीओडी का इंतजार';
 
   @override
-  String get truckerTripsProofStatusProofSubmitted => 'Proof submitted';
+  String get truckerTripsProofStatusProofSubmitted => 'प्रूफ जमा किया गया';
 
   @override
-  String get truckerTripsProofStatusProofPending => 'Proof pending';
+  String get truckerTripsProofStatusProofPending => 'प्रूफ लंबित';
 
   @override
-  String get truckerTripsTabActive => 'Active';
+  String get truckerTripsTabActive => 'सक्रिय';
 
   @override
-  String get truckerTripsTabCompleted => 'Completed';
+  String get truckerTripsTabCompleted => 'पूर्ण';
 
   @override
   String get truckerTripsLoadFailureTitle => 'Trips लोड नहीं हो सकीं';
@@ -2297,20 +2307,20 @@ class AppLocalizationsHi extends AppLocalizations {
       'Execution close होने के बाद completed और cancelled trips यहाँ दिखेंगी।';
 
   @override
-  String get truckerTripsEmptyActiveAction => 'Find loads';
+  String get truckerTripsEmptyActiveAction => 'लोड्स ढूंढें';
 
   @override
-  String get truckerTripsEmptyCompletedAction => 'View active trips';
+  String get truckerTripsEmptyCompletedAction => 'सक्रिय ट्रिप्स देखें';
 
   @override
-  String get truckerTripDetailNotFoundTitle => 'Trip not found';
+  String get truckerTripDetailNotFoundTitle => 'ट्रिप नहीं मिली';
 
   @override
   String get truckerTripDetailNotFoundSubtitle =>
       'यह assigned trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
 
   @override
-  String get truckerTripDetailBackToTripsAction => 'Back to my trips';
+  String get truckerTripDetailBackToTripsAction => 'मेरी ट्रिप्स पर वापस जाएं';
 
   @override
   String truckerTripsTimeContextAssigned(Object date) {
@@ -2487,7 +2497,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerFleetSaveFailureMessage =>
-      'अभी यह truck save नहीं हो सकी। Truck details review करें और थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी यह ट्रक सेव नहीं हो सका। ट्रक विवरण देखें और थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get truckerFleetTruckNumberConflictMessage =>
+      'यह ट्रक नंबर पहले से उपयोग में है। नंबर जाँचें और फिर कोशिश करें।';
 
   @override
   String truckerFleetTruckCardSubtitle(
@@ -2495,7 +2509,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object tyres,
     Object capacityTonnes,
   ) {
-    return '$bodyType • $tyres tyres • ${capacityTonnes}T';
+    return '$bodyType - $tyres tyres - ${capacityTonnes}T';
   }
 
   @override
@@ -2521,26 +2535,26 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerFleetFixResubmitAction => 'Fix and resubmit truck';
 
   @override
-  String get truckerFleetEditTruckAction => 'Edit truck';
+  String get truckerFleetEditTruckAction => 'ट्रक संपादित करें';
 
   @override
-  String get truckerFleetStatusPendingLabel => 'Pending review';
+  String get truckerFleetStatusPendingLabel => 'समीक्षा लंबित';
 
   @override
-  String get truckerFleetStatusVerifiedLabel => 'Approved';
+  String get truckerFleetStatusVerifiedLabel => 'स्वीकृत';
 
   @override
-  String get truckerFleetStatusRejectedLabel => 'Rejected';
+  String get truckerFleetStatusRejectedLabel => 'अस्वीकृत';
 
   @override
   String get truckerFleetStatusEditedPendingReapprovalLabel =>
-      'Pending reapproval';
+      'पुनः स्वीकृति लंबित';
 
   @override
-  String get truckerFleetStatusArchivedLabel => 'Archived';
+  String get truckerFleetStatusArchivedLabel => 'संग्रहीत';
 
   @override
-  String get truckerFleetStatusUnknownLabel => 'Unknown';
+  String get truckerFleetStatusUnknownLabel => 'अज्ञात';
 
   @override
   String get truckerFleetStatusPendingMessage =>
@@ -2574,37 +2588,37 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerFindLoadsAdvancedFiltersAction => 'Advanced filters';
 
   @override
-  String get truckerFindLoadsOriginHint => 'Origin city';
+  String get truckerFindLoadsOriginHint => 'मूल शहर';
 
   @override
-  String get truckerFindLoadsDestinationHint => 'Destination city';
+  String get truckerFindLoadsDestinationHint => 'गंतव्य शहर';
 
   @override
-  String get truckerFindLoadsMaterialHint => 'Material';
+  String get truckerFindLoadsMaterialHint => 'सामग्री';
 
   @override
-  String get truckerFindLoadsSortByLabel => 'Sort by';
+  String get truckerFindLoadsSortByLabel => 'क्रमबद्ध करें';
 
   @override
-  String get truckerFindLoadsSortNewest => 'Newest';
+  String get truckerFindLoadsSortNewest => 'नवीनतम';
 
   @override
-  String get truckerFindLoadsSortPriceHighToLow => 'Price High→Low';
+  String get truckerFindLoadsSortPriceHighToLow => 'मूल्य उच्च से निम्न';
 
   @override
-  String get truckerFindLoadsSortPriceLowToHigh => 'Price Low→High';
+  String get truckerFindLoadsSortPriceLowToHigh => 'मूल्य निम्न से उच्च';
 
   @override
-  String get truckerFindLoadsSortPickupDate => 'Pickup Date';
+  String get truckerFindLoadsSortPickupDate => 'पिकअप तिथि';
 
   @override
   String get truckerFindLoadsMarketplaceTabsTitle => 'Marketplace tabs';
 
   @override
-  String get truckerFindLoadsAllLoadsTab => 'All Loads';
+  String get truckerFindLoadsAllLoadsTab => 'सभी लोड्स';
 
   @override
-  String get truckerFindLoadsSuperLoadsTab => 'Super Loads';
+  String get truckerFindLoadsSuperLoadsTab => 'सुपर लोड्स';
 
   @override
   String get truckerFindLoadsLoadFailureTitle => 'Freight लोड नहीं हो सकी';
@@ -2652,16 +2666,16 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String truckerFindLoadsSummaryAllLoads(int resultCount) {
-    return 'Showing all loads • $resultCount result(s)';
+    return 'Showing all loads - $resultCount result(s)';
   }
 
   @override
   String truckerFindLoadsSummaryFiltered(Object pieces, int resultCount) {
-    return '$pieces • $resultCount result(s)';
+    return '$pieces - $resultCount result(s)';
   }
 
   @override
-  String get truckerFindLoadsResetFiltersAction => 'Reset filters';
+  String get truckerFindLoadsResetFiltersAction => 'फ़िल्टर रीसेट करें';
 
   @override
   String get truckerFindLoadsAnyBodyFallback => 'Any body';
@@ -2684,7 +2698,7 @@ class AppLocalizationsHi extends AppLocalizations {
     int advancePercentage,
     Object pickupDate,
   ) {
-    return '₹$priceAmount • $advancePercentage% adv • $pickupDate';
+    return '₹$priceAmount - $advancePercentage% adv - $pickupDate';
   }
 
   @override
@@ -2699,12 +2713,12 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String truckerFindLoadsDistanceUnavailable(Object tyres) {
-    return 'Distance उपलब्ध नहीं है • Tyres $tyres';
+    return 'Distance उपलब्ध नहीं है - Tyres $tyres';
   }
 
   @override
   String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres) {
-    return 'Distance $distanceKm km • Tyres $tyres';
+    return 'Distance $distanceKm km - Tyres $tyres';
   }
 
   @override
@@ -2712,7 +2726,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerFindLoadsSuperLoadBanner =>
-      'Super Load • Payment Guarantee';
+      'Super Load - Payment Guarantee';
 
   @override
   String get truckerFindLoadsViewDetailsAction => 'View details';
@@ -2758,7 +2772,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierPostLoadTitle => 'Post Load';
 
   @override
-  String get supplierPostLoadHeroTitle => 'Create a supplier load';
+  String get supplierPostLoadHeroTitle => 'सप्लायर लोड बनाएं';
 
   @override
   String get supplierPostLoadHeroSubtitle =>
@@ -2769,44 +2783,42 @@ class AppLocalizationsHi extends AppLocalizations {
       'अगर route services preview नहीं लौटातीं तब भी manual city entry काम करती है। Validation या submission failure पर आपका form data सुरक्षित रहता है।';
 
   @override
-  String get supplierPostLoadPostingBlockedTitle => 'Posting is blocked';
+  String get supplierPostLoadPostingBlockedTitle => 'पोस्टिंग अवरुद्ध है';
 
   @override
-  String get supplierPostLoadOpenVerificationAction => 'Open verification';
+  String get supplierPostLoadOpenVerificationAction => 'सत्यापन खोलें';
 
   @override
-  String get supplierPostLoadRouteTimingTitle => 'Route and timing';
+  String get supplierPostLoadRouteTimingTitle => 'मार्ग और समय';
 
   @override
-  String get supplierPostLoadOriginCityLabel => 'Origin city';
+  String get supplierPostLoadOriginCityLabel => 'मूल शहर';
 
   @override
-  String get supplierPostLoadSearchCityHint => 'Search city';
+  String get supplierPostLoadSearchCityHint => 'शहर खोजें';
 
   @override
-  String get supplierPostLoadOriginExactLocationLabel =>
-      'Origin exact location';
+  String get supplierPostLoadOriginExactLocationLabel => 'मूल सटीक स्थान';
 
   @override
-  String get supplierPostLoadOriginExactLocationHint =>
-      'Warehouse / pickup point';
+  String get supplierPostLoadOriginExactLocationHint => 'गोदाम / पिकअप बिंदु';
 
   @override
-  String get supplierPostLoadDestinationCityLabel => 'Destination city';
+  String get supplierPostLoadDestinationCityLabel => 'गंतव्य शहर';
 
   @override
   String get supplierPostLoadDestinationExactLocationLabel =>
-      'Destination exact location';
+      'गंतव्य सटीक स्थान';
 
   @override
   String get supplierPostLoadDestinationExactLocationHint =>
-      'Drop point / delivery point';
+      'ड्रॉप बिंदु / डिलीवरी बिंदु';
 
   @override
-  String get supplierPostLoadPickupDateLabel => 'Pickup date';
+  String get supplierPostLoadPickupDateLabel => 'पिकअप तिथि';
 
   @override
-  String get supplierPostLoadRoutePreviewTitle => 'Route preview';
+  String get supplierPostLoadRoutePreviewTitle => 'मार्ग पूर्वावलोकन';
 
   @override
   String supplierPostLoadDistanceLabel(Object value) {
@@ -2820,65 +2832,65 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierPostLoadRoutePreviewUnavailableTitle =>
-      'Route preview unavailable';
+      'मार्ग पूर्वावलोकन अनुपलब्ध';
 
   @override
   String get supplierPostLoadRoutePreviewUnavailableMessage =>
       'अभी route distance और duration derive नहीं हो सके। आप manual city-based posting के साथ फिर भी आगे बढ़ सकते हैं।';
 
   @override
-  String get supplierPostLoadCargoDetailsTitle => 'Cargo details';
+  String get supplierPostLoadCargoDetailsTitle => 'कार्गो विवरण';
 
   @override
-  String get supplierPostLoadMaterialLabel => 'Material';
+  String get supplierPostLoadMaterialLabel => 'सामग्री';
 
   @override
-  String get supplierPostLoadWeightLabel => 'Weight (tonnes)';
+  String get supplierPostLoadWeightLabel => 'वजन (टन)';
 
   @override
   String get supplierPostLoadWeightHint => '22';
 
   @override
-  String get supplierPostLoadVehicleRequirementsTitle => 'Vehicle requirements';
+  String get supplierPostLoadVehicleRequirementsTitle => 'वाहन आवश्यकताएं';
 
   @override
-  String get supplierPostLoadTruckBodyTypeLabel => 'Truck body type';
+  String get supplierPostLoadTruckBodyTypeLabel => 'ट्रक बॉडी प्रकार';
 
   @override
-  String get supplierPostLoadTyreRequirementTitle => 'Tyre requirement';
+  String get supplierPostLoadTyreRequirementTitle => 'टायर आवश्यकता';
 
   @override
-  String get supplierPostLoadAnyTyresLabel => 'Any';
+  String get supplierPostLoadAnyTyresLabel => 'कोई भी';
 
   @override
-  String get supplierPostLoadTrucksNeededTitle => 'Trucks needed';
+  String get supplierPostLoadTrucksNeededTitle => 'ट्रकों की आवश्यकता';
 
   @override
-  String get supplierPostLoadTrucksNeededLabel => 'Trucks needed';
+  String get supplierPostLoadTrucksNeededLabel => 'ट्रकों की आवश्यकता';
 
   @override
   String get supplierPostLoadTrucksNeededHint => '1';
 
   @override
-  String get supplierPostLoadPricingScheduleTitle => 'Pricing and schedule';
+  String get supplierPostLoadPricingScheduleTitle => 'मूल्य और अनुसूची';
 
   @override
-  String get supplierPostLoadPriceAmountLabel => 'Price amount (₹)';
+  String get supplierPostLoadPriceAmountLabel => 'मूल्य राशि (₹)';
 
   @override
   String get supplierPostLoadPriceAmountHint => '54000';
 
   @override
-  String get supplierPostLoadPriceTypeTitle => 'Price type';
+  String get supplierPostLoadPriceTypeTitle => 'मूल्य प्रकार';
 
   @override
-  String get supplierPostLoadPriceTypeFixed => 'Fixed';
+  String get supplierPostLoadPriceTypeFixed => 'निश्चित';
 
   @override
-  String get supplierPostLoadPriceTypeNegotiable => 'Per Ton';
+  String get supplierPostLoadPriceTypeNegotiable => 'प्रति टन';
 
   @override
-  String get supplierPostLoadPriceTypeUnknown => 'Unknown';
+  String get supplierPostLoadPriceTypeUnknown => 'अज्ञात';
 
   @override
   String supplierPostLoadAdvancePercentageLabel(int value) {
@@ -2890,21 +2902,21 @@ class AppLocalizationsHi extends AppLocalizations {
     Object advanceAmount,
     Object balanceAmount,
   ) {
-    return 'Advance: ₹$advanceAmount • Balance: ₹$balanceAmount';
+    return 'Advance: ₹$advanceAmount - Balance: ₹$balanceAmount';
   }
 
   @override
-  String get supplierPostLoadReviewSummaryTitle => 'Review summary';
+  String get supplierPostLoadReviewSummaryTitle => 'सारांश समीक्षा करें';
 
   @override
-  String get supplierPostLoadOriginPending => 'Origin pending';
+  String get supplierPostLoadOriginPending => 'मूल लंबित';
 
   @override
-  String get supplierPostLoadDestinationPending => 'Destination pending';
+  String get supplierPostLoadDestinationPending => 'गंतव्य लंबित';
 
   @override
   String supplierPostLoadRouteSummary(Object origin, Object destination) {
-    return '$origin → $destination';
+    return '$origin > $destination';
   }
 
   @override
@@ -2913,12 +2925,12 @@ class AppLocalizationsHi extends AppLocalizations {
     Object weightTonnes,
     Object trucksNeeded,
   ) {
-    return '$material • ${weightTonnes}T • $trucksNeeded truck(s)';
+    return '$material - ${weightTonnes}T - $trucksNeeded truck(s)';
   }
 
   @override
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount • $priceType';
+    return 'Price: ₹$priceAmount - $priceType';
   }
 
   @override
@@ -2964,24 +2976,79 @@ class AppLocalizationsHi extends AppLocalizations {
       'Loads post करने से पहले supplier verification पूरी करें। Identity और business documents upload करें, फिर उन्हें review के लिए submit करें।';
 
   @override
-  String supplierPostLoadSuggestionSubtitle(Object label, Object source) {
-    return '$label • $source';
+  String get verificationReadinessCheckAadhaarNumber => 'आधार नंबर';
+
+  @override
+  String get verificationReadinessCheckPanNumber => 'पैन नंबर';
+
+  @override
+  String get verificationReadinessCheckAadhaarFrontPhoto =>
+      'आधार सामने का फोटो';
+
+  @override
+  String get verificationReadinessCheckAadhaarBackPhoto => 'आधार पीछे का फोटो';
+
+  @override
+  String get verificationReadinessCheckPanPhoto => 'पैन फोटो';
+
+  @override
+  String get verificationReadinessCheckCompanyName => 'कंपनी का नाम';
+
+  @override
+  String get verificationReadinessCheckBusinessLicenceNumber =>
+      'व्यवसाय लाइसेंस नंबर';
+
+  @override
+  String get verificationReadinessCheckBusinessLicenceDocument =>
+      'व्यवसाय लाइसेंस दस्तावेज़';
+
+  @override
+  String get verificationReadinessCheckLocation => 'सत्यापन स्थान';
+
+  @override
+  String get verificationReadinessCheckTruckWithRcDocument =>
+      'RC document वाला truck';
+
+  @override
+  String get verificationSubmitSectionTitle =>
+      'Verification के लिए submit करें';
+
+  @override
+  String get verificationSubmitSectionTitleTrucker =>
+      'Step 3: Verification के लिए submit करें';
+
+  @override
+  String get verificationSubmitSectionSubtitle =>
+      'नीचे दिए गए सभी items पूरे करें, फिर अपने documents को admin review के लिए भेजने हेतु Submit पर tap करें।';
+
+  @override
+  String verificationReadinessCompletedCount(int doneCount, int totalCount) {
+    return '$doneCount / $totalCount पूरे';
   }
 
   @override
-  String get supplierDashboardVerificationStatusVerified => 'Verified';
+  String get verificationOpenFleetHint =>
+      'Fleet screen से RC document वाला truck जोड़ें या manage करें।';
 
   @override
-  String get supplierDashboardVerificationStatusPending => 'Pending';
+  String supplierPostLoadSuggestionSubtitle(Object label, Object source) {
+    return '$label - $source';
+  }
 
   @override
-  String get supplierDashboardVerificationStatusRejected => 'Rejected';
+  String get supplierDashboardVerificationStatusVerified => 'सत्यापित';
+
+  @override
+  String get supplierDashboardVerificationStatusPending => 'लंबित';
+
+  @override
+  String get supplierDashboardVerificationStatusRejected => 'अस्वीकृत';
 
   @override
   String get supplierDashboardVerificationStatusUnknown => 'Unknown';
 
   @override
-  String get supplierVerificationPendingTitle => 'Verification pending';
+  String get supplierVerificationPendingTitle => 'सत्यापन लंबित';
 
   @override
   String get supplierVerificationPendingMessage =>
@@ -2997,54 +3064,53 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierVerificationNeedsAttentionTitle =>
-      'Verification needs attention';
+      'सत्यापन में ध्यान देना आवश्यक';
 
   @override
   String get supplierVerificationNeedsAttentionDescription =>
       'Latest verification feedback review करें, जरूरी documents update करें, और तैयार होने पर फिर submit करें।';
 
   @override
-  String get supplierOpenVerification => 'Open verification';
+  String get supplierOpenVerification => 'सत्यापन खोलें';
 
   @override
-  String get supplierReviewVerification => 'Review verification';
+  String get supplierReviewVerification => 'सत्यापन समीक्षा करें';
 
   @override
   String get supplierDashboardVerificationStatusUnknownFallback =>
       'Unknown verification status';
 
   @override
-  String get supplierFixVerification => 'Fix verification';
+  String get supplierFixVerification => 'सत्यापन ठीक करें';
 
   @override
-  String get supplierCompleteSetupTitle => 'Complete your supplier setup';
+  String get supplierCompleteSetupTitle => 'अपना सप्लायर सेटअप पूरा करें';
 
   @override
   String get supplierCompleteSetupMessage =>
       'Full supplier workspace use करने से पहले supplier verification पूरी करें और अपनी company details जोड़ें।';
 
   @override
-  String get supplierCompleteVerification => 'Complete verification';
+  String get supplierCompleteVerification => 'सत्यापन पूरा करें';
 
   @override
   String get supplierDashboardSuperLoadReadinessIntro =>
       'सुपर लोड के लिए अभी उपलब्ध तैयारी स्टेटस देखें।';
 
   @override
-  String get supplierDashboardSuperLoadVerificationComplete =>
-      'Verification complete';
+  String get supplierDashboardSuperLoadVerificationComplete => 'सत्यापन पूर्ण';
 
   @override
   String get supplierDashboardSuperLoadVerificationRequired =>
-      'Verification still required';
+      'सत्यापन अभी भी आवश्यक';
 
   @override
   String get supplierDashboardSuperLoadBusinessLicenceOnFile =>
-      'Business licence on file';
+      'व्यवसाय लाइसेंस दर्ज है';
 
   @override
   String get supplierDashboardSuperLoadBusinessLicenceMissing =>
-      'Business licence missing';
+      'व्यवसाय लाइसेंस गायब है';
 
   @override
   String get supplierDashboardSuperLoadCompanyAgeUnavailable =>
@@ -3139,34 +3205,35 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get supplierDashboardOpenLoadsWorkspace => 'Open loads workspace';
+  String get supplierDashboardOpenLoadsWorkspace => 'लोड्स वर्कस्पेस खोलें';
 
   @override
   String get supplierDashboardSuperLoadStatusRequestSubmitted =>
-      'Request submitted';
+      'अनुरोध जमा किया गया';
 
   @override
-  String get supplierDashboardSuperLoadStatusUnderReview => 'Under review';
+  String get supplierDashboardSuperLoadStatusUnderReview => 'समीक्षा में';
 
   @override
   String get supplierDashboardSuperLoadStatusApproved =>
-      'Approved • payment pending';
+      'स्वीकृत - भुगतान लंबित';
 
   @override
-  String get supplierDashboardSuperLoadStatusRejected => 'Rejected';
+  String get supplierDashboardSuperLoadStatusRejected => 'अस्वीकृत';
 
   @override
-  String get supplierDashboardSuperLoadStatusExpiredOrClosed => 'Closed';
+  String get supplierDashboardSuperLoadStatusExpiredOrClosed => 'बंद';
 
   @override
-  String get supplierDashboardSuperLoadStatusActive => 'Active';
+  String get supplierDashboardSuperLoadStatusActive => 'सक्रिय';
 
   @override
-  String get supplierDashboardSuperLoadStatusNotActive => 'Not requested';
+  String get supplierDashboardSuperLoadStatusNotActive =>
+      'अनुरोध नहीं किया गया';
 
   @override
   String supplierDashboardSuperLoadBadge(Object status) {
-    return 'Super Load • $status';
+    return 'Super Load - $status';
   }
 
   @override
@@ -3277,7 +3344,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId • Truck $truckNumber';
+    return 'Trip $tripId - Truck $truckNumber';
   }
 
   @override
@@ -3285,7 +3352,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object material,
     Object truckerName,
   ) {
-    return '$material • Trucker $truckerName';
+    return '$material - Trucker $truckerName';
   }
 
   @override
@@ -3386,7 +3453,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierTripDetailReportSourceLabel(Object routeLabel) {
-    return 'Supplier trip • $routeLabel';
+    return 'Supplier trip - $routeLabel';
   }
 
   @override
@@ -3464,46 +3531,46 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierTripDetailPending => 'Pending';
 
   @override
-  String get supplierTripDetailStageAssigned => 'Assigned';
+  String get supplierTripDetailStageAssigned => 'असाइन किया गया';
 
   @override
-  String get supplierTripDetailStagePickupPending => 'Pickup pending';
+  String get supplierTripDetailStagePickupPending => 'पिकअप लंबित';
 
   @override
-  String get supplierTripDetailStagePickedUp => 'Picked up';
+  String get supplierTripDetailStagePickedUp => 'पिक किया गया';
 
   @override
-  String get supplierTripDetailStageInTransit => 'In transit';
+  String get supplierTripDetailStageInTransit => 'रास्ते में';
 
   @override
-  String get supplierTripDetailStageDelivered => 'Delivered';
+  String get supplierTripDetailStageDelivered => 'डिलीवर किया गया';
 
   @override
-  String get supplierTripDetailStageProofSubmitted => 'Proof submitted';
+  String get supplierTripDetailStageProofSubmitted => 'प्रूफ जमा किया गया';
 
   @override
-  String get supplierTripDetailStageCompleted => 'Completed';
+  String get supplierTripDetailStageCompleted => 'पूर्ण';
 
   @override
-  String get supplierTripDetailStageDisputed => 'Disputed';
+  String get supplierTripDetailStageDisputed => 'विवादित';
 
   @override
-  String get supplierTripDetailStageCancelled => 'Cancelled';
+  String get supplierTripDetailStageCancelled => 'रद्द';
 
   @override
-  String get supplierTripDetailStageUnknown => 'Unknown';
+  String get supplierTripDetailStageUnknown => 'अज्ञात';
 
   @override
-  String get supplierTripDetailVerificationStatusVerified => 'Verified';
+  String get supplierTripDetailVerificationStatusVerified => 'सत्यापित';
 
   @override
-  String get supplierTripDetailVerificationStatusPending => 'Pending';
+  String get supplierTripDetailVerificationStatusPending => 'लंबित';
 
   @override
-  String get supplierTripDetailVerificationStatusRejected => 'Rejected';
+  String get supplierTripDetailVerificationStatusRejected => 'अस्वीकृत';
 
   @override
-  String get supplierTripDetailVerificationStatusUnknown => 'Unknown';
+  String get supplierTripDetailVerificationStatusUnknown => 'अज्ञात';
 
   @override
   String get supplierTripDetailDisputeCategoryFallback => 'Trip dispute';
@@ -3724,6 +3791,302 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get verificationTimelineNotifiedDescription =>
       'Review approve होने या correction के लिए वापस भेजे जाने पर हम आपका verification state यहीं update करेंगे।';
+
+  @override
+  String get verificationWizardStepPhoto => 'Photo';
+
+  @override
+  String get verificationWizardStepIdentity => 'Identity';
+
+  @override
+  String get verificationWizardStepTruck => 'Truck';
+
+  @override
+  String get verificationWizardStepBusiness => 'Business';
+
+  @override
+  String get verificationWizardStepReview => 'Review';
+
+  @override
+  String get verificationWizardBackAction => 'Back';
+
+  @override
+  String get verificationWizardSaveAndExitAction => 'Save & exit';
+
+  @override
+  String get verificationWizardExitTitle => 'Exit verification?';
+
+  @override
+  String get verificationWizardExitMessage =>
+      'You can leave this flow now and continue later.';
+
+  @override
+  String get verificationWizardExitAction => 'Exit';
+
+  @override
+  String get verificationWizardDashboardAction => 'Dashboard';
+
+  @override
+  String get verificationWizardProfileTitle => 'Profile photo';
+
+  @override
+  String get verificationWizardProfileSubtitle =>
+      'Upload a clear profile photo for verification.';
+
+  @override
+  String get verificationWizardProfileHint =>
+      'Use a clear, front-facing photo with good lighting.';
+
+  @override
+  String get verificationWizardIdentityTitle => 'Identity documents';
+
+  @override
+  String get verificationWizardIdentitySubtitle =>
+      'Add Aadhaar and PAN details with document uploads.';
+
+  @override
+  String get verificationWizardAadhaarNumberLabel => 'Aadhaar number';
+
+  @override
+  String get verificationWizardPanNumberLabel => 'PAN number';
+
+  @override
+  String get verificationWizardPanDocumentLabel => 'PAN document';
+
+  @override
+  String get verificationWizardTruckTitle => 'Truck details';
+
+  @override
+  String get verificationWizardTruckSubtitle =>
+      'Add one truck and upload its RC document.';
+
+  @override
+  String get verificationWizardTruckInfo =>
+      'At least one truck with an RC document is required for trucker verification.';
+
+  @override
+  String get verificationWizardTruckNumberLabel => 'Truck number';
+
+  @override
+  String get verificationWizardBodyTypeLabel => 'Body type';
+
+  @override
+  String get verificationWizardTyresLabel => 'Tyres';
+
+  @override
+  String get verificationWizardCapacityLabel => 'Capacity';
+
+  @override
+  String get verificationWizardCapacityHint => '16';
+
+  @override
+  String get verificationWizardRcDocumentLabel => 'RC document';
+
+  @override
+  String get verificationWizardRequiredForVerification =>
+      'Required for verification';
+
+  @override
+  String get verificationWizardTruckPhotoLabel => 'Truck photo';
+
+  @override
+  String get verificationWizardTruckPhotoHint => 'Optional photo of your truck';
+
+  @override
+  String get verificationWizardBusinessTitle => 'Business details';
+
+  @override
+  String get verificationWizardBusinessSubtitle =>
+      'Add your company, licence, optional GST, and verification location.';
+
+  @override
+  String get verificationWizardCompanyNameLabel => 'Company name';
+
+  @override
+  String get verificationWizardCompanyNameHint => 'Enter your company name';
+
+  @override
+  String get verificationWizardLicenseNumberLabel => 'License number';
+
+  @override
+  String get verificationWizardLicenseNumberHint =>
+      'Enter your business licence number';
+
+  @override
+  String get verificationWizardLicenseDocumentLabel =>
+      'Business licence document';
+
+  @override
+  String get verificationWizardGstDetailsTitle => 'GST details';
+
+  @override
+  String get verificationWizardGstDetailsAdded => 'GST details added';
+
+  @override
+  String get verificationWizardGstOptional => 'GST is optional';
+
+  @override
+  String get verificationWizardGstNumberLabel => 'GST number';
+
+  @override
+  String get verificationWizardGstCertificateLabel => 'GST certificate';
+
+  @override
+  String get verificationWizardSearchCityTitle => 'Search city';
+
+  @override
+  String get verificationWizardSearchCityHint => 'Type city name';
+
+  @override
+  String get verificationWizardUseCurrentLocation => 'Use current location';
+
+  @override
+  String verificationWizardNoCitiesFound(Object query) {
+    return 'No cities found for \"$query\"';
+  }
+
+  @override
+  String get verificationWizardTryDifferentSearch =>
+      'Try a different search term';
+
+  @override
+  String get verificationWizardLocationServicesOffTitle =>
+      'Location services are off';
+
+  @override
+  String get verificationWizardLocationServicesOffMessage =>
+      'Please enable GPS/location services and try again.';
+
+  @override
+  String get verificationWizardLocationPermissionTitle =>
+      'Location permission needed';
+
+  @override
+  String get verificationWizardLocationPermissionMessage =>
+      'Please allow location permission in app settings to continue.';
+
+  @override
+  String get verificationWizardOpenSettingsAction => 'Open settings';
+
+  @override
+  String get verificationWizardCapturedViaGps => 'Captured via GPS';
+
+  @override
+  String get verificationWizardAddedManually => 'Added manually';
+
+  @override
+  String get verificationWizardReviewTitle => 'Review and submit';
+
+  @override
+  String get verificationWizardReviewSubtitle =>
+      'Confirm your details before sending the verification packet.';
+
+  @override
+  String get verificationWizardReviewProfile => 'Profile';
+
+  @override
+  String get verificationWizardReviewProfileUploaded =>
+      'Profile photo uploaded';
+
+  @override
+  String get verificationWizardReviewProfileMissing => 'Profile photo missing';
+
+  @override
+  String get verificationWizardReviewIdentity => 'Identity';
+
+  @override
+  String get verificationWizardReviewDocumentsUploaded => 'Documents uploaded';
+
+  @override
+  String get verificationWizardReviewTruck => 'Truck';
+
+  @override
+  String get verificationWizardReviewTruckNumber => 'Truck number';
+
+  @override
+  String get verificationWizardReviewRcUploaded => 'RC document uploaded';
+
+  @override
+  String get verificationWizardReviewTruckPhotoUploaded =>
+      'Truck photo uploaded';
+
+  @override
+  String get verificationWizardReviewBusiness => 'Business';
+
+  @override
+  String get verificationWizardReviewCompanyName => 'Company name';
+
+  @override
+  String get verificationWizardReviewLicenseNumber => 'License number';
+
+  @override
+  String get verificationWizardReviewGstNumber => 'GST number';
+
+  @override
+  String get verificationWizardReviewLocation => 'Location';
+
+  @override
+  String get verificationWizardReviewTimelineMessage =>
+      'Review usually completes after the submitted packet is checked by the team.';
+
+  @override
+  String get verificationWizardTermsText =>
+      'I confirm that the information and uploaded documents are accurate and ready for verification review.';
+
+  @override
+  String get verificationWizardValidationError =>
+      'Please complete the required fields before submitting.';
+
+  @override
+  String get verificationWizardUnauthorizedError =>
+      'Your session is unavailable. Please sign in again.';
+
+  @override
+  String get verificationWizardUnknownError =>
+      'Something went wrong while submitting verification.';
+
+  @override
+  String get verificationWizardProfilePhotoRequired =>
+      'Profile photo is required';
+
+  @override
+  String get verificationWizardAadhaarRequired => 'Aadhaar must be 12 digits';
+
+  @override
+  String get verificationWizardPanRequired => 'Invalid PAN format';
+
+  @override
+  String get verificationWizardAadhaarFrontRequired =>
+      'Aadhaar front photo required';
+
+  @override
+  String get verificationWizardAadhaarBackRequired =>
+      'Aadhaar back photo required';
+
+  @override
+  String get verificationWizardPanPhotoRequired => 'PAN photo required';
+
+  @override
+  String get verificationWizardTruckNumberRequired =>
+      'Truck number is required';
+
+  @override
+  String get verificationWizardRcRequired => 'RC document is required';
+
+  @override
+  String get verificationWizardCompanyNameRequired =>
+      'Company name is required';
+
+  @override
+  String get verificationWizardLicenseRequired => 'License number is required';
+
+  @override
+  String get verificationWizardLicenseDocumentRequired =>
+      'License document is required';
+
+  @override
+  String get verificationWizardLocationRequired =>
+      'Verification location is required';
 
   @override
   String get verificationActionNeedsAttentionTitle =>
@@ -4026,6 +4389,27 @@ class AppLocalizationsHi extends AppLocalizations {
       'Trucker verification submit करने से पहले Aadhaar, PAN, profile photo upload करें और सुनिश्चित करें कि कम-से-कम एक approved truck मौजूद हो।';
 
   @override
+  String get verificationLockedStatusSectionTitle => 'Verification status';
+
+  @override
+  String get verificationLockedStatusVerifiedTitle => 'Verified';
+
+  @override
+  String get verificationLockedStatusPendingTitle => 'Under review';
+
+  @override
+  String get verificationLockedStatusVerifiedMessage =>
+      'आपकी verification approve हो चुकी है। अभी किसी action की ज़रूरत नहीं है।';
+
+  @override
+  String get verificationLockedStatusPendingMessage =>
+      'आपके documents review में हैं। Review पूरी होने पर आपको notify किया जाएगा।';
+
+  @override
+  String get verificationSubmitLockedFooter =>
+      'Submit होने के बाद आपकी details admin review पूरी होने तक locked रहेंगी।';
+
+  @override
   String verificationRequiredUploadedLabel(Object required, Object uploaded) {
     return '$uploaded/$required required uploaded';
   }
@@ -4174,62 +4558,62 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get truckerTripDetailVerificationStatusVerified => 'Verified';
+  String get truckerTripDetailVerificationStatusVerified => 'सत्यापित';
 
   @override
-  String get truckerTripDetailVerificationStatusPending => 'Pending';
+  String get truckerTripDetailVerificationStatusPending => 'लंबित';
 
   @override
-  String get truckerTripDetailVerificationStatusRejected => 'Rejected';
+  String get truckerTripDetailVerificationStatusRejected => 'अस्वीकृत';
 
   @override
-  String get truckerTripDetailVerificationStatusUnknown => 'Unknown';
+  String get truckerTripDetailVerificationStatusUnknown => 'अज्ञात';
 
   @override
-  String get truckerTripDetailStageAssigned => 'Assigned';
+  String get truckerTripDetailStageAssigned => 'असाइन किया गया';
 
   @override
-  String get truckerTripDetailStagePickupPending => 'Pickup pending';
+  String get truckerTripDetailStagePickupPending => 'पिकअप लंबित';
 
   @override
-  String get truckerTripDetailStagePickedUp => 'Picked up';
+  String get truckerTripDetailStagePickedUp => 'पिक किया गया';
 
   @override
-  String get truckerTripDetailStageInTransit => 'In transit';
+  String get truckerTripDetailStageInTransit => 'रास्ते में';
 
   @override
-  String get truckerTripDetailStageDelivered => 'Delivered';
+  String get truckerTripDetailStageDelivered => 'डिलीवर किया गया';
 
   @override
-  String get truckerTripDetailStageProofSubmitted => 'Proof submitted';
+  String get truckerTripDetailStageProofSubmitted => 'प्रूफ जमा किया गया';
 
   @override
-  String get truckerTripDetailStageCompleted => 'Completed';
+  String get truckerTripDetailStageCompleted => 'पूर्ण';
 
   @override
-  String get truckerTripDetailStageDisputed => 'Disputed';
+  String get truckerTripDetailStageDisputed => 'विवादित';
 
   @override
-  String get truckerTripDetailStageCancelled => 'Cancelled';
+  String get truckerTripDetailStageCancelled => 'रद्द';
 
   @override
-  String get truckerTripDetailProofStatusPodUploaded => 'POD uploaded';
+  String get truckerTripDetailProofStatusPodUploaded => 'पीओडी अपलोड किया गया';
 
   @override
-  String get truckerTripDetailProofStatusLrUploaded => 'LR uploaded';
+  String get truckerTripDetailProofStatusLrUploaded => 'एलआर अपलोड किया गया';
 
   @override
-  String get truckerTripDetailProofStatusAwaitingPod => 'Awaiting POD';
+  String get truckerTripDetailProofStatusAwaitingPod => 'पीओडी का इंतजार';
 
   @override
-  String get truckerTripDetailProofStatusProofSubmitted => 'Proof submitted';
+  String get truckerTripDetailProofStatusProofSubmitted => 'प्रूफ जमा किया गया';
 
   @override
-  String get truckerTripDetailProofStatusProofPending => 'Proof pending';
+  String get truckerTripDetailProofStatusProofPending => 'प्रूफ लंबित';
 
   @override
   String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId • Truck $truckNumber';
+    return 'Trip $tripId - Truck $truckNumber';
   }
 
   @override
@@ -4237,7 +4621,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object material,
     Object pickupDate,
   ) {
-    return '$material • Pickup $pickupDate';
+    return '$material - Pickup $pickupDate';
   }
 
   @override
@@ -4283,7 +4667,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object destinationLabel,
     Object originLabel,
   ) {
-    return 'Trucker trip • $originLabel → $destinationLabel';
+    return 'Trucker trip - $originLabel > $destinationLabel';
   }
 
   @override
@@ -4624,7 +5008,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'Latest movement समझने के लिए current trip state और recent timestamps review करें।';
 
   @override
-  String get truckerTripDetailPending => 'Pending';
+  String get truckerTripDetailPending => 'लंबित';
 
   @override
   String get supplierRaiseDisputeTitle => 'Raise Dispute';
@@ -4651,7 +5035,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierRaiseDisputeHeroSummary(Object material, Object routeLabel) {
-    return '$routeLabel • $material';
+    return '$routeLabel - $material';
   }
 
   @override
@@ -5086,10 +5470,10 @@ class AppLocalizationsHi extends AppLocalizations {
       'Image में visible न होने वाली additional evidence को written reason में describe करें।';
 
   @override
-  String get reportIssueTitle => 'Report Issue';
+  String get reportIssueTitle => 'समस्या रिपोर्ट करें';
 
   @override
-  String get reportIssueHeroTitle => 'Report spam, scam, or abuse';
+  String get reportIssueHeroTitle => 'स्पैम, स्कैम या दुरुपयोग रिपोर्ट करें';
 
   @override
   String get reportIssueHeroSubtitle =>
@@ -5101,74 +5485,74 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reportIssueSubmissionUnavailableTitle =>
-      'Report submission unavailable';
+      'रिपोर्ट जमा करना उपलब्ध नहीं है';
 
   @override
   String get reportIssueFailureMessage =>
       'अभी यह report तैयार या submit नहीं हो सकी। Linked context review करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get reportIssueLinkedContextTitle => 'Linked context';
+  String get reportIssueLinkedContextTitle => 'लिंक्ड संदर्भ';
 
   @override
   String reportIssueSourceLabel(Object sourceLabel) {
-    return 'Source: $sourceLabel';
+    return 'स्रोत: $sourceLabel';
   }
 
   @override
   String reportIssueRelatedLoadLabel(Object value) {
-    return 'Related load: $value';
+    return 'संबंधित लोड: $value';
   }
 
   @override
   String reportIssueRelatedTripLabel(Object value) {
-    return 'Related trip: $value';
+    return 'संबंधित ट्रिप: $value';
   }
 
   @override
-  String get reportIssueNotLinked => 'Not linked';
+  String get reportIssueNotLinked => 'लिंक नहीं किया गया';
 
   @override
-  String get reportIssueDetailsTitle => 'Report details';
+  String get reportIssueDetailsTitle => 'रिपोर्ट विवरण';
 
   @override
-  String get reportIssueTypeLabel => 'Issue type';
+  String get reportIssueTypeLabel => 'समस्या का प्रकार';
 
   @override
-  String get reportIssueWhatHappenedLabel => 'What happened?';
+  String get reportIssueWhatHappenedLabel => 'क्या हुआ?';
 
   @override
   String get reportIssueWhatHappenedHint =>
       'बताएँ कि spam, fake proof, non-payment, payout deception, या abusive behavior में क्या हुआ जिसे support को review करना चाहिए।';
 
   @override
-  String get reportIssueHelpfulDetailsTitle => 'Helpful details to include';
+  String get reportIssueHelpfulDetailsTitle => 'शामिल करने के लिए सहायक विवरण';
 
   @override
-  String get reportIssueEvidenceOptionalTitle => 'Evidence (required)';
+  String get reportIssueEvidenceOptionalTitle => 'सबूत (आवश्यक)';
 
   @override
   String get reportIssueNoEvidenceAttached =>
-      'Attach one evidence image before submitting this report.';
+      'इस रिपोर्ट को सबमिट करने से पहले एक सबूत इमेज अटैच करें।';
 
   @override
   String get reportIssueEvidenceAttached =>
-      'One evidence image is attached for review.';
+      'समीक्षा के लिए एक सबूत इमेज अटैच की गई है।';
 
   @override
-  String get reportIssueUseCameraAction => 'Use camera';
+  String get reportIssueUseCameraAction => 'कैमरा का उपयोग करें';
 
   @override
-  String get reportIssueChoosePhotoAction => 'Choose photo';
+  String get reportIssueChoosePhotoAction => 'फोटो चुनें';
 
   @override
-  String get reportIssueRemoveEvidenceAction => 'Remove evidence';
+  String get reportIssueRemoveEvidenceAction => 'सबूत हटाएं';
 
   @override
-  String get reportIssueSubmitAction => 'Submit report';
+  String get reportIssueSubmitAction => 'रिपोर्ट सबमिट करें';
 
   @override
-  String get reportIssueSubmittedSuccess => 'Report submitted successfully';
+  String get reportIssueSubmittedSuccess => 'रिपोर्ट सफलतापूर्वक सबमिट की गई';
 
   @override
   String get reportIssueSubmitFailureMessage =>
@@ -5176,23 +5560,23 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reportIssueAttachmentAttachedSuccess =>
-      'Evidence attached successfully';
+      'सबूत सफलतापूर्वक अटैच किया गया';
 
   @override
   String get reportIssueAttachmentFailureMessage =>
       'अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get reportIssueCategorySpamOrScamLabel => 'Spam or scam';
+  String get reportIssueCategorySpamOrScamLabel => 'स्पैम या स्कैम';
 
   @override
-  String get reportIssueCategoryAbusiveBehaviorLabel => 'Abusive behavior';
+  String get reportIssueCategoryAbusiveBehaviorLabel => 'दुरुपयोग व्यवहार';
 
   @override
-  String get reportIssueCategoryFakePayoutProofLabel => 'Fake payout proof';
+  String get reportIssueCategoryFakePayoutProofLabel => 'नकली भुगतान प्रमाण';
 
   @override
-  String get reportIssueCategoryNonPaymentLabel => 'Non-payment';
+  String get reportIssueCategoryNonPaymentLabel => 'गैर-भुगतान';
 
   @override
   String get reportIssueCategoryGuidanceSpamOrScam =>
@@ -5283,12 +5667,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supportComposeAttachmentOptionalTitle => 'अटैचमेंट (वैकल्पिक)';
 
   @override
-  String get supportComposeNoAttachment =>
-      'अभी कोई evidence image attach नहीं है।';
+  String get supportComposeNoAttachment => 'अभी कोई सबूत इमेज अटैच नहीं है।';
 
   @override
   String get supportComposeAttachmentAttached =>
-      'सपोर्ट review के लिए एक evidence image attach है।';
+      'सपोर्ट समीक्षा के लिए एक सबूत इमेज अटैच है।';
 
   @override
   String get supportComposeRemoveAttachmentAction => 'अटैचमेंट हटाएँ';
@@ -5299,7 +5682,31 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supportComposeAttachmentFailureMessage =>
-      'अभी वह evidence image attach नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी वह सबूत इमेज अटैच नहीं हो सकी। कोई दूसरी इमेज आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
+
+  @override
+  String get supportCreateTicketInvalidCategoryMessage =>
+      'Select a valid support category';
+
+  @override
+  String get supportCreateTicketDescriptionTooShortMessage =>
+      'Describe the issue in at least 10 characters';
+
+  @override
+  String get reportIssueInvalidCategoryMessage =>
+      'Select a valid report category';
+
+  @override
+  String get reportIssueDescriptionTooShortMessage =>
+      'Describe the issue in at least 10 characters';
+
+  @override
+  String get reportIssueAttachmentRequiredMessage =>
+      'Attach one evidence image before submitting this report';
+
+  @override
+  String get supportReplyMessageTooShortMessage =>
+      'Reply must contain at least 2 characters';
 
   @override
   String get supportCreateTicketSubmitAction => 'टिकट सबमिट करें';
@@ -5317,7 +5724,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supportReplyFailureMessage =>
-      'अभी आपकी latest support reply तैयार या submit नहीं हो सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी नवीनतम सपोर्ट रिप्लाई तैयार या सबमिट नहीं हो सकी। मैसेज समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get supportReplyLabel => 'सपोर्ट को रिप्लाई करें';
@@ -5334,7 +5741,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supportReplySubmitFailureMessage =>
-      'अभी आपकी reply भेजी नहीं जा सकी। Message review करें और थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी रिप्लाई भेजी नहीं जा सकी। मैसेज समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get supplierTripsSectionTitle => 'सप्लायर ट्रिप्स';
@@ -5355,7 +5762,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierTripsLoadFailureMessage =>
-      'अभी आपकी supplier trips लोड नहीं हो सकीं। Latest trip list और statuses refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी सप्लायर ट्रिप्स लोड नहीं हो सकीं। नवीनतम ट्रिप सूची और स्थिति रिफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get supplierTripsEmptyActiveTitle => 'अभी कोई सक्रिय ट्रिप नहीं है';
@@ -5365,11 +5772,11 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierTripsEmptyActiveSubtitle =>
-      'जब कोई load assigned execution में जाएगी, तब trips यहाँ दिखाई देंगी।';
+      'जब कोई लोड असाइन्ड एक्जिक्यूशन में जाएगी, तब ट्रिप्स यहाँ दिखाई देंगी।';
 
   @override
   String get supplierTripsEmptyCompletedSubtitle =>
-      'जब deliveries close out हो जाएँगी, तब completed supplier trips यहाँ दिखाई देंगी।';
+      'जब डिलिवरीज़ क्लोज आउट हो जाएँगी, तब पूर्ण सप्लायर ट्रिप्स यहाँ दिखाई देंगी।';
 
   @override
   String get supplierTripsEmptyActiveAction => 'मेरे लोड्स खोलें';
@@ -5384,21 +5791,22 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierTripsTruckerTruckLabel(Object truckId, Object truckerId) {
-    return 'ट्रकर $truckerId • ट्रक $truckId';
+    return 'ट्रकर $truckerId - ट्रक $truckId';
   }
 
   @override
   String get supplierTripsTrackTripAction => 'ट्रिप ट्रैक करें';
 
   @override
-  String get supplierTripDetailNotFoundTitle => 'Trip not found';
+  String get supplierTripDetailNotFoundTitle => 'ट्रिप नहीं मिली';
 
   @override
   String get supplierTripDetailNotFoundSubtitle =>
-      'यह supplier trip अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
+      'यह सप्लायर ट्रिप अब उपलब्ध नहीं है या अब आपके पास इसका एक्सेस नहीं है।';
 
   @override
-  String get supplierTripDetailBackToTripsAction => 'Back to supplier trips';
+  String get supplierTripDetailBackToTripsAction =>
+      'सप्लायर ट्रिप्स पर वापस जाएं';
 
   @override
   String get supplierTripDetailStubScreenTitle => 'ट्रिप विवरण';
@@ -5413,26 +5821,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierTripDetailStubMessage =>
-      'Detailed supplier trip execution screens अगले trip-detail slice में और विस्तृत होंगी। Navigation पहले से supplier trips list से wired है।';
+      'विस्तृत सप्लायर ट्रिप एक्जिक्यूशन स्क्रीन्स अगले ट्रिप-डिटेल स्लाइस में और विस्तृत होंगी। नेविगेशन पहले से सप्लायर ट्रिप्स सूची से वायर्ड है।';
 
   @override
   String assistantHeroTitleWithName(Object firstName) {
-    return '$firstName के लिए Guided help';
+    return '$firstName के लिए मार्गदर्शन सहायता';
   }
 
   @override
   String get assistantHeroSubtitleSupplier =>
-      'लोड पोस्ट करने, active load execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।';
+      'लोड पोस्ट करने, सक्रिय लोड एक्जिक्यूशन देखने, और सही कम्युनिकेशन या सपोर्ट सरफेस जल्दी खोलने के लिए गाइडेड शॉर्टकट्स का उपयोग करें।';
 
   @override
   String get assistantHeroSubtitleTrucker =>
-      'लोड ढूँढने, trip execution देखने, और सही communication या support surface जल्दी खोलने के लिए guided shortcuts का उपयोग करें।';
+      'लोड ढूँढने, ट्रिप एक्जिक्यूशन देखने, और सही कम्युनिकेशन या सपोर्ट सरफेस जल्दी खोलने के लिए गाइडेड शॉर्टकट्स का उपयोग करें।';
 
   @override
-  String get assistantWorkflowGuidanceSupplier => 'Supplier workflow guidance';
+  String get assistantWorkflowGuidanceSupplier =>
+      'सप्लायर वर्कफ़्लो मार्गदर्शन';
 
   @override
-  String get assistantWorkflowGuidanceTrucker => 'Trucker workflow guidance';
+  String get assistantWorkflowGuidanceTrucker => 'ट्रकर वर्कफ़्लो मार्गदर्शन';
 
   @override
   String get assistantProfileComplete => 'प्रोफ़ाइल पूर्ण';
@@ -5441,7 +5850,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get assistantProfileIncomplete => 'प्रोफ़ाइल अपूर्ण';
 
   @override
-  String get assistantRecommendedNextActionsTitle => 'सुझाए गए अगले actions';
+  String get assistantRecommendedNextActionsTitle =>
+      'सुझाए गए अगले कार्रवाइयाँ';
 
   @override
   String get assistantOpenSupplierTripsAction => 'सप्लायर ट्रिप्स खोलें';
@@ -5456,31 +5866,31 @@ class AppLocalizationsHi extends AppLocalizations {
   String get assistantOpenMessagesAction => 'मेसेजेस खोलें';
 
   @override
-  String get assistantGuidedHelpTitle => 'Guided help';
+  String get assistantGuidedHelpTitle => 'मार्गदर्शन सहायता';
 
   @override
   String get assistantBestForLabel => 'किसके लिए बेहतर';
 
   @override
   String get assistantBestForSupplier =>
-      'लोड पोस्ट करना, active load execution देखना, conversations review करना, और support जल्दी खोलना।';
+      'लोड पोस्ट करना, सक्रिय लोड एक्जिक्यूशन देखना, कन्वर्सेशन्स रिव्यू करना, और सपोर्ट जल्दी खोलना।';
 
   @override
   String get assistantBestForTrucker =>
-      'लोड ढूँढना, trip execution देखना, conversations review करना, और support जल्दी खोलना।';
+      'लोड ढूँढना, ट्रिप एक्जिक्यूशन देखना, कन्वर्सेशन्स रिव्यू करना, और सपोर्ट जल्दी खोलना।';
 
   @override
-  String get assistantVoiceBehaviorLabel => 'Voice behavior';
+  String get assistantVoiceBehaviorLabel => 'आवाज व्यवहार';
 
   @override
   String get assistantVoiceBehaviorValue =>
-      'अभी केवल manual entry उपलब्ध है। Full conversational bot, STT, और auto-speak dedicated communication और localization phases में अभी pending हैं।';
+      'अभी केवल मैनुअल एंट्री उपलब्ध है। फुल कन्वर्सेशनल बॉट, स्पीच-टू-टेक्स्ट, और ऑटो-स्पीक डेडिकेटेड कम्युनिकेशन और लोकलाइजेशन फेज़ में अभी पेंडिंग हैं।';
 
   @override
   String get assistantCurrentRoleLabel => 'वर्तमान भूमिका';
 
   @override
-  String get assistantMoreActionsTitle => 'More actions';
+  String get assistantMoreActionsTitle => 'और कार्रवाइयाँ';
 
   @override
   String get assistantOpenNotificationsAction => 'नोटिफिकेशन्स खोलें';
@@ -5493,96 +5903,95 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get shellAccessRestrictedDeactivatedSubtitle =>
-      'आपका account cleanup pending होने तक deactivated है। आपको सुरक्षित रूप से sign out किया जा रहा है...';
+      'आपका खाता क्लीनअप पेंडिंग होने तक डिएक्टिवेटेड है। आपको सुरक्षित रूप से साइन आउट किया जा रहा है...';
 
   @override
   String get shellAccessRestrictedBannedSubtitle =>
-      'आपके account access पर प्रतिबंध है। आपको सुरक्षित रूप से sign out किया जा रहा है...';
+      'आपके खाते एक्सेस पर प्रतिबंध है। आपको सुरक्षित रूप से साइन आउट किया जा रहा है...';
 
   @override
-  String get shellAccountDeactivatedMessage => 'Account deactivated';
+  String get shellAccountDeactivatedMessage => 'खाता निष्क्रिय किया गया';
 
   @override
-  String get shellAccountBannedMessage => 'Account banned';
+  String get shellAccountBannedMessage => 'खाते पर प्रतिबंध';
 
   @override
-  String get shellRouteNotFoundTitle => 'Route नहीं मिला';
+  String get shellRouteNotFoundTitle => 'मार्ग नहीं मिला';
 
   @override
   String get shellMessagesLoadFailureMessage =>
-      'अभी आपके messages लोड नहीं हो सके। Latest conversations refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपके संदेश लोड नहीं हो सके। नवीनतम बातचीत रिफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get shellMessagesBookingStatusSubmitted => 'Submitted';
+  String get shellMessagesBookingStatusSubmitted => 'जमा किया गया';
 
   @override
-  String get shellMessagesBookingStatusApproved => 'Approved';
+  String get shellMessagesBookingStatusApproved => 'स्वीकृत';
 
   @override
-  String get shellMessagesBookingStatusRejected => 'Rejected';
+  String get shellMessagesBookingStatusRejected => 'अस्वीकृत';
 
   @override
-  String get shellMessagesBookingStatusPending => 'Pending';
+  String get shellMessagesBookingStatusPending => 'लंबित';
 
   @override
-  String get shellMessagesBookingStatusUnknown => 'Unknown';
+  String get shellMessagesBookingStatusUnknown => 'अज्ञात';
 
   @override
-  String get truckerLoadDetailTitle => 'Load Detail';
+  String get truckerLoadDetailTitle => 'लोड विवरण';
 
   @override
-  String get truckerLoadDetailLoadNotFoundTitle => 'Load not found';
+  String get truckerLoadDetailLoadNotFoundTitle => 'लोड नहीं मिला';
 
   @override
   String get truckerLoadDetailLoadNotFoundSubtitle =>
-      'यह marketplace load अब उपलब्ध नहीं है या अब आपके पास इसका access नहीं है।';
+      'यह मार्केटप्लेस लोड अब उपलब्ध नहीं है या अब आपके पास इसका एक्सेस नहीं है।';
 
   @override
-  String get truckerLoadDetailBackToFindLoadsAction => 'Back to find loads';
+  String get truckerLoadDetailBackToFindLoadsAction => 'लोड खोजें पर वापस जाएं';
 
   @override
-  String get truckerLoadDetailLoadFailureTitle =>
-      'Unable to load freight detail';
+  String get truckerLoadDetailLoadFailureTitle => 'लोड विवरण लोड नहीं हो सका';
 
   @override
   String get truckerLoadDetailLoadFailureMessage =>
-      'अभी यह freight detail load नहीं हो सकी। Current route, pricing, और booking context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'We could not load this freight detail right now. Retry shortly to refresh the current route, pricing, and booking context.';
 
   @override
   String get truckerLoadDetailSupportUnavailableTitle =>
-      'Some supporting load details are unavailable';
+      'कुछ सहायक लोड विवरण उपलब्ध नहीं हैं';
 
   @override
   String get truckerLoadDetailSupportFailureMessage =>
-      'कुछ supporting load details अभी उपलब्ध नहीं हैं। Latest freight context refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
+      'कुछ सहायक लोड विवरण अभी उपलब्ध नहीं हैं। नवीनतम लोड संदर्भ को रिफ्रेश करने के लिए थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get truckerLoadDetailActionFailureTitle => 'Action unavailable';
+  String get truckerLoadDetailActionFailureTitle => 'कार्रवाई उपलब्ध नहीं है';
 
   @override
   String get truckerLoadDetailActionFailureMessage =>
-      'Latest load action अभी पूरी नहीं हो सकी। Current booking state review करें और थोड़ी देर बाद फिर कोशिश करें।';
+      'नवीनतम लोड कार्रवाई अभी पूरी नहीं हो सकी। वर्तमान बुकिंग स्थिति की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String get truckerLoadDetailBookingSubmitFailureMessage =>
-      'अभी यह booking request submit नहीं हो सकी। Selected truck review करें और थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी यह बुकिंग अनुरोध सबमिट नहीं हो सका। चुने गए ट्रक की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
   String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'Load $loadId • Pickup $pickupDate';
+    return 'लोड $loadId - पिकअप $pickupDate';
   }
 
   @override
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType) {
-    return '₹$priceAmount • $priceType';
+    return '₹$priceAmount - $priceType';
   }
 
   @override
-  String get truckerLoadDetailTruckMatchAvailable => 'Truck match available';
+  String get truckerLoadDetailTruckMatchAvailable => 'ट्रक मैच उपलब्ध है';
 
   @override
   String get truckerLoadDetailNoApprovedTruckMatchYet =>
-      'No approved truck match yet';
+      'अभी तक कोई स्वीकृत ट्रक मैच नहीं';
 
   @override
   String truckerLoadDetailMaterialSummary(
@@ -5590,139 +5999,135 @@ class AppLocalizationsHi extends AppLocalizations {
     Object material,
     Object weightTonnes,
   ) {
-    return '$material • ${weightTonnes}T • Advance $advancePercentage%';
+    return '$material - ${weightTonnes}T - अग्रिम $advancePercentage%';
   }
 
   @override
-  String get truckerLoadDetailSuperLoadGuarantee =>
-      'Super Load • Payment Guarantee';
+  String get truckerLoadDetailSuperLoadGuarantee => 'सुपर लोड - भुगतान गारंटी';
 
   @override
-  String get truckerLoadDetailRoutePriceSummaryTitle =>
-      'Route and price summary';
+  String get truckerLoadDetailRoutePriceSummaryTitle => 'मार्ग और कीमत सारांश';
 
   @override
   String truckerLoadDetailOriginLabel(Object origin) {
-    return 'Origin: $origin';
+    return 'मूल: $origin';
   }
 
   @override
   String truckerLoadDetailDestinationLabel(Object destination) {
-    return 'Destination: $destination';
+    return 'गंतव्य: $destination';
   }
 
   @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
-    return 'Pickup: $pickupDate';
+    return 'पिकअप: $pickupDate';
   }
 
   @override
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount • $priceType';
+    return 'कीमत: ₹$priceAmount - $priceType';
   }
 
   @override
   String truckerLoadDetailDistanceLabel(Object distance) {
-    return 'Distance: $distance km';
+    return 'दूरी: $distance किमी';
   }
 
   @override
   String truckerLoadDetailDriveTimeLabel(Object minutes) {
-    return 'Estimated drive time: $minutes min';
+    return 'अनुमानित ड्राइव समय: $minutes मिनट';
   }
 
   @override
-  String get truckerLoadDetailTruckRequirementTitle =>
-      'Truck requirement summary';
+  String get truckerLoadDetailTruckRequirementTitle => 'ट्रक आवश्यकता सारांश';
 
   @override
   String truckerLoadDetailBodyTypeLabel(Object bodyType) {
-    return 'Body type: $bodyType';
+    return 'बॉडी टाइप: $bodyType';
   }
 
   @override
   String truckerLoadDetailTyresLabel(Object tyres) {
-    return 'Tyres: $tyres';
+    return 'टायर: $tyres';
   }
 
   @override
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed) {
-    return 'Trucks needed: $booked/$needed booked';
+    return 'ट्रक चाहिए: $booked/$needed बुक किए गए';
   }
 
   @override
-  String get truckerLoadDetailAnyOption => 'Any';
+  String get truckerLoadDetailAnyOption => 'कोई भी';
 
   @override
   String get truckerLoadDetailNoApprovedTruckSelected =>
-      'No approved truck selected';
+      'कोई स्वीकृत ट्रक नहीं चुना गया';
 
   @override
   String get truckerLoadDetailSelectedTruckMatches =>
-      'Selected truck matches this load';
+      'चुना गया ट्रक इस लोड से मेल खाता है';
 
   @override
   String get truckerLoadDetailSelectedTruckMayNotMatch =>
-      'Selected truck may not match this load';
+      'चुना गया ट्रक इस लोड से मेल नहीं खा सकता';
 
   @override
-  String get truckerLoadDetailCargoScheduleTitle =>
-      'Cargo and schedule details';
+  String get truckerLoadDetailCargoScheduleTitle => 'कार्गो और शेड्यूल विवरण';
 
   @override
   String truckerLoadDetailMaterialLabel(Object material) {
-    return 'Material: $material';
+    return 'सामग्री: $material';
   }
 
   @override
   String truckerLoadDetailWeightLabel(Object weight) {
-    return 'Weight: $weight tonnes';
+    return 'वजन: $weight टन';
   }
 
   @override
   String truckerLoadDetailOriginCityLabel(Object city) {
-    return 'Origin city: $city';
+    return 'मूल शहर: $city';
   }
 
   @override
   String truckerLoadDetailDestinationCityLabel(Object city) {
-    return 'Destination city: $city';
+    return 'गंतव्य शहर: $city';
   }
 
   @override
-  String get truckerLoadDetailTripCostEstimateTitle => 'Trip cost estimate';
+  String get truckerLoadDetailTripCostEstimateTitle => 'ट्रिप लागत अनुमान';
 
   @override
   String get truckerLoadDetailTripCostUnavailableTitle =>
-      'Trip cost unavailable';
+      'ट्रिप लागत उपलब्ध नहीं';
 
   @override
   String get truckerLoadDetailTripCostUnavailableMessage =>
-      'अभी इस load के लिए distance उपलब्ध नहीं है, इसलिए trip cost estimate calculate नहीं हो सकती।';
+      'अभी इस लोड के लिए दूरी उपलब्ध नहीं है, इसलिए ट्रिप लागत अनुमान की गणना नहीं हो सकती।';
 
   @override
   String truckerLoadDetailDieselLabel(Object amount) {
-    return 'Diesel: ₹$amount';
+    return 'डीजल: ₹$amount';
   }
 
   @override
   String truckerLoadDetailTollsLabel(Object amount) {
-    return 'Tolls: ₹$amount';
+    return 'टोल: ₹$amount';
   }
 
   @override
   String truckerLoadDetailMileageUsedLabel(Object value) {
-    return 'Mileage used: $value km/L';
+    return 'माइलेज: $value किमी/ली';
   }
 
   @override
   String truckerLoadDetailDieselPriceLabel(Object value) {
-    return 'Diesel price: ₹$value/L';
+    return 'डीजल कीमत: ₹$value/ली';
   }
 
   @override
   String truckerLoadDetailEstimatedTollPlazasLabel(Object count) {
-    return 'Estimated toll plazas: $count';
+    return 'अनुमानित टोल प्लाजा: $count';
   }
 
   @override
@@ -5740,7 +6145,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailSupplierProfile => 'Supplier profile';
 
   @override
-  String get truckerLoadDetailNextStepTitle => 'Next step';
+  String get truckerLoadDetailNextStepTitle => 'अगला कदम';
 
   @override
   String get truckerLoadDetailStatusActive => 'सक्रिय';
@@ -5757,10 +6162,10 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get truckerLoadDetailBookingFeedbackTitle => 'Booking feedback';
+  String get truckerLoadDetailBookingFeedbackTitle => 'बुकिंग फीडबैक';
 
   @override
-  String get truckerLoadDetailBookingBlockedTitle => 'Booking is blocked';
+  String get truckerLoadDetailBookingBlockedTitle => 'बुकिंग अवरुद्ध है';
 
   @override
   String get truckerLoadDetailMessageSupplierAction => 'Message supplier';
@@ -5779,7 +6184,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object truckNumber,
     Object tyres,
   ) {
-    return 'This load will be booked with $truckNumber • $bodyType • $tyres tyres.';
+    return 'This load will be booked with $truckNumber - $bodyType - $tyres tyres.';
   }
 
   @override
@@ -5792,7 +6197,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object truckNumber,
     Object tyres,
   ) {
-    return '$truckNumber • $bodyType • $tyres tyres';
+    return '$truckNumber - $bodyType - $tyres tyres';
   }
 
   @override
@@ -5803,7 +6208,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailAddTruckFirstAction => 'पहले एक ट्रक जोड़ें';
 
   @override
-  String get truckerLoadDetailRequestSubmittedAction => 'अनुरोध सबमिट किया गया';
+  String get truckerLoadDetailRequestSubmittedAction => 'अनुरोध जमा किया गया';
 
   @override
   String get truckerLoadDetailBookedAction => 'बुक किया गया';
@@ -5813,7 +6218,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerLoadDetailLoadBookedSuccess =>
-      'लोड बुक किया गया! सप्लायर की मंजूरी की प्रतीक्षा कर रहा है';
+      'लोड बुक किया गया! सप्लायर की मंजूरी की प्रतीक्षा में';
 
   @override
   String get truckerLoadDetailShareLoadAction => 'लोड साझा करें';
@@ -5844,7 +6249,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String truckerLoadDetailReportSourceLabel(Object routeLabel) {
-    return 'ट्रक लोड • $routeLabel';
+    return 'ट्रक लोड - $routeLabel';
   }
 
   @override
@@ -5994,7 +6399,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierLoadDetailNotFoundSubtitle =>
-      'यह लोड विवरण अभी उपलब्ध नहीं है। My Loads पर लौटें और फिर प्रयास करें।';
+      'यह लोड विवरण अभी उपलब्ध नहीं है। मेरे लोड्स पर लौटें और फिर प्रयास करें।';
 
   @override
   String get supplierLoadDetailLoadFailureTitle => 'लोड विवरण लोड नहीं हो सका';
@@ -6008,7 +6413,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'लोड ID: $loadId • पिकअप: $pickupDate';
+    return 'लोड ID: $loadId - पिकअप: $pickupDate';
   }
 
   @override
@@ -6017,7 +6422,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get supplierLoadSupportFailureMessage =>
-      'बुकिंग या ट्रिप अभी रीफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।';
+      'बुकिंग या ट्रिप अभी रिफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।';
 
   @override
   String get supplierLoadDetailStatusAndActionsTitle => 'स्थिति और कार्रवाई';
@@ -6109,7 +6514,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'इस लोड का रूट प्रीव्यू अभी उपलब्ध नहीं है।';
 
   @override
-  String get supplierLoadDetailOpenInGoogleMaps => 'Google Maps में खोलें';
+  String get supplierLoadDetailOpenInGoogleMaps => 'गूगल मैप्स में खोलें';
 
   @override
   String get supplierLoadDetailCargoAndRequirementsTitle =>
@@ -6209,7 +6614,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supplierBookingSubmittedAt(Object truckLabel, Object submittedAt) {
-    return '$truckLabel • जमा किया गया $submittedAt';
+    return '$truckLabel - जमा किया गया $submittedAt';
   }
 
   @override
@@ -6223,7 +6628,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object truckerId,
     Object truckId,
   ) {
-    return '$material • ट्रकर $truckerId • ट्रक $truckId';
+    return '$material - ट्रकर $truckerId - ट्रक $truckId';
   }
 
   @override
@@ -6348,5 +6753,68 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String verificationReadyTruckCount(Object count) {
     return 'वेरिफिकेशन-रेडी ट्रक: $count';
+  }
+
+  @override
+  String get appBarLanguageToggleTooltip => 'Switch language';
+
+  @override
+  String get connectivityOfflineBanner =>
+      'आप ऑफ़लाइन हैं। कुछ सुविधाएँ सीमित हो सकती हैं।';
+
+  @override
+  String get connectivityOfflineActionsMessage =>
+      'आप ऑफ़लाइन हैं। नेटवर्क की ज़रूरत वाली कार्रवाइयाँ अभी काम नहीं करेंगी।';
+
+  @override
+  String get localeSelectSupportedLanguage => 'कोई समर्थित भाषा चुनें';
+
+  @override
+  String get localeFieldSupportedLanguages =>
+      'समर्थित भाषाएँ English और हिंदी हैं';
+
+  @override
+  String get onboardingGateTimeoutMessage =>
+      'लोडिंग में सामान्य से अधिक समय लग रहा है।';
+
+  @override
+  String get onboardingGateRetryAction => 'पुनः प्रयास करें';
+
+  @override
+  String get onboardingGateBackToSignInAction => 'साइन इन पर वापस जाएँ';
+
+  @override
+  String authPasswordResetSentSuccess(Object email) {
+    return '$email पर पासवर्ड रीसेट लिंक भेजा गया है। अपना inbox देखें।';
+  }
+
+  @override
+  String get authPasswordResetSentFailure =>
+      'रीसेट लिंक नहीं भेजा जा सका। कृपया फिर कोशिश करें।';
+
+  @override
+  String get chatPreviewVoice => 'वॉइस संदेश';
+
+  @override
+  String get chatPreviewLocation => 'स्थान साझा किया गया';
+
+  @override
+  String get chatPreviewDocument => 'दस्तावेज़ साझा किया गया';
+
+  @override
+  String get chatPreviewMapCard => 'मार्ग कार्ड साझा किया गया';
+
+  @override
+  String get chatPreviewTruckCard => 'ट्रक विवरण साझा किए गए';
+
+  @override
+  String get chatPreviewSystem => 'सिस्टम अद्यतन';
+
+  @override
+  String get chatPreviewEmpty => 'अभी कोई संदेश नहीं';
+
+  @override
+  String reportSourceSupplierLoad(Object routeLabel) {
+    return 'Supplier load - $routeLabel';
   }
 }

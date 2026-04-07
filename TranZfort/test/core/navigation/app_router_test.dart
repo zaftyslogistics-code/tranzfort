@@ -70,6 +70,9 @@ class _NoopChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async {}
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => 0;
 }
 
 class _TestInboxController extends InboxController {
@@ -302,6 +305,7 @@ ProviderContainer _buildSupplierRouterContainer({AuthStateSnapshot authState = _
           supabaseConfig: SupabaseConfig(
             url: 'https://example.supabase.co',
             anonKey: 'anon-key',
+            googleWebClientId: 'google-web-client-id',
           ),
         ),
       ),
@@ -335,6 +339,7 @@ ProviderContainer _buildTruckerRouterContainer({AuthStateSnapshot authState = _t
           supabaseConfig: SupabaseConfig(
             url: 'https://example.supabase.co',
             anonKey: 'anon-key',
+            googleWebClientId: 'google-web-client-id',
           ),
         ),
       ),
@@ -415,6 +420,7 @@ void main() {
             supabaseConfig: SupabaseConfig(
               url: 'https://example.supabase.co',
               anonKey: 'anon-key',
+              googleWebClientId: 'google-web-client-id',
             ),
           ),
         ),

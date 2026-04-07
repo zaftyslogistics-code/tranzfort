@@ -63,6 +63,9 @@ class _UnusedChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async => throw UnimplementedError();
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => throw UnimplementedError();
 }
 
 class _FakeChatRepository extends ChatRepository {
@@ -270,7 +273,7 @@ ConversationPreview _conversation({String bookingStatusLabel = 'approved'}) {
     truckerId: 'trucker-1',
     loadId: 'load-1',
     tripId: 'trip-1',
-    routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+    routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
     loadMaterial: 'Coal',
     loadPriceAmount: 62500,
     loadStatusLabel: 'active',
@@ -280,7 +283,7 @@ ConversationPreview _conversation({String bookingStatusLabel = 'approved'}) {
     supplierCompanyName: 'Amit Logistics',
     truckerName: 'Ravi Trucker',
     truckerMobile: '+919812345678',
-    truckDisplayLabel: 'MH12AB1234 • Tata Ace Gold',
+    truckDisplayLabel: 'MH12AB1234 - Tata Ace Gold',
     bookingRequestId: 'booking-1',
     bookingStatusLabel: bookingStatusLabel,
     latestMessagePreview: 'Report after unloading',
@@ -461,7 +464,7 @@ TruckerProfile _verifiedTruckerProfile() {
 void main() {
   testWidgets('renders chat thread and marks conversation read on open', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -484,7 +487,7 @@ void main() {
 
   testWidgets('chat screen falls back to unknown for unsupported booking status', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation(bookingStatusLabel: 'needs_manual_review')],
       messages: <ChatMessage>[
@@ -501,7 +504,7 @@ void main() {
 
   testWidgets('sends text messages from composer', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -525,7 +528,7 @@ void main() {
 
   testWidgets('shows sanitized text-send failure copy', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -547,7 +550,7 @@ void main() {
 
   testWidgets('shows sanitized thread-load failure copy', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: const <ChatMessage>[],
@@ -565,7 +568,7 @@ void main() {
 
   testWidgets('shows sanitized booking action failure copy', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -604,7 +607,7 @@ void main() {
 
   testWidgets('shows optimistic sending state before send completes', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -632,7 +635,7 @@ void main() {
 
   testWidgets('blocks trucker replies until verification is complete', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -678,7 +681,7 @@ void main() {
 
   testWidgets('blocked trucker chat readiness action opens trucker verification when verification is incomplete', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -714,7 +717,7 @@ void main() {
 
   testWidgets('blocked trucker chat readiness action opens fleet when verification is complete but no approved truck exists', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -750,7 +753,7 @@ void main() {
 
   testWidgets('chat menu report issue action opens report issue route with conversation context', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -778,12 +781,12 @@ void main() {
     expect(receivedContext!.initialCategory, 'spam_or_scam');
     expect(receivedContext!.relatedLoadId, 'load-1');
     expect(receivedContext!.relatedTripId, 'trip-1');
-    expect(receivedContext!.sourceLabel, 'Chat • Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(receivedContext!.sourceLabel, 'Chat - Chandrapur, Maharashtra > Mumbai, Maharashtra');
   });
 
   testWidgets('unavailable conversation recovery action opens messages route', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: const <ConversationPreview>[],
       messages: const <ChatMessage>[],
@@ -803,7 +806,7 @@ void main() {
 
   testWidgets('renders richer supported non-text message types', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -826,7 +829,7 @@ void main() {
           id: 'map-1',
           type: ChatMessageType.mapCard,
           structuredPayload: {
-            'route_label': 'Chandrapur → Mumbai',
+            'route_label': 'Chandrapur > Mumbai',
             'material': 'Coal',
             'weight_label': '25T',
             'price_label': '₹62,500',
@@ -837,7 +840,7 @@ void main() {
           id: 'truck-1',
           type: ChatMessageType.truckCard,
           structuredPayload: {
-            'truck_display_label': 'MH12AB1234 • Tata Ace Gold',
+            'truck_display_label': 'MH12AB1234 - Tata Ace Gold',
             'body_type': 'Open body',
             'tyres': '6',
           },
@@ -852,15 +855,15 @@ void main() {
     expect(find.text('0:12'), findsOneWidget);
     expect(find.text('Factory gate'), findsOneWidget);
     expect(find.text('invoice.pdf'), findsOneWidget);
-    expect(find.text('Chandrapur → Mumbai'), findsOneWidget);
-    expect(find.text('Coal • 25T • ₹62,500 • ₹15,200'), findsOneWidget);
-    expect(find.text('MH12AB1234 • Tata Ace Gold'), findsOneWidget);
-    expect(find.text('Open body • 6 tyres'), findsOneWidget);
+    expect(find.text('Chandrapur > Mumbai'), findsOneWidget);
+    expect(find.text('Coal - 25T - ₹62,500 - ₹15,200'), findsOneWidget);
+    expect(find.text('MH12AB1234 - Tata Ace Gold'), findsOneWidget);
+    expect(find.text('Open body - 6 tyres'), findsOneWidget);
   });
 
   testWidgets('toggles voice recording and sends voice message on second tap', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -888,7 +891,7 @@ void main() {
 
   testWidgets('shows sanitized voice-start failure copy', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -910,7 +913,7 @@ void main() {
 
   testWidgets('plays and pauses a voice message bubble with signed playback url', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -952,7 +955,7 @@ void main() {
 
   testWidgets('shows unavailable copy when voice playback signed url cannot be created', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -987,7 +990,7 @@ void main() {
 
   testWidgets('shows playback failure copy when voice playback controller throws', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -1021,7 +1024,7 @@ void main() {
 
   testWidgets('derives map card trip cost from distance and diesel price payload fields', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -1029,7 +1032,7 @@ void main() {
           id: 'map-raw-1',
           type: ChatMessageType.mapCard,
           structuredPayload: {
-            'route_label': 'Chandrapur → Mumbai',
+            'route_label': 'Chandrapur > Mumbai',
             'material': 'Coal',
             'weight_tonnes': 25,
             'price_amount': 62500,
@@ -1048,12 +1051,12 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Coal • 25T • ₹62,500 • ₹12,440'), findsOneWidget);
+    expect(find.text('Coal - 25T - ₹62,500 - ₹12,440'), findsOneWidget);
   });
 
   testWidgets('opens load detail when map card view route is tapped', (tester) async {
     addTearDown(() => tester.binding.setSurfaceSize(null));
-    await tester.binding.setSurfaceSize(const Size(1280, 1600));
+    await tester.binding.setSurfaceSize(const Size(1280, 2400));
     final repository = _FakeChatRepository(
       conversations: <ConversationPreview>[_conversation()],
       messages: <ChatMessage>[
@@ -1062,7 +1065,7 @@ void main() {
           type: ChatMessageType.mapCard,
           structuredPayload: {
             'load_id': 'load-1',
-            'route_label': 'Chandrapur → Mumbai',
+            'route_label': 'Chandrapur > Mumbai',
             'material': 'Coal',
             'weight_tonnes': 25,
             'price_amount': 62500,

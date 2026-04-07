@@ -57,7 +57,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           if (path == AppRoutes.splashPath || isPublicRoute || isOnboardingRoute || isBannedRoute) {
             return null;
           }
-          return AppRoutes.onboardingPath;
+          return AppRoutes.splashPath;
         }
         return null;
       }

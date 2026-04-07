@@ -597,7 +597,7 @@ class _ActiveFilterSummary extends StatelessWidget {
         Text(
           pieces.isEmpty
               ? l10n.truckerFindLoadsSummaryAllLoads(resultCount)
-              : l10n.truckerFindLoadsSummaryFiltered(pieces.join(' • '), resultCount),
+              : l10n.truckerFindLoadsSummaryFiltered(pieces.join(' - '), resultCount),
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         if (filters.hasActiveFilters) ...[
@@ -638,10 +638,10 @@ class _MarketplaceLoadCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originCity} → ${load.destinationCity}',
+      title: '${load.originCity} > ${load.destinationCity}',
       subtitle: routeSnapshot == null
-          ? '${load.originLabel} • ${load.destinationLabel}'
-          : '${routeSnapshot.distanceKm.toStringAsFixed(0)} km • ${_durationCompact(routeSnapshot.durationMinutes)}',
+          ? '${load.originLabel} - ${load.destinationLabel}'
+          : '${routeSnapshot.distanceKm.toStringAsFixed(0)} km - ${_durationCompact(routeSnapshot.durationMinutes)}',
       trailing: StatusChip(label: _localizedLoadStatus(l10n, load.status)),
       onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
       footer: Column(

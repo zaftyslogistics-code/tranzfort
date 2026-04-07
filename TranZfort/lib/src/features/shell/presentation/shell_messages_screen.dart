@@ -154,7 +154,7 @@ class _SupplierConversationGroupCard extends StatelessWidget {
       title: group.routeLabel,
       subtitle: l10n.shellMessagesActiveConversations(
         group.conversations.length,
-        latestConversation.latestMessagePreview,
+        _localizedMessagePreview(l10n, latestConversation),
       ),
       trailing: StatusChip(
         label: unreadCount > 0 ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
@@ -242,7 +242,7 @@ class _SupplierConversationRow extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text(conversation.latestMessagePreview),
+              Text(_localizedMessagePreview(AppLocalizations.of(context), conversation)),
               if ((conversation.truckDisplayLabel ?? '').trim().isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.xs),
                 Text(
@@ -294,13 +294,13 @@ class _TruckerConversationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final supplierLabel = (conversation.supplierCompanyName ?? '').trim().isNotEmpty
-        ? '${conversation.supplierName} • ${conversation.supplierCompanyName}'
+        ? '${conversation.supplierName} - ${conversation.supplierCompanyName}'
         : conversation.supplierName;
 
     return StandardListCard(
       accent: conversation.hasUnread ? AppColors.info : AppColors.neutral,
       title: supplierLabel,
-      subtitle: '${conversation.routeLabel} • ${conversation.latestMessagePreview}',
+      subtitle: '${conversation.routeLabel} - ${_localizedMessagePreview(l10n, conversation)}',
       trailing: StatusChip(
         label: conversation.hasUnread ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
         showDot: conversation.hasUnread,
@@ -369,6 +369,23 @@ String _localizedShellBookingStatus(AppLocalizations l10n, String value) {
   }
 }
 
+String _localizedMessagePreview(AppLocalizations l10n, ConversationPreview conversation) {
+  final type = conversation.latestMessageTypeHint;
+  final text = conversation.latestMessagePreview;
+  if (type == null || type == ChatMessageType.text) {
+    return text;
+  }
+  return switch (type) {
+    ChatMessageType.voice => l10n.chatPreviewVoice,
+    ChatMessageType.location => l10n.chatPreviewLocation,
+    ChatMessageType.document => l10n.chatPreviewDocument,
+    ChatMessageType.mapCard => l10n.chatPreviewMapCard,
+    ChatMessageType.truckCard => l10n.chatPreviewTruckCard,
+    ChatMessageType.system => l10n.chatPreviewSystem,
+    ChatMessageType.text => text,
+  };
+}
+
 String _formatInboxTimestamp(BuildContext context, DateTime value) {
   final material = MaterialLocalizations.of(context);
   final dateLabel = material.formatShortDate(value);
@@ -376,5 +393,5 @@ String _formatInboxTimestamp(BuildContext context, DateTime value) {
     TimeOfDay.fromDateTime(value),
     alwaysUse24HourFormat: true,
   );
-  return '$dateLabel • $timeLabel';
+  return '$dateLabel - $timeLabel';
 }

@@ -201,7 +201,7 @@ Future<AuthStateSnapshot> _resolveAuthSnapshot({
     return AuthStateSnapshot.signedOut();
   }
 
-  if (failure != null && failure is! UnauthorizedFailure) {
+  if (failure != null) {
     debugPrint('_resolveAuthSnapshot: profile fetch failed with non-auth error, preserving session: $failure');
     return AuthStateSnapshot.fromSessionAndProfile(
       session,

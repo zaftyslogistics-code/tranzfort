@@ -173,7 +173,7 @@ void main() {
 
     expect(find.text('My loads'), findsOneWidget);
     expect(find.text('Active'), findsWidgets);
-    expect(find.textContaining('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.textContaining('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
     expect(find.text('View details'), findsOneWidget);
 
     await tester.tap(find.text('View details'));
@@ -195,7 +195,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final loadCardTitle = find.textContaining('Chandrapur, Maharashtra → Mumbai, Maharashtra').first;
+    final loadCardTitle = find.textContaining('Chandrapur, Maharashtra > Mumbai, Maharashtra').first;
 
     await tester.tap(loadCardTitle);
     await tester.pumpAndSettle();
@@ -338,7 +338,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Super Load • Approved • payment pending'), findsOneWidget);
+    expect(find.text('Super Load - Approved - payment pending'), findsOneWidget);
     expect(find.textContaining('activation still depends on the off-platform payment confirmation step'), findsOneWidget);
   });
 

@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -18,10 +17,23 @@ const List<String> supportTicketCategories = <String>[
 
 const List<String> reportIssueCategories = <String>[
   'spam_or_scam',
-  'abusive_behavior',
   'fake_payout_proof',
   'non_payment',
+  'abusive_behavior',
 ];
+
+const String supportCreateTicketValidationFailureCode = 'support_create_ticket_validation';
+const String supportCreateTicketInvalidCategoryCode = 'support_create_ticket_invalid_category';
+const String supportCreateTicketDescriptionTooShortCode = 'support_create_ticket_description_too_short';
+const String supportCreateTicketAttachmentFinalizeFailureCode = 'support_create_ticket_attachment_finalize_failed';
+const String reportIssueValidationFailureCode = 'report_issue_validation';
+const String reportIssueInvalidCategoryCode = 'report_issue_invalid_category';
+const String reportIssueDescriptionTooShortCode = 'report_issue_description_too_short';
+const String reportIssueAttachmentRequiredCode = 'report_issue_attachment_required';
+const String reportIssueAttachmentFinalizeFailureCode = 'report_issue_attachment_finalize_failed';
+const String supportReplyValidationFailureCode = 'support_reply_validation';
+const String supportReplyMessageTooShortCode = 'support_reply_message_too_short';
+const String supportReplyAttachmentFinalizeFailureCode = 'support_reply_attachment_finalize_failed';
 
 class ReportIssueContext {
   final String initialCategory;
@@ -228,7 +240,7 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
       state = state.copyWith(fieldErrors: fieldErrors, clearFailure: true, clearCreatedTicketId: true);
       return Failure<String>(
         ValidationFailure(
-          message: 'Please correct the highlighted support ticket details',
+          message: supportCreateTicketValidationFailureCode,
           fieldErrors: fieldErrors,
         ),
       );
@@ -258,7 +270,7 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
       if (relocateResult.isFailure) {
         state = state.copyWith(
           isSubmitting: false,
-          failure: const ServerFailure(message: 'Ticket created but failed to finalize attachment.'),
+          failure: const ServerFailure(message: supportCreateTicketAttachmentFinalizeFailureCode),
           createdTicketId: finalTicketId,
         );
         return result;
@@ -277,10 +289,10 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
   Map<String, String> _validate() {
     final errors = <String, String>{};
     if (!supportTicketCategories.contains(state.category)) {
-      errors['category'] = 'Select a valid support category';
+      errors['category'] = supportCreateTicketInvalidCategoryCode;
     }
     if (state.description.trim().length < 10) {
-      errors['message_body'] = 'Describe the issue in at least 10 characters';
+      errors['message_body'] = supportCreateTicketDescriptionTooShortCode;
     }
     return errors;
   }
@@ -349,7 +361,7 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
       state = state.copyWith(fieldErrors: fieldErrors, clearFailure: true, clearCreatedTicketId: true);
       return Failure<String>(
         ValidationFailure(
-          message: 'Please correct the highlighted report details',
+          message: reportIssueValidationFailureCode,
           fieldErrors: fieldErrors,
         ),
       );
@@ -379,7 +391,7 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
       if (relocateResult.isFailure) {
         state = state.copyWith(
           isSubmitting: false,
-          failure: const ServerFailure(message: 'Report created but failed to finalize attachment.'),
+          failure: const ServerFailure(message: reportIssueAttachmentFinalizeFailureCode),
           createdTicketId: finalTicketId,
         );
         return result;
@@ -398,13 +410,13 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
   Map<String, String> _validate() {
     final errors = <String, String>{};
     if (!reportIssueCategories.contains(state.category)) {
-      errors['category'] = 'Select a valid report category';
+      errors['category'] = reportIssueInvalidCategoryCode;
     }
     if (state.description.trim().length < 10) {
-      errors['message_body'] = 'Describe the issue in at least 10 characters';
+      errors['message_body'] = reportIssueDescriptionTooShortCode;
     }
     if (state.attachmentPath.trim().isEmpty) {
-      errors['attachment_path'] = 'Attach one evidence image before submitting this report';
+      errors['attachment_path'] = reportIssueAttachmentRequiredCode;
     }
     return errors;
   }
@@ -510,7 +522,7 @@ class SupportReplyController extends StateNotifier<SupportReplyState> {
       state = state.copyWith(fieldErrors: fieldErrors, clearFailure: true, clearLastReplyId: true);
       return Failure<String>(
         ValidationFailure(
-          message: 'Please enter a longer reply',
+          message: supportReplyValidationFailureCode,
           fieldErrors: fieldErrors,
         ),
       );
@@ -536,7 +548,12 @@ class SupportReplyController extends StateNotifier<SupportReplyState> {
         targetPathSegment: 'support_reply/$replyId',
       );
       if (relocateResult.isFailure) {
-        debugPrint('Support reply attachment relocation failed for reply $replyId: ${relocateResult.failureOrNull}');
+        state = state.copyWith(
+          isSubmitting: false,
+          failure: const ServerFailure(message: supportReplyAttachmentFinalizeFailureCode),
+          lastReplyId: replyId,
+        );
+        return result;
       }
     }
 
@@ -553,7 +570,7 @@ class SupportReplyController extends StateNotifier<SupportReplyState> {
   Map<String, String> _validate() {
     final errors = <String, String>{};
     if (state.messageBody.trim().length < 2) {
-      errors['message_body'] = 'Reply must contain at least 2 characters';
+      errors['message_body'] = supportReplyMessageTooShortCode;
     }
     return errors;
   }

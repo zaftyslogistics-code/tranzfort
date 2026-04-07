@@ -1,3 +1,5 @@
+import '../../../core/utils/map_readers.dart';
+
 class CreateLoadDto {
   final String originLabel;
   final String originCity;
@@ -53,31 +55,41 @@ class CreateLoadDto {
     return {
       'p_origin_label': originLabel.trim(),
       'p_origin_city': originCity.trim(),
-      'p_origin_state': _nullableString(originState),
+      'p_origin_state': nullableString(originState),
       'p_origin_lat': originLat,
       'p_origin_lng': originLng,
       'p_destination_label': destinationLabel.trim(),
       'p_destination_city': destinationCity.trim(),
-      'p_destination_state': _nullableString(destinationState),
+      'p_destination_state': nullableString(destinationState),
       'p_destination_lat': destinationLat,
       'p_destination_lng': destinationLng,
       'p_route_distance_km': routeDistanceKm,
       'p_route_duration_minutes': routeDurationMinutes,
-      'p_route_polyline': _nullableString(routePolyline),
-      'p_route_snapshot_source': _nullableString(routeSnapshotSource),
+      'p_route_polyline': nullableString(routePolyline),
+      'p_route_snapshot_source': nullableString(routeSnapshotSource),
       'p_material': material.trim(),
       'p_weight_tonnes': weightTonnes,
-      'p_required_body_type': _nullableString(requiredBodyType),
+      'p_required_body_type': nullableString(requiredBodyType),
       'p_required_tyres': requiredTyres == null || requiredTyres!.isEmpty ? null : requiredTyres,
       'p_trucks_needed': trucksNeeded,
       'p_price_amount': priceAmount,
-      'p_price_type': _backendPriceType(priceType),
+      'p_price_type': backendPriceType(priceType),
       'p_advance_percentage': advancePercentage,
       'p_pickup_date': pickupDate.toIso8601String().split('T').first,
     };
   }
 
-  static String _backendPriceType(String value) {
+  /// Maps UI-facing price type to database enum value.
+  ///
+  /// Mapping contract:
+  /// - `'per_ton'` → `'negotiable'` (DB enum does not include 'per_ton')
+  /// - `'fixed'` → `'fixed'` (direct pass-through)
+  /// - `'negotiable'` → `'negotiable'` (direct pass-through for backward compatibility)
+  ///
+  /// NOTE: The DB `price_type` enum currently has values: `fixed`, `negotiable`.
+  /// If the DB enum is updated to include `per_ton`, this mapping should be
+  /// revisited to remove the `per_ton` → `negotiable` translation.
+  static String backendPriceType(String value) {
     final normalized = value.trim().toLowerCase();
     if (normalized == 'per_ton') {
       return 'negotiable';
@@ -85,12 +97,13 @@ class CreateLoadDto {
     return normalized;
   }
 
-  static String? _nullableString(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return null;
-    }
-
-    return value.trim();
+  /// Validates supported price type values (both UI-facing and DB-facing).
+  ///
+  /// Accepts: `'fixed'`, `'per_ton'` (UI-facing), `'negotiable'` (DB-facing).
+  /// This allows backward compatibility with existing data that may use either value.
+  static bool isSupportedPriceType(String value) {
+    final normalized = value.trim().toLowerCase();
+    return normalized == 'fixed' || normalized == 'per_ton' || normalized == 'negotiable';
   }
 }
 
@@ -190,36 +203,6 @@ class LoadDetail {
     required this.linkedTrips,
   });
 
-  factory LoadDetail.fromMap(Map<String, dynamic> map) {
-    return LoadDetail(
-      summary: LoadListItemDto.fromMap(map).toDomain(),
-      originCity: (map['origin_city'] ?? '').toString(),
-      originState: map['origin_state']?.toString(),
-      originLat: _readDouble(map['origin_lat']),
-      originLng: _readDouble(map['origin_lng']),
-      destinationCity: (map['destination_city'] ?? '').toString(),
-      destinationState: map['destination_state']?.toString(),
-      destinationLat: _readDouble(map['destination_lat']),
-      destinationLng: _readDouble(map['destination_lng']),
-      routeDistanceKm: _readDouble(map['route_distance_km']),
-      routeDurationMinutes: LoadListItemDto._readInt(map['route_duration_minutes']) == 0 && map['route_duration_minutes'] == null
-          ? null
-          : LoadListItemDto._readInt(map['route_duration_minutes']),
-      routePolyline: map['route_polyline']?.toString(),
-      routeSnapshotSource: map['route_snapshot_source']?.toString(),
-      parentLoadId: map['parent_load_id']?.toString(),
-      assignedTruckerId: map['assigned_trucker_id']?.toString(),
-      assignedTruckId: map['assigned_truck_id']?.toString(),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
-      updatedAt: DateTime.parse((map['updated_at'] ?? '').toString()),
-      bookingRequest: map['booking_request'] != null
-          ? LoadBookingRequest.fromMap(map['booking_request'])
-          : null,
-      linkedTrips: (map['linked_trips'] ?? [])
-          .map((trip) => LinkedTrip.fromMap(trip))
-          .toList(growable: false),
-    );
-  }
 }
 
 class LoadBookingRequest {
@@ -265,7 +248,7 @@ class LoadBookingRequest {
     final number = truckNumber ?? 'Truck ${truckId.length > 8 ? truckId.substring(0, 8) : truckId}';
     final model = truckModelLabel;
     if (model != null) {
-      return '$number • $model';
+      return '$number - $model';
     }
     return number;
   }
@@ -351,7 +334,7 @@ class LinkedTrip {
       id: (map['id'] ?? '').toString(),
       loadId: (map['load_id'] ?? '').toString(),
       parentLoadId: _nullableString(relatedLoad['parent_load_id']),
-      routeLabel: destination.isEmpty ? origin : '$origin → $destination',
+      routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       material: material,
       stage: (map['stage'] ?? 'assigned').toString(),
       truckerId: (map['trucker_id'] ?? '').toString(),

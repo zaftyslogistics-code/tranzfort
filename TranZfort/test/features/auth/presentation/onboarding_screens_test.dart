@@ -9,6 +9,7 @@ import 'package:tranzfort/src/core/navigation/app_routes.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
+import 'package:tranzfort/src/features/auth/providers/auth_providers.dart';
 import 'package:tranzfort/src/features/auth/presentation/onboarding_screens.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
@@ -249,11 +250,57 @@ void main() {
 
     await tester.enterText(find.byType(TextField).first, 'Amit Supplier');
     await tester.enterText(find.byType(TextField).at(1), '+919999999999');
+    await tester.tap(find.byType(Checkbox));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('Save and continue'));
     await tester.pumpAndSettle();
 
     expect(find.text('We could not save your profile right now. Review the details and retry shortly.'), findsOneWidget);
     expect(find.text('PostgrestException: leaked detail'), findsNothing);
+    await tester.pump(const Duration(seconds: 5));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('profile completion requires terms acceptance before submitting', (tester) async {
+    tester.view.physicalSize = const Size(1080, 2200);
+    tester.view.devicePixelRatio = 1.0;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+
+    const profile = UserProfile(
+      id: 'user-1',
+      fullName: 'Amit Supplier',
+      mobile: '+919999999999',
+      email: 'amit@example.com',
+      roleType: 'supplier',
+      isBanned: false,
+      accountDeletionStatus: 'active',
+      trustSafetyStatus: 'normal',
+    );
+
+    final repository = _FakeOnboardingAuthRepository(
+      updateRoleResult: const Success<void>(null),
+      provisionRoleResult: const Success<void>(null),
+      updateProfileResult: const Success<void>(null),
+    );
+
+    await tester.pumpWidget(
+      _buildApp(repository: repository, home: const ProfileCompletionScreen(), profile: profile),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(TextField).first, 'Amit Supplier');
+    await tester.enterText(find.byType(TextField).at(1), '+919999999999');
+    await tester.tap(find.text('Save and continue'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text('By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.'),
+      findsAtLeastNWidgets(1),
+    );
+    expect(find.text(OnboardingController.termsAcceptanceRequiredCode), findsNothing);
     await tester.pump(const Duration(seconds: 5));
     await tester.pumpAndSettle();
   });

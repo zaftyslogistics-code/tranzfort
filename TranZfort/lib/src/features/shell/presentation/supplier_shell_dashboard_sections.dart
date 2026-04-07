@@ -1,4 +1,22 @@
-part of 'supplier_shell_screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../features/supplier/data/supplier_dashboard_repository.dart';
+import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/data/supplier_profile_repository.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/status_components.dart';
+import '../../../features/supplier/providers/supplier_providers.dart';
+import 'shell_components.dart';
+import 'supplier_shell_shared_helpers.dart';
 
 String _localizedLinkedTripProofStatus(AppLocalizations l10n, LinkedTrip trip) {
   if (trip.hasPodProof) {
@@ -17,81 +35,18 @@ String _localizedLinkedTripProofStatus(AppLocalizations l10n, LinkedTrip trip) {
   }
 }
 
-String _formatSupplierShortDate(BuildContext context, DateTime value) {
-  return MaterialLocalizations.of(context).formatShortDate(value);
-}
 
-String _formatSupplierDateTime(BuildContext context, DateTime value) {
-  final material = MaterialLocalizations.of(context);
-  final timeLabel = material.formatTimeOfDay(
-    TimeOfDay.fromDateTime(value),
-    alwaysUse24HourFormat: MediaQuery.maybeOf(context)?.alwaysUse24HourFormat ?? false,
-  );
-  return '${material.formatShortDate(value)} • $timeLabel';
-}
 
-String _localizedSupplierBookingStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'submitted':
-      return l10n.shellMessagesBookingStatusSubmitted;
-    case 'approved':
-      return l10n.shellMessagesBookingStatusApproved;
-    case 'rejected':
-      return l10n.shellMessagesBookingStatusRejected;
-    case 'pending':
-      return l10n.shellMessagesBookingStatusPending;
-    default:
-      return l10n.shellMessagesBookingStatusUnknown;
-  }
-}
 
-String _localizedSupplierPriceType(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'fixed':
-      return l10n.supplierPostLoadPriceTypeFixed;
-    case 'per_ton':
-    case 'negotiable':
-      return l10n.supplierPostLoadPriceTypeNegotiable;
-    default:
-      return l10n.supplierPostLoadPriceTypeUnknown;
-  }
-}
-
-class _SupplierVerificationBannerWithAction extends StatelessWidget {
-  final VerificationBanner banner;
-  final String actionLabel;
-  final VoidCallback onTap;
-
-  const _SupplierVerificationBannerWithAction({
-    required this.banner,
-    required this.actionLabel,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        banner,
-        const SizedBox(height: AppSpacing.md),
-        OutlineButton(
-          label: actionLabel,
-          onPressed: onTap,
-        ),
-      ],
-    );
-  }
-}
-
-class _BookingRequestCard extends StatelessWidget {
+class BookingRequestCard extends StatelessWidget {
   final LoadBookingRequest booking;
   final bool isApproving;
   final bool isRejecting;
   final Future<void> Function()? onApprove;
   final Future<void> Function()? onReject;
 
-  const _BookingRequestCard({
+  const BookingRequestCard({
+    super.key,
     required this.booking,
     required this.isApproving,
     required this.isRejecting,
@@ -103,24 +58,23 @@ class _BookingRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final truckerMeta = <String>[
-      if (booking.truckerVerificationStatus == 'verified') _supplierBookingVerifiedLabel(l10n),
+      if (booking.truckerVerificationStatus == 'verified') l10n.supplierBookingVerifiedLabel,
       if (booking.truckerRating != null && booking.truckerRating! > 0)
-        _supplierBookingRatingLabel(l10n, booking.truckerRating!.toStringAsFixed(1)),
-    ].join(' • ');
+        l10n.supplierBookingRatingLabel(booking.truckerRating!.toStringAsFixed(1)),
+    ].join(' - ');
     final truckMeta = <String>[
       if (booking.truckBodyType != null) booking.truckBodyType!,
-      if (booking.truckTyres != null) _supplierBookingTyres(l10n, '${booking.truckTyres}'),
-    ].join(' • ');
+      if (booking.truckTyres != null) l10n.supplierBookingTyres('${booking.truckTyres}'),
+    ].join(' - ');
 
     return StandardListCard(
       accent: statusPaletteFor(booking.status).foreground,
       title: booking.displayTruckerName,
-      subtitle: _supplierBookingSubmittedAt(
-        l10n,
+      subtitle: l10n.supplierBookingSubmittedAt(
         booking.displayTruckLabel,
-        _formatSupplierDateTime(context, booking.createdAt),
+        formatSupplierDateTime(context, booking.createdAt),
       ),
-      trailing: StatusChip(label: _localizedSupplierBookingStatus(l10n, booking.status)),
+      trailing: StatusChip(label: localizedSupplierBookingStatus(l10n, booking.status)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -158,7 +112,7 @@ class _BookingRequestCard extends StatelessWidget {
             )
           else if (booking.decidedAt != null)
             Text(
-              _supplierBookingDecisionRecorded(l10n, _formatSupplierDateTime(context, booking.decidedAt!)),
+              l10n.supplierBookingDecisionRecorded(formatSupplierDateTime(context, booking.decidedAt!)),
               style: Theme.of(context).textTheme.bodySmall,
             ),
         ],
@@ -167,10 +121,10 @@ class _BookingRequestCard extends StatelessWidget {
   }
 }
 
-class _LinkedTripCard extends StatelessWidget {
+class LinkedTripCard extends StatelessWidget {
   final LinkedTrip trip;
 
-  const _LinkedTripCard({required this.trip});
+  const LinkedTripCard({super.key, required this.trip});
 
   @override
   Widget build(BuildContext context) {
@@ -180,18 +134,17 @@ class _LinkedTripCard extends StatelessWidget {
     return StandardListCard(
       accent: statusPaletteFor(trip.stage).foreground,
       title: trip.routeLabel,
-      subtitle: _supplierLinkedTripSubtitle(
-        l10n,
+      subtitle: l10n.supplierLinkedTripSubtitle(
         trip.material,
-        _shortId(trip.truckerId),
-        _shortId(trip.truckId),
+        shortId(trip.truckerId),
+        shortId(trip.truckId),
       ),
-      trailing: StatusChip(label: _localizedSupplierTripStage(l10n, trip.stage)),
+      trailing: StatusChip(label: localizedSupplierTripStage(l10n, trip.stage)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.supplierLinkedTripAssignedLabel(_formatSupplierDateTime(context, trip.assignedAt)),
+            l10n.supplierLinkedTripAssignedLabel(formatSupplierDateTime(context, trip.assignedAt)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: AppSpacing.xs),
@@ -208,133 +161,8 @@ class _LinkedTripCard extends StatelessWidget {
   }
 }
 
-String _shortId(String value) {
-  final trimmed = value.trim();
-  if (trimmed.length <= 8) {
-    return trimmed;
-  }
-  return trimmed.substring(0, 8);
-}
 
-bool _hasSuperLoadState({required bool isSuperLoad, required String superStatus}) {
-  return isSuperLoad || superStatus.trim().toLowerCase() != 'none';
-}
 
-String _localizedSupplierDashboardVerificationStatus(AppLocalizations l10n, String? status) {
-  switch ((status ?? '').trim().toLowerCase()) {
-    case 'verified':
-      return l10n.supplierDashboardVerificationStatusVerified;
-    case 'pending':
-      return l10n.supplierDashboardVerificationStatusPending;
-    case 'rejected':
-      return l10n.supplierDashboardVerificationStatusRejected;
-    case 'unverified':
-    case '':
-      return l10n.accountProfileStatusNeedsAttention;
-    default:
-      return l10n.supplierDashboardVerificationStatusUnknown;
-  }
-}
-
-String _localizedSupplierDashboardLoadStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'active':
-      return l10n.supplierDashboardLoadStatusActive;
-    case 'assigned_partial':
-      return l10n.supplierLoadStatusAssignedPartial;
-    case 'assigned_full':
-      return l10n.supplierLoadStatusAssignedFull;
-    case 'in_transit':
-      return l10n.supplierLoadStatusInTransit;
-    case 'completed':
-      return l10n.supplierLoadStatusCompleted;
-    case 'filled_outside_app':
-      return l10n.supplierLoadStatusFilledOutsideApp;
-    case 'cancelled':
-      return l10n.supplierLoadStatusCancelled;
-    case 'expired':
-      return l10n.supplierLoadStatusExpired;
-    case 'deactivated':
-      return l10n.supplierLoadStatusDeactivated;
-    default:
-      return l10n.supplierLoadStatusUnknown;
-  }
-}
-
-String _superLoadStatusLabel(AppLocalizations l10n, String superStatus, {required bool isSuperLoad}) {
-  final normalized = superStatus.trim().toLowerCase();
-  return switch (normalized) {
-    'request_submitted' => l10n.supplierDashboardSuperLoadStatusRequestSubmitted,
-    'under_review' => l10n.supplierDashboardSuperLoadStatusUnderReview,
-    'approved_payment_pending' => l10n.supplierDashboardSuperLoadStatusApproved,
-    'active' => l10n.supplierDashboardSuperLoadStatusActive,
-    'rejected' => l10n.supplierDashboardSuperLoadStatusRejected,
-    'expired_or_closed' => l10n.supplierDashboardSuperLoadStatusExpiredOrClosed,
-    _ when isSuperLoad => l10n.supplierDashboardSuperLoadStatusActive,
-    _ => l10n.supplierDashboardSuperLoadStatusNotActive,
-  };
-}
-
-String _superLoadStatusGuidance(AppLocalizations l10n, String superStatus, {required bool isSuperLoad}) {
-  final normalized = superStatus.trim().toLowerCase();
-  return switch (normalized) {
-    'request_submitted' => l10n.supplierDashboardSuperLoadGuidanceRequestSubmitted,
-    'under_review' => l10n.supplierDashboardSuperLoadGuidanceUnderReview,
-    'approved_payment_pending' => l10n.supplierDashboardSuperLoadGuidanceApproved,
-    'active' => l10n.supplierDashboardSuperLoadGuidanceActive,
-    'rejected' => l10n.supplierDashboardSuperLoadGuidanceRejected,
-    'expired_or_closed' => l10n.supplierDashboardSuperLoadGuidanceExpiredOrClosed,
-    _ when isSuperLoad => l10n.supplierDashboardSuperLoadGuidanceActive,
-    _ => l10n.supplierDashboardSuperLoadGuidanceNotActive,
-  };
-}
-
-class _SuperLoadStatusBlock extends StatelessWidget {
-  final bool isSuperLoad;
-  final String superStatus;
-
-  const _SuperLoadStatusBlock({
-    required this.isSuperLoad,
-    required this.superStatus,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    if (!_hasSuperLoadState(isSuperLoad: isSuperLoad, superStatus: superStatus)) {
-      return const SizedBox.shrink();
-    }
-
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: BoxDecoration(
-        color: AppColors.superLoadBg,
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          StatusBadge(
-            label: l10n.supplierDashboardSuperLoadBadge(
-              _superLoadStatusLabel(l10n, superStatus, isSuperLoad: isSuperLoad),
-            ),
-            icon: Icons.workspace_premium_outlined,
-            palette: const StatusPalette(
-              foreground: AppColors.superLoadText,
-              background: AppColors.superLoadBg,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            _superLoadStatusGuidance(l10n, superStatus, isSuperLoad: isSuperLoad),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      ),
-    );
-  }
-}
 
 class _HeroSummary extends StatelessWidget {
   final SupplierProfile? profile;
@@ -344,7 +172,7 @@ class _HeroSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    final verificationLabel = _localizedSupplierDashboardVerificationStatus(
+    final verificationLabel = localizedSupplierDashboardVerificationStatus(
       l10n,
       profile?.verificationStatus,
     );
@@ -462,7 +290,7 @@ class _SuperLoadReadinessSection extends StatelessWidget {
         StatusBadge(
           label: isVerified
               ? l10n.supplierDashboardSuperLoadVerificationComplete
-              : _localizedSupplierDashboardVerificationStatus(l10n, verificationStatus),
+              : localizedSupplierDashboardVerificationStatus(l10n, verificationStatus),
           icon: Icons.verified_user_outlined,
           palette: StatusPalette(
             foreground: isVerified
@@ -587,9 +415,9 @@ class _RecentLoadCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} → ${load.destinationLabel}',
-      subtitle: '${load.material} • ${tonnes}T • ${_localizedSupplierPriceType(l10n, load.priceType)}',
-      trailing: StatusChip(label: _localizedSupplierDashboardLoadStatus(l10n, load.status)),
+      title: '${load.originLabel} > ${load.destinationLabel}',
+      subtitle: '${load.material} - ${tonnes}T - ${localizedSupplierPriceType(l10n, load.priceType)}',
+      trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -599,12 +427,12 @@ class _RecentLoadCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            l10n.supplierDashboardLoadPickup(_formatSupplierShortDate(context, load.pickupDate)),
+            l10n.supplierDashboardLoadPickup(formatSupplierShortDate(context, load.pickupDate)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          if (_hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
+          if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
             const SizedBox(height: AppSpacing.sm),
-            _SuperLoadStatusBlock(
+            SuperLoadStatusBlock(
               isSuperLoad: load.isSuperLoad,
               superStatus: load.superStatus,
             ),
@@ -618,5 +446,207 @@ class _RecentLoadCard extends StatelessWidget {
       ),
       onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
     );
+  }
+}
+
+class SupplierDashboardScreen extends ConsumerWidget {
+  const SupplierDashboardScreen({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final profileAsync = ref.watch(supplierProfileProvider);
+    final dashboardAsync = ref.watch(supplierDashboardProvider);
+    final recentLoadsAsync = ref.watch(supplierRecentLoadsProvider);
+    final profile = profileAsync.valueOrNull;
+    final profileResolved = !profileAsync.isLoading && !profileAsync.hasError && profile != null;
+    final canPostLoads = _canPostLoads(profile);
+    final Widget? topBanner = _buildTopBanner(context, ref, profileAsync);
+    final List<Widget>? topBannerSection = topBanner == null ? null : <Widget>[topBanner];
+
+    return ShellScrollView(
+      children: [
+        ...?topBannerSection,
+        HeroActionCard(
+          title: _heroTitle(context, profile),
+          subtitle: '',
+          compact: true,
+          primaryAction: GradientButton(
+            label: !profileResolved
+                ? l10n.navSupport
+                : canPostLoads
+                ? l10n.supplierDashboardPostLoadAction
+                : l10n.supplierCompleteVerification,
+            onPressed: () => context.go(
+              !profileResolved
+                  ? AppRoutes.supportPath
+                  : canPostLoads
+                  ? AppRoutes.postLoadPath
+                  : AppRoutes.supplierVerificationPath,
+            ),
+          ),
+          child: _HeroSummary(profile: profile),
+        ),
+        DetailSectionCard(
+          title: l10n.supplierDashboardOverviewTitle,
+          children: [
+            _DashboardStatsSection(
+              dashboardAsync: dashboardAsync,
+              onRetry: () => ref.refresh(supplierDashboardProvider),
+            ),
+          ],
+        ),
+        DetailSectionCard(
+          title: l10n.supplierDashboardSuperLoadReadinessTitle,
+          children: [
+            if (profileResolved)
+              _SuperLoadReadinessSection(profile: profile)
+            else
+              WarningBlock(
+                title: l10n.supplierDashboardAccountStateUnavailableTitle,
+                message: l10n.supplierDashboardAccountStateUnavailableMessage,
+                action: OutlineButton(
+                  label: l10n.navSupport,
+                  onPressed: () => context.go(AppRoutes.supportPath),
+                ),
+              ),
+          ],
+        ),
+        DetailSectionCard(
+          title: l10n.supplierDashboardQuickActionsTitle,
+          children: [
+            QuickActionGrid(
+              items: [
+                QuickActionItem(
+                  icon: Icons.inventory_2_outlined,
+                  label: l10n.shellTitleMyLoads,
+                  onTap: () => context.go(AppRoutes.myLoadsPath),
+                ),
+                QuickActionItem(
+                  icon: Icons.alt_route_outlined,
+                  label: l10n.shellQuickActionTrips,
+                  onTap: () => context.go(AppRoutes.supplierTripsPath),
+                ),
+                QuickActionItem(
+                  icon: Icons.chat_bubble_outline,
+                  label: l10n.supplierDashboardQuickActionChatLabel,
+                  onTap: () => context.go(AppRoutes.messagesPath),
+                ),
+                QuickActionItem(
+                  icon: Icons.notifications_outlined,
+                  label: l10n.navNotifications,
+                  onTap: () => context.go(AppRoutes.notificationsPath),
+                ),
+              ],
+            ),
+          ],
+        ),
+        DetailSectionCard(
+          title: l10n.supplierRecentLoadsTitle,
+          children: [
+            _RecentLoadsSection(
+              recentLoadsAsync: recentLoadsAsync,
+              onRetry: () => ref.refresh(supplierRecentLoadsProvider),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  String _heroTitle(BuildContext context, SupplierProfile? profile) {
+    final l10n = AppLocalizations.of(context);
+    final businessName = (profile?.companyName ?? '').trim();
+    if (businessName.isNotEmpty) {
+      return l10n.supplierDashboardWelcomeBack(businessName);
+    }
+
+    final fullName = profile?.fullName.trim() ?? '';
+    if (fullName.isNotEmpty) {
+      return l10n.supplierDashboardWelcomeBack(fullName);
+    }
+
+    return l10n.shellTitleSupplierDashboard;
+  }
+
+  Widget? _buildTopBanner(
+    BuildContext context,
+    WidgetRef ref,
+    AsyncValue<SupplierProfile?> profileAsync,
+  ) {
+    final l10n = AppLocalizations.of(context);
+    final profile = profileAsync.valueOrNull;
+    final verificationStatus = (profile?.verificationStatus ?? '').trim().toLowerCase();
+
+    if (profileAsync.hasError) {
+      return WarningBlock(
+        title: l10n.supplierDashboardAccountStateUnavailableTitle,
+        message: supplierAsyncFailure(profileAsync)?.message ?? l10n.supplierDashboardAccountStateUnavailableMessage,
+        action: OutlineButton(
+          label: l10n.commonRetry,
+          onPressed: () => ref.refresh(supplierProfileProvider),
+        ),
+      );
+    }
+
+    if (profileAsync.isLoading) {
+      return const LoadingShimmer(height: 92, itemCount: 1);
+    }
+
+    if (profile == null) {
+      return WarningBlock(
+        title: l10n.supplierDashboardAccountStateUnavailableTitle,
+        message: l10n.supplierDashboardAccountStateUnavailableMessage,
+        action: OutlineButton(
+          label: l10n.commonRetry,
+          onPressed: () => ref.refresh(supplierProfileProvider),
+        ),
+      );
+    }
+
+    if (verificationStatus == 'pending') {
+      return SupplierVerificationBannerWithAction(
+        banner: VerificationBanner(
+          status: VerificationBannerStatus.pending,
+          title: l10n.supplierVerificationPendingTitle,
+          description: l10n.supplierVerificationPendingMessage,
+        ),
+        actionLabel: l10n.supplierOpenVerification,
+        onTap: () => context.go(AppRoutes.supplierVerificationPath),
+      );
+    }
+
+    if (verificationStatus == 'verified' && profile.canAccessWorkspace) {
+      return null;
+    }
+
+    if (verificationStatus == 'rejected') {
+      return SupplierVerificationBannerWithAction(
+        banner: VerificationBanner(
+          status: VerificationBannerStatus.rejected,
+          title: l10n.supplierVerificationNeedsAttentionTitle,
+          description: l10n.supplierVerificationNeedsAttentionDescription,
+        ),
+        actionLabel: l10n.supplierFixVerification,
+        onTap: () => context.go(AppRoutes.supplierVerificationPath),
+      );
+    }
+
+    if (verificationStatus == 'unverified' || !profile.hasCompanyName) {
+      return WarningBlock(
+        title: l10n.supplierCompleteSetupTitle,
+        message: l10n.supplierCompleteSetupMessage,
+        action: OutlineButton(
+          label: l10n.supplierOpenVerification,
+          onPressed: () => context.go(AppRoutes.supplierVerificationPath),
+        ),
+      );
+    }
+
+    return null;
+  }
+
+  bool _canPostLoads(SupplierProfile? profile) {
+    return profile?.canAccessWorkspace == true;
   }
 }

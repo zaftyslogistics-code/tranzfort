@@ -54,6 +54,7 @@ class VerificationDetail {
   bool get isPending => verificationStatus.trim().toLowerCase() == 'pending';
   bool get isVerified => verificationStatus.trim().toLowerCase() == 'verified';
   bool get isRejected => verificationStatus.trim().toLowerCase() == 'rejected';
+  bool get isUnverified => verificationStatus.trim().toLowerCase() == 'unverified' || verificationStatus.trim().isEmpty;
   bool get isTrucker => role == AppUserRole.trucker;
   bool get isSupplier => role == AppUserRole.supplier;
   bool get hasApprovedTruckRequirement => !isTrucker || approvedTruckCount > 0;
@@ -91,6 +92,8 @@ class VerificationDetail {
       VerificationDocumentType.profilePhoto => false,
       VerificationDocumentType.businessLicence => isSupplier,
       VerificationDocumentType.gstCertificate => false,
+      VerificationDocumentType.truckRc => false,
+      VerificationDocumentType.truckPhoto => false,
     };
   }
 
@@ -102,6 +105,8 @@ class VerificationDetail {
       VerificationDocumentType.profilePhoto => profilePhotoDocumentPath,
       VerificationDocumentType.businessLicence => businessLicenceDocumentPath,
       VerificationDocumentType.gstCertificate => gstCertificateDocumentPath,
+      VerificationDocumentType.truckRc => null,
+      VerificationDocumentType.truckPhoto => null,
     };
   }
 

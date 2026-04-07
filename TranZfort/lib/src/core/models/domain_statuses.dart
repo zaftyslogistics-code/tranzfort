@@ -30,6 +30,9 @@ enum LoadStatus {
   active('active'),
   assignedPartial('assigned_partial'),
   assignedFull('assigned_full'),
+  // NOTE: 'open' is a legacy value that is no longer used in the codebase.
+  // New loads use 'active' instead. Kept for backward compatibility with existing data.
+  // ignore: unused_field
   open('open'),
   partiallyBooked('partially_booked'),
   booked('booked'),

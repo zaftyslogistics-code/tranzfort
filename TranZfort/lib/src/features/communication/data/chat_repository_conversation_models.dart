@@ -1,4 +1,4 @@
-part of 'chat_repository.dart';
+import 'chat_repository_models.dart';
 
 class ConversationPreviewDto {
   final String id;
@@ -20,6 +20,7 @@ class ConversationPreviewDto {
   final String? bookingRequestId;
   final String? bookingStatusLabel;
   final String latestMessagePreview;
+  final ChatMessageType? latestMessageTypeHint;
   final DateTime? lastMessageAt;
   final bool hasUnread;
   final bool isArchived;
@@ -45,6 +46,7 @@ class ConversationPreviewDto {
     required this.bookingRequestId,
     required this.bookingStatusLabel,
     required this.latestMessagePreview,
+    this.latestMessageTypeHint,
     required this.lastMessageAt,
     required this.hasUnread,
     required this.isArchived,
@@ -72,6 +74,7 @@ class ConversationPreviewDto {
       bookingRequestId: bookingRequestId,
       bookingStatusLabel: bookingStatusLabel,
       latestMessagePreview: latestMessagePreview,
+      latestMessageTypeHint: latestMessageTypeHint,
       lastMessageAt: lastMessageAt,
       hasUnread: hasUnread,
       isArchived: isArchived,
@@ -100,6 +103,7 @@ class ConversationPreview {
   final String? bookingRequestId;
   final String? bookingStatusLabel;
   final String latestMessagePreview;
+  final ChatMessageType? latestMessageTypeHint;
   final DateTime? lastMessageAt;
   final bool hasUnread;
   final bool isArchived;
@@ -125,6 +129,7 @@ class ConversationPreview {
     required this.bookingRequestId,
     required this.bookingStatusLabel,
     required this.latestMessagePreview,
+    this.latestMessageTypeHint,
     required this.lastMessageAt,
     required this.hasUnread,
     required this.isArchived,

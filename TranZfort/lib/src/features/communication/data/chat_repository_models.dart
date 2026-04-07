@@ -1,4 +1,4 @@
-part of 'chat_repository.dart';
+import '../../../core/utils/map_readers.dart';
 
 class MessageDto {
   final String id;
@@ -30,13 +30,13 @@ class MessageDto {
     return MessageDto(
       id: (map['id'] ?? '').toString(),
       conversationId: (map['conversation_id'] ?? '').toString(),
-      senderProfileId: _nullableString(map['sender_profile_id']),
+      senderProfileId: nullableString(map['sender_profile_id']),
       type: ChatMessageTypeX.fromDatabase((map['message_type'] ?? 'text').toString()),
-      textBody: _nullableString(map['text_body']),
-      attachmentPath: _nullableString(map['attachment_path']),
+      textBody: nullableString(map['text_body']),
+      attachmentPath: nullableString(map['attachment_path']),
       structuredPayload: payload is Map<String, dynamic> ? payload : null,
       isRead: map['is_read'] == true,
-      readAt: _readDate(map['read_at']),
+      readAt: readDate(map['read_at']),
       createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
     );
   }
@@ -120,31 +120,4 @@ class ChatMessage {
     required this.createdAt,
     required this.isFromCurrentUser,
   });
-}
-
-String? _nullableString(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return raw;
-}
-
-DateTime? _readDate(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return DateTime.tryParse(raw);
-}
-
-double? _readDouble(Object? value) {
-  if (value is num) {
-    return value.toDouble();
-  }
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return double.tryParse(raw);
 }

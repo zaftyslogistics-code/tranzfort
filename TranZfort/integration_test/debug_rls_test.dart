@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<void> _init() async {
+  Future<void> initSupabase() async {
     await dotenv.load(fileName: '.env');
     await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!,
@@ -17,7 +18,7 @@ void main() {
 
   group('DEBUG: Load visibility', () {
     testWidgets('Direct query loads as trucker', (tester) async {
-      await _init();
+      await initSupabase();
       final client = Supabase.instance.client;
 
       // Sign in as trucker
@@ -27,7 +28,7 @@ void main() {
       );
       expect(client.auth.currentUser, isNotNull);
       final truckerId = client.auth.currentUser!.id;
-      print('Trucker ID: $truckerId');
+      debugPrint('Trucker ID: $truckerId');
 
       // Query loads directly
       final loads = await client
@@ -35,15 +36,15 @@ void main() {
           .select('id, status, supplier_id, origin_city, parent_load_id')
           .limit(5);
 
-      print('Found ${loads.length} loads');
+      debugPrint('Found ${loads.length} loads');
       for (final load in loads) {
-        print('Load: ${load['id']} - status: ${load['status']} - parent: ${load['parent_load_id']}');
+        debugPrint('Load: ${load['id']} - status: ${load['status']} - parent: ${load['parent_load_id']}');
       }
 
       // If we have loads, try to query one by ID (like detail repo does)
       if (loads.isNotEmpty) {
         final firstLoadId = loads.first['id'];
-        print('Querying load $firstLoadId by ID...');
+        debugPrint('Querying load $firstLoadId by ID...');
 
         final singleLoad = await client
             .from('loads')
@@ -51,7 +52,7 @@ void main() {
             .eq('id', firstLoadId)
             .maybeSingle();
 
-        print('Single load query result: $singleLoad');
+        debugPrint('Single load query result: $singleLoad');
         expect(singleLoad, isNotNull, reason: 'Should find load by ID');
       }
 

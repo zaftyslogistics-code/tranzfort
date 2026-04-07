@@ -1,0 +1,830 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart
+00:00 +0: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:01 +1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows normal trust-safety guidance for healthy accounts
+00:01 +2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:01 +2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows trust-safety warning guidance for warned users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing warning on record: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:201:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 201
+The test description was:
+  account screen shows trust-safety warning guidance for warned users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:01 +2 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:01 +2 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows trust-safety warning guidance for warned users [E]
+  Test failed. See exception logs above.
+  The test description was: account screen shows trust-safety warning guidance for warned users
+  
+00:02 +3 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:02 +4 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:02 +5 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:02 +6 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:02 +7 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:02 +7 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows trust-safety restriction guidance for restricted users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing confirm which actions
+are limited: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:258:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 258
+The test description was:
+  profile screen shows trust-safety restriction guidance for restricted users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:02 +7 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:02 +7 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows trust-safety restriction guidance for restricted users [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen shows trust-safety restriction guidance for restricted users
+  
+00:02 +8 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +9 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +10 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +10 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows suspension guidance for suspended users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing paused while this
+suspension remains active: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:274:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 274
+The test description was:
+  account screen shows suspension guidance for suspended users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:03 +10 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +10 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows suspension guidance for suspended users [E]
+  Test failed. See exception logs above.
+  The test description was: account screen shows suspension guidance for suspended users
+  
+00:03 +11 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +12 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +13 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +14 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +15 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +16 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +17 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +17 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows restriction guidance for restricted users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing confirm which actions
+are limited: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:330:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 330
+The test description was:
+  account screen shows restriction guidance for restricted users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:03 +17 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +17 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows restriction guidance for restricted users [E]
+  Test failed. See exception logs above.
+  The test description was: account screen shows restriction guidance for restricted users
+  
+00:03 +18 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +19 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:03 +20 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:04 +21 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +22 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +23 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +24 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +25 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +26 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +27 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +28 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +29 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +30 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +31 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +32 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:04 +33 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +33 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Hear summary": []" (used in a call to "tap()") could not find
+any matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2013:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1865:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1045:7)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart:132:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  settings screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:05 +33 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +33 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen hear summary action triggers contextual TTS [E]
+  Test failed. See exception logs above.
+  The test description was: settings screen hear summary action triggers contextual TTS
+  
+00:05 +34 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +35 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +36 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +37 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:05 +38 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing supplier verification
+and the business licence prerequisite: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:188:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 188
+The test description was:
+  renders supplier dashboard success state
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:05 +38 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +38 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state [E]
+  Test failed. See exception logs above.
+  The test description was: renders supplier dashboard success state
+  
+00:05 +39 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +40 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +41 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +42 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +43 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +44 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +45 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +46 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +47 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +48 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +49 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +49 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard does not auto-speak at launch
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: <0>
+  Actual: <1>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:234:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 234
+The test description was:
+  supplier dashboard does not auto-speak at launch
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:05 +49 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:05 +49 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard does not auto-speak at launch [E]
+  Test failed. See exception logs above.
+  The test description was: supplier dashboard does not auto-speak at launch
+  
+00:05 +50 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:06 +51 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:06 +52 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:06 +53 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:06 +54 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Coal ΓÇó Γé╣54000 ΓÇó
+Negotiable: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart:312:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart line 312
+The test description was:
+  renders localized supplier load detail success status surfaces
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:06 +54 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +54 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces [E]
+  Test failed. See exception logs above.
+  The test description was: renders localized supplier load detail success status surfaces
+  
+00:06 +55 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +56 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +57 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +58 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +59 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +59 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: verified supplier dashboard review verification action opens supplier verification
+
+Warning: A call to tap() with finder "Found 1 widget with text "Review verification" (ignoring all but first): [
+  Text("Review verification", debugLabel: ((englishLike labelLarge 2021).merge((blackMountainView labelLarge).apply)).copyWith, inherit: false, color: Color(alpha: 1.0000, red: 0.0588, green: 0.4353, blue: 0.4118, colorSpace: ColorSpace.sRGB), family: Roboto, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic, height: 1.4x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(216.0, 1341.1)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+Indeed, Offset(216.0, 1341.1) is outside the bounds of the root of the render tree, Size(800.0, 600.0).
+The finder corresponds to this RenderBox: RenderParagraph#79c2c relayoutBoundary=up2
+The hit test result at that offset is: HitTestResult(HitTestEntry<HitTestTarget>#9d303(_ReusableRenderView#b1c6f), HitTestEntry<HitTestTarget>#3223e(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2081:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1865:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1045:7)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:326:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+00:06 +60 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +60 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: verified supplier dashboard review verification action opens supplier verification
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Supplier verification opened": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:329:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 329
+The test description was:
+  verified supplier dashboard review verification action opens supplier verification
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:06 +60 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +60 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: verified supplier dashboard review verification action opens supplier verification [E]
+  Test failed. See exception logs above.
+  The test description was: verified supplier dashboard review verification action opens supplier verification
+  
+00:06 +61 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +62 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +63 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +64 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:06 +65 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +66 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +66 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows trust-safety warning guidance for warned users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing warning on record: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:783:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 783
+The test description was:
+  profile screen shows trust-safety warning guidance for warned users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:07 +66 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +66 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows trust-safety warning guidance for warned users [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen shows trust-safety warning guidance for warned users
+  
+00:07 +67 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +68 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +68 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows suspension guidance for suspended users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing paused while this
+suspension remains active: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:800:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 800
+The test description was:
+  profile screen shows suspension guidance for suspended users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:07 +68 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +68 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows suspension guidance for suspended users [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen shows suspension guidance for suspended users
+  
+00:07 +69 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +70 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +71 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +71 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows restriction guidance with reason summary for restricted users
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing confirm which actions
+are limited: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:821:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 821
+The test description was:
+  profile screen shows restriction guidance with reason summary for restricted users
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:07 +71 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +71 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen shows restriction guidance with reason summary for restricted users [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen shows restriction guidance with reason summary for restricted users
+  
+00:07 +72 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:07 +73 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +74 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +75 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +76 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +77 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +78 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:07 +79 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +80 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +81 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +82 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +83 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +84 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +85 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +86 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +87 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +88 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +89 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +90 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +91 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +92 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +93 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +94 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +95 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +96 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +97 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:08 +98 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +99 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +100 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +101 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +102 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +103 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +104 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +105 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +106 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +107 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +108 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +109 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +110 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +111 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +111 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:868:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2305:32)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:1197:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  profile screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:09 +111 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +111 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary action triggers contextual TTS [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen hear summary action triggers contextual TTS
+  
+00:09 +112 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +113 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +113 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary falls back to unknown for unsupported trust and account states
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:868:30)
+#2      WidgetController.ensureVisible (package:flutter_test/src/controller.dart:2305:32)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:1223:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  profile screen hear summary falls back to unknown for unsupported trust and account states
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:09 +113 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:09 +113 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary falls back to unknown for unsupported trust and account states [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen hear summary falls back to unknown for unsupported trust and account states
+  
+00:10 +114 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +115 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +115 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +115 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/data/chat_repository_test.dart: chat repository maps conversation previews [E]
+  Expected: 'Chandrapur, Maharashtra ΓåÆ Mumbai, Maharashtra'
+    Actual: 'Load'
+     Which: is different.
+            Expected: Chandrapur ...
+              Actual: Load
+                      ^
+             Differ at offset 0
+  
+  package:matcher                                                   expect
+  package:flutter_test/src/widget_tester.dart 473:18                expect
+  test\features\communication\data\chat_repository_test.dart 209:5  main.<fn>
+  
+00:10 +116 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +117 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +118 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +119 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +120 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +121 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:10 +122 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: shows unread notification badge in the top app bar bell
+00:10 +123 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness support action opens support when verification is incomplete
+00:10 +124 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: top app bar voice assistance action is not visible
+00:10 +125 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: pending supplier dashboard super load readiness shows pending-review guidance and review action
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Your supplier verification is already under
+review. Super Load readiness cannot move forward until that review completes, and final eligibility
+still remains admin-managed until company-age/readiness fields exist in the current source model.":
+[]>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1159:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1159
+The test description was:
+  pending supplier dashboard super load readiness shows pending-review guidance and review action
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:10 +125 -16: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:10 +125 -16: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: pending supplier dashboard super load readiness shows pending-review guidance and review action [E]
+  Test failed. See exception logs above.
+  The test description was: pending supplier dashboard super load readiness shows pending-review guidance and review action
+  
+00:11 +126 -16: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: rejected supplier dashboard super load readiness shows correction guidance and fix action
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Your supplier verification needs correction
+before Super Load readiness can move forward. Review the latest verification feedback, update the
+required documents, and then re-check this readiness surface once the packet is resubmitted.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1219:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1219
+The test description was:
+  rejected supplier dashboard super load readiness shows correction guidance and fix action
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:11 +126 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +126 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: rejected supplier dashboard super load readiness shows correction guidance and fix action [E]
+  Test failed. See exception logs above.
+  The test description was: rejected supplier dashboard super load readiness shows correction guidance and fix action
+  
+00:11 +127 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +128 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +129 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +130 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +131 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +132 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +133 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +134 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:11 +135 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:11 +136 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:11 +137 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:11 +138 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +139 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +140 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +140 -17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders error and empty states for supplier dashboard sections
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Both supplier verification and the business
+licence prerequisite still need attention before Super Load readiness can move closer to
+eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness
+fields exist in the current source model.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1424:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1424
+The test description was:
+  renders error and empty states for supplier dashboard sections
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:12 +140 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +140 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders error and empty states for supplier dashboard sections [E]
+  Test failed. See exception logs above.
+  The test description was: renders error and empty states for supplier dashboard sections
+  
+00:12 +141 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +142 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +143 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +144 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +145 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:12 +146 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +147 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +148 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +149 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +150 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +151 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +152 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:13 +153 -18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: 'conversation-1'
+  Actual: <null>
+   Which: not an <Instance of 'String'>
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart:568:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart line 568
+The test description was:
+  renders chat thread and marks conversation read on open
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:13 +153 -19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: role selection shows sanitized workspace provisioning failure copy
+00:13 +153 -19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open [E]
+  Test failed. See exception logs above.
+  The test description was: renders chat thread and marks conversation read on open
+  
+00:13 +154 -19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: role selection shows sanitized workspace provisioning failure copy
+00:13 +155 -19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: role selection shows sanitized workspace provisioning failure copy
+00:13 +156 -19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: auth entry shows sanitized Google sign-in failure copy
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with type "Checkbox": []" (used in a call to "tap()") could not find any
+matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2013:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1865:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1045:7)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart:256:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  auth entry shows sanitized Google sign-in failure copy
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:14 +156 -20: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: sends text messages from composer
+00:14 +156 -20: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: auth entry shows sanitized Google sign-in failure copy [E]
+  Test failed. See exception logs above.
+  The test description was: auth entry shows sanitized Google sign-in failure copy
+  
+00:14 +157 -20: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: profile completion shows sanitized profile save failure copy
+00:14 +157 -20: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: auth entry prompt uses the shared contextual TTS service
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: 'hi'
+  Actual: 'en'
+   Which: is different.
+          Expected: hi
+            Actual: en
+                    ^
+           Differ at offset 0
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart:288:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart line 288
+The test description was:
+  auth entry prompt uses the shared contextual TTS service
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:14 +157 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: profile completion shows sanitized profile save failure copy
+00:14 +157 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: auth entry prompt uses the shared contextual TTS service [E]
+  Test failed. See exception logs above.
+  The test description was: auth entry prompt uses the shared contextual TTS service
+  
+00:14 +158 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: profile completion shows sanitized profile save failure copy
+00:14 +159 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: profile completion shows sanitized profile save failure copy
+00:14 +160 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows sanitized thread-load failure copy
+00:14 +161 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-in shows sanitized failure copy
+00:14 +162 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-in shows sanitized failure copy
+00:14 +163 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-in shows sanitized failure copy
+00:15 +164 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows optimistic sending state before send completes
+00:15 +165 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows optimistic sending state before send completes
+00:15 +166 -21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows optimistic sending state before send completes
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: no matching candidates
+  Actual: _TextWidgetFinder:<Found 1 widget with text "sending...": [
+            Text("sending...", debugLabel: (englishLike bodySmall 2021).merge((blackMountainView
+bodySmall).apply), inherit: false, color: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue:
+0.1255, colorSpace: ColorSpace.sRGB), family: Roboto, size: 12.0, weight: 400, letterSpacing: 0.4,
+baseline: alphabetic, height: 1.3x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red:
+0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, dependencies:
+[DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: means one was found but none were expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart:762:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart line 762
+The test description was:
+  shows optimistic sending state before send completes
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:15 +166 -22: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-up shows explicit check-email state when session is not ready yet
+00:15 +166 -22: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows optimistic sending state before send completes [E]
+  Test failed. See exception logs above.
+  The test description was: shows optimistic sending state before send completes
+  
+00:15 +167 -22: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-up shows explicit check-email state when session is not ready yet
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "We sent a verification link to
+new@example.com. Open that email, finish verification, and then return here to sign in.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart:384:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart line 384
+The test description was:
+  email/password sign-up shows explicit check-email state when session is not ready yet
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:15 +167 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: blocked trucker chat readiness action opens trucker verification when verification is incomplete
+00:15 +167 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-up shows explicit check-email state when session is not ready yet [E]
+  Test failed. See exception logs above.
+  The test description was: email/password sign-up shows explicit check-email state when session is not ready yet
+  
+00:15 +168 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: manual auth check-email state can resend verification email
+00:15 +169 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: blocked trucker chat readiness action opens fleet when verification is complete but no approved truck exists
+00:15 +170 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: manual auth resend verification surfaces safe failure copy
+00:15 +171 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat menu report issue action opens report issue route with conversation context
+00:16 +172 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: unavailable conversation recovery action opens messages route
+00:16 +173 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders richer supported non-text message types
+00:16 +174 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: toggles voice recording and sends voice message on second tap
+00:16 +175 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows sanitized voice-start failure copy
+00:16 +176 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: plays and pauses a voice message bubble with signed playback url
+00:16 +177 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows unavailable copy when voice playback signed url cannot be created
+00:17 +178 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows playback failure copy when voice playback controller throws
+00:17 +179 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: derives map card trip cost from distance and diesel price payload fields
+00:17 +180 -23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: opens load detail when map card view route is tapped
+00:17 +181 -23: Some tests failed.

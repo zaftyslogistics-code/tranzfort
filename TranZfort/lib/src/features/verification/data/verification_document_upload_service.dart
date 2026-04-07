@@ -129,6 +129,8 @@ class VerificationDocumentUploadService {
       VerificationDocumentType.profilePhoto => 'profile_photo',
       VerificationDocumentType.businessLicence => 'business_licence',
       VerificationDocumentType.gstCertificate => 'gst_certificate',
+      VerificationDocumentType.truckRc => 'truck_rc',
+      VerificationDocumentType.truckPhoto => 'truck_photo',
     };
   }
 
@@ -140,6 +142,8 @@ class VerificationDocumentUploadService {
       VerificationDocumentType.profilePhoto => 'profile_photo.jpg',
       VerificationDocumentType.businessLicence => 'business_licence.jpg',
       VerificationDocumentType.gstCertificate => 'gst_certificate.jpg',
+      VerificationDocumentType.truckRc => 'truck_rc.jpg',
+      VerificationDocumentType.truckPhoto => 'truck_photo.jpg',
     };
   }
 }

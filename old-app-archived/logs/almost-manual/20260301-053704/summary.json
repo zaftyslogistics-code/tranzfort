@@ -1,0 +1,8 @@
+{
+  "timestamp": "20260301-053704",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260301-053704",
+  "failedSteps": [
+    "tranZfort_analyze"
+  ],
+  "status": "FAIL"
+}

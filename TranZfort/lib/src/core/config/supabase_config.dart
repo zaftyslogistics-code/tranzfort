@@ -5,8 +5,13 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 class SupabaseConfig {
   final String url;
   final String anonKey;
+  final String googleWebClientId;
 
-  const SupabaseConfig({required this.url, required this.anonKey});
+  const SupabaseConfig({
+    required this.url,
+    required this.anonKey,
+    required this.googleWebClientId,
+  });
 
   bool get isConfigured =>
       url.isNotEmpty &&
@@ -18,6 +23,7 @@ class SupabaseConfig {
     return SupabaseConfig(
       url: dotenv.env['SUPABASE_URL'] ?? '',
       anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
+      googleWebClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? '',
     );
   }
 }

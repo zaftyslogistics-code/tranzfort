@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'app_failure.dart';
 
-/// Shared Supabase error → AppFailure mapper used by all repositories.
+/// Shared Supabase error > AppFailure mapper used by all repositories.
 ///
 /// Repositories that need additional domain-specific mapping can call this
 /// as a fallback after their own checks.

@@ -166,6 +166,7 @@ class StandardListCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(

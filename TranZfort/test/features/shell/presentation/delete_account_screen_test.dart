@@ -117,10 +117,7 @@ String _expectedGracePeriodRemainingLabel(WidgetTester tester, DateTime requeste
   if (remainingDays <= 0) {
     return l10n.deleteAccountGracePeriodLessThanOneDayLabel;
   }
-  return l10n.deleteAccountGracePeriodRemainingDaysLabel(
-    remainingDays,
-    remainingDays == 1 ? '' : 's',
-  );
+  return l10n.deleteAccountGracePeriodRemainingDaysLabel(remainingDays);
 }
 
 void main() {

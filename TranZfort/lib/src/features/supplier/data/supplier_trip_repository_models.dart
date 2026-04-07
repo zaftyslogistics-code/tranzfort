@@ -1,5 +1,3 @@
-part of 'supplier_trip_repository.dart';
-
 class SupplierTrip {
   final String id;
   final String loadId;

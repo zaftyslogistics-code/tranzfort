@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -12,6 +13,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../data/notification_repository.dart';
@@ -30,11 +32,19 @@ class NotificationsScreen extends ConsumerWidget {
     final highPriorityUnreadCount = state.notifications
         .where((item) => !item.isRead && item.priority == AppNotificationPriority.high)
         .length;
+    final languageCode = ref.watch(appLocaleProvider).locale.languageCode;
+    final ttsSummary = _notificationsTtsSummary(
+      context: context,
+      languageCode: languageCode,
+      unreadCount: unreadCount,
+      highPriorityUnreadCount: highPriorityUnreadCount,
+    );
 
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.notificationsTitle),
         actions: [
+          TtsActionButton(fallbackSummary: ttsSummary),
           if (state.notifications.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(right: AppSpacing.sm),
@@ -69,10 +79,18 @@ class NotificationsScreen extends ConsumerWidget {
             ),
         ],
       ),
-      body: _NotificationsBody(
-        state: state,
-        unreadCount: unreadCount,
-        highPriorityUnreadCount: highPriorityUnreadCount,
+      body: Stack(
+        children: [
+          _NotificationsBody(
+            state: state,
+            unreadCount: unreadCount,
+            highPriorityUnreadCount: highPriorityUnreadCount,
+          ),
+          TtsScreenSummaryEffect(
+            summary: ttsSummary,
+            screenKey: AppRoutes.notificationsPath,
+          ),
+        ],
       ),
     );
   }

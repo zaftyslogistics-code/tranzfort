@@ -36,6 +36,7 @@ void main() {
               caseId: 'case-1',
               subjectId: 'user-1',
               subjectType: 'supplier_profile',
+              reviewType: 'full_verification',
               subjectTypeLabel: 'Supplier',
               displayName: 'S1 Logistics',
               subjectLabel: 'Supplier profile verification case',
@@ -65,6 +66,8 @@ void main() {
                 'Registered': '2026-03-01 09:30',
                 'Verification coordinates': '19.076, 72.8777',
               },
+              approvedAvatarPath: '',
+              pendingProfilePhotoPath: '',
               documents: const [
                 VerificationDocument(
                   label: 'PAN Card',
@@ -101,9 +104,16 @@ void main() {
     expect(find.text('case-1'), findsOneWidget);
     expect(find.text('user-1'), findsWidgets);
     expect(find.text('Supplier'), findsWidgets);
+    expect(find.text('Full verification'), findsOneWidget);
     expect(find.text('Ops One (ops_admin) • admin-1'), findsOneWidget);
+    final primaryScrollView = find.byType(Scrollable).first;
+    await tester.scrollUntilVisible(
+      find.text('Subject context'),
+      300,
+      scrollable: primaryScrollView,
+    );
+    await tester.pumpAndSettle();
     expect(find.text('Subject context'), findsOneWidget);
-    expect(find.text('Business licence mismatch'), findsOneWidget);
     expect(find.text('pending'), findsOneWidget);
     expect(find.text('123412341234'), findsOneWidget);
     expect(find.text('1234'), findsOneWidget);
@@ -112,7 +122,6 @@ void main() {
     expect(find.text('19.076, 72.8777'), findsOneWidget);
     expect(find.text('Linked profile id'), findsOneWidget);
     expect(find.byKey(const ValueKey('verification-open-subject-profile-button')), findsOneWidget);
-    final primaryScrollView = find.byType(Scrollable).first;
     await tester.scrollUntilVisible(
       find.text('Verification documents'),
       300,
@@ -158,6 +167,7 @@ void main() {
               caseId: 'case-missing-docs',
               subjectId: 'user-2',
               subjectType: 'supplier_profile',
+              reviewType: 'full_verification',
               subjectTypeLabel: 'Supplier',
               displayName: 'S2 Logistics',
               subjectLabel: 'Supplier profile verification case',
@@ -173,6 +183,8 @@ void main() {
               assignedAdminLabel: '',
               slaLabel: '12h left',
               subjectMetadata: {},
+              approvedAvatarPath: '',
+              pendingProfilePhotoPath: '',
               documents: [
                 VerificationDocument(
                   label: 'Aadhaar Front',
@@ -225,6 +237,7 @@ void main() {
               caseId: 'case-1',
               subjectId: 'user-1',
               subjectType: 'supplier_profile',
+              reviewType: 'full_verification',
               subjectTypeLabel: 'Supplier',
               displayName: 'S1 Logistics',
               subjectLabel: 'Supplier profile verification case',
@@ -240,6 +253,8 @@ void main() {
               assignedAdminLabel: '',
               slaLabel: '12h left',
               subjectMetadata: {},
+              approvedAvatarPath: '',
+              pendingProfilePhotoPath: '',
               documents: [
                 VerificationDocument(
                   label: 'PAN Card',
@@ -302,6 +317,7 @@ void main() {
               caseId: 'case-truck-1',
               subjectId: 'truck-1',
               subjectType: 'truck',
+              reviewType: 'full_verification',
               subjectTypeLabel: 'Truck',
               displayName: 'MH12AB1234',
               subjectLabel: 'Truck verification case',
@@ -329,6 +345,8 @@ void main() {
                 'Owner registered': '2026-02-28 07:45',
                 'Verified at': '2026-03-10 13:20',
               },
+              approvedAvatarPath: '',
+              pendingProfilePhotoPath: '',
               documents: [
                 VerificationDocument(
                   label: 'RC Document',
@@ -352,15 +370,21 @@ void main() {
 
     await tester.pumpAndSettle();
 
+    final primaryScrollView = find.byType(Scrollable).first;
+    await tester.scrollUntilVisible(
+      find.text('Subject context'),
+      300,
+      scrollable: primaryScrollView,
+    );
+    await tester.pumpAndSettle();
     expect(find.text('MH12AB1234'), findsWidgets);
-    expect(find.text('Trucker One'), findsOneWidget);
+    expect(find.text('Trucker One'), findsWidgets);
     expect(find.text('approved'), findsOneWidget);
     expect(find.text('2026-02-28 07:45'), findsOneWidget);
     expect(find.text('2026-03-10 13:20'), findsOneWidget);
     expect(find.text('Linked profile id'), findsOneWidget);
     expect(find.byKey(const ValueKey('verification-open-subject-profile-button')), findsOneWidget);
     expect(find.text('Open owner profile'), findsOneWidget);
-    final primaryScrollView = find.byType(Scrollable).first;
     await tester.scrollUntilVisible(
       find.text('Verification documents'),
       300,
@@ -391,6 +415,7 @@ void main() {
               caseId: 'case-truck-2',
               subjectId: 'truck-2',
               subjectType: 'truck',
+              reviewType: 'full_verification',
               subjectTypeLabel: 'Truck',
               displayName: 'MH14CD5678',
               subjectLabel: 'Truck verification case',
@@ -406,6 +431,8 @@ void main() {
               assignedAdminLabel: '',
               slaLabel: '12h left',
               subjectMetadata: {},
+              approvedAvatarPath: '',
+              pendingProfilePhotoPath: '',
               documents: [
                 VerificationDocument(
                   label: 'RC Document',

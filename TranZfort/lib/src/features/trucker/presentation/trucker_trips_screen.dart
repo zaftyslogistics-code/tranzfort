@@ -184,7 +184,7 @@ class _TruckerTripCard extends StatelessWidget {
     return StandardListCard(
       accent: palette.foreground,
       title: trip.routeLabel,
-      subtitle: '${trip.material} • ${_localizedTruckerTripsProofStatus(l10n, trip)}',
+      subtitle: '${trip.material} - ${_localizedTruckerTripsProofStatus(l10n, trip)}',
       trailing: StatusChip(label: _localizedTruckerTripsStage(l10n, trip.stage)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

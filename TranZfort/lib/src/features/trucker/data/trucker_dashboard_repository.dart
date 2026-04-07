@@ -112,27 +112,29 @@ class TruckerDashboardRepository {
     }
 
     try {
-      final activeBids = await _backend.countBookingRequestsByStatuses(userId, activeBidStatuses);
-      final upcomingTrips = await _backend.countTripsByStages(userId, upcomingTripStages);
-      final inTransitTrips = await _backend.countTripsByStages(userId, const ['in_transit']);
-      final completedTrips = await _backend.countTripsByStages(userId, const ['completed']);
-      final totalTrucks = await _backend.countTrucksByStatuses(userId, const <String>[]);
-      final approvedTrucks = await _backend.countTrucksByStatuses(userId, const ['verified']);
-      final pendingTrucks = await _backend.countTrucksByStatuses(userId, const ['pending']);
-      final rejectedTrucks = await _backend.countTrucksByStatuses(userId, const ['rejected']);
-      final pendingReapprovalTrucks = await _backend.countTrucksByStatuses(userId, const ['edited_pending_reapproval']);
+      final results = await Future.wait([
+        _backend.countBookingRequestsByStatuses(userId, activeBidStatuses),
+        _backend.countTripsByStages(userId, upcomingTripStages),
+        _backend.countTripsByStages(userId, const ['in_transit']),
+        _backend.countTripsByStages(userId, const ['completed']),
+        _backend.countTrucksByStatuses(userId, const <String>[]),
+        _backend.countTrucksByStatuses(userId, const ['verified']),
+        _backend.countTrucksByStatuses(userId, const ['pending']),
+        _backend.countTrucksByStatuses(userId, const ['rejected']),
+        _backend.countTrucksByStatuses(userId, const ['edited_pending_reapproval']),
+      ]);
 
       return Success<TruckerDashboardStats>(
         TruckerDashboardStats(
-          activeBids: activeBids,
-          upcomingTrips: upcomingTrips,
-          inTransitTrips: inTransitTrips,
-          completedTrips: completedTrips,
-          totalTrucks: totalTrucks,
-          approvedTrucks: approvedTrucks,
-          pendingTrucks: pendingTrucks,
-          rejectedTrucks: rejectedTrucks,
-          pendingReapprovalTrucks: pendingReapprovalTrucks,
+          activeBids: results[0],
+          upcomingTrips: results[1],
+          inTransitTrips: results[2],
+          completedTrips: results[3],
+          totalTrucks: results[4],
+          approvedTrucks: results[5],
+          pendingTrucks: results[6],
+          rejectedTrucks: results[7],
+          pendingReapprovalTrucks: results[8],
         ),
       );
     } catch (error, stackTrace) {

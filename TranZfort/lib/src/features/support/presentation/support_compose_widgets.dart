@@ -63,7 +63,7 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
           label: l10n.supportReplyLabel,
           hintText: l10n.supportReplyHint,
           maxLines: 4,
-          errorText: state.fieldErrors['message_body'],
+          errorText: _fieldErrorText(l10n, state.fieldErrors['message_body']),
           onChanged: ref.read(supportReplyProvider(widget.ticketId).notifier).setMessageBody,
         ),
         const SizedBox(height: AppSpacing.md),
@@ -185,5 +185,12 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
       message: AppLocalizations.of(context).supportComposeAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
+  }
+
+  String? _fieldErrorText(AppLocalizations l10n, String? code) {
+    return switch (code) {
+      supportReplyMessageTooShortCode => l10n.supportReplyMessageTooShortMessage,
+      _ => code,
+    };
   }
 }

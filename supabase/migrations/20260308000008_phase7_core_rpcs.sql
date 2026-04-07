@@ -138,7 +138,8 @@ BEGIN
     route_distance_km, route_duration_minutes, route_polyline, route_snapshot_source,
     material, weight_tonnes, required_body_type, required_tyres,
     trucks_needed, price_amount, price_type, advance_percentage, pickup_date,
-    status, assigned_trucker_id, assigned_truck_id, published_at
+    status, assigned_trucker_id, assigned_truck_id, published_at,
+    is_super_load, super_status
   ) SELECT
     supplier_id, v_load.id,
     origin_label, origin_city, origin_state, origin_lat, origin_lng,
@@ -146,7 +147,8 @@ BEGIN
     route_distance_km, route_duration_minutes, route_polyline, route_snapshot_source,
     material, weight_tonnes, required_body_type, required_tyres,
     1, price_amount, price_type, advance_percentage, pickup_date,
-    'assigned_full', v_booking.trucker_id, v_booking.truck_id, NOW()
+    'assigned_full', v_booking.trucker_id, v_booking.truck_id, NOW(),
+    is_super_load, super_status
   FROM loads WHERE id = v_load.id
   RETURNING id INTO v_child_load_id;
 
@@ -242,7 +244,7 @@ BEGIN
   IF p_new_stage = 'in_transit' THEN
     UPDATE loads SET status = 'in_transit'
     WHERE id = (SELECT parent_load_id FROM loads WHERE id = v_trip.load_id)
-      AND status IN ('assigned_partial', 'assigned_full');
+      AND status NOT IN ('completed', 'cancelled', 'in_transit');
   END IF;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;

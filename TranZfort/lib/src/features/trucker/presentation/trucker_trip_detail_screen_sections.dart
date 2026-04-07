@@ -591,7 +591,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                l10n.truckerTripDetailRouteLabel('${detail.originLabel} → ${detail.destinationLabel}'),
+                l10n.truckerTripDetailRouteLabel('${detail.originLabel} > ${detail.destinationLabel}'),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 4),
@@ -624,7 +624,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
               const SizedBox(height: 12),
               Text(l10n.truckerTripDetailCompletedOnLabel(_formatDateTime(context, detail.completedAt))),
               const SizedBox(height: 4),
-              Text(l10n.truckerTripDetailRouteLabel('${detail.originLabel} → ${detail.destinationLabel}')),
+              Text(l10n.truckerTripDetailRouteLabel('${detail.originLabel} > ${detail.destinationLabel}')),
               const SizedBox(height: 4),
               Text(l10n.truckerTripDetailMaterialLabel(detail.material)),
             ],
@@ -811,7 +811,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
       TimeOfDay.fromDateTime(value),
       alwaysUse24HourFormat: true,
     );
-    return '${_formatDate(context, value)} • $time';
+    return '${_formatDate(context, value)} - $time';
   }
 
   String _disputeStatusGuidance(AppLocalizations l10n, String value) {

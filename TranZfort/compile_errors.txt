@@ -1,0 +1,587 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart
+lib/src/features/auth/presentation/auth_screen_sections.dart:168:49: Error: 'authPasswordResetSuccessMessage' isn't a function or method and can't be invoked.
+          ? l10n.authPasswordResetSuccessMessage(email)
+                                                ^^^^^^^^...
+lib/src/features/auth/presentation/auth_screen_sections.dart:469:46: Error: 'authPasswordTtsSummary' isn't a function or method and can't be invoked.
+                : l10n.authPasswordTtsSummary(
+                                             ^^...
+lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+      tooltip: l10n.appBarLanguageToggleTooltip,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart [E]
+  Failed to load "C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart":
+  Compilation failed for testPath=C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: lib/src/features/auth/presentation/auth_screen_sections.dart:168:49: Error: 'authPasswordResetSuccessMessage' isn't a function or method and can't be invoked.
+            ? l10n.authPasswordResetSuccessMessage(email)
+                                                  ^^^^^^^^...
+  lib/src/features/auth/presentation/auth_screen_sections.dart:469:46: Error: 'authPasswordTtsSummary' isn't a function or method and can't be invoked.
+                  : l10n.authPasswordTtsSummary(
+                                               ^^...
+  lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+        tooltip: l10n.appBarLanguageToggleTooltip,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .
+00:00 +0 -1: Some tests failed.
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart
+lib/src/features/verification/presentation/verification_screen.dart:79:27: Error: The getter 'verificationPendingStatusTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationPendingStatusTitle'.
+              title: l10n.verificationPendingStatusTitle,
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen.dart:410:21: Error: The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationLocationCityRequired'.
+        return l10n.verificationValidationLocationCityRequired;
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen.dart:449:20: Error: The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'verificationChecklistProgress'.
+    parts.add(l10n.verificationChecklistProgress(uploadedCount, totalCount));
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:231:63: Error: The getter 'verificationValidationBusinessLicenceRequired' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationBusinessLicenceRequired'.
+    verificationValidationBusinessLicenceRequiredCode => l10n.verificationValidationBusinessLicenceRequired,
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:232:60: Error: The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationLocationCityRequired'.
+    verificationValidationLocationCityRequiredCode => l10n.verificationValidationLocationCityRequired,
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:243:19: Error: The getter 'verificationProfilePhotoBlockedUploadNew' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedUploadNew'.
+      return l10n.verificationProfilePhotoBlockedUploadNew;
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:246:19: Error: The getter 'verificationProfilePhotoBlockedUploadDifferent' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedUploadDifferent'.
+      return l10n.verificationProfilePhotoBlockedUploadDifferent;
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:249:19: Error: The getter 'verificationProfilePhotoBlockedAlreadyUnderReview' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedAlreadyUnderReview'.
+      return l10n.verificationProfilePhotoBlockedAlreadyUnderReview;
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:451:23: Error: The getter 'verificationReadinessLocationLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationReadinessLocationLabel'.
+          label: l10n.verificationReadinessLocationLabel,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:457:23: Error: The getter 'verificationReadinessTruckWithRcLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationReadinessTruckWithRcLabel'.
+          label: l10n.verificationReadinessTruckWithRcLabel,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:468:18: Error: The getter 'verificationSubmitSectionTruckerTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionTruckerTitle'.
+          ? l10n.verificationSubmitSectionTruckerTitle
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:469:18: Error: The getter 'verificationSubmitSectionTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionTitle'.
+          : l10n.verificationSubmitSectionTitle,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:472:16: Error: The getter 'verificationSubmitSectionSubtitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionSubtitle'.
+          l10n.verificationSubmitSectionSubtitle,
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:494:26: Error: The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing method, or defining a method named 'verificationChecklistProgress'.
+                    l10n.verificationChecklistProgress(doneCount, checks.length),
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:541:24: Error: The getter 'verificationSubmitProfilePhotoForReviewAction' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitProfilePhotoForReviewAction'.
+                ? l10n.verificationSubmitProfilePhotoForReviewAction
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:554:38: Error: The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoSubmittedSuccess'.
+                              ? l10n.verificationProfilePhotoSubmittedSuccess
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/verification/presentation/verification_screen_sections.dart:568:22: Error: The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoApprovalGuidance'.
+              ? l10n.verificationProfilePhotoApprovalGuidance
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+      tooltip: l10n.appBarLanguageToggleTooltip,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart [E]
+  Failed to load "C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart":
+  Compilation failed for testPath=C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: lib/src/features/verification/presentation/verification_screen.dart:79:27: Error: The getter 'verificationPendingStatusTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationPendingStatusTitle'.
+                title: l10n.verificationPendingStatusTitle,
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen.dart:410:21: Error: The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationLocationCityRequired'.
+          return l10n.verificationValidationLocationCityRequired;
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen.dart:449:20: Error: The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing method, or defining a method named 'verificationChecklistProgress'.
+      parts.add(l10n.verificationChecklistProgress(uploadedCount, totalCount));
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:231:63: Error: The getter 'verificationValidationBusinessLicenceRequired' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationBusinessLicenceRequired'.
+      verificationValidationBusinessLicenceRequiredCode => l10n.verificationValidationBusinessLicenceRequired,
+                                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:232:60: Error: The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationValidationLocationCityRequired'.
+      verificationValidationLocationCityRequiredCode => l10n.verificationValidationLocationCityRequired,
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:243:19: Error: The getter 'verificationProfilePhotoBlockedUploadNew' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedUploadNew'.
+        return l10n.verificationProfilePhotoBlockedUploadNew;
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:246:19: Error: The getter 'verificationProfilePhotoBlockedUploadDifferent' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedUploadDifferent'.
+        return l10n.verificationProfilePhotoBlockedUploadDifferent;
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:249:19: Error: The getter 'verificationProfilePhotoBlockedAlreadyUnderReview' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoBlockedAlreadyUnderReview'.
+        return l10n.verificationProfilePhotoBlockedAlreadyUnderReview;
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:451:23: Error: The getter 'verificationReadinessLocationLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationReadinessLocationLabel'.
+            label: l10n.verificationReadinessLocationLabel,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:457:23: Error: The getter 'verificationReadinessTruckWithRcLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationReadinessTruckWithRcLabel'.
+            label: l10n.verificationReadinessTruckWithRcLabel,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:468:18: Error: The getter 'verificationSubmitSectionTruckerTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionTruckerTitle'.
+            ? l10n.verificationSubmitSectionTruckerTitle
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:469:18: Error: The getter 'verificationSubmitSectionTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionTitle'.
+            : l10n.verificationSubmitSectionTitle,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:472:16: Error: The getter 'verificationSubmitSectionSubtitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitSectionSubtitle'.
+            l10n.verificationSubmitSectionSubtitle,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:494:26: Error: The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing method, or defining a method named 'verificationChecklistProgress'.
+                      l10n.verificationChecklistProgress(doneCount, checks.length),
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:541:24: Error: The getter 'verificationSubmitProfilePhotoForReviewAction' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationSubmitProfilePhotoForReviewAction'.
+                  ? l10n.verificationSubmitProfilePhotoForReviewAction
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:554:38: Error: The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoSubmittedSuccess'.
+                                ? l10n.verificationProfilePhotoSubmittedSuccess
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/verification/presentation/verification_screen_sections.dart:568:22: Error: The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoApprovalGuidance'.
+                ? l10n.verificationProfilePhotoApprovalGuidance
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+        tooltip: l10n.appBarLanguageToggleTooltip,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .
+00:00 +0 -1: Some tests failed.
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart
+lib/src/features/shell/presentation/shell_account_screens.dart:220:84: Error: The getter 'profilePhotoStatusUnderReview' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusUnderReview'.
+      'submitted' || 'queued' || 'in_review' || 'waiting_for_resubmission' => l10n.profilePhotoStatusUnderReview,
+                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:221:26: Error: The getter 'profilePhotoStatusRejected' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusRejected'.
+      'rejected' => l10n.profilePhotoStatusRejected,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:222:26: Error: The getter 'profilePhotoStatusApprovedRecent' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusApprovedRecent'.
+      'approved' => l10n.profilePhotoStatusApprovedRecent,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:224:18: Error: The getter 'profilePhotoStatusApproved' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusApproved'.
+          ? l10n.profilePhotoStatusApproved
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:225:18: Error: The getter 'profilePhotoStatusNone' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusNone'.
+          : l10n.profilePhotoStatusNone),
+                 ^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:249:25: Error: The getter 'profilePhotoSectionTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoSectionTitle'.
+            title: l10n.profilePhotoSectionTitle,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:265:37: Error: The getter 'profilePhotoStatusLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusLabel'.
+                InfoRow(label: l10n.profilePhotoStatusLabel, value: photoStatusLabel),
+                                    ^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:268:24: Error: The getter 'profilePhotoHelperText' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoHelperText'.
+                  l10n.profilePhotoHelperText,
+                       ^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:273:33: Error: The getter 'profilePhotoSubmittedLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoSubmittedLabel'.
+                    label: l10n.profilePhotoSubmittedLabel,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:278:33: Error: The getter 'profilePhotoRejectionReasonLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectionReasonLabel'.
+                    label: l10n.profilePhotoRejectionReasonLabel,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:290:40: Error: The getter 'profilePhotoPendingCardTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoPendingCardTitle'.
+                                ? l10n.profilePhotoPendingCardTitle
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:291:40: Error: The getter 'profilePhotoRejectedCardTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectedCardTitle'.
+                                : l10n.profilePhotoRejectedCardTitle,
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:293:40: Error: The getter 'profilePhotoPendingCardMessage' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoPendingCardMessage'.
+                                ? l10n.profilePhotoPendingCardMessage
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:294:40: Error: The getter 'profilePhotoRejectedCardMessage' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectedCardMessage'.
+                                : l10n.profilePhotoRejectedCardMessage,
+                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:306:32: Error: The getter 'profilePhotoChangeAction' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoChangeAction'.
+                        ? l10n.profilePhotoChangeAction
+                               ^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:307:32: Error: The getter 'profilePhotoAddAction' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoAddAction'.
+                        : l10n.profilePhotoAddAction,
+                               ^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:317:26: Error: The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoApprovalGuidance'.
+                    l10n.verificationProfilePhotoApprovalGuidance,
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:430:18: Error: The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoSubmittedSuccess'.
+          ? l10n.verificationProfilePhotoSubmittedSuccess
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:603:18: Error: The getter 'settingsTtsPreviewTextHi' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewTextHi'.
+          ? l10n.settingsTtsPreviewTextHi
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:604:18: Error: The getter 'settingsTtsPreviewTextEn' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewTextEn'.
+          : l10n.settingsTtsPreviewTextEn;
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:613:35: Error: The getter 'settingsTtsSpeechRateSlow' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateSlow'.
+      if (rate < 0.4) return l10n.settingsTtsSpeechRateSlow;
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:614:35: Error: The getter 'settingsTtsSpeechRateFast' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateFast'.
+      if (rate > 0.6) return l10n.settingsTtsSpeechRateFast;
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:615:19: Error: The getter 'settingsTtsSpeechRateNormal' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateNormal'.
+      return l10n.settingsTtsSpeechRateNormal;
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:619:19: Error: The getter 'settingsTtsTitle' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsTitle'.
+      title: l10n.settingsTtsTitle,
+                  ^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:625:30: Error: The getter 'settingsTtsMutedLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsMutedLabel'.
+            title: Text(l10n.settingsTtsMutedLabel),
+                             ^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:626:43: Error: The getter 'settingsTtsMutedHelper' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsMutedHelper'.
+            subtitle: Text(isMuted ? l10n.settingsTtsMutedHelper : l10n.settingsTtsPreviewVoiceHelper),
+                                          ^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:626:73: Error: The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceHelper'.
+            subtitle: Text(isMuted ? l10n.settingsTtsMutedHelper : l10n.settingsTtsPreviewVoiceHelper),
+                                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:637:18: Error: The getter 'settingsTtsSpeechRateLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateLabel'.
+            l10n.settingsTtsSpeechRateLabel,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:644:18: Error: The getter 'settingsTtsSpeechRateHelper' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateHelper'.
+            l10n.settingsTtsSpeechRateHelper,
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:676:25: Error: The getter 'settingsTtsLanguageModeLabel' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeLabel'.
+            label: l10n.settingsTtsLanguageModeLabel,
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:678:30: Error: The getter 'settingsTtsLanguageModeHelper' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeHelper'.
+            helperText: l10n.settingsTtsLanguageModeHelper,
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:682:34: Error: The getter 'settingsTtsLanguageModeAuto' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeAuto'.
+                child: Text(l10n.settingsTtsLanguageModeAuto),
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:686:34: Error: The getter 'settingsTtsLanguageModeHindi' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeHindi'.
+                child: Text(l10n.settingsTtsLanguageModeHindi),
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:690:34: Error: The getter 'settingsTtsLanguageModeEnglish' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeEnglish'.
+                child: Text(l10n.settingsTtsLanguageModeEnglish),
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:708:31: Error: The getter 'settingsTtsPreviewVoiceAction' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceAction'.
+                  label: l10n.settingsTtsPreviewVoiceAction,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/features/shell/presentation/shell_account_screens.dart:716:64: Error: The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceHelper'.
+            isMuted ? l10n.commonVoiceMutedGoToSettings : l10n.settingsTtsPreviewVoiceHelper,
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+ - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+      tooltip: l10n.appBarLanguageToggleTooltip,
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+00:00 +0 -1: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart [E]
+  Failed to load "C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart":
+  Compilation failed for testPath=C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: lib/src/features/shell/presentation/shell_account_screens.dart:220:84: Error: The getter 'profilePhotoStatusUnderReview' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusUnderReview'.
+        'submitted' || 'queued' || 'in_review' || 'waiting_for_resubmission' => l10n.profilePhotoStatusUnderReview,
+                                                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:221:26: Error: The getter 'profilePhotoStatusRejected' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusRejected'.
+        'rejected' => l10n.profilePhotoStatusRejected,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:222:26: Error: The getter 'profilePhotoStatusApprovedRecent' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusApprovedRecent'.
+        'approved' => l10n.profilePhotoStatusApprovedRecent,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:224:18: Error: The getter 'profilePhotoStatusApproved' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusApproved'.
+            ? l10n.profilePhotoStatusApproved
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:225:18: Error: The getter 'profilePhotoStatusNone' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusNone'.
+            : l10n.profilePhotoStatusNone),
+                   ^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:249:25: Error: The getter 'profilePhotoSectionTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoSectionTitle'.
+              title: l10n.profilePhotoSectionTitle,
+                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:265:37: Error: The getter 'profilePhotoStatusLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoStatusLabel'.
+                  InfoRow(label: l10n.profilePhotoStatusLabel, value: photoStatusLabel),
+                                      ^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:268:24: Error: The getter 'profilePhotoHelperText' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoHelperText'.
+                    l10n.profilePhotoHelperText,
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:273:33: Error: The getter 'profilePhotoSubmittedLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoSubmittedLabel'.
+                      label: l10n.profilePhotoSubmittedLabel,
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:278:33: Error: The getter 'profilePhotoRejectionReasonLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectionReasonLabel'.
+                      label: l10n.profilePhotoRejectionReasonLabel,
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:290:40: Error: The getter 'profilePhotoPendingCardTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoPendingCardTitle'.
+                                  ? l10n.profilePhotoPendingCardTitle
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:291:40: Error: The getter 'profilePhotoRejectedCardTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectedCardTitle'.
+                                  : l10n.profilePhotoRejectedCardTitle,
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:293:40: Error: The getter 'profilePhotoPendingCardMessage' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoPendingCardMessage'.
+                                  ? l10n.profilePhotoPendingCardMessage
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:294:40: Error: The getter 'profilePhotoRejectedCardMessage' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoRejectedCardMessage'.
+                                  : l10n.profilePhotoRejectedCardMessage,
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:306:32: Error: The getter 'profilePhotoChangeAction' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoChangeAction'.
+                          ? l10n.profilePhotoChangeAction
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:307:32: Error: The getter 'profilePhotoAddAction' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'profilePhotoAddAction'.
+                          : l10n.profilePhotoAddAction,
+                                 ^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:317:26: Error: The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoApprovalGuidance'.
+                      l10n.verificationProfilePhotoApprovalGuidance,
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:430:18: Error: The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'verificationProfilePhotoSubmittedSuccess'.
+            ? l10n.verificationProfilePhotoSubmittedSuccess
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:603:18: Error: The getter 'settingsTtsPreviewTextHi' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewTextHi'.
+            ? l10n.settingsTtsPreviewTextHi
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:604:18: Error: The getter 'settingsTtsPreviewTextEn' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewTextEn'.
+            : l10n.settingsTtsPreviewTextEn;
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:613:35: Error: The getter 'settingsTtsSpeechRateSlow' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateSlow'.
+        if (rate < 0.4) return l10n.settingsTtsSpeechRateSlow;
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:614:35: Error: The getter 'settingsTtsSpeechRateFast' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateFast'.
+        if (rate > 0.6) return l10n.settingsTtsSpeechRateFast;
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:615:19: Error: The getter 'settingsTtsSpeechRateNormal' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateNormal'.
+        return l10n.settingsTtsSpeechRateNormal;
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:619:19: Error: The getter 'settingsTtsTitle' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsTitle'.
+        title: l10n.settingsTtsTitle,
+                    ^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:625:30: Error: The getter 'settingsTtsMutedLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsMutedLabel'.
+              title: Text(l10n.settingsTtsMutedLabel),
+                               ^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:626:43: Error: The getter 'settingsTtsMutedHelper' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsMutedHelper'.
+              subtitle: Text(isMuted ? l10n.settingsTtsMutedHelper : l10n.settingsTtsPreviewVoiceHelper),
+                                            ^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:626:73: Error: The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceHelper'.
+              subtitle: Text(isMuted ? l10n.settingsTtsMutedHelper : l10n.settingsTtsPreviewVoiceHelper),
+                                                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:637:18: Error: The getter 'settingsTtsSpeechRateLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateLabel'.
+              l10n.settingsTtsSpeechRateLabel,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:644:18: Error: The getter 'settingsTtsSpeechRateHelper' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsSpeechRateHelper'.
+              l10n.settingsTtsSpeechRateHelper,
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:676:25: Error: The getter 'settingsTtsLanguageModeLabel' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeLabel'.
+              label: l10n.settingsTtsLanguageModeLabel,
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:678:30: Error: The getter 'settingsTtsLanguageModeHelper' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeHelper'.
+              helperText: l10n.settingsTtsLanguageModeHelper,
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:682:34: Error: The getter 'settingsTtsLanguageModeAuto' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeAuto'.
+                  child: Text(l10n.settingsTtsLanguageModeAuto),
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:686:34: Error: The getter 'settingsTtsLanguageModeHindi' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeHindi'.
+                  child: Text(l10n.settingsTtsLanguageModeHindi),
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:690:34: Error: The getter 'settingsTtsLanguageModeEnglish' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsLanguageModeEnglish'.
+                  child: Text(l10n.settingsTtsLanguageModeEnglish),
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:708:31: Error: The getter 'settingsTtsPreviewVoiceAction' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceAction'.
+                    label: l10n.settingsTtsPreviewVoiceAction,
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/features/shell/presentation/shell_account_screens.dart:716:64: Error: The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'settingsTtsPreviewVoiceHelper'.
+              isMuted ? l10n.commonVoiceMutedGoToSettings : l10n.settingsTtsPreviewVoiceHelper,
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  lib/src/shared/widgets/language_toggle_action.dart:57:21: Error: The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations'.
+   - 'AppLocalizations' is from 'package:tranzfort/src/l10n/app_localizations.dart' ('lib/src/l10n/app_localizations.dart').
+  Try correcting the name to the name of an existing getter, or defining a getter or field named 'appBarLanguageToggleTooltip'.
+        tooltip: l10n.appBarLanguageToggleTooltip,
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  .
+00:00 +0 -1: Some tests failed.

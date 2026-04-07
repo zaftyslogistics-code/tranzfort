@@ -1,0 +1,935 @@
+{
+  "@@locale": "en",
+  "appTitle": "TranZfort",
+  "splashTagline": "Trusted load movement across India.",
+  "splashFirstOpenGreeting": "Welcome to TranZfort.",
+  "settingsTitle": "Settings",
+  "settingsScreenTtsContext": "Settings screen. Manage language, voice guidance, notifications, and account options.",
+  "appBarTtsMutedSnack": "Voice guidance muted",
+  "appBarTtsEnabledSnack": "Voice guidance enabled",
+  "appBarLanguageChangedHindi": "Language changed: Hindi",
+  "appBarLanguageChangedEnglish": "Language changed: English",
+  "appBarTtsTooltipMute": "Mute voice guidance ({screen})",
+  "@appBarTtsTooltipMute": {
+    "placeholders": {
+      "screen": {}
+    }
+  },
+  "appBarTtsTooltipEnable": "Enable voice guidance",
+  "appBarLanguageToggleTooltip": "Toggle language",
+  "appBarNotificationsTooltip": "Notifications",
+  "appDrawerProfileTitle": "Profile",
+  "appDrawerSupplierWorkspace": "Supplier workspace",
+  "appDrawerTruckerWorkspace": "Trucker workspace",
+  "appDrawerHome": "Home",
+  "appDrawerDashboard": "Dashboard",
+  "appDrawerVerification": "Verification",
+  "appDrawerBotChat": "Bot Chat",
+  "dashboardVerificationStatusVerified": "Verification complete",
+  "dashboardVerificationStatusPending": "Verification under review",
+  "dashboardVerificationStatusUnverified": "Verification not started",
+  "dashboardVerificationStatusRejected": "Verification needs updates",
+  "dashboardVerificationStatusUnknown": "Verification status unavailable",
+  "dashboardVerificationRejectedReason": "Update needed: {reason}",
+  "@dashboardVerificationRejectedReason": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "sharedLoadingSuffix": "loading",
+  "languageLabel": "Language",
+  "languageEnglish": "English",
+  "languageHindi": "Hindi",
+  "postLoadTitle": "Post Load",
+  "loadDetailTitle": "Load Detail",
+  "viewRouteMap": "View Route Map",
+  "actionsTitle": "Actions",
+  "loadNotFound": "Load not found",
+  "couldNotStartChatRetry": "Could not start chat. Please retry.",
+  "verifyAction": "Verify",
+  "completeTruckerVerificationToChat": "Complete trucker verification to start chat with suppliers.",
+  "createLoadQuickSteps": "Create a load in 4 quick steps",
+  "createLoadSubtitle": "Add route, cargo, truck requirement and pricing details.",
+  "postLoadSuperLoadReadinessTitle": "Super Load readiness",
+  "postLoadSuperLoadReadinessSubtitle": "Super Load support requires supplier verification and a ready payout profile.",
+  "loadPostedSuccess": "Load posted successfully",
+  "loadPostFailure": "Failed to post load. Please try again.",
+  "postLoadSubmitAction": "Post Load",
+  "nextAction": "Next",
+  "backAction": "Back",
+  "postLoadStepRouteTitle": "Route",
+  "postLoadStepCargoTitle": "Cargo",
+  "postLoadStepVehicleTitle": "Vehicle",
+  "postLoadStepPriceScaleTitle": "Price & Scale",
+  "postLoadStepSummary": "Step {current} of {total} — {label}",
+  "@postLoadStepSummary": {
+    "placeholders": {
+      "current": {},
+      "total": {},
+      "label": {}
+    }
+  },
+  "postLoadOriginCityLabel": "Origin City",
+  "postLoadDestinationCityLabel": "Destination City",
+  "postLoadApproxRouteInfo": "Approx route: {km} km · {hours}h",
+  "@postLoadApproxRouteInfo": {
+    "placeholders": {
+      "km": {},
+      "hours": {}
+    }
+  },
+  "postLoadDistanceUnavailableFallback": "Distance unavailable (offline fallback in use)",
+  "postLoadMaterialLabel": "Material",
+  "postLoadWeightPerTruckLabel": "Weight per Truck (Tonnes)",
+  "postLoadTruckBodyTypeLabel": "Truck Body Type",
+  "postLoadTruckTypeAny": "Any",
+  "postLoadTruckTypeOpen": "Open",
+  "postLoadTruckTypeContainer": "Container",
+  "postLoadTruckTypeTrailer": "Trailer",
+  "postLoadTruckTypeTanker": "Tanker",
+  "postLoadTruckTypeRefrigerated": "Refrigerated",
+  "postLoadPriceTotalLabel": "Total Price (₹)",
+  "postLoadPriceTypeFixed": "Fixed",
+  "postLoadPriceTypeNegotiable": "Per ton",
+  "postLoadAdvanceLabel": "Advance: {percentage}%",
+  "@postLoadAdvanceLabel": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "postLoadPickupDateLabel": "Pickup Date",
+  "postLoadChangeAction": "Change",
+  "postLoadTrucksNeededLabel": "How many trucks needed?",
+  "findLoadsTitle": "Find Loads",
+  "searchLoads": "Search Loads",
+  "resetAction": "Reset",
+  "editAction": "Edit",
+  "loadsFound": "loads found",
+  "mapViewComingSoonTitle": "Map view is coming soon",
+  "mapViewComingSoonSubtitle": "Switch back to list view to continue booking available loads.",
+  "noLoadsFoundTitle": "No loads found",
+  "noLoadsFoundSubtitle": "Try changing your filters or check back later.",
+  "myLoadsTitle": "My Loads",
+  "myLoadsDashboardTts": "My loads dashboard",
+  "myLoadsScreenTtsContext": "My loads dashboard. Review active and completed loads, booking activity, and fulfillment progress.",
+  "myLoadsScreenTtsContextDetailed": "Your loads dashboard. {active} active loads, {inTransit} in transit.",
+  "@myLoadsScreenTtsContextDetailed": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "inTransit": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierOverview": "Supplier overview",
+  "myLoadsOverviewSubtitle": "Track active loads, bookings, and fulfillment progress.",
+  "myLoadsActiveLabel": "Active loads",
+  "myLoadsInTransitLabel": "In transit",
+  "myLoadsRequiresActionBanner": "{count} load(s) need your action.",
+  "@myLoadsRequiresActionBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeTab": "Active",
+  "completedTab": "Completed",
+  "postLoadAction": "Post Load",
+  "noCompletedLoads": "No completed loads",
+  "noActiveLoads": "No active loads",
+  "completedLoadsHere": "Completed/cancelled loads will show here.",
+  "postFirstLoadPrompt": "Post your first load to start getting bookings.",
+  "loadDeactivated": "Load deactivated",
+  "couldNotDeactivateLoad": "Could not deactivate load",
+  "deactivateAction": "Deactivate",
+  "myLoadsTrucksBookedSummary": "{booked}/{needed} trucks booked",
+  "@myLoadsTrucksBookedSummary": {
+    "placeholders": {
+      "booked": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "myLoadsLoadErrorPrefix": "Could not load your loads",
+  "myLoadsStatusCompleted": "Completed",
+  "myLoadsStatusCancelled": "Cancelled",
+  "myLoadsStatusWaiting": "Waiting",
+  "myLoadsStatusFullyBooked": "Fully booked",
+  "myLoadsStatusFulfilling": "Fulfilling",
+  "loadBookedAwaitingApproval": "Load booked! Waiting for supplier approval.",
+  "bookingFailedTryAgain": "Booking failed. Please try again.",
+  "loadBookTtsSuccess": "Booking request sent. Awaiting supplier approval.",
+  "loadBookTtsFailure": "Booking failed. Please try again.",
+  "authTtsPromptGoogleOrPhone": "Continue with Google or phone number.",
+  "authErrorNetwork": "Please check your internet connection.",
+  "authErrorAuthFailed": "Authentication failed. Please try again.",
+  "authErrorConflict": "This account is already registered. Try signing in.",
+  "authErrorValidation": "Please review the entered details.",
+  "authErrorGeneric": "Something went wrong. Please try again.",
+  "authOneFinalStep": "One final step",
+  "authWelcomeTitle": "Welcome to TranZfort",
+  "authGoogleDoneAddMobile": "Google sign-in done. Add your mobile number to continue.",
+  "authWelcomeSubtitle": "India's trusted load matching platform for suppliers and truckers.",
+  "authContinueJourney": "Continue your journey",
+  "authChooseSignInMethod": "Choose your preferred sign-in method.",
+  "authOr": "OR",
+  "authContinueWithPhone": "Continue with Phone",
+  "authContinueWithGoogle": "Continue with Google",
+  "authTermsAgreement": "By continuing, you agree to our Terms of Service and Privacy Policy.",
+  "phoneInvalidNumber": "Please enter a valid phone number",
+  "phoneSaveErrorAuth": "Could not save mobile number. Please try again.",
+  "phoneSaveErrorConflict": "This number is already linked to another account. Try a different number.",
+  "phoneSaveErrorValidation": "Please enter a valid mobile number.",
+  "phoneEnterMobileTitle": "Enter your mobile number",
+  "phoneEnterMobileSubtitle": "Add your number to continue. OTP verification is deferred for now.",
+  "phoneVerificationSetup": "Mobile verification setup",
+  "phoneVerificationSetupSubtitle": "Use your active number to receive booking and trip alerts.",
+  "phoneLabelMobileNumber": "Mobile Number",
+  "commonContinue": "Continue",
+  "otpTtsPrompt": "Enter the 6-digit OTP sent to your phone.",
+  "otpVerificationDeferredMessage": "OTP verification is deferred for now. Please continue with mobile capture flow.",
+  "otpVerificationDeferredTitle": "OTP verification is currently deferred",
+  "otpVerificationDeferredSubtitle": "Use mobile capture flow to continue onboarding.",
+  "otpVerify": "Verify",
+  "otpResendDeferred": "OTP resend is deferred for now.",
+  "otpResendCode": "Resend Code",
+  "roleTtsPrompt": "Are you a supplier or trucker? Please choose.",
+  "roleErrorAuth": "Your session expired. Please sign in again.",
+  "roleErrorConflict": "Role setup was already completed.",
+  "roleErrorValidation": "Please choose a valid role.",
+  "roleErrorGeneric": "Could not save role. Please try again.",
+  "roleTitle": "How will you use TranZfort?",
+  "roleSubtitle": "Select your role to personalize your dashboard and actions.",
+  "roleSupplierTitle": "I am a Supplier / Consignor",
+  "roleSupplierSubtitle": "I want to post loads and find trucks",
+  "roleTruckerTitle": "I am a Trucker / Transporter",
+  "roleTruckerSubtitle": "I want to find loads and manage my fleet",
+  "roleCompleteSetup": "Complete Setup",
+  "myTripsTitle": "My Trips",
+  "myTripsDashboardTts": "My trips dashboard",
+  "myTripsScreenTtsContext": "My trips dashboard. Track current trips, completed deliveries, and stage updates.",
+  "myTripsScreenTtsContextDetailed": "Your trips. {active} active. Current trip: {origin} to {destination}.",
+  "@myTripsScreenTtsContextDetailed": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "truckerOverview": "Trucker overview",
+  "truckerDashboardActiveBidsLabel": "Active bids",
+  "truckerDashboardUpcomingTripsLabel": "Upcoming trips",
+  "truckerDashboardPendingBidsTitle": "Pending bids",
+  "truckerDashboardUpcomingActiveTripsTitle": "Upcoming & active trips",
+  "tripOverviewSubtitle": "Stay on top of active trips and stage progress.",
+  "activeTripStatus": "Active Trip Status",
+  "tripMilestonesSubtitle": "See the next stage and keep documents ready.",
+  "noCompletedTrips": "No completed trips",
+  "noActiveTrips": "No active trips",
+  "completedTripsHere": "Completed trips will appear here.",
+  "bookLoadPrompt": "Book a load from Find Loads to start your first trip.",
+  "findLoadsAction": "Find Loads",
+  "tripsLoadError": "Could not load trips. Please try again.",
+  "tripRecentlyUpdated": "Recently updated",
+  "tripCompletedPrefix": "Completed",
+  "tripStartedPrefix": "Started",
+  "tripApprovedPrefix": "Approved",
+  "tripDeliveredPrefix": "Delivered",
+  "tripPodUploadedPrefix": "POD uploaded",
+  "tripUpdatedPrefix": "Updated",
+  "tripStageCompleted": "Completed",
+  "tripStageInTransit": "In Transit",
+  "tripStageAtPickup": "At Pickup",
+  "tripStageDelivered": "Delivered",
+  "tripStagePodUploaded": "POD Uploaded",
+  "tripStageUnknown": "Unknown",
+  "messagesTitle": "Messages",
+  "chatInboxTts": "Messages inbox",
+  "chatInboxScreenTtsContext": "Messages inbox. Open conversations with suppliers and truckers and track recent updates.",
+  "chatInboxScreenTtsContextCount": "Your messages. {count} conversations.",
+  "@chatInboxScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatNoMessagesTitle": "No messages yet",
+  "chatSupplierInboxSubtitle": "Start a chat by engaging with a load.",
+  "chatTruckerInboxSubtitle": "Start a chat by booking a load.",
+  "chatTapToOpenConversation": "Tap to open conversation",
+  "chatTapToViewConversation": "Tap to view conversation",
+  "chatConversationsSuffix": "trucker conversation(s)",
+  "chatFailedLoadMessages": "Failed to load messages",
+  "chatTruckerFallbackName": "Trucker",
+  "chatSupplierFallbackName": "Supplier",
+  "chatOpenConversationPrefix": "Open conversation",
+  "tripDetailTitle": "Trip Detail",
+  "tripNotFound": "Trip not found",
+  "tripSnapshotTitle": "Trip Snapshot",
+  "tripSnapshotTruck": "Truck",
+  "tripSnapshotWeight": "Weight",
+  "tripSnapshotDistance": "Distance",
+  "tripSnapshotPrice": "Price",
+  "tripPickupActions": "Pickup actions",
+  "tripTransitAction": "Transit action",
+  "tripDeliveryProof": "Delivery proof",
+  "tripLoadError": "Could not load trip details. Please try again.",
+  "tripPodUploaded": "POD uploaded",
+  "tripPodUploadedWaiting": "Waiting for supplier to confirm delivery.",
+  "tripTimelinePickup": "Pickup",
+  "tripTimelineTransit": "Transit",
+  "tripTimelineDelivered": "Delivered",
+  "tripTimelinePodUploaded": "POD Uploaded",
+  "tripTimelineCompleted": "Completed",
+  "tripRouteToolsTitle": "Route tools",
+  "tripViewRoutePreviewAction": "View Route Preview",
+  "tripOpenNavigationAction": "Open Navigation",
+  "tripNavigateToPickupAction": "Navigate to Pickup",
+  "tripNavigateToDestinationAction": "Navigate to Destination",
+  "tripNavigationUnavailable": "Destination coordinates are unavailable for navigation.",
+  "tripLocationCaptured": "Location captured.",
+  "tripLocationCapturedAt": "Location captured at {location}.",
+  "@tripLocationCapturedAt": {
+    "placeholders": {
+      "location": {}
+    }
+  },
+  "tripYourRatingPrefix": "Your rating",
+  "tripRateThisPrefix": "Rate this",
+  "tripCommentOptional": "Comment (optional)",
+  "tripSubmitRating": "Submit Rating",
+  "tripRatingSubmitted": "Rating submitted.",
+  "tripRatingSubmitError": "Could not submit rating. Please try again.",
+  "tripStartAction": "Start",
+  "tripStartDialogTitle": "Start Trip",
+  "tripStartDialogMessage": "Confirm you have loaded the cargo and are ready to start?",
+  "tripCancelAction": "Cancel",
+  "tripStartSuccess": "Trip started successfully.",
+  "tripStartError": "Could not start trip. Please try again.",
+  "tripStartTtsSuccess": "Trip started successfully.",
+  "tripStartTtsFailure": "Trip start failed. Please try again.",
+  "tripUploadLrOptional": "Upload LR (Optional)",
+  "tripLrUploadSuccess": "LR uploaded successfully.",
+  "tripLrUploadError": "Could not upload LR. Please try again.",
+  "tripMarkDelivered": "Mark Delivered",
+  "tripMarkDeliveredDialogTitle": "Mark Delivered",
+  "tripMarkDeliveredDialogMessage": "Confirm cargo has been unloaded at destination?",
+  "tripConfirmAction": "Confirm",
+  "tripMarkedDeliveredNextPod": "Marked delivered. Please upload POD next.",
+  "tripMarkDeliveredError": "Could not mark delivered. Please try again.",
+  "tripEmergencySosAction": "Emergency SOS",
+  "tripEmergencySosPreparing": "Preparing SOS message with your current location...",
+  "tripEmergencySosLocationUnavailable": "Could not capture your current location for SOS.",
+  "tripEmergencySosLaunchFailed": "Could not open SMS app for SOS message.",
+  "tripEmergencySosMessage": "Emergency alert from TranZfort trip. Current location: {lat}, {lng}. Route: {route}. Please assist immediately.",
+  "@tripEmergencySosMessage": {
+    "placeholders": {
+      "lat": {},
+      "lng": {},
+      "route": {}
+    }
+  },
+  "tripUploadProofOfDelivery": "Upload Proof of Delivery",
+  "tripUploadPodPhoto": "Upload POD Photo",
+  "tripPodUploadSuccessWaiting": "POD uploaded. Waiting for supplier confirmation.",
+  "tripPodUploadError": "Could not upload POD. Please try again.",
+  "tripPodUploadTtsSuccess": "Proof of delivery uploaded. Waiting for confirmation.",
+  "tripPodUploadTtsFailure": "Proof of delivery upload failed. Please try again.",
+  "chatTitle": "Chat",
+  "chatMicrophonePermissionRequired": "Microphone permission is required",
+  "chatVoiceRecordingEmpty": "Voice recording was empty",
+  "chatCouldNotReadRecordedFile": "Could not read recorded file",
+  "chatVoiceMessageSent": "Voice message sent",
+  "chatVoiceMessageSendFailed": "Failed to send voice message",
+  "chatVoiceFileUnavailable": "Voice file unavailable",
+  "chatUnablePlayVoiceMessage": "Unable to play voice message",
+  "chatLocationShared": "Location shared",
+  "chatCouldNotShareLocation": "Could not share location",
+  "chatBookingActionShared": "Booking action shared",
+  "chatCouldNotShareBookingAction": "Could not share booking action",
+  "chatBookingRequestSentFromChat": "Booking request sent from chat.",
+  "chatCouldNotBookFromChat": "Could not book from chat.",
+  "chatAttachShareLocation": "Share current location (Map card)",
+  "chatAttachShareBookingAction": "Share booking action",
+  "chatMapCardTitleLocationShared": "Location shared",
+  "chatMapCoordinatesUnavailable": "Coordinates unavailable",
+  "chatMapLatLng": "Lat {lat}, Lng {lng}",
+  "@chatMapLatLng": {
+    "placeholders": {
+      "lat": {},
+      "lng": {}
+    }
+  },
+  "chatBookThisLoad": "Book This Load",
+  "chatBookingActionDescription": "Tap below to send booking request from this chat.",
+  "chatFailedSendMessage": "Failed to send message",
+  "chatNoMessagesYet": "No messages yet.",
+  "chatAttach": "Attach",
+  "chatTypeMessageHint": "Type a message...",
+  "chatSendMessageTooltip": "Send message",
+  "chatStopRecordingTooltip": "Stop recording",
+  "chatStartRecordingTooltip": "Start recording",
+  "chatVoiceLabel": "Voice",
+  "chatPlayAction": "Play",
+  "chatStopAction": "Stop",
+  "chatOpenMap": "Open Map",
+  "verificationSupplierPrompt": "Complete supplier verification",
+  "verificationTruckerPrompt": "Complete trucker verification",
+  "verificationRequired": "Verification Required",
+  "verificationPendingReview": "Verification Pending Review",
+  "verificationPendingMessage": "Your account is under review. Load posting is enabled once verification is approved.",
+  "verificationRequiredMessage": "Complete supplier verification to post loads and access full marketplace actions.",
+  "completeVerification": "Complete Verification",
+  "chatWithSupplier": "Chat with Supplier",
+  "callSupplierAction": "Call Supplier",
+  "callSupplierUnavailable": "Supplier phone number is unavailable right now.",
+  "callSupplierLaunchFailed": "Could not open the phone app. Please try again.",
+  "postedByPrefix": "Posted by",
+  "settingsTtsPreviewText": "Settings screen",
+  "settingsHeroTitle": "Personalize your TranZfort workspace",
+  "settingsHeroSubtitle": "Control language, voice, notifications, and account access in one place.",
+  "settingsGeneralSection": "General",
+  "settingsLanguageSubtitle": "Interface language for app labels and prompts.",
+  "settingsVoiceNotificationsSection": "Voice & notifications",
+  "settingsTtsSpeedLabel": "Speech speed",
+  "settingsTtsSpeedValue": "Current speed: {speed}x",
+  "@settingsTtsSpeedValue": {
+    "placeholders": {
+      "speed": {}
+    }
+  },
+  "settingsTtsLanguageLabel": "TTS language",
+  "settingsTtsLanguageAuto": "Auto (match app language)",
+  "settingsTtsPreviewAction": "Preview voice",
+  "settingsTtsMuteTitle": "TTS mute",
+  "settingsTtsMuteSubtitle": "Mutes all automatic speech",
+  "settingsPushNotificationsTitle": "Push notifications",
+  "settingsPushNotificationsSubtitle": "Keep updates on loads, trips, and verification status.",
+  "settingsAccountSupportSection": "Account & support",
+  "settingsMyProfileTitle": "My profile",
+  "settingsMyProfileSubtitle": "View your role details and verification status.",
+  "settingsPayoutProfileTitle": "Payout profile",
+  "settingsPayoutProfileSubtitle": "Manage account and payout details.",
+  "payoutAccountHolderLabel": "Account holder",
+  "payoutAccountLast4Label": "Account ending",
+  "payoutIfscLabel": "IFSC",
+  "payoutStatusLabel": "Status",
+  "payoutNoProfileTitle": "No payout profile yet",
+  "payoutNoProfileSubtitle": "Payout details will appear here once your financial profile is available.",
+  "payoutLoadError": "Failed to load payout profile.",
+  "settingsHelpSupportTitle": "Help & support",
+  "settingsHelpSupportSubtitle": "Get support for app issues and account guidance.",
+  "supportScreenTtsContext": "Support screen. Create tickets, track updates, and reply to the support team.",
+  "supportHeroTitle": "Get help from the TranZfort support team",
+  "supportHeroSubtitle": "Create a ticket for booking, trip, verification, account, or payout issues and track replies here.",
+  "supportCreateTicketTitle": "Create a support ticket",
+  "supportCategoryLabel": "Category",
+  "supportCategoryTechnicalBug": "Technical bug",
+  "supportCategoryBookingIssue": "Booking issue",
+  "supportCategoryTripIssue": "Trip issue",
+  "supportCategoryPaymentPayout": "Payment or payout",
+  "supportCategoryVerification": "Verification",
+  "supportCategoryAccountAccess": "Account access",
+  "supportCategoryOther": "Other",
+  "supportSubjectLabel": "Subject",
+  "supportSubjectHint": "Short summary of the issue",
+  "supportDescriptionLabel": "Description",
+  "supportDescriptionHint": "Describe what happened and what help you need.",
+  "supportSubmitTicketAction": "Submit Ticket",
+  "supportMyTicketsTitle": "My tickets",
+  "supportEmptyTitle": "No support tickets yet",
+  "supportEmptySubtitle": "Create your first ticket and you can track updates from the support team here.",
+  "supportLoadError": "Could not load support tickets. Please try again.",
+  "supportSubjectRequired": "Please enter a subject for your ticket.",
+  "supportDescriptionRequired": "Please enter a description for your ticket.",
+  "supportCreateFailed": "Could not submit the support ticket. Please try again.",
+  "supportTicketSubmitted": "Support ticket submitted successfully.",
+  "supportCreatedLabel": "Created",
+  "supportResolvedLabel": "Resolved",
+  "supportTicketIdLabel": "Ticket ID",
+  "supportStatusOpen": "Open",
+  "supportStatusInProgress": "In Progress",
+  "supportStatusResolved": "Resolved",
+  "supportPriorityLow": "Low",
+  "supportPriorityMedium": "Medium",
+  "supportPriorityHigh": "High",
+  "supportPriorityUrgent": "Urgent",
+  "supportTicketDetailTitle": "Support Ticket",
+  "supportTicketNotFoundTitle": "Support ticket not found",
+  "supportTicketNotFoundSubtitle": "This ticket is unavailable or no longer accessible from your account.",
+  "supportResolutionNotesTitle": "Resolution notes",
+  "supportConversationTitle": "Conversation",
+  "supportNoMessagesYet": "No replies yet. The support team will respond here.",
+  "supportReplySectionTitle": "Send a reply",
+  "supportTicketResolvedReplyClosed": "This ticket is resolved. Replies are closed for now.",
+  "supportReplyHint": "Add more details or reply to the support team",
+  "supportSendReplyAction": "Send Reply",
+  "supportResolvedTicketReadOnlyAction": "Resolved ticket",
+  "supportReplyRequired": "Please enter a reply before sending.",
+  "supportReplyFailed": "Could not send your reply. Please try again.",
+  "supportReplySent": "Reply sent successfully.",
+  "supportYouLabel": "You",
+  "supportSupportTeamLabel": "Support Team",
+  "settingsSupportPending": "Support screen pending in Sprint 9",
+  "settingsAppVersionTitle": "App version",
+  "settingsCurrentBuildPrefix": "Current build",
+  "settingsDangerZone": "Danger zone",
+  "settingsDeleteAccountTitle": "Delete account permanently",
+  "settingsDeleteAccountSubtitle": "This marks your account for deletion and signs you out immediately.",
+  "settingsDeleteAccountAction": "Delete Account",
+  "settingsDeleteAccountDialogTitle": "Delete Account?",
+  "settingsDeleteAccountDialogContent": "This will permanently delete your account and all data. This cannot be undone.",
+  "settingsDeleteAction": "Delete",
+  "settingsDeleteAccountFailed": "Failed to request account deletion",
+  "settingsSignOutAction": "Sign Out",
+  "verificationSubmitSuccess": "Verification submitted successfully!",
+  "verificationLoadError": "Could not load verification details. Please try again.",
+  "retryAction": "Retry",
+  "verificationUploadMandatory": "Please upload all mandatory documents.",
+  "verificationSupplierTitle": "Supplier Verification",
+  "verificationTruckerTitle": "Trucker Verification",
+  "verificationSupplierSubtitle": "Submit business and identity documents to unlock full marketplace access.",
+  "verificationTruckerSubtitle": "Upload identity and driving documents to activate trip execution privileges.",
+  "verificationDocumentsUploadedSummary": "{uploaded} of {total} documents uploaded",
+  "@verificationDocumentsUploadedSummary": {
+    "placeholders": {
+      "uploaded": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "verificationChooseImageSourceTitle": "Choose image source",
+  "verificationUseCamera": "Use Camera",
+  "verificationUseGallery": "Use Gallery",
+  "verificationAadhaarHelper": "Enter all 12 digits exactly as on your Aadhaar.",
+  "verificationPanHelper": "PAN format: ABCDE1234F",
+  "verificationPanInvalid": "Enter a valid PAN (e.g., ABCDE1234F)",
+  "verificationDlHelper": "Use your driving licence number exactly as printed.",
+  "verificationTruckRequiredMessage": "Add at least one truck with number, body type, tyres, capacity, and RC photo before verification.",
+  "verificationVerifiedLockedTitle": "Verification already approved",
+  "verificationVerifiedLockedBody": "Your details are locked because your verification is approved. Edit only if you need to resubmit for re-verification.",
+  "verificationEditAndResubmitAction": "Edit & Re-submit",
+  "verificationReverificationNotice": "After updates, your profile will move to pending for re-verification.",
+  "verificationImageQualityHint": "Make sure the photo is clear, readable, and fully visible.",
+  "documentAttachedTapReplace": "Document attached. Tap to replace.",
+  "documentTapUploadRequired": "Tap to upload required document",
+  "retakeAction": "Retake",
+  "uploadAction": "Upload",
+  "findLoadsVerifiedTruckRequiredTitle": "Verified truck required",
+  "findLoadsVerifiedTruckRequiredBody": "You need a verified truck to book loads. Add a truck now?",
+  "findLoadsNotNow": "Not now",
+  "findLoadsAddTruck": "Add Truck",
+  "findLoadsAnyMaterial": "Any material",
+  "findLoadsSelectedTruck": "Selected Truck",
+  "findLoadsConfirmBookingTitle": "Confirm Booking",
+  "findLoadsBookConfirmPrefix": "Book",
+  "findLoadsBookConfirmFrom": "load from",
+  "findLoadsBookConfirmTo": "to",
+  "findLoadsBookConfirmWith": "with",
+  "findLoadsAllRoutes": "All routes",
+  "findLoadsAny": "Any",
+  "findLoadsAnyTruck": "Any truck",
+  "findLoadsSelectTruckForLoad": "Select a truck for this load",
+  "findLoadsUnknownTruckType": "Unknown type",
+  "findLoadsTyresSuffix": "tyres",
+  "findLoadsMatchLabel": "MATCH",
+  "findLoadsMismatchLabel": "MISMATCH",
+  "findLoadsDashboardTts": "Find loads dashboard",
+  "findLoadsScreenTtsContext": "Find loads dashboard. Search available loads, apply route filters, and review best matches.",
+  "findLoadsScreenTtsContextCount": "Load marketplace. {count} loads found.",
+  "@findLoadsScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findLoadsHeroTitle": "Find the right load quickly",
+  "findLoadsHeroSubtitle": "Use route, cargo and truck filters to discover best matches.",
+  "findLoadsFromLabel": "From",
+  "findLoadsToLabel": "To",
+  "findLoadsAdvancedFilters": "Advanced Filters",
+  "findLoadsListViewLabel": "List",
+  "findLoadsMapViewLabel": "Map",
+  "botCancelResponse": "Okay, I'm cancelling the process. Anything else?",
+  "botMyLoadsResponse": "Here are your loads.",
+  "botViewLoadsAction": "View Loads",
+  "botMyTripsResponse": "Here are your trips.",
+  "botViewTripsAction": "View Trips",
+  "botCheckStatusResponse": "Check your booking status here.",
+  "botCheckStatusAction": "Check Status",
+  "botHelpResponse": "I can help you find loads, post loads, and check trips. Try saying 'find load'.",
+  "botGreetingResponse": "Namaste! I am the TranZfort bot. How can I help you today?",
+  "botUnknownResponse": "I didn't understand that. You can say 'find load', 'post load', or 'trip status'.",
+  "botAskOrigin": "From where? (Tell me the origin city)",
+  "botAskDestination": "To where? (Tell me the destination city)",
+  "botFindLoadSummary": "Looking for loads from {origin} to {dest}. View them?",
+  "@botFindLoadSummary": {
+    "placeholders": {
+      "origin": {"type": "String"},
+      "dest": {"type": "String"}
+    }
+  },
+  "botAskPostOrigin": "From where are you sending the load?",
+  "botAskPostDestination": "Where are you sending it to?",
+  "botAskPostMaterial": "What material are you sending? (e.g., Coal, Steel)",
+  "botPostLoadSummary": "Post a load for {material} from {origin} to {dest}?",
+  "@botPostLoadSummary": {
+    "placeholders": {
+      "material": {"type": "String"},
+      "origin": {"type": "String"},
+      "dest": {"type": "String"}
+    }
+  },
+  "postLoadAction": "Post Load",
+  "supplierDashboardTitle": "Supplier Dashboard",
+  "supplierDashboardTts": "Supplier dashboard",
+  "supplierDashboardTtsContext": "Supplier dashboard. Review active loads, pending bookings, and overall fulfillment.",
+  "supplierDashboardPendingBookingsLabel": "Pending bookings",
+  "supplierDashboardNeedsActionTitle": "Needs your action",
+  "supplierDashboardRecentLoadsTitle": "Recent load updates",
+  "supplierDashboardNoRecentLoads": "No recent load updates yet.",
+  "@supplierDashboardTitle": {},
+  
+  "truckerDashboardTitle": "Trucker Dashboard",
+  "truckerDashboardTts": "Trucker dashboard",
+  "truckerDashboardTtsContext": "Trucker dashboard. Track active bids, upcoming trips, and overall fulfillment.",
+  "@truckerDashboardTitle": {},
+
+  "findLoadsOriginCity": "Origin City",
+  "findLoadsSortByLabel": "Sort by",
+  "findLoadsSortNewest": "Newest",
+  "findLoadsSortPriceHighLow": "Price High-Low",
+  "findLoadsSortPriceLowHigh": "Price Low-High",
+  "findLoadsSortPickupDate": "Pickup Date",
+  "findLoadsMaterialLabel": "Material",
+  "findLoadsTruckLabel": "Truck",
+  "findLoadsActiveFiltersSummary": "{count} filters active",
+  "@findLoadsActiveFiltersSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findLoadsMaterialCoal": "Coal",
+  "findLoadsMaterialSteel": "Steel",
+  "findLoadsMaterialCement": "Cement",
+  "findLoadsMaterialSand": "Sand",
+  "findLoadsViewListLabel": "List",
+  "findLoadsViewMapLabel": "Map",
+  "findLoadsSaveSearchAction": "Save Search",
+  "findLoadsSavedSearchesLabel": "Saved searches",
+  "findLoadsSavedSearchSaved": "Search saved.",
+  "findLoadsSavedSearchSaveFailed": "Could not save search.",
+  "findLoadsSavedSearchDeleted": "Saved search removed.",
+  "findLoadsSavedSearchDeleteFailed": "Could not remove saved search.",
+  "myFleetTitle": "My Fleet",
+  "myFleetAddTruckTooltip": "Add Truck",
+  "myFleetDashboardTts": "Fleet dashboard",
+  "myFleetScreenTtsContext": "Fleet dashboard. Manage trucks, compliance details, and current availability.",
+  "myFleetScreenTtsContextCount": "Your fleet. {count} trucks.",
+  "@myFleetScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "myFleetEmptyTitle": "No trucks yet",
+  "myFleetEmptySubtitle": "Tap + to add your first truck.",
+  "myFleetLoadError": "Failed to load fleet",
+  "myFleetHeroTitle": "Keep your fleet verification-ready",
+  "myFleetHeroSubtitle": "Review status, rejection remarks, and truck details before booking loads.",
+  "myFleetBodyLabel": "Body: {body}",
+  "@myFleetBodyLabel": {
+    "placeholders": {
+      "body": {}
+    }
+  },
+  "myFleetTyresLabel": "Tyres: {tyres}",
+  "@myFleetTyresLabel": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "myFleetCapacityLabel": "Capacity: {capacity} T",
+  "@myFleetCapacityLabel": {
+    "placeholders": {
+      "capacity": {}
+    }
+  },
+  "myFleetRejectionReasonLabel": "Rejection reason: {reason}",
+  "@myFleetRejectionReasonLabel": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "myFleetRcExpiredWarning": "RC expired. Renew this truck document to avoid dispatch issues.",
+  "myFleetRcExpiryWarningDays": "RC expires in {days} day(s). Please renew soon.",
+  "@myFleetRcExpiryWarningDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "addTruckTitle": "Add Truck",
+  "addTruckHeroTitle": "Add your truck details",
+  "addTruckHeroSubtitle": "Keep fleet information complete to improve booking confidence.",
+  "addTruckIdentitySection": "Truck identity",
+  "addTruckNumberLabel": "Truck Number",
+  "addTruckNumberRequired": "Truck number is required",
+  "addTruckBodyTypeLabel": "Body Type",
+  "addTruckModelManualEntryOption": "Not in list / manual entry",
+  "addTruckModelOptionalLabel": "Truck Model (optional)",
+  "addTruckCatalogLoadError": "Failed to load truck catalog. Please try again.",
+  "addTruckSpecificationsSection": "Specifications",
+  "addTruckTyresLabel": "Tyres",
+  "addTruckTyresRangeError": "Enter tyres between 4 and 22",
+  "addTruckCapacityLabel": "Capacity (T)",
+  "addTruckCapacityInvalid": "Enter a valid capacity",
+  "addTruckDocumentsSection": "Documents",
+  "addTruckUploadRcPhoto": "Upload RC Photo",
+  "addTruckRcExpiryDateLabel": "RC expiry date",
+  "addTruckSelectDateAction": "Select Date",
+  "addTruckRcUploadedReplace": "RC uploaded. Tap to replace.",
+  "addTruckRcRequired": "RC photo is required to keep truck details complete.",
+  "addTruckSaveAction": "Save Truck",
+  "addTruckSelectBodyTypeError": "Please select body type",
+  "addTruckSaveFailed": "Failed to add truck. Please try again.",
+  "loadDetailLoadError": "Failed to load detail",
+  "loadDetailTripCostUnavailable": "Trip cost unavailable",
+  "loadDetailTripCostBreakdown": "Trip Cost Breakdown",
+  "loadDetailTripCostDiesel": "Diesel",
+  "loadDetailTripCostTolls": "Tolls",
+  "loadDetailTripCostTotal": "Total",
+  "loadDetailTripCostMileage": "Mileage",
+  "loadDetailPendingApproval": "Pending Approval",
+  "loadDetailBookingApproved": "Booking approved",
+  "loadDetailApproveFailed": "Approve failed",
+  "loadDetailBookingRejected": "Booking rejected",
+  "loadDetailRejectFailed": "Reject failed",
+  "loadDetailNoPendingBookings": "No pending bookings.",
+  "loadDetailInTransit": "In Transit",
+  "loadDetailTripInTransit": "Trip is in transit",
+  "loadDetailPodUploaded": "POD Uploaded",
+  "loadDetailConfirmDelivery": "Confirm Delivery",
+  "loadDetailDeliveryConfirmed": "Delivery confirmed.",
+  "loadDetailDeliveryConfirmFailed": "Could not confirm delivery.",
+  "loadDetailDelivered": "Delivered",
+  "loadDetailTruckLabel": "Truck",
+  "loadDetailApproveAction": "Approve",
+  "loadDetailRejectAction": "Reject",
+  "loadDetailStatusPrefix": "Status",
+  "richLoadCardTripCostEstimate": "Est. Trip Cost: {amount}",
+  "@richLoadCardTripCostEstimate": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "richLoadCardSuperLoadLabel": "Super Load",
+  "richLoadCardVerifiedSupplierFallback": "Verified Supplier",
+  "richLoadCardPickupPrefix": "Pickup",
+  "richLoadCardTrucksNeededSummary": "{needed} trucks needed · {booked} booked",
+  "@richLoadCardTrucksNeededSummary": {
+    "placeholders": {
+      "needed": {
+        "type": "int"
+      },
+      "booked": {
+        "type": "int"
+      }
+    }
+  },
+  "richLoadCardAdvanceUnavailable": "Advance: -",
+  "richLoadCardAdvanceLabel": "Advance: {percentage}% ({amount})",
+  "@richLoadCardAdvanceLabel": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      },
+      "amount": {}
+    }
+  },
+  "richLoadCardJustNow": "Just now",
+  "profileScreenTts": "Profile screen",
+  "profileNotFound": "No profile found.",
+  "profileDefaultUserName": "TranZfort User",
+  "profileVerifiedChip": "VERIFIED",
+  "profileVerificationChip": "VERIFICATION {status}",
+  "@profileVerificationChip": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "profileSummaryTitle": "Profile summary",
+  "profileRoleLabel": "Role",
+  "profileStatusLabel": "Status",
+  "profileMobileLabel": "Mobile",
+  "profileValueNa": "NA",
+  "profileValueSet": "SET",
+  "profileIdentityDetailsTitle": "Identity details",
+  "profileFullNameLabel": "Full name",
+  "profileVerificationLabel": "Verification",
+  "profileQuickActionsTitle": "Quick actions",
+  "profileDocumentExpiryTitle": "Document expiry alerts",
+  "profileDlExpiredWarning": "Driving licence has expired. Update verification documents now.",
+  "profileDlExpiryWarningDays": "Driving licence expires in {days} day(s). Please renew and re-upload.",
+  "@profileDlExpiryWarningDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSupplierVerificationAction": "Supplier verification",
+  "profileTruckerVerificationAction": "Trucker verification",
+  "profileVerificationActionSubtitle": "Review and manage your verification documents.",
+  "profileSettingsActionSubtitle": "Open app preferences and account controls.",
+  "profileLoadError": "Failed to load profile.",
+  "notificationsMarkAllAsRead": "Mark all as read",
+  "notificationsScreenTts": "Notifications screen",
+  "notificationsScreenTtsCount": "{count} new notifications.",
+  "@notificationsScreenTtsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsAllCaughtUpTitle": "All caught up!",
+  "notificationsAllCaughtUpSubtitle": "You have no new notifications.",
+  "notificationsUnreadUpdates": "{count} unread updates",
+  "@notificationsUnreadUpdates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsCaughtUpBanner": "You are all caught up",
+  "notificationsRealtimeHint": "Trip, load, and chat alerts appear here in real time.",
+  "notificationsLoadError": "Failed to load notifications",
+  "notificationsTimeDaysAgo": "{days}d ago",
+  "@notificationsTimeDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeHoursAgo": "{hours}h ago",
+  "@notificationsTimeHoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeMinutesAgo": "{minutes}m ago",
+  "@notificationsTimeMinutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeJustNow": "Just now",
+  "routePreviewOpenMapsFailed": "Could not open Google Maps",
+  "routePreviewTitle": "Route Preview",
+  "routePreviewDetailsUnavailable": "Route details not available.",
+  "routePreviewFallbackWarning": "Showing direct line. Real route calculation failed.",
+  "routePreviewStartNavigation": "Start Navigation in Google Maps",
+  "routePreviewLoadError": "Error loading route.",
+  "routePreviewScreenTtsContext": "Route from {origin} to {destination}.",
+  "@routePreviewScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "postLoadStepTtsRoute": "Step 1: Enter pickup and delivery cities.",
+  "postLoadStepTtsCargo": "Step 2: Select material and enter weight.",
+  "postLoadStepTtsSchedule": "Step 3: Choose truck type and tyre size.",
+  "postLoadStepTtsPricing": "Step 4: Set your price, advance, and pickup date.",
+  "postLoadTtsSuccess": "Load posted successfully.",
+  "postLoadTtsFailure": "Load posting failed. Please try again.",
+  "loadDetailScreenTtsContext": "Load from {origin} to {destination}. {material}, {weight}T. Price: rupees {price}.",
+  "@loadDetailScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {},
+      "material": {},
+      "weight": {},
+      "price": {}
+    }
+  },
+  "tripDetailScreenTtsContext": "Trip from {origin} to {destination}. Stage: {stage}. Next: {nextAction}.",
+  "@tripDetailScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {},
+      "stage": {},
+      "nextAction": {}
+    }
+  },
+  "verificationCompanyDetailsSection": "Company details",
+  "verificationProfilePhotoLabel": "Upload Profile Photo",
+  "verificationCompanyNameLabel": "Company Name",
+  "verificationGstNumberLabel": "GST Number",
+  "verificationUploadGstCertificate": "Upload GST Certificate",
+  "verificationTaxDetailsSection": "Tax details",
+  "verificationIdentityDetailsSection": "Identity details",
+  "verificationPanNumberLabel": "PAN Number",
+  "verificationUploadPanCard": "Upload PAN Card",
+  "verificationTanNumberLabel": "TAN Number",
+  "verificationTanHelper": "TAN format: 10 characters alphanumeric",
+  "verificationTanInvalid": "Enter a valid TAN (10 characters)",
+  "verificationGstInvalid": "Enter a valid GST number (15 characters)",
+  "verificationUploadTanCard": "Upload TAN Card",
+  "verificationAadhaarNumberLabel": "Aadhaar Number",
+  "verificationUploadAadhaarFront": "Upload Aadhaar Front",
+  "verificationUploadAadhaarBack": "Upload Aadhaar Back",
+  "verificationOptionalBusinessProofSection": "Optional business proof",
+  "verificationBusinessLicenceNumberLabel": "Business Licence Number",
+  "verificationUploadBusinessLicence": "Upload Business Licence",
+  "verificationDrivingLicenseSection": "Driving license details",
+  "verificationDlNumberLabel": "DL Number",
+  "verificationDlExpiryDateLabel": "DL expiry date",
+  "verificationSelectDateAction": "Select Date",
+  "verificationUploadDlFront": "Upload DL Front",
+  "verificationUploadDlBack": "Upload DL Back",
+  "verificationSupplierTtsProfilePhoto": "Upload your supplier profile photo.",
+  "verificationSupplierTtsCompanyName": "Enter your company name as registered.",
+  "verificationSupplierTtsGstNumber": "Enter your GST number.",
+  "verificationSupplierTtsTanNumber": "Enter your TAN number.",
+  "verificationSupplierTtsGstCertificate": "Upload your GST certificate image.",
+  "verificationSupplierTtsTanCard": "Upload your TAN card photo.",
+  "verificationSupplierTtsPanNumber": "Enter your PAN number in the format A B C D E 1 2 3 4 F.",
+  "verificationSupplierTtsPanCard": "Upload your PAN card image.",
+  "verificationSupplierTtsAadhaarNumber": "Enter your 12-digit Aadhaar number.",
+  "verificationSupplierTtsAadhaarFront": "Upload the front side of your Aadhaar card.",
+  "verificationSupplierTtsAadhaarBack": "Upload the back side of your Aadhaar card.",
+  "verificationSupplierTtsBusinessLicenceNumber": "Enter your business licence number if available.",
+  "verificationSupplierTtsBusinessLicenceDoc": "Upload your business licence document if available.",
+  "verificationTruckerTtsProfilePhoto": "Upload your trucker profile photo.",
+  "verificationTruckerTtsAadhaarNumber": "Enter your 12-digit Aadhaar number.",
+  "verificationTruckerTtsAadhaarFront": "Upload the front side of your Aadhaar card.",
+  "verificationTruckerTtsAadhaarBack": "Upload the back side of your Aadhaar card.",
+  "verificationTruckerTtsPanNumber": "Enter your PAN number in the format A B C D E 1 2 3 4 F.",
+  "verificationTruckerTtsPanCard": "Upload your PAN card image.",
+  "verificationTruckerTtsDlNumber": "Enter your driving licence number exactly as printed.",
+  "verificationTruckerTtsDlFront": "Upload the front side of your driving licence.",
+  "verificationTruckerTtsDlBack": "Upload the back side of your driving licence."
+}

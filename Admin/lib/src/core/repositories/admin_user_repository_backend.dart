@@ -9,14 +9,23 @@ class SupabaseAdminUserBackend implements AdminUserBackend {
   Future<List<Map<String, dynamic>>> fetchProfiles() async {
     final activeClient = client;
     if (activeClient == null) {
+      debugPrint('[AdminUserBackend] fetchProfiles: client is null');
       return const [];
     }
 
-    final rows = await activeClient
-        .from('profiles')
-        .select('id, full_name, mobile, email, user_role_type, verification_status, is_banned, ban_reason, created_at, last_login_at')
-        .order('created_at', ascending: false);
-    return rows.map<Map<String, dynamic>>((row) => Map<String, dynamic>.from(row)).toList(growable: false);
+    try {
+      debugPrint('[AdminUserBackend] fetchProfiles: querying profiles...');
+      final rows = await activeClient
+          .from('profiles')
+          .select('id, full_name, mobile, email, user_role_type, verification_status, is_banned, ban_reason, created_at, last_login_at')
+          .order('created_at', ascending: false);
+      debugPrint('[AdminUserBackend] fetchProfiles: returned ${rows.length} rows');
+      return rows.map<Map<String, dynamic>>((row) => Map<String, dynamic>.from(row)).toList(growable: false);
+    } catch (error, stackTrace) {
+      debugPrint('[AdminUserBackend] fetchProfiles ERROR: $error');
+      debugPrint('[AdminUserBackend] fetchProfiles STACK: $stackTrace');
+      Error.throwWithStackTrace(error, stackTrace);
+    }
   }
 
   @override
@@ -290,7 +299,7 @@ class SupabaseAdminUserBackend implements AdminUserBackend {
     try {
       final rows = await activeClient
           .from('loads')
-          .select('id, origin_city, dest_city, status, created_at')
+          .select('id, origin_city, destination_city, status, created_at')
           .eq('supplier_id', userId)
           .order('created_at', ascending: false)
           .limit(10);

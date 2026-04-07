@@ -678,6 +678,6 @@ class _ReadinessSection extends StatelessWidget {
     if (stats.pendingReapprovalTrucks > 0) {
       segments.add(l10n.truckerDashboardTruckPendingReapproval(stats.pendingReapprovalTrucks));
     }
-    return l10n.truckerDashboardTruckLifecycleAttention(segments.join(' • '));
+    return l10n.truckerDashboardTruckLifecycleAttention(segments.join(' - '));
   }
 }

@@ -1,17 +1,17 @@
-part of 'admin_verification_repository.dart';
+import 'admin_verification_helpers.dart';
 
 enum VerificationQueueTab { suppliers, truckers, trucks }
 
-Map<String, String> _feedbackDocumentReasons(Map<String, dynamic> primary, {Map<String, dynamic>? fallback}) {
+Map<String, String> feedbackDocumentReasons(Map<String, dynamic> primary, {Map<String, dynamic>? fallback}) {
   final documents = <String, String>{};
   void mergeFrom(Map<String, dynamic>? source) {
-    final sourceDocuments = source == null ? null : _asMap(source['documents']);
+    final sourceDocuments = source == null ? null : asMap(source['documents']);
     if (sourceDocuments == null) {
       return;
     }
     for (final entry in sourceDocuments.entries) {
-      final documentMap = _asMap(entry.value);
-      final reason = _asString(documentMap['reason']).trim();
+      final documentMap = asMap(entry.value);
+      final reason = asString(documentMap['reason']).trim();
       if (entry.key.trim().isEmpty || reason.isEmpty) {
         continue;
       }
@@ -91,6 +91,7 @@ class VerificationQueueItem {
   final String caseId;
   final String subjectId;
   final String subjectType;
+  final String reviewType;
   final String displayName;
   final String secondaryLabel;
   final String contactLabel;
@@ -108,6 +109,7 @@ class VerificationQueueItem {
     required this.caseId,
     required this.subjectId,
     required this.subjectType,
+    this.reviewType = 'full_verification',
     required this.displayName,
     required this.secondaryLabel,
     required this.contactLabel,
@@ -204,6 +206,7 @@ class AdminVerificationDetail {
   final String caseId;
   final String subjectId;
   final String subjectType;
+  final String reviewType;
   final String subjectTypeLabel;
   final String displayName;
   final String subjectLabel;
@@ -221,6 +224,8 @@ class AdminVerificationDetail {
   final String assignedAdminLabel;
   final String slaLabel;
   final Map<String, String> subjectMetadata;
+  final String approvedAvatarPath;
+  final String pendingProfilePhotoPath;
   final List<VerificationDocument> documents;
   final List<VerificationCaseEvent> events;
 
@@ -228,6 +233,7 @@ class AdminVerificationDetail {
     required this.caseId,
     required this.subjectId,
     required this.subjectType,
+    this.reviewType = 'full_verification',
     required this.subjectTypeLabel,
     required this.displayName,
     required this.subjectLabel,
@@ -245,17 +251,19 @@ class AdminVerificationDetail {
     this.assignedAdminLabel = '',
     required this.slaLabel,
     required this.subjectMetadata,
+    this.approvedAvatarPath = '',
+    this.pendingProfilePhotoPath = '',
     required this.documents,
     required this.events,
   });
 }
 
-class _DocumentSeed {
+class DocumentSeed {
   final String label;
   final String backendKey;
   final String path;
 
-  const _DocumentSeed({required this.label, required this.backendKey, required this.path});
+  const DocumentSeed({required this.label, required this.backendKey, required this.path});
 }
 
 enum VerificationReviewDecision { approve, reject }

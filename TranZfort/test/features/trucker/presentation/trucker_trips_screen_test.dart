@@ -76,7 +76,7 @@ TruckerTrip _trip({String stage = 'in_transit'}) {
   return TruckerTrip(
     id: 'trip-1',
     loadId: 'load-1',
-    routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+    routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
     material: 'Coal',
     stage: stage,
     truckId: 'truck-1',
@@ -172,9 +172,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('My trips'), findsOneWidget);
-    expect(find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
     expect(find.text('IN TRANSIT'), findsOneWidget);
-    expect(find.text('Coal • Proof pending'), findsOneWidget);
+    expect(find.text('Coal - Proof pending'), findsOneWidget);
     expect(find.text(_expectedLocalizedTripTimeContext(tester, trip)), findsOneWidget);
     expect(find.text('Truck MH12AB1234'), findsOneWidget);
   });
@@ -193,9 +193,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('My trips'), findsOneWidget);
-    expect(find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
     expect(find.text('COMPLETED'), findsOneWidget);
-    expect(find.text('Coal • POD uploaded'), findsOneWidget);
+    expect(find.text('Coal - POD uploaded'), findsOneWidget);
     expect(find.text(_expectedLocalizedTripTimeContext(tester, trip)), findsOneWidget);
     expect(find.text('Truck MH12AB1234'), findsOneWidget);
   });
@@ -273,9 +273,9 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('My trips'), findsOneWidget);
-    expect(find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
     expect(find.text('IN TRANSIT'), findsOneWidget);
-    expect(find.text('Coal • Proof pending'), findsOneWidget);
+    expect(find.text('Coal - Proof pending'), findsOneWidget);
     expect(find.text('Truck MH12AB1234'), findsOneWidget);
   });
 
@@ -309,9 +309,9 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
 
-    await tester.tap(find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra'));
+    await tester.tap(find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra'));
     await tester.pumpAndSettle();
 
     expect(find.text('Trip detail opened: trip-1'), findsOneWidget);

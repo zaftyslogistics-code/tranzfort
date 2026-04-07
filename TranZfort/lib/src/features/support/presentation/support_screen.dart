@@ -53,40 +53,21 @@ String _localizedSupportTrustStatus(AppLocalizations l10n, String? status) {
 }
 
 class _SupportScreenState extends ConsumerState<SupportScreen> {
-  String? _selectedTicketId;
-
-  @override
-  void initState() {
-    super.initState();
-    final initialSelectedTicketId = widget.initialSelectedTicketId?.trim();
-    _selectedTicketId = initialSelectedTicketId == null || initialSelectedTicketId.isEmpty
-        ? null
-        : initialSelectedTicketId;
-  }
-
-  @override
-  void didUpdateWidget(covariant SupportScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    final nextInitialSelectedTicketId = widget.initialSelectedTicketId?.trim();
-    final previousInitialSelectedTicketId = oldWidget.initialSelectedTicketId?.trim();
-    if (nextInitialSelectedTicketId != previousInitialSelectedTicketId &&
-        nextInitialSelectedTicketId != null &&
-        nextInitialSelectedTicketId.isNotEmpty) {
-      _selectedTicketId = nextInitialSelectedTicketId;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final authState = ref.watch(currentAuthStateProvider);
     final profile = ref.watch(currentProfileProvider).valueOrNull;
     final ticketsState = ref.watch(supportTicketsProvider);
+    final selectedTicketState = ref.watch(supportSelectedTicketIdProvider);
+    final initialSelectedTicketId = widget.initialSelectedTicketId?.trim();
+    final preferredSelectedTicketId =
+        selectedTicketState != null && selectedTicketState.trim().isNotEmpty ? selectedTicketState.trim() : initialSelectedTicketId;
     final isSupplier = authState.role == AppUserRole.supplier;
     final knownTicketIds = ticketsState.tickets.map((ticket) => ticket.id).toSet();
-    final selectedTicketId = (_selectedTicketId != null &&
-            (_selectedTicketId == widget.initialSelectedTicketId || knownTicketIds.contains(_selectedTicketId)))
-        ? _selectedTicketId
+    final selectedTicketId = (preferredSelectedTicketId != null &&
+            (preferredSelectedTicketId == initialSelectedTicketId || knownTicketIds.contains(preferredSelectedTicketId)))
+        ? preferredSelectedTicketId
         : (ticketsState.tickets.isNotEmpty ? ticketsState.tickets.first.id : null);
     final selectedDetailAsync = selectedTicketId == null
         ? null
@@ -165,9 +146,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
             onLoadMore: () => ref.read(supportTicketsProvider.notifier).loadMore(),
             onCreateTicket: () => context.go(AppRoutes.createSupportTicketPath),
             onSelect: (ticketId) {
-              setState(() {
-                _selectedTicketId = ticketId;
-              });
+              ref.read(supportSelectedTicketIdProvider.notifier).state = ticketId;
             },
           ),
         ),
@@ -361,7 +340,7 @@ String _formatDateTime(BuildContext context, DateTime value) {
     TimeOfDay.fromDateTime(localValue),
     alwaysUse24HourFormat: MediaQuery.maybeOf(context)?.alwaysUse24HourFormat ?? false,
   );
-  return '${material.formatShortDate(localValue)} • $timeLabel';
+  return '${material.formatShortDate(localValue)} - $timeLabel';
 }
 
 String _supportTicketTitle(SupportTicket ticket, AppLocalizations l10n) {

@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<void> _init() async {
+  Future<void> initSupabase() async {
     await dotenv.load(fileName: '.env');
     await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!,
@@ -17,7 +18,7 @@ void main() {
 
   group('DEBUG: Booking requests', () {
     testWidgets('Check RPC error', (tester) async {
-      await _init();
+      await initSupabase();
       final client = Supabase.instance.client;
 
       // Sign in as supplier
@@ -34,18 +35,18 @@ void main() {
           .limit(1);
 
       if (loads.isEmpty) {
-        print('No loads found');
+        debugPrint('No loads found');
         return;
       }
 
       final loadId = loads.first['id'];
-      print('Testing with load: $loadId');
+      debugPrint('Testing with load: $loadId');
 
       try {
         final result = await client.rpc('get_supplier_booking_requests', params: {'p_load_id': loadId});
-        print('RPC result: $result');
+        debugPrint('RPC result: $result');
       } catch (e) {
-        print('RPC ERROR: $e');
+        debugPrint('RPC ERROR: $e');
       }
 
       await client.auth.signOut();

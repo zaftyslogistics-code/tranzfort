@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/services/contextual_tts_service.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
-import '../data/auth_repository.dart';
+import '../../../shared/widgets/tts_action_button.dart';
+import '../providers/auth_providers.dart';
 
 class OnboardingGateScreen extends ConsumerStatefulWidget {
   const OnboardingGateScreen({super.key});
@@ -66,13 +68,13 @@ class _OnboardingGateScreenState extends ConsumerState<OnboardingGateScreen> {
               children: [
                 const Icon(Icons.hourglass_disabled_outlined, size: 48, color: Colors.grey),
                 const SizedBox(height: 16),
-                const Text(
-                  'Loading is taking longer than expected.\nलोडिंग में सामान्य से अधिक समय लग रहा है।',
+                Text(
+                  AppLocalizations.of(context).onboardingGateTimeoutMessage,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 PrimaryButton(
-                  label: 'Retry / पुनः प्रयास करें',
+                  label: AppLocalizations.of(context).onboardingGateRetryAction,
                   onPressed: () {
                     ref.invalidate(authStateProvider);
                     ref.invalidate(currentProfileProvider);
@@ -88,7 +90,7 @@ class _OnboardingGateScreenState extends ConsumerState<OnboardingGateScreen> {
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => context.go(AppRoutes.authPath),
-                  child: const Text('Back to sign in / साइन इन पर वापस जाएं'),
+                  child: Text(AppLocalizations.of(context).onboardingGateBackToSignInAction),
                 ),
               ],
             ),
@@ -111,22 +113,11 @@ class RoleSelectionScreen extends ConsumerStatefulWidget {
 }
 
 class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
-  late final ContextualTtsService _contextualTtsService;
   AppUserRole? _selectedRole;
-  bool _isSubmitting = false;
 
   @override
   void initState() {
     super.initState();
-    _contextualTtsService = ref.read(contextualTtsServiceProvider);
-    WidgetsBinding.instance.addPostFrameCallback((_) => _speakPrompt());
-  }
-
-  Future<void> _speakPrompt() async {
-    await _contextualTtsService.speakSummary(
-          languageCode: 'hi',
-          message: AppLocalizations.of(context).authTtsOnboardingRolePrompt,
-        );
   }
 
   Future<void> _continue() async {
@@ -141,41 +132,23 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
       return;
     }
 
-    setState(() => _isSubmitting = true);
-    final repository = ref.read(authRepositoryProvider);
-    final result = await repository.updateRoleSelection(selectedRole);
-    if (result.isSuccess) {
-      final extensionResult = await repository.provisionRoleExtension(selectedRole);
-      if (extensionResult.isFailure) {
-        if (!mounted) {
-          return;
-        }
-        setState(() => _isSubmitting = false);
-        AppSnackbar.show(
-          context: context,
-          message: l10n.onboardingRoleWorkspaceFailure,
-          variant: AppSnackbarVariant.error,
-        );
-        return;
-      }
-    }
-
-    if (!mounted) {
-      return;
-    }
-    setState(() => _isSubmitting = false);
+    final result = await ref.read(onboardingControllerProvider.notifier).updateRoleSelection(selectedRole);
 
     if (result.isFailure) {
+      if (!mounted) {
+        return;
+      }
+      final failure = result.failureOrNull;
       AppSnackbar.show(
         context: context,
-        message: l10n.onboardingRoleSaveFailure,
+        message: failure is BusinessRuleFailure && failure.message == OnboardingController.roleWorkspaceFailureCode
+            ? l10n.onboardingRoleWorkspaceFailure
+            : l10n.onboardingRoleSaveFailure,
         variant: AppSnackbarVariant.error,
       );
       return;
     }
 
-    ref.invalidate(authStateProvider);
-    await ref.read(authStateProvider.future);
     if (!mounted) {
       return;
     }
@@ -183,22 +156,25 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
   }
 
   @override
-  void dispose() {
-    unawaited(_contextualTtsService.stop());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
+    final onboardingState = ref.watch(onboardingControllerProvider);
+    final ttsSummary = '${l10n.onboardingChooseRoleTitle}. ${l10n.onboardingRoleQuestion}. ${l10n.onboardingRoleSubtitle}';
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.onboardingChooseRoleTitle)),
+      appBar: AppBar(
+        title: Text(l10n.onboardingChooseRoleTitle),
+        actions: [
+          TtsActionButton(fallbackSummary: ttsSummary),
+        ],
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
               Text(
                 l10n.onboardingRoleQuestion,
                 style: Theme.of(context).textTheme.titleLarge,
@@ -225,10 +201,16 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
               PrimaryButton(
                 label: l10n.onboardingContinue,
                 onPressed: _continue,
-                isLoading: _isSubmitting,
+                isLoading: onboardingState.isSubmitting,
               ),
-            ],
-          ),
+                ],
+              ),
+            ),
+            TtsScreenSummaryEffect(
+              summary: ttsSummary,
+              screenKey: AppRoutes.onboardingRolePath,
+            ),
+          ],
         ),
       ),
     );
@@ -246,7 +228,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _mobileController = TextEditingController();
   bool _initialized = false;
-  bool _isSubmitting = false;
+  bool _termsAccepted = false;
 
   @override
   void didChangeDependencies() {
@@ -267,31 +249,29 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   Future<void> _submit() async {
-    setState(() => _isSubmitting = true);
-    final updateResult = await ref.read(authRepositoryProvider).updateProfile(
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final updateResult = await ref.read(onboardingControllerProvider.notifier).updateProfile(
           fullName: _nameController.text,
           mobile: _mobileController.text,
+          termsAccepted: _termsAccepted,
         );
-    if (updateResult.isSuccess) {
-      await ref.read(authRepositoryProvider).recordTermsAcceptance();
-    }
 
     if (!mounted) {
       return;
     }
-    setState(() => _isSubmitting = false);
 
     if (updateResult.isFailure) {
-      final AppLocalizations l10n = AppLocalizations.of(context);
+      final failure = updateResult.failureOrNull;
       AppSnackbar.show(
         context: context,
-        message: l10n.onboardingProfileSaveFailure,
+        message: failure is BusinessRuleFailure && failure.message == OnboardingController.termsAcceptanceRequiredCode
+            ? l10n.onboardingTermsAcceptance
+            : l10n.onboardingProfileSaveFailure,
         variant: AppSnackbarVariant.error,
       );
       return;
     }
 
-    ref.invalidate(authStateProvider);
     final refreshedAuthState = await ref.read(authStateProvider.future);
     if (!mounted) {
       return;
@@ -315,15 +295,24 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final profile = ref.watch(currentProfileProvider).valueOrNull;
+    final onboardingState = ref.watch(onboardingControllerProvider);
+    final ttsSummary = '${l10n.onboardingCompleteProfileTitle}. ${l10n.onboardingCompleteProfileHeading}. ${l10n.onboardingCompleteProfileSubtitle}';
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.onboardingCompleteProfileTitle)),
+      appBar: AppBar(
+        title: Text(l10n.onboardingCompleteProfileTitle),
+        actions: [
+          TtsActionButton(fallbackSummary: ttsSummary),
+        ],
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
               Text(
                 l10n.onboardingCompleteProfileHeading,
                 style: Theme.of(context).textTheme.titleLarge,
@@ -347,15 +336,40 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 keyboardType: TextInputType.phone,
               ),
               const SizedBox(height: 16),
-              Text(l10n.onboardingTermsAcceptance),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Checkbox(
+                      value: _termsAccepted,
+                      onChanged: (value) => setState(() => _termsAccepted = value ?? false),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => setState(() => _termsAccepted = !_termsAccepted),
+                      child: Text(l10n.onboardingTermsAcceptance),
+                    ),
+                  ),
+                ],
+              ),
               const Spacer(),
               PrimaryButton(
                 label: l10n.onboardingSaveAndContinue,
                 onPressed: _submit,
-                isLoading: _isSubmitting,
+                isLoading: onboardingState.isSubmitting,
               ),
-            ],
-          ),
+                ],
+              ),
+            ),
+            TtsScreenSummaryEffect(
+              summary: ttsSummary,
+              screenKey: AppRoutes.onboardingProfilePath,
+            ),
+          ],
         ),
       ),
     );

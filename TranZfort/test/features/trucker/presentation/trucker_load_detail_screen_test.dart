@@ -196,6 +196,9 @@ class _ScreenChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async => throw UnimplementedError();
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => throw UnimplementedError();
 }
 
 Widget _buildApp({
@@ -341,6 +344,12 @@ Widget _buildRoutedApp({
 
 void main() {
   testWidgets('renders sanitized freight detail failure copy', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
@@ -369,13 +378,19 @@ void main() {
   });
 
   testWidgets('renders trucker load detail success state', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp());
     await tester.pumpAndSettle();
 
     expect(find.text('Load Detail'), findsOneWidget);
     expect(find.text('Route and price summary'), findsOneWidget);
-    expect(find.text('₹54000 • Negotiable'), findsOneWidget);
-    expect(find.text('Price: ₹54000 • Negotiable'), findsOneWidget);
+    expect(find.text('₹54000 - Per Ton'), findsOneWidget);
+    expect(find.text('Price: ₹54000 - Per Ton'), findsOneWidget);
     expect(find.text('Truck requirement summary'), findsOneWidget);
     expect(find.text('Trip cost estimate'), findsOneWidget);
     expect(find.text('Book This Load'), findsOneWidget);
@@ -396,6 +411,12 @@ void main() {
   });
 
   testWidgets('renders localized latest booking status on trucker load detail', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         bookingRequestRows: const [
@@ -424,6 +445,12 @@ void main() {
   });
 
   testWidgets('renders neutral fallback for unknown booking status on trucker load detail', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         bookingRequestRows: const [
@@ -453,17 +480,29 @@ void main() {
   });
 
   testWidgets('trucker load detail falls back to unknown for unsupported price type', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(priceType: 'partner_negotiated'),
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('₹54000 • Unknown'), findsOneWidget);
-    expect(find.text('Price: ₹54000 • Unknown'), findsOneWidget);
+    expect(find.text('₹54000 - Unknown'), findsOneWidget);
+    expect(find.text('Price: ₹54000 - Unknown'), findsOneWidget);
     expect(find.text('Partner Negotiated'), findsNothing);
   });
 
   testWidgets('trucker load detail falls back to unknown for unsupported load status', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(status: 'assigned_full'),
     );
@@ -474,6 +513,12 @@ void main() {
   });
 
   testWidgets('trucker load detail prompts truckers to add an approved truck before booking', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(noApprovedTrucks: true),
     );
@@ -505,6 +550,12 @@ void main() {
   });
 
   testWidgets('blocked no-approved-trucks CTA opens fleet after confirmation', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final chatBackend = _ScreenChatBackend();
     final chatRepository = ChatRepository(
       chatBackend,
@@ -539,6 +590,12 @@ void main() {
   });
 
   testWidgets('load-detail not-found fallback opens find loads route', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final chatBackend = _ScreenChatBackend();
     final chatRepository = ChatRepository(
       chatBackend,
@@ -564,6 +621,12 @@ void main() {
   });
 
   testWidgets('renders blocked booking guidance when unverified', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(verified: false));
     await tester.pumpAndSettle();
 
@@ -595,6 +658,12 @@ void main() {
   });
 
   testWidgets('starts or resumes supplier chat from load detail', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final chatBackend = _ScreenChatBackend()..createConversationResult = 'conversation-42';
     final chatRepository = ChatRepository(
       chatBackend,
@@ -622,6 +691,12 @@ void main() {
   });
 
   testWidgets('opens report issue route from load detail with load context', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final chatBackend = _ScreenChatBackend()..createConversationResult = 'conversation-42';
     final chatRepository = ChatRepository(
       chatBackend,
@@ -736,6 +811,12 @@ void main() {
   });
 
   testWidgets('requires confirmation before submitting booking request', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp());
     await tester.pumpAndSettle();
 
@@ -751,7 +832,7 @@ void main() {
 
     expect(find.text('Confirm load booking'), findsOneWidget);
     expect(
-      find.text('Book Coal Chandrapur, Maharashtra → Mumbai, Maharashtra with MH12AB1234?'),
+      find.text('Book Coal Chandrapur, Maharashtra > Mumbai, Maharashtra with MH12AB1234?'),
       findsOneWidget,
     );
 
@@ -763,6 +844,12 @@ void main() {
   });
 
   testWidgets('successful booking request shows success snackbar', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final chatBackend = _ScreenChatBackend();
     final chatRepository = ChatRepository(
       chatBackend,

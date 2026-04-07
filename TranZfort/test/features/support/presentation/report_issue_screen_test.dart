@@ -84,7 +84,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-77',
       relatedTripId: 'trip-77',
-      sourceLabel: 'Chat • Nagpur → Pune',
+      sourceLabel: 'Chat - Nagpur > Pune',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -140,7 +140,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-77',
       relatedTripId: 'trip-77',
-      sourceLabel: 'Chat • Nagpur → Pune',
+      sourceLabel: 'Chat - Nagpur > Pune',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -209,7 +209,7 @@ void main() {
       initialCategory: 'fake_payout_proof',
       relatedLoadId: 'load-55',
       relatedTripId: 'trip-55',
-      sourceLabel: 'Trip • Jaipur → Delhi',
+      sourceLabel: 'Trip - Jaipur > Delhi',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -261,7 +261,7 @@ void main() {
       initialCategory: 'non_payment',
       relatedLoadId: 'load-88',
       relatedTripId: 'trip-88',
-      sourceLabel: 'Trip • Nashik → Pune',
+      sourceLabel: 'Trip - Nashik > Pune',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -330,7 +330,7 @@ void main() {
       initialCategory: 'fake_payout_proof',
       relatedLoadId: 'load-66',
       relatedTripId: 'trip-66',
-      sourceLabel: 'Trip • Surat → Ahmedabad',
+      sourceLabel: 'Trip - Surat > Ahmedabad',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -380,7 +380,7 @@ void main() {
       initialCategory: 'abusive_behavior',
       relatedLoadId: 'load-67',
       relatedTripId: 'trip-67',
-      sourceLabel: 'Chat • Kanpur → Lucknow',
+      sourceLabel: 'Chat - Kanpur > Lucknow',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -430,7 +430,7 @@ void main() {
       initialCategory: 'abusive_behavior',
       relatedLoadId: 'load-68',
       relatedTripId: 'trip-68',
-      sourceLabel: 'Chat • Kota → Jaipur',
+      sourceLabel: 'Chat - Kota > Jaipur',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,
@@ -477,7 +477,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-69',
       relatedTripId: 'trip-69',
-      sourceLabel: 'Chat • Pune → Mumbai',
+      sourceLabel: 'Chat - Pune > Mumbai',
     );
     final router = GoRouter(
       initialLocation: AppRoutes.reportIssuePath,

@@ -1,0 +1,291 @@
+Activity Resolver Table:
+  Schemes:
+      https:
+        59e9374 com.transfort.transfort_app/.MainActivity filter e025912
+          Action: "android.intent.action.VIEW"
+          Category: "android.intent.category.DEFAULT"
+          Category: "android.intent.category.BROWSABLE"
+          Scheme: "https"
+          Authority: "transfort.app": -1
+          Authority: "transfort.app": -1
+          Path: "PatternMatcher{PREFIX: /load}"
+          Path: "PatternMatcher{PREFIX: /truck}"
+          AutoVerify=true
+      transfort:
+        59e9374 com.transfort.transfort_app/.MainActivity filter 40f98e3
+          Action: "android.intent.action.VIEW"
+          Category: "android.intent.category.DEFAULT"
+          Category: "android.intent.category.BROWSABLE"
+          Scheme: "transfort"
+
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        59e9374 com.transfort.transfort_app/.MainActivity filter 52a509d
+          Action: "android.intent.action.MAIN"
+          Category: "android.intent.category.LAUNCHER"
+
+Receiver Resolver Table:
+  Non-Data Actions:
+      android.intent.action.BATTERY_OKAY:
+        128f45e com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy filter 798e03f
+          Action: "android.intent.action.BATTERY_OKAY"
+          Action: "android.intent.action.BATTERY_LOW"
+      android.intent.action.ACTION_POWER_DISCONNECTED:
+        dcb72e0 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy filter 5e05999
+          Action: "android.intent.action.ACTION_POWER_DISCONNECTED"
+          Action: "android.intent.action.ACTION_POWER_CONNECTED"
+      androidx.profileinstaller.action.SAVE_PROFILE:
+        f0f2ac2 com.transfort.transfort_app/androidx.profileinstaller.ProfileInstallReceiver filter dddb09
+          Action: "androidx.profileinstaller.action.SAVE_PROFILE"
+      android.intent.action.DEVICE_STORAGE_LOW:
+        24dd0c com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy filter e53f655
+          Action: "android.intent.action.DEVICE_STORAGE_LOW"
+          Action: "android.intent.action.DEVICE_STORAGE_OK"
+      android.net.conn.CONNECTIVITY_CHANGE:
+        98bf86a com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy filter 245415b
+          Action: "android.net.conn.CONNECTIVITY_CHANGE"
+      android.intent.action.DEVICE_STORAGE_OK:
+        24dd0c com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy filter e53f655
+          Action: "android.intent.action.DEVICE_STORAGE_LOW"
+          Action: "android.intent.action.DEVICE_STORAGE_OK"
+      androidx.profileinstaller.action.INSTALL_PROFILE:
+        f0f2ac2 com.transfort.transfort_app/androidx.profileinstaller.ProfileInstallReceiver filter c8880d3
+          Action: "androidx.profileinstaller.action.INSTALL_PROFILE"
+      android.intent.action.BATTERY_LOW:
+        128f45e com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy filter 798e03f
+          Action: "android.intent.action.BATTERY_OKAY"
+          Action: "android.intent.action.BATTERY_LOW"
+      android.intent.action.TIMEZONE_CHANGED:
+        8c8bdf8 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.RescheduleReceiver filter d2aa2d1
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.BOOT_COMPLETED"
+      android.intent.action.TIME_SET:
+        8c8bdf8 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.RescheduleReceiver filter d2aa2d1
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.BOOT_COMPLETED"
+      androidx.profileinstaller.action.SKIP_FILE:
+        f0f2ac2 com.transfort.transfort_app/androidx.profileinstaller.ProfileInstallReceiver filter 3915410
+          Action: "androidx.profileinstaller.action.SKIP_FILE"
+      androidx.profileinstaller.action.BENCHMARK_OPERATION:
+        f0f2ac2 com.transfort.transfort_app/androidx.profileinstaller.ProfileInstallReceiver filter 929310e
+          Action: "androidx.profileinstaller.action.BENCHMARK_OPERATION"
+      android.intent.action.BOOT_COMPLETED:
+        8c8bdf8 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.RescheduleReceiver filter d2aa2d1
+          Action: "android.intent.action.TIMEZONE_CHANGED"
+          Action: "android.intent.action.TIME_SET"
+          Action: "android.intent.action.BOOT_COMPLETED"
+      android.intent.action.ACTION_POWER_CONNECTED:
+        dcb72e0 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy filter 5e05999
+          Action: "android.intent.action.ACTION_POWER_DISCONNECTED"
+          Action: "android.intent.action.ACTION_POWER_CONNECTED"
+      androidx.work.diagnostics.REQUEST_DIAGNOSTICS:
+        5c7c1a4 com.transfort.transfort_app/androidx.work.impl.diagnostics.DiagnosticsReceiver filter be59b0d
+          Action: "androidx.work.diagnostics.REQUEST_DIAGNOSTICS"
+      androidx.work.impl.background.systemalarm.UpdateProxies:
+        7693136 com.transfort.transfort_app/androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver filter a8c9837
+          Action: "androidx.work.impl.background.systemalarm.UpdateProxies"
+
+Service Resolver Table:
+  Non-Data Actions:
+      com.google.android.gms.metadata.MODULE_DEPENDENCIES:
+        250572f com.transfort.transfort_app/com.google.android.gms.metadata.ModuleDependencies filter 41fa13c
+          Action: "com.google.android.gms.metadata.MODULE_DEPENDENCIES"
+
+Domain verification status:
+  com.transfort.transfort_app:
+    ID: 516884d5-27cd-4485-bdf2-f7356af85be8
+    Signatures: [27:6B:AB:38:74:52:70:62:C5:7B:B3:D6:9C:33:E2:7E:A8:29:6A:E8:E4:D7:AA:70:46:3F:A8:C2:62:4B:BD:52]
+    Domain verification state:
+      transfort.app: 1024
+    User all:
+      Verification link handling allowed: true
+      Selection state:
+        Disabled:
+          transfort.app
+
+Permissions:
+  Permission [com.transfort.transfort_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION] (e2ab099):
+    sourcePackage=com.transfort.transfort_app
+    uid=10309 gids=[] type=0 prot=signature
+    perm=PermissionInfo{951ff5e com.transfort.transfort_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION}
+    flags=0x0
+
+Registered ContentProviders:
+  com.transfort.transfort_app/androidx.startup.InitializationProvider:
+    Provider{46c8f3f com.transfort.transfort_app/androidx.startup.InitializationProvider}
+  com.transfort.transfort_app/io.flutter.plugins.imagepicker.ImagePickerFileProvider:
+    Provider{f98600c com.transfort.transfort_app/io.flutter.plugins.imagepicker.ImagePickerFileProvider}
+  com.transfort.transfort_app/com.google.android.gms.ads.MobileAdsInitProvider:
+    Provider{66cbd55 com.transfort.transfort_app/com.google.android.gms.ads.MobileAdsInitProvider}
+
+ContentProvider Authorities:
+  [com.transfort.transfort_app.flutter.image_provider]:
+    Provider{f98600c com.transfort.transfort_app/io.flutter.plugins.imagepicker.ImagePickerFileProvider}
+      applicationInfo=ApplicationInfo{2bab36a com.transfort.transfort_app}
+  [com.transfort.transfort_app.androidx-startup]:
+    Provider{46c8f3f com.transfort.transfort_app/androidx.startup.InitializationProvider}
+      applicationInfo=ApplicationInfo{a24e05b com.transfort.transfort_app}
+  [com.transfort.transfort_app.mobileadsinitprovider]:
+    Provider{66cbd55 com.transfort.transfort_app/com.google.android.gms.ads.MobileAdsInitProvider}
+      applicationInfo=ApplicationInfo{f7170f8 com.transfort.transfort_app}
+
+Key Set Manager:
+  [com.transfort.transfort_app]
+      Signing KeySets: 98
+
+Packages:
+  Package [com.transfort.transfort_app] (b88d9d1):
+    appId=10309
+    pkg=Package{4489c36 com.transfort.transfort_app}
+    codePath=/data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==
+    resourcePath=/data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==
+    legacyNativeLibraryDir=/data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==/lib
+    extractNativeLibs=false
+    primaryCpuAbi=arm64-v8a
+    secondaryCpuAbi=null
+    cpuAbiOverride=null
+    versionCode=1 minSdk=24 targetSdk=36
+    minExtensionVersions=[]
+    versionName=1.0.0
+    hiddenApiEnforcementPolicy=2
+    usesNonSdkApi=false
+    splits=[base]
+    apkSigningVersion=2
+    flags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privateFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION ALLOW_AUDIO_PLAYBACK_CAPTURE HAS_DOMAIN_URLS PARTIALLY_DIRECT_BOOT_AWARE PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING ]
+    forceQueryable=false
+    queriesIntents=[Intent { act=android.intent.action.PROCESS_TEXT dat=content://*/... typ=text/plain }, Intent { act=android.intent.action.VIEW cat=[android.intent.category.BROWSABLE] dat=https:/... }, Intent { act=android.support.customtabs.action.CustomTabsService }]
+    scannedAsStoppedSystemApp=false
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    usesOptionalLibraries:
+      androidx.window.extensions
+      androidx.window.sidecar
+      android.ext.adservices
+    usesLibraryFiles:
+      /system_ext/framework/androidx.window.extensions.jar
+      /system_ext/framework/androidx.window.sidecar.jar
+    timeStamp=2026-01-24 23:58:53
+    lastUpdateTime=2026-01-24 23:58:54
+    installerPackageName=com.google.android.packageinstaller
+    installerPackageUid=10247
+    initiatingPackageName=com.google.android.packageinstaller
+    originatingPackageName=com.whatsapp
+    packageSource=3
+    appMetadataFilePath=null
+    appMetadataSource=0
+    signatures=PackageSignatures{a472737 version:2, signatures:[30c1b0a], past signatures:[]}
+    installPermissionsFixed=false
+    pkgFlags=[ HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    privatePkgFlags=[ PRIVATE_FLAG_ACTIVITIES_RESIZE_MODE_RESIZEABLE_VIA_SDK_VERSION ALLOW_AUDIO_PLAYBACK_CAPTURE HAS_DOMAIN_URLS PARTIALLY_DIRECT_BOOT_AWARE PRIVATE_FLAG_ALLOW_NATIVE_HEAP_POINTER_TAGGING ]
+    apexModuleName=null
+    declared permissions:
+      com.transfort.transfort_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: prot=signature
+    requested permissions:
+      android.permission.ACCESS_ADSERVICES_TOPICS
+      android.permission.FOREGROUND_SERVICE
+      android.permission.ACCESS_ADSERVICES_AD_ID
+      android.permission.INTERNET
+      android.permission.ACCESS_NETWORK_STATE
+      com.transfort.transfort_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+      android.permission.ACCESS_ADSERVICES_ATTRIBUTION
+      android.permission.USE_FINGERPRINT
+      android.permission.USE_BIOMETRIC
+      com.google.android.gms.permission.AD_ID
+      android.permission.WAKE_LOCK
+    install permissions:
+      android.permission.ACCESS_ADSERVICES_TOPICS: granted=true
+      android.permission.FOREGROUND_SERVICE: granted=true
+      android.permission.ACCESS_ADSERVICES_AD_ID: granted=true
+      android.permission.INTERNET: granted=true
+      android.permission.ACCESS_NETWORK_STATE: granted=true
+      com.transfort.transfort_app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION: granted=true
+      android.permission.ACCESS_ADSERVICES_ATTRIBUTION: granted=true
+      android.permission.USE_FINGERPRINT: granted=true
+      android.permission.USE_BIOMETRIC: granted=true
+      com.google.android.gms.permission.AD_ID: granted=true
+      android.permission.WAKE_LOCK: granted=true
+    User 0: ceDataInode=59606 deDataInode=59899 installed=true hidden=false suspended=false distractionFlags=0 stopped=false notLaunched=false enabled=0 ofs=0 pdm=false instant=false virtual=false quarantined=false
+      installReason=4
+      dataDir=/data/user/0/com.transfort.transfort_app
+      firstInstallTime=2026-01-24 22:50:48
+      uninstallReason=0
+      overlay paths:
+        /data/resource-cache/com.android.systemui-neutral-SJx8.frro
+        /data/resource-cache/com.android.systemui-accent-ao3c.frro
+        /data/resource-cache/com.android.systemui-dynamic-YPeb.frro
+      lastDisabledCaller: com.google.android.packageinstaller
+      gids=[3003]
+      runtime permissions:
+      enabledComponents:
+        androidx.work.impl.background.systemjob.SystemJobService
+
+Queries:
+  system apps queryable: false
+  queries via forceQueryable:
+  queries via package name:
+  queries via component:
+    com.oplus.ndsf:
+      com.transfort.transfort_app
+    com.oneplus.account:
+      com.transfort.transfort_app
+    com.oneplus.oshare:
+      com.transfort.transfort_app
+    com.truecaller:
+      com.transfort.transfort_app
+    com.oplus.pay:
+      com.transfort.transfort_app
+    com.heytap.htms:
+      com.transfort.transfort_app
+    com.redteamobile.roaming:
+      com.transfort.transfort_app
+    com.google.android.as.oss:
+      com.transfort.transfort_app
+    com.google.android.apps.messaging:
+      com.transfort.transfort_app
+    com.oneplus.mall:
+      com.transfort.transfort_app
+    com.blackbuck.sme.demand:
+      com.transfort.transfort_app
+    net.oneplus.forums:
+      com.transfort.transfort_app
+    com.transfort.transfort_app:
+      com.google.android.googlequicksearchbox
+      com.android.chrome
+      com.truecaller
+      com.heytap.browser
+      com.google.android.setupwizard
+      com.google.android.apps.docs
+      com.oneplus.note
+      com.openai.chatgpt
+      idm.internet.download.manager
+    com.zinka.boss:
+      com.transfort.transfort_app
+    com.whatsapp:
+      com.transfort.transfort_app
+    com.facebook.katana:
+      com.transfort.transfort_app
+    com.instagram.android:
+      com.transfort.transfort_app
+    com.phonepe.app:
+      com.transfort.transfort_app
+  queryable via interaction:
+    User 0:
+  queryable via uses-library:
+
+Dexopt state:
+  [com.transfort.transfort_app]
+    path: /data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==/base.apk
+      arm64: [status=speed-profile] [reason=ab-ota] [primary-abi]
+        [location is /data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==/oat/arm64/base.odex]
+    known secondary dex files:
+      /data/user/0/com.transfort.transfort_app/app_pccache/5/C150A56EE81A7F41B729057EB1FA05CBFA504FB6/pcam.jar
+        arm64: [status=verify] [reason=vdex] [primary-abi]
+          [location is /data/user/0/com.transfort.transfort_app/app_pccache/5/C150A56EE81A7F41B729057EB1FA05CBFA504FB6/oat/arm64/pcam.vdex]
+        class loader context: PCL[];PCL[/data/app/~~ETlOS0HC6Osil_STR-O5VA==/com.transfort.transfort_app-b3mb9YrVQpWjxP-Iu2ROow==/base.apk]{PCL[/system_ext/framework/androidx.window.extensions.jar]#PCL[/system_ext/framework/androidx.window.sidecar.jar]}
+
+Compiler stats:
+  [com.transfort.transfort_app]
+    (No recorded stats)
+

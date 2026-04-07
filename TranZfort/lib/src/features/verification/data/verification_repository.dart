@@ -201,10 +201,6 @@ class VerificationRepository {
           if (type == VerificationDocumentType.pan) 'pan_document_path': normalizedPath,
           if (type == VerificationDocumentType.profilePhoto) 'profile_photo_document_path': normalizedPath,
         };
-        // Sync profile photo to avatar_url for display purposes
-        if (type == VerificationDocumentType.profilePhoto) {
-          profileUpdates['avatar_url'] = normalizedPath;
-        }
         await _backend.updateProfileFields(userId, profileUpdates);
       }
       return const Success<void>(null);

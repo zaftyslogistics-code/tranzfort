@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -61,15 +62,25 @@ class SupabaseAdminAuthBackend implements AdminAuthBackend {
   }) async {
     final activeClient = client;
     if (activeClient == null) {
+      debugPrint('SupabaseAdminAuthBackend: client is null');
       return null;
     }
 
-    final response = await activeClient.auth.signInWithPassword(
-      email: email,
-      password: password,
-    );
-
-    return response.user?.id ?? activeClient.auth.currentUser?.id;
+    try {
+      debugPrint('SupabaseAdminAuthBackend: Attempting sign in for email: $email');
+      final response = await activeClient.auth.signInWithPassword(
+        email: email,
+        password: password,
+      );
+      debugPrint('SupabaseAdminAuthBackend: Sign in successful, userId: ${response.user?.id}');
+      return response.user?.id ?? activeClient.auth.currentUser?.id;
+    } on AuthException catch (e) {
+      debugPrint('SupabaseAdminAuthBackend: AuthException - message: ${e.message}, statusCode: ${e.statusCode}');
+      rethrow;
+    } catch (e) {
+      debugPrint('SupabaseAdminAuthBackend: Unexpected error - $e');
+      rethrow;
+    }
   }
 
   @override
@@ -96,15 +107,20 @@ class SupabaseAdminAuthBackend implements AdminAuthBackend {
   Future<Map<String, dynamic>?> fetchAdminAccessRow({required String authUserId}) async {
     final activeClient = client;
     if (activeClient == null) {
+      debugPrint('fetchAdminAccessRow: client is null');
       return null;
     }
 
     try {
+      debugPrint('fetchAdminAccessRow: Calling RPC verify_admin_after_auth for authUserId: $authUserId');
       // Use RPC to bypass RLS issues
       final result = await activeClient
           .rpc('verify_admin_after_auth', params: {'p_auth_user_id': authUserId});
       
+      debugPrint('fetchAdminAccessRow: RPC result: $result');
+      
       if (result == null || result['found'] != true) {
+        debugPrint('fetchAdminAccessRow: Admin not found in RPC result');
         return null;
       }
       
@@ -113,12 +129,15 @@ class SupabaseAdminAuthBackend implements AdminAuthBackend {
         'is_active': result['is_active'],
       };
     } catch (e) {
+      debugPrint('fetchAdminAccessRow: RPC failed with error: $e, trying fallback query');
       // Fallback to direct query if RPC fails
       final row = await activeClient
           .from('admin_users')
           .select('role, is_active')
           .eq('auth_user_id', authUserId)
           .maybeSingle();
+      
+      debugPrint('fetchAdminAccessRow: Fallback query result: $row');
       
       if (row == null) {
         return null;
@@ -150,23 +169,27 @@ class AdminAuthRepository {
         email: normalizedEmail,
         password: password,
       );
+      debugPrint('AdminAuthRepository: authUserId from backend: $authUserId');
       if (authUserId == null || authUserId.isEmpty) {
         return AdminSignInResult.failure(AdminSignInFailureReason.unavailable);
       }
 
       final row = await backend.fetchAdminAccessRow(authUserId: authUserId);
+      debugPrint('AdminAuthRepository: row from fetchAdminAccessRow: $row');
       if (row == null) {
         await backend.signOut();
         return AdminSignInResult.failure(AdminSignInFailureReason.notAuthorized);
       }
 
       final role = _parseRole((row['role'] ?? '').toString());
+      debugPrint('AdminAuthRepository: parsed role: $role');
       if (role == AdminRole.unknown) {
         await backend.signOut();
         return AdminSignInResult.failure(AdminSignInFailureReason.notAuthorized);
       }
 
       final isActive = row['is_active'] == true;
+      debugPrint('AdminAuthRepository: isActive: $isActive');
       if (!isActive) {
         await backend.signOut();
         return AdminSignInResult.failure(AdminSignInFailureReason.deactivated);
@@ -179,9 +202,11 @@ class AdminAuthRepository {
           isActive: true,
         ),
       );
-    } on AuthException {
+    } on AuthException catch (e) {
+      debugPrint('AdminAuthRepository: AuthException during signIn - message: ${e.message}, statusCode: ${e.statusCode}');
       return AdminSignInResult.failure(AdminSignInFailureReason.invalidCredentials);
-    } catch (_) {
+    } catch (e) {
+      debugPrint('AdminAuthRepository: Unexpected error during signIn - $e');
       return AdminSignInResult.failure(AdminSignInFailureReason.unavailable);
     }
   }

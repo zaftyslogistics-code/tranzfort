@@ -130,6 +130,43 @@ void main() {
     expect(container.read(unreadNotificationCountProvider), 2);
   });
 
+  test('shell unread notification count provider uses lightweight unread count path', () async {
+    final backend = _FakeNotificationBackend()..unreadCount = 3;
+    final repository = NotificationRepository(backend, () => 'user-1');
+    final container = ProviderContainer(
+      overrides: [
+        notificationRepositoryProvider.overrideWithValue(repository),
+      ],
+    );
+    final seenValues = <int>[];
+    final subscription = container.listen(shellUnreadNotificationCountProvider, (_, next) {
+      final value = next.valueOrNull;
+      if (value != null) {
+        seenValues.add(value);
+      }
+    });
+    addTearDown(() async {
+      subscription.close();
+      container.dispose();
+      await backend.streamController.close();
+    });
+
+    expect(await container.read(shellUnreadNotificationCountProvider.future), 3);
+    expect(seenValues, contains(3));
+    await Future<void>.delayed(Duration.zero);
+
+    backend.unreadCount = 1;
+    backend.streamController.add([_notificationRow('notification-1', isRead: true)]);
+    for (var attempt = 0; attempt < 10; attempt++) {
+      await Future<void>.delayed(Duration.zero);
+      if (seenValues.contains(1)) {
+        break;
+      }
+    }
+
+    expect(seenValues, contains(1));
+  });
+
   test('notifications provider preserves paged older notifications when realtime updates arrive', () async {
     final backend = _FakeNotificationBackend()
       ..notificationRows = List.generate(

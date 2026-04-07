@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -17,6 +18,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/tts_action_button.dart';
 import '../../supplier/providers/load_detail_provider.dart';
 import '../../support/providers/support_compose_providers.dart';
 import '../../trucker/data/diesel_price_repository.dart';
@@ -85,12 +87,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
     _voiceMessageService = ref.read(voiceMessageServiceProvider);
     _messageController = TextEditingController();
     _scrollController = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) {
-        return;
-      }
-      ref.read(inboxProvider.notifier).load();
-    });
   }
 
   @override
@@ -152,6 +148,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
 
     final otherPartyName = _otherPartyName(conversation, authState.role, l10n.chatTitleFallback);
     final callUri = _callUri(_otherPartyMobile(conversation, authState.role));
+    final ttsSummary = [
+      otherPartyName,
+      if ((conversation?.routeLabel ?? '').trim().isNotEmpty) conversation!.routeLabel,
+      l10n.shellMessagesTitle,
+    ].join('. ');
     final canShowBookingActions = isSupplier &&
         conversation != null &&
         (conversation.bookingRequestId ?? '').trim().isNotEmpty &&
@@ -173,6 +174,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
           ],
         ),
         actions: [
+          TtsActionButton(fallbackSummary: ttsSummary),
           if (callUri != null)
             IconButton(
               tooltip: l10n.chatTooltipCall,
@@ -222,101 +224,109 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
         ],
       ),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: Builder(
-                builder: (context) {
-                  if (inboxState.isLoading && conversation == null) {
-                    return const Padding(
-                      padding: EdgeInsets.all(AppSpacing.lg),
-                      child: LoadingShimmer(height: 88, itemCount: 4),
-                    );
-                  }
-                  if (conversation == null) {
-                    return EmptyStateView(
-                      icon: Icons.chat_bubble_outline,
-                      title: l10n.chatConversationUnavailableTitle,
-                      subtitle: l10n.chatConversationUnavailableSubtitle,
-                      actionLabel: l10n.chatBackToInboxAction,
-                      onAction: () => context.go(AppRoutes.messagesPath),
-                    );
-                  }
+            Column(
+              children: [
+                Expanded(
+                  child: Builder(
+                    builder: (context) {
+                      if (inboxState.isLoading && conversation == null) {
+                        return const Padding(
+                          padding: EdgeInsets.all(AppSpacing.lg),
+                          child: LoadingShimmer(height: 88, itemCount: 4),
+                        );
+                      }
+                      if (conversation == null) {
+                        return EmptyStateView(
+                          icon: Icons.chat_bubble_outline,
+                          title: l10n.chatConversationUnavailableTitle,
+                          subtitle: l10n.chatConversationUnavailableSubtitle,
+                          actionLabel: l10n.chatBackToInboxAction,
+                          onAction: () => context.go(AppRoutes.messagesPath),
+                        );
+                      }
 
-                  return Column(
-                    children: [
-                      _ChatContextBanner(
-                        conversation: conversation,
-                        isExpanded: _isBannerExpanded,
-                        onToggleExpanded: () {
-                          setState(() {
-                            _isBannerExpanded = !_isBannerExpanded;
-                          });
-                        },
-                        canShowBookingActions: canShowBookingActions,
-                        isProcessingBookingAction: isProcessingBookingAction,
-                        onApprove: canShowBookingActions
-                            ? () => _approveBooking(context, conversation.bookingRequestId!, conversation.loadId)
-                            : null,
-                        onReject: canShowBookingActions
-                            ? () => _rejectBooking(context, conversation.bookingRequestId!, conversation.loadId)
-                            : null,
-                      ),
-                      if (loadDetailState?.actionFailure != null)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
-                          child: WarningBlock(
-                            title: l10n.chatBookingActionUnavailableTitle,
-                            message: _chatBookingActionFailureMessage(),
+                      return Column(
+                        children: [
+                          _ChatContextBanner(
+                            conversation: conversation,
+                            isExpanded: _isBannerExpanded,
+                            onToggleExpanded: () {
+                              setState(() {
+                                _isBannerExpanded = !_isBannerExpanded;
+                              });
+                            },
+                            canShowBookingActions: canShowBookingActions,
+                            isProcessingBookingAction: isProcessingBookingAction,
+                            onApprove: canShowBookingActions
+                                ? () => _approveBooking(context, conversation.bookingRequestId!, conversation.loadId)
+                                : null,
+                            onReject: canShowBookingActions
+                                ? () => _rejectBooking(context, conversation.bookingRequestId!, conversation.loadId)
+                                : null,
                           ),
-                        ),
-                      Expanded(
-                        child: _ChatMessagesBody(
-                          scrollController: _scrollController,
-                          renderedMessages: renderedMessages,
-                          isLoading: messagesState.isLoading,
-                          failure: messagesState.failure,
-                          loadId: conversation.loadId,
-                        ),
-                      ),
-                      if (truckerChatBlocked)
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
-                          child: WarningBlock(
-                            title: l10n.verificationChatAndCallGatingBadge,
-                            message: truckerChatGatingMessage,
-                            action: OutlineButton(
-                              label: _truckerChatActionLabel(l10n, truckerProfile),
-                              onPressed: () => _openTruckerChatReadiness(context, truckerProfile),
+                          if (loadDetailState?.actionFailure != null)
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.md),
+                              child: WarningBlock(
+                                title: l10n.chatBookingActionUnavailableTitle,
+                                message: _chatBookingActionFailureMessage(),
+                              ),
+                            ),
+                          Expanded(
+                            child: _ChatMessagesBody(
+                              scrollController: _scrollController,
+                              renderedMessages: renderedMessages,
+                              isLoading: messagesState.isLoading,
+                              failure: messagesState.failure,
+                              loadId: conversation.loadId,
                             ),
                           ),
-                        ),
-                    ],
-                  );
-                },
-              ),
+                          if (truckerChatBlocked)
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.md, AppSpacing.md, 0),
+                              child: WarningBlock(
+                                title: l10n.verificationChatAndCallGatingBadge,
+                                message: truckerChatGatingMessage,
+                                action: OutlineButton(
+                                  label: _truckerChatActionLabel(l10n, truckerProfile),
+                                  onPressed: () => _openTruckerChatReadiness(context, truckerProfile),
+                                ),
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                ValueListenableBuilder<TextEditingValue>(
+                  valueListenable: _messageController,
+                  builder: (context, textValue, _) {
+                    final hasText = textValue.text.trim().isNotEmpty;
+                    return _ChatComposer(
+                      controller: _messageController,
+                      isSending: sendState.isSending,
+                      isRecordingVoice: _isRecordingVoice,
+                      recordingElapsedSeconds: _recordingElapsedSeconds,
+                      onSend: truckerChatBlocked || !hasText
+                          ? null
+                          : () => _sendTextMessage(context),
+                      onVoiceAction: truckerChatBlocked || hasText || sendState.isSending
+                          ? null
+                          : () => _toggleVoiceRecording(context),
+                    );
+                  },
+                ),
+              ],
             ),
-            ValueListenableBuilder<TextEditingValue>(
-              valueListenable: _messageController,
-              builder: (context, textValue, _) {
-                final hasText = textValue.text.trim().isNotEmpty;
-                return _ChatComposer(
-                  controller: _messageController,
-                  isSending: sendState.isSending,
-                  isRecordingVoice: _isRecordingVoice,
-                  recordingElapsedSeconds: _recordingElapsedSeconds,
-                  onSend: truckerChatBlocked || !hasText
-                      ? null
-                      : () => _sendTextMessage(context),
-                  onVoiceAction: truckerChatBlocked || hasText || sendState.isSending
-                      ? null
-                      : () => _toggleVoiceRecording(context),
-                );
-              },
+            TtsScreenSummaryEffect(
+              summary: ttsSummary,
+              screenKey: '${AppRoutes.chatPath}/${widget.conversationId}',
             ),
           ],
         ),
       ),
     );
   }
- }
+}

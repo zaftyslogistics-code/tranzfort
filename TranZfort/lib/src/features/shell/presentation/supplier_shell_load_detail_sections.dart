@@ -1,4 +1,25 @@
-part of 'supplier_shell_screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/models/domain_statuses.dart';
+import '../../../core/error/app_failure.dart';
+import '../../../core/navigation/app_routes.dart';
+import '../../../core/services/maps_launcher_service.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/providers/load_detail_provider.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/status_components.dart';
+import '../../../features/support/providers/support_compose_providers.dart';
+import 'shell_components.dart';
+import 'supplier_shell_dashboard_sections.dart';
+import 'supplier_shell_shared_helpers.dart';
 
 class SupplierLoadDetailScreen extends ConsumerWidget {
   final String loadId;
@@ -16,7 +37,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
     final detail = state.detail;
 
     return DetailPageScaffold(
-      title: _supplierLoadDetailScreenTitle(l10n),
+      title: l10n.supplierLoadDetailScreenTitle,
       children: [
         if (state.isLoading) const LoadingShimmer(height: 120, itemCount: 4),
         if (!state.isLoading && state.failure != null && detail == null)
@@ -26,11 +47,10 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
           ),
         if (!state.isLoading && detail != null) ...[
               HeroActionCard(
-                title: '${detail.summary.originLabel} → ${detail.summary.destinationLabel}',
-                subtitle: _supplierLoadDetailHeroSubtitle(
-                  l10n,
+                title: '${detail.summary.originLabel} > ${detail.summary.destinationLabel}',
+                subtitle: l10n.supplierLoadDetailHeroSubtitle(
                   detail.summary.id,
-                  _formatSupplierShortDate(context, detail.summary.pickupDate),
+                  formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,16 +60,16 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                       runSpacing: AppSpacing.sm,
                       children: [
                         StatusBadge(
-                          label: _localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
+                          label: localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
                           icon: Icons.local_shipping_outlined,
                         ),
-                        if (_hasSuperLoadState(
+                        if (hasSuperLoadState(
                           isSuperLoad: detail.summary.isSuperLoad,
                           superStatus: detail.summary.superStatus,
                         ))
                           StatusBadge(
                             label: l10n.supplierDashboardSuperLoadBadge(
-                              _superLoadStatusLabel(
+                              superLoadStatusLabel(
                                 l10n,
                                 detail.summary.superStatus,
                                 isSuperLoad: detail.summary.isSuperLoad,
@@ -76,7 +96,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: AppSpacing.lg),
                     Text(
-                      '${detail.summary.material} • ₹${detail.summary.priceAmount.toStringAsFixed(0)} • ${_localizedSupplierPriceType(l10n, detail.summary.priceType)}',
+                      '${detail.summary.material} - ₹${detail.summary.priceAmount.toStringAsFixed(0)} - ${localizedSupplierPriceType(l10n, detail.summary.priceType)}',
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                   ],
@@ -84,8 +104,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
               ),
               if (state.failure != null) ...[
                 WarningBlock(
-                  title: _supplierLoadDetailLinkedExecutionUnavailableTitle(l10n),
-                  message: _supplierLoadSupportFailureMessage(l10n),
+                  title: l10n.supplierLoadDetailLinkedExecutionUnavailableTitle,
+                  message: l10n.supplierLoadSupportFailureMessage,
                   action: OutlineButton(
                     label: l10n.commonRetry,
                     onPressed: () => ref.read(loadDetailProvider(loadId).notifier).load(),
@@ -93,26 +113,25 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 ),
               ],
               DetailSectionCard(
-                title: _supplierLoadDetailStatusAndActionsTitle(l10n),
+                title: l10n.supplierLoadDetailStatusAndActionsTitle,
                 children: [
                   Text(
-                    _supplierLoadDetailCurrentStatus(
-                      l10n,
-                      _localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
+                    l10n.supplierLoadDetailCurrentStatus(
+                      localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
                     ),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                   const SizedBox(height: AppSpacing.sm),
                   Text(
-                    _supplierLoadDetailActionsSubtitle(l10n),
+                    l10n.supplierLoadDetailActionsSubtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  if (_hasSuperLoadState(
+                  if (hasSuperLoadState(
                     isSuperLoad: detail.summary.isSuperLoad,
                     superStatus: detail.summary.superStatus,
                   )) ...[
                     const SizedBox(height: AppSpacing.md),
-                    _SuperLoadStatusBlock(
+                    SuperLoadStatusBlock(
                       isSuperLoad: detail.summary.isSuperLoad,
                       superStatus: detail.summary.superStatus,
                     ),
@@ -120,14 +139,14 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                   if (state.actionFailure != null) ...[
                     const SizedBox(height: AppSpacing.md),
                     WarningBlock(
-                      title: _supplierLoadDetailActionUnavailableTitle(l10n),
-                      message: _supplierLoadActionFailureMessage(l10n),
+                      title: l10n.supplierLoadDetailActionUnavailableTitle,
+                      message: l10n.supplierLoadActionFailureMessage,
                     ),
                   ],
                   const SizedBox(height: AppSpacing.md),
                   if (_canCancel(detail)) ...[
                     DestructiveButton(
-                      label: _supplierLoadDetailCancelAction(l10n),
+                      label: l10n.supplierLoadDetailCancelAction,
                       isLoading: state.isCancelling,
                       onPressed: state.isCancelling
                           ? null
@@ -140,8 +159,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                                 AppSnackbar.build(
                                   context: context,
                                   message: result.isSuccess
-                                      ? _supplierLoadDetailCancelledSuccess(l10n)
-                                      : _supplierLoadCancelFailureMessage(l10n),
+                                      ? l10n.supplierLoadDetailCancelledSuccess
+                                      : l10n.supplierLoadCancelFailureMessage,
                                   variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                                 ),
                               );
@@ -151,7 +170,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                   ],
                   if (_canCloseFilledOutsideApp(detail))
                     OutlineButton(
-                      label: _supplierLoadDetailCloseFilledOutsideAction(l10n),
+                      label: l10n.supplierLoadDetailCloseFilledOutsideAction,
                       isLoading: state.isClosingFilledOutsideApp,
                       onPressed: state.isClosingFilledOutsideApp
                           ? null
@@ -164,8 +183,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                                 AppSnackbar.build(
                                   context: context,
                                   message: result.isSuccess
-                                      ? _supplierLoadDetailClosedFilledOutsideSuccess(l10n)
-                                      : _supplierLoadCloseFailureMessage(l10n),
+                                      ? l10n.supplierLoadDetailClosedFilledOutsideSuccess
+                                      : l10n.supplierLoadCloseFailureMessage,
                                   variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                                 ),
                               );
@@ -180,44 +199,42 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                         initialCategory: 'spam_or_scam',
                         relatedLoadId: detail.summary.id,
                         relatedTripId: '',
-                        sourceLabel: 'Supplier load • ${detail.summary.originLabel} → ${detail.summary.destinationLabel}',
+                        sourceLabel: l10n.reportSourceSupplierLoad('${detail.summary.originLabel} > ${detail.summary.destinationLabel}'),
                       ),
                     ),
                   ),
                 ],
               ),
           DetailSectionCard(
-            title: _supplierLoadDetailRouteAndScheduleTitle(l10n),
+            title: l10n.supplierLoadDetailRouteAndScheduleTitle,
             children: [
               Text(
-                _supplierLoadDetailOriginCity(
-                  l10n,
+                l10n.supplierLoadDetailOriginCity(
                   '${detail.originCity}${detail.originState == null ? '' : ', ${detail.originState}'}',
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text(_supplierLoadDetailOriginPoint(l10n, detail.summary.originLabel)),
+              Text(l10n.supplierLoadDetailOriginPoint(detail.summary.originLabel)),
               const SizedBox(height: AppSpacing.md),
               Text(
-                _supplierLoadDetailDestinationCity(
-                  l10n,
+                l10n.supplierLoadDetailDestinationCity(
                   '${detail.destinationCity}${detail.destinationState == null ? '' : ', ${detail.destinationState}'}',
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text(_supplierLoadDetailDestinationPoint(l10n, detail.summary.destinationLabel)),
+              Text(l10n.supplierLoadDetailDestinationPoint(detail.summary.destinationLabel)),
               const SizedBox(height: AppSpacing.md),
-              Text(_supplierLoadDetailPickupDate(l10n, _formatSupplierShortDate(context, detail.summary.pickupDate))),
+              Text(l10n.supplierLoadDetailPickupDate(formatSupplierShortDate(context, detail.summary.pickupDate))),
               if (detail.routeDistanceKm != null && detail.routeDurationMinutes != null) ...[
                 const SizedBox(height: AppSpacing.md),
-                Text(_supplierLoadDetailDistance(l10n, '${detail.routeDistanceKm!.toStringAsFixed(1)} km')),
+                Text(l10n.supplierLoadDetailDistance('${detail.routeDistanceKm!.toStringAsFixed(1)} km')),
                 const SizedBox(height: AppSpacing.xs),
-                Text(_supplierLoadDetailDriveTime(l10n, '${detail.routeDurationMinutes} min')),
+                Text(l10n.supplierLoadDetailDriveTime('${detail.routeDurationMinutes} min')),
               ] else ...[
                 const SizedBox(height: AppSpacing.md),
                 WarningBlock(
-                  title: _supplierLoadDetailRoutePreviewUnavailableTitle(l10n),
-                  message: _supplierLoadDetailRoutePreviewUnavailableMessage(l10n),
+                  title: l10n.supplierLoadDetailRoutePreviewUnavailableTitle,
+                  message: l10n.supplierLoadDetailRoutePreviewUnavailableMessage,
                 ),
               ],
               if (mapsLauncher.buildDirectionsUri(
@@ -229,7 +246,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
               ) case final mapsUri?) ...[
                 const SizedBox(height: AppSpacing.md),
                 OutlineButton(
-                  label: _supplierLoadDetailOpenInGoogleMaps(l10n),
+                  label: l10n.supplierLoadDetailOpenInGoogleMaps,
                   onPressed: () async {
                     await mapsLauncher.launchDirectionsUri(mapsUri);
                   },
@@ -238,50 +255,48 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
             ],
           ),
           DetailSectionCard(
-            title: _supplierLoadDetailCargoAndRequirementsTitle(l10n),
+            title: l10n.supplierLoadDetailCargoAndRequirementsTitle,
             children: [
-              Text(_supplierLoadDetailMaterial(l10n, detail.summary.material)),
+              Text(l10n.supplierLoadDetailMaterial(detail.summary.material)),
               const SizedBox(height: AppSpacing.xs),
               Text(
-                _supplierLoadDetailWeight(
-                  l10n,
+                l10n.supplierLoadDetailWeight(
                   '${detail.summary.weightTonnes.toStringAsFixed(detail.summary.weightTonnes % 1 == 0 ? 0 : 1)} tonnes',
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text(_supplierLoadDetailBodyType(l10n, detail.summary.requiredBodyType ?? _supplierLoadDetailAnyValue(l10n))),
+              Text(l10n.supplierLoadDetailBodyType(detail.summary.requiredBodyType ?? l10n.supplierLoadDetailAnyValue)),
               const SizedBox(height: AppSpacing.xs),
               Text(
-                _supplierLoadDetailTyres(
-                  l10n,
+                l10n.supplierLoadDetailTyres(
                   detail.summary.requiredTyres.isEmpty
-                      ? _supplierLoadDetailAnyValue(l10n)
+                      ? l10n.supplierLoadDetailAnyValue
                       : detail.summary.requiredTyres.join(', '),
                 ),
               ),
             ],
           ),
           DetailSectionCard(
-            title: _supplierLoadDetailBookingAndTripLinkageTitle(l10n),
+            title: l10n.supplierLoadDetailBookingAndTripLinkageTitle,
             children: [
               Text(
                 state.bookingRequests.isEmpty
-                    ? _supplierLoadDetailBookingLinkageEmptyDescription(l10n)
-                    : _supplierLoadDetailBookingLinkageDescription(l10n),
+                    ? l10n.supplierLoadDetailBookingLinkageEmptyDescription
+                    : l10n.supplierLoadDetailBookingLinkageDescription,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: AppSpacing.md),
               if (state.bookingRequests.isEmpty)
                 EmptyStateView(
                   icon: Icons.assignment_outlined,
-                  title: _supplierLoadDetailNoBookingRequestsTitle(l10n),
-                  subtitle: _supplierLoadDetailNoBookingRequestsSubtitle(l10n),
+                  title: l10n.supplierLoadDetailNoBookingRequestsTitle,
+                  subtitle: l10n.supplierLoadDetailNoBookingRequestsSubtitle,
                 )
               else
                 Column(
                   children: [
                     for (var index = 0; index < state.bookingRequests.length; index++) ...[
-                      _BookingRequestCard(
+                      BookingRequestCard(
                         booking: state.bookingRequests[index],
                         isApproving: state.approvingBookingId == state.bookingRequests[index].id,
                         isRejecting: state.rejectingBookingId == state.bookingRequests[index].id,
@@ -305,8 +320,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                                   AppSnackbar.build(
                                     context: context,
                                     message: result.isSuccess
-                                        ? _supplierBookingApprovedSuccessMessage(l10n)
-                                        : _supplierLoadApproveBookingFailureMessage(l10n),
+                                        ? l10n.supplierBookingApprovedSuccessMessage
+                                        : l10n.supplierLoadApproveBookingFailureMessage,
                                     variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                                   ),
                                 );
@@ -333,8 +348,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                                   AppSnackbar.build(
                                     context: context,
                                     message: result.isSuccess
-                                        ? _supplierBookingRejectedSuccessMessage(l10n)
-                                        : _supplierLoadRejectBookingFailureMessage(l10n),
+                                        ? l10n.supplierBookingRejectedSuccessMessage
+                                        : l10n.supplierLoadRejectBookingFailureMessage,
                                     variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                                   ),
                                 );
@@ -347,19 +362,19 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                   ],
                 ),
               const SizedBox(height: AppSpacing.lg),
-              Text(_supplierLoadDetailLinkedTripsTitle(l10n), style: Theme.of(context).textTheme.titleSmall),
+              Text(l10n.supplierLoadDetailLinkedTripsTitle, style: Theme.of(context).textTheme.titleSmall),
               const SizedBox(height: AppSpacing.sm),
               if (state.linkedTrips.isEmpty)
                 EmptyStateView(
                   icon: Icons.alt_route_outlined,
-                  title: _supplierLoadDetailNoLinkedTripsTitle(l10n),
-                  subtitle: _supplierLoadDetailNoLinkedTripsSubtitle(l10n),
+                  title: l10n.supplierLoadDetailNoLinkedTripsTitle,
+                  subtitle: l10n.supplierLoadDetailNoLinkedTripsSubtitle,
                 )
               else
                 Column(
                   children: [
                     for (var index = 0; index < state.linkedTrips.length; index++) ...[
-                      _LinkedTripCard(trip: state.linkedTrips[index]),
+                      LinkedTripCard(trip: state.linkedTrips[index]),
                       if (index != state.linkedTrips.length - 1)
                         const SizedBox(height: AppSpacing.md),
                     ],
@@ -368,27 +383,26 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
             ],
           ),
           DetailSectionCard(
-            title: _supplierLoadDetailActivityTimelineTitle(l10n),
+            title: l10n.supplierLoadDetailActivityTimelineTitle,
             children: [
               TimelineBlock(
                 events: [
                   TimelineEvent(
-                    title: _supplierLoadDetailTimelineCreatedTitle(l10n),
-                    timestamp: _formatSupplierDateTime(context, detail.createdAt),
-                    description: _supplierLoadDetailTimelineCreatedDescription(l10n),
+                    title: l10n.supplierLoadDetailTimelineCreatedTitle,
+                    timestamp: formatSupplierDateTime(context, detail.createdAt),
+                    description: l10n.supplierLoadDetailTimelineCreatedDescription,
                   ),
                   if (detail.summary.publishedAt != null)
                     TimelineEvent(
-                      title: _supplierLoadDetailTimelinePublishedTitle(l10n),
-                      timestamp: _formatSupplierDateTime(context, detail.summary.publishedAt!),
-                      description: _supplierLoadDetailTimelinePublishedDescription(l10n),
+                      title: l10n.supplierLoadDetailTimelinePublishedTitle,
+                      timestamp: formatSupplierDateTime(context, detail.summary.publishedAt!),
+                      description: l10n.supplierLoadDetailTimelinePublishedDescription,
                     ),
                   TimelineEvent(
-                    title: _supplierLoadDetailTimelineUpdatedTitle(l10n),
-                    timestamp: _formatSupplierDateTime(context, detail.updatedAt),
-                    description: _supplierLoadDetailTimelineUpdatedDescription(
-                      l10n,
-                      _localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
+                    title: l10n.supplierLoadDetailTimelineUpdatedTitle,
+                    timestamp: formatSupplierDateTime(context, detail.updatedAt),
+                    description: l10n.supplierLoadDetailTimelineUpdatedDescription(
+                      localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
                     ),
                   ),
                 ],
@@ -422,10 +436,9 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
     return showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: Text(_supplierBookingApproveDialogTitle(l10n)),
+        title: Text(l10n.supplierBookingApproveDialogTitle),
         content: Text(
-          _supplierBookingApproveDialogMessage(
-            l10n,
+          l10n.supplierBookingApproveDialogMessage(
             load.material,
             load.originLabel,
             load.destinationLabel,
@@ -455,19 +468,19 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
       return await showDialog<String?>(
         context: context,
         builder: (dialogContext) => AlertDialog(
-          title: Text(_supplierBookingRejectDialogTitle(l10n)),
+          title: Text(l10n.supplierBookingRejectDialogTitle),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(_supplierBookingRejectDialogSubtitle(l10n)),
+              Text(l10n.supplierBookingRejectDialogSubtitle),
               const SizedBox(height: AppSpacing.md),
               TextField(
                 controller: controller,
                 maxLines: 4,
                 decoration: InputDecoration(
-                  labelText: _supplierBookingRejectReasonLabel(l10n),
-                  hintText: _supplierBookingRejectReasonHint(l10n),
+                  labelText: l10n.supplierBookingRejectReasonLabel,
+                  hintText: l10n.supplierBookingRejectReasonHint,
                 ),
               ),
             ],
@@ -505,161 +518,17 @@ class _LoadDetailFailureBlock extends StatelessWidget {
     if (failure is NotFoundFailure) {
       return EmptyStateView(
         icon: Icons.inventory_2_outlined,
-        title: _supplierLoadDetailNotFoundTitle(l10n),
-        subtitle: _supplierLoadDetailNotFoundSubtitle(l10n),
+        title: l10n.supplierLoadDetailNotFoundTitle,
+        subtitle: l10n.supplierLoadDetailNotFoundSubtitle,
         actionLabel: l10n.commonRetry,
         onAction: () => context.go(AppRoutes.myLoadsPath),
       );
     }
 
     return WarningBlock(
-      title: _supplierLoadDetailLoadFailureTitle(l10n),
-      message: _supplierLoadDetailFailureMessage(l10n),
+      title: l10n.supplierLoadDetailLoadFailureTitle,
+      message: l10n.supplierLoadDetailFailureMessage,
       action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
     );
   }
 }
-
-String _supplierLoadDetailNotFoundTitle(AppLocalizations l10n) => l10n.supplierLoadDetailNotFoundTitle;
-
-String _supplierLoadDetailNotFoundSubtitle(AppLocalizations l10n) => l10n.supplierLoadDetailNotFoundSubtitle;
-
-String _supplierLoadDetailLoadFailureTitle(AppLocalizations l10n) => l10n.supplierLoadDetailLoadFailureTitle;
-
-String _supplierLoadDetailFailureMessage(AppLocalizations l10n) => l10n.supplierLoadDetailFailureMessage;
-
-String _supplierLoadDetailScreenTitle(AppLocalizations l10n) => l10n.supplierLoadDetailScreenTitle;
-
-String _supplierLoadDetailHeroSubtitle(AppLocalizations l10n, String loadId, String pickupDate) =>
-    l10n.supplierLoadDetailHeroSubtitle(loadId, pickupDate);
-
-String _supplierLoadDetailLinkedExecutionUnavailableTitle(AppLocalizations l10n) => l10n.supplierLoadDetailLinkedExecutionUnavailableTitle;
-
-String _supplierLoadSupportFailureMessage(AppLocalizations l10n) => l10n.supplierLoadSupportFailureMessage;
-
-String _supplierLoadDetailStatusAndActionsTitle(AppLocalizations l10n) => l10n.supplierLoadDetailStatusAndActionsTitle;
-
-String _supplierLoadDetailCurrentStatus(AppLocalizations l10n, String status) => l10n.supplierLoadDetailCurrentStatus(status);
-
-String _supplierLoadDetailActionsSubtitle(AppLocalizations l10n) => l10n.supplierLoadDetailActionsSubtitle;
-
-String _supplierLoadDetailActionUnavailableTitle(AppLocalizations l10n) => l10n.supplierLoadDetailActionUnavailableTitle;
-
-String _supplierLoadActionFailureMessage(AppLocalizations l10n) => l10n.supplierLoadActionFailureMessage;
-
-String _supplierLoadDetailCancelAction(AppLocalizations l10n) => l10n.supplierLoadDetailCancelAction;
-
-String _supplierLoadDetailCancelledSuccess(AppLocalizations l10n) => l10n.supplierLoadDetailCancelledSuccess;
-
-String _supplierLoadCancelFailureMessage(AppLocalizations l10n) => l10n.supplierLoadCancelFailureMessage;
-
-String _supplierLoadDetailCloseFilledOutsideAction(AppLocalizations l10n) => l10n.supplierLoadDetailCloseFilledOutsideAction;
-
-String _supplierLoadDetailClosedFilledOutsideSuccess(AppLocalizations l10n) => l10n.supplierLoadDetailClosedFilledOutsideSuccess;
-
-String _supplierLoadCloseFailureMessage(AppLocalizations l10n) => l10n.supplierLoadCloseFailureMessage;
-
-String _supplierLoadDetailRouteAndScheduleTitle(AppLocalizations l10n) => l10n.supplierLoadDetailRouteAndScheduleTitle;
-
-String _supplierLoadDetailOriginCity(AppLocalizations l10n, String value) => l10n.supplierLoadDetailOriginCity(value);
-
-String _supplierLoadDetailOriginPoint(AppLocalizations l10n, String value) => l10n.supplierLoadDetailOriginPoint(value);
-
-String _supplierLoadDetailDestinationCity(AppLocalizations l10n, String value) => l10n.supplierLoadDetailDestinationCity(value);
-
-String _supplierLoadDetailDestinationPoint(AppLocalizations l10n, String value) => l10n.supplierLoadDetailDestinationPoint(value);
-
-String _supplierLoadDetailPickupDate(AppLocalizations l10n, String value) => l10n.supplierLoadDetailPickupDate(value);
-
-String _supplierLoadDetailDistance(AppLocalizations l10n, String value) => l10n.supplierLoadDetailDistance(value);
-
-String _supplierLoadDetailDriveTime(AppLocalizations l10n, String value) => l10n.supplierLoadDetailDriveTime(value);
-
-String _supplierLoadDetailRoutePreviewUnavailableTitle(AppLocalizations l10n) => l10n.supplierLoadDetailRoutePreviewUnavailableTitle;
-
-String _supplierLoadDetailRoutePreviewUnavailableMessage(AppLocalizations l10n) => l10n.supplierLoadDetailRoutePreviewUnavailableMessage;
-
-String _supplierLoadDetailOpenInGoogleMaps(AppLocalizations l10n) => l10n.supplierLoadDetailOpenInGoogleMaps;
-
-String _supplierLoadDetailCargoAndRequirementsTitle(AppLocalizations l10n) => l10n.supplierLoadDetailCargoAndRequirementsTitle;
-
-String _supplierLoadDetailMaterial(AppLocalizations l10n, String value) => l10n.supplierLoadDetailMaterial(value);
-
-String _supplierLoadDetailWeight(AppLocalizations l10n, String value) => l10n.supplierLoadDetailWeight(value);
-
-String _supplierLoadDetailAnyValue(AppLocalizations l10n) => l10n.supplierLoadDetailAnyValue;
-
-String _supplierLoadDetailBodyType(AppLocalizations l10n, String value) => l10n.supplierLoadDetailBodyType(value);
-
-String _supplierLoadDetailTyres(AppLocalizations l10n, String value) => l10n.supplierLoadDetailTyres(value);
-
-String _supplierLoadDetailBookingAndTripLinkageTitle(AppLocalizations l10n) => l10n.supplierLoadDetailBookingAndTripLinkageTitle;
-
-String _supplierLoadDetailBookingLinkageEmptyDescription(AppLocalizations l10n) => l10n.supplierLoadDetailBookingLinkageEmptyDescription;
-
-String _supplierLoadDetailBookingLinkageDescription(AppLocalizations l10n) => l10n.supplierLoadDetailBookingLinkageDescription;
-
-String _supplierLoadDetailNoBookingRequestsTitle(AppLocalizations l10n) => l10n.supplierLoadDetailNoBookingRequestsTitle;
-
-String _supplierLoadDetailNoBookingRequestsSubtitle(AppLocalizations l10n) => l10n.supplierLoadDetailNoBookingRequestsSubtitle;
-
-String _supplierLoadDetailLinkedTripsTitle(AppLocalizations l10n) => l10n.supplierLoadDetailLinkedTripsTitle;
-
-String _supplierLoadDetailNoLinkedTripsTitle(AppLocalizations l10n) => l10n.supplierLoadDetailNoLinkedTripsTitle;
-
-String _supplierLoadDetailNoLinkedTripsSubtitle(AppLocalizations l10n) => l10n.supplierLoadDetailNoLinkedTripsSubtitle;
-
-String _supplierLoadDetailActivityTimelineTitle(AppLocalizations l10n) => l10n.supplierLoadDetailActivityTimelineTitle;
-
-String _supplierLoadDetailTimelineCreatedTitle(AppLocalizations l10n) => l10n.supplierLoadDetailTimelineCreatedTitle;
-
-String _supplierLoadDetailTimelineCreatedDescription(AppLocalizations l10n) => l10n.supplierLoadDetailTimelineCreatedDescription;
-
-String _supplierLoadDetailTimelinePublishedTitle(AppLocalizations l10n) => l10n.supplierLoadDetailTimelinePublishedTitle;
-
-String _supplierLoadDetailTimelinePublishedDescription(AppLocalizations l10n) => l10n.supplierLoadDetailTimelinePublishedDescription;
-
-String _supplierLoadDetailTimelineUpdatedTitle(AppLocalizations l10n) => l10n.supplierLoadDetailTimelineUpdatedTitle;
-
-String _supplierLoadDetailTimelineUpdatedDescription(AppLocalizations l10n, String status) =>
-    l10n.supplierLoadDetailTimelineUpdatedDescription(status);
-
-String _supplierBookingVerifiedLabel(AppLocalizations l10n) => l10n.supplierBookingVerifiedLabel;
-
-String _supplierBookingRatingLabel(AppLocalizations l10n, String rating) => l10n.supplierBookingRatingLabel(rating);
-
-String _supplierBookingTyres(AppLocalizations l10n, String tyres) => l10n.supplierBookingTyres(tyres);
-
-String _supplierBookingSubmittedAt(AppLocalizations l10n, String truckLabel, String submittedAt) =>
-    l10n.supplierBookingSubmittedAt(truckLabel, submittedAt);
-
-String _supplierBookingDecisionRecorded(AppLocalizations l10n, String decidedAt) => l10n.supplierBookingDecisionRecorded(decidedAt);
-
-String _supplierLinkedTripSubtitle(AppLocalizations l10n, String material, String truckerId, String truckId) =>
-    l10n.supplierLinkedTripSubtitle(material, truckerId, truckId);
-
-String _supplierBookingApprovedSuccessMessage(AppLocalizations l10n) => l10n.supplierBookingApprovedSuccessMessage;
-
-String _supplierLoadApproveBookingFailureMessage(AppLocalizations l10n) => l10n.supplierLoadApproveBookingFailureMessage;
-
-String _supplierBookingRejectedSuccessMessage(AppLocalizations l10n) => l10n.supplierBookingRejectedSuccessMessage;
-
-String _supplierLoadRejectBookingFailureMessage(AppLocalizations l10n) => l10n.supplierLoadRejectBookingFailureMessage;
-
-String _supplierBookingApproveDialogTitle(AppLocalizations l10n) => l10n.supplierBookingApproveDialogTitle;
-
-String _supplierBookingApproveDialogMessage(
-  AppLocalizations l10n,
-  String material,
-  String origin,
-  String destination,
-) =>
-    l10n.supplierBookingApproveDialogMessage(material, origin, destination);
-
-String _supplierBookingRejectDialogTitle(AppLocalizations l10n) => l10n.supplierBookingRejectDialogTitle;
-
-String _supplierBookingRejectDialogSubtitle(AppLocalizations l10n) => l10n.supplierBookingRejectDialogSubtitle;
-
-String _supplierBookingRejectReasonLabel(AppLocalizations l10n) => l10n.supplierBookingRejectReasonLabel;
-
-String _supplierBookingRejectReasonHint(AppLocalizations l10n) => l10n.supplierBookingRejectReasonHint;

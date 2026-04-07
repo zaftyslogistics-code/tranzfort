@@ -5,6 +5,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
 
 class TruckerFleetReviewFeedback {
   final String? summary;
@@ -24,8 +25,8 @@ class TruckerFleetReviewFeedback {
 
     final map = raw.map((key, value) => MapEntry(key.toString(), value));
     return TruckerFleetReviewFeedback(
-      summary: _nullableString(map['summary']),
-      nextStep: _nullableString(map['next_step']),
+      summary: nullableString(map['summary']),
+      nextStep: nullableString(map['next_step']),
     );
   }
 }
@@ -57,17 +58,6 @@ extension TruckerFleetTruckStatusX on TruckerFleetTruckStatus {
       TruckerFleetTruckStatus.verified => 'verified',
       TruckerFleetTruckStatus.rejected => 'rejected',
       TruckerFleetTruckStatus.editedPendingReapproval => 'edited_pending_reapproval',
-      TruckerFleetTruckStatus.archived => 'archived',
-      TruckerFleetTruckStatus.unknown => 'unknown',
-    };
-  }
-
-  String get label {
-    return switch (this) {
-      TruckerFleetTruckStatus.pending => 'pending review',
-      TruckerFleetTruckStatus.verified => 'approved',
-      TruckerFleetTruckStatus.rejected => 'rejected',
-      TruckerFleetTruckStatus.editedPendingReapproval => 'pending reapproval',
       TruckerFleetTruckStatus.archived => 'archived',
       TruckerFleetTruckStatus.unknown => 'unknown',
     };
@@ -294,7 +284,7 @@ class TruckerFleetRepository {
 
   AppFailure _mapError(Object error, StackTrace stackTrace) {
     if (error is PostgrestException && error.code?.trim() == '23505') {
-      return ConflictFailure(message: 'This truck number is already in use.', debugInfo: error.details?.toString());
+      return ConflictFailure(debugInfo: error.details?.toString());
     }
     return mapSupabaseError(error, stackTrace);
   }

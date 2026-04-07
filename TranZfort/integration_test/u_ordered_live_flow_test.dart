@@ -314,7 +314,11 @@ void main() {
           ),
         );
 
-        expect(createResult.isSuccess, isTrue);
+        expect(
+          createResult.isSuccess,
+          isTrue,
+          reason: 'Supplier createLoad failure: ${createResult.failureOrNull}',
+        );
         createdLoadId = createResult.valueOrNull;
         expect(createdLoadId, isNotEmpty);
 

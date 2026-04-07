@@ -1,4 +1,20 @@
-part of 'supplier_shell_screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/data/supplier_profile_repository.dart';
+import '../../../features/supplier/providers/my_loads_provider.dart';
+import '../../../features/supplier/providers/supplier_providers.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/status_components.dart';
+import 'supplier_shell_shared_helpers.dart';
 
 class SupplierMyLoadsScreen extends ConsumerWidget {
   const SupplierMyLoadsScreen({super.key});
@@ -14,33 +30,45 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
 
     return RefreshIndicator(
       onRefresh: () => ref.read(myLoadsProvider.notifier).loadInitial(),
-      child: ShellScrollView(
-        children: [
-          DetailSectionCard(
-            title: l10n.supplierMyLoadsTitle,
-            children: [
-              Text(
-                l10n.supplierMyLoadsSubtitle,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              FilterChipBar(
-                items: [
-                  FilterChipItem(
-                    label: l10n.supplierMyLoadsTabActive,
-                    selected: state.selectedTab == MyLoadsTab.active,
-                    onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
+      child: CustomScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        slivers: [
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(
+              AppSpacing.lg,
+              AppSpacing.xl,
+              AppSpacing.lg,
+              AppSpacing.sectionGap,
+            ),
+            sliver: SliverToBoxAdapter(
+              child: DetailSectionCard(
+                title: l10n.supplierMyLoadsTitle,
+                children: [
+                  Text(
+                    l10n.supplierMyLoadsSubtitle,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  FilterChipItem(
-                    label: l10n.supplierMyLoadsTabCompleted,
-                    selected: state.selectedTab == MyLoadsTab.completed,
-                    onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
+                  const SizedBox(height: AppSpacing.md),
+                  FilterChipBar(
+                    items: [
+                      FilterChipItem(
+                        label: l10n.supplierMyLoadsTabActive,
+                        selected: state.selectedTab == MyLoadsTab.active,
+                        onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
+                      ),
+                      FilterChipItem(
+                        label: l10n.supplierMyLoadsTabCompleted,
+                        selected: state.selectedTab == MyLoadsTab.completed,
+                        onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
+                      ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-          _MyLoadsBody(
+          ..._buildMyLoadsSlivers(
+            context,
             state: state,
             canPostLoads: canPostLoads,
             hasResolvedSupplierProfile: profileResolved,
@@ -57,88 +85,130 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
   }
 }
 
-class _MyLoadsBody extends StatelessWidget {
-  final MyLoadsState state;
-  final bool canPostLoads;
-  final bool hasResolvedSupplierProfile;
-  final VoidCallback onRetry;
-  final VoidCallback onLoadMore;
-
-  const _MyLoadsBody({
-    required this.state,
-    required this.canPostLoads,
-    required this.hasResolvedSupplierProfile,
-    required this.onRetry,
-    required this.onLoadMore,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    if (state.isInitialLoading) {
-      return const LoadingShimmer(height: 110, itemCount: 4);
-    }
-
-    if (state.failure != null && state.loads.isEmpty) {
-      return WarningBlock(
-        title: l10n.supplierMyLoadsLoadFailureTitle,
-        message: l10n.supplierMyLoadsFailureMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
-      );
-    }
-
-    if (state.loads.isEmpty) {
-      return EmptyStateView(
-        icon: Icons.inventory_2_outlined,
-        title: state.selectedTab == MyLoadsTab.active
-            ? l10n.supplierMyLoadsEmptyActiveTitle
-            : l10n.supplierMyLoadsEmptyCompletedTitle,
-        subtitle: state.selectedTab == MyLoadsTab.active
-            ? l10n.supplierMyLoadsEmptyActiveSubtitle
-            : l10n.supplierMyLoadsEmptyCompletedSubtitle,
-        actionLabel: state.selectedTab == MyLoadsTab.active
-            ? (!hasResolvedSupplierProfile
-                  ? l10n.navSupport
-                  : canPostLoads
-                  ? l10n.supplierDashboardPostLoadAction
-                  : l10n.supplierCompleteVerification)
-            : l10n.supplierMyLoadsOpenActiveLoads,
-        onAction: () => context.go(
-          state.selectedTab == MyLoadsTab.active
-              ? (!hasResolvedSupplierProfile
-                    ? AppRoutes.supportPath
-                    : canPostLoads
-                    ? AppRoutes.postLoadPath
-                    : AppRoutes.supplierVerificationPath)
-              : AppRoutes.myLoadsPath,
+List<Widget> _buildMyLoadsSlivers(
+  BuildContext context, {
+  required MyLoadsState state,
+  required bool canPostLoads,
+  required bool hasResolvedSupplierProfile,
+  required VoidCallback onRetry,
+  required VoidCallback onLoadMore,
+}) {
+  final l10n = AppLocalizations.of(context);
+  if (state.isInitialLoading) {
+    return const <Widget>[
+      SliverPadding(
+        padding: EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          0,
+          AppSpacing.lg,
+          AppSpacing.bottomNavSafe + AppSpacing.xl,
         ),
-      );
-    }
+        sliver: SliverToBoxAdapter(
+          child: LoadingShimmer(height: 110, itemCount: 4),
+        ),
+      ),
+    ];
+  }
 
-    return Column(
-      children: [
-        for (var index = 0; index < state.loads.length; index++) ...[
-          _SupplierLoadListCard(load: state.loads[index]),
-          if (index != state.loads.length - 1) const SizedBox(height: AppSpacing.md),
-        ],
-        if (state.failure != null) ...[
-          const SizedBox(height: AppSpacing.md),
-          WarningBlock(
-            title: l10n.supplierMyLoadsMoreUnavailableTitle,
-            message: l10n.supplierMyLoadsPaginationFailureMessage,
+  if (state.failure != null && state.loads.isEmpty) {
+    return <Widget>[
+      SliverPadding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          0,
+          AppSpacing.lg,
+          AppSpacing.bottomNavSafe + AppSpacing.xl,
+        ),
+        sliver: SliverToBoxAdapter(
+          child: WarningBlock(
+            title: l10n.supplierMyLoadsLoadFailureTitle,
+            message: l10n.supplierMyLoadsFailureMessage,
             action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
           ),
-        ],
-        if (state.hasMore) ...[
-          const SizedBox(height: AppSpacing.md),
-          OutlineButton(
-            label: state.isLoadingMore ? l10n.supplierMyLoadsLoadingMore : l10n.supplierMyLoadsLoadMore,
-            onPressed: state.isLoadingMore ? null : onLoadMore,
-          ),
-        ],
-      ],
-    );
+        ),
+      ),
+    ];
   }
+
+  if (state.loads.isEmpty) {
+    return <Widget>[
+      SliverPadding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          0,
+          AppSpacing.lg,
+          AppSpacing.bottomNavSafe + AppSpacing.xl,
+        ),
+        sliver: SliverToBoxAdapter(
+          child: EmptyStateView(
+            icon: Icons.inventory_2_outlined,
+            title: state.selectedTab == MyLoadsTab.active
+                ? l10n.supplierMyLoadsEmptyActiveTitle
+                : l10n.supplierMyLoadsEmptyCompletedTitle,
+            subtitle: state.selectedTab == MyLoadsTab.active
+                ? l10n.supplierMyLoadsEmptyActiveSubtitle
+                : l10n.supplierMyLoadsEmptyCompletedSubtitle,
+            actionLabel: state.selectedTab == MyLoadsTab.active
+                ? (!hasResolvedSupplierProfile
+                      ? l10n.navSupport
+                      : canPostLoads
+                      ? l10n.supplierDashboardPostLoadAction
+                      : l10n.supplierCompleteVerification)
+                : l10n.supplierMyLoadsOpenActiveLoads,
+            onAction: () => context.go(
+              state.selectedTab == MyLoadsTab.active
+                  ? (!hasResolvedSupplierProfile
+                        ? AppRoutes.supportPath
+                        : canPostLoads
+                        ? AppRoutes.postLoadPath
+                        : AppRoutes.supplierVerificationPath)
+                  : AppRoutes.myLoadsPath,
+            ),
+          ),
+        ),
+      ),
+    ];
+  }
+
+  return <Widget>[
+    SliverPadding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+      sliver: SliverList(
+        delegate: SliverChildBuilderDelegate((context, index) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: index == state.loads.length - 1 ? 0 : AppSpacing.md),
+            child: _SupplierLoadListCard(load: state.loads[index]),
+          );
+        }, childCount: state.loads.length),
+      ),
+    ),
+    SliverPadding(
+      padding: const EdgeInsets.fromLTRB(
+        AppSpacing.lg,
+        AppSpacing.md,
+        AppSpacing.lg,
+        AppSpacing.bottomNavSafe + AppSpacing.xl,
+      ),
+      sliver: SliverToBoxAdapter(
+        child: Column(
+          children: [
+            if (state.failure != null)
+              WarningBlock(
+                title: l10n.supplierMyLoadsMoreUnavailableTitle,
+                message: l10n.supplierMyLoadsPaginationFailureMessage,
+                action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+              ),
+            if (state.failure != null && state.hasMore) const SizedBox(height: AppSpacing.md),
+            if (state.hasMore)
+              OutlineButton(
+                label: state.isLoadingMore ? l10n.supplierMyLoadsLoadingMore : l10n.supplierMyLoadsLoadMore,
+                onPressed: state.isLoadingMore ? null : onLoadMore,
+              ),
+          ],
+        ),
+      ),
+    ),
+  ];
 }
 
 class _SupplierLoadListCard extends StatelessWidget {
@@ -156,14 +226,14 @@ class _SupplierLoadListCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} → ${load.destinationLabel}',
-      subtitle: '${load.material} • ${tonnes}T • ₹${load.priceAmount.toStringAsFixed(0)}',
-      trailing: StatusChip(label: _localizedSupplierDashboardLoadStatus(l10n, load.status)),
+      title: '${load.originLabel} > ${load.destinationLabel}',
+      subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
+      trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.supplierLoadCardPickupDate(_formatSupplierShortDate(context, load.pickupDate)),
+            l10n.supplierLoadCardPickupDate(formatSupplierShortDate(context, load.pickupDate)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: AppSpacing.xs),
@@ -171,9 +241,9 @@ class _SupplierLoadListCard extends StatelessWidget {
             l10n.supplierLoadCardTrucks('${load.trucksBooked}', '${load.trucksNeeded}'),
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          if (_hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
+          if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
             const SizedBox(height: AppSpacing.sm),
-            _SuperLoadStatusBlock(
+            SuperLoadStatusBlock(
               isSuperLoad: load.isSuperLoad,
               superStatus: load.superStatus,
             ),

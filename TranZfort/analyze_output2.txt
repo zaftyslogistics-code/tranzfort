@@ -1,0 +1,48 @@
+Analyzing TranZfort...                                          
+
+   info - The private field _isGoogleLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:77:8 - prefer_final_fields
+   info - The private field _isEmailLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:78:8 - prefer_final_fields
+   info - The private field _isForgotPasswordLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:80:8 - prefer_final_fields
+  error - The method 'authPasswordResetSuccessMessage' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:168:18 - undefined_method
+  error - The getter 'authPasswordResetFailureMessage' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:169:18 - undefined_getter
+warning - The value of the local variable 'state' isn't used - lib\src\features\auth\presentation\auth_screen_sections.dart:186:11 - unused_local_variable
+  error - The getter 'commonOrLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:242:42 - undefined_getter
+  error - The getter 'authEmailHint' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:253:36 - undefined_getter
+  error - The getter 'authForgotPasswordAction' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:285:43 - undefined_getter
+warning - The declaration '_openCheckEmailState' isn't referenced - lib\src\features\auth\presentation\auth_screen_sections.dart:312:8 - unused_element
+  error - The method 'authPasswordTtsSummary' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\auth_screen_sections.dart:469:24 - undefined_method
+warning - Unused import: '../data/auth_repository.dart' - lib\src\features\auth\presentation\auth_screens.dart:21:8 - unused_import
+warning - Unused import: '../data/auth_repository.dart' - lib\src\features\auth\presentation\onboarding_screens.dart:21:8 - unused_import
+  error - The getter 'onboardingGateSlowLoadingMessage' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\onboarding_screens.dart:79:24 - undefined_getter
+   info - The private field _isSubmitting could be 'final' - lib\src\features\auth\presentation\onboarding_screens.dart:125:8 - prefer_final_fields
+warning - The value of the field '_isSubmitting' isn't used - lib\src\features\auth\presentation\onboarding_screens.dart:125:8 - unused_field
+  error - The method 'onboardingRoleTtsSummary' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\onboarding_screens.dart:191:47 - undefined_method
+   info - The private field _isSubmitting could be 'final' - lib\src\features\auth\presentation\onboarding_screens.dart:271:8 - prefer_final_fields
+warning - The value of the local variable 'state' isn't used - lib\src\features\auth\presentation\onboarding_screens.dart:391:11 - unused_local_variable
+  error - The method 'onboardingProfileTtsSummary' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\onboarding_screens.dart:395:29 - undefined_method
+  error - The getter 'onboardingMobileHint' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\onboarding_screens.dart:460:96 - undefined_getter
+  error - The getter 'onboardingTermsAcceptanceLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\auth\presentation\onboarding_screens.dart:533:36 - undefined_getter
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre - lib\src\features\shell\presentation\shell_account_screens.dart:630:13 - deprecated_member_use
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:716:28 - undefined_getter
+  error - The getter 'commonVoiceStop' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_components.dart:79:22 - undefined_getter
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_components.dart:92:25 - undefined_getter
+  error - The getter 'commonVoiceStop' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\supplier_shell_my_loads_sections.dart:316:22 - undefined_getter
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\supplier_shell_my_loads_sections.dart:328:25 - undefined_getter
+warning - Unused import: '../../support/presentation/report_issue_screen.dart' - lib\src\features\supplier\presentation\supplier_trip_detail_screen.dart:17:8 - unused_import
+  error - The getter 'commonVoiceStop' isn't defined for the type 'AppLocalizations' - lib\src\features\supplier\presentation\supplier_trip_detail_screen.dart:123:22 - undefined_getter
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\supplier\presentation\supplier_trip_detail_screen.dart:131:23 - undefined_getter
+warning - The declaration '_relativeAge' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:149:10 - unused_element
+warning - The declaration '_SuperLoadStatusBlock' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:3:7 - unused_element
+warning - The declaration '_hasSuperLoadState' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:82:6 - unused_element
+warning - Unused import: '../../../core/providers/tts_state_provider.dart' - lib\src\features\trucker\presentation\trucker_dashboard_screen.dart:7:8 - unused_import
+  error - The getter 'commonVoiceStop' isn't defined for the type 'AppLocalizations' - lib\src\features\trucker\presentation\trucker_find_loads_screen.dart:557:22 - undefined_getter
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\trucker\presentation\trucker_find_loads_screen.dart:569:25 - undefined_getter
+  error - The getter 'commonVoiceStop' isn't defined for the type 'AppLocalizations' - lib\src\features\trucker\presentation\trucker_trips_screen.dart:317:22 - undefined_getter
+  error - The getter 'commonVoiceMutedGoToSettings' isn't defined for the type 'AppLocalizations' - lib\src\features\trucker\presentation\trucker_trips_screen.dart:329:25 - undefined_getter
+  error - The getter 'verificationValidationAadhaarDigits' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:228:53 - undefined_getter
+  error - The getter 'verificationValidationPanFormat' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:229:49 - undefined_getter
+  error - The getter 'verificationValidationCompanyNameRequired' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:230:59 - undefined_getter
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\shared\widgets\content_cards.dart:51:15 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\shared\widgets\content_cards.dart:239:17 - use_null_aware_elements
+
+44 issues found. (ran in 6.9s)

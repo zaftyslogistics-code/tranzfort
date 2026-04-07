@@ -104,7 +104,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
                   )
                   .toList(growable: false),
               onChanged: ref.read(reportIssueProvider(widget.contextData).notifier).setCategory,
-              helperText: state.fieldErrors['category'],
+              helperText: _fieldErrorText(l10n, state.fieldErrors['category']),
             ),
             const SizedBox(height: AppSpacing.md),
             AppTextField(
@@ -112,7 +112,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
               label: l10n.reportIssueWhatHappenedLabel,
               hintText: l10n.reportIssueWhatHappenedHint,
               maxLines: 6,
-              errorText: state.fieldErrors['message_body'],
+              errorText: _fieldErrorText(l10n, state.fieldErrors['message_body']),
               onChanged: ref.read(reportIssueProvider(widget.contextData).notifier).setDescription,
             ),
             const SizedBox(height: AppSpacing.md),
@@ -153,7 +153,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
             if (state.fieldErrors['attachment_path'] case final attachmentError?) ...[
               const SizedBox(height: AppSpacing.xs),
               Text(
-                attachmentError,
+                _fieldErrorText(l10n, attachmentError) ?? attachmentError,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
               ),
             ],
@@ -284,6 +284,15 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
       message: l10n.reportIssueAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
+  }
+
+  String? _fieldErrorText(AppLocalizations l10n, String? code) {
+    return switch (code) {
+      reportIssueInvalidCategoryCode => l10n.reportIssueInvalidCategoryMessage,
+      reportIssueDescriptionTooShortCode => l10n.reportIssueDescriptionTooShortMessage,
+      reportIssueAttachmentRequiredCode => l10n.reportIssueAttachmentRequiredMessage,
+      _ => code,
+    };
   }
 
   List<String> _reportPrompts(AppLocalizations l10n, String category) {

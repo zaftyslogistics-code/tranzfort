@@ -80,6 +80,13 @@ class _VerificationPacketFieldsSectionState extends ConsumerState<_VerificationP
           const SizedBox(height: AppSpacing.sm),
           _TruckerInlineDocumentUpload(
             detail: detail,
+            type: VerificationDocumentType.profilePhoto,
+            uploadingType: verificationState.uploadingDocumentType,
+            isLocked: isLocked,
+          ),
+          const SizedBox(height: AppSpacing.xs),
+          _TruckerInlineDocumentUpload(
+            detail: detail,
             type: VerificationDocumentType.aadhaarFront,
             uploadingType: verificationState.uploadingDocumentType,
             isLocked: isLocked,
@@ -182,6 +189,8 @@ String _localizedDocTypeLabel(AppLocalizations l10n, VerificationDocumentType ty
     VerificationDocumentType.profilePhoto => l10n.verificationDocTypeProfilePhoto,
     VerificationDocumentType.businessLicence => l10n.verificationDocTypeBusinessLicence,
     VerificationDocumentType.gstCertificate => l10n.verificationDocTypeGstCertificate,
+    VerificationDocumentType.truckRc => 'Truck RC',
+    VerificationDocumentType.truckPhoto => 'Truck photo',
   };
 }
 
@@ -344,14 +353,14 @@ class _VerificationSubmitSection extends ConsumerWidget {
 
     if (isLocked) {
       return DetailSectionCard(
-        title: 'Verification Status',
+        title: l10n.verificationLockedStatusSectionTitle,
         children: [
           StandardListCard(
             accent: detail.isVerified ? AppColors.success : AppColors.primary,
-            title: detail.isVerified ? 'Verified' : 'Under Review',
+            title: detail.isVerified ? l10n.verificationLockedStatusVerifiedTitle : l10n.verificationLockedStatusPendingTitle,
             subtitle: detail.isVerified
-                ? 'Your verification has been approved. No action needed.'
-                : 'Your documents are being reviewed. You will be notified once the review is complete.',
+                ? l10n.verificationLockedStatusVerifiedMessage
+                : l10n.verificationLockedStatusPendingMessage,
             trailing: StatusChip(
               label: _localizedVerificationStatus(l10n, detail.verificationStatus),
             ),
@@ -362,46 +371,46 @@ class _VerificationSubmitSection extends ConsumerWidget {
 
     final checks = <_ReadinessCheck>[
       _ReadinessCheck(
-        label: 'Aadhaar number',
+        label: l10n.verificationReadinessCheckAadhaarNumber,
         done: (detail.aadhaarNumber ?? '').trim().isNotEmpty,
       ),
       _ReadinessCheck(
-        label: 'PAN number',
+        label: l10n.verificationReadinessCheckPanNumber,
         done: (detail.panNumber ?? '').trim().isNotEmpty,
       ),
       _ReadinessCheck(
-        label: 'Aadhaar front photo',
+        label: l10n.verificationReadinessCheckAadhaarFrontPhoto,
         done: detail.isDocumentUploaded(VerificationDocumentType.aadhaarFront),
       ),
       _ReadinessCheck(
-        label: 'Aadhaar back photo',
+        label: l10n.verificationReadinessCheckAadhaarBackPhoto,
         done: detail.isDocumentUploaded(VerificationDocumentType.aadhaarBack),
       ),
       _ReadinessCheck(
-        label: 'PAN photo',
+        label: l10n.verificationReadinessCheckPanPhoto,
         done: detail.isDocumentUploaded(VerificationDocumentType.pan),
       ),
       if (detail.isSupplier) ...[
         _ReadinessCheck(
-          label: 'Company name',
+          label: l10n.verificationReadinessCheckCompanyName,
           done: (detail.companyName ?? '').trim().isNotEmpty,
         ),
         _ReadinessCheck(
-          label: 'Business licence number',
+          label: l10n.verificationReadinessCheckBusinessLicenceNumber,
           done: (detail.businessLicenceNumber ?? '').trim().isNotEmpty,
         ),
         _ReadinessCheck(
-          label: 'Business licence document',
+          label: l10n.verificationReadinessCheckBusinessLicenceDocument,
           done: detail.isDocumentUploaded(VerificationDocumentType.businessLicence),
         ),
         _ReadinessCheck(
-          label: 'Verification location',
+          label: l10n.verificationReadinessCheckLocation,
           done: detail.hasVerificationLocation,
         ),
       ],
       if (detail.isTrucker)
         _ReadinessCheck(
-          label: 'Truck with RC document',
+          label: l10n.verificationReadinessCheckTruckWithRcDocument,
           done: detail.hasVerificationReadyTruckRequirement,
         ),
     ];
@@ -411,10 +420,10 @@ class _VerificationSubmitSection extends ConsumerWidget {
     final blockedReason = _localizedSubmissionBlockedReason(l10n, detail);
 
     return DetailSectionCard(
-      title: detail.isTrucker ? 'Step 3: Submit for Verification' : 'Submit for Verification',
+      title: detail.isTrucker ? l10n.verificationSubmitSectionTitleTrucker : l10n.verificationSubmitSectionTitle,
       children: [
         Text(
-          'Complete all items below, then tap Submit to send your documents for admin review.',
+          l10n.verificationSubmitSectionSubtitle,
           style: Theme.of(context).textTheme.bodyMedium,
         ),
         const SizedBox(height: AppSpacing.md),
@@ -436,7 +445,7 @@ class _VerificationSubmitSection extends ConsumerWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    '$doneCount / ${checks.length} completed',
+                    l10n.verificationReadinessCompletedCount(doneCount, checks.length),
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
                           fontWeight: FontWeight.w600,
                           color: allDone ? AppColors.success : AppColors.textPrimary,
@@ -505,7 +514,7 @@ class _VerificationSubmitSection extends ConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'Once submitted, your details will be locked until the admin completes the review.',
+          l10n.verificationSubmitLockedFooter,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
         ),
       ],
@@ -529,11 +538,41 @@ class TruckerInlineTruckSection extends ConsumerStatefulWidget {
 }
 
 class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSection> {
+  late final TextEditingController _truckNumberController;
+  late final TextEditingController _capacityController;
+
+  @override
+  void initState() {
+    super.initState();
+    final fleetState = ref.read(truckerFleetProvider);
+    _truckNumberController = TextEditingController(text: fleetState.truckNumberDraft);
+    _capacityController = TextEditingController(text: fleetState.capacityTonnesDraft);
+    if (!fleetState.isEditing &&
+        fleetState.truckNumberDraft.isEmpty &&
+        fleetState.capacityTonnesDraft.isEmpty &&
+        (fleetState.rcDocumentPathDraft ?? '').isEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          ref.read(truckerFleetProvider.notifier).startCreate();
+        }
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _truckNumberController.dispose();
+    _capacityController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final detail = widget.detail;
     final isLocked = detail.isPending || detail.isVerified;
+    final fleetState = ref.watch(truckerFleetProvider);
+    _syncControllers(fleetState);
 
     return DetailSectionCard(
       title: 'Step 2: Truck Details',
@@ -546,9 +585,154 @@ class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSe
             trailing: const StatusChip(label: 'Ready'),
           )
         else
-          WarningBlock(
-            title: l10n.verificationTruckPacketStillRequiredTitle,
-            message: l10n.verificationTruckPacketStillRequiredMessage,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              WarningBlock(
+                title: l10n.verificationTruckPacketStillRequiredTitle,
+                message: l10n.verificationTruckPacketStillRequiredMessage,
+              ),
+              if (fleetState.actionFailure != null) ...[
+                const SizedBox(height: AppSpacing.md),
+                WarningBlock(
+                  title: l10n.truckerFleetActionAttentionTitle,
+                  message: l10n.truckerFleetActionFailureMessage,
+                ),
+              ],
+              const SizedBox(height: AppSpacing.md),
+              AppTextField(
+                controller: _truckNumberController,
+                label: l10n.truckerFleetTruckNumberLabel,
+                hintText: l10n.truckerFleetTruckNumberHint,
+                errorText: fleetState.fieldErrors['truck_number'],
+                onChanged: ref.read(truckerFleetProvider.notifier).updateTruckNumber,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppDropdown<String>(
+                label: l10n.truckerFleetBodyTypeLabel,
+                value: fleetState.bodyTypeDraft,
+                items: truckerFleetBodyTypes
+                    .map(
+                      (bodyType) => DropdownMenuItem<String>(
+                        value: bodyType,
+                        child: Text(l10n.truckerFleetBodyTypeOption(bodyType)),
+                      ),
+                    )
+                    .toList(growable: false),
+                onChanged: ref.read(truckerFleetProvider.notifier).updateBodyType,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppDropdown<String>(
+                label: l10n.truckerFleetTyresLabel,
+                value: fleetState.tyresDraft,
+                items: truckerFleetTyreOptions
+                    .map(
+                      (tyres) => DropdownMenuItem<String>(
+                        value: '$tyres',
+                        child: Text(l10n.truckerFleetTyresOption(tyres)),
+                      ),
+                    )
+                    .toList(growable: false),
+                onChanged: ref.read(truckerFleetProvider.notifier).updateTyres,
+                helperText: fleetState.fieldErrors['tyres'],
+              ),
+              const SizedBox(height: AppSpacing.md),
+              AppTextField(
+                controller: _capacityController,
+                label: l10n.truckerFleetCapacityLabel,
+                hintText: l10n.truckerFleetCapacityHint,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                errorText: fleetState.fieldErrors['capacity_tonnes'],
+                onChanged: ref.read(truckerFleetProvider.notifier).updateCapacityTonnes,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              StandardListCard(
+                accent: (fleetState.rcDocumentPathDraft ?? '').trim().isNotEmpty ? AppColors.success : AppColors.warning,
+                title: l10n.truckerFleetRcDocumentTitle,
+                subtitle: (fleetState.rcDocumentPathDraft ?? '').trim().isNotEmpty
+                    ? l10n.truckerFleetRcUploadedSubtitle
+                    : l10n.truckerFleetRcRequiredSubtitle,
+                trailing: StatusChip(
+                  label: (fleetState.rcDocumentPathDraft ?? '').trim().isNotEmpty
+                      ? l10n.truckerFleetUploadedStatus
+                      : l10n.truckerFleetRequiredStatus,
+                ),
+                footer: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if ((fleetState.rcDocumentPathDraft ?? '').trim().isNotEmpty)
+                      Text(
+                        l10n.truckerFleetStoredPath(fleetState.rcDocumentPathDraft!),
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    if (fleetState.fieldErrors['rc_document_path'] case final rcError?) ...[
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        rcError,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
+                      ),
+                    ],
+                    const SizedBox(height: AppSpacing.md),
+                    OutlineButton(
+                      label: (fleetState.rcDocumentPathDraft ?? '').trim().isNotEmpty
+                          ? l10n.truckerFleetReplaceRcAction
+                          : l10n.truckerFleetUploadRcAction,
+                      isLoading: fleetState.isUploadingDocument,
+                      onPressed: fleetState.isUploadingDocument
+                          ? null
+                          : () async {
+                              final source = await VerificationScreen.selectImageSource(
+                                context,
+                                l10n.truckerFleetRcDocumentTitle,
+                              );
+                              if (source == null || !context.mounted) {
+                                return;
+                              }
+                              final result = await ref.read(truckerFleetProvider.notifier).uploadRcDocument(source);
+                              if (!context.mounted) {
+                                return;
+                              }
+                              AppSnackbar.show(
+                                context: context,
+                                message: result.isSuccess
+                                    ? ((fleetState.rcDocumentPathDraft ?? '').trim().isEmpty
+                                        ? l10n.truckerFleetRcUploadedSuccess
+                                        : l10n.truckerFleetRcUpdatedSuccess)
+                                    : l10n.truckerFleetRcUploadFailureMessage,
+                                variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                              );
+                            },
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryButton(
+                  label: l10n.truckerFleetSaveTruckAction,
+                  isLoading: fleetState.isSaving,
+                  onPressed: fleetState.isSaving
+                      ? null
+                      : () async {
+                          final result = await ref.read(truckerFleetProvider.notifier).save();
+                          if (!context.mounted) {
+                            return;
+                          }
+                          if (result.isSuccess) {
+                            ref.invalidate(verificationProvider);
+                          }
+                          AppSnackbar.show(
+                            context: context,
+                            message: result.isSuccess
+                                ? l10n.truckerFleetTruckAddedSuccess
+                                : l10n.truckerFleetSaveFailureMessage,
+                            variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                          );
+                        },
+                ),
+              ),
+            ],
           ),
         if (!isLocked) ...[
           const SizedBox(height: AppSpacing.md),
@@ -560,11 +744,26 @@ class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSe
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'Add or manage your truck with RC document from the fleet screen.',
+            l10n.verificationOpenFleetHint,
             style: Theme.of(context).textTheme.bodySmall,
           ),
         ],
       ],
     );
+  }
+
+  void _syncControllers(TruckerFleetState state) {
+    if (_truckNumberController.text != state.truckNumberDraft) {
+      _truckNumberController.value = _truckNumberController.value.copyWith(
+        text: state.truckNumberDraft,
+        selection: TextSelection.collapsed(offset: state.truckNumberDraft.length),
+      );
+    }
+    if (_capacityController.text != state.capacityTonnesDraft) {
+      _capacityController.value = _capacityController.value.copyWith(
+        text: state.capacityTonnesDraft,
+        selection: TextSelection.collapsed(offset: state.capacityTonnesDraft.length),
+      );
+    }
   }
 }

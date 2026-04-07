@@ -1,0 +1,119 @@
+Expected: true
+Actual: <false>
+Expected: null
+Actual: Uri:<https://www.google.com/maps/search/?api=1&query=18.5204%2C73.8567>
+Expected: 'Chandrapur, Maharashtra ΓåÆ Mumbai, Maharashtra'
+Actual: 'Load'
+Which: is different.
+Expected: Chandrapur ...
+Actual: Load
+The test description was:
+The test description was: auth entry shows sanitized Google sign-in failure copy
+Expected: 'hi'
+Actual: 'en'
+Which: is different.
+Expected: hi
+Actual: en
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart line 288
+The test description was:
+The test description was: auth entry prompt uses the shared contextual TTS service
+Expected: 'conversation-1'
+Actual: <null>
+Which: not an <Instance of 'String'>
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart line 568
+The test description was:
+The test description was: renders chat thread and marks conversation read on open
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "We sent a verification link to
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart line 384
+The test description was:
+The test description was: email/password sign-up shows explicit check-email state when session is not ready yet
+Expected: no matching candidates
+Actual: _TextWidgetFinder:<Found 1 widget with text "sending...": [
+Which: means one was found but none were expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart line 762
+The test description was:
+The test description was: shows optimistic sending state before send completes
+The test description was:
+The test description was: notifications overview hear summary action triggers contextual TTS
+The test description was: renders sanitized supplier trip detail failure copy
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Trip not found": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 179
+The test description was:
+The test description was: supplier trip-detail not-found fallback opens supplier trips route
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Confirm Delivery": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 208
+The test description was:
+The test description was: renders supplier trip detail proof review state
+The test description was: renders neutral fallback for unknown supplier trip stage and verification status
+The test description was: supplier trip detail dispute action opens raise dispute route
+The test description was: supplier trip detail report action opens report issue route with trip context
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Rate this trip": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 354
+The test description was:
+The test description was: renders supplier completed trip rating prompt
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "You already rated this trip.": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 386
+The test description was:
+The test description was: renders supplier already rated state on completed trip
+Expected: at least one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Dispute review in progress": []>
+Which: means none were found but some were expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 421
+The test description was:
+The test description was: renders supplier disputed trip summary with visible category and status
+Expected: at least one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Dispute review in progress": []>
+Which: means none were found but some were expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 471
+The test description was:
+The test description was: renders supplier disputed trip fallback summary when dispute summary is unavailable
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Dispute review waiting for your reply": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 501
+The test description was:
+The test description was: renders supplier waiting-for-user dispute banner copy
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Dispute review closed": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 528
+The test description was:
+The test description was: renders supplier resolved dispute banner copy
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Category: Fake payout proof": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 567
+The test description was:
+The test description was: renders supplier in-progress dispute coverage for fake payout proof category
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Dispute review waiting for your reply": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart line 603
+The test description was:
+The test description was: renders supplier waiting dispute banner copy for delay-or-no-show category
+The test description was:
+The test description was: successful supplier post load submission opens my loads
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Support and dispute follow-up": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart line 440
+The test description was:
+The test description was: renders support tickets and selected detail thread
+Expected: exactly one matching candidate
+Actual: _TextWidgetFinder:<Found 0 widgets with text "Total load value: Γé╣1188000": []>
+Which: means none were found but one was expected
+file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart line 314
+The test description was:
+The test description was: renders marketplace success state
+The test description was:
+The test description was: renders rejected truck fallback guidance when review summary is unavailable

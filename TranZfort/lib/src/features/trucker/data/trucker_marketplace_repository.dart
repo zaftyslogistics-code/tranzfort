@@ -6,6 +6,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
+import '../../../core/utils/map_readers.dart';
 
 const int truckerMarketplacePageSize = 50;
 
@@ -75,26 +76,26 @@ class MarketplaceLoadItem {
       id: (map['id'] ?? '').toString(),
       originLabel: (map['origin_label'] ?? '').toString(),
       originCity: (map['origin_city'] ?? '').toString(),
-      originState: _nullableString(map['origin_state']),
-      originLat: _readDouble(map['origin_lat']),
-      originLng: _readDouble(map['origin_lng']),
+      originState: nullableString(map['origin_state']),
+      originLat: readDouble(map['origin_lat']),
+      originLng: readDouble(map['origin_lng']),
       destinationLabel: (map['destination_label'] ?? '').toString(),
       destinationCity: (map['destination_city'] ?? '').toString(),
-      destinationState: _nullableString(map['destination_state']),
-      destinationLat: _readDouble(map['destination_lat']),
-      destinationLng: _readDouble(map['destination_lng']),
-      routeDistanceKm: _readDouble(map['route_distance_km']),
-      routeDurationMinutes: _readIntNullable(map['route_duration_minutes']),
-      routeSnapshotSource: _nullableString(map['route_snapshot_source']),
+      destinationState: nullableString(map['destination_state']),
+      destinationLat: readDouble(map['destination_lat']),
+      destinationLng: readDouble(map['destination_lng']),
+      routeDistanceKm: readDouble(map['route_distance_km']),
+      routeDurationMinutes: readInt(map['route_duration_minutes']),
+      routeSnapshotSource: nullableString(map['route_snapshot_source']),
       material: (map['material'] ?? '').toString(),
-      weightTonnes: _readDouble(map['weight_tonnes']) ?? 0,
-      requiredBodyType: _nullableString(map['required_body_type']),
+      weightTonnes: readDouble(map['weight_tonnes']),
+      requiredBodyType: nullableString(map['required_body_type']),
       requiredTyres: _readTyres(map['required_tyres']),
-      trucksNeeded: _readInt(map['trucks_needed']),
-      trucksBooked: _readInt(map['trucks_booked']),
-      priceAmount: _readDouble(map['price_amount']) ?? 0,
+      trucksNeeded: readInt(map['trucks_needed']),
+      trucksBooked: readInt(map['trucks_booked']),
+      priceAmount: readDouble(map['price_amount']),
       priceType: (map['price_type'] ?? 'fixed').toString(),
-      advancePercentage: _readInt(map['advance_percentage']),
+      advancePercentage: readInt(map['advance_percentage']),
       pickupDate: DateTime.parse((map['pickup_date'] ?? '').toString()),
       status: (map['status'] ?? 'active').toString(),
       isSuperLoad: map['is_super_load'] == true,
@@ -114,32 +115,8 @@ class MarketplaceLoadItem {
     );
   }
 
-  static double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
-  }
-
-  static int _readInt(Object? value) {
-    if (value is int) {
-      return value;
-    }
-    return int.tryParse((value ?? '0').toString()) ?? 0;
-  }
-
-  static int? _readIntNullable(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    return _readInt(value);
-  }
-
-  static String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    return raw.isEmpty ? null : raw;
-  }
-
+  // Private helpers removed - using shared map_readers.dart helpers where applicable
+  // _readTyres remains as it's used internally
   static List<int> _readTyres(Object? value) {
     if (value is List) {
       return value.map((item) => int.tryParse(item.toString()) ?? 0).where((item) => item > 0).toList(growable: false);
@@ -260,9 +237,12 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
         .isFilter('parent_load_id', null)
         .inFilter('status', const ['active', 'assigned_partial']);
 
-    final origin = filters.originCity.trim();
-    final destination = filters.destinationCity.trim();
-    final material = filters.material.trim();
+    // Escape SQL LIKE wildcard characters to prevent injection
+    String escapeLike(String s) => s.replaceAll(r'%', r'\%').replaceAll(r'_', r'\_');
+
+    final origin = escapeLike(filters.originCity.trim());
+    final destination = escapeLike(filters.destinationCity.trim());
+    final material = escapeLike(filters.material.trim());
     final bodyType = filters.truckBodyType.trim();
     final minPrice = filters.minPrice;
     final maxPrice = filters.maxPrice;

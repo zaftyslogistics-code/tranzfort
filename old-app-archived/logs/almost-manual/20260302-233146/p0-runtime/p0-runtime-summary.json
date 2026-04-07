@@ -1,0 +1,16 @@
+{
+  "timestamp": "20260302-233146",
+  "device": "89P7MZVWV4Z9C6GE",
+  "package": "com.tranzfort.app",
+  "logcat_cleared": true,
+  "stream_filter_log": "c:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260302-233146\\p0-runtime\\phase-p0-log-stream-filter.log",
+  "package_dump": "c:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260302-233146\\p0-runtime\\package-dumpsys.txt",
+  "appops_dump": "c:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260302-233146\\p0-runtime\\appops.txt",
+  "permissions_probe": [
+    "android.permission.CAMERA : not-found",
+    "android.permission.READ_MEDIA_IMAGES : not-found",
+    "android.permission.READ_EXTERNAL_STORAGE : not-found",
+    "android.permission.RECORD_AUDIO : not-found",
+    "android.permission.POST_NOTIFICATIONS : not-found"
+  ]
+}

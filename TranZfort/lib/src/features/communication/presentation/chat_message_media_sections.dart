@@ -106,7 +106,7 @@ class _MapCardMessageContent extends ConsumerWidget {
     return _InfoMessageCard(
       icon: Icons.map_outlined,
       title: route,
-      subtitle: [material, weight, price, tripCost].whereType<String>().where((value) => value.trim().isNotEmpty).join(' • '),
+      subtitle: [material, weight, price, tripCost].whereType<String>().where((value) => value.trim().isNotEmpty).join(' - '),
       actionLabel: (resolvedLoadId == null || resolvedLoadId.trim().isEmpty) && uri == null ? null : l10n.chatViewRouteAction,
       onAction: (resolvedLoadId == null || resolvedLoadId.trim().isEmpty) && uri == null
           ? null
@@ -137,7 +137,7 @@ class _TruckCardMessageContent extends StatelessWidget {
     return _InfoMessageCard(
       icon: Icons.local_shipping_outlined,
       title: title,
-      subtitle: [bodyType, tyres == null ? null : l10n.chatTruckTyresLabel(tyres), rcName].whereType<String>().where((value) => value.trim().isNotEmpty).join(' • '),
+      subtitle: [bodyType, tyres == null ? null : l10n.chatTruckTyresLabel(tyres), rcName].whereType<String>().where((value) => value.trim().isNotEmpty).join(' - '),
     );
   }
 }

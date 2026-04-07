@@ -4,7 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
+import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
+import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/core/error/result.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
@@ -13,6 +15,24 @@ import 'package:tranzfort/src/features/notifications/data/notification_tts_servi
 import 'package:tranzfort/src/features/notifications/presentation/notifications_screen.dart';
 import 'package:tranzfort/src/features/notifications/providers/notification_providers.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+
+class _FakeAuthRepository extends AuthRepository {
+  _FakeAuthRepository() : super(null);
+}
+
+class _FixedAppLocaleController extends AppLocaleController {
+  _FixedAppLocaleController(String languageCode)
+      : super(
+          _FakeAuthRepository(),
+          profileLanguageCode: languageCode,
+        ) {
+    state = state.copyWith(
+      locale: Locale(languageCode),
+      isInitialized: true,
+      clearFailure: true,
+    );
+  }
+}
 
 class _NoopNotificationBackend implements NotificationBackend {
   @override
@@ -195,6 +215,7 @@ Widget _buildApp(
       notificationsProvider.overrideWith((ref) => controller),
       notificationTtsServiceProvider.overrideWithValue(resolvedTtsService),
       contextualTtsServiceProvider.overrideWithValue(resolvedContextualTtsService),
+      appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController('en')),
     ],
     child: const MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -297,7 +318,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: today,
             priority: AppNotificationPriority.high,
           ),
@@ -335,7 +356,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: DateTime.now().subtract(const Duration(hours: 1)),
           ),
         ],
@@ -361,7 +382,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: DateTime.now().subtract(const Duration(hours: 1)),
           ),
         ],
@@ -446,7 +467,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: DateTime.now().subtract(const Duration(hours: 1)),
           ),
         ],
@@ -491,7 +512,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: DateTime.now().subtract(const Duration(hours: 1)),
           ),
         ],
@@ -555,7 +576,7 @@ void main() {
           _notification(
             'notification-1',
             title: 'Booking Approved!',
-            body: 'Head to pickup for Coal Chandrapur→Mumbai',
+            body: 'Head to pickup for Coal Chandrapur>Mumbai',
             createdAt: DateTime(2026, 3, 10, 12),
             priority: AppNotificationPriority.high,
           ),

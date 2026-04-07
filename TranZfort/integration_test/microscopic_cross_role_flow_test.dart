@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
-import 'package:tranzfort/src/features/supplier/data/supplier_load_repository.dart';
 import 'package:tranzfort/src/features/trucker/data/trucker_marketplace_repository.dart';
 import 'package:tranzfort/src/features/communication/data/chat_repository.dart';
 // ignore: unused_import
@@ -96,18 +95,11 @@ void main() {
           ],
         );
         addTearDown(container.dispose);
-        
-        final repo = container.read(supplierLoadRepositoryProvider);
-        
-        // Try to create a load - this should fail for unverified supplier
-        // If it succeeds, it's a BUG
-        try {
-          // Note: We're not actually calling createLoad here because it requires
-          // complex DTO. Instead, we'll verify the verification gate in the UI
-          // by checking the supplier's permissions.
-        } catch (e) {
-          // Expected to be blocked
-        }
+
+        // Try to create a load - this should fail for unverified supplier.
+        // This test currently verifies the gate context exists without invoking
+        // the full mutation DTO path.
+        expect(container.read(currentAuthStateProvider).role, AppUserRole.supplier);
       }
       
       await client.auth.signOut(scope: SignOutScope.local);
@@ -124,8 +116,7 @@ void main() {
           .select('verification_status')
           .eq('id', client.auth.currentUser!.id)
           .single();
-      
-      final status = profile['verification_status'];
+      final verificationStatus = profile['verification_status'];
       
       // Unverified trucker should be able to browse but NOT book
       final container = ProviderContainer(
@@ -151,13 +142,13 @@ void main() {
       // Marketplace should be accessible
       expect(result.isSuccess, isTrue, 
           reason: 'Trucker should be able to browse marketplace regardless of verification');
+      expect(verificationStatus, anyOf('unverified', 'pending', 'verified', 'rejected'));
       
       await client.auth.signOut(scope: SignOutScope.local);
     });
     
     testWidgets('M-X-003: Check for orphaned loads (supplier deleted but loads remain)', (tester) async {
       await _ensureSupabaseInitialized();
-      final client = Supabase.instance.client;
       
       // This test checks for a common data integrity bug:
       // Loads that reference suppliers who no longer exist
@@ -166,21 +157,20 @@ void main() {
       final orphanedLoads = <dynamic>[]; // Simplified for testing
       
       // If orphaned loads exist, that's a bug
-      if (orphanedLoads != null && (orphanedLoads as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(orphanedLoads as List).length} orphaned loads found - loads referencing non-existent suppliers');
+      if (orphanedLoads.isNotEmpty) {
+        fail('BUG DETECTED: ${orphanedLoads.length} orphaned loads found - loads referencing non-existent suppliers');
       }
     });
     
     testWidgets('M-X-004: Check for orphaned trips (trucker deleted but trips remain)', (tester) async {
       await _ensureSupabaseInitialized();
-      final client = Supabase.instance.client;
       
       // Check for orphaned trips - trips referencing non-existent truckers
       // Note: This query may need to be adjusted based on actual schema
       final orphanedTrips = <dynamic>[]; // Simplified for testing
       
-      if (orphanedTrips != null && (orphanedTrips as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(orphanedTrips as List).length} orphaned trips found - trips referencing non-existent truckers');
+      if (orphanedTrips.isNotEmpty) {
+        fail('BUG DETECTED: ${orphanedTrips.length} orphaned trips found - trips referencing non-existent truckers');
       }
     });
     
@@ -192,10 +182,9 @@ void main() {
       // This tests a common bug: chat created without proper load reference
       
       await _signInAsTrucker(client);
-      final truckerId = client.auth.currentUser!.id;
-      
+
       // Check if there are any conversations without proper context
-      final conversationsWithNullLoad = await client
+      await client
           .from('conversations')
           .select('id, load_id')
           .filter('load_id', 'is', null)
@@ -209,27 +198,25 @@ void main() {
     
     testWidgets('M-X-006: Check for booking requests without valid load reference', (tester) async {
       await _ensureSupabaseInitialized();
-      final client = Supabase.instance.client;
       
       // Check for orphaned booking requests - bookings referencing non-existent loads
       // Note: This query may need to be adjusted based on actual schema  
       final orphanedBookings = <dynamic>[]; // Simplified for testing
       
-      if (orphanedBookings != null && (orphanedBookings as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(orphanedBookings as List).length} orphaned booking requests - bookings referencing non-existent loads');
+      if (orphanedBookings.isNotEmpty) {
+        fail('BUG DETECTED: ${orphanedBookings.length} orphaned booking requests - bookings referencing non-existent loads');
       }
     });
     
     testWidgets('M-X-007: Check for trips without valid load reference', (tester) async {
       await _ensureSupabaseInitialized();
-      final client = Supabase.instance.client;
       
       // Check for orphaned trips - trips referencing non-existent loads
       // Note: This query may need to be adjusted based on actual schema
       final orphanedTripsFromLoads = <dynamic>[]; // Simplified for testing
       
-      if (orphanedTripsFromLoads != null && (orphanedTripsFromLoads as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(orphanedTripsFromLoads as List).length} orphaned trips - trips referencing non-existent loads');
+      if (orphanedTripsFromLoads.isNotEmpty) {
+        fail('BUG DETECTED: ${orphanedTripsFromLoads.length} orphaned trips - trips referencing non-existent loads');
       }
     });
     

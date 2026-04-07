@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/error/result.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/error/app_failure.dart';
 import '../../../features/auth/data/auth_repository.dart';
 import '../../../l10n/app_localizations.dart';
+import '../providers/delete_account_providers.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
@@ -100,10 +99,7 @@ String _gracePeriodRemainingLabel(AppLocalizations l10n, DateTime requestedAt) {
     return l10n.deleteAccountGracePeriodLessThanOneDayLabel;
   }
 
-  return l10n.deleteAccountGracePeriodRemainingDaysLabel(
-    remainingDays,
-    remainingDays == 1 ? '' : 's',
-  );
+  return l10n.deleteAccountGracePeriodRemainingDaysLabel(remainingDays);
 }
 
 String _deleteLifecycleFailureMessage(AppLocalizations l10n) {
@@ -133,95 +129,6 @@ String _deleteCancelledMessage(AppLocalizations l10n) {
 String _deleteAcceptedMessage(AppLocalizations l10n) {
   return l10n.deleteAccountAcceptedMessage;
 }
-
-class DeleteAccountState {
-  final bool isSubmitting;
-  final AppFailure? failure;
-  final AccountDeletionRequestOutcome? outcome;
-
-  const DeleteAccountState({
-    required this.isSubmitting,
-    required this.failure,
-    required this.outcome,
-  });
-
-  factory DeleteAccountState.initial() {
-    return const DeleteAccountState(
-      isSubmitting: false,
-      failure: null,
-      outcome: null,
-    );
-  }
-
-  DeleteAccountState copyWith({
-    bool? isSubmitting,
-    AppFailure? failure,
-    bool? clearFailure,
-    AccountDeletionRequestOutcome? outcome,
-    bool? clearOutcome,
-  }) {
-    return DeleteAccountState(
-      isSubmitting: isSubmitting ?? this.isSubmitting,
-      failure: clearFailure == true ? null : failure ?? this.failure,
-      outcome: clearOutcome == true ? null : outcome ?? this.outcome,
-    );
-  }
-}
-
-class DeleteAccountController extends StateNotifier<DeleteAccountState> {
-  final AuthRepository _repository;
-
-  DeleteAccountController(this._repository) : super(DeleteAccountState.initial());
-
-  Future<Result<AccountDeletionRequestOutcome>> submit() async {
-    if (state.isSubmitting) {
-      return const Failure<AccountDeletionRequestOutcome>(
-        BusinessRuleFailure(message: 'Account deletion request is already in progress.'),
-      );
-    }
-
-    state = state.copyWith(
-      isSubmitting: true,
-      clearFailure: true,
-      clearOutcome: true,
-    );
-
-    final result = await _repository.requestAccountDeletion();
-    state = state.copyWith(
-      isSubmitting: false,
-      failure: result.failureOrNull,
-      outcome: result.valueOrNull,
-    );
-    return result;
-  }
-
-  Future<Result<AccountDeletionRequestOutcome>> cancelDeletion() async {
-    if (state.isSubmitting) {
-      return const Failure<AccountDeletionRequestOutcome>(
-        BusinessRuleFailure(message: 'Account deletion request is already in progress.'),
-      );
-    }
-
-    state = state.copyWith(
-      isSubmitting: true,
-      clearFailure: true,
-      clearOutcome: true,
-    );
-
-    final result = await _repository.cancelAccountDeletion();
-    state = state.copyWith(
-      isSubmitting: false,
-      failure: result.failureOrNull,
-      outcome: result.valueOrNull,
-    );
-    return result;
-  }
-}
-
-final deleteAccountProvider =
-    StateNotifierProvider.autoDispose<DeleteAccountController, DeleteAccountState>((ref) {
-  return DeleteAccountController(ref.watch(authRepositoryProvider));
-});
 
 class DeleteAccountScreen extends ConsumerWidget {
   const DeleteAccountScreen({super.key});

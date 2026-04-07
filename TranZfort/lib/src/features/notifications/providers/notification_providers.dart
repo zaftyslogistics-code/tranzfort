@@ -150,20 +150,7 @@ class NotificationsController extends StateNotifier<NotificationsState> {
       notifications: state.notifications
           .map(
             (notification) => notification.id == notificationId
-                ? AppNotification(
-                    id: notification.id,
-                    type: notification.type,
-                    priority: notification.priority,
-                    titleText: notification.titleText,
-                    bodyText: notification.bodyText,
-                    relatedLoadId: notification.relatedLoadId,
-                    relatedTripId: notification.relatedTripId,
-                    relatedCaseId: notification.relatedCaseId,
-                    actionRouteHint: notification.actionRouteHint,
-                    isRead: true,
-                    readAt: notification.readAt ?? DateTime.now(),
-                    createdAt: notification.createdAt,
-                  )
+                ? notification.copyWith(isRead: true, readAt: notification.readAt ?? DateTime.now())
                 : notification,
           )
           .toList(growable: false),
@@ -231,6 +218,16 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 final notificationsProvider =
     StateNotifierProvider.autoDispose<NotificationsController, NotificationsState>((ref) {
   return NotificationsController(ref.watch(notificationRepositoryProvider));
+});
+
+final shellUnreadNotificationCountProvider = StreamProvider.autoDispose<int>((ref) async* {
+  final repository = ref.watch(notificationRepositoryProvider);
+  final initial = await repository.getUnreadCount();
+  yield initial.valueOrNull ?? 0;
+
+  await for (final result in repository.watchUnreadCount()) {
+    yield result.valueOrNull ?? 0;
+  }
 });
 
 final unreadNotificationCountProvider = Provider.autoDispose<int>((ref) {

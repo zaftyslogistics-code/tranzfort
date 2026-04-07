@@ -1,0 +1,13 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart
+00:00 +0: settings screen shows request permission action when push permission is not determined
+00:00 +1: settings screen shows blocked guidance when push permission is denied
+00:01 +2: settings screen hear summary action triggers contextual TTS
+00:01 +3: settings screen connected profile route opens profile
+00:01 +4: settings screen connected profile route opens profile for truckers
+00:01 +5: settings screen connected notifications route opens notifications
+00:01 +6: settings screen connected notifications route opens notifications for truckers
+00:01 +7: settings screen connected support route opens support
+00:01 +8: settings screen connected support route opens support for truckers
+00:01 +9: settings screen connected delete-account route opens delete account
+00:01 +10: settings screen connected delete-account route opens delete account for truckers
+00:02 +11: All tests passed!

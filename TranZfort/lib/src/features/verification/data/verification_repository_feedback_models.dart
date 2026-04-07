@@ -71,6 +71,8 @@ enum VerificationDocumentType {
   profilePhoto,
   businessLicence,
   gstCertificate,
+  truckRc,
+  truckPhoto,
 }
 
 extension VerificationDocumentTypeX on VerificationDocumentType {
@@ -82,6 +84,8 @@ extension VerificationDocumentTypeX on VerificationDocumentType {
       VerificationDocumentType.profilePhoto => 'Profile photo',
       VerificationDocumentType.businessLicence => 'Business licence',
       VerificationDocumentType.gstCertificate => 'GST certificate',
+      VerificationDocumentType.truckRc => 'Truck RC',
+      VerificationDocumentType.truckPhoto => 'Truck photo',
     };
   }
 
@@ -93,6 +97,8 @@ extension VerificationDocumentTypeX on VerificationDocumentType {
       VerificationDocumentType.profilePhoto => 'profile_photo',
       VerificationDocumentType.businessLicence => 'business_licence',
       VerificationDocumentType.gstCertificate => 'gst_certificate',
+      VerificationDocumentType.truckRc => 'truck_rc',
+      VerificationDocumentType.truckPhoto => 'truck_photo',
     };
   }
 
@@ -104,6 +110,8 @@ extension VerificationDocumentTypeX on VerificationDocumentType {
       'profile_photo' => VerificationDocumentType.profilePhoto,
       'business_licence' => VerificationDocumentType.businessLicence,
       'gst_certificate' => VerificationDocumentType.gstCertificate,
+      'truck_rc' => VerificationDocumentType.truckRc,
+      'truck_photo' => VerificationDocumentType.truckPhoto,
       _ => null,
     };
   }

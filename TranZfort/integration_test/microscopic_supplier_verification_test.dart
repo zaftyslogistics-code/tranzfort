@@ -156,7 +156,7 @@ void main() {
       // The create_load RPC requires many parameters - we're just checking it exists
       try {
         // Try to call create_load with minimal test params - should fail for unverified
-        final result = await client.rpc('create_load', params: {
+        await client.rpc('create_load', params: {
           'p_origin_label': 'Test Origin',
           'p_origin_city': 'Test City',
           'p_origin_state': 'Test State',

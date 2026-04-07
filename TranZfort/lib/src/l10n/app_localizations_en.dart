@@ -26,6 +26,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'Choose Google or email sign-in to continue into your supplier or trucker workspace.';
 
   @override
+  String get authEmailHint => 'you@example.com';
+
+  @override
+  String get authSignInDividerLabel => 'OR';
+
+  @override
+  String get authForgotPasswordAction => 'Forgot password?';
+
+  @override
+  String get authConfigIncompleteSignInMessage =>
+      'Supabase is not configured in this build, so sign-in and live account data will remain unavailable until the environment is fixed.';
+
+  @override
   String get splashSetupTitle => 'Set up device access';
 
   @override
@@ -479,7 +492,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String shellMessagesActiveConversations(int count, Object preview) {
-    return '$count active conversations • $preview';
+    return '$count active conversations - $preview';
   }
 
   @override
@@ -494,7 +507,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String shellMessagesLatestBy(Object name, Object timestamp) {
-    return 'Latest by $name • $timestamp';
+    return 'Latest by $name - $timestamp';
   }
 
   @override
@@ -521,7 +534,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String chatReportSourceLabel(Object source) {
-    return 'Chat • $source';
+    return 'Chat - $source';
   }
 
   @override
@@ -846,11 +859,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Less than 1 day remains before the grace period ends.';
 
   @override
-  String deleteAccountGracePeriodRemainingDaysLabel(
-    Object count,
-    Object plural,
-  ) {
-    return '$count day$plural remain before the grace period ends.';
+  String deleteAccountGracePeriodRemainingDaysLabel(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count days remain before the grace period ends.',
+      one: '$count day remains before the grace period ends.',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -1783,7 +1799,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supportTicketTitleWithPriority(Object title, Object priority) {
-    return '$title • $priority priority';
+    return '$title - $priority priority';
   }
 
   @override
@@ -2103,7 +2119,7 @@ class AppLocalizationsEn extends AppLocalizations {
     int inTransitTrips,
     int completedTrips,
   ) {
-    return '$upcomingTrips upcoming • $inTransitTrips in transit • $completedTrips completed';
+    return '$upcomingTrips upcoming - $inTransitTrips in transit - $completedTrips completed';
   }
 
   @override
@@ -2116,7 +2132,7 @@ class AppLocalizationsEn extends AppLocalizations {
     int rejectedTrucks,
     int pendingReapprovalTrucks,
   ) {
-    return '$pendingTrucks pending • $rejectedTrucks rejected • $pendingReapprovalTrucks pending reapproval';
+    return '$pendingTrucks pending - $rejectedTrucks rejected - $pendingReapprovalTrucks pending reapproval';
   }
 
   @override
@@ -2482,12 +2498,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not save this truck right now. Review the truck details and retry shortly.';
 
   @override
+  String get truckerFleetTruckNumberConflictMessage =>
+      'This truck number is already in use. Check the number and try again.';
+
+  @override
   String truckerFleetTruckCardSubtitle(
     Object bodyType,
     Object tyres,
     Object capacityTonnes,
   ) {
-    return '$bodyType • $tyres tyres • ${capacityTonnes}T';
+    return '$bodyType - $tyres tyres - ${capacityTonnes}T';
   }
 
   @override
@@ -2581,10 +2601,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsSortNewest => 'Newest';
 
   @override
-  String get truckerFindLoadsSortPriceHighToLow => 'Price High→Low';
+  String get truckerFindLoadsSortPriceHighToLow => 'Price High>Low';
 
   @override
-  String get truckerFindLoadsSortPriceLowToHigh => 'Price Low→High';
+  String get truckerFindLoadsSortPriceLowToHigh => 'Price Low>High';
 
   @override
   String get truckerFindLoadsSortPickupDate => 'Pickup Date';
@@ -2644,12 +2664,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerFindLoadsSummaryAllLoads(int resultCount) {
-    return 'Showing all loads • $resultCount result(s)';
+    return 'Showing all loads - $resultCount result(s)';
   }
 
   @override
   String truckerFindLoadsSummaryFiltered(Object pieces, int resultCount) {
-    return '$pieces • $resultCount result(s)';
+    return '$pieces - $resultCount result(s)';
   }
 
   @override
@@ -2676,7 +2696,7 @@ class AppLocalizationsEn extends AppLocalizations {
     int advancePercentage,
     Object pickupDate,
   ) {
-    return '₹$priceAmount • $advancePercentage% adv • $pickupDate';
+    return '₹$priceAmount - $advancePercentage% adv - $pickupDate';
   }
 
   @override
@@ -2691,12 +2711,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerFindLoadsDistanceUnavailable(Object tyres) {
-    return 'Distance unavailable • Tyres $tyres';
+    return 'Distance unavailable - Tyres $tyres';
   }
 
   @override
   String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres) {
-    return 'Distance $distanceKm km • Tyres $tyres';
+    return 'Distance $distanceKm km - Tyres $tyres';
   }
 
   @override
@@ -2704,7 +2724,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerFindLoadsSuperLoadBanner =>
-      'Super Load • Payment Guarantee';
+      'Super Load - Payment Guarantee';
 
   @override
   String get truckerFindLoadsViewDetailsAction => 'View details';
@@ -2882,7 +2902,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object advanceAmount,
     Object balanceAmount,
   ) {
-    return 'Advance: ₹$advanceAmount • Balance: ₹$balanceAmount';
+    return 'Advance: ₹$advanceAmount - Balance: ₹$balanceAmount';
   }
 
   @override
@@ -2896,7 +2916,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierPostLoadRouteSummary(Object origin, Object destination) {
-    return '$origin → $destination';
+    return '$origin > $destination';
   }
 
   @override
@@ -2905,12 +2925,12 @@ class AppLocalizationsEn extends AppLocalizations {
     Object weightTonnes,
     Object trucksNeeded,
   ) {
-    return '$material • ${weightTonnes}T • $trucksNeeded truck(s)';
+    return '$material - ${weightTonnes}T - $trucksNeeded truck(s)';
   }
 
   @override
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount • $priceType';
+    return 'Price: ₹$priceAmount - $priceType';
   }
 
   @override
@@ -2956,8 +2976,62 @@ class AppLocalizationsEn extends AppLocalizations {
       'Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.';
 
   @override
+  String get verificationReadinessCheckAadhaarNumber => 'Aadhaar number';
+
+  @override
+  String get verificationReadinessCheckPanNumber => 'PAN number';
+
+  @override
+  String get verificationReadinessCheckAadhaarFrontPhoto =>
+      'Aadhaar front photo';
+
+  @override
+  String get verificationReadinessCheckAadhaarBackPhoto => 'Aadhaar back photo';
+
+  @override
+  String get verificationReadinessCheckPanPhoto => 'PAN photo';
+
+  @override
+  String get verificationReadinessCheckCompanyName => 'Company name';
+
+  @override
+  String get verificationReadinessCheckBusinessLicenceNumber =>
+      'Business licence number';
+
+  @override
+  String get verificationReadinessCheckBusinessLicenceDocument =>
+      'Business licence document';
+
+  @override
+  String get verificationReadinessCheckLocation => 'Verification location';
+
+  @override
+  String get verificationReadinessCheckTruckWithRcDocument =>
+      'Truck with RC document';
+
+  @override
+  String get verificationSubmitSectionTitle => 'Submit for Verification';
+
+  @override
+  String get verificationSubmitSectionTitleTrucker =>
+      'Step 3: Submit for Verification';
+
+  @override
+  String get verificationSubmitSectionSubtitle =>
+      'Complete all items below, then tap Submit to send your documents for admin review.';
+
+  @override
+  String verificationReadinessCompletedCount(int doneCount, int totalCount) {
+    return '$doneCount / $totalCount completed';
+  }
+
+  @override
+  String get verificationOpenFleetHint =>
+      'Add or manage your truck with RC document from the fleet screen.';
+
+  @override
   String supplierPostLoadSuggestionSubtitle(Object label, Object source) {
-    return '$label • $source';
+    return '$label - $source';
   }
 
   @override
@@ -3142,7 +3216,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supplierDashboardSuperLoadStatusApproved =>
-      'Approved • payment pending';
+      'Approved - payment pending';
 
   @override
   String get supplierDashboardSuperLoadStatusRejected => 'Rejected';
@@ -3158,7 +3232,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierDashboardSuperLoadBadge(Object status) {
-    return 'Super Load • $status';
+    return 'Super Load - $status';
   }
 
   @override
@@ -3269,7 +3343,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId • Truck $truckNumber';
+    return 'Trip $tripId - Truck $truckNumber';
   }
 
   @override
@@ -3277,7 +3351,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object material,
     Object truckerName,
   ) {
-    return '$material • Trucker $truckerName';
+    return '$material - Trucker $truckerName';
   }
 
   @override
@@ -3378,7 +3452,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierTripDetailReportSourceLabel(Object routeLabel) {
-    return 'Supplier trip • $routeLabel';
+    return 'Supplier trip - $routeLabel';
   }
 
   @override
@@ -3718,6 +3792,302 @@ class AppLocalizationsEn extends AppLocalizations {
       'We will update your verification state here once the review is approved or sent back for corrections.';
 
   @override
+  String get verificationWizardStepPhoto => 'Photo';
+
+  @override
+  String get verificationWizardStepIdentity => 'Identity';
+
+  @override
+  String get verificationWizardStepTruck => 'Truck';
+
+  @override
+  String get verificationWizardStepBusiness => 'Business';
+
+  @override
+  String get verificationWizardStepReview => 'Review';
+
+  @override
+  String get verificationWizardBackAction => 'Back';
+
+  @override
+  String get verificationWizardSaveAndExitAction => 'Save & exit';
+
+  @override
+  String get verificationWizardExitTitle => 'Exit verification?';
+
+  @override
+  String get verificationWizardExitMessage =>
+      'You can leave this flow now and continue later.';
+
+  @override
+  String get verificationWizardExitAction => 'Exit';
+
+  @override
+  String get verificationWizardDashboardAction => 'Dashboard';
+
+  @override
+  String get verificationWizardProfileTitle => 'Profile photo';
+
+  @override
+  String get verificationWizardProfileSubtitle =>
+      'Upload a clear profile photo for verification.';
+
+  @override
+  String get verificationWizardProfileHint =>
+      'Use a clear, front-facing photo with good lighting.';
+
+  @override
+  String get verificationWizardIdentityTitle => 'Identity documents';
+
+  @override
+  String get verificationWizardIdentitySubtitle =>
+      'Add Aadhaar and PAN details with document uploads.';
+
+  @override
+  String get verificationWizardAadhaarNumberLabel => 'Aadhaar number';
+
+  @override
+  String get verificationWizardPanNumberLabel => 'PAN number';
+
+  @override
+  String get verificationWizardPanDocumentLabel => 'PAN document';
+
+  @override
+  String get verificationWizardTruckTitle => 'Truck details';
+
+  @override
+  String get verificationWizardTruckSubtitle =>
+      'Add one truck and upload its RC document.';
+
+  @override
+  String get verificationWizardTruckInfo =>
+      'At least one truck with an RC document is required for trucker verification.';
+
+  @override
+  String get verificationWizardTruckNumberLabel => 'Truck number';
+
+  @override
+  String get verificationWizardBodyTypeLabel => 'Body type';
+
+  @override
+  String get verificationWizardTyresLabel => 'Tyres';
+
+  @override
+  String get verificationWizardCapacityLabel => 'Capacity';
+
+  @override
+  String get verificationWizardCapacityHint => '16';
+
+  @override
+  String get verificationWizardRcDocumentLabel => 'RC document';
+
+  @override
+  String get verificationWizardRequiredForVerification =>
+      'Required for verification';
+
+  @override
+  String get verificationWizardTruckPhotoLabel => 'Truck photo';
+
+  @override
+  String get verificationWizardTruckPhotoHint => 'Optional photo of your truck';
+
+  @override
+  String get verificationWizardBusinessTitle => 'Business details';
+
+  @override
+  String get verificationWizardBusinessSubtitle =>
+      'Add your company, licence, optional GST, and verification location.';
+
+  @override
+  String get verificationWizardCompanyNameLabel => 'Company name';
+
+  @override
+  String get verificationWizardCompanyNameHint => 'Enter your company name';
+
+  @override
+  String get verificationWizardLicenseNumberLabel => 'License number';
+
+  @override
+  String get verificationWizardLicenseNumberHint =>
+      'Enter your business licence number';
+
+  @override
+  String get verificationWizardLicenseDocumentLabel =>
+      'Business licence document';
+
+  @override
+  String get verificationWizardGstDetailsTitle => 'GST details';
+
+  @override
+  String get verificationWizardGstDetailsAdded => 'GST details added';
+
+  @override
+  String get verificationWizardGstOptional => 'GST is optional';
+
+  @override
+  String get verificationWizardGstNumberLabel => 'GST number';
+
+  @override
+  String get verificationWizardGstCertificateLabel => 'GST certificate';
+
+  @override
+  String get verificationWizardSearchCityTitle => 'Search city';
+
+  @override
+  String get verificationWizardSearchCityHint => 'Type city name';
+
+  @override
+  String get verificationWizardUseCurrentLocation => 'Use current location';
+
+  @override
+  String verificationWizardNoCitiesFound(Object query) {
+    return 'No cities found for \"$query\"';
+  }
+
+  @override
+  String get verificationWizardTryDifferentSearch =>
+      'Try a different search term';
+
+  @override
+  String get verificationWizardLocationServicesOffTitle =>
+      'Location services are off';
+
+  @override
+  String get verificationWizardLocationServicesOffMessage =>
+      'Please enable GPS/location services and try again.';
+
+  @override
+  String get verificationWizardLocationPermissionTitle =>
+      'Location permission needed';
+
+  @override
+  String get verificationWizardLocationPermissionMessage =>
+      'Please allow location permission in app settings to continue.';
+
+  @override
+  String get verificationWizardOpenSettingsAction => 'Open settings';
+
+  @override
+  String get verificationWizardCapturedViaGps => 'Captured via GPS';
+
+  @override
+  String get verificationWizardAddedManually => 'Added manually';
+
+  @override
+  String get verificationWizardReviewTitle => 'Review and submit';
+
+  @override
+  String get verificationWizardReviewSubtitle =>
+      'Confirm your details before sending the verification packet.';
+
+  @override
+  String get verificationWizardReviewProfile => 'Profile';
+
+  @override
+  String get verificationWizardReviewProfileUploaded =>
+      'Profile photo uploaded';
+
+  @override
+  String get verificationWizardReviewProfileMissing => 'Profile photo missing';
+
+  @override
+  String get verificationWizardReviewIdentity => 'Identity';
+
+  @override
+  String get verificationWizardReviewDocumentsUploaded => 'Documents uploaded';
+
+  @override
+  String get verificationWizardReviewTruck => 'Truck';
+
+  @override
+  String get verificationWizardReviewTruckNumber => 'Truck number';
+
+  @override
+  String get verificationWizardReviewRcUploaded => 'RC document uploaded';
+
+  @override
+  String get verificationWizardReviewTruckPhotoUploaded =>
+      'Truck photo uploaded';
+
+  @override
+  String get verificationWizardReviewBusiness => 'Business';
+
+  @override
+  String get verificationWizardReviewCompanyName => 'Company name';
+
+  @override
+  String get verificationWizardReviewLicenseNumber => 'License number';
+
+  @override
+  String get verificationWizardReviewGstNumber => 'GST number';
+
+  @override
+  String get verificationWizardReviewLocation => 'Location';
+
+  @override
+  String get verificationWizardReviewTimelineMessage =>
+      'Review usually completes after the submitted packet is checked by the team.';
+
+  @override
+  String get verificationWizardTermsText =>
+      'I confirm that the information and uploaded documents are accurate and ready for verification review.';
+
+  @override
+  String get verificationWizardValidationError =>
+      'Please complete the required fields before submitting.';
+
+  @override
+  String get verificationWizardUnauthorizedError =>
+      'Your session is unavailable. Please sign in again.';
+
+  @override
+  String get verificationWizardUnknownError =>
+      'Something went wrong while submitting verification.';
+
+  @override
+  String get verificationWizardProfilePhotoRequired =>
+      'Profile photo is required';
+
+  @override
+  String get verificationWizardAadhaarRequired => 'Aadhaar must be 12 digits';
+
+  @override
+  String get verificationWizardPanRequired => 'Invalid PAN format';
+
+  @override
+  String get verificationWizardAadhaarFrontRequired =>
+      'Aadhaar front photo required';
+
+  @override
+  String get verificationWizardAadhaarBackRequired =>
+      'Aadhaar back photo required';
+
+  @override
+  String get verificationWizardPanPhotoRequired => 'PAN photo required';
+
+  @override
+  String get verificationWizardTruckNumberRequired =>
+      'Truck number is required';
+
+  @override
+  String get verificationWizardRcRequired => 'RC document is required';
+
+  @override
+  String get verificationWizardCompanyNameRequired =>
+      'Company name is required';
+
+  @override
+  String get verificationWizardLicenseRequired => 'License number is required';
+
+  @override
+  String get verificationWizardLicenseDocumentRequired =>
+      'License document is required';
+
+  @override
+  String get verificationWizardLocationRequired =>
+      'Verification location is required';
+
+  @override
   String get verificationActionNeedsAttentionTitle =>
       'Verification action needs attention';
 
@@ -4019,6 +4389,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'Upload Aadhaar, PAN, profile photo, and ensure at least one approved truck exists before submitting trucker verification.';
 
   @override
+  String get verificationLockedStatusSectionTitle => 'Verification status';
+
+  @override
+  String get verificationLockedStatusVerifiedTitle => 'Verified';
+
+  @override
+  String get verificationLockedStatusPendingTitle => 'Under review';
+
+  @override
+  String get verificationLockedStatusVerifiedMessage =>
+      'Your verification has been approved. No action is needed right now.';
+
+  @override
+  String get verificationLockedStatusPendingMessage =>
+      'Your documents are being reviewed. You will be notified once the review is complete.';
+
+  @override
+  String get verificationSubmitLockedFooter =>
+      'Once submitted, your details stay locked until the admin completes the review.';
+
+  @override
   String verificationRequiredUploadedLabel(Object required, Object uploaded) {
     return '$uploaded/$required required uploaded';
   }
@@ -4222,7 +4613,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId • Truck $truckNumber';
+    return 'Trip $tripId - Truck $truckNumber';
   }
 
   @override
@@ -4230,7 +4621,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object material,
     Object pickupDate,
   ) {
-    return '$material • Pickup $pickupDate';
+    return '$material - Pickup $pickupDate';
   }
 
   @override
@@ -4276,7 +4667,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object destinationLabel,
     Object originLabel,
   ) {
-    return 'Trucker trip • $originLabel → $destinationLabel';
+    return 'Trucker trip - $originLabel > $destinationLabel';
   }
 
   @override
@@ -4644,7 +5035,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierRaiseDisputeHeroSummary(Object material, Object routeLabel) {
-    return '$routeLabel • $material';
+    return '$routeLabel - $material';
   }
 
   @override
@@ -5295,6 +5686,30 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not attach that evidence image right now. Try another image or retry shortly.';
 
   @override
+  String get supportCreateTicketInvalidCategoryMessage =>
+      'Select a valid support category';
+
+  @override
+  String get supportCreateTicketDescriptionTooShortMessage =>
+      'Describe the issue in at least 10 characters';
+
+  @override
+  String get reportIssueInvalidCategoryMessage =>
+      'Select a valid report category';
+
+  @override
+  String get reportIssueDescriptionTooShortMessage =>
+      'Describe the issue in at least 10 characters';
+
+  @override
+  String get reportIssueAttachmentRequiredMessage =>
+      'Attach one evidence image before submitting this report';
+
+  @override
+  String get supportReplyMessageTooShortMessage =>
+      'Reply must contain at least 2 characters';
+
+  @override
   String get supportCreateTicketSubmitAction => 'Submit ticket';
 
   @override
@@ -5376,7 +5791,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierTripsTruckerTruckLabel(Object truckId, Object truckerId) {
-    return 'Trucker $truckerId • Truck $truckId';
+    return 'Trucker $truckerId - Truck $truckId';
   }
 
   @override
@@ -5561,12 +5976,12 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'Load $loadId • Pickup $pickupDate';
+    return 'Load $loadId - Pickup $pickupDate';
   }
 
   @override
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType) {
-    return '₹$priceAmount • $priceType';
+    return '₹$priceAmount - $priceType';
   }
 
   @override
@@ -5582,12 +5997,12 @@ class AppLocalizationsEn extends AppLocalizations {
     Object material,
     Object weightTonnes,
   ) {
-    return '$material • ${weightTonnes}T • Advance $advancePercentage%';
+    return '$material - ${weightTonnes}T - Advance $advancePercentage%';
   }
 
   @override
   String get truckerLoadDetailSuperLoadGuarantee =>
-      'Super Load • Payment Guarantee';
+      'Super Load - Payment Guarantee';
 
   @override
   String get truckerLoadDetailRoutePriceSummaryTitle =>
@@ -5610,7 +6025,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount • $priceType';
+    return 'Price: ₹$priceAmount - $priceType';
   }
 
   @override
@@ -5771,7 +6186,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object truckNumber,
     Object tyres,
   ) {
-    return 'This load will be booked with $truckNumber • $bodyType • $tyres tyres.';
+    return 'This load will be booked with $truckNumber - $bodyType - $tyres tyres.';
   }
 
   @override
@@ -5784,7 +6199,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object truckNumber,
     Object tyres,
   ) {
-    return '$truckNumber • $bodyType • $tyres tyres';
+    return '$truckNumber - $bodyType - $tyres tyres';
   }
 
   @override
@@ -5835,7 +6250,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailReportSourceLabel(Object routeLabel) {
-    return 'Trucker load • $routeLabel';
+    return 'Trucker load - $routeLabel';
   }
 
   @override
@@ -5999,7 +6414,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'Load ID: $loadId • Pickup: $pickupDate';
+    return 'Load ID: $loadId - Pickup: $pickupDate';
   }
 
   @override
@@ -6198,7 +6613,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierBookingSubmittedAt(Object truckLabel, Object submittedAt) {
-    return '$truckLabel • Submitted $submittedAt';
+    return '$truckLabel - Submitted $submittedAt';
   }
 
   @override
@@ -6212,7 +6627,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object truckerId,
     Object truckId,
   ) {
-    return '$material • Trucker $truckerId • Truck $truckId';
+    return '$material - Trucker $truckerId - Truck $truckId';
   }
 
   @override
@@ -6338,5 +6753,68 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String verificationReadyTruckCount(Object count) {
     return 'Verification-ready trucks: $count';
+  }
+
+  @override
+  String get appBarLanguageToggleTooltip => 'Switch language';
+
+  @override
+  String get connectivityOfflineBanner =>
+      'You are offline. Features may be limited.';
+
+  @override
+  String get connectivityOfflineActionsMessage =>
+      'You are offline. Actions that need network access should stay disabled.';
+
+  @override
+  String get localeSelectSupportedLanguage => 'Select a supported language';
+
+  @override
+  String get localeFieldSupportedLanguages =>
+      'Supported languages are English and Hindi';
+
+  @override
+  String get onboardingGateTimeoutMessage =>
+      'Loading is taking longer than expected.';
+
+  @override
+  String get onboardingGateRetryAction => 'Retry';
+
+  @override
+  String get onboardingGateBackToSignInAction => 'Back to sign in';
+
+  @override
+  String authPasswordResetSentSuccess(Object email) {
+    return 'Password reset link sent to $email. Check your inbox.';
+  }
+
+  @override
+  String get authPasswordResetSentFailure =>
+      'Unable to send reset link. Please try again.';
+
+  @override
+  String get chatPreviewVoice => 'Voice message';
+
+  @override
+  String get chatPreviewLocation => 'Location shared';
+
+  @override
+  String get chatPreviewDocument => 'Document shared';
+
+  @override
+  String get chatPreviewMapCard => 'Route card shared';
+
+  @override
+  String get chatPreviewTruckCard => 'Truck details shared';
+
+  @override
+  String get chatPreviewSystem => 'System update';
+
+  @override
+  String get chatPreviewEmpty => 'No messages yet';
+
+  @override
+  String reportSourceSupplierLoad(Object routeLabel) {
+    return 'Supplier load - $routeLabel';
   }
 }

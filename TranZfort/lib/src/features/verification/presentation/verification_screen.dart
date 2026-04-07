@@ -15,19 +15,31 @@ import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
+import '../../trucker/providers/trucker_fleet_provider.dart';
 import '../data/verification_repository.dart';
 import '../providers/verification_provider.dart';
+import '../providers/verification_wizard_provider.dart';
+import 'verification_wizard.dart';
 
 part 'verification_screen_sections.dart';
 
 class VerificationScreen extends ConsumerWidget {
   const VerificationScreen({super.key});
 
+  static Future<ImageSource?> selectImageSource(BuildContext context, String documentLabel) {
+    return _selectImageSource(context, documentLabel);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(verificationProvider);
     final detail = state.detail;
+
+    // Show wizard for unverified or rejected users
+    if (detail != null && (detail.isUnverified || detail.isRejected)) {
+      return const VerificationWizard();
+    }
 
     return DetailPageScaffold(
       title: detail == null
@@ -174,7 +186,7 @@ class VerificationScreen extends ConsumerWidget {
                                       }
                                       final result = await ref.read(verificationProvider.notifier).saveManualSupplierLocation(
                                             city: manualLocation.city,
-                                            state: manualLocation.state,
+                                            stateProvince: manualLocation.state,
                                           );
                                       if (!context.mounted) {
                                         return;
@@ -200,41 +212,42 @@ class VerificationScreen extends ConsumerWidget {
               title: l10n.verificationDocumentChecklistTitle,
               children: [
                 for (var index = 0; index < detail.visibleDocuments.length; index++) ...[
-                  _VerificationDocumentCard(
-                    detail: detail,
-                    type: detail.visibleDocuments[index],
-                    isUploading: state.uploadingDocumentType == detail.visibleDocuments[index],
-                    onUploadRequested: detail.isPending || detail.isVerified
-                        ? null
-                        : () async {
-                            final source = await _selectImageSource(context, _localizedDocumentTypeLabel(l10n, detail.visibleDocuments[index]));
-                            if (source == null || !context.mounted) {
-                              return;
-                            }
-                            final result = await ref.read(verificationProvider.notifier).uploadDocument(
-                                  type: detail.visibleDocuments[index],
-                                  source: source,
-                                );
-                            if (!context.mounted) {
-                              return;
-                            }
-                            if (result.isSuccess) {
+                  if (detail.visibleDocuments[index] != VerificationDocumentType.truckRc &&
+                      detail.visibleDocuments[index] != VerificationDocumentType.truckPhoto)
+                    _VerificationDocumentCard(
+                      detail: detail,
+                      type: detail.visibleDocuments[index],
+                      isUploading: state.uploadingDocumentType == detail.visibleDocuments[index],
+                      onUploadRequested: detail.isPending || detail.isVerified
+                          ? null
+                          : () async {
+                              final source = await _selectImageSource(
+                                context,
+                                _localizedDocumentTypeLabel(l10n, detail.visibleDocuments[index]),
+                              );
+                              if (source == null || !context.mounted) {
+                                return;
+                              }
+                              final result = await ref.read(verificationProvider.notifier).uploadDocument(
+                                    type: detail.visibleDocuments[index],
+                                    source: source,
+                                  );
+                              if (!context.mounted) {
+                                return;
+                              }
                               AppSnackbar.show(
                                 context: context,
-                                message: l10n.verificationDocumentUploadedSuccess(
-                                  _localizedDocumentTypeLabel(l10n, detail.visibleDocuments[index]),
-                                ),
-                                variant: AppSnackbarVariant.success,
+                                message: result.isSuccess
+                                    ? l10n.verificationDocumentUploadedSuccess(
+                                        _localizedDocumentTypeLabel(l10n, detail.visibleDocuments[index]),
+                                      )
+                                    : l10n.verificationDocumentUploadFailureMessage,
+                                variant: result.isSuccess
+                                    ? AppSnackbarVariant.success
+                                    : AppSnackbarVariant.error,
                               );
-                            } else {
-                              AppSnackbar.show(
-                                context: context,
-                                message: l10n.verificationDocumentUploadFailureMessage,
-                                variant: AppSnackbarVariant.error,
-                              );
-                            }
-                          },
-                  ),
+                            },
+                    ),
                   if (index != detail.visibleDocuments.length - 1) const SizedBox(height: AppSpacing.md),
                 ],
               ],
@@ -335,12 +348,12 @@ class VerificationScreen extends ConsumerWidget {
   }
 }
 
- class _ManualLocationInput {
+class _ManualLocationInput {
   final String city;
   final String? state;
 
   const _ManualLocationInput({required this.city, required this.state});
- }
+}
 
 String _localizedDocumentTypeLabel(AppLocalizations l10n, VerificationDocumentType type) {
   return switch (type) {
@@ -350,10 +363,12 @@ String _localizedDocumentTypeLabel(AppLocalizations l10n, VerificationDocumentTy
     VerificationDocumentType.profilePhoto => l10n.verificationDocTypeProfilePhoto,
     VerificationDocumentType.businessLicence => l10n.verificationDocTypeBusinessLicence,
     VerificationDocumentType.gstCertificate => l10n.verificationDocTypeGstCertificate,
+    VerificationDocumentType.truckRc => 'Truck RC',
+    VerificationDocumentType.truckPhoto => 'Truck photo',
   };
 }
 
- class _VerificationDocumentCard extends StatelessWidget {
+class _VerificationDocumentCard extends StatelessWidget {
   final VerificationDetail detail;
   final VerificationDocumentType type;
   final bool isUploading;

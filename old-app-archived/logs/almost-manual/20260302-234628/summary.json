@@ -1,0 +1,8 @@
+{
+  "timestamp": "20260302-234628",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260302-234628",
+  "failedSteps": [
+    "p1_trucker_permissions_baseline"
+  ],
+  "status": "FAIL"
+}

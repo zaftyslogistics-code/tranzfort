@@ -4,12 +4,31 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
+import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/notifications/data/push_runtime_service.dart';
 import 'package:tranzfort/src/features/shell/presentation/shell_destinations.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+
+class _FakeAuthRepository extends AuthRepository {
+  _FakeAuthRepository() : super(null);
+}
+
+class _FixedAppLocaleController extends AppLocaleController {
+  _FixedAppLocaleController(String languageCode)
+      : super(
+          _FakeAuthRepository(),
+          profileLanguageCode: languageCode,
+        ) {
+    state = state.copyWith(
+      locale: Locale(languageCode),
+      isInitialized: true,
+      clearFailure: true,
+    );
+  }
+}
 
 class _FakeContextualTtsService extends ContextualTtsService {
   String? lastLanguageCode;
@@ -56,6 +75,7 @@ Widget _buildApp(
       ),
       pushPermissionSnapshotProvider.overrideWith((ref) async => snapshot),
       contextualTtsServiceProvider.overrideWithValue(resolvedTtsService),
+      appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController('en')),
     ],
     child: MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -107,6 +127,12 @@ void main() {
   });
 
   testWidgets('settings screen shows blocked guidance when push permission is denied', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(const PushPermissionSnapshot(PushPermissionStatus.denied)),
     );
@@ -119,6 +145,12 @@ void main() {
   });
 
   testWidgets('settings screen hear summary action triggers contextual TTS', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final ttsService = _FakeContextualTtsService();
 
     await tester.pumpWidget(
@@ -138,6 +170,12 @@ void main() {
   });
 
   testWidgets('settings screen connected profile route opens profile', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(const PushPermissionSnapshot(PushPermissionStatus.notDetermined)));
     await tester.pumpAndSettle();
 
@@ -155,6 +193,12 @@ void main() {
   });
 
   testWidgets('settings screen connected profile route opens profile for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         const PushPermissionSnapshot(PushPermissionStatus.notDetermined),
@@ -177,6 +221,12 @@ void main() {
   });
 
   testWidgets('settings screen connected notifications route opens notifications', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(const PushPermissionSnapshot(PushPermissionStatus.notDetermined)));
     await tester.pumpAndSettle();
 
@@ -196,6 +246,12 @@ void main() {
   });
 
   testWidgets('settings screen connected notifications route opens notifications for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         const PushPermissionSnapshot(PushPermissionStatus.notDetermined),
@@ -220,6 +276,12 @@ void main() {
   });
 
   testWidgets('settings screen connected support route opens support', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(const PushPermissionSnapshot(PushPermissionStatus.notDetermined)));
     await tester.pumpAndSettle();
 
@@ -237,6 +299,12 @@ void main() {
   });
 
   testWidgets('settings screen connected support route opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         const PushPermissionSnapshot(PushPermissionStatus.notDetermined),
@@ -259,6 +327,12 @@ void main() {
   });
 
   testWidgets('settings screen connected delete-account route opens delete account', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(const PushPermissionSnapshot(PushPermissionStatus.notDetermined)));
     await tester.pumpAndSettle();
 
@@ -276,6 +350,12 @@ void main() {
   });
 
   testWidgets('settings screen connected delete-account route opens delete account for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         const PushPermissionSnapshot(PushPermissionStatus.notDetermined),

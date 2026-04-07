@@ -106,7 +106,7 @@ void main() {
         // Check if Super Load related columns exist
         // NOTE: The actual column is 'super_status' not 'super_load_status'
         try {
-          final superLoads = await client
+          await client
               .from('loads')
               .select('id, is_super_load, super_status')
               .eq('is_super_load', true)
@@ -132,7 +132,7 @@ void main() {
       
       // Check for Super Load operations queue
       try {
-        final opsCases = await client
+        await client
             .from('operational_cases')
             .select()
             .eq('case_type', 'super_load_review')
@@ -180,7 +180,7 @@ void main() {
       try {
         // This will fail if RPC doesn't exist, but that's expected for pending features
         // We're just checking for schema presence
-        final result = await client.rpc('force_assign_super_load', params: {
+        await client.rpc('force_assign_super_load', params: {
           'p_load_id': '00000000-0000-0000-0000-000000000000',
           'p_trucker_id': '00000000-0000-0000-0000-000000000000',
         });
@@ -213,7 +213,7 @@ void main() {
       
       for (final docType in requiredSuperLoadDocs) {
         try {
-          final cases = await client
+          await client
               .from('verification_cases')
               .select()
               .eq('subject_type', docType)
@@ -261,8 +261,8 @@ void main() {
           .select('id, status')
           .not('status', 'in', allValidStatuses);
       
-      if (invalidLoads != null && (invalidLoads as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(invalidLoads as List).length} loads have invalid status values');
+      if (invalidLoads.isNotEmpty) {
+        fail('BUG DETECTED: ${invalidLoads.length} loads have invalid status values');
       }
     });
     
@@ -283,8 +283,8 @@ void main() {
           .select('id, status')
           .not('status', 'in', validStatuses);
       
-      if (invalidBookings != null && (invalidBookings as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(invalidBookings as List).length} booking requests have invalid status values');
+      if (invalidBookings.isNotEmpty) {
+        fail('BUG DETECTED: ${invalidBookings.length} booking requests have invalid status values');
       }
     });
     
@@ -307,8 +307,8 @@ void main() {
           .select('id, stage')
           .not('stage', 'in', validStages);
       
-      if (invalidTrips != null && (invalidTrips as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(invalidTrips as List).length} trips have invalid stage values');
+      if (invalidTrips.isNotEmpty) {
+        fail('BUG DETECTED: ${invalidTrips.length} trips have invalid stage values');
       }
     });
     
@@ -335,8 +335,8 @@ void main() {
           .select('id, type')
           .not('type', 'in', validTypes);
       
-      if (invalidNotifications != null && (invalidNotifications as List).isNotEmpty) {
-        fail('BUG DETECTED: ${(invalidNotifications as List).length} notifications have invalid type values');
+      if (invalidNotifications.isNotEmpty) {
+        fail('BUG DETECTED: ${invalidNotifications.length} notifications have invalid type values');
       }
     });
   });

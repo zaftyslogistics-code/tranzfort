@@ -99,17 +99,19 @@ class SupplierDashboardRepository {
     }
 
     try {
-      final activeLoads = await _backend.countLoadsByStatuses(userId, activeLoadStatuses);
-      final pendingBookings = await _backend.countPendingBookings(userId);
-      final inTransitTrips = await _backend.countTripsByStages(userId, const ['in_transit']);
-      final completedTrips = await _backend.countTripsByStages(userId, const ['completed']);
+      final results = await Future.wait([
+        _backend.countLoadsByStatuses(userId, activeLoadStatuses),
+        _backend.countPendingBookings(userId),
+        _backend.countTripsByStages(userId, const ['in_transit']),
+        _backend.countTripsByStages(userId, const ['completed']),
+      ]);
 
       return Success<SupplierDashboardStats>(
         SupplierDashboardStats(
-          activeLoads: activeLoads,
-          pendingBookings: pendingBookings,
-          inTransitTrips: inTransitTrips,
-          completedTrips: completedTrips,
+          activeLoads: results[0],
+          pendingBookings: results[1],
+          inTransitTrips: results[2],
+          completedTrips: results[3],
         ),
       );
     } catch (error, stackTrace) {

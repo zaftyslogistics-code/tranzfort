@@ -1,0 +1,41 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart
+00:00 +0: renders sanitized freight detail failure copy
+00:00 +1: renders trucker load detail success state
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Γé╣54000 - Negotiable": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart:389:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart line 389
+The test description was:
+  renders trucker load detail success state
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:01 +1 -1: renders trucker load detail success state [E]
+  Test failed. See exception logs above.
+  The test description was: renders trucker load detail success state
+  
+00:01 +1 -1: renders localized latest booking status on trucker load detail
+00:01 +2 -1: renders neutral fallback for unknown booking status on trucker load detail
+00:01 +3 -1: trucker load detail falls back to unknown for unsupported price type
+00:01 +4 -1: trucker load detail falls back to unknown for unsupported load status
+00:01 +5 -1: trucker load detail prompts truckers to add an approved truck before booking
+00:01 +6 -1: blocked no-approved-trucks CTA opens fleet after confirmation
+00:01 +7 -1: load-detail not-found fallback opens find loads route
+00:02 +8 -1: renders blocked booking guidance when unverified
+00:02 +9 -1: starts or resumes supplier chat from load detail
+00:02 +10 -1: opens report issue route from load detail with load context
+00:02 +11 -1: requires confirmation before submitting booking request
+00:02 +12 -1: successful booking request shows success snackbar
+00:02 +13 -1: Some tests failed.

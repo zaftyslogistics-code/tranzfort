@@ -1,0 +1,10 @@
+{
+  "timestamp": "20260307-225946",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260307-225946",
+  "failedSteps": [
+    "u_pack_existing_integration",
+    "a_pack_existing_integration",
+    "p2_supplier_baseline"
+  ],
+  "status": "FAIL"
+}

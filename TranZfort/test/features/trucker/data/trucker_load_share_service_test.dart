@@ -11,9 +11,13 @@ TruckerLoadDetail _detail({String? requiredBodyType = 'Open', List<int> required
       originLabel: 'Chandrapur, Maharashtra',
       originCity: 'Chandrapur',
       originState: 'Maharashtra',
+      originLat: 19.9615,
+      originLng: 79.2961,
       destinationLabel: 'Mumbai, Maharashtra',
       destinationCity: 'Mumbai',
       destinationState: 'Maharashtra',
+      destinationLat: 19.0760,
+      destinationLng: 72.8777,
       routeDistanceKm: 820,
       routeDurationMinutes: 780,
       material: 'Coal',
@@ -72,13 +76,13 @@ void main() {
     final payload = service.buildPayload(l10n, localizedPickupDate, _detail(priceType: 'per_ton'));
 
     expect(payload.subject, 'TranZfort Load load-1');
-    expect(payload.text, contains('TranZfort load: Chandrapur → Mumbai'));
+    expect(payload.text, contains('TranZfort load: Chandrapur > Mumbai'));
     expect(payload.text, contains('Material: Coal'));
     expect(payload.text, contains('Weight: 22 tonnes'));
-    expect(payload.text, contains('Truck: Open • 10/12 tyres'));
+    expect(payload.text, contains('Truck: Open - 10/12 tyres'));
     expect(payload.text, contains('Pickup 12 Mar 2026'));
-    expect(payload.text, contains('Price: ₹54000 • Per Ton'));
-    expect(payload.text, contains('Super Load • Payment Guarantee'));
+    expect(payload.text, contains('Price: ₹54000 - Per Ton'));
+    expect(payload.text, contains('Super Load - Payment Guarantee'));
     expect(payload.text, contains('Load reference: load-1'));
     expect(payload.text, isNot(contains('Amit Supplier')));
     expect(payload.text, isNot(contains('+91')));
@@ -100,7 +104,7 @@ void main() {
       _detail(requiredBodyType: null, requiredTyres: const <int>[], priceType: 'fixed'),
     );
 
-    expect(payload.text, contains('Truck: Any body • Any tyres'));
-    expect(payload.text, contains('Price: ₹54000 • Fixed'));
+    expect(payload.text, contains('Truck: Any body - Any tyres'));
+    expect(payload.text, contains('Price: ₹54000 - Fixed'));
   });
 }

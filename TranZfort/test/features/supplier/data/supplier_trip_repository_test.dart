@@ -143,7 +143,7 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, hasLength(1));
-    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
     expect(result.valueOrNull!.first.proofStatus, 'LR uploaded');
   });
 
@@ -184,7 +184,7 @@ void main() {
     final result = await repository.fetchTripDetail('trip-1');
 
     expect(result.isSuccess, isTrue);
-    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
     expect(result.valueOrNull?.podSignedUrl, 'https://example.com/trip-1/pod.jpg');
     expect(result.valueOrNull?.trucker.fullName, 'Ravi Trucker');
     expect(result.valueOrNull?.truckNumber, 'MH12AB1234');

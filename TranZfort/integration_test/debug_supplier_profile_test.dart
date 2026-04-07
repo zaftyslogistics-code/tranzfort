@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -7,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<void> _init() async {
+  Future<void> initSupabase() async {
     await dotenv.load(fileName: '.env');
     await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!,
@@ -17,7 +18,7 @@ void main() {
 
   group('DEBUG: Supplier profile', () {
     testWidgets('Check supplier profile for existing loads', (tester) async {
-      await _init();
+      await initSupabase();
       final client = Supabase.instance.client;
 
       // Sign in as trucker
@@ -33,12 +34,12 @@ void main() {
           .limit(1);
 
       if (loads.isEmpty) {
-        print('No loads found');
+        debugPrint('No loads found');
         return;
       }
 
       final supplierId = loads.first['supplier_id'];
-      print('Supplier ID from load: $supplierId');
+      debugPrint('Supplier ID from load: $supplierId');
 
       // Check supplier profile
       final profile = await client
@@ -46,7 +47,7 @@ void main() {
           .select('id, full_name, user_role_type')
           .eq('id', supplierId)
           .maybeSingle();
-      print('Supplier profile: $profile');
+      debugPrint('Supplier profile: $profile');
 
       // Check suppliers extension
       final supplier = await client
@@ -54,7 +55,7 @@ void main() {
           .select('id, company_name')
           .eq('id', supplierId)
           .maybeSingle();
-      print('Supplier extension: $supplier');
+      debugPrint('Supplier extension: $supplier');
 
       expect(profile, isNotNull, reason: 'Supplier profile should exist');
 

@@ -1,0 +1,737 @@
+Analyzing TranZfort...                                          
+
+  error - The getter 'scaffoldMessengerKey' isn't defined for the type 'AppSnackbar' - lib\main.dart:222:41 - undefined_getter
+  error - The named parameter 'city' isn't defined - lib\src\features\auth\providers\auth_providers.dart:93:7 - undefined_named_parameter
+  error - The named parameter 'state' isn't defined - lib\src\features\auth\providers\auth_providers.dart:94:7 - undefined_named_parameter
+  error - The named parameter 'locationLat' isn't defined - lib\src\features\auth\providers\auth_providers.dart:95:7 - undefined_named_parameter
+  error - The named parameter 'locationLng' isn't defined - lib\src\features\auth\providers\auth_providers.dart:96:7 - undefined_named_parameter
+  error - The named parameter 'locationSource' isn't defined - lib\src\features\auth\providers\auth_providers.dart:97:7 - undefined_named_parameter
+warning - The declaration '_SupplierTripDetailBody' isn't referenced - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:3:39 - extends_non_class
+  error - Undefined class 'SupplierTripDetail' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:4:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:9:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:9:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:9:16 - undefined_class
+  error - Undefined class 'WidgetRef' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:9:38 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:10:18 - undefined_identifier
+  error - The method 'supplierTripActionProvider' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:11:35 - undefined_method
+  error - The method 'ListView' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:14:12 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:15:22 - undefined_identifier
+  error - The method 'HeroActionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:17:9 - undefined_method
+  error - The method 'Column' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:21:18 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:22:33 - undefined_identifier
+  error - The method 'Wrap' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:24:15 - undefined_method
+  error - The method 'StatusBadge' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:28:19 - undefined_method
+  error - The method '_localizedSupplierTripStage' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:29:28 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:30:27 - undefined_identifier
+  error - The method 'StatusBadge' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:33:21 - undefined_method
+  error - The method '_localizedDisputeStatusLabel' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:34:30 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:35:29 - undefined_identifier
+  error - The name 'StatusPalette' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:36:38 - creation_with_non_type
+  error - Undefined name 'AppColors' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:37:37 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:38:37 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:43:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:44:15 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:46:24 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:51:15 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:53:11 - undefined_method
+  error - The method 'OutlineButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:60:21 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:62:45 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:65:17 - creation_with_non_type
+  error - The method 'DetailSectionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:67:9 - undefined_method
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:70:13 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:72:22 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:74:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:75:13 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:77:22 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:81:15 - creation_with_non_type
+  error - The method 'DetailSectionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:83:11 - undefined_method
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:87:17 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:89:26 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:93:19 - undefined_method
+  error - The method 'BoxDecoration' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:96:33 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:97:30 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:98:37 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:99:31 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:99:49 - undefined_identifier
+  error - The method 'ClipRRect' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:101:28 - undefined_method
+  error - Undefined name 'BorderRadius' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:102:37 - undefined_identifier
+  error - Undefined name 'Image' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:103:30 - undefined_identifier
+  error - Undefined name 'BoxFit' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:105:30 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:107:34 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:108:36 - undefined_identifier
+  error - Undefined name 'Alignment' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:109:40 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:110:36 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:116:23 - creation_with_non_type
+  error - The method 'OutlineButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:117:17 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:122:84 - creation_with_non_type
+  error - The method 'OutlineButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:124:17 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:132:17 - creation_with_non_type
+  error - The method 'DetailSectionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:133:11 - undefined_method
+  error - The method 'GradientButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:136:15 - undefined_method
+  error - The method 'supplierTripActionProvider' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:143:35 - undefined_method
+  error - Undefined name 'AppSnackbar' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:150:29 - undefined_identifier
+  error - Undefined name 'AppSnackbarVariant' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:153:40 - undefined_identifier
+  error - Undefined name 'AppSnackbar' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:157:29 - undefined_identifier
+  error - Undefined name 'AppSnackbarVariant' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:160:40 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:166:21 - creation_with_non_type
+  error - The method 'OutlineButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:167:15 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:172:45 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:174:21 - creation_with_non_type
+  error - The method 'OutlineButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:175:15 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:178:19 - undefined_identifier
+  error - The method 'ReportIssueContext' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:179:26 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:191:17 - creation_with_non_type
+  error - The method '_CompletedTripRatingSection' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:192:11 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:194:15 - creation_with_non_type
+  error - The method 'DetailSectionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:195:9 - undefined_method
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:198:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:199:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:200:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:202:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:203:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:206:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:207:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:210:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:211:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:213:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:214:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:216:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:217:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:220:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:221:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:224:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:225:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:229:15 - creation_with_non_type
+  error - The method 'DetailSectionCard' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:230:9 - undefined_method
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:233:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:234:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:235:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:237:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:238:15 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:241:21 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:242:15 - undefined_method
+  error - Undefined class 'AppLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:250:30 - undefined_class
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:271:34 - undefined_class
+  error - The method 'showDialog' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:272:11 - undefined_method
+  error - Undefined name 'AppLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:275:22 - undefined_identifier
+  error - The method 'Dialog' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:276:16 - undefined_method
+  error - The method 'Padding' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:277:18 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:278:28 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:279:20 - undefined_method
+  error - Undefined name 'MainAxisSize' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:280:29 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:282:17 - undefined_method
+  error - Undefined name 'MainAxisAlignment' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:283:38 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:285:21 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:285:40 - undefined_identifier
+  error - The method 'IconButton' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:286:21 - undefined_method
+  error - The name 'Icon' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:287:35 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:287:40 - undefined_identifier
+  error - Undefined name 'Navigator' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:288:40 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:292:23 - creation_with_non_type
+  error - The method 'Flexible' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:293:17 - undefined_method
+  error - The method 'InteractiveViewer' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:294:26 - undefined_method
+  error - Undefined name 'Image' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:295:28 - undefined_identifier
+  error - Undefined name 'BoxFit' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:297:28 - undefined_identifier
+  error - The method 'Padding' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:299:32 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:300:42 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_SupplierTripDetailBody' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:301:34 - undefined_method
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:315:26 - undefined_class
+  error - Undefined name 'MaterialLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:320:18 - undefined_identifier
+  error - Undefined name 'MaterialLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:321:18 - undefined_identifier
+  error - Undefined name 'TimeOfDay' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:322:7 - undefined_identifier
+  error - Undefined name 'MediaQuery' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:323:30 - undefined_identifier
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:328:22 - undefined_class
+  error - Undefined name 'MaterialLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\detail_body.dart:332:12 - undefined_identifier
+  error - Classes can only extend other classes - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:3:43 - extends_non_class
+  error - Undefined class 'SupplierTripDetail' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:4:9 - undefined_class
+  error - Undefined class 'ConsumerState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:9:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:9:46 - override_on_non_overriding_member
+  error - Classes can only extend other classes - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:12:48 - extends_non_class
+  error - Undefined class 'TextEditingController' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:13:14 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:17:8 - override_on_non_overriding_member
+  error - The method 'initState' isn't defined in a superclass of '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:18:11 - undefined_super_member
+  error - The method 'TextEditingController' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:19:26 - undefined_method
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:23:8 - override_on_non_overriding_member
+  error - The method 'dispose' isn't defined in a superclass of '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:25:11 - undefined_super_member
+  error - Undefined class 'Widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:29:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:29:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:29:16 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:30:18 - undefined_identifier
+  error - Undefined name 'ref' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:31:25 - undefined_identifier
+  error - The method 'supplierTripRatingProvider' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:31:35 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:31:62 - undefined_identifier
+  error - The method 'DetailSectionCard' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:38:12 - undefined_method
+  error - The name 'LoadingShimmer' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:42:17 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:44:11 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:46:20 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:48:17 - creation_with_non_type
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:55:19 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:56:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:58:17 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:59:11 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:63:20 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:66:11 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:68:20 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:70:17 - creation_with_non_type
+  error - Undefined name 'ref' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:75:15 - undefined_identifier
+  error - The method 'supplierTripRatingProvider' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:75:24 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:75:51 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:78:17 - creation_with_non_type
+  error - The method 'AppTextField' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:79:11 - undefined_method
+  error - Undefined name 'ref' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:85:15 - undefined_identifier
+  error - The method 'supplierTripRatingProvider' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:85:24 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:85:51 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:89:19 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:90:13 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:95:17 - creation_with_non_type
+  error - The method 'GradientButton' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:96:11 - undefined_method
+  error - Undefined name 'ref' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:102:42 - undefined_identifier
+  error - The method 'supplierTripRatingProvider' isn't defined for the type '_CompletedTripRatingSectionState' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:102:51 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:102:78 - undefined_identifier
+  error - Undefined name 'AppSnackbar' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:108:25 - undefined_identifier
+  error - Undefined name 'AppSnackbarVariant' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:111:36 - undefined_identifier
+  error - Undefined name 'AppSnackbar' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:115:25 - undefined_identifier
+  error - Undefined name 'AppSnackbarVariant' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:118:36 - undefined_identifier
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:129:31 - undefined_class
+  error - Undefined name 'MaterialLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:130:12 - undefined_identifier
+  error - Classes can only extend other classes - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:134:28 - extends_non_class
+  error - Undefined class 'ValueChanged' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:137:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:146:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:146:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:146:16 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:147:18 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_RatingStars' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:148:12 - undefined_method
+  error - The method 'IconButton' isn't defined for the type '_RatingStars' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:151:11 - undefined_method
+  error - The method 'Icon' isn't defined for the type '_RatingStars' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:153:19 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:154:40 - undefined_identifier
+  error - Undefined name 'Icons' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:154:61 - undefined_identifier
+  error - Undefined name 'Colors' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:155:47 - undefined_identifier
+  error - Undefined name 'Theme' - lib\src\features\supplier\presentation\trip_detail_sections\rating_section.dart:155:62 - undefined_identifier
+warning - The declaration '_ReadinessSection' isn't referenced - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:3:33 - extends_non_class
+  error - Undefined class 'AsyncValue' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:4:9 - undefined_class
+  error - The name 'TruckerProfile' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:4:20 - non_type_as_type_argument
+  error - Undefined class 'AsyncValue' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:5:9 - undefined_class
+  error - The name 'TruckerDashboardStats' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:5:20 - non_type_as_type_argument
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:13:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:14:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:14:35 - undefined_identifier
+  error - The name 'LoadingShimmer' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:16:20 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:20:14 - undefined_method
+  error - The method 'EmptyStateView' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:29:14 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:30:15 - undefined_identifier
+  error - The method 'TruckerDashboardStats' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:35:36 - undefined_method
+  error - The method 'Column' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:47:12 - undefined_method
+  error - The method 'StandardListCard' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:49:9 - undefined_method
+  error - The method 'statusPaletteFor' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:50:19 - undefined_method
+  error - The method '_localizedTruckerDashboardVerificationStatus' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:52:21 - undefined_method
+  error - The method 'StatusChip' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:53:21 - undefined_method
+  error - The method '_localizedTruckerDashboardVerificationStatus' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:53:39 - undefined_method
+  error - The method 'Text' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:56:17 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:56:78 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:58:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:58:32 - undefined_identifier
+  error - The method 'StandardListCard' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:59:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:60:52 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:60:72 - undefined_identifier
+  error - The method 'StatusChip' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:66:21 - undefined_method
+  error - The method 'Text' isn't defined for the type '_ReadinessSection' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:70:17 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:72:26 - undefined_identifier
+  error - Undefined class 'TruckerDashboardStats' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:80:42 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\readiness_section.dart:80:71 - undefined_class
+warning - The declaration '_RecentActivitySection' isn't referenced - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:3:38 - extends_non_class
+  error - Undefined class 'AsyncValue' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:4:9 - undefined_class
+  error - The name 'TruckerDashboardStats' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:4:20 - non_type_as_type_argument
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:5:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:13:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:14:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:14:35 - undefined_identifier
+  error - The name 'LoadingShimmer' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:15:48 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:17:14 - undefined_method
+  error - The method 'OutlineButton' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:20:17 - undefined_method
+  error - The name 'TruckerDashboardStats' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:23:55 - creation_with_non_type
+  error - The method 'EmptyStateView' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:26:14 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:27:15 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:32:12 - undefined_method
+  error - The method 'StandardListCard' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:34:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:35:19 - undefined_identifier
+  error - The method 'StatusChip' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:38:21 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:40:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:40:32 - undefined_identifier
+  error - The method 'StandardListCard' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:41:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:42:46 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:42:63 - undefined_identifier
+  error - The method 'StatusChip' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:49:21 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:52:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:52:34 - undefined_identifier
+  error - The method 'StandardListCard' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:53:11 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:54:21 - undefined_identifier
+  error - The method 'StatusChip' isn't defined for the type '_RecentActivitySection' - lib\src\features\trucker\presentation\dashboard_sections\recent_activity_section.dart:61:23 - undefined_method
+warning - The declaration '_DashboardRouteMapSection' isn't referenced - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:3:41 - extends_non_class
+  error - Undefined class 'TruckerTripsState' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:4:9 - undefined_class
+  error - Undefined class 'MapsLauncherService' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:5:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:13:16 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:14:18 - undefined_identifier
+  error - The name 'LoadingShimmer' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:17:20 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:21:14 - undefined_method
+  error - The method 'EmptyStateView' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:28:14 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:29:15 - undefined_identifier
+  error - Undefined name 'AppRoutes' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:33:36 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:52:12 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:53:22 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:53:37 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:54:19 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:55:16 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:56:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:56:45 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:57:17 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:57:35 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:59:14 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:60:29 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:62:11 - undefined_method
+  error - The method 'Container' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:64:15 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:65:32 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:66:29 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:67:26 - undefined_identifier
+  error - Undefined name 'BoxShape' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:68:26 - undefined_identifier
+  error - The name 'Icon' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:70:30 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:70:35 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:70:59 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:72:21 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:72:37 - undefined_identifier
+  error - The method 'Expanded' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:73:15 - undefined_method
+  error - The method 'Column' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:74:24 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:75:39 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:77:21 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:79:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:80:32 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:81:37 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:84:27 - creation_with_non_type
+  error - The method 'Text' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:85:21 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:87:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:87:85 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:94:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:94:34 - undefined_identifier
+  error - The method 'StaticRouteMap' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:96:13 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:104:17 - undefined_identifier
+  error - The method 'TruckerRoutePreviewArgs' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:105:24 - undefined_method
+  error - The method 'Container' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:116:13 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:118:30 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:119:29 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:120:27 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:122:27 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:123:24 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:124:31 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:124:53 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:125:25 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:125:43 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:127:22 - undefined_method
+  error - The name 'Icon' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:129:25 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:129:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:129:69 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:130:25 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:130:41 - undefined_identifier
+  error - The method 'Expanded' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:131:19 - undefined_method
+  error - The method 'Text' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:132:28 - undefined_method
+  error - Undefined name 'TextOverflow' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:135:33 - undefined_identifier
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:136:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:137:36 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:138:41 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:146:19 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:146:36 - undefined_identifier
+  error - The method 'SizedBox' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:147:13 - undefined_method
+  error - Undefined name 'PrimaryButton' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:149:22 - undefined_identifier
+  error - The name 'Icon' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:151:29 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:151:34 - undefined_identifier
+  error - Undefined name 'Colors' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:151:61 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:158:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:158:34 - undefined_identifier
+  error - The method 'SizedBox' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:159:11 - undefined_method
+  error - The method 'OutlineButton' isn't defined for the type '_DashboardRouteMapSection' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:161:20 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\trucker\presentation\dashboard_sections\route_map_section.dart:163:48 - undefined_identifier
+warning - The declaration '_DashboardStatsSection' isn't referenced - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:3:38 - extends_non_class
+  error - Undefined class 'AsyncValue' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:4:9 - undefined_class
+  error - The name 'TruckerDashboardStats' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:4:20 - non_type_as_type_argument
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:5:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:13:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:14:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:14:35 - undefined_identifier
+  error - The name 'LoadingShimmer' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:16:20 - creation_with_non_type
+  error - The method 'WarningBlock' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:20:14 - undefined_method
+  error - The method 'OutlineButton' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:23:17 - undefined_method
+  error - The name 'TruckerDashboardStats' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:28:15 - creation_with_non_type
+  error - Undefined name 'GridView' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:40:12 - undefined_identifier
+  error - The name 'NeverScrollableScrollPhysics' isn't a class - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:42:22 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:44:25 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:45:24 - undefined_identifier
+  error - The method 'StatCard' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:48:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:51:19 - undefined_identifier
+  error - The method 'StatCard' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:53:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:56:19 - undefined_identifier
+  error - The method 'StatCard' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:58:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:61:19 - undefined_identifier
+  error - The method 'StatCard' isn't defined for the type '_DashboardStatsSection' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:63:9 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\dashboard_sections\stats_section.dart:66:19 - undefined_identifier
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:3:37 - extends_non_class
+  error - Undefined class 'MarketplaceSearchFilters' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:4:9 - undefined_class
+  error - Undefined class 'State' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:9:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:9:32 - override_on_non_overriding_member
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:12:42 - extends_non_class
+  error - Undefined class 'TextEditingController' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:15:8 - undefined_class
+  error - Undefined class 'TextEditingController' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:16:8 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:19:8 - override_on_non_overriding_member
+  error - The method 'initState' isn't defined in a superclass of '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:20:11 - undefined_super_member
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:21:17 - undefined_identifier
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:22:29 - undefined_identifier
+  error - The method 'TextEditingController' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:23:27 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:23:55 - undefined_identifier
+  error - The method 'TextEditingController' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:24:27 - undefined_method
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:24:55 - undefined_identifier
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:28:8 - override_on_non_overriding_member
+  error - The method 'dispose' isn't defined in a superclass of '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:31:11 - undefined_super_member
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:35:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:35:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:35:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:36:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:36:35 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:37:12 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:38:27 - undefined_identifier
+  error - The method 'AppDropdown' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:40:9 - undefined_method
+  error - The method 'DropdownMenuItem' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:44:13 - undefined_method
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:44:52 - undefined_method
+  error - The method 'DropdownMenuItem' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:45:13 - undefined_method
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:45:55 - undefined_method
+  error - The method 'DropdownMenuItem' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:46:13 - undefined_method
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:46:57 - undefined_method
+  error - The method 'DropdownMenuItem' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:47:13 - undefined_method
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:47:54 - undefined_method
+  error - The method 'setState' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:49:33 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:51:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:51:32 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:52:9 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:52:64 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:53:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:53:32 - undefined_identifier
+  error - The method 'Wrap' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:54:9 - undefined_method
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:55:20 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:56:23 - undefined_identifier
+  error - The method 'FilterChip' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:59:15 - undefined_method
+  error - The method 'Text' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:60:24 - undefined_method
+  error - The method 'setState' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:63:19 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:75:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:75:32 - undefined_identifier
+  error - The method 'AppTextField' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:76:9 - undefined_method
+  error - Undefined name 'TextInputType' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:79:31 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:81:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:81:32 - undefined_identifier
+  error - The method 'AppTextField' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:82:9 - undefined_method
+  error - Undefined name 'TextInputType' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:85:31 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:87:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:87:32 - undefined_identifier
+  error - The method 'PrimaryButton' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:88:9 - undefined_method
+  error - Undefined name 'Navigator' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:91:13 - undefined_identifier
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:92:15 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:101:15 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:101:32 - undefined_identifier
+  error - The method 'OutlineButton' isn't defined for the type '_AdvancedFiltersSheetState' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:102:9 - undefined_method
+  error - Undefined name 'Navigator' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:105:13 - undefined_identifier
+  error - Undefined name 'widget' - lib\src\features\trucker\presentation\find_loads_sections\advanced_filters_sheet.dart:106:15 - undefined_identifier
+warning - The declaration '_MarketplaceLoadCard' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:3:36 - extends_non_class
+  error - Undefined class 'MarketplaceLoadItem' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:4:9 - undefined_class
+  error - The name 'TruckerApprovedTruck' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:5:14 - non_type_as_type_argument
+  error - Undefined class 'TripCostingService' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:7:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:17:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:17:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:17:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:18:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:18:35 - undefined_identifier
+  error - The method 'statusPaletteFor' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:19:21 - undefined_method
+  error - The method 'StandardListCard' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:30:12 - undefined_method
+  error - The method 'StatusChip' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:36:17 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:37:36 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:38:15 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:39:29 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:41:11 - undefined_method
+  error - The method 'Expanded' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:43:15 - undefined_method
+  error - The method 'Container' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:44:24 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:45:34 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:46:33 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:47:31 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:49:31 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:50:28 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:51:35 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:51:57 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:52:29 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:52:47 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:54:26 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:56:28 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:57:34 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:58:39 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:63:21 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:63:37 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:64:15 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:65:32 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:66:31 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:67:29 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:69:29 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:70:26 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:71:33 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:71:55 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:72:27 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:72:45 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:74:24 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:76:26 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:77:32 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:78:37 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:85:19 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:85:36 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:86:13 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:88:30 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:88:63 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:88:88 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:89:27 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:90:24 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:91:31 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:91:53 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:92:25 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:92:43 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:94:22 - undefined_method
+  error - The name 'Icon' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:96:25 - creation_with_non_type
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:96:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:96:66 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:97:25 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:97:41 - undefined_identifier
+  error - The method 'Expanded' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:98:19 - undefined_method
+  error - The method 'Text' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:99:28 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:101:30 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:102:36 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:103:41 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:107:19 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:109:28 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:110:34 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:111:39 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:118:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:118:34 - undefined_identifier
+  error - The method 'Wrap' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:119:11 - undefined_method
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:120:22 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:121:25 - undefined_identifier
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:123:35 - undefined_identifier
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:124:35 - undefined_identifier
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:125:35 - undefined_identifier
+  error - The method '_localizedBodyType' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:125:73 - undefined_method
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:128:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:128:34 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:129:11 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:135:20 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:136:26 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:139:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:139:34 - undefined_identifier
+  error - The method 'TextActionButton' isn't defined for the type '_MarketplaceLoadCard' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:140:11 - undefined_method
+  error - Undefined name 'AppRoutes' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:142:46 - undefined_identifier
+warning - The declaration '_relativeAge' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:149:10 - unused_element
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:182:31 - undefined_class
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:194:29 - extends_non_class
+  error - Undefined class 'IconData' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:195:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:204:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:204:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:204:16 - undefined_class
+  error - The method 'Container' isn't defined for the type '_LoadMetaChip' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:205:12 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:206:22 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:207:21 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:208:19 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_LoadMetaChip' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:210:19 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:211:16 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:212:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:212:45 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:213:17 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:213:35 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_LoadMetaChip' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:215:14 - undefined_method
+  error - Undefined name 'MainAxisSize' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:216:23 - undefined_identifier
+  error - The method 'Icon' isn't defined for the type '_LoadMetaChip' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:218:11 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:218:39 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:219:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:219:33 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_LoadMetaChip' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:220:11 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:222:20 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:223:26 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:224:31 - undefined_identifier
+warning - The declaration '_SuggestionList' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:3:31 - extends_non_class
+  error - The name 'TruckerCitySuggestion' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:4:14 - non_type_as_type_argument
+  error - Undefined class 'ValueChanged' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:5:9 - undefined_class
+  error - The name 'TruckerCitySuggestion' isn't a type, so it can't be used as a type argument - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:5:22 - non_type_as_type_argument
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:13:16 - undefined_class
+  error - The method 'Card' isn't defined for the type '_SuggestionList' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:14:12 - undefined_method
+  error - The method 'Column' isn't defined for the type '_SuggestionList' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:15:14 - undefined_method
+  error - The method 'ListTile' isn't defined for the type '_SuggestionList' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:18:13 - undefined_method
+  error - The method 'Text' isn't defined for the type '_SuggestionList' - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:20:22 - undefined_method
+  error - The name 'Divider' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\suggestion_list.dart:23:56 - creation_with_non_type
+warning - The declaration '_SuperLoadStatusBlock' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:3:37 - extends_non_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:13:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:13:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:13:16 - undefined_class
+  error - Undefined name 'SizedBox' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:15:20 - undefined_identifier
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:18:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:18:35 - undefined_identifier
+  error - The method 'Container' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:21:12 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:23:22 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:23:55 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:23:80 - undefined_identifier
+  error - The method 'BoxDecoration' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:24:19 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:25:29 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:25:49 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:26:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:26:45 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:27:17 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:27:48 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:27:89 - undefined_identifier
+  error - The method 'Row' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:29:14 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:30:29 - undefined_identifier
+  error - The method 'Icon' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:32:11 - undefined_method
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:33:26 - undefined_identifier
+  error - Undefined name 'Icons' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:33:56 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:35:33 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:35:51 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:37:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:37:33 - undefined_identifier
+  error - The method 'Expanded' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:38:11 - undefined_method
+  error - The method 'Column' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:39:20 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:40:35 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:42:17 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:44:26 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:45:45 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:45:63 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:46:37 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_SuperLoadStatusBlock' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:49:17 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:51:26 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:52:45 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:52:63 - undefined_identifier
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:63:39 - undefined_class
+warning - The declaration '_hasSuperLoadState' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:82:6 - unused_element
+warning - The declaration '_FindLoadsTabsHeader' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:3:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:3:36 - extends_non_class
+  error - Undefined class 'FindLoadsState' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:4:9 - undefined_class
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:5:9 - undefined_class
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:6:9 - undefined_class
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:7:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:17:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:17:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:17:16 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:18:18 - undefined_identifier
+  error - The method 'DecoratedBox' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:19:12 - undefined_method
+  error - The method 'BoxDecoration' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:20:19 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:21:16 - undefined_identifier
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:22:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:22:45 - undefined_identifier
+  error - Undefined name 'Border' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:23:17 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:23:35 - undefined_identifier
+  error - The method 'Padding' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:25:14 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:26:24 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:27:23 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:28:21 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:30:16 - undefined_method
+  error - Undefined name 'MainAxisSize' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:31:25 - undefined_identifier
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:32:31 - undefined_identifier
+  error - The method 'SizedBox' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:34:13 - undefined_method
+  error - The method 'Row' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:36:22 - undefined_method
+  error - The method 'Expanded' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:38:19 - undefined_method
+  error - Undefined name 'FindLoadsTab' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:41:54 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:45:25 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:45:41 - undefined_identifier
+  error - The method 'Expanded' isn't defined for the type '_FindLoadsTabsHeader' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:46:19 - undefined_method
+  error - Undefined name 'FindLoadsTab' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:49:54 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:57:21 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:57:38 - undefined_identifier
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:71:34 - extends_non_class
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:74:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:83:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:83:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:83:16 - undefined_class
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:84:19 - undefined_identifier
+  error - The method 'Material' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:85:12 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:86:25 - undefined_identifier
+  error - Undefined name 'Colors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:86:45 - undefined_identifier
+  error - The method 'RoundedRectangleBorder' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:87:14 - undefined_method
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:88:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:88:45 - undefined_identifier
+  error - The method 'BorderSide' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:89:15 - undefined_method
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:90:29 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:90:49 - undefined_identifier
+  error - The method 'InkWell' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:94:14 - undefined_method
+  error - Undefined name 'BorderRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:96:23 - undefined_identifier
+  error - Undefined name 'AppRadius' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:96:45 - undefined_identifier
+  error - The method 'Center' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:97:16 - undefined_method
+  error - The method 'Padding' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:98:18 - undefined_method
+  error - Undefined name 'EdgeInsets' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:99:28 - undefined_identifier
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:99:61 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_LoadFeedTabButton' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:100:20 - undefined_method
+  error - Undefined name 'TextOverflow' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:103:25 - undefined_identifier
+  error - Undefined name 'TextAlign' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:104:26 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:106:35 - undefined_identifier
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:106:61 - undefined_identifier
+  error - Undefined name 'FontWeight' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:107:29 - undefined_identifier
+warning - The declaration '_PinnedHeaderDelegate' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:117:7 - unused_element
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:117:37 - extends_non_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:119:9 - undefined_class
+warning - The getter doesn't override an inherited getter - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:127:14 - override_on_non_overriding_member
+warning - The getter doesn't override an inherited getter - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:130:14 - override_on_non_overriding_member
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:133:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:133:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:133:16 - undefined_class
+  error - The method 'DecoratedBox' isn't defined for the type '_PinnedHeaderDelegate' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:134:12 - undefined_method
+  error - The name 'BoxDecoration' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:135:25 - creation_with_non_type
+  error - Undefined name 'AppColors' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:136:19 - undefined_identifier
+  error - The method 'Align' isn't defined for the type '_PinnedHeaderDelegate' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:138:14 - undefined_method
+  error - Undefined name 'Alignment' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:139:20 - undefined_identifier
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:146:8 - override_on_non_overriding_member
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:151:27 - undefined_class
+  error - Classes can only extend other classes - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:167:36 - extends_non_class
+  error - Undefined class 'MarketplaceSearchFilters' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:168:9 - undefined_class
+  error - Undefined class 'VoidCallback' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:170:9 - undefined_class
+  error - Undefined class 'Widget' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:179:3 - undefined_class
+warning - The method doesn't override an inherited method - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:179:10 - override_on_non_overriding_member
+  error - Undefined class 'BuildContext' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:179:16 - undefined_class
+  error - Undefined class 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:180:11 - undefined_class
+  error - Undefined name 'AppLocalizations' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:180:35 - undefined_identifier
+  error - The method 'Column' isn't defined for the type '_ActiveFilterSummary' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:195:12 - undefined_method
+  error - Undefined name 'CrossAxisAlignment' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:196:27 - undefined_identifier
+  error - The method 'Text' isn't defined for the type '_ActiveFilterSummary' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:198:9 - undefined_method
+  error - Undefined name 'Theme' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:202:18 - undefined_identifier
+  error - The name 'SizedBox' isn't a class - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:205:17 - creation_with_non_type
+  error - Undefined name 'AppSpacing' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:205:34 - undefined_identifier
+  error - The method 'TextActionButton' isn't defined for the type '_ActiveFilterSummary' - lib\src\features\trucker\presentation\find_loads_sections\tabs_header.dart:206:11 - undefined_method
+  error - The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations' - lib\src\shared\widgets\language_toggle_action.dart:57:21 - undefined_getter
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+
+733 issues found. (ran in 7.6s)

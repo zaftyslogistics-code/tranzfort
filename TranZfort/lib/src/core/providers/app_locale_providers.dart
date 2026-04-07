@@ -24,7 +24,7 @@ class AppLocaleState {
 
   factory AppLocaleState.initial() {
     return const AppLocaleState(
-      locale: Locale('hi'),
+      locale: Locale('en'),
       isInitialized: false,
       isSaving: false,
       failure: null,
@@ -63,9 +63,10 @@ class AppLocaleController extends StateNotifier<AppLocaleState> {
     final preferences = await SharedPreferences.getInstance();
     final savedLanguageCode = _normalizeLanguageCode(preferences.getString(_appLanguagePreferenceKey));
     final profileLanguageCode = _normalizeLanguageCode(_profileLanguageCode);
-    final resolvedLanguageCode = savedLanguageCode ?? profileLanguageCode ?? 'hi';
+    // Default to 'en' (English) to align with UserProfile.preferredLanguage default
+    final resolvedLanguageCode = savedLanguageCode ?? profileLanguageCode ?? 'en';
     if (savedLanguageCode == null) {
-      await preferences.setString(_appLanguagePreferenceKey, profileLanguageCode ?? 'hi');
+      await preferences.setString(_appLanguagePreferenceKey, profileLanguageCode ?? 'en');
     }
     if (!mounted) {
       return;

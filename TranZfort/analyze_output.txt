@@ -1,0 +1,86 @@
+Analyzing TranZfort...                                          
+
+   info - The private field _isGoogleLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:77:8 - prefer_final_fields
+   info - The private field _isEmailLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:78:8 - prefer_final_fields
+   info - The private field _isForgotPasswordLoading could be 'final' - lib\src\features\auth\presentation\auth_screen_sections.dart:80:8 - prefer_final_fields
+  error - The expression doesn't evaluate to a function, so it can't be invoked - lib\src\features\auth\presentation\auth_screen_sections.dart:168:13 - invocation_of_non_function_expression
+warning - The value of the local variable 'state' isn't used - lib\src\features\auth\presentation\auth_screen_sections.dart:186:11 - unused_local_variable
+warning - The declaration '_openCheckEmailState' isn't referenced - lib\src\features\auth\presentation\auth_screen_sections.dart:312:8 - unused_element
+  error - The expression doesn't evaluate to a function, so it can't be invoked - lib\src\features\auth\presentation\auth_screen_sections.dart:469:19 - invocation_of_non_function_expression
+warning - Unused import: '../data/auth_repository.dart' - lib\src\features\auth\presentation\auth_screens.dart:21:8 - unused_import
+warning - Unused import: '../data/auth_repository.dart' - lib\src\features\auth\presentation\onboarding_screens.dart:21:8 - unused_import
+   info - The private field _isSubmitting could be 'final' - lib\src\features\auth\presentation\onboarding_screens.dart:125:8 - prefer_final_fields
+warning - The value of the field '_isSubmitting' isn't used - lib\src\features\auth\presentation\onboarding_screens.dart:125:8 - unused_field
+  error - The expression doesn't evaluate to a function, so it can't be invoked - lib\src\features\auth\presentation\onboarding_screens.dart:191:42 - invocation_of_non_function_expression
+   info - The private field _isSubmitting could be 'final' - lib\src\features\auth\presentation\onboarding_screens.dart:271:8 - prefer_final_fields
+warning - The value of the local variable 'state' isn't used - lib\src\features\auth\presentation\onboarding_screens.dart:391:11 - unused_local_variable
+  error - The expression doesn't evaluate to a function, so it can't be invoked - lib\src\features\auth\presentation\onboarding_screens.dart:395:24 - invocation_of_non_function_expression
+  error - The getter 'profilePhotoStatusUnderReview' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:220:84 - undefined_getter
+  error - The getter 'profilePhotoStatusRejected' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:221:26 - undefined_getter
+  error - The getter 'profilePhotoStatusApprovedRecent' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:222:26 - undefined_getter
+  error - The getter 'profilePhotoStatusApproved' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:224:18 - undefined_getter
+  error - The getter 'profilePhotoStatusNone' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:225:18 - undefined_getter
+  error - The getter 'profilePhotoSectionTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:249:25 - undefined_getter
+  error - The getter 'profilePhotoStatusLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:265:37 - undefined_getter
+  error - The getter 'profilePhotoHelperText' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:268:24 - undefined_getter
+  error - The getter 'profilePhotoSubmittedLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:273:33 - undefined_getter
+  error - The getter 'profilePhotoRejectionReasonLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:278:33 - undefined_getter
+  error - The getter 'profilePhotoPendingCardTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:290:40 - undefined_getter
+  error - The getter 'profilePhotoRejectedCardTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:291:40 - undefined_getter
+  error - The getter 'profilePhotoPendingCardMessage' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:293:40 - undefined_getter
+  error - The getter 'profilePhotoRejectedCardMessage' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:294:40 - undefined_getter
+  error - The getter 'profilePhotoChangeAction' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:306:32 - undefined_getter
+  error - The getter 'profilePhotoAddAction' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:307:32 - undefined_getter
+  error - The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:317:26 - undefined_getter
+  error - The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:430:18 - undefined_getter
+  error - The getter 'settingsTtsPreviewTextHi' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:603:18 - undefined_getter
+  error - The getter 'settingsTtsPreviewTextEn' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:604:18 - undefined_getter
+  error - The getter 'settingsTtsSpeechRateSlow' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:613:35 - undefined_getter
+  error - The getter 'settingsTtsSpeechRateFast' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:614:35 - undefined_getter
+  error - The getter 'settingsTtsSpeechRateNormal' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:615:19 - undefined_getter
+  error - The getter 'settingsTtsTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:619:19 - undefined_getter
+  error - The getter 'settingsTtsMutedLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:625:30 - undefined_getter
+  error - The getter 'settingsTtsMutedHelper' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:626:43 - undefined_getter
+  error - The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:626:73 - undefined_getter
+   info - 'activeColor' is deprecated and shouldn't be used. Use activeThumbColor instead. This feature was deprecated after v3.31.0-2.0.pre - lib\src\features\shell\presentation\shell_account_screens.dart:630:13 - deprecated_member_use
+  error - The getter 'settingsTtsSpeechRateLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:637:18 - undefined_getter
+  error - The getter 'settingsTtsSpeechRateHelper' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:644:18 - undefined_getter
+  error - The getter 'settingsTtsLanguageModeLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:676:25 - undefined_getter
+  error - The getter 'settingsTtsLanguageModeHelper' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:678:30 - undefined_getter
+  error - The getter 'settingsTtsLanguageModeAuto' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:682:34 - undefined_getter
+  error - The getter 'settingsTtsLanguageModeHindi' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:686:34 - undefined_getter
+  error - The getter 'settingsTtsLanguageModeEnglish' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:690:34 - undefined_getter
+  error - The getter 'settingsTtsPreviewVoiceAction' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:708:31 - undefined_getter
+  error - The getter 'settingsTtsPreviewVoiceHelper' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\shell_account_screens.dart:716:64 - undefined_getter
+  error - The getter 'profilePhotoStatusUnderReview' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\user_app_shell.dart:213:84 - undefined_getter
+  error - The getter 'profilePhotoStatusRejected' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\user_app_shell.dart:214:26 - undefined_getter
+  error - The getter 'profilePhotoStatusApproved' isn't defined for the type 'AppLocalizations' - lib\src\features\shell\presentation\user_app_shell.dart:215:26 - undefined_getter
+warning - Unused import: '../../support/presentation/report_issue_screen.dart' - lib\src\features\supplier\presentation\supplier_trip_detail_screen.dart:17:8 - unused_import
+  error - The getter 'postLoadSubmissionInProgress' isn't defined for the type 'AppLocalizations' - lib\src\features\supplier\providers\post_load_provider.dart:369:26 - undefined_getter
+  error - The getter 'postLoadValidationCorrectErrors' isn't defined for the type 'AppLocalizations' - lib\src\features\supplier\providers\post_load_provider.dart:383:26 - undefined_getter
+warning - The declaration '_relativeAge' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\marketplace_load_card.dart:149:10 - unused_element
+warning - The declaration '_SuperLoadStatusBlock' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:3:7 - unused_element
+warning - The declaration '_hasSuperLoadState' isn't referenced - lib\src\features\trucker\presentation\find_loads_sections\super_load_status_block.dart:82:6 - unused_element
+warning - Unused import: '../../../core/providers/tts_state_provider.dart' - lib\src\features\trucker\presentation\trucker_dashboard_screen.dart:7:8 - unused_import
+  error - The getter 'verificationPendingStatusTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen.dart:79:27 - undefined_getter
+  error - The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen.dart:410:21 - undefined_getter
+  error - The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen.dart:449:20 - undefined_method
+  error - The getter 'verificationValidationBusinessLicenceRequired' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:231:63 - undefined_getter
+  error - The getter 'verificationValidationLocationCityRequired' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:232:60 - undefined_getter
+  error - The getter 'verificationProfilePhotoBlockedUploadNew' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:243:19 - undefined_getter
+  error - The getter 'verificationProfilePhotoBlockedUploadDifferent' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:246:19 - undefined_getter
+  error - The getter 'verificationProfilePhotoBlockedAlreadyUnderReview' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:249:19 - undefined_getter
+  error - The getter 'verificationReadinessLocationLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:451:23 - undefined_getter
+  error - The getter 'verificationReadinessTruckWithRcLabel' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:457:23 - undefined_getter
+  error - The getter 'verificationSubmitSectionTruckerTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:468:18 - undefined_getter
+  error - The getter 'verificationSubmitSectionTitle' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:469:18 - undefined_getter
+  error - The getter 'verificationSubmitSectionSubtitle' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:472:16 - undefined_getter
+  error - The method 'verificationChecklistProgress' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:494:26 - undefined_method
+  error - The getter 'verificationSubmitProfilePhotoForReviewAction' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:541:24 - undefined_getter
+  error - The getter 'verificationProfilePhotoSubmittedSuccess' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:554:38 - undefined_getter
+  error - The getter 'verificationProfilePhotoApprovalGuidance' isn't defined for the type 'AppLocalizations' - lib\src\features\verification\presentation\verification_screen_sections.dart:568:22 - undefined_getter
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\shared\widgets\content_cards.dart:51:15 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\shared\widgets\content_cards.dart:239:17 - use_null_aware_elements
+  error - The getter 'appBarLanguageToggleTooltip' isn't defined for the type 'AppLocalizations' - lib\src\shared\widgets\language_toggle_action.dart:57:21 - undefined_getter
+
+82 issues found. (ran in 96.2s)

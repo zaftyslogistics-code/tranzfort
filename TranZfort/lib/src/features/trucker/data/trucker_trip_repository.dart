@@ -8,10 +8,12 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/models/domain_statuses.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/services/route_snapshot_service.dart';
+import '../../../core/utils/map_readers.dart';
+import 'trucker_trip_repository_models.dart';
+import 'trucker_trip_repository_backend.dart';
 
-part 'trucker_trip_repository_models.dart';
-part 'trucker_trip_repository_backend.dart';
+export 'trucker_trip_repository_models.dart';
+export 'trucker_trip_repository_backend.dart';
 
 class TruckerTripsRepository {
   final TruckerTripsBackend _backend;
@@ -351,21 +353,21 @@ class TruckerTripsRepository {
     return TruckerTrip(
       id: (map['id'] ?? '').toString(),
       loadId: (map['load_id'] ?? '').toString(),
-      routeLabel: destination.isEmpty ? origin : '$origin → $destination',
+      routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       originLabel: origin,
       destinationLabel: destination.isEmpty ? null : destination,
-      originLat: _readDouble(loadMap['origin_lat']),
-      originLng: _readDouble(loadMap['origin_lng']),
-      destinationLat: _readDouble(loadMap['destination_lat']),
-      destinationLng: _readDouble(loadMap['destination_lng']),
+      originLat: readDouble(loadMap['origin_lat']),
+      originLng: readDouble(loadMap['origin_lng']),
+      destinationLat: readDouble(loadMap['destination_lat']),
+      destinationLng: readDouble(loadMap['destination_lng']),
       material: material,
       stage: (map['stage'] ?? 'assigned').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),
       assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
-      deliveredAt: _readDate(map['delivered_at']),
-      podUploadedAt: _readDate(map['pod_uploaded_at']),
-      completedAt: _readDate(map['completed_at']),
+      deliveredAt: readDate(map['delivered_at']),
+      podUploadedAt: readDate(map['pod_uploaded_at']),
+      completedAt: readDate(map['completed_at']),
       hasLrProof: ((map['lr_document_path'] ?? '').toString()).trim().isNotEmpty,
       hasPodProof: ((map['pod_document_path'] ?? '').toString()).trim().isNotEmpty,
     );
@@ -375,7 +377,7 @@ class TruckerTripsRepository {
     return TruckerTripRating(
       id: (map['id'] ?? '').toString(),
       score: _readIntNullable(map['score']) ?? 0,
-      comment: _nullableString(map['comment']),
+      comment: nullableString(map['comment']),
       createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
     );
   }
@@ -400,31 +402,31 @@ class TruckerTripsRepository {
       truckerId: (map['trucker_id'] ?? '').toString(),
       supplierId: (map['supplier_id'] ?? '').toString(),
       stage: (map['stage'] ?? 'assigned').toString(),
-      routeLabel: destinationLabel.isEmpty ? originLabel : '$originLabel → $destinationLabel',
+      routeLabel: destinationLabel.isEmpty ? originLabel : '$originLabel > $destinationLabel',
       material: material,
       truckId: (map['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),
-      truckBodyType: _nullableString(truckMap['body_type']),
+      truckBodyType: nullableString(truckMap['body_type']),
       truckTyres: _readIntNullable(truckMap['tyres']),
       originLabel: originLabel,
       destinationLabel: destinationLabel,
-      originCity: _nullableString(loadMap['origin_city']),
-      originState: _nullableString(loadMap['origin_state']),
-      originLat: _readDouble(loadMap['origin_lat']),
-      originLng: _readDouble(loadMap['origin_lng']),
-      destinationCity: _nullableString(loadMap['destination_city']),
-      destinationState: _nullableString(loadMap['destination_state']),
-      destinationLat: _readDouble(loadMap['destination_lat']),
-      destinationLng: _readDouble(loadMap['destination_lng']),
-      routeDistanceKm: _readDouble(loadMap['route_distance_km']),
+      originCity: nullableString(loadMap['origin_city']),
+      originState: nullableString(loadMap['origin_state']),
+      originLat: readDouble(loadMap['origin_lat']),
+      originLng: readDouble(loadMap['origin_lng']),
+      destinationCity: nullableString(loadMap['destination_city']),
+      destinationState: nullableString(loadMap['destination_state']),
+      destinationLat: readDouble(loadMap['destination_lat']),
+      destinationLng: readDouble(loadMap['destination_lng']),
+      routeDistanceKm: readDouble(loadMap['route_distance_km']),
       routeDurationMinutes: _readIntNullable(loadMap['route_duration_minutes']),
-      routeSnapshotSource: _nullableString(loadMap['route_snapshot_source']),
-      pickupDate: _readDate(loadMap['pickup_date']),
+      routeSnapshotSource: nullableString(loadMap['route_snapshot_source']),
+      pickupDate: readDate(loadMap['pickup_date']),
       assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
-      startedAt: _readDate(map['started_at']),
-      deliveredAt: _readDate(map['delivered_at']),
-      podUploadedAt: _readDate(map['pod_uploaded_at']),
-      completedAt: _readDate(map['completed_at']),
+      startedAt: readDate(map['started_at']),
+      deliveredAt: readDate(map['delivered_at']),
+      podUploadedAt: readDate(map['pod_uploaded_at']),
+      completedAt: readDate(map['completed_at']),
       hasLrProof: ((map['lr_document_path'] ?? '').toString()).trim().isNotEmpty,
       hasPodProof: ((map['pod_document_path'] ?? '').toString()).trim().isNotEmpty,
       disputeSummary: disputeSummary == null
@@ -437,27 +439,11 @@ class TruckerTripsRepository {
       supplier: TruckerTripSupplierSummary(
         id: (supplierProfile['id'] ?? '').toString(),
         fullName: (supplierProfile['full_name'] ?? 'Supplier').toString(),
-        companyName: _nullableString(supplierExtension?['company_name']),
-        mobile: _nullableString(supplierProfile['mobile']),
+        companyName: nullableString(supplierExtension?['company_name']),
+        mobile: nullableString(supplierProfile['mobile']),
         verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
       ),
     );
-  }
-
-  DateTime? _readDate(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    if (raw.isEmpty) {
-      return null;
-    }
-    return DateTime.parse(raw);
-  }
-
-  String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    if (raw.isEmpty) {
-      return null;
-    }
-    return raw;
   }
 
   int? _readIntNullable(Object? value) {
@@ -507,12 +493,7 @@ class TruckerTripsRepository {
     return ServerFailure(debugInfo: error.details?.toString());
   }
 
-  double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
-  }
+  // Private helpers removed - using shared map_readers.dart helpers
 }
 
 final truckerTripsRepositoryProvider = Provider<TruckerTripsRepository>((ref) {

@@ -3,6 +3,7 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../l10n/app_localizations.dart';
 import 'action_buttons.dart';
 
 class EmptyStateView extends StatelessWidget {
@@ -85,12 +86,12 @@ class LoadingShimmer extends StatelessWidget {
 
 class ConnectivityBanner extends StatelessWidget {
   final bool isOnline;
-  final String offlineMessage;
+  final String? offlineMessage;
 
   const ConnectivityBanner({
     super.key,
     required this.isOnline,
-    this.offlineMessage = 'You are offline. Actions that need network access should stay disabled.',
+    this.offlineMessage,
   });
 
   @override
@@ -112,7 +113,7 @@ class ConnectivityBanner extends StatelessWidget {
           const SizedBox(width: AppSpacing.sm),
           Expanded(
             child: Text(
-              offlineMessage,
+              offlineMessage ?? AppLocalizations.of(context).connectivityOfflineActionsMessage,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.white),
             ),
           ),
@@ -130,6 +131,8 @@ enum AppSnackbarVariant {
 
 class AppSnackbar {
   AppSnackbar._();
+
+  static final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   static SnackBar build({
     required BuildContext context,

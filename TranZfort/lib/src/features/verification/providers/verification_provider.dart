@@ -246,7 +246,7 @@ class VerificationController extends StateNotifier<VerificationState> {
 
   Future<Result<void>> saveManualSupplierLocation({
     required String city,
-    String? state,
+    String? stateProvince,
   }) async {
     final detail = this.state.detail;
     if (detail == null) {
@@ -257,7 +257,7 @@ class VerificationController extends StateNotifier<VerificationState> {
         BusinessRuleFailure(message: 'Verification location capture is only available for supplier verification.'),
       );
     }
-    final manualState = (state ?? '').trim().isEmpty ? null : state?.trim();
+    final manualState = (stateProvince ?? '').trim().isEmpty ? null : stateProvince?.trim();
     if (this.state.isCapturingLocation || this.state.isSubmitting || this.state.uploadingDocumentType != null) {
       return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
     }

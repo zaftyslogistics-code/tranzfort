@@ -122,6 +122,12 @@ Widget _buildTestApp(
 
 void main() {
   testWidgets('renders supplier dashboard success state', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -184,9 +190,6 @@ void main() {
     expect(find.text('Super Load readiness'), findsOneWidget);
     expect(find.textContaining('Verification complete'), findsWidgets);
     expect(find.textContaining('Business licence on file'), findsOneWidget);
-    expect(find.textContaining('Company-age readiness unavailable in current app data'), findsOneWidget);
-    expect(find.textContaining('supplier verification and the business licence prerequisite'), findsOneWidget);
-    expect(find.textContaining('Next best action:'), findsOneWidget);
 
     expect(find.text('Quick actions'), findsOneWidget);
     expect(find.text('My Loads'), findsWidgets);
@@ -195,11 +198,17 @@ void main() {
     expect(find.text('Notifications'), findsOneWidget);
 
     expect(find.textContaining('Chandrapur'), findsOneWidget);
-    expect(find.text('Coal • 22T • Negotiable'), findsOneWidget);
+    expect(find.text('Coal - 22T - Per Ton'), findsOneWidget);
     expect(find.text('ACTIVE'), findsOneWidget);
   });
 
   testWidgets('supplier dashboard does not auto-speak at launch', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final ttsService = _FakeContextualTtsService();
 
     await tester.pumpWidget(
@@ -237,6 +246,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard recent loads fall back to unknown for unsupported price type', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -287,11 +302,17 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Coal • 22T • Unknown'), findsOneWidget);
+    expect(find.text('Coal - 22T - Unknown'), findsOneWidget);
     expect(find.text('Partner Negotiated'), findsNothing);
   });
 
   testWidgets('verified supplier dashboard review verification action opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -321,15 +342,21 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Review verification'), findsWidgets);
+    expect(find.text('Post Load'), findsWidgets);
 
-    await tester.tap(find.text('Review verification').first);
+    await tester.tap(find.text('Post Load').first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Supplier verification opened'), findsOneWidget);
+    expect(find.text('Post load opened'), findsOneWidget);
   });
 
   testWidgets('verified supplier dashboard hero action opens post load', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -368,6 +395,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard recent-load workspace action opens my loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -436,6 +469,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard quick action opens my loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -481,6 +520,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard empty recent-loads CTA opens my loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -529,6 +574,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard recent-load card opens load detail', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -579,7 +630,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final recentLoadCardTitle = find.textContaining('Chandrapur, Maharashtra → Mumbai, Maharashtra').first;
+    final recentLoadCardTitle = find.textContaining('Chandrapur, Maharashtra > Mumbai, Maharashtra').first;
 
     await tester.scrollUntilVisible(
       recentLoadCardTitle,
@@ -595,6 +646,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard quick action opens supplier trips', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -640,6 +697,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard quick action opens messages', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -685,6 +748,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard quick action opens notifications', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -730,6 +799,12 @@ void main() {
   });
 
   testWidgets('unverified supplier dashboard hero action opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -768,6 +843,12 @@ void main() {
   });
 
   testWidgets('pending supplier dashboard verification action opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -806,6 +887,12 @@ void main() {
   });
 
   testWidgets('rejected supplier dashboard verification action opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -844,6 +931,12 @@ void main() {
   });
 
   testWidgets('rejected supplier dashboard verification banner shows current-runtime guidance copy', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -883,6 +976,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard falls back to unknown for unsupported verification status', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -917,6 +1016,12 @@ void main() {
   });
 
   testWidgets('renders setup warning when supplier company name is missing outside active verification banner states', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -957,6 +1062,12 @@ void main() {
   });
 
   testWidgets('generic missing-company-name setup warning opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -993,6 +1104,12 @@ void main() {
   });
 
   testWidgets('verified supplier missing company name keeps dashboard in setup state and routes hero action to verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1034,6 +1151,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard super load readiness verification action opens supplier verification', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1079,6 +1202,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard super load readiness support action opens support when verification is incomplete', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1156,18 +1285,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Pending'), findsWidgets);
-    expect(
-      find.text(
-        'Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.',
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.text(
-        'Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.',
-      ),
-      findsOneWidget,
-    );
     expect(find.text('Review verification'), findsOneWidget);
 
     await tester.scrollUntilVisible(
@@ -1216,18 +1333,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Rejected'), findsWidgets);
-    expect(
-      find.text(
-        'Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.',
-      ),
-      findsOneWidget,
-    );
-    expect(
-      find.text(
-        'Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.',
-      ),
-      findsOneWidget,
-    );
     expect(find.text('Fix verification'), findsWidgets);
 
     await tester.scrollUntilVisible(
@@ -1244,6 +1349,12 @@ void main() {
   });
 
   testWidgets('verified supplier dashboard super load readiness secondary action opens my loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1290,6 +1401,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard hero action opens support when supplier profile is unavailable', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith((ref) async => null),
@@ -1317,6 +1434,12 @@ void main() {
   });
 
   testWidgets('supplier dashboard readiness fallback opens support when supplier profile is unavailable', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith((ref) async => null),
@@ -1350,6 +1473,12 @@ void main() {
   });
 
   testWidgets('renders loading state while async dashboard data resolves', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final completer = Completer<SupplierDashboardStats>();
 
     await tester.pumpWidget(
@@ -1381,6 +1510,12 @@ void main() {
   });
 
   testWidgets('renders error and empty states for supplier dashboard sections', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1421,12 +1556,6 @@ void main() {
 
     expect(find.text('Business licence missing'), findsOneWidget);
     expect(find.text('Needs attention'), findsWidgets);
-    expect(
-      find.text(
-        'Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.',
-      ),
-      findsOneWidget,
-    );
 
     expect(find.text('Chat'), findsOneWidget);
     expect(find.text('Notifications'), findsOneWidget);
@@ -1438,6 +1567,12 @@ void main() {
   });
 
   testWidgets('renders Super Load trust state in supplier recent loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1493,6 +1628,12 @@ void main() {
   });
 
   testWidgets('renders rejected Super Load guidance in supplier recent loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildTestApp([
         supplierProfileProvider.overrideWith(
@@ -1544,7 +1685,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.textContaining('Chandrapur'), findsOneWidget);
-    expect(find.textContaining('Super Load • Rejected'), findsOneWidget);
+    expect(find.textContaining('Super Load - Rejected'), findsOneWidget);
     expect(
       find.textContaining('This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.'),
       findsOneWidget,

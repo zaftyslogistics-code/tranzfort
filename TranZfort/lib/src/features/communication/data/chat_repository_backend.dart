@@ -1,4 +1,7 @@
-part of 'chat_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../../../core/providers/app_state_providers.dart';
+import 'chat_repository_models.dart';
 
 abstract class ChatBackend {
   Future<List<Map<String, dynamic>>> fetchConversations({
@@ -58,6 +61,8 @@ abstract class ChatBackend {
     required String conversationId,
     required String readerId,
   });
+
+  Future<int> fetchUnreadConversationCount();
 }
 
 class SupabaseChatBackend implements ChatBackend {
@@ -74,14 +79,7 @@ class SupabaseChatBackend implements ChatBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final query = _client
-        .from('conversations')
-        .select('id, supplier_id, trucker_id, load_id, trip_id, last_message_at, is_archived, created_at')
-        .eq(role == AppUserRole.supplier ? 'supplier_id' : 'trucker_id', userId)
-        .order('last_message_at', ascending: false)
-        .order('created_at', ascending: false);
-
-    final response = await query;
+    final response = await _client.rpc('get_current_user_conversation_summaries');
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
 
@@ -275,6 +273,16 @@ class SupabaseChatBackend implements ChatBackend {
       },
     );
     return (response ?? '').toString();
+  }
+
+  @override
+  Future<int> fetchUnreadConversationCount() async {
+    if (_client == null) {
+      return 0;
+    }
+
+    final response = await _client.rpc('get_current_user_unread_conversation_count');
+    return (response as num?)?.toInt() ?? 0;
   }
 
   @override

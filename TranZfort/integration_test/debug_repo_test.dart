@@ -1,18 +1,18 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tranzfort/main.dart' as app;
 import 'package:tranzfort/src/features/supplier/data/supplier_load_repository.dart';
-import 'package:tranzfort/src/features/supplier/providers/supplier_providers.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
+import 'package:tranzfort/src/features/supplier/data/supplier_load_models.dart';
 
 /// DEBUG: Check supplier loads through repository
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<void> _init() async {
+  Future<void> initSupabase() async {
     await dotenv.load(fileName: '.env');
     await Supabase.initialize(
       url: dotenv.env['SUPABASE_URL']!,
@@ -20,7 +20,7 @@ void main() {
     );
   }
 
-  ProviderContainer _buildContainer({required AppUserRole role}) {
+  ProviderContainer buildContainer({required AppUserRole role}) {
     return ProviderContainer(
       overrides: [
         currentAuthStateProvider.overrideWithValue(
@@ -40,7 +40,7 @@ void main() {
 
   group('DEBUG: Supplier loads via repository', () {
     testWidgets('Check loads and their errors', (tester) async {
-      await _init();
+      await initSupabase();
       final client = Supabase.instance.client;
 
       // Sign in as supplier
@@ -49,33 +49,29 @@ void main() {
         password: 'Tabish%%Khan721',
       );
 
-      final container = _buildContainer(role: AppUserRole.supplier);
+      final container = buildContainer(role: AppUserRole.supplier);
       addTearDown(container.dispose);
 
       final repository = container.read(supplierLoadRepositoryProvider);
 
-      // Get loads
       final loadsResult = await repository.getMyLoads(const LoadFilters(), page: 1);
-      print('Loads result: ${loadsResult.isSuccess ? 'SUCCESS' : 'FAIL: ${loadsResult.failureOrNull}'}');
+      debugPrint('Loads result: ${loadsResult.isSuccess ? 'SUCCESS' : 'FAIL: ${loadsResult.failureOrNull}'}');
 
       if (loadsResult.isSuccess) {
         final loads = loadsResult.valueOrNull!;
-        print('Found ${loads.length} loads');
+        debugPrint('Found ${loads.length} loads');
 
         for (final load in loads.take(3)) {
-          print('\nLoad: ${load.originLabel} -> ${load.destinationCity} (${load.status})');
+          debugPrint('\nLoad: ${load.originLabel} -> ${load.destinationLabel} (${load.status})');
 
-          // Try detail
           final detailResult = await repository.getLoadDetail(load.id);
-          print('  Detail: ${detailResult.isSuccess ? 'OK' : 'FAIL: ${detailResult.failureOrNull}'}');
+          debugPrint('  Detail: ${detailResult.isSuccess ? 'OK' : 'FAIL: ${detailResult.failureOrNull}'}');
 
-          // Try bookings
           final bookingsResult = await repository.getBookingRequests(load.id);
-          print('  Bookings: ${bookingsResult.isSuccess ? 'OK' : 'FAIL: ${bookingsResult.failureOrNull}'}');
+          debugPrint('  Bookings: ${bookingsResult.isSuccess ? 'OK' : 'FAIL: ${bookingsResult.failureOrNull}'}');
 
-          // Try trips
           final tripsResult = await repository.getLinkedTrips(load.id);
-          print('  Trips: ${tripsResult.isSuccess ? 'OK' : 'FAIL: ${tripsResult.failureOrNull}'}');
+          debugPrint('  Trips: ${tripsResult.isSuccess ? 'OK' : 'FAIL: ${tripsResult.failureOrNull}'}');
         }
       }
 

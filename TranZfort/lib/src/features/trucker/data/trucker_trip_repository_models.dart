@@ -1,4 +1,4 @@
-part of 'trucker_trip_repository.dart';
+import '../../../core/services/route_snapshot_service.dart';
 
 class TruckerTrip {
   final String id;

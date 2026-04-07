@@ -98,823 +98,847 @@ abstract class AppLocalizations {
     Locale('hi'),
   ];
 
-  /// No description provided for @appTitle.
+  /// App Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'TranZfort'**
   String get appTitle;
 
-  /// No description provided for @splashLoadingWorkspace.
+  /// Splash Loading Workspace - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loading your workspace...'**
   String get splashLoadingWorkspace;
 
-  /// No description provided for @authGoogleFailureMessage.
+  /// Auth Google Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not continue with Google right now. Retry shortly or use email sign-in instead.'**
   String get authGoogleFailureMessage;
 
-  /// No description provided for @authWelcomeTitle.
+  /// Auth Welcome Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Welcome to TranZfort'**
   String get authWelcomeTitle;
 
-  /// No description provided for @authWelcomeSubtitle.
+  /// Auth Welcome Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose Google or email sign-in to continue into your supplier or trucker workspace.'**
   String get authWelcomeSubtitle;
 
-  /// No description provided for @splashSetupTitle.
+  /// Auth Email Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'you@example.com'**
+  String get authEmailHint;
+
+  /// Auth Sign In Divider Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'OR'**
+  String get authSignInDividerLabel;
+
+  /// Auth Forgot Password Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Forgot password?'**
+  String get authForgotPasswordAction;
+
+  /// Auth Config Incomplete Sign In Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Supabase is not configured in this build, so sign-in and live account data will remain unavailable until the environment is fixed.'**
+  String get authConfigIncompleteSignInMessage;
+
+  /// Splash Setup Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Set up device access'**
   String get splashSetupTitle;
 
-  /// No description provided for @splashSetupSubtitle.
+  /// Splash Setup Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Allow notifications, voice guidance, and location access now so your first login and verification flow can continue smoothly.'**
   String get splashSetupSubtitle;
 
-  /// No description provided for @splashSetupEnableVoiceAction.
+  /// Splash Setup Enable Voice Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enable voice guidance'**
   String get splashSetupEnableVoiceAction;
 
-  /// No description provided for @splashSetupOpenLocationSettingsAction.
+  /// Splash Setup Open Location Settings Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open location settings'**
   String get splashSetupOpenLocationSettingsAction;
 
-  /// No description provided for @authContinueWithGoogle.
+  /// Auth Continue With Google - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Continue with Google'**
   String get authContinueWithGoogle;
 
-  /// No description provided for @authContinueWithPassword.
+  /// Auth Continue With Password - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Continue with email and password'**
   String get authContinueWithPassword;
 
-  /// No description provided for @authTermsOfService.
+  /// Auth Terms Of Service - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Terms of service'**
   String get authTermsOfService;
 
-  /// No description provided for @authTermsInfoMessage.
+  /// Auth Terms Info Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.'**
   String get authTermsInfoMessage;
 
-  /// No description provided for @authPasswordTitle.
+  /// Auth Password Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Email and password'**
   String get authPasswordTitle;
 
-  /// No description provided for @authPasswordSubtitle.
+  /// Auth Password Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sign in with your email and password, or create a new TranZfort account to continue.'**
   String get authPasswordSubtitle;
 
-  /// No description provided for @authPasswordLabel.
+  /// Auth Password Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Password'**
   String get authPasswordLabel;
 
-  /// No description provided for @authPasswordConfirmLabel.
+  /// Auth Password Confirm Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Confirm password'**
   String get authPasswordConfirmLabel;
 
-  /// No description provided for @authPasswordHint.
+  /// Auth Password Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter at least 8 characters'**
   String get authPasswordHint;
 
-  /// No description provided for @authPasswordModeSignIn.
+  /// Auth Password Mode Sign In - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sign in'**
   String get authPasswordModeSignIn;
 
-  /// No description provided for @authPasswordModeSignUp.
+  /// Auth Password Mode Sign Up - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create account'**
   String get authPasswordModeSignUp;
 
-  /// No description provided for @authPasswordSwitchToSignIn.
+  /// Auth Password Switch To Sign In - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Already have an account? Sign in'**
   String get authPasswordSwitchToSignIn;
 
-  /// No description provided for @authPasswordSwitchToSignUp.
+  /// Auth Password Switch To Sign Up - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'New to TranZfort? Create account'**
   String get authPasswordSwitchToSignUp;
 
-  /// No description provided for @authPasswordSignInAction.
+  /// Auth Password Sign In Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sign in with password'**
   String get authPasswordSignInAction;
 
-  /// No description provided for @authPasswordSignUpAction.
+  /// Auth Password Sign Up Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create account'**
   String get authPasswordSignUpAction;
 
-  /// No description provided for @authPasswordInvalidEmailMessage.
+  /// Auth Password Invalid Email Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter a valid email address.'**
   String get authPasswordInvalidEmailMessage;
 
-  /// No description provided for @authPasswordTooShortMessage.
+  /// Auth Password Too Short Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter a password with at least 8 characters.'**
   String get authPasswordTooShortMessage;
 
-  /// No description provided for @authPasswordConfirmMismatchMessage.
+  /// Auth Password Confirm Mismatch Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The password confirmation does not match.'**
   String get authPasswordConfirmMismatchMessage;
 
-  /// No description provided for @authPasswordSignInFailureMessage.
+  /// Auth Password Sign In Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not sign you in with email and password right now. Retry shortly or use another sign-in method.'**
   String get authPasswordSignInFailureMessage;
 
-  /// No description provided for @authPasswordSignUpFailureMessage.
+  /// Auth Password Sign Up Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not create your account right now. Retry shortly with the same details.'**
   String get authPasswordSignUpFailureMessage;
 
-  /// No description provided for @authPasswordSignUpSuccessMessage.
+  /// Auth Password Sign Up Success Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account was created. If email confirmation is required, finish that step and then sign in with your new password.'**
   String get authPasswordSignUpSuccessMessage;
 
-  /// No description provided for @authPasswordCheckEmailTitle.
+  /// Auth Password Check Email Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Check your email'**
   String get authPasswordCheckEmailTitle;
 
-  /// No description provided for @authPasswordCheckEmailSubtitle.
+  /// Instruction for user to check their email for verification link. Placeholder {email} is the user's email address.
   ///
   /// In en, this message translates to:
   /// **'We sent a verification link to {email}. Open that email, finish verification, and then return here to sign in.'**
   String authPasswordCheckEmailSubtitle(Object email);
 
-  /// No description provided for @authPasswordResendVerificationAction.
+  /// Auth Password Resend Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resend verification email'**
   String get authPasswordResendVerificationAction;
 
-  /// No description provided for @authPasswordResendVerificationSuccessMessage.
+  /// Success message after resending verification email. Placeholder {email} is the recipient's email address.
   ///
   /// In en, this message translates to:
   /// **'We sent a fresh verification email to {email}. Open it, finish verification, and then sign in.'**
   String authPasswordResendVerificationSuccessMessage(Object email);
 
-  /// No description provided for @authPasswordResendVerificationFailureMessage.
+  /// Auth Password Resend Verification Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not resend the verification email right now. Retry shortly or use a different email.'**
   String get authPasswordResendVerificationFailureMessage;
 
-  /// No description provided for @authPasswordBackToSignInAction.
+  /// Auth Password Back To Sign In Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to sign in'**
   String get authPasswordBackToSignInAction;
 
-  /// No description provided for @authPasswordUseDifferentEmailAction.
+  /// Auth Password Use Different Email Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use a different email'**
   String get authPasswordUseDifferentEmailAction;
 
-  /// No description provided for @onboardingSelectRoleError.
+  /// Onboarding Select Role Error - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select whether you are joining as a supplier or trucker.'**
   String get onboardingSelectRoleError;
 
-  /// No description provided for @onboardingRoleWorkspaceFailure.
+  /// Onboarding Role Workspace Failure - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not prepare your role workspace right now. Retry shortly after selecting your role again.'**
   String get onboardingRoleWorkspaceFailure;
 
-  /// No description provided for @onboardingRoleSaveFailure.
+  /// Onboarding Role Save Failure - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not save your role right now. Retry shortly.'**
   String get onboardingRoleSaveFailure;
 
-  /// No description provided for @onboardingChooseRoleTitle.
+  /// Onboarding Choose Role Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose role'**
   String get onboardingChooseRoleTitle;
 
-  /// No description provided for @onboardingRoleQuestion.
+  /// Onboarding Role Question - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Which role fits your work?'**
   String get onboardingRoleQuestion;
 
-  /// No description provided for @onboardingRoleSubtitle.
+  /// Explains that user's role determines available tools and dashboard.
   ///
   /// In en, this message translates to:
   /// **'Your role decides the tools, dashboard, and workflows TranZfort will prepare for you.'**
   String get onboardingRoleSubtitle;
 
-  /// No description provided for @onboardingSupplierTitle.
+  /// Onboarding Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier'**
   String get onboardingSupplierTitle;
 
-  /// No description provided for @onboardingSupplierSubtitle.
+  /// Onboarding Supplier Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post loads, review bookings, manage trips, and track delivery follow-through.'**
   String get onboardingSupplierSubtitle;
 
-  /// No description provided for @onboardingTruckerTitle.
+  /// Onboarding Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker'**
   String get onboardingTruckerTitle;
 
-  /// No description provided for @onboardingTruckerSubtitle.
+  /// Onboarding Trucker Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Find loads, manage fleet readiness, and execute active trips from one place.'**
   String get onboardingTruckerSubtitle;
 
-  /// No description provided for @onboardingContinue.
+  /// Onboarding Continue - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Continue'**
   String get onboardingContinue;
 
-  /// No description provided for @onboardingProfileSaveFailure.
+  /// Onboarding Profile Save Failure - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not save your profile right now. Review the details and retry shortly.'**
   String get onboardingProfileSaveFailure;
 
-  /// No description provided for @onboardingCompleteProfileTitle.
+  /// Onboarding Complete Profile Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete profile'**
   String get onboardingCompleteProfileTitle;
 
-  /// No description provided for @onboardingCompleteProfileHeading.
+  /// Onboarding Complete Profile Heading - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Finish your basic profile'**
   String get onboardingCompleteProfileHeading;
 
-  /// No description provided for @onboardingCompleteProfileSubtitle.
+  /// Onboarding Complete Profile Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add the core contact details that will follow you through verification and daily operations.'**
   String get onboardingCompleteProfileSubtitle;
 
-  /// No description provided for @onboardingFullNameLabel.
+  /// Onboarding Full Name Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Full name'**
   String get onboardingFullNameLabel;
 
-  /// No description provided for @onboardingFullNameHint.
+  /// Onboarding Full Name Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter your full name'**
   String get onboardingFullNameHint;
 
-  /// No description provided for @onboardingMobileLabel.
+  /// Onboarding Mobile Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mobile number'**
   String get onboardingMobileLabel;
 
-  /// No description provided for @onboardingTermsAcceptance.
+  /// Onboarding Terms Acceptance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.'**
   String get onboardingTermsAcceptance;
 
-  /// No description provided for @onboardingSaveAndContinue.
+  /// Onboarding Save And Continue - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Save and continue'**
   String get onboardingSaveAndContinue;
 
-  /// No description provided for @commonRetry.
+  /// Common Retry - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Retry'**
   String get commonRetry;
 
-  /// No description provided for @shellTooltipVoiceAssistance.
+  /// Shell Tooltip Voice Assistance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice assistance'**
   String get shellTooltipVoiceAssistance;
 
-  /// No description provided for @supplierQuickActionNotifications.
+  /// Supplier Quick Action Notifications - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
   String get supplierQuickActionNotifications;
 
-  /// No description provided for @supplierMyLoadsTitle.
+  /// Supplier My Loads Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My loads'**
   String get supplierMyLoadsTitle;
 
-  /// No description provided for @supplierMyLoadsSubtitle.
+  /// Supplier My Loads Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Monitor active supplier loads, booking demand, and completed load history from one place.'**
   String get supplierMyLoadsSubtitle;
 
-  /// No description provided for @supplierMyLoadsTabActive.
+  /// Supplier My Loads Tab Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get supplierMyLoadsTabActive;
 
-  /// No description provided for @supplierMyLoadsTabCompleted.
+  /// Supplier My Loads Tab Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get supplierMyLoadsTabCompleted;
 
-  /// No description provided for @supplierMyLoadsLoadFailureTitle.
+  /// Supplier My Loads Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load your supplier loads'**
   String get supplierMyLoadsLoadFailureTitle;
 
-  /// No description provided for @supplierMyLoadsFailureMessage.
+  /// Supplier My Loads Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your supplier loads right now. Retry shortly to refresh the latest load list.'**
   String get supplierMyLoadsFailureMessage;
 
-  /// No description provided for @supplierMyLoadsEmptyActiveTitle.
+  /// Supplier My Loads Empty Active Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No active loads yet'**
   String get supplierMyLoadsEmptyActiveTitle;
 
-  /// No description provided for @supplierMyLoadsEmptyCompletedTitle.
+  /// Supplier My Loads Empty Completed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No completed loads yet'**
   String get supplierMyLoadsEmptyCompletedTitle;
 
-  /// No description provided for @supplierMyLoadsEmptyActiveSubtitle.
+  /// Supplier My Loads Empty Active Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post your first load to start receiving booking requests and execution updates here.'**
   String get supplierMyLoadsEmptyActiveSubtitle;
 
-  /// No description provided for @supplierMyLoadsEmptyCompletedSubtitle.
+  /// Supplier My Loads Empty Completed Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed, cancelled, expired, and externally filled loads will appear here once active work is closed out.'**
   String get supplierMyLoadsEmptyCompletedSubtitle;
 
-  /// No description provided for @supplierMyLoadsOpenActiveLoads.
+  /// Supplier My Loads Open Active Loads - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open active loads'**
   String get supplierMyLoadsOpenActiveLoads;
 
-  /// No description provided for @supplierMyLoadsMoreUnavailableTitle.
+  /// Supplier My Loads More Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load more supplier loads'**
   String get supplierMyLoadsMoreUnavailableTitle;
 
-  /// No description provided for @supplierMyLoadsPaginationFailureMessage.
+  /// Supplier My Loads Pagination Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load more supplier loads right now. Retry shortly to refresh the latest load history.'**
   String get supplierMyLoadsPaginationFailureMessage;
 
-  /// No description provided for @supplierMyLoadsLoadingMore.
+  /// Supplier My Loads Loading More - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loading more loads...'**
   String get supplierMyLoadsLoadingMore;
 
-  /// No description provided for @supplierMyLoadsLoadMore.
+  /// Supplier My Loads Load More - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load more loads'**
   String get supplierMyLoadsLoadMore;
 
-  /// No description provided for @supplierLoadCardPickupDate.
+  /// Supplier Load Card Pickup Date - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup {value}'**
   String supplierLoadCardPickupDate(Object value);
 
-  /// No description provided for @supplierLoadCardTrucks.
+  /// Supplier Load Card Trucks - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{booked}/{needed} trucks booked'**
   String supplierLoadCardTrucks(Object booked, Object needed);
 
-  /// No description provided for @supplierLoadCardTrackLoad.
+  /// Supplier Load Card Track Load - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track load'**
   String get supplierLoadCardTrackLoad;
 
-  /// No description provided for @supplierLoadCardViewHistory.
+  /// Supplier Load Card View History - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View history'**
   String get supplierLoadCardViewHistory;
 
-  /// No description provided for @supplierLoadCardViewDetails.
+  /// Supplier Load Card View Details - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View details'**
   String get supplierLoadCardViewDetails;
 
-  /// No description provided for @supplierRecentLoadsTitle.
+  /// Supplier Recent Loads Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recent loads'**
   String get supplierRecentLoadsTitle;
 
-  /// No description provided for @supplierDashboardWelcomeBack.
+  /// Welcome message on supplier dashboard. Placeholder {name} is the user's display name.
   ///
   /// In en, this message translates to:
   /// **'Welcome back, {name}'**
   String supplierDashboardWelcomeBack(Object name);
 
-  /// No description provided for @supplierDashboardHeroSubtitle.
+  /// Supplier Dashboard Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track supplier verification, review Super Load readiness, and keep your latest loads and execution activity in view.'**
   String get supplierDashboardHeroSubtitle;
 
-  /// No description provided for @supplierDashboardOverviewTitle.
+  /// Supplier Dashboard Overview Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dashboard overview'**
   String get supplierDashboardOverviewTitle;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessTitle.
+  /// Supplier Dashboard Super Load Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Load readiness'**
   String get supplierDashboardSuperLoadReadinessTitle;
 
-  /// No description provided for @supplierDashboardQuickActionsTitle.
+  /// Supplier Dashboard Quick Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quick actions'**
   String get supplierDashboardQuickActionsTitle;
 
-  /// No description provided for @supplierDashboardQuickActionChatLabel.
+  /// Supplier Dashboard Quick Action Chat Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat'**
   String get supplierDashboardQuickActionChatLabel;
 
-  /// No description provided for @supplierDashboardPostLoadAction.
+  /// Supplier Dashboard Post Load Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post Load'**
   String get supplierDashboardPostLoadAction;
 
-  /// No description provided for @supplierDashboardHeroSummaryBody.
+  /// Supplier Dashboard Hero Summary Body - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep your supplier verification current, monitor active loads, and follow the latest Super Load readiness signals visible in this workspace.'**
   String get supplierDashboardHeroSummaryBody;
 
-  /// No description provided for @supplierDashboardStatsActiveLoadsLabel.
+  /// Supplier Dashboard Stats Active Loads Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active loads'**
   String get supplierDashboardStatsActiveLoadsLabel;
 
-  /// No description provided for @supplierDashboardStatsActiveLoadsHelper.
+  /// Supplier Dashboard Stats Active Loads Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loads currently open for supplier-side tracking.'**
   String get supplierDashboardStatsActiveLoadsHelper;
 
-  /// No description provided for @supplierDashboardStatsPendingBookingsLabel.
+  /// Supplier Dashboard Stats Pending Bookings Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending bookings'**
   String get supplierDashboardStatsPendingBookingsLabel;
 
-  /// No description provided for @supplierDashboardStatsPendingBookingsHelper.
+  /// Supplier Dashboard Stats Pending Bookings Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking requests that still need supplier attention.'**
   String get supplierDashboardStatsPendingBookingsHelper;
 
-  /// No description provided for @supplierDashboardStatsInTransitTripsLabel.
+  /// Supplier Dashboard Stats In Transit Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips in transit'**
   String get supplierDashboardStatsInTransitTripsLabel;
 
-  /// No description provided for @supplierDashboardStatsInTransitTripsHelper.
+  /// Supplier Dashboard Stats In Transit Trips Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Linked trips currently moving against your loads.'**
   String get supplierDashboardStatsInTransitTripsHelper;
 
-  /// No description provided for @supplierDashboardStatsCompletedTripsLabel.
+  /// Supplier Dashboard Stats Completed Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed trips'**
   String get supplierDashboardStatsCompletedTripsLabel;
 
-  /// No description provided for @supplierDashboardStatsCompletedTripsHelper.
+  /// Supplier Dashboard Stats Completed Trips Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips that have reached their recorded completion state.'**
   String get supplierDashboardStatsCompletedTripsHelper;
 
-  /// No description provided for @supplierDashboardOpenMyLoadsAction.
+  /// Supplier Dashboard Open My Loads Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open my loads'**
   String get supplierDashboardOpenMyLoadsAction;
 
-  /// No description provided for @supplierDashboardLoadFailureTitle.
+  /// Supplier Dashboard Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load your supplier dashboard'**
   String get supplierDashboardLoadFailureTitle;
 
-  /// No description provided for @supplierDashboardLoadFailureMessage.
+  /// Supplier Dashboard Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your supplier dashboard right now. Retry shortly to refresh the latest overview metrics.'**
   String get supplierDashboardLoadFailureMessage;
 
-  /// No description provided for @supplierDashboardAccountStateUnavailableTitle.
+  /// Supplier Dashboard Account State Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier account state unavailable'**
   String get supplierDashboardAccountStateUnavailableTitle;
 
-  /// No description provided for @supplierDashboardAccountStateUnavailableMessage.
+  /// Supplier Dashboard Account State Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your current supplier account state right now. Retry shortly to restore the latest verification and company details.'**
   String get supplierDashboardAccountStateUnavailableMessage;
 
-  /// No description provided for @supplierDashboardRecentLoadsUnavailableTitle.
+  /// Supplier Dashboard Recent Loads Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recent loads unavailable'**
   String get supplierDashboardRecentLoadsUnavailableTitle;
 
-  /// No description provided for @supplierDashboardRecentLoadsUnavailableMessage.
+  /// Supplier Dashboard Recent Loads Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your recent supplier loads right now. Retry shortly to refresh the latest load list.'**
   String get supplierDashboardRecentLoadsUnavailableMessage;
 
-  /// No description provided for @supplierDashboardNoLoadsPostedTitle.
+  /// Supplier Dashboard No Loads Posted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No loads posted yet'**
   String get supplierDashboardNoLoadsPostedTitle;
 
-  /// No description provided for @supplierDashboardNoLoadsPostedSubtitle.
+  /// Supplier Dashboard No Loads Posted Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post your first supplier load to start receiving booking requests and linked trip activity.'**
   String get supplierDashboardNoLoadsPostedSubtitle;
 
-  /// No description provided for @shellTabHome.
+  /// Shell Tab Home - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get shellTabHome;
 
-  /// No description provided for @shellTitleSupplierDashboard.
+  /// Shell Title Supplier Dashboard - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier dashboard'**
   String get shellTitleSupplierDashboard;
 
-  /// No description provided for @shellTabLoads.
+  /// Shell Tab Loads - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loads'**
   String get shellTabLoads;
 
-  /// No description provided for @shellTitleMyLoads.
+  /// Shell Title My Loads - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My Loads'**
   String get shellTitleMyLoads;
 
-  /// No description provided for @shellTabTrips.
+  /// Shell Tab Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips'**
   String get shellTabTrips;
 
-  /// No description provided for @shellQuickActionTrips.
+  /// Shell Quick Action Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips'**
   String get shellQuickActionTrips;
 
-  /// No description provided for @shellDashboardTitle.
+  /// Shell Dashboard Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get shellDashboardTitle;
 
-  /// No description provided for @shellTabFind.
+  /// Shell Tab Find - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Find'**
   String get shellTabFind;
 
-  /// No description provided for @shellTitleFindLoads.
+  /// Shell Title Find Loads - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Find Loads'**
   String get shellTitleFindLoads;
 
-  /// No description provided for @shellDrawerSupplierWorkspace.
+  /// Shell Drawer Supplier Workspace - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier workspace'**
   String get shellDrawerSupplierWorkspace;
 
-  /// No description provided for @shellDrawerTruckerWorkspace.
+  /// Shell Drawer Trucker Workspace - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker workspace'**
   String get shellDrawerTruckerWorkspace;
 
-  /// No description provided for @shellDrawerDashboard.
+  /// Shell Drawer Dashboard - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get shellDrawerDashboard;
 
-  /// No description provided for @shellDrawerAssistant.
+  /// Shell Drawer Assistant - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Guided help'**
   String get shellDrawerAssistant;
 
-  /// No description provided for @shellDrawerFleet.
+  /// Shell Drawer Fleet - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet'**
   String get shellDrawerFleet;
 
-  /// No description provided for @shellDrawerMessages.
+  /// Shell Drawer Messages - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Messages'**
   String get shellDrawerMessages;
 
-  /// No description provided for @navNotifications.
+  /// Nav Notifications - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
   String get navNotifications;
 
-  /// No description provided for @shellDrawerSupport.
+  /// Shell Drawer Support - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support'**
   String get shellDrawerSupport;
 
-  /// No description provided for @shellDrawerProfile.
+  /// Shell Drawer Profile - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile'**
   String get shellDrawerProfile;
 
-  /// No description provided for @shellDrawerLanguage.
+  /// Shell Drawer Language - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get shellDrawerLanguage;
 
-  /// No description provided for @shellDrawerSignOut.
+  /// Shell Drawer Sign Out - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sign out'**
   String get shellDrawerSignOut;
 
-  /// No description provided for @shellSignOutFailureMessage.
+  /// Shell Sign Out Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not sign you out right now. Retry shortly.'**
   String get shellSignOutFailureMessage;
 
-  /// No description provided for @shellMessagesTitle.
+  /// Shell Messages Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Messages'**
   String get shellMessagesTitle;
 
-  /// No description provided for @shellMessagesSupplierSubtitle.
+  /// Shell Messages Supplier Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track load-linked conversations with truckers and reply quickly from one place.'**
   String get shellMessagesSupplierSubtitle;
 
-  /// No description provided for @shellMessagesTruckerSubtitle.
+  /// Shell Messages Trucker Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Stay on top of supplier updates, route context, and booking follow-through in one inbox.'**
   String get shellMessagesTruckerSubtitle;
 
-  /// No description provided for @shellMessagesSupplierGroupedInbox.
+  /// Shell Messages Supplier Grouped Inbox - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Grouped inbox'**
   String get shellMessagesSupplierGroupedInbox;
 
-  /// No description provided for @shellMessagesTruckerFlatInbox.
+  /// Shell Messages Trucker Flat Inbox - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Flat inbox'**
   String get shellMessagesTruckerFlatInbox;
 
-  /// No description provided for @shellMessagesUnreadThreads.
+  /// Shows count of unread conversation threads. Placeholder {count} is the number of unread threads.
   ///
   /// In en, this message translates to:
   /// **'{count} unread threads'**
   String shellMessagesUnreadThreads(int count);
 
-  /// No description provided for @shellMessagesLoadFailureTitle.
+  /// Shell Messages Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not load messages'**
   String get shellMessagesLoadFailureTitle;
 
-  /// No description provided for @shellMessagesEmptyTitle.
+  /// Shell Messages Empty Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No conversations yet'**
   String get shellMessagesEmptyTitle;
 
-  /// No description provided for @shellMessagesSupplierEmptySubtitle.
+  /// Shell Messages Supplier Empty Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load-linked trucker conversations will appear here after the first message arrives.'**
   String get shellMessagesSupplierEmptySubtitle;
 
-  /// No description provided for @shellMessagesTruckerEmptySubtitle.
+  /// Shell Messages Trucker Empty Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Start a chat by booking a load and your supplier conversations will show here.'**
@@ -923,22 +947,22 @@ abstract class AppLocalizations {
   /// No description provided for @shellMessagesActiveConversations.
   ///
   /// In en, this message translates to:
-  /// **'{count} active conversations • {preview}'**
+  /// **'{count} active conversations - {preview}'**
   String shellMessagesActiveConversations(int count, Object preview);
 
-  /// No description provided for @shellMessagesUnreadStatus.
+  /// Shell Messages Unread Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unread'**
   String get shellMessagesUnreadStatus;
 
-  /// No description provided for @shellMessagesReadStatus.
+  /// Shell Messages Read Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Read'**
   String get shellMessagesReadStatus;
 
-  /// No description provided for @shellMessagesHideTruckerConversations.
+  /// Shell Messages Hide Trucker Conversations - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Hide trucker conversations'**
@@ -947,358 +971,358 @@ abstract class AppLocalizations {
   /// No description provided for @shellMessagesLatestBy.
   ///
   /// In en, this message translates to:
-  /// **'Latest by {name} • {timestamp}'**
+  /// **'Latest by {name} - {timestamp}'**
   String shellMessagesLatestBy(Object name, Object timestamp);
 
-  /// No description provided for @truckerChatSupplierAction.
+  /// Trucker Chat Supplier Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat with supplier'**
   String get truckerChatSupplierAction;
 
-  /// No description provided for @truckerLoadChatStartFailureMessage.
+  /// Trucker Load Chat Start Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not start this supplier chat right now. Retry shortly from the load detail.'**
   String get truckerLoadChatStartFailureMessage;
 
-  /// No description provided for @truckerTripChatStartFailureMessage.
+  /// Trucker Trip Chat Start Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not start this supplier chat right now. Retry shortly from the trip detail.'**
   String get truckerTripChatStartFailureMessage;
 
-  /// No description provided for @truckerChatLockedLabel.
+  /// Message shown when chat is unavailable. Placeholder {reason} explains why chat is locked.
   ///
   /// In en, this message translates to:
   /// **'Chat unavailable: {reason}'**
   String truckerChatLockedLabel(Object reason);
 
-  /// No description provided for @chatTitleFallback.
+  /// Chat Title Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Conversation'**
   String get chatTitleFallback;
 
-  /// No description provided for @chatTooltipCall.
+  /// Chat Tooltip Call - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Call'**
   String get chatTooltipCall;
 
-  /// No description provided for @chatReportSourceLabel.
+  /// Label for reporting chat source. Placeholder {source} is the chat context source.
   ///
   /// In en, this message translates to:
-  /// **'Chat • {source}'**
+  /// **'Chat - {source}'**
   String chatReportSourceLabel(Object source);
 
-  /// No description provided for @chatMenuMarkConversationRead.
+  /// Chat Menu Mark Conversation Read - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mark conversation read'**
   String get chatMenuMarkConversationRead;
 
-  /// No description provided for @chatMenuRefreshThread.
+  /// Chat Menu Refresh Thread - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Refresh thread'**
   String get chatMenuRefreshThread;
 
-  /// No description provided for @chatMenuReportSpamOrAbuse.
+  /// Chat Menu Report Spam Or Abuse - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report spam or abuse'**
   String get chatMenuReportSpamOrAbuse;
 
-  /// No description provided for @chatConversationUnavailableTitle.
+  /// Chat Conversation Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Conversation unavailable'**
   String get chatConversationUnavailableTitle;
 
-  /// No description provided for @chatConversationUnavailableSubtitle.
+  /// Chat Conversation Unavailable Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not find this conversation right now. Refresh or return to your inbox.'**
   String get chatConversationUnavailableSubtitle;
 
-  /// No description provided for @chatBackToInboxAction.
+  /// Chat Back To Inbox Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to messages'**
   String get chatBackToInboxAction;
 
-  /// No description provided for @chatBookingActionUnavailableTitle.
+  /// Chat Booking Action Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking action unavailable'**
   String get chatBookingActionUnavailableTitle;
 
-  /// No description provided for @chatBookingActionFailureMessage.
+  /// Chat Booking Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest booking action could not be completed from this chat. Review the booking state and retry shortly.'**
   String get chatBookingActionFailureMessage;
 
-  /// No description provided for @chatApproveBookingDialogTitle.
+  /// Chat Approve Booking Dialog Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approve booking?'**
   String get chatApproveBookingDialogTitle;
 
-  /// No description provided for @chatApproveBookingDialogMessage.
+  /// Chat Approve Booking Dialog Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This will approve the trucker booking request from the chat context.'**
   String get chatApproveBookingDialogMessage;
 
-  /// No description provided for @chatRejectBookingDialogTitle.
+  /// Chat Reject Booking Dialog Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reject booking?'**
   String get chatRejectBookingDialogTitle;
 
-  /// No description provided for @chatRejectBookingDialogMessage.
+  /// Chat Reject Booking Dialog Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This will reject the trucker booking request from the chat context.'**
   String get chatRejectBookingDialogMessage;
 
-  /// No description provided for @chatActionCancel.
+  /// Chat Action Cancel - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get chatActionCancel;
 
-  /// No description provided for @chatActionApprove.
+  /// Chat Action Approve - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approve'**
   String get chatActionApprove;
 
-  /// No description provided for @chatActionReject.
+  /// Chat Action Reject - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reject'**
   String get chatActionReject;
 
-  /// No description provided for @chatBookingApprovedSuccess.
+  /// Chat Booking Approved Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking approved!'**
   String get chatBookingApprovedSuccess;
 
-  /// No description provided for @chatBookingRejectedSuccess.
+  /// Chat Booking Rejected Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking rejected.'**
   String get chatBookingRejectedSuccess;
 
-  /// No description provided for @chatTextSendFailureMessage.
+  /// Chat Text Send Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not send your message right now. Retry shortly from this chat.'**
   String get chatTextSendFailureMessage;
 
-  /// No description provided for @chatVoiceStartFailureMessage.
+  /// Chat Voice Start Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not start voice recording right now. Retry shortly from this chat.'**
   String get chatVoiceStartFailureMessage;
 
-  /// No description provided for @chatVoiceUploadFailureMessage.
+  /// Chat Voice Upload Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not upload this voice message right now. Retry shortly from this chat.'**
   String get chatVoiceUploadFailureMessage;
 
-  /// No description provided for @chatVoiceSendFailureMessage.
+  /// Chat Voice Send Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not send this voice message right now. Retry shortly from this chat.'**
   String get chatVoiceSendFailureMessage;
 
-  /// No description provided for @chatApproveBookingFailureMessage.
+  /// Chat Approve Booking Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not approve this booking right now. Retry shortly from this chat.'**
   String get chatApproveBookingFailureMessage;
 
-  /// No description provided for @chatRejectBookingFailureMessage.
+  /// Chat Reject Booking Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not reject this booking right now. Retry shortly from this chat.'**
   String get chatRejectBookingFailureMessage;
 
-  /// No description provided for @chatLoadContextTitle.
+  /// Chat Load Context Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load context'**
   String get chatLoadContextTitle;
 
-  /// No description provided for @chatCollapseLoadContextTooltip.
+  /// Chat Collapse Load Context Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Collapse load context'**
   String get chatCollapseLoadContextTooltip;
 
-  /// No description provided for @chatExpandLoadContextTooltip.
+  /// Chat Expand Load Context Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Expand load context'**
   String get chatExpandLoadContextTooltip;
 
-  /// No description provided for @chatMaterialLabel.
+  /// Label showing load material in chat context. Placeholder {value} is the material name.
   ///
   /// In en, this message translates to:
   /// **'Material: {value}'**
   String chatMaterialLabel(Object value);
 
-  /// No description provided for @chatPriceLabel.
+  /// Label showing load price in chat context. Placeholder {value} is the formatted price.
   ///
   /// In en, this message translates to:
   /// **'Price: {value}'**
   String chatPriceLabel(Object value);
 
-  /// No description provided for @chatPickupLabel.
+  /// Label showing pickup location in chat context. Placeholder {value} is the pickup location name.
   ///
   /// In en, this message translates to:
   /// **'Pickup: {value}'**
   String chatPickupLabel(Object value);
 
-  /// No description provided for @chatLoadStatusActive.
+  /// Chat Load Status Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get chatLoadStatusActive;
 
-  /// No description provided for @chatBookingStatusApproved.
+  /// Chat Booking Status Approved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approved'**
   String get chatBookingStatusApproved;
 
-  /// No description provided for @chatBookingStatusUnknown.
+  /// Chat Booking Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get chatBookingStatusUnknown;
 
-  /// No description provided for @chatMessagesLoadFailureTitle.
+  /// Chat Messages Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load messages'**
   String get chatMessagesLoadFailureTitle;
 
-  /// No description provided for @chatMessagesLoadFailureMessage.
+  /// Chat Messages Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this conversation right now. Retry shortly to refresh the latest messages and booking context.'**
   String get chatMessagesLoadFailureMessage;
 
-  /// No description provided for @chatNoMessagesTitle.
+  /// Chat No Messages Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No messages yet'**
   String get chatNoMessagesTitle;
 
-  /// No description provided for @chatNoMessagesSubtitle.
+  /// Chat No Messages Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Send a message to start this conversation.'**
   String get chatNoMessagesSubtitle;
 
-  /// No description provided for @chatSystemUpdateFallback.
+  /// Chat System Update Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'System update'**
   String get chatSystemUpdateFallback;
 
-  /// No description provided for @chatSendingLabel.
+  /// Chat Sending Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'sending...'**
   String get chatSendingLabel;
 
-  /// No description provided for @chatPauseVoiceMessageTooltip.
+  /// Chat Pause Voice Message Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pause voice message'**
   String get chatPauseVoiceMessageTooltip;
 
-  /// No description provided for @chatPlayVoiceMessageTooltip.
+  /// Chat Play Voice Message Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Play voice message'**
   String get chatPlayVoiceMessageTooltip;
 
-  /// No description provided for @chatVoiceMessageLabel.
+  /// Chat Voice Message Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice message'**
   String get chatVoiceMessageLabel;
 
-  /// No description provided for @chatVoicePlaybackUnavailable.
+  /// Chat Voice Playback Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice playback is unavailable right now.'**
   String get chatVoicePlaybackUnavailable;
 
-  /// No description provided for @chatVoicePlaybackFailed.
+  /// Chat Voice Playback Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not play this voice message right now.'**
   String get chatVoicePlaybackFailed;
 
-  /// No description provided for @chatLocationSharedFallback.
+  /// Chat Location Shared Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Shared location'**
   String get chatLocationSharedFallback;
 
-  /// No description provided for @chatMapPreviewUnavailable.
+  /// Chat Map Preview Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Map preview unavailable'**
   String get chatMapPreviewUnavailable;
 
-  /// No description provided for @chatOpenInMapsAction.
+  /// Chat Open In Maps Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open in Maps'**
   String get chatOpenInMapsAction;
 
-  /// No description provided for @chatDocumentSharedFallback.
+  /// Chat Document Shared Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Shared document'**
   String get chatDocumentSharedFallback;
 
-  /// No description provided for @chatAttachmentSavedSubtitle.
+  /// Chat Attachment Saved Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attachment saved to this conversation.'**
   String get chatAttachmentSavedSubtitle;
 
-  /// No description provided for @chatOpenDocumentAction.
+  /// Chat Open Document Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open document'**
   String get chatOpenDocumentAction;
 
-  /// No description provided for @chatRouteSummaryFallback.
+  /// Chat Route Summary Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route summary'**
   String get chatRouteSummaryFallback;
 
-  /// No description provided for @chatViewRouteAction.
+  /// Chat View Route Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View route'**
   String get chatViewRouteAction;
 
-  /// No description provided for @chatTruckDetailsSharedFallback.
+  /// Chat Truck Details Shared Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck details'**
@@ -1310,115 +1334,115 @@ abstract class AppLocalizations {
   /// **'{value} tyres'**
   String chatTruckTyresLabel(Object value);
 
-  /// No description provided for @chatTypeMessageHint.
+  /// Chat Type Message Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Type a message...'**
   String get chatTypeMessageHint;
 
-  /// No description provided for @chatStopRecordingTooltip.
+  /// Chat Stop Recording Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Stop recording'**
   String get chatStopRecordingTooltip;
 
-  /// No description provided for @chatVoiceRecordingTooltip.
+  /// Chat Voice Recording Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice recording'**
   String get chatVoiceRecordingTooltip;
 
-  /// No description provided for @chatSendAction.
+  /// Chat Send Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Send'**
   String get chatSendAction;
 
-  /// No description provided for @commonHearSummary.
+  /// Common Hear Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Hear summary'**
   String get commonHearSummary;
 
-  /// No description provided for @commonVoiceMuted.
+  /// Common Voice Muted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice guidance is muted on this device.'**
   String get commonVoiceMuted;
 
-  /// No description provided for @commonVoiceUnavailable.
+  /// Common Voice Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice guidance is unavailable right now.'**
   String get commonVoiceUnavailable;
 
-  /// No description provided for @notificationsTitle.
+  /// Notifications Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
   String get notificationsTitle;
 
-  /// No description provided for @notificationsMarkedAllReadSuccess.
+  /// Notifications Marked All Read Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'All notifications marked as read'**
   String get notificationsMarkedAllReadSuccess;
 
-  /// No description provided for @notificationsMarkAllRead.
+  /// Notifications Mark All Read - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mark All Read'**
   String get notificationsMarkAllRead;
 
-  /// No description provided for @notificationsLoadFailureTitle.
+  /// Notifications Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load notifications'**
   String get notificationsLoadFailureTitle;
 
-  /// No description provided for @notificationsMarkAllReadFailureMessage.
+  /// Notifications Mark All Read Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not mark all notifications as read right now. Retry shortly from the notifications screen.'**
   String get notificationsMarkAllReadFailureMessage;
 
-  /// No description provided for @notificationsLoadFailureMessage.
+  /// Notifications Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your notifications right now. Retry shortly to refresh the latest alerts and updates.'**
   String get notificationsLoadFailureMessage;
 
-  /// No description provided for @notificationsEmptyTitle.
+  /// Notifications Empty Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'All caught up!'**
   String get notificationsEmptyTitle;
 
-  /// No description provided for @notificationsEmptySubtitle.
+  /// Notifications Empty Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No new notifications.'**
   String get notificationsEmptySubtitle;
 
-  /// No description provided for @notificationsOverviewTitle.
+  /// Notifications Overview Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Overview'**
   String get notificationsOverviewTitle;
 
-  /// No description provided for @notificationsUnreadCountLabel.
+  /// Label showing number of unread notifications. Placeholder {count} is the unread count.
   ///
   /// In en, this message translates to:
   /// **'{count} unread'**
   String notificationsUnreadCountLabel(int count);
 
-  /// No description provided for @notificationsHighPriorityCountLabel.
+  /// Label showing number of high priority notifications. Placeholder {count} is the high priority count.
   ///
   /// In en, this message translates to:
   /// **'{count} high priority'**
   String notificationsHighPriorityCountLabel(int count);
 
-  /// No description provided for @notificationsLoadMore.
+  /// Notifications Load More - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load More'**
@@ -1430,694 +1454,691 @@ abstract class AppLocalizations {
   /// **'Notifications screen. You have {unreadCount} unread notifications and {highPriorityUnreadCount} high priority alerts pending review.'**
   String notificationsTtsSummary(int unreadCount, int highPriorityUnreadCount);
 
-  /// No description provided for @notificationsGroupToday.
+  /// Notifications Group Today - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Today'**
   String get notificationsGroupToday;
 
-  /// No description provided for @notificationsGroupYesterday.
+  /// Notifications Group Yesterday - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Yesterday'**
   String get notificationsGroupYesterday;
 
-  /// No description provided for @notificationsPriorityHighLabel.
+  /// Notifications Priority High Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'HIGH'**
   String get notificationsPriorityHighLabel;
 
-  /// No description provided for @notificationsBodyFallback.
+  /// Notifications Body Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open the linked workflow for full context.'**
   String get notificationsBodyFallback;
 
-  /// No description provided for @notificationFallbackVerificationUpdate.
+  /// Notification Fallback Verification Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification update'**
   String get notificationFallbackVerificationUpdate;
 
-  /// No description provided for @notificationFallbackBookingUpdate.
+  /// Notification Fallback Booking Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking update'**
   String get notificationFallbackBookingUpdate;
 
-  /// No description provided for @notificationFallbackTripUpdate.
+  /// Notification Fallback Trip Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip update'**
   String get notificationFallbackTripUpdate;
 
-  /// No description provided for @notificationFallbackProofUpdate.
+  /// Notification Fallback Proof Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof update'**
   String get notificationFallbackProofUpdate;
 
-  /// No description provided for @notificationFallbackSuperLoadUpdate.
+  /// Notification Fallback Super Load Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Load update'**
   String get notificationFallbackSuperLoadUpdate;
 
-  /// No description provided for @notificationFallbackMessageReceived.
+  /// Notification Fallback Message Received - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'New message'**
   String get notificationFallbackMessageReceived;
 
-  /// No description provided for @notificationFallbackSupportUpdate.
+  /// Notification Fallback Support Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support update'**
   String get notificationFallbackSupportUpdate;
 
-  /// No description provided for @notificationFallbackDisputeUpdate.
+  /// Notification Fallback Dispute Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute update'**
   String get notificationFallbackDisputeUpdate;
 
-  /// No description provided for @notificationFallbackAccountUpdate.
+  /// Notification Fallback Account Update - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account update'**
   String get notificationFallbackAccountUpdate;
 
-  /// No description provided for @notificationFallbackSystemNotice.
+  /// Notification Fallback System Notice - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'System notice'**
   String get notificationFallbackSystemNotice;
 
-  /// No description provided for @notificationFallbackLoadExpiryWarning.
+  /// Notification Fallback Load Expiry Warning - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load expiry warning'**
   String get notificationFallbackLoadExpiryWarning;
 
-  /// No description provided for @navProfile.
+  /// Nav Profile - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile'**
   String get navProfile;
 
-  /// No description provided for @navSupport.
+  /// Nav Support - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support'**
   String get navSupport;
 
-  /// No description provided for @navDeleteAccount.
+  /// Nav Delete Account - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delete account'**
   String get navDeleteAccount;
 
-  /// No description provided for @deleteAccountRequestedOnLabel.
+  /// Delete Account Requested On Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion requested on'**
   String get deleteAccountRequestedOnLabel;
 
-  /// No description provided for @deleteAccountGracePeriodEndsLabel.
+  /// Delete Account Grace Period Ends Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Grace period ends'**
   String get deleteAccountGracePeriodEndsLabel;
 
-  /// No description provided for @deleteAccountGracePeriodPassedLabel.
+  /// Delete Account Grace Period Passed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Grace-period end date has passed. Permanent deletion processing may happen at any time.'**
   String get deleteAccountGracePeriodPassedLabel;
 
-  /// No description provided for @deleteAccountGracePeriodLessThanOneDayLabel.
+  /// Delete Account Grace Period Less Than One Day Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Less than 1 day remains before the grace period ends.'**
   String get deleteAccountGracePeriodLessThanOneDayLabel;
 
-  /// No description provided for @deleteAccountGracePeriodRemainingDaysLabel.
+  /// ICU plural message showing remaining days in grace period before account deletion. Placeholder {count} is the number of days remaining.
   ///
   /// In en, this message translates to:
-  /// **'{count} day{plural} remain before the grace period ends.'**
-  String deleteAccountGracePeriodRemainingDaysLabel(
-    Object count,
-    Object plural,
-  );
+  /// **'{count, plural, one {{count} day remains before the grace period ends.} other {{count} days remain before the grace period ends.}}'**
+  String deleteAccountGracePeriodRemainingDaysLabel(int count);
 
-  /// No description provided for @deleteAccountLifecycleFailureMessage.
+  /// Delete Account Lifecycle Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The account deletion lifecycle is temporarily unavailable. Retry shortly to refresh the latest deletion status.'**
   String get deleteAccountLifecycleFailureMessage;
 
-  /// No description provided for @deleteAccountCancelFailureMessage.
+  /// Delete Account Cancel Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not cancel this deletion request right now. Retry shortly from the deletion lifecycle screen.'**
   String get deleteAccountCancelFailureMessage;
 
-  /// No description provided for @deleteAccountRequestFailureMessage.
+  /// Delete Account Request Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not process this deletion request right now. Review the current account status and retry shortly.'**
   String get deleteAccountRequestFailureMessage;
 
-  /// No description provided for @deleteAccountAcceptedSignOutFailureMessage.
+  /// Delete Account Accepted Sign Out Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion was accepted, but we could not complete sign out right now. Retry shortly to refresh your account session.'**
   String get deleteAccountAcceptedSignOutFailureMessage;
 
-  /// No description provided for @deleteAccountBlockedSummaryMessage.
+  /// Delete Account Blocked Summary Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This deletion request cannot proceed yet because another account dependency still needs attention.'**
   String get deleteAccountBlockedSummaryMessage;
 
-  /// No description provided for @deleteAccountCancelledMessage.
+  /// Delete Account Cancelled Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your deletion request was cancelled. Account access can be restored while the lifecycle returns to active.'**
   String get deleteAccountCancelledMessage;
 
-  /// No description provided for @deleteAccountAcceptedMessage.
+  /// Delete Account Accepted Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your deletion request was accepted. You have been signed out while the account enters pending cleanup.'**
   String get deleteAccountAcceptedMessage;
 
-  /// No description provided for @deleteAccountBlockerRecoveryGuidanceActiveTrips.
+  /// Delete Account Blocker Recovery Guidance Active Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Finish or cancel every active trip first, then retry the deletion request.'**
   String get deleteAccountBlockerRecoveryGuidanceActiveTrips;
 
-  /// No description provided for @deleteAccountBlockerRecoveryGuidanceDispute.
+  /// Delete Account Blocker Recovery Guidance Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Wait until the unresolved dispute is reviewed or resolved before requesting deletion again.'**
   String get deleteAccountBlockerRecoveryGuidanceDispute;
 
-  /// No description provided for @deleteAccountBlockerRecoveryGuidanceCompliance.
+  /// Delete Account Blocker Recovery Guidance Compliance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some records still need to stay on the platform for compliance or retention policy. Use support if you need clarification on the hold.'**
   String get deleteAccountBlockerRecoveryGuidanceCompliance;
 
-  /// No description provided for @deleteAccountBlockerRecoveryGuidanceDefault.
+  /// Delete Account Blocker Recovery Guidance Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resolve the blocking dependency first, then request deletion again.'**
   String get deleteAccountBlockerRecoveryGuidanceDefault;
 
-  /// No description provided for @deleteAccountBlockerActionOpenTrips.
+  /// Delete Account Blocker Action Open Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open trips'**
   String get deleteAccountBlockerActionOpenTrips;
 
-  /// No description provided for @deleteAccountBlockerActionOpenSupport.
+  /// Delete Account Blocker Action Open Support - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open support'**
   String get deleteAccountBlockerActionOpenSupport;
 
-  /// No description provided for @deleteAccountBlockerTitleActiveTrips.
+  /// Delete Account Blocker Title Active Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Finish active trips first'**
   String get deleteAccountBlockerTitleActiveTrips;
 
-  /// No description provided for @deleteAccountBlockerTitleDispute.
+  /// Delete Account Blocker Title Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resolve the open dispute first'**
   String get deleteAccountBlockerTitleDispute;
 
-  /// No description provided for @deleteAccountBlockerTitleCompliance.
+  /// Delete Account Blocker Title Compliance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Wait for the compliance hold to clear'**
   String get deleteAccountBlockerTitleCompliance;
 
-  /// No description provided for @deleteAccountBlockerTitleDefault.
+  /// Delete Account Blocker Title Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resolve the blocker first'**
   String get deleteAccountBlockerTitleDefault;
 
-  /// No description provided for @deleteAccountBlockerBodyActiveTrips.
+  /// Delete Account Blocker Body Active Trips - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This account still has active trip work attached to it. Review the current trip list, complete any legitimate active work, and then retry the deletion request.'**
   String get deleteAccountBlockerBodyActiveTrips;
 
-  /// No description provided for @deleteAccountBlockerBodyDispute.
+  /// Delete Account Blocker Body Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This account still has an unresolved dispute or review dependency. Use support to follow the current case until the blocking dispute is resolved.'**
   String get deleteAccountBlockerBodyDispute;
 
-  /// No description provided for @deleteAccountBlockerBodyCompliance.
+  /// Delete Account Blocker Body Compliance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This account is still under a compliance or retention hold. Support can clarify the current hold, but the platform cannot bypass the retention requirement.'**
   String get deleteAccountBlockerBodyCompliance;
 
-  /// No description provided for @deleteAccountBlockerBodyDefault.
+  /// Delete Account Blocker Body Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the current blocker carefully and resolve it before retrying the deletion request.'**
   String get deleteAccountBlockerBodyDefault;
 
-  /// No description provided for @deleteAccountSupportTitle.
+  /// Delete Account Support Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Need help first?'**
   String get deleteAccountSupportTitle;
 
-  /// No description provided for @deleteAccountSupportBodyPendingCleanup.
+  /// Delete Account Support Body Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use support if you need clarification on the pending-cleanup status, the grace-period timeline, or whether cancellation is the right next step for this account.'**
   String get deleteAccountSupportBodyPendingCleanup;
 
-  /// No description provided for @deleteAccountSupportBodyDefault.
+  /// Delete Account Support Body Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use support if you expect blockers like active trips, unresolved disputes, or compliance holds and need clarification before retrying the deletion request.'**
   String get deleteAccountSupportBodyDefault;
 
-  /// No description provided for @deleteAccountSupportDetailPendingCleanup.
+  /// Delete Account Support Detail Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support can clarify the current lifecycle state, but they may still need to follow retention and compliance policy before permanent deletion is processed.'**
   String get deleteAccountSupportDetailPendingCleanup;
 
-  /// No description provided for @deleteAccountSupportDetailDefault.
+  /// Delete Account Support Detail Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.'**
   String get deleteAccountSupportDetailDefault;
 
-  /// No description provided for @deleteAccountWhatHappensNextTitle.
+  /// Delete Account What Happens Next Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What happens next'**
   String get deleteAccountWhatHappensNextTitle;
 
-  /// No description provided for @deleteAccountWhatHappensNextBodyPendingCleanup.
+  /// Delete Account What Happens Next Body Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account is already in the pending-cleanup state. Cancel the request if you want to restore the account to active before permanent deletion is processed.'**
   String get deleteAccountWhatHappensNextBodyPendingCleanup;
 
-  /// No description provided for @deleteAccountWhatHappensNextBodyDefault.
+  /// Delete Account What Happens Next Body Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If no blockers exist, your account is moved to deactivated pending cleanup and you are signed out safely.'**
   String get deleteAccountWhatHappensNextBodyDefault;
 
-  /// No description provided for @deleteAccountWhatHappensNextDetailPendingCleanup.
+  /// Delete Account What Happens Next Detail Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If you cancel now, the account deletion status returns to active and normal access is restored.'**
   String get deleteAccountWhatHappensNextDetailPendingCleanup;
 
-  /// No description provided for @deleteAccountWhatHappensNextDetailDefault.
+  /// Delete Account What Happens Next Detail Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If blockers exist, the platform keeps your account active and tells you which dependency must be resolved first.'**
   String get deleteAccountWhatHappensNextDetailDefault;
 
-  /// No description provided for @deleteAccountWhatHappensNextFootnotePendingCleanup.
+  /// Delete Account What Happens Next Footnote Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support may still retain internal records according to policy, but the user-facing deletion request will be cancelled.'**
   String get deleteAccountWhatHappensNextFootnotePendingCleanup;
 
-  /// No description provided for @deleteAccountWhatHappensNextFootnoteDefault.
+  /// Delete Account What Happens Next Footnote Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The deletion request can now be cancelled while the account is in the pending-cleanup lifecycle before permanent deletion is processed.'**
   String get deleteAccountWhatHappensNextFootnoteDefault;
 
-  /// No description provided for @deleteAccountLifecycleUnavailableTitle.
+  /// Delete Account Lifecycle Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account deletion lifecycle unavailable'**
   String get deleteAccountLifecycleUnavailableTitle;
 
-  /// No description provided for @deleteAccountCancelledTitle.
+  /// Delete Account Cancelled Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion request cancelled'**
   String get deleteAccountCancelledTitle;
 
-  /// No description provided for @deleteAccountAlreadyRequestedTitle.
+  /// Delete Account Already Requested Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion already requested'**
   String get deleteAccountAlreadyRequestedTitle;
 
-  /// No description provided for @deleteAccountAlreadyRequestedMessage.
+  /// Delete Account Already Requested Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.'**
   String get deleteAccountAlreadyRequestedMessage;
 
-  /// No description provided for @deleteAccountCancelRequestTitle.
+  /// Delete Account Cancel Request Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancel deletion request'**
   String get deleteAccountCancelRequestTitle;
 
-  /// No description provided for @deleteAccountCancellingButton.
+  /// Delete Account Cancelling Button - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancelling deletion...'**
   String get deleteAccountCancellingButton;
 
-  /// No description provided for @deleteAccountCancelRequestButton.
+  /// Delete Account Cancel Request Button - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancel deletion request'**
   String get deleteAccountCancelRequestButton;
 
-  /// No description provided for @deleteAccountUnavailableTitle.
+  /// Delete Account Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account deletion unavailable'**
   String get deleteAccountUnavailableTitle;
 
-  /// No description provided for @deleteAccountBlockedTitle.
+  /// Delete Account Blocked Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion blocked'**
   String get deleteAccountBlockedTitle;
 
-  /// No description provided for @deleteAccountConfirmRequestTitle.
+  /// Delete Account Confirm Request Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Confirm deletion request'**
   String get deleteAccountConfirmRequestTitle;
 
-  /// No description provided for @deleteAccountRequestingButton.
+  /// Delete Account Requesting Button - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Requesting deletion...'**
   String get deleteAccountRequestingButton;
 
-  /// No description provided for @deleteAccountScreenTitle.
+  /// Delete Account Screen Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delete Account'**
   String get deleteAccountScreenTitle;
 
-  /// No description provided for @deleteAccountHeroTitlePendingCleanup.
+  /// Delete Account Hero Title Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account deletion pending cleanup'**
   String get deleteAccountHeroTitlePendingCleanup;
 
-  /// No description provided for @deleteAccountHeroTitleDefault.
+  /// Delete Account Hero Title Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Request account deletion'**
   String get deleteAccountHeroTitleDefault;
 
-  /// No description provided for @deleteAccountHeroSubtitlePendingCleanup.
+  /// Delete Account Hero Subtitle Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account is currently deactivated pending cleanup. You can still cancel this request during the grace-period lifecycle while the account is not permanently deleted.'**
   String get deleteAccountHeroSubtitlePendingCleanup;
 
-  /// No description provided for @deleteAccountHeroSubtitleDefault.
+  /// Delete Account Hero Subtitle Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.'**
   String get deleteAccountHeroSubtitleDefault;
 
-  /// No description provided for @deleteAccountHeroBodyPendingCleanup.
+  /// Delete Account Hero Body Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.'**
   String get deleteAccountHeroBodyPendingCleanup;
 
-  /// No description provided for @deleteAccountHeroBodyDefault.
+  /// Delete Account Hero Body Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.'**
   String get deleteAccountHeroBodyDefault;
 
-  /// No description provided for @accountSignOutFailureMessage.
+  /// Account Sign Out Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not sign you out right now. Retry shortly from this screen.'**
   String get accountSignOutFailureMessage;
 
-  /// No description provided for @accountRoleSupplier.
+  /// Account Role Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier'**
   String get accountRoleSupplier;
 
-  /// No description provided for @accountRoleTrucker.
+  /// Account Role Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker'**
   String get accountRoleTrucker;
 
-  /// No description provided for @accountRoleUnknown.
+  /// Account Role Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get accountRoleUnknown;
 
-  /// No description provided for @accountStatusTitle.
+  /// Account Status Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account status'**
   String get accountStatusTitle;
 
-  /// No description provided for @accountProfileStatusLabel.
+  /// Account Profile Status Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile status'**
   String get accountProfileStatusLabel;
 
-  /// No description provided for @accountProfileStatusComplete.
+  /// Account Profile Status Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete'**
   String get accountProfileStatusComplete;
 
-  /// No description provided for @accountProfileStatusNeedsAttention.
+  /// Account Profile Status Needs Attention - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Needs attention'**
   String get accountProfileStatusNeedsAttention;
 
-  /// No description provided for @accountAccountStateLabel.
+  /// Account Account State Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account state'**
   String get accountAccountStateLabel;
 
-  /// No description provided for @accountStateDeactivatedPendingCleanup.
+  /// Account State Deactivated Pending Cleanup - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deactivated pending cleanup'**
   String get accountStateDeactivatedPendingCleanup;
 
-  /// No description provided for @accountStateRestricted.
+  /// Account State Restricted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Restricted'**
   String get accountStateRestricted;
 
-  /// No description provided for @accountStateActive.
+  /// Account State Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get accountStateActive;
 
-  /// No description provided for @accountStateUnknown.
+  /// Account State Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get accountStateUnknown;
 
-  /// No description provided for @accountLoadFailureTitle.
+  /// Account Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account details unavailable'**
   String get accountLoadFailureTitle;
 
-  /// No description provided for @accountLoadFailureMessage.
+  /// Account Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your account details right now. Retry shortly from this screen.'**
   String get accountLoadFailureMessage;
 
-  /// No description provided for @accountManageTitle.
+  /// Account Manage Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Manage account'**
   String get accountManageTitle;
 
-  /// No description provided for @accountVerificationLabel.
+  /// Account Verification Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification'**
   String get accountVerificationLabel;
 
-  /// No description provided for @accountFleetLabel.
+  /// Account Fleet Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet'**
   String get accountFleetLabel;
 
-  /// No description provided for @accountSettingsLabel.
+  /// Account Settings Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get accountSettingsLabel;
 
-  /// No description provided for @accountSessionTitle.
+  /// Account Session Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current session'**
   String get accountSessionTitle;
 
-  /// No description provided for @accountSignedInAsLabel.
+  /// Account Signed In As Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Signed in as'**
   String get accountSignedInAsLabel;
 
-  /// No description provided for @accountCurrentAuthenticatedSession.
+  /// Account Current Authenticated Session - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current authenticated session'**
   String get accountCurrentAuthenticatedSession;
 
-  /// No description provided for @accountSignOutAction.
+  /// Account Sign Out Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sign out'**
   String get accountSignOutAction;
 
-  /// No description provided for @profileTitle.
+  /// Profile Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile'**
   String get profileTitle;
 
-  /// No description provided for @profileLoadFailureTitle.
+  /// Profile Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile unavailable'**
   String get profileLoadFailureTitle;
 
-  /// No description provided for @profileLoadFailureMessage.
+  /// Profile Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your profile right now. Retry shortly from this screen.'**
   String get profileLoadFailureMessage;
 
-  /// No description provided for @profileSummaryTitle.
+  /// Profile Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile summary'**
   String get profileSummaryTitle;
 
-  /// No description provided for @profileNameLabel.
+  /// Profile Name Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Name'**
   String get profileNameLabel;
 
-  /// No description provided for @profileValueNotSet.
+  /// Profile Value Not Set - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not set'**
   String get profileValueNotSet;
 
-  /// No description provided for @profilePhoneLabel.
+  /// Profile Phone Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Phone'**
   String get profilePhoneLabel;
 
-  /// No description provided for @profileValueNotProvided.
+  /// Profile Value Not Provided - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not provided'**
   String get profileValueNotProvided;
 
-  /// No description provided for @profileEmailLabel.
+  /// Profile Email Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Email'**
   String get profileEmailLabel;
 
-  /// No description provided for @profileRoleLabel.
+  /// Profile Role Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Role'**
   String get profileRoleLabel;
 
-  /// No description provided for @profileReadinessTitle.
+  /// Profile Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile readiness'**
   String get profileReadinessTitle;
 
-  /// No description provided for @profileCompletenessLabel.
+  /// Profile Completeness Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completeness'**
   String get profileCompletenessLabel;
 
-  /// No description provided for @profileCompletenessComplete.
+  /// Profile Completeness Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete'**
   String get profileCompletenessComplete;
 
-  /// No description provided for @profileCompletenessNeedsUpdates.
+  /// Profile Completeness Needs Updates - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Needs updates'**
   String get profileCompletenessNeedsUpdates;
 
-  /// No description provided for @profileDeletionStatusLabel.
+  /// Profile Deletion Status Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deletion status'**
   String get profileDeletionStatusLabel;
 
-  /// No description provided for @profileOpenFleetReadiness.
+  /// Profile Open Fleet Readiness - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open fleet readiness'**
   String get profileOpenFleetReadiness;
 
-  /// No description provided for @profileRequestAccountDeletion.
+  /// Profile Request Account Deletion - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Request account deletion'**
   String get profileRequestAccountDeletion;
 
-  /// No description provided for @profileTtsSummary.
+  /// TTS summary for profile screen. Placeholders {roleLabel}, {trustStatus}, {deletionStatus} describe user's account state.
   ///
   /// In en, this message translates to:
   /// **'Profile screen. Role is {roleLabel}. Trust and safety status is {trustStatus}. Account deletion status is {deletionStatus}. You can open deletion follow-up or support guidance from this screen if needed.'**
@@ -2127,535 +2148,535 @@ abstract class AppLocalizations {
     Object deletionStatus,
   );
 
-  /// No description provided for @settingsTitle.
+  /// Settings Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsTitle;
 
-  /// No description provided for @settingsPreferencesTitle.
+  /// Settings Preferences Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Preferences'**
   String get settingsPreferencesTitle;
 
-  /// No description provided for @settingsRoleContextLabel.
+  /// Settings Role Context Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Role context'**
   String get settingsRoleContextLabel;
 
-  /// No description provided for @settingsTtsSummary.
+  /// TTS summary for settings screen. Placeholders {selectedLanguageLabel} and {roleSentence} describe current settings.
   ///
   /// In en, this message translates to:
   /// **'Settings screen. Language is set to {selectedLanguageLabel}. Voice guidance is manual right now. Notifications are enabled through the in-app inbox.{roleSentence}'**
   String settingsTtsSummary(Object selectedLanguageLabel, Object roleSentence);
 
-  /// No description provided for @settingsVoiceAssistanceLabel.
+  /// Settings Voice Assistance Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice assistance'**
   String get settingsVoiceAssistanceLabel;
 
-  /// No description provided for @settingsVoiceAssistanceValue.
+  /// Settings Voice Assistance Value - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Manual contextual summaries are available from supported screens.'**
   String get settingsVoiceAssistanceValue;
 
-  /// No description provided for @settingsNotificationsLabel.
+  /// Settings Notifications Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
   String get settingsNotificationsLabel;
 
-  /// No description provided for @settingsNotificationsValue.
+  /// Settings Notifications Value - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In-app inbox and push status controls are available here.'**
   String get settingsNotificationsValue;
 
-  /// No description provided for @settingsConnectedSurfacesTitle.
+  /// Settings Connected Surfaces Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Connected surfaces'**
   String get settingsConnectedSurfacesTitle;
 
-  /// No description provided for @settingsPushNotificationsTitle.
+  /// Settings Push Notifications Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push notifications'**
   String get settingsPushNotificationsTitle;
 
-  /// No description provided for @settingsPushStatusLabel.
+  /// Settings Push Status Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Status'**
   String get settingsPushStatusLabel;
 
-  /// No description provided for @settingsPushRequestPermission.
+  /// Settings Push Request Permission - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Request permission'**
   String get settingsPushRequestPermission;
 
-  /// No description provided for @settingsPushRefreshStatus.
+  /// Settings Push Refresh Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Refresh status'**
   String get settingsPushRefreshStatus;
 
-  /// No description provided for @settingsPushStatusUnavailableTitle.
+  /// Settings Push Status Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push notification status unavailable'**
   String get settingsPushStatusUnavailableTitle;
 
-  /// No description provided for @settingsPushStatusUnavailableMessage.
+  /// Settings Push Status Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to read device notification permission right now. Refresh after Firebase/device support is available.'**
   String get settingsPushStatusUnavailableMessage;
 
-  /// No description provided for @settingsPushStatusAllowed.
+  /// Settings Push Status Allowed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Allowed'**
   String get settingsPushStatusAllowed;
 
-  /// No description provided for @settingsPushStatusAllowedQuietly.
+  /// Settings Push Status Allowed Quietly - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Allowed quietly'**
   String get settingsPushStatusAllowedQuietly;
 
-  /// No description provided for @settingsPushStatusBlocked.
+  /// Settings Push Status Blocked - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Blocked in system settings'**
   String get settingsPushStatusBlocked;
 
-  /// No description provided for @settingsPushStatusNotRequested.
+  /// Settings Push Status Not Requested - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not requested yet'**
   String get settingsPushStatusNotRequested;
 
-  /// No description provided for @settingsPushStatusUnavailable.
+  /// Settings Push Status Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unavailable on this device/build'**
   String get settingsPushStatusUnavailable;
 
-  /// No description provided for @settingsPushGuidanceAllowed.
+  /// Settings Push Guidance Allowed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Foreground and opened push flows are enabled when Firebase delivery is configured.'**
   String get settingsPushGuidanceAllowed;
 
-  /// No description provided for @settingsPushGuidanceAllowedQuietly.
+  /// Settings Push Guidance Allowed Quietly - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push is allowed quietly. You can promote alerts in the device notification settings if needed.'**
   String get settingsPushGuidanceAllowedQuietly;
 
-  /// No description provided for @settingsPushGuidanceBlocked.
+  /// Settings Push Guidance Blocked - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.'**
   String get settingsPushGuidanceBlocked;
 
-  /// No description provided for @settingsPushGuidanceNotRequested.
+  /// Settings Push Guidance Not Requested - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push permission has not been requested yet on this device session.'**
   String get settingsPushGuidanceNotRequested;
 
-  /// No description provided for @settingsPushGuidanceUnavailable.
+  /// Settings Push Guidance Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Push runtime is unavailable here until Firebase/device support is fully configured.'**
   String get settingsPushGuidanceUnavailable;
 
-  /// No description provided for @supportActiveTicketCount.
+  /// Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.
   ///
   /// In en, this message translates to:
   /// **'{count} ticket{s}'**
   String supportActiveTicketCount(Object count, Object s);
 
-  /// No description provided for @supportScreenTitle.
+  /// Support Screen Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support and dispute follow-up'**
   String get supportScreenTitle;
 
-  /// No description provided for @supportHeroTitle.
+  /// Support Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review your latest support activity'**
   String get supportHeroTitle;
 
-  /// No description provided for @supportHeroSubtitleSupplier.
+  /// Support Hero Subtitle Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use support to review dispute progress, payment follow-ups, and the latest visible ticket updates linked to your supplier activity.'**
   String get supportHeroSubtitleSupplier;
 
-  /// No description provided for @supportHeroSubtitleTrucker.
+  /// Support Hero Subtitle Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use support to review dispute progress, freight follow-ups, and the latest visible ticket updates linked to your trucker activity.'**
   String get supportHeroSubtitleTrucker;
 
-  /// No description provided for @supportNoActiveTickets.
+  /// Support No Active Tickets - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No active tickets'**
   String get supportNoActiveTickets;
 
-  /// No description provided for @supportCreateTicketAction.
+  /// Support Create Ticket Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create support ticket'**
   String get supportCreateTicketAction;
 
-  /// No description provided for @supportIntroMessage.
+  /// Support Intro Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Follow your latest support and dispute tickets here, review visible workflow updates, and reply with any clarification or proof support requested.'**
   String get supportIntroMessage;
 
-  /// No description provided for @supportTicketSummaryTitle.
+  /// Support Ticket Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support summary'**
   String get supportTicketSummaryTitle;
 
-  /// No description provided for @supportEscalationPathLabel.
+  /// Support Escalation Path Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Escalation path'**
   String get supportEscalationPathLabel;
 
-  /// No description provided for @supportEscalationPathSupplier.
+  /// Support Escalation Path Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier support'**
   String get supportEscalationPathSupplier;
 
-  /// No description provided for @supportEscalationPathTrucker.
+  /// Support Escalation Path Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker support'**
   String get supportEscalationPathTrucker;
 
-  /// No description provided for @supportCurrentTrustStatusLabel.
+  /// Support Current Trust Status Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current trust status'**
   String get supportCurrentTrustStatusLabel;
 
-  /// No description provided for @supportMyTicketsTitle.
+  /// Support My Tickets Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My tickets'**
   String get supportMyTicketsTitle;
 
-  /// No description provided for @supportSelectedTicketAndReplyTitle.
+  /// Support Selected Ticket And Reply Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Selected ticket and reply'**
   String get supportSelectedTicketAndReplyTitle;
 
-  /// No description provided for @supportSelectTicketTitle.
+  /// Support Select Ticket Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select a ticket'**
   String get supportSelectTicketTitle;
 
-  /// No description provided for @supportSelectTicketSubtitle.
+  /// Support Select Ticket Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose a support ticket from the list to review its visible thread, workflow state, and reply options.'**
   String get supportSelectTicketSubtitle;
 
-  /// No description provided for @supportTicketsUnavailableTitle.
+  /// Support Tickets Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support tickets unavailable'**
   String get supportTicketsUnavailableTitle;
 
-  /// No description provided for @supportNoTicketsTitle.
+  /// Support No Tickets Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No support tickets yet'**
   String get supportNoTicketsTitle;
 
-  /// No description provided for @supportNoTicketsSubtitle.
+  /// Support No Tickets Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create a support ticket to start a new support or dispute follow-up and track future updates here.'**
   String get supportNoTicketsSubtitle;
 
-  /// No description provided for @supportLoadingOlderTickets.
+  /// Support Loading Older Tickets - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loading older tickets...'**
   String get supportLoadingOlderTickets;
 
-  /// No description provided for @supportLoadOlderTickets.
+  /// Support Load Older Tickets - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load older tickets'**
   String get supportLoadOlderTickets;
 
-  /// No description provided for @supportTicketsLoadFailureMessage.
+  /// Support Tickets Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your support tickets right now. Retry shortly to refresh your latest support and dispute activity.'**
   String get supportTicketsLoadFailureMessage;
 
-  /// No description provided for @supportOpenTripAction.
+  /// Support Open Trip Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open trip'**
   String get supportOpenTripAction;
 
-  /// No description provided for @supportOpenLoadAction.
+  /// Support Open Load Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open load'**
   String get supportOpenLoadAction;
 
-  /// No description provided for @supportViewingThisTicket.
+  /// Support Viewing This Ticket - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Viewing this ticket'**
   String get supportViewingThisTicket;
 
-  /// No description provided for @supportOpenTicketAction.
+  /// Support Open Ticket Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open ticket'**
   String get supportOpenTicketAction;
 
-  /// No description provided for @supportDetailUnavailableTitle.
+  /// Support Detail Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Ticket detail unavailable'**
   String get supportDetailUnavailableTitle;
 
-  /// No description provided for @supportDetailUnavailableMessage.
+  /// Support Detail Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this ticket detail right now. Retry shortly to refresh the latest visible thread and workflow status.'**
   String get supportDetailUnavailableMessage;
 
-  /// No description provided for @supportTicketUnavailableTitle.
+  /// Support Ticket Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Ticket unavailable'**
   String get supportTicketUnavailableTitle;
 
-  /// No description provided for @supportTicketUnavailableSubtitle.
+  /// Support Ticket Unavailable Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This support ticket is unavailable right now for the current account.'**
   String get supportTicketUnavailableSubtitle;
 
-  /// No description provided for @supportTicketStatusOpen.
+  /// Support Ticket Status Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open'**
   String get supportTicketStatusOpen;
 
-  /// No description provided for @supportTicketStatusInProgress.
+  /// Support Ticket Status In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In progress'**
   String get supportTicketStatusInProgress;
 
-  /// No description provided for @supportTicketStatusWaitingForYou.
+  /// Support Ticket Status Waiting For You - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Waiting for you'**
   String get supportTicketStatusWaitingForYou;
 
-  /// No description provided for @supportTicketStatusResolved.
+  /// Support Ticket Status Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resolved'**
   String get supportTicketStatusResolved;
 
-  /// No description provided for @supportTicketStatusClosed.
+  /// Support Ticket Status Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Closed'**
   String get supportTicketStatusClosed;
 
-  /// No description provided for @supportTicketStatusUnknown.
+  /// Support Ticket Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supportTicketStatusUnknown;
 
-  /// No description provided for @supportTicketPriorityLow.
+  /// Support Ticket Priority Low - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'low'**
   String get supportTicketPriorityLow;
 
-  /// No description provided for @supportTicketPriorityMedium.
+  /// Support Ticket Priority Medium - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'medium'**
   String get supportTicketPriorityMedium;
 
-  /// No description provided for @supportTicketPriorityHigh.
+  /// Support Ticket Priority High - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'high'**
   String get supportTicketPriorityHigh;
 
-  /// No description provided for @supportTicketPriorityUrgent.
+  /// Support Ticket Priority Urgent - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'urgent'**
   String get supportTicketPriorityUrgent;
 
-  /// No description provided for @supportTicketPriorityNotSet.
+  /// Support Ticket Priority Not Set - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'not set'**
   String get supportTicketPriorityNotSet;
 
-  /// No description provided for @supportTicketTitleTripDisputeReview.
+  /// Support Ticket Title Trip Dispute Review - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip dispute review'**
   String get supportTicketTitleTripDisputeReview;
 
-  /// No description provided for @supportTicketTitleLoadedQuantityMismatchReport.
+  /// Support Ticket Title Loaded Quantity Mismatch Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loaded quantity mismatch report'**
   String get supportTicketTitleLoadedQuantityMismatchReport;
 
-  /// No description provided for @supportTicketTitleUnloadedQuantityMismatchReport.
+  /// Support Ticket Title Unloaded Quantity Mismatch Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unloaded quantity mismatch report'**
   String get supportTicketTitleUnloadedQuantityMismatchReport;
 
-  /// No description provided for @supportTicketTitleDocumentMismatchReport.
+  /// Support Ticket Title Document Mismatch Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Document mismatch report'**
   String get supportTicketTitleDocumentMismatchReport;
 
-  /// No description provided for @supportTicketTitleSpamOrScamReport.
+  /// Support Ticket Title Spam Or Scam Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Spam or scam report'**
   String get supportTicketTitleSpamOrScamReport;
 
-  /// No description provided for @supportTicketTitleAbusiveBehaviorReport.
+  /// Support Ticket Title Abusive Behavior Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Abusive behavior report'**
   String get supportTicketTitleAbusiveBehaviorReport;
 
-  /// No description provided for @supportTicketTitleFakePayoutProofReport.
+  /// Support Ticket Title Fake Payout Proof Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fake payout proof report'**
   String get supportTicketTitleFakePayoutProofReport;
 
-  /// No description provided for @supportTicketTitleNonPaymentReport.
+  /// Support Ticket Title Non Payment Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Non-payment report'**
   String get supportTicketTitleNonPaymentReport;
 
-  /// No description provided for @supportTicketTitleDelayOrNoShowReport.
+  /// Support Ticket Title Delay Or No Show Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delay or no-show report'**
   String get supportTicketTitleDelayOrNoShowReport;
 
-  /// No description provided for @supportTicketTitleDamageOrShortageReport.
+  /// Support Ticket Title Damage Or Shortage Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Damage or shortage report'**
   String get supportTicketTitleDamageOrShortageReport;
 
-  /// No description provided for @supportTicketTitleOtherReport.
+  /// Support Ticket Title Other Report - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other report'**
   String get supportTicketTitleOtherReport;
 
-  /// No description provided for @supportDisputeCategoryTripDispute.
+  /// Support Dispute Category Trip Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip dispute'**
   String get supportDisputeCategoryTripDispute;
 
-  /// No description provided for @supportDisputeCategoryLoadedQuantityMismatch.
+  /// Support Dispute Category Loaded Quantity Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loaded quantity mismatch'**
   String get supportDisputeCategoryLoadedQuantityMismatch;
 
-  /// No description provided for @supportDisputeCategoryUnloadedQuantityMismatch.
+  /// Support Dispute Category Unloaded Quantity Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unloaded quantity mismatch'**
   String get supportDisputeCategoryUnloadedQuantityMismatch;
 
-  /// No description provided for @supportDisputeCategoryDocumentMismatch.
+  /// Support Dispute Category Document Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Document mismatch'**
   String get supportDisputeCategoryDocumentMismatch;
 
-  /// No description provided for @supportDisputeCategoryNonPayment.
+  /// Support Dispute Category Non Payment - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Non-payment'**
   String get supportDisputeCategoryNonPayment;
 
-  /// No description provided for @supportDisputeCategoryFakePayoutProof.
+  /// Support Dispute Category Fake Payout Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fake payout proof'**
   String get supportDisputeCategoryFakePayoutProof;
 
-  /// No description provided for @supportDisputeCategoryDelayOrNoShow.
+  /// Support Dispute Category Delay Or No Show - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delay or no-show'**
   String get supportDisputeCategoryDelayOrNoShow;
 
-  /// No description provided for @supportDisputeCategoryDamageOrShortage.
+  /// Support Dispute Category Damage Or Shortage - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Damage or shortage'**
   String get supportDisputeCategoryDamageOrShortage;
 
-  /// No description provided for @supportDisputeCategoryAbusiveBehavior.
+  /// Support Dispute Category Abusive Behavior - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Abusive behavior'**
   String get supportDisputeCategoryAbusiveBehavior;
 
-  /// No description provided for @supportDisputeCategorySpamOrScam.
+  /// Support Dispute Category Spam Or Scam - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Spam or scam'**
   String get supportDisputeCategorySpamOrScam;
 
-  /// No description provided for @supportDisputeCategoryOther.
+  /// Support Dispute Category Other - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other'**
@@ -2721,61 +2742,61 @@ abstract class AppLocalizations {
   /// **'Related load: {value}'**
   String supportRelatedLoadValue(Object value);
 
-  /// No description provided for @supportOpenRelatedTripAction.
+  /// Support Open Related Trip Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open related trip'**
   String get supportOpenRelatedTripAction;
 
-  /// No description provided for @supportOpenRelatedLoadAction.
+  /// Support Open Related Load Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open related load'**
   String get supportOpenRelatedLoadAction;
 
-  /// No description provided for @supportWorkflowGuidanceOpen.
+  /// Support Workflow Guidance Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support has received this ticket and review should begin shortly. Use visible replies to add any missing context if needed.'**
   String get supportWorkflowGuidanceOpen;
 
-  /// No description provided for @supportWorkflowGuidanceInProgress.
+  /// Support Workflow Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support or operations are actively reviewing this ticket. Watch for visible replies and be ready to clarify the timeline or proof if more detail is requested.'**
   String get supportWorkflowGuidanceInProgress;
 
-  /// No description provided for @supportWorkflowGuidanceWaitingForUser.
+  /// Support Workflow Guidance Waiting For User - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support is waiting on your clarification or proof. Reply on this ticket so the review can continue without unnecessary delay.'**
   String get supportWorkflowGuidanceWaitingForUser;
 
-  /// No description provided for @supportWorkflowGuidanceResolved.
+  /// Support Workflow Guidance Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This ticket has reached a final support outcome. Review the recorded resolution before opening any fresh follow-up.'**
   String get supportWorkflowGuidanceResolved;
 
-  /// No description provided for @supportWorkflowGuidanceUnknown.
+  /// Support Workflow Guidance Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the latest visible ticket updates for the current workflow state.'**
   String get supportWorkflowGuidanceUnknown;
 
-  /// No description provided for @supportDisputeBannerTitleClosed.
+  /// Support Dispute Banner Title Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review closed'**
   String get supportDisputeBannerTitleClosed;
 
-  /// No description provided for @supportDisputeBannerTitleWaiting.
+  /// Support Dispute Banner Title Waiting - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute waiting for your reply'**
   String get supportDisputeBannerTitleWaiting;
 
-  /// No description provided for @supportDisputeBannerTitleInProgress.
+  /// Support Dispute Banner Title In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review in progress'**
@@ -2799,115 +2820,115 @@ abstract class AppLocalizations {
   /// **'Category: {category}. This trip dispute is under active support review. Both sides can follow visible status updates, but raw evidence access may remain restricted during review.'**
   String supportDisputeBannerMessageInProgress(Object category);
 
-  /// No description provided for @supportEvidenceVisibilitySummaryClosed.
+  /// Support Evidence Visibility Summary Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this ticket.'**
   String get supportEvidenceVisibilitySummaryClosed;
 
-  /// No description provided for @supportEvidenceVisibilitySummaryInProgress.
+  /// Support Evidence Visibility Summary In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible on this ticket.'**
   String get supportEvidenceVisibilitySummaryInProgress;
 
-  /// No description provided for @supportRestrictedEvidenceMessageClosed.
+  /// Support Restricted Evidence Message Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Raw attachments and sensitive proof may remain restricted even after the review outcome is recorded on the ticket.'**
   String get supportRestrictedEvidenceMessageClosed;
 
-  /// No description provided for @supportRestrictedEvidenceMessageInProgress.
+  /// Support Restricted Evidence Message In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Raw attachments and sensitive proof may remain restricted while this review stays active on the ticket.'**
   String get supportRestrictedEvidenceMessageInProgress;
 
-  /// No description provided for @supportAdditionalProofGuidanceClosed.
+  /// Support Additional Proof Guidance Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If you believe important proof was not considered before closure, start a fresh support follow-up only when you have a genuinely new issue or clarification to raise.'**
   String get supportAdditionalProofGuidanceClosed;
 
-  /// No description provided for @supportAdditionalProofGuidanceInProgress.
+  /// Support Additional Proof Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If your dispute depends on additional documents or screenshots beyond the current single-image flow, describe those missing proofs clearly in your visible reply so support knows what else to review.'**
   String get supportAdditionalProofGuidanceInProgress;
 
-  /// No description provided for @supportAttachmentVisibilityMessageClosed.
+  /// Support Attachment Visibility Message Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence attached to this reply. Raw file access may remain restricted even after the review outcome is recorded on this ticket.'**
   String get supportAttachmentVisibilityMessageClosed;
 
-  /// No description provided for @supportAttachmentVisibilityMessageInProgress.
+  /// Support Attachment Visibility Message In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence attached to this reply. Raw file access may remain restricted during review.'**
   String get supportAttachmentVisibilityMessageInProgress;
 
-  /// No description provided for @supportAttachmentGuidanceMessageClosed.
+  /// Support Attachment Guidance Message Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If you still need to reference other supporting proofs after closure, open a fresh follow-up only when you have genuinely new context that was not captured on this ticket.'**
   String get supportAttachmentGuidanceMessageClosed;
 
-  /// No description provided for @supportAttachmentGuidanceMessageInProgress.
+  /// Support Attachment Guidance Message In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If other supporting proofs are not attached here, summarize them in visible reply text so support can request or review them safely.'**
   String get supportAttachmentGuidanceMessageInProgress;
 
-  /// No description provided for @supportSupportTeamLabel.
+  /// Support Support Team Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support team'**
   String get supportSupportTeamLabel;
 
-  /// No description provided for @supportYouLabel.
+  /// Support You Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You'**
   String get supportYouLabel;
 
-  /// No description provided for @supportEmptyThreadSubtitleOpen.
+  /// Support Empty Thread Subtitle Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread has been posted on this support ticket yet.'**
   String get supportEmptyThreadSubtitleOpen;
 
-  /// No description provided for @supportEmptyThreadSubtitleInProgress.
+  /// Support Empty Thread Subtitle In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread is available yet while this ticket remains under active review.'**
   String get supportEmptyThreadSubtitleInProgress;
 
-  /// No description provided for @supportEmptyThreadSubtitleWaiting.
+  /// Support Empty Thread Subtitle Waiting - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread is available yet. Reply on this ticket so the review can continue.'**
   String get supportEmptyThreadSubtitleWaiting;
 
-  /// No description provided for @supportEmptyThreadSubtitleResolved.
+  /// Support Empty Thread Subtitle Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread was recorded before this ticket was resolved or closed.'**
   String get supportEmptyThreadSubtitleResolved;
 
-  /// No description provided for @supportEmptyThreadSubtitleUnknown.
+  /// Support Empty Thread Subtitle Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread is available for this support ticket yet.'**
   String get supportEmptyThreadSubtitleUnknown;
 
-  /// No description provided for @supportEvidenceVisibilityTitle.
+  /// Support Evidence Visibility Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence visibility'**
   String get supportEvidenceVisibilityTitle;
 
-  /// No description provided for @supportVisibleThreadSummaryTitle.
+  /// Support Visible Thread Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Visible thread summary'**
@@ -2919,7 +2940,7 @@ abstract class AppLocalizations {
   /// **'Visible replies: {count}'**
   String supportVisibleRepliesCount(int count);
 
-  /// No description provided for @supportLastVisibleUpdateNone.
+  /// Support Last Visible Update None - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Last visible update: No visible replies yet.'**
@@ -2931,7 +2952,7 @@ abstract class AppLocalizations {
   /// **'Last visible update: {value}'**
   String supportLastVisibleUpdate(Object value);
 
-  /// No description provided for @supportLatestVisibleSenderNone.
+  /// Support Latest Visible Sender None - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Latest visible sender: No visible sender yet.'**
@@ -2943,31 +2964,31 @@ abstract class AppLocalizations {
   /// **'Latest visible sender: {value}'**
   String supportLatestVisibleSender(Object value);
 
-  /// No description provided for @supportVisibleAttachmentSummaryPresent.
+  /// Support Visible Attachment Summary Present - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Visible attachment summary: One or more visible replies include an attachment reference.'**
   String get supportVisibleAttachmentSummaryPresent;
 
-  /// No description provided for @supportVisibleAttachmentSummaryAbsent.
+  /// Support Visible Attachment Summary Absent - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Visible attachment summary: No visible replies include an attachment reference yet.'**
   String get supportVisibleAttachmentSummaryAbsent;
 
-  /// No description provided for @supportNoVisibleThreadTitle.
+  /// Support No Visible Thread Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No visible thread yet'**
   String get supportNoVisibleThreadTitle;
 
-  /// No description provided for @supportCurrentWorkflowTitle.
+  /// Support Current Workflow Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current workflow'**
   String get supportCurrentWorkflowTitle;
 
-  /// No description provided for @supportResolutionOutcomeTitle.
+  /// Support Resolution Outcome Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resolution outcome'**
@@ -2979,55 +3000,55 @@ abstract class AppLocalizations {
   /// **'Resolved on: {value}'**
   String supportResolvedOn(Object value);
 
-  /// No description provided for @supportWaitingForReplyTitle.
+  /// Support Waiting For Reply Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support is waiting for your reply'**
   String get supportWaitingForReplyTitle;
 
-  /// No description provided for @supportWaitingForReplyMessage.
+  /// Support Waiting For Reply Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply on this ticket with the requested clarification or proof so the review can continue.'**
   String get supportWaitingForReplyMessage;
 
-  /// No description provided for @supportReplyGuidanceTitle.
+  /// Support Reply Guidance Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply guidance'**
   String get supportReplyGuidanceTitle;
 
-  /// No description provided for @supportRepliesClosedTitle.
+  /// Support Replies Closed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Replies are closed for this ticket'**
   String get supportRepliesClosedTitle;
 
-  /// No description provided for @supportRepliesClosedMessage.
+  /// Support Replies Closed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This ticket has reached a final support outcome and does not accept further replies.'**
   String get supportRepliesClosedMessage;
 
-  /// No description provided for @supportReplyStatusReply.
+  /// Support Reply Status Reply - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply'**
   String get supportReplyStatusReply;
 
-  /// No description provided for @supportReplyStatusSubmitted.
+  /// Support Reply Status Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submitted'**
   String get supportReplyStatusSubmitted;
 
-  /// No description provided for @supportNoMessageTextProvided.
+  /// Support No Message Text Provided - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No message text provided.'**
   String get supportNoMessageTextProvided;
 
-  /// No description provided for @supportTrustStatusLoading.
+  /// Support Trust Status Loading - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Loading trust status'**
@@ -3039,85 +3060,85 @@ abstract class AppLocalizations {
   /// **'Resolution: {value}'**
   String supportResolutionValue(Object value);
 
-  /// No description provided for @supportReplyGuidancePrimaryOpenDispute.
+  /// Support Reply Guidance Primary Open Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use your visible reply to explain the dispute timeline, what proof is already attached, and what support should review first.'**
   String get supportReplyGuidancePrimaryOpenDispute;
 
-  /// No description provided for @supportReplyGuidancePrimaryOpenDefault.
+  /// Support Reply Guidance Primary Open Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use your reply to explain the current blocker clearly so support can continue the review.'**
   String get supportReplyGuidancePrimaryOpenDefault;
 
-  /// No description provided for @supportReplyGuidancePrimaryInProgressDispute.
+  /// Support Reply Guidance Primary In Progress Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep your next reply focused on the dispute timeline, proof gaps, and the clearest follow-up support should review.'**
   String get supportReplyGuidancePrimaryInProgressDispute;
 
-  /// No description provided for @supportReplyGuidancePrimaryInProgressDefault.
+  /// Support Reply Guidance Primary In Progress Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply with the next operational detail or clarification support asked for so the review can continue.'**
   String get supportReplyGuidancePrimaryInProgressDefault;
 
-  /// No description provided for @supportReplyGuidancePrimaryWaitingDispute.
+  /// Support Reply Guidance Primary Waiting Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply with the missing clarification or proof support requested so the dispute review can continue without unnecessary delay.'**
   String get supportReplyGuidancePrimaryWaitingDispute;
 
-  /// No description provided for @supportReplyGuidancePrimaryWaitingDefault.
+  /// Support Reply Guidance Primary Waiting Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply with the missing clarification support requested so the ticket can continue moving.'**
   String get supportReplyGuidancePrimaryWaitingDefault;
 
-  /// No description provided for @supportReplyGuidancePrimaryResolved.
+  /// Support Reply Guidance Primary Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This ticket is already resolved. Start a fresh follow-up only if a genuinely new issue appears.'**
   String get supportReplyGuidancePrimaryResolved;
 
-  /// No description provided for @supportReplyGuidancePrimaryUnknown.
+  /// Support Reply Guidance Primary Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply with the clearest next detail you can share if support requests more information.'**
   String get supportReplyGuidancePrimaryUnknown;
 
-  /// No description provided for @supportReplyGuidanceSecondaryOpenInProgressDispute.
+  /// Support Reply Guidance Secondary Open In Progress Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If proof is missing from the current single-image flow, summarize the rest clearly in visible text so support knows what else to request or review.'**
   String get supportReplyGuidanceSecondaryOpenInProgressDispute;
 
-  /// No description provided for @supportReplyGuidanceSecondaryOpenInProgressDefault.
+  /// Support Reply Guidance Secondary Open In Progress Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the reply concise, specific, and tied to the load or trip context support is reviewing.'**
   String get supportReplyGuidanceSecondaryOpenInProgressDefault;
 
-  /// No description provided for @supportReplyGuidanceSecondaryWaitingDispute.
+  /// Support Reply Guidance Secondary Waiting Dispute - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If more than one proof matters, attach the strongest one first and summarize the remaining context in your visible reply.'**
   String get supportReplyGuidanceSecondaryWaitingDispute;
 
-  /// No description provided for @supportReplyGuidanceSecondaryWaitingDefault.
+  /// Support Reply Guidance Secondary Waiting Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Answer the latest support prompt directly so the next review step is clear.'**
   String get supportReplyGuidanceSecondaryWaitingDefault;
 
-  /// No description provided for @supportReplyGuidanceSecondaryResolved.
+  /// Support Reply Guidance Secondary Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the recorded resolution for reference and use a new ticket only for genuinely new follow-up.'**
   String get supportReplyGuidanceSecondaryResolved;
 
-  /// No description provided for @supportReplyGuidanceSecondaryUnknown.
+  /// Support Reply Guidance Secondary Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep your reply clear and limited to the facts support can verify next.'**
@@ -3126,124 +3147,124 @@ abstract class AppLocalizations {
   /// No description provided for @supportTicketTitleWithPriority.
   ///
   /// In en, this message translates to:
-  /// **'{title} • {priority} priority'**
+  /// **'{title} - {priority} priority'**
   String supportTicketTitleWithPriority(Object title, Object priority);
 
-  /// No description provided for @supportFallbackLabel.
+  /// Support Fallback Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support'**
   String get supportFallbackLabel;
 
-  /// No description provided for @supportTrustStatusNormal.
+  /// Support Trust Status Normal - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Normal'**
   String get supportTrustStatusNormal;
 
-  /// No description provided for @supportTrustStatusWarned.
+  /// Support Trust Status Warned - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Warned'**
   String get supportTrustStatusWarned;
 
-  /// No description provided for @supportTrustStatusRestricted.
+  /// Support Trust Status Restricted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Restricted'**
   String get supportTrustStatusRestricted;
 
-  /// No description provided for @supportTrustStatusSuspended.
+  /// Support Trust Status Suspended - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Suspended'**
   String get supportTrustStatusSuspended;
 
-  /// No description provided for @supportTrustStatusBanned.
+  /// Support Trust Status Banned - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Banned'**
   String get supportTrustStatusBanned;
 
-  /// No description provided for @supportTrustStatusUnknown.
+  /// Support Trust Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supportTrustStatusUnknown;
 
-  /// No description provided for @supportTrustBadge.
+  /// Support Trust Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust: {status}'**
   String supportTrustBadge(Object status);
 
-  /// No description provided for @trustSafetyLabel.
+  /// Trust Safety Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust & safety'**
   String get trustSafetyLabel;
 
-  /// No description provided for @trustSafetyWarningTitle.
+  /// Trust Safety Warning Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust & safety warning active'**
   String get trustSafetyWarningTitle;
 
-  /// No description provided for @trustSafetyWarningMessage.
+  /// Trust Safety Warning Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account has a warning on record. Marketplace and support surfaces remain available, but you should avoid further violations and use support if you need clarification on the warning or next-step expectations.'**
   String get trustSafetyWarningMessage;
 
-  /// No description provided for @trustSafetyRestrictionTitle.
+  /// Trust Safety Restriction Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust & safety restriction active'**
   String get trustSafetyRestrictionTitle;
 
-  /// No description provided for @trustSafetyRestrictionFallback.
+  /// Trust Safety Restriction Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some platform actions may be limited while this restriction remains active. Use support to confirm which actions are limited and what changes may be required before the restriction can be reviewed.'**
   String get trustSafetyRestrictionFallback;
 
-  /// No description provided for @trustSafetySuspensionTitle.
+  /// Trust Safety Suspension Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust & safety suspension active'**
   String get trustSafetySuspensionTitle;
 
-  /// No description provided for @trustSafetySuspensionFallback.
+  /// Trust Safety Suspension Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Access to key platform actions may be paused while this suspension remains active. Use support for policy-allowed review updates or reinstatement guidance once the required next steps are complete.'**
   String get trustSafetySuspensionFallback;
 
-  /// No description provided for @trustSafetyBanTitle.
+  /// Trust Safety Ban Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trust & safety ban active'**
   String get trustSafetyBanTitle;
 
-  /// No description provided for @trustSafetyBanFallback.
+  /// Trust Safety Ban Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This account is blocked from normal platform use. Use support only for policy-allowed clarification or final review outcome questions.'**
   String get trustSafetyBanFallback;
 
-  /// No description provided for @trustSafetyOpenSupport.
+  /// Trust Safety Open Support - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open support'**
   String get trustSafetyOpenSupport;
 
-  /// No description provided for @trustSafetyHealthyMessageLine1.
+  /// Trust Safety Healthy Message Line1 - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account currently has no active trust or safety enforcement. Keep delivery proofs, payout confirmations, and marketplace communication accurate so this status remains normal.'**
   String get trustSafetyHealthyMessageLine1;
 
-  /// No description provided for @trustSafetyHealthyMessageLine2.
+  /// Trust Safety Healthy Message Line2 - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If policy or moderation questions ever appear on this account, open support for clarification before retrying blocked actions.'**
@@ -3265,265 +3286,265 @@ abstract class AppLocalizations {
     Object fallback,
   );
 
-  /// No description provided for @settingsLanguageLabel.
+  /// Settings Language Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Language'**
   String get settingsLanguageLabel;
 
-  /// No description provided for @settingsLanguageHelper.
+  /// Settings Language Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Hindi is the launch default. You can switch to English here.'**
   String get settingsLanguageHelper;
 
-  /// No description provided for @settingsLanguageEnglish.
+  /// Settings Language English - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'English'**
   String get settingsLanguageEnglish;
 
-  /// No description provided for @settingsLanguageHindi.
+  /// Settings Language Hindi - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Hindi'**
   String get settingsLanguageHindi;
 
-  /// No description provided for @settingsLanguageSavedEnglish.
+  /// Settings Language Saved English - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Language saved: English'**
   String get settingsLanguageSavedEnglish;
 
-  /// No description provided for @settingsLanguageSavedHindi.
+  /// Settings Language Saved Hindi - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Language saved: Hindi'**
   String get settingsLanguageSavedHindi;
 
-  /// No description provided for @settingsLanguageSaveFailed.
+  /// Settings Language Save Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not save your language preference right now. Retry shortly from settings.'**
   String get settingsLanguageSaveFailed;
 
-  /// No description provided for @settingsLanguageSaving.
+  /// Settings Language Saving - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Saving language preference...'**
   String get settingsLanguageSaving;
 
-  /// No description provided for @truckerDashboardHeroSubtitle.
+  /// Trucker Dashboard Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use your trucker dashboard as the command center for freight discovery, readiness, and active work visibility.'**
   String get truckerDashboardHeroSubtitle;
 
-  /// No description provided for @truckerDashboardWelcomeBack.
+  /// Welcome message on trucker dashboard. Placeholder {fullName} is the user's full name.
   ///
   /// In en, this message translates to:
   /// **'Welcome back, {fullName}'**
   String truckerDashboardWelcomeBack(Object fullName);
 
-  /// No description provided for @truckerDashboardTitle.
+  /// Trucker Dashboard Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker Dashboard'**
   String get truckerDashboardTitle;
 
-  /// No description provided for @truckerDashboardOverviewTitle.
+  /// Trucker Dashboard Overview Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dashboard overview'**
   String get truckerDashboardOverviewTitle;
 
-  /// No description provided for @truckerDashboardQuickActionsTitle.
+  /// Trucker Dashboard Quick Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quick actions'**
   String get truckerDashboardQuickActionsTitle;
 
-  /// No description provided for @truckerDashboardQuickActionTripsLabel.
+  /// Trucker Dashboard Quick Action Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My Trips'**
   String get truckerDashboardQuickActionTripsLabel;
 
-  /// No description provided for @truckerDashboardQuickActionChatLabel.
+  /// Trucker Dashboard Quick Action Chat Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat'**
   String get truckerDashboardQuickActionChatLabel;
 
-  /// No description provided for @truckerDashboardRecentActivityTitle.
+  /// Trucker Dashboard Recent Activity Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recent activity'**
   String get truckerDashboardRecentActivityTitle;
 
-  /// No description provided for @truckerDashboardReadinessNextStepsTitle.
+  /// Trucker Dashboard Readiness Next Steps Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Readiness and next steps'**
   String get truckerDashboardReadinessNextStepsTitle;
 
-  /// No description provided for @truckerDashboardReadinessUnavailableTitle.
+  /// Trucker Dashboard Readiness Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Readiness state unavailable'**
   String get truckerDashboardReadinessUnavailableTitle;
 
-  /// No description provided for @truckerDashboardReadinessFailureMessage.
+  /// Trucker Dashboard Readiness Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your trucker readiness state is temporarily unavailable. Retry shortly to refresh verification and fleet readiness.'**
   String get truckerDashboardReadinessFailureMessage;
 
-  /// No description provided for @truckerDashboardVerificationPendingTitle.
+  /// Trucker Dashboard Verification Pending Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification pending'**
   String get truckerDashboardVerificationPendingTitle;
 
-  /// No description provided for @truckerDashboardVerificationPendingDescription.
+  /// Trucker Dashboard Verification Pending Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You can browse loads while review is pending, but chat and call stay locked until verification is complete.'**
   String get truckerDashboardVerificationPendingDescription;
 
-  /// No description provided for @truckerDashboardOpenVerificationAction.
+  /// Trucker Dashboard Open Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open verification'**
   String get truckerDashboardOpenVerificationAction;
 
-  /// No description provided for @truckerDashboardVerificationCompleteTitle.
+  /// Trucker Dashboard Verification Complete Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification complete'**
   String get truckerDashboardVerificationCompleteTitle;
 
-  /// No description provided for @truckerDashboardVerificationCompleteDescription.
+  /// Trucker Dashboard Verification Complete Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your trucker verification is complete. Chat and call stay unlocked on open loads while your readiness remains healthy.'**
   String get truckerDashboardVerificationCompleteDescription;
 
-  /// No description provided for @truckerDashboardReviewVerificationAction.
+  /// Trucker Dashboard Review Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review verification'**
   String get truckerDashboardReviewVerificationAction;
 
-  /// No description provided for @truckerDashboardVerificationNeedsAttentionTitle.
+  /// Trucker Dashboard Verification Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
   String get truckerDashboardVerificationNeedsAttentionTitle;
 
-  /// No description provided for @truckerDashboardVerificationNeedsAttentionDescription.
+  /// Trucker Dashboard Verification Needs Attention Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification was rejected. Browsing stays open, but communication and assignment readiness remain blocked.'**
   String get truckerDashboardVerificationNeedsAttentionDescription;
 
-  /// No description provided for @truckerDashboardFixVerificationAction.
+  /// Trucker Dashboard Fix Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fix verification'**
   String get truckerDashboardFixVerificationAction;
 
-  /// No description provided for @truckerDashboardCompleteFleetVerificationTitle.
+  /// Trucker Dashboard Complete Fleet Verification Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete fleet and verification setup'**
   String get truckerDashboardCompleteFleetVerificationTitle;
 
-  /// No description provided for @truckerDashboardCompleteFleetVerificationMessage.
+  /// Trucker Dashboard Complete Fleet Verification Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You can browse the marketplace now, but chat, call, and booking stay locked until you finish Aadhaar, PAN, profile photo, and get at least one truck approved.'**
   String get truckerDashboardCompleteFleetVerificationMessage;
 
-  /// No description provided for @truckerDashboardOpenFleetVerificationAction.
+  /// Trucker Dashboard Open Fleet Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open fleet and verification'**
   String get truckerDashboardOpenFleetVerificationAction;
 
-  /// No description provided for @truckerDashboardAddApproveFirstTruckTitle.
+  /// Trucker Dashboard Add Approve First Truck Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add and approve your first truck'**
   String get truckerDashboardAddApproveFirstTruckTitle;
 
-  /// No description provided for @truckerDashboardAddApproveFirstTruckMessage.
+  /// Trucker Dashboard Add Approve First Truck Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Marketplace browsing is available now, but your first approved truck is required before full trucker verification can complete.'**
   String get truckerDashboardAddApproveFirstTruckMessage;
 
-  /// No description provided for @truckerDashboardOpenFleetAction.
+  /// Trucker Dashboard Open Fleet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open fleet'**
   String get truckerDashboardOpenFleetAction;
 
-  /// No description provided for @truckerDashboardCompleteVerificationTitle.
+  /// Trucker Dashboard Complete Verification Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete trucker verification'**
   String get truckerDashboardCompleteVerificationTitle;
 
-  /// No description provided for @truckerDashboardCompleteVerificationMessage.
+  /// Trucker Dashboard Complete Verification Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You can browse the marketplace now. Finish Aadhaar, PAN, profile photo, and at least one approved truck to unlock chat and call.'**
   String get truckerDashboardCompleteVerificationMessage;
 
-  /// No description provided for @truckerDashboardLoadFailureTitle.
+  /// Trucker Dashboard Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load your trucker dashboard'**
   String get truckerDashboardLoadFailureTitle;
 
-  /// No description provided for @truckerDashboardLoadFailureMessage.
+  /// Trucker Dashboard Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your trucker dashboard right now. Retry shortly to refresh the latest KPIs and activity summary.'**
   String get truckerDashboardLoadFailureMessage;
 
-  /// No description provided for @truckerDashboardSetupInProgress.
+  /// Trucker Dashboard Setup In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Setup in progress'**
   String get truckerDashboardSetupInProgress;
 
-  /// No description provided for @truckerDashboardVerificationStatusVerified.
+  /// Trucker Dashboard Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get truckerDashboardVerificationStatusVerified;
 
-  /// No description provided for @truckerDashboardVerificationStatusPending.
+  /// Trucker Dashboard Verification Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get truckerDashboardVerificationStatusPending;
 
-  /// No description provided for @truckerDashboardVerificationStatusRejected.
+  /// Trucker Dashboard Verification Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get truckerDashboardVerificationStatusRejected;
 
-  /// No description provided for @truckerDashboardVerificationStatusUnverified.
+  /// Trucker Dashboard Verification Status Unverified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unverified'**
   String get truckerDashboardVerificationStatusUnverified;
 
-  /// No description provided for @truckerDashboardVerificationStatusUnknown.
+  /// Trucker Dashboard Verification Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
@@ -3535,85 +3556,85 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1 {# approved truck} other {# approved trucks}}'**
   String truckerDashboardApprovedTruckCount(int count);
 
-  /// No description provided for @truckerDashboardHeroSummary.
+  /// Trucker Dashboard Hero Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dashboard-first remains the trucker home rule: understand readiness, scan active work, then jump into freight discovery from here.'**
   String get truckerDashboardHeroSummary;
 
-  /// No description provided for @truckerDashboardStatActiveBidsLabel.
+  /// Trucker Dashboard Stat Active Bids Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active bids'**
   String get truckerDashboardStatActiveBidsLabel;
 
-  /// No description provided for @truckerDashboardStatActiveBidsHelper.
+  /// Trucker Dashboard Stat Active Bids Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submitted requests still waiting for supplier decision'**
   String get truckerDashboardStatActiveBidsHelper;
 
-  /// No description provided for @truckerDashboardStatUpcomingTripsLabel.
+  /// Trucker Dashboard Stat Upcoming Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upcoming trips'**
   String get truckerDashboardStatUpcomingTripsLabel;
 
-  /// No description provided for @truckerDashboardStatUpcomingTripsHelper.
+  /// Trucker Dashboard Stat Upcoming Trips Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned and pickup-stage work approaching execution'**
   String get truckerDashboardStatUpcomingTripsHelper;
 
-  /// No description provided for @truckerDashboardStatInTransitLabel.
+  /// Trucker Dashboard Stat In Transit Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In-transit'**
   String get truckerDashboardStatInTransitLabel;
 
-  /// No description provided for @truckerDashboardStatInTransitHelper.
+  /// Trucker Dashboard Stat In Transit Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips currently moving on the road'**
   String get truckerDashboardStatInTransitHelper;
 
-  /// No description provided for @truckerDashboardStatCompletedLabel.
+  /// Trucker Dashboard Stat Completed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get truckerDashboardStatCompletedLabel;
 
-  /// No description provided for @truckerDashboardStatCompletedHelper.
+  /// Trucker Dashboard Stat Completed Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips already closed in your trucker history'**
   String get truckerDashboardStatCompletedHelper;
 
-  /// No description provided for @truckerDashboardRecentActivityUnavailableTitle.
+  /// Trucker Dashboard Recent Activity Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recent activity unavailable'**
   String get truckerDashboardRecentActivityUnavailableTitle;
 
-  /// No description provided for @truckerDashboardRecentActivityUnavailableMessage.
+  /// Trucker Dashboard Recent Activity Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your latest booking, trip, and fleet activity right now.'**
   String get truckerDashboardRecentActivityUnavailableMessage;
 
-  /// No description provided for @truckerDashboardNoRecentActivityTitle.
+  /// Trucker Dashboard No Recent Activity Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No recent activity yet'**
   String get truckerDashboardNoRecentActivityTitle;
 
-  /// No description provided for @truckerDashboardNoRecentActivitySubtitle.
+  /// Trucker Dashboard No Recent Activity Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your booking requests, trip movement, and fleet review updates will appear here once work begins.'**
   String get truckerDashboardNoRecentActivitySubtitle;
 
-  /// No description provided for @truckerDashboardBookingActivityTitle.
+  /// Trucker Dashboard Booking Activity Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking activity'**
@@ -3625,7 +3646,7 @@ abstract class AppLocalizations {
   /// **'{count, plural, one {{count} active bid waiting for supplier review} other {{count} active bids waiting for supplier review}}'**
   String truckerDashboardBookingActivitySubtitle(int count);
 
-  /// No description provided for @truckerDashboardTripActivityTitle.
+  /// Trucker Dashboard Trip Activity Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip activity'**
@@ -3634,14 +3655,14 @@ abstract class AppLocalizations {
   /// No description provided for @truckerDashboardTripActivitySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'{upcomingTrips} upcoming • {inTransitTrips} in transit • {completedTrips} completed'**
+  /// **'{upcomingTrips} upcoming - {inTransitTrips} in transit - {completedTrips} completed'**
   String truckerDashboardTripActivitySubtitle(
     int upcomingTrips,
     int inTransitTrips,
     int completedTrips,
   );
 
-  /// No description provided for @truckerDashboardFleetReviewActivityTitle.
+  /// Trucker Dashboard Fleet Review Activity Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet review activity'**
@@ -3650,80 +3671,80 @@ abstract class AppLocalizations {
   /// No description provided for @truckerDashboardFleetReviewActivitySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'{pendingTrucks} pending • {rejectedTrucks} rejected • {pendingReapprovalTrucks} pending reapproval'**
+  /// **'{pendingTrucks} pending - {rejectedTrucks} rejected - {pendingReapprovalTrucks} pending reapproval'**
   String truckerDashboardFleetReviewActivitySubtitle(
     int pendingTrucks,
     int rejectedTrucks,
     int pendingReapprovalTrucks,
   );
 
-  /// No description provided for @truckerDashboardStatusOpen.
+  /// Trucker Dashboard Status Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'open'**
   String get truckerDashboardStatusOpen;
 
-  /// No description provided for @truckerDashboardStatusClear.
+  /// Trucker Dashboard Status Clear - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'clear'**
   String get truckerDashboardStatusClear;
 
-  /// No description provided for @truckerDashboardStatusMoving.
+  /// Trucker Dashboard Status Moving - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'moving'**
   String get truckerDashboardStatusMoving;
 
-  /// No description provided for @truckerDashboardStatusTracked.
+  /// Trucker Dashboard Status Tracked - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'tracked'**
   String get truckerDashboardStatusTracked;
 
-  /// No description provided for @truckerDashboardStatusAttention.
+  /// Trucker Dashboard Status Attention - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'attention'**
   String get truckerDashboardStatusAttention;
 
-  /// No description provided for @truckerDashboardReadinessSummaryUnavailableTitle.
+  /// Trucker Dashboard Readiness Summary Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker readiness unavailable'**
   String get truckerDashboardReadinessSummaryUnavailableTitle;
 
-  /// No description provided for @truckerDashboardReadinessSummaryUnavailableMessage.
+  /// Trucker Dashboard Readiness Summary Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your readiness summary right now.'**
   String get truckerDashboardReadinessSummaryUnavailableMessage;
 
-  /// No description provided for @truckerDashboardProfileSetupInProgressTitle.
+  /// Trucker Dashboard Profile Setup In Progress Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile setup still in progress'**
   String get truckerDashboardProfileSetupInProgressTitle;
 
-  /// No description provided for @truckerDashboardProfileSetupInProgressSubtitle.
+  /// Trucker Dashboard Profile Setup In Progress Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your dashboard will show readiness details once your trucker profile finishes loading.'**
   String get truckerDashboardProfileSetupInProgressSubtitle;
 
-  /// No description provided for @truckerDashboardVerificationStatusTitle.
+  /// Trucker Dashboard Verification Status Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification status'**
   String get truckerDashboardVerificationStatusTitle;
 
-  /// No description provided for @truckerDashboardVerificationReadyMessage.
+  /// Trucker Dashboard Verification Ready Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat and call are unlocked on open loads because your verification is complete.'**
   String get truckerDashboardVerificationReadyMessage;
 
-  /// No description provided for @truckerDashboardVerificationLockedMessage.
+  /// Trucker Dashboard Verification Locked Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Browsing is open now. Chat and call unlock only after verification and at least one approved truck.'**
@@ -3735,7 +3756,7 @@ abstract class AppLocalizations {
   /// **'DL: {value}'**
   String truckerDashboardDlLabel(Object value);
 
-  /// No description provided for @truckerDashboardFleetReadinessTitle.
+  /// Trucker Dashboard Fleet Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet readiness'**
@@ -3750,25 +3771,25 @@ abstract class AppLocalizations {
     int totalTrucks,
   );
 
-  /// No description provided for @truckerDashboardReadyStatus.
+  /// Trucker Dashboard Ready Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'ready'**
   String get truckerDashboardReadyStatus;
 
-  /// No description provided for @truckerDashboardActionNeededStatus.
+  /// Trucker Dashboard Action Needed Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'action needed'**
   String get truckerDashboardActionNeededStatus;
 
-  /// No description provided for @truckerDashboardFleetReadyMessage.
+  /// Trucker Dashboard Fleet Ready Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You have at least one approved truck available for verification-dependent workflows.'**
   String get truckerDashboardFleetReadyMessage;
 
-  /// No description provided for @truckerDashboardFleetNeedFirstTruckMessage.
+  /// Trucker Dashboard Fleet Need First Truck Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add and approve your first truck in the fleet slice to complete trucker readiness.'**
@@ -3798,181 +3819,181 @@ abstract class AppLocalizations {
   /// **'Truck lifecycle attention: {segments}. Non-approved trucks stay blocked for new booking workflows until review is cleared.'**
   String truckerDashboardTruckLifecycleAttention(Object segments);
 
-  /// No description provided for @truckerTripsTitle.
+  /// Trucker Trips Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My trips'**
   String get truckerTripsTitle;
 
-  /// No description provided for @truckerTripsSubtitle.
+  /// Trucker Trips Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.'**
   String get truckerTripsSubtitle;
 
-  /// No description provided for @truckerTripsStageAssigned.
+  /// Trucker Trips Stage Assigned - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned'**
   String get truckerTripsStageAssigned;
 
-  /// No description provided for @truckerTripsStagePickupPending.
+  /// Trucker Trips Stage Pickup Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup pending'**
   String get truckerTripsStagePickupPending;
 
-  /// No description provided for @truckerTripsStagePickedUp.
+  /// Trucker Trips Stage Picked Up - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Picked up'**
   String get truckerTripsStagePickedUp;
 
-  /// No description provided for @truckerTripsStageInTransit.
+  /// Trucker Trips Stage In Transit - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In transit'**
   String get truckerTripsStageInTransit;
 
-  /// No description provided for @truckerTripsStageDelivered.
+  /// Trucker Trips Stage Delivered - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivered'**
   String get truckerTripsStageDelivered;
 
-  /// No description provided for @truckerTripsStageProofSubmitted.
+  /// Trucker Trips Stage Proof Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof submitted'**
   String get truckerTripsStageProofSubmitted;
 
-  /// No description provided for @truckerTripsStageCompleted.
+  /// Trucker Trips Stage Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get truckerTripsStageCompleted;
 
-  /// No description provided for @truckerTripsStageDisputed.
+  /// Trucker Trips Stage Disputed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Disputed'**
   String get truckerTripsStageDisputed;
 
-  /// No description provided for @truckerTripsStageCancelled.
+  /// Trucker Trips Stage Cancelled - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get truckerTripsStageCancelled;
 
-  /// No description provided for @truckerTripsStageUnknown.
+  /// Trucker Trips Stage Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get truckerTripsStageUnknown;
 
-  /// No description provided for @truckerTripsProofStatusPodUploaded.
+  /// Trucker Trips Proof Status Pod Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'POD uploaded'**
   String get truckerTripsProofStatusPodUploaded;
 
-  /// No description provided for @truckerTripsProofStatusLrUploaded.
+  /// Trucker Trips Proof Status Lr Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'LR uploaded'**
   String get truckerTripsProofStatusLrUploaded;
 
-  /// No description provided for @truckerTripsProofStatusAwaitingPod.
+  /// Trucker Trips Proof Status Awaiting Pod - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Awaiting POD'**
   String get truckerTripsProofStatusAwaitingPod;
 
-  /// No description provided for @truckerTripsProofStatusProofSubmitted.
+  /// Trucker Trips Proof Status Proof Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof submitted'**
   String get truckerTripsProofStatusProofSubmitted;
 
-  /// No description provided for @truckerTripsProofStatusProofPending.
+  /// Trucker Trips Proof Status Proof Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof pending'**
   String get truckerTripsProofStatusProofPending;
 
-  /// No description provided for @truckerTripsTabActive.
+  /// Trucker Trips Tab Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get truckerTripsTabActive;
 
-  /// No description provided for @truckerTripsTabCompleted.
+  /// Trucker Trips Tab Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get truckerTripsTabCompleted;
 
-  /// No description provided for @truckerTripsLoadFailureTitle.
+  /// Trucker Trips Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load trips'**
   String get truckerTripsLoadFailureTitle;
 
-  /// No description provided for @truckerTripsLoadFailureMessage.
+  /// Trucker Trips Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your trips right now. Retry shortly to refresh the latest execution timeline.'**
   String get truckerTripsLoadFailureMessage;
 
-  /// No description provided for @truckerTripsEmptyActiveTitle.
+  /// Trucker Trips Empty Active Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No trips yet'**
   String get truckerTripsEmptyActiveTitle;
 
-  /// No description provided for @truckerTripsEmptyCompletedTitle.
+  /// Trucker Trips Empty Completed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No completed trips yet'**
   String get truckerTripsEmptyCompletedTitle;
 
-  /// No description provided for @truckerTripsEmptyActiveSubtitle.
+  /// Trucker Trips Empty Active Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Book a load and wait for supplier approval to start your first trip.'**
   String get truckerTripsEmptyActiveSubtitle;
 
-  /// No description provided for @truckerTripsEmptyCompletedSubtitle.
+  /// Trucker Trips Empty Completed Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed and cancelled trips will appear here after execution closes.'**
   String get truckerTripsEmptyCompletedSubtitle;
 
-  /// No description provided for @truckerTripsEmptyActiveAction.
+  /// Trucker Trips Empty Active Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Find loads'**
   String get truckerTripsEmptyActiveAction;
 
-  /// No description provided for @truckerTripsEmptyCompletedAction.
+  /// Trucker Trips Empty Completed Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View active trips'**
   String get truckerTripsEmptyCompletedAction;
 
-  /// No description provided for @truckerTripDetailNotFoundTitle.
+  /// Trucker Trip Detail Not Found Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip not found'**
   String get truckerTripDetailNotFoundTitle;
 
-  /// No description provided for @truckerTripDetailNotFoundSubtitle.
+  /// Trucker Trip Detail Not Found Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This assigned trip is no longer available or you no longer have access to it.'**
   String get truckerTripDetailNotFoundSubtitle;
 
-  /// No description provided for @truckerTripDetailBackToTripsAction.
+  /// Trucker Trip Detail Back To Trips Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to my trips'**
@@ -4008,25 +4029,25 @@ abstract class AppLocalizations {
   /// **'Truck {truckNumber}'**
   String truckerTripsTruckLabel(Object truckNumber);
 
-  /// No description provided for @truckerFleetHeroTitle.
+  /// Trucker Fleet Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Manage truck readiness'**
   String get truckerFleetHeroTitle;
 
-  /// No description provided for @truckerFleetHeroSubtitle.
+  /// Trucker Fleet Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track truck approval, review rejection guidance, and keep RC details current so booking-ready trucks stay available.'**
   String get truckerFleetHeroSubtitle;
 
-  /// No description provided for @truckerFleetEditingTruckAction.
+  /// Trucker Fleet Editing Truck Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Editing truck'**
   String get truckerFleetEditingTruckAction;
 
-  /// No description provided for @truckerFleetAddTruckAction.
+  /// Trucker Fleet Add Truck Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add truck'**
@@ -4044,43 +4065,43 @@ abstract class AppLocalizations {
   /// **'{count} approved'**
   String truckerFleetApprovedCount(int count);
 
-  /// No description provided for @truckerFleetActionAttentionTitle.
+  /// Trucker Fleet Action Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck action needs attention'**
   String get truckerFleetActionAttentionTitle;
 
-  /// No description provided for @truckerFleetActionFailureMessage.
+  /// Trucker Fleet Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest truck action could not be completed right now. Review the truck details and retry shortly.'**
   String get truckerFleetActionFailureMessage;
 
-  /// No description provided for @truckerFleetEditTruckTitle.
+  /// Trucker Fleet Edit Truck Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Edit truck'**
   String get truckerFleetEditTruckTitle;
 
-  /// No description provided for @truckerFleetAddOrUpdateTruckTitle.
+  /// Trucker Fleet Add Or Update Truck Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add or update truck'**
   String get truckerFleetAddOrUpdateTruckTitle;
 
-  /// No description provided for @truckerFleetTruckNumberLabel.
+  /// Trucker Fleet Truck Number Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck number'**
   String get truckerFleetTruckNumberLabel;
 
-  /// No description provided for @truckerFleetTruckNumberHint.
+  /// Trucker Fleet Truck Number Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'MH12AB1234'**
   String get truckerFleetTruckNumberHint;
 
-  /// No description provided for @truckerFleetBodyTypeLabel.
+  /// Trucker Fleet Body Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Body type'**
@@ -4092,7 +4113,7 @@ abstract class AppLocalizations {
   /// **'{value}'**
   String truckerFleetBodyTypeOption(Object value);
 
-  /// No description provided for @truckerFleetTyresLabel.
+  /// Trucker Fleet Tyres Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tyres'**
@@ -4104,43 +4125,43 @@ abstract class AppLocalizations {
   /// **'{tyres} tyres'**
   String truckerFleetTyresOption(int tyres);
 
-  /// No description provided for @truckerFleetCapacityLabel.
+  /// Trucker Fleet Capacity Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Capacity (tonnes)'**
   String get truckerFleetCapacityLabel;
 
-  /// No description provided for @truckerFleetCapacityHint.
+  /// Trucker Fleet Capacity Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'25'**
   String get truckerFleetCapacityHint;
 
-  /// No description provided for @truckerFleetRcDocumentTitle.
+  /// Trucker Fleet Rc Document Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'RC document'**
   String get truckerFleetRcDocumentTitle;
 
-  /// No description provided for @truckerFleetRcUploadedSubtitle.
+  /// Trucker Fleet Rc Uploaded Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'RC image uploaded and linked to this truck draft.'**
   String get truckerFleetRcUploadedSubtitle;
 
-  /// No description provided for @truckerFleetRcRequiredSubtitle.
+  /// Trucker Fleet Rc Required Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload the truck RC before saving this truck.'**
   String get truckerFleetRcRequiredSubtitle;
 
-  /// No description provided for @truckerFleetUploadedStatus.
+  /// Trucker Fleet Uploaded Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'uploaded'**
   String get truckerFleetUploadedStatus;
 
-  /// No description provided for @truckerFleetRequiredStatus.
+  /// Trucker Fleet Required Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'required'**
@@ -4152,118 +4173,124 @@ abstract class AppLocalizations {
   /// **'Stored path: {path}'**
   String truckerFleetStoredPath(Object path);
 
-  /// No description provided for @truckerFleetReplaceRcAction.
+  /// Trucker Fleet Replace Rc Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Replace RC document'**
   String get truckerFleetReplaceRcAction;
 
-  /// No description provided for @truckerFleetUploadRcAction.
+  /// Trucker Fleet Upload Rc Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload RC document'**
   String get truckerFleetUploadRcAction;
 
-  /// No description provided for @truckerFleetRcUploadedSuccess.
+  /// Trucker Fleet Rc Uploaded Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'RC uploaded successfully'**
   String get truckerFleetRcUploadedSuccess;
 
-  /// No description provided for @truckerFleetRcUpdatedSuccess.
+  /// Trucker Fleet Rc Updated Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'RC document updated successfully'**
   String get truckerFleetRcUpdatedSuccess;
 
-  /// No description provided for @truckerFleetSaveTruckUpdatesAction.
+  /// Trucker Fleet Save Truck Updates Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Save truck updates'**
   String get truckerFleetSaveTruckUpdatesAction;
 
-  /// No description provided for @truckerFleetSaveTruckAction.
+  /// Trucker Fleet Save Truck Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Save truck'**
   String get truckerFleetSaveTruckAction;
 
-  /// No description provided for @truckerFleetTruckUpdatedSuccess.
+  /// Trucker Fleet Truck Updated Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck updated successfully'**
   String get truckerFleetTruckUpdatedSuccess;
 
-  /// No description provided for @truckerFleetTruckAddedSuccess.
+  /// Trucker Fleet Truck Added Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck added successfully'**
   String get truckerFleetTruckAddedSuccess;
 
-  /// No description provided for @truckerFleetMyTrucksTitle.
+  /// Trucker Fleet My Trucks Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'My trucks'**
   String get truckerFleetMyTrucksTitle;
 
-  /// No description provided for @truckerFleetUnavailableTitle.
+  /// Trucker Fleet Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet unavailable'**
   String get truckerFleetUnavailableTitle;
 
-  /// No description provided for @truckerFleetLoadFailureMessage.
+  /// Trucker Fleet Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your fleet right now. Retry shortly to refresh the latest truck readiness and approval state.'**
   String get truckerFleetLoadFailureMessage;
 
-  /// No description provided for @truckerFleetNoTrucksTitle.
+  /// Trucker Fleet No Trucks Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No trucks added yet'**
   String get truckerFleetNoTrucksTitle;
 
-  /// No description provided for @truckerFleetNoTrucksSubtitle.
+  /// Trucker Fleet No Trucks Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add your first truck with its RC document so trucker verification can progress toward approval.'**
   String get truckerFleetNoTrucksSubtitle;
 
-  /// No description provided for @truckerFleetSelectRcSourceTitle.
+  /// Trucker Fleet Select Rc Source Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload RC document'**
   String get truckerFleetSelectRcSourceTitle;
 
-  /// No description provided for @truckerFleetTakePhotoAction.
+  /// Trucker Fleet Take Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Take photo'**
   String get truckerFleetTakePhotoAction;
 
-  /// No description provided for @truckerFleetChooseGalleryAction.
+  /// Trucker Fleet Choose Gallery Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose from gallery'**
   String get truckerFleetChooseGalleryAction;
 
-  /// No description provided for @truckerFleetRcUploadFailureMessage.
+  /// Trucker Fleet Rc Upload Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not upload the RC document right now. Try another image or retry shortly.'**
   String get truckerFleetRcUploadFailureMessage;
 
-  /// No description provided for @truckerFleetSaveFailureMessage.
+  /// Trucker Fleet Save Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not save this truck right now. Review the truck details and retry shortly.'**
   String get truckerFleetSaveFailureMessage;
 
+  /// Trucker Fleet Truck Number Conflict Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'This truck number is already in use. Check the number and try again.'**
+  String get truckerFleetTruckNumberConflictMessage;
+
   /// No description provided for @truckerFleetTruckCardSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'{bodyType} • {tyres} tyres • {capacityTonnes}T'**
+  /// **'{bodyType} - {tyres} tyres - {capacityTonnes}T'**
   String truckerFleetTruckCardSubtitle(
     Object bodyType,
     Object tyres,
@@ -4288,205 +4315,205 @@ abstract class AppLocalizations {
   /// **'Next step: {value}'**
   String truckerFleetNextStepLabel(Object value);
 
-  /// No description provided for @truckerFleetBlockedBookingMessage.
+  /// Trucker Fleet Blocked Booking Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This truck is blocked for approval-dependent booking workflows until review clears.'**
   String get truckerFleetBlockedBookingMessage;
 
-  /// No description provided for @truckerFleetFixResubmitAction.
+  /// Trucker Fleet Fix Resubmit Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fix and resubmit truck'**
   String get truckerFleetFixResubmitAction;
 
-  /// No description provided for @truckerFleetEditTruckAction.
+  /// Trucker Fleet Edit Truck Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Edit truck'**
   String get truckerFleetEditTruckAction;
 
-  /// No description provided for @truckerFleetStatusPendingLabel.
+  /// Trucker Fleet Status Pending Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending review'**
   String get truckerFleetStatusPendingLabel;
 
-  /// No description provided for @truckerFleetStatusVerifiedLabel.
+  /// Trucker Fleet Status Verified Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approved'**
   String get truckerFleetStatusVerifiedLabel;
 
-  /// No description provided for @truckerFleetStatusRejectedLabel.
+  /// Trucker Fleet Status Rejected Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get truckerFleetStatusRejectedLabel;
 
-  /// No description provided for @truckerFleetStatusEditedPendingReapprovalLabel.
+  /// Trucker Fleet Status Edited Pending Reapproval Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending reapproval'**
   String get truckerFleetStatusEditedPendingReapprovalLabel;
 
-  /// No description provided for @truckerFleetStatusArchivedLabel.
+  /// Trucker Fleet Status Archived Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Archived'**
   String get truckerFleetStatusArchivedLabel;
 
-  /// No description provided for @truckerFleetStatusUnknownLabel.
+  /// Trucker Fleet Status Unknown Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get truckerFleetStatusUnknownLabel;
 
-  /// No description provided for @truckerFleetStatusPendingMessage.
+  /// Trucker Fleet Status Pending Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your truck is waiting for admin review. Approval is required before this truck can be used for booking.'**
   String get truckerFleetStatusPendingMessage;
 
-  /// No description provided for @truckerFleetStatusVerifiedMessage.
+  /// Trucker Fleet Status Verified Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This truck is approved and available for verification-dependent workflows.'**
   String get truckerFleetStatusVerifiedMessage;
 
-  /// No description provided for @truckerFleetStatusRejectedFallback.
+  /// Trucker Fleet Status Rejected Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This truck was rejected. Review the guidance below and update the affected details or RC document.'**
   String get truckerFleetStatusRejectedFallback;
 
-  /// No description provided for @truckerFleetStatusEditedPendingReapprovalMessage.
+  /// Trucker Fleet Status Edited Pending Reapproval Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This truck stays visible, but recent edits sent it back for reapproval before it can be used again.'**
   String get truckerFleetStatusEditedPendingReapprovalMessage;
 
-  /// No description provided for @truckerFleetStatusArchivedMessage.
+  /// Trucker Fleet Status Archived Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This truck is archived and no longer available for normal booking workflows.'**
   String get truckerFleetStatusArchivedMessage;
 
-  /// No description provided for @truckerFleetStatusUnknownMessage.
+  /// Trucker Fleet Status Unknown Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck review state is currently unavailable.'**
   String get truckerFleetStatusUnknownMessage;
 
-  /// No description provided for @truckerFindLoadsHeroSubtitle.
+  /// Trucker Find Loads Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Scan compact freight cards, keep filters tight, and move quickly from route interest to load evaluation.'**
   String get truckerFindLoadsHeroSubtitle;
 
-  /// No description provided for @truckerFindLoadsAdvancedFiltersAction.
+  /// Trucker Find Loads Advanced Filters Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Advanced filters'**
   String get truckerFindLoadsAdvancedFiltersAction;
 
-  /// No description provided for @truckerFindLoadsOriginHint.
+  /// Trucker Find Loads Origin Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin city'**
   String get truckerFindLoadsOriginHint;
 
-  /// No description provided for @truckerFindLoadsDestinationHint.
+  /// Trucker Find Loads Destination Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination city'**
   String get truckerFindLoadsDestinationHint;
 
-  /// No description provided for @truckerFindLoadsMaterialHint.
+  /// Trucker Find Loads Material Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Material'**
   String get truckerFindLoadsMaterialHint;
 
-  /// No description provided for @truckerFindLoadsSortByLabel.
+  /// Trucker Find Loads Sort By Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Sort by'**
   String get truckerFindLoadsSortByLabel;
 
-  /// No description provided for @truckerFindLoadsSortNewest.
+  /// Trucker Find Loads Sort Newest - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Newest'**
   String get truckerFindLoadsSortNewest;
 
-  /// No description provided for @truckerFindLoadsSortPriceHighToLow.
+  /// Trucker Find Loads Sort Price High To Low - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price High→Low'**
+  /// **'Price High>Low'**
   String get truckerFindLoadsSortPriceHighToLow;
 
-  /// No description provided for @truckerFindLoadsSortPriceLowToHigh.
+  /// Trucker Find Loads Sort Price Low To High - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price Low→High'**
+  /// **'Price Low>High'**
   String get truckerFindLoadsSortPriceLowToHigh;
 
-  /// No description provided for @truckerFindLoadsSortPickupDate.
+  /// Trucker Find Loads Sort Pickup Date - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup Date'**
   String get truckerFindLoadsSortPickupDate;
 
-  /// No description provided for @truckerFindLoadsMarketplaceTabsTitle.
+  /// Trucker Find Loads Marketplace Tabs Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Marketplace tabs'**
   String get truckerFindLoadsMarketplaceTabsTitle;
 
-  /// No description provided for @truckerFindLoadsAllLoadsTab.
+  /// Trucker Find Loads All Loads Tab - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'All Loads'**
   String get truckerFindLoadsAllLoadsTab;
 
-  /// No description provided for @truckerFindLoadsSuperLoadsTab.
+  /// Trucker Find Loads Super Loads Tab - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Loads'**
   String get truckerFindLoadsSuperLoadsTab;
 
-  /// No description provided for @truckerFindLoadsLoadFailureTitle.
+  /// Trucker Find Loads Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load freight'**
   String get truckerFindLoadsLoadFailureTitle;
 
-  /// No description provided for @truckerFindLoadsLoadFailureMessage.
+  /// Trucker Find Loads Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load marketplace freight right now. Retry shortly to refresh the latest load search results.'**
   String get truckerFindLoadsLoadFailureMessage;
 
-  /// No description provided for @truckerFindLoadsEmptyTitle.
+  /// Trucker Find Loads Empty Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No loads found'**
   String get truckerFindLoadsEmptyTitle;
 
-  /// No description provided for @truckerFindLoadsEmptySubtitle.
+  /// Trucker Find Loads Empty Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Try adjusting your city, material, or advanced filters to widen the marketplace search.'**
   String get truckerFindLoadsEmptySubtitle;
 
-  /// No description provided for @truckerFindLoadsLoadMoreFailureTitle.
+  /// Trucker Find Loads Load More Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'More loads unavailable'**
   String get truckerFindLoadsLoadMoreFailureTitle;
 
-  /// No description provided for @truckerFindLoadsLoadMoreFailureMessage.
+  /// Trucker Find Loads Load More Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load more freight right now. Retry shortly to continue the marketplace search.'**
@@ -4516,7 +4543,7 @@ abstract class AppLocalizations {
   /// **'₹{minPrice}-{maxPrice}'**
   String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice);
 
-  /// No description provided for @truckerFindLoadsSummarySuperLoads.
+  /// Trucker Find Loads Summary Super Loads - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Loads'**
@@ -4525,40 +4552,40 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsSummaryAllLoads.
   ///
   /// In en, this message translates to:
-  /// **'Showing all loads • {resultCount} result(s)'**
+  /// **'Showing all loads - {resultCount} result(s)'**
   String truckerFindLoadsSummaryAllLoads(int resultCount);
 
   /// No description provided for @truckerFindLoadsSummaryFiltered.
   ///
   /// In en, this message translates to:
-  /// **'{pieces} • {resultCount} result(s)'**
+  /// **'{pieces} - {resultCount} result(s)'**
   String truckerFindLoadsSummaryFiltered(Object pieces, int resultCount);
 
-  /// No description provided for @truckerFindLoadsResetFiltersAction.
+  /// Trucker Find Loads Reset Filters Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reset filters'**
   String get truckerFindLoadsResetFiltersAction;
 
-  /// No description provided for @truckerFindLoadsAnyBodyFallback.
+  /// Trucker Find Loads Any Body Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Any body'**
   String get truckerFindLoadsAnyBodyFallback;
 
-  /// No description provided for @truckerFindLoadsStatusActive.
+  /// Trucker Find Loads Status Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get truckerFindLoadsStatusActive;
 
-  /// No description provided for @truckerFindLoadsStatusAssignedPartial.
+  /// Trucker Find Loads Status Assigned Partial - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned Partial'**
   String get truckerFindLoadsStatusAssignedPartial;
 
-  /// No description provided for @truckerFindLoadsStatusUnknown.
+  /// Trucker Find Loads Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
@@ -4573,26 +4600,26 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsPriceAdvancePickup.
   ///
   /// In en, this message translates to:
-  /// **'₹{priceAmount} • {advancePercentage}% adv • {pickupDate}'**
+  /// **'₹{priceAmount} - {advancePercentage}% adv - {pickupDate}'**
   String truckerFindLoadsPriceAdvancePickup(
     Object priceAmount,
     int advancePercentage,
     Object pickupDate,
   );
 
-  /// No description provided for @truckerFindLoadsTruckMatchAvailable.
+  /// Trucker Find Loads Truck Match Available - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck match available'**
   String get truckerFindLoadsTruckMatchAvailable;
 
-  /// No description provided for @truckerFindLoadsNoApprovedTruckMatch.
+  /// Trucker Find Loads No Approved Truck Match - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No approved truck match yet'**
   String get truckerFindLoadsNoApprovedTruckMatch;
 
-  /// No description provided for @truckerFindLoadsTripCostUnavailable.
+  /// Trucker Find Loads Trip Cost Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip cost unavailable'**
@@ -4601,334 +4628,334 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsDistanceUnavailable.
   ///
   /// In en, this message translates to:
-  /// **'Distance unavailable • Tyres {tyres}'**
+  /// **'Distance unavailable - Tyres {tyres}'**
   String truckerFindLoadsDistanceUnavailable(Object tyres);
 
   /// No description provided for @truckerFindLoadsDistanceAvailable.
   ///
   /// In en, this message translates to:
-  /// **'Distance {distanceKm} km • Tyres {tyres}'**
+  /// **'Distance {distanceKm} km - Tyres {tyres}'**
   String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres);
 
-  /// No description provided for @truckerFindLoadsTyresAny.
+  /// Trucker Find Loads Tyres Any - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Any'**
   String get truckerFindLoadsTyresAny;
 
-  /// No description provided for @truckerFindLoadsSuperLoadBanner.
+  /// Trucker Find Loads Super Load Banner - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Super Load • Payment Guarantee'**
+  /// **'Super Load - Payment Guarantee'**
   String get truckerFindLoadsSuperLoadBanner;
 
-  /// No description provided for @truckerFindLoadsViewDetailsAction.
+  /// Trucker Find Loads View Details Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View details'**
   String get truckerFindLoadsViewDetailsAction;
 
-  /// No description provided for @truckerFindLoadsAdvancedFiltersTitle.
+  /// Trucker Find Loads Advanced Filters Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Advanced filters'**
   String get truckerFindLoadsAdvancedFiltersTitle;
 
-  /// No description provided for @truckerFindLoadsTruckBodyTypeLabel.
+  /// Trucker Find Loads Truck Body Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck body type'**
   String get truckerFindLoadsTruckBodyTypeLabel;
 
-  /// No description provided for @truckerFindLoadsBodyTypeOpen.
+  /// Trucker Find Loads Body Type Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open'**
   String get truckerFindLoadsBodyTypeOpen;
 
-  /// No description provided for @truckerFindLoadsBodyTypeTrailer.
+  /// Trucker Find Loads Body Type Trailer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trailer'**
   String get truckerFindLoadsBodyTypeTrailer;
 
-  /// No description provided for @truckerFindLoadsBodyTypeContainer.
+  /// Trucker Find Loads Body Type Container - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Container'**
   String get truckerFindLoadsBodyTypeContainer;
 
-  /// No description provided for @truckerFindLoadsBodyTypeTanker.
+  /// Trucker Find Loads Body Type Tanker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tanker'**
   String get truckerFindLoadsBodyTypeTanker;
 
-  /// No description provided for @truckerFindLoadsBodyTypeUnknown.
+  /// Trucker Find Loads Body Type Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get truckerFindLoadsBodyTypeUnknown;
 
-  /// No description provided for @truckerFindLoadsTyreRequirementTitle.
+  /// Trucker Find Loads Tyre Requirement Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tyre requirement'**
   String get truckerFindLoadsTyreRequirementTitle;
 
-  /// No description provided for @truckerFindLoadsMinPriceLabel.
+  /// Trucker Find Loads Min Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Min price (₹)'**
   String get truckerFindLoadsMinPriceLabel;
 
-  /// No description provided for @truckerFindLoadsMaxPriceLabel.
+  /// Trucker Find Loads Max Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Max price (₹)'**
   String get truckerFindLoadsMaxPriceLabel;
 
-  /// No description provided for @truckerFindLoadsApplyFiltersAction.
+  /// Trucker Find Loads Apply Filters Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Apply filters'**
   String get truckerFindLoadsApplyFiltersAction;
 
-  /// No description provided for @truckerFindLoadsResetAdvancedFiltersAction.
+  /// Trucker Find Loads Reset Advanced Filters Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reset advanced filters'**
   String get truckerFindLoadsResetAdvancedFiltersAction;
 
-  /// No description provided for @supplierPostLoadTitle.
+  /// Supplier Post Load Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post Load'**
   String get supplierPostLoadTitle;
 
-  /// No description provided for @supplierPostLoadHeroTitle.
+  /// Supplier Post Load Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create a supplier load'**
   String get supplierPostLoadHeroTitle;
 
-  /// No description provided for @supplierPostLoadHeroSubtitle.
+  /// Supplier Post Load Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use one clean scrolling form to define route, cargo, vehicle requirements, pricing, and pickup timing.'**
   String get supplierPostLoadHeroSubtitle;
 
-  /// No description provided for @supplierPostLoadHeroHelper.
+  /// Supplier Post Load Hero Helper - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Manual city entry still works if route services do not return a preview. Your form data stays intact on validation or submission failure.'**
   String get supplierPostLoadHeroHelper;
 
-  /// No description provided for @supplierPostLoadPostingBlockedTitle.
+  /// Supplier Post Load Posting Blocked Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Posting is blocked'**
   String get supplierPostLoadPostingBlockedTitle;
 
-  /// No description provided for @supplierPostLoadOpenVerificationAction.
+  /// Supplier Post Load Open Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open verification'**
   String get supplierPostLoadOpenVerificationAction;
 
-  /// No description provided for @supplierPostLoadRouteTimingTitle.
+  /// Supplier Post Load Route Timing Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route and timing'**
   String get supplierPostLoadRouteTimingTitle;
 
-  /// No description provided for @supplierPostLoadOriginCityLabel.
+  /// Supplier Post Load Origin City Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin city'**
   String get supplierPostLoadOriginCityLabel;
 
-  /// No description provided for @supplierPostLoadSearchCityHint.
+  /// Supplier Post Load Search City Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Search city'**
   String get supplierPostLoadSearchCityHint;
 
-  /// No description provided for @supplierPostLoadOriginExactLocationLabel.
+  /// Supplier Post Load Origin Exact Location Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin exact location'**
   String get supplierPostLoadOriginExactLocationLabel;
 
-  /// No description provided for @supplierPostLoadOriginExactLocationHint.
+  /// Supplier Post Load Origin Exact Location Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Warehouse / pickup point'**
   String get supplierPostLoadOriginExactLocationHint;
 
-  /// No description provided for @supplierPostLoadDestinationCityLabel.
+  /// Supplier Post Load Destination City Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination city'**
   String get supplierPostLoadDestinationCityLabel;
 
-  /// No description provided for @supplierPostLoadDestinationExactLocationLabel.
+  /// Supplier Post Load Destination Exact Location Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination exact location'**
   String get supplierPostLoadDestinationExactLocationLabel;
 
-  /// No description provided for @supplierPostLoadDestinationExactLocationHint.
+  /// Supplier Post Load Destination Exact Location Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Drop point / delivery point'**
   String get supplierPostLoadDestinationExactLocationHint;
 
-  /// No description provided for @supplierPostLoadPickupDateLabel.
+  /// Supplier Post Load Pickup Date Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup date'**
   String get supplierPostLoadPickupDateLabel;
 
-  /// No description provided for @supplierPostLoadRoutePreviewTitle.
+  /// Supplier Post Load Route Preview Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route preview'**
   String get supplierPostLoadRoutePreviewTitle;
 
-  /// No description provided for @supplierPostLoadDistanceLabel.
+  /// Shows route distance in kilometers. Placeholder {value} is the numeric distance.
   ///
   /// In en, this message translates to:
   /// **'Distance: {value} km'**
   String supplierPostLoadDistanceLabel(Object value);
 
-  /// No description provided for @supplierPostLoadDriveTimeLabel.
+  /// Shows estimated drive time in minutes. Placeholder {minutes} is the numeric drive time.
   ///
   /// In en, this message translates to:
   /// **'Est. drive time: {minutes} min'**
   String supplierPostLoadDriveTimeLabel(int minutes);
 
-  /// No description provided for @supplierPostLoadRoutePreviewUnavailableTitle.
+  /// Supplier Post Load Route Preview Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route preview unavailable'**
   String get supplierPostLoadRoutePreviewUnavailableTitle;
 
-  /// No description provided for @supplierPostLoadRoutePreviewUnavailableMessage.
+  /// Supplier Post Load Route Preview Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route distance and duration could not be derived right now. You can still continue with manual city-based posting.'**
   String get supplierPostLoadRoutePreviewUnavailableMessage;
 
-  /// No description provided for @supplierPostLoadCargoDetailsTitle.
+  /// Supplier Post Load Cargo Details Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo details'**
   String get supplierPostLoadCargoDetailsTitle;
 
-  /// No description provided for @supplierPostLoadMaterialLabel.
+  /// Supplier Post Load Material Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Material'**
   String get supplierPostLoadMaterialLabel;
 
-  /// No description provided for @supplierPostLoadWeightLabel.
+  /// Supplier Post Load Weight Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Weight (tonnes)'**
   String get supplierPostLoadWeightLabel;
 
-  /// No description provided for @supplierPostLoadWeightHint.
+  /// Supplier Post Load Weight Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'22'**
   String get supplierPostLoadWeightHint;
 
-  /// No description provided for @supplierPostLoadVehicleRequirementsTitle.
+  /// Supplier Post Load Vehicle Requirements Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Vehicle requirements'**
   String get supplierPostLoadVehicleRequirementsTitle;
 
-  /// No description provided for @supplierPostLoadTruckBodyTypeLabel.
+  /// Supplier Post Load Truck Body Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck body type'**
   String get supplierPostLoadTruckBodyTypeLabel;
 
-  /// No description provided for @supplierPostLoadTyreRequirementTitle.
+  /// Supplier Post Load Tyre Requirement Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tyre requirement'**
   String get supplierPostLoadTyreRequirementTitle;
 
-  /// No description provided for @supplierPostLoadAnyTyresLabel.
+  /// Supplier Post Load Any Tyres Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Any'**
   String get supplierPostLoadAnyTyresLabel;
 
-  /// No description provided for @supplierPostLoadTrucksNeededTitle.
+  /// Supplier Post Load Trucks Needed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucks needed'**
   String get supplierPostLoadTrucksNeededTitle;
 
-  /// No description provided for @supplierPostLoadTrucksNeededLabel.
+  /// Supplier Post Load Trucks Needed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucks needed'**
   String get supplierPostLoadTrucksNeededLabel;
 
-  /// No description provided for @supplierPostLoadTrucksNeededHint.
+  /// Supplier Post Load Trucks Needed Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'1'**
   String get supplierPostLoadTrucksNeededHint;
 
-  /// No description provided for @supplierPostLoadPricingScheduleTitle.
+  /// Supplier Post Load Pricing Schedule Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pricing and schedule'**
   String get supplierPostLoadPricingScheduleTitle;
 
-  /// No description provided for @supplierPostLoadPriceAmountLabel.
+  /// Supplier Post Load Price Amount Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Price amount (₹)'**
   String get supplierPostLoadPriceAmountLabel;
 
-  /// No description provided for @supplierPostLoadPriceAmountHint.
+  /// Supplier Post Load Price Amount Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'54000'**
   String get supplierPostLoadPriceAmountHint;
 
-  /// No description provided for @supplierPostLoadPriceTypeTitle.
+  /// Supplier Post Load Price Type Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Price type'**
   String get supplierPostLoadPriceTypeTitle;
 
-  /// No description provided for @supplierPostLoadPriceTypeFixed.
+  /// Supplier Post Load Price Type Fixed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fixed'**
   String get supplierPostLoadPriceTypeFixed;
 
-  /// No description provided for @supplierPostLoadPriceTypeNegotiable.
+  /// Supplier Post Load Price Type Negotiable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Per Ton'**
   String get supplierPostLoadPriceTypeNegotiable;
 
-  /// No description provided for @supplierPostLoadPriceTypeUnknown.
+  /// Supplier Post Load Price Type Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supplierPostLoadPriceTypeUnknown;
 
-  /// No description provided for @supplierPostLoadAdvancePercentageLabel.
+  /// Shows advance payment percentage. Placeholder {value} is the percentage amount.
   ///
   /// In en, this message translates to:
   /// **'Advance percentage: {value}%'**
@@ -4937,25 +4964,25 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadAdvanceBalanceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Advance: ₹{advanceAmount} • Balance: ₹{balanceAmount}'**
+  /// **'Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}'**
   String supplierPostLoadAdvanceBalanceLabel(
     Object advanceAmount,
     Object balanceAmount,
   );
 
-  /// No description provided for @supplierPostLoadReviewSummaryTitle.
+  /// Supplier Post Load Review Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review summary'**
   String get supplierPostLoadReviewSummaryTitle;
 
-  /// No description provided for @supplierPostLoadOriginPending.
+  /// Supplier Post Load Origin Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin pending'**
   String get supplierPostLoadOriginPending;
 
-  /// No description provided for @supplierPostLoadDestinationPending.
+  /// Supplier Post Load Destination Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination pending'**
@@ -4964,13 +4991,13 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadRouteSummary.
   ///
   /// In en, this message translates to:
-  /// **'{origin} → {destination}'**
+  /// **'{origin} > {destination}'**
   String supplierPostLoadRouteSummary(Object origin, Object destination);
 
   /// No description provided for @supplierPostLoadCargoSummary.
   ///
   /// In en, this message translates to:
-  /// **'{material} • {weightTonnes}T • {trucksNeeded} truck(s)'**
+  /// **'{material} - {weightTonnes}T - {trucksNeeded} truck(s)'**
   String supplierPostLoadCargoSummary(
     Object material,
     Object weightTonnes,
@@ -4980,7 +5007,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadPriceSummary.
   ///
   /// In en, this message translates to:
-  /// **'Price: ₹{priceAmount} • {priceType}'**
+  /// **'Price: ₹{priceAmount} - {priceType}'**
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType);
 
   /// No description provided for @supplierPostLoadPickupSummary.
@@ -4989,139 +5016,229 @@ abstract class AppLocalizations {
   /// **'Pickup: {pickupDate}'**
   String supplierPostLoadPickupSummary(Object pickupDate);
 
-  /// No description provided for @supplierPostLoadSubmissionFailedTitle.
+  /// Supplier Post Load Submission Failed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submission failed'**
   String get supplierPostLoadSubmissionFailedTitle;
 
-  /// No description provided for @supplierPostLoadCompleteVerificationAction.
+  /// Supplier Post Load Complete Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete verification to post load'**
   String get supplierPostLoadCompleteVerificationAction;
 
-  /// No description provided for @supplierPostLoadSubmitAction.
+  /// Supplier Post Load Submit Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Post Load'**
   String get supplierPostLoadSubmitAction;
 
-  /// No description provided for @supplierPostLoadCreatedSuccess.
+  /// Supplier Post Load Created Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load created successfully'**
   String get supplierPostLoadCreatedSuccess;
 
-  /// No description provided for @supplierPostLoadSubmissionFailureMessage.
+  /// Supplier Post Load Submission Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not prepare this load submission right now. Review the load details and retry shortly.'**
   String get supplierPostLoadSubmissionFailureMessage;
 
-  /// No description provided for @supplierPostLoadSubmitFailureMessage.
+  /// Supplier Post Load Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not create this load right now. Review the load details and retry shortly.'**
   String get supplierPostLoadSubmitFailureMessage;
 
-  /// No description provided for @supplierPostLoadVerificationCheckingMessage.
+  /// Supplier Post Load Verification Checking Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Checking supplier verification before enabling load posting.'**
   String get supplierPostLoadVerificationCheckingMessage;
 
-  /// No description provided for @supplierPostLoadVerificationUnavailableMessage.
+  /// Supplier Post Load Verification Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to confirm supplier verification right now. Retry shortly or open verification to review your trust status.'**
   String get supplierPostLoadVerificationUnavailableMessage;
 
-  /// No description provided for @supplierPostLoadProfileUnavailableMessage.
+  /// Supplier Post Load Profile Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier profile is unavailable right now. Retry shortly before posting this load.'**
   String get supplierPostLoadProfileUnavailableMessage;
 
-  /// No description provided for @supplierPostLoadVerificationRequiredMessage.
+  /// Supplier Post Load Verification Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.'**
   String get supplierPostLoadVerificationRequiredMessage;
 
+  /// Verification Readiness Check Aadhaar Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar number'**
+  String get verificationReadinessCheckAadhaarNumber;
+
+  /// Verification Readiness Check Pan Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'PAN number'**
+  String get verificationReadinessCheckPanNumber;
+
+  /// Verification Readiness Check Aadhaar Front Photo - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar front photo'**
+  String get verificationReadinessCheckAadhaarFrontPhoto;
+
+  /// Verification Readiness Check Aadhaar Back Photo - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar back photo'**
+  String get verificationReadinessCheckAadhaarBackPhoto;
+
+  /// Verification Readiness Check Pan Photo - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'PAN photo'**
+  String get verificationReadinessCheckPanPhoto;
+
+  /// Verification Readiness Check Company Name - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get verificationReadinessCheckCompanyName;
+
+  /// Verification Readiness Check Business Licence Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business licence number'**
+  String get verificationReadinessCheckBusinessLicenceNumber;
+
+  /// Verification Readiness Check Business Licence Document - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business licence document'**
+  String get verificationReadinessCheckBusinessLicenceDocument;
+
+  /// Verification Readiness Check Location - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification location'**
+  String get verificationReadinessCheckLocation;
+
+  /// Verification Readiness Check Truck With Rc Document - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck with RC document'**
+  String get verificationReadinessCheckTruckWithRcDocument;
+
+  /// Verification Submit Section Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit for Verification'**
+  String get verificationSubmitSectionTitle;
+
+  /// Verification Submit Section Title Trucker - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Step 3: Submit for Verification'**
+  String get verificationSubmitSectionTitleTrucker;
+
+  /// Verification Submit Section Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete all items below, then tap Submit to send your documents for admin review.'**
+  String get verificationSubmitSectionSubtitle;
+
+  /// No description provided for @verificationReadinessCompletedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{doneCount} / {totalCount} completed'**
+  String verificationReadinessCompletedCount(int doneCount, int totalCount);
+
+  /// Verification Open Fleet Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Add or manage your truck with RC document from the fleet screen.'**
+  String get verificationOpenFleetHint;
+
   /// No description provided for @supplierPostLoadSuggestionSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'{label} • {source}'**
+  /// **'{label} - {source}'**
   String supplierPostLoadSuggestionSubtitle(Object label, Object source);
 
-  /// No description provided for @supplierDashboardVerificationStatusVerified.
+  /// Supplier Dashboard Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get supplierDashboardVerificationStatusVerified;
 
-  /// No description provided for @supplierDashboardVerificationStatusPending.
+  /// Supplier Dashboard Verification Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get supplierDashboardVerificationStatusPending;
 
-  /// No description provided for @supplierDashboardVerificationStatusRejected.
+  /// Supplier Dashboard Verification Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get supplierDashboardVerificationStatusRejected;
 
-  /// No description provided for @supplierDashboardVerificationStatusUnknown.
+  /// Supplier Dashboard Verification Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supplierDashboardVerificationStatusUnknown;
 
-  /// No description provided for @supplierVerificationPendingTitle.
+  /// Supplier Verification Pending Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification pending'**
   String get supplierVerificationPendingTitle;
 
-  /// No description provided for @supplierVerificationPendingMessage.
+  /// Supplier Verification Pending Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification is under review. Keep documents ready in case the support team asks for clarification.'**
   String get supplierVerificationPendingMessage;
 
-  /// No description provided for @supplierVerificationRejectedTitle.
+  /// Supplier Verification Rejected Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
   String get supplierVerificationRejectedTitle;
 
-  /// No description provided for @supplierVerificationCompleteDescription.
+  /// Supplier Verification Complete Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your supplier verification is complete. You can keep posting loads and monitoring readiness from this dashboard.'**
   String get supplierVerificationCompleteDescription;
 
-  /// No description provided for @supplierVerificationNeedsAttentionTitle.
+  /// Supplier Verification Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
   String get supplierVerificationNeedsAttentionTitle;
 
-  /// No description provided for @supplierVerificationNeedsAttentionDescription.
+  /// Supplier Verification Needs Attention Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the latest verification feedback, update the required documents, and resubmit when you are ready.'**
   String get supplierVerificationNeedsAttentionDescription;
 
-  /// No description provided for @supplierOpenVerification.
+  /// Supplier Open Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open verification'**
   String get supplierOpenVerification;
 
-  /// No description provided for @supplierReviewVerification.
+  /// Supplier Review Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review verification'**
@@ -5133,193 +5250,193 @@ abstract class AppLocalizations {
   /// **'Unknown verification status'**
   String get supplierDashboardVerificationStatusUnknownFallback;
 
-  /// No description provided for @supplierFixVerification.
+  /// Supplier Fix Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fix verification'**
   String get supplierFixVerification;
 
-  /// No description provided for @supplierCompleteSetupTitle.
+  /// Supplier Complete Setup Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete your supplier setup'**
   String get supplierCompleteSetupTitle;
 
-  /// No description provided for @supplierCompleteSetupMessage.
+  /// Supplier Complete Setup Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete supplier verification and add your company details before using the full supplier workspace.'**
   String get supplierCompleteSetupMessage;
 
-  /// No description provided for @supplierCompleteVerification.
+  /// Supplier Complete Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete verification'**
   String get supplierCompleteVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessIntro.
+  /// Supplier Dashboard Super Load Readiness Intro - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Load eligibility is still partially admin-managed in the current app. This surface shows only the readiness facts the current profile model can confirm honestly.'**
   String get supplierDashboardSuperLoadReadinessIntro;
 
-  /// No description provided for @supplierDashboardSuperLoadVerificationComplete.
+  /// Supplier Dashboard Super Load Verification Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification complete'**
   String get supplierDashboardSuperLoadVerificationComplete;
 
-  /// No description provided for @supplierDashboardSuperLoadVerificationRequired.
+  /// Supplier Dashboard Super Load Verification Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification still required'**
   String get supplierDashboardSuperLoadVerificationRequired;
 
-  /// No description provided for @supplierDashboardSuperLoadBusinessLicenceOnFile.
+  /// Supplier Dashboard Super Load Business Licence On File - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business licence on file'**
   String get supplierDashboardSuperLoadBusinessLicenceOnFile;
 
-  /// No description provided for @supplierDashboardSuperLoadBusinessLicenceMissing.
+  /// Supplier Dashboard Super Load Business Licence Missing - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business licence missing'**
   String get supplierDashboardSuperLoadBusinessLicenceMissing;
 
-  /// No description provided for @supplierDashboardSuperLoadCompanyAgeUnavailable.
+  /// Supplier Dashboard Super Load Company Age Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Company-age readiness unavailable in current app data'**
   String get supplierDashboardSuperLoadCompanyAgeUnavailable;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryReady.
+  /// Supplier Dashboard Super Load Readiness Summary Ready - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your current profile can confirm supplier verification and the business licence prerequisite, but final Super Load eligibility still cannot be determined here because company-age/readiness fields are not yet present in the current source model.'**
   String get supplierDashboardSuperLoadReadinessSummaryReady;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence.
+  /// Supplier Dashboard Super Load Readiness Summary Missing Business Licence - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your supplier verification is complete, but the business licence prerequisite is still missing from the current profile. Final Super Load eligibility remains blocked until that verification requirement is satisfied.'**
   String get supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryMissingVerification.
+  /// Supplier Dashboard Super Load Readiness Summary Missing Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your current profile can confirm a business licence on file, but supplier verification is still incomplete. Final Super Load eligibility remains blocked until verification is completed and company-age/readiness fields exist in the current source model.'**
   String get supplierDashboardSuperLoadReadinessSummaryMissingVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryPendingVerification.
+  /// Supplier Dashboard Super Load Readiness Summary Pending Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.'**
   String get supplierDashboardSuperLoadReadinessSummaryPendingVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryRejectedVerification.
+  /// Supplier Dashboard Super Load Readiness Summary Rejected Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.'**
   String get supplierDashboardSuperLoadReadinessSummaryRejectedVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadReadinessSummaryNeedsAttention.
+  /// Supplier Dashboard Super Load Readiness Summary Needs Attention - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.'**
   String get supplierDashboardSuperLoadReadinessSummaryNeedsAttention;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepReady.
+  /// Supplier Dashboard Super Load Next Step Ready - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: keep your verification details accurate, monitor your loads normally, and use support only if you need follow-up on Super Load review or policy questions.'**
   String get supplierDashboardSuperLoadNextStepReady;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepBusinessLicence.
+  /// Supplier Dashboard Super Load Next Step Business Licence - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: update or upload the business licence through verification first, then re-check this readiness surface.'**
   String get supplierDashboardSuperLoadNextStepBusinessLicence;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepVerification.
+  /// Supplier Dashboard Super Load Next Step Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: complete supplier verification so the platform can confirm your trust baseline before any future Super Load review.'**
   String get supplierDashboardSuperLoadNextStepVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepPendingVerification.
+  /// Supplier Dashboard Super Load Next Step Pending Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.'**
   String get supplierDashboardSuperLoadNextStepPendingVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepRejectedVerification.
+  /// Supplier Dashboard Super Load Next Step Rejected Verification - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.'**
   String get supplierDashboardSuperLoadNextStepRejectedVerification;
 
-  /// No description provided for @supplierDashboardSuperLoadNextStepNeedsAttention.
+  /// Supplier Dashboard Super Load Next Step Needs Attention - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next best action: complete supplier verification and business licence requirements first, then return here for the remaining readiness summary.'**
   String get supplierDashboardSuperLoadNextStepNeedsAttention;
 
-  /// No description provided for @supplierDashboardLoadStatusActive.
+  /// Supplier Dashboard Load Status Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get supplierDashboardLoadStatusActive;
 
-  /// No description provided for @supplierLoadStatusAssignedPartial.
+  /// Supplier Load Status Assigned Partial - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned partial'**
   String get supplierLoadStatusAssignedPartial;
 
-  /// No description provided for @supplierLoadStatusAssignedFull.
+  /// Supplier Load Status Assigned Full - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned full'**
   String get supplierLoadStatusAssignedFull;
 
-  /// No description provided for @supplierLoadStatusInTransit.
+  /// Supplier Load Status In Transit - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In transit'**
   String get supplierLoadStatusInTransit;
 
-  /// No description provided for @supplierLoadStatusCompleted.
+  /// Supplier Load Status Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get supplierLoadStatusCompleted;
 
-  /// No description provided for @supplierLoadStatusUnknown.
+  /// Supplier Load Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supplierLoadStatusUnknown;
 
-  /// No description provided for @supplierLoadStatusFilledOutsideApp.
+  /// Supplier Load Status Filled Outside App - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Filled outside app'**
   String get supplierLoadStatusFilledOutsideApp;
 
-  /// No description provided for @supplierLoadStatusCancelled.
+  /// Supplier Load Status Cancelled - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get supplierLoadStatusCancelled;
 
-  /// No description provided for @supplierLoadStatusExpired.
+  /// Supplier Load Status Expired - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Expired'**
   String get supplierLoadStatusExpired;
 
-  /// No description provided for @supplierLoadStatusDeactivated.
+  /// Supplier Load Status Deactivated - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Deactivated'**
@@ -5331,55 +5448,55 @@ abstract class AppLocalizations {
   /// **'{booked}/{needed} trucks booked'**
   String supplierDashboardTrucksBooked(int booked, int needed);
 
-  /// No description provided for @supplierDashboardLoadPickup.
+  /// Pickup date for a load on the supplier dashboard.
   ///
   /// In en, this message translates to:
   /// **'Pickup {value}'**
   String supplierDashboardLoadPickup(Object value);
 
-  /// No description provided for @supplierDashboardOpenLoadsWorkspace.
+  /// Supplier Dashboard Open Loads Workspace - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open loads workspace'**
   String get supplierDashboardOpenLoadsWorkspace;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusRequestSubmitted.
+  /// Supplier Dashboard Super Load Status Request Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Request submitted'**
   String get supplierDashboardSuperLoadStatusRequestSubmitted;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusUnderReview.
+  /// Supplier Dashboard Super Load Status Under Review - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Under review'**
   String get supplierDashboardSuperLoadStatusUnderReview;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusApproved.
+  /// Supplier Dashboard Super Load Status Approved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Approved • payment pending'**
+  /// **'Approved - payment pending'**
   String get supplierDashboardSuperLoadStatusApproved;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusRejected.
+  /// Supplier Dashboard Super Load Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get supplierDashboardSuperLoadStatusRejected;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusExpiredOrClosed.
+  /// Supplier Dashboard Super Load Status Expired Or Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Closed'**
   String get supplierDashboardSuperLoadStatusExpiredOrClosed;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusActive.
+  /// Supplier Dashboard Super Load Status Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get supplierDashboardSuperLoadStatusActive;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusNotActive.
+  /// Supplier Dashboard Super Load Status Not Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not requested'**
@@ -5388,46 +5505,46 @@ abstract class AppLocalizations {
   /// No description provided for @supplierDashboardSuperLoadBadge.
   ///
   /// In en, this message translates to:
-  /// **'Super Load • {status}'**
+  /// **'Super Load - {status}'**
   String supplierDashboardSuperLoadBadge(Object status);
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceRequestSubmitted.
+  /// Supplier Dashboard Super Load Guidance Request Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.'**
   String get supplierDashboardSuperLoadGuidanceRequestSubmitted;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceUnderReview.
+  /// Supplier Dashboard Super Load Guidance Under Review - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This Super Load request is under admin review. Keep load details stable while review is in progress.'**
   String get supplierDashboardSuperLoadGuidanceUnderReview;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceApproved.
+  /// Supplier Dashboard Super Load Guidance Approved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.'**
   String get supplierDashboardSuperLoadGuidanceApproved;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceRejected.
+  /// Supplier Dashboard Super Load Guidance Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.'**
   String get supplierDashboardSuperLoadGuidanceRejected;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceExpiredOrClosed.
+  /// Supplier Dashboard Super Load Guidance Expired Or Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.'**
   String get supplierDashboardSuperLoadGuidanceExpiredOrClosed;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceActive.
+  /// Supplier Dashboard Super Load Guidance Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.'**
   String get supplierDashboardSuperLoadGuidanceActive;
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceNotActive.
+  /// Supplier Dashboard Super Load Guidance Not Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Super Load state is not active for this load.'**
@@ -5445,61 +5562,61 @@ abstract class AppLocalizations {
   /// **'Proof status: {status}'**
   String supplierLinkedTripProofLabel(Object status);
 
-  /// No description provided for @supplierLinkedTripTrackAction.
+  /// Supplier Linked Trip Track Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track trip'**
   String get supplierLinkedTripTrackAction;
 
-  /// No description provided for @supplierTripDetailTitle.
+  /// Supplier Trip Detail Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip Detail'**
   String get supplierTripDetailTitle;
 
-  /// No description provided for @supplierTripDetailLoadFailureTitle.
+  /// Supplier Trip Detail Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load supplier trip detail'**
   String get supplierTripDetailLoadFailureTitle;
 
-  /// No description provided for @supplierTripDetailLoadFailureMessage.
+  /// Supplier Trip Detail Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this supplier trip detail right now. Retry shortly to refresh the latest trip status and proof review context.'**
   String get supplierTripDetailLoadFailureMessage;
 
-  /// No description provided for @supplierTripDetailRatingFailureMessage.
+  /// Supplier Trip Detail Rating Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The supplier rating state is temporarily unavailable. Retry shortly before submitting a rating.'**
   String get supplierTripDetailRatingFailureMessage;
 
-  /// No description provided for @supplierTripDetailRatingSubmitFailureMessage.
+  /// Supplier Trip Detail Rating Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit this supplier rating right now. Review the rating and retry shortly.'**
   String get supplierTripDetailRatingSubmitFailureMessage;
 
-  /// No description provided for @supplierTripDetailActionFailureMessage.
+  /// Supplier Trip Detail Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest supplier trip action could not be completed right now. Retry shortly after the trip detail refreshes.'**
   String get supplierTripDetailActionFailureMessage;
 
-  /// No description provided for @supplierTripDetailActionSubmitFailureMessage.
+  /// Supplier Trip Detail Action Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not complete that supplier trip action right now. Retry shortly after checking the latest trip status.'**
   String get supplierTripDetailActionSubmitFailureMessage;
 
-  /// No description provided for @supplierTripDetailRatingSectionTitle.
+  /// Supplier Trip Detail Rating Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rate this trip'**
   String get supplierTripDetailRatingSectionTitle;
 
-  /// No description provided for @supplierTripDetailRatingAlreadySubmitted.
+  /// Supplier Trip Detail Rating Already Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You already rated this trip.'**
@@ -5511,37 +5628,37 @@ abstract class AppLocalizations {
   /// **'Submitted on {date}'**
   String supplierTripDetailRatingSubmittedOn(Object date);
 
-  /// No description provided for @supplierTripDetailRatingPrompt.
+  /// Supplier Trip Detail Rating Prompt - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery is complete. Rate the trucker for this trip.'**
   String get supplierTripDetailRatingPrompt;
 
-  /// No description provided for @supplierTripDetailCommentLabel.
+  /// Supplier Trip Detail Comment Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Comment (optional)'**
   String get supplierTripDetailCommentLabel;
 
-  /// No description provided for @supplierTripDetailCommentHint.
+  /// Supplier Trip Detail Comment Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share anything useful about the trip outcome'**
   String get supplierTripDetailCommentHint;
 
-  /// No description provided for @supplierTripDetailRatingUnavailableTitle.
+  /// Supplier Trip Detail Rating Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rating unavailable'**
   String get supplierTripDetailRatingUnavailableTitle;
 
-  /// No description provided for @supplierTripDetailSubmitRatingAction.
+  /// Supplier Trip Detail Submit Rating Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit Rating'**
   String get supplierTripDetailSubmitRatingAction;
 
-  /// No description provided for @supplierTripDetailRatingSubmittedSuccess.
+  /// Supplier Trip Detail Rating Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rating submitted successfully.'**
@@ -5556,79 +5673,79 @@ abstract class AppLocalizations {
   /// No description provided for @supplierTripDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Trip {tripId} • Truck {truckNumber}'**
+  /// **'Trip {tripId} - Truck {truckNumber}'**
   String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber);
 
   /// No description provided for @supplierTripDetailMaterialTruckerSummary.
   ///
   /// In en, this message translates to:
-  /// **'{material} • Trucker {truckerName}'**
+  /// **'{material} - Trucker {truckerName}'**
   String supplierTripDetailMaterialTruckerSummary(
     Object material,
     Object truckerName,
   );
 
-  /// No description provided for @supplierTripDetailNextStepTitle.
+  /// Supplier Trip Detail Next Step Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next step'**
   String get supplierTripDetailNextStepTitle;
 
-  /// No description provided for @supplierTripDetailNextStepReviewTitle.
+  /// Supplier Trip Detail Next Step Review Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review and confirm delivery'**
   String get supplierTripDetailNextStepReviewTitle;
 
-  /// No description provided for @supplierTripDetailNextStepReviewMessage.
+  /// Supplier Trip Detail Next Step Review Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The trucker has uploaded POD. Review the proof and confirm delivery to close the trip.'**
   String get supplierTripDetailNextStepReviewMessage;
 
-  /// No description provided for @supplierTripDetailNextStepCompletedTitle.
+  /// Supplier Trip Detail Next Step Completed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip completed'**
   String get supplierTripDetailNextStepCompletedTitle;
 
-  /// No description provided for @supplierTripDetailNextStepCompletedMessage.
+  /// Supplier Trip Detail Next Step Completed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery has been confirmed. Rating and post-trip follow-up continue from this completed state.'**
   String get supplierTripDetailNextStepCompletedMessage;
 
-  /// No description provided for @supplierTripDetailNextStepDisputedTitle.
+  /// Supplier Trip Detail Next Step Disputed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute in progress'**
   String get supplierTripDetailNextStepDisputedTitle;
 
-  /// No description provided for @supplierTripDetailNextStepDisputedMessage.
+  /// Supplier Trip Detail Next Step Disputed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This trip is under dispute review and awaits support or operations resolution.'**
   String get supplierTripDetailNextStepDisputedMessage;
 
-  /// No description provided for @supplierTripDetailNextStepDefaultTitle.
+  /// Supplier Trip Detail Next Step Default Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track execution'**
   String get supplierTripDetailNextStepDefaultTitle;
 
-  /// No description provided for @supplierTripDetailNextStepDefaultMessage.
+  /// Supplier Trip Detail Next Step Default Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the current trip status, timestamps, and proof progress from this supplier execution view.'**
   String get supplierTripDetailNextStepDefaultMessage;
 
-  /// No description provided for @supplierTripDetailDisputeStatusTitle.
+  /// Supplier Trip Detail Dispute Status Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute status'**
   String get supplierTripDetailDisputeStatusTitle;
 
-  /// No description provided for @supplierTripDetailDisputeStateRaised.
+  /// Supplier Trip Detail Dispute State Raised - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current state: Dispute raised'**
@@ -5664,61 +5781,61 @@ abstract class AppLocalizations {
   /// **'Last updated: {date}'**
   String supplierTripDetailDisputeLastUpdatedLabel(Object date);
 
-  /// No description provided for @supplierTripDetailActionUnavailableTitle.
+  /// Supplier Trip Detail Action Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier trip action unavailable'**
   String get supplierTripDetailActionUnavailableTitle;
 
-  /// No description provided for @supplierTripDetailProofDocumentsTitle.
+  /// Supplier Trip Detail Proof Documents Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof documents'**
   String get supplierTripDetailProofDocumentsTitle;
 
-  /// No description provided for @supplierTripDetailPodPhotoTitle.
+  /// Supplier Trip Detail Pod Photo Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'POD photo'**
   String get supplierTripDetailPodPhotoTitle;
 
-  /// No description provided for @supplierTripDetailPreviewUnavailable.
+  /// Supplier Trip Detail Preview Unavailable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to open preview'**
   String get supplierTripDetailPreviewUnavailable;
 
-  /// No description provided for @supplierTripDetailOpenPodPhotoAction.
+  /// Supplier Trip Detail Open Pod Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open POD Photo'**
   String get supplierTripDetailOpenPodPhotoAction;
 
-  /// No description provided for @supplierTripDetailOpenLrDocumentAction.
+  /// Supplier Trip Detail Open Lr Document Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open LR Document'**
   String get supplierTripDetailOpenLrDocumentAction;
 
-  /// No description provided for @supplierTripDetailActionsTitle.
+  /// Supplier Trip Detail Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Actions'**
   String get supplierTripDetailActionsTitle;
 
-  /// No description provided for @supplierTripDetailConfirmDeliveryAction.
+  /// Supplier Trip Detail Confirm Delivery Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Confirm Delivery'**
   String get supplierTripDetailConfirmDeliveryAction;
 
-  /// No description provided for @supplierTripDetailConfirmDeliverySuccess.
+  /// Supplier Trip Detail Confirm Delivery Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery confirmed. The trip is now completed.'**
   String get supplierTripDetailConfirmDeliverySuccess;
 
-  /// No description provided for @supplierTripDetailDisputePodAction.
+  /// Supplier Trip Detail Dispute Pod Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute POD'**
@@ -5727,10 +5844,10 @@ abstract class AppLocalizations {
   /// No description provided for @supplierTripDetailReportSourceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Supplier trip • {routeLabel}'**
+  /// **'Supplier trip - {routeLabel}'**
   String supplierTripDetailReportSourceLabel(Object routeLabel);
 
-  /// No description provided for @supplierTripDetailRouteScheduleTitle.
+  /// Supplier Trip Detail Route Schedule Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route and schedule'**
@@ -5790,7 +5907,7 @@ abstract class AppLocalizations {
   /// **'Completed: {dateTime}'**
   String supplierTripDetailCompletedLabel(Object dateTime);
 
-  /// No description provided for @supplierTripDetailTruckerTruckTitle.
+  /// Supplier Trip Detail Trucker Truck Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker and truck'**
@@ -5820,157 +5937,157 @@ abstract class AppLocalizations {
   /// **'Tyres: {tyres}'**
   String supplierTripDetailTyresLabel(Object tyres);
 
-  /// No description provided for @supplierTripDetailPending.
+  /// Supplier Trip Detail Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get supplierTripDetailPending;
 
-  /// No description provided for @supplierTripDetailStageAssigned.
+  /// Supplier Trip Detail Stage Assigned - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned'**
   String get supplierTripDetailStageAssigned;
 
-  /// No description provided for @supplierTripDetailStagePickupPending.
+  /// Supplier Trip Detail Stage Pickup Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup pending'**
   String get supplierTripDetailStagePickupPending;
 
-  /// No description provided for @supplierTripDetailStagePickedUp.
+  /// Supplier Trip Detail Stage Picked Up - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Picked up'**
   String get supplierTripDetailStagePickedUp;
 
-  /// No description provided for @supplierTripDetailStageInTransit.
+  /// Supplier Trip Detail Stage In Transit - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In transit'**
   String get supplierTripDetailStageInTransit;
 
-  /// No description provided for @supplierTripDetailStageDelivered.
+  /// Supplier Trip Detail Stage Delivered - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivered'**
   String get supplierTripDetailStageDelivered;
 
-  /// No description provided for @supplierTripDetailStageProofSubmitted.
+  /// Supplier Trip Detail Stage Proof Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof submitted'**
   String get supplierTripDetailStageProofSubmitted;
 
-  /// No description provided for @supplierTripDetailStageCompleted.
+  /// Supplier Trip Detail Stage Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get supplierTripDetailStageCompleted;
 
-  /// No description provided for @supplierTripDetailStageDisputed.
+  /// Supplier Trip Detail Stage Disputed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Disputed'**
   String get supplierTripDetailStageDisputed;
 
-  /// No description provided for @supplierTripDetailStageCancelled.
+  /// Supplier Trip Detail Stage Cancelled - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get supplierTripDetailStageCancelled;
 
-  /// No description provided for @supplierTripDetailStageUnknown.
+  /// Supplier Trip Detail Stage Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supplierTripDetailStageUnknown;
 
-  /// No description provided for @supplierTripDetailVerificationStatusVerified.
+  /// Supplier Trip Detail Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get supplierTripDetailVerificationStatusVerified;
 
-  /// No description provided for @supplierTripDetailVerificationStatusPending.
+  /// Supplier Trip Detail Verification Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get supplierTripDetailVerificationStatusPending;
 
-  /// No description provided for @supplierTripDetailVerificationStatusRejected.
+  /// Supplier Trip Detail Verification Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get supplierTripDetailVerificationStatusRejected;
 
-  /// No description provided for @supplierTripDetailVerificationStatusUnknown.
+  /// Supplier Trip Detail Verification Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get supplierTripDetailVerificationStatusUnknown;
 
-  /// No description provided for @supplierTripDetailDisputeCategoryFallback.
+  /// Supplier Trip Detail Dispute Category Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip dispute'**
   String get supplierTripDetailDisputeCategoryFallback;
 
-  /// No description provided for @supplierTripDetailDisputeStatusFallback.
+  /// Supplier Trip Detail Dispute Status Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open'**
   String get supplierTripDetailDisputeStatusFallback;
 
-  /// No description provided for @supplierTripDetailDisputeStatusGuidanceOpen.
+  /// Supplier Trip Detail Dispute Status Guidance Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.'**
   String get supplierTripDetailDisputeStatusGuidanceOpen;
 
-  /// No description provided for @supplierTripDetailDisputeStatusGuidanceInProgress.
+  /// Supplier Trip Detail Dispute Status Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support or operations are actively reviewing the dispute. Watch the related support ticket for visible updates or clarification requests.'**
   String get supplierTripDetailDisputeStatusGuidanceInProgress;
 
-  /// No description provided for @supplierTripDetailDisputeStatusGuidanceWaitingForUser.
+  /// Supplier Trip Detail Dispute Status Guidance Waiting For User - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support is waiting for your clarification or additional context. Reply on the related support ticket so the review can continue.'**
   String get supplierTripDetailDisputeStatusGuidanceWaitingForUser;
 
-  /// No description provided for @supplierTripDetailDisputeStatusGuidanceResolved.
+  /// Supplier Trip Detail Dispute Status Guidance Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This dispute has reached a final review state. Check the linked support ticket outcome before raising any fresh follow-up issue.'**
   String get supplierTripDetailDisputeStatusGuidanceResolved;
 
-  /// No description provided for @supplierTripDetailDisputeStatusGuidanceDefault.
+  /// Supplier Trip Detail Dispute Status Guidance Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep following the related support ticket for the latest visible review updates.'**
   String get supplierTripDetailDisputeStatusGuidanceDefault;
 
-  /// No description provided for @supplierTripDetailDisputeBannerWaitingTitle.
+  /// Supplier Trip Detail Dispute Banner Waiting Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review waiting for your reply'**
   String get supplierTripDetailDisputeBannerWaitingTitle;
 
-  /// No description provided for @supplierTripDetailDisputeBannerClosedTitle.
+  /// Supplier Trip Detail Dispute Banner Closed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review closed'**
   String get supplierTripDetailDisputeBannerClosedTitle;
 
-  /// No description provided for @supplierTripDetailDisputeBannerInProgressTitle.
+  /// Supplier Trip Detail Dispute Banner In Progress Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review in progress'**
   String get supplierTripDetailDisputeBannerInProgressTitle;
 
-  /// No description provided for @supplierTripDetailDisputeBannerNoSummaryMessage.
+  /// Supplier Trip Detail Dispute Banner No Summary Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute has been raised on this trip. Support and operations are reviewing the delivery context, while raw evidence access may remain restricted during review.'**
@@ -5997,427 +6114,955 @@ abstract class AppLocalizations {
     Object status,
   );
 
-  /// No description provided for @supplierTripDetailSharedVisibilityClosed.
+  /// Supplier Trip Detail Shared Visibility Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this trip dispute.'**
   String get supplierTripDetailSharedVisibilityClosed;
 
-  /// No description provided for @supplierTripDetailSharedVisibilityInProgress.
+  /// Supplier Trip Detail Shared Visibility In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible during review.'**
   String get supplierTripDetailSharedVisibilityInProgress;
 
-  /// No description provided for @supplierTripDetailActionGuidanceClosed.
+  /// Supplier Trip Detail Action Guidance Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This dispute has reached a final review state. Check the recorded outcome on the linked support ticket before opening any genuinely new follow-up issue.'**
   String get supplierTripDetailActionGuidanceClosed;
 
-  /// No description provided for @supplierTripDetailActionGuidanceInProgress.
+  /// Supplier Trip Detail Action Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No further delivery-confirmation action is available while this dispute stays under review. Follow the linked support ticket if support requests clarification or additional context.'**
   String get supplierTripDetailActionGuidanceInProgress;
 
-  /// No description provided for @supplierTripDetailProofGuidanceClosed.
+  /// Supplier Trip Detail Proof Guidance Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If you believe important proof was not considered before closure, start a fresh support follow-up only when you have genuinely new dispute context to raise.'**
   String get supplierTripDetailProofGuidanceClosed;
 
-  /// No description provided for @supplierTripDetailProofGuidanceInProgress.
+  /// Supplier Trip Detail Proof Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If this dispute depends on additional documents beyond the current single-image flow, summarize those missing proofs clearly in the related support ticket replies.'**
   String get supplierTripDetailProofGuidanceInProgress;
 
-  /// No description provided for @verificationTitle.
+  /// Verification Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification'**
   String get verificationTitle;
 
-  /// No description provided for @verificationTitleSupplier.
+  /// Verification Title Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier Verification'**
   String get verificationTitleSupplier;
 
-  /// No description provided for @verificationTitleTrucker.
+  /// Verification Title Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker Verification'**
   String get verificationTitleTrucker;
 
-  /// No description provided for @verificationLoadFailureTitle.
+  /// Verification Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load verification state'**
   String get verificationLoadFailureTitle;
 
-  /// No description provided for @verificationLoadFailureMessage.
+  /// Verification Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your verification status right now. Retry shortly to refresh the latest verification state.'**
   String get verificationLoadFailureMessage;
 
-  /// No description provided for @verificationDetailsUnavailableTitle.
+  /// Verification Details Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification details unavailable'**
   String get verificationDetailsUnavailableTitle;
 
-  /// No description provided for @verificationDetailsUnavailableSubtitle.
+  /// Verification Details Unavailable Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not find the current verification record for this account. Please retry shortly.'**
   String get verificationDetailsUnavailableSubtitle;
 
-  /// No description provided for @verificationHeroPendingSupplierTitle.
+  /// Verification Hero Pending Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier verification under review'**
   String get verificationHeroPendingSupplierTitle;
 
-  /// No description provided for @verificationHeroPendingTruckerTitle.
+  /// Verification Hero Pending Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker verification under review'**
   String get verificationHeroPendingTruckerTitle;
 
-  /// No description provided for @verificationHeroVerifiedSupplierTitle.
+  /// Verification Hero Verified Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier verification complete'**
   String get verificationHeroVerifiedSupplierTitle;
 
-  /// No description provided for @verificationHeroVerifiedTruckerTitle.
+  /// Verification Hero Verified Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker verification complete'**
   String get verificationHeroVerifiedTruckerTitle;
 
-  /// No description provided for @verificationHeroRejectedSupplierTitle.
+  /// Verification Hero Rejected Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resubmit supplier verification'**
   String get verificationHeroRejectedSupplierTitle;
 
-  /// No description provided for @verificationHeroRejectedTruckerTitle.
+  /// Verification Hero Rejected Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resubmit trucker verification'**
   String get verificationHeroRejectedTruckerTitle;
 
-  /// No description provided for @verificationHeroInitialSupplierTitle.
+  /// Verification Hero Initial Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete supplier trust setup'**
   String get verificationHeroInitialSupplierTitle;
 
-  /// No description provided for @verificationHeroInitialTruckerTitle.
+  /// Verification Hero Initial Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete trucker trust setup'**
   String get verificationHeroInitialTruckerTitle;
 
-  /// No description provided for @verificationHeroPendingSubtitle.
+  /// Verification Hero Pending Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification packet is already under review. We will notify you when approval is complete.'**
   String get verificationHeroPendingSubtitle;
 
-  /// No description provided for @verificationHeroVerifiedSubtitle.
+  /// Verification Hero Verified Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification packet is already approved. You can review the captured documents and readiness details below.'**
   String get verificationHeroVerifiedSubtitle;
 
-  /// No description provided for @verificationHeroRejectedWithFeedbackSubtitle.
+  /// Verification Hero Rejected With Feedback Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the rejected document markers below, replace any affected items, and resubmit when you are ready.'**
   String get verificationHeroRejectedWithFeedbackSubtitle;
 
-  /// No description provided for @verificationHeroRejectedFallbackSubtitle.
+  /// Verification Hero Rejected Fallback Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the rejection summary, replace any affected items, and resubmit the full packet when you are ready.'**
   String get verificationHeroRejectedFallbackSubtitle;
 
-  /// No description provided for @verificationHeroInitialSupplierSubtitle.
+  /// Verification Hero Initial Supplier Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload the required business and identity documents, capture supplier verification location, and submit them for review from this single verification surface.'**
   String get verificationHeroInitialSupplierSubtitle;
 
-  /// No description provided for @verificationHeroInitialTruckerSubtitle.
+  /// Verification Hero Initial Trucker Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload identity documents, confirm truck readiness, and submit the full verification packet for review from this single setup surface.'**
   String get verificationHeroInitialTruckerSubtitle;
 
-  /// No description provided for @verificationResubmitForReviewAction.
+  /// Verification Resubmit For Review Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Resubmit for review'**
   String get verificationResubmitForReviewAction;
 
-  /// No description provided for @verificationSubmitForReviewAction.
+  /// Verification Submit For Review Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit for review'**
   String get verificationSubmitForReviewAction;
 
-  /// No description provided for @verificationResubmittedSuccess.
+  /// Verification Resubmitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification resubmitted for review'**
   String get verificationResubmittedSuccess;
 
-  /// No description provided for @verificationSubmittedSuccess.
+  /// Verification Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification submitted for review'**
   String get verificationSubmittedSuccess;
 
-  /// No description provided for @verificationSubmitFailureMessage.
+  /// Verification Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit this verification packet right now. Review the current checklist and retry shortly.'**
   String get verificationSubmitFailureMessage;
 
-  /// No description provided for @verificationWhatHappensNextTitle.
+  /// Verification What Happens Next Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What happens next'**
   String get verificationWhatHappensNextTitle;
 
-  /// No description provided for @verificationWhatHappensNextMessage.
+  /// Verification What Happens Next Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification packet is queued for review. You do not need to resubmit anything unless our team rejects the case with a correction request.'**
   String get verificationWhatHappensNextMessage;
 
-  /// No description provided for @verificationTimelinePacketSubmittedTitle.
+  /// Verification Timeline Packet Submitted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Packet submitted'**
   String get verificationTimelinePacketSubmittedTitle;
 
-  /// No description provided for @verificationTimelinePacketSubmittedTimestamp.
+  /// Verification Timeline Packet Submitted Timestamp - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get verificationTimelinePacketSubmittedTimestamp;
 
-  /// No description provided for @verificationTimelinePacketSubmittedDescription.
+  /// Verification Timeline Packet Submitted Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your current documents and readiness data are already attached to the verification case.'**
   String get verificationTimelinePacketSubmittedDescription;
 
-  /// No description provided for @verificationTimelineReviewInProgressTitle.
+  /// Verification Timeline Review In Progress Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review in progress'**
   String get verificationTimelineReviewInProgressTitle;
 
-  /// No description provided for @verificationTimelineReviewInProgressTimestamp.
+  /// Verification Timeline Review In Progress Timestamp - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Now'**
   String get verificationTimelineReviewInProgressTimestamp;
 
-  /// No description provided for @verificationTimelineReviewInProgressDescription.
+  /// Verification Timeline Review In Progress Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Our operations team is reviewing the submitted identity, business, and readiness evidence.'**
   String get verificationTimelineReviewInProgressDescription;
 
-  /// No description provided for @verificationTimelineNotifiedTitle.
+  /// Verification Timeline Notified Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You will be notified'**
   String get verificationTimelineNotifiedTitle;
 
-  /// No description provided for @verificationTimelineNotifiedTimestamp.
+  /// Verification Timeline Notified Timestamp - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next'**
   String get verificationTimelineNotifiedTimestamp;
 
-  /// No description provided for @verificationTimelineNotifiedDescription.
+  /// Verification Timeline Notified Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We will update your verification state here once the review is approved or sent back for corrections.'**
   String get verificationTimelineNotifiedDescription;
 
-  /// No description provided for @verificationActionNeedsAttentionTitle.
+  /// Verification Wizard Step Photo - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo'**
+  String get verificationWizardStepPhoto;
+
+  /// Verification Wizard Step Identity - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity'**
+  String get verificationWizardStepIdentity;
+
+  /// Verification Wizard Step Truck - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck'**
+  String get verificationWizardStepTruck;
+
+  /// Verification Wizard Step Business - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get verificationWizardStepBusiness;
+
+  /// Verification Wizard Step Review - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get verificationWizardStepReview;
+
+  /// Verification Wizard Back Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get verificationWizardBackAction;
+
+  /// Verification Wizard Save And Exit Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Save & exit'**
+  String get verificationWizardSaveAndExitAction;
+
+  /// Verification Wizard Exit Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit verification?'**
+  String get verificationWizardExitTitle;
+
+  /// Verification Wizard Exit Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'You can leave this flow now and continue later.'**
+  String get verificationWizardExitMessage;
+
+  /// Verification Wizard Exit Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get verificationWizardExitAction;
+
+  /// Verification Wizard Dashboard Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard'**
+  String get verificationWizardDashboardAction;
+
+  /// Verification Wizard Profile Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo'**
+  String get verificationWizardProfileTitle;
+
+  /// Verification Wizard Profile Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear profile photo for verification.'**
+  String get verificationWizardProfileSubtitle;
+
+  /// Verification Wizard Profile Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a clear, front-facing photo with good lighting.'**
+  String get verificationWizardProfileHint;
+
+  /// Verification Wizard Identity Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity documents'**
+  String get verificationWizardIdentityTitle;
+
+  /// Verification Wizard Identity Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Aadhaar and PAN details with document uploads.'**
+  String get verificationWizardIdentitySubtitle;
+
+  /// Verification Wizard Aadhaar Number Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar number'**
+  String get verificationWizardAadhaarNumberLabel;
+
+  /// Verification Wizard Pan Number Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'PAN number'**
+  String get verificationWizardPanNumberLabel;
+
+  /// Verification Wizard Pan Document Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'PAN document'**
+  String get verificationWizardPanDocumentLabel;
+
+  /// Verification Wizard Truck Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck details'**
+  String get verificationWizardTruckTitle;
+
+  /// Verification Wizard Truck Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Add one truck and upload its RC document.'**
+  String get verificationWizardTruckSubtitle;
+
+  /// Verification Wizard Truck Info - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'At least one truck with an RC document is required for trucker verification.'**
+  String get verificationWizardTruckInfo;
+
+  /// Verification Wizard Truck Number Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck number'**
+  String get verificationWizardTruckNumberLabel;
+
+  /// Verification Wizard Body Type Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Body type'**
+  String get verificationWizardBodyTypeLabel;
+
+  /// Verification Wizard Tyres Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Tyres'**
+  String get verificationWizardTyresLabel;
+
+  /// Verification Wizard Capacity Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity'**
+  String get verificationWizardCapacityLabel;
+
+  /// Verification Wizard Capacity Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'16'**
+  String get verificationWizardCapacityHint;
+
+  /// Verification Wizard Rc Document Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document'**
+  String get verificationWizardRcDocumentLabel;
+
+  /// Verification Wizard Required For Verification - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Required for verification'**
+  String get verificationWizardRequiredForVerification;
+
+  /// Verification Wizard Truck Photo Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck photo'**
+  String get verificationWizardTruckPhotoLabel;
+
+  /// Verification Wizard Truck Photo Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional photo of your truck'**
+  String get verificationWizardTruckPhotoHint;
+
+  /// Verification Wizard Business Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business details'**
+  String get verificationWizardBusinessTitle;
+
+  /// Verification Wizard Business Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your company, licence, optional GST, and verification location.'**
+  String get verificationWizardBusinessSubtitle;
+
+  /// Verification Wizard Company Name Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get verificationWizardCompanyNameLabel;
+
+  /// Verification Wizard Company Name Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your company name'**
+  String get verificationWizardCompanyNameHint;
+
+  /// Verification Wizard License Number Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'License number'**
+  String get verificationWizardLicenseNumberLabel;
+
+  /// Verification Wizard License Number Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your business licence number'**
+  String get verificationWizardLicenseNumberHint;
+
+  /// Verification Wizard License Document Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business licence document'**
+  String get verificationWizardLicenseDocumentLabel;
+
+  /// Verification Wizard Gst Details Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST details'**
+  String get verificationWizardGstDetailsTitle;
+
+  /// Verification Wizard Gst Details Added - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST details added'**
+  String get verificationWizardGstDetailsAdded;
+
+  /// Verification Wizard Gst Optional - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST is optional'**
+  String get verificationWizardGstOptional;
+
+  /// Verification Wizard Gst Number Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST number'**
+  String get verificationWizardGstNumberLabel;
+
+  /// Verification Wizard Gst Certificate Label - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST certificate'**
+  String get verificationWizardGstCertificateLabel;
+
+  /// Verification Wizard Search City Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Search city'**
+  String get verificationWizardSearchCityTitle;
+
+  /// Verification Wizard Search City Hint - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Type city name'**
+  String get verificationWizardSearchCityHint;
+
+  /// Verification Wizard Use Current Location - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current location'**
+  String get verificationWizardUseCurrentLocation;
+
+  /// No description provided for @verificationWizardNoCitiesFound.
+  ///
+  /// In en, this message translates to:
+  /// **'No cities found for \"{query}\"'**
+  String verificationWizardNoCitiesFound(Object query);
+
+  /// Verification Wizard Try Different Search - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Try a different search term'**
+  String get verificationWizardTryDifferentSearch;
+
+  /// Verification Wizard Location Services Off Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are off'**
+  String get verificationWizardLocationServicesOffTitle;
+
+  /// Verification Wizard Location Services Off Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable GPS/location services and try again.'**
+  String get verificationWizardLocationServicesOffMessage;
+
+  /// Verification Wizard Location Permission Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission needed'**
+  String get verificationWizardLocationPermissionTitle;
+
+  /// Verification Wizard Location Permission Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Please allow location permission in app settings to continue.'**
+  String get verificationWizardLocationPermissionMessage;
+
+  /// Verification Wizard Open Settings Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get verificationWizardOpenSettingsAction;
+
+  /// Verification Wizard Captured Via Gps - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured via GPS'**
+  String get verificationWizardCapturedViaGps;
+
+  /// Verification Wizard Added Manually - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Added manually'**
+  String get verificationWizardAddedManually;
+
+  /// Verification Wizard Review Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Review and submit'**
+  String get verificationWizardReviewTitle;
+
+  /// Verification Wizard Review Subtitle - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm your details before sending the verification packet.'**
+  String get verificationWizardReviewSubtitle;
+
+  /// Verification Wizard Review Profile - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get verificationWizardReviewProfile;
+
+  /// Verification Wizard Review Profile Uploaded - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo uploaded'**
+  String get verificationWizardReviewProfileUploaded;
+
+  /// Verification Wizard Review Profile Missing - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo missing'**
+  String get verificationWizardReviewProfileMissing;
+
+  /// Verification Wizard Review Identity - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Identity'**
+  String get verificationWizardReviewIdentity;
+
+  /// Verification Wizard Review Documents Uploaded - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Documents uploaded'**
+  String get verificationWizardReviewDocumentsUploaded;
+
+  /// Verification Wizard Review Truck - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck'**
+  String get verificationWizardReviewTruck;
+
+  /// Verification Wizard Review Truck Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck number'**
+  String get verificationWizardReviewTruckNumber;
+
+  /// Verification Wizard Review Rc Uploaded - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document uploaded'**
+  String get verificationWizardReviewRcUploaded;
+
+  /// Verification Wizard Review Truck Photo Uploaded - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck photo uploaded'**
+  String get verificationWizardReviewTruckPhotoUploaded;
+
+  /// Verification Wizard Review Business - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get verificationWizardReviewBusiness;
+
+  /// Verification Wizard Review Company Name - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name'**
+  String get verificationWizardReviewCompanyName;
+
+  /// Verification Wizard Review License Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'License number'**
+  String get verificationWizardReviewLicenseNumber;
+
+  /// Verification Wizard Review Gst Number - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'GST number'**
+  String get verificationWizardReviewGstNumber;
+
+  /// Verification Wizard Review Location - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get verificationWizardReviewLocation;
+
+  /// Verification Wizard Review Timeline Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Review usually completes after the submitted packet is checked by the team.'**
+  String get verificationWizardReviewTimelineMessage;
+
+  /// Verification Wizard Terms Text - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'I confirm that the information and uploaded documents are accurate and ready for verification review.'**
+  String get verificationWizardTermsText;
+
+  /// Verification Wizard Validation Error - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete the required fields before submitting.'**
+  String get verificationWizardValidationError;
+
+  /// Verification Wizard Unauthorized Error - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Your session is unavailable. Please sign in again.'**
+  String get verificationWizardUnauthorizedError;
+
+  /// Verification Wizard Unknown Error - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong while submitting verification.'**
+  String get verificationWizardUnknownError;
+
+  /// Verification Wizard Profile Photo Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo is required'**
+  String get verificationWizardProfilePhotoRequired;
+
+  /// Verification Wizard Aadhaar Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar must be 12 digits'**
+  String get verificationWizardAadhaarRequired;
+
+  /// Verification Wizard Pan Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid PAN format'**
+  String get verificationWizardPanRequired;
+
+  /// Verification Wizard Aadhaar Front Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar front photo required'**
+  String get verificationWizardAadhaarFrontRequired;
+
+  /// Verification Wizard Aadhaar Back Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar back photo required'**
+  String get verificationWizardAadhaarBackRequired;
+
+  /// Verification Wizard Pan Photo Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'PAN photo required'**
+  String get verificationWizardPanPhotoRequired;
+
+  /// Verification Wizard Truck Number Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck number is required'**
+  String get verificationWizardTruckNumberRequired;
+
+  /// Verification Wizard Rc Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document is required'**
+  String get verificationWizardRcRequired;
+
+  /// Verification Wizard Company Name Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name is required'**
+  String get verificationWizardCompanyNameRequired;
+
+  /// Verification Wizard License Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'License number is required'**
+  String get verificationWizardLicenseRequired;
+
+  /// Verification Wizard License Document Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'License document is required'**
+  String get verificationWizardLicenseDocumentRequired;
+
+  /// Verification Wizard Location Required - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification location is required'**
+  String get verificationWizardLocationRequired;
+
+  /// Verification Action Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification action needs attention'**
   String get verificationActionNeedsAttentionTitle;
 
-  /// No description provided for @verificationActionFailureMessage.
+  /// Verification Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest verification action could not be completed right now. Review the current checklist and retry shortly.'**
   String get verificationActionFailureMessage;
 
-  /// No description provided for @verificationLatestRejectionReasonTitle.
+  /// Verification Latest Rejection Reason Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Latest rejection reason'**
   String get verificationLatestRejectionReasonTitle;
 
-  /// No description provided for @verificationNextStepTitle.
+  /// Verification Next Step Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next step'**
   String get verificationNextStepTitle;
 
-  /// No description provided for @verificationLocationTitle.
+  /// Verification Location Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification location'**
   String get verificationLocationTitle;
 
-  /// No description provided for @verificationLocationCapturedTitle.
+  /// Verification Location Captured Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Location captured'**
   String get verificationLocationCapturedTitle;
 
-  /// No description provided for @verificationLocationRequiredTitle.
+  /// Verification Location Required Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Location still required'**
   String get verificationLocationRequiredTitle;
 
-  /// No description provided for @verificationLocationRequiredMessage.
+  /// Verification Location Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier verification needs a city-level location capture before submission can proceed.'**
   String get verificationLocationRequiredMessage;
 
-  /// No description provided for @verificationLocationCapturedStatus.
+  /// Verification Location Captured Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'captured'**
   String get verificationLocationCapturedStatus;
 
-  /// No description provided for @verificationLocationRequiredStatus.
+  /// Verification Location Required Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'required'**
   String get verificationLocationRequiredStatus;
 
-  /// No description provided for @verificationLocationCapturedFooter.
+  /// Verification Location Captured Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Captured location remains attached to the supplier verification packet for review.'**
   String get verificationLocationCapturedFooter;
 
-  /// No description provided for @verificationLocationCaptureGuidanceFooter.
+  /// Verification Location Capture Guidance Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We attempt GPS capture and resolve to the nearest city-level location when possible.'**
   String get verificationLocationCaptureGuidanceFooter;
 
-  /// No description provided for @verificationRefreshLocationAction.
+  /// Verification Refresh Location Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Refresh location'**
   String get verificationRefreshLocationAction;
 
-  /// No description provided for @verificationCaptureLocationAction.
+  /// Verification Capture Location Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Capture location'**
   String get verificationCaptureLocationAction;
 
-  /// No description provided for @verificationLocationCapturedSuccess.
+  /// Verification Location Captured Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification location captured'**
   String get verificationLocationCapturedSuccess;
 
-  /// No description provided for @verificationLocationFailureMessage.
+  /// Verification Location Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not capture the verification location right now. Retry shortly from this verification screen.'**
   String get verificationLocationFailureMessage;
 
-  /// No description provided for @verificationManualLocationAction.
+  /// Verification Manual Location Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter location manually'**
   String get verificationManualLocationAction;
 
-  /// No description provided for @verificationManualLocationTitle.
+  /// Verification Manual Location Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add verification location manually'**
   String get verificationManualLocationTitle;
 
-  /// No description provided for @verificationManualLocationCityLabel.
+  /// Verification Manual Location City Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'City'**
   String get verificationManualLocationCityLabel;
 
-  /// No description provided for @verificationManualLocationStateLabel.
+  /// Verification Manual Location State Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'State (optional)'**
   String get verificationManualLocationStateLabel;
 
-  /// No description provided for @verificationManualLocationSaveAction.
+  /// Verification Manual Location Save Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Save location'**
   String get verificationManualLocationSaveAction;
 
-  /// No description provided for @verificationDocTypeAadhaarFront.
+  /// Verification Doc Type Aadhaar Front - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Aadhaar front'**
   String get verificationDocTypeAadhaarFront;
 
-  /// No description provided for @verificationDocTypeAadhaarBack.
+  /// Verification Doc Type Aadhaar Back - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Aadhaar back'**
   String get verificationDocTypeAadhaarBack;
 
-  /// No description provided for @verificationDocTypePan.
+  /// Verification Doc Type Pan - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'PAN card'**
   String get verificationDocTypePan;
 
-  /// No description provided for @verificationDocTypeProfilePhoto.
+  /// Verification Doc Type Profile Photo - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile photo'**
   String get verificationDocTypeProfilePhoto;
 
-  /// No description provided for @verificationDocTypeBusinessLicence.
+  /// Verification Doc Type Business Licence - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business licence'**
   String get verificationDocTypeBusinessLicence;
 
-  /// No description provided for @verificationDocTypeGstCertificate.
+  /// Verification Doc Type Gst Certificate - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'GST certificate'**
   String get verificationDocTypeGstCertificate;
 
-  /// No description provided for @verificationDocumentChecklistTitle.
+  /// Verification Document Checklist Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Document checklist'**
@@ -6429,145 +7074,145 @@ abstract class AppLocalizations {
   /// **'{label} uploaded successfully'**
   String verificationDocumentUploadedSuccess(Object label);
 
-  /// No description provided for @verificationDocumentUploadFailureMessage.
+  /// Verification Document Upload Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not upload that verification document right now. Try another image or retry shortly.'**
   String get verificationDocumentUploadFailureMessage;
 
-  /// No description provided for @verificationReadinessSupplierTitle.
+  /// Verification Readiness Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification readiness'**
   String get verificationReadinessSupplierTitle;
 
-  /// No description provided for @verificationReadinessTruckerTitle.
+  /// Verification Readiness Trucker Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification and truck readiness'**
   String get verificationReadinessTruckerTitle;
 
-  /// No description provided for @verificationCurrentStateTitle.
+  /// Verification Current State Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current verification state'**
   String get verificationCurrentStateTitle;
 
-  /// No description provided for @verificationStatusVerified.
+  /// Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get verificationStatusVerified;
 
-  /// No description provided for @verificationStatusPending.
+  /// Verification Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get verificationStatusPending;
 
-  /// No description provided for @verificationStatusRejected.
+  /// Verification Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get verificationStatusRejected;
 
-  /// No description provided for @verificationStatusUnverified.
+  /// Verification Status Unverified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unverified'**
   String get verificationStatusUnverified;
 
-  /// No description provided for @verificationStatusUnknown.
+  /// Verification Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get verificationStatusUnknown;
 
-  /// No description provided for @verificationCurrentStateSupplierFooter.
+  /// Verification Current State Supplier Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier verification keeps load-posting readiness and trust visibility aligned to one authoritative state.'**
   String get verificationCurrentStateSupplierFooter;
 
-  /// No description provided for @verificationCurrentStateTruckerFooter.
+  /// Verification Current State Trucker Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker verification unlocks chat and call on open loads once identity documents and truck readiness are complete.'**
   String get verificationCurrentStateTruckerFooter;
 
-  /// No description provided for @verificationBusinessReadinessTitle.
+  /// Verification Business Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business readiness'**
   String get verificationBusinessReadinessTitle;
 
-  /// No description provided for @verificationTruckReadinessTitle.
+  /// Verification Truck Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck readiness'**
   String get verificationTruckReadinessTitle;
 
-  /// No description provided for @verificationCompanyNameNeedsAttention.
+  /// Verification Company Name Needs Attention - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Company name still needs attention'**
   String get verificationCompanyNameNeedsAttention;
 
-  /// No description provided for @approvedTruckCountLabel.
+  /// Approved Truck Count Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{count} approved truck{s}'**
   String approvedTruckCountLabel(Object count, Object s);
 
-  /// No description provided for @verificationCheckProfileStatus.
+  /// Verification Check Profile Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'check profile'**
   String get verificationCheckProfileStatus;
 
-  /// No description provided for @verificationCapturedStatus.
+  /// Verification Captured Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'captured'**
   String get verificationCapturedStatus;
 
-  /// No description provided for @verificationReadyStatus.
+  /// Verification Ready Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'ready'**
   String get verificationReadyStatus;
 
-  /// No description provided for @verificationActionNeededStatus.
+  /// Verification Action Needed Status - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'action needed'**
   String get verificationActionNeededStatus;
 
-  /// No description provided for @verificationBusinessReadinessFooter.
+  /// Verification Business Readiness Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business licence is required for supplier verification. GST certificate remains optional.'**
   String get verificationBusinessReadinessFooter;
 
-  /// No description provided for @verificationTruckReadyFooter.
+  /// Verification Truck Ready Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You already have at least one approved truck available for verification-dependent workflows.'**
   String get verificationTruckReadyFooter;
 
-  /// No description provided for @verificationTruckRequiredFooter.
+  /// Verification Truck Required Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'At least one approved truck is still required before trucker verification can be submitted.'**
   String get verificationTruckRequiredFooter;
 
-  /// No description provided for @verificationPacketDetailsSectionTitle.
+  /// Verification Packet Details Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification packet details'**
   String get verificationPacketDetailsSectionTitle;
 
-  /// No description provided for @verificationIdentityPacketSectionTitle.
+  /// Verification Identity Packet Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Identity packet details'**
@@ -6579,2903 +7224,2975 @@ abstract class AppLocalizations {
   /// **'{count} ready {count, plural, =1{truck} other{trucks}}'**
   String verificationReadyTruckCountLabel(int count);
 
-  /// No description provided for @verificationTruckReadyWithRcFooter.
+  /// Verification Truck Ready With Rc Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You already have at least one complete truck packet with RC document attached.'**
   String get verificationTruckReadyWithRcFooter;
 
-  /// No description provided for @verificationTruckRequiredWithRcFooter.
+  /// Verification Truck Required With Rc Footer - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add one truck with its RC document before submitting trucker verification.'**
   String get verificationTruckRequiredWithRcFooter;
 
-  /// No description provided for @verificationTruckPacketStillRequiredTitle.
+  /// Verification Truck Packet Still Required Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A truck packet is still required'**
   String get verificationTruckPacketStillRequiredTitle;
 
-  /// No description provided for @verificationTruckPacketStillRequiredMessage.
+  /// Verification Truck Packet Still Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open your fleet to add the first truck or upload the RC document so trucker verification can be submitted as one packet.'**
   String get verificationTruckPacketStillRequiredMessage;
 
-  /// No description provided for @verificationTruckPacketRequiredBadge.
+  /// Verification Truck Packet Required Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck packet required'**
   String get verificationTruckPacketRequiredBadge;
 
-  /// No description provided for @verificationTruckApprovalRequiredTitle.
+  /// Verification Truck Approval Required Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck approval is still required'**
   String get verificationTruckApprovalRequiredTitle;
 
-  /// No description provided for @verificationTruckApprovalRequiredMessage.
+  /// Verification Truck Approval Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open your fleet to add the first truck, review rejection guidance, or resubmit edited truck details for approval.'**
   String get verificationTruckApprovalRequiredMessage;
 
-  /// No description provided for @verificationOpenFleetAction.
+  /// Verification Open Fleet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open fleet'**
   String get verificationOpenFleetAction;
 
-  /// No description provided for @verificationUnlocksTitle.
+  /// Verification Unlocks Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What this unlocks'**
   String get verificationUnlocksTitle;
 
-  /// No description provided for @verificationUnlocksSupplierMessage.
+  /// Verification Unlocks Supplier Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Once verified, your supplier account becomes trust-ready for broader marketplace and account workflows.'**
   String get verificationUnlocksSupplierMessage;
 
-  /// No description provided for @verificationUnlocksTruckerMessage.
+  /// Verification Unlocks Trucker Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Once verified, chat and call stay unlocked on open loads and your trucker account becomes assignment-ready.'**
   String get verificationUnlocksTruckerMessage;
 
-  /// No description provided for @verificationSourceOfTruthBadge.
+  /// Verification Source Of Truth Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification source of truth'**
   String get verificationSourceOfTruthBadge;
 
-  /// No description provided for @verificationChatAndCallGatingBadge.
+  /// Verification Chat And Call Gating Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat and call gating'**
   String get verificationChatAndCallGatingBadge;
 
-  /// No description provided for @verificationApprovedTruckRequiredBadge.
+  /// Verification Approved Truck Required Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approved truck required'**
   String get verificationApprovedTruckRequiredBadge;
 
-  /// No description provided for @verificationBackToAccountAction.
+  /// Verification Back To Account Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to account'**
   String get verificationBackToAccountAction;
 
-  /// No description provided for @verificationUploadSourceTitle.
+  /// Verification Upload Source Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload {documentLabel}'**
   String verificationUploadSourceTitle(Object documentLabel);
 
-  /// No description provided for @verificationTakePhotoAction.
+  /// Verification Take Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Take photo'**
   String get verificationTakePhotoAction;
 
-  /// No description provided for @verificationChooseFromGalleryAction.
+  /// Verification Choose From Gallery Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose from gallery'**
   String get verificationChooseFromGalleryAction;
 
-  /// No description provided for @verificationRejectionSummaryWithMarkers.
+  /// Verification Rejection Summary With Markers - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{summary}\n\nRejected documents are marked below with document-specific correction notes.'**
   String verificationRejectionSummaryWithMarkers(Object summary);
 
-  /// No description provided for @verificationRejectionSummaryPacketLevel.
+  /// Verification Rejection Summary Packet Level - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{summary}\n\nCurrent review feedback is returned as one packet-level reason when document-specific review markers are not provided.'**
   String verificationRejectionSummaryPacketLevel(Object summary);
 
-  /// No description provided for @verificationPendingBannerTitle.
+  /// Verification Pending Banner Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification pending'**
   String get verificationPendingBannerTitle;
 
-  /// No description provided for @verificationPendingBannerDescription.
+  /// Verification Pending Banner Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification packet is already under review. You can keep browsing while review is pending.'**
   String get verificationPendingBannerDescription;
 
-  /// No description provided for @verificationCompleteBannerTitle.
+  /// Verification Complete Banner Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification complete'**
   String get verificationCompleteBannerTitle;
 
-  /// No description provided for @verificationCompleteBannerDescription.
+  /// Verification Complete Banner Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account is already verified. You can still review the uploaded document checklist below.'**
   String get verificationCompleteBannerDescription;
 
-  /// No description provided for @verificationNeedsAttentionBannerTitle.
+  /// Verification Needs Attention Banner Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
   String get verificationNeedsAttentionBannerTitle;
 
-  /// No description provided for @verificationNeedsAttentionBannerDescription.
+  /// Verification Needs Attention Banner Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the rejection summary, replace any affected documents, and resubmit the packet when ready.'**
   String get verificationNeedsAttentionBannerDescription;
 
-  /// No description provided for @verificationNotSubmittedTitle.
+  /// Verification Not Submitted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification not submitted yet'**
   String get verificationNotSubmittedTitle;
 
-  /// No description provided for @verificationNotSubmittedSupplierMessage.
+  /// Verification Not Submitted Supplier Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload Aadhaar, PAN, profile photo, and business licence before submitting supplier verification.'**
   String get verificationNotSubmittedSupplierMessage;
 
-  /// No description provided for @verificationNotSubmittedTruckerMessage.
+  /// Verification Not Submitted Trucker Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload Aadhaar, PAN, profile photo, and ensure at least one approved truck exists before submitting trucker verification.'**
   String get verificationNotSubmittedTruckerMessage;
 
-  /// No description provided for @verificationRequiredUploadedLabel.
+  /// Verification Locked Status Section Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification status'**
+  String get verificationLockedStatusSectionTitle;
+
+  /// Verification Locked Status Verified Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Verified'**
+  String get verificationLockedStatusVerifiedTitle;
+
+  /// Verification Locked Status Pending Title - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Under review'**
+  String get verificationLockedStatusPendingTitle;
+
+  /// Verification Locked Status Verified Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Your verification has been approved. No action is needed right now.'**
+  String get verificationLockedStatusVerifiedMessage;
+
+  /// Verification Locked Status Pending Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Your documents are being reviewed. You will be notified once the review is complete.'**
+  String get verificationLockedStatusPendingMessage;
+
+  /// Verification Submit Locked Footer - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Once submitted, your details stay locked until the admin completes the review.'**
+  String get verificationSubmitLockedFooter;
+
+  /// Verification Required Uploaded Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{uploaded}/{required} required uploaded'**
   String verificationRequiredUploadedLabel(Object required, Object uploaded);
 
-  /// No description provided for @verificationPrerequisitesSatisfiedMessage.
+  /// Verification Prerequisites Satisfied Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'All current client-side verification prerequisites are satisfied for submission.'**
   String get verificationPrerequisitesSatisfiedMessage;
 
-  /// No description provided for @verificationDocumentStatusPending.
+  /// Verification Document Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'pending'**
   String get verificationDocumentStatusPending;
 
-  /// No description provided for @verificationDocumentStatusVerified.
+  /// Verification Document Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'verified'**
   String get verificationDocumentStatusVerified;
 
-  /// No description provided for @verificationDocumentStatusRejected.
+  /// Verification Document Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'rejected'**
   String get verificationDocumentStatusRejected;
 
-  /// No description provided for @verificationDocumentStatusUploaded.
+  /// Verification Document Status Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'uploaded'**
   String get verificationDocumentStatusUploaded;
 
-  /// No description provided for @verificationDocumentStatusRequired.
+  /// Verification Document Status Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'required'**
   String get verificationDocumentStatusRequired;
 
-  /// No description provided for @verificationDocumentStatusOptional.
+  /// Verification Document Status Optional - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'optional'**
   String get verificationDocumentStatusOptional;
 
-  /// No description provided for @verificationDocumentCorrectionFallback.
+  /// Verification Document Correction Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This document needs correction before verification can be resubmitted.'**
   String get verificationDocumentCorrectionFallback;
 
-  /// No description provided for @verificationDocumentUploadedSubtitle.
+  /// Verification Document Uploaded Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Document uploaded and linked to your verification record.'**
   String get verificationDocumentUploadedSubtitle;
 
-  /// No description provided for @verificationDocumentRequiredSubtitle.
+  /// Verification Document Required Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Required before verification can be submitted.'**
   String get verificationDocumentRequiredSubtitle;
 
-  /// No description provided for @verificationDocumentOptionalSubtitle.
+  /// Verification Document Optional Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Optional for the current verification packet.'**
   String get verificationDocumentOptionalSubtitle;
 
-  /// No description provided for @verificationReviewNoteLabel.
+  /// Verification Review Note Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review note: {reason}'**
   String verificationReviewNoteLabel(Object reason);
 
-  /// No description provided for @verificationStoredPathLabel.
+  /// Verification Stored Path Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Stored path: {path}'**
   String verificationStoredPathLabel(Object path);
 
-  /// No description provided for @verificationDocumentMissingMessage.
+  /// Verification Document Missing Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This document is still missing from the current packet.'**
   String get verificationDocumentMissingMessage;
 
-  /// No description provided for @verificationReplaceDocumentAction.
+  /// Verification Replace Document Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Replace document'**
   String get verificationReplaceDocumentAction;
 
-  /// No description provided for @verificationUploadDocumentAction.
+  /// Verification Upload Document Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload document'**
   String get verificationUploadDocumentAction;
 
-  /// No description provided for @truckerTripDetailTitle.
+  /// Trucker Trip Detail Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip Detail'**
   String get truckerTripDetailTitle;
 
-  /// No description provided for @truckerTripDetailLoadFailureTitle.
+  /// Trucker Trip Detail Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load trip detail'**
   String get truckerTripDetailLoadFailureTitle;
 
-  /// No description provided for @truckerTripDetailLoadFailureMessage.
+  /// Trucker Trip Detail Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this trip detail right now. Retry shortly to refresh the latest trip status and actions.'**
   String get truckerTripDetailLoadFailureMessage;
 
-  /// No description provided for @truckerTripDetailRatingFailureMessage.
+  /// Trucker Trip Detail Rating Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your trip rating state is temporarily unavailable. Retry shortly before submitting a rating.'**
   String get truckerTripDetailRatingFailureMessage;
 
-  /// No description provided for @truckerTripDetailRatingSubmitFailureMessage.
+  /// Trucker Trip Detail Rating Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit your rating right now. Review the rating and retry shortly.'**
   String get truckerTripDetailRatingSubmitFailureMessage;
 
-  /// No description provided for @truckerTripDetailActionFailureMessage.
+  /// Trucker Trip Detail Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest trip action could not be completed right now. Retry shortly after the trip detail refreshes.'**
   String get truckerTripDetailActionFailureMessage;
 
-  /// No description provided for @truckerTripDetailActionSubmitFailureMessage.
+  /// Trucker Trip Detail Action Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not complete that trip action right now. Retry shortly after checking the latest trip status.'**
   String get truckerTripDetailActionSubmitFailureMessage;
 
-  /// No description provided for @truckerTripDetailLrUploadFailureMessage.
+  /// Trucker Trip Detail Lr Upload Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not upload the LR proof right now. Try another image or retry shortly.'**
   String get truckerTripDetailLrUploadFailureMessage;
 
-  /// No description provided for @truckerTripDetailPodUploadFailureMessage.
+  /// Trucker Trip Detail Pod Upload Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not upload the POD proof right now. Try another image or retry shortly.'**
   String get truckerTripDetailPodUploadFailureMessage;
 
-  /// No description provided for @truckerTripDetailRatingSectionTitle.
+  /// Trucker Trip Detail Rating Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rate this trip'**
   String get truckerTripDetailRatingSectionTitle;
 
-  /// No description provided for @truckerTripDetailRatingAlreadySubmitted.
+  /// Trucker Trip Detail Rating Already Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You already rated this trip.'**
   String get truckerTripDetailRatingAlreadySubmitted;
 
-  /// No description provided for @truckerTripDetailRatingSubmittedOn.
+  /// Trucker Trip Detail Rating Submitted On - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submitted on {date}'**
   String truckerTripDetailRatingSubmittedOn(Object date);
 
-  /// No description provided for @truckerTripDetailRatingPrompt.
+  /// Trucker Trip Detail Rating Prompt - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery is complete. Rate the supplier for this trip.'**
   String get truckerTripDetailRatingPrompt;
 
-  /// No description provided for @truckerTripDetailCommentLabel.
+  /// Trucker Trip Detail Comment Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Comment (optional)'**
   String get truckerTripDetailCommentLabel;
 
-  /// No description provided for @truckerTripDetailCommentHint.
+  /// Trucker Trip Detail Comment Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share anything useful about the trip outcome'**
   String get truckerTripDetailCommentHint;
 
-  /// No description provided for @truckerTripDetailRatingUnavailableTitle.
+  /// Trucker Trip Detail Rating Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rating unavailable'**
   String get truckerTripDetailRatingUnavailableTitle;
 
-  /// No description provided for @truckerTripDetailSubmitRatingAction.
+  /// Trucker Trip Detail Submit Rating Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit Rating'**
   String get truckerTripDetailSubmitRatingAction;
 
-  /// No description provided for @truckerTripDetailRatingSubmittedSuccess.
+  /// Trucker Trip Detail Rating Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rating submitted successfully.'**
   String get truckerTripDetailRatingSubmittedSuccess;
 
-  /// No description provided for @truckerTripDetailRatingStarTooltip.
+  /// Trucker Trip Detail Rating Star Tooltip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{count} star{s}'**
   String truckerTripDetailRatingStarTooltip(Object count, Object s);
 
-  /// No description provided for @truckerTripDetailAutoCompleteDueNow.
+  /// Trucker Trip Detail Auto Complete Due Now - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Auto-complete is due now.'**
   String get truckerTripDetailAutoCompleteDueNow;
 
-  /// No description provided for @truckerTripDetailAutoCompleteDuration.
+  /// Trucker Trip Detail Auto Complete Duration - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{hours}h {minutes}m'**
   String truckerTripDetailAutoCompleteDuration(Object hours, Object minutes);
 
-  /// No description provided for @truckerTripDetailAutoCompleteIn.
+  /// Trucker Trip Detail Auto Complete In - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Auto-complete in: {duration}'**
   String truckerTripDetailAutoCompleteIn(Object duration);
 
-  /// No description provided for @truckerTripDetailVerificationStatusVerified.
+  /// Trucker Trip Detail Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get truckerTripDetailVerificationStatusVerified;
 
-  /// No description provided for @truckerTripDetailVerificationStatusPending.
+  /// Trucker Trip Detail Verification Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get truckerTripDetailVerificationStatusPending;
 
-  /// No description provided for @truckerTripDetailVerificationStatusRejected.
+  /// Trucker Trip Detail Verification Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get truckerTripDetailVerificationStatusRejected;
 
-  /// No description provided for @truckerTripDetailVerificationStatusUnknown.
+  /// Trucker Trip Detail Verification Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get truckerTripDetailVerificationStatusUnknown;
 
-  /// No description provided for @truckerTripDetailStageAssigned.
+  /// Trucker Trip Detail Stage Assigned - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned'**
   String get truckerTripDetailStageAssigned;
 
-  /// No description provided for @truckerTripDetailStagePickupPending.
+  /// Trucker Trip Detail Stage Pickup Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup pending'**
   String get truckerTripDetailStagePickupPending;
 
-  /// No description provided for @truckerTripDetailStagePickedUp.
+  /// Trucker Trip Detail Stage Picked Up - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Picked up'**
   String get truckerTripDetailStagePickedUp;
 
-  /// No description provided for @truckerTripDetailStageInTransit.
+  /// Trucker Trip Detail Stage In Transit - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In transit'**
   String get truckerTripDetailStageInTransit;
 
-  /// No description provided for @truckerTripDetailStageDelivered.
+  /// Trucker Trip Detail Stage Delivered - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivered'**
   String get truckerTripDetailStageDelivered;
 
-  /// No description provided for @truckerTripDetailStageProofSubmitted.
+  /// Trucker Trip Detail Stage Proof Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof submitted'**
   String get truckerTripDetailStageProofSubmitted;
 
-  /// No description provided for @truckerTripDetailStageCompleted.
+  /// Trucker Trip Detail Stage Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get truckerTripDetailStageCompleted;
 
-  /// No description provided for @truckerTripDetailStageDisputed.
+  /// Trucker Trip Detail Stage Disputed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Disputed'**
   String get truckerTripDetailStageDisputed;
 
-  /// No description provided for @truckerTripDetailStageCancelled.
+  /// Trucker Trip Detail Stage Cancelled - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get truckerTripDetailStageCancelled;
 
-  /// No description provided for @truckerTripDetailProofStatusPodUploaded.
+  /// Trucker Trip Detail Proof Status Pod Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'POD uploaded'**
   String get truckerTripDetailProofStatusPodUploaded;
 
-  /// No description provided for @truckerTripDetailProofStatusLrUploaded.
+  /// Trucker Trip Detail Proof Status Lr Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'LR uploaded'**
   String get truckerTripDetailProofStatusLrUploaded;
 
-  /// No description provided for @truckerTripDetailProofStatusAwaitingPod.
+  /// Trucker Trip Detail Proof Status Awaiting Pod - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Awaiting POD'**
   String get truckerTripDetailProofStatusAwaitingPod;
 
-  /// No description provided for @truckerTripDetailProofStatusProofSubmitted.
+  /// Trucker Trip Detail Proof Status Proof Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof submitted'**
   String get truckerTripDetailProofStatusProofSubmitted;
 
-  /// No description provided for @truckerTripDetailProofStatusProofPending.
+  /// Trucker Trip Detail Proof Status Proof Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof pending'**
   String get truckerTripDetailProofStatusProofPending;
 
-  /// No description provided for @truckerTripDetailHeroSubtitle.
+  /// Trucker Trip Detail Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trip {tripId} • Truck {truckNumber}'**
+  /// **'Trip {tripId} - Truck {truckNumber}'**
   String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber);
 
-  /// No description provided for @truckerTripDetailMaterialPickupSummary.
+  /// Trucker Trip Detail Material Pickup Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'{material} • Pickup {pickupDate}'**
+  /// **'{material} - Pickup {pickupDate}'**
   String truckerTripDetailMaterialPickupSummary(
     Object material,
     Object pickupDate,
   );
 
-  /// No description provided for @truckerTripDetailNextStepTitle.
+  /// Trucker Trip Detail Next Step Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next step'**
   String get truckerTripDetailNextStepTitle;
 
-  /// No description provided for @truckerTripDetailActionUnavailableTitle.
+  /// Trucker Trip Detail Action Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip action unavailable'**
   String get truckerTripDetailActionUnavailableTitle;
 
-  /// No description provided for @truckerTripDetailActionsTitle.
+  /// Trucker Trip Detail Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Actions'**
   String get truckerTripDetailActionsTitle;
 
-  /// No description provided for @truckerTripDetailReplaceLrUploadAction.
+  /// Trucker Trip Detail Replace Lr Upload Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Replace LR Upload'**
   String get truckerTripDetailReplaceLrUploadAction;
 
-  /// No description provided for @truckerTripDetailUploadLrOptionalAction.
+  /// Trucker Trip Detail Upload Lr Optional Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload LR (Optional)'**
   String get truckerTripDetailUploadLrOptionalAction;
 
-  /// No description provided for @truckerTripDetailUploadLrImageTitle.
+  /// Trucker Trip Detail Upload Lr Image Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload LR image'**
   String get truckerTripDetailUploadLrImageTitle;
 
-  /// No description provided for @truckerTripDetailLrUploadedSuccess.
+  /// Trucker Trip Detail Lr Uploaded Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'LR uploaded successfully.'**
   String get truckerTripDetailLrUploadedSuccess;
 
-  /// No description provided for @truckerTripDetailUploadPodPhotoAction.
+  /// Trucker Trip Detail Upload Pod Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload POD Photo'**
   String get truckerTripDetailUploadPodPhotoAction;
 
-  /// No description provided for @truckerTripDetailUploadPodPhotoTitle.
+  /// Trucker Trip Detail Upload Pod Photo Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload POD photo'**
   String get truckerTripDetailUploadPodPhotoTitle;
 
-  /// No description provided for @truckerTripDetailPodUploadedSuccess.
+  /// Trucker Trip Detail Pod Uploaded Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'POD uploaded successfully. Supplier confirmation is now pending.'**
   String get truckerTripDetailPodUploadedSuccess;
 
-  /// No description provided for @truckerTripDetailCallSupplierAction.
+  /// Trucker Trip Detail Call Supplier Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Call Supplier'**
   String get truckerTripDetailCallSupplierAction;
 
-  /// No description provided for @truckerTripDetailOpenInGoogleMapsAction.
+  /// Trucker Trip Detail Open In Google Maps Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open in Google Maps'**
   String get truckerTripDetailOpenInGoogleMapsAction;
 
-  /// No description provided for @truckerTripDetailReportSourceLabel.
+  /// Trucker Trip Detail Report Source Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trucker trip • {originLabel} → {destinationLabel}'**
+  /// **'Trucker trip - {originLabel} > {destinationLabel}'**
   String truckerTripDetailReportSourceLabel(
     Object destinationLabel,
     Object originLabel,
   );
 
-  /// No description provided for @truckerTripDetailReviewCountdownTitle.
+  /// Trucker Trip Detail Review Countdown Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery review countdown'**
   String get truckerTripDetailReviewCountdownTitle;
 
-  /// No description provided for @truckerTripDetailReviewCountdownMessage.
+  /// Trucker Trip Detail Review Countdown Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier confirmation is pending. This trip auto-completes 48 hours after POD upload if no action is taken.'**
   String get truckerTripDetailReviewCountdownMessage;
 
-  /// No description provided for @truckerTripDetailDisputeStatusTitle.
+  /// Trucker Trip Detail Dispute Status Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute status'**
   String get truckerTripDetailDisputeStatusTitle;
 
-  /// No description provided for @truckerTripDetailDisputeStateRaised.
+  /// Trucker Trip Detail Dispute State Raised - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current state: Dispute raised'**
   String get truckerTripDetailDisputeStateRaised;
 
-  /// No description provided for @truckerTripDetailDisputeCurrentStateLabel.
+  /// Trucker Trip Detail Dispute Current State Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current state: {status}'**
   String truckerTripDetailDisputeCurrentStateLabel(Object status);
 
-  /// No description provided for @truckerTripDetailDisputeCategoryLabel.
+  /// Trucker Trip Detail Dispute Category Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'{category}'**
   String truckerTripDetailDisputeCategoryLabel(Object category);
 
-  /// No description provided for @truckerTripDetailDisputeLastUpdatedLabel.
+  /// Trucker Trip Detail Dispute Last Updated Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Last updated: {date}'**
   String truckerTripDetailDisputeLastUpdatedLabel(Object date);
 
-  /// No description provided for @truckerTripDetailDisputeStatusGuidanceOpen.
+  /// Trucker Trip Detail Dispute Status Guidance Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.'**
   String get truckerTripDetailDisputeStatusGuidanceOpen;
 
-  /// No description provided for @truckerTripDetailDisputeStatusGuidanceInProgress.
+  /// Trucker Trip Detail Dispute Status Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support or operations are actively reviewing the dispute. Watch the related support ticket for visible updates or clarification requests.'**
   String get truckerTripDetailDisputeStatusGuidanceInProgress;
 
-  /// No description provided for @truckerTripDetailDisputeStatusGuidanceWaitingForUser.
+  /// Trucker Trip Detail Dispute Status Guidance Waiting For User - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support is waiting for your clarification or additional context. Reply on the related support ticket so the review can continue.'**
   String get truckerTripDetailDisputeStatusGuidanceWaitingForUser;
 
-  /// No description provided for @truckerTripDetailDisputeStatusGuidanceResolved.
+  /// Trucker Trip Detail Dispute Status Guidance Resolved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This dispute has reached a final review state. Check the linked support ticket outcome before raising any fresh follow-up issue.'**
   String get truckerTripDetailDisputeStatusGuidanceResolved;
 
-  /// No description provided for @truckerTripDetailDisputeStatusGuidanceDefault.
+  /// Trucker Trip Detail Dispute Status Guidance Default - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep following the related support ticket for the latest visible review updates.'**
   String get truckerTripDetailDisputeStatusGuidanceDefault;
 
-  /// No description provided for @truckerTripDetailDisputeBannerWaitingTitle.
+  /// Trucker Trip Detail Dispute Banner Waiting Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute waiting for your reply'**
   String get truckerTripDetailDisputeBannerWaitingTitle;
 
-  /// No description provided for @truckerTripDetailDisputeBannerClosedTitle.
+  /// Trucker Trip Detail Dispute Banner Closed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute review closed'**
   String get truckerTripDetailDisputeBannerClosedTitle;
 
-  /// No description provided for @truckerTripDetailDisputeBannerInProgressTitle.
+  /// Trucker Trip Detail Dispute Banner In Progress Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute in progress'**
   String get truckerTripDetailDisputeBannerInProgressTitle;
 
-  /// No description provided for @truckerTripDetailDisputeBannerNoSummaryMessage.
+  /// Trucker Trip Detail Dispute Banner No Summary Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute has been raised on this trip. The trip stays open while support or operations review the submitted proof and delivery context. Both sides can see dispute status, but sensitive evidence may remain restricted during review.'**
   String get truckerTripDetailDisputeBannerNoSummaryMessage;
 
-  /// No description provided for @truckerTripDetailDisputeBannerWaitingMessage.
+  /// Trucker Trip Detail Dispute Banner Waiting Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute has been raised on this trip under {category} and is waiting on your clarification or proof. Sensitive evidence may remain restricted during review.'**
   String truckerTripDetailDisputeBannerWaitingMessage(Object category);
 
-  /// No description provided for @truckerTripDetailDisputeBannerClosedMessage.
+  /// Trucker Trip Detail Dispute Banner Closed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute raised on this trip under {category} has reached a final review outcome. Recorded status updates remain visible, while sensitive evidence may remain restricted.'**
   String truckerTripDetailDisputeBannerClosedMessage(Object category);
 
-  /// No description provided for @truckerTripDetailDisputeBannerInProgressMessage.
+  /// Trucker Trip Detail Dispute Banner In Progress Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute has been raised on this trip under {category}. The trip stays open while support or operations review the delivery context, and sensitive evidence may remain restricted during review.'**
   String truckerTripDetailDisputeBannerInProgressMessage(Object category);
 
-  /// No description provided for @truckerTripDetailDisputeActionGuidanceClosed.
+  /// Trucker Trip Detail Dispute Action Guidance Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This dispute has reached a final review state. Keep this trip detail for the recorded outcome and start a fresh follow-up only if a genuinely new issue appears.'**
   String get truckerTripDetailDisputeActionGuidanceClosed;
 
-  /// No description provided for @truckerTripDetailDisputeActionGuidanceInProgress.
+  /// Trucker Trip Detail Dispute Action Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No further trip-stage action is available until the dispute is resolved. Keep this trip detail for status updates and follow any support instructions if requested.'**
   String get truckerTripDetailDisputeActionGuidanceInProgress;
 
-  /// No description provided for @truckerTripDetailSharedVisibilityClosed.
+  /// Trucker Trip Detail Shared Visibility Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can still follow the recorded dispute category, final workflow state, and visible support replies kept on this trip dispute.'**
   String get truckerTripDetailSharedVisibilityClosed;
 
-  /// No description provided for @truckerTripDetailSharedVisibilityInProgress.
+  /// Trucker Trip Detail Shared Visibility In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Both parties can follow the dispute category, workflow status, and support replies that are intentionally visible during review.'**
   String get truckerTripDetailSharedVisibilityInProgress;
 
-  /// No description provided for @truckerTripDetailProofGuidanceClosed.
+  /// Trucker Trip Detail Proof Guidance Closed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If you believe important proof was not considered before closure, start a fresh support follow-up only when you have genuinely new dispute context to raise.'**
   String get truckerTripDetailProofGuidanceClosed;
 
-  /// No description provided for @truckerTripDetailProofGuidanceInProgress.
+  /// Trucker Trip Detail Proof Guidance In Progress - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If additional supporting proofs are not attached in the current single-image flow, keep the related support replies clear so support and operations know what else to review.'**
   String get truckerTripDetailProofGuidanceInProgress;
 
-  /// No description provided for @truckerTripDetailCancelledTitle.
+  /// Trucker Trip Detail Cancelled Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip cancelled'**
   String get truckerTripDetailCancelledTitle;
 
-  /// No description provided for @truckerTripDetailCancelledMessage.
+  /// Trucker Trip Detail Cancelled Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This trip was cancelled before completion. No further execution actions are available, and this detail now serves as a record of the cancelled movement.'**
   String get truckerTripDetailCancelledMessage;
 
-  /// No description provided for @truckerTripDetailCancellationSummaryTitle.
+  /// Trucker Trip Detail Cancellation Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancellation summary'**
   String get truckerTripDetailCancellationSummaryTitle;
 
-  /// No description provided for @truckerTripDetailCancellationCurrentState.
+  /// Trucker Trip Detail Cancellation Current State - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current state: cancelled'**
   String get truckerTripDetailCancellationCurrentState;
 
-  /// No description provided for @truckerTripDetailRouteLabel.
+  /// Trucker Trip Detail Route Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route: {route}'**
   String truckerTripDetailRouteLabel(Object route);
 
-  /// No description provided for @truckerTripDetailMaterialLabel.
+  /// Trucker Trip Detail Material Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Material: {material}'**
   String truckerTripDetailMaterialLabel(Object material);
 
-  /// No description provided for @truckerTripDetailAssignedOnLabel.
+  /// Trucker Trip Detail Assigned On Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned on: {dateTime}'**
   String truckerTripDetailAssignedOnLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailCancellationFollowupMessage.
+  /// Trucker Trip Detail Cancellation Followup Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If support or operations share follow-up instructions, use this trip reference and the existing trip timeline for context.'**
   String get truckerTripDetailCancellationFollowupMessage;
 
-  /// No description provided for @truckerTripDetailTripSummaryTitle.
+  /// Trucker Trip Detail Trip Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip summary'**
   String get truckerTripDetailTripSummaryTitle;
 
-  /// No description provided for @truckerTripDetailTripSummaryMessage.
+  /// Trucker Trip Detail Trip Summary Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This trip is complete and closed out from the execution workflow.'**
   String get truckerTripDetailTripSummaryMessage;
 
-  /// No description provided for @truckerTripDetailCompletedOnLabel.
+  /// Trucker Trip Detail Completed On Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed on: {dateTime}'**
   String truckerTripDetailCompletedOnLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailRouteScheduleTitle.
+  /// Trucker Trip Detail Route Schedule Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route and schedule'**
   String get truckerTripDetailRouteScheduleTitle;
 
-  /// No description provided for @truckerTripDetailOriginLabel.
+  /// Trucker Trip Detail Origin Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin: {origin}'**
   String truckerTripDetailOriginLabel(Object origin);
 
-  /// No description provided for @truckerTripDetailDestinationLabel.
+  /// Trucker Trip Detail Destination Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination: {destination}'**
   String truckerTripDetailDestinationLabel(Object destination);
 
-  /// No description provided for @truckerTripDetailDistanceLabel.
+  /// Trucker Trip Detail Distance Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Distance: {distance} km'**
   String truckerTripDetailDistanceLabel(Object distance);
 
-  /// No description provided for @truckerTripDetailDriveTimeLabel.
+  /// Trucker Trip Detail Drive Time Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Drive time: {minutes} min'**
   String truckerTripDetailDriveTimeLabel(Object minutes);
 
-  /// No description provided for @truckerTripDetailAssignedLabel.
+  /// Trucker Trip Detail Assigned Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned: {dateTime}'**
   String truckerTripDetailAssignedLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailStartedLabel.
+  /// Trucker Trip Detail Started Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Started: {dateTime}'**
   String truckerTripDetailStartedLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailDeliveredLabel.
+  /// Trucker Trip Detail Delivered Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivered: {dateTime}'**
   String truckerTripDetailDeliveredLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailPodUploadedLabel.
+  /// Trucker Trip Detail Pod Uploaded Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'POD uploaded: {dateTime}'**
   String truckerTripDetailPodUploadedLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailCompletedLabel.
+  /// Trucker Trip Detail Completed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed: {dateTime}'**
   String truckerTripDetailCompletedLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailTruckSupplierTitle.
+  /// Trucker Trip Detail Truck Supplier Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck and supplier'**
   String get truckerTripDetailTruckSupplierTitle;
 
-  /// No description provided for @truckerTripDetailTruckNumberLabel.
+  /// Trucker Trip Detail Truck Number Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck number: {truckNumber}'**
   String truckerTripDetailTruckNumberLabel(Object truckNumber);
 
-  /// No description provided for @truckerTripDetailBodyTypeLabel.
+  /// Trucker Trip Detail Body Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Body type: {bodyType}'**
   String truckerTripDetailBodyTypeLabel(Object bodyType);
 
-  /// No description provided for @truckerTripDetailTyresLabel.
+  /// Trucker Trip Detail Tyres Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tyres: {tyres}'**
   String truckerTripDetailTyresLabel(Object tyres);
 
-  /// No description provided for @truckerTripDetailSupplierLabel.
+  /// Trucker Trip Detail Supplier Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier: {name}'**
   String truckerTripDetailSupplierLabel(Object name);
 
-  /// No description provided for @truckerTripDetailCompanyLabel.
+  /// Trucker Trip Detail Company Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Company: {companyName}'**
   String truckerTripDetailCompanyLabel(Object companyName);
 
-  /// No description provided for @truckerTripDetailMobileLabel.
+  /// Trucker Trip Detail Mobile Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mobile: {mobile}'**
   String truckerTripDetailMobileLabel(Object mobile);
 
-  /// No description provided for @truckerTripDetailTakePhotoAction.
+  /// Trucker Trip Detail Take Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Take photo'**
   String get truckerTripDetailTakePhotoAction;
 
-  /// No description provided for @truckerTripDetailChooseFromGalleryAction.
+  /// Trucker Trip Detail Choose From Gallery Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose from gallery'**
   String get truckerTripDetailChooseFromGalleryAction;
 
-  /// No description provided for @truckerTripDetailHeadToPickupAction.
+  /// Trucker Trip Detail Head To Pickup Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Head to pickup'**
   String get truckerTripDetailHeadToPickupAction;
 
-  /// No description provided for @truckerTripDetailHeadToPickupSuccess.
+  /// Trucker Trip Detail Head To Pickup Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup movement started. The supplier can now see that you are heading to pickup.'**
   String get truckerTripDetailHeadToPickupSuccess;
 
-  /// No description provided for @truckerTripDetailCargoLoadedAction.
+  /// Trucker Trip Detail Cargo Loaded Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo Loaded'**
   String get truckerTripDetailCargoLoadedAction;
 
-  /// No description provided for @truckerTripDetailCargoLoadedSuccess.
+  /// Trucker Trip Detail Cargo Loaded Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo loading has been confirmed for this trip.'**
   String get truckerTripDetailCargoLoadedSuccess;
 
-  /// No description provided for @truckerTripDetailStartTripAction.
+  /// Trucker Trip Detail Start Trip Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Start Trip'**
   String get truckerTripDetailStartTripAction;
 
-  /// No description provided for @truckerTripDetailStartTripSuccess.
+  /// Trucker Trip Detail Start Trip Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip started successfully. This load is now in transit.'**
   String get truckerTripDetailStartTripSuccess;
 
-  /// No description provided for @truckerTripDetailMarkDeliveredAction.
+  /// Trucker Trip Detail Mark Delivered Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mark Delivered'**
   String get truckerTripDetailMarkDeliveredAction;
 
-  /// No description provided for @truckerTripDetailMarkDeliveredSuccess.
+  /// Trucker Trip Detail Mark Delivered Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery recorded. Upload POD in the next step to complete the proof flow.'**
   String get truckerTripDetailMarkDeliveredSuccess;
 
-  /// No description provided for @truckerTripDetailNextStepAssignedTitle.
+  /// Trucker Trip Detail Next Step Assigned Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Head to pickup'**
   String get truckerTripDetailNextStepAssignedTitle;
 
-  /// No description provided for @truckerTripDetailNextStepAssignedMessage.
+  /// Trucker Trip Detail Next Step Assigned Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This trip is assigned and waiting for the pickup movement to begin.'**
   String get truckerTripDetailNextStepAssignedMessage;
 
-  /// No description provided for @truckerTripDetailNextStepPickupPendingTitle.
+  /// Trucker Trip Detail Next Step Pickup Pending Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Confirm loading'**
   String get truckerTripDetailNextStepPickupPendingTitle;
 
-  /// No description provided for @truckerTripDetailNextStepPickupPendingMessage.
+  /// Trucker Trip Detail Next Step Pickup Pending Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The trip is at pickup and waiting for cargo loading confirmation.'**
   String get truckerTripDetailNextStepPickupPendingMessage;
 
-  /// No description provided for @truckerTripDetailNextStepPickedUpTitle.
+  /// Trucker Trip Detail Next Step Picked Up Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Start the trip'**
   String get truckerTripDetailNextStepPickedUpTitle;
 
-  /// No description provided for @truckerTripDetailNextStepPickedUpMessage.
+  /// Trucker Trip Detail Next Step Picked Up Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo is loaded and the next operational milestone is moving into transit.'**
   String get truckerTripDetailNextStepPickedUpMessage;
 
-  /// No description provided for @truckerTripDetailNextStepInTransitTitle.
+  /// Trucker Trip Detail Next Step In Transit Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reach destination'**
   String get truckerTripDetailNextStepInTransitTitle;
 
-  /// No description provided for @truckerTripDetailNextStepInTransitMessage.
+  /// Trucker Trip Detail Next Step In Transit Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The trip is in transit and the next milestone is delivery confirmation.'**
   String get truckerTripDetailNextStepInTransitMessage;
 
-  /// No description provided for @truckerTripDetailNextStepDeliveredTitle.
+  /// Trucker Trip Detail Next Step Delivered Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload POD'**
   String get truckerTripDetailNextStepDeliveredTitle;
 
-  /// No description provided for @truckerTripDetailNextStepDeliveredMessage.
+  /// Trucker Trip Detail Next Step Delivered Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Delivery is recorded and proof of delivery is the next required step.'**
   String get truckerTripDetailNextStepDeliveredMessage;
 
-  /// No description provided for @truckerTripDetailNextStepProofSubmittedTitle.
+  /// Trucker Trip Detail Next Step Proof Submitted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Await supplier confirmation'**
   String get truckerTripDetailNextStepProofSubmittedTitle;
 
-  /// No description provided for @truckerTripDetailNextStepProofSubmittedMessage.
+  /// Trucker Trip Detail Next Step Proof Submitted Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Proof is submitted and the trip is waiting for supplier review or auto-completion.'**
   String get truckerTripDetailNextStepProofSubmittedMessage;
 
-  /// No description provided for @truckerTripDetailNextStepCompletedTitle.
+  /// Trucker Trip Detail Next Step Completed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip completed'**
   String get truckerTripDetailNextStepCompletedTitle;
 
-  /// No description provided for @truckerTripDetailNextStepCompletedMessage.
+  /// Trucker Trip Detail Next Step Completed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Execution is closed and this trip now serves as a historical record.'**
   String get truckerTripDetailNextStepCompletedMessage;
 
-  /// No description provided for @truckerTripDetailNextStepDisputedTitle.
+  /// Trucker Trip Detail Next Step Disputed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute in progress'**
   String get truckerTripDetailNextStepDisputedTitle;
 
-  /// No description provided for @truckerTripDetailNextStepDisputedMessage.
+  /// Trucker Trip Detail Next Step Disputed Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'A dispute is active on this trip and operational review is required before closure.'**
   String get truckerTripDetailNextStepDisputedMessage;
 
-  /// No description provided for @truckerTripDetailNextStepCancelledTitle.
+  /// Trucker Trip Detail Next Step Cancelled Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip cancelled'**
   String get truckerTripDetailNextStepCancelledTitle;
 
-  /// No description provided for @truckerTripDetailNextStepCancelledMessage.
+  /// Trucker Trip Detail Next Step Cancelled Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This trip was cancelled before normal completion and no further execution steps remain.'**
   String get truckerTripDetailNextStepCancelledMessage;
 
-  /// No description provided for @truckerTripDetailNextStepDefaultTitle.
+  /// Trucker Trip Detail Next Step Default Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Check execution status'**
   String get truckerTripDetailNextStepDefaultTitle;
 
-  /// No description provided for @truckerTripDetailNextStepDefaultMessage.
+  /// Trucker Trip Detail Next Step Default Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Review the current trip state and recent timestamps to understand the latest movement.'**
   String get truckerTripDetailNextStepDefaultMessage;
 
-  /// No description provided for @truckerTripDetailPending.
+  /// Trucker Trip Detail Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get truckerTripDetailPending;
 
-  /// No description provided for @supplierRaiseDisputeTitle.
+  /// Supplier Raise Dispute Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Raise Dispute'**
   String get supplierRaiseDisputeTitle;
 
-  /// No description provided for @supplierRaiseDisputeTripUnavailableTitle.
+  /// Supplier Raise Dispute Trip Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip detail unavailable'**
   String get supplierRaiseDisputeTripUnavailableTitle;
 
-  /// No description provided for @supplierRaiseDisputeTripLoadFailureMessage.
+  /// Supplier Raise Dispute Trip Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this trip detail right now. Retry shortly to review the latest dispute context.'**
   String get supplierRaiseDisputeTripLoadFailureMessage;
 
-  /// No description provided for @supplierRaiseDisputeHeroTitle.
+  /// Supplier Raise Dispute Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute delivery proof'**
   String get supplierRaiseDisputeHeroTitle;
 
-  /// No description provided for @supplierRaiseDisputeHeroSubtitle.
+  /// Supplier Raise Dispute Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain what is wrong with the submitted POD so the dispute can be opened against the current trip and routed into support review.'**
   String get supplierRaiseDisputeHeroSubtitle;
 
-  /// No description provided for @supplierRaiseDisputeTripBadge.
+  /// Supplier Raise Dispute Trip Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip {tripId}'**
   String supplierRaiseDisputeTripBadge(Object tripId);
 
-  /// No description provided for @supplierRaiseDisputeHeroSummary.
+  /// Supplier Raise Dispute Hero Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'{routeLabel} • {material}'**
+  /// **'{routeLabel} - {material}'**
   String supplierRaiseDisputeHeroSummary(Object material, Object routeLabel);
 
-  /// No description provided for @supplierRaiseDisputeHeroGuidance.
+  /// Supplier Raise Dispute Hero Guidance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select the dispute category that best matches the issue, add a written explanation, and optionally attach one supporting evidence image for support review.'**
   String get supplierRaiseDisputeHeroGuidance;
 
-  /// No description provided for @supplierRaiseDisputePartialContextUnavailableTitle.
+  /// Supplier Raise Dispute Partial Context Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some trip detail context is unavailable'**
   String get supplierRaiseDisputePartialContextUnavailableTitle;
 
-  /// No description provided for @supplierRaiseDisputeTripContextFailureMessage.
+  /// Supplier Raise Dispute Trip Context Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some dispute context is temporarily unavailable. Retry shortly to refresh the latest trip detail and proof review state.'**
   String get supplierRaiseDisputeTripContextFailureMessage;
 
-  /// No description provided for @supplierRaiseDisputeSummaryTitle.
+  /// Supplier Raise Dispute Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute summary'**
   String get supplierRaiseDisputeSummaryTitle;
 
-  /// No description provided for @supplierRaiseDisputeTripRouteLabel.
+  /// Supplier Raise Dispute Trip Route Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip route: {routeLabel}'**
   String supplierRaiseDisputeTripRouteLabel(Object routeLabel);
 
-  /// No description provided for @supplierRaiseDisputeTruckLabel.
+  /// Supplier Raise Dispute Truck Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck: {truckNumber}'**
   String supplierRaiseDisputeTruckLabel(Object truckNumber);
 
-  /// No description provided for @supplierRaiseDisputeTruckerLabel.
+  /// Supplier Raise Dispute Trucker Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker: {truckerName}'**
   String supplierRaiseDisputeTruckerLabel(Object truckerName);
 
-  /// No description provided for @supplierRaiseDisputeCurrentStageLabel.
+  /// Supplier Raise Dispute Current Stage Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current stage: {stageLabel}'**
   String supplierRaiseDisputeCurrentStageLabel(Object stageLabel);
 
-  /// No description provided for @supplierRaiseDisputeSubmissionBlockedTitle.
+  /// Supplier Raise Dispute Submission Blocked Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute submission blocked'**
   String get supplierRaiseDisputeSubmissionBlockedTitle;
 
-  /// No description provided for @supplierRaiseDisputeSubmissionBlockedMessage.
+  /// Supplier Raise Dispute Submission Blocked Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You can only raise this POD dispute while the trip is in proof submitted state.'**
   String get supplierRaiseDisputeSubmissionBlockedMessage;
 
-  /// No description provided for @supplierRaiseDisputeSubmissionUnavailableTitle.
+  /// Supplier Raise Dispute Submission Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute submission unavailable'**
   String get supplierRaiseDisputeSubmissionUnavailableTitle;
 
-  /// No description provided for @supplierRaiseDisputeSubmitFailureMessage.
+  /// Supplier Raise Dispute Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit this dispute right now. Review the dispute details and retry shortly.'**
   String get supplierRaiseDisputeSubmitFailureMessage;
 
-  /// No description provided for @supplierRaiseDisputeProblemTitle.
+  /// Supplier Raise Dispute Problem Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What is wrong with the POD?'**
   String get supplierRaiseDisputeProblemTitle;
 
-  /// No description provided for @supplierRaiseDisputeCategoryLabel.
+  /// Supplier Raise Dispute Category Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute category'**
   String get supplierRaiseDisputeCategoryLabel;
 
-  /// No description provided for @supplierRaiseDisputeReasonLabel.
+  /// Supplier Raise Dispute Reason Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute reason'**
   String get supplierRaiseDisputeReasonLabel;
 
-  /// No description provided for @supplierRaiseDisputeReasonHint.
+  /// Supplier Raise Dispute Reason Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain what is wrong with the submitted proof and what support should review.'**
   String get supplierRaiseDisputeReasonHint;
 
-  /// No description provided for @supplierRaiseDisputeHelpfulDetailsTitle.
+  /// Supplier Raise Dispute Helpful Details Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Helpful details to include'**
   String get supplierRaiseDisputeHelpfulDetailsTitle;
 
-  /// No description provided for @supplierRaiseDisputeHelpfulDetailsMessage.
+  /// Supplier Raise Dispute Helpful Details Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The current dispute flow still accepts one optional image. Use these prompts to capture any second or third proof in your written explanation.'**
   String get supplierRaiseDisputeHelpfulDetailsMessage;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceOptionalTitle.
+  /// Supplier Raise Dispute Evidence Optional Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence (optional)'**
   String get supplierRaiseDisputeEvidenceOptionalTitle;
 
-  /// No description provided for @supplierRaiseDisputeNoEvidenceAttached.
+  /// Supplier Raise Dispute No Evidence Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No evidence image attached yet. You can attach one supporting image in the current flow.'**
   String get supplierRaiseDisputeNoEvidenceAttached;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceAttached.
+  /// Supplier Raise Dispute Evidence Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'One supporting evidence image is attached for review.'**
   String get supplierRaiseDisputeEvidenceAttached;
 
-  /// No description provided for @supplierRaiseDisputeVisibleToOtherPartyMessage.
+  /// Supplier Raise Dispute Visible To Other Party Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Visible to the other party: dispute category and status only. Raw evidence may stay restricted during review.'**
   String get supplierRaiseDisputeVisibleToOtherPartyMessage;
 
-  /// No description provided for @supplierRaiseDisputeUseCameraAction.
+  /// Supplier Raise Dispute Use Camera Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use camera'**
   String get supplierRaiseDisputeUseCameraAction;
 
-  /// No description provided for @supplierRaiseDisputeChoosePhotoAction.
+  /// Supplier Raise Dispute Choose Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose photo'**
   String get supplierRaiseDisputeChoosePhotoAction;
 
-  /// No description provided for @supplierRaiseDisputeRemoveEvidenceAction.
+  /// Supplier Raise Dispute Remove Evidence Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Remove evidence'**
   String get supplierRaiseDisputeRemoveEvidenceAction;
 
-  /// No description provided for @supplierRaiseDisputeSubmitAction.
+  /// Supplier Raise Dispute Submit Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit dispute'**
   String get supplierRaiseDisputeSubmitAction;
 
-  /// No description provided for @supplierRaiseDisputeCategoryError.
+  /// Supplier Raise Dispute Category Error - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select a valid dispute category'**
   String get supplierRaiseDisputeCategoryError;
 
-  /// No description provided for @supplierRaiseDisputeReasonError.
+  /// Supplier Raise Dispute Reason Error - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain the POD problem in at least 10 characters'**
   String get supplierRaiseDisputeReasonError;
 
-  /// No description provided for @supplierRaiseDisputeSubmittedSuccess.
+  /// Supplier Raise Dispute Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispute submitted. Support ticket created for review.'**
   String get supplierRaiseDisputeSubmittedSuccess;
 
-  /// No description provided for @supplierRaiseDisputeAttachmentAttachedSuccess.
+  /// Supplier Raise Dispute Attachment Attached Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence attached successfully'**
   String get supplierRaiseDisputeAttachmentAttachedSuccess;
 
-  /// No description provided for @supplierRaiseDisputeAttachmentFailureMessage.
+  /// Supplier Raise Dispute Attachment Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
   String get supplierRaiseDisputeAttachmentFailureMessage;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch.
+  /// Supplier Raise Dispute Evidence Guidance Loaded Quantity Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: the loaded bilty or loading proof that shows the dispatched quantity. Only one image can be attached right now.'**
   String get supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceUnloadedQuantityMismatch.
+  /// Supplier Raise Dispute Evidence Guidance Unloaded Quantity Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: the unloaded bilty, weighbridge slip, or unloading proof showing the received quantity. Only one image can be attached right now.'**
   String get supplierRaiseDisputeEvidenceGuidanceUnloadedQuantityMismatch;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceDocumentMismatch.
+  /// Supplier Raise Dispute Evidence Guidance Document Mismatch - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: the clearest POD, bilty, or related proof image showing the document mismatch. Only one image can be attached right now.'**
   String get supplierRaiseDisputeEvidenceGuidanceDocumentMismatch;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceNonPayment.
+  /// Supplier Raise Dispute Evidence Guidance Non Payment - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one proof image that best supports the non-payment claim. Full payment workflow evidence still remains limited in the current flow.'**
   String get supplierRaiseDisputeEvidenceGuidanceNonPayment;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceFakePayoutProof.
+  /// Supplier Raise Dispute Evidence Guidance Fake Payout Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one payout-proof image that best shows the fake or inconsistent payment claim.'**
   String get supplierRaiseDisputeEvidenceGuidanceFakePayoutProof;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceDelayOrNoShow.
+  /// Supplier Raise Dispute Evidence Guidance Delay Or No Show - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one supporting image or screenshot that best shows the delay or no-show context.'**
   String get supplierRaiseDisputeEvidenceGuidanceDelayOrNoShow;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceDamageOrShortage.
+  /// Supplier Raise Dispute Evidence Guidance Damage Or Shortage - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one image that best shows the damage, shortage, or affected goods at delivery.'**
   String get supplierRaiseDisputeEvidenceGuidanceDamageOrShortage;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceAbusiveBehavior.
+  /// Supplier Raise Dispute Evidence Guidance Abusive Behavior - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one supporting image or screenshot if it is safe and relevant to the abusive-behavior claim.'**
   String get supplierRaiseDisputeEvidenceGuidanceAbusiveBehavior;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceSpamOrScam.
+  /// Supplier Raise Dispute Evidence Guidance Spam Or Scam - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended evidence: one screenshot or proof image that best supports the spam or scam report.'**
   String get supplierRaiseDisputeEvidenceGuidanceSpamOrScam;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceOther.
+  /// Supplier Raise Dispute Evidence Guidance Other - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Provide a clear explanation of the dispute and attach the single most relevant supporting image if needed.'**
   String get supplierRaiseDisputeEvidenceGuidanceOther;
 
-  /// No description provided for @supplierRaiseDisputeEvidenceGuidanceFallback.
+  /// Supplier Raise Dispute Evidence Guidance Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attach the single most relevant supporting image available for this dispute category.'**
   String get supplierRaiseDisputeEvidenceGuidanceFallback;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidanceDocumentCategory.
+  /// Supplier Raise Dispute Best Image Guidance Document Category - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the clearest single document image where quantities, signatures, stamps, or POD details are readable in one frame.'**
   String get supplierRaiseDisputeBestImageGuidanceDocumentCategory;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidancePaymentCategory.
+  /// Supplier Raise Dispute Best Image Guidance Payment Category - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the single screenshot or payout-proof image that most clearly shows the mismatch, missing payment, or fake confirmation.'**
   String get supplierRaiseDisputeBestImageGuidancePaymentCategory;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidanceTimelineCategory.
+  /// Supplier Raise Dispute Best Image Guidance Timeline Category - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the single screenshot or photo that gives the strongest timeline or behavior context in one image.'**
   String get supplierRaiseDisputeBestImageGuidanceTimelineCategory;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidanceDamageCategory.
+  /// Supplier Raise Dispute Best Image Guidance Damage Category - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the single image that best shows the damaged goods, shortage, or delivered condition at handover.'**
   String get supplierRaiseDisputeBestImageGuidanceDamageCategory;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidanceOther.
+  /// Supplier Raise Dispute Best Image Guidance Other - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the one image that gives support the strongest proof of the issue you describe in your written reason.'**
   String get supplierRaiseDisputeBestImageGuidanceOther;
 
-  /// No description provided for @supplierRaiseDisputeBestImageGuidanceFallback.
+  /// Supplier Raise Dispute Best Image Guidance Fallback - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the one clearest image that gives support the strongest proof to review first.'**
   String get supplierRaiseDisputeBestImageGuidanceFallback;
 
-  /// No description provided for @supplierRaiseDisputePromptDispatchQuantityShownOnProof.
+  /// Supplier Raise Dispute Prompt Dispatch Quantity Shown On Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Dispatch quantity shown on proof:'**
   String get supplierRaiseDisputePromptDispatchQuantityShownOnProof;
 
-  /// No description provided for @supplierRaiseDisputePromptQuantityActuallyChallenged.
+  /// Supplier Raise Dispute Prompt Quantity Actually Challenged - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quantity actually challenged:'**
   String get supplierRaiseDisputePromptQuantityActuallyChallenged;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherLoadingProofNotAttached.
+  /// Supplier Raise Dispute Prompt Other Loading Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other loading proof not attached but reviewed by support:'**
   String get supplierRaiseDisputePromptOtherLoadingProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptQuantityReceivedAtUnloading.
+  /// Supplier Raise Dispute Prompt Quantity Received At Unloading - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quantity received at unloading:'**
   String get supplierRaiseDisputePromptQuantityReceivedAtUnloading;
 
-  /// No description provided for @supplierRaiseDisputePromptQuantityExpectedFromDispatchProof.
+  /// Supplier Raise Dispute Prompt Quantity Expected From Dispatch Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quantity expected from dispatch proof:'**
   String get supplierRaiseDisputePromptQuantityExpectedFromDispatchProof;
 
-  /// No description provided for @supplierRaiseDisputePromptExtraUnloadProofNotAttached.
+  /// Supplier Raise Dispute Prompt Extra Unload Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Extra unload proof not attached but available:'**
   String get supplierRaiseDisputePromptExtraUnloadProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptDocumentFieldDoesNotMatch.
+  /// Supplier Raise Dispute Prompt Document Field Does Not Match - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Document field that does not match:'**
   String get supplierRaiseDisputePromptDocumentFieldDoesNotMatch;
 
-  /// No description provided for @supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe.
+  /// Supplier Raise Dispute Prompt Correct Trip Or Pod Detail Should Be - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Correct trip or POD detail should be:'**
   String get supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherRelatedDocumentNotAttached.
+  /// Supplier Raise Dispute Prompt Other Related Document Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other related document not attached but relevant:'**
   String get supplierRaiseDisputePromptOtherRelatedDocumentNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptAmountStillUnpaid.
+  /// Supplier Raise Dispute Prompt Amount Still Unpaid - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Amount still unpaid:'**
   String get supplierRaiseDisputePromptAmountStillUnpaid;
 
-  /// No description provided for @supplierRaiseDisputePromptPaymentDueDateOrMilestone.
+  /// Supplier Raise Dispute Prompt Payment Due Date Or Milestone - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Payment due date or milestone:'**
   String get supplierRaiseDisputePromptPaymentDueDateOrMilestone;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherPaymentProofNotAttached.
+  /// Supplier Raise Dispute Prompt Other Payment Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other payment proof not attached but relevant:'**
   String get supplierRaiseDisputePromptOtherPaymentProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptWhyPayoutProofLooksFake.
+  /// Supplier Raise Dispute Prompt Why Payout Proof Looks Fake - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Why the payout proof looks fake or inconsistent:'**
   String get supplierRaiseDisputePromptWhyPayoutProofLooksFake;
 
-  /// No description provided for @supplierRaiseDisputePromptWhatPaymentStatusShouldBe.
+  /// Supplier Raise Dispute Prompt What Payment Status Should Be - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What payment status should be instead:'**
   String get supplierRaiseDisputePromptWhatPaymentStatusShouldBe;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherProofOrChatContextNotAttached.
+  /// Supplier Raise Dispute Prompt Other Proof Or Chat Context Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other proof or chat context not attached:'**
   String get supplierRaiseDisputePromptOtherProofOrChatContextNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptExpectedReportingOrArrivalTime.
+  /// Supplier Raise Dispute Prompt Expected Reporting Or Arrival Time - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Expected reporting or arrival time:'**
   String get supplierRaiseDisputePromptExpectedReportingOrArrivalTime;
 
-  /// No description provided for @supplierRaiseDisputePromptActualDelayOrNoShowOutcome.
+  /// Supplier Raise Dispute Prompt Actual Delay Or No Show Outcome - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Actual delay or no-show outcome:'**
   String get supplierRaiseDisputePromptActualDelayOrNoShowOutcome;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherTimingProofNotAttached.
+  /// Supplier Raise Dispute Prompt Other Timing Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other timing proof not attached but relevant:'**
   String get supplierRaiseDisputePromptOtherTimingProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage.
+  /// Supplier Raise Dispute Prompt Goods Affected By Damage Or Shortage - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Goods affected by damage or shortage:'**
   String get supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage;
 
-  /// No description provided for @supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed.
+  /// Supplier Raise Dispute Prompt Quantity Or Condition Difference Noticed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Quantity or condition difference noticed:'**
   String get supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed;
 
-  /// No description provided for @supplierRaiseDisputePromptOtherSupportingProofNotAttached.
+  /// Supplier Raise Dispute Prompt Other Supporting Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other supporting proof not attached but relevant:'**
   String get supplierRaiseDisputePromptOtherSupportingProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputePromptWhatHappenedDuringIncident.
+  /// Supplier Raise Dispute Prompt What Happened During Incident - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What happened during the incident:'**
   String get supplierRaiseDisputePromptWhatHappenedDuringIncident;
 
-  /// No description provided for @supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred.
+  /// Supplier Raise Dispute Prompt When Or Where Behavior Occurred - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'When or where the behavior occurred:'**
   String get supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred;
 
-  /// No description provided for @supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred.
+  /// Supplier Raise Dispute Prompt What Scam Or Spam Behavior Occurred - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What scam or spam behavior occurred:'**
   String get supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred;
 
-  /// No description provided for @supplierRaiseDisputePromptWhatMisleadingClaimWasMade.
+  /// Supplier Raise Dispute Prompt What Misleading Claim Was Made - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What misleading claim was made:'**
   String get supplierRaiseDisputePromptWhatMisleadingClaimWasMade;
 
-  /// No description provided for @supplierRaiseDisputePromptMainIssueSupportShouldReview.
+  /// Supplier Raise Dispute Prompt Main Issue Support Should Review - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Main issue support should review:'**
   String get supplierRaiseDisputePromptMainIssueSupportShouldReview;
 
-  /// No description provided for @supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded.
+  /// Supplier Raise Dispute Prompt What Outcome Or Correction Needed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What outcome or correction is needed:'**
   String get supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded;
 
-  /// No description provided for @supplierRaiseDisputePromptStrongestMissingProofNotAttached.
+  /// Supplier Raise Dispute Prompt Strongest Missing Proof Not Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Strongest missing proof not attached:'**
   String get supplierRaiseDisputePromptStrongestMissingProofNotAttached;
 
-  /// No description provided for @supplierRaiseDisputeChecklistLoadedReadableQuantity.
+  /// Supplier Raise Dispute Checklist Loaded Readable Quantity - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the dispatched quantity readable in the uploaded image.'**
   String get supplierRaiseDisputeChecklistLoadedReadableQuantity;
 
-  /// No description provided for @supplierRaiseDisputeChecklistLoadedPreferBilty.
+  /// Supplier Raise Dispute Checklist Loaded Prefer Bilty - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Include the bilty, loading slip, or marked proof instead of a distant photo.'**
   String get supplierRaiseDisputeChecklistLoadedPreferBilty;
 
-  /// No description provided for @supplierRaiseDisputeChecklistLoadedUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Loaded Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to describe any additional document context not visible in the image.'**
   String get supplierRaiseDisputeChecklistLoadedUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistUnloadedKeepReceivedQuantity.
+  /// Supplier Raise Dispute Checklist Unloaded Keep Received Quantity - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the received quantity or unload record readable in the image.'**
   String get supplierRaiseDisputeChecklistUnloadedKeepReceivedQuantity;
 
-  /// No description provided for @supplierRaiseDisputeChecklistUnloadedPreferWeighbridge.
+  /// Supplier Raise Dispute Checklist Unloaded Prefer Weighbridge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer a weighbridge slip, unload bilty, or marked proof over a generic cargo photo.'**
   String get supplierRaiseDisputeChecklistUnloadedPreferWeighbridge;
 
-  /// No description provided for @supplierRaiseDisputeChecklistUnloadedUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Unloaded Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain any missing second document that cannot fit in the current single-image flow.'**
   String get supplierRaiseDisputeChecklistUnloadedUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDocumentReadableFields.
+  /// Supplier Raise Dispute Checklist Document Readable Fields - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Make sure key document fields are readable in one frame.'**
   String get supplierRaiseDisputeChecklistDocumentReadableFields;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDocumentPreferSpecificPage.
+  /// Supplier Raise Dispute Checklist Document Prefer Specific Page - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer the specific POD or bilty page where the mismatch appears.'**
   String get supplierRaiseDisputeChecklistDocumentPreferSpecificPage;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDocumentUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Document Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to describe what field or proof does not match the trip.'**
   String get supplierRaiseDisputeChecklistDocumentUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistPaymentPreferClearestScreenshot.
+  /// Supplier Raise Dispute Checklist Payment Prefer Clearest Screenshot - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer the clearest single payout-related screenshot or proof image.'**
   String get supplierRaiseDisputeChecklistPaymentPreferClearestScreenshot;
 
-  /// No description provided for @supplierRaiseDisputeChecklistPaymentUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Payment Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain what payment is still missing and when it was due.'**
   String get supplierRaiseDisputeChecklistPaymentUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistPaymentUploadStrongestFirst.
+  /// Supplier Raise Dispute Checklist Payment Upload Strongest First - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If multiple proofs exist, upload the strongest one first and summarize the rest in text.'**
   String get supplierRaiseDisputeChecklistPaymentUploadStrongestFirst;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFakePreferScreenshot.
+  /// Supplier Raise Dispute Checklist Fake Prefer Screenshot - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer the payout screenshot or proof image that most clearly appears fake or inconsistent.'**
   String get supplierRaiseDisputeChecklistFakePreferScreenshot;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFakeUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Fake Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain what is suspicious about the proof.'**
   String get supplierRaiseDisputeChecklistFakeUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFakeSummarizeChatContext.
+  /// Supplier Raise Dispute Checklist Fake Summarize Chat Context - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'If supporting chat context exists, summarize it in text when it cannot fit in the single-image flow.'**
   String get supplierRaiseDisputeChecklistFakeSummarizeChatContext;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDelayChooseClearestTiming.
+  /// Supplier Raise Dispute Checklist Delay Choose Clearest Timing - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the clearest screenshot or photo showing the missed timing or no-show context.'**
   String get supplierRaiseDisputeChecklistDelayChooseClearestTiming;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDelayUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Delay Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain the expected time and the actual outcome.'**
   String get supplierRaiseDisputeChecklistDelayUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDelayKeepFocusedImage.
+  /// Supplier Raise Dispute Checklist Delay Keep Focused Image - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the uploaded image focused on timing/location evidence instead of unrelated media.'**
   String get supplierRaiseDisputeChecklistDelayKeepFocusedImage;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDamageChooseImage.
+  /// Supplier Raise Dispute Checklist Damage Choose Image - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the image that most clearly shows the damage or shortage at delivery.'**
   String get supplierRaiseDisputeChecklistDamageChooseImage;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDamageKeepAffectedGoods.
+  /// Supplier Raise Dispute Checklist Damage Keep Affected Goods - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the affected goods or missing quantity context visible in the frame.'**
   String get supplierRaiseDisputeChecklistDamageKeepAffectedGoods;
 
-  /// No description provided for @supplierRaiseDisputeChecklistDamageUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Damage Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain what cannot be shown in the single uploaded image.'**
   String get supplierRaiseDisputeChecklistDamageUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistAbusiveUploadIfSafe.
+  /// Supplier Raise Dispute Checklist Abusive Upload If Safe - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Upload evidence only if it is safe and relevant to the case.'**
   String get supplierRaiseDisputeChecklistAbusiveUploadIfSafe;
 
-  /// No description provided for @supplierRaiseDisputeChecklistAbusivePreferClearestScreenshot.
+  /// Supplier Raise Dispute Checklist Abusive Prefer Clearest Screenshot - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer the clearest screenshot or image tied directly to the abusive incident.'**
   String get supplierRaiseDisputeChecklistAbusivePreferClearestScreenshot;
 
-  /// No description provided for @supplierRaiseDisputeChecklistAbusiveUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Abusive Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain the sequence of events without adding sensitive internal notes.'**
   String get supplierRaiseDisputeChecklistAbusiveUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistSpamChooseScreenshot.
+  /// Supplier Raise Dispute Checklist Spam Choose Screenshot - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the screenshot or image that most clearly shows the scam or spam behavior.'**
   String get supplierRaiseDisputeChecklistSpamChooseScreenshot;
 
-  /// No description provided for @supplierRaiseDisputeChecklistSpamPreferStrongestProof.
+  /// Supplier Raise Dispute Checklist Spam Prefer Strongest Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Prefer the strongest proof of deception instead of a partial conversation fragment.'**
   String get supplierRaiseDisputeChecklistSpamPreferStrongestProof;
 
-  /// No description provided for @supplierRaiseDisputeChecklistSpamUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Spam Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to summarize any extra scam context that cannot fit in one image.'**
   String get supplierRaiseDisputeChecklistSpamUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistOtherChooseStrongestImage.
+  /// Supplier Raise Dispute Checklist Other Choose Strongest Image - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the one strongest image that supports your explanation.'**
   String get supplierRaiseDisputeChecklistOtherChooseStrongestImage;
 
-  /// No description provided for @supplierRaiseDisputeChecklistOtherKeepIssueReadable.
+  /// Supplier Raise Dispute Checklist Other Keep Issue Readable - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the issue-specific detail readable in the uploaded image.'**
   String get supplierRaiseDisputeChecklistOtherKeepIssueReadable;
 
-  /// No description provided for @supplierRaiseDisputeChecklistOtherUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Other Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to explain the rest of the evidence that cannot fit in the current flow.'**
   String get supplierRaiseDisputeChecklistOtherUseWrittenReason;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFallbackChooseClearestImage.
+  /// Supplier Raise Dispute Checklist Fallback Choose Clearest Image - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose the one clearest supporting image available.'**
   String get supplierRaiseDisputeChecklistFallbackChooseClearestImage;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFallbackKeepReadableProof.
+  /// Supplier Raise Dispute Checklist Fallback Keep Readable Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Keep the important proof readable in the frame.'**
   String get supplierRaiseDisputeChecklistFallbackKeepReadableProof;
 
-  /// No description provided for @supplierRaiseDisputeChecklistFallbackUseWrittenReason.
+  /// Supplier Raise Dispute Checklist Fallback Use Written Reason - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use the written reason to describe any additional evidence not visible in the image.'**
   String get supplierRaiseDisputeChecklistFallbackUseWrittenReason;
 
-  /// No description provided for @reportIssueTitle.
+  /// Report Issue Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report Issue'**
   String get reportIssueTitle;
 
-  /// No description provided for @reportIssueHeroTitle.
+  /// Report Issue Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report spam, scam, or abuse'**
   String get reportIssueHeroTitle;
 
-  /// No description provided for @reportIssueHeroSubtitle.
+  /// Report Issue Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open a trust-safety ticket tied to the current operational context so support can review the issue quickly.'**
   String get reportIssueHeroSubtitle;
 
-  /// No description provided for @reportIssueHeroMessage.
+  /// Report Issue Hero Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attach one evidence image if you have it. The report still submits through the live support-ticket workflow using the linked load/trip context, and can also capture fake payout-proof or non-payment issues.'**
   String get reportIssueHeroMessage;
 
-  /// No description provided for @reportIssueSubmissionUnavailableTitle.
+  /// Report Issue Submission Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report submission unavailable'**
   String get reportIssueSubmissionUnavailableTitle;
 
-  /// No description provided for @reportIssueFailureMessage.
+  /// Report Issue Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This report could not be prepared or submitted right now. Review the linked context and try again shortly.'**
   String get reportIssueFailureMessage;
 
-  /// No description provided for @reportIssueLinkedContextTitle.
+  /// Report Issue Linked Context Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Linked context'**
   String get reportIssueLinkedContextTitle;
 
-  /// No description provided for @reportIssueSourceLabel.
+  /// Report Issue Source Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Source: {sourceLabel}'**
   String reportIssueSourceLabel(Object sourceLabel);
 
-  /// No description provided for @reportIssueRelatedLoadLabel.
+  /// Report Issue Related Load Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Related load: {value}'**
   String reportIssueRelatedLoadLabel(Object value);
 
-  /// No description provided for @reportIssueRelatedTripLabel.
+  /// Report Issue Related Trip Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Related trip: {value}'**
   String reportIssueRelatedTripLabel(Object value);
 
-  /// No description provided for @reportIssueNotLinked.
+  /// Report Issue Not Linked - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not linked'**
   String get reportIssueNotLinked;
 
-  /// No description provided for @reportIssueDetailsTitle.
+  /// Report Issue Details Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report details'**
   String get reportIssueDetailsTitle;
 
-  /// No description provided for @reportIssueTypeLabel.
+  /// Report Issue Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Issue type'**
   String get reportIssueTypeLabel;
 
-  /// No description provided for @reportIssueWhatHappenedLabel.
+  /// Report Issue What Happened Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'What happened?'**
   String get reportIssueWhatHappenedLabel;
 
-  /// No description provided for @reportIssueWhatHappenedHint.
+  /// Report Issue What Happened Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain the spam, fake proof, non-payment, payout deception, or abusive behavior that support should review.'**
   String get reportIssueWhatHappenedHint;
 
-  /// No description provided for @reportIssueHelpfulDetailsTitle.
+  /// Report Issue Helpful Details Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Helpful details to include'**
   String get reportIssueHelpfulDetailsTitle;
 
-  /// No description provided for @reportIssueEvidenceOptionalTitle.
+  /// Report Issue Evidence Optional Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence (required)'**
   String get reportIssueEvidenceOptionalTitle;
 
-  /// No description provided for @reportIssueNoEvidenceAttached.
+  /// Report Issue No Evidence Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attach one evidence image before submitting this report.'**
   String get reportIssueNoEvidenceAttached;
 
-  /// No description provided for @reportIssueEvidenceAttached.
+  /// Report Issue Evidence Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'One evidence image is attached for review.'**
   String get reportIssueEvidenceAttached;
 
-  /// No description provided for @reportIssueUseCameraAction.
+  /// Report Issue Use Camera Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use camera'**
   String get reportIssueUseCameraAction;
 
-  /// No description provided for @reportIssueChoosePhotoAction.
+  /// Report Issue Choose Photo Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose photo'**
   String get reportIssueChoosePhotoAction;
 
-  /// No description provided for @reportIssueRemoveEvidenceAction.
+  /// Report Issue Remove Evidence Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Remove evidence'**
   String get reportIssueRemoveEvidenceAction;
 
-  /// No description provided for @reportIssueSubmitAction.
+  /// Report Issue Submit Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit report'**
   String get reportIssueSubmitAction;
 
-  /// No description provided for @reportIssueSubmittedSuccess.
+  /// Report Issue Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report submitted successfully'**
   String get reportIssueSubmittedSuccess;
 
-  /// No description provided for @reportIssueSubmitFailureMessage.
+  /// Report Issue Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit this report right now. Review the details and retry shortly.'**
   String get reportIssueSubmitFailureMessage;
 
-  /// No description provided for @reportIssueAttachmentAttachedSuccess.
+  /// Report Issue Attachment Attached Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Evidence attached successfully'**
   String get reportIssueAttachmentAttachedSuccess;
 
-  /// No description provided for @reportIssueAttachmentFailureMessage.
+  /// Report Issue Attachment Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
   String get reportIssueAttachmentFailureMessage;
 
-  /// No description provided for @reportIssueCategorySpamOrScamLabel.
+  /// Report Issue Category Spam Or Scam Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Spam or scam'**
   String get reportIssueCategorySpamOrScamLabel;
 
-  /// No description provided for @reportIssueCategoryAbusiveBehaviorLabel.
+  /// Report Issue Category Abusive Behavior Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Abusive behavior'**
   String get reportIssueCategoryAbusiveBehaviorLabel;
 
-  /// No description provided for @reportIssueCategoryFakePayoutProofLabel.
+  /// Report Issue Category Fake Payout Proof Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fake payout proof'**
   String get reportIssueCategoryFakePayoutProofLabel;
 
-  /// No description provided for @reportIssueCategoryNonPaymentLabel.
+  /// Report Issue Category Non Payment Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Non-payment'**
   String get reportIssueCategoryNonPaymentLabel;
 
-  /// No description provided for @reportIssueCategoryGuidanceSpamOrScam.
+  /// Report Issue Category Guidance Spam Or Scam - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain the spam, scam, or misleading behavior clearly and attach one evidence image that helps support review the report.'**
   String get reportIssueCategoryGuidanceSpamOrScam;
 
-  /// No description provided for @reportIssueCategoryGuidanceAbusiveBehavior.
+  /// Report Issue Category Guidance Abusive Behavior - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Describe the abusive or unsafe behavior clearly, including where it happened and any context support should review.'**
   String get reportIssueCategoryGuidanceAbusiveBehavior;
 
-  /// No description provided for @reportIssueCategoryGuidanceFakePayoutProof.
+  /// Report Issue Category Guidance Fake Payout Proof - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain why the payout proof looks fake or misleading and attach one evidence image with the most useful payment context you can share.'**
   String get reportIssueCategoryGuidanceFakePayoutProof;
 
-  /// No description provided for @reportIssueCategoryGuidanceNonPayment.
+  /// Report Issue Category Guidance Non Payment - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Describe the non-payment issue clearly, including what was due, what follow-up already happened, and attach one evidence image with the strongest payment proof you can share.'**
   String get reportIssueCategoryGuidanceNonPayment;
 
-  /// No description provided for @supportCreateTicketScreenTitle.
+  /// Support Create Ticket Screen Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Create support ticket'**
   String get supportCreateTicketScreenTitle;
 
-  /// No description provided for @supportCreateTicketHeroTitle.
+  /// Support Create Ticket Hero Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open a support request'**
   String get supportCreateTicketHeroTitle;
 
-  /// No description provided for @supportCreateTicketHeroSubtitle.
+  /// Support Create Ticket Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Describe your issue clearly so support can route it faster and keep your follow-up thread linked to the right context.'**
   String get supportCreateTicketHeroSubtitle;
 
-  /// No description provided for @supportCreateTicketHeroMessage.
+  /// Support Create Ticket Hero Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You can optionally include a related load or trip id if the issue is tied to a specific operational flow. You can also attach one evidence image if it helps support review the issue faster.'**
   String get supportCreateTicketHeroMessage;
 
-  /// No description provided for @supportCreateTicketFailureTitle.
+  /// Support Create Ticket Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support request needs attention'**
   String get supportCreateTicketFailureTitle;
 
-  /// No description provided for @supportCreateTicketFailureMessage.
+  /// Support Create Ticket Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your support request could not be prepared or submitted right now. Review the issue details and try again shortly.'**
   String get supportCreateTicketFailureMessage;
 
-  /// No description provided for @supportCreateTicketDetailsTitle.
+  /// Support Create Ticket Details Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Ticket details'**
   String get supportCreateTicketDetailsTitle;
 
-  /// No description provided for @supportComposeCategoryLabel.
+  /// Support Compose Category Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Category'**
   String get supportComposeCategoryLabel;
 
-  /// No description provided for @supportComposeCategoryGeneral.
+  /// Support Compose Category General - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'General'**
   String get supportComposeCategoryGeneral;
 
-  /// No description provided for @supportComposeCategoryAccount.
+  /// Support Compose Category Account - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account'**
   String get supportComposeCategoryAccount;
 
-  /// No description provided for @supportComposeCategoryLoad.
+  /// Support Compose Category Load - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load'**
   String get supportComposeCategoryLoad;
 
-  /// No description provided for @supportComposeCategoryTrip.
+  /// Support Compose Category Trip - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip'**
   String get supportComposeCategoryTrip;
 
-  /// No description provided for @supportComposeCategoryPayment.
+  /// Support Compose Category Payment - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Payment'**
   String get supportComposeCategoryPayment;
 
-  /// No description provided for @supportComposeCategoryTechnical.
+  /// Support Compose Category Technical - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Technical'**
   String get supportComposeCategoryTechnical;
 
-  /// No description provided for @supportComposeCategoryOther.
+  /// Support Compose Category Other - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Other'**
   String get supportComposeCategoryOther;
 
-  /// No description provided for @supportCreateTicketRelatedLoadIdLabel.
+  /// Support Create Ticket Related Load Id Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Related load id (optional)'**
   String get supportCreateTicketRelatedLoadIdLabel;
 
-  /// No description provided for @supportCreateTicketRelatedLoadIdHint.
+  /// Support Create Ticket Related Load Id Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'load-123'**
   String get supportCreateTicketRelatedLoadIdHint;
 
-  /// No description provided for @supportCreateTicketRelatedTripIdLabel.
+  /// Support Create Ticket Related Trip Id Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Related trip id (optional)'**
   String get supportCreateTicketRelatedTripIdLabel;
 
-  /// No description provided for @supportCreateTicketRelatedTripIdHint.
+  /// Support Create Ticket Related Trip Id Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'trip-123'**
   String get supportCreateTicketRelatedTripIdHint;
 
-  /// No description provided for @supportCreateTicketDescriptionLabel.
+  /// Support Create Ticket Description Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Describe the issue'**
   String get supportCreateTicketDescriptionLabel;
 
-  /// No description provided for @supportCreateTicketDescriptionHint.
+  /// Support Create Ticket Description Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Explain what happened, what is blocked, and what follow-up you need.'**
   String get supportCreateTicketDescriptionHint;
 
-  /// No description provided for @supportComposeAttachmentOptionalTitle.
+  /// Support Compose Attachment Optional Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attachment (optional)'**
   String get supportComposeAttachmentOptionalTitle;
 
-  /// No description provided for @supportComposeNoAttachment.
+  /// Support Compose No Attachment - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No evidence image attached yet.'**
   String get supportComposeNoAttachment;
 
-  /// No description provided for @supportComposeAttachmentAttached.
+  /// Support Compose Attachment Attached - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'One evidence image is attached for support review.'**
   String get supportComposeAttachmentAttached;
 
-  /// No description provided for @supportComposeRemoveAttachmentAction.
+  /// Support Compose Remove Attachment Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Remove attachment'**
   String get supportComposeRemoveAttachmentAction;
 
-  /// No description provided for @supportComposeAttachmentAddedSuccess.
+  /// Support Compose Attachment Added Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Attachment added successfully'**
   String get supportComposeAttachmentAddedSuccess;
 
-  /// No description provided for @supportComposeAttachmentFailureMessage.
+  /// Support Compose Attachment Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
   String get supportComposeAttachmentFailureMessage;
 
-  /// No description provided for @supportCreateTicketSubmitAction.
+  /// Support Create Ticket Invalid Category Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid support category'**
+  String get supportCreateTicketInvalidCategoryMessage;
+
+  /// Support Create Ticket Description Too Short Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the issue in at least 10 characters'**
+  String get supportCreateTicketDescriptionTooShortMessage;
+
+  /// Report Issue Invalid Category Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid report category'**
+  String get reportIssueInvalidCategoryMessage;
+
+  /// Report Issue Description Too Short Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Describe the issue in at least 10 characters'**
+  String get reportIssueDescriptionTooShortMessage;
+
+  /// Report Issue Attachment Required Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Attach one evidence image before submitting this report'**
+  String get reportIssueAttachmentRequiredMessage;
+
+  /// Support Reply Message Too Short Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply must contain at least 2 characters'**
+  String get supportReplyMessageTooShortMessage;
+
+  /// Support Create Ticket Submit Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submit ticket'**
   String get supportCreateTicketSubmitAction;
 
-  /// No description provided for @supportCreateTicketSubmittedSuccess.
+  /// Support Create Ticket Submitted Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Support ticket created successfully'**
   String get supportCreateTicketSubmittedSuccess;
 
-  /// No description provided for @supportCreateTicketSubmitFailureMessage.
+  /// Support Create Ticket Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not create this support ticket right now. Review the details and retry shortly.'**
   String get supportCreateTicketSubmitFailureMessage;
 
-  /// No description provided for @supportReplyFailureTitle.
+  /// Support Reply Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply needs attention'**
   String get supportReplyFailureTitle;
 
-  /// No description provided for @supportReplyFailureMessage.
+  /// Support Reply Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your latest support reply could not be prepared or submitted right now. Review the message and try again shortly.'**
   String get supportReplyFailureMessage;
 
-  /// No description provided for @supportReplyLabel.
+  /// Support Reply Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply to support'**
   String get supportReplyLabel;
 
-  /// No description provided for @supportReplyHint.
+  /// Support Reply Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add the next detail or response support requested.'**
   String get supportReplyHint;
 
-  /// No description provided for @supportReplySendAction.
+  /// Support Reply Send Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Send reply'**
   String get supportReplySendAction;
 
-  /// No description provided for @supportReplySentSuccess.
+  /// Support Reply Sent Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reply sent successfully'**
   String get supportReplySentSuccess;
 
-  /// No description provided for @supportReplySubmitFailureMessage.
+  /// Support Reply Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not send your reply right now. Review the message and retry shortly.'**
   String get supportReplySubmitFailureMessage;
 
-  /// No description provided for @supplierTripsSectionTitle.
+  /// Supplier Trips Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier trips'**
   String get supplierTripsSectionTitle;
 
-  /// No description provided for @supplierTripsSectionSubtitle.
+  /// Supplier Trips Section Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track active movements and recent trip outcomes from one supplier execution surface.'**
   String get supplierTripsSectionSubtitle;
 
-  /// No description provided for @supplierTripsTabActive.
+  /// Supplier Trips Tab Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get supplierTripsTabActive;
 
-  /// No description provided for @supplierTripsTabCompleted.
+  /// Supplier Trips Tab Completed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get supplierTripsTabCompleted;
 
-  /// No description provided for @supplierTripsLoadFailureTitle.
+  /// Supplier Trips Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load supplier trips'**
   String get supplierTripsLoadFailureTitle;
 
-  /// No description provided for @supplierTripsLoadFailureMessage.
+  /// Supplier Trips Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your supplier trips right now. Retry shortly to refresh the latest trip list and statuses.'**
   String get supplierTripsLoadFailureMessage;
 
-  /// No description provided for @supplierTripsEmptyActiveTitle.
+  /// Supplier Trips Empty Active Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No active trips yet'**
   String get supplierTripsEmptyActiveTitle;
 
-  /// No description provided for @supplierTripsEmptyCompletedTitle.
+  /// Supplier Trips Empty Completed Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No completed trips yet'**
   String get supplierTripsEmptyCompletedTitle;
 
-  /// No description provided for @supplierTripsEmptyActiveSubtitle.
+  /// Supplier Trips Empty Active Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips will appear here once a load moves into assigned execution.'**
   String get supplierTripsEmptyActiveSubtitle;
 
-  /// No description provided for @supplierTripsEmptyCompletedSubtitle.
+  /// Supplier Trips Empty Completed Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed supplier trips will appear here once deliveries are closed out.'**
   String get supplierTripsEmptyCompletedSubtitle;
 
-  /// No description provided for @supplierTripsEmptyActiveAction.
+  /// Supplier Trips Empty Active Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open my loads'**
   String get supplierTripsEmptyActiveAction;
 
-  /// No description provided for @supplierTripsEmptyCompletedAction.
+  /// Supplier Trips Empty Completed Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'View active trips'**
   String get supplierTripsEmptyCompletedAction;
 
-  /// No description provided for @supplierTripsAssignedLabel.
+  /// Supplier Trips Assigned Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned {date}'**
   String supplierTripsAssignedLabel(Object date);
 
-  /// No description provided for @supplierTripsTruckerTruckLabel.
+  /// Supplier Trips Trucker Truck Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trucker {truckerId} • Truck {truckId}'**
+  /// **'Trucker {truckerId} - Truck {truckId}'**
   String supplierTripsTruckerTruckLabel(Object truckId, Object truckerId);
 
-  /// No description provided for @supplierTripsTrackTripAction.
+  /// Supplier Trips Track Trip Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Track trip'**
   String get supplierTripsTrackTripAction;
 
-  /// No description provided for @supplierTripDetailNotFoundTitle.
+  /// Supplier Trip Detail Not Found Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip not found'**
   String get supplierTripDetailNotFoundTitle;
 
-  /// No description provided for @supplierTripDetailNotFoundSubtitle.
+  /// Supplier Trip Detail Not Found Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This supplier trip is no longer available or you no longer have access to it.'**
   String get supplierTripDetailNotFoundSubtitle;
 
-  /// No description provided for @supplierTripDetailBackToTripsAction.
+  /// Supplier Trip Detail Back To Trips Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to supplier trips'**
   String get supplierTripDetailBackToTripsAction;
 
-  /// No description provided for @supplierTripDetailStubScreenTitle.
+  /// Supplier Trip Detail Stub Screen Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip detail'**
   String get supplierTripDetailStubScreenTitle;
 
-  /// No description provided for @supplierTripDetailStubCardTitle.
+  /// Supplier Trip Detail Stub Card Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier trip detail'**
   String get supplierTripDetailStubCardTitle;
 
-  /// No description provided for @supplierTripDetailStubReference.
+  /// Supplier Trip Detail Stub Reference - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip reference: {tripId}'**
   String supplierTripDetailStubReference(Object tripId);
 
-  /// No description provided for @supplierTripDetailStubMessage.
+  /// Supplier Trip Detail Stub Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Detailed supplier trip execution screens will expand in the next trip-detail slice. Navigation is already wired from the supplier trips list.'**
   String get supplierTripDetailStubMessage;
 
-  /// No description provided for @assistantHeroTitleWithName.
+  /// Assistant Hero Title With Name - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Guided help for {firstName}'**
   String assistantHeroTitleWithName(Object firstName);
 
-  /// No description provided for @assistantHeroSubtitleSupplier.
+  /// Assistant Hero Subtitle Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.'**
   String get assistantHeroSubtitleSupplier;
 
-  /// No description provided for @assistantHeroSubtitleTrucker.
+  /// Assistant Hero Subtitle Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.'**
   String get assistantHeroSubtitleTrucker;
 
-  /// No description provided for @assistantWorkflowGuidanceSupplier.
+  /// Assistant Workflow Guidance Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier workflow guidance'**
   String get assistantWorkflowGuidanceSupplier;
 
-  /// No description provided for @assistantWorkflowGuidanceTrucker.
+  /// Assistant Workflow Guidance Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucker workflow guidance'**
   String get assistantWorkflowGuidanceTrucker;
 
-  /// No description provided for @assistantProfileComplete.
+  /// Assistant Profile Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile complete'**
   String get assistantProfileComplete;
 
-  /// No description provided for @assistantProfileIncomplete.
+  /// Assistant Profile Incomplete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Profile incomplete'**
   String get assistantProfileIncomplete;
 
-  /// No description provided for @assistantRecommendedNextActionsTitle.
+  /// Assistant Recommended Next Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Recommended next actions'**
   String get assistantRecommendedNextActionsTitle;
 
-  /// No description provided for @assistantOpenSupplierTripsAction.
+  /// Assistant Open Supplier Trips Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open supplier trips'**
   String get assistantOpenSupplierTripsAction;
 
-  /// No description provided for @assistantFindLoadsAction.
+  /// Assistant Find Loads Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Find loads'**
   String get assistantFindLoadsAction;
 
-  /// No description provided for @assistantOpenTripsAction.
+  /// Assistant Open Trips Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open trips'**
   String get assistantOpenTripsAction;
 
-  /// No description provided for @assistantOpenMessagesAction.
+  /// Assistant Open Messages Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open messages'**
   String get assistantOpenMessagesAction;
 
-  /// No description provided for @assistantGuidedHelpTitle.
+  /// Assistant Guided Help Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Guided help'**
   String get assistantGuidedHelpTitle;
 
-  /// No description provided for @assistantBestForLabel.
+  /// Assistant Best For Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Best for'**
   String get assistantBestForLabel;
 
-  /// No description provided for @assistantBestForSupplier.
+  /// Assistant Best For Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Posting loads, checking active load execution, reviewing conversations, and opening support quickly.'**
   String get assistantBestForSupplier;
 
-  /// No description provided for @assistantBestForTrucker.
+  /// Assistant Best For Trucker - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Finding loads, checking trip execution, reviewing conversations, and opening support quickly.'**
   String get assistantBestForTrucker;
 
-  /// No description provided for @assistantVoiceBehaviorLabel.
+  /// Assistant Voice Behavior Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice behavior'**
   String get assistantVoiceBehaviorLabel;
 
-  /// No description provided for @assistantVoiceBehaviorValue.
+  /// Assistant Voice Behavior Value - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Manual entry only right now. Full conversational bot, STT, and auto-speak remain in the dedicated communication and localization phases.'**
   String get assistantVoiceBehaviorValue;
 
-  /// No description provided for @assistantCurrentRoleLabel.
+  /// Assistant Current Role Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Current role'**
   String get assistantCurrentRoleLabel;
 
-  /// No description provided for @assistantMoreActionsTitle.
+  /// Assistant More Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'More actions'**
   String get assistantMoreActionsTitle;
 
-  /// No description provided for @assistantOpenNotificationsAction.
+  /// Assistant Open Notifications Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open notifications'**
   String get assistantOpenNotificationsAction;
 
-  /// No description provided for @assistantOpenSupportAction.
+  /// Assistant Open Support Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open support'**
   String get assistantOpenSupportAction;
 
-  /// No description provided for @shellAccessRestrictedTitle.
+  /// Shell Access Restricted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Access restricted'**
   String get shellAccessRestrictedTitle;
 
-  /// No description provided for @shellAccessRestrictedDeactivatedSubtitle.
+  /// Shell Access Restricted Deactivated Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account is deactivated pending cleanup. Signing you out safely...'**
   String get shellAccessRestrictedDeactivatedSubtitle;
 
-  /// No description provided for @shellAccessRestrictedBannedSubtitle.
+  /// Shell Access Restricted Banned Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your account access is restricted. Signing you out safely...'**
   String get shellAccessRestrictedBannedSubtitle;
 
-  /// No description provided for @shellAccountDeactivatedMessage.
+  /// Shell Account Deactivated Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account deactivated'**
   String get shellAccountDeactivatedMessage;
 
-  /// No description provided for @shellAccountBannedMessage.
+  /// Shell Account Banned Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Account banned'**
   String get shellAccountBannedMessage;
 
-  /// No description provided for @shellRouteNotFoundTitle.
+  /// Shell Route Not Found Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route not found'**
   String get shellRouteNotFoundTitle;
 
-  /// No description provided for @shellMessagesLoadFailureMessage.
+  /// Shell Messages Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load your messages right now. Retry shortly to refresh the latest conversations.'**
   String get shellMessagesLoadFailureMessage;
 
-  /// No description provided for @shellMessagesBookingStatusSubmitted.
+  /// Shell Messages Booking Status Submitted - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Submitted'**
   String get shellMessagesBookingStatusSubmitted;
 
-  /// No description provided for @shellMessagesBookingStatusApproved.
+  /// Shell Messages Booking Status Approved - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approved'**
   String get shellMessagesBookingStatusApproved;
 
-  /// No description provided for @shellMessagesBookingStatusRejected.
+  /// Shell Messages Booking Status Rejected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Rejected'**
   String get shellMessagesBookingStatusRejected;
 
-  /// No description provided for @shellMessagesBookingStatusPending.
+  /// Shell Messages Booking Status Pending - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
   String get shellMessagesBookingStatusPending;
 
-  /// No description provided for @shellMessagesBookingStatusUnknown.
+  /// Shell Messages Booking Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
   String get shellMessagesBookingStatusUnknown;
 
-  /// No description provided for @truckerLoadDetailTitle.
+  /// Trucker Load Detail Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load Detail'**
   String get truckerLoadDetailTitle;
 
-  /// No description provided for @truckerLoadDetailLoadNotFoundTitle.
+  /// Trucker Load Detail Load Not Found Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load not found'**
   String get truckerLoadDetailLoadNotFoundTitle;
 
-  /// No description provided for @truckerLoadDetailLoadNotFoundSubtitle.
+  /// Trucker Load Detail Load Not Found Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This marketplace load is no longer available or you no longer have access to it.'**
   String get truckerLoadDetailLoadNotFoundSubtitle;
 
-  /// No description provided for @truckerLoadDetailBackToFindLoadsAction.
+  /// Trucker Load Detail Back To Find Loads Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to find loads'**
   String get truckerLoadDetailBackToFindLoadsAction;
 
-  /// No description provided for @truckerLoadDetailLoadFailureTitle.
+  /// Trucker Load Detail Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load freight detail'**
   String get truckerLoadDetailLoadFailureTitle;
 
-  /// No description provided for @truckerLoadDetailLoadFailureMessage.
+  /// Trucker Load Detail Load Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not load this freight detail right now. Retry shortly to refresh the current route, pricing, and booking context.'**
   String get truckerLoadDetailLoadFailureMessage;
 
-  /// No description provided for @truckerLoadDetailSupportUnavailableTitle.
+  /// Trucker Load Detail Support Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some supporting load details are unavailable'**
   String get truckerLoadDetailSupportUnavailableTitle;
 
-  /// No description provided for @truckerLoadDetailSupportFailureMessage.
+  /// Trucker Load Detail Support Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some supporting load details are temporarily unavailable. Retry shortly to refresh the latest freight context.'**
   String get truckerLoadDetailSupportFailureMessage;
 
-  /// No description provided for @truckerLoadDetailActionFailureTitle.
+  /// Trucker Load Detail Action Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Action unavailable'**
   String get truckerLoadDetailActionFailureTitle;
 
-  /// No description provided for @truckerLoadDetailActionFailureMessage.
+  /// Trucker Load Detail Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'The latest load action could not be completed right now. Review the current load details and retry shortly.'**
   String get truckerLoadDetailActionFailureMessage;
 
-  /// No description provided for @truckerLoadDetailBookingSubmitFailureMessage.
+  /// Trucker Load Detail Booking Submit Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not submit this booking request right now. Review the selected truck and retry shortly.'**
   String get truckerLoadDetailBookingSubmitFailureMessage;
 
-  /// No description provided for @truckerLoadDetailHeroSubtitle.
+  /// Trucker Load Detail Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Load {loadId} • Pickup {pickupDate}'**
+  /// **'Load {loadId} - Pickup {pickupDate}'**
   String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate);
 
-  /// No description provided for @truckerLoadDetailPriceBadge.
+  /// Trucker Load Detail Price Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'₹{priceAmount} • {priceType}'**
+  /// **'₹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType);
 
-  /// No description provided for @truckerLoadDetailTruckMatchAvailable.
+  /// Trucker Load Detail Truck Match Available - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck match available'**
   String get truckerLoadDetailTruckMatchAvailable;
 
-  /// No description provided for @truckerLoadDetailNoApprovedTruckMatchYet.
+  /// Trucker Load Detail No Approved Truck Match Yet - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No approved truck match yet'**
   String get truckerLoadDetailNoApprovedTruckMatchYet;
 
-  /// No description provided for @truckerLoadDetailMaterialSummary.
+  /// Trucker Load Detail Material Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'{material} • {weightTonnes}T • Advance {advancePercentage}%'**
+  /// **'{material} - {weightTonnes}T - Advance {advancePercentage}%'**
   String truckerLoadDetailMaterialSummary(
     Object advancePercentage,
     Object material,
     Object weightTonnes,
   );
 
-  /// No description provided for @truckerLoadDetailSuperLoadGuarantee.
+  /// Trucker Load Detail Super Load Guarantee - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Super Load • Payment Guarantee'**
+  /// **'Super Load - Payment Guarantee'**
   String get truckerLoadDetailSuperLoadGuarantee;
 
-  /// No description provided for @truckerLoadDetailRoutePriceSummaryTitle.
+  /// Trucker Load Detail Route Price Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route and price summary'**
   String get truckerLoadDetailRoutePriceSummaryTitle;
 
-  /// No description provided for @truckerLoadDetailOriginLabel.
+  /// Trucker Load Detail Origin Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin: {origin}'**
   String truckerLoadDetailOriginLabel(Object origin);
 
-  /// No description provided for @truckerLoadDetailDestinationLabel.
+  /// Trucker Load Detail Destination Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination: {destination}'**
   String truckerLoadDetailDestinationLabel(Object destination);
 
-  /// No description provided for @truckerLoadDetailPickupLabel.
+  /// Trucker Load Detail Pickup Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup: {pickupDate}'**
   String truckerLoadDetailPickupLabel(Object pickupDate);
 
-  /// No description provided for @truckerLoadDetailPriceLabel.
+  /// Trucker Load Detail Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price: ₹{priceAmount} • {priceType}'**
+  /// **'Price: ₹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType);
 
-  /// No description provided for @truckerLoadDetailDistanceLabel.
+  /// Trucker Load Detail Distance Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Distance: {distance} km'**
   String truckerLoadDetailDistanceLabel(Object distance);
 
-  /// No description provided for @truckerLoadDetailDriveTimeLabel.
+  /// Trucker Load Detail Drive Time Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Estimated drive time: {minutes} min'**
   String truckerLoadDetailDriveTimeLabel(Object minutes);
 
-  /// No description provided for @truckerLoadDetailTruckRequirementTitle.
+  /// Trucker Load Detail Truck Requirement Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck requirement summary'**
   String get truckerLoadDetailTruckRequirementTitle;
 
-  /// No description provided for @truckerLoadDetailBodyTypeLabel.
+  /// Trucker Load Detail Body Type Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Body type: {bodyType}'**
   String truckerLoadDetailBodyTypeLabel(Object bodyType);
 
-  /// No description provided for @truckerLoadDetailTyresLabel.
+  /// Trucker Load Detail Tyres Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tyres: {tyres}'**
   String truckerLoadDetailTyresLabel(Object tyres);
 
-  /// No description provided for @truckerLoadDetailTrucksNeededLabel.
+  /// Trucker Load Detail Trucks Needed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trucks needed: {booked}/{needed} booked'**
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed);
 
-  /// No description provided for @truckerLoadDetailAnyOption.
+  /// Trucker Load Detail Any Option - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Any'**
   String get truckerLoadDetailAnyOption;
 
-  /// No description provided for @truckerLoadDetailNoApprovedTruckSelected.
+  /// Trucker Load Detail No Approved Truck Selected - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No approved truck selected'**
   String get truckerLoadDetailNoApprovedTruckSelected;
 
-  /// No description provided for @truckerLoadDetailSelectedTruckMatches.
+  /// Trucker Load Detail Selected Truck Matches - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Selected truck matches this load'**
   String get truckerLoadDetailSelectedTruckMatches;
 
-  /// No description provided for @truckerLoadDetailSelectedTruckMayNotMatch.
+  /// Trucker Load Detail Selected Truck May Not Match - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Selected truck may not match this load'**
   String get truckerLoadDetailSelectedTruckMayNotMatch;
 
-  /// No description provided for @truckerLoadDetailCargoScheduleTitle.
+  /// Trucker Load Detail Cargo Schedule Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo and schedule details'**
   String get truckerLoadDetailCargoScheduleTitle;
 
-  /// No description provided for @truckerLoadDetailMaterialLabel.
+  /// Trucker Load Detail Material Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Material: {material}'**
   String truckerLoadDetailMaterialLabel(Object material);
 
-  /// No description provided for @truckerLoadDetailWeightLabel.
+  /// Trucker Load Detail Weight Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Weight: {weight} tonnes'**
   String truckerLoadDetailWeightLabel(Object weight);
 
-  /// No description provided for @truckerLoadDetailOriginCityLabel.
+  /// Trucker Load Detail Origin City Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Origin city: {city}'**
   String truckerLoadDetailOriginCityLabel(Object city);
 
-  /// No description provided for @truckerLoadDetailDestinationCityLabel.
+  /// Trucker Load Detail Destination City Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Destination city: {city}'**
   String truckerLoadDetailDestinationCityLabel(Object city);
 
-  /// No description provided for @truckerLoadDetailTripCostEstimateTitle.
+  /// Trucker Load Detail Trip Cost Estimate Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip cost estimate'**
   String get truckerLoadDetailTripCostEstimateTitle;
 
-  /// No description provided for @truckerLoadDetailTripCostUnavailableTitle.
+  /// Trucker Load Detail Trip Cost Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trip cost unavailable'**
   String get truckerLoadDetailTripCostUnavailableTitle;
 
-  /// No description provided for @truckerLoadDetailTripCostUnavailableMessage.
+  /// Trucker Load Detail Trip Cost Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.'**
   String get truckerLoadDetailTripCostUnavailableMessage;
 
-  /// No description provided for @truckerLoadDetailDieselLabel.
+  /// Trucker Load Detail Diesel Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Diesel: ₹{amount}'**
   String truckerLoadDetailDieselLabel(Object amount);
 
-  /// No description provided for @truckerLoadDetailTollsLabel.
+  /// Trucker Load Detail Tolls Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Tolls: ₹{amount}'**
   String truckerLoadDetailTollsLabel(Object amount);
 
-  /// No description provided for @truckerLoadDetailMileageUsedLabel.
+  /// Trucker Load Detail Mileage Used Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Mileage used: {value} km/L'**
   String truckerLoadDetailMileageUsedLabel(Object value);
 
-  /// No description provided for @truckerLoadDetailDieselPriceLabel.
+  /// Trucker Load Detail Diesel Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Diesel price: ₹{value}/L'**
   String truckerLoadDetailDieselPriceLabel(Object value);
 
-  /// No description provided for @truckerLoadDetailEstimatedTollPlazasLabel.
+  /// Trucker Load Detail Estimated Toll Plazas Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Estimated toll plazas: {count}'**
   String truckerLoadDetailEstimatedTollPlazasLabel(Object count);
 
-  /// No description provided for @truckerLoadDetailSupplierSummaryTitle.
+  /// Trucker Load Detail Supplier Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier summary'**
   String get truckerLoadDetailSupplierSummaryTitle;
 
-  /// No description provided for @truckerLoadDetailContactOwnerLabel.
+  /// Trucker Load Detail Contact Owner Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Contact owner: {name}'**
   String truckerLoadDetailContactOwnerLabel(Object name);
 
-  /// No description provided for @truckerLoadDetailVerifiedSupplier.
+  /// Trucker Load Detail Verified Supplier - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified supplier'**
   String get truckerLoadDetailVerifiedSupplier;
 
-  /// No description provided for @truckerLoadDetailSupplierProfile.
+  /// Trucker Load Detail Supplier Profile - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier profile'**
   String get truckerLoadDetailSupplierProfile;
 
-  /// No description provided for @truckerLoadDetailNextStepTitle.
+  /// Trucker Load Detail Next Step Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Next step'**
   String get truckerLoadDetailNextStepTitle;
 
-  /// No description provided for @truckerLoadDetailStatusActive.
+  /// Trucker Load Detail Status Active - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get truckerLoadDetailStatusActive;
 
-  /// No description provided for @truckerLoadDetailStatusAssignedPartial.
+  /// Trucker Load Detail Status Assigned Partial - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Assigned partial'**
   String get truckerLoadDetailStatusAssignedPartial;
 
-  /// No description provided for @truckerLoadDetailStatusUnknown.
+  /// Trucker Load Detail Status Unknown - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
@@ -9487,195 +10204,195 @@ abstract class AppLocalizations {
   /// **'Booking status: {status}'**
   String truckerLoadDetailBookingStatusLabel(Object status);
 
-  /// No description provided for @truckerLoadDetailBookingFeedbackTitle.
+  /// Trucker Load Detail Booking Feedback Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking feedback'**
   String get truckerLoadDetailBookingFeedbackTitle;
 
-  /// No description provided for @truckerLoadDetailBookingBlockedTitle.
+  /// Trucker Load Detail Booking Blocked Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking is blocked'**
   String get truckerLoadDetailBookingBlockedTitle;
 
-  /// No description provided for @truckerLoadDetailMessageSupplierAction.
+  /// Trucker Load Detail Message Supplier Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Message supplier'**
   String get truckerLoadDetailMessageSupplierAction;
 
-  /// No description provided for @truckerLoadDetailCallSupplierAction.
+  /// Trucker Load Detail Call Supplier Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Call supplier'**
   String get truckerLoadDetailCallSupplierAction;
 
-  /// No description provided for @truckerLoadDetailUsingTruckLabel.
+  /// Trucker Load Detail Using Truck Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Using {truckNumber}'**
   String truckerLoadDetailUsingTruckLabel(Object truckNumber);
 
-  /// No description provided for @truckerLoadDetailSelectedTruckSummary.
+  /// Trucker Load Detail Selected Truck Summary - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'This load will be booked with {truckNumber} • {bodyType} • {tyres} tyres.'**
+  /// **'This load will be booked with {truckNumber} - {bodyType} - {tyres} tyres.'**
   String truckerLoadDetailSelectedTruckSummary(
     Object bodyType,
     Object truckNumber,
     Object tyres,
   );
 
-  /// No description provided for @truckerLoadDetailApprovedTruckLabel.
+  /// Trucker Load Detail Approved Truck Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approved truck for this request'**
   String get truckerLoadDetailApprovedTruckLabel;
 
-  /// No description provided for @truckerLoadDetailTruckOptionLabel.
+  /// Trucker Load Detail Truck Option Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'{truckNumber} • {bodyType} • {tyres} tyres'**
+  /// **'{truckNumber} - {bodyType} - {tyres} tyres'**
   String truckerLoadDetailTruckOptionLabel(
     Object bodyType,
     Object truckNumber,
     Object tyres,
   );
 
-  /// No description provided for @truckerLoadDetailNoApprovedTrucksAvailable.
+  /// Trucker Load Detail No Approved Trucks Available - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No approved trucks are available yet.'**
   String get truckerLoadDetailNoApprovedTrucksAvailable;
 
-  /// No description provided for @truckerLoadDetailAddTruckFirstAction.
+  /// Trucker Load Detail Add Truck First Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add a Truck First'**
   String get truckerLoadDetailAddTruckFirstAction;
 
-  /// No description provided for @truckerLoadDetailRequestSubmittedAction.
+  /// Trucker Load Detail Request Submitted Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Request Submitted'**
   String get truckerLoadDetailRequestSubmittedAction;
 
-  /// No description provided for @truckerLoadDetailBookedAction.
+  /// Trucker Load Detail Booked Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booked'**
   String get truckerLoadDetailBookedAction;
 
-  /// No description provided for @truckerLoadDetailBookThisLoadAction.
+  /// Trucker Load Detail Book This Load Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Book This Load'**
   String get truckerLoadDetailBookThisLoadAction;
 
-  /// No description provided for @truckerLoadDetailLoadBookedSuccess.
+  /// Trucker Load Detail Load Booked Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load booked! Waiting for supplier approval'**
   String get truckerLoadDetailLoadBookedSuccess;
 
-  /// No description provided for @truckerLoadDetailShareLoadAction.
+  /// Trucker Load Detail Share Load Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share load'**
   String get truckerLoadDetailShareLoadAction;
 
-  /// No description provided for @truckerLoadDetailShareLoadTitle.
+  /// Trucker Load Detail Share Load Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share load'**
   String get truckerLoadDetailShareLoadTitle;
 
-  /// No description provided for @truckerLoadDetailShareLoadMessage.
+  /// Trucker Load Detail Share Load Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share a safe summary-first load card without exposing direct phone numbers or private operational notes.'**
   String get truckerLoadDetailShareLoadMessage;
 
-  /// No description provided for @truckerLoadDetailSystemShareAction.
+  /// Trucker Load Detail System Share Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'System share'**
   String get truckerLoadDetailSystemShareAction;
 
-  /// No description provided for @truckerLoadDetailShareToWhatsAppAction.
+  /// Trucker Load Detail Share To Whats App Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Share to WhatsApp'**
   String get truckerLoadDetailShareToWhatsAppAction;
 
-  /// No description provided for @truckerLoadDetailWhatsAppUnavailableMessage.
+  /// Trucker Load Detail Whats App Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'WhatsApp is unavailable on this device. Use system share instead.'**
   String get truckerLoadDetailWhatsAppUnavailableMessage;
 
-  /// No description provided for @truckerLoadDetailOpenInGoogleMapsAction.
+  /// Trucker Load Detail Open In Google Maps Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open in Google Maps'**
   String get truckerLoadDetailOpenInGoogleMapsAction;
 
-  /// No description provided for @truckerLoadDetailReportSpamOrAbuseAction.
+  /// Trucker Load Detail Report Spam Or Abuse Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Report spam or abuse'**
   String get truckerLoadDetailReportSpamOrAbuseAction;
 
-  /// No description provided for @truckerLoadDetailReportSourceLabel.
+  /// Trucker Load Detail Report Source Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trucker load • {routeLabel}'**
+  /// **'Trucker load - {routeLabel}'**
   String truckerLoadDetailReportSourceLabel(Object routeLabel);
 
-  /// No description provided for @truckerLoadDetailVerificationRequiredMessage.
+  /// Trucker Load Detail Verification Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Complete trucker verification before booking loads or starting supplier chat. Verification requires approved identity documents and profile review.'**
   String get truckerLoadDetailVerificationRequiredMessage;
 
-  /// No description provided for @truckerLoadDetailTruckApprovalRequiredMessage.
+  /// Trucker Load Detail Truck Approval Required Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add and approve at least one truck before booking this load or unlocking supplier chat.'**
   String get truckerLoadDetailTruckApprovalRequiredMessage;
 
-  /// No description provided for @truckerLoadDetailAddTruckDialogTitle.
+  /// Trucker Load Detail Add Truck Dialog Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add a truck first'**
   String get truckerLoadDetailAddTruckDialogTitle;
 
-  /// No description provided for @truckerLoadDetailAddTruckDialogMessage.
+  /// Trucker Load Detail Add Truck Dialog Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'You need at least one approved truck before you can book this load. Open Fleet now to add or complete truck approval?'**
   String get truckerLoadDetailAddTruckDialogMessage;
 
-  /// No description provided for @truckerLoadDetailNotNowAction.
+  /// Trucker Load Detail Not Now Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Not now'**
   String get truckerLoadDetailNotNowAction;
 
-  /// No description provided for @truckerLoadDetailOpenFleetAction.
+  /// Trucker Load Detail Open Fleet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open Fleet'**
   String get truckerLoadDetailOpenFleetAction;
 
-  /// No description provided for @truckerLoadDetailConfirmBookingTitle.
+  /// Trucker Load Detail Confirm Booking Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Confirm load booking'**
   String get truckerLoadDetailConfirmBookingTitle;
 
-  /// No description provided for @truckerLoadDetailConfirmBookingMessage.
+  /// Trucker Load Detail Confirm Booking Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Book {material} {routeLabel} with {truckNumber}?'**
@@ -9685,115 +10402,115 @@ abstract class AppLocalizations {
     Object truckNumber,
   );
 
-  /// No description provided for @truckerLoadDetailCancelAction.
+  /// Trucker Load Detail Cancel Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get truckerLoadDetailCancelAction;
 
-  /// No description provided for @authTtsSplashWelcome.
+  /// Auth Tts Splash Welcome - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Welcome to TranZfort. I will help you finish a quick setup before you continue.'**
   String get authTtsSplashWelcome;
 
-  /// No description provided for @authSessionRefreshFailureMessage.
+  /// Auth Session Refresh Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not refresh your session right now. Please continue and try again if needed.'**
   String get authSessionRefreshFailureMessage;
 
-  /// No description provided for @authNotificationPermissionFailureMessage.
+  /// Auth Notification Permission Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notification permission could not be enabled right now.'**
   String get authNotificationPermissionFailureMessage;
 
-  /// No description provided for @authTtsVoiceGuidanceEnabled.
+  /// Auth Tts Voice Guidance Enabled - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Voice guidance is now enabled.'**
   String get authTtsVoiceGuidanceEnabled;
 
-  /// No description provided for @authConfigIncompleteTitle.
+  /// Auth Config Incomplete Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Setup incomplete'**
   String get authConfigIncompleteTitle;
 
-  /// No description provided for @authConfigIncompleteMessage.
+  /// Auth Config Incomplete Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Some app configuration is missing. Sign-in may not work until setup is completed.'**
   String get authConfigIncompleteMessage;
 
-  /// No description provided for @authTtsSignInPrompt.
+  /// Auth Tts Sign In Prompt - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose how you want to sign in to TranZfort.'**
   String get authTtsSignInPrompt;
 
-  /// No description provided for @authTtsOnboardingRolePrompt.
+  /// Auth Tts Onboarding Role Prompt - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Choose your role to continue onboarding.'**
   String get authTtsOnboardingRolePrompt;
 
-  /// No description provided for @postLoadValidationOriginCityRequired.
+  /// Post Load Validation Origin City Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select the origin city'**
   String get postLoadValidationOriginCityRequired;
 
-  /// No description provided for @postLoadValidationOriginLocationRequired.
+  /// Post Load Validation Origin Location Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter the pickup location'**
   String get postLoadValidationOriginLocationRequired;
 
-  /// No description provided for @postLoadValidationDestinationCityRequired.
+  /// Post Load Validation Destination City Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select the destination city'**
   String get postLoadValidationDestinationCityRequired;
 
-  /// No description provided for @postLoadValidationDestinationLocationRequired.
+  /// Post Load Validation Destination Location Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter the drop location'**
   String get postLoadValidationDestinationLocationRequired;
 
-  /// No description provided for @postLoadValidationMaterialRequired.
+  /// Post Load Validation Material Required - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter the material name'**
   String get postLoadValidationMaterialRequired;
 
-  /// No description provided for @postLoadValidationWeightRange.
+  /// Post Load Validation Weight Range - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter a weight between 0 and 100 tonnes'**
   String get postLoadValidationWeightRange;
 
-  /// No description provided for @postLoadValidationTrucksNeeded.
+  /// Post Load Validation Trucks Needed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'At least one truck is required'**
   String get postLoadValidationTrucksNeeded;
 
-  /// No description provided for @postLoadValidationPricePositive.
+  /// Post Load Validation Price Positive - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter a valid price greater than zero'**
   String get postLoadValidationPricePositive;
 
-  /// No description provided for @postLoadValidationPriceType.
+  /// Post Load Validation Price Type - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Select a valid price type'**
   String get postLoadValidationPriceType;
 
-  /// No description provided for @postLoadValidationPickupDatePast.
+  /// Post Load Validation Pickup Date Past - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Pickup date cannot be in the past'**
@@ -9811,85 +10528,85 @@ abstract class AppLocalizations {
   /// **'Current role: {roleLabel}.'**
   String settingsRoleSentenceEn(Object roleLabel);
 
-  /// No description provided for @pushIssuePermissionRequestFailed.
+  /// Push Issue Permission Request Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Permission request failed.'**
   String get pushIssuePermissionRequestFailed;
 
-  /// No description provided for @pushIssueLocalInitFailed.
+  /// Push Issue Local Init Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Local notification setup failed.'**
   String get pushIssueLocalInitFailed;
 
-  /// No description provided for @pushIssueDisplayFailed.
+  /// Push Issue Display Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Notification display failed.'**
   String get pushIssueDisplayFailed;
 
-  /// No description provided for @pushIssueTokenSyncFailed.
+  /// Push Issue Token Sync Failed - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Token sync failed.'**
   String get pushIssueTokenSyncFailed;
 
-  /// No description provided for @truckerFleetReturnToVerificationTitle.
+  /// Trucker Fleet Return To Verification Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Return to verification'**
   String get truckerFleetReturnToVerificationTitle;
 
-  /// No description provided for @truckerFleetReturnToVerificationMessage.
+  /// Trucker Fleet Return To Verification Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add or update your truck, then return to verification to continue.'**
   String get truckerFleetReturnToVerificationMessage;
 
-  /// No description provided for @truckerFleetBackToVerificationAction.
+  /// Trucker Fleet Back To Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Back to verification'**
   String get truckerFleetBackToVerificationAction;
 
-  /// No description provided for @truckerFleetTruckSavedReturnMessage.
+  /// Trucker Fleet Truck Saved Return Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Truck saved. Return to verification to continue.'**
   String get truckerFleetTruckSavedReturnMessage;
 
-  /// No description provided for @truckerLoadDetailProfileLoadingMessage.
+  /// Trucker Load Detail Profile Loading Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Checking your profile. Please wait...'**
   String get truckerLoadDetailProfileLoadingMessage;
 
-  /// No description provided for @supplierLoadDetailNotFoundTitle.
+  /// Supplier Load Detail Not Found Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load not found'**
   String get supplierLoadDetailNotFoundTitle;
 
-  /// No description provided for @supplierLoadDetailNotFoundSubtitle.
+  /// Supplier Load Detail Not Found Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This load detail is not available right now. Return to My Loads and try again.'**
   String get supplierLoadDetailNotFoundSubtitle;
 
-  /// No description provided for @supplierLoadDetailLoadFailureTitle.
+  /// Supplier Load Detail Load Failure Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Unable to load load detail'**
   String get supplierLoadDetailLoadFailureTitle;
 
-  /// No description provided for @supplierLoadDetailFailureMessage.
+  /// Supplier Load Detail Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not load this load detail. Please try again.'**
   String get supplierLoadDetailFailureMessage;
 
-  /// No description provided for @supplierLoadDetailScreenTitle.
+  /// Supplier Load Detail Screen Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load detail'**
@@ -9898,22 +10615,22 @@ abstract class AppLocalizations {
   /// No description provided for @supplierLoadDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Load ID: {loadId} • Pickup: {pickupDate}'**
+  /// **'Load ID: {loadId} - Pickup: {pickupDate}'**
   String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate);
 
-  /// No description provided for @supplierLoadDetailLinkedExecutionUnavailableTitle.
+  /// Supplier Load Detail Linked Execution Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Linked execution data unavailable'**
   String get supplierLoadDetailLinkedExecutionUnavailableTitle;
 
-  /// No description provided for @supplierLoadSupportFailureMessage.
+  /// Supplier Load Support Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not refresh bookings or trips right now. Please retry.'**
   String get supplierLoadSupportFailureMessage;
 
-  /// No description provided for @supplierLoadDetailStatusAndActionsTitle.
+  /// Supplier Load Detail Status And Actions Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Status and actions'**
@@ -9925,67 +10642,67 @@ abstract class AppLocalizations {
   /// **'Current status: {status}'**
   String supplierLoadDetailCurrentStatus(Object status);
 
-  /// No description provided for @supplierLoadDetailActionsSubtitle.
+  /// Supplier Load Detail Actions Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Use these actions only after checking the latest status.'**
   String get supplierLoadDetailActionsSubtitle;
 
-  /// No description provided for @supplierLoadDetailActionUnavailableTitle.
+  /// Supplier Load Detail Action Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Action unavailable'**
   String get supplierLoadDetailActionUnavailableTitle;
 
-  /// No description provided for @supplierLoadActionFailureMessage.
+  /// Supplier Load Action Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'We could not complete that load action right now. Please try again.'**
   String get supplierLoadActionFailureMessage;
 
-  /// No description provided for @supplierLoadDetailCancelAction.
+  /// Supplier Load Detail Cancel Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cancel load'**
   String get supplierLoadDetailCancelAction;
 
-  /// No description provided for @supplierLoadDetailCancelledSuccess.
+  /// Supplier Load Detail Cancelled Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load cancelled successfully'**
   String get supplierLoadDetailCancelledSuccess;
 
-  /// No description provided for @supplierLoadCancelFailureMessage.
+  /// Supplier Load Cancel Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not cancel this load right now. Please try again.'**
   String get supplierLoadCancelFailureMessage;
 
-  /// No description provided for @supplierLoadDetailCloseFilledOutsideAction.
+  /// Supplier Load Detail Close Filled Outside Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Close as filled outside app'**
   String get supplierLoadDetailCloseFilledOutsideAction;
 
-  /// No description provided for @supplierLoadDetailClosedFilledOutsideSuccess.
+  /// Supplier Load Detail Closed Filled Outside Success - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load marked as filled outside the app'**
   String get supplierLoadDetailClosedFilledOutsideSuccess;
 
-  /// No description provided for @supplierLoadCloseFailureMessage.
+  /// Supplier Load Close Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not close this load right now. Please try again.'**
   String get supplierLoadCloseFailureMessage;
 
-  /// No description provided for @supplierLoadDetailRouteAndScheduleTitle.
+  /// Supplier Load Detail Route And Schedule Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route and schedule'**
   String get supplierLoadDetailRouteAndScheduleTitle;
 
-  /// No description provided for @supplierLoadDetailOriginCity.
+  /// Label showing origin city. Placeholder {value} is the city name.
   ///
   /// In en, this message translates to:
   /// **'Origin city: {value}'**
@@ -9997,7 +10714,7 @@ abstract class AppLocalizations {
   /// **'Origin point: {value}'**
   String supplierLoadDetailOriginPoint(Object value);
 
-  /// No description provided for @supplierLoadDetailDestinationCity.
+  /// Label showing destination city. Placeholder {value} is the city name.
   ///
   /// In en, this message translates to:
   /// **'Destination city: {value}'**
@@ -10009,13 +10726,13 @@ abstract class AppLocalizations {
   /// **'Destination point: {value}'**
   String supplierLoadDetailDestinationPoint(Object value);
 
-  /// No description provided for @supplierLoadDetailPickupDate.
+  /// Label showing pickup date. Placeholder {value} is the formatted date.
   ///
   /// In en, this message translates to:
   /// **'Pickup date: {value}'**
   String supplierLoadDetailPickupDate(Object value);
 
-  /// No description provided for @supplierLoadDetailDistance.
+  /// Label showing route distance. Placeholder {value} is the distance value.
   ///
   /// In en, this message translates to:
   /// **'Distance: {value}'**
@@ -10027,25 +10744,25 @@ abstract class AppLocalizations {
   /// **'Drive time: {value}'**
   String supplierLoadDetailDriveTime(Object value);
 
-  /// No description provided for @supplierLoadDetailRoutePreviewUnavailableTitle.
+  /// Supplier Load Detail Route Preview Unavailable Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route preview unavailable'**
   String get supplierLoadDetailRoutePreviewUnavailableTitle;
 
-  /// No description provided for @supplierLoadDetailRoutePreviewUnavailableMessage.
+  /// Supplier Load Detail Route Preview Unavailable Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Route preview details are unavailable for this load right now.'**
   String get supplierLoadDetailRoutePreviewUnavailableMessage;
 
-  /// No description provided for @supplierLoadDetailOpenInGoogleMaps.
+  /// Supplier Load Detail Open In Google Maps - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open in Google Maps'**
   String get supplierLoadDetailOpenInGoogleMaps;
 
-  /// No description provided for @supplierLoadDetailCargoAndRequirementsTitle.
+  /// Supplier Load Detail Cargo And Requirements Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Cargo and requirements'**
@@ -10063,103 +10780,103 @@ abstract class AppLocalizations {
   /// **'Weight: {value}'**
   String supplierLoadDetailWeight(Object value);
 
-  /// No description provided for @supplierLoadDetailAnyValue.
+  /// Supplier Load Detail Any Value - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Any'**
   String get supplierLoadDetailAnyValue;
 
-  /// No description provided for @supplierLoadDetailBodyType.
+  /// Label showing truck body type. Placeholder {value} is the body type name.
   ///
   /// In en, this message translates to:
   /// **'Body type: {value}'**
   String supplierLoadDetailBodyType(Object value);
 
-  /// No description provided for @supplierLoadDetailTyres.
+  /// Label showing tyre count. Placeholder {value} is the number of tyres.
   ///
   /// In en, this message translates to:
   /// **'Tyres: {value}'**
   String supplierLoadDetailTyres(Object value);
 
-  /// No description provided for @supplierLoadDetailBookingAndTripLinkageTitle.
+  /// Supplier Load Detail Booking And Trip Linkage Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking and trip linkage'**
   String get supplierLoadDetailBookingAndTripLinkageTitle;
 
-  /// No description provided for @supplierLoadDetailBookingLinkageEmptyDescription.
+  /// Supplier Load Detail Booking Linkage Empty Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No booking requests or linked trips are available on this load yet.'**
   String get supplierLoadDetailBookingLinkageEmptyDescription;
 
-  /// No description provided for @supplierLoadDetailBookingLinkageDescription.
+  /// Supplier Load Detail Booking Linkage Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'See booking requests and linked trips together.'**
   String get supplierLoadDetailBookingLinkageDescription;
 
-  /// No description provided for @supplierLoadDetailNoBookingRequestsTitle.
+  /// Supplier Load Detail No Booking Requests Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No booking requests yet'**
   String get supplierLoadDetailNoBookingRequestsTitle;
 
-  /// No description provided for @supplierLoadDetailNoBookingRequestsSubtitle.
+  /// Supplier Load Detail No Booking Requests Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking requests will appear here once truckers respond to this load.'**
   String get supplierLoadDetailNoBookingRequestsSubtitle;
 
-  /// No description provided for @supplierLoadDetailLinkedTripsTitle.
+  /// Supplier Load Detail Linked Trips Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Linked trips'**
   String get supplierLoadDetailLinkedTripsTitle;
 
-  /// No description provided for @supplierLoadDetailNoLinkedTripsTitle.
+  /// Supplier Load Detail No Linked Trips Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'No linked trips yet'**
   String get supplierLoadDetailNoLinkedTripsTitle;
 
-  /// No description provided for @supplierLoadDetailNoLinkedTripsSubtitle.
+  /// Supplier Load Detail No Linked Trips Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips will appear here after you approve a booking.'**
   String get supplierLoadDetailNoLinkedTripsSubtitle;
 
-  /// No description provided for @supplierLoadDetailActivityTimelineTitle.
+  /// Supplier Load Detail Activity Timeline Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Activity timeline'**
   String get supplierLoadDetailActivityTimelineTitle;
 
-  /// No description provided for @supplierLoadDetailTimelineCreatedTitle.
+  /// Supplier Load Detail Timeline Created Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load created'**
   String get supplierLoadDetailTimelineCreatedTitle;
 
-  /// No description provided for @supplierLoadDetailTimelineCreatedDescription.
+  /// Supplier Load Detail Timeline Created Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This load was created.'**
   String get supplierLoadDetailTimelineCreatedDescription;
 
-  /// No description provided for @supplierLoadDetailTimelinePublishedTitle.
+  /// Supplier Load Detail Timeline Published Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Load published'**
   String get supplierLoadDetailTimelinePublishedTitle;
 
-  /// No description provided for @supplierLoadDetailTimelinePublishedDescription.
+  /// Supplier Load Detail Timeline Published Description - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'This load is published and visible to truckers.'**
   String get supplierLoadDetailTimelinePublishedDescription;
 
-  /// No description provided for @supplierLoadDetailTimelineUpdatedTitle.
+  /// Supplier Load Detail Timeline Updated Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Status updated'**
@@ -10171,19 +10888,19 @@ abstract class AppLocalizations {
   /// **'Current status: {status}.'**
   String supplierLoadDetailTimelineUpdatedDescription(Object status);
 
-  /// No description provided for @supplierBookingVerifiedLabel.
+  /// Supplier Booking Verified Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verified'**
   String get supplierBookingVerifiedLabel;
 
-  /// No description provided for @supplierBookingRatingLabel.
+  /// Shows trucker rating. Placeholder {rating} is the numeric rating value.
   ///
   /// In en, this message translates to:
   /// **'Rating: {rating}'**
   String supplierBookingRatingLabel(Object rating);
 
-  /// No description provided for @supplierBookingTyres.
+  /// Shows tyre count on truck. Placeholder {tyres} is the number of tyres.
   ///
   /// In en, this message translates to:
   /// **'{tyres} tyres'**
@@ -10192,50 +10909,50 @@ abstract class AppLocalizations {
   /// No description provided for @supplierBookingSubmittedAt.
   ///
   /// In en, this message translates to:
-  /// **'{truckLabel} • Submitted {submittedAt}'**
+  /// **'{truckLabel} - Submitted {submittedAt}'**
   String supplierBookingSubmittedAt(Object truckLabel, Object submittedAt);
 
-  /// No description provided for @supplierBookingDecisionRecorded.
+  /// Shows when booking decision was made. Placeholder {decidedAt} is the timestamp.
   ///
   /// In en, this message translates to:
   /// **'Decision recorded {decidedAt}'**
   String supplierBookingDecisionRecorded(Object decidedAt);
 
-  /// No description provided for @supplierLinkedTripSubtitle.
+  /// Subtitle for linked trip showing material, trucker and truck info. Placeholders: {material}, {truckerId}, {truckId}.
   ///
   /// In en, this message translates to:
-  /// **'{material} • Trucker {truckerId} • Truck {truckId}'**
+  /// **'{material} - Trucker {truckerId} - Truck {truckId}'**
   String supplierLinkedTripSubtitle(
     Object material,
     Object truckerId,
     Object truckId,
   );
 
-  /// No description provided for @supplierBookingApprovedSuccessMessage.
+  /// Supplier Booking Approved Success Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking approved successfully'**
   String get supplierBookingApprovedSuccessMessage;
 
-  /// No description provided for @supplierLoadApproveBookingFailureMessage.
+  /// Supplier Load Approve Booking Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not approve this booking right now. Please try again.'**
   String get supplierLoadApproveBookingFailureMessage;
 
-  /// No description provided for @supplierBookingRejectedSuccessMessage.
+  /// Supplier Booking Rejected Success Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Booking rejected successfully'**
   String get supplierBookingRejectedSuccessMessage;
 
-  /// No description provided for @supplierLoadRejectBookingFailureMessage.
+  /// Supplier Load Reject Booking Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not reject this booking right now. Please try again.'**
   String get supplierLoadRejectBookingFailureMessage;
 
-  /// No description provided for @supplierBookingApproveDialogTitle.
+  /// Supplier Booking Approve Dialog Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Approve booking'**
@@ -10251,161 +10968,269 @@ abstract class AppLocalizations {
     Object destination,
   );
 
-  /// No description provided for @supplierBookingRejectDialogTitle.
+  /// Supplier Booking Reject Dialog Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reject booking'**
   String get supplierBookingRejectDialogTitle;
 
-  /// No description provided for @supplierBookingRejectDialogSubtitle.
+  /// Supplier Booking Reject Dialog Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add a short reason before rejecting this booking.'**
   String get supplierBookingRejectDialogSubtitle;
 
-  /// No description provided for @supplierBookingRejectReasonLabel.
+  /// Supplier Booking Reject Reason Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Reason'**
   String get supplierBookingRejectReasonLabel;
 
-  /// No description provided for @supplierBookingRejectReasonHint.
+  /// Supplier Booking Reject Reason Hint - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Example: vehicle mismatch or route timing issue'**
   String get supplierBookingRejectReasonHint;
 
-  /// No description provided for @verificationFieldCompanyName.
+  /// Verification Field Company Name - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Company name'**
   String get verificationFieldCompanyName;
 
-  /// No description provided for @verificationFieldAadhaarNumber.
+  /// Verification Field Aadhaar Number - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Aadhaar number'**
   String get verificationFieldAadhaarNumber;
 
-  /// No description provided for @verificationFieldPanNumber.
+  /// Verification Field Pan Number - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'PAN number'**
   String get verificationFieldPanNumber;
 
-  /// No description provided for @verificationFieldBusinessLicenceNumber.
+  /// Verification Field Business Licence Number - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Business licence number'**
   String get verificationFieldBusinessLicenceNumber;
 
-  /// No description provided for @verificationFieldGstNumber.
+  /// Verification Field Gst Number - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'GST number'**
   String get verificationFieldGstNumber;
 
-  /// No description provided for @verificationFieldGstOptional.
+  /// Verification Field Gst Optional - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Optional'**
   String get verificationFieldGstOptional;
 
-  /// No description provided for @verificationSavePacketAction.
+  /// Verification Save Packet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Save details'**
   String get verificationSavePacketAction;
 
-  /// No description provided for @verificationSaveSuccessMessage.
+  /// Verification Save Success Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification details saved'**
   String get verificationSaveSuccessMessage;
 
-  /// No description provided for @verificationSaveFailureMessage.
+  /// Verification Save Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Could not save verification details'**
   String get verificationSaveFailureMessage;
 
-  /// No description provided for @verificationLockedVerifiedGuidance.
+  /// Verification Locked Verified Guidance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification is already approved, so these fields are locked.'**
   String get verificationLockedVerifiedGuidance;
 
-  /// No description provided for @verificationLockedPendingGuidance.
+  /// Verification Locked Pending Guidance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification is under review, so these fields are locked until a decision is made.'**
   String get verificationLockedPendingGuidance;
 
-  /// No description provided for @verificationUnlockedSupplierGuidance.
+  /// Verification Unlocked Supplier Guidance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter your business and identity details, then upload the required documents.'**
   String get verificationUnlockedSupplierGuidance;
 
-  /// No description provided for @verificationUnlockedTruckerGuidance.
+  /// Verification Unlocked Trucker Guidance - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter your identity details and keep at least one truck ready for verification.'**
   String get verificationUnlockedTruckerGuidance;
 
-  /// No description provided for @verificationBlockedAlreadyComplete.
+  /// Verification Blocked Already Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification is already complete.'**
   String get verificationBlockedAlreadyComplete;
 
-  /// No description provided for @verificationBlockedUnderReview.
+  /// Verification Blocked Under Review - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Your verification is already under review.'**
   String get verificationBlockedUnderReview;
 
-  /// No description provided for @verificationBlockedMissingIdentity.
+  /// Verification Blocked Missing Identity - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add your Aadhaar and PAN numbers first.'**
   String get verificationBlockedMissingIdentity;
 
-  /// No description provided for @verificationBlockedMissingCompanyName.
+  /// Verification Blocked Missing Company Name - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter your company name first.'**
   String get verificationBlockedMissingCompanyName;
 
-  /// No description provided for @verificationBlockedMissingBusinessNumbers.
+  /// Verification Blocked Missing Business Numbers - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Enter your business licence details first.'**
   String get verificationBlockedMissingBusinessNumbers;
 
-  /// No description provided for @verificationBlockedMissingDocument.
+  /// Error message when required document is missing. Placeholder {documentType} is the document type name.
   ///
   /// In en, this message translates to:
   /// **'Upload {documentType} to continue.'**
   String verificationBlockedMissingDocument(Object documentType);
 
-  /// No description provided for @verificationBlockedMissingLocation.
+  /// Verification Blocked Missing Location - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add your verification location first.'**
   String get verificationBlockedMissingLocation;
 
-  /// No description provided for @verificationBlockedMissingTruck.
+  /// Verification Blocked Missing Truck - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Add at least one truck before submitting verification.'**
   String get verificationBlockedMissingTruck;
 
-  /// No description provided for @verificationReadyTruckCount.
+  /// Shows count of verification-ready trucks. Placeholder {count} is the truck count.
   ///
   /// In en, this message translates to:
   /// **'Verification-ready trucks: {count}'**
   String verificationReadyTruckCount(Object count);
+
+  /// App Bar Language Toggle Tooltip - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch language'**
+  String get appBarLanguageToggleTooltip;
+
+  /// Connectivity Offline Banner - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline. Features may be limited.'**
+  String get connectivityOfflineBanner;
+
+  /// Connectivity Offline Actions Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'You are offline. Actions that need network access should stay disabled.'**
+  String get connectivityOfflineActionsMessage;
+
+  /// Locale Select Supported Language - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a supported language'**
+  String get localeSelectSupportedLanguage;
+
+  /// Locale Field Supported Languages - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Supported languages are English and Hindi'**
+  String get localeFieldSupportedLanguages;
+
+  /// Onboarding Gate Timeout Message - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading is taking longer than expected.'**
+  String get onboardingGateTimeoutMessage;
+
+  /// Onboarding Gate Retry Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get onboardingGateRetryAction;
+
+  /// Onboarding Gate Back To Sign In Action - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to sign in'**
+  String get onboardingGateBackToSignInAction;
+
+  /// Success message after sending password reset. Placeholder {email} is the recipient email.
+  ///
+  /// In en, this message translates to:
+  /// **'Password reset link sent to {email}. Check your inbox.'**
+  String authPasswordResetSentSuccess(Object email);
+
+  /// Auth Password Reset Sent Failure - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to send reset link. Please try again.'**
+  String get authPasswordResetSentFailure;
+
+  /// Chat Preview Voice - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice message'**
+  String get chatPreviewVoice;
+
+  /// Chat Preview Location - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Location shared'**
+  String get chatPreviewLocation;
+
+  /// Chat Preview Document - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Document shared'**
+  String get chatPreviewDocument;
+
+  /// Chat Preview Map Card - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Route card shared'**
+  String get chatPreviewMapCard;
+
+  /// Chat Preview Truck Card - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck details shared'**
+  String get chatPreviewTruckCard;
+
+  /// Chat Preview System - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'System update'**
+  String get chatPreviewSystem;
+
+  /// Chat Preview Empty - User-facing text for the app interface.
+  ///
+  /// In en, this message translates to:
+  /// **'No messages yet'**
+  String get chatPreviewEmpty;
+
+  /// Report source label for supplier load. Placeholder {routeLabel} is the route description.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier load - {routeLabel}'**
+  String reportSourceSupplierLoad(Object routeLabel);
 }
 
 class _AppLocalizationsDelegate

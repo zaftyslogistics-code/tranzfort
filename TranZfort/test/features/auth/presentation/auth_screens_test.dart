@@ -97,6 +97,7 @@ Widget _buildApp({
           supabaseConfig: SupabaseConfig(
             url: 'https://example.supabase.co',
             anonKey: 'anon-key',
+            googleWebClientId: 'google-web-client-id',
           ),
         ),
       ),
@@ -251,9 +252,6 @@ void main() {
     await tester.pumpWidget(
       _buildApp(repository: repository, home: const AuthEntryScreen()),
     );
-    await tester.pumpAndSettle();
-
-    await tester.tap(find.byType(Checkbox));
     await tester.pumpAndSettle();
 
     await tester.tap(find.text('Continue with Google'));

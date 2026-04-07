@@ -244,8 +244,8 @@ void main() {
 
       expect(booking.isSubmitted, isTrue);
       expect(booking.displayTruckerName, 'Ravi Trucker');
-      expect(booking.displayTruckLabel, 'MH12AB1234 • Tata 407');
-      expect(trip.routeLabel, 'Chandrapur → Mumbai');
+      expect(booking.displayTruckLabel, 'MH12AB1234 - Tata 407');
+      expect(trip.routeLabel, 'Chandrapur > Mumbai');
       expect(trip.proofStatus, 'Proof pending');
     });
   });
@@ -261,6 +261,42 @@ void main() {
       expect(result.valueOrNull, 'load-1');
       expect(backend.createdParams?['p_material'], 'Coal');
       expect(backend.createdParams?['p_trucks_needed'], 2);
+      expect(backend.createdParams?['p_price_type'], 'negotiable');
+    });
+
+    test('createLoad accepts legacy negotiable price type for compatibility', () async {
+      final backend = _FakeSupplierLoadBackend();
+      final repository = SupplierLoadRepository(backend, () => 'supplier-1');
+      final dto = CreateLoadDto(
+        originLabel: _sampleCreateLoadDto().originLabel,
+        originCity: _sampleCreateLoadDto().originCity,
+        originState: _sampleCreateLoadDto().originState,
+        originLat: _sampleCreateLoadDto().originLat,
+        originLng: _sampleCreateLoadDto().originLng,
+        destinationLabel: _sampleCreateLoadDto().destinationLabel,
+        destinationCity: _sampleCreateLoadDto().destinationCity,
+        destinationState: _sampleCreateLoadDto().destinationState,
+        destinationLat: _sampleCreateLoadDto().destinationLat,
+        destinationLng: _sampleCreateLoadDto().destinationLng,
+        routeDistanceKm: _sampleCreateLoadDto().routeDistanceKm,
+        routeDurationMinutes: _sampleCreateLoadDto().routeDurationMinutes,
+        routePolyline: _sampleCreateLoadDto().routePolyline,
+        routeSnapshotSource: _sampleCreateLoadDto().routeSnapshotSource,
+        material: _sampleCreateLoadDto().material,
+        weightTonnes: _sampleCreateLoadDto().weightTonnes,
+        requiredBodyType: _sampleCreateLoadDto().requiredBodyType,
+        requiredTyres: _sampleCreateLoadDto().requiredTyres,
+        trucksNeeded: _sampleCreateLoadDto().trucksNeeded,
+        priceAmount: _sampleCreateLoadDto().priceAmount,
+        priceType: 'negotiable',
+        advancePercentage: _sampleCreateLoadDto().advancePercentage,
+        pickupDate: _sampleCreateLoadDto().pickupDate,
+      );
+
+      final result = await repository.createLoad(dto);
+
+      expect(result.isSuccess, isTrue);
+      expect(backend.createdParams?['p_price_type'], 'negotiable');
     });
 
     test('createLoad rejects invalid payloads', () async {

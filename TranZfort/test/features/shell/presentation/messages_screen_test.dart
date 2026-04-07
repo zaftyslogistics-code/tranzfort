@@ -51,6 +51,9 @@ class _NoopChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async {}
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => 0;
 }
 
 class _TestInboxController extends InboxController {
@@ -200,10 +203,10 @@ void main() {
             _conversation(
               id: 'conversation-1',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Ravi Trucker',
               supplierName: 'Amit Supplier',
-              truckDisplayLabel: 'MH12AB1234 • Tata Ace Gold',
+              truckDisplayLabel: 'MH12AB1234 - Tata Ace Gold',
               bookingRequestId: 'booking-1',
               bookingStatusLabel: 'approved',
               latestMessagePreview: 'Truck reached destination',
@@ -212,10 +215,10 @@ void main() {
             _conversation(
               id: 'conversation-2',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Suresh Trucker',
               supplierName: 'Amit Supplier',
-              truckDisplayLabel: 'MH14CD5678 • Eicher Pro 6025',
+              truckDisplayLabel: 'MH14CD5678 - Eicher Pro 6025',
               bookingRequestId: 'booking-2',
               bookingStatusLabel: 'submitted',
               latestMessagePreview: 'Waiting at gate',
@@ -233,7 +236,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text('Ravi Trucker'), findsOneWidget);
     expect(find.text('Suresh Trucker'), findsOneWidget);
-    expect(find.text('MH12AB1234 • Tata Ace Gold'), findsOneWidget);
+    expect(find.text('MH12AB1234 - Tata Ace Gold'), findsOneWidget);
     expect(find.text('APPROVED'), findsOneWidget);
   });
 
@@ -247,10 +250,10 @@ void main() {
             _conversation(
               id: 'conversation-1',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Ravi Trucker',
               supplierName: 'Amit Supplier',
-              truckDisplayLabel: 'MH12AB1234 • Tata Ace Gold',
+              truckDisplayLabel: 'MH12AB1234 - Tata Ace Gold',
               bookingRequestId: 'booking-1',
               bookingStatusLabel: 'needs_manual_review',
               latestMessagePreview: 'Truck reached destination',
@@ -279,7 +282,7 @@ void main() {
             _conversation(
               id: 'conversation-1',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Ravi Trucker',
               supplierName: 'Amit Supplier',
               supplierCompanyName: 'Amit Logistics',
@@ -293,7 +296,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Flat inbox'), findsOneWidget);
-    expect(find.textContaining('Amit Supplier • Amit Logistics'), findsOneWidget);
+    expect(find.textContaining('Amit Supplier - Amit Logistics'), findsOneWidget);
     expect(find.textContaining('Report after unloading'), findsOneWidget);
   });
 
@@ -307,10 +310,10 @@ void main() {
             _conversation(
               id: 'conversation-1',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Ravi Trucker',
               supplierName: 'Amit Supplier',
-              truckDisplayLabel: 'MH12AB1234 • Tata Ace Gold',
+              truckDisplayLabel: 'MH12AB1234 - Tata Ace Gold',
               bookingRequestId: 'booking-1',
               bookingStatusLabel: 'approved',
               latestMessagePreview: 'Truck reached destination',
@@ -341,7 +344,7 @@ void main() {
             _conversation(
               id: 'conversation-1',
               loadId: 'load-1',
-              routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+              routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
               truckerName: 'Ravi Trucker',
               supplierName: 'Amit Supplier',
               supplierCompanyName: 'Amit Logistics',
@@ -354,7 +357,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await tester.tap(find.textContaining('Amit Supplier • Amit Logistics'));
+    await tester.tap(find.textContaining('Amit Supplier - Amit Logistics'));
     await tester.pumpAndSettle();
 
     expect(find.text('Chat conversation-1'), findsOneWidget);

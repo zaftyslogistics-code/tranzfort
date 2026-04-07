@@ -198,6 +198,9 @@ class _ScreenChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async => throw UnimplementedError();
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => throw UnimplementedError();
 }
 
 Widget _buildRoutedApp({required ChatRepository chatRepository, TruckerProfile? truckerProfile}) {

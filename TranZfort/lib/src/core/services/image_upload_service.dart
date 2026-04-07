@@ -17,6 +17,9 @@ typedef UploadBinaryFn = Future<void> Function(SupabaseClient client, String sto
 class ImageUploadServiceDefaults {
   ImageUploadServiceDefaults._();
 
+  static const int maxImageDimension = 1200;
+  static const int jpegQuality = 85;
+
   static Future<XFile?> pickImage(ImageSource source) {
     return ImagePicker().pickImage(source: source);
   }
@@ -32,10 +35,10 @@ class ImageUploadServiceDefaults {
     }
 
     final resized = decoded.width >= decoded.height
-        ? img.copyResize(decoded, width: decoded.width > 1200 ? 1200 : decoded.width)
-        : img.copyResize(decoded, height: decoded.height > 1200 ? 1200 : decoded.height);
+        ? img.copyResize(decoded, width: decoded.width > maxImageDimension ? maxImageDimension : decoded.width)
+        : img.copyResize(decoded, height: decoded.height > maxImageDimension ? maxImageDimension : decoded.height);
 
-    return Uint8List.fromList(img.encodeJpg(resized, quality: 85));
+    return Uint8List.fromList(img.encodeJpg(resized, quality: jpegQuality));
   }
 }
 

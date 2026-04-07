@@ -1,0 +1,47 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart
+00:00 +0: shows unread notification badge in the top app bar bell
+00:00 +1: top app bar voice assistance action is not visible
+00:00 +2: drawer assistant item is not visible
+00:01 +3: drawer messages item routes to messages
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 2 widgets with text "Messages": [
+            Text("Messages", debugLabel: ((englishLike labelMedium 2021).merge((blackMountainView
+labelMedium).apply)).apply, inherit: false, color: Color(alpha: 1.0000, red: 0.2863, green: 0.2706,
+blue: 0.3098, colorSpace: ColorSpace.sRGB), family: Roboto, size: 12.0, weight: 500, letterSpacing:
+0.5, baseline: alphabetic, height: 1.3x, leadingDistribution: even, decoration: Color(alpha: 1.0000,
+red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none,
+dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Messages", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart:341:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart line 341
+The test description was:
+  drawer messages item routes to messages
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:01 +3 -1: drawer messages item routes to messages [E]
+  Test failed. See exception logs above.
+  The test description was: drawer messages item routes to messages
+  
+00:01 +3 -1: drawer notifications item routes to notifications
+00:01 +4 -1: drawer language item routes to settings
+00:01 +5 -1: drawer fleet item routes truckers to fleet
+00:01 +6 -1: drawer sign out item signs out and routes to auth
+00:02 +7 -1: bottom navigation routes suppliers to my loads
+00:02 +8 -1: bottom navigation routes suppliers to trips
+00:02 +9 -1: bottom navigation routes truckers to find loads
+00:02 +10 -1: bottom navigation routes truckers to trips
+00:02 +11 -1: Some tests failed.

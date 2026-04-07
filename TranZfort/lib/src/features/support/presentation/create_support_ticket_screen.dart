@@ -81,7 +81,7 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
                       ))
                   .toList(growable: false),
               onChanged: ref.read(createSupportTicketProvider.notifier).setCategory,
-              helperText: state.fieldErrors['category'],
+              helperText: _fieldErrorText(l10n, state.fieldErrors['category']),
             ),
             const SizedBox(height: AppSpacing.md),
             AppTextField(
@@ -103,7 +103,7 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
               label: l10n.supportCreateTicketDescriptionLabel,
               hintText: l10n.supportCreateTicketDescriptionHint,
               maxLines: 6,
-              errorText: state.fieldErrors['message_body'],
+              errorText: _fieldErrorText(l10n, state.fieldErrors['message_body']),
               onChanged: ref.read(createSupportTicketProvider.notifier).setDescription,
             ),
             const SizedBox(height: AppSpacing.md),
@@ -254,6 +254,14 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
       'technical' => l10n.supportComposeCategoryTechnical,
       'other' => l10n.supportComposeCategoryOther,
       _ => l10n.supportComposeCategoryOther,
+    };
+  }
+
+  String? _fieldErrorText(AppLocalizations l10n, String? code) {
+    return switch (code) {
+      supportCreateTicketInvalidCategoryCode => l10n.supportCreateTicketInvalidCategoryMessage,
+      supportCreateTicketDescriptionTooShortCode => l10n.supportCreateTicketDescriptionTooShortMessage,
+      _ => code,
     };
   }
 }

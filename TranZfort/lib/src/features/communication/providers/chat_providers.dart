@@ -39,6 +39,16 @@ class InboxState {
   }
 }
 
+final unreadConversationCountProvider = StreamProvider.autoDispose<int>((ref) async* {
+  final repository = ref.watch(chatRepositoryProvider);
+  final initial = await repository.getUnreadConversationCount();
+  yield initial.valueOrNull ?? 0;
+
+  await for (final result in repository.watchUnreadConversationCount()) {
+    yield result.valueOrNull ?? 0;
+  }
+});
+
 class ConversationMessagesState {
   final bool isLoading;
   final List<ChatMessage> messages;

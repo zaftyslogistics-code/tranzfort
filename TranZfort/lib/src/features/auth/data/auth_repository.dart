@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,33 +8,39 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import 'auth_error_mapper.dart';
+import 'auth_models.dart';
+import 'auth_repository_profile_ops.dart';
 
-part 'auth_models.dart';
-part 'auth_repository_profile_ops.dart';
+export 'auth_models.dart';
+export 'auth_repository_profile_ops.dart';
 
 class AuthRepository {
   final SupabaseClient? _client;
   final GoogleSignIn _googleSignIn;
-
-  static String get _webClientId {
-    try {
-      return dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? Platform.environment['GOOGLE_WEB_CLIENT_ID'] ?? '';
-    } catch (_) {
-      return Platform.environment['GOOGLE_WEB_CLIENT_ID'] ?? '';
-    }
-  }
+  final String _googleWebClientId;
 
   AuthRepository(
     this._client, {
+    String googleWebClientId = '',
     GoogleSignIn? googleSignIn,
-  }) : _googleSignIn = googleSignIn ??
+  }) : _googleWebClientId = googleWebClientId.trim(),
+       _googleSignIn = googleSignIn ??
             GoogleSignIn(
-              serverClientId: _webClientId,
+              serverClientId: googleWebClientId.trim(),
             );
 
   Future<Result<void>> signInWithGoogle() async {
     if (_client == null) {
       return const Failure<void>(UnauthorizedFailure());
+    }
+
+    if (_googleWebClientId.isEmpty) {
+      return const Failure<void>(
+        BusinessRuleFailure(
+          message: 'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.',
+        ),
+      );
     }
 
     try {
@@ -68,7 +72,7 @@ class AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -93,7 +97,7 @@ class AuthRepository {
 
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -131,7 +135,7 @@ class AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -169,7 +173,7 @@ class AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -192,7 +196,7 @@ class AuthRepository {
       await _client.auth.resetPasswordForEmail(normalizedEmail);
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -218,47 +222,28 @@ class AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
-  Future<Result<UserProfile?>> getCurrentProfile() {
-    return AuthRepositoryProfileOps(this).getCurrentProfile();
-  }
+  AuthProfileRepository get profileOps => AuthProfileRepository(_client);
 
-  Future<Result<void>> updateRoleSelection(AppUserRole role) {
-    return AuthRepositoryProfileOps(this).updateRoleSelection(role);
-  }
+  Future<Result<UserProfile?>> getCurrentProfile() => profileOps.getCurrentProfile();
 
-  Future<Result<void>> provisionRoleExtension(AppUserRole role) {
-    return AuthRepositoryProfileOps(this).provisionRoleExtension(role);
-  }
+  Future<Result<void>> updateRoleSelection(AppUserRole role) => profileOps.updateRoleSelection(role);
 
-  Future<Result<void>> updateProfile({
-    required String fullName,
-    required String mobile,
-  }) {
-    return AuthRepositoryProfileOps(this).updateProfile(
-      fullName: fullName,
-      mobile: mobile,
-    );
-  }
+  Future<Result<void>> provisionRoleExtension(AppUserRole role) => profileOps.provisionRoleExtension(role);
 
-  Future<Result<void>> updatePreferredLanguage(String languageCode) {
-    return AuthRepositoryProfileOps(this).updatePreferredLanguage(languageCode);
-  }
+  Future<Result<void>> updateProfile({required String fullName, required String mobile}) =>
+      profileOps.updateProfile(fullName: fullName, mobile: mobile);
 
-  Future<Result<void>> recordTermsAcceptance() {
-    return AuthRepositoryProfileOps(this).recordTermsAcceptance();
-  }
+  Future<Result<void>> updatePreferredLanguage(String languageCode) => profileOps.updatePreferredLanguage(languageCode);
 
-  Future<Result<AccountDeletionRequestOutcome>> requestAccountDeletion() {
-    return AuthRepositoryProfileOps(this).requestAccountDeletion();
-  }
+  Future<Result<void>> recordTermsAcceptance() => profileOps.recordTermsAcceptance();
 
-  Future<Result<AccountDeletionRequestOutcome>> cancelAccountDeletion() {
-    return AuthRepositoryProfileOps(this).cancelAccountDeletion();
-  }
+  Future<Result<AccountDeletionRequestOutcome>> requestAccountDeletion() => profileOps.requestAccountDeletion();
+
+  Future<Result<AccountDeletionRequestOutcome>> cancelAccountDeletion() => profileOps.cancelAccountDeletion();
 
   Future<Result<void>> signOut() async {
     if (_client == null) {
@@ -270,7 +255,7 @@ class AuthRepository {
       await _clearGoogleSession();
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -320,7 +305,7 @@ class AuthRepository {
       await _client.rpc('set_push_token', params: {'p_token': null});
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -332,7 +317,7 @@ class AuthRepository {
     try {
       return Success<Session?>(_client.auth.currentSession);
     } catch (error, stackTrace) {
-      return Failure<Session?>(_mapError(error, stackTrace));
+      return Failure<Session?>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -344,78 +329,13 @@ class AuthRepository {
     return _client.auth.onAuthStateChange;
   }
 
-  AppFailure _mapError(Object error, StackTrace stackTrace) {
-    if (error is SocketException || error is TimeoutException) {
-      return NetworkFailure(debugInfo: error.toString());
-    }
-
-    if (error is AuthException) {
-      final message = error.message.trim();
-      final normalized = message.toLowerCase();
-
-      if (normalized.contains('session') ||
-          normalized.contains('expired') ||
-          normalized.contains('refresh token') ||
-          normalized.contains('refresh_token_not_found')) {
-        return UnauthorizedFailure(message: message, debugInfo: stackTrace.toString());
-      }
-
-      if (normalized.contains('email not confirmed') ||
-          normalized.contains('email not verified') ||
-          normalized.contains('confirm your email') ||
-          normalized.contains('email confirmation')) {
-        return const BusinessRuleFailure(
-          message:
-              'Confirm your email before signing in. Open the verification email from TranZfort, finish verification, and then try again.',
-        );
-      }
-
-      if (normalized.contains('redirect') || normalized.contains('oauth')) {
-        return const BusinessRuleFailure(
-          message:
-              'Google auth redirect failed. Please update Supabase Google provider settings and Android client configuration, then retry.',
-        );
-      }
-
-      if (normalized.contains('invalid')) {
-        return ValidationFailure(
-          message: message,
-          debugInfo: stackTrace.toString(),
-        );
-      }
-
-      return UnknownFailure(message: message, debugInfo: stackTrace.toString());
-    }
-
-    if (error is PostgrestException) {
-      final code = error.code?.trim();
-      final message = error.message.trim().isEmpty
-          ? 'Something went wrong. Please try again.'
-          : error.message.trim();
-      final details = error.details?.toString();
-
-      if (code == '42501') {
-        return PermissionFailure(message: message, debugInfo: details);
-      }
-
-      if (code == '23505') {
-        return ConflictFailure(message: message, debugInfo: details);
-      }
-
-      if (code == 'PGRST116') {
-        return NotFoundFailure(message: message, debugInfo: details);
-      }
-
-      return ServerFailure(message: message, debugInfo: details);
-    }
-
-    return UnknownFailure(
-      debugInfo: '$error\n$stackTrace',
-    );
-  }
 }
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {
   final client = ref.watch(supabaseClientProvider);
-  return AuthRepository(client);
+  final appConfig = ref.watch(appConfigProvider);
+  return AuthRepository(
+    client,
+    googleWebClientId: appConfig.supabaseConfig.googleWebClientId,
+  );
 });

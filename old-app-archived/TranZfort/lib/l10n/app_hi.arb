@@ -1,0 +1,905 @@
+{
+  "@@locale": "hi",
+  "appTitle": "ट्रांसज़फोर्ट",
+  "splashTagline": "भारत भर में भरोसेमंद लोड मूवमेंट।",
+  "splashFirstOpenGreeting": "ट्रांसज़फोर्ट में आपका स्वागत है।",
+  "settingsTitle": "सेटिंग्स",
+  "settingsScreenTtsContext": "सेटिंग्स स्क्रीन। भाषा, वॉइस मार्गदर्शन, नोटिफिकेशन और अकाउंट विकल्प प्रबंधित करें।",
+  "appBarTtsMutedSnack": "वॉइस मार्गदर्शन बंद कर दिया गया",
+  "appBarTtsEnabledSnack": "वॉइस मार्गदर्शन चालू कर दिया गया",
+  "appBarLanguageChangedHindi": "भाषा बदली: हिंदी",
+  "appBarLanguageChangedEnglish": "भाषा बदली: अंग्रेज़ी",
+  "appBarTtsTooltipMute": "वॉइस मार्गदर्शन बंद करें ({screen})",
+  "@appBarTtsTooltipMute": {
+    "placeholders": {
+      "screen": {}
+    }
+  },
+  "appBarTtsTooltipEnable": "वॉइस मार्गदर्शन चालू करें",
+  "appBarLanguageToggleTooltip": "भाषा बदलें",
+  "appBarNotificationsTooltip": "नोटिफिकेशन",
+  "appDrawerProfileTitle": "प्रोफ़ाइल",
+  "appDrawerSupplierWorkspace": "सप्लायर वर्कस्पेस",
+  "appDrawerTruckerWorkspace": "ट्रकर वर्कस्पेस",
+  "appDrawerHome": "होम",
+  "appDrawerDashboard": "डैशबोर्ड",
+  "appDrawerVerification": "सत्यापन",
+  "appDrawerBotChat": "बॉट चैट",
+  "dashboardVerificationStatusVerified": "सत्यापन पूरा हो गया",
+  "dashboardVerificationStatusPending": "सत्यापन समीक्षा में है",
+  "dashboardVerificationStatusUnverified": "सत्यापन शुरू नहीं हुआ है",
+  "dashboardVerificationStatusRejected": "सत्यापन में सुधार जरूरी है",
+  "dashboardVerificationStatusUnknown": "सत्यापन स्थिति उपलब्ध नहीं",
+  "dashboardVerificationRejectedReason": "सुधार आवश्यक: {reason}",
+  "@dashboardVerificationRejectedReason": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "sharedLoadingSuffix": "लोड हो रहा है",
+  "languageLabel": "भाषा",
+  "languageEnglish": "अंग्रेज़ी",
+  "languageHindi": "हिंदी",
+  "postLoadTitle": "लोड पोस्ट करें",
+  "loadDetailTitle": "लोड विवरण",
+  "viewRouteMap": "रूट मैप देखें",
+  "actionsTitle": "कार्रवाइयाँ",
+  "loadNotFound": "लोड नहीं मिला",
+  "couldNotStartChatRetry": "चैट शुरू नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "verifyAction": "सत्यापित करें",
+  "completeTruckerVerificationToChat": "सप्लायर से चैट शुरू करने के लिए ट्रकर सत्यापन पूरा करें।",
+  "createLoadQuickSteps": "4 आसान स्टेप्स में लोड बनाएं",
+  "createLoadSubtitle": "रूट, माल, ट्रक आवश्यकता और कीमत की जानकारी जोड़ें।",
+  "postLoadSuperLoadReadinessTitle": "सुपर लोड तैयारी",
+  "postLoadSuperLoadReadinessSubtitle": "सुपर लोड सपोर्ट के लिए सप्लायर सत्यापन और तैयार पेआउट प्रोफ़ाइल आवश्यक है।",
+  "loadPostedSuccess": "लोड सफलतापूर्वक पोस्ट हो गया",
+  "loadPostFailure": "लोड पोस्ट नहीं हो सका। कृपया फिर प्रयास करें।",
+  "postLoadSubmitAction": "लोड पोस्ट करें",
+  "nextAction": "अगला",
+  "backAction": "वापस",
+  "postLoadStepRouteTitle": "रूट",
+  "postLoadStepCargoTitle": "कार्गो",
+  "postLoadStepVehicleTitle": "वाहन",
+  "postLoadStepPriceScaleTitle": "कीमत और स्केल",
+  "postLoadStepSummary": "चरण {current} / {total} — {label}",
+  "@postLoadStepSummary": {
+    "placeholders": {
+      "current": {},
+      "total": {},
+      "label": {}
+    }
+  },
+  "postLoadOriginCityLabel": "मूल शहर",
+  "postLoadDestinationCityLabel": "गंतव्य शहर",
+  "postLoadApproxRouteInfo": "अनुमानित रूट: {km} किमी · {hours} घंटे",
+  "@postLoadApproxRouteInfo": {
+    "placeholders": {
+      "km": {},
+      "hours": {}
+    }
+  },
+  "postLoadDistanceUnavailableFallback": "दूरी उपलब्ध नहीं है (ऑफलाइन बैकअप मोड चालू है)",
+  "postLoadMaterialLabel": "माल का प्रकार",
+  "postLoadWeightPerTruckLabel": "प्रति ट्रक वजन (टन)",
+  "postLoadTruckBodyTypeLabel": "ट्रक बॉडी प्रकार",
+  "postLoadTruckTypeAny": "कोई भी",
+  "postLoadTruckTypeOpen": "ओपन",
+  "postLoadTruckTypeContainer": "कंटेनर",
+  "postLoadTruckTypeTrailer": "ट्रेलर",
+  "postLoadTruckTypeTanker": "टैंकर",
+  "postLoadTruckTypeRefrigerated": "रेफ्रिजरेटेड",
+  "postLoadPriceTotalLabel": "कुल कीमत (₹)",
+  "postLoadPriceTypeFixed": "फिक्स्ड",
+  "postLoadPriceTypeNegotiable": "प्रति टन",
+  "postLoadAdvanceLabel": "अग्रिम: {percentage}%",
+  "@postLoadAdvanceLabel": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      }
+    }
+  },
+  "postLoadPickupDateLabel": "पिकअप तारीख",
+  "postLoadChangeAction": "बदलें",
+  "postLoadTrucksNeededLabel": "कितने ट्रक चाहिए?",
+  "findLoadsTitle": "लोड खोजें",
+  "searchLoads": "लोड खोजें",
+  "resetAction": "रीसेट",
+  "editAction": "संपादित करें",
+  "loadsFound": "लोड मिले",
+  "mapViewComingSoonTitle": "मैप व्यू जल्द आ रहा है",
+  "mapViewComingSoonSubtitle": "उपलब्ध लोड बुक करने के लिए लिस्ट व्यू पर वापस जाएं।",
+  "noLoadsFoundTitle": "कोई लोड नहीं मिली",
+  "noLoadsFoundSubtitle": "फ़िल्टर बदलें या बाद में फिर जांचें।",
+  "myLoadsTitle": "मेरे लोड",
+  "myLoadsDashboardTts": "मेरे लोड डैशबोर्ड",
+  "myLoadsScreenTtsContext": "मेरे लोड डैशबोर्ड। सक्रिय और पूर्ण लोड, बुकिंग गतिविधि और पूर्ति प्रगति देखें।",
+  "myLoadsScreenTtsContextDetailed": "आपका लोड डैशबोर्ड। {active} सक्रिय लोड, {inTransit} ट्रांजिट में।",
+  "@myLoadsScreenTtsContextDetailed": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "inTransit": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierOverview": "सप्लायर ओवरव्यू",
+  "myLoadsOverviewSubtitle": "सक्रिय लोड्स, बुकिंग और पूर्ति प्रगति ट्रैक करें।",
+  "myLoadsActiveLabel": "सक्रिय लोड्स",
+  "myLoadsInTransitLabel": "ट्रांजिट में",
+  "myLoadsRequiresActionBanner": "{count} लोड पर आपकी कार्रवाई लंबित है।",
+  "@myLoadsRequiresActionBanner": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "activeTab": "सक्रिय",
+  "completedTab": "पूर्ण",
+  "postLoadAction": "लोड पोस्ट करें",
+  "noCompletedLoads": "कोई पूर्ण लोड नहीं",
+  "noActiveLoads": "कोई सक्रिय लोड नहीं",
+  "completedLoadsHere": "पूर्ण/रद्द लोड यहां दिखेंगी।",
+  "postFirstLoadPrompt": "बुकिंग शुरू करने के लिए अपनी पहली लोड पोस्ट करें।",
+  "loadDeactivated": "लोड निष्क्रिय की गई",
+  "couldNotDeactivateLoad": "लोड निष्क्रिय नहीं हो सकी",
+  "deactivateAction": "निष्क्रिय करें",
+  "myLoadsTrucksBookedSummary": "{booked}/{needed} ट्रक बुक",
+  "@myLoadsTrucksBookedSummary": {
+    "placeholders": {
+      "booked": {
+        "type": "int"
+      },
+      "needed": {
+        "type": "int"
+      }
+    }
+  },
+  "myLoadsLoadErrorPrefix": "आपकी लोड्स लोड नहीं हो सकीं",
+  "myLoadsStatusCompleted": "पूर्ण",
+  "myLoadsStatusCancelled": "रद्द",
+  "myLoadsStatusWaiting": "प्रतीक्षा में",
+  "myLoadsStatusFullyBooked": "पूरी तरह बुक",
+  "myLoadsStatusFulfilling": "पूर्ति जारी",
+  "loadBookedAwaitingApproval": "लोड बुक हो गई! सप्लायर अनुमोदन की प्रतीक्षा करें।",
+  "bookingFailedTryAgain": "बुकिंग असफल हुई। कृपया फिर कोशिश करें।",
+  "loadBookTtsSuccess": "बुकिंग अनुरोध भेज दिया गया है। सप्लायर अनुमोदन की प्रतीक्षा करें।",
+  "loadBookTtsFailure": "बुकिंग असफल हुई। कृपया फिर कोशिश करें।",
+  "authTtsPromptGoogleOrPhone": "Google या फोन नंबर से आगे बढ़ें।",
+  "authErrorNetwork": "कृपया अपना इंटरनेट कनेक्शन जांचें।",
+  "authErrorAuthFailed": "प्रमाणीकरण विफल रहा। कृपया फिर कोशिश करें।",
+  "authErrorConflict": "यह खाता पहले से पंजीकृत है। साइन-इन करें।",
+  "authErrorValidation": "कृपया दर्ज विवरण जांचें।",
+  "authErrorGeneric": "कुछ गलत हुआ। कृपया फिर कोशिश करें।",
+  "authOneFinalStep": "बस एक अंतिम चरण",
+  "authWelcomeTitle": "ट्रांसज़फोर्ट में आपका स्वागत है",
+  "authGoogleDoneAddMobile": "Google साइन-इन पूरा। आगे बढ़ने के लिए मोबाइल नंबर जोड़ें।",
+  "authWelcomeSubtitle": "सप्लायर और ट्रकर के लिए भारत का भरोसेमंद लोड-मैचिंग प्लेटफ़ॉर्म।",
+  "authContinueJourney": "अपनी यात्रा जारी रखें",
+  "authChooseSignInMethod": "अपना पसंदीदा साइन-इन तरीका चुनें।",
+  "authOr": "या",
+  "authContinueWithPhone": "फोन से जारी रखें",
+  "authContinueWithGoogle": "Google से जारी रखें",
+  "authTermsAgreement": "आगे बढ़कर आप हमारी सेवा शर्तों और गोपनीयता नीति से सहमत होते हैं।",
+  "phoneInvalidNumber": "कृपया सही फोन नंबर दर्ज करें",
+  "phoneSaveErrorAuth": "मोबाइल नंबर सेव नहीं हो सका। कृपया फिर कोशिश करें।",
+  "phoneSaveErrorConflict": "यह नंबर किसी अन्य खाते से जुड़ा है। दूसरा नंबर आज़माएँ।",
+  "phoneSaveErrorValidation": "कृपया सही मोबाइल नंबर दर्ज करें।",
+  "phoneEnterMobileTitle": "अपना मोबाइल नंबर दर्ज करें",
+  "phoneEnterMobileSubtitle": "आगे बढ़ने के लिए नंबर जोड़ें। अभी OTP सत्यापन स्थगित है।",
+  "phoneVerificationSetup": "मोबाइल सत्यापन सेटअप",
+  "phoneVerificationSetupSubtitle": "बुकिंग और ट्रिप अलर्ट पाने के लिए सक्रिय नंबर उपयोग करें।",
+  "phoneLabelMobileNumber": "मोबाइल नंबर",
+  "commonContinue": "जारी रखें",
+  "otpTtsPrompt": "अपने फोन पर भेजा गया 6 अंकों का OTP दर्ज करें।",
+  "otpVerificationDeferredMessage": "अभी OTP सत्यापन स्थगित है। कृपया मोबाइल कैप्चर फ्लो से जारी रखें।",
+  "otpVerificationDeferredTitle": "OTP सत्यापन फिलहाल स्थगित है",
+  "otpVerificationDeferredSubtitle": "ऑनबोर्डिंग जारी रखने के लिए मोबाइल कैप्चर फ्लो का उपयोग करें।",
+  "otpVerify": "सत्यापित करें",
+  "otpResendDeferred": "अभी OTP पुनः भेजना स्थगित है।",
+  "otpResendCode": "कोड दोबारा भेजें",
+  "roleTtsPrompt": "क्या आप सप्लायर हैं या ट्रकर? कृपया चुनें।",
+  "roleErrorAuth": "आपका सत्र समाप्त हो गया है। कृपया फिर साइन-इन करें।",
+  "roleErrorConflict": "रोल सेटअप पहले ही पूरा हो चुका है।",
+  "roleErrorValidation": "कृपया एक मान्य रोल चुनें।",
+  "roleErrorGeneric": "रोल सेव नहीं हो सका। कृपया फिर कोशिश करें।",
+  "roleTitle": "आप ट्रांसज़फोर्ट का उपयोग कैसे करेंगे?",
+  "roleSubtitle": "डैशबोर्ड और कार्रवाइयों को व्यक्तिगत बनाने के लिए अपना रोल चुनें।",
+  "roleSupplierTitle": "मैं सप्लायर / कन्साइनर हूँ",
+  "roleSupplierSubtitle": "मैं लोड पोस्ट करना और ट्रक ढूंढना चाहता हूँ",
+  "roleTruckerTitle": "मैं ट्रकर / ट्रांसपोर्टर हूँ",
+  "roleTruckerSubtitle": "मैं लोड ढूंढना और अपना बेड़ा प्रबंधित करना चाहता हूँ",
+  "roleCompleteSetup": "सेटअप पूरा करें",
+  "myTripsTitle": "मेरी ट्रिप्स",
+  "myTripsDashboardTts": "मेरी ट्रिप्स डैशबोर्ड",
+  "myTripsScreenTtsContext": "मेरी ट्रिप्स डैशबोर्ड। वर्तमान ट्रिप्स, पूर्ण डिलीवरी और स्टेज अपडेट ट्रैक करें।",
+  "myTripsScreenTtsContextDetailed": "आपकी ट्रिप्स। {active} सक्रिय। वर्तमान ट्रिप: {origin} से {destination}।",
+  "@myTripsScreenTtsContextDetailed": {
+    "placeholders": {
+      "active": {
+        "type": "int"
+      },
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "truckerOverview": "ट्रकर ओवरव्यू",
+  "truckerDashboardActiveBidsLabel": "सक्रिय बोलियां",
+  "truckerDashboardUpcomingTripsLabel": "आगामी ट्रिप्स",
+  "truckerDashboardPendingBidsTitle": "लंबित बोलियां",
+  "truckerDashboardUpcomingActiveTripsTitle": "आगामी और सक्रिय ट्रिप्स",
+  "tripOverviewSubtitle": "सक्रिय ट्रिप्स और स्टेज प्रगति पर नज़र रखें।",
+  "activeTripStatus": "सक्रिय ट्रिप स्थिति",
+  "tripMilestonesSubtitle": "अगला स्टेज देखें और दस्तावेज़ तैयार रखें।",
+  "noCompletedTrips": "कोई पूर्ण ट्रिप नहीं",
+  "noActiveTrips": "कोई सक्रिय ट्रिप नहीं",
+  "completedTripsHere": "पूर्ण ट्रिप्स यहां दिखेंगी।",
+  "bookLoadPrompt": "अपनी पहली ट्रिप शुरू करने के लिए Find Loads से लोड बुक करें।",
+  "findLoadsAction": "लोड खोजें",
+  "tripsLoadError": "ट्रिप्स लोड नहीं हो सकीं। कृपया फिर प्रयास करें।",
+  "tripRecentlyUpdated": "हाल ही में अपडेट",
+  "tripCompletedPrefix": "पूर्ण",
+  "tripStartedPrefix": "शुरू",
+  "tripApprovedPrefix": "स्वीकृत",
+  "tripDeliveredPrefix": "डिलीवर",
+  "tripPodUploadedPrefix": "POD अपलोड",
+  "tripUpdatedPrefix": "अपडेट",
+  "tripStageCompleted": "पूर्ण",
+  "tripStageInTransit": "ट्रांजिट में",
+  "tripStageAtPickup": "पिकअप पर",
+  "tripStageDelivered": "डिलीवर",
+  "tripStagePodUploaded": "POD अपलोड",
+  "tripStageUnknown": "अज्ञात",
+  "messagesTitle": "संदेश",
+  "chatInboxTts": "संदेश इनबॉक्स",
+  "chatInboxScreenTtsContext": "संदेश इनबॉक्स। सप्लायर और ट्रकर के साथ बातचीत खोलें और हाल के अपडेट देखें।",
+  "chatInboxScreenTtsContextCount": "आपके संदेश। {count} बातचीत।",
+  "@chatInboxScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chatNoMessagesTitle": "अभी कोई संदेश नहीं",
+  "chatSupplierInboxSubtitle": "लोड से जुड़कर चैट शुरू करें।",
+  "chatTruckerInboxSubtitle": "लोड बुक करके चैट शुरू करें।",
+  "chatTapToOpenConversation": "कन्वर्सेशन खोलने के लिए टैप करें",
+  "chatTapToViewConversation": "कन्वर्सेशन देखने के लिए टैप करें",
+  "chatConversationsSuffix": "ट्रकर कन्वर्सेशन",
+  "chatFailedLoadMessages": "संदेश लोड नहीं हो सके",
+  "chatTruckerFallbackName": "ट्रकर",
+  "chatSupplierFallbackName": "सप्लायर",
+  "chatOpenConversationPrefix": "कन्वर्सेशन खोलें",
+  "tripDetailTitle": "ट्रिप विवरण",
+  "tripNotFound": "ट्रिप नहीं मिली",
+  "tripSnapshotTitle": "ट्रिप स्नैपशॉट",
+  "tripSnapshotTruck": "ट्रक",
+  "tripSnapshotWeight": "वजन",
+  "tripSnapshotDistance": "दूरी",
+  "tripSnapshotPrice": "कीमत",
+  "tripPickupActions": "पिकअप कार्रवाइयाँ",
+  "tripTransitAction": "ट्रांजिट कार्रवाई",
+  "tripDeliveryProof": "डिलीवरी प्रमाण",
+  "tripLoadError": "ट्रिप विवरण लोड नहीं हो सके। कृपया फिर प्रयास करें।",
+  "tripPodUploaded": "POD अपलोड",
+  "tripPodUploadedWaiting": "सप्लायर द्वारा डिलीवरी पुष्टि की प्रतीक्षा है।",
+  "tripTimelinePickup": "पिकअप",
+  "tripTimelineTransit": "ट्रांजिट",
+  "tripTimelineDelivered": "डिलीवर",
+  "tripTimelinePodUploaded": "POD अपलोड",
+  "tripTimelineCompleted": "पूर्ण",
+  "tripRouteToolsTitle": "रूट टूल्स",
+  "tripViewRoutePreviewAction": "रूट प्रीव्यू देखें",
+  "tripOpenNavigationAction": "नेविगेशन खोलें",
+  "tripNavigateToPickupAction": "पिकअप तक नेविगेट करें",
+  "tripNavigateToDestinationAction": "गंतव्य तक नेविगेट करें",
+  "tripNavigationUnavailable": "नेविगेशन के लिए गंतव्य निर्देशांक उपलब्ध नहीं हैं।",
+  "tripLocationCaptured": "लोकेशन कैप्चर हो गई।",
+  "tripLocationCapturedAt": "लोकेशन {location} पर कैप्चर की गई।",
+  "@tripLocationCapturedAt": {
+    "placeholders": {
+      "location": {}
+    }
+  },
+  "tripYourRatingPrefix": "आपकी रेटिंग",
+  "tripRateThisPrefix": "रेट करें",
+  "tripCommentOptional": "टिप्पणी (वैकल्पिक)",
+  "tripSubmitRating": "रेटिंग सबमिट करें",
+  "tripRatingSubmitted": "रेटिंग सबमिट हो गई।",
+  "tripRatingSubmitError": "रेटिंग सबमिट नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripStartAction": "शुरू करें",
+  "tripStartDialogTitle": "ट्रिप शुरू करें",
+  "tripStartDialogMessage": "क्या आपने कार्गो लोड कर लिया है और शुरू करने के लिए तैयार हैं?",
+  "tripCancelAction": "रद्द करें",
+  "tripStartSuccess": "ट्रिप सफलतापूर्वक शुरू हुई।",
+  "tripStartError": "ट्रिप शुरू नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripStartTtsSuccess": "ट्रिप सफलतापूर्वक शुरू हुई।",
+  "tripStartTtsFailure": "ट्रिप शुरू नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripUploadLrOptional": "LR अपलोड करें (वैकल्पिक)",
+  "tripLrUploadSuccess": "LR सफलतापूर्वक अपलोड हुई।",
+  "tripLrUploadError": "LR अपलोड नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripMarkDelivered": "डिलीवर मार्क करें",
+  "tripMarkDeliveredDialogTitle": "डिलीवर मार्क करें",
+  "tripMarkDeliveredDialogMessage": "क्या कार्गो गंतव्य पर उतार दी गई है?",
+  "tripConfirmAction": "पुष्टि करें",
+  "tripMarkedDeliveredNextPod": "डिलीवर मार्क किया गया। अब POD अपलोड करें।",
+  "tripMarkDeliveredError": "डिलीवर मार्क नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripUploadProofOfDelivery": "डिलीवरी का प्रमाण अपलोड करें",
+  "tripUploadPodPhoto": "POD फोटो अपलोड करें",
+  "tripPodUploadSuccessWaiting": "POD अपलोड हो गई। सप्लायर पुष्टि की प्रतीक्षा करें।",
+  "tripPodUploadError": "POD अपलोड नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "tripPodUploadTtsSuccess": "डिलीवरी प्रमाण अपलोड हो गया। पुष्टि की प्रतीक्षा करें।",
+  "tripPodUploadTtsFailure": "डिलीवरी प्रमाण अपलोड नहीं हो सका। कृपया फिर प्रयास करें।",
+  "chatTitle": "चैट",
+  "chatMicrophonePermissionRequired": "माइक्रोफोन अनुमति आवश्यक है",
+  "chatVoiceRecordingEmpty": "वॉइस रिकॉर्डिंग खाली थी",
+  "chatCouldNotReadRecordedFile": "रिकॉर्ड की गई फ़ाइल पढ़ी नहीं जा सकी",
+  "chatVoiceMessageSent": "वॉइस संदेश भेजा गया",
+  "chatVoiceMessageSendFailed": "वॉइस संदेश भेजने में विफल",
+  "chatVoiceFileUnavailable": "वॉइस फ़ाइल उपलब्ध नहीं",
+  "chatUnablePlayVoiceMessage": "वॉइस संदेश चलाया नहीं जा सका",
+  "chatLocationShared": "लोकेशन साझा की गई",
+  "chatCouldNotShareLocation": "लोकेशन साझा नहीं हो सकी",
+  "chatBookingActionShared": "बुकिंग कार्रवाई साझा की गई",
+  "chatCouldNotShareBookingAction": "बुकिंग कार्रवाई साझा नहीं हो सकी",
+  "chatBookingRequestSentFromChat": "चैट से बुकिंग अनुरोध भेजा गया।",
+  "chatCouldNotBookFromChat": "चैट से बुक नहीं हो सकी।",
+  "chatAttachShareLocation": "वर्तमान लोकेशन साझा करें (मैप कार्ड)",
+  "chatAttachShareBookingAction": "बुकिंग कार्रवाई साझा करें",
+  "chatMapCardTitleLocationShared": "लोकेशन साझा की गई",
+  "chatMapCoordinatesUnavailable": "कोऑर्डिनेट उपलब्ध नहीं",
+  "chatMapLatLng": "अक्षांश {lat}, देशांतर {lng}",
+  "@chatMapLatLng": {
+    "placeholders": {
+      "lat": {},
+      "lng": {}
+    }
+  },
+  "chatBookThisLoad": "यह लोड बुक करें",
+  "chatBookingActionDescription": "इस चैट से बुकिंग अनुरोध भेजने के लिए नीचे टैप करें।",
+  "chatFailedSendMessage": "संदेश भेजने में विफल",
+  "chatNoMessagesYet": "अभी कोई संदेश नहीं।",
+  "chatAttach": "अटैच",
+  "chatTypeMessageHint": "संदेश लिखें...",
+  "chatSendMessageTooltip": "संदेश भेजें",
+  "chatStopRecordingTooltip": "रिकॉर्डिंग रोकें",
+  "chatStartRecordingTooltip": "रिकॉर्डिंग शुरू करें",
+  "chatVoiceLabel": "वॉइस",
+  "chatPlayAction": "चलाएँ",
+  "chatStopAction": "रोकें",
+  "chatOpenMap": "मैप खोलें",
+  "verificationSupplierPrompt": "सप्लायर सत्यापन पूरा करें",
+  "verificationTruckerPrompt": "ट्रकर सत्यापन पूरा करें",
+  "verificationRequired": "सत्यापन आवश्यक",
+  "verificationPendingReview": "सत्यापन समीक्षा में है",
+  "verificationPendingMessage": "आपका खाता समीक्षा में है। स्वीकृति के बाद लोड पोस्टिंग सक्षम होगी।",
+  "verificationRequiredMessage": "लोड पोस्ट करने और पूरी मार्केटप्लेस सुविधा के लिए सप्लायर सत्यापन पूरा करें।",
+  "completeVerification": "सत्यापन पूरा करें",
+  "chatWithSupplier": "सप्लायर से चैट करें",
+  "callSupplierAction": "सप्लायर को कॉल करें",
+  "callSupplierUnavailable": "अभी सप्लायर का फोन नंबर उपलब्ध नहीं है।",
+  "callSupplierLaunchFailed": "फोन ऐप नहीं खुल सकी। कृपया फिर प्रयास करें।",
+  "postedByPrefix": "पोस्ट किया गया",
+  "settingsTtsPreviewText": "सेटिंग्स स्क्रीन",
+  "settingsHeroTitle": "अपने TranZfort वर्कस्पेस को व्यक्तिगत बनाएं",
+  "settingsHeroSubtitle": "भाषा, वॉइस, नोटिफिकेशन और अकाउंट एक्सेस को एक ही जगह से नियंत्रित करें।",
+  "settingsGeneralSection": "सामान्य",
+  "settingsLanguageSubtitle": "ऐप लेबल और प्रॉम्प्ट्स की इंटरफ़ेस भाषा।",
+  "settingsVoiceNotificationsSection": "वॉइस और नोटिफिकेशन",
+  "settingsTtsSpeedLabel": "बोलने की गति",
+  "settingsTtsSpeedValue": "वर्तमान गति: {speed}x",
+  "@settingsTtsSpeedValue": {
+    "placeholders": {
+      "speed": {}
+    }
+  },
+  "settingsTtsLanguageLabel": "TTS भाषा",
+  "settingsTtsLanguageAuto": "ऑटो (ऐप भाषा के अनुसार)",
+  "settingsTtsPreviewAction": "आवाज़ सुनें",
+  "settingsTtsMuteTitle": "TTS म्यूट",
+  "settingsTtsMuteSubtitle": "सभी ऑटोमैटिक वॉइस बंद करता है",
+  "settingsPushNotificationsTitle": "पुश नोटिफिकेशन",
+  "settingsPushNotificationsSubtitle": "लोड, ट्रिप और सत्यापन के अपडेट तुरंत पाएं।",
+  "settingsAccountSupportSection": "अकाउंट और सहायता",
+  "settingsMyProfileTitle": "मेरा प्रोफ़ाइल",
+  "settingsMyProfileSubtitle": "अपनी भूमिका और सत्यापन स्थिति देखें।",
+  "settingsPayoutProfileTitle": "पेआउट प्रोफ़ाइल",
+  "settingsPayoutProfileSubtitle": "खाता और पेआउट विवरण प्रबंधित करें।",
+  "payoutAccountHolderLabel": "अकाउंट होल्डर",
+  "payoutAccountLast4Label": "अकाउंट अंतिम अंक",
+  "payoutIfscLabel": "IFSC",
+  "payoutStatusLabel": "स्थिति",
+  "payoutNoProfileTitle": "अभी कोई पेआउट प्रोफ़ाइल नहीं",
+  "payoutNoProfileSubtitle": "जब आपकी वित्तीय प्रोफ़ाइल उपलब्ध होगी, पेआउट विवरण यहाँ दिखाई देंगे।",
+  "payoutLoadError": "पेआउट प्रोफ़ाइल लोड नहीं हो सकी।",
+  "settingsHelpSupportTitle": "मदद और सहायता",
+  "settingsHelpSupportSubtitle": "ऐप समस्या या अकाउंट मदद के लिए सपोर्ट लें।",
+  "supportScreenTtsContext": "सपोर्ट स्क्रीन। टिकट बनाएं, अपडेट ट्रैक करें, और सपोर्ट टीम को जवाब दें।",
+  "supportHeroTitle": "TranZfort सपोर्ट टीम से मदद लें",
+  "supportHeroSubtitle": "बुकिंग, ट्रिप, सत्यापन, अकाउंट, या पेआउट समस्याओं के लिए टिकट बनाएं और जवाब यहीं ट्रैक करें।",
+  "supportCreateTicketTitle": "सपोर्ट टिकट बनाएं",
+  "supportCategoryLabel": "श्रेणी",
+  "supportCategoryTechnicalBug": "तकनीकी बग",
+  "supportCategoryBookingIssue": "बुकिंग समस्या",
+  "supportCategoryTripIssue": "ट्रिप समस्या",
+  "supportCategoryPaymentPayout": "पेमेंट या पेआउट",
+  "supportCategoryVerification": "सत्यापन",
+  "supportCategoryAccountAccess": "अकाउंट एक्सेस",
+  "supportCategoryOther": "अन्य",
+  "supportSubjectLabel": "विषय",
+  "supportSubjectHint": "समस्या का छोटा सारांश",
+  "supportDescriptionLabel": "विवरण",
+  "supportDescriptionHint": "बताएं क्या हुआ और आपको किस तरह की मदद चाहिए।",
+  "supportSubmitTicketAction": "टिकट सबमिट करें",
+  "supportMyTicketsTitle": "मेरे टिकट",
+  "supportEmptyTitle": "अभी कोई सपोर्ट टिकट नहीं है",
+  "supportEmptySubtitle": "अपना पहला टिकट बनाएं और सपोर्ट टीम के अपडेट यहीं ट्रैक करें।",
+  "supportLoadError": "सपोर्ट टिकट लोड नहीं हो सके। कृपया फिर प्रयास करें।",
+  "supportSubjectRequired": "कृपया अपने टिकट के लिए विषय दर्ज करें।",
+  "supportDescriptionRequired": "कृपया अपने टिकट के लिए विवरण दर्ज करें।",
+  "supportCreateFailed": "सपोर्ट टिकट सबमिट नहीं हो सका। कृपया फिर प्रयास करें।",
+  "supportTicketSubmitted": "सपोर्ट टिकट सफलतापूर्वक सबमिट हो गया।",
+  "supportCreatedLabel": "बनाया गया",
+  "supportResolvedLabel": "समाधान हुआ",
+  "supportTicketIdLabel": "टिकट आईडी",
+  "supportStatusOpen": "खुला",
+  "supportStatusInProgress": "प्रगति में",
+  "supportStatusResolved": "समाधान हुआ",
+  "supportPriorityLow": "कम",
+  "supportPriorityMedium": "मध्यम",
+  "supportPriorityHigh": "उच्च",
+  "supportPriorityUrgent": "तत्काल",
+  "supportTicketDetailTitle": "सपोर्ट टिकट",
+  "supportTicketNotFoundTitle": "सपोर्ट टिकट नहीं मिला",
+  "supportTicketNotFoundSubtitle": "यह टिकट उपलब्ध नहीं है या आपके अकाउंट से अब एक्सेस नहीं हो सकता।",
+  "supportResolutionNotesTitle": "समाधान नोट्स",
+  "supportConversationTitle": "वार्तालाप",
+  "supportNoMessagesYet": "अभी कोई जवाब नहीं है। सपोर्ट टीम यहीं जवाब देगी।",
+  "supportReplySectionTitle": "जवाब भेजें",
+  "supportTicketResolvedReplyClosed": "यह टिकट हल हो चुका है। अभी जवाब बंद हैं।",
+  "supportReplyHint": "अधिक जानकारी जोड़ें या सपोर्ट टीम को जवाब दें",
+  "supportSendReplyAction": "जवाब भेजें",
+  "supportResolvedTicketReadOnlyAction": "समाधान हो चुका टिकट",
+  "supportReplyRequired": "कृपया भेजने से पहले जवाब दर्ज करें।",
+  "supportReplyFailed": "आपका जवाब भेजा नहीं जा सका। कृपया फिर प्रयास करें।",
+  "supportReplySent": "जवाब सफलतापूर्वक भेज दिया गया।",
+  "supportYouLabel": "आप",
+  "supportSupportTeamLabel": "सपोर्ट टीम",
+  "settingsSupportPending": "सपोर्ट स्क्रीन Sprint 9 में जोड़ी जाएगी",
+  "settingsAppVersionTitle": "ऐप संस्करण",
+  "settingsCurrentBuildPrefix": "वर्तमान बिल्ड",
+  "settingsDangerZone": "डेंजर ज़ोन",
+  "settingsDeleteAccountTitle": "खाता स्थायी रूप से हटाएँ",
+  "settingsDeleteAccountSubtitle": "खाता डिलीट रिक्वेस्ट जाएगी और आप तुरंत साइन आउट हो जाएंगे।",
+  "settingsDeleteAccountAction": "खाता हटाएँ",
+  "settingsDeleteAccountDialogTitle": "खाता हटाएँ?",
+  "settingsDeleteAccountDialogContent": "यह आपका खाता और पूरा डेटा हमेशा के लिए मिटा देगा। इसे वापस नहीं लाया जा सकता।",
+  "settingsDeleteAction": "हटाएँ",
+  "settingsDeleteAccountFailed": "खाता हटाने का अनुरोध नहीं हो सका, फिर प्रयास करें",
+  "settingsSignOutAction": "साइन आउट",
+  "verificationSubmitSuccess": "सत्यापन सफलतापूर्वक सबमिट हुआ!",
+  "verificationLoadError": "सत्यापन विवरण लोड नहीं हो सका। कृपया फिर प्रयास करें।",
+  "retryAction": "पुनः प्रयास",
+  "verificationUploadMandatory": "कृपया सभी अनिवार्य दस्तावेज़ अपलोड करें।",
+  "verificationSupplierTitle": "सप्लायर सत्यापन",
+  "verificationTruckerTitle": "ट्रकर सत्यापन",
+  "verificationSupplierSubtitle": "पूरी मार्केटप्लेस पहुंच के लिए व्यवसाय और पहचान दस्तावेज़ जमा करें।",
+  "verificationTruckerSubtitle": "ट्रिप संचालन सक्रिय करने के लिए पहचान और ड्राइविंग दस्तावेज़ अपलोड करें।",
+  "verificationDocumentsUploadedSummary": "{uploaded} में से {total} दस्तावेज़ अपलोड हुए",
+  "@verificationDocumentsUploadedSummary": {
+    "placeholders": {
+      "uploaded": {"type": "int"},
+      "total": {"type": "int"}
+    }
+  },
+  "verificationChooseImageSourceTitle": "इमेज स्रोत चुनें",
+  "verificationUseCamera": "कैमरा इस्तेमाल करें",
+  "verificationUseGallery": "गैलरी से चुनें",
+  "verificationAadhaarHelper": "आधार के अनुसार पूरे 12 अंक सही-सही दर्ज करें।",
+  "verificationPanHelper": "PAN प्रारूप: ABCDE1234F",
+  "verificationPanInvalid": "मान्य PAN दर्ज करें (जैसे ABCDE1234F)",
+  "verificationDlHelper": "ड्राइविंग लाइसेंस नंबर जैसा है वैसा ही दर्ज करें।",
+  "verificationTruckRequiredMessage": "सत्यापन से पहले नंबर, बॉडी टाइप, टायर, क्षमता और RC फोटो सहित कम-से-कम एक पूरा ट्रक जोड़ें।",
+  "verificationVerifiedLockedTitle": "सत्यापन पहले से स्वीकृत है",
+  "verificationVerifiedLockedBody": "सत्यापन स्वीकृत होने के कारण आपकी जानकारी लॉक है। केवल दोबारा सत्यापन के लिए बदलाव करने पर एडिट करें।",
+  "verificationEditAndResubmitAction": "एडिट करें और दोबारा सबमिट करें",
+  "verificationReverificationNotice": "बदलाव के बाद आपका प्रोफ़ाइल दोबारा समीक्षा के लिए पेंडिंग में चला जाएगा।",
+  "verificationImageQualityHint": "ध्यान दें: फोटो साफ, पढ़ने योग्य और पूरी तरह दिखाई देनी चाहिए।",
+  "documentAttachedTapReplace": "दस्तावेज़ संलग्न है। बदलने के लिए टैप करें।",
+  "documentTapUploadRequired": "आवश्यक दस्तावेज़ अपलोड करने के लिए टैप करें",
+  "retakeAction": "फिर से लें",
+  "uploadAction": "अपलोड करें",
+  "findLoadsVerifiedTruckRequiredTitle": "सत्यापित ट्रक आवश्यक है",
+  "findLoadsVerifiedTruckRequiredBody": "लोड बुक करने के लिए सत्यापित ट्रक चाहिए। क्या अभी ट्रक जोड़ना है?",
+  "findLoadsNotNow": "अभी नहीं",
+  "findLoadsAddTruck": "ट्रक जोड़ें",
+  "findLoadsAnyMaterial": "कोई भी माल",
+  "findLoadsSelectedTruck": "चयनित ट्रक",
+  "findLoadsConfirmBookingTitle": "बुकिंग की पुष्टि करें",
+  "findLoadsBookConfirmPrefix": "क्या आप",
+  "findLoadsBookConfirmFrom": "लोड",
+  "findLoadsBookConfirmTo": "तक",
+  "findLoadsBookConfirmWith": "को",
+  "findLoadsAllRoutes": "सभी रूट",
+  "findLoadsAny": "कोई भी",
+  "findLoadsAnyTruck": "कोई भी ट्रक",
+  "findLoadsSelectTruckForLoad": "इस लोड के लिए ट्रक चुनें",
+  "findLoadsUnknownTruckType": "ट्रक प्रकार अज्ञात",
+  "findLoadsTyresSuffix": "टायर",
+  "findLoadsMatchLabel": "मैच",
+  "findLoadsMismatchLabel": "मेल नहीं",
+  "findLoadsDashboardTts": "लोड खोज डैशबोर्ड",
+  "findLoadsScreenTtsContext": "लोड खोज डैशबोर्ड। उपलब्ध लोड खोजें, रूट फ़िल्टर लागू करें और सर्वोत्तम मैच देखें।",
+  "findLoadsScreenTtsContextCount": "लोड मार्केटप्लेस। {count} लोड मिलीं।",
+  "@findLoadsScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findLoadsHeroTitle": "सही लोड जल्दी खोजें",
+  "findLoadsHeroSubtitle": "रूट, माल और ट्रक फ़िल्टर से बेहतर मैच चुनें।",
+  "findLoadsFromLabel": "से",
+  "findLoadsToLabel": "तक",
+  "findLoadsAdvancedFilters": "उन्नत फ़िल्टर",
+  "findLoadsListViewLabel": "सूची",
+  "findLoadsMapViewLabel": "मैप",
+  "botCancelResponse": "ठीक है, मैंने प्रोसेस कैंसल कर दिया है। और कुछ?",
+  "botMyLoadsResponse": "यहाँ आपके लोड्स हैं।",
+  "botViewLoadsAction": "लोड्स देखें",
+  "botMyTripsResponse": "यहाँ आपके ट्रिप्स हैं।",
+  "botViewTripsAction": "ट्रिप्स देखें",
+  "botCheckStatusResponse": "यहाँ अपनी बुकिंग स्थिति देखें।",
+  "botCheckStatusAction": "स्थिति देखें",
+  "botHelpResponse": "मैं आपकी लोड ढूंढने, पोस्ट करने और ट्रिप्स चेक करने में मदद कर सकता हूँ। बोल कर देखें 'लोड ढूंढो'।",
+  "botGreetingResponse": "नमस्ते! मैं TranZfort बॉट हूँ। आज मैं आपकी क्या मदद कर सकता हूँ?",
+  "botUnknownResponse": "मैं समझ नहीं पाया। आप 'लोड ढूंढो', 'लोड डालना है', या 'ट्रिप स्टेटस' बोल सकते हैं।",
+  "botAskOrigin": "कहाँ से? (शहर का नाम बताएँ)",
+  "botAskDestination": "कहाँ तक? (शहर का नाम बताएँ)",
+  "botFindLoadSummary": "{origin} से {dest} के लिए लोड्स ढूँढ रहा हूँ। देखें?",
+  "botAskPostOrigin": "आप लोड कहाँ से भेज रहे हैं?",
+  "botAskPostDestination": "आप इसे कहाँ भेज रहे हैं?",
+  "botAskPostMaterial": "आप कौन सा माल भेज रहे हैं? (जैसे: कोयला, स्टील)",
+  "botPostLoadSummary": "क्या {material} को {origin} से {dest} भेजने के लिए लोड पोस्ट करें?",
+  "postLoadAction": "लोड पोस्ट करें",
+  "supplierDashboardTitle": "सप्लायर डैशबोर्ड",
+  "supplierDashboardTts": "सप्लायर डैशबोर्ड",
+  "supplierDashboardTtsContext": "सप्लायर डैशबोर्ड। अपने सक्रिय लोड, पेंडिंग बुकिंग्स और कुल प्रगति की समीक्षा करें।",
+  "supplierDashboardPendingBookingsLabel": "पेंडिंग बुकिंग्स",
+  "supplierDashboardNeedsActionTitle": "आपकी कार्रवाई आवश्यक है",
+  "supplierDashboardRecentLoadsTitle": "हाल के लोड अपडेट",
+  "supplierDashboardNoRecentLoads": "अभी कोई हाल का लोड अपडेट नहीं है।",
+  "truckerDashboardTitle": "ट्रकर डैशबोर्ड",
+  "truckerDashboardTts": "ट्रकर डैशबोर्ड",
+  "truckerDashboardTtsContext": "ट्रकर डैशबोर्ड। अपनी सक्रिय बोलियों, आगामी ट्रिप्स और कुल प्रगति को ट्रैक करें।",
+  "findLoadsMaterialLabel": "माल",
+  "findLoadsTruckLabel": "ट्रक",
+  "findLoadsSortByLabel": "क्रमबद्ध करें",
+  "findLoadsSortNewest": "नवीनतम",
+  "findLoadsSortPriceHighLow": "कीमत: अधिक से कम",
+  "findLoadsSortPriceLowHigh": "कीमत: कम से अधिक",
+  "findLoadsSortPickupDate": "पिकअप तारीख",
+  "findLoadsActiveFiltersSummary": "{count} फ़िल्टर सक्रिय",
+  "@findLoadsActiveFiltersSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "findLoadsMaterialCoal": "कोयला",
+  "findLoadsMaterialSteel": "स्टील",
+  "findLoadsMaterialCement": "सीमेंट",
+  "findLoadsMaterialSand": "रेत",
+  "findLoadsViewListLabel": "सूची",
+  "findLoadsViewMapLabel": "मैप",
+  "findLoadsSaveSearchAction": "खोज सेव करें",
+  "findLoadsSavedSearchesLabel": "सेव की गई खोजें",
+  "findLoadsSavedSearchSaved": "खोज सेव हो गई।",
+  "findLoadsSavedSearchSaveFailed": "खोज सेव नहीं हो सकी।",
+  "findLoadsSavedSearchDeleted": "सेव की गई खोज हटा दी गई।",
+  "findLoadsSavedSearchDeleteFailed": "सेव की गई खोज हटाई नहीं जा सकी।",
+  "myFleetTitle": "मेरा फ्लीट",
+  "myFleetAddTruckTooltip": "ट्रक जोड़ें",
+  "myFleetDashboardTts": "फ्लीट डैशबोर्ड",
+  "myFleetScreenTtsContext": "फ्लीट डैशबोर्ड। ट्रक, अनुपालन विवरण और वर्तमान उपलब्धता प्रबंधित करें।",
+  "myFleetScreenTtsContextCount": "आपका फ्लीट। {count} ट्रक।",
+  "@myFleetScreenTtsContextCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "myFleetEmptyTitle": "अभी तक कोई ट्रक नहीं",
+  "myFleetEmptySubtitle": "+ दबाकर अपना पहला ट्रक जोड़ें।",
+  "myFleetLoadError": "फ्लीट लोड नहीं हो सका",
+  "myFleetHeroTitle": "अपने फ्लीट को हमेशा सत्यापन-तैयार रखें",
+  "myFleetHeroSubtitle": "लोड बुक करने से पहले स्टेटस, रिजेक्शन कारण और ट्रक विवरण जांचें।",
+  "myFleetBodyLabel": "बॉडी: {body}",
+  "@myFleetBodyLabel": {
+    "placeholders": {
+      "body": {}
+    }
+  },
+  "myFleetTyresLabel": "टायर: {tyres}",
+  "@myFleetTyresLabel": {
+    "placeholders": {
+      "tyres": {}
+    }
+  },
+  "myFleetCapacityLabel": "क्षमता: {capacity} टन",
+  "@myFleetCapacityLabel": {
+    "placeholders": {
+      "capacity": {}
+    }
+  },
+  "myFleetRejectionReasonLabel": "अस्वीकृति कारण: {reason}",
+  "@myFleetRejectionReasonLabel": {
+    "placeholders": {
+      "reason": {}
+    }
+  },
+  "myFleetRcExpiredWarning": "RC की समय-सीमा समाप्त हो चुकी है। डिस्पैच समस्या से बचने के लिए दस्तावेज़ नवीनीकृत करें।",
+  "myFleetRcExpiryWarningDays": "RC {days} दिन में समाप्त होगी। कृपया जल्द नवीनीकरण करें।",
+  "@myFleetRcExpiryWarningDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "addTruckTitle": "ट्रक जोड़ें",
+  "addTruckHeroTitle": "अपने ट्रक का विवरण जोड़ें",
+  "addTruckHeroSubtitle": "फ्लीट जानकारी पूरी रखें ताकि बुकिंग भरोसा बढ़े।",
+  "addTruckIdentitySection": "ट्रक पहचान",
+  "addTruckNumberLabel": "ट्रक नंबर",
+  "addTruckNumberRequired": "ट्रक नंबर जरूरी है",
+  "addTruckBodyTypeLabel": "बॉडी प्रकार",
+  "addTruckModelManualEntryOption": "सूची में नहीं / मैनुअल एंट्री",
+  "addTruckModelOptionalLabel": "ट्रक मॉडल (वैकल्पिक)",
+  "addTruckCatalogLoadError": "ट्रक कैटलॉग लोड नहीं हुआ। फिर प्रयास करें।",
+  "addTruckSpecificationsSection": "स्पेसिफिकेशन",
+  "addTruckTyresLabel": "टायर",
+  "addTruckTyresRangeError": "4 से 22 के बीच टायर दर्ज करें",
+  "addTruckCapacityLabel": "क्षमता (टन)",
+  "addTruckCapacityInvalid": "सही क्षमता दर्ज करें",
+  "addTruckDocumentsSection": "दस्तावेज़",
+  "addTruckUploadRcPhoto": "RC फोटो अपलोड करें",
+  "addTruckRcExpiryDateLabel": "RC समाप्ति तिथि",
+  "addTruckSelectDateAction": "तारीख चुनें",
+  "addTruckRcUploadedReplace": "RC अपलोड हो गई। बदलने के लिए टैप करें।",
+  "addTruckRcRequired": "ट्रक विवरण पूरा रखने के लिए RC फोटो अनिवार्य है।",
+  "addTruckSaveAction": "ट्रक सेव करें",
+  "addTruckSelectBodyTypeError": "कृपया बॉडी प्रकार चुनें",
+  "addTruckSaveFailed": "ट्रक जोड़ना विफल रहा। फिर प्रयास करें।",
+  "loadDetailLoadError": "विवरण लोड नहीं हो सका",
+  "loadDetailTripCostUnavailable": "ट्रिप लागत उपलब्ध नहीं",
+  "loadDetailTripCostBreakdown": "ट्रिप लागत विवरण",
+  "loadDetailTripCostDiesel": "डीज़ल",
+  "loadDetailTripCostTolls": "टोल",
+  "loadDetailTripCostTotal": "कुल",
+  "loadDetailTripCostMileage": "माइलेज",
+  "loadDetailPendingApproval": "अनुमोदन लंबित",
+  "loadDetailBookingApproved": "बुकिंग स्वीकृत",
+  "loadDetailApproveFailed": "स्वीकृति विफल",
+  "loadDetailBookingRejected": "बुकिंग अस्वीकृत",
+  "loadDetailRejectFailed": "अस्वीकृति विफल",
+  "loadDetailNoPendingBookings": "कोई लंबित बुकिंग नहीं।",
+  "loadDetailInTransit": "ट्रांजिट में",
+  "loadDetailTripInTransit": "ट्रिप ट्रांजिट में है",
+  "loadDetailPodUploaded": "POD अपलोड",
+  "loadDetailConfirmDelivery": "डिलीवरी की पुष्टि करें",
+  "loadDetailDeliveryConfirmed": "डिलीवरी पुष्टि हो गई।",
+  "loadDetailDeliveryConfirmFailed": "डिलीवरी पुष्टि नहीं हो पाई।",
+  "loadDetailDelivered": "डिलीवर",
+  "loadDetailTruckLabel": "ट्रक",
+  "loadDetailApproveAction": "स्वीकृत करें",
+  "loadDetailRejectAction": "अस्वीकार करें",
+  "loadDetailStatusPrefix": "स्थिति",
+  "richLoadCardTripCostEstimate": "अनुमानित ट्रिप लागत: {amount}",
+  "@richLoadCardTripCostEstimate": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "richLoadCardSuperLoadLabel": "सुपर लोड",
+  "richLoadCardVerifiedSupplierFallback": "सत्यापित सप्लायर",
+  "richLoadCardPickupPrefix": "पिकअप",
+  "richLoadCardTrucksNeededSummary": "{needed} ट्रक चाहिए · {booked} बुक हो चुके",
+  "@richLoadCardTrucksNeededSummary": {
+    "placeholders": {
+      "needed": {
+        "type": "int"
+      },
+      "booked": {
+        "type": "int"
+      }
+    }
+  },
+  "richLoadCardAdvanceUnavailable": "अग्रिम: -",
+  "richLoadCardAdvanceLabel": "अग्रिम: {percentage}% ({amount})",
+  "@richLoadCardAdvanceLabel": {
+    "placeholders": {
+      "percentage": {
+        "type": "int"
+      },
+      "amount": {}
+    }
+  },
+  "richLoadCardJustNow": "अभी",
+  "profileScreenTts": "प्रोफ़ाइल स्क्रीन",
+  "profileNotFound": "कोई प्रोफ़ाइल नहीं मिली।",
+  "profileDefaultUserName": "TranZfort यूज़र",
+  "profileVerifiedChip": "सत्यापित",
+  "profileVerificationChip": "सत्यापन {status}",
+  "@profileVerificationChip": {
+    "placeholders": {
+      "status": {}
+    }
+  },
+  "profileSummaryTitle": "प्रोफ़ाइल सारांश",
+  "profileRoleLabel": "भूमिका",
+  "profileStatusLabel": "स्थिति",
+  "profileMobileLabel": "मोबाइल",
+  "profileValueNa": "NA",
+  "profileValueSet": "सेट",
+  "profileIdentityDetailsTitle": "पहचान विवरण",
+  "profileFullNameLabel": "पूरा नाम",
+  "profileVerificationLabel": "सत्यापन",
+  "profileQuickActionsTitle": "त्वरित कार्रवाइयाँ",
+  "profileDocumentExpiryTitle": "दस्तावेज़ समाप्ति अलर्ट",
+  "profileDlExpiredWarning": "ड्राइविंग लाइसेंस की समय-सीमा समाप्त हो चुकी है। कृपया सत्यापन दस्तावेज़ अपडेट करें।",
+  "profileDlExpiryWarningDays": "ड्राइविंग लाइसेंस {days} दिन में समाप्त होगा। कृपया नवीनीकरण करके पुनः अपलोड करें।",
+  "@profileDlExpiryWarningDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "profileSupplierVerificationAction": "सप्लायर सत्यापन",
+  "profileTruckerVerificationAction": "ट्रकर सत्यापन",
+  "profileVerificationActionSubtitle": "अपने सत्यापन दस्तावेज़ देखें और प्रबंधित करें।",
+  "profileSettingsActionSubtitle": "ऐप प्राथमिकताएँ और अकाउंट नियंत्रण खोलें।",
+  "profileLoadError": "प्रोफ़ाइल लोड नहीं हो सकी।",
+  "notificationsMarkAllAsRead": "सभी को पढ़ा हुआ मार्क करें",
+  "notificationsScreenTts": "नोटिफिकेशन स्क्रीन",
+  "notificationsScreenTtsCount": "{count} नए नोटिफिकेशन।",
+  "@notificationsScreenTtsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsAllCaughtUpTitle": "सब अपडेट है!",
+  "notificationsAllCaughtUpSubtitle": "आपके पास कोई नया नोटिफिकेशन नहीं है।",
+  "notificationsUnreadUpdates": "{count} अपठित अपडेट",
+  "@notificationsUnreadUpdates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsCaughtUpBanner": "आप पूरी तरह अपडेट हैं",
+  "notificationsRealtimeHint": "ट्रिप, लोड और चैट अलर्ट यहाँ रियल-टाइम में दिखते हैं।",
+  "notificationsLoadError": "नोटिफिकेशन लोड नहीं हो सके",
+  "notificationsTimeDaysAgo": "{days} दिन पहले",
+  "@notificationsTimeDaysAgo": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeHoursAgo": "{hours} घंटे पहले",
+  "@notificationsTimeHoursAgo": {
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeMinutesAgo": "{minutes} मिनट पहले",
+  "@notificationsTimeMinutesAgo": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "notificationsTimeJustNow": "अभी",
+  "routePreviewOpenMapsFailed": "Google Maps नहीं खुल पाया",
+  "routePreviewTitle": "रूट प्रीव्यू",
+  "routePreviewDetailsUnavailable": "रूट विवरण उपलब्ध नहीं है।",
+  "routePreviewFallbackWarning": "सीधी लाइन दिखाई जा रही है। वास्तविक रूट गणना विफल रही।",
+  "routePreviewStartNavigation": "Google Maps में नेविगेशन शुरू करें",
+  "routePreviewLoadError": "रूट लोड करने में त्रुटि हुई।",
+  "routePreviewScreenTtsContext": "रूट {origin} से {destination} तक।",
+  "@routePreviewScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "postLoadStepTtsRoute": "चरण 1: पिकअप और डिलीवरी शहर दर्ज करें।",
+  "postLoadStepTtsCargo": "चरण 2: माल चुनें और वजन दर्ज करें।",
+  "postLoadStepTtsSchedule": "चरण 3: ट्रक प्रकार और टायर आकार चुनें।",
+  "postLoadStepTtsPricing": "चरण 4: अपनी कीमत, अग्रिम और पिकअप तारीख सेट करें।",
+  "postLoadTtsSuccess": "लोड सफलतापूर्वक पोस्ट हो गई।",
+  "postLoadTtsFailure": "लोड पोस्ट नहीं हो सकी। कृपया फिर प्रयास करें।",
+  "loadDetailScreenTtsContext": "लोड {origin} से {destination} तक। {material}, {weight} टन। कीमत: {price} रुपये।",
+  "@loadDetailScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {},
+      "material": {},
+      "weight": {},
+      "price": {}
+    }
+  },
+  "tripDetailScreenTtsContext": "ट्रिप {origin} से {destination} तक। चरण: {stage}। अगला: {nextAction}।",
+  "@tripDetailScreenTtsContext": {
+    "placeholders": {
+      "origin": {},
+      "destination": {},
+      "stage": {},
+      "nextAction": {}
+    }
+  },
+  "verificationCompanyDetailsSection": "कंपनी विवरण",
+  "verificationProfilePhotoLabel": "प्रोफ़ाइल फोटो अपलोड करें",
+  "verificationCompanyNameLabel": "कंपनी का नाम",
+  "verificationGstNumberLabel": "GST नंबर",
+  "verificationUploadGstCertificate": "GST प्रमाणपत्र अपलोड करें",
+  "verificationTaxDetailsSection": "कर विवरण",
+  "verificationIdentityDetailsSection": "पहचान विवरण",
+  "verificationPanNumberLabel": "PAN नंबर",
+  "verificationUploadPanCard": "PAN कार्ड अपलोड करें",
+  "verificationTanNumberLabel": "TAN नंबर",
+  "verificationTanHelper": "TAN प्रारूप: 10 अक्षर अल्फ़ान्यूमेरिक",
+  "verificationTanInvalid": "मान्य TAN दर्ज करें (10 अक्षर)",
+  "verificationGstInvalid": "मान्य GST नंबर दर्ज करें (15 अक्षर)",
+  "verificationUploadTanCard": "TAN कार्ड अपलोड करें",
+  "verificationAadhaarNumberLabel": "आधार नंबर",
+  "verificationUploadAadhaarFront": "आधार फ्रंट अपलोड करें",
+  "verificationUploadAadhaarBack": "आधार बैक अपलोड करें",
+  "verificationOptionalBusinessProofSection": "वैकल्पिक व्यवसाय प्रमाण",
+  "verificationBusinessLicenceNumberLabel": "व्यवसाय लाइसेंस नंबर",
+  "verificationUploadBusinessLicence": "व्यवसाय लाइसेंस अपलोड करें",
+  "verificationDrivingLicenseSection": "ड्राइविंग लाइसेंस विवरण",
+  "verificationDlNumberLabel": "DL नंबर",
+  "verificationDlExpiryDateLabel": "DL समाप्ति तिथि",
+  "verificationSelectDateAction": "तारीख चुनें",
+  "verificationUploadDlFront": "DL फ्रंट अपलोड करें",
+  "verificationUploadDlBack": "DL बैक अपलोड करें",
+  "verificationSupplierTtsProfilePhoto": "अपनी सप्लायर प्रोफ़ाइल फोटो अपलोड करें।",
+  "verificationSupplierTtsCompanyName": "अपनी पंजीकृत कंपनी का नाम दर्ज करें।",
+  "verificationSupplierTtsGstNumber": "अपना जीएसटी नंबर दर्ज करें।",
+  "verificationSupplierTtsTanNumber": "अपना TAN नंबर दर्ज करें।",
+  "verificationSupplierTtsGstCertificate": "अपना जीएसटी प्रमाणपत्र अपलोड करें।",
+  "verificationSupplierTtsTanCard": "अपने TAN कार्ड की फोटो अपलोड करें।",
+  "verificationSupplierTtsPanNumber": "अपना PAN नंबर A B C D E 1 2 3 4 F प्रारूप में दर्ज करें।",
+  "verificationSupplierTtsPanCard": "अपना पैन कार्ड अपलोड करें।",
+  "verificationSupplierTtsAadhaarNumber": "अपना 12 अंकों का आधार नंबर दर्ज करें।",
+  "verificationSupplierTtsAadhaarFront": "आधार कार्ड का फ्रंट साइड अपलोड करें।",
+  "verificationSupplierTtsAadhaarBack": "आधार कार्ड का बैक साइड अपलोड करें।",
+  "verificationSupplierTtsBusinessLicenceNumber": "यदि उपलब्ध हो तो व्यवसाय लाइसेंस नंबर दर्ज करें।",
+  "verificationSupplierTtsBusinessLicenceDoc": "यदि उपलब्ध हो तो व्यवसाय लाइसेंस दस्तावेज़ अपलोड करें।",
+  "verificationTruckerTtsProfilePhoto": "अपनी ट्रकर प्रोफ़ाइल फोटो अपलोड करें।",
+  "verificationTruckerTtsAadhaarNumber": "अपना 12 अंकों का आधार नंबर दर्ज करें।",
+  "verificationTruckerTtsAadhaarFront": "आधार कार्ड का फ्रंट साइड अपलोड करें।",
+  "verificationTruckerTtsAadhaarBack": "आधार कार्ड का बैक साइड अपलोड करें।",
+  "verificationTruckerTtsPanNumber": "अपना पैन नंबर दर्ज करें, प्रारूप ए बी सी डी ई 1 2 3 4 एफ।",
+  "verificationTruckerTtsPanCard": "अपना पैन कार्ड अपलोड करें।",
+  "verificationTruckerTtsDlNumber": "अपना ड्राइविंग लाइसेंस नंबर जैसा छपा है वैसा ही दर्ज करें।",
+  "verificationTruckerTtsDlFront": "ड्राइविंग लाइसेंस का फ्रंट साइड अपलोड करें।",
+  "verificationTruckerTtsDlBack": "ड्राइविंग लाइसेंस का बैक साइड अपलोड करें।"
+}

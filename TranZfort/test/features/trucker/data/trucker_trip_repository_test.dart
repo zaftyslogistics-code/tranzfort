@@ -165,7 +165,7 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, hasLength(1));
-    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
     expect(result.valueOrNull!.first.truckNumber, 'MH12AB1234');
     expect(result.valueOrNull!.first.proofStatus, 'POD uploaded');
   });
@@ -218,7 +218,7 @@ void main() {
     final result = await repository.fetchTripDetail('trip-1');
 
     expect(result.isSuccess, isTrue);
-    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
     expect(result.valueOrNull?.supplier.fullName, 'Amit Supplier');
     expect(result.valueOrNull?.truckBodyType, 'Open');
   });

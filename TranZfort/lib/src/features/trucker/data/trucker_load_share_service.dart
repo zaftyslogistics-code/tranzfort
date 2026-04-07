@@ -36,19 +36,19 @@ class TruckerLoadShareService {
     String localizedPickupDate,
     TruckerLoadDetail detail,
   ) {
-    final routeSummary = '${detail.summary.originCity} → ${detail.summary.destinationCity}';
+    final routeSummary = '${detail.summary.originCity} > ${detail.summary.destinationCity}';
     final requirement = _localizedBodyType(l10n, detail.summary.requiredBodyType);
     final tyreSummary = detail.summary.requiredTyres.isEmpty
         ? l10n.chatTruckTyresLabel(l10n.truckerLoadDetailAnyOption)
         : l10n.chatTruckTyresLabel(detail.summary.requiredTyres.join('/'));
-    final superLoadLine = detail.summary.isSuperLoad ? 'Super Load • Payment Guarantee' : null;
+    final superLoadLine = detail.summary.isSuperLoad ? 'Super Load - Payment Guarantee' : null;
     final appLink = '${AppRoutes.loadDetailPath}/${detail.summary.id}';
     final text = [
       'TranZfort load: $routeSummary',
       'Material: ${detail.summary.material}',
       'Weight: ${_tonnes(detail.summary.weightTonnes)} tonnes',
       l10n.supplierLoadCardPickupDate(localizedPickupDate),
-      'Truck: $requirement • $tyreSummary',
+      'Truck: $requirement - $tyreSummary',
       l10n.truckerLoadDetailPriceLabel(
         detail.summary.priceAmount.toStringAsFixed(0),
         _localizedPriceType(l10n, detail.summary.priceType),

@@ -7,9 +7,12 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
+import 'supplier_trip_repository_models.dart';
+import 'supplier_trip_repository_backend.dart';
 
-part 'supplier_trip_repository_models.dart';
-part 'supplier_trip_repository_backend.dart';
+export 'supplier_trip_repository_models.dart';
+export 'supplier_trip_repository_backend.dart';
 
 class SupplierTripsRepository {
   final SupplierTripsBackend _backend;
@@ -297,15 +300,15 @@ class SupplierTripsRepository {
     return SupplierTrip(
       id: (map['id'] ?? '').toString(),
       loadId: (map['load_id'] ?? '').toString(),
-      routeLabel: destination.isEmpty ? origin : '$origin → $destination',
+      routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       material: material,
       stage: (map['stage'] ?? 'assigned').toString(),
       truckerId: (map['trucker_id'] ?? '').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
-      assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
-      deliveredAt: _readDate(map['delivered_at']),
-      podUploadedAt: _readDate(map['pod_uploaded_at']),
-      completedAt: _readDate(map['completed_at']),
+      assignedAt: DateTime.tryParse((map['assigned_at'] ?? '').toString()) ?? DateTime.now(),
+      deliveredAt: readDate(map['delivered_at']),
+      podUploadedAt: readDate(map['pod_uploaded_at']),
+      completedAt: readDate(map['completed_at']),
       hasLrProof: ((map['lr_document_path'] ?? '').toString()).trim().isNotEmpty,
       hasPodProof: ((map['pod_document_path'] ?? '').toString()).trim().isNotEmpty,
     );
@@ -329,24 +332,24 @@ class SupplierTripsRepository {
     return SupplierTripDetail(
       id: (map['id'] ?? '').toString(),
       loadId: (map['load_id'] ?? '').toString(),
-      routeLabel: destination.isEmpty ? origin : '$origin → $destination',
+      routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       material: material,
       stage: (map['stage'] ?? 'assigned').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),
       truckBodyType: truckMap['body_type']?.toString(),
-      truckTyres: _readIntNullable(truckMap['tyres']),
-      assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
-      deliveredAt: _readDate(map['delivered_at']),
-      podUploadedAt: _readDate(map['pod_uploaded_at']),
-      completedAt: _readDate(map['completed_at']),
+      truckTyres: readInt(truckMap['tyres']),
+      assignedAt: DateTime.tryParse((map['assigned_at'] ?? '').toString()) ?? DateTime.now(),
+      deliveredAt: readDate(map['delivered_at']),
+      podUploadedAt: readDate(map['pod_uploaded_at']),
+      completedAt: readDate(map['completed_at']),
       originLabel: origin,
       destinationLabel: destination,
-      routeDistanceKm: _readDouble(loadMap['route_distance_km']),
-      routeDurationMinutes: _readIntNullable(loadMap['route_duration_minutes']),
-      pickupDate: _readDate(loadMap['pickup_date']),
-      lrDocumentPath: _nullableString(map['lr_document_path']),
-      podDocumentPath: _nullableString(map['pod_document_path']),
+      routeDistanceKm: readDouble(loadMap['route_distance_km']),
+      routeDurationMinutes: readInt(loadMap['route_duration_minutes']),
+      pickupDate: readDate(loadMap['pickup_date']),
+      lrDocumentPath: nullableString(map['lr_document_path']),
+      podDocumentPath: nullableString(map['pod_document_path']),
       lrSignedUrl: lrSignedUrl,
       podSignedUrl: podSignedUrl,
       disputeSummary: disputeSummary == null
@@ -368,42 +371,9 @@ class SupplierTripsRepository {
     return SupplierTripRating(
       id: (row['id'] ?? '').toString(),
       score: (row['score'] as num?)?.toInt() ?? 0,
-      comment: _nullableString(row['comment']),
+      comment: nullableString(row['comment']),
       createdAt: DateTime.parse((row['created_at'] ?? '').toString()),
     );
-  }
-
-  DateTime? _readDate(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    if (raw.isEmpty) {
-      return null;
-    }
-    return DateTime.parse(raw);
-  }
-
-  String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    if (raw.isEmpty) {
-      return null;
-    }
-    return raw;
-  }
-
-  double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
-  }
-
-  int? _readIntNullable(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is int) {
-      return value;
-    }
-    return int.tryParse(value.toString());
   }
 
   AppFailure _mapError(Object error, StackTrace stackTrace) {

@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
 
 enum AppNotificationType {
   verificationUpdate,
@@ -90,14 +91,14 @@ class NotificationDto {
       id: (map['id'] ?? '').toString(),
       type: AppNotificationTypeX.fromDatabase((map['notification_type'] ?? 'system_notice').toString()),
       priority: AppNotificationPriorityX.fromDatabase((map['notification_priority'] ?? 'medium').toString()),
-      titleText: _nullableString(map['title_text']),
-      bodyText: _nullableString(map['body_text']),
-      relatedLoadId: _nullableString(map['related_load_id']),
-      relatedTripId: _nullableString(map['related_trip_id']),
-      relatedCaseId: _nullableString(map['related_case_id']),
-      actionRouteHint: _nullableString(map['action_route_hint']),
+      titleText: nullableString(map['title_text']),
+      bodyText: nullableString(map['body_text']),
+      relatedLoadId: nullableString(map['related_load_id']),
+      relatedTripId: nullableString(map['related_trip_id']),
+      relatedCaseId: nullableString(map['related_case_id']),
+      actionRouteHint: nullableString(map['action_route_hint']),
       isRead: map['is_read'] == true,
-      readAt: _readDate(map['read_at']),
+      readAt: readDate(map['read_at']),
       createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
     );
   }
@@ -148,6 +149,36 @@ class AppNotification {
     required this.readAt,
     required this.createdAt,
   });
+
+  AppNotification copyWith({
+    String? id,
+    AppNotificationType? type,
+    AppNotificationPriority? priority,
+    String? titleText,
+    String? bodyText,
+    String? relatedLoadId,
+    String? relatedTripId,
+    String? relatedCaseId,
+    String? actionRouteHint,
+    bool? isRead,
+    DateTime? readAt,
+    DateTime? createdAt,
+  }) {
+    return AppNotification(
+      id: id ?? this.id,
+      type: type ?? this.type,
+      priority: priority ?? this.priority,
+      titleText: titleText ?? this.titleText,
+      bodyText: bodyText ?? this.bodyText,
+      relatedLoadId: relatedLoadId ?? this.relatedLoadId,
+      relatedTripId: relatedTripId ?? this.relatedTripId,
+      relatedCaseId: relatedCaseId ?? this.relatedCaseId,
+      actionRouteHint: actionRouteHint ?? this.actionRouteHint,
+      isRead: isRead ?? this.isRead,
+      readAt: readAt ?? this.readAt,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }
 
 abstract class NotificationBackend {
@@ -315,6 +346,27 @@ class NotificationRepository {
     }
   }
 
+  Stream<Result<int>> watchUnreadCount() async* {
+    final userId = _currentUserId();
+    if (userId == null) {
+      yield const Failure<int>(UnauthorizedFailure());
+      return;
+    }
+
+    // Compute count directly from stream data to avoid N+1 queries
+    await for (final rows in _backend.watchNotifications(userId: userId)) {
+      try {
+        final unreadCount = rows.where((row) {
+          final isRead = row['is_read'] as bool? ?? false;
+          return !isRead;
+        }).length;
+        yield Success<int>(unreadCount);
+      } catch (error, stackTrace) {
+        yield Failure<int>(_mapError(error, stackTrace));
+      }
+    }
+  }
+
   Future<Result<void>> markRead(String notificationId) async {
     final userId = _currentUserId();
     if (userId == null) {
@@ -355,19 +407,6 @@ class NotificationRepository {
 
   AppFailure _mapError(Object error, StackTrace stackTrace) =>
       mapSupabaseError(error, stackTrace);
-}
-
-String? _nullableString(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  return raw.isEmpty ? null : raw;
-}
-
-DateTime? _readDate(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return DateTime.tryParse(raw);
 }
 
 final notificationRepositoryProvider = Provider<NotificationRepository>((ref) {

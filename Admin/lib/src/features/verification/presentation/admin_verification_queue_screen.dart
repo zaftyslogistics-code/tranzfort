@@ -106,7 +106,11 @@ class AdminVerificationQueueScreen extends ConsumerWidget {
                         (item) => ListTile(
                           contentPadding: EdgeInsets.zero,
                           leading: Icon(
-                            item.subjectType == 'truck' ? Icons.local_shipping_outlined : Icons.verified_user_outlined,
+                            item.subjectType == 'truck'
+                                ? Icons.local_shipping_outlined
+                                : (item.reviewType == 'profile_photo_update'
+                                    ? Icons.photo_camera_back_outlined
+                                    : Icons.verified_user_outlined),
                           ),
                           title: Text(item.displayName),
                           subtitle: Column(
@@ -120,7 +124,7 @@ class AdminVerificationQueueScreen extends ConsumerWidget {
                                 ),
                               const SizedBox(height: 4),
                               Text(
-                                '${_statusLabel(item.caseStatus)} • ${item.isClaimed ? 'Claimed' : 'Unclaimed'}',
+                                '${_statusLabel(item.caseStatus)} • ${item.reviewType == 'profile_photo_update' ? 'Photo update' : 'Full verification'} • ${item.isClaimed ? 'Claimed' : 'Unclaimed'}',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AdminColors.textSecondary),
                               ),
                               if (item.assignedAdminUserId.isNotEmpty) ...[

@@ -620,7 +620,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
       TimeOfDay.fromDateTime(date),
       alwaysUse24HourFormat: true,
     );
-    return '${_formatDate(context, date)} • $time';
+    return '${_formatDate(context, date)} - $time';
   }
 
   String _disputeStatusGuidance(AppLocalizations l10n, String value) {

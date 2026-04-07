@@ -1,0 +1,1093 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart
+00:00 +0: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:00 +11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +16: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +17: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +18: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +19: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: supplier generic verification route redirects to supplier verification path
+00:01 +20: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: trucker generic verification route redirects to trucker verification path
+00:01 +21: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: trucker generic verification route redirects to trucker verification path
+00:01 +22: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: trucker generic verification route redirects to trucker verification path
+00:02 +23: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +24: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +25: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +26: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +27: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +28: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: legacy phone auth route is not part of the active public auth surface
+00:02 +29: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: deactivated authenticated supplier is redirected from auth to delete account path
+00:02 +30: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: deactivated authenticated supplier is redirected from protected routes to delete account path
+00:02 +31: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: deactivated authenticated trucker is redirected from auth to delete account path
+00:02 +32: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: deactivated authenticated trucker is redirected from protected routes to delete account path
+00:02 +33: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/core/navigation/app_router_test.dart: restricted authenticated supplier is redirected from auth to banned path
+00:02 +34: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:02 +35: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:02 +36: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:02 +37: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +38: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +39: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +40: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +41: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +42: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +43: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +44: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +45: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +46: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: splash routes banned users to restricted access
+00:03 +47: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: onboarding gate skips role selection when auth state already knows the role
+00:04 +48: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: onboarding gate skips role selection when auth state already knows the role
+00:04 +49: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/onboarding_screens_test.dart: onboarding gate skips role selection when auth state already knows the role
+00:04 +50: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +51: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +52: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +53: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +54: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +55: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +56: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +57: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +58: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +59: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +60: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +61: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +62: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +63: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +64: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +65: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +66: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +67: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:04 +68: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +69: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +70: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +71: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +72: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +73: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +74: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +75: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +76: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +77: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +78: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +79: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +80: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +81: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +82: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +83: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +84: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +85: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: renders chat thread and marks conversation read on open
+00:05 +86: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-in surfaces explicit email verification guidance
+00:05 +87: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +88: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +89: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +90: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +91: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +92: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: chat screen falls back to unknown for unsupported booking status
+00:05 +93: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: email/password sign-up shows explicit check-email state when session is not ready yet
+00:05 +94: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: sends text messages from composer
+00:06 +95: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/auth/presentation/auth_screens_test.dart: manual auth check-email state can resend verification email
+00:06 +96: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/communication/presentation/chat_screen_test.dart: shows sanitized text-send failure copy
+00:06 +97: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +98: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +99: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +100: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +101: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +102: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +103: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +104: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +105: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +106: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:06 +107: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:07 +108: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/notifications/presentation/notifications_screen_test.dart: renders grouped notifications with overview and high priority treatment
+00:07 +109: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +110: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +111: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +112: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +113: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +114: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:07 +115: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:08 +116: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:08 +117: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/access_restricted_screen_test.dart: access restricted screen shows generic restricted snackbar for suspended accounts
+00:08 +118: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows normal trust-safety guidance for healthy accounts
+00:08 +119: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: account screen shows normal trust-safety guidance for healthy accounts
+00:08 +120: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +121: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +122: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +123: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +124: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +125: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +126: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +127: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +128: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +129: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +130: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +131: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +132: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +133: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/assistant_screen_test.dart: access restricted screen signs out and routes to auth
+00:08 +134: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:08 +135: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +136: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +137: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +138: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +139: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +140: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +141: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +142: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +143: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/delete_account_screen_test.dart: delete account screen shows sanitized lifecycle failure copy
+00:09 +144: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +145: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +146: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +147: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +148: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +149: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +150: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +151: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +152: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +153: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +154: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +155: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +156: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:09 +157: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +158: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +159: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +160: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +161: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +162: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +163: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +164: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/messages_screen_test.dart: renders supplier grouped messages inbox
+00:10 +165: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +166: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +167: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +168: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +169: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +170: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +171: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +172: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +173: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:10 +174: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +175: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +176: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +177: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +178: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +179: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +180: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +181: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +182: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +183: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +184: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +185: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +186: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +187: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +188: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +189: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +190: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +191: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +192: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen shows request permission action when push permission is not determined
+00:11 +193: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +194: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +195: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +196: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +197: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +198: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +199: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +200: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:11 +201: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +202: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +203: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +203: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: 'en'
+  Actual: 'hi'
+   Which: is different.
+          Expected: en
+            Actual: hi
+                    ^
+           Differ at offset 0
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart:147:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart line 147
+The test description was:
+  settings screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:12 +203 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +203 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/settings_screen_test.dart: settings screen hear summary action triggers contextual TTS [E]
+  Test failed. See exception logs above.
+  The test description was: settings screen hear summary action triggers contextual TTS
+  
+00:12 +204 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +205 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +206 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +207 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+00:12 +208 -1: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing supplier verification
+and the business licence prerequisite: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:194:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 194
+The test description was:
+  renders supplier dashboard success state
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:12 +208 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:12 +208 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders supplier dashboard success state [E]
+  Test failed. See exception logs above.
+  The test description was: renders supplier dashboard success state
+  
+00:12 +209 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:12 +210 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:12 +211 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+00:12 +212 -2: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextContainingWidgetFinder:<Found 0 widgets with text containing Coal - Γé╣54000 -
+Negotiable: []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart:318:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart line 318
+The test description was:
+  renders localized supplier load detail success status surfaces
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:12 +212 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:12 +212 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_load_detail_screen_test.dart: renders localized supplier load detail success status surfaces [E]
+  Test failed. See exception logs above.
+  The test description was: renders localized supplier load detail success status surfaces
+  
+00:12 +213 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +214 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +215 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +216 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +217 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +218 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +219 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +220 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +221 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +222 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +223 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +224 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +224 -3: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: verified supplier dashboard review verification action opens supplier verification
+
+Warning: A call to tap() with finder "Found 1 widget with text "Review verification" (ignoring all but first): [
+  Text("Review verification", debugLabel: ((englishLike labelLarge 2021).merge((blackMountainView labelLarge).apply)).copyWith, inherit: false, color: Color(alpha: 1.0000, red: 0.0588, green: 0.4353, blue: 0.4118, colorSpace: ColorSpace.sRGB), family: Roboto, size: 14.0, weight: 500, letterSpacing: 0.1, baseline: alphabetic, height: 1.4x, leadingDistribution: even, decoration: Color(alpha: 1.0000, red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none, dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+]" derived an Offset (Offset(216.0, 1063.9)) that would not hit test on the specified widget.
+Maybe the widget is actually off-screen, or another widget is obscuring it, or the widget cannot receive pointer events.
+Indeed, Offset(216.0, 1063.9) is outside the bounds of the root of the render tree, Size(800.0, 600.0).
+The finder corresponds to this RenderBox: RenderParagraph#672da relayoutBoundary=up2
+The hit test result at that offset is: HitTestResult(HitTestEntry<HitTestTarget>#90438(_ReusableRenderView#84ed7), HitTestEntry<HitTestTarget>#8e9dc(<AutomatedTestWidgetsFlutterBinding>))
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2081:25)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1865:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1045:7)
+#3      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:350:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+#6      StackZoneSpecification._registerCallback.<anonymous closure> (package:stack_trace/src/stack_zone_specification.dart:114:42)
+<asynchronous suspension>
+To silence this warning, pass "warnIfMissed: false" to "tap()".
+To make this warning fatal, set WidgetController.hitTestWarningShouldBeFatal to true.
+
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Supplier verification opened": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:353:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 353
+The test description was:
+  verified supplier dashboard review verification action opens supplier verification
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:13 +224 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +224 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: verified supplier dashboard review verification action opens supplier verification [E]
+  Test failed. See exception logs above.
+  The test description was: verified supplier dashboard review verification action opens supplier verification
+  
+00:13 +225 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +225 -4: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: 'en'
+  Actual: 'hi'
+   Which: is different.
+          Expected: en
+            Actual: hi
+                    ^
+           Differ at offset 0
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:1478:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 1478
+The test description was:
+  profile screen hear summary action triggers contextual TTS
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:13 +225 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +225 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary action triggers contextual TTS [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen hear summary action triggers contextual TTS
+  
+00:13 +226 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +227 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +227 -5: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary falls back to unknown for unsupported trust and account states
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: 'en'
+  Actual: 'hi'
+   Which: is different.
+          Expected: en
+            Actual: hi
+                    ^
+           Differ at offset 0
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart:1510:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart line 1510
+The test description was:
+  profile screen hear summary falls back to unknown for unsupported trust and account states
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:13 +227 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +227 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart: profile screen hear summary falls back to unknown for unsupported trust and account states [E]
+  Test failed. See exception logs above.
+  The test description was: profile screen hear summary falls back to unknown for unsupported trust and account states
+  
+00:13 +228 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +229 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:13 +230 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:14 +231 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:14 +232 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders supplier my loads success state
+00:14 +233 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:14 +234 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:14 +235 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: renders supplier trips success state
+00:14 +236 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard empty recent-loads CTA opens my loads
+00:14 +237 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: renders empty state for active loads
+00:14 +238 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: supplier trips card tap opens trip detail
+00:14 +239 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard recent-load card opens load detail
+00:14 +240 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard recent-load card opens load detail
+00:14 +241 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: supplier trips fall back to unknown for unsupported stage
+00:14 +242 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: verified supplier without company name routes empty-state CTA to verification
+00:14 +243 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard quick action opens supplier trips
+00:14 +244 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard quick action opens supplier trips
+00:14 +245 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: supplier my loads routes active empty-state CTA to support when supplier profile is unavailable
+00:14 +246 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_trips_screen_test.dart: supplier trips completed empty-state action opens supplier trips route
+00:14 +247 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard quick action opens messages
+00:15 +248 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: supplier my loads completed empty-state action opens my loads route
+00:15 +249 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_my_loads_screen_test.dart: supplier my loads completed empty-state action opens my loads route
+00:15 +250 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +251 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +252 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +253 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +254 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +255 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +256 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +257 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +258 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +259 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +260 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +261 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +262 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:15 +263 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +264 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +265 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +266 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +267 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +268 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +269 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +270 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +271 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +272 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +273 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +274 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +275 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +276 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +277 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +278 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +279 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/support_screen_shell_test.dart: support screen create ticket action routes to create support ticket screen
+00:16 +280 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness verification action opens supplier verification
+00:16 +281 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness verification action opens supplier verification
+00:16 +282 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness verification action opens supplier verification
+00:16 +283 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness verification action opens supplier verification
+00:16 +284 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: top app bar voice assistance action is not visible
+00:16 +285 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: supplier dashboard super load readiness support action opens support when verification is incomplete
+00:16 +286 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +287 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +288 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +289 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +290 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +291 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +292 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +293 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +294 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +295 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer assistant item is not visible
+00:16 +296 -6: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: pending supplier dashboard super load readiness shows pending-review guidance and review action
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Your supplier verification is already under
+review. Super Load readiness cannot move forward until that review completes, and final eligibility
+still remains admin-managed until company-age/readiness fields exist in the current source model.":
+[]>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1291:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1291
+The test description was:
+  pending supplier dashboard super load readiness shows pending-review guidance and review action
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:16 +296 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:16 +296 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: pending supplier dashboard super load readiness shows pending-review guidance and review action [E]
+  Test failed. See exception logs above.
+  The test description was: pending supplier dashboard super load readiness shows pending-review guidance and review action
+  
+00:17 +296 -7: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: rejected supplier dashboard super load readiness shows correction guidance and fix action
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Your supplier verification needs correction
+before Super Load readiness can move forward. Review the latest verification feedback, update the
+required documents, and then re-check this readiness surface once the packet is resubmitted.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1351:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1351
+The test description was:
+  rejected supplier dashboard super load readiness shows correction guidance and fix action
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:17 +296 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+00:17 +296 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: rejected supplier dashboard super load readiness shows correction guidance and fix action [E]
+  Test failed. See exception logs above.
+  The test description was: rejected supplier dashboard super load readiness shows correction guidance and fix action
+  
+00:17 +297 -8: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 2 widgets with text "Messages": [
+            Text("Messages", debugLabel: ((englishLike labelMedium 2021).merge((blackMountainView
+labelMedium).apply)).apply, inherit: false, color: Color(alpha: 1.0000, red: 0.2863, green: 0.2706,
+blue: 0.3098, colorSpace: ColorSpace.sRGB), family: Roboto, size: 12.0, weight: 500, letterSpacing:
+0.5, baseline: alphabetic, height: 1.3x, leadingDistribution: even, decoration: Color(alpha: 1.0000,
+red: 0.1137, green: 0.1059, blue: 0.1255, colorSpace: ColorSpace.sRGB) TextDecoration.none,
+dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+            Text("Messages", dependencies: [DefaultSelectionStyle, DefaultTextStyle, MediaQuery]),
+          ]>
+   Which: is too many
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart:341:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart line 341
+The test description was:
+  drawer messages item routes to messages
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:17 +297 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:17 +297 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/user_app_shell_test.dart: drawer messages item routes to messages [E]
+  Test failed. See exception logs above.
+  The test description was: drawer messages item routes to messages
+  
+00:17 +298 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:17 +299 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:17 +300 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:17 +301 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +301 -9: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders error and empty states for supplier dashboard sections
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Both supplier verification and the business
+licence prerequisite still need attention before Super Load readiness can move closer to
+eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness
+fields exist in the current source model.": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart:1586:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart line 1586
+The test description was:
+  renders error and empty states for supplier dashboard sections
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:18 +301 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +301 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/supplier_dashboard_screen_test.dart: renders error and empty states for supplier dashboard sections [E]
+  Test failed. See exception logs above.
+  The test description was: renders error and empty states for supplier dashboard sections
+  
+00:18 +302 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +303 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +304 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +305 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +306 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +307 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +308 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +309 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +310 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +311 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +312 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +313 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:18 +314 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +315 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +316 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +317 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +318 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +319 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: renders sanitized post-load submission failure copy
+00:19 +320 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +321 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +322 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +323 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +324 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +325 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +326 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +327 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +328 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:19 +329 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:20 +330 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:20 +331 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen submits dispute and opens support with created ticket id
+00:20 +332 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting until verification is complete
+00:20 +333 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart: supplier trip detail report action opens report issue route with trip context
+00:20 +334 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/raise_dispute_screen_test.dart: raise dispute screen falls back to unknown for unsupported trip stage
+00:20 +335 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +336 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +337 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +338 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +339 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +340 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile is unavailable
+00:20 +341 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/providers/supplier_trips_provider_test.dart: supplier trips provider loads active trips initially
+00:20 +342 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart: renders supplier already rated state on completed trip
+00:20 +343 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart: renders supplier already rated state on completed trip
+00:20 +344 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart: renders supplier already rated state on completed trip
+00:20 +345 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile fails to load and offers support recovery
+00:21 +346 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile fails to load and offers support recovery
+00:21 +347 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks supplier posting when supplier profile fails to load and offers support recovery
+00:21 +348 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/supplier_trip_detail_screen_test.dart: renders supplier waiting-for-user dispute banner copy
+00:21 +349 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/providers/supplier_trip_action_provider_test.dart: supplier trip action provider cancels trip and refreshes detail
+00:21 +350 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +351 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +352 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +353 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +354 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +355 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +356 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +357 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: keeps supplier posting enabled once verification is complete
+00:21 +358 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks verified supplier posting until company details are completed
+00:21 +359 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks verified supplier posting until company details are completed
+00:21 +360 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks verified supplier posting until company details are completed
+00:21 +361 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: blocks verified supplier posting until company details are completed
+00:21 +362 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +363 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +364 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +365 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +366 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +367 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +368 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +369 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +370 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +371 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +372 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +373 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +374 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+00:22 +375 -10: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following StateError was thrown running a test:
+Bad state: No element
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:694:25)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:868:30)
+#2      WidgetController.dragUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2398:38)
+<asynchronous suspension>
+#3      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#4      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2355:7)
+<asynchronous suspension>
+#5      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#6      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart:431:5)
+<asynchronous suspension>
+#7      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#8      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  successful supplier post load submission opens my loads
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:23 +375 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +375 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/supplier/presentation/post_load_screen_test.dart: successful supplier post load submission opens my loads [E]
+  Test failed. See exception logs above.
+  The test description was: successful supplier post load submission opens my loads
+  
+00:23 +376 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +377 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +378 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +379 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +380 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +381 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:23 +382 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +383 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +384 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +385 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +386 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +387 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +388 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +389 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +390 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +391 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +392 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +393 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen shows sanitized submission failure copy
+00:24 +394 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen shows sanitized submission failure copy
+00:24 +395 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen shows sanitized submission failure copy
+00:24 +396 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen shows sanitized submission failure copy
+00:24 +397 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen shows sanitized submission failure copy
+00:25 +398 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen submits and navigates to support route
+00:25 +399 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: renders support tickets and selected detail thread
+00:25 +400 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: renders support tickets and selected detail thread
+00:25 +401 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen submits and navigates to support route
+00:25 +402 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen submits and navigates to support route
+00:25 +403 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/create_support_ticket_screen_test.dart: create support ticket screen allows removing an attached image before submit
+00:25 +404 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: renders sanitized selected support detail failure copy
+00:25 +405 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +406 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +407 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +408 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +409 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +410 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen blocks submission until evidence is attached
+00:25 +411 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:25 +412 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:25 +413 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:25 +414 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:26 +415 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:26 +416 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:26 +417 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:26 +418 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+00:26 +419 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer attaches an image path and clears it after successful submit
+Support reply attachment relocation failed for reply reply-created: Instance of 'UnauthorizedFailure'
+00:26 +420 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen renders fake payout proof guidance and prompt chips
+00:26 +421 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer allows removing an attached image before submit
+00:26 +422 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen reply composer allows removing an attached image before submit
+00:26 +423 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen appends prompt chip text into the description
+00:26 +424 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen appends prompt chip text into the description
+00:26 +425 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen appends prompt chip text into the description
+00:26 +426 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen appends prompt chip text into the description
+00:26 +427 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen appends prompt chip text into the description
+00:26 +428 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: renders suspended trust badge and current trust status on support screen
+00:26 +429 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +430 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +431 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +432 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +433 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +434 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/report_issue_screen_test.dart: report issue screen remove evidence action restores the required-evidence state
+00:26 +435 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen create support ticket CTA opens create support ticket route
+00:26 +436 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen create support ticket CTA opens create support ticket route for suppliers
+00:27 +437 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route
+00:27 +438 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route
+00:27 +439 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route
+00:27 +440 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route
+00:27 +441 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route
+00:27 +442 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related trip action opens trip detail route for suppliers
+00:27 +443 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +444 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +445 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +446 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +447 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +448 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +449 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +450 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +451 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +452 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +453 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +454 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route
+00:27 +455 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen selected ticket related load action opens load detail route for suppliers
+00:27 +456 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/support/presentation/support_screen_test.dart: support screen ticket list related trip action opens trip detail route
+00:28 +457 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +458 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +459 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +460 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +461 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +462 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +463 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:28 +464 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:29 +465 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders sanitized trucker readiness failure copy
+00:29 +466 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +467 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +468 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +469 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +470 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +471 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +471 -11: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: recent activity failure exposes retry and refreshes successfully
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following StateError was thrown running a test:
+Bad state: Too many elements
+
+When the exception was thrown, this was the stack:
+#0      Iterable.single (dart:core/iterable.dart:696:24)
+#1      WidgetController.element (package:flutter_test/src/controller.dart:868:30)
+#2      WidgetController.dragUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2398:38)
+<asynchronous suspension>
+#3      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#4      WidgetController.scrollUntilVisible.<anonymous closure> (package:flutter_test/src/controller.dart:2355:7)
+<asynchronous suspension>
+#5      TestAsyncUtils.guard.<anonymous closure> (package:flutter_test/src/test_async_utils.dart:130:27)
+<asynchronous suspension>
+#6      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart:197:5)
+<asynchronous suspension>
+#7      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#8      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  recent activity failure exposes retry and refreshes successfully
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:29 +471 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: filtered empty find loads state exposes reset filters recovery
+00:29 +471 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: recent activity failure exposes retry and refreshes successfully [E]
+  Test failed. See exception logs above.
+  The test description was: recent activity failure exposes retry and refreshes successfully
+  
+00:29 +472 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: shows verification return guidance when fleet is opened from verification flow
+00:29 +473 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: shows verification return guidance when fleet is opened from verification flow
+00:29 +474 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: shows verification return guidance when fleet is opened from verification flow
+00:29 +475 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: shows verification return guidance when fleet is opened from verification flow
+00:30 +476 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders sanitized freight detail failure copy
+00:30 +477 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders sanitized freight detail failure copy
+00:30 +478 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders sanitized freight detail failure copy
+00:30 +479 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: renders trucker trips success state
+00:30 +480 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: renders trucker trips success state
+00:30 +480 -12: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders trucker dashboard success state
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Verification complete": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart:259:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart line 259
+The test description was:
+  renders trucker dashboard success state
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:30 +480 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: renders trucker trips success state
+00:30 +480 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders trucker dashboard success state [E]
+  Test failed. See exception logs above.
+  The test description was: renders trucker dashboard success state
+  
+00:30 +481 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: renders trucker trips success state
+00:30 +482 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: find loads view details action opens load detail route
+00:30 +483 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +484 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +485 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +486 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +487 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +488 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +489 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+00:30 +490 -13: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Γé╣54000 - Negotiable": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart:389:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart line 389
+The test description was:
+  renders trucker load detail success state
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:30 +490 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: trucker trips active empty-state action opens find loads route
+00:30 +490 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders trucker load detail success state [E]
+  Test failed. See exception logs above.
+  The test description was: renders trucker load detail success state
+  
+00:30 +491 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: trucker trips active empty-state action opens find loads route
+00:30 +492 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: trucker trips active empty-state action opens find loads route
+00:31 +493 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: trucker trips active empty-state action opens find loads route
+00:31 +494 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trips_screen_test.dart: trucker trips active empty-state action opens find loads route
+00:31 +495 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: renders rejected truck review summary, next step, and blocked-booking guidance
+00:31 +496 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: trucker dashboard hero action opens find loads route
+00:31 +497 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders neutral fallback for unknown booking status on trucker load detail
+00:31 +498 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: renders neutral fallback for unknown booking status on trucker load detail
+00:31 +499 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: find loads load card tap opens load detail route
+00:31 +500 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: find loads load card tap opens load detail route
+00:31 +501 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_find_loads_screen_test.dart: find loads load card tap opens load detail route
+00:31 +502 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: trucker dashboard quick action opens fleet route
+00:31 +503 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: trucker dashboard quick action opens fleet route
+00:31 +504 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: trucker dashboard quick action opens fleet route
+00:31 +505 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_fleet_screen_test.dart: renders rejected truck fallback guidance when review summary is unavailable
+00:31 +506 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +507 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +508 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +509 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +510 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +511 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +512 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +513 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +514 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:31 +515 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +516 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +517 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +518 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +519 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +520 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +521 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +522 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +523 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +524 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders sanitized trip detail failure copy
+00:32 +525 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: starts or resumes supplier chat from load detail
+00:32 +526 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: starts or resumes supplier chat from load detail
+00:32 +527 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: starts or resumes supplier chat from load detail
+00:32 +528 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: rejected verification attention action opens trucker verification route
+00:32 +529 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: trucker trip-detail not-found fallback opens trips route
+00:32 +530 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: trucker trip-detail not-found fallback opens trips route
+00:32 +531 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: trucker trip-detail not-found fallback opens trips route
+00:32 +532 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: verified review verification action opens trucker verification route
+00:32 +533 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: verified review verification action opens trucker verification route
+00:33 +534 -14: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: verified review verification action opens trucker verification route
+ΓòÉΓòÉΓòí EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK Γò₧ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+The following TestFailure was thrown running a test:
+Expected: exactly one matching candidate
+  Actual: _TextWidgetFinder:<Found 0 widgets with text "Verification complete": []>
+   Which: means none were found but one was expected
+
+When the exception was thrown, this was the stack:
+#4      main.<anonymous closure> (file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart:1005:5)
+<asynchronous suspension>
+#5      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#6      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1059:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+This was caught by the test expectation on the following line:
+  file:///C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart line 1005
+The test description was:
+  verified review verification action opens trucker verification route
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+00:33 +534 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker trip detail success state
+00:33 +534 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: verified review verification action opens trucker verification route [E]
+  Test failed. See exception logs above.
+  The test description was: verified review verification action opens trucker verification route
+  
+00:33 +535 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker trip detail success state
+00:33 +536 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: successful booking request shows success snackbar
+00:33 +537 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_load_detail_screen_test.dart: successful booking request shows success snackbar
+00:33 +538 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders neutral fallback for unknown trucker trip stage and supplier verification status
+00:33 +539 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders fleet-only warning when verification is pending but no approved truck exists
+00:33 +540 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders optional LR upload action during pickup flow
+00:33 +541 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: fleet-only warning action opens trucker verification route
+00:33 +542 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: fleet-only warning action opens trucker verification route
+00:33 +543 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: fleet-only warning action opens trucker verification route
+00:33 +544 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: fleet-only warning action opens trucker verification route
+00:33 +545 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders localized proof review countdown duration
+00:33 +546 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders localized proof review countdown duration
+00:33 +547 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_dashboard_screen_test.dart: renders fleet-only warning when no approved truck exists outside active verification banner states
+00:33 +548 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker completed trip rating prompt
+00:33 +549 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker completed trip rating prompt
+00:33 +550 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker completed trip rating prompt
+00:33 +551 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker completed trip rating prompt
+00:33 +552 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker completed trip rating prompt
+00:33 +553 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders already rated state on completed trip
+00:34 +554 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +555 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +556 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +557 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +558 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +559 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +560 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders disputed trip status card
+00:34 +561 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker disputed-stage fallback summary when dispute summary is unavailable
+00:34 +562 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker waiting-for-user dispute banner copy
+00:34 +563 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/providers/trucker_trip_detail_provider_test.dart: trucker trip detail provider loads trip detail
+00:34 +564 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker resolved dispute banner copy
+00:34 +565 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker in-progress dispute coverage for damage-or-shortage category
+00:34 +566 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders trucker resolved dispute banner copy for non-payment category
+00:34 +567 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/providers/trucker_trip_rating_provider_test.dart: trucker trip rating provider loads existing rating
+00:34 +568 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders cancelled trip summary card
+00:34 +569 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders cancelled trip summary card
+00:34 +570 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: renders cancelled trip summary card
+00:34 +571 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: starts or resumes supplier chat from trip detail
+00:35 +572 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: opens report issue route from trip detail with trip context
+00:35 +573 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: opens report issue route from trip detail with trip context
+00:35 +574 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: opens report issue route from trip detail with trip context
+00:35 +575 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: blocks supplier chat from trip detail until trucker verification is complete
+00:35 +576 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: blocked trip-detail verification CTA opens verification route
+00:35 +577 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: blocked trip-detail verification CTA opens verification route
+00:35 +578 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_location_service_test.dart: verification location service resolves nearest offline city when google geocode is unavailable
+00:35 +579 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: blocks supplier chat and call from trip detail until a truck is approved
+00:35 +580 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/trucker/presentation/trucker_trip_detail_screen_test.dart: blocked trip-detail truck CTA opens fleet route
+00:35 +581 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository maps trucker verification detail and truck readiness
+00:35 +582 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository maps supplier verification detail including optional gst and business licence
+00:35 +583 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository saveVerificationPacketFields stores profile and supplier identifiers
+00:35 +584 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository saveDocumentPath updates supplier fields for business licence
+00:35 +585 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository saveDocumentPath updates profile fields for trucker identity documents
+00:35 +586 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository submitForReview uses resubmission rpc when requested
+00:35 +587 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository saveSupplierVerificationLocation updates supplier location fields
+00:35 +588 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/data/verification_repository_test.dart: VerificationRepository returns unauthorized without current user
+00:36 +589 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +590 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +591 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +592 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +593 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +594 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders sanitized verification load failure copy
+00:36 +595 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders structured rejection feedback for affected verification documents
+00:37 +596 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders structured rejection feedback for affected supplier verification documents
+00:37 +597 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders packet-level rejection fallback guidance when structured document feedback is unavailable
+00:37 +598 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders supplier packet-level rejection fallback guidance when structured document feedback is unavailable
+00:37 +599 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: resubmits rejected verification from the screen and shows success feedback
+00:37 +600 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:37 +601 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +602 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +603 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +604 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +605 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +606 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +607 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/theme_render_test.dart: user app theme renders a scaffold with common components
+00:38 +608 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders blocked-submit guidance when trucker verification is missing a required document
+00:38 +609 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders blocked-submit guidance when supplier verification is missing business licence
+00:38 +610 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders blocked-submit guidance when supplier verification is missing company name
+00:38 +611 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: truck readiness warning opens fleet from verification screen
+00:39 +612 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: submits trucker verification for review from the screen and shows success feedback
+00:39 +613 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: submits supplier verification for review from the screen and shows success feedback
+00:39 +614 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders verified trucker verification state without a submit action
+00:39 +615 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders verified supplier verification state without a submit action
+00:39 +616 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders unknown fallback for unsupported verification status
+00:39 +617 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: pending supplier verification keeps the user on the verification screen
+00:39 +618 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: verified trucker verification stays on the verification screen summary
+00:39 +619 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: captures supplier location from verification screen and shows success feedback
+00:39 +620 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: shows action-failure warning when supplier location capture fails
+00:39 +621 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: uploads a verification document from the screen via gallery selection
+00:40 +622 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: uploads supplier business licence from the verification screen via gallery selection
+00:40 +623 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: uploads optional supplier gst certificate from the verification screen via camera selection
+00:40 +624 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: replaces a rejected supplier business licence from the verification screen
+00:40 +625 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: replaces a rejected supplier gst certificate from the verification screen
+00:40 +626 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: replaces a rejected verification document from the screen via camera selection
+00:41 +627 -15: C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/verification/presentation/verification_screen_test.dart: renders supplier verification checklist including optional gst
+00:41 +628 -15: Some tests failed.

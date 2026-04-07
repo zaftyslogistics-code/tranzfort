@@ -67,10 +67,16 @@ class AdminUserRepository {
   }
 
   Future<AdminUserDetail?> getUserDetail(String userId) async {
-    final profile = await backend.fetchProfileById(userId);
-    if (profile == null) {
-      return null;
-    }
+    try {
+      debugPrint('[AdminUserRepository] getUserDetail: Starting for userId: $userId');
+      
+      debugPrint('[AdminUserRepository] getUserDetail: Fetching profile...');
+      final profile = await backend.fetchProfileById(userId);
+      debugPrint('[AdminUserRepository] getUserDetail: Profile: $profile');
+      if (profile == null) {
+        debugPrint('[AdminUserRepository] getUserDetail: Profile is null, returning null');
+        return null;
+      }
 
     final role = _asString(profile['user_role_type']);
     final activityCount = role == 'supplier'
@@ -243,6 +249,11 @@ class AdminUserRepository {
       auditEntries: auditEntries,
       fleetTrucks: fleetTrucks,
     );
+    } catch (error, stackTrace) {
+      debugPrint('[AdminUserRepository] getUserDetail ERROR: $error');
+      debugPrint('[AdminUserRepository] getUserDetail STACK: $stackTrace');
+      rethrow;
+    }
   }
 
   Future<List<VerificationDocument>> _buildVerificationDocuments(List<_DocumentSeed> seeds) async {

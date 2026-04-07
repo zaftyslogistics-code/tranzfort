@@ -8,6 +8,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
+import '../../../core/utils/map_readers.dart';
 import 'trucker_marketplace_repository.dart';
 
 class TruckerApprovedTruck {
@@ -110,16 +111,13 @@ class TruckerBookingRequestSummary {
       id: (map['id'] ?? '').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
       status: (map['status'] ?? 'submitted').toString(),
-      decisionReason: _nullableString(map['decision_reason']),
+      decisionReason: nullableString(map['decision_reason']),
       createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
-      decidedAt: _readDateTime(map['decided_at']),
+      decidedAt: readDate(map['decided_at']),
     );
   }
 
-  static String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    return raw.isEmpty ? null : raw;
-  }
+  // Using shared map_readers.dart helpers
 }
 
 class TruckerLoadDetail {
@@ -364,24 +362,24 @@ class TruckerLoadDetailRepository {
           supplier: TruckerSupplierSummary(
             id: supplierId,
             fullName: (supplierProfile['full_name'] ?? 'Supplier').toString(),
-            companyName: _nullableString(supplierExtension?['company_name']),
+            companyName: nullableString(supplierExtension?['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
           ),
           originCity: (loadRow['origin_city'] ?? '').toString(),
-          originState: _nullableString(loadRow['origin_state']),
-          originLat: _readDouble(loadRow['origin_lat']),
-          originLng: _readDouble(loadRow['origin_lng']),
+          originState: nullableString(loadRow['origin_state']),
+          originLat: readDouble(loadRow['origin_lat']),
+          originLng: readDouble(loadRow['origin_lng']),
           destinationCity: (loadRow['destination_city'] ?? '').toString(),
-          destinationState: _nullableString(loadRow['destination_state']),
-          destinationLat: _readDouble(loadRow['destination_lat']),
-          destinationLng: _readDouble(loadRow['destination_lng']),
-          routeDistanceKm: _readDouble(loadRow['route_distance_km']),
-          routeDurationMinutes: _readIntNullable(loadRow['route_duration_minutes']),
-          routePolyline: _nullableString(loadRow['route_polyline']),
-          routeSnapshotSource: _nullableString(loadRow['route_snapshot_source']),
-          parentLoadId: _nullableString(loadRow['parent_load_id']),
-          assignedTruckerId: _nullableString(loadRow['assigned_trucker_id']),
-          assignedTruckId: _nullableString(loadRow['assigned_truck_id']),
+          destinationState: nullableString(loadRow['destination_state']),
+          destinationLat: readDouble(loadRow['destination_lat']),
+          destinationLng: readDouble(loadRow['destination_lng']),
+          routeDistanceKm: readDouble(loadRow['route_distance_km']),
+          routeDurationMinutes: readInt(loadRow['route_duration_minutes']),
+          routePolyline: nullableString(loadRow['route_polyline']),
+          routeSnapshotSource: nullableString(loadRow['route_snapshot_source']),
+          parentLoadId: nullableString(loadRow['parent_load_id']),
+          assignedTruckerId: nullableString(loadRow['assigned_trucker_id']),
+          assignedTruckId: nullableString(loadRow['assigned_truck_id']),
           createdAt: DateTime.parse((loadRow['created_at'] ?? '').toString()),
           updatedAt: DateTime.parse((loadRow['updated_at'] ?? '').toString()),
           latestBookingRequest: bookingRows.isEmpty ? null : TruckerBookingRequestSummary.fromMap(bookingRows.first),
@@ -467,39 +465,10 @@ class TruckerLoadDetailRepository {
     return mapSupabaseError(error, stackTrace);
   }
 
-  static double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
-  }
-
-  static int? _readIntNullable(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is int) {
-      return value;
-    }
-    return int.tryParse(value.toString());
-  }
-
-  static String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    return raw.isEmpty ? null : raw;
-  }
+  // Using shared map_readers.dart helpers
 }
 
-DateTime? _readDateTime(Object? value) {
-  if (value == null) {
-    return null;
-  }
-  final raw = value.toString();
-  if (raw.trim().isEmpty) {
-    return null;
-  }
-  return DateTime.tryParse(raw);
-}
+// Using shared map_readers.dart helper: readDate
 
 final truckerLoadDetailRepositoryProvider = Provider<TruckerLoadDetailRepository>((ref) {
   final client = ref.watch(supabaseClientProvider);

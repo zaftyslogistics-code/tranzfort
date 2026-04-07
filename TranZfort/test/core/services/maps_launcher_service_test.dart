@@ -14,7 +14,10 @@ void main() {
       destinationLabel: 'Pune',
     );
 
-    expect(uri, isNull);
+    expect(
+      uri.toString(),
+      'https://www.google.com/maps/search/?api=1&query=18.5204%2C73.8567',
+    );
   });
 
   test('buildDirectionsUri uses destination coordinates when available', () {

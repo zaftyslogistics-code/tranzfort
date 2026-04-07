@@ -13,6 +13,8 @@ class _FakeChatRepository extends ChatRepository {
   final Result<List<ChatMessage>> initialMessages;
   final StreamController<Result<List<ConversationPreview>>> conversationStreamController;
   final StreamController<Result<List<ChatMessage>>> messageStreamController;
+  final Result<int> initialUnreadConversationCount;
+  final StreamController<Result<int>> unreadConversationCountStreamController;
   Result<String> sendTextResult;
   Result<String> sendVoiceResult;
   Result<void> markReadResult;
@@ -22,22 +24,34 @@ class _FakeChatRepository extends ChatRepository {
   String? lastVoiceMessageId;
   String? lastVoiceAttachmentPath;
   String? lastMarkedConversationId;
+  int getConversationsCalls = 0;
 
   _FakeChatRepository({
     required this.initialConversations,
     required this.initialMessages,
     required this.conversationStreamController,
     required this.messageStreamController,
+    required this.initialUnreadConversationCount,
+    required this.unreadConversationCountStreamController,
     this.sendTextResult = const Success<String>('message-1'),
     this.sendVoiceResult = const Success<String>('message-voice-1'),
     this.markReadResult = const Success<void>(null),
   }) : super(const _UnusedChatBackend(), () => null, () => throw UnimplementedError());
 
   @override
-  Future<Result<List<ConversationPreview>>> getConversations() async => initialConversations;
+  Future<Result<List<ConversationPreview>>> getConversations() async {
+    getConversationsCalls += 1;
+    return initialConversations;
+  }
 
   @override
   Stream<Result<List<ConversationPreview>>> watchConversations() => conversationStreamController.stream;
+
+  @override
+  Future<Result<int>> getUnreadConversationCount() async => initialUnreadConversationCount;
+
+  @override
+  Stream<Result<int>> watchUnreadConversationCount() => unreadConversationCountStreamController.stream;
 
   @override
   Future<Result<List<ChatMessage>>> getMessages(String conversationId) async => initialMessages;
@@ -114,6 +128,9 @@ class _UnusedChatBackend implements ChatBackend {
 
   @override
   Future<void> markMessagesRead({required String conversationId, required String readerId}) async => throw UnimplementedError();
+
+  @override
+  Future<int> fetchUnreadConversationCount() async => throw UnimplementedError();
 }
 
 ConversationPreview _conversation(String id, {String latestMessagePreview = 'Latest update'}) {
@@ -123,7 +140,7 @@ ConversationPreview _conversation(String id, {String latestMessagePreview = 'Lat
     truckerId: 'trucker-1',
     loadId: 'load-1',
     tripId: 'trip-1',
-    routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+    routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
     loadMaterial: 'Coal',
     loadPriceAmount: 62500,
     loadStatusLabel: 'active',
@@ -133,7 +150,7 @@ ConversationPreview _conversation(String id, {String latestMessagePreview = 'Lat
     supplierCompanyName: 'Amit Logistics',
     truckerName: 'Ravi Trucker',
     truckerMobile: '+919812345678',
-    truckDisplayLabel: 'MH12AB1234 • Tata Ace Gold',
+    truckDisplayLabel: 'MH12AB1234 - Tata Ace Gold',
     bookingRequestId: 'booking-1',
     bookingStatusLabel: 'approved',
     latestMessagePreview: latestMessagePreview,
@@ -164,11 +181,14 @@ void main() {
   test('inbox provider loads initial conversations and merges realtime updates', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
     );
     final container = ProviderContainer(
       overrides: [
@@ -180,6 +200,7 @@ void main() {
       inboxSubscription.close();
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 
@@ -197,14 +218,54 @@ void main() {
     expect(container.read(inboxProvider).conversations, hasLength(2));
   });
 
-  test('conversation messages provider loads initial messages and merges realtime updates', () async {
+  test('inbox provider does not trigger fallback load after realtime arrives promptly', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
+    );
+    final container = ProviderContainer(
+      overrides: [
+        chatRepositoryProvider.overrideWithValue(repository),
+      ],
+    );
+    final subscription = container.listen(inboxProvider, (_, _) {});
+    addTearDown(() async {
+      subscription.close();
+      await conversationStreamController.close();
+      await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
+      container.dispose();
+    });
+
+    conversationStreamController.add(
+      Success<List<ConversationPreview>>([
+        _conversation('conversation-1'),
+      ]),
+    );
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+
+    expect(repository.getConversationsCalls, 0);
+    expect(container.read(inboxProvider).conversations, hasLength(1));
+  });
+
+  test('conversation messages provider loads initial messages and merges realtime updates', () async {
+    final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
+    final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
+    final repository = _FakeChatRepository(
+      initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
+      initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
+      conversationStreamController: conversationStreamController,
+      messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
     );
     final container = ProviderContainer(
       overrides: [
@@ -219,6 +280,7 @@ void main() {
       messagesSubscription.close();
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 
@@ -244,11 +306,14 @@ void main() {
       },
     );
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
     );
     final container = ProviderContainer(
       overrides: [
@@ -266,6 +331,54 @@ void main() {
 
     await conversationStreamController.close();
     await messageStreamController.close();
+    await unreadConversationCountStreamController.close();
+  });
+
+  test('unread conversation count provider loads initial count and merges realtime updates', () async {
+    final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
+    final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
+    final repository = _FakeChatRepository(
+      initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
+      initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
+      conversationStreamController: conversationStreamController,
+      messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
+    );
+    final container = ProviderContainer(
+      overrides: [
+        chatRepositoryProvider.overrideWithValue(repository),
+      ],
+    );
+    final seenValues = <int>[];
+    final subscription = container.listen(unreadConversationCountProvider, (_, next) {
+      final value = next.valueOrNull;
+      if (value != null) {
+        seenValues.add(value);
+      }
+    });
+    addTearDown(() async {
+      subscription.close();
+      await conversationStreamController.close();
+      await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
+      container.dispose();
+    });
+
+    expect(await container.read(unreadConversationCountProvider.future), 1);
+    expect(seenValues, contains(1));
+    await Future<void>.delayed(Duration.zero);
+
+    unreadConversationCountStreamController.add(const Success<int>(3));
+    for (var attempt = 0; attempt < 10; attempt++) {
+      await Future<void>.delayed(Duration.zero);
+      if (seenValues.contains(3)) {
+        break;
+      }
+    }
+
+    expect(seenValues, contains(3));
   });
 
   test('conversation messages provider cancels realtime message subscription on dispose', () async {
@@ -276,11 +389,14 @@ void main() {
         messageStreamCancelled = true;
       },
     );
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
     );
     final container = ProviderContainer(
       overrides: [
@@ -301,16 +417,20 @@ void main() {
 
     await conversationStreamController.close();
     await messageStreamController.close();
+    await unreadConversationCountStreamController.close();
   });
 
   test('send message provider sends text and stores last sent id', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
     );
     final container = ProviderContainer(
       overrides: [
@@ -320,6 +440,7 @@ void main() {
     addTearDown(() async {
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 
@@ -336,11 +457,14 @@ void main() {
   test('send message provider surfaces repository failures', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
       sendTextResult: const Failure<String>(BusinessRuleFailure(message: 'Message blocked')),
     );
     final container = ProviderContainer(
@@ -351,6 +475,7 @@ void main() {
     addTearDown(() async {
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 
@@ -366,11 +491,14 @@ void main() {
   test('send message provider sends voice message', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
       sendVoiceResult: const Success<String>('message-voice-1'),
     );
     final container = ProviderContainer(
@@ -381,6 +509,7 @@ void main() {
     addTearDown(() async {
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 
@@ -400,11 +529,14 @@ void main() {
   test('conversation messages provider marks conversation read', () async {
     final conversationStreamController = StreamController<Result<List<ConversationPreview>>>.broadcast();
     final messageStreamController = StreamController<Result<List<ChatMessage>>>.broadcast();
+    final unreadConversationCountStreamController = StreamController<Result<int>>.broadcast();
     final repository = _FakeChatRepository(
       initialConversations: Success<List<ConversationPreview>>([_conversation('conversation-1')]),
       initialMessages: Success<List<ChatMessage>>([_message('message-1')]),
       conversationStreamController: conversationStreamController,
       messageStreamController: messageStreamController,
+      initialUnreadConversationCount: const Success<int>(1),
+      unreadConversationCountStreamController: unreadConversationCountStreamController,
       markReadResult: const Success<void>(null),
     );
     final container = ProviderContainer(
@@ -420,6 +552,7 @@ void main() {
       messagesSubscription.close();
       await conversationStreamController.close();
       await messageStreamController.close();
+      await unreadConversationCountStreamController.close();
       container.dispose();
     });
 

@@ -1,4 +1,6 @@
-part of 'trucker_trip_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'trucker_trip_repository_models.dart';
 
 class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
   final SupabaseClient? _client;

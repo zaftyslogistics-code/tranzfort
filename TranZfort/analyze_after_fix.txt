@@ -1,0 +1,20 @@
+Analyzing TranZfort...                                          
+
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\data\trucker_load_share_service_test.dart:9:14 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:65:10 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:93:10 - missing_required_argument
+  error - The named parameter 'destinationLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'destinationLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'originLat' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+  error - The named parameter 'originLng' is required, but there's no corresponding argument - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:121:10 - missing_required_argument
+
+16 issues found. (ran in 7.1s)

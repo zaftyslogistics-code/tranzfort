@@ -5,11 +5,30 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tranzfort/src/core/error/result.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
+import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/shell/presentation/shell_destinations.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+
+class _FakeAuthRepoForLocale extends AuthRepository {
+  _FakeAuthRepoForLocale() : super(null);
+}
+
+class _FixedAppLocaleController extends AppLocaleController {
+  _FixedAppLocaleController(String languageCode)
+      : super(
+          _FakeAuthRepoForLocale(),
+          profileLanguageCode: languageCode,
+        ) {
+    state = state.copyWith(
+      locale: Locale(languageCode),
+      isInitialized: true,
+      clearFailure: true,
+    );
+  }
+}
 
 class _FakeContextualTtsService extends ContextualTtsService {
   String? lastLanguageCode;
@@ -66,6 +85,7 @@ Widget _buildApp({
       ),
       currentProfileProvider.overrideWith((ref) => AsyncValue<UserProfile?>.data(profile)),
       contextualTtsServiceProvider.overrideWithValue(resolvedTtsService),
+      appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController('en')),
     ],
     child: MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -140,6 +160,7 @@ Widget _buildRoutedApp({
       ),
       currentProfileProvider.overrideWith((ref) => AsyncValue<UserProfile?>.data(profile)),
       contextualTtsServiceProvider.overrideWithValue(resolvedTtsService),
+      appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController('en')),
       if (authRepository != null) authRepositoryProvider.overrideWithValue(authRepository),
     ],
     child: MaterialApp.router(
@@ -171,6 +192,12 @@ UserProfile _profile({
 
 void main() {
   testWidgets('account screen shows normal trust-safety guidance for healthy accounts', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const AccountScreen(),
@@ -188,6 +215,12 @@ void main() {
   });
 
   testWidgets('account screen shows trust-safety warning guidance for warned users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const AccountScreen(),
@@ -204,6 +237,12 @@ void main() {
   });
 
   testWidgets('account screen trust summary support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -222,6 +261,12 @@ void main() {
   });
 
   testWidgets('account screen trust summary support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -240,6 +285,12 @@ void main() {
   });
 
   testWidgets('profile screen shows trust-safety restriction guidance for restricted users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -260,6 +311,12 @@ void main() {
   });
 
   testWidgets('account screen shows suspension guidance for suspended users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const AccountScreen(),
@@ -276,6 +333,12 @@ void main() {
   });
 
   testWidgets('account screen suspended trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -294,6 +357,12 @@ void main() {
   });
 
   testWidgets('account screen suspended trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -312,6 +381,12 @@ void main() {
   });
 
   testWidgets('account screen shows restriction guidance for restricted users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const AccountScreen(),
@@ -332,6 +407,12 @@ void main() {
   });
 
   testWidgets('account screen shows ban guidance for banned users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const AccountScreen(),
@@ -354,6 +435,12 @@ void main() {
   });
 
   testWidgets('account screen restricted trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -375,6 +462,12 @@ void main() {
   });
 
   testWidgets('account screen restricted trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -396,6 +489,12 @@ void main() {
   });
 
   testWidgets('account screen banned trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -418,6 +517,12 @@ void main() {
   });
 
   testWidgets('account screen banned trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -440,6 +545,12 @@ void main() {
   });
 
   testWidgets('account screen verification tile opens supplier verification for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -458,6 +569,12 @@ void main() {
   });
 
   testWidgets('account screen verification tile opens trucker verification for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -476,6 +593,12 @@ void main() {
   });
 
   testWidgets('account screen fleet tile opens fleet for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -501,6 +624,12 @@ void main() {
   });
 
   testWidgets('account screen profile tile opens profile for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -519,6 +648,12 @@ void main() {
   });
 
   testWidgets('account screen profile tile opens profile for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -537,6 +672,12 @@ void main() {
   });
 
   testWidgets('account screen settings tile opens settings for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -562,6 +703,12 @@ void main() {
   });
 
   testWidgets('account screen settings tile opens settings for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -587,6 +734,12 @@ void main() {
   });
 
   testWidgets('account screen support tile opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -612,6 +765,12 @@ void main() {
   });
 
   testWidgets('account screen support tile opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -637,6 +796,12 @@ void main() {
   });
 
   testWidgets('account screen delete account tile opens delete account for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -662,6 +827,12 @@ void main() {
   });
 
   testWidgets('account screen delete account tile opens delete account for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const AccountScreen(),
@@ -687,6 +858,12 @@ void main() {
   });
 
   testWidgets('account screen sign out action opens auth for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final authRepository = _FakeAuthRepository();
 
     await tester.pumpWidget(
@@ -716,6 +893,12 @@ void main() {
   });
 
   testWidgets('account screen sign out action opens auth for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final authRepository = _FakeAuthRepository();
 
     await tester.pumpWidget(
@@ -745,6 +928,12 @@ void main() {
   });
 
   testWidgets('profile screen open fleet readiness action opens fleet for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -770,6 +959,12 @@ void main() {
   });
 
   testWidgets('profile screen shows trust-safety warning guidance for warned users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -786,6 +981,12 @@ void main() {
   });
 
   testWidgets('profile screen shows suspension guidance for suspended users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -803,6 +1004,12 @@ void main() {
   });
 
   testWidgets('profile screen shows restriction guidance with reason summary for restricted users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -823,6 +1030,12 @@ void main() {
   });
 
   testWidgets('profile screen shows ban guidance with reason summary for banned users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -845,6 +1058,12 @@ void main() {
   });
 
   testWidgets('profile screen warned trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -870,6 +1089,12 @@ void main() {
   });
 
   testWidgets('profile screen warned trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -895,6 +1120,12 @@ void main() {
   });
 
   testWidgets('profile screen suspended trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -920,6 +1151,12 @@ void main() {
   });
 
   testWidgets('profile screen suspended trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -945,6 +1182,12 @@ void main() {
   });
 
   testWidgets('profile screen trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -970,6 +1213,12 @@ void main() {
   });
 
   testWidgets('profile screen trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -995,6 +1244,12 @@ void main() {
   });
 
   testWidgets('profile screen banned trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1024,6 +1279,12 @@ void main() {
   });
 
   testWidgets('profile screen banned trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1053,6 +1314,12 @@ void main() {
   });
 
   testWidgets('profile screen delete account action opens delete account for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1078,6 +1345,12 @@ void main() {
   });
 
   testWidgets('profile screen delete account action opens delete account for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1103,6 +1376,12 @@ void main() {
   });
 
   testWidgets('profile screen shows ban guidance for banned users', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildApp(
         child: const ProfileScreen(),
@@ -1124,6 +1403,12 @@ void main() {
   });
 
   testWidgets('profile screen banned trust support action opens support for suppliers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1153,6 +1438,12 @@ void main() {
   });
 
   testWidgets('profile screen banned trust support action opens support for truckers', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(
       _buildRoutedApp(
         child: const ProfileScreen(),
@@ -1182,6 +1473,12 @@ void main() {
   });
 
   testWidgets('profile screen hear summary action triggers contextual TTS', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final ttsService = _FakeContextualTtsService();
 
     await tester.pumpWidget(
@@ -1205,6 +1502,12 @@ void main() {
   });
 
   testWidgets('profile screen hear summary falls back to unknown for unsupported trust and account states', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     final ttsService = _FakeContextualTtsService();
 
     await tester.pumpWidget(

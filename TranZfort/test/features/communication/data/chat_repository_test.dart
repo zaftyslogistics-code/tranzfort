@@ -114,6 +114,14 @@ class _FakeChatBackend implements ChatBackend {
     markedReadConversationId = conversationId;
     markedReadReaderId = readerId;
   }
+
+  @override
+  Future<int> fetchUnreadConversationCount() async {
+    if (error != null) {
+      throw error!;
+    }
+    return conversationRows.where((row) => row['has_unread'] == true).length;
+  }
 }
 
 void main() {
@@ -189,7 +197,7 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, hasLength(1));
-    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
     expect(result.valueOrNull!.first.loadMaterial, 'Coal');
     expect(result.valueOrNull!.first.loadPriceAmount, 62500);
     expect(result.valueOrNull!.first.loadStatusLabel, 'active');
@@ -197,10 +205,74 @@ void main() {
     expect(result.valueOrNull!.first.truckerMobile, '+919812345678');
     expect(result.valueOrNull!.first.supplierCompanyName, 'Amit Logistics');
     expect(result.valueOrNull!.first.bookingRequestId, 'booking-1');
-    expect(result.valueOrNull!.first.truckDisplayLabel, 'MH12AB1234 • Tata Ace Gold');
+    expect(result.valueOrNull!.first.truckDisplayLabel, 'MH12AB1234 - Tata Ace Gold');
     expect(result.valueOrNull!.first.bookingStatusLabel, 'approved');
     expect(result.valueOrNull!.first.latestMessagePreview, 'Rate confirmed');
     expect(result.valueOrNull!.first.hasUnread, isTrue);
+  });
+
+  test('chat repository maps RPC-backed conversation summary rows without N+1 context fetches', () async {
+    final backend = _FakeChatBackend()
+      ..conversationRows = [
+        {
+          'id': 'conversation-1',
+          'supplier_id': 'supplier-1',
+          'trucker_id': 'trucker-1',
+          'load_id': 'load-1',
+          'trip_id': 'trip-1',
+          'route_label': 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+          'load_material': 'Coal',
+          'load_price_amount': 62500,
+          'load_status_label': 'active',
+          'pickup_date': '2026-03-11T00:00:00.000Z',
+          'supplier_name': 'Amit Supplier',
+          'supplier_mobile': '+919876543210',
+          'supplier_company_name': 'Amit Logistics',
+          'trucker_name': 'Ravi Trucker',
+          'trucker_mobile': '+919812345678',
+          'truck_display_label': 'MH12AB1234 • Tata Ace Gold',
+          'booking_request_id': 'booking-1',
+          'booking_status_label': 'approved',
+          'latest_message_type': 'voice',
+          'latest_message_text': null,
+          'last_message_at': '2026-03-10T09:00:00.000Z',
+          'has_unread': true,
+          'is_archived': false,
+          'created_at': '2026-03-10T08:00:00.000Z',
+        },
+      ];
+    final repository = ChatRepository(
+      backend,
+      () => 'supplier-1',
+      () => AppUserRole.supplier,
+    );
+
+    final result = await repository.getConversations();
+
+    expect(result.isSuccess, isTrue);
+    expect(result.valueOrNull, hasLength(1));
+    expect(result.valueOrNull!.first.routeLabel, 'Chandrapur, Maharashtra → Mumbai, Maharashtra');
+    expect(result.valueOrNull!.first.latestMessagePreview, 'Voice message');
+    expect(result.valueOrNull!.first.hasUnread, isTrue);
+  });
+
+  test('chat repository returns unread conversation count from summary rows', () async {
+    final backend = _FakeChatBackend()
+      ..conversationRows = [
+        {'id': 'conversation-1', 'has_unread': true},
+        {'id': 'conversation-2', 'has_unread': false},
+        {'id': 'conversation-3', 'has_unread': true},
+      ];
+    final repository = ChatRepository(
+      backend,
+      () => 'supplier-1',
+      () => AppUserRole.supplier,
+    );
+
+    final result = await repository.getUnreadConversationCount();
+
+    expect(result.isSuccess, isTrue);
+    expect(result.valueOrNull, 2);
   });
 
   test('chat repository maps messages with sender ownership', () async {

@@ -1,4 +1,6 @@
-part of 'supplier_trip_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+
+import 'supplier_trip_repository_models.dart';
 
 class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
   final SupabaseClient? _client;

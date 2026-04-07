@@ -51,15 +51,18 @@ class VerificationLocationService {
     try {
       final servicesEnabled = await _isLocationServiceEnabled();
       if (!servicesEnabled) {
-        return null;
+        throw LocationServiceDisabledException();
       }
 
       var permission = await _checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await _requestPermission();
       }
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-        return null;
+      if (permission == LocationPermission.denied) {
+        throw LocationPermissionDeniedException();
+      }
+      if (permission == LocationPermission.deniedForever) {
+        throw LocationPermissionDeniedForeverException();
       }
 
       final position = await _getCurrentPosition();
@@ -75,6 +78,12 @@ class VerificationLocationService {
         latitude: position.latitude,
         longitude: position.longitude,
       );
+    } on LocationServiceDisabledException {
+      rethrow;
+    } on LocationPermissionDeniedException {
+      rethrow;
+    } on LocationPermissionDeniedForeverException {
+      rethrow;
     } catch (_) {
       return null;
     }
@@ -299,3 +308,9 @@ class VerificationLocationService {
 final verificationLocationServiceProvider = Provider<VerificationLocationService>((ref) {
   return VerificationLocationService();
 });
+
+class LocationServiceDisabledException implements Exception {}
+
+class LocationPermissionDeniedException implements Exception {}
+
+class LocationPermissionDeniedForeverException implements Exception {}

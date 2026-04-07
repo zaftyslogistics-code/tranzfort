@@ -4,13 +4,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
-import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
+import 'chat_repository_conversation_models.dart';
+import 'chat_repository_models.dart';
+import 'chat_repository_backend.dart';
 
-part 'chat_repository_conversation_models.dart';
-part 'chat_repository_models.dart';
-part 'chat_repository_backend.dart';
+export 'chat_repository_conversation_models.dart';
+export 'chat_repository_models.dart';
+export 'chat_repository_backend.dart';
 
 class ChatRepository {
   final ChatBackend _backend;
@@ -45,6 +48,20 @@ class ChatRepository {
     }
   }
 
+  Future<Result<int>> getUnreadConversationCount() async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<int>(UnauthorizedFailure());
+    }
+
+    try {
+      final count = await _backend.fetchUnreadConversationCount();
+      return Success<int>(count);
+    } catch (error, stackTrace) {
+      return Failure<int>(_mapError(error, stackTrace));
+    }
+  }
+
   Stream<Result<List<ConversationPreview>>> watchConversations() async* {
     final userId = _currentUserId();
     final role = _currentUserRole();
@@ -59,8 +76,9 @@ class ChatRepository {
       return;
     }
 
-    await for (final rows in _backend.watchConversations(userId: userId, role: role)) {
+    await for (final _ in _backend.watchConversations(userId: userId, role: role)) {
       try {
+        final rows = await _backend.fetchConversations(userId: userId, role: role);
         final previews = await _mapConversationRows(rows, currentUserId: userId);
         previews.sort((a, b) {
           final aTime = a.lastMessageAt ?? a.createdAt;
@@ -70,6 +88,23 @@ class ChatRepository {
         yield Success<List<ConversationPreview>>(previews);
       } catch (error, stackTrace) {
         yield Failure<List<ConversationPreview>>(_mapError(error, stackTrace));
+      }
+    }
+  }
+
+  Stream<Result<int>> watchUnreadConversationCount() async* {
+    final userId = _currentUserId();
+    if (userId == null) {
+      yield const Failure<int>(UnauthorizedFailure());
+      return;
+    }
+
+    await for (final _ in _backend.watchConversations(userId: userId, role: _currentUserRole())) {
+      try {
+        final count = await _backend.fetchUnreadConversationCount();
+        yield Success<int>(count);
+      } catch (error, stackTrace) {
+        yield Failure<int>(_mapError(error, stackTrace));
       }
     }
   }
@@ -287,101 +322,59 @@ class ChatRepository {
   }) async {
     final previews = <ConversationPreview>[];
     for (final row in rows) {
-      final loadId = (row['load_id'] ?? '').toString();
-      final supplierId = (row['supplier_id'] ?? '').toString();
-      final truckerId = (row['trucker_id'] ?? '').toString();
-      final loadMap = loadId.isEmpty ? null : await _backend.fetchLoadContext(loadId);
-      final supplierProfile = supplierId.isEmpty ? null : await _backend.fetchProfile(supplierId);
-      final supplierExtension = supplierId.isEmpty ? null : await _backend.fetchSupplierExtension(supplierId);
-      final truckerProfile = truckerId.isEmpty ? null : await _backend.fetchProfile(truckerId);
-      final bookingContext = loadId.isEmpty || truckerId.isEmpty
-          ? null
-          : await _backend.fetchBookingContext(loadId: loadId, truckerId: truckerId);
-      final latestMessageMap = await _backend.fetchLatestMessage(
-        conversationId: (row['id'] ?? '').toString(),
-      );
-      final latestMessage = latestMessageMap == null ? null : MessageDto.fromMap(latestMessageMap);
-      final hasUnread = await _backend.fetchHasUnread(
-        conversationId: (row['id'] ?? '').toString(),
-        currentUserId: currentUserId,
-      );
-      final dto = ConversationPreviewDto(
-        id: (row['id'] ?? '').toString(),
-        supplierId: supplierId,
-        truckerId: truckerId,
-        loadId: loadId,
-        tripId: _nullableString(row['trip_id']),
-        routeLabel: _buildRouteLabel(loadMap),
-        loadMaterial: _nullableString(loadMap?['material']),
-        loadPriceAmount: _readDouble(loadMap?['price_amount']),
-        loadStatusLabel: _nullableString(loadMap?['status']),
-        pickupDate: _readDate(loadMap?['pickup_date']),
-        supplierName: (supplierProfile?['full_name'] ?? 'Supplier').toString(),
-        supplierMobile: _nullableString(supplierProfile?['mobile']),
-        supplierCompanyName: _nullableString(supplierExtension?['company_name']),
-        truckerName: (truckerProfile?['full_name'] ?? 'Trucker').toString(),
-        truckerMobile: _nullableString(truckerProfile?['mobile']),
-        truckDisplayLabel: _buildTruckDisplayLabel(bookingContext),
-        bookingRequestId: _nullableString(bookingContext?['id']),
-        bookingStatusLabel: _nullableString(bookingContext?['status']),
-        latestMessagePreview: _previewTextFromLatestMessage(latestMessage),
-        lastMessageAt: _readDate(row['last_message_at']) ?? latestMessage?.createdAt,
-        hasUnread: hasUnread,
-        isArchived: row['is_archived'] == true,
-        createdAt: DateTime.parse((row['created_at'] ?? '').toString()),
-      );
-      previews.add(dto.toDomain());
+      // Phase 3-G: RPC path always returns complete data. N+1 fallback removed.
+      if (!row.containsKey('route_label') || !row.containsKey('has_unread')) {
+        throw const ServerFailure(message: 'Conversation summary row missing required fields. Ensure RPC returns complete data.');
+      }
+      previews.add(_mapConversationSummaryRow(row));
     }
     return previews;
   }
 
-  String _buildRouteLabel(Map<String, dynamic>? loadMap) {
-    final origin = (loadMap?['origin_label'] ?? 'Load').toString();
-    final destination = (loadMap?['destination_label'] ?? '').toString();
-    if (destination.trim().isEmpty) {
-      return origin;
-    }
-    return '$origin → $destination';
-  }
+  ConversationPreview _mapConversationSummaryRow(Map<String, dynamic> row) {
+    final latestMessageType = row['latest_message_type']?.toString();
+    final latestMessageText = nullableString(row['latest_message_text']);
+    final parsedType = latestMessageType == null
+        ? null
+        : ChatMessageTypeX.fromDatabase(latestMessageType);
+    final latestPreview = latestMessageText?.trim().isNotEmpty == true
+        ? latestMessageText!.trim()
+        : switch (parsedType) {
+            ChatMessageType.voice => 'Voice message',
+            ChatMessageType.location => 'Location shared',
+            ChatMessageType.document => 'Document shared',
+            ChatMessageType.mapCard => 'Route card shared',
+            ChatMessageType.truckCard => 'Truck details shared',
+            ChatMessageType.system => 'System update',
+            _ => 'No messages yet',
+          };
 
-  String _previewTextFromLatestMessage(MessageDto? message) {
-    if (message == null) {
-      return 'No messages yet';
-    }
-    return switch (message.type) {
-      ChatMessageType.text => (message.textBody ?? '').trim().isEmpty ? 'New message' : message.textBody!.trim(),
-      ChatMessageType.voice => 'Voice message',
-      ChatMessageType.location => 'Location shared',
-      ChatMessageType.document => 'Document shared',
-      ChatMessageType.mapCard => 'Route card shared',
-      ChatMessageType.truckCard => 'Truck details shared',
-      ChatMessageType.system => (message.textBody ?? '').trim().isEmpty ? 'System update' : message.textBody!.trim(),
-    };
-  }
-
-  String? _buildTruckDisplayLabel(Map<String, dynamic>? bookingContext) {
-    if (bookingContext == null) {
-      return null;
-    }
-    final truckMap = bookingContext['trucks'];
-    final truck = truckMap is Map<String, dynamic> ? truckMap : null;
-    final modelMap = truck?['truck_models'];
-    final model = modelMap is Map<String, dynamic> ? modelMap : null;
-    final truckNumber = _nullableString(truck?['truck_number']);
-    final make = _nullableString(model?['make']);
-    final modelName = _nullableString(model?['model']);
-
-    final modelLabel = [make, modelName].whereType<String>().where((value) => value.trim().isNotEmpty).join(' ');
-    if (truckNumber != null && modelLabel.isNotEmpty) {
-      return '$truckNumber • $modelLabel';
-    }
-    if (truckNumber != null) {
-      return truckNumber;
-    }
-    if (modelLabel.isNotEmpty) {
-      return modelLabel;
-    }
-    return null;
+    return ConversationPreview(
+      id: (row['id'] ?? '').toString(),
+      supplierId: (row['supplier_id'] ?? '').toString(),
+      truckerId: (row['trucker_id'] ?? '').toString(),
+      loadId: (row['load_id'] ?? '').toString(),
+      tripId: nullableString(row['trip_id']),
+      routeLabel: (row['route_label'] ?? 'Load').toString(),
+      loadMaterial: nullableString(row['load_material']),
+      loadPriceAmount: readDouble(row['load_price_amount']),
+      loadStatusLabel: nullableString(row['load_status_label']),
+      pickupDate: readDate(row['pickup_date']),
+      supplierName: (row['supplier_name'] ?? 'Supplier').toString(),
+      supplierMobile: nullableString(row['supplier_mobile']),
+      supplierCompanyName: nullableString(row['supplier_company_name']),
+      truckerName: (row['trucker_name'] ?? 'Trucker').toString(),
+      truckerMobile: nullableString(row['trucker_mobile']),
+      truckDisplayLabel: nullableString(row['truck_display_label']),
+      bookingRequestId: nullableString(row['booking_request_id']),
+      bookingStatusLabel: nullableString(row['booking_status_label']),
+      latestMessagePreview: latestPreview,
+      latestMessageTypeHint: parsedType,
+      lastMessageAt: readDate(row['last_message_at']),
+      hasUnread: row['has_unread'] == true,
+      isArchived: row['is_archived'] == true,
+      createdAt: DateTime.parse((row['created_at'] ?? '').toString()),
+    );
   }
 
   AppFailure _mapError(Object error, StackTrace stackTrace) {
@@ -397,7 +390,7 @@ class ChatRepository {
         return ConflictFailure(debugInfo: error.details?.toString());
       }
     }
-    return mapSupabaseError(error, stackTrace);
+    return ServerFailure(message: 'An unknown error occurred', debugInfo: error.toString());
   }
 }
 

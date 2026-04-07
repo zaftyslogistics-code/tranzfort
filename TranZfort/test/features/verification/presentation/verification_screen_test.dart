@@ -2,14 +2,75 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
 import 'package:tranzfort/src/core/error/result.dart';
+import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
+import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/verification/data/verification_document_upload_service.dart';
 import 'package:tranzfort/src/features/verification/data/verification_location_service.dart';
 import 'package:tranzfort/src/features/verification/data/verification_repository.dart';
 import 'package:tranzfort/src/features/verification/presentation/verification_screen.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 import 'package:image_picker/image_picker.dart';
+
+// Mock classes for testing
+class _FakeAuthRepository extends AuthRepository {
+  _FakeAuthRepository() : super(null);
+
+  @override
+  Stream<AuthState> get authStateChanges => Stream.value(
+        AuthState(
+          AuthChangeEvent.signedIn,
+          Session(
+            accessToken: 'test-token',
+            tokenType: 'bearer',
+            user: User(
+              id: 'test-user',
+              email: 'test@test.com',
+              appMetadata: {},
+              userMetadata: {},
+              aud: 'authenticated',
+              createdAt: DateTime.now().toIso8601String(),
+            ),
+          ),
+        ),
+      );
+
+  @override
+  Future<String?> get currentUserId async => 'test-user';
+
+  @override
+  Future<Result<void>> signOut() async => const Success(null);
+
+  @override
+  Future<Result<void>> signInWithOtp({required String phone}) async {
+    return const Success(null);
+  }
+
+  @override
+  Future<Result<void>> verifyOtp({required String phone, required String token}) async {
+    return const Success(null);
+  }
+
+  @override
+  Future<Result<void>> updatePreferredLanguage(String languageCode) async {
+    return const Success(null);
+  }
+}
+
+class _FakeAppLocaleController extends AppLocaleController {
+  _FakeAppLocaleController() : super(_FakeAuthRepository(), profileLanguageCode: 'hi');
+
+  @override
+  Future<void> _loadInitialLocale() async {
+    state = state.copyWith(
+      locale: const Locale('hi'),
+      isInitialized: true,
+      clearFailure: true,
+    );
+  }
+}
 
 class _FakeVerificationBackend implements VerificationBackend {
   Map<String, dynamic>? profileMap;
@@ -104,6 +165,8 @@ Widget _buildApp({
 }) {
   return ProviderScope(
     overrides: [
+      appLocaleProvider.overrideWith((ref) => _FakeAppLocaleController()),
+      authRepositoryProvider.overrideWith((ref) => _FakeAuthRepository()),
       verificationRepositoryProvider.overrideWith(
         (ref) => VerificationRepository(backend, () => currentUserId),
       ),
@@ -147,6 +210,8 @@ Widget _buildRoutedApp({
 
   return ProviderScope(
     overrides: [
+      appLocaleProvider.overrideWith((ref) => _FakeAppLocaleController()),
+      authRepositoryProvider.overrideWith((ref) => _FakeAuthRepository()),
       verificationRepositoryProvider.overrideWith(
         (ref) => VerificationRepository(backend, () => currentUserId),
       ),
@@ -231,6 +296,43 @@ void main() {
 
     expect(find.textContaining('PAN card'), findsWidgets);
     expect(find.text('Replace document'), findsWidgets);
+  });
+
+  testWidgets('renders inline truck creation fields when truck packet is still required', (tester) async {
+    final backend = _FakeVerificationBackend()
+      ..profileMap = {
+        'id': 'trucker-1',
+        'user_role_type': 'trucker',
+        'verification_status': 'unverified',
+        'verification_rejection_reason': null,
+        'aadhaar_front_document_path': 'trucker-1/aadhaar_front/aadhaar_front.jpg',
+        'aadhaar_back_document_path': 'trucker-1/aadhaar_back/aadhaar_back.jpg',
+        'pan_document_path': 'trucker-1/pan/pan.jpg',
+        'profile_photo_document_path': 'trucker-1/profile_photo/profile_photo.jpg',
+        'aadhaar_number': '123412341234',
+        'aadhaar_last4': '1234',
+        'pan_number': 'ABCDE1234F',
+      }
+      ..approvedTruckCount = 0
+      ..verificationReadyTruckCount = 0;
+
+    await tester.pumpWidget(
+      _buildRoutedApp(
+        backend: backend,
+        currentUserId: 'trucker-1',
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.ensureVisible(find.text('A truck packet is still required').first);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Truck number'), findsOneWidget);
+    expect(find.text('Body type'), findsOneWidget);
+    expect(find.text('RC document'), findsOneWidget);
+    expect(find.text('Upload RC document'), findsOneWidget);
+    expect(find.text('Save truck'), findsOneWidget);
+    expect(find.text('Open fleet'), findsOneWidget);
   });
 
   testWidgets('renders structured rejection feedback for affected supplier verification documents', (tester) async {
@@ -668,6 +770,37 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Add at least one truck before submitting verification.'), findsOneWidget);
+  });
+
+  testWidgets('profile photo document card reflects pending review state for trucker verification', (tester) async {
+    final backend = _FakeVerificationBackend()
+      ..profileMap = {
+        'id': 'trucker-1',
+        'user_role_type': 'trucker',
+        'verification_status': 'pending',
+        'verification_rejection_reason': null,
+        'aadhaar_front_document_path': 'trucker-1/aadhaar_front/aadhaar_front.jpg',
+        'aadhaar_back_document_path': 'trucker-1/aadhaar_back/aadhaar_back.jpg',
+        'pan_document_path': 'trucker-1/pan/pan.jpg',
+        'profile_photo_document_path': 'trucker-1/profile_photo/profile_photo.jpg',
+        'aadhaar_number': '123412341234',
+        'aadhaar_last4': '1234',
+        'pan_number': 'ABCDE1234F',
+      }
+      ..approvedTruckCount = 1
+      ..verificationReadyTruckCount = 1;
+
+    await tester.pumpWidget(
+      _buildApp(
+        backend: backend,
+        currentUserId: 'trucker-1',
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Profile photo uploaded'), findsOneWidget);
+    expect(find.text('Replace document'), findsNothing);
+    expect(find.text('Upload document'), findsNothing);
   });
 
   testWidgets('renders blocked-submit guidance when supplier verification is missing location capture', (tester) async {
@@ -1255,8 +1388,16 @@ void main() {
     await tester.ensureVisible(find.textContaining('PAN card').first);
     await tester.pumpAndSettle();
 
+    final panInlineRow = find.ancestor(
+      of: find.text('PAN card required'),
+      matching: find.byType(Row),
+    );
+
     await tester.tap(
-      find.text('Upload document'),
+      find.descendant(
+        of: panInlineRow,
+        matching: find.text('Upload document'),
+      ),
     );
     await tester.pumpAndSettle();
 

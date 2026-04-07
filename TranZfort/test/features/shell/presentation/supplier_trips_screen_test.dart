@@ -104,7 +104,7 @@ SupplierTrip _sampleTrip(String id, String stage) {
   return SupplierTrip(
     id: id,
     loadId: 'load-$id',
-    routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+    routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
     material: 'Coal',
     stage: stage,
     truckerId: 'trucker-$id',
@@ -131,7 +131,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Supplier trips'), findsOneWidget);
-    expect(find.textContaining('Chandrapur, Maharashtra → Mumbai, Maharashtra'), findsOneWidget);
+    expect(find.textContaining('Chandrapur, Maharashtra > Mumbai, Maharashtra'), findsOneWidget);
     expect(find.text('Track trip'), findsOneWidget);
 
     await tester.tap(find.text('Track trip'));
@@ -151,7 +151,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    final tripCardTitle = find.textContaining('Chandrapur, Maharashtra → Mumbai, Maharashtra').first;
+    final tripCardTitle = find.textContaining('Chandrapur, Maharashtra > Mumbai, Maharashtra').first;
 
     await tester.tap(tripCardTitle);
     await tester.pumpAndSettle();

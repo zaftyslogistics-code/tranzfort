@@ -67,7 +67,7 @@ void main() {
           'notification_type': 'booking_update',
           'notification_priority': 'high',
           'title_text': 'Booking Approved!',
-          'body_text': 'Head to pickup for Coal Chandrapur→Mumbai',
+          'body_text': 'Head to pickup for Coal Chandrapur>Mumbai',
           'related_load_id': 'load-1',
           'related_trip_id': 'trip-1',
           'related_case_id': null,

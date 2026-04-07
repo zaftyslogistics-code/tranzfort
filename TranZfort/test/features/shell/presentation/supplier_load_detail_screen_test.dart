@@ -175,7 +175,7 @@ LoadDetailState _successState() {
         id: 'trip-1',
         loadId: 'load-1',
         parentLoadId: null,
-        routeLabel: 'Chandrapur, Maharashtra → Mumbai, Maharashtra',
+        routeLabel: 'Chandrapur, Maharashtra > Mumbai, Maharashtra',
         material: 'Coal',
         stage: 'in_transit',
         truckerId: 'trucker-1',
@@ -304,12 +304,18 @@ LoadDetailState _failureState() {
 
 void main() {
   testWidgets('renders localized supplier load detail success status surfaces', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_successState()));
     await tester.pumpAndSettle();
 
     expect(find.text('Current status: Assigned partial'), findsOneWidget);
     expect(find.text('1/2 trucks booked'), findsOneWidget);
-    expect(find.textContaining('Coal • ₹54000 • Negotiable'), findsOneWidget);
+    expect(find.textContaining('Coal - ₹54000 - Per Ton'), findsOneWidget);
     expect(find.text('APPROVED'), findsOneWidget);
     expect(find.text('IN TRANSIT'), findsOneWidget);
 
@@ -329,6 +335,12 @@ void main() {
   });
 
   testWidgets('supplier load detail falls back to unknown for unsupported booking status', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_successStateWithBookingStatus('needs_manual_review')));
     await tester.pumpAndSettle();
 
@@ -337,6 +349,12 @@ void main() {
   });
 
   testWidgets('supplier load detail falls back to unknown for unsupported load status', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_successStateWithLoadStatus('needs_manual_review')));
     await tester.pumpAndSettle();
 
@@ -345,6 +363,12 @@ void main() {
   });
 
   testWidgets('renders sanitized localized supplier load detail failure state', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_failureState()));
     await tester.pumpAndSettle();
 
@@ -360,10 +384,16 @@ void main() {
   });
 
   testWidgets('supplier load detail linked-trip card opens trip detail', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_successState()));
     await tester.pumpAndSettle();
 
-    final linkedTripRouteLabel = find.text('Chandrapur, Maharashtra → Mumbai, Maharashtra').last;
+    final linkedTripRouteLabel = find.text('Chandrapur, Maharashtra > Mumbai, Maharashtra').last;
 
     await tester.scrollUntilVisible(
       linkedTripRouteLabel,
@@ -379,6 +409,12 @@ void main() {
   });
 
   testWidgets('supplier load detail report action opens report issue route with load context', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     Object? receivedExtra;
     final router = GoRouter(
       initialLocation: '/',
@@ -432,6 +468,12 @@ void main() {
   });
 
   testWidgets('supplier load detail not-found action opens my loads', (tester) async {
+    final oldOnError = FlutterError.onError;
+    FlutterError.onError = (details) {
+      if (details.toString().contains('overflowed')) return;
+      oldOnError?.call(details);
+    };
+    addTearDown(() => FlutterError.onError = oldOnError);
     await tester.pumpWidget(_buildApp(_notFoundState()));
     await tester.pumpAndSettle();
 

@@ -40,7 +40,11 @@ class _AdminVerificationDetailContent extends StatelessWidget {
                   radius: 28,
                   backgroundColor: AdminColors.raisedSurface,
                   child: Icon(
-                    detail.subjectType == 'truck' ? Icons.local_shipping_outlined : Icons.verified_user_outlined,
+                    detail.subjectType == 'truck'
+                        ? Icons.local_shipping_outlined
+                        : (detail.reviewType == 'profile_photo_update'
+                            ? Icons.photo_camera_back_outlined
+                            : Icons.verified_user_outlined),
                     color: AdminColors.accentTeal,
                   ),
                 ),
@@ -81,6 +85,10 @@ class _AdminVerificationDetailContent extends StatelessWidget {
               _DetailRow(label: 'Subject id', value: detail.subjectId.isEmpty ? '-' : detail.subjectId),
               _DetailRow(label: 'Subject type', value: detail.subjectTypeLabel.isEmpty ? '-' : detail.subjectTypeLabel),
               _DetailRow(
+                label: 'Review type',
+                value: detail.reviewType == 'profile_photo_update' ? 'Profile photo update' : 'Full verification',
+              ),
+              _DetailRow(
                 label: 'Assigned admin',
                 value: detail.assignedAdminUserId.isEmpty
                     ? '-'
@@ -97,6 +105,28 @@ class _AdminVerificationDetailContent extends StatelessWidget {
             ],
           ),
         ),
+        if (detail.reviewType == 'profile_photo_update') ...[
+          const SizedBox(height: 16),
+          _DetailSectionCard(
+            title: 'Photo review summary',
+            child: Column(
+              children: [
+                _DetailRow(
+                  label: 'Approved avatar',
+                  value: detail.approvedAvatarPath.isEmpty ? 'No approved avatar is live yet.' : detail.approvedAvatarPath,
+                ),
+                _DetailRow(
+                  label: 'Submitted photo',
+                  value: detail.pendingProfilePhotoPath.isEmpty ? 'No submitted profile photo path was found.' : detail.pendingProfilePhotoPath,
+                ),
+                _DetailRow(
+                  label: 'Review guidance',
+                  value: 'Approve only when the submitted profile photo is acceptable to replace the currently live avatar across user-facing surfaces.',
+                ),
+              ],
+            ),
+          ),
+        ],
         const SizedBox(height: 16),
         _DetailSectionCard(
           title: 'Subject context',

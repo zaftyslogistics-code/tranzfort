@@ -1,46 +1,19 @@
-part of 'supplier_shell_screens.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-String _localizedSupplierProofStatus(AppLocalizations l10n, SupplierTrip trip) {
-  if (trip.hasPodProof) {
-    return l10n.truckerTripDetailProofStatusPodUploaded;
-  }
-  if (trip.hasLrProof) {
-    return l10n.truckerTripDetailProofStatusLrUploaded;
-  }
-  switch (trip.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripDetailProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripDetailProofStatusProofPending;
-  }
-}
-
-String _localizedSupplierTripStage(AppLocalizations l10n, String stage) {
-  switch (stage.trim().toLowerCase()) {
-    case 'assigned':
-      return l10n.supplierTripDetailStageAssigned;
-    case 'pickup_pending':
-      return l10n.supplierTripDetailStagePickupPending;
-    case 'picked_up':
-      return l10n.supplierTripDetailStagePickedUp;
-    case 'in_transit':
-      return l10n.supplierTripDetailStageInTransit;
-    case 'delivered':
-      return l10n.supplierTripDetailStageDelivered;
-    case 'proof_submitted':
-      return l10n.supplierTripDetailStageProofSubmitted;
-    case 'completed':
-      return l10n.supplierTripDetailStageCompleted;
-    case 'disputed':
-      return l10n.supplierTripDetailStageDisputed;
-    case 'cancelled':
-      return l10n.supplierTripDetailStageCancelled;
-    default:
-      return l10n.supplierTripDetailStageUnknown;
-  }
-}
+import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../features/supplier/data/supplier_trip_repository.dart';
+import '../../../features/supplier/providers/supplier_trips_provider.dart';
+import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/status_components.dart';
+import 'shell_components.dart';
+import 'supplier_shell_shared_helpers.dart';
 
 class SupplierTripsScreen extends ConsumerWidget {
   const SupplierTripsScreen({super.key});
@@ -178,23 +151,23 @@ class _SupplierTripCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final palette = statusPaletteFor(trip.stage);
     final tripPath = '${AppRoutes.tripDetailPath}/${trip.id}';
-    final proofStatus = _localizedSupplierProofStatus(l10n, trip);
+    final proofStatus = localizedSupplierProofStatus(l10n, trip);
 
     return StandardListCard(
       accent: palette.foreground,
       title: trip.routeLabel,
-      subtitle: '${trip.material} • $proofStatus',
-      trailing: StatusChip(label: _localizedSupplierTripStage(l10n, trip.stage)),
+      subtitle: '${trip.material} - $proofStatus',
+      trailing: StatusChip(label: localizedSupplierTripStage(l10n, trip.stage)),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            l10n.supplierTripsAssignedLabel(_formatSupplierDateTime(context, trip.assignedAt)),
+            l10n.supplierTripsAssignedLabel(formatSupplierDateTime(context, trip.assignedAt)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            l10n.supplierTripsTruckerTruckLabel(_shortId(trip.truckerId), _shortId(trip.truckId)),
+            l10n.supplierTripsTruckerTruckLabel(shortId(trip.truckerId), shortId(trip.truckId)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           const SizedBox(height: AppSpacing.sm),

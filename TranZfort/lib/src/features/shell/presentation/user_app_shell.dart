@@ -4,12 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
+import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../auth/data/auth_repository.dart';
-import '../../communication/providers/chat_providers.dart';
 import '../../notifications/providers/notification_providers.dart';
 
 class UserAppShell extends ConsumerWidget {
@@ -31,7 +33,7 @@ class UserAppShell extends ConsumerWidget {
     final currentIndex = _resolveIndex(currentLocation, tabs);
     final currentTab = tabs[currentIndex];
     final topLevel = _isTopLevel(currentLocation, tabs);
-    final unreadNotificationCount = ref.watch(unreadNotificationCountProvider);
+    final unreadNotificationCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
 
     return Scaffold(
       appBar: topLevel
@@ -46,6 +48,8 @@ class UserAppShell extends ConsumerWidget {
                     count: unreadNotificationCount,
                   ),
                 ),
+                TtsActionButton(fallbackSummary: currentTab.title),
+                const LanguageToggleAction(),
                 Builder(
                   builder: (scaffoldContext) {
                     final authState = ref.watch(currentAuthStateProvider);
@@ -64,7 +68,16 @@ class UserAppShell extends ConsumerWidget {
             )
           : null,
       drawer: UserAppDrawer(role: role),
-      body: child,
+      body: Stack(
+        children: [
+          child,
+          if (topLevel)
+            TtsScreenSummaryEffect(
+              summary: currentTab.title,
+              screenKey: '${role.name}:${currentTab.route}',
+            ),
+        ],
+      ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: currentIndex,
         onDestinationSelected: (index) => context.go(tabs[index].route),
@@ -90,6 +103,11 @@ class UserAppShell extends ConsumerWidget {
           icon: Icons.home_outlined,
           activeIcon: Icons.home,
           title: l10n.shellTitleSupplierDashboard,
+          associatedRoutes: const <String>[
+            AppRoutes.supplierDashboardPath,
+            AppRoutes.supplierVerificationPath,
+            AppRoutes.verificationPath,
+          ],
         ),
         _ShellTab(
           route: AppRoutes.myLoadsPath,
@@ -97,6 +115,22 @@ class UserAppShell extends ConsumerWidget {
           icon: Icons.inventory_2_outlined,
           activeIcon: Icons.inventory_2,
           title: l10n.shellTitleMyLoads,
+          associatedRoutes: const <String>[
+            AppRoutes.myLoadsPath,
+            AppRoutes.postLoadPath,
+            AppRoutes.loadDetailPath,
+          ],
+        ),
+        _ShellTab(
+          route: AppRoutes.messagesPath,
+          label: l10n.shellMessagesTitle,
+          icon: Icons.chat_bubble_outline,
+          activeIcon: Icons.chat_bubble,
+          title: l10n.shellMessagesTitle,
+          associatedRoutes: const <String>[
+            AppRoutes.messagesPath,
+            AppRoutes.chatPath,
+          ],
         ),
         _ShellTab(
           route: AppRoutes.supplierTripsPath,
@@ -104,13 +138,11 @@ class UserAppShell extends ConsumerWidget {
           icon: Icons.alt_route_outlined,
           activeIcon: Icons.alt_route,
           title: l10n.shellQuickActionTrips,
-        ),
-        _ShellTab(
-          route: AppRoutes.messagesPath,
-          label: l10n.shellDrawerMessages,
-          icon: Icons.chat_bubble_outline,
-          activeIcon: Icons.chat_bubble,
-          title: l10n.shellMessagesTitle,
+          associatedRoutes: const <String>[
+            AppRoutes.supplierTripsPath,
+            AppRoutes.tripDetailPath,
+            AppRoutes.raiseDisputePath,
+          ],
         ),
       ];
     }
@@ -122,6 +154,12 @@ class UserAppShell extends ConsumerWidget {
         icon: Icons.home_outlined,
         activeIcon: Icons.home,
         title: l10n.shellDashboardTitle,
+        associatedRoutes: const <String>[
+          AppRoutes.truckerDashboardPath,
+          AppRoutes.truckerVerificationPath,
+          AppRoutes.verificationPath,
+          AppRoutes.fleetPath,
+        ],
       ),
       _ShellTab(
         route: AppRoutes.findLoadsPath,
@@ -129,6 +167,22 @@ class UserAppShell extends ConsumerWidget {
         icon: Icons.search_outlined,
         activeIcon: Icons.search,
         title: l10n.shellTitleFindLoads,
+        associatedRoutes: const <String>[
+          AppRoutes.findLoadsPath,
+          AppRoutes.loadDetailPath,
+          AppRoutes.routePreviewPath,
+        ],
+      ),
+      _ShellTab(
+        route: AppRoutes.messagesPath,
+        label: l10n.shellMessagesTitle,
+        icon: Icons.chat_bubble_outline,
+        activeIcon: Icons.chat_bubble,
+        title: l10n.shellMessagesTitle,
+        associatedRoutes: const <String>[
+          AppRoutes.messagesPath,
+          AppRoutes.chatPath,
+        ],
       ),
       _ShellTab(
         route: AppRoutes.tripsPath,
@@ -136,39 +190,36 @@ class UserAppShell extends ConsumerWidget {
         icon: Icons.alt_route_outlined,
         activeIcon: Icons.alt_route,
         title: l10n.shellQuickActionTrips,
-      ),
-      _ShellTab(
-        route: AppRoutes.messagesPath,
-        label: l10n.shellDrawerMessages,
-        icon: Icons.chat_bubble_outline,
-        activeIcon: Icons.chat_bubble,
-        title: l10n.shellMessagesTitle,
+        associatedRoutes: const <String>[
+          AppRoutes.tripsPath,
+          AppRoutes.tripDetailPath,
+          AppRoutes.raiseDisputePath,
+        ],
       ),
     ];
   }
 
   bool _isTopLevel(String location, List<_ShellTab> tabs) {
-    return tabs.any((tab) => tab.route == location);
+    final normalizedLocation = _normalizeRoute(location);
+    return tabs.any((tab) {
+      return _normalizeRoute(tab.route) == normalizedLocation;
+    });
   }
 
   int _resolveIndex(String location, List<_ShellTab> tabs) {
-    final index = tabs.indexWhere((tab) => location == tab.route);
+    final normalizedLocation = _normalizeRoute(location);
+    final index = tabs.indexWhere((tab) => tab.matchesLocation(normalizedLocation));
     if (index != -1) {
       return index;
     }
 
-    if (location.startsWith('${AppRoutes.chatPath}/')) {
-      final messagesIndex = tabs.indexWhere((tab) => tab.route == AppRoutes.messagesPath);
-      if (messagesIndex != -1) {
-        return messagesIndex;
-      }
-    }
-
-    if (role == AppUserRole.supplier && location == AppRoutes.postLoadPath) {
-      return 1;
-    }
-
     return 0;
+  }
+
+  String _normalizeRoute(String location) {
+    return location.endsWith('/') && location.length > 1
+        ? location.substring(0, location.length - 1)
+        : location;
   }
 }
 
@@ -200,8 +251,6 @@ class UserAppDrawerContent extends ConsumerWidget {
     final roleLabel = role == AppUserRole.supplier
         ? l10n.shellDrawerSupplierWorkspace
         : l10n.shellDrawerTruckerWorkspace;
-    final unreadConversationCount = ref.watch(inboxProvider).conversations.where((conversation) => conversation.hasUnread).length;
-    final unreadNotificationCount = ref.watch(unreadNotificationCountProvider);
     final authState = ref.watch(currentAuthStateProvider);
     final avatarUrl = authState.profile?.avatarUrl;
     final fullName = authState.profile?.fullName ?? '';
@@ -260,18 +309,6 @@ class UserAppDrawerContent extends ConsumerWidget {
                   onTap: () => _go(context, AppRoutes.verificationPath),
                 ),
                 DrawerNavItem(
-                  icon: Icons.chat_bubble_outline,
-                  label: l10n.shellDrawerMessages,
-                  badgeCount: unreadConversationCount,
-                  onTap: () => _go(context, AppRoutes.messagesPath),
-                ),
-                DrawerNavItem(
-                  icon: Icons.notifications_none_outlined,
-                  label: l10n.navNotifications,
-                  badgeCount: unreadNotificationCount,
-                  onTap: () => _go(context, AppRoutes.notificationsPath),
-                ),
-                DrawerNavItem(
                   icon: Icons.support_agent_outlined,
                   label: l10n.shellDrawerSupport,
                   onTap: () => _go(context, AppRoutes.supportPath),
@@ -284,11 +321,6 @@ class UserAppDrawerContent extends ConsumerWidget {
                 DrawerNavItem(
                   icon: Icons.settings_outlined,
                   label: l10n.settingsTitle,
-                  onTap: () => _go(context, AppRoutes.settingsPath),
-                ),
-                DrawerNavItem(
-                  icon: Icons.translate_outlined,
-                  label: l10n.shellDrawerLanguage,
                   onTap: () => _go(context, AppRoutes.settingsPath),
                 ),
                 DrawerNavItem(
@@ -353,10 +385,23 @@ class DrawerNavItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       minLeadingWidth: 24,
       leading: Icon(icon, color: AppColors.primary),
-      title: Text(label),
-      trailing: badgeCount > 0 ? ShellCountBadge(count: badgeCount) : null,
+      title: Text(
+        label,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
+      trailing: badgeCount > 0
+          ? SizedBox(
+              width: 52,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: ShellCountBadge(count: badgeCount),
+              ),
+            )
+          : null,
       onTap: onTap,
     );
   }
@@ -442,25 +487,74 @@ class _AvatarCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final url = avatarUrl?.trim();
     final iconSize = radius * 1.125;
+    final fallback = _AvatarFallback(
+      radius: radius,
+      iconSize: iconSize,
+      icon: fallbackIcon ?? Icons.person_outline,
+    );
 
     if (url == null || url.isEmpty) {
-      return CircleAvatar(
-        radius: radius,
-        backgroundColor: AppColors.subtleSurface,
-        child: Icon(
-          fallbackIcon ?? Icons.person_outline,
-          size: iconSize,
-          color: AppColors.primary,
-        ),
-      );
+      return fallback;
     }
 
-    return CircleAvatar(
-      radius: radius,
-      backgroundColor: AppColors.subtleSurface,
-      backgroundImage: NetworkImage(url),
-      onBackgroundImageError: (_, _) {},
-      child: null,
+    return Container(
+      width: radius * 2,
+      height: radius * 2,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white,
+        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x26000000),
+            blurRadius: 10,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Image.network(
+        url,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => fallback,
+      ),
+    );
+  }
+}
+
+class _AvatarFallback extends StatelessWidget {
+  final double radius;
+  final double iconSize;
+  final IconData icon;
+
+  const _AvatarFallback({
+    required this.radius,
+    required this.iconSize,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: radius * 2,
+      height: radius * 2,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white,
+        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x26000000),
+            blurRadius: 10,
+            offset: Offset(0, 3),
+          ),
+        ],
+      ),
+      child: Icon(
+        icon,
+        size: iconSize,
+        color: AppColors.primary,
+      ),
     );
   }
 }
@@ -471,6 +565,7 @@ class _ShellTab {
   final IconData icon;
   final IconData activeIcon;
   final String title;
+  final List<String> associatedRoutes;
 
   const _ShellTab({
     required this.route,
@@ -478,5 +573,21 @@ class _ShellTab {
     required this.icon,
     required this.activeIcon,
     required this.title,
+    this.associatedRoutes = const <String>[],
   });
+
+  bool matchesLocation(String normalizedLocation) {
+    for (final associatedRoute in associatedRoutes) {
+      final normalizedAssociatedRoute = associatedRoute.endsWith('/') && associatedRoute.length > 1
+          ? associatedRoute.substring(0, associatedRoute.length - 1)
+          : associatedRoute;
+      if (normalizedLocation == normalizedAssociatedRoute || normalizedLocation.startsWith('$normalizedAssociatedRoute/')) {
+        return true;
+      }
+    }
+    final normalizedRoute = route.endsWith('/') && route.length > 1
+        ? route.substring(0, route.length - 1)
+        : route;
+    return normalizedLocation == normalizedRoute || normalizedLocation.startsWith('$normalizedRoute/');
+  }
 }

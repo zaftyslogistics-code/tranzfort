@@ -207,6 +207,27 @@ void main() {
       expect(backend.lastSupplierUpdate, isNull);
     });
 
+    test('saveDocumentPath stores profile photo review document without updating avatar_url', () async {
+      final backend = _FakeVerificationBackend()
+        ..profileMap = {
+          'id': 'trucker-1',
+          'user_role_type': 'trucker',
+          'verification_status': 'unverified',
+          'avatar_url': 'trucker-1/avatar/current-approved.jpg',
+        };
+      final repository = VerificationRepository(backend, () => 'trucker-1');
+
+      final result = await repository.saveDocumentPath(
+        type: VerificationDocumentType.profilePhoto,
+        storagePath: 'trucker-1/profile_photo/new-review-photo.jpg',
+      );
+
+      expect(result.isSuccess, isTrue);
+      expect(backend.lastProfileUpdate?['profile_photo_document_path'], 'trucker-1/profile_photo/new-review-photo.jpg');
+      expect(backend.lastProfileUpdate?.containsKey('avatar_url'), isFalse);
+      expect(backend.lastSupplierUpdate, isNull);
+    });
+
     test('submitForReview uses resubmission rpc when requested', () async {
       final backend = _FakeVerificationBackend();
       final repository = VerificationRepository(backend, () => 'profile-1');

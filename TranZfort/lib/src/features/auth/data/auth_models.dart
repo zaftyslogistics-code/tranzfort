@@ -1,4 +1,6 @@
-part of 'auth_repository.dart';
+import 'package:flutter/foundation.dart';
+
+import '../../../core/providers/app_state_providers.dart';
 
 class UserProfile {
   final String id;
@@ -82,10 +84,14 @@ class UserProfile {
   }
 
   static String _normalizedPreferredLanguage(String? rawValue) {
-    return switch ((rawValue ?? '').trim().toLowerCase()) {
-      'hi' => 'hi',
-      _ => 'en',
-    };
+    final normalized = (rawValue ?? '').trim().toLowerCase();
+    if (normalized == 'hi' || normalized == 'en') {
+      return normalized;
+    }
+    if (normalized.isNotEmpty) {
+      debugPrint('_normalizedPreferredLanguage: unexpected language value "$normalized", defaulting to "en"');
+    }
+    return 'en';
   }
 }
 

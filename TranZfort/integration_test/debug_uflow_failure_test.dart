@@ -7,14 +7,14 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  Future<void> _ensureSupabaseInitialized() async {
+  Future<void> ensureSupabaseInitialized() async {
     await dotenv.load(fileName: '.env');
     final url = dotenv.env['SUPABASE_URL']!;
     final key = dotenv.env['SUPABASE_ANON_KEY']!;
     await Supabase.initialize(url: url, anonKey: key);
   }
 
-  Future<void> _signIn(SupabaseClient client, String email) async {
+  Future<void> signIn(SupabaseClient client, String email) async {
     final passcode = dotenv.env['TZ_TEST_PASSCODE'] ?? 'TestPass123!';
     await client.auth.signInWithPassword(email: email, password: passcode);
     expect(client.auth.currentUser, isNotNull);
@@ -22,9 +22,9 @@ void main() {
 
   group('DEBUG: U-FLOW-005 Failure Analysis', () {
     testWidgets('Check supplier profile exists', (tester) async {
-      await _ensureSupabaseInitialized();
+      await ensureSupabaseInitialized();
       final client = Supabase.instance.client;
-      await _signIn(client, 'supplier@example.com');
+      await signIn(client, 'supplier@example.com');
 
       // Check profile
       final profile = await client
@@ -48,9 +48,9 @@ void main() {
     });
 
     testWidgets('Check trucker profile exists', (tester) async {
-      await _ensureSupabaseInitialized();
+      await ensureSupabaseInitialized();
       final client = Supabase.instance.client;
-      await _signIn(client, 'trucker@example.com');
+      await signIn(client, 'trucker@example.com');
 
       // Check profile
       final profile = await client
@@ -74,9 +74,9 @@ void main() {
     });
 
     testWidgets('Check loads table RLS for trucker', (tester) async {
-      await _ensureSupabaseInitialized();
+      await ensureSupabaseInitialized();
       final client = Supabase.instance.client;
-      await _signIn(client, 'trucker@example.com');
+      await signIn(client, 'trucker@example.com');
 
       // Try to query loads directly (bypassing repository)
       final loads = await client
@@ -92,12 +92,11 @@ void main() {
     });
 
     testWidgets('Create load and verify visibility', (tester) async {
-      await _ensureSupabaseInitialized();
+      await ensureSupabaseInitialized();
       final client = Supabase.instance.client;
 
       // Sign in as supplier and create a load
-      await _signIn(client, 'supplier@example.com');
-      final supplierId = client.auth.currentUser!.id;
+      await signIn(client, 'supplier@example.com');
 
       final result = await client.rpc('create_load', params: {
         'p_origin_label': 'Debug Origin',
@@ -140,7 +139,7 @@ void main() {
       await client.auth.signOut();
 
       // Sign in as trucker and try to find the load
-      await _signIn(client, 'trucker@example.com');
+      await signIn(client, 'trucker@example.com');
 
       // Wait a moment for any replication
       await Future.delayed(const Duration(seconds: 2));

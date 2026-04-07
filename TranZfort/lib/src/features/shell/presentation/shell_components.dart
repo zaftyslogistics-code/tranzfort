@@ -1,22 +1,45 @@
 import 'package:flutter/material.dart';
+
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
+import '../../../shared/widgets/tts_action_button.dart';
 
 class DetailPageScaffold extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final String? ttsSummary;
+  final String? ttsScreenKey;
 
   const DetailPageScaffold({
     super.key,
     required this.title,
     required this.children,
+    this.ttsSummary,
+    this.ttsScreenKey,
   });
 
   @override
   Widget build(BuildContext context) {
+    final resolvedSummary = (ttsSummary ?? title).trim();
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
-      body: ShellScrollView(children: children),
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          TtsActionButton(fallbackSummary: resolvedSummary),
+          const LanguageToggleAction(),
+        ],
+      ),
+      body: Stack(
+        children: [
+          ShellScrollView(children: children),
+          TtsScreenSummaryEffect(
+            summary: resolvedSummary,
+            screenKey: ttsScreenKey ?? title,
+          ),
+        ],
+      ),
     );
   }
 }

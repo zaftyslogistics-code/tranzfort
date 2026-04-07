@@ -324,7 +324,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-99',
       relatedTripId: 'trip-99',
-      sourceLabel: 'Chat • Nagpur → Pune',
+      sourceLabel: 'Chat - Nagpur > Pune',
     );
     final controller = container.read(reportIssueProvider(context).notifier);
     controller.setCategory('abusive_behavior');
@@ -363,7 +363,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-55',
       relatedTripId: 'trip-55',
-      sourceLabel: 'Trip • Jaipur → Delhi',
+      sourceLabel: 'Trip - Jaipur > Delhi',
     );
     final controller = container.read(reportIssueProvider(context).notifier);
     controller.setAttachmentPath('user-1/report_issue/evidence_55.jpg');
@@ -375,7 +375,7 @@ void main() {
     expect(uploadService.lastRelocateCurrentPath, 'user-1/report_issue/evidence_55.jpg');
     expect(uploadService.lastRelocateTargetPathSegment, 'support_ticket/ticket-created');
     expect(container.read(reportIssueProvider(context)).failure, isA<ServerFailure>());
-    expect(container.read(reportIssueProvider(context)).failure?.message, 'Report created but failed to finalize attachment.');
+    expect(container.read(reportIssueProvider(context)).failure?.message, reportIssueAttachmentFinalizeFailureCode);
     expect(container.read(reportIssueProvider(context)).attachmentPath, 'user-1/report_issue/evidence_55.jpg');
   });
 
@@ -393,7 +393,7 @@ void main() {
       initialCategory: 'spam_or_scam',
       relatedLoadId: 'load-44',
       relatedTripId: 'trip-44',
-      sourceLabel: 'Trip • Indore → Bhopal',
+      sourceLabel: 'Trip - Indore > Bhopal',
     );
     final controller = container.read(reportIssueProvider(context).notifier);
     controller.setDescription('The other party is sending repeated misleading payment claims and scam-like follow-up.');
@@ -402,7 +402,7 @@ void main() {
 
     expect(result.isFailure, isTrue);
     expect(result.failureOrNull, isA<ValidationFailure>());
-    expect(container.read(reportIssueProvider(context)).fieldErrors['attachment_path'], 'Attach one evidence image before submitting this report');
+    expect(container.read(reportIssueProvider(context)).fieldErrors['attachment_path'], reportIssueAttachmentRequiredCode);
     expect(backend.lastCreatedCategory, isNull);
   });
 
@@ -435,5 +435,34 @@ void main() {
     expect(uploadService.lastRelocateTargetPathSegment, 'support_reply/reply-created');
     expect(container.read(supportReplyProvider('ticket-1')).attachmentPath, isEmpty);
     expect(container.read(supportReplyProvider('ticket-1')).messageBody, isEmpty);
+  });
+
+  test('support reply controller surfaces finalize failure when attachment relocation fails', () async {
+    final backend = _FakeSupportBackend();
+    final repository = SupportRepository(backend, () => 'user-1');
+    final uploadService = _FakeSupportAttachmentUploadService(
+      relocateResult: const Failure<String>(ServerFailure(message: 'move failed')),
+    );
+    final container = ProviderContainer(
+      overrides: [
+        supportRepositoryProvider.overrideWithValue(repository),
+        supportAttachmentUploadServiceProvider.overrideWithValue(uploadService),
+      ],
+    );
+    addTearDown(container.dispose);
+
+    final controller = container.read(supportReplyProvider('ticket-1').notifier);
+    controller.setAttachmentPath('user-1/support/evidence_3.jpg');
+    controller.setMessageBody('This reply should surface a safe finalize failure if relocation does not complete.');
+
+    final result = await controller.submit();
+
+    expect(result.isSuccess, isTrue);
+    expect(uploadService.lastRelocateCurrentPath, 'user-1/support/evidence_3.jpg');
+    expect(uploadService.lastRelocateTargetPathSegment, 'support_reply/reply-created');
+    expect(container.read(supportReplyProvider('ticket-1')).failure, isA<ServerFailure>());
+    expect(container.read(supportReplyProvider('ticket-1')).failure?.message, supportReplyAttachmentFinalizeFailureCode);
+    expect(container.read(supportReplyProvider('ticket-1')).attachmentPath, 'user-1/support/evidence_3.jpg');
+    expect(container.read(supportReplyProvider('ticket-1')).messageBody, 'This reply should surface a safe finalize failure if relocation does not complete.');
   });
 }

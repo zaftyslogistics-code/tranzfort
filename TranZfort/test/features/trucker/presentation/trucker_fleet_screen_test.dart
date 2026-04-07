@@ -238,13 +238,13 @@ void main() {
     await tester.pumpAndSettle();
 
     await tester.scrollUntilVisible(
-      find.text('Open • 12 tyres • 25T'),
+      find.text('Open - 12 tyres - 25T'),
       300,
       scrollable: find.byType(Scrollable).first,
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Open • 12 tyres • 25T'), findsOneWidget);
+    expect(find.text('Open - 12 tyres - 25T'), findsOneWidget);
     expect(find.text('APPROVED'), findsOneWidget);
     expect(find.text('Model: Tata Signa'), findsOneWidget);
   });

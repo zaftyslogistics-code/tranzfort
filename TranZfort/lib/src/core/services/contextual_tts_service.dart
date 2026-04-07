@@ -89,7 +89,9 @@ class ContextualTtsService {
     if (withoutEmoji.length <= 500) {
       return withoutEmoji;
     }
-    return withoutEmoji.substring(0, 500).trimRight();
+    final truncated = withoutEmoji.substring(0, 500);
+    final lastSpace = truncated.lastIndexOf(' ');
+    return lastSpace > 0 ? truncated.substring(0, lastSpace).trimRight() : truncated.trimRight();
   }
 
   Future<void> stop() async {

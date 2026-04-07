@@ -361,7 +361,7 @@ String _expectedLocalizedDateTime(WidgetTester tester, DateTime value) {
     TimeOfDay.fromDateTime(localValue),
     alwaysUse24HourFormat: MediaQuery.maybeOf(context)?.alwaysUse24HourFormat ?? false,
   );
-  return '${material.formatShortDate(localValue)} • $timeLabel';
+  return '${material.formatShortDate(localValue)} - $timeLabel';
 }
 
 void main() {
@@ -447,8 +447,8 @@ void main() {
     await tester.scrollUntilVisible(find.text('My tickets'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
     expect(find.text('My tickets'), findsOneWidget);
-    expect(find.text('Trip dispute review • high priority'), findsAtLeastNWidgets(1));
-    expect(find.text('Non-payment report • medium priority'), findsOneWidget);
+    expect(find.text('Trip dispute review - high priority'), findsAtLeastNWidgets(1));
+    expect(find.text('Non-payment report - medium priority'), findsOneWidget);
     expect(find.byKey(const ValueKey('support-list-open-trip-ticket-1')), findsOneWidget);
     expect(find.byKey(const ValueKey('support-list-open-load-ticket-1')), findsOneWidget);
     expect(find.byKey(const ValueKey('support-list-open-load-ticket-2')), findsOneWidget);
@@ -541,8 +541,8 @@ void main() {
     await tester.scrollUntilVisible(find.text('My tickets'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Support • medium priority'), findsOneWidget);
-    expect(find.text('Unexpected review code • medium priority'), findsNothing);
+    expect(find.text('Support - medium priority'), findsOneWidget);
+    expect(find.text('Unexpected review code - medium priority'), findsNothing);
   });
 
   testWidgets('support screen reply composer attaches an image path and clears it after successful submit', (tester) async {
@@ -1276,8 +1276,8 @@ void main() {
     await tester.scrollUntilVisible(find.text('My tickets'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    final newerUpdateFinder = find.text('Abusive behavior report • medium priority');
-    final olderUpdateFinder = find.text('Non-payment report • medium priority');
+    final newerUpdateFinder = find.text('Abusive behavior report - medium priority');
+    final olderUpdateFinder = find.text('Non-payment report - medium priority');
 
     expect(newerUpdateFinder, findsOneWidget);
     expect(olderUpdateFinder, findsOneWidget);
@@ -1337,7 +1337,7 @@ void main() {
     await tester.scrollUntilVisible(find.text('Selected ticket and reply'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Fake payout proof report • medium priority'), findsAtLeastNWidgets(1));
+    expect(find.text('Fake payout proof report - medium priority'), findsAtLeastNWidgets(1));
     expect(find.text('Please keep the clearest payout-proof screenshot ready for review.'), findsOneWidget);
   });
 
@@ -1391,7 +1391,7 @@ void main() {
     await tester.scrollUntilVisible(find.text('Selected ticket and reply'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Spam or scam report • medium priority'), findsAtLeastNWidgets(1));
+    expect(find.text('Spam or scam report - medium priority'), findsAtLeastNWidgets(1));
     expect(find.text('We have started reviewing the reported spam and scam indicators on this ticket.'), findsOneWidget);
   });
 
@@ -1445,7 +1445,7 @@ void main() {
     await tester.scrollUntilVisible(find.text('Selected ticket and reply'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Abusive behavior report • medium priority'), findsAtLeastNWidgets(1));
+    expect(find.text('Abusive behavior report - medium priority'), findsAtLeastNWidgets(1));
     expect(find.text('We are reviewing the reported abusive behavior and any related context shared on this ticket.'), findsOneWidget);
   });
 
@@ -1496,7 +1496,7 @@ void main() {
     await tester.scrollUntilVisible(find.text('My tickets'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
 
-    expect(find.text('Trip dispute review • medium priority'), findsAtLeastNWidgets(1));
+    expect(find.text('Trip dispute review - medium priority'), findsAtLeastNWidgets(1));
 
     await tester.scrollUntilVisible(find.text('Selected ticket and reply'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();

@@ -27,7 +27,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
 
   # --- Connectivity ---
-  connectivity_plus: ^6.1.4
+  connectivity_plus: ^7.0.0
 
   # --- Voice & Audio ---
   flutter_tts: ^4.2.0

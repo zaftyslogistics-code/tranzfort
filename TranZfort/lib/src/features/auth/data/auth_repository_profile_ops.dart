@@ -1,6 +1,16 @@
-part of 'auth_repository.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-extension AuthRepositoryProfileOps on AuthRepository {
+import '../../../core/error/app_failure.dart';
+import '../../../core/error/result.dart';
+import '../../../core/providers/app_state_providers.dart';
+import 'auth_error_mapper.dart';
+import 'auth_models.dart';
+
+class AuthProfileRepository {
+  final SupabaseClient? _client;
+
+  AuthProfileRepository(this._client);
+
   Future<Result<UserProfile?>> getCurrentProfile() async {
     if (_client == null) {
       return const Success<UserProfile?>(null);
@@ -25,7 +35,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
 
       return Success<UserProfile?>(UserProfile.fromMap(response));
     } catch (error, stackTrace) {
-      return Failure<UserProfile?>(_mapError(error, stackTrace));
+      return Failure<UserProfile?>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -58,7 +68,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -88,7 +98,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
       await _client.rpc('upsert_current_user_profile', params: rpcParams);
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -149,7 +159,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
       await _client.rpc('ensure_role_extension', params: {'p_role': roleValue});
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -223,7 +233,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -250,7 +260,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
         return const Success<void>(null);
       }
 
-      return Failure<void>(_mapError(error, stackTrace));
+      return Failure<void>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -278,7 +288,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
         AccountDeletionRequestOutcome.fromMap(payload),
       );
     } catch (error, stackTrace) {
-      return Failure<AccountDeletionRequestOutcome>(_mapError(error, stackTrace));
+      return Failure<AccountDeletionRequestOutcome>(mapAuthError(error, stackTrace));
     }
   }
 
@@ -301,7 +311,7 @@ extension AuthRepositoryProfileOps on AuthRepository {
         AccountDeletionRequestOutcome.fromMap(payload),
       );
     } catch (error, stackTrace) {
-      return Failure<AccountDeletionRequestOutcome>(_mapError(error, stackTrace));
+      return Failure<AccountDeletionRequestOutcome>(mapAuthError(error, stackTrace));
     }
   }
 }

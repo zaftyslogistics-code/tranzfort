@@ -49,7 +49,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     final gatingMessage = _trustGatingMessage(l10n, profile, state.approvedTrucks);
     final hasNoApprovedTrucks = state.approvedTrucks.isEmpty;
     final hasSingleApprovedTruck = state.approvedTrucks.length == 1 && selectedTruck != null;
-    final routeLabel = '${detail.summary.originLabel} → ${detail.summary.destinationLabel}';
+    final routeLabel = '${detail.summary.originLabel} > ${detail.summary.destinationLabel}';
     final hasRoutePreview =
         detail.originLat != null && detail.originLng != null && detail.destinationLat != null && detail.destinationLng != null;
     final mapsUri = mapsLauncher.buildDirectionsUri(
@@ -700,7 +700,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         content: Text(
           l10n.truckerLoadDetailConfirmBookingMessage(
             detail.summary.material,
-            '${detail.summary.originLabel} → ${detail.summary.destinationLabel}',
+            '${detail.summary.originLabel} > ${detail.summary.destinationLabel}',
             truckNumber,
           ),
         ),

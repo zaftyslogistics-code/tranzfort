@@ -129,6 +129,8 @@ final supportTicketsProvider =
   return SupportTicketsController(ref.watch(supportRepositoryProvider));
 });
 
+final supportSelectedTicketIdProvider = StateProvider.autoDispose<String?>((ref) => null);
+
 final supportTicketDetailProvider = FutureProvider.autoDispose.family<SupportTicketDetail, String>((ref, ticketId) async {
   final result = await ref.watch(supportRepositoryProvider).getTicketDetail(ticketId);
   return result.when(

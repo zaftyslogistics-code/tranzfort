@@ -12,6 +12,7 @@ import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
+import '../../../core/error/app_failure.dart';
 import '../data/trucker_fleet_repository.dart';
 import '../providers/trucker_fleet_provider.dart';
 import '../providers/trucker_providers.dart';
@@ -215,13 +216,19 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                           ref.invalidate(truckerProfileProvider);
                           ref.invalidate(truckerDashboardProvider);
                         }
+                        final String snackMessage;
+                        if (result.isSuccess) {
+                          snackMessage = widget.returnToVerification
+                              ? l10n.truckerFleetTruckSavedReturnMessage
+                              : (state.isEditing ? l10n.truckerFleetTruckUpdatedSuccess : l10n.truckerFleetTruckAddedSuccess);
+                        } else if (result.failureOrNull is ConflictFailure) {
+                          snackMessage = l10n.truckerFleetTruckNumberConflictMessage;
+                        } else {
+                          snackMessage = l10n.truckerFleetSaveFailureMessage;
+                        }
                         AppSnackbar.show(
                           context: context,
-                          message: result.isSuccess
-                              ? (widget.returnToVerification
-                                  ? l10n.truckerFleetTruckSavedReturnMessage
-                                  : (state.isEditing ? l10n.truckerFleetTruckUpdatedSuccess : l10n.truckerFleetTruckAddedSuccess))
-                              : l10n.truckerFleetSaveFailureMessage,
+                          message: snackMessage,
                           variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                         );
                       },

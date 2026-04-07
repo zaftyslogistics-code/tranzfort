@@ -1,0 +1,9 @@
+{
+  "timestamp": "20260301-223129",
+  "log_root": "C:\\Users\\marte\\Desktop\\tranzfort.com-v-1.1\\logs\\almost-manual\\20260301-223129",
+  "failedSteps": [
+    "tranZfort_analyze",
+    "supabase_db_lint"
+  ],
+  "status": "FAIL"
+}

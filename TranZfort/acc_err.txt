@@ -1,0 +1,49 @@
+00:00 +0: loading C:/Users/marte/Desktop/tranzfort.com-v-1.1/TranZfort/test/features/shell/presentation/account_profile_trust_status_test.dart
+00:00 +0: account screen shows normal trust-safety guidance for healthy accounts
+00:00 +1: account screen shows trust-safety warning guidance for warned users
+00:00 +2: account screen trust summary support action opens support for suppliers
+00:01 +3: account screen trust summary support action opens support for truckers
+00:01 +4: profile screen shows trust-safety restriction guidance for restricted users
+00:01 +5: account screen shows suspension guidance for suspended users
+00:01 +6: account screen suspended trust support action opens support for suppliers
+00:01 +7: account screen suspended trust support action opens support for truckers
+00:01 +8: account screen shows restriction guidance for restricted users
+00:01 +9: account screen shows ban guidance for banned users
+00:01 +10: account screen restricted trust support action opens support for suppliers
+00:01 +11: account screen restricted trust support action opens support for truckers
+00:01 +12: account screen banned trust support action opens support for suppliers
+00:01 +13: account screen banned trust support action opens support for truckers
+00:02 +14: account screen verification tile opens supplier verification for suppliers
+00:02 +15: account screen verification tile opens trucker verification for truckers
+00:02 +16: account screen fleet tile opens fleet for truckers
+00:02 +17: account screen profile tile opens profile for suppliers
+00:02 +18: account screen profile tile opens profile for truckers
+00:02 +19: account screen settings tile opens settings for suppliers
+00:02 +20: account screen settings tile opens settings for truckers
+00:02 +21: account screen support tile opens support for suppliers
+00:02 +22: account screen support tile opens support for truckers
+00:02 +23: account screen delete account tile opens delete account for suppliers
+00:02 +24: account screen delete account tile opens delete account for truckers
+00:02 +25: account screen sign out action opens auth for suppliers
+00:02 +26: account screen sign out action opens auth for truckers
+00:02 +27: profile screen open fleet readiness action opens fleet for truckers
+00:03 +28: profile screen shows trust-safety warning guidance for warned users
+00:03 +29: profile screen shows suspension guidance for suspended users
+00:03 +30: profile screen shows restriction guidance with reason summary for restricted users
+00:03 +31: profile screen shows ban guidance with reason summary for banned users
+00:03 +32: profile screen warned trust support action opens support for suppliers
+00:03 +33: profile screen warned trust support action opens support for truckers
+00:03 +34: profile screen suspended trust support action opens support for suppliers
+00:03 +35: profile screen suspended trust support action opens support for truckers
+00:03 +36: profile screen trust support action opens support for suppliers
+00:03 +37: profile screen trust support action opens support for truckers
+00:03 +38: profile screen banned trust support action opens support for suppliers
+00:03 +39: profile screen banned trust support action opens support for truckers
+00:03 +40: profile screen delete account action opens delete account for suppliers
+00:03 +41: profile screen delete account action opens delete account for truckers
+00:03 +42: profile screen shows ban guidance for banned users
+00:03 +43: profile screen banned trust support action opens support for suppliers
+00:03 +44: profile screen banned trust support action opens support for truckers
+00:03 +45: profile screen hear summary action triggers contextual TTS
+00:04 +46: profile screen hear summary falls back to unknown for unsupported trust and account states
+00:04 +47: All tests passed!
