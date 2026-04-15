@@ -46,6 +46,24 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
       );
       return;
     }
+    final authState = ref.read(currentAuthStateProvider);
+    final inboxState = ref.read(inboxProvider);
+    final conversation = inboxState.conversations.where((item) => item.id == widget.conversationId).isEmpty
+        ? null
+        : inboxState.conversations.firstWhere((item) => item.id == widget.conversationId);
+    final messageCount = ref.read(conversationMessagesProvider(widget.conversationId)).messages.length + 1;
+    if (conversation != null) {
+      final targetUserId = authState.role == AppUserRole.supplier ? conversation.truckerId : conversation.supplierId;
+      final targetUserName = authState.role == AppUserRole.supplier ? conversation.truckerName : conversation.supplierName;
+      ReviewTriggerHelper.maybeShowChatReviewPrompt(
+        this.context,
+        ref,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        conversationId: widget.conversationId,
+        messageCount: messageCount,
+      );
+    }
     _scrollToBottom();
   }
 
@@ -135,6 +153,24 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         variant: AppSnackbarVariant.error,
       );
       return;
+    }
+    final authState = ref.read(currentAuthStateProvider);
+    final inboxState = ref.read(inboxProvider);
+    final conversation = inboxState.conversations.where((item) => item.id == widget.conversationId).isEmpty
+        ? null
+        : inboxState.conversations.firstWhere((item) => item.id == widget.conversationId);
+    final messageCount = ref.read(conversationMessagesProvider(widget.conversationId)).messages.length + 1;
+    if (conversation != null && messageCount >= 3) {
+      final targetUserId = authState.role == AppUserRole.supplier ? conversation.truckerId : conversation.supplierId;
+      final targetUserName = authState.role == AppUserRole.supplier ? conversation.truckerName : conversation.supplierName;
+      ReviewTriggerHelper.maybeShowChatReviewPrompt(
+        this.context,
+        ref,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        conversationId: widget.conversationId,
+        messageCount: messageCount,
+      );
     }
     _scrollToBottom();
   }

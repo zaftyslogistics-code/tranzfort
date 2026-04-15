@@ -27,6 +27,30 @@ class LocationData {
   String toString() => 'LocationData(city: $city, state: $state, lat: $latitude, lng: $longitude, source: $source)';
 }
 
+/// Exception thrown when location services (GPS) are disabled
+class LocationServiceDisabledException implements Exception {
+  final String message;
+  const LocationServiceDisabledException({this.message = 'Location services are disabled'});
+  @override
+  String toString() => message;
+}
+
+/// Exception thrown when location permission is denied
+class LocationPermissionDeniedException implements Exception {
+  final String message;
+  const LocationPermissionDeniedException({this.message = 'Location permission denied'});
+  @override
+  String toString() => message;
+}
+
+/// Exception thrown when location permission is permanently denied
+class LocationPermissionDeniedForeverException implements Exception {
+  final String message;
+  const LocationPermissionDeniedForeverException({this.message = 'Location permission permanently denied'});
+  @override
+  String toString() => message;
+}
+
 /// General-purpose location capture service for onboarding and verification
 class LocationCaptureService {
   final AssetBundle _assetBundle;
@@ -53,20 +77,25 @@ class LocationCaptureService {
         _getCurrentPosition = getCurrentPositionFn ?? _defaultGetCurrentPosition;
 
   /// Capture current GPS location and resolve city/state
-  /// Returns null if GPS unavailable, permissions denied, or resolution fails
-  Future<LocationData?> captureLocation() async {
+  /// Throws [LocationServiceDisabledException] if GPS is disabled
+  /// Throws [LocationPermissionDeniedException] if permission denied (once)
+  /// Throws [LocationPermissionDeniedForeverException] if permission denied forever
+  Future<LocationData> captureLocation() async {
     try {
       final servicesEnabled = await _isLocationServiceEnabled();
       if (!servicesEnabled) {
-        return null;
+        throw const LocationServiceDisabledException();
       }
 
       var permission = await _checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await _requestPermission();
       }
-      if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-        return null;
+      if (permission == LocationPermission.denied) {
+        throw const LocationPermissionDeniedException();
+      }
+      if (permission == LocationPermission.deniedForever) {
+        throw const LocationPermissionDeniedForeverException();
       }
 
       final position = await _getCurrentPosition();
@@ -78,12 +107,23 @@ class LocationCaptureService {
         return googleResolved;
       }
 
-      return _reverseLookupOffline(
+      final offlineResult = await _reverseLookupOffline(
         latitude: position.latitude,
         longitude: position.longitude,
       );
-    } catch (_) {
-      return null;
+      if (offlineResult != null) {
+        return offlineResult;
+      }
+
+      throw Exception('Unable to resolve location from coordinates');
+    } on LocationServiceDisabledException {
+      rethrow;
+    } on LocationPermissionDeniedException {
+      rethrow;
+    } on LocationPermissionDeniedForeverException {
+      rethrow;
+    } catch (e) {
+      throw Exception('Location capture failed: $e');
     }
   }
 
@@ -114,8 +154,14 @@ class LocationCaptureService {
       break;
     }
 
-    final latitude = _readDouble(matchedCity?['lat']) ?? 0;
-    final longitude = _readDouble(matchedCity?['lng']) ?? 0;
+    final latitude = _readDouble(matchedCity?['lat']);
+    final longitude = _readDouble(matchedCity?['lng']);
+    
+    // Validate coordinates - reject 0,0 or null coordinates
+    if (latitude == null || longitude == null || latitude == 0 || longitude == 0) {
+      return null;  // City not found in database or invalid coordinates
+    }
+    
     final matchedState = matchedCity == null ? null : matchedCity['state']?.toString();
     final resolvedState = (trimmedState == null || trimmedState.isEmpty)
         ? matchedState

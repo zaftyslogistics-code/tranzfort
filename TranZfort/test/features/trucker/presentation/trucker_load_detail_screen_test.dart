@@ -192,6 +192,9 @@ class _ScreenChatBackend implements ChatBackend {
   Future<Map<String, dynamic>?> fetchBookingContext({required String loadId, required String truckerId}) async => throw UnimplementedError();
 
   @override
+  Future<Object?> fetchConversation(String conversationId) async => throw UnimplementedError();
+
+  @override
   Future<String> sendMessage({required String conversationId, required ChatMessageType type, String? messageId, String? textBody, String? attachmentPath, Map<String, dynamic>? structuredPayload}) async => throw UnimplementedError();
 
   @override

@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/onboarding_screens.dart';
+import '../../features/auth/presentation/onboarding_profile_completion.dart';
 import '../../features/communication/presentation/chat_screen.dart';
 import '../../features/notifications/presentation/notifications_screen.dart';
+import '../../features/profile/providers/public_profile_providers.dart';
 import '../../features/shell/presentation/delete_account_screen.dart';
 import '../../features/supplier/presentation/post_load_screen.dart';
 import '../../features/supplier/presentation/raise_dispute_screen.dart';
@@ -21,6 +24,8 @@ import '../../features/trucker/presentation/trucker_route_preview_screen.dart';
 import '../../features/trucker/presentation/trucker_trip_detail_screen.dart';
 import '../../features/trucker/presentation/trucker_trips_screen.dart';
 import '../../features/verification/presentation/verification_screen.dart';
+import '../../features/profile/presentation/supplier_public_profile_screen.dart';
+import '../../features/profile/presentation/trucker_public_profile_screen.dart';
 import '../../features/shell/presentation/shell_destinations.dart';
 import '../../features/shell/presentation/supplier_shell_screens.dart';
 import '../services/maps_launcher_service.dart';
@@ -29,6 +34,8 @@ import 'auth_router_refresh_notifier.dart';
 import '../../features/shell/presentation/user_app_shell.dart';
 import 'app_routes.dart';
 
+part 'app_router_redirect.dart';
+
 final appRouterProvider = Provider<GoRouter>((ref) {
   final refreshNotifier = AuthRouterRefreshNotifier(ref);
   ref.onDispose(refreshNotifier.dispose);
@@ -36,142 +43,7 @@ final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     initialLocation: AppRoutes.splashPath,
     refreshListenable: refreshNotifier,
-    redirect: (context, state) {
-      final path = state.uri.path;
-      final isPublicRoute = path == AppRoutes.splashPath ||
-          path == AppRoutes.authPath ||
-          path == AppRoutes.authPasswordPath;
-      final authStateAsync = ref.read(authStateProvider);
-      final authState = ref.read(currentAuthStateProvider);
-      final hasSession = authState.hasSession;
-      final isBannedRoute = path == AppRoutes.bannedPath;
-      final isDeleteAccountRoute = path == AppRoutes.deleteAccountPath;
-      final isOnboardingRoute = path == AppRoutes.onboardingPath ||
-          path == AppRoutes.onboardingRolePath ||
-          path == AppRoutes.onboardingProfilePath;
-      final isSupplier = authState.role == AppUserRole.supplier;
-      final isRestrictedAccount = authState.isBanned;
-
-      if (hasSession && !authState.isResolved) {
-        if (authStateAsync.isLoading) {
-          if (path == AppRoutes.splashPath || isPublicRoute || isOnboardingRoute || isBannedRoute) {
-            return null;
-          }
-          return AppRoutes.splashPath;
-        }
-        return null;
-      }
-
-      if (!hasSession && !isPublicRoute) {
-        return AppRoutes.authPath;
-      }
-
-      if (!hasSession && path == AppRoutes.splashPath) {
-        return AppRoutes.authPath;
-      }
-
-      if (!hasSession) {
-        return null;
-      }
-
-      if (path == AppRoutes.onboardingPath) {
-        if (hasSession && !authState.isResolved) {
-          return null;
-        }
-
-        final profile = authState.profile;
-        final hasKnownRole = (profile?.hasRole ?? false) || authState.role != AppUserRole.unknown;
-        if (!hasKnownRole) {
-          return AppRoutes.onboardingRolePath;
-        }
-
-        if (!authState.isProfileComplete) {
-          return AppRoutes.onboardingProfilePath;
-        }
-
-        return isSupplier ? AppRoutes.supplierDashboardPath : AppRoutes.truckerDashboardPath;
-      }
-
-      if (authState.isDeactivated && !isDeleteAccountRoute) {
-        return AppRoutes.deleteAccountPath;
-      }
-
-      if (isRestrictedAccount && !isBannedRoute) {
-        return AppRoutes.bannedPath;
-      }
-
-      if (!isRestrictedAccount && isBannedRoute) {
-        return authState.role == AppUserRole.supplier
-            ? AppRoutes.supplierDashboardPath
-            : AppRoutes.truckerDashboardPath;
-      }
-
-      if (!authState.isProfileComplete && !isOnboardingRoute && !isPublicRoute) {
-        return AppRoutes.onboardingPath;
-      }
-
-      if (authState.isProfileComplete && isOnboardingRoute) {
-        return authState.role == AppUserRole.supplier
-            ? AppRoutes.supplierDashboardPath
-            : AppRoutes.truckerDashboardPath;
-      }
-
-      if (path == AppRoutes.authPath) {
-        if (isRestrictedAccount) {
-          return AppRoutes.bannedPath;
-        }
-
-        if (authState.isDeactivated) {
-          return AppRoutes.deleteAccountPath;
-        }
-
-        if (!authState.isProfileComplete) {
-          return AppRoutes.onboardingPath;
-        }
-
-        return isSupplier ? AppRoutes.supplierDashboardPath : AppRoutes.truckerDashboardPath;
-      }
-
-      if (isSupplier) {
-        if (path == AppRoutes.dashboardPath) {
-          return AppRoutes.supplierDashboardPath;
-        }
-
-        if (path == AppRoutes.findLoadsPath) {
-          return AppRoutes.myLoadsPath;
-        }
-
-        if (path == AppRoutes.tripsPath) {
-          return AppRoutes.supplierTripsPath;
-        }
-
-        if (path == AppRoutes.fleetPath) {
-          return AppRoutes.supplierDashboardPath;
-        }
-      } else {
-        if (path == AppRoutes.dashboardPath) {
-          return AppRoutes.truckerDashboardPath;
-        }
-
-        if (path == AppRoutes.supplierDashboardPath) {
-          return AppRoutes.truckerDashboardPath;
-        }
-
-        if (path == AppRoutes.truckerDashboardPath) {
-          return null;
-        }
-
-        if (path == AppRoutes.myLoadsPath) {
-          return AppRoutes.findLoadsPath;
-        }
-
-        if (path == AppRoutes.supplierTripsPath) {
-          return AppRoutes.tripsPath;
-        }
-      }
-
-      return null;
-    },
+    redirect: _createRedirectHandler(ref),
     routes: [
       GoRoute(
         path: AppRoutes.rootPath,
@@ -407,6 +279,14 @@ final appRouterProvider = Provider<GoRouter>((ref) {
               conversationId: state.pathParameters['conversationId'] ?? '',
             ),
           ),
+          GoRoute(
+            path: AppRoutes.publicProfilePath,
+            name: AppRoutes.publicProfile,
+            builder: (context, state) {
+              final userId = state.pathParameters['userId'] ?? '';
+              return _PublicProfileRouteScreen(userId: userId);
+            },
+          ),
         ],
       ),
     ],
@@ -415,3 +295,96 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     ),
   );
 });
+
+class _PublicProfileRouteScreen extends ConsumerWidget {
+  final String userId;
+
+  const _PublicProfileRouteScreen({required this.userId});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final profileAsync = ref.watch(publicProfileProvider(userId));
+
+    return profileAsync.when(
+      data: (result) => result.when(
+        success: (profile) {
+          if (profile == null) {
+            return const _PublicProfileRouteNotFoundScreen();
+          }
+
+          if (profile.role.trim().toLowerCase() == 'supplier') {
+            return SupplierPublicProfileScreen(supplierId: userId);
+          }
+
+          return TruckerPublicProfileScreen(truckerId: userId);
+        },
+        failure: (failure) => _PublicProfileRouteErrorScreen(message: failure.message),
+      ),
+      loading: () => const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      ),
+      error: (error, _) => _PublicProfileRouteErrorScreen(message: error.toString()),
+    );
+  }
+}
+
+class _PublicProfileRouteErrorScreen extends StatelessWidget {
+  final String message;
+
+  const _PublicProfileRouteErrorScreen({required this.message});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, size: 64),
+              const SizedBox(height: 16),
+              Text(
+                'Failed to load profile',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                message,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PublicProfileRouteNotFoundScreen extends StatelessWidget {
+  const _PublicProfileRouteNotFoundScreen();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Profile')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.person_off_outlined, size: 64),
+              const SizedBox(height: 16),
+              Text(
+                'Profile not found',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

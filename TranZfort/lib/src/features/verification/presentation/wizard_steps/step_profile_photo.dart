@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/navigation/app_routes.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/widgets/action_buttons.dart';
-import '../../../../shared/widgets/feedback_components.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
@@ -85,8 +80,8 @@ class StepProfilePhoto extends ConsumerWidget {
   ) async {
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (_) => ImageSourcePicker(
-        onSelected: (s) => Navigator.pop(context, s),
+      builder: (_) => const ImageSourcePicker(
+        onSelected: _noopImageSourceSelection,
       ),
     );
 
@@ -95,3 +90,5 @@ class StepProfilePhoto extends ConsumerWidget {
     }
   }
 }
+
+void _noopImageSourceSelection(ImageSource _) {}

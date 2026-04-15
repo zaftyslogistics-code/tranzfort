@@ -9,6 +9,7 @@ import 'package:uuid/uuid.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 
 class VoiceMessageUpload {
@@ -171,7 +172,9 @@ class VoiceMessageService {
     if (recorder != null) {
       try {
         await recorder.cancel();
-      } catch (_) {}
+      } catch (e) {
+        AppLogger.warning('Failed to cancel voice recorder', scope: 'voice', error: e);
+      }
     }
     await _cleanup();
   }
@@ -187,12 +190,16 @@ class VoiceMessageService {
     if (recorder != null) {
       try {
         await recorder.dispose();
-      } catch (_) {}
+      } catch (e) {
+        AppLogger.warning('Failed to dispose voice recorder', scope: 'voice', error: e);
+      }
     }
     if (filePath != null && filePath.trim().isNotEmpty) {
       try {
         await _deleteFile(filePath);
-      } catch (_) {}
+      } catch (e) {
+        AppLogger.warning('Failed to delete voice file', scope: 'voice', error: e);
+      }
     }
   }
 

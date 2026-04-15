@@ -45,6 +45,20 @@ AppFailure mapSupabaseError(Object error, StackTrace stackTrace) {
     return ServerFailure(message: message, debugInfo: details);
   }
 
+  if (error is FormatException) {
+    return ClientFailure(
+      message: 'Invalid data format. Please try again.',
+      debugInfo: 'FormatException: ${error.message}\n$stackTrace',
+    );
+  }
+
+  if (error is StateError) {
+    return ClientFailure(
+      message: 'Invalid application state. Please restart the app.',
+      debugInfo: 'StateError: ${error.message}\n$stackTrace',
+    );
+  }
+
   if (error is Exception) {
     return ServerFailure(message: error.toString(), debugInfo: stackTrace.toString());
   }

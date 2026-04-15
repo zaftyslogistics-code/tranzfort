@@ -10,6 +10,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/validators.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
@@ -18,9 +19,11 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
+import '../../../shared/widgets/google_sign_in_button.dart';
 import '../providers/auth_providers.dart';
 
 part 'auth_screen_sections.dart';
+part 'auth_screens_email_password.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});

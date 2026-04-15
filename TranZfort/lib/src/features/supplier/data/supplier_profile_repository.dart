@@ -42,12 +42,12 @@ class SupplierProfile {
     return SupplierProfile(
       id: (profileMap['id'] ?? '').toString(),
       fullName: (profileMap['full_name'] ?? '').toString(),
-      mobile: profileMap['mobile']?.toString(),
-      email: profileMap['email']?.toString(),
+      mobile: _nullableString(profileMap['mobile']),
+      email: _nullableString(profileMap['email']),
       verificationStatus: (profileMap['verification_status'] ?? 'unverified').toString(),
-      companyName: supplierMap?['company_name']?.toString(),
-      businessLicenceNumber: supplierMap?['business_licence_number']?.toString(),
-      gstNumber: supplierMap?['gst_number']?.toString(),
+      companyName: _nullableString(supplierMap?['company_name']),
+      businessLicenceNumber: _nullableString(supplierMap?['business_licence_number']),
+      gstNumber: _nullableString(supplierMap?['gst_number']),
       totalLoadsPosted: _readInt(supplierMap?['total_loads_posted']),
       activeLoadsCount: _readInt(supplierMap?['active_loads_count']),
     );
@@ -59,6 +59,14 @@ class SupplierProfile {
     }
 
     return int.tryParse((value ?? '0').toString()) ?? 0;
+  }
+
+  static String? _nullableString(Object? value) {
+    final normalized = (value ?? '').toString().trim();
+    if (normalized.isEmpty) {
+      return null;
+    }
+    return normalized;
   }
 }
 
@@ -186,12 +194,13 @@ class SupplierProfileRepository {
   AppFailure _mapError(Object error, StackTrace stackTrace) =>
       mapSupabaseError(error, stackTrace);
 
-  static String? _nullableString(String? value) {
-    if (value == null || value.isEmpty) {
+  static String? _nullableString(Object? value) {
+    final normalized = (value ?? '').toString().trim();
+    if (normalized.isEmpty) {
       return null;
     }
 
-    return value;
+    return normalized;
   }
 }
 

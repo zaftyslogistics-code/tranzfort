@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:async';
 
 import '../providers/tts_state_provider.dart';
 
@@ -77,7 +78,13 @@ class _TtsScreenSummaryEffectState extends ConsumerState<TtsScreenSummaryEffect>
 
   @override
   void dispose() {
-    _summaryController.state = null;
+    scheduleMicrotask(() {
+      try {
+        _summaryController.state = null;
+      } catch (_) {
+        return;
+      }
+    });
     super.dispose();
   }
 

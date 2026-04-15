@@ -1,12 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/widgets/tts_screen_summary_effect.dart';
+import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/tts_action_button.dart';
@@ -52,8 +53,9 @@ class UserAppShell extends ConsumerWidget {
                 const LanguageToggleAction(),
                 Builder(
                   builder: (scaffoldContext) {
+                    final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
                     final authState = ref.watch(currentAuthStateProvider);
-                    final avatarUrl = authState.profile?.avatarUrl;
+                    final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
                     return Padding(
                       padding: const EdgeInsets.only(right: AppSpacing.sm),
                       child: IconButton(
@@ -251,9 +253,10 @@ class UserAppDrawerContent extends ConsumerWidget {
     final roleLabel = role == AppUserRole.supplier
         ? l10n.shellDrawerSupplierWorkspace
         : l10n.shellDrawerTruckerWorkspace;
+    final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
     final authState = ref.watch(currentAuthStateProvider);
-    final avatarUrl = authState.profile?.avatarUrl;
-    final fullName = authState.profile?.fullName ?? '';
+    final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
+    final fullName = liveProfile?.fullName ?? authState.profile?.fullName ?? '';
 
     return SafeArea(
       child: Column(
@@ -496,6 +499,46 @@ class _AvatarCircle extends StatelessWidget {
     if (url == null || url.isEmpty) {
       return fallback;
     }
+
+    if (!url.startsWith('http')) {
+      return FutureBuilder<String?>(
+        future: _createSignedUrl(url),
+        builder: (context, snapshot) {
+          final resolvedUrl = snapshot.data;
+          if (resolvedUrl == null || resolvedUrl.isEmpty) {
+            return fallback;
+          }
+          return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+        },
+      );
+    }
+
+    return _AvatarImage(url: url, radius: radius, fallback: fallback);
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
 
     return Container(
       width: radius * 2,

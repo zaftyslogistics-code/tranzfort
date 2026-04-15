@@ -27,6 +27,9 @@ class _FakeTripsBackend implements TruckerTripsBackend {
   Future<Map<String, dynamic>?> fetchTripDetail({required String truckerId, required String tripId}) async => null;
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailWithSupplier({required String truckerId, required String tripId}) async => null;
+
+  @override
   Future<void> advanceTripStage({
     required String tripId,
     required String newStage,

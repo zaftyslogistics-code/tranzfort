@@ -118,42 +118,9 @@ class SendMessageState {
 
 class InboxController extends StateNotifier<InboxState> {
   final ChatRepository _repository;
-  StreamSubscription<Result<List<ConversationPreview>>>? _subscription;
-  Timer? _fallbackLoadTimer;
 
   InboxController(this._repository) : super(InboxState.initial()) {
-    _start();
-  }
-
-  Future<void> _start() async {
-    state = state.copyWith(isLoading: true, clearFailure: true);
-    bool receivedRealtime = false;
-    _subscription = _repository.watchConversations().listen((result) {
-      receivedRealtime = true;
-      _fallbackLoadTimer?.cancel();
-      _fallbackLoadTimer = null;
-      result.when(
-        success: (conversations) {
-          state = state.copyWith(
-            isLoading: false,
-            conversations: conversations,
-            clearFailure: true,
-          );
-        },
-        failure: (failure) {
-          state = state.copyWith(
-            isLoading: false,
-            failure: failure,
-          );
-        },
-      );
-    });
-    _fallbackLoadTimer?.cancel();
-    _fallbackLoadTimer = Timer(const Duration(seconds: 2), () {
-      if (!receivedRealtime && mounted) {
-        load();
-      }
-    });
+    load();
   }
 
   Future<void> load() async {
@@ -174,13 +141,6 @@ class InboxController extends StateNotifier<InboxState> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    _fallbackLoadTimer?.cancel();
-    _subscription?.cancel();
-    super.dispose();
   }
 }
 

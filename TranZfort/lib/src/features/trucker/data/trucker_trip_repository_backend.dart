@@ -50,6 +50,35 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
   }
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailWithSupplier({
+    required String truckerId,
+    required String tripId,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    final response = await _client.rpc(
+      'get_trip_detail_with_supplier',
+      params: <String, dynamic>{
+        'p_trip_id': tripId,
+        'p_trucker_id': truckerId,
+      },
+    );
+
+    if (response == null) {
+      return null;
+    }
+
+    // RPC returns JSONB, parse if needed
+    if (response is Map<String, dynamic>) {
+      return response;
+    }
+
+    return null;
+  }
+
+  @override
   Future<void> advanceTripStage({
     required String tripId,
     required String newStage,

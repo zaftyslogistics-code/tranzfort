@@ -54,11 +54,10 @@ class TruckerLoadShareService {
         _localizedPriceType(l10n, detail.summary.priceType),
       ),
       ?superLoadLine,
-      'Load reference: ${detail.summary.id}',
       'In app: $appLink',
     ].join('\n');
     return TruckerLoadSharePayload(
-      subject: 'TranZfort Load ${detail.summary.id}',
+      subject: 'TranZfort load: $routeSummary',
       text: text,
       whatsappUri: Uri.parse('https://wa.me/?text=${Uri.encodeComponent(text)}'),
     );

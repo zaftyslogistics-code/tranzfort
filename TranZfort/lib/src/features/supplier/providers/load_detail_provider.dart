@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -94,17 +95,28 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
 
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
+    
+    // Debug log: Start loading
+    debugPrint('🔍 [LoadDetail] Loading details for loadId: ${state.loadId}');
+    
     final detailResult = await _repository.getLoadDetail(state.loadId);
     if (detailResult.isFailure) {
+      debugPrint('❌ [LoadDetail] getLoadDetail FAILED: ${detailResult.failureOrNull}');
+      debugPrint('   Failure type: ${detailResult.failureOrNull.runtimeType}');
+      debugPrint('   Failure message: ${detailResult.failureOrNull.toString()}');
       state = state.copyWith(
         isLoading: false,
         failure: detailResult.failureOrNull,
       );
       return;
     }
+    debugPrint('✅ [LoadDetail] getLoadDetail SUCCESS');
 
     final bookingsResult = await _repository.getBookingRequests(state.loadId);
     if (bookingsResult.isFailure) {
+      debugPrint('❌ [LoadDetail] getBookingRequests FAILED: ${bookingsResult.failureOrNull}');
+      debugPrint('   Failure type: ${bookingsResult.failureOrNull.runtimeType}');
+      debugPrint('   Failure message: ${bookingsResult.failureOrNull.toString()}');
       state = state.copyWith(
         isLoading: false,
         detail: detailResult.valueOrNull,
@@ -112,10 +124,12 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
       );
       return;
     }
+    debugPrint('✅ [LoadDetail] getBookingRequests SUCCESS: ${bookingsResult.valueOrNull?.length} bookings');
 
     final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
     linkedTripsResult.when(
       success: (linkedTrips) {
+        debugPrint('✅ [LoadDetail] getLinkedTrips SUCCESS: ${linkedTrips.length} trips');
         state = state.copyWith(
           detail: detailResult.valueOrNull,
           bookingRequests: bookingsResult.valueOrNull ?? const <LoadBookingRequest>[],
@@ -125,6 +139,9 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
         );
       },
       failure: (failure) {
+        debugPrint('❌ [LoadDetail] getLinkedTrips FAILED: $failure');
+        debugPrint('   Failure type: ${failure.runtimeType}');
+        debugPrint('   Failure message: ${failure.toString()}');
         state = state.copyWith(
           isLoading: false,
           detail: detailResult.valueOrNull,
@@ -133,6 +150,8 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
         );
       },
     );
+    
+    debugPrint('🎉 [LoadDetail] Load complete - Failure: ${state.failure}');
   }
 
   Future<Result<void>> cancelLoad() async {

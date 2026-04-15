@@ -78,12 +78,14 @@ class TruckerSupplierSummary {
   final String fullName;
   final String? companyName;
   final String verificationStatus;
+  final String? avatarUrl;
 
   const TruckerSupplierSummary({
     required this.id,
     required this.fullName,
     required this.companyName,
     required this.verificationStatus,
+    this.avatarUrl,
   });
 }
 
@@ -238,7 +240,7 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
 
     final response = await _client
         .from('profiles')
-        .select('id, full_name, verification_status')
+        .select('id, full_name, verification_status, avatar_url, profile_photo_document_path')
         .eq('id', supplierId)
         .maybeSingle();
 
@@ -364,15 +366,16 @@ class TruckerLoadDetailRepository {
             fullName: (supplierProfile['full_name'] ?? 'Supplier').toString(),
             companyName: nullableString(supplierExtension?['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
+            avatarUrl: nullableString(supplierProfile['avatar_url']) ?? nullableString(supplierProfile['profile_photo_document_path']),
           ),
           originCity: (loadRow['origin_city'] ?? '').toString(),
           originState: nullableString(loadRow['origin_state']),
-          originLat: readDouble(loadRow['origin_lat']),
-          originLng: readDouble(loadRow['origin_lng']),
+          originLat: readDoubleNullable(loadRow['origin_lat']),
+          originLng: readDoubleNullable(loadRow['origin_lng']),
           destinationCity: (loadRow['destination_city'] ?? '').toString(),
           destinationState: nullableString(loadRow['destination_state']),
-          destinationLat: readDouble(loadRow['destination_lat']),
-          destinationLng: readDouble(loadRow['destination_lng']),
+          destinationLat: readDoubleNullable(loadRow['destination_lat']),
+          destinationLng: readDoubleNullable(loadRow['destination_lng']),
           routeDistanceKm: readDouble(loadRow['route_distance_km']),
           routeDurationMinutes: readInt(loadRow['route_duration_minutes']),
           routePolyline: nullableString(loadRow['route_polyline']),

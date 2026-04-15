@@ -12,10 +12,12 @@ import '../../../../l10n/app_localizations.dart';
 // Uses existing TruckerCitySuggestion and service pattern
 class CitySearchSheet extends ConsumerStatefulWidget {
   final void Function(TruckerCitySuggestion) onCitySelected;
+  final VoidCallback? onUseCurrentLocation;
 
   const CitySearchSheet({
     super.key,
     required this.onCitySelected,
+    this.onUseCurrentLocation,
   });
 
   @override
@@ -132,8 +134,8 @@ class _CitySearchSheetState extends ConsumerState<CitySearchSheet> {
             title: Text(l10n.verificationWizardUseCurrentLocation),
             onTap: () {
               Navigator.pop(context);
-              // Return null to signal using GPS
-              // Caller handles GPS capture
+              // Trigger GPS capture via callback
+              widget.onUseCurrentLocation?.call();
             },
           ),
           const Divider(),
@@ -271,13 +273,21 @@ class AssetCitySearchService implements CitySearchService {
       
       int score = 0;
       // Exact match gets highest score
-      if (name == normalizedQuery) score += 100;
+      if (name == normalizedQuery) {
+        score += 100;
+      }
       // Starts with query gets high score
-      else if (name.startsWith(normalizedQuery)) score += 50;
+      else if (name.startsWith(normalizedQuery)) {
+        score += 50;
+      }
       // Contains query gets medium score
-      else if (name.contains(normalizedQuery)) score += 25;
+      else if (name.contains(normalizedQuery)) {
+        score += 25;
+      }
       // State match gets bonus
-      if (state.contains(normalizedQuery)) score += 10;
+      if (state.contains(normalizedQuery)) {
+        score += 10;
+      }
       
       return _ScoredCity(city, score);
     }).where((sc) => sc.score > 0).toList();
@@ -326,8 +336,12 @@ class AssetCitySearchService implements CitySearchService {
   }
 
   double? _readDouble(dynamic value) {
-    if (value == null) return null;
-    if (value is num) return value.toDouble();
+    if (value == null) {
+      return null;
+    }
+    if (value is num) {
+      return value.toDouble();
+    }
     return double.tryParse(value.toString());
   }
 }

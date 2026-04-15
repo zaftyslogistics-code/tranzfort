@@ -43,7 +43,7 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         authRepositoryProvider.overrideWithValue(repository),
-        currentProfileProvider.overrideWith((ref) => const AsyncData<UserProfile?>(null)),
+        currentProfileProvider.overrideWith((ref) => Stream.value(null)),
       ],
     );
     addTearDown(container.dispose);
@@ -61,8 +61,8 @@ void main() {
       overrides: [
         authRepositoryProvider.overrideWithValue(repository),
         currentProfileProvider.overrideWith(
-          (ref) => const AsyncData<UserProfile?>(
-            UserProfile(
+          (ref) => Stream.value(
+            const UserProfile(
               id: 'user-1',
               fullName: 'Aarav Singh',
               mobile: '9999999999',
@@ -92,7 +92,7 @@ void main() {
     final container = ProviderContainer(
       overrides: [
         authRepositoryProvider.overrideWithValue(repository),
-        currentProfileProvider.overrideWith((ref) => const AsyncData<UserProfile?>(null)),
+        currentProfileProvider.overrideWith((ref) => Stream.value(null)),
       ],
     );
     addTearDown(container.dispose);

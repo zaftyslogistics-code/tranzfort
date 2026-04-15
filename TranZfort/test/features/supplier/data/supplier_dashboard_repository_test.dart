@@ -13,30 +13,11 @@ class _FakeSupplierDashboardBackend implements SupplierDashboardBackend {
   Object? error;
 
   @override
-  Future<int> countLoadsByStatuses(String supplierId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String supplierId) async {
     if (error != null) {
       throw error!;
     }
-    return activeLoads;
-  }
-
-  @override
-  Future<int> countPendingBookings(String supplierId) async {
-    if (error != null) {
-      throw error!;
-    }
-    return pendingBookings;
-  }
-
-  @override
-  Future<int> countTripsByStages(String supplierId, List<String> stages) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (stages.contains('completed')) {
-      return completedTrips;
-    }
-    return inTransitTrips;
+    return [activeLoads, pendingBookings, inTransitTrips, completedTrips];
   }
 }
 

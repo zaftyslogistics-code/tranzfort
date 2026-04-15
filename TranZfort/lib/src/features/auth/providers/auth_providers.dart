@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../data/auth_repository.dart';
 
@@ -107,7 +108,9 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     ref.invalidate(authStateProvider);
     try {
       await ref.read(authStateProvider.future).timeout(const Duration(seconds: 4));
-    } catch (_) {}
+    } catch (e) {
+      AppLogger.warning('Auth state refresh timed out or failed', scope: 'auth', error: e);
+    }
   }
 }
 

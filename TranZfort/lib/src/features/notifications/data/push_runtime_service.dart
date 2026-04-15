@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'notification_route_resolver.dart';
 
@@ -238,7 +239,7 @@ final pushRuntimeLifecycleProvider = Provider<void>((ref) {
         final ok = await service.requestPermission();
         _setPushRuntimeIssue(ref, PushRuntimeIssue.permissionRequestFailed, !ok);
       } catch (e) {
-        debugPrint('Push permission request error: $e');
+        AppLogger.error('Push permission request error', scope: 'push', error: e);
         _setPushRuntimeIssue(ref, PushRuntimeIssue.permissionRequestFailed, true);
       }
     }());
@@ -247,7 +248,7 @@ final pushRuntimeLifecycleProvider = Provider<void>((ref) {
         final ok = await service.initializeLocalNotifications();
         _setPushRuntimeIssue(ref, PushRuntimeIssue.localNotificationsInitFailed, !ok);
       } catch (e) {
-        debugPrint('Local notifications init error: $e');
+        AppLogger.error('Local notifications init error', scope: 'push', error: e);
         _setPushRuntimeIssue(ref, PushRuntimeIssue.localNotificationsInitFailed, true);
       }
     }());
@@ -261,7 +262,7 @@ final pushRuntimeLifecycleProvider = Provider<void>((ref) {
           final shown = await service.showForegroundMessage(message, payloadRoute: route);
           _setPushRuntimeIssue(ref, PushRuntimeIssue.localNotificationDisplayFailed, !shown);
         } catch (e) {
-          debugPrint('Foreground message display error: $e');
+          AppLogger.error('Foreground message display error', scope: 'push', error: e);
           _setPushRuntimeIssue(ref, PushRuntimeIssue.localNotificationDisplayFailed, true);
         }
       }());
@@ -277,7 +278,7 @@ final pushRuntimeLifecycleProvider = Provider<void>((ref) {
         }
         ref.read(pendingPushRouteProvider.notifier).state = routeFromPushMessage(initialMessage, authState.role);
       } catch (e) {
-        debugPrint('Initial push message fetch error: $e');
+        AppLogger.error('Initial push message fetch error', scope: 'push', error: e);
       }
     }());
   } else {

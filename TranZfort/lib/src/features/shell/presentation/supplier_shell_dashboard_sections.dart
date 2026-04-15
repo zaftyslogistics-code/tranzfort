@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
@@ -73,6 +74,32 @@ class BookingRequestCard extends StatelessWidget {
       subtitle: l10n.supplierBookingSubmittedAt(
         booking.displayTruckLabel,
         formatSupplierDateTime(context, booking.createdAt),
+      ),
+      leading: InkWell(
+        onTap: () => context.push(AppRoutes.publicProfileLocation(booking.truckerId)),
+        borderRadius: BorderRadius.circular(20),
+        child: _AvatarCircle(
+          avatarUrl: booking.truckerAvatarUrl,
+          radius: 20,
+          fallback: Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: statusPaletteFor(booking.status).foreground.withValues(alpha: 0.1),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: Text(
+                booking.displayTruckerName.isNotEmpty ? booking.displayTruckerName[0].toUpperCase() : 'T',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: statusPaletteFor(booking.status).foreground,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
       trailing: StatusChip(label: localizedSupplierBookingStatus(l10n, booking.status)),
       footer: Column(
@@ -648,5 +675,95 @@ class SupplierDashboardScreen extends ConsumerWidget {
 
   bool _canPostLoads(SupplierProfile? profile) {
     return profile?.canAccessWorkspace == true;
+  }
+}
+
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
+      return SizedBox(
+        width: radius * 2,
+        height: radius * 2,
+        child: fallback,
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: _createSignedUrl(avatarUrl!),
+      builder: (context, snapshot) {
+        final resolvedUrl = snapshot.data;
+        if (resolvedUrl == null) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        }
+        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+      },
+    );
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      try {
+        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+      } catch (_) {
+        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: radius * 2,
+        height: radius * 2,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+      ),
+    );
   }
 }

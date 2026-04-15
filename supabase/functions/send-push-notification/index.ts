@@ -5,11 +5,48 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 }
 
-type PushNotificationRequest = {
+type SingleNotificationRequest = {
   target_user_id: string
   title: string
   body: string
   data?: Record<string, string | number | boolean | null>
+}
+
+type BatchNotificationRequest = {
+  notifications: Array<{
+    target_user_id: string
+    title: string
+    body: string
+    data?: Record<string, string | number | boolean | null>
+  }>
+}
+
+type PushNotificationRequest = SingleNotificationRequest | BatchNotificationRequest
+
+// Rate limiting: max 100 notifications per request, max 500 tokens per FCM batch
+const MAX_NOTIFICATIONS_PER_REQUEST = 100
+const MAX_FCM_BATCH_SIZE = 500
+const MAX_REQUESTS_PER_MINUTE = 60
+
+// Simple in-memory rate limiter (resets on function cold start)
+const requestCounts = new Map<string, { count: number; resetTime: number }>()
+
+function checkRateLimit(clientId: string): boolean {
+  const now = Date.now()
+  const windowStart = now - 60000 // 1 minute window
+
+  const record = requestCounts.get(clientId)
+  if (!record || record.resetTime < windowStart) {
+    requestCounts.set(clientId, { count: 1, resetTime: now })
+    return true
+  }
+
+  if (record.count >= MAX_REQUESTS_PER_MINUTE) {
+    return false
+  }
+
+  record.count++
+  return true
 }
 
 type ServiceAccountCredentials = {
@@ -50,6 +87,12 @@ Deno.serve(async (request: Request) => {
     return jsonResponse({ error: 'FCM_SERVICE_ACCOUNT_JSON missing required fields' }, 500)
   }
 
+  // Rate limiting check
+  const clientId = request.headers.get('x-client-info') ?? 'anonymous'
+  if (!checkRateLimit(clientId)) {
+    return jsonResponse({ error: 'Rate limit exceeded. Max 60 requests per minute.' }, 429)
+  }
+
   let payload: PushNotificationRequest
   try {
     payload = await request.json()
@@ -57,36 +100,69 @@ Deno.serve(async (request: Request) => {
     return jsonResponse({ error: 'Invalid JSON body' }, 400)
   }
 
-  const targetUserId = payload.target_user_id?.trim()
-  const title = payload.title?.trim()
-  const body = payload.body?.trim()
+  // Normalize to batch format
+  const notifications: Array<{ target_user_id: string; title: string; body: string; data?: Record<string, string | number | boolean | null> }> =
+    'notifications' in payload ? payload.notifications : [payload as SingleNotificationRequest]
 
-  if (!targetUserId || !title || !body) {
+  if (notifications.length === 0) {
+    return jsonResponse({ error: 'At least one notification is required' }, 400)
+  }
+
+  if (notifications.length > MAX_NOTIFICATIONS_PER_REQUEST) {
     return jsonResponse(
-      {
-        error: 'target_user_id, title, and body are required',
-      },
+      { error: `Max ${MAX_NOTIFICATIONS_PER_REQUEST} notifications per request` },
       400,
     )
+  }
+
+  // Validate all notifications
+  for (const notification of notifications) {
+    if (!notification.target_user_id?.trim() || !notification.title?.trim() || !notification.body?.trim()) {
+      return jsonResponse(
+        { error: 'Each notification requires target_user_id, title, and body' },
+        400,
+      )
+    }
   }
 
   const supabase = createClient(supabaseUrl, serviceRoleKey, {
     auth: { persistSession: false },
   })
 
-  const { data: profile, error: profileError } = await supabase
+  // Fetch all push tokens in a single query
+  const userIds = notifications.map((n) => n.target_user_id.trim())
+  const { data: profiles, error: profilesError } = await supabase
     .from('profiles')
     .select('id, push_token')
-    .eq('id', targetUserId)
-    .maybeSingle()
+    .in('id', userIds)
 
-  if (profileError) {
-    return jsonResponse({ error: profileError.message }, 500)
+  if (profilesError) {
+    return jsonResponse({ error: profilesError.message }, 500)
   }
 
-  const pushToken = profile?.push_token?.toString().trim() ?? ''
-  if (!pushToken) {
-    return jsonResponse({ delivered: false, reason: 'No push token for target user' }, 200)
+  // Build token -> notification mapping
+  const tokenMap = new Map<string, typeof notifications[0]>()
+  const skippedUsers: string[] = []
+
+  for (const notification of notifications) {
+    const profile = profiles?.find((p) => p.id === notification.target_user_id.trim())
+    const pushToken = profile?.push_token?.toString().trim() ?? ''
+
+    if (!pushToken) {
+      skippedUsers.push(notification.target_user_id)
+      continue
+    }
+
+    // If same user appears multiple times, last one wins
+    tokenMap.set(pushToken, notification)
+  }
+
+  if (tokenMap.size === 0) {
+    return jsonResponse({
+      delivered: false,
+      reason: 'No valid push tokens found',
+      skipped_users: skippedUsers,
+    }, 200)
   }
 
   let accessToken: string
@@ -96,42 +172,31 @@ Deno.serve(async (request: Request) => {
     return jsonResponse({ error: 'Failed to obtain FCM access token', details: String(err) }, 500)
   }
 
-  const fcmUrl = `https://fcm.googleapis.com/v1/projects/${serviceAccount.project_id}/messages:send`
+  // Send notifications in batches (FCM supports up to 500 tokens per batch)
+  const tokens = Array.from(tokenMap.keys())
+  const results: Array<{ token: string; success: boolean; error?: string }> = []
 
-  const response = await fetch(fcmUrl, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: {
-        token: pushToken,
-        notification: {
-          title,
-          body,
-        },
-        data: stringifyData(payload.data),
-        android: {
-          priority: 'high' as const,
-        },
-      },
-    }),
-  })
-
-  const responseText = await response.text()
-  if (!response.ok) {
-    return jsonResponse(
-      {
-        delivered: false,
-        error: 'FCM request failed',
-        details: responseText,
-      },
-      502,
+  for (let i = 0; i < tokens.length; i += MAX_FCM_BATCH_SIZE) {
+    const batchTokens = tokens.slice(i, i + MAX_FCM_BATCH_SIZE)
+    const batchResults = await sendFcmBatch(
+      serviceAccount.project_id,
+      accessToken,
+      batchTokens,
+      tokenMap,
     )
+    results.push(...batchResults)
   }
 
-  return jsonResponse({ delivered: true, details: responseText }, 200)
+  const successCount = results.filter((r) => r.success).length
+  const failureCount = results.length - successCount
+
+  return jsonResponse({
+    delivered: successCount > 0,
+    success_count: successCount,
+    failure_count: failureCount,
+    skipped_users: skippedUsers,
+    results: results,
+  }, 200)
 })
 
 async function getAccessToken(sa: ServiceAccountCredentials): Promise<string> {
@@ -203,7 +268,7 @@ function base64url(input: string | ArrayBuffer): string {
   return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
 }
 
-function stringifyData(data: PushNotificationRequest['data']): Record<string, string> {
+function stringifyData(data: Record<string, string | number | boolean | null> | undefined): Record<string, string> {
   if (!data) {
     return {}
   }
@@ -211,6 +276,92 @@ function stringifyData(data: PushNotificationRequest['data']): Record<string, st
   return Object.fromEntries(
     Object.entries(data).map(([key, value]) => [key, value == null ? '' : String(value)]),
   )
+}
+
+async function sendFcmBatch(
+  projectId: string,
+  accessToken: string,
+  tokens: string[],
+  tokenMap: Map<string, { title: string; body: string; data?: Record<string, string | number | boolean | null> }>,
+): Promise<Array<{ token: string; success: boolean; error?: string }>> {
+  const fcmUrl = `https://fcm.googleapis.com/batch`
+  const results: Array<{ token: string; success: boolean; error?: string }> = []
+
+  // Build multipart batch request
+  const boundary = 'batch_' + crypto.randomUUID()
+  const parts: string[] = []
+
+  for (const token of tokens) {
+    const notification = tokenMap.get(token)!
+    const messageBody = JSON.stringify({
+      message: {
+        token: token,
+        notification: {
+          title: notification.title,
+          body: notification.body,
+        },
+        data: stringifyData(notification.data),
+        android: {
+          priority: 'high',
+        },
+      },
+    })
+
+    parts.push(
+      `--${boundary}\r\n` +
+      `Content-Type: application/http\r\n` +
+      `Content-Transfer-Encoding: binary\r\n\r\n` +
+      `POST /v1/projects/${projectId}/messages:send HTTP/1.1\r\n` +
+      `Content-Type: application/json\r\n\r\n` +
+      `${messageBody}\r\n`,
+    )
+  }
+
+  parts.push(`--${boundary}--\r\n`)
+
+  try {
+    const response = await fetch(fcmUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': `multipart/mixed; boundary=${boundary}`,
+      },
+      body: parts.join(''),
+    })
+
+    if (!response.ok) {
+      // Batch request failed entirely - mark all as failed
+      return tokens.map((token) => ({
+        token,
+        success: false,
+        error: `Batch request failed: ${response.statusText}`,
+      }))
+    }
+
+    // Parse batch response
+    const responseText = await response.text()
+
+    // Simple parsing of multipart response
+    for (const token of tokens) {
+      if (responseText.includes('"name":"projects/')) {
+        results.push({ token, success: true })
+      } else if (responseText.includes('error')) {
+        const errorMatch = responseText.match(/"message":"([^"]+)"/)
+        results.push({ token, success: false, error: errorMatch?.[1] ?? 'Unknown error' })
+      } else {
+        results.push({ token, success: true })
+      }
+    }
+  } catch (error) {
+    // Network or parsing error - mark all as failed
+    return tokens.map((token) => ({
+      token,
+      success: false,
+      error: String(error),
+    }))
+  }
+
+  return results
 }
 
 function jsonResponse(payload: unknown, status: number) {

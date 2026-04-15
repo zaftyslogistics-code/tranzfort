@@ -8,6 +8,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/services/maps_launcher_service.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../reviews/utils/review_trigger_helper.dart';
 import '../../communication/data/chat_repository.dart';
 import '../../../features/shell/presentation/shell_components.dart';
 import '../../support/providers/support_compose_providers.dart';
@@ -25,6 +26,9 @@ import '../providers/trucker_trip_detail_provider.dart';
 import '../providers/trucker_trip_rating_provider.dart';
 
 part 'trucker_trip_detail_screen_sections.dart';
+part 'trucker_trip_detail_screen_rating.dart';
+part 'trucker_trip_detail_screen_chat.dart';
+part 'trucker_trip_detail_screen_helpers.dart';
 
 class TruckerTripDetailScreen extends ConsumerWidget {
   final String tripId;

@@ -73,19 +73,15 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
             Text(l10n.reportIssueSourceLabel(widget.contextData.sourceLabel)),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              l10n.reportIssueRelatedLoadLabel(
-                widget.contextData.relatedLoadId.trim().isEmpty
-                    ? l10n.reportIssueNotLinked
-                    : widget.contextData.relatedLoadId,
-              ),
+              widget.contextData.relatedLoadId.trim().isEmpty
+                  ? '${l10n.reportIssueRelatedLoadLabel}: ${l10n.reportIssueNotLinked}'
+                  : l10n.reportIssueRelatedLoadLabel,
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              l10n.reportIssueRelatedTripLabel(
-                widget.contextData.relatedTripId.trim().isEmpty
-                    ? l10n.reportIssueNotLinked
-                    : widget.contextData.relatedTripId,
-              ),
+              widget.contextData.relatedTripId.trim().isEmpty
+                  ? '${l10n.reportIssueRelatedTripLabel}: ${l10n.reportIssueNotLinked}'
+                  : l10n.reportIssueRelatedTripLabel,
             ),
           ],
         ),

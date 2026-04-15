@@ -217,6 +217,7 @@ class LoadBookingRequest {
   final String? truckerName;
   final String? truckerVerificationStatus;
   final double? truckerRating;
+  final String? truckerAvatarUrl;
   final String? truckNumber;
   final String? truckBodyType;
   final int? truckTyres;
@@ -234,6 +235,7 @@ class LoadBookingRequest {
     required this.truckerName,
     required this.truckerVerificationStatus,
     required this.truckerRating,
+    this.truckerAvatarUrl,
     required this.truckNumber,
     required this.truckBodyType,
     required this.truckTyres,
@@ -266,6 +268,7 @@ class LoadBookingRequest {
       truckerName: _nullableString(map['trucker_name']),
       truckerVerificationStatus: _nullableString(map['trucker_verification_status']),
       truckerRating: _readDouble(map['trucker_rating']),
+      truckerAvatarUrl: _nullableString(map['trucker_avatar_url']),
       truckNumber: _nullableString(map['truck_number']),
       truckBodyType: _nullableString(map['truck_body_type']),
       truckTyres: LoadListItemDto._readInt(map['truck_tyres']) == 0 && map['truck_tyres'] == null

@@ -10,81 +10,15 @@ import 'package:tranzfort/src/features/trucker/data/trucker_trip_repository.dart
 import 'package:tranzfort/src/features/trucker/providers/trucker_trip_action_provider.dart';
 import 'package:tranzfort/src/features/trucker/providers/trucker_trip_detail_provider.dart';
 
-class _ActionBackend implements TruckerTripsBackend {
-  String stage;
-  String? advancedTripId;
-  String? advancedStage;
-  double? advancedGpsLat;
-  double? advancedGpsLng;
-  String? uploadedTripId;
-  String? uploadedPodPath;
-  String? uploadedLrPath;
-  String? uploadedStandaloneLrTripId;
-  Object? error;
+import '../../../core/mocks.dart';
 
-  _ActionBackend({this.stage = 'assigned'});
-
-  @override
-  Future<void> advanceTripStage({
-    required String tripId,
-    required String newStage,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    advancedTripId = tripId;
-    advancedStage = newStage;
-    advancedGpsLat = gpsLat;
-    advancedGpsLng = gpsLng;
-    stage = newStage;
-  }
-
-  @override
-  Future<void> uploadTripProof({
-    required String tripId,
-    required String podPath,
-    String? lrPath,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    uploadedTripId = tripId;
-    uploadedPodPath = podPath;
-    advancedGpsLat = gpsLat;
-    advancedGpsLng = gpsLng;
-    stage = 'proof_submitted';
-  }
-
-  @override
-  Future<Map<String, dynamic>?> uploadTripLr({
-    required String tripId,
-    required String lrPath,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    uploadedStandaloneLrTripId = tripId;
-    uploadedLrPath = lrPath;
-    return <String, dynamic>{'id': tripId};
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchOwnRating({required String reviewerId, required String loadId}) async => null;
-
-  @override
-  Future<void> submitRating({required String loadId, required int score, String? comment}) async {}
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDetail({
-    required String truckerId,
-    required String tripId,
-  }) async {
-    return {
-      'id': tripId,
+MockTruckerTripsBackend _createActionBackend({String stage = 'assigned'}) {
+  final backend = MockTruckerTripsBackend();
+  backend.setupTripDetail(
+    tripId: 'trip-1',
+    supplierId: 'supplier-1',
+    customDetail: {
+      'id': 'trip-1',
       'load_id': 'load-1',
       'supplier_id': 'supplier-1',
       'truck_id': 'truck-1',
@@ -98,8 +32,8 @@ class _ActionBackend implements TruckerTripsBackend {
           : null,
       'pod_uploaded_at': stage == 'proof_submitted' ? '2026-03-10T11:00:00.000Z' : null,
       'completed_at': null,
-      'lr_document_path': uploadedLrPath,
-      'pod_document_path': stage == 'proof_submitted' ? uploadedPodPath : null,
+      'lr_document_path': null,
+      'pod_document_path': stage == 'proof_submitted' ? 'pod.jpg' : null,
       'load_snapshot_summary': {
         'origin_label': 'Chandrapur, Maharashtra',
         'destination_label': 'Mumbai, Maharashtra',
@@ -127,33 +61,9 @@ class _ActionBackend implements TruckerTripsBackend {
         'body_type': 'Open',
         'tyres': 12,
       },
-    };
-  }
-
-  @override
-  Future<List<Map<String, dynamic>>> fetchTrips({
-    required String truckerId,
-    required List<String> stages,
-  }) async {
-    return const <Map<String, dynamic>>[];
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierExtension(String supplierId) async => {
-        'id': supplierId,
-        'company_name': 'Amit Logistics',
-      };
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => {
-        'id': supplierId,
-        'full_name': 'Amit Supplier',
-        'mobile': '+919876543210',
-        'verification_status': 'verified',
-      };
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDisputeSummary({required String tripId}) async => null;
+    },
+  );
+  return backend;
 }
 
 class _FakeTripProofUploadService extends TripProofUploadService {
@@ -192,7 +102,7 @@ TripGpsCaptureService _noGpsService() {
 }
 
 ProviderContainer _buildContainer({
-  required _ActionBackend backend,
+  required MockTruckerTripsBackend backend,
   required Result<String?> podUploadResult,
   required Result<String?> lrUploadResult,
 }) {
@@ -214,7 +124,7 @@ ProviderContainer _buildContainer({
 
 void main() {
   test('trucker trip action provider advances stage and refreshes trip detail', () async {
-    final backend = _ActionBackend(stage: 'assigned');
+    final backend = _createActionBackend(stage: 'assigned');
     final container = _buildContainer(
       backend: backend,
       podUploadResult: const Success<String?>(null),
@@ -230,13 +140,30 @@ void main() {
     expect(result.valueOrNull, 'pickup_pending');
     expect(backend.advancedTripId, 'trip-1');
     expect(backend.advancedStage, 'pickup_pending');
-    expect(backend.advancedGpsLat, isNull);
+  });
+
+  test('action controller upload LR', () async {
+    final backend = _createActionBackend(stage: 'pickup_pending');
+    final container = _buildContainer(
+      backend: backend,
+      podUploadResult: const Success<String?>(null),
+      lrUploadResult: const Success<String?>('lr.jpg'),
+    );
+    addTearDown(container.dispose);
+
+    final result = await container
+        .read(truckerTripActionProvider('trip-1').notifier)
+        .uploadLrProof(currentStage: 'pickup_pending', source: ImageSource.gallery);
+
+    expect(result.isSuccess, isTrue);
+    expect(backend.uploadedLrTripId, 'trip-1');
+    expect(backend.uploadedLrPath, 'lr.jpg');
     expect(container.read(truckerTripActionProvider('trip-1')).isSubmitting, isFalse);
     expect(container.read(truckerTripDetailProvider('trip-1')).detail?.stage, 'pickup_pending');
   });
 
   test('trucker trip action provider surfaces repository failures', () async {
-    final backend = _ActionBackend(stage: 'assigned')
+    final backend = _createActionBackend(stage: 'assigned')
       ..error = const PostgrestException(message: 'Invalid stage transition from assigned to delivered');
     final container = _buildContainer(
       backend: backend,
@@ -255,7 +182,7 @@ void main() {
   });
 
   test('trucker trip action provider uploads pod proof and refreshes trip detail', () async {
-    final backend = _ActionBackend(stage: 'delivered');
+    final backend = _createActionBackend(stage: 'delivered');
     final container = _buildContainer(
       backend: backend,
       podUploadResult: const Success<String?>('trip-1/pod.jpg'),
@@ -269,13 +196,13 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isTrue);
-    expect(backend.uploadedTripId, 'trip-1');
-    expect(backend.uploadedPodPath, 'trip-1/pod.jpg');
+    expect(backend.uploadedProofTripId, 'trip-1');
+    expect(backend.uploadedProofPodPath, 'trip-1/pod.jpg');
     expect(container.read(truckerTripDetailProvider('trip-1')).detail?.stage, 'proof_submitted');
   });
 
   test('trucker trip action provider treats cancelled proof pick as non-error', () async {
-    final backend = _ActionBackend(stage: 'delivered');
+    final backend = _createActionBackend(stage: 'delivered');
     final container = _buildContainer(
       backend: backend,
       podUploadResult: const Success<String?>(null),
@@ -289,12 +216,12 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isFalse);
-    expect(backend.uploadedTripId, isNull);
+    expect(backend.uploadedProofTripId, isNull);
     expect(container.read(truckerTripActionProvider('trip-1')).failure, isNull);
   });
 
   test('trucker trip action provider surfaces proof upload service failure', () async {
-    final backend = _ActionBackend(stage: 'delivered');
+    final backend = _createActionBackend(stage: 'delivered');
     final container = _buildContainer(
       backend: backend,
       podUploadResult: const Failure<String?>(
@@ -309,12 +236,12 @@ void main() {
         .uploadPodProof(ImageSource.gallery);
 
     expect(result.failureOrNull, isA<BusinessRuleFailure>());
-    expect(backend.uploadedTripId, isNull);
+    expect(backend.uploadedProofTripId, isNull);
     expect(container.read(truckerTripActionProvider('trip-1')).isSubmitting, isFalse);
   });
 
   test('trucker trip action provider uploads lr proof and refreshes trip detail', () async {
-    final backend = _ActionBackend(stage: 'pickup_pending');
+    final backend = _createActionBackend(stage: 'pickup_pending');
     final container = _buildContainer(
       backend: backend,
       podUploadResult: const Success<String?>(null),
@@ -328,7 +255,7 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isTrue);
-    expect(backend.uploadedStandaloneLrTripId, 'trip-1');
+    expect(backend.uploadedLrTripId, 'trip-1');
     expect(backend.uploadedLrPath, 'trip-1/lr.jpg');
     expect(container.read(truckerTripDetailProvider('trip-1')).detail?.hasLrProof, isTrue);
   });

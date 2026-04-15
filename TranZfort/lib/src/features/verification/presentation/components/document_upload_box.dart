@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/widgets/action_buttons.dart';
-import '../../data/verification_repository.dart';
+import '../../data/document_url_service.dart';
 
-class DocumentUploadBox extends StatelessWidget {
+class DocumentUploadBox extends ConsumerWidget {
   final String? documentPath;
   final String label;
   final String? subtitle;
@@ -34,10 +34,10 @@ class DocumentUploadBox extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
-    final hasDocument = documentPath?.isNotEmpty ?? false;
+    final hasDocument = documentPath != null && documentPath!.isNotEmpty;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,6 +91,7 @@ class DocumentUploadBox extends StatelessWidget {
                         documentPath: documentPath!,
                         onClear: onClear,
                         qualityChecks: qualityChecks,
+                        urlService: ref.watch(documentUrlServiceProvider),
                       )
                     : _EmptyContent(icon: icon),
           ),
@@ -141,39 +142,34 @@ class _UploadedContent extends StatelessWidget {
   final String documentPath;
   final VoidCallback? onClear;
   final List<QualityCheck> qualityChecks;
+  final DocumentUrlService urlService;
 
   const _UploadedContent({
     required this.documentPath,
     this.onClear,
     required this.qualityChecks,
+    required this.urlService,
   });
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context);
-    final isLocalFile = !documentPath.startsWith('http');
+    final normalizedPath = documentPath.trim();
+    final isRemoteUrl = normalizedPath.startsWith('http');
+    final isLocalFile = !isRemoteUrl && File(normalizedPath).existsSync();
 
     return Stack(
       fit: StackFit.expand,
       children: [
-        // Preview image
         ClipRRect(
           borderRadius: BorderRadius.circular(11),
-          child: isLocalFile
-              ? Image.file(
-                  File(documentPath),
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => _ErrorPlaceholder(),
-                )
-              : Image.network(
-                  documentPath,
-                  fit: BoxFit.cover,
-                  errorBuilder: (_, __, ___) => _ErrorPlaceholder(),
-                ),
+          child: _DocumentPreview(
+            documentPath: normalizedPath,
+            isLocalFile: isLocalFile,
+            isRemoteUrl: isRemoteUrl,
+            urlService: urlService,
+          ),
         ),
-        
-        // Quality checks overlay
+
         if (qualityChecks.isNotEmpty)
           Positioned(
             left: 8,
@@ -181,8 +177,7 @@ class _UploadedContent extends StatelessWidget {
             right: 8,
             child: _QualityChecksOverlay(checks: qualityChecks),
           ),
-        
-        // Success indicator
+
         Positioned(
           top: 8,
           right: 8,
@@ -224,6 +219,64 @@ class _UploadedContent extends StatelessWidget {
       ],
     );
   }
+}
+
+class _DocumentPreview extends StatelessWidget {
+  final String documentPath;
+  final bool isLocalFile;
+  final bool isRemoteUrl;
+  final DocumentUrlService urlService;
+
+  const _DocumentPreview({
+    required this.documentPath,
+    required this.isLocalFile,
+    required this.isRemoteUrl,
+    required this.urlService,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (documentPath.isEmpty) {
+      return const _ErrorPlaceholder(message: 'No document');
+    }
+
+    if (isLocalFile) {
+      return Image.file(
+        File(documentPath),
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, trace) => const _ErrorPlaceholder(message: 'File error'),
+      );
+    }
+
+    if (isRemoteUrl) {
+      return Image.network(
+        documentPath,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, trace) => const _ErrorPlaceholder(message: 'Load error'),
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: urlService.createSignedUrl(documentPath),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        final signedUrl = snapshot.data;
+        if (signedUrl == null || signedUrl.isEmpty) {
+          return const _ErrorPlaceholder(message: 'Access error');
+        }
+
+        return Image.network(
+          signedUrl,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, trace) => const _ErrorPlaceholder(message: 'Load error'),
+        );
+      },
+    );
+  }
+
 }
 
 class _QualityChecksOverlay extends StatelessWidget {
@@ -268,15 +321,34 @@ class _QualityChecksOverlay extends StatelessWidget {
 }
 
 class _ErrorPlaceholder extends StatelessWidget {
+  final String? message;
+
+  const _ErrorPlaceholder({this.message});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.neutralBg,
       child: Center(
-        child: Icon(
-          Icons.broken_image_outlined,
-          color: AppColors.textMuted,
-          size: 48,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.broken_image_outlined,
+              color: AppColors.textMuted,
+              size: 48,
+            ),
+            if (message != null && message!.isNotEmpty) ...[
+              const SizedBox(height: 8),
+              Text(
+                message!,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: AppColors.textMuted,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ],
         ),
       ),
     );
@@ -311,18 +383,12 @@ class ImageSourcePicker extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.camera_alt),
           title: Text(l10n.verificationTakePhotoAction),
-          onTap: () {
-            Navigator.pop(context);
-            onSelected(ImageSource.camera);
-          },
+          onTap: () => Navigator.pop(context, ImageSource.camera),
         ),
         ListTile(
           leading: const Icon(Icons.photo_library),
           title: Text(l10n.verificationChooseFromGalleryAction),
-          onTap: () {
-            Navigator.pop(context);
-            onSelected(ImageSource.gallery);
-          },
+          onTap: () => Navigator.pop(context, ImageSource.gallery),
         ),
       ],
     );

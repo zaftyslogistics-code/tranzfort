@@ -158,7 +158,7 @@ void main() {
       ProviderScope(
         overrides: [
           supplierTripsRepositoryProvider.overrideWithValue(repository),
-          currentProfileProvider.overrideWith((ref) => const AsyncValue<UserProfile?>.data(
+          currentProfileProvider.overrideWith((ref) => Stream.value(const 
                 UserProfile(
                   id: 'supplier-1',
                   fullName: 'Amit Supplier',
@@ -169,7 +169,8 @@ void main() {
                   accountDeletionStatus: 'active',
                   trustSafetyStatus: 'normal',
                 ),
-              )),
+            ),
+          ),
         ],
         child: MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -211,7 +212,7 @@ void main() {
       ProviderScope(
         overrides: [
           supplierTripsRepositoryProvider.overrideWithValue(repository),
-          currentProfileProvider.overrideWith((ref) => const AsyncValue<UserProfile?>.data(
+          currentProfileProvider.overrideWith((ref) => Stream.value(const 
                 UserProfile(
                   id: 'supplier-1',
                   fullName: 'Amit Supplier',
@@ -222,7 +223,8 @@ void main() {
                   accountDeletionStatus: 'active',
                   trustSafetyStatus: 'normal',
                 ),
-              )),
+            ),
+          ),
         ],
         child: MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -354,7 +356,7 @@ void main() {
       ProviderScope(
         overrides: [
           supplierTripsRepositoryProvider.overrideWithValue(repository),
-          currentProfileProvider.overrideWith((ref) => const AsyncValue<UserProfile?>.data(
+          currentProfileProvider.overrideWith((ref) => Stream.value(const 
                 UserProfile(
                   id: 'supplier-1',
                   fullName: 'Amit Supplier',
@@ -365,7 +367,8 @@ void main() {
                   accountDeletionStatus: 'active',
                   trustSafetyStatus: 'normal',
                 ),
-              )),
+            ),
+          ),
         ],
         child: MaterialApp.router(
           localizationsDelegates: AppLocalizations.localizationsDelegates,

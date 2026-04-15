@@ -5,138 +5,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/features/trucker/data/trucker_trip_repository.dart';
 
-class _FakeTripsBackend implements TruckerTripsBackend {
-  List<Map<String, dynamic>> rows = const <Map<String, dynamic>>[];
-  Map<String, dynamic>? detailRow;
-  Map<String, dynamic>? ratingRow;
-  Map<String, dynamic>? lrUploadRow;
-  Object? error;
-  String? advancedTripId;
-  String? advancedStage;
-  double? advancedGpsLat;
-  double? advancedGpsLng;
-  String? uploadedTripId;
-  String? uploadedPodPath;
-  String? uploadedLrPath;
-  String? uploadedStandaloneLrTripId;
-  String? submittedRatingLoadId;
-  int? submittedRatingScore;
-  String? submittedRatingComment;
+import '../../../core/mocks.dart';
 
-  @override
-  Future<List<Map<String, dynamic>>> fetchTrips({required String truckerId, required List<String> stages}) async {
-    if (error != null) {
-      throw error!;
-    }
-    return rows;
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDetail({required String truckerId, required String tripId}) async {
-    if (error != null) {
-      throw error!;
-    }
-    return detailRow;
-  }
-
-  @override
-  Future<void> advanceTripStage({
-    required String tripId,
-    required String newStage,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    advancedTripId = tripId;
-    advancedStage = newStage;
-    advancedGpsLat = gpsLat;
-    advancedGpsLng = gpsLng;
-  }
-
-  @override
-  Future<Map<String, dynamic>?> uploadTripLr({
-    required String tripId,
-    required String lrPath,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    uploadedStandaloneLrTripId = tripId;
-    uploadedLrPath = lrPath;
-    return lrUploadRow ?? <String, dynamic>{'id': tripId};
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchOwnRating({
-    required String reviewerId,
-    required String loadId,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    return ratingRow;
-  }
-
-  @override
-  Future<void> submitRating({
-    required String loadId,
-    required int score,
-    String? comment,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    submittedRatingLoadId = loadId;
-    submittedRatingScore = score;
-    submittedRatingComment = comment;
-    ratingRow = {
-      'id': 'rating-1',
-      'score': score,
-      'comment': comment,
-      'created_at': '2026-03-10T13:00:00.000Z',
-    };
-  }
-
-  @override
-  Future<void> uploadTripProof({
-    required String tripId,
-    required String podPath,
-    String? lrPath,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {
-    if (error != null) {
-      throw error!;
-    }
-    uploadedTripId = tripId;
-    uploadedPodPath = podPath;
-    uploadedLrPath = lrPath;
-    advancedGpsLat = gpsLat;
-    advancedGpsLng = gpsLng;
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierExtension(String supplierId) async => {
-        'id': supplierId,
-        'company_name': 'Amit Logistics',
-      };
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => {
-        'id': supplierId,
-        'full_name': 'Amit Supplier',
-        'verification_status': 'verified',
-      };
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDisputeSummary({required String tripId}) async => null;
-}
+// Using shared MockTruckerTripsBackend from test/core/mocks.dart
 
 void main() {
   test('trucker trips repository maps trip rows', () async {
-    final backend = _FakeTripsBackend()
+    final backend = MockTruckerTripsBackend()
       ..rows = [
         {
           'id': 'trip-1',
@@ -171,7 +46,7 @@ void main() {
   });
 
   test('trucker trips repository maps trip detail rows', () async {
-    final backend = _FakeTripsBackend()
+    final backend = MockTruckerTripsBackend()
       ..detailRow = {
         'id': 'trip-1',
         'load_id': 'load-1',
@@ -224,7 +99,7 @@ void main() {
   });
 
   test('trucker trips repository advances trip stage with gps payload', () async {
-    final backend = _FakeTripsBackend();
+    final backend = MockTruckerTripsBackend();
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.advanceTripStage(
@@ -244,7 +119,7 @@ void main() {
   });
 
   test('trucker trips repository uploads lr proof during pickup stages', () async {
-    final backend = _FakeTripsBackend();
+    final backend = MockTruckerTripsBackend();
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.uploadTripLr(
@@ -255,12 +130,12 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, 'lr_uploaded');
-    expect(backend.uploadedStandaloneLrTripId, 'trip-1');
+    expect(backend.uploadedLrTripId, 'trip-1');
     expect(backend.uploadedLrPath, 'trip-1/lr.jpg');
   });
 
   test('trucker trips repository rejects invalid requested next stage', () async {
-    final backend = _FakeTripsBackend();
+    final backend = MockTruckerTripsBackend();
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.advanceTripStage(
@@ -274,7 +149,7 @@ void main() {
   });
 
   test('trucker trips repository maps invalid stage transition as business rule failure', () async {
-    final backend = _FakeTripsBackend()
+    final backend = MockTruckerTripsBackend()
       ..error = const PostgrestException(message: 'Invalid stage transition from assigned to delivered');
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
@@ -288,7 +163,7 @@ void main() {
   });
 
   test('trucker trips repository uploads pod proof', () async {
-    final backend = _FakeTripsBackend();
+    final backend = MockTruckerTripsBackend();
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.uploadTripProof(
@@ -300,14 +175,14 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, 'proof_submitted');
-    expect(backend.uploadedTripId, 'trip-1');
-    expect(backend.uploadedPodPath, 'trip-1/pod.jpg');
-    expect(backend.advancedGpsLat, 19.95);
-    expect(backend.advancedGpsLng, 79.30);
+    expect(backend.uploadedProofTripId, 'trip-1');
+    expect(backend.uploadedProofPodPath, 'trip-1/pod.jpg');
+    expect(backend.uploadedProofGpsLat, 19.95);
+    expect(backend.uploadedProofGpsLng, 79.30);
   });
 
   test('trucker trips repository fetches own rating', () async {
-    final backend = _FakeTripsBackend()
+    final backend = MockTruckerTripsBackend()
       ..ratingRow = {
         'id': 'rating-1',
         'score': 4,
@@ -324,7 +199,7 @@ void main() {
   });
 
   test('trucker trips repository submits rating', () async {
-    final backend = _FakeTripsBackend();
+    final backend = MockTruckerTripsBackend();
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.submitRating(
@@ -341,7 +216,7 @@ void main() {
   });
 
   test('trucker trips repository maps network failure', () async {
-    final backend = _FakeTripsBackend()..error = const SocketException('offline');
+    final backend = MockTruckerTripsBackend()..error = const SocketException('offline');
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.fetchTrips(TruckerTripsRepository.activeStages);
@@ -350,7 +225,7 @@ void main() {
   });
 
   test('trucker trips repository maps permission failure', () async {
-    final backend = _FakeTripsBackend()..error = const PostgrestException(message: 'forbidden', code: '42501');
+    final backend = MockTruckerTripsBackend()..error = const PostgrestException(message: 'forbidden', code: '42501');
     final repository = TruckerTripsRepository(backend, () => 'trucker-1');
 
     final result = await repository.fetchTrips(TruckerTripsRepository.activeStages);

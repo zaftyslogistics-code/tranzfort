@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/shell/presentation/shell_components.dart';
 import '../../support/providers/support_compose_providers.dart';
@@ -273,7 +276,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
       children: [
         HeroActionCard(
           title: detail.routeLabel,
-          subtitle: l10n.supplierTripDetailHeroSubtitle(detail.id, detail.truckNumber),
+          subtitle: l10n.supplierTripDetailHeroSubtitle(detail.truckNumber),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -292,9 +295,42 @@ class _SupplierTripDetailBody extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              Text(
-                l10n.supplierTripDetailMaterialTruckerSummary(detail.material, detail.trucker.fullName),
-                style: Theme.of(context).textTheme.bodyLarge,
+              Row(
+                children: [
+                  InkWell(
+                    onTap: () => context.push(AppRoutes.publicProfileLocation(detail.trucker.id)),
+                    borderRadius: BorderRadius.circular(20),
+                    child: _AvatarCircle(
+                      avatarUrl: detail.trucker.avatarUrl,
+                      radius: 20,
+                      fallback: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            detail.trucker.fullName.isNotEmpty ? detail.trucker.fullName[0].toUpperCase() : 'T',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.primary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Text(
+                      l10n.supplierTripDetailMaterialTruckerSummary(detail.material, detail.trucker.fullName),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
@@ -710,5 +746,95 @@ class _SupplierTripDetailBody extends ConsumerWidget {
       'resolved' || 'closed' => l10n.supplierTripDetailProofGuidanceClosed,
       _ => l10n.supplierTripDetailProofGuidanceInProgress,
     };
+  }
+}
+
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
+      return SizedBox(
+        width: radius * 2,
+        height: radius * 2,
+        child: fallback,
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: _createSignedUrl(avatarUrl!),
+      builder: (context, snapshot) {
+        final resolvedUrl = snapshot.data;
+        if (resolvedUrl == null) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        }
+        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+      },
+    );
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      try {
+        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+      } catch (_) {
+        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: radius * 2,
+        height: radius * 2,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+      ),
+    );
   }
 }

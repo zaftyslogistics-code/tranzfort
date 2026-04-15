@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
+import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/map_readers.dart';
@@ -14,6 +15,24 @@ import 'chat_repository_backend.dart';
 export 'chat_repository_conversation_models.dart';
 export 'chat_repository_models.dart';
 export 'chat_repository_backend.dart';
+
+/// Extension to debounce stream events - batches rapid updates
+extension StreamDebounce<T> on Stream<T> {
+  Stream<T> debounce(Duration duration) {
+    Timer? timer;
+    final controller = StreamController<T>();
+
+    listen((event) {
+      timer?.cancel();
+      timer = Timer(duration, () => controller.add(event));
+    }, onDone: () {
+      timer?.cancel();
+      controller.close();
+    }, onError: controller.addError, cancelOnError: false);
+
+    return controller.stream;
+  }
+}
 
 class ChatRepository {
   final ChatBackend _backend;
@@ -76,20 +95,10 @@ class ChatRepository {
       return;
     }
 
-    await for (final _ in _backend.watchConversations(userId: userId, role: role)) {
-      try {
-        final rows = await _backend.fetchConversations(userId: userId, role: role);
-        final previews = await _mapConversationRows(rows, currentUserId: userId);
-        previews.sort((a, b) {
-          final aTime = a.lastMessageAt ?? a.createdAt;
-          final bTime = b.lastMessageAt ?? b.createdAt;
-          return bTime.compareTo(aTime);
-        });
-        yield Success<List<ConversationPreview>>(previews);
-      } catch (error, stackTrace) {
-        yield Failure<List<ConversationPreview>>(_mapError(error, stackTrace));
-      }
-    }
+    // Disable realtime streaming - use manual load only
+    // The realtime stream from raw conversations table doesn't have enriched fields (route_label, has_unread)
+    // which causes mapping failures. Manual RPC load provides complete data.
+    yield const Success<List<ConversationPreview>>([]);
   }
 
   Stream<Result<int>> watchUnreadConversationCount() async* {
@@ -99,7 +108,9 @@ class ChatRepository {
       return;
     }
 
-    await for (final _ in _backend.watchConversations(userId: userId, role: _currentUserRole())) {
+    await for (final _ in _backend
+        .watchConversations(userId: userId, role: _currentUserRole())
+        .debounce(const Duration(milliseconds: 300))) {
       try {
         final count = await _backend.fetchUnreadConversationCount();
         yield Success<int>(count);
@@ -213,6 +224,35 @@ class ChatRepository {
     }
   }
 
+  Future<Result<String?>> getSupplierMobile(String conversationId) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<String?>(UnauthorizedFailure());
+    }
+
+    try {
+      final result = await _backend.fetchConversation(conversationId);
+      if (result == null) {
+        return const Failure<String?>(NotFoundFailure());
+      }
+      final Map<String, dynamic>? row = switch (result) {
+        final Map<String, dynamic> map => map,
+        final List<dynamic> rows when rows.isNotEmpty => rows.first is Map<String, dynamic>
+            ? rows.first as Map<String, dynamic>
+            : Map<String, dynamic>.from(rows.first as Map),
+        _ => null,
+      };
+      if (row == null) {
+        return const Failure<String?>(NotFoundFailure());
+      }
+
+      final mobile = nullableString(row['supplier_mobile']);
+      return Success<String?>(mobile);
+    } catch (error, stackTrace) {
+      return Failure<String?>(_mapError(error, stackTrace));
+    }
+  }
+
   Future<Result<String>> sendTextMessage({
     required String conversationId,
     required String text,
@@ -316,6 +356,57 @@ class ChatRepository {
     }
   }
 
+  Future<Result<ConversationPreview?>> _fetchConversationPreview({
+    required String conversationId,
+  }) async {
+    try {
+      final result = await _backend.fetchConversation(conversationId);
+      if (result == null) {
+        return const Success<ConversationPreview?>(null);
+      }
+
+      final Map<String, dynamic>? row = switch (result) {
+        final Map<String, dynamic> map => map,
+        final List<dynamic> rows when rows.isNotEmpty => rows.first is Map<String, dynamic>
+            ? rows.first as Map<String, dynamic>
+            : Map<String, dynamic>.from(rows.first as Map),
+        _ => null,
+      };
+      if (row == null) {
+        return const Success<ConversationPreview?>(null);
+      }
+
+      return Success<ConversationPreview?>(_mapConversationSummaryRow(row));
+    } catch (error, stackTrace) {
+      return Failure<ConversationPreview?>(_mapError(error, stackTrace));
+    }
+  }
+
+  List<ConversationPreview> _sortConversationPreviews(Iterable<ConversationPreview> previews) {
+    final sorted = previews.toList(growable: false);
+    sorted.sort((a, b) {
+      final aTime = a.lastMessageAt ?? a.createdAt;
+      final bTime = b.lastMessageAt ?? b.createdAt;
+      return bTime.compareTo(aTime);
+    });
+    return sorted;
+  }
+
+  bool _mapEquals(Map<String, dynamic>? left, Map<String, dynamic>? right) {
+    if (identical(left, right)) {
+      return true;
+    }
+    if (left == null || right == null || left.length != right.length) {
+      return false;
+    }
+    for (final entry in left.entries) {
+      if (right[entry.key] != entry.value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   Future<List<ConversationPreview>> _mapConversationRows(
     List<Map<String, dynamic>> rows, {
     required String currentUserId,
@@ -363,9 +454,11 @@ class ChatRepository {
       supplierName: (row['supplier_name'] ?? 'Supplier').toString(),
       supplierMobile: nullableString(row['supplier_mobile']),
       supplierCompanyName: nullableString(row['supplier_company_name']),
+      supplierAvatarUrl: nullableString(row['supplier_avatar_url']),
       truckerName: (row['trucker_name'] ?? 'Trucker').toString(),
       truckerMobile: nullableString(row['trucker_mobile']),
       truckDisplayLabel: nullableString(row['truck_display_label']),
+      truckerAvatarUrl: nullableString(row['trucker_avatar_url']),
       bookingRequestId: nullableString(row['booking_request_id']),
       bookingStatusLabel: nullableString(row['booking_status_label']),
       latestMessagePreview: latestPreview,
@@ -390,7 +483,7 @@ class ChatRepository {
         return ConflictFailure(debugInfo: error.details?.toString());
       }
     }
-    return ServerFailure(message: 'An unknown error occurred', debugInfo: error.toString());
+    return mapSupabaseError(error, stackTrace);
   }
 }
 

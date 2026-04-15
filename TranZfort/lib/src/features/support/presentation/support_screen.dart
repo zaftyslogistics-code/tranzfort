@@ -83,7 +83,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
               : l10n.supportHeroSubtitleTrucker,
           primaryAction: GradientButton(
             label: l10n.supportCreateTicketAction,
-            onPressed: () => context.go(AppRoutes.createSupportTicketPath),
+            onPressed: () => context.push(AppRoutes.createSupportTicketPath),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,7 +144,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
             selectedTicketId: selectedTicketId,
             onRetry: () => ref.read(supportTicketsProvider.notifier).load(),
             onLoadMore: () => ref.read(supportTicketsProvider.notifier).loadMore(),
-            onCreateTicket: () => context.go(AppRoutes.createSupportTicketPath),
+            onCreateTicket: () => context.push(AppRoutes.createSupportTicketPath),
             onSelect: (ticketId) {
               ref.read(supportSelectedTicketIdProvider.notifier).state = ticketId;
             },
@@ -395,23 +395,23 @@ String _supportTrustStatusLoading(AppLocalizations l10n) => l10n.supportTrustSta
 
 String _supportUpdatedAt(String value, AppLocalizations l10n) => l10n.supportUpdatedAt(value);
 
-String _supportTicketReference(String value, AppLocalizations l10n) => l10n.supportTicketReference(value);
+String _supportTicketReference(AppLocalizations l10n) => l10n.supportTicketReference;
 
-String _supportTripReference(String value, AppLocalizations l10n) => l10n.supportTripReference(value);
+String _supportTripReference(AppLocalizations l10n) => l10n.supportTripReference;
 
 String _supportOpenedAt(String value, AppLocalizations l10n) => l10n.supportOpenedAt(value);
 
 String _supportDisputeCategoryLabel(String category, AppLocalizations l10n) => l10n.supportDisputeCategoryLabel(category);
 
-String _supportTicketIdValue(String id, AppLocalizations l10n) => l10n.supportTicketIdValue(id);
+String _supportTicketIdValue(AppLocalizations l10n) => l10n.supportTicketIdValue;
 
 String _supportPriorityValue(String priority, AppLocalizations l10n) => l10n.supportPriorityValue(priority);
 
 String _supportLastUpdatedValue(String value, AppLocalizations l10n) => l10n.supportLastUpdatedValue(value);
 
-String _supportRelatedTripValue(String value, AppLocalizations l10n) => l10n.supportRelatedTripValue(value);
+String _supportRelatedTripValue(AppLocalizations l10n) => l10n.supportRelatedTripValue;
 
-String _supportRelatedLoadValue(String value, AppLocalizations l10n) => l10n.supportRelatedLoadValue(value);
+String _supportRelatedLoadValue(AppLocalizations l10n) => l10n.supportRelatedLoadValue;
 
 String _supportOpenRelatedTripAction(AppLocalizations l10n) => l10n.supportOpenRelatedTripAction;
 

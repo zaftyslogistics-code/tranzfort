@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/navigation/app_routes.dart';
-import '../../../core/services/maps_launcher_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -11,14 +10,11 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
-import '../../../shared/widgets/static_route_map.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../data/trucker_dashboard_repository.dart';
 import '../data/trucker_profile_repository.dart';
-import 'trucker_route_preview_screen.dart';
 import '../providers/trucker_providers.dart';
-import '../providers/trucker_trips_provider.dart';
 
 class TruckerDashboardScreen extends ConsumerWidget {
   const TruckerDashboardScreen({super.key});
@@ -28,8 +24,6 @@ class TruckerDashboardScreen extends ConsumerWidget {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final profileAsync = ref.watch(truckerProfileProvider);
     final dashboardAsync = ref.watch(truckerDashboardProvider);
-    final tripsState = ref.watch(truckerTripsProvider);
-    final mapsLauncher = ref.watch(mapsLauncherServiceProvider);
     final profile = profileAsync.valueOrNull;
     final Widget? topBanner = _buildTopBanner(context, ref, profileAsync, l10n);
     final List<Widget>? topBannerSection = topBanner == null ? null : <Widget>[topBanner];
@@ -82,15 +76,6 @@ class TruckerDashboardScreen extends ConsumerWidget {
                   onTap: () => context.go(AppRoutes.messagesPath),
                 ),
               ],
-            ),
-          ],
-        ),
-        DetailSectionCard(
-          title: l10n.truckerDashboardTripActivityTitle,
-          children: [
-            _DashboardRouteMapSection(
-              tripsState: tripsState,
-              mapsLauncher: mapsLauncher,
             ),
           ],
         ),
@@ -197,137 +182,6 @@ class TruckerDashboardScreen extends ConsumerWidget {
     }
 
     return null;
-  }
-}
-
-class _DashboardRouteMapSection extends StatelessWidget {
-  final TruckerTripsState tripsState;
-  final MapsLauncherService mapsLauncher;
-
-  const _DashboardRouteMapSection({
-    required this.tripsState,
-    required this.mapsLauncher,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
-    if (tripsState.isLoading) {
-      return const LoadingShimmer(height: 116, itemCount: 1);
-    }
-
-    if (tripsState.failure != null && tripsState.trips.isEmpty) {
-      return WarningBlock(
-        title: l10n.truckerDashboardRecentActivityUnavailableTitle,
-        message: l10n.truckerDashboardRecentActivityUnavailableMessage,
-      );
-    }
-
-    if (tripsState.trips.isEmpty) {
-      return EmptyStateView(
-        icon: Icons.alt_route_outlined,
-        title: l10n.truckerTripsEmptyActiveTitle,
-        subtitle: l10n.truckerTripsEmptyActiveSubtitle,
-        actionLabel: l10n.truckerTripsEmptyActiveAction,
-        onAction: () => context.go(AppRoutes.findLoadsPath),
-      );
-    }
-
-    final trip = tripsState.trips.firstWhere(
-      (item) => item.stage != 'completed' && item.stage != 'cancelled',
-      orElse: () => tripsState.trips.first,
-    );
-
-    final hasRoutePreview =
-        trip.originLat != null && trip.originLng != null && trip.destinationLat != null && trip.destinationLng != null;
-    final mapsUri = mapsLauncher.buildDirectionsUri(
-      originLat: trip.originLat,
-      originLng: trip.originLng,
-      destinationLat: trip.destinationLat,
-      destinationLng: trip.destinationLng,
-      destinationLabel: trip.destinationLabel ?? trip.routeLabel,
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          trip.routeLabel,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
-        const SizedBox(height: AppSpacing.xs),
-        Text(
-          l10n.truckerTripsTruckLabel(trip.truckNumber),
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        if (hasRoutePreview)
-          StaticRouteMap(
-            originLat: trip.originLat!,
-            originLng: trip.originLng!,
-            destLat: trip.destinationLat!,
-            destLng: trip.destinationLng!,
-            originLabel: trip.originLabel,
-            destLabel: trip.destinationLabel,
-            onTap: () => context.go(
-              AppRoutes.routePreviewPath,
-              extra: TruckerRoutePreviewArgs(
-                routeLabel: trip.routeLabel,
-                destinationLabel: trip.destinationLabel ?? trip.routeLabel,
-                originLat: trip.originLat!,
-                originLng: trip.originLng!,
-                destinationLat: trip.destinationLat!,
-                destinationLng: trip.destinationLng!,
-              ),
-            ),
-          )
-        else
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md,
-              vertical: AppSpacing.sm,
-            ),
-            decoration: BoxDecoration(
-              color: AppColors.subtleSurface,
-              borderRadius: BorderRadius.circular(AppRadius.button),
-              border: Border.all(color: AppColors.divider),
-            ),
-            child: Row(
-              children: [
-                const Icon(Icons.route_outlined, size: 16, color: AppColors.textSecondary),
-                const SizedBox(width: AppSpacing.xs),
-                Expanded(
-                  child: Text(
-                    trip.routeLabel,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
-                          fontWeight: FontWeight.w600,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        if (mapsUri != null) ...[
-          const SizedBox(height: AppSpacing.sm),
-          TextActionButton(
-            label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
-            onPressed: () async {
-              await mapsLauncher.launchDirectionsUri(mapsUri);
-            },
-          ),
-        ],
-        const SizedBox(height: AppSpacing.sm),
-        OutlineButton(
-          label: l10n.truckerDashboardQuickActionTripsLabel,
-          onPressed: () => context.go('${AppRoutes.tripDetailPath}/${trip.id}'),
-        ),
-      ],
-    );
   }
 }
 

@@ -182,6 +182,18 @@ abstract class AppLocalizations {
   /// **'Continue with Google'**
   String get authContinueWithGoogle;
 
+  /// No description provided for @authGoogleFastestMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Fastest way to get started — no password to remember'**
+  String get authGoogleFastestMessage;
+
+  /// No description provided for @authOrWithEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Or continue with email'**
+  String get authOrWithEmail;
+
   /// Auth Continue With Password - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -278,7 +290,7 @@ abstract class AppLocalizations {
   /// **'Enter a password with at least 8 characters.'**
   String get authPasswordTooShortMessage;
 
-  /// Auth Password Confirm Mismatch Message - User-facing text for the app interface.
+  /// No description provided for @authPasswordConfirmMismatchMessage.
   ///
   /// In en, this message translates to:
   /// **'The password confirmation does not match.'**
@@ -2096,6 +2108,18 @@ abstract class AppLocalizations {
   /// **'Role'**
   String get profileRoleLabel;
 
+  /// No description provided for @profileLocationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get profileLocationLabel;
+
+  /// No description provided for @profileLocationNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get profileLocationNotSet;
+
   /// Profile Readiness Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -2691,14 +2715,14 @@ abstract class AppLocalizations {
   /// No description provided for @supportTicketReference.
   ///
   /// In en, this message translates to:
-  /// **'Ticket reference: {value}'**
-  String supportTicketReference(Object value);
+  /// **'Support ticket on record'**
+  String get supportTicketReference;
 
   /// No description provided for @supportTripReference.
   ///
   /// In en, this message translates to:
-  /// **'Trip reference: {value}'**
-  String supportTripReference(Object value);
+  /// **'Linked trip'**
+  String get supportTripReference;
 
   /// No description provided for @supportOpenedAt.
   ///
@@ -2715,8 +2739,8 @@ abstract class AppLocalizations {
   /// No description provided for @supportTicketIdValue.
   ///
   /// In en, this message translates to:
-  /// **'Ticket id: {id}'**
-  String supportTicketIdValue(Object id);
+  /// **'Support ticket on record'**
+  String get supportTicketIdValue;
 
   /// No description provided for @supportPriorityValue.
   ///
@@ -2733,14 +2757,14 @@ abstract class AppLocalizations {
   /// No description provided for @supportRelatedTripValue.
   ///
   /// In en, this message translates to:
-  /// **'Related trip: {value}'**
-  String supportRelatedTripValue(Object value);
+  /// **'Related trip linked'**
+  String get supportRelatedTripValue;
 
   /// No description provided for @supportRelatedLoadValue.
   ///
   /// In en, this message translates to:
-  /// **'Related load: {value}'**
-  String supportRelatedLoadValue(Object value);
+  /// **'Related load linked'**
+  String get supportRelatedLoadValue;
 
   /// Support Open Related Trip Action - User-facing text for the app interface.
   ///
@@ -5673,8 +5697,8 @@ abstract class AppLocalizations {
   /// No description provided for @supplierTripDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Trip {tripId} - Truck {truckNumber}'**
-  String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber);
+  /// **'Truck {truckNumber}'**
+  String supplierTripDetailHeroSubtitle(Object truckNumber);
 
   /// No description provided for @supplierTripDetailMaterialTruckerSummary.
   ///
@@ -6996,6 +7020,42 @@ abstract class AppLocalizations {
   /// **'We could not capture the verification location right now. Retry shortly from this verification screen.'**
   String get verificationLocationFailureMessage;
 
+  /// No description provided for @verificationGpsDisabledTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'GPS is disabled'**
+  String get verificationGpsDisabledTitle;
+
+  /// No description provided for @verificationGpsDisabledMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are turned off. Please enable GPS in your device settings to capture your verification location.'**
+  String get verificationGpsDisabledMessage;
+
+  /// No description provided for @verificationOpenSettingsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get verificationOpenSettingsAction;
+
+  /// No description provided for @verificationPermissionDeniedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission required'**
+  String get verificationPermissionDeniedTitle;
+
+  /// No description provided for @verificationPermissionDeniedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location access is permanently denied. Please enable location permission in your app settings to continue.'**
+  String get verificationPermissionDeniedMessage;
+
+  /// No description provided for @verificationOpenAppSettingsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open App Settings'**
+  String get verificationOpenAppSettingsAction;
+
   /// Verification Manual Location Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7746,6 +7806,12 @@ abstract class AppLocalizations {
   /// **'Cancelled'**
   String get truckerTripDetailStageCancelled;
 
+  /// No description provided for @truckerTripDetailStageUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Unknown'**
+  String get truckerTripDetailStageUnknown;
+
   /// Trucker Trip Detail Proof Status Pod Uploaded - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7779,8 +7845,8 @@ abstract class AppLocalizations {
   /// Trucker Trip Detail Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trip {tripId} - Truck {truckNumber}'**
-  String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber);
+  /// **'Truck {truckNumber}'**
+  String truckerTripDetailHeroSubtitle(Object truckNumber);
 
   /// Trucker Trip Detail Material Pickup Summary - User-facing text for the app interface.
   ///
@@ -8409,8 +8475,8 @@ abstract class AppLocalizations {
   /// Supplier Raise Dispute Trip Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Trip {tripId}'**
-  String supplierRaiseDisputeTripBadge(Object tripId);
+  /// **'Trip under review'**
+  String get supplierRaiseDisputeTripBadge;
 
   /// Supplier Raise Dispute Hero Summary - User-facing text for the app interface.
   ///
@@ -9123,14 +9189,14 @@ abstract class AppLocalizations {
   /// Report Issue Related Load Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Related load: {value}'**
-  String reportIssueRelatedLoadLabel(Object value);
+  /// **'Related load linked'**
+  String get reportIssueRelatedLoadLabel;
 
   /// Report Issue Related Trip Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Related trip: {value}'**
-  String reportIssueRelatedTripLabel(Object value);
+  /// **'Related trip linked'**
+  String get reportIssueRelatedTripLabel;
 
   /// Report Issue Not Linked - User-facing text for the app interface.
   ///
@@ -9648,30 +9714,6 @@ abstract class AppLocalizations {
   /// **'Back to supplier trips'**
   String get supplierTripDetailBackToTripsAction;
 
-  /// Supplier Trip Detail Stub Screen Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip detail'**
-  String get supplierTripDetailStubScreenTitle;
-
-  /// Supplier Trip Detail Stub Card Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier trip detail'**
-  String get supplierTripDetailStubCardTitle;
-
-  /// Supplier Trip Detail Stub Reference - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip reference: {tripId}'**
-  String supplierTripDetailStubReference(Object tripId);
-
-  /// Supplier Trip Detail Stub Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Detailed supplier trip execution screens will expand in the next trip-detail slice. Navigation is already wired from the supplier trips list.'**
-  String get supplierTripDetailStubMessage;
-
   /// Assistant Hero Title With Name - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -9945,8 +9987,8 @@ abstract class AppLocalizations {
   /// Trucker Load Detail Hero Subtitle - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Load {loadId} - Pickup {pickupDate}'**
-  String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate);
+  /// **'Pickup {pickupDate}'**
+  String truckerLoadDetailHeroSubtitle(Object pickupDate);
 
   /// Trucker Load Detail Price Badge - User-facing text for the app interface.
   ///
@@ -10447,7 +10489,7 @@ abstract class AppLocalizations {
   /// Auth Tts Sign In Prompt - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Choose how you want to sign in to TranZfort.'**
+  /// **'Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.'**
   String get authTtsSignInPrompt;
 
   /// Auth Tts Onboarding Role Prompt - User-facing text for the app interface.
@@ -10615,8 +10657,8 @@ abstract class AppLocalizations {
   /// No description provided for @supplierLoadDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Load ID: {loadId} - Pickup: {pickupDate}'**
-  String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate);
+  /// **'Pickup: {pickupDate}'**
+  String supplierLoadDetailHeroSubtitle(Object pickupDate);
 
   /// Supplier Load Detail Linked Execution Unavailable Title - User-facing text for the app interface.
   ///
@@ -10636,7 +10678,7 @@ abstract class AppLocalizations {
   /// **'Status and actions'**
   String get supplierLoadDetailStatusAndActionsTitle;
 
-  /// No description provided for @supplierLoadDetailCurrentStatus.
+  /// Label showing current load status. Placeholder {status} is the status name.
   ///
   /// In en, this message translates to:
   /// **'Current status: {status}'**
@@ -11231,6 +11273,258 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Supplier load - {routeLabel}'**
   String reportSourceSupplierLoad(Object routeLabel);
+
+  /// No description provided for @supplierProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier Profile'**
+  String get supplierProfileTitle;
+
+  /// No description provided for @truckerProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trucker Profile'**
+  String get truckerProfileTitle;
+
+  /// No description provided for @reviewsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews & Comments'**
+  String get reviewsSectionTitle;
+
+  /// No description provided for @reviewsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'({count} total)'**
+  String reviewsCount(int count);
+
+  /// No description provided for @noReviewsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews yet'**
+  String get noReviewsYet;
+
+  /// No description provided for @noReviewsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews will appear here after interactions'**
+  String get noReviewsSubtitle;
+
+  /// No description provided for @noRatingYet.
+  ///
+  /// In en, this message translates to:
+  /// **'No rating yet'**
+  String get noRatingYet;
+
+  /// No description provided for @newTruckerBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New Trucker'**
+  String get newTruckerBadge;
+
+  /// No description provided for @newSupplierBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New Supplier'**
+  String get newSupplierBadge;
+
+  /// No description provided for @reviewerProfileHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to view reviewer profile'**
+  String get reviewerProfileHint;
+
+  /// No description provided for @addReplyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply to Review'**
+  String get addReplyTitle;
+
+  /// No description provided for @replyButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get replyButton;
+
+  /// No description provided for @rateInteractionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Your Interaction'**
+  String get rateInteractionTitle;
+
+  /// No description provided for @rateInteractionSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'How was your experience with {name}?'**
+  String rateInteractionSubtitle(Object name);
+
+  /// No description provided for @submitReviewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Review'**
+  String get submitReviewButton;
+
+  /// No description provided for @skipReviewButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skipReviewButton;
+
+  /// No description provided for @reviewSubmitted.
+  ///
+  /// In en, this message translates to:
+  /// **'Review submitted'**
+  String get reviewSubmitted;
+
+  /// No description provided for @reviewSubmittedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Review submitted successfully'**
+  String get reviewSubmittedSuccess;
+
+  /// No description provided for @alreadyReviewedError.
+  ///
+  /// In en, this message translates to:
+  /// **'You have already reviewed this user'**
+  String get alreadyReviewedError;
+
+  /// No description provided for @loadHistoryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent Loads'**
+  String get loadHistoryTitle;
+
+  /// No description provided for @loadMoreButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More'**
+  String get loadMoreButton;
+
+  /// No description provided for @avgRatingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{rating} out of 5'**
+  String avgRatingLabel(Object rating);
+
+  /// No description provided for @reviewCountLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'({count} reviews)'**
+  String reviewCountLabel(int count);
+
+  /// No description provided for @memberSinceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since {date}'**
+  String memberSinceLabel(Object date);
+
+  /// No description provided for @trustScoreTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trust & Reviews'**
+  String get trustScoreTitle;
+
+  /// No description provided for @reviewsReceivedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews received'**
+  String get reviewsReceivedLabel;
+
+  /// No description provided for @tripsCompletedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Trips completed'**
+  String get tripsCompletedLabel;
+
+  /// No description provided for @loadsPostedLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Loads posted'**
+  String get loadsPostedLabel;
+
+  /// No description provided for @trucksInFleetLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Trucks in fleet'**
+  String get trucksInFleetLabel;
+
+  /// No description provided for @superLoadEligibleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Super Load eligible'**
+  String get superLoadEligibleLabel;
+
+  /// No description provided for @fleetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fleet'**
+  String get fleetTitle;
+
+  /// No description provided for @truckCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} truck{count, plural, one {} other {s}}'**
+  String truckCount(int count);
+
+  /// No description provided for @replyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can reply to this review once. Your response will be visible to everyone...'**
+  String get replyHint;
+
+  /// No description provided for @replySuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply added successfully'**
+  String get replySuccess;
+
+  /// No description provided for @replyFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add reply. You may have already replied.'**
+  String get replyFailure;
+
+  /// No description provided for @addReplyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Your reply will be visible to everyone viewing your profile'**
+  String get addReplyHint;
+
+  /// No description provided for @noComments.
+  ///
+  /// In en, this message translates to:
+  /// **'No comments'**
+  String get noComments;
+
+  /// No description provided for @newMemberBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'New member'**
+  String get newMemberBadge;
+
+  /// No description provided for @insufficientInteractionError.
+  ///
+  /// In en, this message translates to:
+  /// **'More interaction needed to review'**
+  String get insufficientInteractionError;
+
+  /// No description provided for @activeLoadsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Active Loads ({count})'**
+  String activeLoadsTitle(int count);
+
+  /// No description provided for @responseRateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{rate}% response rate'**
+  String responseRateLabel(Object rate);
+
+  /// No description provided for @memberForMonthsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Member for {count} months'**
+  String memberForMonthsLabel(int count);
 }
 
 class _AppLocalizationsDelegate

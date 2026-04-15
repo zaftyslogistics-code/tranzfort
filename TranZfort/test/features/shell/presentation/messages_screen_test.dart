@@ -41,6 +41,9 @@ class _NoopChatBackend implements ChatBackend {
   Future<Map<String, dynamic>?> fetchSupplierExtension(String supplierId) async => null;
 
   @override
+  Future<Object?> fetchConversation(String conversationId) async => null;
+
+  @override
   Future<Map<String, dynamic>?> fetchBookingContext({required String loadId, required String truckerId}) async => null;
 
   @override

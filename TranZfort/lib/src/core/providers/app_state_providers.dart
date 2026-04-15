@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../config/supabase_config.dart';
 import '../error/app_failure.dart';
+import '../logger/app_logger.dart';
 import '../../features/auth/data/auth_repository.dart';
 
 enum AppUserRole {
@@ -83,10 +84,14 @@ class AuthStateSnapshot {
       ...appMetadata,
       ...userMetadata,
     };
+    final authoritativeMetadata = <String, dynamic>{
+      ...userMetadata,
+      ...appMetadata,
+    };
 
     final role = profile?.role ?? _parseRole(mergedMetadata);
-    final isBanned = profile?.hasRestrictedTrustState ?? _parseBannedState(mergedMetadata);
-    final isDeactivated = profile?.isDeactivated ?? _parseDeactivatedState(mergedMetadata);
+    final isBanned = profile?.hasRestrictedTrustState ?? _parseBannedState(authoritativeMetadata);
+    final isDeactivated = profile?.isDeactivated ?? _parseDeactivatedState(authoritativeMetadata);
     final isProfileComplete = profile?.isProfileComplete ?? _parseProfileCompletion(mergedMetadata);
 
     return AuthStateSnapshot(
@@ -186,6 +191,17 @@ final authStateProvider = StreamProvider<AuthStateSnapshot>((ref) async* {
   }
 });
 
+final currentProfileProvider = StreamProvider<UserProfile?>((ref) async* {
+  final authSnapshot = ref.watch(currentAuthStateProvider);
+  if (!authSnapshot.hasSession) {
+    yield null;
+    return;
+  }
+
+  final repository = ref.watch(authRepositoryProvider);
+  yield* repository.watchCurrentProfile();
+});
+
 Future<AuthStateSnapshot> _resolveAuthSnapshot({
   required AuthRepository repository,
   required Session? session,
@@ -202,7 +218,7 @@ Future<AuthStateSnapshot> _resolveAuthSnapshot({
   }
 
   if (failure != null) {
-    debugPrint('_resolveAuthSnapshot: profile fetch failed with non-auth error, preserving session: $failure');
+    AppLogger.warning('Profile fetch failed with non-auth error, preserving session', scope: 'auth', error: failure);
     return AuthStateSnapshot.fromSessionAndProfile(
       session,
       null,
@@ -215,11 +231,6 @@ Future<AuthStateSnapshot> _resolveAuthSnapshot({
     profileResult.valueOrNull,
   );
 }
-
-final currentProfileProvider = Provider<AsyncValue<UserProfile?>>((ref) {
-  final authStateAsync = ref.watch(authStateProvider);
-  return authStateAsync.whenData((snapshot) => snapshot.profile);
-});
 
 final profileCompletenessProvider = Provider<ProfileCompletenessState>((ref) {
   final profile = ref.watch(currentProfileProvider).valueOrNull;

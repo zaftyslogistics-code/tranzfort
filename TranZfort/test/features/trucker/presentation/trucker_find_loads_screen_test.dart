@@ -21,7 +21,6 @@ import 'package:tranzfort/src/l10n/app_localizations.dart';
 class _FakeAuthRepository extends AuthRepository {
   _FakeAuthRepository() : super(null);
 
-  @override
   Stream<AuthState> get authStateChanges => Stream.value(
         AuthState(
           AuthChangeEvent.signedIn,
@@ -40,7 +39,6 @@ class _FakeAuthRepository extends AuthRepository {
         ),
       );
 
-  @override
   Future<String?> get currentUserId async => 'test-user';
 
   @override
@@ -51,10 +49,8 @@ class _FakeAuthRepository extends AuthRepository {
 }
 
 class _FakeAppLocaleController extends AppLocaleController {
-  _FakeAppLocaleController() : super(_FakeAuthRepository(), profileLanguageCode: 'hi');
-
-  @override
-  Future<void> _loadInitialLocale() async {
+  _FakeAppLocaleController()
+      : super(_FakeAuthRepository(), profileLanguageCode: 'hi') {
     state = state.copyWith(
       locale: const Locale('hi'),
       isInitialized: true,
@@ -77,6 +73,9 @@ class _NoopTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
   }) async {
     return const <Map<String, dynamic>>[];
   }
+
+  @override
+  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => null;
 }
 
 class _TestFindLoadsController extends FindLoadsController {
@@ -114,6 +113,7 @@ class _TestFindLoadsController extends FindLoadsController {
 MarketplaceLoadItem _loadItem() {
   return MarketplaceLoadItem(
     id: 'load-1',
+    supplierId: 'supplier-1',
     originLabel: 'Chandrapur, Maharashtra',
     originCity: 'Chandrapur',
     originState: 'Maharashtra',
@@ -146,6 +146,7 @@ MarketplaceLoadItem _loadItem() {
 MarketplaceLoadItem _loadItemWithBodyType(String? bodyType) {
   return MarketplaceLoadItem(
     id: 'load-1',
+    supplierId: 'supplier-1',
     originLabel: 'Chandrapur, Maharashtra',
     originCity: 'Chandrapur',
     originState: 'Maharashtra',
@@ -178,6 +179,7 @@ MarketplaceLoadItem _loadItemWithBodyType(String? bodyType) {
 MarketplaceLoadItem _loadItemWithStatus(String status) {
   return MarketplaceLoadItem(
     id: 'load-1',
+    supplierId: 'supplier-1',
     originLabel: 'Chandrapur, Maharashtra',
     originCity: 'Chandrapur',
     originState: 'Maharashtra',

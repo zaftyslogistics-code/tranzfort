@@ -26,6 +26,9 @@ class _NoopChatBackend implements ChatBackend {
       const <Map<String, dynamic>>[];
 
   @override
+  Future<Object?> fetchConversation(String conversationId) async => null;
+
+  @override
   Stream<List<Map<String, dynamic>>> watchConversations({required String userId, required AppUserRole role}) =>
       const Stream<List<Map<String, dynamic>>>.empty();
 
@@ -313,7 +316,7 @@ ProviderContainer _buildSupplierRouterContainer({AuthStateSnapshot authState = _
         yield authState;
       }),
       currentAuthStateProvider.overrideWithValue(authState),
-      currentProfileProvider.overrideWith((ref) => AsyncValue<UserProfile?>.data(authState.profile)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(authState.profile)),
       unreadNotificationCountProvider.overrideWith((ref) => 0),
       inboxProvider.overrideWith((ref) => _TestInboxController(InboxState.initial().copyWith(isLoading: false))),
       supplierTripsProvider.overrideWith(
@@ -347,7 +350,7 @@ ProviderContainer _buildTruckerRouterContainer({AuthStateSnapshot authState = _t
         yield authState;
       }),
       currentAuthStateProvider.overrideWithValue(authState),
-      currentProfileProvider.overrideWith((ref) => AsyncValue<UserProfile?>.data(authState.profile)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(authState.profile)),
       unreadNotificationCountProvider.overrideWith((ref) => 0),
       inboxProvider.overrideWith((ref) => _TestInboxController(InboxState.initial().copyWith(isLoading: false))),
       verificationRepositoryProvider.overrideWith(

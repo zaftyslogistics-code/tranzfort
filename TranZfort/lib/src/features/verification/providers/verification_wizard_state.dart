@@ -1,5 +1,12 @@
-part of 'verification_wizard_provider.dart';
+import '../../../core/error/app_failure.dart';
+import '../../../core/providers/app_state_providers.dart';
+import '../data/verification_repository.dart';
+import '../data/verification_location_service.dart';
+import 'verification_wizard_draft.dart';
 
+export 'verification_wizard_draft.dart';
+
+/// Steps in the verification wizard flow
 enum WizardStep {
   profilePhoto,
   identityDocuments,

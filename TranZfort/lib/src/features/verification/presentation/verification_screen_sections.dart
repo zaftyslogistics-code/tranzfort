@@ -325,6 +325,9 @@ class _TruckerInlineDocumentUpload extends ConsumerWidget {
                     if (source == null || !context.mounted) return;
                     final result = await ref.read(verificationProvider.notifier).uploadDocument(type: type, source: source);
                     if (!context.mounted) return;
+                    if (result.isSuccess && result.valueOrNull != true) {
+                      return;
+                    }
                     AppSnackbar.show(
                       context: context,
                       message: result.isSuccess

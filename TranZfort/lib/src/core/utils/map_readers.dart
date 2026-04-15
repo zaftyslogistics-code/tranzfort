@@ -31,3 +31,16 @@ DateTime? readDate(Object? value) {
   }
   return DateTime.tryParse(raw);
 }
+
+/// Reads a nullable double from a map value.
+/// Returns null if value is null, otherwise parses to double.
+/// Use this for coordinates to distinguish between null and 0.0.
+double? readDoubleNullable(Object? value) {
+  if (value == null) {
+    return null;
+  }
+  if (value is num) {
+    return value.toDouble();
+  }
+  return double.tryParse(value.toString());
+}

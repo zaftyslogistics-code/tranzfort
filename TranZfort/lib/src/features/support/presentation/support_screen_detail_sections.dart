@@ -58,7 +58,7 @@ class _SupportTicketDetailSection extends StatelessWidget {
                 ),
                 const SizedBox(height: AppSpacing.xs),
               ],
-              Text(_supportTicketIdValue(detail.ticket.id, l10n), style: Theme.of(context).textTheme.bodySmall),
+              Text(_supportTicketIdValue(l10n), style: Theme.of(context).textTheme.bodySmall),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 _supportPriorityValue(_ticketPriorityLabel(detail.ticket.priority, l10n), l10n),
@@ -72,11 +72,11 @@ class _SupportTicketDetailSection extends StatelessWidget {
               if (detail.ticket.relatedTripId != null)
                 ...[
                   const SizedBox(height: AppSpacing.xs),
-                  Text(_supportRelatedTripValue(detail.ticket.relatedTripId!, l10n), style: Theme.of(context).textTheme.bodySmall),
+                  Text(_supportRelatedTripValue(l10n), style: Theme.of(context).textTheme.bodySmall),
                 ],
               if (detail.ticket.relatedLoadId != null) ...[
                 const SizedBox(height: AppSpacing.xs),
-                Text(_supportRelatedLoadValue(detail.ticket.relatedLoadId!, l10n), style: Theme.of(context).textTheme.bodySmall),
+                Text(_supportRelatedLoadValue(l10n), style: Theme.of(context).textTheme.bodySmall),
               ],
               if (detail.ticket.relatedTripId != null || detail.ticket.relatedLoadId != null) ...[
                 const SizedBox(height: AppSpacing.sm),
@@ -88,13 +88,13 @@ class _SupportTicketDetailSection extends StatelessWidget {
                       TextActionButton(
                         key: const ValueKey('support-open-related-trip-button'),
                         label: _supportOpenRelatedTripAction(l10n),
-                        onPressed: () => context.go('${AppRoutes.tripDetailPath}/${detail.ticket.relatedTripId}'),
+                        onPressed: () => context.push('${AppRoutes.tripDetailPath}/${detail.ticket.relatedTripId}'),
                       ),
                     if (detail.ticket.relatedLoadId != null)
                       TextActionButton(
                         key: const ValueKey('support-open-related-load-button'),
                         label: _supportOpenRelatedLoadAction(l10n),
-                        onPressed: () => context.go('${AppRoutes.loadDetailPath}/${detail.ticket.relatedLoadId}'),
+                        onPressed: () => context.push('${AppRoutes.loadDetailPath}/${detail.ticket.relatedLoadId}'),
                       ),
                   ],
                 ),

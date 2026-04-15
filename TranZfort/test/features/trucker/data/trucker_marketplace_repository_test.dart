@@ -7,6 +7,7 @@ import 'package:tranzfort/src/features/trucker/data/trucker_marketplace_reposito
 
 class _FakeTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
   List<Map<String, dynamic>> rows = const <Map<String, dynamic>>[];
+  Map<String, dynamic>? supplierProfile;
   Object? error;
 
   @override
@@ -19,6 +20,14 @@ class _FakeTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
       throw error!;
     }
     return rows;
+  }
+
+  @override
+  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async {
+    if (error != null) {
+      throw error!;
+    }
+    return supplierProfile;
   }
 }
 
@@ -85,6 +94,20 @@ void main() {
 
       expect(result.isFailure, isTrue);
       expect(result.failureOrNull, isA<PermissionFailure>());
+    });
+
+    test('returns supplier mobile from direct supplier profile lookup', () async {
+      final backend = _FakeTruckerMarketplaceBackend()
+        ..supplierProfile = {
+          'id': 'supplier-1',
+          'mobile': '+919876543210',
+        };
+      final repository = TruckerMarketplaceRepository(backend);
+
+      final result = await repository.getSupplierMobile('supplier-1');
+
+      expect(result.isSuccess, isTrue);
+      expect(result.valueOrNull, '+919876543210');
     });
   });
 }

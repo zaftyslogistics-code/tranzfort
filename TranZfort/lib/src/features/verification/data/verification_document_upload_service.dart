@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -46,6 +47,11 @@ class VerificationDocumentUploadService {
     }
 
     try {
+      final permissionFailure = await _ensureImageAccessPermission(source);
+      if (permissionFailure != null) {
+        return Failure<String?>(permissionFailure);
+      }
+
       final file = await _pickImage(source);
       if (file == null) {
         return const Success<String?>(null);
@@ -84,7 +90,45 @@ class VerificationDocumentUploadService {
     }
   }
 
-  static Future<XFile?> _defaultPickImage(ImageSource source) {
+  Future<AppFailure?> _ensureImageAccessPermission(ImageSource source) async {
+    if (kIsWeb) {
+      return null;
+    }
+
+    if (!(Platform.isAndroid || Platform.isIOS)) {
+      return null;
+    }
+
+    final permission = source == ImageSource.camera
+        ? Permission.camera
+        : Permission.photos;
+
+    var status = await permission.status;
+    if (status.isGranted || status.isLimited) {
+      return null;
+    }
+
+    status = await permission.request();
+    if (status.isGranted || status.isLimited) {
+      return null;
+    }
+
+    if (status.isPermanentlyDenied || status.isRestricted) {
+      return PermissionFailure(
+        message: source == ImageSource.camera
+            ? 'Camera permission is required to take a photo. Enable it in app settings and try again.'
+            : 'Photo access is required to choose an image. Enable it in app settings and try again.',
+      );
+    }
+
+    return PermissionFailure(
+      message: source == ImageSource.camera
+          ? 'Camera permission was denied. Please allow camera access to continue.'
+          : 'Photo access was denied. Please allow photo access to continue.',
+    );
+  }
+
+  static Future<XFile?> _defaultPickImage(ImageSource source) async {
     return ImagePicker().pickImage(source: source);
   }
 

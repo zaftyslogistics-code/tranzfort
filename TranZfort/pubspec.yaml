@@ -46,6 +46,7 @@ dependencies:
   # --- Image & Camera ---
   image_picker: ^1.1.2
   image: ^4.5.3
+  permission_handler: ^11.4.0
 
   # --- Maps ---
   flutter_map: ^7.0.2

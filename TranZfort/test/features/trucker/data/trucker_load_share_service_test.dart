@@ -8,6 +8,7 @@ TruckerLoadDetail _detail({String? requiredBodyType = 'Open', List<int> required
   return TruckerLoadDetail(
     summary: MarketplaceLoadItem(
       id: 'load-1',
+      supplierId: 'supplier-1',
       originLabel: 'Chandrapur, Maharashtra',
       originCity: 'Chandrapur',
       originState: 'Maharashtra',

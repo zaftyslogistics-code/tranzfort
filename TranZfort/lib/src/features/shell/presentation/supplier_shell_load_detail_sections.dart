@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,6 +12,7 @@ import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
 import '../../../features/supplier/providers/load_detail_provider.dart';
+import '../../../features/reviews/utils/review_trigger_helper.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
@@ -36,6 +38,13 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
     final mapsLauncher = ref.watch(mapsLauncherServiceProvider);
     final detail = state.detail;
 
+    // Debug log: State monitoring
+    if (state.failure != null) {
+      debugPrint('⚠️  [LoadDetail UI] Displaying failure warning: ${state.failure}');
+      debugPrint('   Failure type: ${state.failure.runtimeType}');
+      debugPrint('   Failure message: ${state.failure.toString()}');
+    }
+
     return DetailPageScaffold(
       title: l10n.supplierLoadDetailScreenTitle,
       children: [
@@ -49,7 +58,6 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
               HeroActionCard(
                 title: '${detail.summary.originLabel} > ${detail.summary.destinationLabel}',
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
-                  detail.summary.id,
                   formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),
                 child: Column(
@@ -175,6 +183,16 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                       onPressed: state.isClosingFilledOutsideApp
                           ? null
                           : () async {
+                              final assignedTruckerId = detail.assignedTruckerId?.trim() ?? '';
+                              String? targetUserName;
+                              if (assignedTruckerId.isNotEmpty) {
+                                for (final booking in state.bookingRequests) {
+                                  if (booking.truckerId == assignedTruckerId) {
+                                    targetUserName = booking.displayTruckerName;
+                                    break;
+                                  }
+                                }
+                              }
                               final result = await ref.read(loadDetailProvider(loadId).notifier).closeFilledOutsideApp();
                               if (!context.mounted) {
                                 return;
@@ -188,12 +206,23 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                                   variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
                                 ),
                               );
+                              if (result.isSuccess &&
+                                  assignedTruckerId.isNotEmpty &&
+                                  (targetUserName ?? '').trim().isNotEmpty) {
+                                await ReviewTriggerHelper.showLoadClosedReviewPrompt(
+                                  context,
+                                  ref,
+                                  targetUserId: assignedTruckerId,
+                                  targetUserName: targetUserName!.trim(),
+                                  loadId: detail.summary.id,
+                                );
+                              }
                             },
                     ),
                   const SizedBox(height: AppSpacing.md),
                   OutlineButton(
                     label: l10n.chatMenuReportSpamOrAbuse,
-                    onPressed: () => context.go(
+                    onPressed: () => context.push(
                       AppRoutes.reportIssuePath,
                       extra: ReportIssueContext(
                         initialCategory: 'spam_or_scam',

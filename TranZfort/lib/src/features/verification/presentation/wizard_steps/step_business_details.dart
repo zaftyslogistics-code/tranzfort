@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,6 +10,7 @@ import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../shared/widgets/form_inputs.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
+import '../../providers/verification_wizard_state.dart';
 import '../components/city_search_sheet.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
@@ -52,7 +52,7 @@ class StepBusinessDetails extends ConsumerWidget {
             AppTextField(
               label: l10n.verificationWizardCompanyNameLabel,
               hintText: l10n.verificationWizardCompanyNameHint,
-              controller: TextEditingController(text: draft.companyName ?? ''),
+              initialValue: draft.companyName ?? '',
               onChanged: controller.updateCompanyName,
               errorText: state.fieldErrors['companyName'],
             ),
@@ -62,7 +62,7 @@ class StepBusinessDetails extends ConsumerWidget {
             AppTextField(
               label: l10n.verificationWizardLicenseNumberLabel,
               hintText: l10n.verificationWizardLicenseNumberHint,
-              controller: TextEditingController(text: draft.businessLicenseNumber ?? ''),
+              initialValue: draft.businessLicenseNumber ?? '',
               onChanged: controller.updateBusinessLicenseNumber,
               errorText: state.fieldErrors['businessLicenseNumber'],
             ),
@@ -129,8 +129,8 @@ class StepBusinessDetails extends ConsumerWidget {
   ) async {
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (_) => ImageSourcePicker(
-        onSelected: (s) => Navigator.pop(context, s),
+      builder: (_) => const ImageSourcePicker(
+        onSelected: _noopImageSourceSelection,
       ),
     );
 
@@ -151,13 +151,16 @@ class StepBusinessDetails extends ConsumerWidget {
 
     if (result.error == LocationCaptureError.serviceDisabled) {
       final shouldOpenSettings = await _showGpsDisabledDialog(context);
+      if (!context.mounted) return;
       if (shouldOpenSettings) {
         await Geolocator.openLocationSettings();
+        if (!context.mounted) return;
         // Retry after user returns
-        _handleLocationCapture(context, ref);
+        await _handleLocationCapture(context, ref);
       }
     } else if (result.error == LocationCaptureError.permissionDeniedForever) {
       final shouldOpenSettings = await _showPermissionDeniedDialog(context);
+      if (!context.mounted) return;
       if (shouldOpenSettings) {
         await Geolocator.openAppSettings();
       }
@@ -219,18 +222,30 @@ class StepBusinessDetails extends ConsumerWidget {
       isScrollControlled: true,
       builder: (_) => CitySearchSheet(
         onCitySelected: (city) {
+          if (city.lat == null || city.lng == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Selected city is missing coordinates. Please choose another result.')),
+            );
+            return;
+          }
           Navigator.pop(context);
           ref.read(verificationWizardProvider.notifier).setManualLocation(
             city: city.city,
             region: city.state,
-            latitude: city.lat ?? 0,
-            longitude: city.lng ?? 0,
+            latitude: city.lat!,
+            longitude: city.lng!,
           );
+        },
+        onUseCurrentLocation: () async {
+          Navigator.pop(context);
+          await _handleLocationCapture(context, ref);
         },
       ),
     );
   }
 }
+
+void _noopImageSourceSelection(ImageSource _) {}
 
 class _OptionalGstSection extends StatefulWidget {
   final String? gstNumber;
@@ -290,7 +305,7 @@ class _OptionalGstSectionState extends State<_OptionalGstSection> {
                   AppTextField(
                     label: l10n.verificationWizardGstNumberLabel,
                     hintText: '22AAAAA0000A1Z5',
-                    controller: TextEditingController(text: widget.gstNumber ?? ''),
+                    initialValue: widget.gstNumber ?? '',
                     onChanged: widget.onGstNumberChanged,
                   ),
                   const SizedBox(height: AppSpacing.md),

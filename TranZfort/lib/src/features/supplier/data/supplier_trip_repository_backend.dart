@@ -55,7 +55,7 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client.from('profiles').select('id, full_name, verification_status').eq('id', truckerId).maybeSingle();
+    return _client.from('profiles').select('id, full_name, mobile, verification_status, avatar_url, profile_photo_document_path').eq('id', truckerId).maybeSingle();
   }
 
   @override

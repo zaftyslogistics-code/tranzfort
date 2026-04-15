@@ -66,7 +66,6 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         HeroActionCard(
           title: routeLabel,
           subtitle: l10n.truckerLoadDetailHeroSubtitle(
-            detail.summary.id,
             _formatDate(context, detail.summary.pickupDate),
           ),
           child: Column(
@@ -137,125 +136,15 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: AppSpacing.sectionGap),
-        DetailSectionCard(
-          title: l10n.truckerLoadDetailRoutePriceSummaryTitle,
-          children: [
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: AppColors.infoBg,
-                borderRadius: BorderRadius.circular(AppRadius.button),
-                border: Border.all(color: AppColors.divider),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.truckerLoadDetailPriceLabel(
-                      detail.summary.priceAmount.toStringAsFixed(0),
-                      _localizedLoadPriceType(l10n, detail.summary.priceType),
-                    ),
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: AppColors.primary,
-                          fontWeight: FontWeight.w700,
-                        ),
-                  ),
-                  const SizedBox(height: AppSpacing.xs),
-                  Text(
-                    l10n.truckerLoadDetailPickupLabel(_formatDate(context, detail.summary.pickupDate)),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            if (hasRoutePreview)
-              StaticRouteMap(
-                originLat: detail.originLat!,
-                originLng: detail.originLng!,
-                destLat: detail.destinationLat!,
-                destLng: detail.destinationLng!,
-                originLabel: detail.originCity,
-                destLabel: detail.destinationCity,
-                height: 156,
-                onTap: () => context.go(
-                  AppRoutes.routePreviewPath,
-                  extra: TruckerRoutePreviewArgs(
-                    routeLabel: routeLabel,
-                    destinationLabel: detail.summary.destinationLabel,
-                    originLat: detail.originLat!,
-                    originLng: detail.originLng!,
-                    destinationLat: detail.destinationLat!,
-                    destinationLng: detail.destinationLng!,
-                  ),
-                ),
-              )
-            else
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: AppSpacing.sm,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.subtleSurface,
-                  borderRadius: BorderRadius.circular(AppRadius.button),
-                  border: Border.all(color: AppColors.divider),
-                ),
-                child: Row(
-                  children: [
-                    const Icon(Icons.route_outlined, size: 16, color: AppColors.textSecondary),
-                    const SizedBox(width: AppSpacing.xs),
-                    Expanded(
-                      child: Text(
-                        routeLabel,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.textSecondary,
-                              fontWeight: FontWeight.w600,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            if (mapsUri != null) ...[
-              const SizedBox(height: AppSpacing.sm),
-              OutlineButton(
-                label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
-                onPressed: () async {
-                  await mapsLauncher.launchDirectionsUri(mapsUri);
-                },
-              ),
-            ],
-            const SizedBox(height: AppSpacing.md),
-            Wrap(
-              spacing: AppSpacing.xs,
-              runSpacing: AppSpacing.xs,
-              children: [
-                _DetailFactChip(
-                  icon: Icons.trip_origin,
-                  text: l10n.truckerLoadDetailOriginLabel(detail.summary.originLabel),
-                ),
-                _DetailFactChip(
-                  icon: Icons.location_on_outlined,
-                  text: l10n.truckerLoadDetailDestinationLabel(detail.summary.destinationLabel),
-                ),
-                if (routeSnapshot != null)
-                  _DetailFactChip(
-                    icon: Icons.straighten,
-                    text: l10n.truckerLoadDetailDistanceLabel(routeSnapshot.distanceKm.toStringAsFixed(1)),
-                  ),
-                if (routeSnapshot != null)
-                  _DetailFactChip(
-                    icon: Icons.schedule,
-                    text: l10n.truckerLoadDetailDriveTimeLabel(routeSnapshot.durationMinutes),
-                  ),
-              ],
-            ),
-          ],
+        _LoadRoutePriceSection(
+          l10n: l10n,
+          detail: detail,
+          routeSnapshot: routeSnapshot,
+          hasRoutePreview: hasRoutePreview,
+          mapsUri: mapsUri,
+          routeLabel: routeLabel,
+          mapsLauncher: mapsLauncher,
+          formatDate: _formatDate,
         ),
         const SizedBox(height: AppSpacing.sectionGap),
         DetailSectionCard(
@@ -400,241 +289,97 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         DetailSectionCard(
           title: l10n.truckerLoadDetailSupplierSummaryTitle,
           children: [
-            Text(detail.supplier.companyName?.trim().isNotEmpty == true ? detail.supplier.companyName! : detail.supplier.fullName),
-            const SizedBox(height: AppSpacing.xs),
-            Text(l10n.truckerLoadDetailContactOwnerLabel(detail.supplier.fullName)),
-            const SizedBox(height: AppSpacing.xs),
-            StatusBadge(
-              label: detail.supplier.verificationStatus == 'verified'
-                  ? l10n.truckerLoadDetailVerifiedSupplier
-                  : l10n.truckerLoadDetailSupplierProfile,
-              icon: detail.supplier.verificationStatus == 'verified' ? Icons.verified_outlined : Icons.business_outlined,
-              palette: detail.supplier.verificationStatus == 'verified'
-                  ? const StatusPalette(
-                      foreground: AppColors.success,
-                      background: AppColors.successBg,
-                    )
-                  : const StatusPalette(
-                      foreground: AppColors.neutral,
-                      background: AppColors.neutralBg,
+            InkWell(
+              onTap: () => context.push(AppRoutes.publicProfileLocation(detail.supplierId)),
+              borderRadius: BorderRadius.circular(AppRadius.card),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+                child: Row(
+                  children: [
+                    _AvatarCircle(
+                      avatarUrl: detail.supplier.avatarUrl,
+                      radius: 20,
+                      fallback: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(AppRadius.chip),
+                        ),
+                        child: Center(
+                          child: Text(
+                            detail.supplier.fullName.isNotEmpty ? detail.supplier.fullName[0].toUpperCase() : 'S',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                        ),
+                      ),
                     ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            detail.supplier.companyName?.trim().isNotEmpty == true
+                                ? detail.supplier.companyName!
+                                : detail.supplier.fullName,
+                            style: Theme.of(context).textTheme.titleSmall,
+                          ),
+                          StatusBadge(
+                            label: detail.supplier.verificationStatus == 'verified'
+                                ? l10n.truckerLoadDetailVerifiedSupplier
+                                : l10n.truckerLoadDetailSupplierProfile,
+                            icon: detail.supplier.verificationStatus == 'verified'
+                                ? Icons.verified_outlined
+                                : Icons.business_outlined,
+                            palette: detail.supplier.verificationStatus == 'verified'
+                                ? const StatusPalette(
+                                    foreground: AppColors.success,
+                                    background: AppColors.successBg,
+                                  )
+                                : const StatusPalette(
+                                    foreground: AppColors.neutral,
+                                    background: AppColors.neutralBg,
+                                  ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    const Icon(Icons.chevron_right, color: AppColors.neutral),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            OutlineButton(
+              label: l10n.truckerChatSupplierAction,
+              onPressed: () => _startChat(context, ref, loadId, detail),
+              height: 40,
             ),
           ],
         ),
         const SizedBox(height: AppSpacing.sectionGap),
-        DetailSectionCard(
-          title: l10n.truckerLoadDetailNextStepTitle,
-          children: [
-            if (detail.latestBookingRequest != null)
-              StatusBadge(
-                label: l10n.truckerLoadDetailBookingStatusLabel(
-                  _localizedBookingRequestStatus(l10n, detail.latestBookingRequest!.status),
-                ),
-                icon: Icons.assignment_turned_in_outlined,
-              ),
-            if (detail.latestBookingRequest?.decisionReason != null) ...[
-              const SizedBox(height: AppSpacing.sm),
-              WarningBlock(
-                title: l10n.truckerLoadDetailBookingFeedbackTitle,
-                message: detail.latestBookingRequest!.decisionReason!,
-              ),
-            ],
-            if (gatingMessage != null) ...[
-              const SizedBox(height: AppSpacing.md),
-              WarningBlock(
-                title: l10n.truckerLoadDetailBookingBlockedTitle,
-                message: gatingMessage,
-              ),
-            ],
-            if (state.actionFailure != null) ...[
-              const SizedBox(height: AppSpacing.md),
-              WarningBlock(
-                title: l10n.truckerLoadDetailActionFailureTitle,
-                message: _loadActionFailureMessage(l10n),
-              ),
-            ],
-            const SizedBox(height: AppSpacing.md),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: AppColors.subtleSurface,
-                borderRadius: BorderRadius.circular(AppRadius.button),
-                border: Border.all(color: AppColors.divider),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    l10n.truckerLoadDetailApprovedTruckLabel,
-                    style: Theme.of(context).textTheme.titleSmall,
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  if (hasSingleApprovedTruck) ...[
-                    StatusBadge(
-                      label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck.truckNumber),
-                      icon: Icons.local_shipping_outlined,
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Text(
-                      l10n.truckerLoadDetailSelectedTruckSummary(
-                        selectedTruck.bodyType,
-                        selectedTruck.truckNumber,
-                        selectedTruck.tyres,
-                      ),
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ] else if (state.approvedTrucks.isNotEmpty)
-                    AppDropdown<String>(
-                      label: l10n.truckerLoadDetailApprovedTruckLabel,
-                      value: state.selectedTruckId,
-                      items: [
-                        for (final truck in state.approvedTrucks)
-                          DropdownMenuItem(
-                            value: truck.id,
-                            child: Text(
-                              l10n.truckerLoadDetailTruckOptionLabel(
-                                truck.truckNumber,
-                                truck.bodyType,
-                                truck.tyres,
-                              ),
-                            ),
-                          ),
-                      ],
-                      onChanged: (value) => ref.read(truckerLoadDetailProvider(loadId).notifier).selectTruck(value),
-                    ),
-                  if (hasNoApprovedTrucks) ...[
-                    Text(l10n.truckerLoadDetailNoApprovedTrucksAvailable),
-                    const SizedBox(height: AppSpacing.md),
-                    OutlineButton(
-                      label: l10n.truckerLoadDetailAddTruckFirstAction,
-                      onPressed: () async {
-                        final goToFleet = await _confirmGoToFleet(context, l10n);
-                        if (goToFleet == true && context.mounted) {
-                          context.go(AppRoutes.fleetPath);
-                        }
-                      },
-                    ),
-                  ],
-                ],
-              ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            GradientButton(
-              label: bookingLabel,
-              isLoading: state.isSubmittingBooking,
-              onPressed: bookingAllowed
-                  ? () async {
-                      final selectedTruckId = state.selectedTruckId;
-                      final selectedTruckLabel = selectedTruck?.truckNumber ?? 'selected truck';
-                      if (selectedTruckId == null || selectedTruckId.trim().isEmpty) {
-                        return;
-                      }
-
-                      final confirmed = await _confirmBooking(
-                        context,
-                        detail,
-                        selectedTruckLabel,
-                      );
-                      if (confirmed != true || !context.mounted) {
-                        return;
-                      }
-
-                      final result = await ref.read(truckerLoadDetailProvider(loadId).notifier).submitBookingRequest();
-                      if (!context.mounted) {
-                        return;
-                      }
-                      AppSnackbar.show(
-                        context: context,
-                        message: result.isSuccess
-                            ? l10n.truckerLoadDetailLoadBookedSuccess
-                            : _bookingSubmitFailureMessage(l10n),
-                        variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
-                      );
-                    }
-                  : null,
-            ),
-            const SizedBox(height: AppSpacing.sm),
-            _StartConversationButton(
-              supplierId: detail.supplierId,
-              truckerId: profile?.id,
-              loadId: detail.summary.id,
-              blockedReason: gatingMessage,
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(AppSpacing.md),
-              decoration: BoxDecoration(
-                color: AppColors.cardSurface,
-                borderRadius: BorderRadius.circular(AppRadius.button),
-                border: Border.all(color: AppColors.divider),
-              ),
-              child: Column(
-                children: [
-                  OutlineButton(
-                    label: l10n.truckerLoadDetailShareLoadAction,
-                    onPressed: () async {
-                      final action = await showAppBottomSheet<String>(
-                        context: context,
-                        title: l10n.truckerLoadDetailShareLoadTitle,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              l10n.truckerLoadDetailShareLoadMessage,
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            const SizedBox(height: AppSpacing.lg),
-                            PrimaryButton(
-                              label: l10n.truckerLoadDetailSystemShareAction,
-                              onPressed: () => Navigator.of(context).pop('system'),
-                            ),
-                            const SizedBox(height: AppSpacing.md),
-                            OutlineButton(
-                              label: l10n.truckerLoadDetailShareToWhatsAppAction,
-                              onPressed: () => Navigator.of(context).pop('whatsapp'),
-                            ),
-                          ],
-                        ),
-                      );
-                      if (!context.mounted || action == null) {
-                        return;
-                      }
-                      if (action == 'system') {
-                        await shareService.shareSystem(sharePayload);
-                        return;
-                      }
-                      final launched = await shareService.shareToWhatsApp(sharePayload);
-                      if (!context.mounted) {
-                        return;
-                      }
-                      if (!launched) {
-                        AppSnackbar.show(
-                          context: context,
-                          message: l10n.truckerLoadDetailWhatsAppUnavailableMessage,
-                          variant: AppSnackbarVariant.info,
-                        );
-                      }
-                    },
-                  ),
-                  const SizedBox(height: AppSpacing.sm),
-                  OutlineButton(
-                    label: l10n.truckerLoadDetailReportSpamOrAbuseAction,
-                    onPressed: () => context.go(
-                      AppRoutes.reportIssuePath,
-                      extra: ReportIssueContext(
-                        initialCategory: 'spam_or_scam',
-                        relatedLoadId: detail.summary.id,
-                        relatedTripId: '',
-                        sourceLabel: l10n.truckerLoadDetailReportSourceLabel(routeLabel),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        _LoadNextStepSection(
+          loadId: loadId,
+          l10n: l10n,
+          detail: detail,
+          state: state,
+          profile: profile,
+          hasNoApprovedTrucks: hasNoApprovedTrucks,
+          bookingAllowed: bookingAllowed,
+          hasSingleApprovedTruck: hasSingleApprovedTruck,
+          selectedTruck: selectedTruck,
+          bookingLabel: bookingLabel,
+          gatingMessage: gatingMessage,
+          routeLabel: routeLabel,
+          shareService: shareService,
+          sharePayload: sharePayload,
+          confirmGoToFleet: _confirmGoToFleet,
+          confirmBooking: _confirmBooking,
         ),
       ],
     );
@@ -727,147 +472,94 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
   }
 }
 
-class _DetailFactChip extends StatelessWidget {
-  final IconData icon;
-  final String text;
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final Widget fallback;
 
-  const _DetailFactChip({
-    required this.icon,
-    required this.text,
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    required this.fallback,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: 28),
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: AppColors.subtleSurface,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(color: AppColors.divider),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: AppColors.textSecondary),
-          const SizedBox(width: AppSpacing.xs),
-          Flexible(
-            child: Text(
-              text,
-              style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StartConversationButton extends ConsumerStatefulWidget {
-  final String supplierId;
-  final String? truckerId;
-  final String loadId;
-  final String? blockedReason;
-
-  const _StartConversationButton({
-    required this.supplierId,
-    required this.truckerId,
-    required this.loadId,
-    required this.blockedReason,
-  });
-
-  @override
-  ConsumerState<_StartConversationButton> createState() => _StartConversationButtonState();
-}
-
-class _StartConversationButtonState extends ConsumerState<_StartConversationButton> {
-  bool _isStarting = false;
-
-  @override
-  Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context);
-    final truckerId = (widget.truckerId ?? '').trim();
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        OutlineButton(
-          label: l10n.truckerChatSupplierAction,
-          isLoading: _isStarting,
-          onPressed: truckerId.isEmpty || _isStarting || widget.blockedReason != null
-              ? null
-              : () async {
-                  setState(() {
-                    _isStarting = true;
-                  });
-                  final result = await ref.read(chatRepositoryProvider).createOrGetConversation(
-                        supplierId: widget.supplierId,
-                        truckerId: truckerId,
-                        loadId: widget.loadId,
-                      );
-                  if (!mounted) {
-                    return;
-                  }
-                  setState(() {
-                    _isStarting = false;
-                  });
-                  result.when(
-                    success: (conversationId) {
-                      context.go('${AppRoutes.chatPath}/$conversationId');
-                    },
-                    failure: (failure) {
-                      AppSnackbar.show(
-                        context: context,
-                        message: l10n.truckerLoadChatStartFailureMessage,
-                        variant: AppSnackbarVariant.error,
-                      );
-                    },
-                  );
-                },
-        ),
-        if ((widget.blockedReason ?? '').trim().isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            l10n.truckerChatLockedLabel(widget.blockedReason!),
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ],
-      ],
-    );
-  }
-}
-
-class _TruckerLoadDetailFailureBlock extends StatelessWidget {
-  final AppFailure failure;
-  final VoidCallback onRetry;
-
-  const _TruckerLoadDetailFailureBlock({
-    required this.failure,
-    required this.onRetry,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    if (failure is NotFoundFailure) {
-      return EmptyStateView(
-        icon: Icons.inventory_2_outlined,
-        title: l10n.truckerLoadDetailLoadNotFoundTitle,
-        subtitle: l10n.truckerLoadDetailLoadNotFoundSubtitle,
-        actionLabel: l10n.truckerLoadDetailBackToFindLoadsAction,
-        onAction: () => context.go(AppRoutes.findLoadsPath),
+    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
+      return SizedBox(
+        width: radius * 2,
+        height: radius * 2,
+        child: fallback,
       );
     }
 
-    return WarningBlock(
-      title: l10n.truckerLoadDetailLoadFailureTitle,
-      message: l10n.truckerLoadDetailLoadFailureMessage,
-      action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+    return FutureBuilder<String?>(
+      future: _createSignedUrl(avatarUrl!),
+      builder: (context, snapshot) {
+        final resolvedUrl = snapshot.data;
+        if (resolvedUrl == null) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        }
+        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+      },
+    );
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      // Try verification-documents bucket first (for user's own profile)
+      try {
+        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+      } catch (_) {
+        // Fallback to profile-photos bucket (for supplier profiles)
+        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: radius * 2,
+        height: radius * 2,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+      ),
     );
   }
 }

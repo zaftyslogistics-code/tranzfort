@@ -9,57 +9,11 @@ import 'package:tranzfort/src/features/trucker/presentation/trucker_trips_screen
 import 'package:tranzfort/src/features/trucker/providers/trucker_trips_provider.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
-class _NoopTripsBackend implements TruckerTripsBackend {
-  @override
-  Future<List<Map<String, dynamic>>> fetchTrips({required String truckerId, required List<String> stages}) async {
-    return const <Map<String, dynamic>>[];
-  }
-
-  @override
-  Future<Map<String, dynamic>?> fetchOwnRating({required String reviewerId, required String loadId}) async => null;
-
-  @override
-  Future<void> submitRating({required String loadId, required int score, String? comment}) async {}
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDetail({required String truckerId, required String tripId}) async => null;
-
-  @override
-  Future<void> advanceTripStage({
-    required String tripId,
-    required String newStage,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {}
-
-  @override
-  Future<void> uploadTripProof({
-    required String tripId,
-    required String podPath,
-    String? lrPath,
-    double? gpsLat,
-    double? gpsLng,
-  }) async {}
-
-  @override
-  Future<Map<String, dynamic>?> uploadTripLr({
-    required String tripId,
-    required String lrPath,
-  }) async => {'id': tripId};
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierExtension(String supplierId) async => null;
-
-  @override
-  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => null;
-
-  @override
-  Future<Map<String, dynamic>?> fetchTripDisputeSummary({required String tripId}) async => null;
-}
+import '../../../core/mocks.dart';
 
 class _TestTruckerTripsController extends TruckerTripsController {
   _TestTruckerTripsController(TruckerTripsState initialState)
-      : super(TruckerTripsRepository(_NoopTripsBackend(), () => 'trucker-1')) {
+      : super(TruckerTripsRepository(MockTruckerTripsBackend(), () => 'trucker-1')) {
     state = initialState;
   }
 

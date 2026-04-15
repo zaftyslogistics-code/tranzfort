@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'src/core/config/supabase_config.dart';
+import 'src/core/logger/app_logger.dart';
 import 'src/core/navigation/app_router.dart';
 import 'src/core/providers/app_locale_providers.dart';
 import 'src/core/providers/connectivity_provider.dart';
@@ -27,7 +28,7 @@ Future<void> main() async {
       try {
         await dotenv.load(fileName: '.env');
       } catch (dotenvError) {
-        debugPrint('dotenv.load() failed — continuing with platform env: $dotenvError');
+        AppLogger.warning('dotenv.load() failed — continuing with platform env', scope: 'main', error: dotenvError);
       }
 
       final config = SupabaseConfig.fromEnvironment();
@@ -84,8 +85,7 @@ void _configureGlobalErrorHandling() {
 }
 
 void _reportUnhandledError(Object error, StackTrace stackTrace) {
-  debugPrint('Unhandled application error: $error');
-  debugPrintStack(stackTrace: stackTrace);
+  AppLogger.error('Unhandled application error', scope: 'main', error: error, stackTrace: stackTrace);
 }
 
 bool _isBootstrapHindi() {
@@ -128,7 +128,7 @@ Future<void> _initializeFirebaseIfAvailable() async {
   try {
     await Firebase.initializeApp();
   } catch (error) {
-    debugPrint('Firebase initialization skipped: $error');
+    AppLogger.warning('Firebase initialization skipped', scope: 'main', error: error);
   }
 }
 

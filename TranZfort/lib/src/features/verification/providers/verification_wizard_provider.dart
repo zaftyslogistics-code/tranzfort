@@ -9,133 +9,138 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../trucker/data/truck_document_upload_service.dart';
 import '../../trucker/data/trucker_fleet_repository.dart';
 import '../data/verification_document_upload_service.dart';
 import '../data/verification_location_service.dart';
 import '../data/verification_repository.dart';
+import 'verification_wizard_upload_helper.dart';
+import 'verification_wizard_validation_helper.dart';
 
-part 'verification_wizard_state.dart';
-part 'verification_wizard_draft.dart';
+import 'verification_wizard_state.dart';
 
 class VerificationWizardController extends StateNotifier<VerificationWizardState> {
   static const _draftStorageKeyPrefix = 'verification_wizard_draft_v1';
 
   final VerificationRepository _repository;
   final VerificationDocumentUploadService _uploadService;
+  final TruckDocumentUploadService _truckUploadService;
   final VerificationLocationService _locationService;
   final TruckerFleetRepository? _fleetRepository;
   final String? _currentUserId;
   final AppUserRole _role;
+  late final VerificationWizardUploadHelper _uploadHelper;
+  late final VerificationWizardValidationHelper _validationHelper;
 
   VerificationWizardController({
     required VerificationRepository repository,
     required VerificationDocumentUploadService uploadService,
+    required TruckDocumentUploadService truckUploadService,
     required VerificationLocationService locationService,
     required AppUserRole role,
     TruckerFleetRepository? fleetRepository,
     String? currentUserId,
   })  : _repository = repository,
         _uploadService = uploadService,
+        _truckUploadService = truckUploadService,
         _locationService = locationService,
         _fleetRepository = fleetRepository,
         _currentUserId = currentUserId,
         _role = role,
         super(VerificationWizardState.initial(role)) {
-    _loadExistingData();
+    _uploadHelper = VerificationWizardUploadHelper(
+      repository: _repository,
+      uploadService: _uploadService,
+      truckUploadService: _truckUploadService,
+      currentUserId: _currentUserId,
+    );
+    _validationHelper = VerificationWizardValidationHelper(role: _role);
+    _verificationLoadExistingData();
   }
 
-  Future<void> _loadExistingData() async {
-    final persistedDraft = await _loadPersistedDraft();
-    if (persistedDraft != null) {
-      state = state.copyWith(draft: persistedDraft);
+  void _setState(VerificationWizardState newState, {bool persistDraft = true}) {
+    state = newState;
+    if (!persistDraft) {
+      return;
     }
-
-    final result = await _repository.fetchCurrentDetail();
-    result.when(
-      success: (detail) {
-        if (detail != null) {
-          final detailDraft = VerificationDraft.fromDetail(detail);
-          state = state.copyWith(
-            draft: persistedDraft == null ? detailDraft : detailDraft.mergeMissingFrom(state.draft),
-            isLoading: false,
-            verificationStatus: detail.verificationStatus.toLowerCase(),
-          );
-        } else {
-          state = state.copyWith(isLoading: false);
-        }
-      },
-      failure: (failure) {
-        state = state.copyWith(isLoading: false, error: failure);
-      },
-    );
+    unawaited(_verificationPersistDraft(state.draft));
   }
 
   void nextStep() {
     if (!state.canProceed) return;
     if (state.isLastStep) return;
     
-    state = state.copyWith(
+    _setState(state.copyWith(
       currentStepIndex: state.currentStepIndex + 1,
       clearError: true,
-    );
+    ));
   }
 
   void previousStep() {
     if (state.isFirstStep) return;
     
-    state = state.copyWith(
+    _setState(state.copyWith(
       currentStepIndex: state.currentStepIndex - 1,
       clearError: true,
-    );
+    ));
   }
 
   void goToStep(int index) {
     if (index < 0 || index >= state.totalSteps) return;
     if (index > state.currentStepIndex + 1) return; // Can't skip ahead
     
-    state = state.copyWith(
+    _setState(state.copyWith(
       currentStepIndex: index,
       clearError: true,
-    );
+    ));
   }
 
   // Profile Photo
   Future<Result<void>> uploadProfilePhoto(ImageSource source) async {
-    state = state.copyWith(
+    _setState(state.copyWith(
       uploadingDocumentType: VerificationDocumentType.profilePhoto,
       clearError: true,
-    );
+    ));
 
-    final result = await _pickCompressAndUpload(
-      type: VerificationDocumentType.profilePhoto,
-      source: source,
-    );
+    final result = await _uploadHelper.uploadProfilePhoto(source: source);
 
-    state = state.copyWith(clearUploadingDocumentType: true);
-    return result;
+    if (result.isSuccess) {
+      _setState(state.copyWith(
+        draft: state.draft.copyWith(profilePhotoPath: result.valueOrNull),
+        clearUploadingDocumentType: true,
+        clearFieldError: 'profilePhoto',
+      ));
+      return const Success(null);
+    }
+
+    _setState(state.copyWith(
+      clearUploadingDocumentType: true,
+      error: result.failureOrNull,
+    ), persistDraft: false);
+    return Failure(result.failureOrNull!);
   }
 
   void clearProfilePhoto() {
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(profilePhotoPath: null),
-    );
+    ));
   }
 
   // Identity Numbers
   void updateAadhaarNumber(String value) {
     final normalized = value.replaceAll(RegExp(r'\s'), '').trim();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(aadhaarNumber: normalized),
       clearFieldError: 'aadhaarNumber',
-    );
+    ));
   }
 
   void updatePanNumber(String value) {
     final normalized = value.toUpperCase().trim();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(panNumber: normalized),
       clearFieldError: 'panNumber',
-    );
+    ));
   }
 
   // Identity Documents
@@ -152,25 +157,62 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
   }
 
   Future<Result<void>> _uploadIdentityDoc(VerificationDocumentType type, ImageSource source) async {
-    state = state.copyWith(uploadingDocumentType: type, clearError: true);
+    _setState(state.copyWith(uploadingDocumentType: type, clearError: true));
 
-    final result = await _pickCompressAndUpload(type: type, source: source);
+    final result = await _uploadHelper.uploadIdentityDoc(type: type, source: source);
 
-    state = state.copyWith(clearUploadingDocumentType: true);
-    return result;
+    if (result.isSuccess) {
+      final path = result.valueOrNull;
+      switch (type) {
+        case VerificationDocumentType.aadhaarFront:
+          _setState(state.copyWith(
+            draft: state.draft.copyWith(aadhaarFrontPath: path),
+            clearUploadingDocumentType: true,
+            clearFieldError: 'aadhaarFront',
+          ));
+          break;
+        case VerificationDocumentType.aadhaarBack:
+          _setState(state.copyWith(
+            draft: state.draft.copyWith(aadhaarBackPath: path),
+            clearUploadingDocumentType: true,
+            clearFieldError: 'aadhaarBack',
+          ));
+          break;
+        case VerificationDocumentType.pan:
+          _setState(state.copyWith(
+            draft: state.draft.copyWith(panDocumentPath: path),
+            clearUploadingDocumentType: true,
+            clearFieldError: 'panDocument',
+          ));
+          break;
+        default:
+          _setState(state.copyWith(clearUploadingDocumentType: true));
+          break;
+      }
+      return const Success(null);
+    }
+
+    _setState(
+      state.copyWith(
+        clearUploadingDocumentType: true,
+        error: result.failureOrNull,
+      ),
+      persistDraft: false,
+    );
+    return Failure(result.failureOrNull!);
   }
 
   void clearIdentityDoc(VerificationDocumentType type) {
     final draft = state.draft;
     switch (type) {
       case VerificationDocumentType.aadhaarFront:
-        state = state.copyWith(draft: draft.copyWith(aadhaarFrontPath: null));
+        _setState(state.copyWith(draft: draft.copyWith(aadhaarFrontPath: null)));
         break;
       case VerificationDocumentType.aadhaarBack:
-        state = state.copyWith(draft: draft.copyWith(aadhaarBackPath: null));
+        _setState(state.copyWith(draft: draft.copyWith(aadhaarBackPath: null)));
         break;
       case VerificationDocumentType.pan:
-        state = state.copyWith(draft: draft.copyWith(panDocumentPath: null));
+        _setState(state.copyWith(draft: draft.copyWith(panDocumentPath: null)));
         break;
       default:
         break;
@@ -181,132 +223,163 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
   void updateTruckNumber(String value) {
     final normalized = value.toUpperCase().trim();
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(truckNumber: normalized),
       ),
       clearFieldError: 'truckNumber',
-    );
+    ));
   }
 
   void updateTruckBodyType(String value) {
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(bodyType: value),
       ),
-    );
+    ));
   }
 
   void updateTruckTyres(int value) {
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(tyres: value),
       ),
-    );
+    ));
   }
 
   void updateTruckCapacity(String value) {
     final capacity = double.tryParse(value.trim()) ?? 0;
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(capacityTonnes: capacity),
       ),
-    );
+    ));
   }
 
   Future<Result<void>> uploadTruckRcDocument(ImageSource source) async {
-    state = state.copyWith(
+    _setState(state.copyWith(
       uploadingDocumentType: VerificationDocumentType.truckRc,
       clearError: true,
-    );
+    ));
 
-    final result = await _pickCompressAndUpload(
-      type: VerificationDocumentType.truckRc,
-      source: source,
-    );
+    if (_currentUserId == null) {
+      final failure = UnauthorizedFailure();
+      _setState(
+        state.copyWith(
+          clearUploadingDocumentType: true,
+          error: failure,
+        ),
+        persistDraft: false,
+      );
+      return Failure(failure);
+    }
+
+    final result = await _uploadHelper.uploadTruckRcDocument(source: source);
 
     if (result.isSuccess) {
       final truck = state.draft.truck ?? TruckDraft();
-      state = state.copyWith(
+      _setState(state.copyWith(
         draft: state.draft.copyWith(
           truck: truck.copyWith(rcDocumentPath: result.valueOrNull),
         ),
         clearUploadingDocumentType: true,
-      );
+        clearFieldError: 'rcDocument',
+      ));
     } else {
-      state = state.copyWith(clearUploadingDocumentType: true);
+      _setState(
+        state.copyWith(
+          clearUploadingDocumentType: true,
+          error: result.failureOrNull,
+        ),
+        persistDraft: false,
+      );
     }
 
-    return result;
+    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
   }
 
   Future<Result<void>> uploadTruckPhoto(ImageSource source) async {
-    state = state.copyWith(
+    _setState(state.copyWith(
       uploadingDocumentType: VerificationDocumentType.truckPhoto,
       clearError: true,
-    );
+    ));
 
-    final result = await _pickCompressAndUpload(
-      type: VerificationDocumentType.truckPhoto,
-      source: source,
-    );
+    if (_currentUserId == null) {
+      final failure = UnauthorizedFailure();
+      _setState(
+        state.copyWith(
+          clearUploadingDocumentType: true,
+          error: failure,
+        ),
+        persistDraft: false,
+      );
+      return Failure(failure);
+    }
+
+    final result = await _uploadHelper.uploadTruckPhoto(source: source);
 
     if (result.isSuccess) {
       final truck = state.draft.truck ?? TruckDraft();
-      state = state.copyWith(
+      _setState(state.copyWith(
         draft: state.draft.copyWith(
           truck: truck.copyWith(truckPhotoPath: result.valueOrNull),
         ),
         clearUploadingDocumentType: true,
-      );
+      ));
     } else {
-      state = state.copyWith(clearUploadingDocumentType: true);
+      _setState(
+        state.copyWith(
+          clearUploadingDocumentType: true,
+          error: result.failureOrNull,
+        ),
+        persistDraft: false,
+      );
     }
 
-    return result;
+    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
   }
 
   void clearTruckRc() {
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(rcDocumentPath: null),
       ),
-    );
+    ));
   }
 
   void clearTruckPhoto() {
     final truck = state.draft.truck ?? TruckDraft();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(
         truck: truck.copyWith(truckPhotoPath: null),
       ),
-    );
+    ));
   }
 
   // Supplier: Business Details
   void updateCompanyName(String value) {
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(companyName: value.trim()),
       clearFieldError: 'companyName',
-    );
+    ));
   }
 
   void updateBusinessLicenseNumber(String value) {
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(businessLicenseNumber: value.trim()),
       clearFieldError: 'businessLicenseNumber',
-    );
+    ));
   }
 
   void updateGstNumber(String value) {
     final normalized = value.toUpperCase().trim();
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(gstNumber: normalized),
-    );
+    ));
   }
 
   Future<Result<void>> uploadBusinessLicense(ImageSource source) async {
@@ -327,52 +400,146 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
     required VerificationDocumentType type,
     required ImageSource source,
   }) async {
-    state = state.copyWith(uploadingDocumentType: type, clearError: true);
+    _setState(state.copyWith(uploadingDocumentType: type, clearError: true));
 
-    final result = await _pickCompressAndUpload(type: type, source: source);
+    final result = await _uploadHelper.uploadBusinessDoc(type: type, source: source);
 
     if (result.isSuccess) {
       final path = result.valueOrNull;
       if (type == VerificationDocumentType.businessLicence) {
-        state = state.copyWith(
+        _setState(state.copyWith(
           draft: state.draft.copyWith(businessLicensePath: path),
-        );
+        ));
       } else {
-        state = state.copyWith(
+        _setState(state.copyWith(
           draft: state.draft.copyWith(gstCertificatePath: path),
-        );
+        ));
       }
+    } else {
+      _setState(
+        state.copyWith(error: result.failureOrNull),
+        persistDraft: false,
+      );
     }
 
-    state = state.copyWith(clearUploadingDocumentType: true);
-    return result;
+    _setState(
+      state.copyWith(clearUploadingDocumentType: true),
+      persistDraft: result.isSuccess,
+    );
+    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
   }
 
   void clearBusinessLicense() {
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(businessLicensePath: null),
-    );
+    ));
   }
 
   void clearGstCertificate() {
-    state = state.copyWith(
+    _setState(state.copyWith(
       draft: state.draft.copyWith(gstCertificatePath: null),
-    );
+    ));
   }
 
   // Supplier: Location
   Future<LocationCaptureResult> captureLocation() async {
-    state = state.copyWith(isCapturingLocation: true, clearError: true);
+    return _verificationCaptureLocation();
+  }
+
+  Future<void> setManualLocation({
+    required String city,
+    String? region,
+    required double latitude,
+    required double longitude,
+  }) async {
+    _setState(state.copyWith(
+      draft: state.draft.copyWith(
+        location: WizardLocation(
+          city: city,
+          state: region,
+          latitude: latitude,
+          longitude: longitude,
+          source: 'manual',
+        ),
+      ),
+    ));
+  }
+
+  void clearLocation() {
+    _setState(state.copyWith(
+      draft: state.draft.copyWith(location: null),
+    ));
+  }
+
+  // Submit
+  Future<Result<String>> submit() async {
+    return _verificationSubmit();
+  }
+
+  void setTermsAccepted(bool value) {
+    _setState(state.copyWith(termsAccepted: value), persistDraft: false);
+  }
+
+  Future<void> saveDraft() async {
+    await _verificationPersistDraft(state.draft);
+  }
+
+  void clearError() {
+    _setState(state.copyWith(clearError: true, clearFieldErrors: true), persistDraft: false);
+  }
+
+  String get _draftStorageKey => '$_draftStorageKeyPrefix:${_currentUserId ?? _role.name}';
+
+  // Helper methods from part file
+  Future<void> _verificationLoadExistingData() async {
+    final persistedDraft = await _verificationLoadPersistedDraft();
+    if (persistedDraft != null) {
+      _setState(state.copyWith(draft: persistedDraft), persistDraft: false);
+    }
+
+    final result = await _repository.fetchCurrentDetail();
+    result.when(
+      success: (detail) {
+        if (detail != null) {
+          final detailDraft = VerificationDraft.fromDetail(detail);
+          _setState(
+            state.copyWith(
+              draft: persistedDraft == null
+                  ? detailDraft
+                  : detailDraft.mergeMissingFrom(state.draft),
+              isLoading: false,
+              verificationStatus: detail.verificationStatus.toLowerCase(),
+            ),
+            persistDraft: false,
+          );
+        } else {
+          _setState(state.copyWith(isLoading: false), persistDraft: false);
+        }
+      },
+      failure: (failure) {
+        _setState(
+          state.copyWith(isLoading: false, error: failure),
+          persistDraft: false,
+        );
+      },
+    );
+  }
+
+  Future<LocationCaptureResult> _verificationCaptureLocation() async {
+    _setState(
+      state.copyWith(isCapturingLocation: true, clearError: true),
+      persistDraft: false,
+    );
 
     try {
       final location = await _locationService.captureSupplierVerificationLocation();
 
       if (location == null) {
-        state = state.copyWith(isCapturingLocation: false);
+        _setState(state.copyWith(isCapturingLocation: false), persistDraft: false);
         return LocationCaptureResult.error(LocationCaptureError.unknown);
       }
 
-      state = state.copyWith(
+      _setState(state.copyWith(
         isCapturingLocation: false,
         draft: state.draft.copyWith(
           location: WizardLocation(
@@ -383,96 +550,89 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
             source: 'gps',
           ),
         ),
-      );
+      ));
 
       return LocationCaptureResult.success(location);
     } on LocationServiceDisabledException {
-      state = state.copyWith(isCapturingLocation: false);
+      _setState(state.copyWith(isCapturingLocation: false), persistDraft: false);
       return LocationCaptureResult.error(LocationCaptureError.serviceDisabled);
     } on LocationPermissionDeniedException {
-      state = state.copyWith(isCapturingLocation: false);
+      _setState(state.copyWith(isCapturingLocation: false), persistDraft: false);
       return LocationCaptureResult.error(LocationCaptureError.permissionDenied);
     } on LocationPermissionDeniedForeverException {
-      state = state.copyWith(isCapturingLocation: false);
-      return LocationCaptureResult.error(
-        LocationCaptureError.permissionDeniedForever,
-      );
+      _setState(state.copyWith(isCapturingLocation: false), persistDraft: false);
+      return LocationCaptureResult.error(LocationCaptureError.permissionDeniedForever);
     } catch (_) {
-      state = state.copyWith(isCapturingLocation: false);
+      _setState(state.copyWith(isCapturingLocation: false), persistDraft: false);
       return LocationCaptureResult.error(LocationCaptureError.unknown);
     }
   }
 
-  Future<void> setManualLocation({
-    required String city,
-    String? region,
-    required double latitude,
-    required double longitude,
-  }) async {
-    state = state.copyWith(
-      draft: state.draft.copyWith(
-        location: WizardLocation(
-          city: city,
-          state: region,
-          latitude: latitude,
-          longitude: longitude,
-          source: 'manual',
-        ),
-      ),
-    );
-  }
-
-  void clearLocation() {
-    state = state.copyWith(
-      draft: state.draft.copyWith(location: null),
-    );
-  }
-
-  // Submit
-  Future<Result<String>> submit() async {
+  Future<Result<String>> _verificationSubmit() async {
     if (!state.isLastStep) {
       return Failure(BusinessRuleFailure(message: 'Complete all steps first'));
     }
 
-    final validationError = _validateAll();
+    final validationError = _verificationValidateAll();
     if (validationError != null) {
-      return Failure(ValidationFailure(
+      final failure = ValidationFailure(
         message: validationError,
         fieldErrors: state.fieldErrors,
-      ));
+      );
+      _setState(state.copyWith(error: failure), persistDraft: false);
+      return Failure(failure);
     }
 
-    state = state.copyWith(isSubmitting: true, clearError: true);
+    _setState(
+      state.copyWith(isSubmitting: true, clearError: true),
+      persistDraft: false,
+    );
 
     try {
-      // Save all draft data
-      final saveResult = await _saveDraftData();
+      final saveResult = await _verificationSaveDraftData();
       if (saveResult.isFailure) {
-        state = state.copyWith(isSubmitting: false);
+        _setState(
+          state.copyWith(
+            isSubmitting: false,
+            error: saveResult.failureOrNull,
+          ),
+          persistDraft: false,
+        );
         return Failure(saveResult.failureOrNull!);
       }
 
-      // Submit for review
       final submitResult = await _repository.submitForReview(
         isResubmission: state.isResubmission,
       );
 
       if (submitResult.isSuccess) {
-        await _clearPersistedDraft();
+        await _verificationClearPersistedDraft();
       }
 
-      state = state.copyWith(isSubmitting: false);
+      _setState(
+        state.copyWith(
+          isSubmitting: false,
+          error: submitResult.isFailure ? submitResult.failureOrNull : null,
+        ),
+        persistDraft: submitResult.isFailure,
+      );
       return submitResult;
     } catch (e, stack) {
-      state = state.copyWith(isSubmitting: false);
-      return Failure(mapSupabaseError(e, stack));
+      final failure = mapSupabaseError(e, stack);
+      _setState(
+        state.copyWith(
+          isSubmitting: false,
+          error: failure,
+        ),
+        persistDraft: false,
+      );
+      return Failure(failure);
     }
   }
 
-  Future<Result<void>> _saveDraftData() async {
+  Future<Result<void>> _verificationSaveDraftData() async {
     final draft = state.draft;
 
-    // Save identity fields
     final identityResult = await _repository.saveVerificationPacketFields(
       aadhaarNumber: draft.aadhaarNumber ?? '',
       panNumber: draft.panNumber ?? '',
@@ -480,9 +640,10 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
       businessLicenceNumber: draft.businessLicenseNumber,
       gstNumber: draft.gstNumber,
     );
-    if (identityResult.isFailure) return identityResult;
+    if (identityResult.isFailure) {
+      return identityResult;
+    }
 
-    // Save supplier location
     if (state.isSupplier && draft.location != null) {
       final locationResult = await _repository.saveSupplierVerificationLocation(
         city: draft.location!.city,
@@ -490,10 +651,11 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
         latitude: draft.location!.latitude,
         longitude: draft.location!.longitude,
       );
-      if (locationResult.isFailure) return locationResult;
+      if (locationResult.isFailure) {
+        return locationResult;
+      }
     }
 
-    // Create truck for truckers
     if (state.isTrucker && draft.truck != null && _fleetRepository != null) {
       final truckResult = await _fleetRepository.createTruck(
         truckNumber: draft.truck!.truckNumber,
@@ -502,117 +664,24 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
         capacityTonnes: draft.truck!.capacityTonnes,
         rcDocumentPath: draft.truck!.rcDocumentPath ?? '',
       );
-      if (truckResult.isFailure) return truckResult;
+      if (truckResult.isFailure) {
+        return truckResult;
+      }
     }
 
-    return Success(null);
+    return const Success(null);
   }
 
-  String? _validateAll() {
-    final draft = state.draft;
-    final errors = <String, String>{};
-
-    // Step 1: Profile Photo
-    if (draft.profilePhotoPath?.isEmpty ?? true) {
-      errors['profilePhoto'] = 'Profile photo is required';
+  String? _verificationValidateAll() {
+    final result = _validationHelper.validateAll(state.draft);
+    if (!result.isValid) {
+      _setState(state.copyWith(fieldErrors: result.fieldErrors), persistDraft: false);
+      return result.errorMessage;
     }
-
-    // Step 2: Identity
-    if (draft.aadhaarNumber?.length != 12) {
-      errors['aadhaarNumber'] = 'Aadhaar must be 12 digits';
-    }
-    if (!RegExp(r'^[A-Z]{5}\d{4}[A-Z]$').hasMatch(draft.panNumber ?? '')) {
-      errors['panNumber'] = 'Invalid PAN format';
-    }
-    if (draft.aadhaarFrontPath?.isEmpty ?? true) {
-      errors['aadhaarFront'] = 'Aadhaar front photo required';
-    }
-    if (draft.aadhaarBackPath?.isEmpty ?? true) {
-      errors['aadhaarBack'] = 'Aadhaar back photo required';
-    }
-    if (draft.panDocumentPath?.isEmpty ?? true) {
-      errors['panDocument'] = 'PAN photo required';
-    }
-
-    // Step 3: Role-specific
-    if (state.isTrucker) {
-      final truck = draft.truck;
-      if (truck == null || truck.truckNumber.isEmpty) {
-        errors['truckNumber'] = 'Truck number is required';
-      }
-      if (truck?.rcDocumentPath?.isEmpty ?? true) {
-        errors['rcDocument'] = 'RC document is required';
-      }
-    } else {
-      if (draft.companyName?.isEmpty ?? true) {
-        errors['companyName'] = 'Company name is required';
-      }
-      if (draft.businessLicenseNumber?.isEmpty ?? true) {
-        errors['businessLicenseNumber'] = 'License number is required';
-      }
-      if (draft.businessLicensePath?.isEmpty ?? true) {
-        errors['businessLicense'] = 'License document is required';
-      }
-      if (draft.location == null) {
-        errors['location'] = 'Verification location is required';
-      }
-    }
-
-    if (errors.isNotEmpty) {
-      state = state.copyWith(fieldErrors: errors);
-      return 'Please complete all required fields';
-    }
-
     return null;
   }
 
-  Future<Result<String?>> _pickCompressAndUpload({
-    required VerificationDocumentType type,
-    required ImageSource source,
-  }) async {
-    if (_currentUserId == null) {
-      return Failure(UnauthorizedFailure());
-    }
-
-    final uploadResult = await _uploadService.pickCompressAndUploadDocument(
-      profileId: _currentUserId,
-      type: type,
-      source: source,
-    );
-
-    if (uploadResult.isFailure) {
-      return Failure(uploadResult.failureOrNull!);
-    }
-
-    final path = uploadResult.valueOrNull;
-    if (path == null) {
-      return Success(null);
-    }
-
-    // Save path to backend
-    final saveResult = await _repository.saveDocumentPath(type: type, storagePath: path);
-    if (saveResult.isFailure) {
-      return Failure(saveResult.failureOrNull!);
-    }
-
-    return Success(path);
-  }
-
-  void setTermsAccepted(bool value) {
-    state = state.copyWith(termsAccepted: value);
-  }
-
-  Future<void> saveDraft() async {
-    await _persistDraft(state.draft);
-  }
-
-  void clearError() {
-    state = state.copyWith(clearError: true, clearFieldErrors: true);
-  }
-
-  String get _draftStorageKey => '$_draftStorageKeyPrefix:${_currentUserId ?? _role.name}';
-
-  Future<void> _persistDraft(VerificationDraft draft) async {
+  Future<void> _verificationPersistDraft(VerificationDraft draft) async {
     final preferences = await SharedPreferences.getInstance();
     if (draft.isEmpty) {
       await preferences.remove(_draftStorageKey);
@@ -621,7 +690,7 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
     await preferences.setString(_draftStorageKey, jsonEncode(draft.toJson()));
   }
 
-  Future<VerificationDraft?> _loadPersistedDraft() async {
+  Future<VerificationDraft?> _verificationLoadPersistedDraft() async {
     final preferences = await SharedPreferences.getInstance();
     final encoded = preferences.getString(_draftStorageKey);
     if (encoded == null || encoded.trim().isEmpty) {
@@ -641,7 +710,7 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
     }
   }
 
-  Future<void> _clearPersistedDraft() async {
+  Future<void> _verificationClearPersistedDraft() async {
     final preferences = await SharedPreferences.getInstance();
     await preferences.remove(_draftStorageKey);
   }
@@ -652,6 +721,7 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
   final role = ref.watch(currentAuthStateProvider).role;
   final repository = ref.watch(verificationRepositoryProvider);
   final uploadService = ref.watch(verificationDocumentUploadServiceProvider);
+  final truckUploadService = ref.watch(truckDocumentUploadServiceProvider);
   final locationService = ref.watch(verificationLocationServiceProvider);
   final client = ref.watch(supabaseClientProvider);
 
@@ -666,6 +736,7 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
   return VerificationWizardController(
     repository: repository,
     uploadService: uploadService,
+    truckUploadService: truckUploadService,
     locationService: locationService,
     role: role,
     fleetRepository: fleetRepo,

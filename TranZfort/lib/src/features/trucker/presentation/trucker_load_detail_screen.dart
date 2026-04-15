@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -28,6 +29,8 @@ import '../providers/trucker_load_detail_provider.dart';
 import '../providers/trucker_providers.dart';
 
 part 'trucker_load_detail_sections.dart';
+part 'trucker_load_detail_shared.dart';
+part 'trucker_load_detail_primary_sections.dart';
 
 class TruckerLoadDetailScreen extends ConsumerWidget {
   final String loadId;
@@ -120,4 +123,19 @@ String _localizedLoadPriceType(AppLocalizations l10n, String value) {
     default:
       return l10n.supplierPostLoadPriceTypeUnknown;
   }
+}
+
+String _durationCompact(int minutes) {
+  if (minutes <= 0) {
+    return '0m';
+  }
+  final hours = minutes ~/ 60;
+  final mins = minutes % 60;
+  if (hours <= 0) {
+    return '${mins}m';
+  }
+  if (mins == 0) {
+    return '${hours}h';
+  }
+  return '${hours}h ${mins}m';
 }

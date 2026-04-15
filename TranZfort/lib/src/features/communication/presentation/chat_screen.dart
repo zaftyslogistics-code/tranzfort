@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -19,6 +20,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
+import '../../reviews/utils/review_trigger_helper.dart';
 import '../../supplier/providers/load_detail_provider.dart';
 import '../../support/providers/support_compose_providers.dart';
 import '../../trucker/data/diesel_price_repository.dart';
@@ -162,6 +164,36 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
 
     return Scaffold(
       appBar: AppBar(
+        leading: _otherPartyId(conversation, authState.role) != null
+            ? InkWell(
+                onTap: () => context.push(AppRoutes.publicProfileLocation(_otherPartyId(conversation, authState.role)!)),
+                borderRadius: BorderRadius.circular(18),
+                child: Padding(
+                  padding: const EdgeInsets.all(AppSpacing.sm),
+                  child: _AvatarCircle(
+                    avatarUrl: _otherPartyAvatarUrl(conversation, authState.role),
+                    radius: 18,
+                    fallback: Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Center(
+                        child: Text(
+                          otherPartyName.isNotEmpty ? otherPartyName[0].toUpperCase() : '?',
+                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            : null,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -326,6 +358,96 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
+      return SizedBox(
+        width: radius * 2,
+        height: radius * 2,
+        child: fallback,
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: _createSignedUrl(avatarUrl!),
+      builder: (context, snapshot) {
+        final resolvedUrl = snapshot.data;
+        if (resolvedUrl == null) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        }
+        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+      },
+    );
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      try {
+        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+      } catch (_) {
+        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: radius * 2,
+        height: radius * 2,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
       ),
     );
   }

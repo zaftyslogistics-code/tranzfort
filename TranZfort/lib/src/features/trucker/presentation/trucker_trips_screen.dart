@@ -204,7 +204,7 @@ class _TruckerTripCard extends StatelessWidget {
           Text(l10n.truckerTripsTruckLabel(trip.truckNumber), style: Theme.of(context).textTheme.bodySmall),
         ],
       ),
-      onTap: () => context.go('${AppRoutes.tripDetailPath}/${trip.id}'),
+      onTap: () => context.push('${AppRoutes.tripDetailPath}/${trip.id}'),
     );
   }
 }

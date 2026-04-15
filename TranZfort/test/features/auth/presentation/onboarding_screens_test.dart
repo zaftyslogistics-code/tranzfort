@@ -11,6 +11,7 @@ import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/auth/providers/auth_providers.dart';
 import 'package:tranzfort/src/features/auth/presentation/onboarding_screens.dart';
+import 'package:tranzfort/src/features/auth/presentation/onboarding_profile_completion.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
 class _FakeOnboardingAuthRepository extends AuthRepository {
@@ -81,7 +82,7 @@ Widget _buildApp({
           profile: profile,
         ),
       ),
-      currentProfileProvider.overrideWithValue(AsyncValue.data(profile)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(profile)),
     ],
     child: MaterialApp(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -134,7 +135,7 @@ Widget _buildRoutedApp({
         yield authState;
       }),
       currentAuthStateProvider.overrideWithValue(authState),
-      currentProfileProvider.overrideWithValue(AsyncValue.data(profile)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(profile)),
     ],
     child: MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,

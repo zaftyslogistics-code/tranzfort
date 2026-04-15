@@ -11,6 +11,31 @@ class AuthProfileRepository {
 
   AuthProfileRepository(this._client);
 
+  Stream<UserProfile?> watchCurrentProfile() async* {
+    if (_client == null) {
+      yield null;
+      return;
+    }
+
+    final user = _client.auth.currentUser;
+    if (user == null) {
+      yield null;
+      return;
+    }
+
+    yield* _client
+        .from('profiles')
+        .stream(primaryKey: const ['id'])
+        .eq('id', user.id)
+        .map((rows) {
+          final first = rows.whereType<Map<String, dynamic>>().firstOrNull;
+          if (first == null) {
+            return null;
+          }
+          return UserProfile.fromMap(first);
+        });
+  }
+
   Future<Result<UserProfile?>> getCurrentProfile() async {
     if (_client == null) {
       return const Success<UserProfile?>(null);
@@ -24,7 +49,7 @@ class AuthProfileRepository {
 
       final response = await _client
           .from('profiles')
-          .select('id, full_name, mobile, email, user_role_type, preferred_language, is_banned, account_deletion_status, trust_safety_status, ban_reason, data_deletion_requested_at, avatar_url')
+          .select('id, full_name, mobile, email, user_role_type, preferred_language, is_banned, account_deletion_status, trust_safety_status, ban_reason, data_deletion_requested_at, avatar_url, profile_photo_document_path, city, state')
           .eq('id', user.id)
           .maybeSingle()
           .timeout(const Duration(seconds: 8));

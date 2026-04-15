@@ -87,22 +87,28 @@ class TruckerTripsRepository {
     }
 
     try {
-      final row = await _backend.fetchTripDetail(truckerId: userId, tripId: tripId.trim());
-      if (row == null) {
+      // Use consolidated RPC to fetch trip + supplier + dispute in single call
+      final result = await _backend.fetchTripDetailWithSupplier(
+        truckerId: userId,
+        tripId: tripId.trim(),
+      );
+
+      if (result == null) {
         return const Failure<TruckerTripDetail>(NotFoundFailure());
       }
-      final supplierId = (row['supplier_id'] ?? '').toString();
-      final supplierProfile = await _backend.fetchSupplierProfile(supplierId);
-      if (supplierProfile == null) {
+
+      final tripData = result['trip'] as Map<String, dynamic>?;
+      final supplierProfile = result['supplier_profile'] as Map<String, dynamic>?;
+      final supplierExtension = result['supplier_extension'] as Map<String, dynamic>?;
+      final disputeSummary = result['dispute_summary'] as Map<String, dynamic>?;
+
+      if (tripData == null || supplierProfile == null) {
         return const Failure<TruckerTripDetail>(NotFoundFailure());
       }
-      final supplierExtension = await _backend.fetchSupplierExtension(supplierId);
-      final disputeSummary = (row['stage'] ?? '').toString().trim().toLowerCase() == 'disputed'
-          ? await _backend.fetchTripDisputeSummary(tripId: tripId.trim())
-          : null;
+
       return Success<TruckerTripDetail>(
         _mapTripDetail(
-          row,
+          tripData,
           supplierProfile,
           supplierExtension,
           disputeSummary,
@@ -356,10 +362,10 @@ class TruckerTripsRepository {
       routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       originLabel: origin,
       destinationLabel: destination.isEmpty ? null : destination,
-      originLat: readDouble(loadMap['origin_lat']),
-      originLng: readDouble(loadMap['origin_lng']),
-      destinationLat: readDouble(loadMap['destination_lat']),
-      destinationLng: readDouble(loadMap['destination_lng']),
+      originLat: readDoubleNullable(loadMap['origin_lat']),
+      originLng: readDoubleNullable(loadMap['origin_lng']),
+      destinationLat: readDoubleNullable(loadMap['destination_lat']),
+      destinationLng: readDoubleNullable(loadMap['destination_lng']),
       material: material,
       stage: (map['stage'] ?? 'assigned').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
@@ -412,12 +418,12 @@ class TruckerTripsRepository {
       destinationLabel: destinationLabel,
       originCity: nullableString(loadMap['origin_city']),
       originState: nullableString(loadMap['origin_state']),
-      originLat: readDouble(loadMap['origin_lat']),
-      originLng: readDouble(loadMap['origin_lng']),
+      originLat: readDoubleNullable(loadMap['origin_lat']),
+      originLng: readDoubleNullable(loadMap['origin_lng']),
       destinationCity: nullableString(loadMap['destination_city']),
       destinationState: nullableString(loadMap['destination_state']),
-      destinationLat: readDouble(loadMap['destination_lat']),
-      destinationLng: readDouble(loadMap['destination_lng']),
+      destinationLat: readDoubleNullable(loadMap['destination_lat']),
+      destinationLng: readDoubleNullable(loadMap['destination_lng']),
       routeDistanceKm: readDouble(loadMap['route_distance_km']),
       routeDurationMinutes: _readIntNullable(loadMap['route_duration_minutes']),
       routeSnapshotSource: nullableString(loadMap['route_snapshot_source']),

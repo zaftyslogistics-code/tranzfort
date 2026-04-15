@@ -3,10 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../shared/widgets/form_inputs.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
@@ -50,7 +48,12 @@ class StepIdentityDocuments extends ConsumerWidget {
               label: l10n.verificationWizardAadhaarNumberLabel,
               hintText: '1234 5678 9012',
               keyboardType: TextInputType.number,
-              controller: TextEditingController(text: _formatAadhaar(state.draft.aadhaarNumber) ?? ''),
+              initialValue: _formatAadhaar(state.draft.aadhaarNumber) ?? '',
+              inputFormatters: [
+                FilteringTextInputFormatter.digitsOnly,
+                LengthLimitingTextInputFormatter(12),
+                _AadhaarFormatter(),
+              ],
               onChanged: (v) => controller.updateAadhaarNumber(v.replaceAll(' ', '')),
               errorText: state.fieldErrors['aadhaarNumber'],
             ),
@@ -92,7 +95,11 @@ class StepIdentityDocuments extends ConsumerWidget {
             AppTextField(
               label: l10n.verificationWizardPanNumberLabel,
               hintText: 'ABCDE1234F',
-              controller: TextEditingController(text: state.draft.panNumber ?? ''),
+              initialValue: state.draft.panNumber ?? '',
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(10),
+                FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+              ],
               onChanged: controller.updatePanNumber,
               errorText: state.fieldErrors['panNumber'],
             ),
@@ -143,8 +150,8 @@ class StepIdentityDocuments extends ConsumerWidget {
   ) async {
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (_) => ImageSourcePicker(
-        onSelected: (s) => Navigator.pop(context, s),
+      builder: (_) => const ImageSourcePicker(
+        onSelected: _noopImageSourceSelection,
       ),
     );
 
@@ -165,6 +172,8 @@ class StepIdentityDocuments extends ConsumerWidget {
     }
   }
 }
+
+void _noopImageSourceSelection(ImageSource _) {}
 
 class _AadhaarFormatter extends TextInputFormatter {
   @override

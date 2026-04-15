@@ -46,6 +46,7 @@ class _DetailBackend implements SupplierTripsBackend {
   Future<Map<String, dynamic>?> fetchTruckerProfile(String truckerId) async => {
         'id': truckerId,
         'full_name': 'Ravi Trucker',
+        'mobile': '+919999999999',
         'verification_status': 'verified',
       };
 
@@ -88,6 +89,7 @@ void main() {
     expect(controller.state.detail, isNotNull);
     expect(controller.state.detail?.id, 'trip-1');
     expect(controller.state.detail?.trucker.fullName, 'Ravi Trucker');
+    expect(controller.state.detail?.trucker.mobile, '+919999999999');
     expect(controller.state.detail?.podSignedUrl, 'https://example.com/trip-1/pod.jpg');
   });
 }

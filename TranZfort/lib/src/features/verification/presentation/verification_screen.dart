@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -18,7 +19,7 @@ import '../../shell/presentation/shell_components.dart';
 import '../../trucker/providers/trucker_fleet_provider.dart';
 import '../data/verification_repository.dart';
 import '../providers/verification_provider.dart';
-import '../providers/verification_wizard_provider.dart';
+import '../presentation/components/city_search_sheet.dart';
 import 'verification_wizard.dart';
 
 part 'verification_screen_sections.dart';
@@ -166,13 +167,55 @@ class VerificationScreen extends ConsumerWidget {
                                       if (!context.mounted) {
                                         return;
                                       }
-                                      AppSnackbar.show(
-                                        context: context,
-                                        message: result.isSuccess
-                                            ? l10n.verificationLocationCapturedSuccess
-                                            : l10n.verificationLocationFailureMessage,
-                                        variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
-                                      );
+
+                                      // Handle typed location failures with specific dialogs
+                                      final failure = result.failureOrNull;
+                                      if (failure is LocationServiceDisabledFailure) {
+                                        final shouldOpen = await _showGpsDisabledDialog(context);
+                                        if (shouldOpen && context.mounted) {
+                                          await Geolocator.openLocationSettings();
+                                          // Auto-retry after user returns from settings
+                                          if (context.mounted) {
+                                            final retryResult = await ref.read(verificationProvider.notifier).captureSupplierLocation();
+                                            if (context.mounted) {
+                                              AppSnackbar.show(
+                                                context: context,
+                                                message: retryResult.isSuccess
+                                                    ? l10n.verificationLocationCapturedSuccess
+                                                    : l10n.verificationLocationFailureMessage,
+                                                variant: retryResult.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                                              );
+                                            }
+                                          }
+                                        }
+                                      } else if (failure is LocationPermissionDeniedForeverFailure) {
+                                        final shouldOpen = await _showPermissionDeniedForeverDialog(context);
+                                        if (shouldOpen && context.mounted) {
+                                          await Geolocator.openAppSettings();
+                                          // Auto-retry after user returns from settings
+                                          if (context.mounted) {
+                                            final retryResult = await ref.read(verificationProvider.notifier).captureSupplierLocation();
+                                            if (context.mounted) {
+                                              AppSnackbar.show(
+                                                context: context,
+                                                message: retryResult.isSuccess
+                                                    ? l10n.verificationLocationCapturedSuccess
+                                                    : l10n.verificationLocationFailureMessage,
+                                                variant: retryResult.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                                              );
+                                            }
+                                          }
+                                        }
+                                      } else {
+                                        // Generic success/failure message for other cases
+                                        AppSnackbar.show(
+                                          context: context,
+                                          message: result.isSuccess
+                                              ? l10n.verificationLocationCapturedSuccess
+                                              : l10n.verificationLocationFailureMessage,
+                                          variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                                        );
+                                      }
                                     },
                             ),
                             OutlineButton(
@@ -180,7 +223,22 @@ class VerificationScreen extends ConsumerWidget {
                               onPressed: state.isCapturingLocation
                                   ? null
                                   : () async {
-                                      final manualLocation = await _showManualLocationDialog(context);
+                                      final manualLocation = await _showManualLocationDialog(
+                                        context,
+                                        onUseCurrentLocation: () async {
+                                          // Trigger GPS capture flow when user taps "Use Current Location"
+                                          final result = await ref.read(verificationProvider.notifier).captureSupplierLocation();
+                                          if (context.mounted) {
+                                            AppSnackbar.show(
+                                              context: context,
+                                              message: result.isSuccess
+                                                  ? l10n.verificationLocationCapturedSuccess
+                                                  : l10n.verificationLocationFailureMessage,
+                                              variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                                            );
+                                          }
+                                        },
+                                      );
                                       if (manualLocation == null || !context.mounted) {
                                         return;
                                       }
@@ -233,6 +291,9 @@ class VerificationScreen extends ConsumerWidget {
                                     source: source,
                                   );
                               if (!context.mounted) {
+                                return;
+                              }
+                              if (result.isSuccess && result.valueOrNull != true) {
                                 return;
                               }
                               AppSnackbar.show(
@@ -291,52 +352,26 @@ class VerificationScreen extends ConsumerWidget {
     return city;
   }
 
-  static Future<_ManualLocationInput?> _showManualLocationDialog(BuildContext context) async {
-    final l10n = AppLocalizations.of(context);
-    final cityController = TextEditingController();
-    final stateController = TextEditingController();
-    final result = await showDialog<_ManualLocationInput>(
+  static Future<_ManualLocationInput?> _showManualLocationDialog(
+    BuildContext context, {
+    VoidCallback? onUseCurrentLocation,
+  }) async {
+    // Use CitySearchSheet for autocomplete location selection from JSON database
+    final result = await showModalBottomSheet<TruckerCitySuggestion>(
       context: context,
-      builder: (dialogContext) {
-        return AlertDialog(
-          title: Text(l10n.verificationManualLocationTitle),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              AppTextField(
-                controller: cityController,
-                label: l10n.verificationManualLocationCityLabel,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              AppTextField(
-                controller: stateController,
-                label: l10n.verificationManualLocationStateLabel,
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(dialogContext).pop(),
-              child: Text(MaterialLocalizations.of(dialogContext).cancelButtonLabel),
-            ),
-            PrimaryButton(
-              label: l10n.verificationManualLocationSaveAction,
-              onPressed: () {
-                Navigator.of(dialogContext).pop(
-                  _ManualLocationInput(
-                    city: cityController.text.trim(),
-                    state: stateController.text.trim().isEmpty ? null : stateController.text.trim(),
-                  ),
-                );
-              },
-            ),
-          ],
-        );
-      },
+      isScrollControlled: true,
+      builder: (_) => CitySearchSheet(
+        onCitySelected: (city) => Navigator.pop(context, city),
+        onUseCurrentLocation: onUseCurrentLocation,
+      ),
     );
-    cityController.dispose();
-    stateController.dispose();
-    return result;
+
+    if (result == null) return null;
+
+    return _ManualLocationInput(
+      city: result.city,
+      state: result.state.isEmpty ? null : result.state,
+    );
   }
 
   static String _buildRejectionSummary(AppLocalizations l10n, VerificationDetail detail) {
@@ -345,6 +380,52 @@ class VerificationScreen extends ConsumerWidget {
       return l10n.verificationRejectionSummaryWithMarkers(summary);
     }
     return l10n.verificationRejectionSummaryPacketLevel(summary);
+  }
+
+  /// Shows dialog when GPS is disabled, returns true if user wants to open settings
+  static Future<bool> _showGpsDisabledDialog(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.verificationGpsDisabledTitle),
+        content: Text(l10n.verificationGpsDisabledMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.chatActionCancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.verificationOpenSettingsAction),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  }
+
+  /// Shows dialog when location permission is permanently denied
+  static Future<bool> _showPermissionDeniedForeverDialog(BuildContext context) async {
+    final l10n = AppLocalizations.of(context);
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.verificationPermissionDeniedTitle),
+        content: Text(l10n.verificationPermissionDeniedMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.chatActionCancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.verificationOpenAppSettingsAction),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
   }
 }
 

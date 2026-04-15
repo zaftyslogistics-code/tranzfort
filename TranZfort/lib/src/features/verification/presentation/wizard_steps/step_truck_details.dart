@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/navigation/app_routes.dart';
+import '../../../../core/error/app_failure.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../shared/widgets/form_inputs.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
+import '../../providers/verification_wizard_state.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
 import '../components/wizard_progress_bar.dart';
@@ -56,7 +54,7 @@ class StepTruckDetails extends ConsumerWidget {
             AppTextField(
               label: l10n.verificationWizardTruckNumberLabel,
               hintText: 'MH01AB1234',
-              controller: TextEditingController(text: truck.truckNumber),
+              initialValue: truck.truckNumber,
               onChanged: controller.updateTruckNumber,
               errorText: state.fieldErrors['truckNumber'],
             ),
@@ -98,8 +96,9 @@ class StepTruckDetails extends ConsumerWidget {
               label: l10n.verificationWizardCapacityLabel,
               hintText: l10n.verificationWizardCapacityHint,
               keyboardType: const TextInputType.numberWithOptions(decimal: true),
-              controller: TextEditingController(text: truck.capacityTonnes > 0 ? truck.capacityTonnes.toString() : ''),
+              initialValue: truck.capacityTonnes > 0 ? truck.capacityTonnes.toString() : '',
               onChanged: controller.updateTruckCapacity,
+              errorText: state.fieldErrors['capacityTonnes'],
             ),
             const SizedBox(height: AppSpacing.xl),
             
@@ -127,6 +126,15 @@ class StepTruckDetails extends ConsumerWidget {
               onTap: () => _uploadPhoto(context, controller),
               onClear: controller.clearTruckPhoto,
             ),
+            if (state.error != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                _getErrorMessage(state.error!, l10n),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.error,
+                ),
+              ),
+            ],
             const SizedBox(height: AppSpacing.xl),
             
             StepActions(
@@ -158,8 +166,8 @@ class StepTruckDetails extends ConsumerWidget {
   Future<ImageSource?> _showImageSourcePicker(BuildContext context) async {
     return showModalBottomSheet<ImageSource>(
       context: context,
-      builder: (_) => ImageSourcePicker(
-        onSelected: (s) => Navigator.pop(context, s),
+      builder: (_) => const ImageSourcePicker(
+        onSelected: _noopImageSourceSelection,
       ),
     );
   }
@@ -175,7 +183,22 @@ class StepTruckDetails extends ConsumerWidget {
       _ => type,
     };
   }
+
+  String _getErrorMessage(AppFailure error, AppLocalizations l10n) {
+    if (error is BusinessRuleFailure) {
+      return error.message;
+    }
+    if (error is ValidationFailure) {
+      return l10n.verificationWizardValidationError;
+    }
+    if (error is UnauthorizedFailure) {
+      return l10n.verificationWizardUnauthorizedError;
+    }
+    return l10n.verificationWizardUnknownError;
+  }
 }
+
+void _noopImageSourceSelection(ImageSource _) {}
 
 class _InfoBanner extends StatelessWidget {
   final String message;

@@ -7,7 +7,9 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/validators.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
 import 'auth_repository_profile_ops.dart';
@@ -230,6 +232,8 @@ class AuthRepository {
 
   Future<Result<UserProfile?>> getCurrentProfile() => profileOps.getCurrentProfile();
 
+  Stream<UserProfile?> watchCurrentProfile() => profileOps.watchCurrentProfile();
+
   Future<Result<void>> updateRoleSelection(AppUserRole role) => profileOps.updateRoleSelection(role);
 
   Future<Result<void>> provisionRoleExtension(AppUserRole role) => profileOps.provisionRoleExtension(role);
@@ -264,31 +268,24 @@ class AuthRepository {
       if (await _googleSignIn.isSignedIn()) {
         try {
           await _googleSignIn.disconnect();
-        } catch (_) {
+        } catch (e) {
+          AppLogger.warning('Google disconnect failed, trying signOut', scope: 'auth', error: e);
           await _googleSignIn.signOut();
         }
       } else {
         await _googleSignIn.signOut();
       }
-    } catch (_) {}
+    } catch (e) {
+      AppLogger.warning('Google sign-out failed', scope: 'auth', error: e);
+    }
   }
 
   String? _normalizeEmail(String raw) {
-    final trimmed = raw.trim().toLowerCase();
-    if (trimmed.isEmpty) {
-      return null;
-    }
-
-    final emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-    if (!emailPattern.hasMatch(trimmed)) {
-      return null;
-    }
-
-    return trimmed.toLowerCase();
+    return Validators.validateEmail(raw);
   }
 
   bool _isValidPassword(String raw) {
-    return raw.trim().length >= 8;
+    return Validators.isValidPassword(raw);
   }
 
   Future<Result<void>> clearPushToken() async {

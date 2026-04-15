@@ -104,6 +104,20 @@ String? _otherPartyMobile(ConversationPreview? conversation, AppUserRole role) {
   return role == AppUserRole.supplier ? conversation.truckerMobile : conversation.supplierMobile;
 }
 
+String? _otherPartyAvatarUrl(ConversationPreview? conversation, AppUserRole role) {
+  if (conversation == null) {
+    return null;
+  }
+  return role == AppUserRole.supplier ? conversation.truckerAvatarUrl : conversation.supplierAvatarUrl;
+}
+
+String? _otherPartyId(ConversationPreview? conversation, AppUserRole role) {
+  if (conversation == null) {
+    return null;
+  }
+  return role == AppUserRole.supplier ? conversation.truckerId : conversation.supplierId;
+}
+
 Uri? _callUri(String? mobile) {
   final normalized = (mobile ?? '').trim();
   if (normalized.isEmpty) {

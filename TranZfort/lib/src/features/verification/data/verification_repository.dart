@@ -65,13 +65,6 @@ class VerificationRepository {
     final normalizedGst = VerificationDetail.nullableString(gstNumber)?.toUpperCase();
     final fieldErrors = <String, String>{};
 
-    if (!RegExp(r'^\d{12}$').hasMatch(normalizedAadhaar)) {
-      fieldErrors['aadhaar_number'] = 'Aadhaar must be exactly 12 digits';
-    }
-    if (!RegExp(r'^[A-Z]{5}\d{4}[A-Z]$').hasMatch(normalizedPan)) {
-      fieldErrors['pan_number'] = 'PAN must follow the format: AAAAA9999A';
-    }
-
     try {
       final profileMap = await _backend.fetchProfile(userId);
       if (profileMap == null) {

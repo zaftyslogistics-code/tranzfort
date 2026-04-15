@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/logger/app_logger.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
@@ -218,7 +219,7 @@ class _PushNotificationSettingsCard extends ConsumerWidget {
         },
         loading: () => const LoadingShimmer(height: 104, itemCount: 1),
         error: (error, _) {
-          debugPrint('[PushSettings] Permission snapshot error: $error');
+          AppLogger.error('Permission snapshot error', scope: 'push', error: error);
           return WarningBlock(
             title: l10n.settingsPushStatusUnavailableTitle,
             message: l10n.settingsPushStatusUnavailableMessage,

@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 
 class UserProfile {
@@ -15,6 +14,8 @@ class UserProfile {
   final String? trustSafetyReasonSummary;
   final DateTime? dataDeletionRequestedAt;
   final String? avatarUrl;
+  final String? city;      // User location for public profile
+  final String? state;     // User location state for public profile
 
   const UserProfile({
     required this.id,
@@ -29,6 +30,8 @@ class UserProfile {
     this.trustSafetyReasonSummary,
     this.dataDeletionRequestedAt,
     this.avatarUrl,
+    this.city,
+    this.state,
   });
 
   bool get hasName => fullName.trim().length >= 2;
@@ -51,6 +54,8 @@ class UserProfile {
   }
 
   factory UserProfile.fromMap(Map<String, dynamic> map) {
+    final avatarUrl = _nullableText(map['avatar_url']);
+    final verificationPhotoPath = _nullableText(map['profile_photo_document_path']);
     return UserProfile(
       id: (map['id'] ?? '').toString(),
       fullName: (map['full_name'] ?? '').toString(),
@@ -63,7 +68,9 @@ class UserProfile {
       trustSafetyStatus: (map['trust_safety_status'] ?? 'normal').toString(),
       trustSafetyReasonSummary: _nullableText(map['ban_reason']),
       dataDeletionRequestedAt: _parseDateTime(map['data_deletion_requested_at']),
-      avatarUrl: _nullableText(map['avatar_url']),
+      avatarUrl: avatarUrl ?? verificationPhotoPath,
+      city: _nullableText(map['city']),
+      state: _nullableText(map['state']),
     );
   }
 
@@ -89,7 +96,7 @@ class UserProfile {
       return normalized;
     }
     if (normalized.isNotEmpty) {
-      debugPrint('_normalizedPreferredLanguage: unexpected language value "$normalized", defaulting to "en"');
+      AppLogger.warning('Unexpected language value, defaulting to en', scope: 'auth', error: normalized);
     }
     return 'en';
   }

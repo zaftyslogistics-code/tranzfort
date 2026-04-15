@@ -56,30 +56,16 @@ class _ProviderSupplierDashboardBackend implements SupplierDashboardBackend {
   _ProviderSupplierDashboardBackend({this.stats, this.error});
 
   @override
-  Future<int> countLoadsByStatuses(String supplierId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String supplierId) async {
     if (error != null) {
       throw error!;
     }
-    return stats?.activeLoads ?? 0;
-  }
-
-  @override
-  Future<int> countPendingBookings(String supplierId) async {
-    if (error != null) {
-      throw error!;
-    }
-    return stats?.pendingBookings ?? 0;
-  }
-
-  @override
-  Future<int> countTripsByStages(String supplierId, List<String> stages) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (stages.contains('completed')) {
-      return stats?.completedTrips ?? 0;
-    }
-    return stats?.inTransitTrips ?? 0;
+    return [
+      stats?.activeLoads ?? 0,
+      stats?.pendingBookings ?? 0,
+      stats?.inTransitTrips ?? 0,
+      stats?.completedTrips ?? 0,
+    ];
   }
 }
 

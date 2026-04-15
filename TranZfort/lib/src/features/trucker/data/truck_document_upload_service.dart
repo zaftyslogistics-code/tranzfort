@@ -62,6 +62,40 @@ class TruckDocumentUploadService {
     );
   }
 
+  Future<Result<String?>> pickCompressAndUploadTruckPhoto({
+    required String ownerId,
+    required String truckId,
+    required ImageSource source,
+  }) async {
+    final normalizedOwnerId = ownerId.trim();
+    final normalizedTruckId = truckId.trim();
+    if (normalizedOwnerId.isEmpty || normalizedTruckId.isEmpty) {
+      return const Failure<String?>(
+        ValidationFailure(
+          message: 'Truck identity is required',
+          fieldErrors: {
+            'owner_id': 'Owner id is required',
+            'truck_id': 'Truck id is required',
+          },
+        ),
+      );
+    }
+
+    final timestamp = DateTime.now().toUtc().millisecondsSinceEpoch;
+    final storagePath = '$normalizedOwnerId/$normalizedTruckId/photo/truck_photo_$timestamp.jpg';
+    return ImageUploadWorkflow.pickCompressAndUpload(
+      client: _client,
+      source: source,
+      pickImage: _pickImage,
+      readBytes: _readBytes,
+      compressImage: _compressImage,
+      uploadBinary: _uploadBinary,
+      storagePath: storagePath,
+      invalidImageMessage: 'We could not prepare the truck photo. Please try another photo.',
+      storageFailureFallbackMessage: 'Unable to upload the truck photo right now.',
+    );
+  }
+
   static Future<void> _defaultUploadBinary(
     SupabaseClient client,
     String storagePath,

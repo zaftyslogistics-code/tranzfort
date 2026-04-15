@@ -221,7 +221,7 @@ Widget _buildRouterApp({
         _currentAuthStateForProfile(resolvedProfile, role),
       ),
       currentProfileProvider.overrideWith(
-        (ref) => AsyncValue<UserProfile?>.data(resolvedProfile),
+        (ref) => Stream.value(resolvedProfile),
       ),
       supportRepositoryProvider.overrideWithValue(repository),
       if (controller != null) supportTicketsProvider.overrideWith((ref) => controller),
@@ -266,7 +266,7 @@ Widget _buildApp({
         _currentAuthStateForProfile(resolvedProfile, role),
       ),
       currentProfileProvider.overrideWith(
-        (ref) => AsyncValue<UserProfile?>.data(resolvedProfile),
+        (ref) => Stream.value(resolvedProfile),
       ),
       supportRepositoryProvider.overrideWithValue(repository),
       if (controller != null) supportTicketsProvider.overrideWith((ref) => controller),
@@ -329,7 +329,7 @@ Widget _buildRoutedApp({
         ),
       ),
       currentProfileProvider.overrideWith(
-        (ref) => const AsyncValue<UserProfile?>.data(
+        (ref) => Stream.value(const 
           UserProfile(
             id: 'user-1',
             fullName: 'Aarav Singh',

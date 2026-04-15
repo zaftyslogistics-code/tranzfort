@@ -104,16 +104,16 @@ class VerificationController extends StateNotifier<VerificationState> {
     );
   }
 
-  Future<Result<void>> uploadDocument({
+  Future<Result<bool>> uploadDocument({
     required VerificationDocumentType type,
     required ImageSource source,
   }) async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<void>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<bool>(NotFoundFailure(message: 'Verification detail is unavailable'));
     }
     if (state.uploadingDocumentType != null || state.isSubmitting || state.isCapturingLocation) {
-      return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<bool>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
     }
 
     state = state.copyWith(
@@ -131,7 +131,7 @@ class VerificationController extends StateNotifier<VerificationState> {
         clearUploadingDocumentType: true,
         actionFailure: uploadResult.failureOrNull,
       );
-      return Failure<void>(uploadResult.failureOrNull!);
+      return Failure<bool>(uploadResult.failureOrNull!);
     }
 
     final storagePath = uploadResult.valueOrNull;
@@ -140,7 +140,7 @@ class VerificationController extends StateNotifier<VerificationState> {
         clearUploadingDocumentType: true,
         clearActionFailure: true,
       );
-      return const Success<void>(null);
+      return const Success<bool>(false);
     }
 
     final saveResult = await _repository.saveDocumentPath(type: type, storagePath: storagePath);
@@ -149,7 +149,7 @@ class VerificationController extends StateNotifier<VerificationState> {
         clearUploadingDocumentType: true,
         actionFailure: saveResult.failureOrNull,
       );
-      return saveResult;
+      return Failure<bool>(saveResult.failureOrNull!);
     }
 
     state = state.copyWith(
@@ -158,7 +158,7 @@ class VerificationController extends StateNotifier<VerificationState> {
     );
     await load();
     _invalidateRoleDependencies(state.detail);
-    return const Success<void>(null);
+    return const Success<bool>(true);
   }
 
   Future<Result<void>> saveVerificationPacketFields({
@@ -210,12 +210,41 @@ class VerificationController extends StateNotifier<VerificationState> {
     }
 
     state = state.copyWith(isCapturingLocation: true, clearActionFailure: true);
-    final location = await _locationService.captureSupplierVerificationLocation();
-    if (location == null) {
+    final VerificationLocation? location;
+    try {
+      location = await _locationService.captureSupplierVerificationLocation();
+      if (location == null) {
+        state = state.copyWith(
+          isCapturingLocation: false,
+          actionFailure: const BusinessRuleFailure(
+            message: 'Unable to capture your verification location right now. Check location services and try again.',
+          ),
+        );
+        return Failure<void>(state.actionFailure!);
+      }
+    } on LocationServiceDisabledException catch (_) {
       state = state.copyWith(
         isCapturingLocation: false,
-        actionFailure: const BusinessRuleFailure(
-          message: 'Unable to capture your verification location right now. Check location services and try again.',
+        actionFailure: const LocationServiceDisabledFailure(),
+      );
+      return Failure<void>(state.actionFailure!);
+    } on LocationPermissionDeniedException catch (_) {
+      state = state.copyWith(
+        isCapturingLocation: false,
+        actionFailure: const LocationPermissionDeniedFailure(),
+      );
+      return Failure<void>(state.actionFailure!);
+    } on LocationPermissionDeniedForeverException catch (_) {
+      state = state.copyWith(
+        isCapturingLocation: false,
+        actionFailure: const LocationPermissionDeniedForeverFailure(),
+      );
+      return Failure<void>(state.actionFailure!);
+    } catch (e) {
+      state = state.copyWith(
+        isCapturingLocation: false,
+        actionFailure: BusinessRuleFailure(
+          message: 'Unable to capture your verification location: $e',
         ),
       );
       return Failure<void>(state.actionFailure!);
@@ -248,7 +277,7 @@ class VerificationController extends StateNotifier<VerificationState> {
     required String city,
     String? stateProvince,
   }) async {
-    final detail = this.state.detail;
+    final detail = state.detail;
     if (detail == null) {
       return const Failure<void>(NotFoundFailure(message: 'Verification detail is unavailable'));
     }
@@ -258,24 +287,24 @@ class VerificationController extends StateNotifier<VerificationState> {
       );
     }
     final manualState = (stateProvince ?? '').trim().isEmpty ? null : stateProvince?.trim();
-    if (this.state.isCapturingLocation || this.state.isSubmitting || this.state.uploadingDocumentType != null) {
+    if (state.isCapturingLocation || state.isSubmitting || state.uploadingDocumentType != null) {
       return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
     }
 
-    this.state = this.state.copyWith(isCapturingLocation: true, clearActionFailure: true);
+    state = state.copyWith(isCapturingLocation: true, clearActionFailure: true);
     final location = await _locationService.resolveManualSupplierVerificationLocation(
       city: city,
       state: manualState,
     );
     if (location == null) {
-      this.state = this.state.copyWith(
+      state = state.copyWith(
         isCapturingLocation: false,
         actionFailure: const ValidationFailure(
           message: 'Verification city is required',
           fieldErrors: {'verification_location_city': 'Verification city is required'},
         ),
       );
-      return Failure<void>(this.state.actionFailure!);
+      return Failure<void>(state.actionFailure!);
     }
 
     final saveResult = await _repository.saveSupplierVerificationLocation(
@@ -285,19 +314,19 @@ class VerificationController extends StateNotifier<VerificationState> {
       longitude: location.longitude,
     );
     if (saveResult.isFailure) {
-      this.state = this.state.copyWith(
+      state = state.copyWith(
         isCapturingLocation: false,
         actionFailure: saveResult.failureOrNull,
       );
       return saveResult;
     }
 
-    this.state = this.state.copyWith(
+    state = state.copyWith(
       isCapturingLocation: false,
       clearActionFailure: true,
     );
     await load();
-    _invalidateRoleDependencies(this.state.detail);
+    _invalidateRoleDependencies(state.detail);
     return const Success<void>(null);
   }
 

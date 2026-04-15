@@ -112,7 +112,7 @@ class _MapCardMessageContent extends ConsumerWidget {
           ? null
           : () async {
               if (resolvedLoadId != null && resolvedLoadId.trim().isNotEmpty) {
-                context.go('${AppRoutes.loadDetailPath}/${resolvedLoadId.trim()}');
+                context.push('${AppRoutes.loadDetailPath}/${resolvedLoadId.trim()}');
                 return;
               }
               await launchUrl(uri!, mode: LaunchMode.externalApplication);

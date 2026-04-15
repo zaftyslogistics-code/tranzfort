@@ -50,6 +50,9 @@ class _NoopChatBackend implements ChatBackend {
       const <Map<String, dynamic>>[];
 
   @override
+  Future<Object?> fetchConversation(String conversationId) async => null;
+
+  @override
   Stream<List<Map<String, dynamic>>> watchConversations({required String userId, required AppUserRole role}) =>
       const Stream<List<Map<String, dynamic>>>.empty();
 

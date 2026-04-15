@@ -55,6 +55,13 @@ class ProfileScreen extends ConsumerWidget {
                 InfoRow(label: l10n.profilePhoneLabel, value: (profile?.mobile ?? '').trim().isNotEmpty ? profile!.mobile! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileEmailLabel, value: (profile?.email ?? '').trim().isNotEmpty ? profile!.email! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileRoleLabel, value: roleLabel),
+                // Location display - shows city/state from profile
+                InfoRow(
+                  label: l10n.profileLocationLabel,
+                  value: profile?.city?.trim().isNotEmpty == true
+                      ? '📍 ${profile!.city}${profile?.state?.trim().isNotEmpty == true ? ', ${profile!.state}' : ''}'
+                      : l10n.profileLocationNotSet,
+                ),
               ],
             ),
           ),

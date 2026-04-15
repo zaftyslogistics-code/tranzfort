@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -34,11 +36,10 @@ class TruckerDashboardStats {
 }
 
 abstract class TruckerDashboardBackend {
-  Future<int> countBookingRequestsByStatuses(String truckerId, List<String> statuses);
-
-  Future<int> countTripsByStages(String truckerId, List<String> stages);
-
-  Future<int> countTrucksByStatuses(String truckerId, List<String> statuses);
+  /// Fetches all dashboard stats in a single RPC call
+  /// Returns: [activeBids, upcomingTrips, inTransitTrips, completedTrips,
+  ///           totalTrucks, approvedTrucks, pendingTrucks, rejectedTrucks, pendingApprovalTrucks]
+  Future<List<int>> fetchDashboardStats(String truckerId);
 }
 
 class SupabaseTruckerDashboardBackend implements TruckerDashboardBackend {
@@ -47,48 +48,37 @@ class SupabaseTruckerDashboardBackend implements TruckerDashboardBackend {
   const SupabaseTruckerDashboardBackend(this._client);
 
   @override
-  Future<int> countBookingRequestsByStatuses(String truckerId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String truckerId) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('booking_requests')
-        .select('id')
-        .eq('trucker_id', truckerId)
-        .inFilter('status', statuses);
+    final response = await _client.rpc(
+      'get_trucker_dashboard_stats',
+      params: {'p_trucker_id': truckerId},
+    );
 
-    return response.length;
-  }
-
-  @override
-  Future<int> countTripsByStages(String truckerId, List<String> stages) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
+    // RPC returns JSONB, handle both Map and String formats
+    final Map<String, dynamic> row;
+    if (response is Map<String, dynamic>) {
+      row = response;
+    } else if (response is String) {
+      row = jsonDecode(response) as Map<String, dynamic>;
+    } else {
+      throw const ServerFailure(message: 'Unexpected dashboard response format');
     }
 
-    final response = await _client
-        .from('trips')
-        .select('id')
-        .eq('trucker_id', truckerId)
-        .inFilter('stage', stages);
-
-    return response.length;
-  }
-
-  @override
-  Future<int> countTrucksByStatuses(String truckerId, List<String> statuses) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
-    }
-
-    var query = _client.from('trucks').select('id').eq('owner_id', truckerId);
-    if (statuses.isNotEmpty) {
-      query = query.inFilter('status', statuses);
-    }
-
-    final response = await query;
-    return response.length;
+    return [
+      (row['active_bids'] as num?)?.toInt() ?? 0,
+      (row['upcoming_trips'] as num?)?.toInt() ?? 0,
+      (row['in_transit_trips'] as num?)?.toInt() ?? 0,
+      (row['completed_trips'] as num?)?.toInt() ?? 0,
+      (row['total_trucks'] as num?)?.toInt() ?? 0,
+      (row['approved_trucks'] as num?)?.toInt() ?? 0,
+      (row['pending_trucks'] as num?)?.toInt() ?? 0,
+      (row['rejected_trucks'] as num?)?.toInt() ?? 0,
+      (row['pending_approval_trucks'] as num?)?.toInt() ?? 0,
+    ];
   }
 }
 
@@ -112,17 +102,7 @@ class TruckerDashboardRepository {
     }
 
     try {
-      final results = await Future.wait([
-        _backend.countBookingRequestsByStatuses(userId, activeBidStatuses),
-        _backend.countTripsByStages(userId, upcomingTripStages),
-        _backend.countTripsByStages(userId, const ['in_transit']),
-        _backend.countTripsByStages(userId, const ['completed']),
-        _backend.countTrucksByStatuses(userId, const <String>[]),
-        _backend.countTrucksByStatuses(userId, const ['verified']),
-        _backend.countTrucksByStatuses(userId, const ['pending']),
-        _backend.countTrucksByStatuses(userId, const ['rejected']),
-        _backend.countTrucksByStatuses(userId, const ['edited_pending_reapproval']),
-      ]);
+      final results = await _backend.fetchDashboardStats(userId);
 
       return Success<TruckerDashboardStats>(
         TruckerDashboardStats(

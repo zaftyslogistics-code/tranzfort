@@ -286,6 +286,12 @@ abstract class TruckerTripsBackend {
     required String tripId,
   });
 
+  /// Consolidated RPC that fetches trip detail with supplier data in single call
+  Future<Map<String, dynamic>?> fetchTripDetailWithSupplier({
+    required String truckerId,
+    required String tripId,
+  });
+
   Future<void> advanceTripStage({
     required String tripId,
     required String newStage,

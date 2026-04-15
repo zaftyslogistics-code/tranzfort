@@ -61,6 +61,7 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
         state = state.copyWith(
           isLoading: false,
           failure: failure,
+          clearDetail: true,
         );
       },
     );

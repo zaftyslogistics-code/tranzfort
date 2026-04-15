@@ -55,6 +55,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authContinueWithGoogle => 'Continue with Google';
 
   @override
+  String get authGoogleFastestMessage =>
+      'Fastest way to get started — no password to remember';
+
+  @override
+  String get authOrWithEmail => 'Or continue with email';
+
+  @override
   String get authContinueWithPassword => 'Continue with email and password';
 
   @override
@@ -1162,6 +1169,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get profileRoleLabel => 'Role';
 
   @override
+  String get profileLocationLabel => 'Location';
+
+  @override
+  String get profileLocationNotSet => 'Not set';
+
+  @override
   String get profileReadinessTitle => 'Profile readiness';
 
   @override
@@ -1494,14 +1507,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String supportTicketReference(Object value) {
-    return 'Ticket reference: $value';
-  }
+  String get supportTicketReference => 'Support ticket on record';
 
   @override
-  String supportTripReference(Object value) {
-    return 'Trip reference: $value';
-  }
+  String get supportTripReference => 'Linked trip';
 
   @override
   String supportOpenedAt(Object value) {
@@ -1514,9 +1523,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String supportTicketIdValue(Object id) {
-    return 'Ticket id: $id';
-  }
+  String get supportTicketIdValue => 'Support ticket on record';
 
   @override
   String supportPriorityValue(Object priority) {
@@ -1529,14 +1536,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String supportRelatedTripValue(Object value) {
-    return 'Related trip: $value';
-  }
+  String get supportRelatedTripValue => 'Related trip linked';
 
   @override
-  String supportRelatedLoadValue(Object value) {
-    return 'Related load: $value';
-  }
+  String get supportRelatedLoadValue => 'Related load linked';
 
   @override
   String get supportOpenRelatedTripAction => 'Open related trip';
@@ -3342,8 +3345,8 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String supplierTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId - Truck $truckNumber';
+  String supplierTripDetailHeroSubtitle(Object truckNumber) {
+    return 'Truck $truckNumber';
   }
 
   @override
@@ -4144,6 +4147,27 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not capture the verification location right now. Retry shortly from this verification screen.';
 
   @override
+  String get verificationGpsDisabledTitle => 'GPS is disabled';
+
+  @override
+  String get verificationGpsDisabledMessage =>
+      'Location services are turned off. Please enable GPS in your device settings to capture your verification location.';
+
+  @override
+  String get verificationOpenSettingsAction => 'Open Settings';
+
+  @override
+  String get verificationPermissionDeniedTitle =>
+      'Location permission required';
+
+  @override
+  String get verificationPermissionDeniedMessage =>
+      'Location access is permanently denied. Please enable location permission in your app settings to continue.';
+
+  @override
+  String get verificationOpenAppSettingsAction => 'Open App Settings';
+
+  @override
   String get verificationManualLocationAction => 'Enter location manually';
 
   @override
@@ -4597,6 +4621,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerTripDetailStageCancelled => 'Cancelled';
 
   @override
+  String get truckerTripDetailStageUnknown => 'Unknown';
+
+  @override
   String get truckerTripDetailProofStatusPodUploaded => 'POD uploaded';
 
   @override
@@ -4612,8 +4639,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerTripDetailProofStatusProofPending => 'Proof pending';
 
   @override
-  String truckerTripDetailHeroSubtitle(Object tripId, Object truckNumber) {
-    return 'Trip $tripId - Truck $truckNumber';
+  String truckerTripDetailHeroSubtitle(Object truckNumber) {
+    return 'Truck $truckNumber';
   }
 
   @override
@@ -5029,9 +5056,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Explain what is wrong with the submitted POD so the dispute can be opened against the current trip and routed into support review.';
 
   @override
-  String supplierRaiseDisputeTripBadge(Object tripId) {
-    return 'Trip $tripId';
-  }
+  String get supplierRaiseDisputeTripBadge => 'Trip under review';
 
   @override
   String supplierRaiseDisputeHeroSummary(Object material, Object routeLabel) {
@@ -5500,14 +5525,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String reportIssueRelatedLoadLabel(Object value) {
-    return 'Related load: $value';
-  }
+  String get reportIssueRelatedLoadLabel => 'Related load linked';
 
   @override
-  String reportIssueRelatedTripLabel(Object value) {
-    return 'Related trip: $value';
-  }
+  String get reportIssueRelatedTripLabel => 'Related trip linked';
 
   @override
   String get reportIssueNotLinked => 'Not linked';
@@ -5808,21 +5829,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierTripDetailBackToTripsAction => 'Back to supplier trips';
 
   @override
-  String get supplierTripDetailStubScreenTitle => 'Trip detail';
-
-  @override
-  String get supplierTripDetailStubCardTitle => 'Supplier trip detail';
-
-  @override
-  String supplierTripDetailStubReference(Object tripId) {
-    return 'Trip reference: $tripId';
-  }
-
-  @override
-  String get supplierTripDetailStubMessage =>
-      'Detailed supplier trip execution screens will expand in the next trip-detail slice. Navigation is already wired from the supplier trips list.';
-
-  @override
   String assistantHeroTitleWithName(Object firstName) {
     return 'Guided help for $firstName';
   }
@@ -5975,8 +5981,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not submit this booking request right now. Review the selected truck and retry shortly.';
 
   @override
-  String truckerLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'Load $loadId - Pickup $pickupDate';
+  String truckerLoadDetailHeroSubtitle(Object pickupDate) {
+    return 'Pickup $pickupDate';
   }
 
   @override
@@ -6313,7 +6319,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authTtsSignInPrompt =>
-      'Choose how you want to sign in to TranZfort.';
+      'Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.';
 
   @override
   String get authTtsOnboardingRolePrompt =>
@@ -6413,8 +6419,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierLoadDetailScreenTitle => 'Load detail';
 
   @override
-  String supplierLoadDetailHeroSubtitle(Object loadId, Object pickupDate) {
-    return 'Load ID: $loadId - Pickup: $pickupDate';
+  String supplierLoadDetailHeroSubtitle(Object pickupDate) {
+    return 'Pickup: $pickupDate';
   }
 
   @override
@@ -6816,5 +6822,159 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String reportSourceSupplierLoad(Object routeLabel) {
     return 'Supplier load - $routeLabel';
+  }
+
+  @override
+  String get supplierProfileTitle => 'Supplier Profile';
+
+  @override
+  String get truckerProfileTitle => 'Trucker Profile';
+
+  @override
+  String get reviewsSectionTitle => 'Reviews & Comments';
+
+  @override
+  String reviewsCount(int count) {
+    return '($count total)';
+  }
+
+  @override
+  String get noReviewsYet => 'No reviews yet';
+
+  @override
+  String get noReviewsSubtitle => 'Reviews will appear here after interactions';
+
+  @override
+  String get noRatingYet => 'No rating yet';
+
+  @override
+  String get newTruckerBadge => 'New Trucker';
+
+  @override
+  String get newSupplierBadge => 'New Supplier';
+
+  @override
+  String get reviewerProfileHint => 'Tap to view reviewer profile';
+
+  @override
+  String get addReplyTitle => 'Reply to Review';
+
+  @override
+  String get replyButton => 'Reply';
+
+  @override
+  String get rateInteractionTitle => 'Rate Your Interaction';
+
+  @override
+  String rateInteractionSubtitle(Object name) {
+    return 'How was your experience with $name?';
+  }
+
+  @override
+  String get submitReviewButton => 'Submit Review';
+
+  @override
+  String get skipReviewButton => 'Skip';
+
+  @override
+  String get reviewSubmitted => 'Review submitted';
+
+  @override
+  String get reviewSubmittedSuccess => 'Review submitted successfully';
+
+  @override
+  String get alreadyReviewedError => 'You have already reviewed this user';
+
+  @override
+  String get loadHistoryTitle => 'Recent Loads';
+
+  @override
+  String get loadMoreButton => 'Load More';
+
+  @override
+  String avgRatingLabel(Object rating) {
+    return '$rating out of 5';
+  }
+
+  @override
+  String reviewCountLabel(int count) {
+    return '($count reviews)';
+  }
+
+  @override
+  String memberSinceLabel(Object date) {
+    return 'Member since $date';
+  }
+
+  @override
+  String get trustScoreTitle => 'Trust & Reviews';
+
+  @override
+  String get reviewsReceivedLabel => 'Reviews received';
+
+  @override
+  String get tripsCompletedLabel => 'Trips completed';
+
+  @override
+  String get loadsPostedLabel => 'Loads posted';
+
+  @override
+  String get trucksInFleetLabel => 'Trucks in fleet';
+
+  @override
+  String get superLoadEligibleLabel => 'Super Load eligible';
+
+  @override
+  String get fleetTitle => 'Fleet';
+
+  @override
+  String truckCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 's',
+      one: '',
+    );
+    return '$count truck$_temp0';
+  }
+
+  @override
+  String get replyHint =>
+      'You can reply to this review once. Your response will be visible to everyone...';
+
+  @override
+  String get replySuccess => 'Reply added successfully';
+
+  @override
+  String get replyFailure =>
+      'Failed to add reply. You may have already replied.';
+
+  @override
+  String get addReplyHint =>
+      'Your reply will be visible to everyone viewing your profile';
+
+  @override
+  String get noComments => 'No comments';
+
+  @override
+  String get newMemberBadge => 'New member';
+
+  @override
+  String get insufficientInteractionError =>
+      'More interaction needed to review';
+
+  @override
+  String activeLoadsTitle(int count) {
+    return 'Active Loads ($count)';
+  }
+
+  @override
+  String responseRateLabel(Object rate) {
+    return '$rate% response rate';
+  }
+
+  @override
+  String memberForMonthsLabel(int count) {
+    return 'Member for $count months';
   }
 }

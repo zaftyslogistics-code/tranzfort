@@ -69,39 +69,22 @@ class _ProviderTruckerDashboardBackend implements TruckerDashboardBackend {
   _ProviderTruckerDashboardBackend({this.stats, this.error});
 
   @override
-  Future<int> countBookingRequestsByStatuses(String truckerId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String truckerId) async {
     if (error != null) {
       throw error!;
     }
-    return stats?.activeBids ?? 0;
+    return [
+      stats?.activeBids ?? 0,
+      stats?.upcomingTrips ?? 0,
+      stats?.inTransitTrips ?? 0,
+      stats?.completedTrips ?? 0,
+      stats?.totalTrucks ?? 0,
+      stats?.approvedTrucks ?? 0,
+      stats?.pendingTrucks ?? 0,
+      stats?.rejectedTrucks ?? 0,
+      stats?.pendingReapprovalTrucks ?? 0,
+    ];
   }
-
-  @override
-  Future<int> countTripsByStages(String truckerId, List<String> stages) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (stages.contains('completed')) {
-      return stats?.completedTrips ?? 0;
-    }
-    if (stages.contains('in_transit')) {
-      return stats?.inTransitTrips ?? 0;
-    }
-    return stats?.upcomingTrips ?? 0;
-  }
-
-  @override
-  Future<int> countTrucksByStatuses(String truckerId, List<String> statuses) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (stagesVerified(statuses)) {
-      return stats?.approvedTrucks ?? 0;
-    }
-    return stats?.totalTrucks ?? 0;
-  }
-
-  bool stagesVerified(List<String> statuses) => statuses.contains('verified');
 }
 
 void main() {

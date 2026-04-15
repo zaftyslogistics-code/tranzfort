@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/providers/app_state_providers.dart';
@@ -48,6 +50,8 @@ abstract class ChatBackend {
     required String loadId,
   });
 
+  Future<Object?> fetchConversation(String conversationId);
+
   Future<String> sendMessage({
     required String conversationId,
     required ChatMessageType type,
@@ -80,7 +84,17 @@ class SupabaseChatBackend implements ChatBackend {
     }
 
     final response = await _client.rpc('get_current_user_conversation_summaries');
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    
+    // Handle both List and JSONB string formats
+    if (response is List) {
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    } else if (response is String) {
+      final decoded = jsonDecode(response);
+      if (decoded is List) {
+        return decoded.whereType<Map<String, dynamic>>().toList(growable: false);
+      }
+    }
+    return const <Map<String, dynamic>>[];
   }
 
   @override
@@ -89,7 +103,7 @@ class SupabaseChatBackend implements ChatBackend {
     required AppUserRole role,
   }) {
     if (_client == null) {
-      return Stream<List<Map<String, dynamic>>>.value(const <Map<String, dynamic>>[]);
+      return const Stream.empty();
     }
 
     return _client
@@ -246,6 +260,18 @@ class SupabaseChatBackend implements ChatBackend {
       },
     );
     return (response ?? '').toString();
+  }
+
+  @override
+  Future<Object?> fetchConversation(String conversationId) async {
+    if (_client == null) {
+      return null;
+    }
+    final response = await _client.rpc(
+      'get_conversation_summary',
+      params: <String, dynamic>{'p_conversation_id': conversationId},
+    );
+    return response;
   }
 
   @override

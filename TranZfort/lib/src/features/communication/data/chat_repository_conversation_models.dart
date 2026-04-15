@@ -14,9 +14,11 @@ class ConversationPreviewDto {
   final String supplierName;
   final String? supplierMobile;
   final String? supplierCompanyName;
+  final String? supplierAvatarUrl;
   final String truckerName;
   final String? truckerMobile;
   final String? truckDisplayLabel;
+  final String? truckerAvatarUrl;
   final String? bookingRequestId;
   final String? bookingStatusLabel;
   final String latestMessagePreview;
@@ -40,9 +42,11 @@ class ConversationPreviewDto {
     required this.supplierName,
     required this.supplierMobile,
     required this.supplierCompanyName,
+    this.supplierAvatarUrl,
     required this.truckerName,
     required this.truckerMobile,
     required this.truckDisplayLabel,
+    this.truckerAvatarUrl,
     required this.bookingRequestId,
     required this.bookingStatusLabel,
     required this.latestMessagePreview,
@@ -68,9 +72,11 @@ class ConversationPreviewDto {
       supplierName: supplierName,
       supplierMobile: supplierMobile,
       supplierCompanyName: supplierCompanyName,
+      supplierAvatarUrl: supplierAvatarUrl,
       truckerName: truckerName,
       truckerMobile: truckerMobile,
       truckDisplayLabel: truckDisplayLabel,
+      truckerAvatarUrl: truckerAvatarUrl,
       bookingRequestId: bookingRequestId,
       bookingStatusLabel: bookingStatusLabel,
       latestMessagePreview: latestMessagePreview,
@@ -97,9 +103,11 @@ class ConversationPreview {
   final String supplierName;
   final String? supplierMobile;
   final String? supplierCompanyName;
+  final String? supplierAvatarUrl;
   final String truckerName;
   final String? truckerMobile;
   final String? truckDisplayLabel;
+  final String? truckerAvatarUrl;
   final String? bookingRequestId;
   final String? bookingStatusLabel;
   final String latestMessagePreview;
@@ -123,9 +131,11 @@ class ConversationPreview {
     required this.supplierName,
     required this.supplierMobile,
     required this.supplierCompanyName,
+    this.supplierAvatarUrl,
     required this.truckerName,
     required this.truckerMobile,
     required this.truckDisplayLabel,
+    this.truckerAvatarUrl,
     required this.bookingRequestId,
     required this.bookingStatusLabel,
     required this.latestMessagePreview,

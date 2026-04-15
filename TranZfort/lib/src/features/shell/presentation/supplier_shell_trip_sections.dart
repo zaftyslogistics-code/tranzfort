@@ -58,36 +58,6 @@ class SupplierTripsScreen extends ConsumerWidget {
   }
 }
 
-class SupplierTripDetailStubScreen extends StatelessWidget {
-  final String tripId;
-
-  const SupplierTripDetailStubScreen({
-    super.key,
-    required this.tripId,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    return DetailPageScaffold(
-      title: l10n.supplierTripDetailStubScreenTitle,
-      children: [
-        DetailSectionCard(
-          title: l10n.supplierTripDetailStubCardTitle,
-          children: [
-            Text(l10n.supplierTripDetailStubReference(tripId), style: Theme.of(context).textTheme.titleSmall),
-            const SizedBox(height: AppSpacing.sm),
-            Text(
-              l10n.supplierTripDetailStubMessage,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
 class _SupplierTripsBody extends StatelessWidget {
   final SupplierTripsState state;
   final VoidCallback onRetry;
@@ -173,11 +143,11 @@ class _SupplierTripCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           TextActionButton(
             label: l10n.supplierTripsTrackTripAction,
-            onPressed: () => context.go(tripPath),
+            onPressed: () => context.push(tripPath),
           ),
         ],
       ),
-      onTap: () => context.go(tripPath),
+      onTap: () => context.push(tripPath),
     );
   }
 }

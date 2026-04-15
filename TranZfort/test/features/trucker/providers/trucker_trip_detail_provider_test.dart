@@ -15,6 +15,9 @@ class _DetailBackend implements TruckerTripsBackend {
   Future<void> submitRating({required String loadId, required int score, String? comment}) async {}
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailWithSupplier({required String truckerId, required String tripId}) async => null;
+
+  @override
   Future<Map<String, dynamic>?> fetchTripDetail({required String truckerId, required String tripId}) async {
     return {
       'id': tripId,

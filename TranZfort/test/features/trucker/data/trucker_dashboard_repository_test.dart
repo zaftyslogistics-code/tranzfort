@@ -18,45 +18,21 @@ class _FakeTruckerDashboardBackend implements TruckerDashboardBackend {
   Object? error;
 
   @override
-  Future<int> countBookingRequestsByStatuses(String truckerId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String truckerId) async {
     if (error != null) {
       throw error!;
     }
-    return activeBids;
-  }
-
-  @override
-  Future<int> countTripsByStages(String truckerId, List<String> stages) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (stages.contains('completed')) {
-      return completedTrips;
-    }
-    if (stages.contains('in_transit')) {
-      return inTransitTrips;
-    }
-    return upcomingTrips;
-  }
-
-  @override
-  Future<int> countTrucksByStatuses(String truckerId, List<String> statuses) async {
-    if (error != null) {
-      throw error!;
-    }
-    if (statuses.contains('verified')) {
-      return approvedTrucks;
-    }
-    if (statuses.contains('pending')) {
-      return pendingTrucks;
-    }
-    if (statuses.contains('rejected')) {
-      return rejectedTrucks;
-    }
-    if (statuses.contains('edited_pending_reapproval')) {
-      return pendingReapprovalTrucks;
-    }
-    return totalTrucks;
+    return [
+      activeBids,
+      upcomingTrips,
+      inTransitTrips,
+      completedTrips,
+      totalTrucks,
+      approvedTrucks,
+      pendingTrucks,
+      rejectedTrucks,
+      pendingReapprovalTrucks,
+    ];
   }
 }
 

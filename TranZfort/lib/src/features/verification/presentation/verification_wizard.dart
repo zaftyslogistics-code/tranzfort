@@ -7,9 +7,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
-import '../../../shared/widgets/feedback_components.dart';
 import '../providers/verification_wizard_provider.dart';
-import 'components/step_container.dart';
+import '../providers/verification_wizard_state.dart';
 import 'wizard_steps/step_business_details.dart';
 import 'wizard_steps/step_identity_documents.dart';
 import 'wizard_steps/step_profile_photo.dart';
@@ -113,22 +112,25 @@ class VerificationWizard extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final shouldExit = await showDialog<bool>(
       context: context,
-      builder: (_) => AlertDialog(
+      builder: (dialogContext) => AlertDialog(
         title: Text(l10n.verificationWizardExitTitle),
         content: Text(l10n.verificationWizardExitMessage),
         actions: [
           TextButton(
-            onPressed: () => Navigator.pop(context, false),
+            onPressed: () => Navigator.pop(dialogContext, false),
             child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
           TextButton(
-            onPressed: () => Navigator.pop(context, true),
+            onPressed: () => Navigator.pop(dialogContext, true),
             child: Text(l10n.verificationWizardExitAction),
           ),
           PrimaryButton(
             onPressed: () async {
               await ref.read(verificationWizardProvider.notifier).saveDraft();
-              Navigator.pop(context, true);
+              if (!dialogContext.mounted) {
+                return;
+              }
+              Navigator.pop(dialogContext, true);
             },
             label: l10n.verificationWizardSaveAndExitAction,
           ),

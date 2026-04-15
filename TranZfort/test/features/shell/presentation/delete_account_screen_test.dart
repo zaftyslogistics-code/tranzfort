@@ -74,7 +74,7 @@ Widget _buildApp({
     overrides: [
       authRepositoryProvider.overrideWithValue(repository),
       currentAuthStateProvider.overrideWithValue(authState),
-      currentProfileProvider.overrideWith((ref) => AsyncValue<UserProfile?>.data(profile)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(profile)),
     ],
     child: MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,

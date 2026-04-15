@@ -21,11 +21,9 @@ class SupplierDashboardStats {
 }
 
 abstract class SupplierDashboardBackend {
-  Future<int> countLoadsByStatuses(String supplierId, List<String> statuses);
-
-  Future<int> countPendingBookings(String supplierId);
-
-  Future<int> countTripsByStages(String supplierId, List<String> stages);
+  /// Fetches all dashboard stats in a single RPC call
+  /// Returns: [activeLoads, pendingBookings, inTransitTrips, completedTrips]
+  Future<List<int>> fetchDashboardStats(String supplierId);
 }
 
 class SupabaseSupplierDashboardBackend implements SupplierDashboardBackend {
@@ -34,48 +32,24 @@ class SupabaseSupplierDashboardBackend implements SupplierDashboardBackend {
   const SupabaseSupplierDashboardBackend(this._client);
 
   @override
-  Future<int> countLoadsByStatuses(String supplierId, List<String> statuses) async {
+  Future<List<int>> fetchDashboardStats(String supplierId) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('loads')
-        .select('id')
-        .eq('supplier_id', supplierId)
-        .inFilter('status', statuses);
+    final response = await _client.rpc(
+      'get_supplier_dashboard_stats',
+      params: {'p_supplier_id': supplierId},
+    );
 
-    return response.length;
-  }
-
-  @override
-  Future<int> countPendingBookings(String supplierId) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
-    }
-
-    final response = await _client
-        .from('booking_requests')
-        .select('id, loads!inner(supplier_id)')
-        .eq('status', 'submitted')
-        .eq('loads.supplier_id', supplierId);
-
-    return response.length;
-  }
-
-  @override
-  Future<int> countTripsByStages(String supplierId, List<String> stages) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
-    }
-
-    final response = await _client
-        .from('trips')
-        .select('id')
-        .eq('supplier_id', supplierId)
-        .inFilter('stage', stages);
-
-    return response.length;
+    // Response is a single row with columns: active_loads, pending_bookings, etc.
+    final row = response as Map<String, dynamic>;
+    return [
+      (row['active_loads'] as num).toInt(),
+      (row['pending_bookings'] as num).toInt(),
+      (row['in_transit_trips'] as num).toInt(),
+      (row['completed_trips'] as num).toInt(),
+    ];
   }
 }
 
@@ -99,12 +73,7 @@ class SupplierDashboardRepository {
     }
 
     try {
-      final results = await Future.wait([
-        _backend.countLoadsByStatuses(userId, activeLoadStatuses),
-        _backend.countPendingBookings(userId),
-        _backend.countTripsByStages(userId, const ['in_transit']),
-        _backend.countTripsByStages(userId, const ['completed']),
-      ]);
+      final results = await _backend.fetchDashboardStats(userId);
 
       return Success<SupplierDashboardStats>(
         SupplierDashboardStats(

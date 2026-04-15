@@ -59,8 +59,8 @@ Widget _buildApp(
   final resolvedTtsService = ttsService ?? _FakeContextualTtsService();
   return ProviderScope(
     overrides: [
-      currentProfileProvider.overrideWithValue(
-        AsyncData<UserProfile?>(
+      currentProfileProvider.overrideWith(
+        (ref) => Stream.value(
           UserProfile(
             id: 'user-1',
             fullName: 'Test User',

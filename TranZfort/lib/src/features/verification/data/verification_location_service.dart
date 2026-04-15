@@ -114,8 +114,14 @@ class VerificationLocationService {
       break;
     }
 
-    final latitude = _readDouble(matchedCity?['lat']) ?? 0;
-    final longitude = _readDouble(matchedCity?['lng']) ?? 0;
+    final latitude = _readDouble(matchedCity?['lat']);
+    final longitude = _readDouble(matchedCity?['lng']);
+
+    // Validate coordinates - reject 0,0 or null coordinates
+    if (latitude == null || longitude == null || latitude == 0 || longitude == 0) {
+      return null;  // City not found in database or invalid coordinates
+    }
+
     final matchedState = matchedCity == null ? null : matchedCity['state']?.toString();
     final resolvedState = (trimmedState == null || trimmedState.isEmpty)
         ? matchedState

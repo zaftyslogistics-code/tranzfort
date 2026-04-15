@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -223,6 +225,32 @@ class _SupplierConversationRow extends StatelessWidget {
             children: [
               Row(
                 children: [
+                  InkWell(
+                    onTap: () => context.push(AppRoutes.publicProfileLocation(conversation.truckerId)),
+                    borderRadius: BorderRadius.circular(20),
+                    child: _AvatarCircle(
+                      avatarUrl: conversation.truckerAvatarUrl,
+                      radius: 20,
+                      fallback: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: AppColors.primary.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Center(
+                          child: Text(
+                            conversation.truckerName.isNotEmpty ? conversation.truckerName[0].toUpperCase() : 'T',
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
                       conversation.truckerName,
@@ -297,18 +325,74 @@ class _TruckerConversationCard extends StatelessWidget {
         ? '${conversation.supplierName} - ${conversation.supplierCompanyName}'
         : conversation.supplierName;
 
-    return StandardListCard(
-      accent: conversation.hasUnread ? AppColors.info : AppColors.neutral,
-      title: supplierLabel,
-      subtitle: '${conversation.routeLabel} - ${_localizedMessagePreview(l10n, conversation)}',
-      trailing: StatusChip(
-        label: conversation.hasUnread ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
-        showDot: conversation.hasUnread,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        boxShadow: AppShadows.card,
+        border: Border.all(color: AppColors.divider),
       ),
-      onTap: () => context.go('${AppRoutes.chatPath}/${conversation.id}'),
-      footer: Text(
-        _formatInboxTimestamp(context, conversation.lastMessageAt ?? conversation.createdAt),
-        style: Theme.of(context).textTheme.bodySmall,
+      child: InkWell(
+        onTap: () => context.go('${AppRoutes.chatPath}/${conversation.id}'),
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Row(
+            children: [
+              InkWell(
+                onTap: () => context.push(AppRoutes.publicProfileLocation(conversation.supplierId)),
+                borderRadius: BorderRadius.circular(20),
+                child: _AvatarCircle(
+                  avatarUrl: conversation.supplierAvatarUrl,
+                  radius: 20,
+                  fallback: Container(
+                    width: 40,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      color: AppColors.primary.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Center(
+                      child: Text(
+                        supplierLabel.isNotEmpty ? supplierLabel[0].toUpperCase() : 'S',
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      supplierLabel,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      '${conversation.routeLabel} - ${_localizedMessagePreview(l10n, conversation)}',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      _formatInboxTimestamp(context, conversation.lastMessageAt ?? conversation.createdAt),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
+                ),
+              ),
+              StatusChip(
+                label: conversation.hasUnread ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
+                showDot: conversation.hasUnread,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -394,4 +478,94 @@ String _formatInboxTimestamp(BuildContext context, DateTime value) {
     alwaysUse24HourFormat: true,
   );
   return '$dateLabel - $timeLabel';
+}
+
+class _AvatarCircle extends StatelessWidget {
+  final String? avatarUrl;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarCircle({
+    required this.avatarUrl,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
+      return SizedBox(
+        width: radius * 2,
+        height: radius * 2,
+        child: fallback,
+      );
+    }
+
+    return FutureBuilder<String?>(
+      future: _createSignedUrl(avatarUrl!),
+      builder: (context, snapshot) {
+        final resolvedUrl = snapshot.data;
+        if (resolvedUrl == null) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        }
+        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
+      },
+    );
+  }
+
+  Future<String?> _createSignedUrl(String path) async {
+    try {
+      final client = Supabase.instance.client;
+      try {
+        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
+      } catch (_) {
+        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
+      }
+    } catch (_) {
+      return null;
+    }
+  }
+}
+
+class _AvatarImage extends StatelessWidget {
+  final String url;
+  final double radius;
+  final Widget fallback;
+
+  const _AvatarImage({
+    required this.url,
+    required this.radius,
+    required this.fallback,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipOval(
+      child: Image.network(
+        url,
+        width: radius * 2,
+        height: radius * 2,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+        loadingBuilder: (context, child, loadingProgress) {
+          if (loadingProgress == null) return child;
+          return SizedBox(
+            width: radius * 2,
+            height: radius * 2,
+            child: fallback,
+          );
+        },
+      ),
+    );
+  }
 }

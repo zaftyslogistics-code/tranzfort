@@ -54,7 +54,7 @@ Widget _buildRoutedApp() {
           profile: null,
         ),
       ),
-      currentProfileProvider.overrideWithValue(const AsyncData(null)),
+      currentProfileProvider.overrideWith((ref) => Stream.value(null)),
     ],
     child: MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,

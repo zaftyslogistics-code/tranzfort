@@ -362,7 +362,9 @@ class SupplierTripsRepository {
       trucker: SupplierTripTrucker(
         id: (truckerProfile['id'] ?? '').toString(),
         fullName: (truckerProfile['full_name'] ?? 'Trucker').toString(),
+        mobile: nullableString(truckerProfile['mobile']),
         verificationStatus: (truckerProfile['verification_status'] ?? 'unknown').toString(),
+        avatarUrl: nullableString(truckerProfile['avatar_url']),
       ),
     );
   }

@@ -118,6 +118,7 @@ class StandardListCard extends StatelessWidget {
   final Color accent;
   final String title;
   final String subtitle;
+  final Widget? leading;
   final Widget? trailing;
   final Widget? footer;
   final VoidCallback? onTap;
@@ -127,6 +128,7 @@ class StandardListCard extends StatelessWidget {
     required this.accent,
     required this.title,
     required this.subtitle,
+    this.leading,
     this.trailing,
     this.footer,
     this.onTap,
@@ -172,6 +174,10 @@ class StandardListCard extends StatelessWidget {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        if (leading != null) ...[
+                          leading!,
+                          const SizedBox(width: AppSpacing.md),
+                        ],
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,

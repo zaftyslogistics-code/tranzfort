@@ -19,6 +19,8 @@
   "splashSetupEnableVoiceAction": "Voice guidance enable करें",
   "splashSetupOpenLocationSettingsAction": "Location settings खोलें",
   "authContinueWithGoogle": "Google से continue करें",
+  "authGoogleFastestMessage": "शुरू करने का सबसे तेज़ तरीका — पासवर्ड याद रखने की ज़रूरत नहीं",
+  "authOrWithEmail": "या ईमेल से जारी रखें",
   "authContinueWithPassword": "Email और password से continue करें",
   "authTermsOfService": "सेवा की शर्तें",
   "authTermsInfoMessage": "TranZfort access अभी verified supplier और trucker workflows तक सीमित है। आगे बढ़कर आप platform terms से सहमत होते हैं।",
@@ -563,24 +565,19 @@
   "supportDisputeCategoryOther": "अन्य",
   "supportUpdatedAt": "Updated at: {value}",
   "@supportUpdatedAt": {"placeholders": {"value": {}}},
-  "supportTicketReference": "Ticket reference: {value}",
-  "@supportTicketReference": {"placeholders": {"value": {}}},
-  "supportTripReference": "Trip reference: {value}",
-  "@supportTripReference": {"placeholders": {"value": {}}},
+  "supportTicketReference": "सपोर्ट टिकट",
+  "supportTripReference": "लिंक की गई ट्रिप",
   "supportOpenedAt": "Opened at: {value}",
   "@supportOpenedAt": {"placeholders": {"value": {}}},
   "supportDisputeCategoryLabel": "Dispute category: {category}",
   "@supportDisputeCategoryLabel": {"placeholders": {"category": {}}},
-  "supportTicketIdValue": "Ticket id: {id}",
-  "@supportTicketIdValue": {"placeholders": {"id": {}}},
+  "supportTicketIdValue": "सपोर्ट टिकट रिकॉर्ड में है",
   "supportPriorityValue": "Priority: {priority}",
   "@supportPriorityValue": {"placeholders": {"priority": {}}},
   "supportLastUpdatedValue": "Last updated: {value}",
   "@supportLastUpdatedValue": {"placeholders": {"value": {}}},
-  "supportRelatedTripValue": "Related trip: {value}",
-  "@supportRelatedTripValue": {"placeholders": {"value": {}}},
-  "supportRelatedLoadValue": "Related load: {value}",
-  "@supportRelatedLoadValue": {"placeholders": {"value": {}}},
+  "supportRelatedTripValue": "संबंधित ट्रिप लिंक की गई है",
+  "supportRelatedLoadValue": "संबंधित लोड लिंक की गई है",
   "supportOpenRelatedTripAction": "Related trip खोलें",
   "supportOpenRelatedLoadAction": "Related load खोलें",
   "supportWorkflowGuidanceOpen": "Support को यह ticket मिल चुकी है और review जल्द शुरू होनी चाहिए। ज़रूरत हो तो visible replies में missing context जोड़ें।",
@@ -1398,10 +1395,9 @@
       "s": {}
     }
   },
-  "supplierTripDetailHeroSubtitle": "Trip {tripId} - Truck {truckNumber}",
+  "supplierTripDetailHeroSubtitle": "ट्रक {truckNumber}",
   "@supplierTripDetailHeroSubtitle": {
     "placeholders": {
-      "tripId": {},
       "truckNumber": {}
     }
   },
@@ -1798,7 +1794,12 @@
   "truckerTripDetailProofStatusAwaitingPod": "पीओडी का इंतजार",
   "truckerTripDetailProofStatusProofSubmitted": "प्रूफ जमा किया गया",
   "truckerTripDetailProofStatusProofPending": "प्रूफ लंबित",
-  "truckerTripDetailHeroSubtitle": "Trip {tripId} - Truck {truckNumber}",
+  "truckerTripDetailHeroSubtitle": "ट्रक {truckNumber}",
+  "@truckerTripDetailHeroSubtitle": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
   "truckerTripDetailMaterialPickupSummary": "{material} - Pickup {pickupDate}",
   "truckerTripDetailNextStepTitle": "Next step",
   "truckerTripDetailActionUnavailableTitle": "Trip action unavailable",
@@ -1903,7 +1904,7 @@
   "supplierRaiseDisputeTripLoadFailureMessage": "अभी यह trip detail load नहीं हो सकी। Latest dispute context review करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
   "supplierRaiseDisputeHeroTitle": "Dispute delivery proof",
   "supplierRaiseDisputeHeroSubtitle": "Submitted POD में क्या गलत है यह समझाएँ, ताकि current trip के खिलाफ dispute खोली जा सके और support review में भेजी जा सके।",
-  "supplierRaiseDisputeTripBadge": "Trip {tripId}",
+  "supplierRaiseDisputeTripBadge": "समीक्षा में ट्रिप",
   "supplierRaiseDisputeHeroSummary": "{routeLabel} - {material}",
   "supplierRaiseDisputeHeroGuidance": "जो issue सबसे सही बैठती हो वह dispute category चुनें, written explanation जोड़ें, और जरूरत हो तो support review के लिए एक supporting evidence image attach करें।",
   "supplierRaiseDisputePartialContextUnavailableTitle": "Some trip detail context is unavailable",
@@ -2022,8 +2023,8 @@
   "reportIssueFailureMessage": "अभी यह report तैयार या submit नहीं हो सकी। Linked context review करें और थोड़ी देर बाद फिर कोशिश करें।",
   "reportIssueLinkedContextTitle": "लिंक्ड संदर्भ",
   "reportIssueSourceLabel": "स्रोत: {sourceLabel}",
-  "reportIssueRelatedLoadLabel": "संबंधित लोड: {value}",
-  "reportIssueRelatedTripLabel": "संबंधित ट्रिप: {value}",
+  "reportIssueRelatedLoadLabel": "संबंधित लोड लिंक की गई है",
+  "reportIssueRelatedTripLabel": "संबंधित ट्रिप लिंक की गई है",
   "reportIssueNotLinked": "लिंक नहीं किया गया",
   "reportIssueDetailsTitle": "रिपोर्ट विवरण",
   "reportIssueTypeLabel": "समस्या का प्रकार",
@@ -2104,10 +2105,6 @@
   "supplierTripDetailNotFoundTitle": "ट्रिप नहीं मिली",
   "supplierTripDetailNotFoundSubtitle": "यह सप्लायर ट्रिप अब उपलब्ध नहीं है या अब आपके पास इसका एक्सेस नहीं है।",
   "supplierTripDetailBackToTripsAction": "सप्लायर ट्रिप्स पर वापस जाएं",
-  "supplierTripDetailStubScreenTitle": "ट्रिप विवरण",
-  "supplierTripDetailStubCardTitle": "सप्लायर ट्रिप विवरण",
-  "supplierTripDetailStubReference": "ट्रिप रेफरेंस: {tripId}",
-  "supplierTripDetailStubMessage": "विस्तृत सप्लायर ट्रिप एक्जिक्यूशन स्क्रीन्स अगले ट्रिप-डिटेल स्लाइस में और विस्तृत होंगी। नेविगेशन पहले से सप्लायर ट्रिप्स सूची से वायर्ड है।",
   "assistantHeroTitleWithName": "{firstName} के लिए मार्गदर्शन सहायता",
   "assistantHeroSubtitleSupplier": "लोड पोस्ट करने, सक्रिय लोड एक्जिक्यूशन देखने, और सही कम्युनिकेशन या सपोर्ट सरफेस जल्दी खोलने के लिए गाइडेड शॉर्टकट्स का उपयोग करें।",
   "assistantHeroSubtitleTrucker": "लोड ढूँढने, ट्रिप एक्जिक्यूशन देखने, और सही कम्युनिकेशन या सपोर्ट सरफेस जल्दी खोलने के लिए गाइडेड शॉर्टकट्स का उपयोग करें।",
@@ -2152,7 +2149,12 @@
   "truckerLoadDetailActionFailureTitle": "कार्रवाई उपलब्ध नहीं है",
   "truckerLoadDetailActionFailureMessage": "नवीनतम लोड कार्रवाई अभी पूरी नहीं हो सकी। वर्तमान बुकिंग स्थिति की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।",
   "truckerLoadDetailBookingSubmitFailureMessage": "अभी यह बुकिंग अनुरोध सबमिट नहीं हो सका। चुने गए ट्रक की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।",
-  "truckerLoadDetailHeroSubtitle": "लोड {loadId} - पिकअप {pickupDate}",
+  "truckerLoadDetailHeroSubtitle": "पिकअप {pickupDate}",
+  "@truckerLoadDetailHeroSubtitle": {
+    "placeholders": {
+      "pickupDate": {}
+    }
+  },
   "truckerLoadDetailPriceBadge": "₹{priceAmount} - {priceType}",
   "truckerLoadDetailTruckMatchAvailable": "ट्रक मैच उपलब्ध है",
   "truckerLoadDetailNoApprovedTruckMatchYet": "अभी तक कोई स्वीकृत ट्रक मैच नहीं",
@@ -2228,7 +2230,7 @@
   "authTtsVoiceGuidanceEnabled": "वॉइस गाइडेंस अब चालू है।",
   "authConfigIncompleteTitle": "सेटअप अधूरा है",
   "authConfigIncompleteMessage": "ऐप की कुछ सेटिंग अधूरी है। सेटअप पूरा होने तक साइन-इन ठीक से काम नहीं कर सकता।",
-  "authTtsSignInPrompt": "TranZfort में साइन-इन करने का तरीका चुनें।",
+  "authTtsSignInPrompt": "साइन-इन करने का तरीका चुनें। Google साइन-इन सबसे तेज़ विकल्प है — बस एक टैप करें। या आप अपने ईमेल और पासवर्ड का उपयोग कर सकते हैं।",
   "authTtsOnboardingRolePrompt": "ऑनबोर्डिंग जारी रखने के लिए अपनी भूमिका चुनें।",
   "postLoadValidationOriginCityRequired": "मूल शहर चुनें",
   "postLoadValidationOriginLocationRequired": "पिकअप स्थान दर्ज करें",
@@ -2266,10 +2268,9 @@
   "supplierLoadDetailLoadFailureTitle": "लोड विवरण लोड नहीं हो सका",
   "supplierLoadDetailFailureMessage": "लोड विवरण नहीं खुल पाया। कृपया फिर से कोशिश करें।",
   "supplierLoadDetailScreenTitle": "लोड विवरण",
-  "supplierLoadDetailHeroSubtitle": "लोड ID: {loadId} - पिकअप: {pickupDate}",
+  "supplierLoadDetailHeroSubtitle": "पिकअप: {pickupDate}",
   "@supplierLoadDetailHeroSubtitle": {
     "placeholders": {
-      "loadId": {},
       "pickupDate": {}
     }
   },

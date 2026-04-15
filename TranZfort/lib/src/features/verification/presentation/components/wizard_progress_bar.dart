@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
-import '../../../../l10n/app_localizations.dart';
 
 class WizardProgressBar extends StatelessWidget {
   final int current;
@@ -122,7 +121,6 @@ class WizardHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final l10n = AppLocalizations.of(context);
     
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

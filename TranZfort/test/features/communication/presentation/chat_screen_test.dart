@@ -29,6 +29,9 @@ class _UnusedChatBackend implements ChatBackend {
   Future<List<Map<String, dynamic>>> fetchConversations({required String userId, required AppUserRole role}) async => throw UnimplementedError();
 
   @override
+  Future<Object?> fetchConversation(String conversationId) async => throw UnimplementedError();
+
+  @override
   Stream<List<Map<String, dynamic>>> watchConversations({required String userId, required AppUserRole role}) => throw UnimplementedError();
 
   @override

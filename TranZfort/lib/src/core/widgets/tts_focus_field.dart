@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../logger/app_logger.dart';
 import '../services/contextual_tts_service.dart';
 
 /// A widget wrapper that announces field labels when focused
@@ -87,12 +88,18 @@ class _TtsFocusFieldState extends ConsumerState<TtsFocusField> {
     final resolvedLanguageCode = widget.languageCode ??
         Localizations.localeOf(context).languageCode;
 
-    unawaited(
-      ref.read(contextualTtsServiceProvider).speakSummary(
-        languageCode: resolvedLanguageCode,
+    unawaited(_speakSafely(message, resolvedLanguageCode));
+  }
+
+  Future<void> _speakSafely(String message, String languageCode) async {
+    try {
+      await ref.read(contextualTtsServiceProvider).speakSummary(
+        languageCode: languageCode,
         message: message,
-      ),
-    );
+      );
+    } catch (error, stackTrace) {
+      AppLogger.warning('TTS speak failed', scope: 'TtsFocusField', error: error);
+    }
   }
 
   @override

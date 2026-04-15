@@ -103,8 +103,8 @@ class _SupportTicketListCard extends StatelessWidget {
           ],
           Text(
             ticket.relatedTripId == null
-                ? _supportTicketReference(ticket.id, l10n)
-                : _supportTripReference(ticket.relatedTripId!, l10n),
+                ? _supportTicketReference(l10n)
+                : _supportTripReference(l10n),
             style: Theme.of(context).textTheme.bodySmall,
           ),
           if (ticket.relatedTripId != null || ticket.relatedLoadId != null) ...[
@@ -117,13 +117,13 @@ class _SupportTicketListCard extends StatelessWidget {
                   TextActionButton(
                     key: ValueKey('support-list-open-trip-${ticket.id}'),
                     label: l10n.supportOpenTripAction,
-                    onPressed: () => context.go('${AppRoutes.tripDetailPath}/${ticket.relatedTripId}'),
+                    onPressed: () => context.push('${AppRoutes.tripDetailPath}/${ticket.relatedTripId}'),
                   ),
                 if (ticket.relatedLoadId != null)
                   TextActionButton(
                     key: ValueKey('support-list-open-load-${ticket.id}'),
                     label: l10n.supportOpenLoadAction,
-                    onPressed: () => context.go('${AppRoutes.loadDetailPath}/${ticket.relatedLoadId}'),
+                    onPressed: () => context.push('${AppRoutes.loadDetailPath}/${ticket.relatedLoadId}'),
                   ),
               ],
             ),

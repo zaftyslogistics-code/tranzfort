@@ -88,7 +88,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             action: profileUnavailable || profileFailure != null
                 ? OutlineButton(
                     label: l10n.navSupport,
-                    onPressed: () => context.go(AppRoutes.supportPath),
+                    onPressed: () => context.push(AppRoutes.supportPath),
                   )
                 : supplierProfile != null && !supplierProfile.canAccessWorkspace
                 ? OutlineButton(

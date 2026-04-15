@@ -46,12 +46,16 @@ class SupplierTrip {
 class SupplierTripTrucker {
   final String id;
   final String fullName;
+  final String? mobile;
   final String verificationStatus;
+  final String? avatarUrl;
 
   const SupplierTripTrucker({
     required this.id,
     required this.fullName,
+    required this.mobile,
     required this.verificationStatus,
+    this.avatarUrl,
   });
 }
 

@@ -76,10 +76,42 @@ class UnauthorizedFailure extends AppFailure {
   });
 }
 
+/// Client-side error (e.g., data format, state) — not retryable
+class ClientFailure extends AppFailure {
+  const ClientFailure({
+    required super.message,
+    super.debugInfo,
+  });
+}
+
 /// Unclassified error — not retryable
 class UnknownFailure extends AppFailure {
   const UnknownFailure({
     super.message = 'An unexpected error occurred',
+    super.debugInfo,
+  });
+}
+
+/// Location services (GPS) are disabled — requires user to enable in settings
+class LocationServiceDisabledFailure extends AppFailure {
+  const LocationServiceDisabledFailure({
+    super.message = 'Location services are disabled. Please enable GPS to continue.',
+    super.debugInfo,
+  });
+}
+
+/// Location permission denied (temporary) — can request again
+class LocationPermissionDeniedFailure extends AppFailure {
+  const LocationPermissionDeniedFailure({
+    super.message = 'Location permission denied. Please allow access to continue.',
+    super.debugInfo,
+  });
+}
+
+/// Location permission denied forever — requires app settings
+class LocationPermissionDeniedForeverFailure extends AppFailure {
+  const LocationPermissionDeniedForeverFailure({
+    super.message = 'Location permission is permanently denied. Please enable it in app settings.',
     super.debugInfo,
   });
 }

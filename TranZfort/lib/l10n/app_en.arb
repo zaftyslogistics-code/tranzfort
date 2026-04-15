@@ -17,6 +17,8 @@
   "splashSetupEnableVoiceAction": "Enable voice guidance",
   "splashSetupOpenLocationSettingsAction": "Open location settings",
   "authContinueWithGoogle": "Continue with Google",
+  "authGoogleFastestMessage": "Fastest way to get started — no password to remember",
+  "authOrWithEmail": "Or continue with email",
   "authContinueWithPassword": "Continue with email and password",
   "authTermsOfService": "Terms of service",
   "authTermsInfoMessage": "TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.",
@@ -459,6 +461,8 @@
   "profileValueNotProvided": "Not provided",
   "profileEmailLabel": "Email",
   "profileRoleLabel": "Role",
+  "profileLocationLabel": "Location",
+  "profileLocationNotSet": "Not set",
   "profileReadinessTitle": "Profile readiness",
   "profileCompletenessLabel": "Completeness",
   "profileCompletenessComplete": "Complete",
@@ -586,18 +590,8 @@
       "value": {}
     }
   },
-  "supportTicketReference": "Ticket reference: {value}",
-  "@supportTicketReference": {
-    "placeholders": {
-      "value": {}
-    }
-  },
-  "supportTripReference": "Trip reference: {value}",
-  "@supportTripReference": {
-    "placeholders": {
-      "value": {}
-    }
-  },
+  "supportTicketReference": "Support ticket on record",
+  "supportTripReference": "Linked trip",
   "supportOpenedAt": "Opened at: {value}",
   "@supportOpenedAt": {
     "placeholders": {
@@ -610,12 +604,7 @@
       "category": {}
     }
   },
-  "supportTicketIdValue": "Ticket id: {id}",
-  "@supportTicketIdValue": {
-    "placeholders": {
-      "id": {}
-    }
-  },
+  "supportTicketIdValue": "Support ticket on record",
   "supportPriorityValue": "Priority: {priority}",
   "@supportPriorityValue": {
     "placeholders": {
@@ -628,18 +617,8 @@
       "value": {}
     }
   },
-  "supportRelatedTripValue": "Related trip: {value}",
-  "@supportRelatedTripValue": {
-    "placeholders": {
-      "value": {}
-    }
-  },
-  "supportRelatedLoadValue": "Related load: {value}",
-  "@supportRelatedLoadValue": {
-    "placeholders": {
-      "value": {}
-    }
-  },
+  "supportRelatedTripValue": "Related trip linked",
+  "supportRelatedLoadValue": "Related load linked",
   "supportOpenRelatedTripAction": "Open related trip",
   "supportOpenRelatedLoadAction": "Open related load",
   "supportWorkflowGuidanceOpen": "Support has received this ticket and review should begin shortly. Use visible replies to add any missing context if needed.",
@@ -1531,10 +1510,9 @@
       "s": {}
     }
   },
-  "supplierTripDetailHeroSubtitle": "Trip {tripId} - Truck {truckNumber}",
+  "supplierTripDetailHeroSubtitle": "Truck {truckNumber}",
   "@supplierTripDetailHeroSubtitle": {
     "placeholders": {
-      "tripId": {},
       "truckNumber": {}
     }
   },
@@ -1881,6 +1859,12 @@
   "verificationCaptureLocationAction": "Capture location",
   "verificationLocationCapturedSuccess": "Verification location captured",
   "verificationLocationFailureMessage": "We could not capture the verification location right now. Retry shortly from this verification screen.",
+  "verificationGpsDisabledTitle": "GPS is disabled",
+  "verificationGpsDisabledMessage": "Location services are turned off. Please enable GPS in your device settings to capture your verification location.",
+  "verificationOpenSettingsAction": "Open Settings",
+  "verificationPermissionDeniedTitle": "Location permission required",
+  "verificationPermissionDeniedMessage": "Location access is permanently denied. Please enable location permission in your app settings to continue.",
+  "verificationOpenAppSettingsAction": "Open App Settings",
   "verificationManualLocationAction": "Enter location manually",
   "verificationManualLocationTitle": "Add verification location manually",
   "verificationManualLocationCityLabel": "City",
@@ -2019,12 +2003,18 @@
   "truckerTripDetailStageCompleted": "Completed",
   "truckerTripDetailStageDisputed": "Disputed",
   "truckerTripDetailStageCancelled": "Cancelled",
+  "truckerTripDetailStageUnknown": "Unknown",
   "truckerTripDetailProofStatusPodUploaded": "POD uploaded",
   "truckerTripDetailProofStatusLrUploaded": "LR uploaded",
   "truckerTripDetailProofStatusAwaitingPod": "Awaiting POD",
   "truckerTripDetailProofStatusProofSubmitted": "Proof submitted",
   "truckerTripDetailProofStatusProofPending": "Proof pending",
-  "truckerTripDetailHeroSubtitle": "Trip {tripId} - Truck {truckNumber}",
+  "truckerTripDetailHeroSubtitle": "Truck {truckNumber}",
+  "@truckerTripDetailHeroSubtitle": {
+    "placeholders": {
+      "truckNumber": {}
+    }
+  },
   "truckerTripDetailMaterialPickupSummary": "{material} - Pickup {pickupDate}",
   "truckerTripDetailNextStepTitle": "Next step",
   "truckerTripDetailActionUnavailableTitle": "Trip action unavailable",
@@ -2129,7 +2119,7 @@
   "supplierRaiseDisputeTripLoadFailureMessage": "We could not load this trip detail right now. Retry shortly to review the latest dispute context.",
   "supplierRaiseDisputeHeroTitle": "Dispute delivery proof",
   "supplierRaiseDisputeHeroSubtitle": "Explain what is wrong with the submitted POD so the dispute can be opened against the current trip and routed into support review.",
-  "supplierRaiseDisputeTripBadge": "Trip {tripId}",
+  "supplierRaiseDisputeTripBadge": "Trip under review",
   "supplierRaiseDisputeHeroSummary": "{routeLabel} - {material}",
   "supplierRaiseDisputeHeroGuidance": "Select the dispute category that best matches the issue, add a written explanation, and optionally attach one supporting evidence image for support review.",
   "supplierRaiseDisputePartialContextUnavailableTitle": "Some trip detail context is unavailable",
@@ -2248,8 +2238,8 @@
   "reportIssueFailureMessage": "This report could not be prepared or submitted right now. Review the linked context and try again shortly.",
   "reportIssueLinkedContextTitle": "Linked context",
   "reportIssueSourceLabel": "Source: {sourceLabel}",
-  "reportIssueRelatedLoadLabel": "Related load: {value}",
-  "reportIssueRelatedTripLabel": "Related trip: {value}",
+  "reportIssueRelatedLoadLabel": "Related load linked",
+  "reportIssueRelatedTripLabel": "Related trip linked",
   "reportIssueNotLinked": "Not linked",
   "reportIssueDetailsTitle": "Report details",
   "reportIssueTypeLabel": "Issue type",
@@ -2336,10 +2326,6 @@
   "supplierTripDetailNotFoundTitle": "Trip not found",
   "supplierTripDetailNotFoundSubtitle": "This supplier trip is no longer available or you no longer have access to it.",
   "supplierTripDetailBackToTripsAction": "Back to supplier trips",
-  "supplierTripDetailStubScreenTitle": "Trip detail",
-  "supplierTripDetailStubCardTitle": "Supplier trip detail",
-  "supplierTripDetailStubReference": "Trip reference: {tripId}",
-  "supplierTripDetailStubMessage": "Detailed supplier trip execution screens will expand in the next trip-detail slice. Navigation is already wired from the supplier trips list.",
   "assistantHeroTitleWithName": "Guided help for {firstName}",
   "assistantHeroSubtitleSupplier": "Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.",
   "assistantHeroSubtitleTrucker": "Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.",
@@ -2385,7 +2371,7 @@
   "truckerLoadDetailActionFailureTitle": "Action unavailable",
   "truckerLoadDetailActionFailureMessage": "The latest load action could not be completed right now. Review the current load details and retry shortly.",
   "truckerLoadDetailBookingSubmitFailureMessage": "We could not submit this booking request right now. Review the selected truck and retry shortly.",
-  "truckerLoadDetailHeroSubtitle": "Load {loadId} - Pickup {pickupDate}",
+  "truckerLoadDetailHeroSubtitle": "Pickup {pickupDate}",
   "truckerLoadDetailPriceBadge": "₹{priceAmount} - {priceType}",
   "truckerLoadDetailTruckMatchAvailable": "Truck match available",
   "truckerLoadDetailNoApprovedTruckMatchYet": "No approved truck match yet",
@@ -2471,7 +2457,7 @@
   "authTtsVoiceGuidanceEnabled": "Voice guidance is now enabled.",
   "authConfigIncompleteTitle": "Setup incomplete",
   "authConfigIncompleteMessage": "Some app configuration is missing. Sign-in may not work until setup is completed.",
-  "authTtsSignInPrompt": "Choose how you want to sign in to TranZfort.",
+  "authTtsSignInPrompt": "Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.",
   "authTtsOnboardingRolePrompt": "Choose your role to continue onboarding.",
   "postLoadValidationOriginCityRequired": "Select the origin city",
   "postLoadValidationOriginLocationRequired": "Enter the pickup location",
@@ -2509,10 +2495,9 @@
   "supplierLoadDetailLoadFailureTitle": "Unable to load load detail",
   "supplierLoadDetailFailureMessage": "Could not load this load detail. Please try again.",
   "supplierLoadDetailScreenTitle": "Load detail",
-  "supplierLoadDetailHeroSubtitle": "Load ID: {loadId} - Pickup: {pickupDate}",
+  "supplierLoadDetailHeroSubtitle": "Pickup: {pickupDate}",
   "@supplierLoadDetailHeroSubtitle": {
     "placeholders": {
-      "loadId": {},
       "pickupDate": {}
     }
   },
@@ -2521,6 +2506,7 @@
   "supplierLoadDetailStatusAndActionsTitle": "Status and actions",
   "supplierLoadDetailCurrentStatus": "Current status: {status}",
   "@supplierLoadDetailCurrentStatus": {
+    "description": "Label showing current load status. Placeholder {status} is the status name.",
     "placeholders": {
       "status": {}
     }
@@ -2848,13 +2834,85 @@
     "description": "Auth Password Too Short Message - User-facing text for the app interface."
   },
   "@authPasswordConfirmMismatchMessage": {
-    "description": "Auth Password Confirm Mismatch Message - User-facing text for the app interface."
   },
   "@authPasswordSignInFailureMessage": {
     "description": "Auth Password Sign In Failure Message - User-facing text for the app interface."
   },
   "@authPasswordSignUpFailureMessage": {
     "description": "Auth Password Sign Up Failure Message - User-facing text for the app interface."
+  },
+  "@_sectionReviewsAndProfile": "═══ Reviews & Public Profile ═══",
+  "profileTitle": "Profile",
+  "supplierProfileTitle": "Supplier Profile",
+  "truckerProfileTitle": "Trucker Profile",
+  "reviewsSectionTitle": "Reviews & Comments",
+  "reviewsCount": "({count} total)",
+  "@reviewsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "noReviewsYet": "No reviews yet",
+  "noReviewsSubtitle": "Reviews will appear here after interactions",
+  "noRatingYet": "No rating yet",
+  "newTruckerBadge": "New Trucker",
+  "newSupplierBadge": "New Supplier",
+  "reviewerProfileHint": "Tap to view reviewer profile",
+  "addReplyTitle": "Reply to Review",
+  "replyButton": "Reply",
+  "rateInteractionTitle": "Rate Your Interaction",
+  "rateInteractionSubtitle": "How was your experience with {name}?",
+  "@rateInteractionSubtitle": {
+    "placeholders": {"name": {}}
+  },
+  "submitReviewButton": "Submit Review",
+  "skipReviewButton": "Skip",
+  "reviewSubmitted": "Review submitted",
+  "reviewSubmittedSuccess": "Review submitted successfully",
+  "alreadyReviewedError": "You have already reviewed this user",
+  "loadHistoryTitle": "Recent Loads",
+  "loadMoreButton": "Load More",
+  "avgRatingLabel": "{rating} out of 5",
+  "@avgRatingLabel": {
+    "placeholders": {"rating": {}}
+  },
+  "reviewCountLabel": "({count} reviews)",
+  "@reviewCountLabel": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "memberSinceLabel": "Member since {date}",
+  "@memberSinceLabel": {
+    "placeholders": {"date": {}}
+  },
+  "trustScoreTitle": "Trust & Reviews",
+  "reviewsReceivedLabel": "Reviews received",
+  "tripsCompletedLabel": "Trips completed",
+  "loadsPostedLabel": "Loads posted",
+  "trucksInFleetLabel": "Trucks in fleet",
+  "superLoadEligibleLabel": "Super Load eligible",
+  "fleetTitle": "Fleet",
+  "truckCount": "{count} truck{count, plural, one {} other {s}}",
+  "@truckCount": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "replyHint": "You can reply to this review once. Your response will be visible to everyone...",
+  "replySuccess": "Reply added successfully",
+  "replyFailure": "Failed to add reply. You may have already replied.",
+  "addReplyHint": "Your reply will be visible to everyone viewing your profile",
+  "noComments": "No comments",
+  "newMemberBadge": "New member",
+  "insufficientInteractionError": "More interaction needed to review",
+  "activeLoadsTitle": "Active Loads ({count})",
+  "@activeLoadsTitle": {
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "responseRateLabel": "{rate}% response rate",
+  "@responseRateLabel": {
+    "placeholders": {"rate": {}}
+  },
+  "memberForMonthsLabel": "Member for {count} months",
+  "@memberForMonthsLabel": {
+    "placeholders": {"count": {"type": "int"}}
   },
   "@authPasswordSignUpSuccessMessage": {
     "description": "Auth Password Sign Up Success Message - User-facing text for the app interface."
@@ -7145,18 +7203,6 @@
   },
   "@supplierTripDetailBackToTripsAction": {
     "description": "Supplier Trip Detail Back To Trips Action - User-facing text for the app interface."
-  },
-  "@supplierTripDetailStubScreenTitle": {
-    "description": "Supplier Trip Detail Stub Screen Title - User-facing text for the app interface."
-  },
-  "@supplierTripDetailStubCardTitle": {
-    "description": "Supplier Trip Detail Stub Card Title - User-facing text for the app interface."
-  },
-  "@supplierTripDetailStubReference": {
-    "description": "Supplier Trip Detail Stub Reference - User-facing text for the app interface."
-  },
-  "@supplierTripDetailStubMessage": {
-    "description": "Supplier Trip Detail Stub Message - User-facing text for the app interface."
   },
   "@assistantHeroTitleWithName": {
     "description": "Assistant Hero Title With Name - User-facing text for the app interface."

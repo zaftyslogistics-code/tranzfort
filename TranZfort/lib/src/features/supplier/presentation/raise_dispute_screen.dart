@@ -98,7 +98,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
                       icon: Icons.alt_route_outlined,
                     ),
                     StatusBadge(
-                      label: l10n.supplierRaiseDisputeTripBadge(detail.id),
+                      label: l10n.supplierRaiseDisputeTripBadge,
                       icon: Icons.receipt_long_outlined,
                     ),
                   ],
@@ -141,7 +141,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
                   message: l10n.supplierRaiseDisputeSubmissionBlockedMessage,
                   action: OutlineButton(
                     label: l10n.navSupport,
-                    onPressed: () => context.go(AppRoutes.supportPath),
+                    onPressed: () => context.push(AppRoutes.supportPath),
                   ),
                 ),
               ],
@@ -323,7 +323,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
                           result.when(
                             success: (ticketId) {
                               ref.read(supportTicketsProvider.notifier).load();
-                              context.go(AppRoutes.supportPath, extra: ticketId);
+                              context.push(AppRoutes.supportPath, extra: ticketId);
                               AppSnackbar.show(
                                 context: context,
                                 message: l10n.supplierRaiseDisputeSubmittedSuccess,

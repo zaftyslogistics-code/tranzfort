@@ -35,8 +35,10 @@ class AppRoutes {
   static const reportIssue = 'report-issue';
   static const raiseDispute = 'raise-dispute';
   static const deleteAccount = 'delete-account';
+  static const publicProfile = 'public-profile';
 
   static const splashPath = '/splash';
+  static const publicProfilePath = '/profile/:userId';
   static const authPath = '/auth';
   static const authPasswordPath = '/auth/password';
   static const onboardingPath = '/onboarding';
@@ -69,4 +71,8 @@ class AppRoutes {
   static const reportIssuePath = '/report-issue';
   static const raiseDisputePath = '/raise-dispute';
   static const deleteAccountPath = '/delete-account';
+
+  static String publicProfileLocation(String userId) {
+    return publicProfilePath.replaceAll(':userId', userId);
+  }
 }

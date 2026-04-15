@@ -10,8 +10,30 @@ import '../../../core/utils/map_readers.dart';
 
 const int truckerMarketplacePageSize = 50;
 
+class SupplierInfo {
+  final String name;
+  final String? avatarUrl;
+
+  const SupplierInfo({
+    required this.name,
+    this.avatarUrl,
+  });
+
+  factory SupplierInfo.fromMap(Map<String, dynamic> map) {
+    final avatarUrl = map['avatar_url'] as String?;
+    final profilePhotoPath = map['profile_photo_document_path'] as String?;
+    return SupplierInfo(
+      name: (map['full_name'] as String?) ?? '',
+      avatarUrl: avatarUrl ?? profilePhotoPath,
+    );
+  }
+}
+
 class MarketplaceLoadItem {
   final String id;
+  final String supplierId;
+  final String? supplierName;
+  final String? supplierAvatarUrl;
   final String originLabel;
   final String originCity;
   final String? originState;
@@ -42,6 +64,9 @@ class MarketplaceLoadItem {
 
   const MarketplaceLoadItem({
     required this.id,
+    required this.supplierId,
+    this.supplierName,
+    this.supplierAvatarUrl,
     required this.originLabel,
     required this.originCity,
     required this.originState,
@@ -71,19 +96,60 @@ class MarketplaceLoadItem {
     required this.createdAt,
   });
 
+  MarketplaceLoadItem copyWith({
+    String? supplierName,
+    String? supplierAvatarUrl,
+  }) {
+    return MarketplaceLoadItem(
+      id: id,
+      supplierId: supplierId,
+      supplierName: supplierName ?? this.supplierName,
+      supplierAvatarUrl: supplierAvatarUrl ?? this.supplierAvatarUrl,
+      originLabel: originLabel,
+      originCity: originCity,
+      originState: originState,
+      originLat: originLat,
+      originLng: originLng,
+      destinationLabel: destinationLabel,
+      destinationCity: destinationCity,
+      destinationState: destinationState,
+      destinationLat: destinationLat,
+      destinationLng: destinationLng,
+      routeDistanceKm: routeDistanceKm,
+      routeDurationMinutes: routeDurationMinutes,
+      routeSnapshotSource: routeSnapshotSource,
+      material: material,
+      weightTonnes: weightTonnes,
+      requiredBodyType: requiredBodyType,
+      requiredTyres: requiredTyres,
+      trucksNeeded: trucksNeeded,
+      trucksBooked: trucksBooked,
+      priceAmount: priceAmount,
+      priceType: priceType,
+      advancePercentage: advancePercentage,
+      pickupDate: pickupDate,
+      status: status,
+      isSuperLoad: isSuperLoad,
+      superStatus: superStatus,
+      createdAt: createdAt,
+    );
+  }
+
   factory MarketplaceLoadItem.fromMap(Map<String, dynamic> map) {
     return MarketplaceLoadItem(
       id: (map['id'] ?? '').toString(),
+      supplierId: (map['supplier_id'] ?? '').toString(),
+      supplierName: nullableString(map['supplier_name']), // Will be merged via copyWith
       originLabel: (map['origin_label'] ?? '').toString(),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: nullableString(map['origin_state']),
-      originLat: readDouble(map['origin_lat']),
-      originLng: readDouble(map['origin_lng']),
+      originLat: readDoubleNullable(map['origin_lat']),
+      originLng: readDoubleNullable(map['origin_lng']),
       destinationLabel: (map['destination_label'] ?? '').toString(),
       destinationCity: (map['destination_city'] ?? '').toString(),
       destinationState: nullableString(map['destination_state']),
-      destinationLat: readDouble(map['destination_lat']),
-      destinationLng: readDouble(map['destination_lng']),
+      destinationLat: readDoubleNullable(map['destination_lat']),
+      destinationLng: readDoubleNullable(map['destination_lng']),
       routeDistanceKm: readDouble(map['route_distance_km']),
       routeDurationMinutes: readInt(map['route_duration_minutes']),
       routeSnapshotSource: nullableString(map['route_snapshot_source']),
@@ -209,12 +275,16 @@ abstract class TruckerMarketplaceBackend {
     required int page,
     required int pageSize,
   });
+
+  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId);
+
+  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds);
 }
 
 class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
   final SupabaseClient? _client;
 
-  const SupabaseTruckerMarketplaceBackend(this._client);
+  SupabaseTruckerMarketplaceBackend(this._client);
 
   @override
   Future<List<Map<String, dynamic>>> searchLoads(
@@ -232,7 +302,7 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     var filteredQuery = _client
         .from('loads')
         .select(
-          'id, origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id',
+          'id, supplier_id, origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id',
         )
         .isFilter('parent_load_id', null)
         .inFilter('status', const ['active', 'assigned_partial']);
@@ -282,6 +352,40 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     final response = await sortedQuery.range(from, to);
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
+
+  @override
+  Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    return _client
+        .from('profiles')
+        .select('id, mobile')
+        .eq('id', supplierId)
+        .maybeSingle();
+  }
+
+  @override
+  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    if (supplierIds.isEmpty) {
+      return {};
+    }
+
+    final response = await _client
+        .from('profiles')
+        .select('id, full_name, avatar_url, profile_photo_document_path')
+        .inFilter('id', supplierIds);
+
+    return {
+      for (var profile in response)
+        profile['id'] as String: SupplierInfo.fromMap(profile),
+    };
+  }
 }
 
 class TruckerMarketplaceRepository {
@@ -296,11 +400,52 @@ class TruckerMarketplaceRepository {
   }) async {
     try {
       final rows = await _backend.searchLoads(filters, page: page, pageSize: pageSize);
-      return Success<List<MarketplaceLoadItem>>(
-        rows.map(MarketplaceLoadItem.fromMap).toList(growable: false),
-      );
+
+      // Collect unique supplier IDs
+      final supplierIds = rows
+          .map((row) => (row['supplier_id'] ?? '').toString())
+          .where((id) => id.isNotEmpty)
+          .toSet()
+          .toList();
+
+      // Fetch supplier info (name and avatarUrl)
+      final supplierInfo = await _backend.fetchSupplierInfo(supplierIds);
+
+      // Merge supplier info into load items
+      final loadItems = rows.map((row) {
+        final supplierId = (row['supplier_id'] ?? '').toString();
+        final info = supplierInfo[supplierId];
+        return MarketplaceLoadItem.fromMap(row).copyWith(
+          supplierName: info?.name,
+          supplierAvatarUrl: info?.avatarUrl,
+        );
+      }).toList(growable: false);
+
+      return Success<List<MarketplaceLoadItem>>(loadItems);
     } catch (error, stackTrace) {
       return Failure<List<MarketplaceLoadItem>>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<String?>> getSupplierMobile(String supplierId) async {
+    final normalizedSupplierId = supplierId.trim();
+    if (normalizedSupplierId.isEmpty) {
+      return const Failure<String?>(
+        ValidationFailure(
+          message: 'Supplier id is required',
+          fieldErrors: {'supplier_id': 'Supplier id is required'},
+        ),
+      );
+    }
+
+    try {
+      final profile = await _backend.fetchSupplierProfile(normalizedSupplierId);
+      if (profile == null) {
+        return const Failure<String?>(NotFoundFailure());
+      }
+      return Success<String?>(nullableString(profile['mobile']));
+    } catch (error, stackTrace) {
+      return Failure<String?>(_mapError(error, stackTrace));
     }
   }
 

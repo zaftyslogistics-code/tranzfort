@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../logger/app_logger.dart';
+
 typedef MapsLaunchUrlFn = Future<bool> Function(Uri uri, {LaunchMode mode});
 
 class MapsLauncherService {
@@ -38,7 +40,9 @@ class MapsLauncherService {
       if (launchedExternally) {
         return true;
       }
-    } catch (_) {}
+    } catch (e) {
+      AppLogger.warning('External launch failed, trying platform default', scope: 'maps', error: e);
+    }
 
     try {
       return await _launchUrl(uri, mode: LaunchMode.platformDefault);

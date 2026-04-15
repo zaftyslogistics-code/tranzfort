@@ -251,11 +251,11 @@ class _SupplierLoadListCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           TextActionButton(
             label: _primaryActionLabel(context, load.status),
-            onPressed: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
+            onPressed: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
           ),
         ],
       ),
-      onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
+      onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
     );
   }
 

@@ -1,5 +1,6 @@
-part of 'verification_wizard_provider.dart';
+import '../data/verification_repository.dart';
 
+/// Draft data holder for verification wizard state
 class VerificationDraft {
   final String? profilePhotoPath;
   final String? aadhaarNumber;
@@ -205,7 +206,7 @@ class TruckDraft {
     this.truckNumber = '',
     this.bodyType = 'open',
     this.tyres = 10,
-    this.capacityTonnes = 16.0,
+    this.capacityTonnes = 0,
     this.rcDocumentPath,
     this.truckPhotoPath,
   });
@@ -244,7 +245,7 @@ class TruckDraft {
       truckNumber: json['truckNumber']?.toString() ?? '',
       bodyType: json['bodyType']?.toString() ?? 'open',
       tyres: (json['tyres'] as num?)?.toInt() ?? 10,
-      capacityTonnes: (json['capacityTonnes'] as num?)?.toDouble() ?? 16.0,
+      capacityTonnes: (json['capacityTonnes'] as num?)?.toDouble() ?? 0,
       rcDocumentPath: json['rcDocumentPath']?.toString(),
       truckPhotoPath: json['truckPhotoPath']?.toString(),
     );
