@@ -76,23 +76,31 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     required String fullName,
     required String mobile,
     required bool termsAccepted,
+    String? city,
+    String? state,
+    double? latitude,
+    double? longitude,
   }) async {
     if (!termsAccepted) {
       return Failure<void>(BusinessRuleFailure(message: termsAcceptanceRequiredCode));
     }
 
-    state = const OnboardingState(isSubmitting: true);
+    this.state = const OnboardingState(isSubmitting: true);
     final repository = ref.read(authRepositoryProvider);
-    
+
     final updateResult = await repository.updateProfile(
       fullName: fullName,
       mobile: mobile,
+      city: city,
+      state: state,
+      latitude: latitude,
+      longitude: longitude,
     );
     
     if (updateResult.isSuccess) {
       final termsResult = await repository.recordTermsAcceptance();
       if (termsResult.isFailure) {
-        state = const OnboardingState(isSubmitting: false);
+        this.state = const OnboardingState(isSubmitting: false);
         return const Failure<void>(
           BusinessRuleFailure(message: termsAcceptanceRequiredCode),
         );
@@ -100,7 +108,7 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
       await _refreshAuthState();
     }
     
-    state = const OnboardingState(isSubmitting: false);
+    this.state = const OnboardingState(isSubmitting: false);
     return updateResult;
   }
 

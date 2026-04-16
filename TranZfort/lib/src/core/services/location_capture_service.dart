@@ -203,8 +203,9 @@ class LocationCaptureService {
         final addressComponents = (entry['address_components'] as List<dynamic>? ?? const <dynamic>[])
             .whereType<Map<String, dynamic>>()
             .toList(growable: false);
-        final city = _extractAddressComponent(addressComponents, 'locality') ??
-            _extractAddressComponent(addressComponents, 'administrative_area_level_2');
+        // Prioritize district/city (administrative_area_level_2) over locality (which can be village/sub-district)
+        final city = _extractAddressComponent(addressComponents, 'administrative_area_level_2') ??
+            _extractAddressComponent(addressComponents, 'locality');
         if ((city ?? '').trim().isEmpty) {
           continue;
         }
@@ -232,9 +233,18 @@ class LocationCaptureService {
       return null;
     }
 
+    // Filter for cities/towns only (exclude villages) to get main district/city
+    final citiesAndTowns = cities.where((city) {
+      final placeType = (city['place_type'] ?? '').toString().toLowerCase();
+      return placeType == 'city' || placeType == 'town';
+    }).toList();
+
+    // If no cities/towns found, fall back to all places
+    final searchCities = citiesAndTowns.isNotEmpty ? citiesAndTowns : cities;
+
     Map<String, dynamic>? nearest;
     double? bestDistanceKm;
-    for (final city in cities) {
+    for (final city in searchCities) {
       final cityLat = _readDouble(city['lat']);
       final cityLng = _readDouble(city['lng']);
       if (cityLat == null || cityLng == null) {
@@ -251,8 +261,12 @@ class LocationCaptureService {
       return null;
     }
 
+    // Use district if available, otherwise use city name
+    final district = nearest['district']?.toString();
+    final cityName = (nearest['name'] ?? nearest['city'] ?? '').toString();
+
     return LocationData(
-      city: (nearest['name'] ?? nearest['city'] ?? '').toString(),
+      city: (district?.isNotEmpty == true) ? district! : cityName,
       state: nearest['state']?.toString(),
       latitude: latitude,
       longitude: longitude,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:geolocator/geolocator.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -12,6 +13,8 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../providers/auth_providers.dart';
+import '../../verification/data/verification_location_service.dart' as location_service;
+import '../../supplier/data/supplier_location_services.dart';
 
 class ProfileCompletionScreen extends ConsumerStatefulWidget {
   const ProfileCompletionScreen({super.key});
@@ -25,6 +28,11 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   final TextEditingController _mobileController = TextEditingController();
   bool _initialized = false;
   bool _termsAccepted = false;
+  String? _city;
+  String? _state;
+  double? _latitude;
+  double? _longitude;
+  bool _isCapturingLocation = false;
 
   @override
   void didChangeDependencies() {
@@ -50,6 +58,10 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           fullName: _nameController.text,
           mobile: _mobileController.text,
           termsAccepted: _termsAccepted,
+          city: _city,
+          state: _state,
+          latitude: _latitude,
+          longitude: _longitude,
         );
 
     if (!mounted) {
@@ -77,6 +89,269 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       context.go(AppRoutes.supplierDashboardPath);
     } else {
       context.go(AppRoutes.truckerDashboardPath);
+    }
+  }
+
+  Future<void> _handleCaptureLocation() async {
+    setState(() => _isCapturingLocation = true);
+    try {
+      final locationService = ref.read(location_service.verificationLocationServiceProvider);
+      
+      // Check if location service is enabled first
+      final servicesEnabled = await Geolocator.isLocationServiceEnabled();
+      if (!servicesEnabled) {
+        if (!mounted) return;
+        _showLocationServiceDisabledDialog();
+        return;
+      }
+
+      // Check permission
+      var permission = await Geolocator.checkPermission();
+      if (permission == LocationPermission.denied) {
+        permission = await Geolocator.requestPermission();
+      }
+      if (permission == LocationPermission.denied) {
+        if (!mounted) return;
+        _showPermissionDeniedDialog();
+        return;
+      }
+      if (permission == LocationPermission.deniedForever) {
+        if (!mounted) return;
+        _showPermissionDeniedForeverDialog();
+        return;
+      }
+
+      final locationData = await locationService.captureSupplierVerificationLocation();
+      if (!mounted) return;
+
+      if (locationData != null) {
+        setState(() {
+          _city = locationData.city;
+          _state = locationData.state;
+          _latitude = locationData.latitude;
+          _longitude = locationData.longitude;
+        });
+      } else {
+        AppSnackbar.show(
+          context: context,
+          message: 'Failed to capture location. Please try again or add manually.',
+          variant: AppSnackbarVariant.error,
+        );
+      }
+    } on location_service.LocationServiceDisabledException catch (_) {
+      if (!mounted) return;
+      _showLocationServiceDisabledDialog();
+    } on location_service.LocationPermissionDeniedException catch (_) {
+      if (!mounted) return;
+      _showPermissionDeniedDialog();
+    } on location_service.LocationPermissionDeniedForeverException catch (_) {
+      if (!mounted) return;
+      _showPermissionDeniedForeverDialog();
+    } catch (e) {
+      if (!mounted) return;
+      AppSnackbar.show(
+        context: context,
+        message: 'Failed to capture location. Please try again or add manually.',
+        variant: AppSnackbarVariant.error,
+      );
+    } finally {
+      if (mounted) {
+        setState(() => _isCapturingLocation = false);
+      }
+    }
+  }
+
+  void _showLocationServiceDisabledDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Location Services Disabled'),
+        content: const Text('Please enable location services (GPS) to capture your current location.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              final opened = await Geolocator.openLocationSettings();
+              if (opened && mounted) {
+                // Retry after user enables GPS
+                await Future.delayed(const Duration(seconds: 2));
+                _handleCaptureLocation();
+              }
+            },
+            child: const Text('Enable GPS'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showPermissionDeniedDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Location Permission Required'),
+        content: const Text('Please grant location permission to capture your current location.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              final granted = await Geolocator.requestPermission();
+              if (granted == LocationPermission.whileInUse || granted == LocationPermission.always) {
+                if (mounted) {
+                  _handleCaptureLocation();
+                }
+              } else if (granted == LocationPermission.denied) {
+                if (mounted) {
+                  AppSnackbar.show(
+                    context: context,
+                    message: 'Permission denied. Please try again.',
+                    variant: AppSnackbarVariant.error,
+                  );
+                }
+              }
+            },
+            child: const Text('Grant Permission'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showPermissionDeniedForeverDialog() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Location Permission Denied'),
+        content: const Text('Location permission was permanently denied. Please enable it in app settings.'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () async {
+              Navigator.pop(context);
+              await Geolocator.openAppSettings();
+            },
+            child: const Text('Open Settings'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _handleManualLocation() async {
+    final searchController = TextEditingController();
+    PlaceSuggestion? selectedSuggestion;
+    List<PlaceSuggestion> suggestions = [];
+    bool isSearching = false;
+
+    final result = await showDialog<PlaceSuggestion>(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: const Text('Search your location'),
+          content: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: searchController,
+                  decoration: InputDecoration(
+                    labelText: 'Search city',
+                    hintText: 'e.g., Mumbai',
+                    suffixIcon: isSearching
+                        ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Padding(
+                              padding: EdgeInsets.all(12.0),
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          )
+                        : null,
+                  ),
+                  autofocus: true,
+                  onChanged: (value) async {
+                    if (value.length < 2) {
+                      setDialogState(() => suggestions = []);
+                      return;
+                    }
+                    setDialogState(() => isSearching = true);
+                    try {
+                      final locationService = ref.read(supplierLocationServiceProvider);
+                      final results = await locationService.searchCities(value);
+                      if (mounted) {
+                        setDialogState(() {
+                          suggestions = results;
+                          isSearching = false;
+                        });
+                      }
+                    } catch (e) {
+                      if (mounted) {
+                        setDialogState(() => isSearching = false);
+                      }
+                    }
+                  },
+                ),
+                const SizedBox(height: 12),
+                if (suggestions.isNotEmpty)
+                  SizedBox(
+                    height: 200,
+                    child: ListView.builder(
+                      itemCount: suggestions.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = suggestions[index];
+                        return ListTile(
+                          title: Text(suggestion.label),
+                          subtitle: suggestion.source == 'google_places'
+                              ? const Text('Google Places')
+                              : const Text('Offline database'),
+                          onTap: () {
+                            setDialogState(() => selectedSuggestion = suggestion);
+                            Navigator.pop(context, suggestion);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    searchController.dispose();
+
+    if (result != null) {
+      // Resolve the suggestion to get coordinates if needed
+      final locationService = ref.read(supplierLocationServiceProvider);
+      final resolved = await locationService.resolveSuggestion(result);
+      
+      if (mounted) {
+        setState(() {
+          _city = resolved.city;
+          _state = resolved.state;
+          _latitude = resolved.lat;
+          _longitude = resolved.lng;
+        });
+      }
     }
   }
 
@@ -130,6 +405,80 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 label: l10n.onboardingMobileLabel,
                 hintText: profile?.mobile?.isNotEmpty == true ? profile!.mobile : '+91XXXXXXXXXX',
                 keyboardType: TextInputType.phone,
+              ),
+              const SizedBox(height: 16),
+              // Location capture section
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade300),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Location',
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 8),
+                    if (_city != null && _state != null)
+                      Text(
+                        '$_city, $_state',
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: Colors.green.shade700,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      )
+                    else
+                      Text(
+                        'No location added',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey.shade600,
+                            ),
+                      ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
+                            icon: const Icon(Icons.location_on, size: 18),
+                            label: Text(_isCapturingLocation ? 'Capturing...' : 'Use current location'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: _isCapturingLocation ? null : _handleManualLocation,
+                            icon: const Icon(Icons.edit_location, size: 18),
+                            label: const Text('Add manually'),
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    if (_city != null && _state != null) ...[
+                      const SizedBox(height: 8),
+                      TextButton(
+                        onPressed: _isCapturingLocation ? null : () {
+                          setState(() {
+                            _city = null;
+                            _state = null;
+                            _latitude = null;
+                            _longitude = null;
+                          });
+                        },
+                        child: const Text('Clear location', style: TextStyle(fontSize: 12)),
+                      ),
+                    ],
+                  ],
+                ),
               ),
               const SizedBox(height: 16),
               Row(

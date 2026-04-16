@@ -238,8 +238,22 @@ class AuthRepository {
 
   Future<Result<void>> provisionRoleExtension(AppUserRole role) => profileOps.provisionRoleExtension(role);
 
-  Future<Result<void>> updateProfile({required String fullName, required String mobile}) =>
-      profileOps.updateProfile(fullName: fullName, mobile: mobile);
+  Future<Result<void>> updateProfile({
+    required String fullName,
+    required String mobile,
+    String? city,
+    String? state,
+    double? latitude,
+    double? longitude,
+  }) =>
+      profileOps.updateProfile(
+        fullName: fullName,
+        mobile: mobile,
+        city: city,
+        state: state,
+        latitude: latitude,
+        longitude: longitude,
+      );
 
   Future<Result<void>> updatePreferredLanguage(String languageCode) => profileOps.updatePreferredLanguage(languageCode);
 

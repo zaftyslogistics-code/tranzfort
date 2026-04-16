@@ -6,7 +6,14 @@
 
 -- Drop old triggers first (if they exist)
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-DROP TRIGGER IF EXISTS trg_update_trucker_rating ON ratings;
+
+-- Only drop the ratings trigger if the ratings table exists
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'ratings') THEN
+        DROP TRIGGER IF EXISTS trg_update_trucker_rating ON ratings;
+    END IF;
+END $$;
 
 -- Drop old tables in reverse dependency order (cascade handles FKs)
 DROP TABLE IF EXISTS audit_logs CASCADE;

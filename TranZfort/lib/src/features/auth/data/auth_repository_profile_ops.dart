@@ -101,6 +101,10 @@ class AuthProfileRepository {
     String? roleValue,
     String? fullName,
     String? mobile,
+    String? city,
+    String? state,
+    double? latitude,
+    double? longitude,
   }) async {
     if (_client == null) {
       return const Failure<void>(UnauthorizedFailure());
@@ -113,10 +117,19 @@ class AuthProfileRepository {
 
     final trimmedName = fullName?.trim();
     final trimmedMobile = mobile?.trim();
+    final trimmedCity = city?.trim();
+    final trimmedState = state?.trim();
+    final hasGpsCoordinates = latitude != null && longitude != null;
+    final hasManualLocation = trimmedCity != null && trimmedCity.isNotEmpty;
     final rpcParams = <String, dynamic>{
       'p_user_role_type': roleValue,
       'p_full_name': trimmedName == null || trimmedName.isEmpty ? null : trimmedName,
       'p_mobile': trimmedMobile == null || trimmedMobile.isEmpty ? null : trimmedMobile,
+      'p_city': trimmedCity == null || trimmedCity.isEmpty ? null : trimmedCity,
+      'p_state': trimmedState == null || trimmedState.isEmpty ? null : trimmedState,
+      'p_location_lat': latitude,
+      'p_location_lng': longitude,
+      'p_location_source': hasGpsCoordinates ? 'gps' : (hasManualLocation ? 'manual' : null),
     };
 
     try {
@@ -191,6 +204,10 @@ class AuthProfileRepository {
   Future<Result<void>> updateProfile({
     required String fullName,
     required String mobile,
+    String? city,
+    String? state,
+    double? latitude,
+    double? longitude,
   }) async {
     if (_client == null) {
       return const Failure<void>(UnauthorizedFailure());
@@ -203,6 +220,8 @@ class AuthProfileRepository {
 
     final trimmedName = fullName.trim();
     final trimmedMobile = mobile.trim();
+    final trimmedCity = city?.trim();
+    final trimmedState = state?.trim();
     if (trimmedName.length < 2) {
       return const Failure<void>(
         ValidationFailure(
@@ -224,6 +243,10 @@ class AuthProfileRepository {
     final upsertResult = await _upsertCurrentUserProfile(
       fullName: trimmedName,
       mobile: trimmedMobile,
+      city: trimmedCity,
+      state: trimmedState,
+      latitude: latitude,
+      longitude: longitude,
     );
     if (upsertResult.isFailure) {
       return upsertResult;

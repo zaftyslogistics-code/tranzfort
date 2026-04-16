@@ -63,15 +63,28 @@ final adminSupabaseClientProvider = Provider<SupabaseClient?>((ref) {
 });
 
 final adminAuthStateProvider = StreamProvider<AdminAuthStateSnapshot>((ref) async* {
+  debugPrint('=== ADMIN AUTH STATE PROVIDER INITIALIZED ===');
   final client = ref.watch(adminSupabaseClientProvider);
-  yield await _loadAdminAuthStateSnapshot(client);
+  debugPrint('Initial client: ${client != null ? "available" : "null"}');
+  
+  final initialState = await _loadAdminAuthStateSnapshot(client);
+  debugPrint('=== YIELDING INITIAL STATE ===');
+  debugPrint('Initial state: hasSession=${initialState.hasSession}, role=${initialState.role}, isActive=${initialState.isActive}');
+  yield initialState;
 
   if (client == null) {
+    debugPrint('Client is null, not listening to auth state changes');
     return;
   }
 
+  debugPrint('=== STARTING AUTH STATE CHANGE LISTENER ===');
   yield* client.auth.onAuthStateChange.asyncMap(
-    (_) => _loadAdminAuthStateSnapshot(client),
+    (event) {
+      debugPrint('=== AUTH STATE CHANGE EVENT ===');
+      debugPrint('Event: ${event.event}');
+      debugPrint('Session: ${event.session?.user?.id}');
+      return _loadAdminAuthStateSnapshot(client);
+    },
   );
 });
 
@@ -82,31 +95,45 @@ final currentAdminAuthStateProvider = Provider<AdminAuthStateSnapshot>((ref) {
 });
 
 Future<AdminAuthStateSnapshot> _loadAdminAuthStateSnapshot(SupabaseClient? client) async {
+  debugPrint('=== ADMIN AUTH STATE LOADING ===');
+  debugPrint('Client is null: ${client == null}');
+  
   if (client == null) {
+    debugPrint('Client is null, returning signedOut');
     return AdminAuthStateSnapshot.signedOut();
   }
 
   final user = client.auth.currentUser;
+  debugPrint('Current user: ${user?.id}');
+  
   if (user == null) {
+    debugPrint('User is null, returning signedOut');
     return AdminAuthStateSnapshot.signedOut();
   }
 
+  debugPrint('User found, loading admin access...');
   try {
     Map<String, dynamic>? row;
 
     try {
+      debugPrint('Calling verify_admin_after_auth RPC for user: ${user.id}');
       final result = await client.rpc(
         'verify_admin_after_auth',
         params: {'p_auth_user_id': user.id},
       );
+      debugPrint('RPC result: $result');
 
       if (result != null && result['found'] == true) {
         row = {
           'role': result['role'],
           'is_active': result['is_active'],
         };
+        debugPrint('Admin found via RPC: role=${result['role']}, is_active=${result['is_active']}');
+      } else {
+        debugPrint('RPC returned null or found=false');
       }
-    } catch (_) {
+    } catch (e) {
+      debugPrint('RPC failed with error: $e, trying fallback query');
       row = await client
           .from('admin_users')
           .select('role, is_active')
@@ -115,6 +142,7 @@ Future<AdminAuthStateSnapshot> _loadAdminAuthStateSnapshot(SupabaseClient? clien
     }
 
     if (row == null) {
+      debugPrint('Row is null, returning unknown role');
       return const AdminAuthStateSnapshot(
         hasSession: true,
         role: AdminRole.unknown,
@@ -122,27 +150,32 @@ Future<AdminAuthStateSnapshot> _loadAdminAuthStateSnapshot(SupabaseClient? clien
       );
     }
 
+    debugPrint('Row data: $row');
     final role = switch ((row['role'] ?? '').toString().trim().toLowerCase()) {
       'ops_admin' => AdminRole.opsAdmin,
       'super_admin' => AdminRole.superAdmin,
       _ => AdminRole.unknown,
     };
 
-    return AdminAuthStateSnapshot(
+    final snapshot = AdminAuthStateSnapshot(
       hasSession: true,
       role: role,
       isActive: row['is_active'] == true,
     );
+    debugPrint('Returning auth state snapshot: hasSession=${snapshot.hasSession}, role=${snapshot.role}, isActive=${snapshot.isActive}, hasAdminAccess=${snapshot.hasAdminAccess}');
+    return snapshot;
   } catch (error, stackTrace) {
+    debugPrint('_loadAdminAuthStateSnapshot failed: $error\n$stackTrace');
     if (error is AuthApiException && error.code == 'refresh_token_not_found') {
       try {
         await client.auth.signOut();
       } catch (_) {
         // Best-effort local cleanup; fallback state below still signs user out.
       }
+      debugPrint('Refresh token not found, signed out');
       return AdminAuthStateSnapshot.signedOut();
     }
-    debugPrint('_loadAdminAuthStateSnapshot failed: $error\n$stackTrace');
+    debugPrint('Returning verificationFailed state');
     return const AdminAuthStateSnapshot(
       hasSession: true,
       role: AdminRole.unknown,

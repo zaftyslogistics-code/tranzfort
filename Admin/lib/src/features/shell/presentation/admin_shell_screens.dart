@@ -1,8 +1,13 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/providers/admin_auth_flow_providers.dart';
 import '../../../core/providers/admin_app_state_providers.dart';
+import '../../../core/navigation/admin_routes.dart';
 import '../../../core/theme/admin_colors.dart';
 import '../../../core/repositories/admin_auth_repository.dart';
 import '../../super_ops/presentation/admin_super_load_console_screen.dart';
@@ -114,6 +119,26 @@ class _AdminLoginScreenState extends ConsumerState<AdminLoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _logDebugInfo();
+  }
+
+  void _logDebugInfo() {
+    debugPrint('=== ADMIN LOGIN DEBUG INFO ===');
+    debugPrint('Platform: ${Platform.operatingSystem}');
+    debugPrint('Platform version: ${Platform.operatingSystemVersion}');
+    debugPrint('Is Android: ${Platform.isAndroid}');
+    debugPrint('Is iOS: ${Platform.isIOS}');
+    debugPrint('Is Windows: ${Platform.isWindows}');
+    debugPrint('Is macOS: ${Platform.isMacOS}');
+    debugPrint('Is Linux: ${Platform.isLinux}');
+    debugPrint('Is Web: ${kIsWeb}');
+    debugPrint('=============================');
+  }
 
   @override
   void dispose() {
@@ -128,15 +153,38 @@ class _AdminLoginScreenState extends ConsumerState<AdminLoginScreen> {
       return;
     }
 
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+    
+    debugPrint('=== ADMIN LOGIN SUBMIT DEBUG ===');
+    debugPrint('Email: $email');
+    debugPrint('Password length: ${password.length}');
+    debugPrint('Password masked: ${"*" * password.length}');
+    debugPrint('Platform: ${Platform.operatingSystem}');
+    debugPrint('===============================');
+
     final result = await ref.read(adminLoginControllerProvider.notifier).signIn(
-          email: _emailController.text.trim(),
-          password: _passwordController.text,
+          email: email,
+          password: password,
         );
+    
+    debugPrint('=== ADMIN LOGIN RESULT DEBUG ===');
+    debugPrint('IsSuccess: ${result.isSuccess}');
+    debugPrint('FailureReason: ${result.failureReason}');
+    debugPrint('Snapshot: ${result.snapshot}');
+    debugPrint('================================');
+    
     if (!mounted) {
       return;
     }
 
     if (result.isSuccess) {
+      debugPrint('=== LOGIN SUCCESS - MANUALLY NAVIGATING TO DASHBOARD ===');
+      // Small delay to ensure auth state is processed by router
+      await Future.delayed(const Duration(milliseconds: 100));
+      if (mounted) {
+        context.go(AdminRoutes.dashboardPath);
+      }
       return;
     }
 
@@ -146,6 +194,11 @@ class _AdminLoginScreenState extends ConsumerState<AdminLoginScreen> {
       AdminSignInFailureReason.deactivated => 'This admin account has been deactivated. Contact a super admin if you need access restored.',
       _ => 'Admin sign-in is unavailable right now. Try again shortly.',
     };
+
+    debugPrint('=== ADMIN LOGIN ERROR MESSAGE ===');
+    debugPrint('Error message: $message');
+    debugPrint('Failure reason: ${result.failureReason}');
+    debugPrint('================================');
 
     ScaffoldMessenger.of(context)
       ..hideCurrentSnackBar()
@@ -247,10 +300,18 @@ class _AdminLoginScreenState extends ConsumerState<AdminLoginScreen> {
                         const SizedBox(height: 12),
                         TextFormField(
                           controller: _passwordController,
-                          obscureText: true,
+                          obscureText: _obscurePassword,
                           autofillHints: const [AutofillHints.password],
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: 'Password',
+                            suffixIcon: IconButton(
+                              icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
+                            ),
                           ),
                           validator: (value) {
                             if ((value ?? '').isEmpty) {
