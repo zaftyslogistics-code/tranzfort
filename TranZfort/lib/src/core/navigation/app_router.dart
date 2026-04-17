@@ -33,10 +33,80 @@ import '../providers/app_state_providers.dart';
 import 'auth_router_refresh_notifier.dart';
 import '../../features/shell/presentation/user_app_shell.dart';
 import 'app_routes.dart';
+import 'route_metadata_helper.dart';
 
 part 'app_router_redirect.dart';
 
+/// Initialize route metadata
+/// 
+/// This function registers metadata for all routes in the app.
+/// Call this function when the app initializes to ensure route metadata
+/// is available for navigation behavior control.
+void _initializeRouteMetadata() {
+  // Auth Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.rootPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'root_redirect',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.splashPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'splash_screen',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.authPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'auth_entry_screen',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.authPasswordPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'email_password_auth',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.onboardingPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'onboarding_gate',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.onboardingRolePath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'role_selection',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.onboardingProfilePath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'onboarding_profile_completion',
+  });
+
+  // Note: Shell routes, supplier routes, trucker routes, detail routes, 
+  // form/modal routes, and special routes will be registered in subsequent batches
+}
+
+// Flag to ensure metadata is initialized only once
+bool _routeMetadataInitialized = false;
+
 final appRouterProvider = Provider<GoRouter>((ref) {
+  // Initialize route metadata on first access
+  if (!_routeMetadataInitialized) {
+    _initializeRouteMetadata();
+    _routeMetadataInitialized = true;
+  }
+
   final refreshNotifier = AuthRouterRefreshNotifier(ref);
   ref.onDispose(refreshNotifier.dispose);
 
