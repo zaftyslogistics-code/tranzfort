@@ -62,7 +62,7 @@ class RouteMetadataHelper {
   /// otherwise returns null.
   static RouteType? getType(BuildContext context) {
     final state = GoRouterState.of(context);
-    final metadata = _routeMetadata[state.matchedLocation];
+    final metadata = _findMetadata(state.matchedLocation);
     return metadata?['type'] as RouteType?;
   }
 
@@ -72,7 +72,7 @@ class RouteMetadataHelper {
   /// otherwise returns false (default).
   static bool shouldShowBackArrow(BuildContext context) {
     final state = GoRouterState.of(context);
-    final metadata = _routeMetadata[state.matchedLocation];
+    final metadata = _findMetadata(state.matchedLocation);
     return metadata?['showBackArrow'] as bool? ?? false;
   }
 
@@ -85,7 +85,7 @@ class RouteMetadataHelper {
   /// for form screens and other screens that need confirmation.
   static bool requirePopScope(BuildContext context) {
     final state = GoRouterState.of(context);
-    final metadata = _routeMetadata[state.matchedLocation];
+    final metadata = _findMetadata(state.matchedLocation);
     return metadata?['requirePopScope'] as bool? ?? false;
   }
 
@@ -97,8 +97,57 @@ class RouteMetadataHelper {
   /// This is used for future E2E testing infrastructure.
   static String? getTestId(BuildContext context) {
     final state = GoRouterState.of(context);
-    final metadata = _routeMetadata[state.matchedLocation];
+    final metadata = _findMetadata(state.matchedLocation);
     return metadata?['testId'] as String?;
+  }
+
+  /// Find metadata for a given path, supporting parameterized routes
+  /// 
+  /// This method first tries exact matching, then pattern matching for
+  /// routes with parameters (e.g., /load-detail/:loadId matches /load-detail/123).
+  static Map<String, dynamic>? _findMetadata(String path) {
+    // Try exact match first
+    if (_routeMetadata.containsKey(path)) {
+      return _routeMetadata[path];
+    }
+
+    // Try pattern matching for parameterized routes
+    for (final registeredPath in _routeMetadata.keys) {
+      if (_matchesPattern(registeredPath, path)) {
+        return _routeMetadata[registeredPath];
+      }
+    }
+
+    return null;
+  }
+
+  /// Check if a registered path pattern matches the actual path
+  /// 
+  /// Supports parameter matching (e.g., /load-detail/:loadId matches /load-detail/123)
+  static bool _matchesPattern(String pattern, String path) {
+    final patternParts = pattern.split('/');
+    final pathParts = path.split('/');
+
+    if (patternParts.length != pathParts.length) {
+      return false;
+    }
+
+    for (int i = 0; i < patternParts.length; i++) {
+      final patternPart = patternParts[i];
+      final pathPart = pathParts[i];
+
+      // If pattern part starts with ':', it's a parameter and matches anything
+      if (patternPart.startsWith(':')) {
+        continue;
+      }
+
+      // Otherwise, exact match required
+      if (patternPart != pathPart) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   /// Clear all route metadata

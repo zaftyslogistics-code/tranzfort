@@ -180,7 +180,43 @@ void _initializeRouteMetadata() {
     'testId': 'trips',
   });
 
-  // Note: Detail routes, form/modal routes, and special routes will be registered in subsequent batches
+  // Detail Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.loadDetailPath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'load_detail',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.tripDetailPath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'trip_detail',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.routePreviewPath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'route_preview',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.chatPath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'chat',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.publicProfilePath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'public_profile',
+  });
+
+  // Note: Form/modal routes and special routes will be registered in subsequent batches
 }
 
 // Flag to ensure metadata is initialized only once
