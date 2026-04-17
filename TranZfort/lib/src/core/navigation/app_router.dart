@@ -216,7 +216,43 @@ void _initializeRouteMetadata() {
     'testId': 'public_profile',
   });
 
-  // Note: Form/modal routes and special routes will be registered in subsequent batches
+  // Form & Modal Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.supplierVerificationPath, {
+    'type': RouteType.subFlow,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'supplier_verification',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.truckerVerificationPath, {
+    'type': RouteType.subFlow,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'trucker_verification',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.raiseDisputePath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'raise_dispute',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.createSupportTicketPath, {
+    'type': RouteType.modal,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'create_support_ticket',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.reportIssuePath, {
+    'type': RouteType.modal,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'report_issue',
+  });
+
+  // Note: Special routes will be registered in subsequent batches
 }
 
 // Flag to ensure metadata is initialized only once
