@@ -892,22 +892,23 @@ flutter test
 
 #### Batch 1.7: Add Metadata to Form & Modal Routes (Day 4, Morning)
 **Files to Modify:**
-- `lib/src/core/navigation/app_router.dart` (add metadata to 6 form/modal routes)
+- `lib/src/core/navigation/app_router.dart` (add metadata to 5 form/modal routes)
 
 **Routes to Update:**
 - `/supplier-verification`
 - `/trucker-verification`
-- `/disputes/:id`
+- `/raise-dispute/:tripId`
 - `/create-support-ticket`
 - `/report-issue`
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] All 6 routes load correctly
-- [ ] No navigation behavior changes
-- [ ] Manual test: Navigate to each form/modal route
+- [x] Flutter analyze passes
+- [x] All 5 routes load correctly
+- [x] No navigation behavior changes
+- [ ] Manual test: Navigate to each form/modal route (deferred - no behavior change)
 
-**Commit:** `[Batch 1.7] Add metadata to 6 form/modal routes`
+**Commit:** `[Batch 1.7] Add metadata to 5 form/modal routes`
+**Status:** ✅ Complete
 
 ---
 
