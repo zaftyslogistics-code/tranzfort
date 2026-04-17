@@ -619,9 +619,57 @@ Deep link errors show user-friendly error dialog.
 
 ## Safety Measures & Git Strategy
 
+### PRIMARY FALLBACK BRANCH (Ultimate Safety Net)
+
+**Branch Name:** `feature/codebase-refactoring`
+**Commit:** `0587f23`
+**Commit Message:** "Fix: Admin login mobile + GPS location district name + onboarding location capture"
+
+**When to Use This Fallback:**
+- If Plan C implementation completely fails
+- If critical regressions make the app unusable
+- If build fails with dependency conflicts
+- If Supabase configuration issues occur
+- If any emergency rollback is needed
+
+**How to Restore to Primary Fallback:**
+```bash
+# 1. Stash any local changes
+git stash
+
+# 2. Checkout the fallback branch
+git checkout feature/codebase-refactoring
+
+# 3. Clean and rebuild
+cd TranZfort
+flutter clean
+flutter pub get
+flutter build apk --debug
+
+# 4. Run on device
+flutter run --debug -d <device_id>
+```
+
+**What This Branch Contains:**
+- **Dependency Fixes:** flutter_dotenv, record_linux, speech_to_text, record, supabase_flutter
+- **Configuration:** .env file loading, Supabase config, Google Maps API, Firebase messaging
+- **Features:** Admin login mobile fixes, GPS location, onboarding, public profiles, reviews, verification flow
+- **Status:** Latest working state as of April 16, 2026
+- **Build:** Successfully builds APK without errors
+
+**Why This Branch is the Ultimate Fallback:**
+1. Latest working state with all fixes
+2. All dependency conflicts resolved
+3. Configuration complete and verified
+4. Build verified (APK builds successfully)
+5. Feature complete (Sprint 7 and Sprint 8)
+6. Safe to use as production fallback
+
+---
+
 ### Branching Strategy
 
-**Current Branch:** `feature/codebase-refactoring` (safety net)
+**Current Branch:** `feature/codebase-refactoring` (safety net - commit 0587f23)
 
 **Implementation Branch:** Create new branch for Plan C
 ```bash
@@ -634,6 +682,11 @@ git checkout -b feature/navigation-planc
 - Commit after each batch (not after each file)
 - Commit message format: `[Batch X] Description`
 - Push after each batch to remote (backup)
+
+**Safety Net Hierarchy:**
+1. **Checkpoint Tags:** `checkpoint-batch-X-before` and `checkpoint-batch-X-after` (per batch)
+2. **Implementation Branch:** `feature/navigation-planc` (current work)
+3. **Primary Fallback:** `feature/codebase-refactoring` (commit 0587f23) - Ultimate safety net
 
 ### Rollback Plan
 
@@ -1279,14 +1332,29 @@ git push origin checkpoint-batch-X-after
 
 ### Emergency Rollback Procedure:
 ```bash
-# Rollback to last known good state
+# Option 1: Rollback to last known good checkpoint
 git reset --hard checkpoint-batch-X-before
 git push origin feature/navigation-planc --force
 
-# Or rollback to before Plan C started
+# Option 2: Rollback to before Plan C started
 git checkout feature/codebase-refactoring
 git reset --hard <commit-before-planc-start>
+
+# Option 3: Rollback to primary fallback (ULTIMATE SAFETY NET)
+# Use this if everything else fails - commit 0587f23 is the last known working state
+git checkout feature/codebase-refactoring
+git reset --hard 0587f23
+cd TranZfort
+flutter clean
+flutter pub get
+flutter build apk --debug
 ```
+
+**Primary Fallback Branch:** `feature/codebase-refactoring` (commit 0587f23)
+- Latest working state as of April 16, 2026
+- All dependency fixes in place
+- Build verified successfully
+- Safe to use as production fallback
 
 ---
 
