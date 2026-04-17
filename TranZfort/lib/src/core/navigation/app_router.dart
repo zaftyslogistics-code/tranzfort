@@ -252,7 +252,36 @@ void _initializeRouteMetadata() {
     'testId': 'report_issue',
   });
 
-  // Note: Special routes will be registered in subsequent batches
+  // Special Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.bannedPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'banned',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.notificationsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'notifications',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.supportPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'support',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.deleteAccountPath, {
+    'type': RouteType.standalone,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'delete_account',
+  });
+
+  // All routes now have metadata registered
 }
 
 // Flag to ensure metadata is initialized only once
