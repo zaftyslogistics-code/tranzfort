@@ -407,7 +407,524 @@
 - `lib/src/features/shell/presentation/shell_settings_screen.dart`
 - `lib/src/features/shell/presentation/user_app_shell.dart`
 
-**Review Status:** [Not Started/In Progress/Complete]
+**Review Status:** In Progress
+
+---
+
+#### 2.1.1 user_app_shell.dart
+
+**File:** `lib/src/features/shell/presentation/user_app_shell.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget in the shell
+- **Impact:** System back button uses Flutter's default behavior
+- **Risk:** No "Press back again to exit" protection on top-level routes
+
+**AppBar Configuration:**
+- **Status:** Conditional AppBar based on topLevel check (line 40-71)
+- **Finding:** AppBar only shown when route is a top-level tab
+- **Leading Widget:** None (no back arrow)
+- **Actions:** Notifications icon, TTS button, Language toggle, Profile avatar (opens drawer)
+- **Impact:** No visible back arrow on top-level routes (as expected)
+- **Risk:** None - this is correct for top-level routes
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Flutter's default behavior
+- **Risk:** On top-level routes, back button may close app without confirmation
+
+**Navigation Pattern:**
+- **Bottom Nav:** Uses `context.go(tabs[index].route)` (line 85)
+- **Drawer Navigation:** Uses `Navigator.pop()` then `context.go(route)` (lines 342-345)
+- **Sign Out:** Uses `Navigator.pop()` if canPop, then `router.go(authPath)` (lines 363-369)
+- **Pattern:** Consistent use of context.go() for route changes
+
+**State Management:**
+- **Providers Used:**
+  - currentProfileProvider - For avatar display
+  - currentAuthStateProvider - For auth state
+  - shellUnreadNotificationCountProvider - For notification badge
+- **Navigation Dependencies:** Providers watch auth state but don't trigger navigation
+- **Impact:** No provider-driven navigation in shell
+
+**Lifecycle Methods:**
+- **Status:** No special lifecycle handling
+- **Finding:** Standard ConsumerWidget pattern
+- **Impact:** No navigation state cleanup on dispose
+
+---
+
+#### Issues Found
+
+**Issue 1: No "Press Back Again to Exit" Protection**
+- **Severity:** High
+- **Description:** No PopScope with "Press back again to exit" toast on top-level routes
+- **Impact:** Users can accidentally close the app by pressing back button
+- **Location:** Entire user_app_shell.dart
+- **Current Behavior:** System back button closes app immediately on top-level routes
+- **Recommendation:** Add PopScope with canPop: false and double-press logic on top-level routes
+
+**Issue 2: No Back Button Handling on Top-Level Routes**
+- **Severity:** High
+- **Description:** System back button has no special handling on dashboard, messages, etc.
+- **Impact:** Inconsistent with professional app standards
+- **Location:** user_app_shell.dart
+- **Recommendation:** Implement centralized back handler for top-level routes
+
+**Issue 3: Drawer Navigation Uses Mixed Pattern**
+- **Severity:** Low
+- **Description:** Drawer uses Navigator.pop() then context.go() (lines 342-345)
+- **Impact:** Could cause issues if navigation stack is not as expected
+- **Location:** UserAppDrawerContent._go() method
+- **Recommendation:** Consider using context.go() directly (drawer closes automatically)
+
+**Issue 4: Sign Out Navigation Has Conditional Pop**
+- **Severity:** Medium
+- **Description:** Sign out uses Navigator.pop() if canPop, then router.go() (lines 363-369)
+- **Impact:** Could leave unexpected screens in stack
+- **Location:** UserAppDrawerContent._signOut() method
+- **Recommendation:** Use router.go() directly, let GoRouter handle stack
+
+---
+
+#### Dependencies Identified
+
+**Provider Dependencies:**
+- currentProfileProvider - Read for avatar display
+- currentAuthStateProvider - Read for auth state and avatar
+- shellUnreadNotificationCountProvider - Watch for notification badge
+
+**Navigation Dependencies:**
+- GoRouter - Used for all navigation (context.go())
+- Navigator - Used for drawer close and sign out
+
+**State Dependencies:**
+- currentLocation parameter - Determines current tab
+- role parameter - Determines which tabs to show
+- Associated routes in _ShellTab - Determines tab selection for nested routes
+
+---
+
+#### Current Back Behavior
+
+**Top-Level Routes (Dashboard, Messages, etc.):**
+- **System Back Button:** Closes app immediately (Flutter default)
+- **No Confirmation:** No "Press back again to exit" toast
+- **No Visible Back Arrow:** Correct (AppBar has no leading widget)
+
+**Nested Routes (Load Detail, Chat, etc.):**
+- **System Back Button:** Navigator.pop() (Flutter default)
+- **Behavior:** Returns to previous screen in navigation stack
+- **AppBar:** Shown by shell (topLevel = false)
+
+**Drawer Navigation:**
+- **Drawer Close:** Navigator.pop()
+- **Route Change:** context.go()
+- **Pattern:** Two-step navigation
+
+---
+
+#### Questions Raised
+
+1. **Why is there no "Press back again to exit" protection?**
+   - Was this intentionally omitted?
+   - Should it be added for professional app standards?
+
+2. **Why does drawer use Navigator.pop() before context.go()?**
+   - Is this necessary or can context.go() handle drawer close?
+   - Could this cause navigation stack issues?
+
+3. **Why does sign out check Navigator.canPop()?**
+   - What scenarios require this check?
+   - Could router.go() handle this automatically?
+
+4. **Are there any edge cases where associatedRoutes logic fails?**
+   - What if a route matches multiple tabs?
+   - What if a route doesn't match any tab?
+
+---
+
+#### Risk Assessment for Centralized Navigation
+
+**High Risk:**
+- Adding PopScope to shell - Could break existing navigation flows
+- Changing drawer navigation pattern - Could break drawer functionality
+- Changing sign out navigation - Could break auth flow
+
+**Medium Risk:**
+- Adding "Press back again to exit" - Could conflict with existing behavior
+- Modifying associatedRoutes logic - Could break tab selection
+
+**Low Risk:**
+- Adding back arrow to nested routes (handled by shell)
+- Standardizing navigation pattern - Should improve consistency
+
+---
+
+#### Recommendations
+
+1. **Add PopScope to user_app_shell.dart**
+   - Implement only on top-level routes (topLevel = true)
+   - Add "Press back again to exit" toast
+   - Use 2-second timeout for double-press
+
+2. **Simplify Drawer Navigation**
+   - Remove Navigator.pop() from _go() method
+   - Use context.go() directly (drawer closes automatically)
+   - Test to ensure drawer closes properly
+
+3. **Simplify Sign Out Navigation**
+   - Remove Navigator.canPop() check
+   - Use router.go() directly
+   - Let GoRouter handle navigation stack
+
+4. **Document associatedRoutes Logic**
+   - Add comments explaining the matching logic
+   - Document edge cases
+   - Consider moving to separate utility class
+
+---
+
+#### 2.1.2 shell_messages_screen.dart
+
+**File:** `lib/src/features/shell/presentation/shell_messages_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow (correct for top-level route)
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Flutter's default behavior
+
+**Navigation Pattern:**
+- **Empty State Action:** Uses `context.go()` to navigate to my-loads or find-loads (line 94)
+- **Chat Navigation:** Uses `context.go()` to navigate to chat (line 215, 336)
+- **Public Profile:** Uses `context.push()` for public profile (line 229, 343)
+- **Pattern:** Consistent use of context.go() for navigation
+
+**State Management:**
+- **Providers Used:**
+  - currentAuthStateProvider - For auth state
+  - inboxProvider - For conversation list
+- **Navigation Dependencies:** None
+
+**Lifecycle Methods:**
+- **Status:** ConsumerStatefulWidget with local state (_expandedLoadIds)
+- **Finding:** No navigation state cleanup on dispose
+
+---
+
+#### Issues Found
+
+**Issue 1: No Back Button Handling**
+- **Severity:** Medium (inherits from shell)
+- **Description:** No PopScope or custom back handler
+- **Impact:** System back button closes app immediately
+- **Location:** Entire shell_messages_screen.dart
+- **Recommendation:** Rely on shell-level PopScope implementation
+
+**Issue 2: Mixed Navigation Pattern**
+- **Severity:** Low
+- **Description:** Uses context.push() for public profile (line 229, 343)
+- **Impact:** Inconsistent with rest of app (mostly context.go())
+- **Location:** Avatar onTap handlers
+- **Recommendation:** Consider using context.go() for consistency
+
+---
+
+#### Dependencies Identified
+
+**Provider Dependencies:**
+- currentAuthStateProvider - Read for auth state
+- inboxProvider - Watch for conversation list
+
+**Navigation Dependencies:**
+- GoRouter - Used for all navigation
+- Navigator - None
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Closes app immediately (Flutter default)
+- **No Confirmation:** No "Press back again to exit" toast
+- **No Visible Back Arrow:** Correct (DetailPageScaffold has no leading widget)
+
+---
+
+#### 2.1.3 shell_profile_screen.dart
+
+**File:** `lib/src/features/shell/presentation/shell_profile_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow (correct for top-level route)
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Flutter's default behavior
+
+**Navigation Pattern:**
+- **Support Navigation:** Uses `context.go()` to navigate to support (line 85, 161, 176, 192, 206)
+- **Fleet Navigation:** Uses `context.go()` to navigate to fleet (line 119)
+- **Delete Account:** Uses `context.go()` to navigate to delete-account (line 126)
+- **Pattern:** Consistent use of context.go() for navigation
+
+**State Management:**
+- **Providers Used:**
+  - currentAuthStateProvider - For auth state
+  - currentProfileProvider - For profile data
+  - appLocaleProvider - For language
+  - contextualTtsServiceProvider - For TTS
+- **Navigation Dependencies:** None
+
+**Lifecycle Methods:**
+- **Status:** ConsumerWidget
+- **Finding:** No navigation state cleanup on dispose
+
+---
+
+#### Issues Found
+
+**Issue 1: No Back Button Handling**
+- **Severity:** Medium (inherits from shell)
+- **Description:** No PopScope or custom back handler
+- **Impact:** System back button closes app immediately
+- **Location:** Entire shell_profile_screen.dart
+- **Recommendation:** Rely on shell-level PopScope implementation
+
+---
+
+#### Dependencies Identified
+
+**Provider Dependencies:**
+- currentAuthStateProvider - Read for auth state
+- currentProfileProvider - Watch for profile data
+- appLocaleProvider - Watch for language
+- contextualTtsServiceProvider - Read for TTS
+
+**Navigation Dependencies:**
+- GoRouter - Used for all navigation
+- Navigator - None
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Closes app immediately (Flutter default)
+- **No Confirmation:** No "Press back again to exit" toast
+- **No Visible Back Arrow:** Correct (DetailPageScaffold has no leading widget)
+
+---
+
+#### 2.1.4 shell_settings_screen.dart
+
+**File:** `lib/src/features/shell/presentation/shell_settings_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow (correct for top-level route)
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Flutter's default behavior
+
+**Navigation Pattern:**
+- **Profile Navigation:** Uses `context.go()` to navigate to profile (line 120)
+- **Notifications Navigation:** Uses `context.go()` to navigate to notifications (line 125)
+- **Support Navigation:** Uses `context.go()` to navigate to support (line 130)
+- **Delete Account:** Uses `context.go()` to navigate to delete-account (line 135)
+- **Pattern:** Consistent use of context.go() for navigation
+
+**State Management:**
+- **Providers Used:**
+  - currentProfileProvider - For profile data
+  - appLocaleProvider - For language
+  - contextualTtsServiceProvider - For TTS
+  - pushPermissionSnapshotProvider - For push notification status
+  - pushRuntimeIssuesProvider - For push runtime issues
+- **Navigation Dependencies:** None
+
+**Lifecycle Methods:**
+- **Status:** ConsumerWidget
+- **Finding:** No navigation state cleanup on dispose
+
+---
+
+#### Issues Found
+
+**Issue 1: No Back Button Handling**
+- **Severity:** Medium (inherits from shell)
+- **Description:** No PopScope or custom back handler
+- **Impact:** System back button closes app immediately
+- **Location:** Entire shell_settings_screen.dart
+- **Recommendation:** Rely on shell-level PopScope implementation
+
+---
+
+#### Dependencies Identified
+
+**Provider Dependencies:**
+- currentProfileProvider - Watch for profile data
+- appLocaleProvider - Watch for language
+- contextualTtsServiceProvider - Read for TTS
+- pushPermissionSnapshotProvider - Watch for push notification status
+- pushRuntimeIssuesProvider - Watch for push runtime issues
+
+**Navigation Dependencies:**
+- GoRouter - Used for all navigation
+- Navigator - None
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Closes app immediately (Flutter default)
+- **No Confirmation:** No "Press back again to exit" toast
+- **No Visible Back Arrow:** Correct (DetailPageScaffold has no leading widget)
+
+---
+
+#### 2.1.5 shell_components.dart (DetailPageScaffold)
+
+**File:** `lib/src/features/shell/presentation/shell_components.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget in DetailPageScaffold
+- **Impact:** Screens using DetailPageScaffold have no back button handling
+
+**AppBar Configuration:**
+- **Status:** DetailPageScaffold has AppBar (lines 27-33)
+- **Finding:** AppBar has NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow
+- **Used By:** shell_profile_screen, shell_settings_screen
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Flutter's default behavior
+
+**Navigation Pattern:**
+- **Status:** No navigation logic in DetailPageScaffold
+- **Finding:** Pure UI component, no navigation
+- **Impact:** Navigation handled by parent screens
+
+---
+
+#### Issues Found
+
+**Issue 1: No Back Arrow in AppBar**
+- **Severity:** Low
+- **Description:** DetailPageScaffold has no leading widget in AppBar
+- **Impact:** No visible back arrow (may be correct for top-level routes, but used by profile/settings which are also top-level)
+- **Location:** DetailPageScaffold build method (lines 27-33)
+- **Recommendation:** This is correct for top-level routes, no change needed
+
+**Issue 2: No PopScope in DetailPageScaffold**
+- **Severity:** Low
+- **Description:** No PopScope widget
+- **Impact:** Screens using DetailPageScaffold have no back button handling
+- **Location:** DetailPageScaffold
+- **Recommendation:** Keep PopScope at shell level, not in DetailPageScaffold
+
+---
+
+#### Dependencies Identified
+
+**Navigation Dependencies:**
+- None - Pure UI component
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Uses Flutter's default behavior
+- **No Visible Back Arrow:** Correct for top-level routes
+
+---
+
+#### Shell Screens Summary
+
+**Common Pattern:**
+- All shell screens (messages, profile, settings) use DetailPageScaffold
+- DetailPageScaffold has AppBar with NO leading widget
+- No PopScope in any shell screen
+- No custom back button handlers
+- All use context.go() for navigation
+- System back button closes app immediately (Flutter default)
+
+**Key Finding:**
+- Shell screens rely on user_app_shell.dart for back button handling
+- user_app_shell.dart has NO PopScope implementation
+- Therefore, NO back button protection on ANY shell screen
+
+**Risk Assessment:**
+- **High Risk:** Adding PopScope to shell screens individually could break navigation
+- **Recommended:** Add PopScope at user_app_shell.dart level only
 
 ---
 
@@ -428,7 +945,227 @@
 - `lib/src/features/communication/presentation/chat_screen.dart`
 - `lib/src/features/communication/presentation/message_list_screen.dart`
 
-**Review Status:** [Not Started/In Progress/Complete]
+**Review Status:** In Progress
+
+---
+
+#### 2.2.1 supplier_trip_detail_screen.dart
+
+**File:** `lib/src/features/supplier/presentation/supplier_trip_detail_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete (partial - first 100 lines)
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE (in first 100 lines)
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior (Navigator.pop())
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow on detail screen
+
+**Custom Back Button Handler:**
+- **Status:** NONE (in first 100 lines)
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Navigator.pop() (Flutter default for nested routes)
+
+**Navigation Pattern:**
+- **Empty State Action:** Uses `context.go()` to navigate to supplier-trips (line 47)
+- **Pattern:** Uses context.go() for navigation
+
+**State Management:**
+- **Providers Used:**
+  - supplierTripDetailProvider - For trip detail data
+- **Navigation Dependencies:** None
+
+---
+
+#### Issues Found
+
+**Issue 1: No Visible Back Arrow**
+- **Severity:** Medium
+- **Description:** DetailPageScaffold has no leading widget (no back arrow)
+- **Impact:** Users cannot see back button, must use system back button
+- **Location:** DetailPageScaffold (shell_components.dart)
+- **Recommendation:** Add leading widget with back arrow to DetailPageScaffold for nested routes
+
+**Issue 2: No PopScope**
+- **Severity:** Low
+- **Description:** No PopScope widget
+- **Impact:** System back button uses Navigator.pop() (correct for nested routes)
+- **Location:** supplier_trip_detail_screen.dart
+- **Recommendation:** No change needed - Navigator.pop() is correct for nested routes
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Navigator.pop() (Flutter default for nested routes)
+- **Behavior:** Returns to previous screen (supplier-trips)
+- **No Visible Back Arrow:** Issue - should have back arrow
+
+---
+
+#### 2.2.2 trucker_load_detail_screen.dart
+
+**File:** `lib/src/features/trucker/presentation/trucker_load_detail_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete (partial - first 100 lines)
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE (in first 100 lines)
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior (Navigator.pop())
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow on detail screen
+
+**Custom Back Button Handler:**
+- **Status:** NONE (in first 100 lines)
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Navigator.pop() (Flutter default for nested routes)
+
+**Navigation Pattern:**
+- **Status:** No navigation in first 100 lines
+- **Finding:** Uses DetailPageScaffold
+- **Pattern:** Likely uses context.go() for navigation (in other parts)
+
+**State Management:**
+- **Providers Used:**
+  - truckerLoadDetailProvider - For load detail data
+  - truckerProfileProvider - For profile data
+  - dieselPriceMapProvider - For diesel prices
+  - tripCostingServiceProvider - For trip costing
+  - truckerLoadShareServiceProvider - For load sharing
+- **Navigation Dependencies:** None
+
+---
+
+#### Issues Found
+
+**Issue 1: No Visible Back Arrow**
+- **Severity:** Medium
+- **Description:** DetailPageScaffold has no leading widget (no back arrow)
+- **Impact:** Users cannot see back button, must use system back button
+- **Location:** DetailPageScaffold (shell_components.dart)
+- **Recommendation:** Add leading widget with back arrow to DetailPageScaffold for nested routes
+
+**Issue 2: No PopScope**
+- **Severity:** Low
+- **Description:** No PopScope widget
+- **Impact:** System back button uses Navigator.pop() (correct for nested routes)
+- **Location:** trucker_load_detail_screen.dart
+- **Recommendation:** No change needed - Navigator.pop() is correct for nested routes
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Navigator.pop() (Flutter default for nested routes)
+- **Behavior:** Returns to previous screen (find-loads)
+- **No Visible Back Arrow:** Issue - should have back arrow
+
+---
+
+#### 2.2.3 trucker_trip_detail_screen.dart
+
+**File:** `lib/src/features/trucker/presentation/trucker_trip_detail_screen.dart`
+
+**Review Date:** April 17, 2026
+**Review Status:** Complete (full file - 73 lines)
+
+---
+
+#### Navigation Implementation Analysis
+
+**PopScope Implementation:**
+- **Status:** NONE
+- **Finding:** No PopScope widget
+- **Impact:** System back button uses Flutter's default behavior (Navigator.pop())
+
+**AppBar Configuration:**
+- **Status:** Uses DetailPageScaffold (from shell_components.dart)
+- **Finding:** DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- **Actions:** TTS button, Language toggle
+- **Impact:** No visible back arrow on detail screen
+
+**Custom Back Button Handler:**
+- **Status:** NONE
+- **Finding:** No custom back button handler
+- **Impact:** System back button uses Navigator.pop() (Flutter default for nested routes)
+
+**Navigation Pattern:**
+- **Empty State Action:** Uses `context.go()` to navigate to trips (line 57)
+- **Pattern:** Uses context.go() for navigation
+
+**State Management:**
+- **Providers Used:**
+  - truckerTripDetailProvider - For trip detail data
+- **Navigation Dependencies:** None
+
+---
+
+#### Issues Found
+
+**Issue 1: No Visible Back Arrow**
+- **Severity:** Medium
+- **Description:** DetailPageScaffold has no leading widget (no back arrow)
+- **Impact:** Users cannot see back button, must use system back button
+- **Location:** DetailPageScaffold (shell_components.dart)
+- **Recommendation:** Add leading widget with back arrow to DetailPageScaffold for nested routes
+
+**Issue 2: No PopScope**
+- **Severity:** Low
+- **Description:** No PopScope widget
+- **Impact:** System back button uses Navigator.pop() (correct for nested routes)
+- **Location:** trucker_trip_detail_screen.dart
+- **Recommendation:** No change needed - Navigator.pop() is correct for nested routes
+
+---
+
+#### Current Back Behavior
+
+- **System Back Button:** Navigator.pop() (Flutter default for nested routes)
+- **Behavior:** Returns to previous screen (trips)
+- **No Visible Back Arrow:** Issue - should have back arrow
+
+---
+
+#### Detail Screens Summary (First 3 Screens)
+
+**Common Pattern:**
+- All detail screens use DetailPageScaffold
+- DetailPageScaffold has AppBar with NO leading widget (no back arrow)
+- No PopScope in any detail screen
+- No custom back button handlers
+- All use context.go() for navigation
+- System back button uses Navigator.pop() (Flutter default for nested routes)
+
+**Key Finding:**
+- Detail screens have NO visible back arrow
+- System back button works correctly (Navigator.pop())
+- DetailPageScaffold is used by both top-level (profile/settings) and nested (detail) routes
+- DetailPageScaffold has no way to distinguish between top-level and nested routes
+
+**Risk Assessment:**
+- **High Risk:** Adding leading widget to DetailPageScaffold would add back arrow to profile/settings (incorrect)
+- **Medium Risk:** Detail screens need visible back arrow but currently don't have one
+- **Recommended:** Create separate scaffold for detail screens with back arrow, or add configurable leading widget to DetailPageScaffold
 
 ---
 
@@ -440,13 +1177,13 @@
 - `lib/src/features/marketplace/presentation/post_load_screen.dart`
 - `lib/src/features/support/presentation/raise_dispute_screen.dart`
 
-**Review Status:** [Not Started/In Progress/Complete]
+**Review Status:** Not Started
 
 ---
 
 ### 2.4 Modal Screens
 
-**Review Status:** [Not Started/In Progress/Complete]
+**Review Status:** Not Started
 
 ---
 
