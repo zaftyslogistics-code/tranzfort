@@ -15,7 +15,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../notifications/providers/notification_providers.dart';
 
-class UserAppShell extends ConsumerWidget {
+class UserAppShell extends ConsumerStatefulWidget {
   final String currentLocation;
   final AppUserRole role;
   final Widget child;
@@ -28,70 +28,102 @@ class UserAppShell extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final AppLocalizations l10n = AppLocalizations.of(context);
-    final tabs = _tabsForRole(role, l10n);
-    final currentIndex = _resolveIndex(currentLocation, tabs);
-    final currentTab = tabs[currentIndex];
-    final topLevel = _isTopLevel(currentLocation, tabs);
-    final unreadNotificationCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
+  ConsumerState<UserAppShell> createState() => _UserAppShellState();
+}
 
-    return Scaffold(
-      appBar: topLevel
-          ? AppBar(
-              title: Text(currentTab.title),
-              actions: [
-                IconButton(
-                  tooltip: l10n.supplierQuickActionNotifications,
-                  onPressed: () => context.go(AppRoutes.notificationsPath),
-                  icon: _ShellUtilityBadgeIcon(
-                    icon: Icons.notifications_none_outlined,
-                    count: unreadNotificationCount,
-                  ),
-                ),
-                TtsActionButton(fallbackSummary: currentTab.title),
-                const LanguageToggleAction(),
-                Builder(
-                  builder: (scaffoldContext) {
-                    final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
-                    final authState = ref.watch(currentAuthStateProvider);
-                    final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
-                    return Padding(
-                      padding: const EdgeInsets.only(right: AppSpacing.sm),
-                      child: IconButton(
-                        tooltip: l10n.navProfile,
-                        onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
-                        icon: _AvatarCircle(avatarUrl: avatarUrl, radius: 16),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            )
-          : null,
-      drawer: UserAppDrawer(role: role),
-      body: Stack(
-        children: [
-          child,
-          if (topLevel)
-            TtsScreenSummaryEffect(
-              summary: currentTab.title,
-              screenKey: '${role.name}:${currentTab.route}',
-            ),
-        ],
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: currentIndex,
-        onDestinationSelected: (index) => context.go(tabs[index].route),
-        destinations: tabs
-            .map(
-              (tab) => NavigationDestination(
-                icon: Icon(tab.icon),
-                selectedIcon: Icon(tab.activeIcon),
-                label: tab.label,
+class _UserAppShellState extends ConsumerState<UserAppShell> {
+  DateTime? _lastBackPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final tabs = _tabsForRole(widget.role, l10n);
+    final currentIndex = _resolveIndex(widget.currentLocation, tabs);
+    final currentTab = tabs[currentIndex];
+    final topLevel = _isTopLevel(widget.currentLocation, tabs);
+    final unreadNotificationCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
+    
+    // Determine if back should be allowed
+    final canPop = !topLevel || (_lastBackPressed != null && DateTime.now().difference(_lastBackPressed!) < const Duration(seconds: 2));
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        
+        // Handle back button on top-level routes
+        if (topLevel) {
+          final now = DateTime.now();
+          if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
+            // First press - show toast message
+            _lastBackPressed = now;
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Press back again to exit'),
+                duration: const Duration(seconds: 2),
               ),
-            )
-            .toList(growable: false),
+            );
+          }
+          // If pressed within 2 seconds, canPop will be true and the system will handle exit
+        }
+      },
+      child: Scaffold(
+        appBar: topLevel
+            ? AppBar(
+                title: Text(currentTab.title),
+                actions: [
+                  IconButton(
+                    tooltip: l10n.supplierQuickActionNotifications,
+                    onPressed: () => context.go(AppRoutes.notificationsPath),
+                    icon: _ShellUtilityBadgeIcon(
+                      icon: Icons.notifications_none_outlined,
+                      count: unreadNotificationCount,
+                    ),
+                  ),
+                  TtsActionButton(fallbackSummary: currentTab.title),
+                  const LanguageToggleAction(),
+                  Builder(
+                    builder: (scaffoldContext) {
+                      final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
+                      final authState = ref.watch(currentAuthStateProvider);
+                      final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
+                      return Padding(
+                        padding: const EdgeInsets.only(right: AppSpacing.sm),
+                        child: IconButton(
+                          tooltip: l10n.navProfile,
+                          onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
+                          icon: _AvatarCircle(avatarUrl: avatarUrl, radius: 16),
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              )
+            : null,
+        drawer: UserAppDrawer(role: widget.role),
+        body: Stack(
+          children: [
+            widget.child,
+            if (topLevel)
+              TtsScreenSummaryEffect(
+                summary: currentTab.title,
+                screenKey: '${widget.role.name}:${currentTab.route}',
+              ),
+          ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: currentIndex,
+          onDestinationSelected: (index) => context.go(tabs[index].route),
+          destinations: tabs
+              .map(
+                (tab) => NavigationDestination(
+                  icon: Icon(tab.icon),
+                  selectedIcon: Icon(tab.activeIcon),
+                  label: tab.label,
+                ),
+              )
+              .toList(growable: false),
+        ),
       ),
     );
   }
