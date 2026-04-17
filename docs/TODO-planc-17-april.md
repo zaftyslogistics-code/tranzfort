@@ -617,26 +617,676 @@ Deep link errors show user-friendly error dialog.
 
 ---
 
+## Safety Measures & Git Strategy
+
+### Branching Strategy
+
+**Current Branch:** `feature/codebase-refactoring` (safety net)
+
+**Implementation Branch:** Create new branch for Plan C
+```bash
+git checkout feature/codebase-refactoring
+git pull origin feature/codebase-refactoring
+git checkout -b feature/navigation-planc
+```
+
+**Commit Strategy:**
+- Commit after each batch (not after each file)
+- Commit message format: `[Batch X] Description`
+- Push after each batch to remote (backup)
+
+### Rollback Plan
+
+**Before Each Batch:**
+```bash
+# Create checkpoint
+git tag checkpoint-batch-X-before
+git push origin checkpoint-batch-X-before
+```
+
+**If Issues Found:**
+```bash
+# Rollback to checkpoint
+git reset --hard checkpoint-batch-X-before
+git push origin feature/navigation-planc --force
+```
+
+**Emergency Rollback:**
+```bash
+# If entire Plan C fails, go back to original
+git checkout feature/codebase-refactoring
+git reset --hard <commit-before-planc-start>
+```
+
+### Batch Implementation Strategy
+
+**Principle:** Work in smallest possible batches, test after each batch
+
+**Batch Size:** 1-2 files maximum per batch
+**Testing:** Full regression test after each batch
+**Code Quality:** Run Flutter analyzer after each batch
+
+---
+
+## Flutter Code Quality Checks
+
+### Before Each Batch:
+```bash
+# Run Flutter analyzer
+flutter analyze
+
+# Check for warnings
+flutter analyze --fatal-infos
+
+# Format code
+dart format .
+
+# Check formatting
+dart format --set-exit-if-changed .
+```
+
+### After Each Batch:
+```bash
+# Run analyzer again
+flutter analyze
+
+# Check for new warnings
+flutter analyze --fatal-infos
+
+# Verify no formatting issues
+dart format --set-exit-if-changed .
+
+# Run tests (if exist)
+flutter test
+```
+
+### Code Quality Standards:
+- Zero analyzer errors
+- Zero analyzer warnings (treat warnings as errors)
+- Consistent formatting (dart format)
+- No dead code
+- No commented-out code
+- Proper documentation for new files
+
+---
+
+## Batch Implementation Plan
+
+### Week 1: Route Metadata & Shell Protection
+
+#### Batch 1.1: Route Metadata Helper (Day 1, Morning)
+**Files to Create:**
+- `lib/src/core/navigation/route_metadata_helper.dart`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] File compiles without errors
+- [ ] No existing files modified
+
+**Commit:** `[Batch 1.1] Create route metadata helper`
+
+---
+
+#### Batch 1.2: Add Metadata to Auth Routes (Day 1, Afternoon)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 6 auth routes)
+
+**Routes to Update:**
+- `/` (SplashScreen)
+- `/auth` (AuthEntryScreen)
+- `/auth/password` (EmailPasswordAuthScreen)
+- `/onboarding` (OnboardingGateScreen)
+- `/onboarding/role` (RoleSelectionScreen)
+- `/onboarding/profile` (OnboardingProfileCompletionScreen)
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 6 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each auth route
+
+**Commit:** `[Batch 1.2] Add metadata to 6 auth routes`
+
+---
+
+#### Batch 1.3: Add Metadata to Shell Routes (Day 2, Morning)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 6 shell routes)
+
+**Routes to Update:**
+- `/supplier-dashboard`
+- `/trucker-dashboard`
+- `/messages`
+- `/profile`
+- `/settings`
+- `/account`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 6 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each shell route
+
+**Commit:** `[Batch 1.3] Add metadata to 6 shell routes`
+
+---
+
+#### Batch 1.4: Add Metadata to Supplier Routes (Day 2, Afternoon)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 3 supplier routes)
+
+**Routes to Update:**
+- `/my-loads`
+- `/post-load`
+- `/supplier-trips`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 3 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each supplier route
+
+**Commit:** `[Batch 1.4] Add metadata to 3 supplier routes`
+
+---
+
+#### Batch 1.5: Add Metadata to Trucker Routes (Day 3, Morning)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 4 trucker routes)
+
+**Routes to Update:**
+- `/find-loads`
+- `/fleet`
+- `/trips`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 4 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each trucker route
+
+**Commit:** `[Batch 1.5] Add metadata to 4 trucker routes`
+
+---
+
+#### Batch 1.6: Add Metadata to Detail Routes (Day 3, Afternoon)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 7 detail routes)
+
+**Routes to Update:**
+- `/supplier-trips/:id`
+- `/loads/:id`
+- `/trips/:id`
+- `/routes/:id`
+- `/profile/:id`
+- `/chat/:id`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 7 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each detail route
+
+**Commit:** `[Batch 1.6] Add metadata to 7 detail routes`
+
+---
+
+#### Batch 1.7: Add Metadata to Form & Modal Routes (Day 4, Morning)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 6 form/modal routes)
+
+**Routes to Update:**
+- `/supplier-verification`
+- `/trucker-verification`
+- `/disputes/:id`
+- `/create-support-ticket`
+- `/report-issue`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 6 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each form/modal route
+
+**Commit:** `[Batch 1.7] Add metadata to 6 form/modal routes`
+
+---
+
+#### Batch 1.8: Add Metadata to Special Routes (Day 4, Afternoon)
+**Files to Modify:**
+- `lib/src/core/navigation/app_router.dart` (add metadata to 5 special routes)
+
+**Routes to Update:**
+- `/notifications`
+- `/support`
+- `/delete-account`
+- `/banned`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 5 routes load correctly
+- [ ] No navigation behavior changes
+- [ ] Manual test: Navigate to each special route
+
+**Commit:** `[Batch 1.8] Add metadata to 5 special routes`
+
+---
+
+#### Batch 1.9: Shell PopScope (Day 5, Morning)
+**Files to Modify:**
+- `lib/src/features/shell/presentation/user_app_shell.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add back button handler
+- Add "Press back again to exit" logic
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Shell compiles without errors
+- [ ] Navigation between tabs works
+- [ ] Drawer navigation works
+- [ ] "Press back again to exit" works on Android
+
+**Commit:** `[Batch 1.9] Add PopScope to shell for back protection`
+
+---
+
+#### Batch 1.10: Week 1 Validation (Day 5, Afternoon)
+**Files to Modify:** None
+
+**Validation Steps:**
+- [ ] All 37 routes load correctly
+- [ ] All routes have metadata
+- [ ] Shell back protection works
+- [ ] No regressions in navigation
+- [ ] Flutter analyze passes (zero errors, zero warnings)
+- [ ] Full app regression test
+
+**Commit:** `[Batch 1.10] Week 1 validation complete`
+
+**Tag:** `v1-planc-week1-complete`
+
+---
+
+### Week 2: Back Arrows & Form Protection
+
+#### Batch 2.1: DetailPageScaffold Back Arrow Support (Day 1, Morning)
+**Files to Modify:**
+- `lib/src/features/shell/presentation/shell_components.dart`
+
+**Implementation:**
+- Add `leading` parameter to DetailPageScaffold
+- Add `_buildDefaultLeading` method
+- Use RouteMetadataHelper to check showBackArrow
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] DetailPageScaffold compiles without errors
+- [ ] No breaking changes to existing screens
+
+**Commit:** `[Batch 2.1] Add back arrow support to DetailPageScaffold`
+
+---
+
+#### Batch 2.2: Update Detail Screens to Use Back Arrow (Day 1, Afternoon)
+**Files to Modify:**
+- Update route metadata for nested routes (showBackArrow: true)
+
+**Routes to Update:**
+- `/fleet`
+- `/supplier-verification`
+- `/trucker-verification`
+- `/delete-account`
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] All 4 routes show back arrow
+- [ ] Back arrow navigation works
+- [ ] System back still works
+
+**Commit:** `[Batch 2.2] Enable back arrow for 4 nested routes`
+
+---
+
+#### Batch 2.3: PopScope for EmailPasswordAuthScreen (Day 2, Morning)
+**Files to Modify:**
+- `lib/src/features/auth/presentation/auth_screens_email_password.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Form submission still works
+
+**Commit:** `[Batch 2.3] Add PopScope to EmailPasswordAuthScreen`
+
+---
+
+#### Batch 2.4: PopScope for RoleSelectionScreen (Day 2, Afternoon)
+**Files to Modify:**
+- `lib/src/features/auth/presentation/onboarding_screens.dart` (RoleSelectionScreen only)
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Role selection still works
+
+**Commit:** `[Batch 2.4] Add PopScope to RoleSelectionScreen`
+
+---
+
+#### Batch 2.5: PopScope for OnboardingProfileCompletionScreen (Day 3, Morning)
+**Files to Modify:**
+- `lib/src/features/auth/presentation/onboarding_profile_completion.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Profile completion still works
+
+**Commit:** `[Batch 2.5] Add PopScope to OnboardingProfileCompletionScreen`
+
+---
+
+#### Batch 2.6: PopScope for VerificationWizard (Day 3, Afternoon)
+**Files to Modify:**
+- `lib/src/features/verification/presentation/verification_wizard.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Verification wizard still works
+
+**Commit:** `[Batch 2.6] Add PopScope to VerificationWizard`
+
+---
+
+#### Batch 2.7: PopScope for PostLoadScreen (Day 4, Morning)
+**Files to Modify:**
+- `lib/src/features/supplier/presentation/post_load_screen.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Post load submission still works
+
+**Commit:** `[Batch 2.7] Add PopScope to PostLoadScreen`
+
+---
+
+#### Batch 2.8: PopScope for RaiseDisputeScreen (Day 4, Afternoon)
+**Files to Modify:**
+- `lib/src/features/supplier/presentation/raise_dispute_screen.dart`
+
+**Implementation:**
+- Add PopScope wrapper
+- Add unsaved changes detection
+- Add confirmation dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Screen compiles without errors
+- [ ] Confirmation dialog appears on back
+- [ ] Dispute submission still works
+
+**Commit:** `[Batch 2.8] Add PopScope to RaiseDisputeScreen`
+
+---
+
+#### Batch 2.9: Week 2 Validation (Day 5, Morning)
+**Files to Modify:** None
+
+**Validation Steps:**
+- [ ] All 6 form screens have PopScope
+- [ ] All 4 nested routes have back arrow
+- [ ] No regressions in form submission
+- [ ] Flutter analyze passes (zero errors, zero warnings)
+- [ ] Full app regression test
+
+**Commit:** `[Batch 2.9] Week 2 validation complete`
+
+**Tag:** `v1-planc-week2-complete`
+
+---
+
+### Week 3: Navigation Service & Strategic Additions
+
+#### Batch 3.1: Create Monitoring Service (Day 1, Morning)
+**Files to Create:**
+- `lib/src/core/services/monitoring_service.dart`
+
+**Implementation:**
+- Console logging for errors
+- Console logging for navigation
+- Placeholder for future analytics
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Service compiles without errors
+- [ ] No existing files modified
+
+**Commit:** `[Batch 3.1] Create monitoring service`
+
+---
+
+#### Batch 3.2: Create Navigation Service (Day 1, Afternoon)
+**Files to Create:**
+- `lib/src/core/navigation/navigation_service.dart`
+
+**Implementation:**
+- Basic navigate/push/pop methods
+- Navigation logging
+- Test hooks support
+- Error handling placeholder
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Service compiles without errors
+- [ ] No existing files modified
+
+**Commit:** `[Batch 3.2] Create navigation service`
+
+---
+
+#### Batch 3.3: Add Error Logging to Navigation Service (Day 2, Morning)
+**Files to Modify:**
+- `lib/src/core/navigation/navigation_service.dart`
+
+**Implementation:**
+- Add try-catch to navigate method
+- Add error logging via MonitoringService
+- Add user-friendly error message
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Service compiles without errors
+- [ ] Error logging works in debug mode
+
+**Commit:** `[Batch 3.3] Add error logging to navigation service`
+
+---
+
+#### Batch 3.4: Add Deep Link Error Handling (Day 2, Afternoon)
+**Files to Modify:**
+- `lib/src/core/navigation/navigation_service.dart`
+
+**Implementation:**
+- Add navigateFromDeepLink method
+- Add deep link validation
+- Add deep link error dialog
+
+**Safety Check:**
+- [ ] Flutter analyze passes
+- [ ] Service compiles without errors
+- [ ] Deep link error handling works
+
+**Commit:** `[Batch 3.4] Add deep link error handling`
+
+---
+
+#### Batch 3.5: Add Navigation Test Hooks (Day 3, Morning)
+**Files to Modify:**
+- Already added in NavigationService (Batch 3.2)
+- Verify test hooks work correctly
+
+**Validation:**
+- [ ] Test hooks don't affect production
+- [ ] Test hooks work when set
+- [ ] No performance impact
+
+**Commit:** `[Batch 3.5] Verify navigation test hooks`
+
+---
+
+#### Batch 3.6: Create Navigation Architecture Documentation (Day 3, Afternoon)
+**Files to Create:**
+- `docs/navigation-architecture.md`
+
+**Implementation:**
+- Document route metadata system
+- Document navigation service
+- Document form screen protection
+- Document back button behavior
+
+**Safety Check:**
+- [ ] Documentation is accurate
+- [ ] Documentation is complete
+- [ ] No code changes
+
+**Commit:** `[Batch 3.6] Create navigation architecture documentation`
+
+---
+
+#### Batch 3.7: Week 3 Validation (Day 4, Morning)
+**Files to Modify:** None
+
+**Validation Steps:**
+- [ ] Navigation service created
+- [ ] Monitoring service created
+- [ ] Error logging works
+- [ ] Deep link error handling works
+- [ ] Test hooks work
+- [ ] Documentation complete
+- [ ] Flutter analyze passes (zero errors, zero warnings)
+- [ ] Full app regression test
+
+**Commit:** `[Batch 3.7] Week 3 validation complete`
+
+**Tag:** `v1-planc-week3-complete`
+
+---
+
+#### Batch 3.8: Final Validation & Deployment Prep (Day 4, Afternoon)
+**Files to Modify:** None
+
+**Final Validation Steps:**
+- [ ] All 16 files created/modified
+- [ ] All 37 routes have metadata
+- [ ] All 6 form screens have PopScope
+- [ ] Shell has PopScope
+- [ ] DetailPageScaffold has back arrow support
+- [ ] Navigation service created
+- [ ] Monitoring service created
+- [ ] Error logging works
+- [ ] Deep link error handling works
+- [ ] Test hooks work
+- [ ] Documentation complete
+- [ ] Flutter analyze passes (zero errors, zero warnings)
+- [ ] Full app regression test
+- [ ] Performance test (navigation < 50ms)
+- [ ] Code review complete
+
+**Commit:** `[Batch 3.8] Plan C implementation complete`
+
+**Tag:** `v1-planc-complete`
+
+---
+
 ## Risk Mitigation
 
-### To Prevent Breaking Changes:
+### Before Each Batch:
+```bash
+# Create checkpoint
+git tag checkpoint-batch-X-before
+git push origin checkpoint-batch-X-before
 
-1. **Feature Flags:** Add route metadata without changing behavior initially
-2. **Incremental Testing:** Test after each day's work
-3. **Rollback Plan:** `feature/codebase-refactoring` branch is safety net
-4. **Manual Testing:** Test every route type after changes
-5. **Error Logging:** Catch navigation issues early
+# Run quality checks
+flutter analyze
+flutter analyze --fatal-infos
+dart format .
+dart format --set-exit-if-changed .
+```
+
+### After Each Batch:
+```bash
+# Run quality checks
+flutter analyze
+flutter analyze --fatal-infos
+dart format --set-exit-if-changed .
+
+# Commit changes
+git add .
+git commit -m "[Batch X] Description"
+git push origin feature/navigation-planc
+
+# Create checkpoint
+git tag checkpoint-batch-X-after
+git push origin checkpoint-batch-X-after
+```
 
 ### If Issues Found:
 
 | Issue | Action |
 |-------|--------|
-| Navigation regression | Revert day's changes, fix, re-test |
-| Form screen issues | Check PopScope canPop logic |
-| Back arrow missing | Verify route metadata |
-| Performance degradation | Profile navigation timing |
-| Deep link errors | Check error handling logic |
-| Test hooks causing issues | Ensure hooks are null in production |
+| Flutter analyzer errors | Fix errors before commit |
+| Flutter analyzer warnings | Treat as errors, fix before commit |
+| Navigation regression | Rollback to checkpoint, fix, re-test |
+| Form screen issues | Rollback to checkpoint, check PopScope logic |
+| Back arrow missing | Rollback to checkpoint, verify route metadata |
+| Performance degradation | Rollback to checkpoint, profile, fix |
+| Deep link errors | Rollback to checkpoint, check error handling |
+| Test hooks causing issues | Rollback to checkpoint, ensure hooks are null |
+
+### Emergency Rollback Procedure:
+```bash
+# Rollback to last known good state
+git reset --hard checkpoint-batch-X-before
+git push origin feature/navigation-planc --force
+
+# Or rollback to before Plan C started
+git checkout feature/codebase-refactoring
+git reset --hard <commit-before-planc-start>
+```
 
 ---
 
