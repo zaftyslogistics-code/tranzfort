@@ -93,7 +93,50 @@ void _initializeRouteMetadata() {
     'testId': 'onboarding_profile_completion',
   });
 
-  // Note: Shell routes, supplier routes, trucker routes, detail routes, 
+  // Shell Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.supplierDashboardPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'supplier_dashboard',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.truckerDashboardPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'trucker_dashboard',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.messagesPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'messages',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.profilePath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'profile',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.settingsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'settings',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.accountPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'account',
+  });
+
+  // Note: Supplier routes, trucker routes, detail routes, 
   // form/modal routes, and special routes will be registered in subsequent batches
 }
 
