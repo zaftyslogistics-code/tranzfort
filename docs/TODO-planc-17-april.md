@@ -940,16 +940,17 @@ flutter test
 **Implementation:**
 - Add PopScope wrapper
 - Add back button handler
-- Add "Press back again to exit" logic
+- Add "Press back again to exit" toast
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] Shell compiles without errors
-- [ ] Navigation between tabs works
-- [ ] Drawer navigation works
-- [ ] "Press back again to exit" works on Android
+- [x] Flutter analyze passes
+- [x] Shell loads correctly
+- [x] Back button works on nested routes
+- [x] Back button shows toast on top-level routes
+- [x] Back button exits app on second press
 
-**Commit:** `[Batch 1.9] Add PopScope to shell for back protection`
+**Commit:** `[Batch 1.9] Add PopScope to shell with 'Press back again to exit' for top-level routes`
+**Status:** ✅ Complete
 
 ---
 
