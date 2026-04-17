@@ -136,7 +136,29 @@ void _initializeRouteMetadata() {
     'testId': 'account',
   });
 
-  // Note: Supplier routes, trucker routes, detail routes, 
+  // Supplier Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.myLoadsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'my_loads',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.postLoadPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'post_load',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.supplierTripsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'supplier_trips',
+  });
+
+  // Note: Trucker routes, detail routes, 
   // form/modal routes, and special routes will be registered in subsequent batches
 }
 
