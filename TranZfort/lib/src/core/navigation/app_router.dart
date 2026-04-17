@@ -168,7 +168,7 @@ void _initializeRouteMetadata() {
 
   RouteMetadataHelper.registerMetadata(AppRoutes.fleetPath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': true,
     'testId': 'trucker_fleet',
   });
@@ -183,35 +183,35 @@ void _initializeRouteMetadata() {
   // Detail Routes
   RouteMetadataHelper.registerMetadata(AppRoutes.loadDetailPath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'load_detail',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.tripDetailPath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'trip_detail',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.routePreviewPath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'route_preview',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.chatPath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'chat',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.publicProfilePath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'public_profile',
   });
@@ -219,21 +219,21 @@ void _initializeRouteMetadata() {
   // Form & Modal Routes
   RouteMetadataHelper.registerMetadata(AppRoutes.supplierVerificationPath, {
     'type': RouteType.subFlow,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': true,
     'testId': 'supplier_verification',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.truckerVerificationPath, {
     'type': RouteType.subFlow,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': true,
     'testId': 'trucker_verification',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.raiseDisputePath, {
     'type': RouteType.nested,
-    'showBackArrow': false,
+    'showBackArrow': true,
     'requirePopScope': true,
     'testId': 'raise_dispute',
   });
