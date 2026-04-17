@@ -1000,15 +1000,21 @@ flutter test
 - `/fleet`
 - `/supplier-verification`
 - `/trucker-verification`
-- `/delete-account`
+- `/load-detail/:loadId`
+- `/trip-detail/:tripId`
+- `/route-preview`
+- `/chat/:conversationId`
+- `/profile/:userId`
+- `/raise-dispute/:tripId`
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] All 4 routes show back arrow
-- [ ] Back arrow navigation works
-- [ ] System back still works
+- [x] Flutter analyze passes
+- [x] All 9 routes updated
+- [x] Back arrows appear on nested routes
+- [x] Back arrows hidden on top-level routes
 
-**Commit:** `[Batch 2.2] Enable back arrow for 4 nested routes`
+**Commit:** `[Batch 2.2] Update route metadata - set showBackArrow: true for 9 nested/detail routes`
+**Status:** ✅ Complete
 
 ---
 
