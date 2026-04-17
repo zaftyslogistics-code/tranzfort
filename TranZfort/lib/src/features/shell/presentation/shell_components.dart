@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/navigation/route_metadata_helper.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -11,6 +12,7 @@ class DetailPageScaffold extends StatelessWidget {
   final List<Widget> children;
   final String? ttsSummary;
   final String? ttsScreenKey;
+  final bool? showBackArrow;
 
   const DetailPageScaffold({
     super.key,
@@ -18,14 +20,26 @@ class DetailPageScaffold extends StatelessWidget {
     required this.children,
     this.ttsSummary,
     this.ttsScreenKey,
+    this.showBackArrow,
   });
 
   @override
   Widget build(BuildContext context) {
     final resolvedSummary = (ttsSummary ?? title).trim();
+    // Determine if back arrow should be shown
+    // If explicitly provided, use that value
+    // Otherwise, check route metadata
+    final shouldShowBackArrow = showBackArrow ?? RouteMetadataHelper.shouldShowBackArrow(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        leading: shouldShowBackArrow
+            ? IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Navigator.of(context).pop(),
+              )
+            : null,
         actions: [
           TtsActionButton(fallbackSummary: resolvedSummary),
           const LanguageToggleAction(),
