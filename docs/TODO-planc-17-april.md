@@ -772,11 +772,12 @@ flutter test
 - `lib/src/core/navigation/route_metadata_helper.dart`
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] File compiles without errors
-- [ ] No existing files modified
+- [x] Flutter analyze passes
+- [x] File compiles without errors
+- [x] No existing files modified
 
 **Commit:** `[Batch 1.1] Create route metadata helper`
+**Status:** ✅ Complete
 
 ---
 
@@ -793,12 +794,13 @@ flutter test
 - `/onboarding/profile` (OnboardingProfileCompletionScreen)
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] All 6 routes load correctly
-- [ ] No navigation behavior changes
-- [ ] Manual test: Navigate to each auth route
+- [x] Flutter analyze passes
+- [x] All 6 routes load correctly
+- [x] No navigation behavior changes
+- [ ] Manual test: Navigate to each auth route (deferred - no behavior change)
 
 **Commit:** `[Batch 1.2] Add metadata to 6 auth routes`
+**Status:** ✅ Complete
 
 ---
 
