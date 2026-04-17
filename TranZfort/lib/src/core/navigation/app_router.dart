@@ -158,8 +158,29 @@ void _initializeRouteMetadata() {
     'testId': 'supplier_trips',
   });
 
-  // Note: Trucker routes, detail routes, 
-  // form/modal routes, and special routes will be registered in subsequent batches
+  // Trucker Routes
+  RouteMetadataHelper.registerMetadata(AppRoutes.findLoadsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'find_loads',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.fleetPath, {
+    'type': RouteType.nested,
+    'showBackArrow': false,
+    'requirePopScope': true,
+    'testId': 'trucker_fleet',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.tripsPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': false,
+    'requirePopScope': false,
+    'testId': 'trips',
+  });
+
+  // Note: Detail routes, form/modal routes, and special routes will be registered in subsequent batches
 }
 
 // Flag to ensure metadata is initialized only once
