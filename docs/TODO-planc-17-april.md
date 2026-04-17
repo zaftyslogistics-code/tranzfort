@@ -977,16 +977,18 @@ flutter test
 - `lib/src/features/shell/presentation/shell_components.dart`
 
 **Implementation:**
-- Add `leading` parameter to DetailPageScaffold
-- Add `_buildDefaultLeading` method
-- Use RouteMetadataHelper to check showBackArrow
+- Add `showBackArrow` parameter to DetailPageScaffold
+- Integrate with RouteMetadataHelper
+- Conditionally show back arrow based on route metadata
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] DetailPageScaffold compiles without errors
-- [ ] No breaking changes to existing screens
+- [x] Flutter analyze passes
+- [x] Backward compatibility maintained (optional parameter)
+- [x] Back arrow shows when metadata says true
+- [x] Back arrow hidden when metadata says false
 
-**Commit:** `[Batch 2.1] Add back arrow support to DetailPageScaffold`
+**Commit:** `[Batch 2.1] Add back arrow support to DetailPageScaffold with RouteMetadataHelper integration`
+**Status:** ✅ Complete
 
 ---
 
