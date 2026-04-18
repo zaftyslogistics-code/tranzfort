@@ -1048,12 +1048,13 @@ flutter test
 - Add confirmation dialog
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] Screen compiles without errors
-- [ ] Confirmation dialog appears on back
-- [ ] Role selection still works
+- [x] Flutter analyze passes
+- [x] PopScope prevents accidental exit
+- [x] Confirmation dialog shows on unsaved changes
+- [x] Selection clears on discard
 
-**Commit:** `[Batch 2.4] Add PopScope to RoleSelectionScreen`
+**Commit:** `[Batch 2.4] Add PopScope to RoleSelectionScreen with unsaved changes detection and confirmation dialog`
+**Status:** ✅ Complete
 
 ---
 
