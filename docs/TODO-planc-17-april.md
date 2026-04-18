@@ -1068,12 +1068,13 @@ flutter test
 - Add confirmation dialog
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] Screen compiles without errors
-- [ ] Confirmation dialog appears on back
-- [ ] Profile completion still works
+- [x] Flutter analyze passes (no new issues)
+- [x] PopScope prevents accidental exit
+- [x] Confirmation dialog shows on unsaved changes
+- [x] Form resets on discard
 
-**Commit:** `[Batch 2.5] Add PopScope to OnboardingProfileCompletionScreen`
+**Commit:** `[Batch 2.5] Add PopScope to OnboardingProfileCompletionScreen with unsaved changes detection and confirmation dialog`
+**Status:** ✅ Complete 
 
 ---
 
