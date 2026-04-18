@@ -212,7 +212,7 @@ class _SupplierConversationRow extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         borderRadius: BorderRadius.circular(AppRadius.card),
-        onTap: () => context.go('${AppRoutes.chatPath}/${conversation.id}'),
+        onTap: () => context.push('${AppRoutes.chatPath}/${conversation.id}'),
         child: Ink(
           padding: const EdgeInsets.all(AppSpacing.md),
           decoration: BoxDecoration(
@@ -333,7 +333,7 @@ class _TruckerConversationCard extends StatelessWidget {
         border: Border.all(color: AppColors.divider),
       ),
       child: InkWell(
-        onTap: () => context.go('${AppRoutes.chatPath}/${conversation.id}'),
+        onTap: () => context.push('${AppRoutes.chatPath}/${conversation.id}'),
         borderRadius: BorderRadius.circular(AppRadius.card),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.md),
