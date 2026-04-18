@@ -1315,6 +1315,137 @@ flutter test
 
 ---
 
+## Critical Issue Found During Testing
+
+### Issue: Chat Screen Back Navigation Closes App
+
+**Reported:** April 18, 2026 (during APK testing on mobile)
+
+**Problem:**
+- User navigates to messages tab
+- Opens a chat conversation (`/chat/:conversationId`)
+- Presses back button
+- **App closes instead of navigating back to messages list**
+
+**Root Cause Analysis:**
+
+The issue is a **route structure problem**, not a visual back arrow issue.
+
+#### Current Route Structure (INCORRECT)
+```
+ShellRoute
+  ├─ /messages (tab route)
+  ├─ /chat/:conversationId (sibling to messages - WRONG)
+  └─ /dashboard (tab route)
+```
+
+When navigating from `/messages` to `/chat/123`:
+- Route **replaces** `/messages` in the shell's child
+- Does NOT push onto stack
+- No parent route to pop back to
+- App exits on back press
+
+#### Affected Screens (Same Issue)
+1. **Chat Screen** (`/chat/:conversationId`) - Uses regular Scaffold with custom AppBar (avatar in leading)
+2. **Route Preview Screen** (`/route-preview`) - Uses regular Scaffold
+3. **Public Profile Screens** (`/profile/:userId`) - Uses regular Scaffold
+
+All have `showBackArrow: true` metadata but don't use DetailPageScaffold, so metadata is ignored.
+
+### Why We Missed This
+
+**Batch 2.2** only updated screens that **already use DetailPageScaffold** to set `showBackArrow: true`. We didn't audit screens that use regular Scaffold but have `showBackArrow: true` metadata.
+
+The plan assumed all nested/detail routes would use DetailPageScaffold, but this was incorrect.
+
+### Fix Strategy
+
+#### Option 1: Make Chat a Child Route of Messages (RECOMMENDED)
+
+**File to Modify:** `lib/src/core/navigation/app_router.dart`
+
+**Change:**
+```dart
+// Current (WRONG):
+GoRoute(
+  path: AppRoutes.chatPath,
+  name: AppRoutes.chat,
+  builder: (context, state) => ChatScreen(...),
+),
+
+// Fixed (CORRECT):
+GoRoute(
+  path: AppRoutes.messagesPath,
+  name: AppRoutes.messages,
+  builder: (context, state) => const MessagesScreen(),
+  routes: [
+    GoRoute(
+      path: ':conversationId',  // Child route
+      name: AppRoutes.chat,
+      builder: (context, state) => ChatScreen(
+        conversationId: state.pathParameters['conversationId'] ?? '',
+      ),
+    ),
+  ],
+),
+```
+
+**Impact:**
+- Route structure becomes: `/messages` → `/chat/:conversationId` (parent-child)
+- Back navigation works naturally (no visual changes needed)
+- Chat screen keeps its custom AppBar with avatar
+- System back button pops to messages
+
+**Side Effects:**
+- Route path changes from `/chat/:conversationId` to `/messages/:conversationId`
+- Need to update all navigation calls to chat:
+  - `context.go('/chat/123')` → `context.go('/messages/123')`
+  - `context.push('/chat/123')` → `context.push('/messages/123')`
+  - Deep links need update
+
+#### Option 2: Use Push Instead of Go (ALTERNATIVE)
+
+**Files to Modify:**
+- Messages screen navigation calls
+- Any other screens that navigate to chat
+
+**Change:**
+```dart
+// Change from:
+context.go('/chat/123');
+
+// To:
+context.push('/chat/123');
+```
+
+**Impact:**
+- Pushes onto stack instead of replacing
+- Back navigation works
+- No route structure changes
+- No deep link changes
+
+**Side Effects:**
+- Need to find all `context.go(AppRoutes.chatPath)` calls and change to `context.push()`
+- Less clean than Option 1
+
+### Recommended Implementation Plan
+
+1. **Apply Option 1** (make chat a child route of messages)
+2. **Update all navigation calls** to chat to use new path `/messages/:conversationId`
+3. **Update deep link handling** if any
+4. **Test on mobile** to verify back navigation works
+5. **Audit other affected screens** (route preview, public profile) for same issue
+
+### Files to Update for Option 1
+
+1. `lib/src/core/navigation/app_router.dart` - Route structure
+2. `lib/src/core/navigation/app_routes.dart` - Chat route constant (if path changes)
+3. All files that navigate to chat:
+   - Search for `AppRoutes.chatPath` or `/chat/` references
+   - Update to use new path
+
+---
+
 ## Risk Mitigation
 
 ### Before Each Batch:
