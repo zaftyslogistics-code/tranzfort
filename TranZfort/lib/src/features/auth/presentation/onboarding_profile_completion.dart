@@ -33,6 +33,15 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   double? _latitude;
   double? _longitude;
   bool _isCapturingLocation = false;
+  
+  // Track initial values for unsaved changes detection
+  String? _initialName;
+  String? _initialMobile;
+  bool _initialTermsAccepted = false;
+  String? _initialCity;
+  String? _initialState;
+  double? _initialLatitude;
+  double? _initialLongitude;
 
   @override
   void didChangeDependencies() {
@@ -49,7 +58,52 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
     final profile = profileAsync.valueOrNull;
     _nameController.text = profile?.fullName ?? '';
     _mobileController.text = profile?.mobile ?? '';
+    
+    // Store initial values
+    _initialName = profile?.fullName ?? '';
+    _initialMobile = profile?.mobile ?? '';
+    _initialTermsAccepted = false;
+    _initialCity = null;
+    _initialState = null;
+    _initialLatitude = null;
+    _initialLongitude = null;
+    
     _initialized = true;
+  }
+
+  bool _hasUnsavedChanges() {
+    return _nameController.text != (_initialName ?? '') ||
+        _mobileController.text != (_initialMobile ?? '') ||
+        _termsAccepted != _initialTermsAccepted ||
+        _city != _initialCity ||
+        _state != _initialState ||
+        _latitude != _initialLatitude ||
+        _longitude != _initialLongitude;
+  }
+
+  Future<bool> _onWillPop() async {
+    if (!_hasUnsavedChanges()) {
+      return true;
+    }
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Discard Changes?'),
+        content: const Text('You have unsaved profile changes. Do you want to discard them?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Discard'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
   }
 
   Future<void> _submit() async {
@@ -369,152 +423,179 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
     final onboardingState = ref.watch(onboardingControllerProvider);
     final ttsSummary = '${l10n.onboardingCompleteProfileTitle}. ${l10n.onboardingCompleteProfileHeading}. ${l10n.onboardingCompleteProfileSubtitle}';
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.onboardingCompleteProfileTitle),
-        actions: [
-          TtsActionButton(fallbackSummary: ttsSummary),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-              Text(
-                l10n.onboardingCompleteProfileHeading,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 12),
-              Text(
-                l10n.onboardingCompleteProfileSubtitle,
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(height: 24),
-              AppTextField(
-                controller: _nameController,
-                label: l10n.onboardingFullNameLabel,
-                hintText: l10n.onboardingFullNameHint,
-              ),
-              const SizedBox(height: 16),
-              AppTextField(
-                controller: _mobileController,
-                label: l10n.onboardingMobileLabel,
-                hintText: profile?.mobile?.isNotEmpty == true ? profile!.mobile : '+91XXXXXXXXXX',
-                keyboardType: TextInputType.phone,
-              ),
-              const SizedBox(height: 16),
-              // Location capture section
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+    return PopScope(
+      canPop: !_hasUnsavedChanges(),
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (_hasUnsavedChanges()) {
+          final navigator = Navigator.of(context);
+          final shouldPop = await _onWillPop();
+          if (shouldPop && mounted) {
+            // Reset to initial values when discarding changes
+            if (mounted) {
+              setState(() {
+                _nameController.text = _initialName ?? '';
+                _mobileController.text = _initialMobile ?? '';
+                _termsAccepted = _initialTermsAccepted;
+                _city = _initialCity;
+                _state = _initialState;
+                _latitude = _initialLatitude;
+                _longitude = _initialLongitude;
+              });
+              // Navigate back
+              navigator.pop();
+            }
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.onboardingCompleteProfileTitle),
+          actions: [
+            TtsActionButton(fallbackSummary: ttsSummary),
+          ],
+        ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    Text(
-                      'Location',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const SizedBox(height: 8),
-                    if (_city != null && _state != null)
+                Text(
+                  l10n.onboardingCompleteProfileHeading,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  l10n.onboardingCompleteProfileSubtitle,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
+                const SizedBox(height: 24),
+                AppTextField(
+                  controller: _nameController,
+                  label: l10n.onboardingFullNameLabel,
+                  hintText: l10n.onboardingFullNameHint,
+                ),
+                const SizedBox(height: 16),
+                AppTextField(
+                  controller: _mobileController,
+                  label: l10n.onboardingMobileLabel,
+                  hintText: profile?.mobile?.isNotEmpty == true ? profile!.mobile : '+91XXXXXXXXXX',
+                  keyboardType: TextInputType.phone,
+                ),
+                const SizedBox(height: 16),
+                // Location capture section
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Text(
-                        '$_city, $_state',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Colors.green.shade700,
-                              fontWeight: FontWeight.w500,
-                            ),
-                      )
-                    else
-                      Text(
-                        'No location added',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey.shade600,
-                            ),
+                        'Location',
+                        style: Theme.of(context).textTheme.titleSmall,
                       ),
-                    const SizedBox(height: 12),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
-                            icon: const Icon(Icons.location_on, size: 18),
-                            label: Text(_isCapturingLocation ? 'Capturing...' : 'Use current location'),
-                            style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
-                            ),
-                          ),
+                      const SizedBox(height: 8),
+                      if (_city != null && _state != null)
+                        Text(
+                          '$_city, $_state',
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: Colors.green.shade700,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        )
+                      else
+                        Text(
+                          'No location added',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: Colors.grey.shade600,
+                              ),
                         ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            onPressed: _isCapturingLocation ? null : _handleManualLocation,
-                            icon: const Icon(Icons.edit_location, size: 18),
-                            label: const Text('Add manually'),
-                            style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
+                              icon: const Icon(Icons.location_on, size: 18),
+                              label: Text(_isCapturingLocation ? 'Capturing...' : 'Use current location'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                              ),
                             ),
                           ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              onPressed: _isCapturingLocation ? null : _handleManualLocation,
+                              icon: const Icon(Icons.edit_location, size: 18),
+                              label: const Text('Add manually'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(vertical: 12),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      if (_city != null && _state != null) ...[
+                        const SizedBox(height: 8),
+                        TextButton(
+                          onPressed: _isCapturingLocation ? null : () {
+                            setState(() {
+                              _city = null;
+                              _state = null;
+                              _latitude = null;
+                              _longitude = null;
+                            });
+                          },
+                          child: const Text('Clear location', style: TextStyle(fontSize: 12)),
                         ),
                       ],
-                    ),
-                    if (_city != null && _state != null) ...[
-                      const SizedBox(height: 8),
-                      TextButton(
-                        onPressed: _isCapturingLocation ? null : () {
-                          setState(() {
-                            _city = null;
-                            _state = null;
-                            _latitude = null;
-                            _longitude = null;
-                          });
-                        },
-                        child: const Text('Clear location', style: TextStyle(fontSize: 12)),
-                      ),
                     ],
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: Checkbox(
+                        value: _termsAccepted,
+                        onChanged: (value) => setState(() => _termsAccepted = value ?? false),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () => setState(() => _termsAccepted = !_termsAccepted),
+                        child: Text(l10n.onboardingTermsAcceptance),
+                      ),
+                    ),
+                  ],
+                ),
+                const Spacer(),
+                PrimaryButton(
+                  label: l10n.onboardingSaveAndContinue,
+                  onPressed: _submit,
+                  isLoading: onboardingState.isSubmitting,
+                ),
                   ],
                 ),
               ),
-              const SizedBox(height: 16),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Checkbox(
-                      value: _termsAccepted,
-                      onChanged: (value) => setState(() => _termsAccepted = value ?? false),
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => _termsAccepted = !_termsAccepted),
-                      child: Text(l10n.onboardingTermsAcceptance),
-                    ),
-                  ),
-                ],
+              TtsScreenSummaryEffect(
+                summary: ttsSummary,
+                screenKey: AppRoutes.onboardingProfilePath,
               ),
-              const Spacer(),
-              PrimaryButton(
-                label: l10n.onboardingSaveAndContinue,
-                onPressed: _submit,
-                isLoading: onboardingState.isSubmitting,
-              ),
-                ],
-              ),
-            ),
-            TtsScreenSummaryEffect(
-              summary: ttsSummary,
-              screenKey: AppRoutes.onboardingProfilePath,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
