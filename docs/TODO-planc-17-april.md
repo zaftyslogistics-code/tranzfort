@@ -1360,7 +1360,7 @@ The plan assumed all nested/detail routes would use DetailPageScaffold, but this
 
 ### Fix Strategy
 
-#### Option 1: Make Chat a Child Route of Messages (RECOMMENDED)
+#### Option 1: Make Chat a Child Route of Messages
 
 **File to Modify:** `lib/src/core/navigation/app_router.dart`
 
@@ -1398,12 +1398,11 @@ GoRoute(
 
 **Side Effects:**
 - Route path changes from `/chat/:conversationId` to `/messages/:conversationId`
-- Need to update all navigation calls to chat:
-  - `context.go('/chat/123')` → `context.go('/messages/123')`
-  - `context.push('/chat/123')` → `context.push('/messages/123')`
-  - Deep links need update
+- Need to update all navigation calls to chat (8 files found)
+- Deep links need update
+- High risk of breaking changes
 
-#### Option 2: Use Push Instead of Go (ALTERNATIVE)
+#### Option 2: Use Push Instead of Go (RECOMMENDED - SAFER)
 
 **Files to Modify:**
 - Messages screen navigation calls
@@ -1420,29 +1419,32 @@ context.push('/chat/123');
 
 **Impact:**
 - Pushes onto stack instead of replacing
-- Back navigation works
+- Back navigation works naturally
 - No route structure changes
 - No deep link changes
+- No breaking changes to route paths
 
 **Side Effects:**
 - Need to find all `context.go(AppRoutes.chatPath)` calls and change to `context.push()`
-- Less clean than Option 1
+- Found 8 files with chat navigation references
+- Much safer than Option 1
 
 ### Recommended Implementation Plan
 
-1. **Apply Option 1** (make chat a child route of messages)
-2. **Update all navigation calls** to chat to use new path `/messages/:conversationId`
-3. **Update deep link handling** if any
-4. **Test on mobile** to verify back navigation works
-5. **Audit other affected screens** (route preview, public profile) for same issue
+1. **Apply Option 2** (change `context.go()` to `context.push()` for chat navigation)
+2. **Update all navigation calls** to chat in 8 files
+3. **Test on mobile** to verify back navigation works
+4. **Audit other affected screens** (route preview, public profile) for same issue
 
-### Files to Update for Option 1
+### Files to Update for Option 2
 
-1. `lib/src/core/navigation/app_router.dart` - Route structure
-2. `lib/src/core/navigation/app_routes.dart` - Chat route constant (if path changes)
-3. All files that navigate to chat:
-   - Search for `AppRoutes.chatPath` or `/chat/` references
-   - Update to use new path
+1. `lib/src/features/shell/presentation/shell_messages_screen.dart` - Messages list navigation
+2. `lib/src/features/shell/presentation/user_app_shell.dart` - Shell navigation
+3. `lib/src/features/trucker/presentation/trucker_load_detail_shared.dart` - Load detail chat button
+4. `lib/src/features/communication/presentation/chat_screen.dart` - Chat screen internal navigation
+5. `lib/src/features/notifications/data/notification_route_resolver.dart` - Notification tap handling
+6. `lib/src/features/trucker/presentation/trucker_find_loads_actions.dart` - Find loads chat button
+7. `lib/src/features/trucker/presentation/trucker_trip_detail_screen_chat.dart` - Trip detail chat button
 
 ---
 
