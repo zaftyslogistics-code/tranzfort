@@ -32,6 +32,21 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   late final TextEditingController _trucksController;
   late final TextEditingController _priceController;
 
+  // Track initial values for unsaved changes detection
+  late final String _initialOriginCity;
+  late final String _initialOriginLocation;
+  late final String _initialDestinationCity;
+  late final String _initialDestinationLocation;
+  late final String _initialWeight;
+  late final String _initialTrucks;
+  late final String _initialPrice;
+  late final String _initialMaterial;
+  late final String _initialBodyType;
+  late final Set<String> _initialTyres;
+  late final String _initialPriceType;
+  late final double _initialAdvancePercentage;
+  late final DateTime? _initialPickupDate;
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +58,63 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     _weightController = TextEditingController(text: state.weightTonnes);
     _trucksController = TextEditingController(text: state.trucksNeeded);
     _priceController = TextEditingController(text: state.priceAmount);
+
+    // Store initial values
+    _initialOriginCity = state.originCity;
+    _initialOriginLocation = state.originLocation;
+    _initialDestinationCity = state.destinationCity;
+    _initialDestinationLocation = state.destinationLocation;
+    _initialWeight = state.weightTonnes;
+    _initialTrucks = state.trucksNeeded;
+    _initialPrice = state.priceAmount;
+    _initialMaterial = state.material;
+    _initialBodyType = state.bodyType;
+    _initialTyres = Set.from(state.selectedTyres);
+    _initialPriceType = state.priceType;
+    _initialAdvancePercentage = state.advancePercentage;
+    _initialPickupDate = state.pickupDate;
+  }
+
+  bool _hasUnsavedChanges() {
+    final state = ref.read(postLoadProvider);
+    return _originCityController.text != _initialOriginCity ||
+        _originLocationController.text != _initialOriginLocation ||
+        _destinationCityController.text != _initialDestinationCity ||
+        _destinationLocationController.text != _initialDestinationLocation ||
+        _weightController.text != _initialWeight ||
+        _trucksController.text != _initialTrucks ||
+        _priceController.text != _initialPrice ||
+        state.material != _initialMaterial ||
+        state.bodyType != _initialBodyType ||
+        state.selectedTyres.length != _initialTyres.length ||
+        state.priceType != _initialPriceType ||
+        state.advancePercentage != _initialAdvancePercentage ||
+        state.pickupDate != _initialPickupDate;
+  }
+
+  Future<bool> _onWillPop() async {
+    if (!_hasUnsavedChanges()) {
+      return true;
+    }
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Discard Changes?'),
+        content: const Text('You have unsaved load details. Do you want to discard them?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Discard'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
   }
 
   @override
@@ -68,9 +140,23 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     final postingBlocked = postingGatingMessage != null;
     final profileUnavailable = !supplierProfileAsync.isLoading && !supplierProfileAsync.hasError && supplierProfile == null;
 
-    return DetailPageScaffold(
-      title: l10n.supplierPostLoadHeroTitle,
-      children: [
+    return PopScope(
+      canPop: !_hasUnsavedChanges(),
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (_hasUnsavedChanges()) {
+          final navigator = Navigator.of(context);
+          final shouldPop = await _onWillPop();
+          if (shouldPop && mounted) {
+            // Navigate back - form state will be re-initialized on next visit
+            navigator.pop();
+          }
+        }
+      },
+      child: DetailPageScaffold(
+        title: l10n.supplierPostLoadHeroTitle,
+        children: [
         HeroActionCard(
           title: l10n.supplierPostLoadHeroTitle == l10n.supplierPostLoadTitle
               ? l10n.supplierPostLoadHeroSubtitle
@@ -411,6 +497,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
                 },
         ),
       ],
+      ),
     );
   }
 
