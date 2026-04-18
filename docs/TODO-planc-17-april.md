@@ -1014,7 +1014,7 @@ flutter test
 - [x] Back arrows hidden on top-level routes
 
 **Commit:** `[Batch 2.2] Update route metadata - set showBackArrow: true for 9 nested/detail routes`
-**Status:** ✅ Complete
+**Status:** Complete
 
 ---
 
@@ -1034,7 +1034,7 @@ flutter test
 - [x] Form clears on discard
 
 **Commit:** `[Batch 2.3] Add PopScope to EmailPasswordAuthScreen with unsaved changes detection and confirmation dialog`
-**Status:** ✅ Complete
+**Status:** Complete
 
 ---
 
@@ -1108,12 +1108,13 @@ flutter test
 - Add confirmation dialog
 
 **Safety Check:**
-- [ ] Flutter analyze passes
-- [ ] Screen compiles without errors
-- [ ] Confirmation dialog appears on back
-- [ ] Post load submission still works
+- [x] Flutter analyze passes
+- [x] Screen compiles without errors
+- [x] Confirmation dialog appears on back
+- [x] Post load submission still works
 
-**Commit:** `[Batch 2.7] Add PopScope to PostLoadScreen`
+**Commit:** `[Batch 2.7] Add PopScope to PostLoadScreen with unsaved changes detection and confirmation dialog`
+**Status:** ✅ Complete
 
 ---
 
