@@ -164,4 +164,77 @@ class NavigationService {
   GoRouterState getRouterState(BuildContext context) {
     return GoRouterState.of(context);
   }
+
+  /// Navigate from a deep link with validation
+  /// 
+  /// Returns true if navigation succeeded, false otherwise
+  Future<bool> navigateFromDeepLink(
+    BuildContext context,
+    String deepLink, {
+    Map<String, dynamic>? queryParams,
+  }) async {
+    // Validate deep link format
+    if (!_isValidDeepLink(deepLink)) {
+      _monitoringService.logNavigationError(
+        route: deepLink,
+        error: 'Invalid deep link format',
+      );
+      return false;
+    }
+
+    final currentLocation = GoRouterState.of(context).matchedLocation;
+    
+    try {
+      context.go(deepLink, extra: queryParams);
+      _monitoringService.logRouteTransition(
+        fromRoute: currentLocation,
+        toRoute: deepLink,
+        type: NavigationTransitionType.go,
+        metadata: {
+          'deepLink': true,
+          if (queryParams != null) 'queryParams': queryParams,
+        },
+      );
+      return true;
+    } catch (e) {
+      _monitoringService.logNavigationError(
+        route: deepLink,
+        error: 'Deep link navigation failed: ${e.toString()}',
+      );
+      return false;
+    }
+  }
+
+  /// Validate deep link format
+  bool _isValidDeepLink(String deepLink) {
+    // Basic validation - should start with /
+    if (deepLink.isEmpty || !deepLink.startsWith('/')) {
+      return false;
+    }
+    
+    // Check for invalid characters
+    final invalidChars = RegExp(r'[<>:"|?*\s]');
+    if (invalidChars.hasMatch(deepLink)) {
+      return false;
+    }
+    
+    return true;
+  }
+
+  /// Show deep link error dialog
+  void showDeepLinkErrorDialog(BuildContext context, String deepLink) {
+    showDialog(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Navigation Error'),
+        content: Text('Unable to navigate to: $deepLink'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+  }
 }
