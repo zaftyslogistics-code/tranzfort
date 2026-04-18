@@ -119,6 +119,35 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
     super.initState();
   }
 
+  bool _hasUnsavedChanges() {
+    return _selectedRole != null;
+  }
+
+  Future<bool> _onWillPop() async {
+    if (!_hasUnsavedChanges()) {
+      return true;
+    }
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Discard Selection?'),
+        content: const Text('You have selected a role. Do you want to discard it?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Discard'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  }
+
   Future<void> _continue() async {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final selectedRole = _selectedRole;
@@ -159,57 +188,74 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final onboardingState = ref.watch(onboardingControllerProvider);
     final ttsSummary = '${l10n.onboardingChooseRoleTitle}. ${l10n.onboardingRoleQuestion}. ${l10n.onboardingRoleSubtitle}';
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.onboardingChooseRoleTitle),
-        actions: [
-          TtsActionButton(fallbackSummary: ttsSummary),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-              Text(
-                l10n.onboardingRoleQuestion,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              const SizedBox(height: 12),
-              Text(l10n.onboardingRoleSubtitle),
-              const SizedBox(height: 24),
-              _RoleCard(
-                title: l10n.onboardingSupplierTitle,
-                subtitle: l10n.onboardingSupplierSubtitle,
-                icon: Icons.inventory_2_outlined,
-                selected: _selectedRole == AppUserRole.supplier,
-                onTap: () => setState(() => _selectedRole = AppUserRole.supplier),
-              ),
-              const SizedBox(height: 16),
-              _RoleCard(
-                title: l10n.onboardingTruckerTitle,
-                subtitle: l10n.onboardingTruckerSubtitle,
-                icon: Icons.local_shipping_outlined,
-                selected: _selectedRole == AppUserRole.trucker,
-                onTap: () => setState(() => _selectedRole = AppUserRole.trucker),
-              ),
-              const Spacer(),
-              PrimaryButton(
-                label: l10n.onboardingContinue,
-                onPressed: _continue,
-                isLoading: onboardingState.isSubmitting,
-              ),
-                ],
-              ),
-            ),
-            TtsScreenSummaryEffect(
-              summary: ttsSummary,
-              screenKey: AppRoutes.onboardingRolePath,
-            ),
+    return PopScope(
+      canPop: !_hasUnsavedChanges(),
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (_hasUnsavedChanges()) {
+          final navigator = Navigator.of(context);
+          final shouldPop = await _onWillPop();
+          if (shouldPop && mounted) {
+            // Clear selection when discarding changes
+            setState(() => _selectedRole = null);
+            // Navigate back
+            navigator.pop();
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.onboardingChooseRoleTitle),
+          actions: [
+            TtsActionButton(fallbackSummary: ttsSummary),
           ],
+        ),
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                Text(
+                  l10n.onboardingRoleQuestion,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+                const SizedBox(height: 12),
+                Text(l10n.onboardingRoleSubtitle),
+                const SizedBox(height: 24),
+                _RoleCard(
+                  title: l10n.onboardingSupplierTitle,
+                  subtitle: l10n.onboardingSupplierSubtitle,
+                  icon: Icons.inventory_2_outlined,
+                  selected: _selectedRole == AppUserRole.supplier,
+                  onTap: () => setState(() => _selectedRole = AppUserRole.supplier),
+                ),
+                const SizedBox(height: 16),
+                _RoleCard(
+                  title: l10n.onboardingTruckerTitle,
+                  subtitle: l10n.onboardingTruckerSubtitle,
+                  icon: Icons.local_shipping_outlined,
+                  selected: _selectedRole == AppUserRole.trucker,
+                  onTap: () => setState(() => _selectedRole = AppUserRole.trucker),
+                ),
+                const Spacer(),
+                PrimaryButton(
+                  label: l10n.onboardingContinue,
+                  onPressed: _continue,
+                  isLoading: onboardingState.isSubmitting,
+                ),
+                  ],
+                ),
+              ),
+              TtsScreenSummaryEffect(
+                summary: ttsSummary,
+                screenKey: AppRoutes.onboardingRolePath,
+              ),
+            ],
+          ),
         ),
       ),
     );
