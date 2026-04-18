@@ -38,10 +38,47 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
   String? _categoryError;
   String? _reasonError;
 
+  // Track initial values for unsaved changes detection
+  late final String _initialCategory;
+  late final String _initialAttachmentPath;
+
   @override
   void initState() {
     super.initState();
     _reasonController = TextEditingController();
+    _initialCategory = 'document_mismatch';
+    _initialAttachmentPath = '';
+  }
+
+  bool _hasUnsavedChanges() {
+    return _reasonController.text.trim().isNotEmpty ||
+        _selectedCategory != _initialCategory ||
+        _attachmentPath != _initialAttachmentPath;
+  }
+
+  Future<bool> _onWillPop() async {
+    if (!_hasUnsavedChanges()) {
+      return true;
+    }
+
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Discard Dispute?'),
+        content: const Text('You have unsaved dispute details. Do you want to discard them?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('Discard'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
   }
 
   @override
@@ -60,9 +97,29 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
     final localizedStage = detail == null ? '' : _localizedSupplierTripStage(l10n, detail.stage);
     final canSubmit = detail != null && detail.stage == 'proof_submitted' && !actionState.isSubmitting;
 
-    return DetailPageScaffold(
-      title: l10n.supplierRaiseDisputeTitle,
-      children: [
+    return PopScope(
+      canPop: !_hasUnsavedChanges(),
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (_hasUnsavedChanges()) {
+          final navigator = Navigator.of(context);
+          final shouldPop = await _onWillPop();
+          if (shouldPop && mounted) {
+            // Reset form to initial values when discarding changes
+            setState(() {
+              _reasonController.clear();
+              _selectedCategory = _initialCategory;
+              _attachmentPath = _initialAttachmentPath;
+            });
+            // Navigate back
+            navigator.pop();
+          }
+        }
+      },
+      child: DetailPageScaffold(
+        title: l10n.supplierRaiseDisputeTitle,
+        children: [
         if (tripState.isLoading)
           const LoadingShimmer(height: 120, itemCount: 2)
         else if (tripState.failure is NotFoundFailure && detail == null)
@@ -345,6 +402,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
           ),
         ],
       ],
+      ),
     );
   }
 
