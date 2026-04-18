@@ -1438,13 +1438,19 @@ context.push('/chat/123');
 
 ### Files to Update for Option 2
 
-1. `lib/src/features/shell/presentation/shell_messages_screen.dart` - Messages list navigation
-2. `lib/src/features/shell/presentation/user_app_shell.dart` - Shell navigation
-3. `lib/src/features/trucker/presentation/trucker_load_detail_shared.dart` - Load detail chat button
-4. `lib/src/features/communication/presentation/chat_screen.dart` - Chat screen internal navigation
-5. `lib/src/features/notifications/data/notification_route_resolver.dart` - Notification tap handling
-6. `lib/src/features/trucker/presentation/trucker_find_loads_actions.dart` - Find loads chat button
-7. `lib/src/features/trucker/presentation/trucker_trip_detail_screen_chat.dart` - Trip detail chat button
+1. ✅ `lib/src/features/shell/presentation/shell_messages_screen.dart` - Messages list navigation (FIXED - changed to context.push)
+2. `lib/src/features/shell/presentation/user_app_shell.dart` - Shell navigation (NO CHANGE - only metadata reference)
+3. `lib/src/features/trucker/presentation/trucker_load_detail_shared.dart` - Load detail chat button (NO CHANGE - already uses context.push)
+4. `lib/src/features/communication/presentation/chat_screen.dart` - Chat screen internal navigation (NO CHANGE - only string reference)
+5. `lib/src/features/notifications/data/notification_route_resolver.dart` - Notification tap handling (NO CHANGE - only prefix check)
+6. `lib/src/features/trucker/presentation/trucker_find_loads_actions.dart` - Find loads chat button (NO CHANGE - already uses context.push)
+7. `lib/src/features/trucker/presentation/trucker_trip_detail_screen_chat.dart` - Trip detail chat button (NO CHANGE - already uses context.push)
+
+**Fix Status:** ✅ COMPLETE - Only shell_messages_screen.dart needed changes (2 instances of context.go changed to context.push)
+
+**Commit:** `bb2fd30` - Fix chat screen back navigation - change context.go to context.push for proper stack navigation
+
+**Checkpoint:** `checkpoint-chat-fix-after`
 
 ---
 
