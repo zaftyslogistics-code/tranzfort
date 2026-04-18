@@ -15,11 +15,16 @@ import 'wizard_steps/step_profile_photo.dart';
 import 'wizard_steps/step_review_submit.dart';
 import 'wizard_steps/step_truck_details.dart';
 
-class VerificationWizard extends ConsumerWidget {
+class VerificationWizard extends ConsumerStatefulWidget {
   const VerificationWizard({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<VerificationWizard> createState() => _VerificationWizardState();
+}
+
+class _VerificationWizardState extends ConsumerState<VerificationWizard> {
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(verificationWizardProvider);
     final l10n = AppLocalizations.of(context);
 
@@ -62,33 +67,53 @@ class VerificationWizard extends ConsumerWidget {
 
     // Already verified - show success
     if (state.isAlreadyVerified) {
-      return _AlreadyVerifiedView();
+      return const _AlreadyVerifiedView();
     }
 
     // Pending - show status
     if (state.isPending) {
-      return _PendingStatusView();
+      return const _PendingStatusView();
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.verificationTitle),
-        leading: state.currentStepIndex > 0
-            ? IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () => ref.read(verificationWizardProvider.notifier).previousStep(),
-              )
-            : null,
-        actions: [
-          // Exit button with save draft dialog
-          TextButton(
-            onPressed: () => _showExitDialog(context, ref),
-            child: Text(l10n.verificationWizardSaveAndExitAction),
-          ),
-        ],
-      ),
-      body: SafeArea(
-        child: _buildStepContent(state),
+    return PopScope(
+      canPop: state.currentStepIndex == 0,
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (state.currentStepIndex > 0) {
+          final shouldPop = await _showBackDialog(context, ref, state);
+          if (shouldPop && mounted) {
+            ref.read(verificationWizardProvider.notifier).previousStep();
+          }
+        } else {
+          // On first step, show exit dialog
+          final navigator = Navigator.of(context);
+          final shouldExit = await _showExitDialog(context, ref);
+          if (shouldExit && mounted) {
+            navigator.pop();
+          }
+        }
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(l10n.verificationTitle),
+          leading: state.currentStepIndex > 0
+              ? IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () => ref.read(verificationWizardProvider.notifier).previousStep(),
+                )
+              : null,
+          actions: [
+            // Exit button with save draft dialog
+            TextButton(
+              onPressed: () => _showExitDialog(context, ref),
+              child: Text(l10n.verificationWizardSaveAndExitAction),
+            ),
+          ],
+        ),
+        body: SafeArea(
+          child: _buildStepContent(state),
+        ),
       ),
     );
   }
@@ -108,7 +133,28 @@ class VerificationWizard extends ConsumerWidget {
     }
   }
 
-  Future<void> _showExitDialog(BuildContext context, WidgetRef ref) async {
+  Future<bool> _showBackDialog(BuildContext context, WidgetRef ref, VerificationWizardState state) async {
+    final result = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: const Text('Go Back?'),
+        content: const Text('You will lose your progress on this step. Do you want to go back?'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: const Text('Go Back'),
+          ),
+        ],
+      ),
+    );
+    return result ?? false;
+  }
+
+  Future<bool> _showExitDialog(BuildContext context, WidgetRef ref) async {
     final l10n = AppLocalizations.of(context);
     final shouldExit = await showDialog<bool>(
       context: context,
@@ -141,10 +187,13 @@ class VerificationWizard extends ConsumerWidget {
     if (shouldExit == true && context.mounted) {
       context.go(AppRoutes.dashboardPath);
     }
+    return shouldExit ?? false;
   }
 }
 
 class _AlreadyVerifiedView extends StatelessWidget {
+  const _AlreadyVerifiedView();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -178,6 +227,8 @@ class _AlreadyVerifiedView extends StatelessWidget {
 }
 
 class _PendingStatusView extends StatelessWidget {
+  const _PendingStatusView();
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
