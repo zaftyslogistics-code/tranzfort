@@ -1548,10 +1548,14 @@ if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Durat
 4. **Unit Tests:** Essential for stateful logic like PopScope timing
 5. **Flutter Analyze ≠ Complete:** Runtime bugs need manual testing and unit tests
 
-### Status: NOT YET FIXED
+### Status: ✅ FIXED
 
-**Files to Modify:**
-- `lib/src/features/shell/presentation/user_app_shell.dart` - Add setState() call
+**Files Modified:**
+- `lib/src/features/shell/presentation/user_app_shell.dart` - Added setState() call
+
+**Commit:** `8e34f90` - Fix Bug #1: Add setState() to shell PopScope for proper 'press back again to exit' functionality
+
+**Checkpoint:** `checkpoint-bug-fixes-after`
 
 ---
 
@@ -1561,26 +1565,29 @@ if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Durat
 
 **Location:** `lib/src/features/shell/presentation/supplier_shell_dashboard_sections.dart` line 474
 
-**Current Code:**
-```dart
-onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
-```
-
 **Issue:**
 - Load detail is a nested/detail route (`showBackArrow: true` in metadata)
 - Using `context.go()` replaces the route instead of pushing onto stack
 - Same issue as chat screen - back button won't work correctly
 
-**Expected Behavior:**
+**Fix Applied:**
 ```dart
+// Changed from:
+onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
+
+// To:
 onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
 ```
 
 **Impact:**
-- Back button from load detail will exit app instead of returning to dashboard
+- Back button from load detail will now properly return to dashboard
 - Affects all load cards in supplier dashboard
 
-**Status:** NOT YET FIXED
+**Status:** ✅ FIXED
+
+**Commit:** `a1cc1a7` - Fix Bug #2: Change load detail navigation from context.go to context.push for proper back navigation
+
+**Checkpoint:** `checkpoint-bug-fixes-after`
 
 ---
 
@@ -1725,12 +1732,12 @@ bool _isTopLevel(String location, List<_ShellTab> tabs) {
 
 | # | Bug | Severity | Status |
 |---|-----|----------|--------|
-| 1 | Shell PopScope missing setState() | HIGH | NOT FIXED |
-| 2 | Load detail uses context.go() | HIGH | NOT FIXED |
+| 1 | Shell PopScope missing setState() | HIGH | ✅ FIXED |
+| 2 | Load detail uses context.go() | HIGH | ✅ FIXED |
 | 3 | Route preview/public profile no back arrow | MEDIUM | NOT FIXED |
 | 4 | PopScope pattern inconsistency | LOW | NO ACTION |
 | 5 | No unit tests for navigation | MEDIUM | OUT OF SCOPE |
-| 6 | Navigation pattern inconsistency | MEDIUM | PARTIALLY FIXED |
+| 6 | Navigation pattern inconsistency | MEDIUM | ✅ FIXED |
 | 7 | Route metadata not enforced | LOW | NOT ADDRESSED |
 | 8 | Shell top-level detection | INFO | WORKS CORRECTLY |
 
