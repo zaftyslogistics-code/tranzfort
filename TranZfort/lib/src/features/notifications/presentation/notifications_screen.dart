@@ -299,7 +299,7 @@ class _NotificationRow extends ConsumerWidget {
           return;
         }
 
-        context.go(resolveNotificationRoute(notification, role));
+        context.push(resolveNotificationRoute(notification, role));
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),

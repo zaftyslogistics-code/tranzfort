@@ -41,18 +41,19 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     final currentIndex = _resolveIndex(widget.currentLocation, tabs);
     final currentTab = tabs[currentIndex];
     final topLevel = _isTopLevel(widget.currentLocation, tabs);
+    final shouldProtectBack = _shouldProtectBackButton(widget.currentLocation, tabs);
     final unreadNotificationCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
-    
+
     // Determine if back should be allowed
-    final canPop = !topLevel || (_lastBackPressed != null && DateTime.now().difference(_lastBackPressed!) < const Duration(seconds: 2));
+    final canPop = !shouldProtectBack || (_lastBackPressed != null && DateTime.now().difference(_lastBackPressed!) < const Duration(seconds: 2));
 
     return PopScope(
       canPop: canPop,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
-        
+
         // Handle back button on top-level routes
-        if (topLevel) {
+        if (shouldProtectBack) {
           final now = DateTime.now();
           if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
             // First press - show toast message
@@ -240,6 +241,17 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     return tabs.any((tab) {
       return _normalizeRoute(tab.route) == normalizedLocation;
     });
+  }
+
+  bool _shouldProtectBackButton(String location, List<_ShellTab> tabs) {
+    final normalizedLocation = _normalizeRoute(location);
+    // Check if it's a tab route
+    final isTabRoute = tabs.any((tab) {
+      return _normalizeRoute(tab.route) == normalizedLocation;
+    });
+    // Also consider notifications as a top-level route for back button protection
+    final isNotifications = normalizedLocation == _normalizeRoute(AppRoutes.notificationsPath);
+    return isTabRoute || isNotifications;
   }
 
   int _resolveIndex(String location, List<_ShellTab> tabs) {
