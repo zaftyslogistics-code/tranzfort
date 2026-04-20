@@ -1454,6 +1454,107 @@ context.push('/chat/123');
 
 ---
 
+## Bug Found During Mobile Testing: Shell PopScope Missing setState()
+
+**Reported:** April 20, 2026 (during APK testing on mobile)
+
+### Issue: "Press Back Again to Exit" Only Works on Dashboard
+
+**Problem:**
+- Dashboard: Double back press exits app ✓
+- Other tabs (my-loads, messages, trips): Double back press does NOT exit app ✗
+
+### Root Cause Analysis
+
+**Bug Location:** `lib/src/features/shell/presentation/user_app_shell.dart` line 59
+
+**Current Code (BUGGY):**
+```dart
+if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
+  _lastBackPressed = now;  // ❌ NO setState() call!
+  ScaffoldMessenger.of(context).showSnackBar(...);
+}
+```
+
+**What Happens:**
+1. First back press: Sets `_lastBackPressed = now` without setState()
+2. Widget does NOT rebuild
+3. `canPop` remains false (value from original build)
+4. Second back press: `canPop` still false, shows snackbar again
+5. App never exits
+
+### Why We Missed This Bug
+
+#### 1. Specification Error (TODO File Lines 153-165)
+
+The TODO specification itself contained the bug:
+```dart
+void _handleBackButton(BuildContext context) {
+  if (_lastBackPress == null || now.difference(_lastBackPress!) > const Duration(seconds: 2)) {
+    _lastBackPress = now;  // ❌ BUG in spec!
+    ScaffoldMessenger.of(context).showSnackBar(...);
+  }
+}
+```
+
+We implemented the spec exactly, inheriting the bug.
+
+#### 2. Blind Implementation
+
+We followed the specification without questioning the state management approach. Setting state without setState() is a fundamental Flutter error that should have been caught.
+
+#### 3. Incomplete Validation (Batch 1.9)
+
+Validation checklist claimed:
+- ✅ Back button exits app on second press
+
+But this was likely:
+- Only tested on dashboard (works due to frequent provider updates)
+- Not tested on other tabs
+- No systematic testing across all top-level routes
+
+#### 4. No Unit Tests
+
+No unit tests for PopScope logic. Tests would have caught:
+- State not updating
+- canPop not recalculating
+- Timing logic failures
+
+#### 5. Static Analysis Blindness
+
+Flutter analyze doesn't catch missing setState() - it's a runtime behavior issue.
+
+### Why It Worked on Dashboard
+
+Dashboard has frequent provider updates (notifications, live data) that trigger widget rebuilds. These accidental rebuilds recalculated `canPop`, making the feature work by coincidence. Other tabs with fewer updates exposed the bug.
+
+### Fix
+
+Add setState() call:
+```dart
+if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
+  setState(() {
+    _lastBackPressed = now;
+  });
+  ScaffoldMessenger.of(context).showSnackBar(...);
+}
+```
+
+### Lessons Learned
+
+1. **Specification Quality:** Review specs for framework best practices before implementation
+2. **Don't Blindly Follow Specs:** Question implementation details, especially state management
+3. **Comprehensive Validation:** Test ALL affected routes/screens, not just one
+4. **Unit Tests:** Essential for stateful logic like PopScope timing
+5. **Flutter Analyze ≠ Complete:** Runtime bugs need manual testing and unit tests
+
+### Status: NOT YET FIXED
+
+**Files to Modify:**
+- `lib/src/features/shell/presentation/user_app_shell.dart` - Add setState() call
+
+---
+
 ## Risk Mitigation
 
 ### Before Each Batch:
