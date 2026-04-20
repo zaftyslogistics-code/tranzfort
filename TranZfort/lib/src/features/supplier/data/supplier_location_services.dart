@@ -85,16 +85,27 @@ class NetworkSupplierLocationService implements SupplierLocationService {
       return const [];
     }
 
-    debugPrint('[LocationSearch] Searching for: "$trimmedQuery"');
+    debugPrint('[SupplierLocationSearch] ========== SEARCH START ==========');
+    debugPrint('[SupplierLocationSearch] Searching for: "$query"');
     
+    // Try Google Places API first
     final googleSuggestions = await _searchGoogleCities(trimmedQuery);
     if (googleSuggestions.isNotEmpty) {
-      debugPrint('[LocationSearch] Using Google Places API: ${googleSuggestions.length} results');
+      debugPrint('[SupplierLocationSearch] ========== USING GOOGLE PLACES API ==========');
+      debugPrint('[SupplierLocationSearch] Source: Google Places API');
+      debugPrint('[SupplierLocationSearch] Results: ${googleSuggestions.length} cities');
+      debugPrint('[SupplierLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
       return googleSuggestions;
     }
 
-    debugPrint('[LocationSearch] Google Places API returned empty, falling back to offline');
-    return _searchOfflineCities(trimmedQuery);
+    debugPrint('[SupplierLocationSearch] ========== USING OFFLINE DATABASE ==========');
+    debugPrint('[SupplierLocationSearch] Google Places API returned empty or failed');
+    final offlineSuggestions = await _searchOfflineCities(trimmedQuery);
+    debugPrint('[SupplierLocationSearch] Source: Offline Database');
+    debugPrint('[SupplierLocationSearch] Results: ${offlineSuggestions.length} places');
+    debugPrint('[SupplierLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
+    debugPrint('[SupplierLocationSearch] ========== SEARCH END ==========');
+    return offlineSuggestions;
   }
 
   @override
@@ -164,11 +175,11 @@ class NetworkSupplierLocationService implements SupplierLocationService {
   Future<List<PlaceSuggestion>> _searchGoogleCities(String query) async {
     final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
     if (apiKey.isEmpty) {
-      debugPrint('[LocationSearch] Google Maps API key is empty');
+      debugPrint('[SupplierLocationSearch] Google Maps API key is empty');
       return const [];
     }
 
-    debugPrint('[LocationSearch] Using Google Maps API key (length: ${apiKey.length})');
+    debugPrint('[SupplierLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
 
     final uri = Uri.https(
       'maps.googleapis.com',
@@ -182,15 +193,15 @@ class NetworkSupplierLocationService implements SupplierLocationService {
     );
 
     try {
-      debugPrint('[LocationSearch] Calling Google Places API: $uri');
+      debugPrint('[SupplierLocationSearch] Calling Google Places API');
       final payload = await _getJson(uri);
       final predictions = payload['predictions'];
       if (predictions is! List) {
-        debugPrint('[LocationSearch] Google API response: predictions is not a List');
+        debugPrint('[SupplierLocationSearch] Google API response: predictions is not a List');
         return const [];
       }
 
-      debugPrint('[LocationSearch] Google API returned ${predictions.length} predictions');
+      debugPrint('[SupplierLocationSearch] Google API returned ${predictions.length} predictions');
       return predictions
           .whereType<Map<String, dynamic>>()
           .map((prediction) {
@@ -198,6 +209,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
             final parts = description.split(',').map((part) => part.trim()).where((part) => part.isNotEmpty).toList();
             final city = parts.isNotEmpty ? parts.first : description;
             final state = parts.length > 1 ? parts[1] : null;
+            debugPrint('[SupplierLocationSearch] Google result: "$city, $state"');
             return PlaceSuggestion(
               label: description,
               city: city,
@@ -210,34 +222,45 @@ class NetworkSupplierLocationService implements SupplierLocationService {
           })
           .toList(growable: false);
     } catch (e, stackTrace) {
-      debugPrint('[LocationSearch] Google API error: $e');
+      debugPrint('[SupplierLocationSearch] Google API error: $e');
       if (kDebugMode) {
-        debugPrint('[LocationSearch] Stack trace: $stackTrace');
+        debugPrint('[SupplierLocationSearch] Stack trace: $stackTrace');
       }
       return const [];
     }
   }
 
   Future<List<PlaceSuggestion>> _searchOfflineCities(String query) async {
-    debugPrint('[LocationSearch] Using offline database search');
     final normalized = query.toLowerCase();
     final cities = await _loadOfflineCities();
+    
+    // indian_cities.json doesn't have place_type field, so we can't filter by city/town
+    // Use district field if available to get main city name instead of village
+    debugPrint('[SupplierLocationSearch] Offline database has ${cities.length} total places');
+    
     final results = cities
         .where((city) => _readCityName(city).toLowerCase().contains(normalized))
         .take(10)
         .map(
-          (city) => PlaceSuggestion(
-            label: '${_readCityName(city)}, ${city['state']}',
-            city: _readCityName(city),
-            state: city['state']?.toString(),
-            lat: _readDouble(city['lat']),
-            lng: _readDouble(city['lng']),
-            placeId: null,
-            source: 'offline_asset',
-          ),
+          (city) {
+            final cityName = (city['district']?.isNotEmpty == true) ? city['district']!.toString() : _readCityName(city);
+            final stateName = (city['state'] ?? '').toString();
+            debugPrint('[SupplierLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
+            return PlaceSuggestion(
+              // Use district if available (main city), otherwise use city name (may be village)
+              label: '$cityName, $stateName',
+              city: cityName,
+              state: stateName,
+              lat: _readDouble(city['lat']),
+              lng: _readDouble(city['lng']),
+              placeId: null,
+              source: 'offline_asset',
+            );
+          },
         )
         .toList(growable: false);
-    debugPrint('[LocationSearch] Offline search returned ${results.length} results');
+    
+    debugPrint('[SupplierLocationSearch] Offline search returned ${results.length} results');
     return results;
   }
 
