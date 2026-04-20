@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -84,11 +85,15 @@ class NetworkSupplierLocationService implements SupplierLocationService {
       return const [];
     }
 
+    debugPrint('[LocationSearch] Searching for: "$trimmedQuery"');
+    
     final googleSuggestions = await _searchGoogleCities(trimmedQuery);
     if (googleSuggestions.isNotEmpty) {
+      debugPrint('[LocationSearch] Using Google Places API: ${googleSuggestions.length} results');
       return googleSuggestions;
     }
 
+    debugPrint('[LocationSearch] Google Places API returned empty, falling back to offline');
     return _searchOfflineCities(trimmedQuery);
   }
 
@@ -159,8 +164,11 @@ class NetworkSupplierLocationService implements SupplierLocationService {
   Future<List<PlaceSuggestion>> _searchGoogleCities(String query) async {
     final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
     if (apiKey.isEmpty) {
+      debugPrint('[LocationSearch] Google Maps API key is empty');
       return const [];
     }
+
+    debugPrint('[LocationSearch] Using Google Maps API key (length: ${apiKey.length})');
 
     final uri = Uri.https(
       'maps.googleapis.com',
@@ -174,12 +182,15 @@ class NetworkSupplierLocationService implements SupplierLocationService {
     );
 
     try {
+      debugPrint('[LocationSearch] Calling Google Places API: $uri');
       final payload = await _getJson(uri);
       final predictions = payload['predictions'];
       if (predictions is! List) {
+        debugPrint('[LocationSearch] Google API response: predictions is not a List');
         return const [];
       }
 
+      debugPrint('[LocationSearch] Google API returned ${predictions.length} predictions');
       return predictions
           .whereType<Map<String, dynamic>>()
           .map((prediction) {
@@ -198,15 +209,20 @@ class NetworkSupplierLocationService implements SupplierLocationService {
             );
           })
           .toList(growable: false);
-    } catch (_) {
+    } catch (e, stackTrace) {
+      debugPrint('[LocationSearch] Google API error: $e');
+      if (kDebugMode) {
+        debugPrint('[LocationSearch] Stack trace: $stackTrace');
+      }
       return const [];
     }
   }
 
   Future<List<PlaceSuggestion>> _searchOfflineCities(String query) async {
+    debugPrint('[LocationSearch] Using offline database search');
     final normalized = query.toLowerCase();
     final cities = await _loadOfflineCities();
-    return cities
+    final results = cities
         .where((city) => _readCityName(city).toLowerCase().contains(normalized))
         .take(10)
         .map(
@@ -221,6 +237,8 @@ class NetworkSupplierLocationService implements SupplierLocationService {
           ),
         )
         .toList(growable: false);
+    debugPrint('[LocationSearch] Offline search returned ${results.length} results');
+    return results;
   }
 
   Future<List<Map<String, dynamic>>> _loadOfflineCities() async {

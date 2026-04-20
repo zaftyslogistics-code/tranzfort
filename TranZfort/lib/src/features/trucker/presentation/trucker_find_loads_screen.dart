@@ -218,7 +218,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
             SliverPersistentHeader(
               pinned: true,
               delegate: _PinnedHeaderDelegate(
-                height: filters.hasActiveFilters ? 104 : 56,
+                height: filters.hasActiveFilters ? 132 : 56,
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.xs, AppSpacing.lg, AppSpacing.xs),
                   child: _FindLoadsTabsHeader(

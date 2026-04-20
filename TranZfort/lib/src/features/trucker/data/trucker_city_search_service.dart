@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TruckerCitySuggestion {
@@ -8,48 +11,172 @@ class TruckerCitySuggestion {
   final String state;
   final double? lat;
   final double? lng;
+  final String? placeId;
+  final String source;
 
   const TruckerCitySuggestion({
     required this.city,
     required this.state,
     required this.lat,
     required this.lng,
+    this.placeId,
+    required this.source,
   });
 
   String get label => '$city, $state';
+
+  TruckerCitySuggestion copyWith({
+    String? city,
+    String? state,
+    double? lat,
+    double? lng,
+    String? placeId,
+    String? source,
+  }) {
+    return TruckerCitySuggestion(
+      city: city ?? this.city,
+      state: state ?? this.state,
+      lat: lat ?? this.lat,
+      lng: lng ?? this.lng,
+      placeId: placeId ?? this.placeId,
+      source: source ?? this.source,
+    );
+  }
 }
 
 abstract class TruckerCitySearchService {
   Future<List<TruckerCitySuggestion>> searchCities(String query);
 }
 
-class OfflineTruckerCitySearchService implements TruckerCitySearchService {
+class NetworkTruckerCitySearchService implements TruckerCitySearchService {
   final AssetBundle _assetBundle;
+  final HttpClient Function() _httpClientFactory;
   List<Map<String, dynamic>>? _offlineCities;
 
-  OfflineTruckerCitySearchService({AssetBundle? assetBundle})
-      : _assetBundle = assetBundle ?? rootBundle;
+  NetworkTruckerCitySearchService({
+    AssetBundle? assetBundle,
+    HttpClient Function()? httpClientFactory,
+  })  : _assetBundle = assetBundle ?? rootBundle,
+        _httpClientFactory = httpClientFactory ?? HttpClient.new;
 
   @override
   Future<List<TruckerCitySuggestion>> searchCities(String query) async {
-    final normalized = query.trim().toLowerCase();
-    if (normalized.length < 2) {
+    final trimmedQuery = query.trim();
+    if (trimmedQuery.length < 2) {
       return const <TruckerCitySuggestion>[];
     }
 
+    debugPrint('[TruckerLocationSearch] ========== SEARCH START ==========');
+    debugPrint('[TruckerLocationSearch] Searching for: "$query"');
+    
+    // Try Google Places API first
+    final googleSuggestions = await _searchGoogleCities(trimmedQuery);
+    if (googleSuggestions.isNotEmpty) {
+      debugPrint('[TruckerLocationSearch] ========== USING GOOGLE PLACES API ==========');
+      debugPrint('[TruckerLocationSearch] Source: Google Places API');
+      debugPrint('[TruckerLocationSearch] Results: ${googleSuggestions.length} cities');
+      debugPrint('[TruckerLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
+      return googleSuggestions;
+    }
+
+    debugPrint('[TruckerLocationSearch] ========== USING OFFLINE DATABASE ==========');
+    debugPrint('[TruckerLocationSearch] Google Places API returned empty or failed');
+    final offlineSuggestions = await _searchOfflineCities(trimmedQuery);
+    debugPrint('[TruckerLocationSearch] Source: Offline Database');
+    debugPrint('[TruckerLocationSearch] Results: ${offlineSuggestions.length} places');
+    debugPrint('[TruckerLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
+    debugPrint('[TruckerLocationSearch] ========== SEARCH END ==========');
+    return offlineSuggestions;
+  }
+
+  Future<List<TruckerCitySuggestion>> _searchGoogleCities(String query) async {
+    final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
+    if (apiKey.isEmpty) {
+      debugPrint('[TruckerLocationSearch] Google Maps API key is empty');
+      return const [];
+    }
+
+    debugPrint('[TruckerLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
+
+    final uri = Uri.https(
+      'maps.googleapis.com',
+      '/maps/api/place/autocomplete/json',
+      <String, String>{
+        'input': query,
+        'types': '(cities)',
+        'components': 'country:in',
+        'key': apiKey,
+      },
+    );
+
+    try {
+      debugPrint('[TruckerLocationSearch] Calling Google Places API');
+      final payload = await _getJson(uri);
+      final predictions = payload['predictions'];
+      if (predictions is! List) {
+        debugPrint('[TruckerLocationSearch] Google API response: predictions is not a List');
+        return const [];
+      }
+
+      debugPrint('[TruckerLocationSearch] Google API returned ${predictions.length} predictions');
+      final suggestions = predictions
+          .whereType<Map<String, dynamic>>()
+          .map((prediction) {
+            final description = (prediction['description'] ?? '').toString();
+            final parts = description.split(',').map((part) => part.trim()).where((part) => part.isNotEmpty).toList();
+            final city = parts.isNotEmpty ? parts.first : description;
+            final state = parts.length > 1 ? parts[1] : null;
+            debugPrint('[TruckerLocationSearch] Google result: "$city, $state"');
+            return TruckerCitySuggestion(
+              city: city,
+              state: state ?? '',
+              lat: null,
+              lng: null,
+              placeId: prediction['place_id']?.toString(),
+              source: 'google_places',
+            );
+          })
+          .toList(growable: false);
+      return suggestions.cast<TruckerCitySuggestion>().toList();
+    } catch (e, stackTrace) {
+      debugPrint('[TruckerLocationSearch] Google API error: $e');
+      if (kDebugMode) {
+        debugPrint('[TruckerLocationSearch] Stack trace: $stackTrace');
+      }
+      return const [];
+    }
+  }
+
+  Future<List<TruckerCitySuggestion>> _searchOfflineCities(String query) async {
+    final normalized = query.toLowerCase();
     final cities = await _loadOfflineCities();
-    return cities
+    
+    // indian_cities.json doesn't have place_type field, so we can't filter by city/town
+    // Just use district field if available to get main city name instead of village
+    debugPrint('[TruckerLocationSearch] Offline database has ${cities.length} total places');
+    
+    final results = cities
         .where((city) => _readCityName(city).toLowerCase().contains(normalized))
         .take(20)
         .map(
-          (city) => TruckerCitySuggestion(
-            city: _readCityName(city),
-            state: (city['state'] ?? '').toString(),
-            lat: _readDouble(city['lat']),
-            lng: _readDouble(city['lng']),
-          ),
+          (city) {
+            final cityName = (city['district']?.isNotEmpty == true) ? city['district']!.toString() : _readCityName(city);
+            final stateName = (city['state'] ?? '').toString();
+            debugPrint('[TruckerLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
+            return TruckerCitySuggestion(
+              city: cityName,
+              state: stateName,
+              lat: _readDouble(city['lat']),
+              lng: _readDouble(city['lng']),
+              placeId: null,
+              source: 'offline_asset',
+            );
+          },
         )
         .toList(growable: false);
+    
+    debugPrint('[TruckerLocationSearch] Offline search returned ${results.length} results');
+    return results;
   }
 
   Future<List<Map<String, dynamic>>> _loadOfflineCities() async {
@@ -73,6 +200,22 @@ class OfflineTruckerCitySearchService implements TruckerCitySearchService {
     }
   }
 
+  Future<Map<String, dynamic>> _getJson(Uri uri) async {
+    final client = _httpClientFactory();
+    try {
+      final request = await client.getUrl(uri);
+      final response = await request.close();
+      final body = await utf8.decodeStream(response);
+      final decoded = jsonDecode(body);
+      if (decoded is Map<String, dynamic>) {
+        return decoded;
+      }
+      return <String, dynamic>{};
+    } finally {
+      client.close(force: true);
+    }
+  }
+
   double? _readDouble(Object? value) {
     if (value is num) {
       return value.toDouble();
@@ -86,5 +229,5 @@ class OfflineTruckerCitySearchService implements TruckerCitySearchService {
 }
 
 final truckerCitySearchServiceProvider = Provider<TruckerCitySearchService>((ref) {
-  return OfflineTruckerCitySearchService();
+  return NetworkTruckerCitySearchService();
 });

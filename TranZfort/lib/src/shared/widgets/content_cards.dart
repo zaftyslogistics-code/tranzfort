@@ -82,6 +82,7 @@ class StatCard extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             height: 4,
@@ -94,15 +95,16 @@ class StatCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+            padding: const EdgeInsets.all(AppSpacing.md),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(value, style: Theme.of(context).textTheme.displayLarge),
-                const SizedBox(height: AppSpacing.xs),
+                const SizedBox(height: 4),
                 Text(label, style: Theme.of(context).textTheme.bodyLarge),
                 if (helperText != null) ...[
-                  const SizedBox(height: AppSpacing.xs),
+                  const SizedBox(height: 4),
                   Text(helperText!, style: Theme.of(context).textTheme.bodySmall),
                 ],
               ],
