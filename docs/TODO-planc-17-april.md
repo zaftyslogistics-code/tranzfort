@@ -1728,17 +1728,102 @@ bool _isTopLevel(String location, List<_ShellTab> tabs) {
 
 ---
 
+## Brainstorming: Solutions for Bugs #3, #4, #7
+
+### Bug #3: Route Preview & Public Profile No Back Arrow
+
+**Options Analyzed:**
+- **Option A:** Convert to DetailPageScaffold - HIGH RISK (custom AppBar logic)
+- **Option B:** Add manual back arrow to custom AppBar - MEDIUM RISK (3 screens)
+- **Option C:** Accept system back button only - ZERO RISK (no changes)
+- **Option D:** Create hybrid scaffold component - MEDIUM RISK (new component)
+
+**Recommendation:** Option C (Accept system back button only)
+
+**Rationale:**
+- System back button works after Bug #1 and #2 fixes
+- Custom AppBar logic is complex (risk of breaking)
+- Zero risk approach
+- Can revisit later if UX issue becomes critical
+
+**Implementation:** NO ACTION NEEDED
+
+---
+
+### Bug #4: PopScope Pattern Inconsistency
+
+**Options Analyzed:**
+- **Option A:** Standardize on method call pattern - MEDIUM RISK (refactoring shell)
+- **Option B:** Standardize on state variable pattern - HIGH RISK (6 screens)
+- **Option C:** Accept inconsistency + document - ZERO RISK (no changes)
+- **Option D:** Create PopScope helper widget - MEDIUM RISK (new component)
+
+**Recommendation:** Option C (Accept inconsistency + document)
+
+**Rationale:**
+- Both patterns work correctly
+- Shell pattern is now fixed (setState added)
+- Form patterns work fine with method calls
+- No benefit to refactoring working code
+- Document the patterns in navigation-architecture.md
+
+**Implementation:** UPDATE DOCUMENTATION ONLY
+
+---
+
+### Bug #7: Route Metadata Not Enforced
+
+**Options Analyzed:**
+- **Option A:** Enforce via lint rule - LOW RISK (development-time only)
+- **Option B:** Enforce via build-time validation - LOW RISK (debug-only)
+- **Option C:** Make metadata functional (enforcement layer) - HIGH RISK (architectural change)
+- **Option D:** Accept as documentation-only - ZERO RISK (no changes)
+
+**Recommendation:** Option D (Accept as documentation-only)
+
+**Rationale:**
+- Metadata is useful for reference
+- Enforcement would require major architectural change
+- Current implementation works
+- Zero risk
+- Can add lint rules later if needed
+
+**Implementation:** NO ACTION NEEDED
+
+---
+
+## Implementation Plan for Remaining Bugs
+
+### Bug #3: Route Preview & Public Profile Back Arrow
+**Action:** Accept current implementation (system back button only)
+**Reason:** Zero risk, system back button works after fixes
+**Status:** ✅ ACCEPTED - No changes needed
+
+### Bug #4: PopScope Pattern Inconsistency
+**Action:** Update navigation-architecture.md to document both patterns
+**Reason:** Document when to use each pattern
+**Files to Modify:**
+- `docs/navigation-architecture.md` - Add PopScope pattern documentation
+**Status:** PENDING - Documentation update needed
+
+### Bug #7: Route Metadata Not Enforced
+**Action:** Accept as documentation-only
+**Reason:** Zero risk, metadata still useful for reference
+**Status:** ✅ ACCEPTED - No changes needed
+
+---
+
 ### Summary of Bugs Found
 
 | # | Bug | Severity | Status |
 |---|-----|----------|--------|
 | 1 | Shell PopScope missing setState() | HIGH | ✅ FIXED |
 | 2 | Load detail uses context.go() | HIGH | ✅ FIXED |
-| 3 | Route preview/public profile no back arrow | MEDIUM | NOT FIXED |
-| 4 | PopScope pattern inconsistency | LOW | NO ACTION |
+| 3 | Route preview/public profile no back arrow | MEDIUM | ✅ ACCEPTED (no action) |
+| 4 | PopScope pattern inconsistency | LOW | PENDING (documentation) |
 | 5 | No unit tests for navigation | MEDIUM | OUT OF SCOPE |
 | 6 | Navigation pattern inconsistency | MEDIUM | ✅ FIXED |
-| 7 | Route metadata not enforced | LOW | NOT ADDRESSED |
+| 7 | Route metadata not enforced | LOW | ✅ ACCEPTED (no action) |
 | 8 | Shell top-level detection | INFO | WORKS CORRECTLY |
 
 ---
