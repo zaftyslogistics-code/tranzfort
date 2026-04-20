@@ -200,6 +200,265 @@ PopScope(
 )
 ```
 
+### PopScope Implementation Patterns
+
+There are two valid patterns for implementing PopScope in this codebase. Both patterns work correctly; the choice depends on the use case.
+
+#### Pattern 1: State Variable with setState() (Shell Pattern)
+
+**Use Case:** When you need to track timing-based state (e.g., "press back again to exit")
+
+**Example:** Shell PopScope for "Press back again to exit"
+
+```dart
+class _UserAppShellState extends ConsumerState<UserAppShell> {
+  DateTime? _lastBackPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    final canPop = !topLevel || (_lastBackPressed != null && DateTime.now().difference(_lastBackPressed!) < const Duration(seconds: 2));
+
+    return PopScope(
+      canPop: canPop,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        
+        if (topLevel) {
+          final now = DateTime.now();
+          if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
+            setState(() {  // ← CRITICAL: Must call setState()
+              _lastBackPressed = now;
+            });
+            ScaffoldMessenger.of(context).showSnackBar(...);
+          }
+        }
+      },
+      child: Scaffold(...),
+    );
+  }
+}
+```
+
+**Key Points:**
+- Uses state variable (`_lastBackPressed`) in build method
+- **Must call `setState()`** when updating state variable
+- Widget rebuilds, recalculating `canPop`
+- Used for timing-based logic
+
+---
+
+#### Pattern 2: Method Call (Form Screen Pattern)
+
+**Use Case:** When checking dynamic state (e.g., unsaved changes) that's already tracked elsewhere
+
+**Example:** Form screen PopScope for unsaved changes
+
+```dart
+class _MyFormScreenState extends ConsumerState<MyFormScreen> {
+  // Form controllers and state tracking...
+
+  bool _hasUnsavedChanges() {
+    // Check if any form field differs from initial value
+    return _emailController.text != _initialEmail ||
+           _passwordController.text != _initialPassword;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: !_hasUnsavedChanges(),  // ← Method call, recalculated each build
+      onPopInvokedWithResult: (didPop, result) async {
+        if (didPop) return;
+        
+        if (_hasUnsavedChanges()) {
+          final shouldPop = await _showUnsavedChangesDialog();
+          if (shouldPop && mounted) {
+            Navigator.of(context).pop();
+          }
+        }
+      },
+      child: Scaffold(...),
+    );
+  }
+}
+```
+
+**Key Points:**
+- Uses method call (`_hasUnsavedChanges()`) for `canPop`
+- Method is called on each build, no setState needed
+- State is tracked in form controllers/providers
+- Used for dynamic state checks
+
+---
+
+#### When to Use Each Pattern
+
+| Pattern | Use When | Example |
+|---------|----------|---------|
+| State Variable | Timing-based logic, need to track previous state | "Press back again to exit", rate limiting |
+| Method Call | Dynamic state checks, state already tracked | Unsaved changes, validation state |
+
+**Important:** If using Pattern 1 (state variable), **always call `setState()`** when updating the state variable. Without setState(), the widget won't rebuild and `canPop` won't be recalculated.
+
+---
+
+### Scaffold Choice: DetailPageScaffold vs Custom Scaffold
+
+When implementing screens, choose between `DetailPageScaffold` and custom `Scaffold` based on your requirements.
+
+#### DetailPageScaffold
+
+**Use When:**
+- Screen needs a standard back arrow
+- AppBar is simple (title, optional actions)
+- Back arrow behavior is standard (navigate back)
+
+**Features:**
+- Automatically shows back arrow when route metadata has `showBackArrow: true`
+- Integrates with RouteMetadataHelper
+- Consistent styling across detail screens
+
+**Example:**
+```dart
+DetailPageScaffold(
+  title: 'Load Details',
+  body: LoadDetailContent(),
+)
+```
+
+**Used By:**
+- Load detail screens
+- Trip detail screens
+- Other standard detail screens
+
+---
+
+#### Custom Scaffold
+
+**Use When:**
+- Screen has complex AppBar (custom leading, multiple actions)
+- Screen has special AppBar behavior (avatar tap, custom navigation)
+- Back arrow needs custom placement or styling
+- Screen doesn't need a back arrow (top-level routes)
+
+**Features:**
+- Full control over AppBar
+- Custom leading widget (e.g., avatar, custom button)
+- Custom actions and behavior
+
+**Example:**
+```dart
+Scaffold(
+  appBar: AppBar(
+    leading: InkWell(
+      onTap: () => context.push(AppRoutes.publicProfileLocation(userId)),
+      child: AvatarCircle(...),
+    ),
+    title: Column(...),
+    actions: [...],
+  ),
+  body: Content(),
+)
+```
+
+**Used By:**
+- Chat screen (avatar in leading)
+- Route preview screen (custom buttons)
+- Public profile screens (avatar, follow button)
+- Dashboard screens (no back arrow needed)
+
+---
+
+#### Back Arrow Options with Custom Scaffold
+
+If using custom Scaffold but need a back arrow:
+
+**Option 1: Manual Back Arrow (Simple)**
+```dart
+AppBar(
+  leading: IconButton(
+    icon: Icon(Icons.arrow_back),
+    onPressed: () => Navigator.of(context).pop(),
+  ),
+  // ...
+)
+```
+
+**Option 2: Check Metadata (Consistent with system)**
+```dart
+AppBar(
+  leading: RouteMetadataHelper.shouldShowBackArrow(context)
+      ? IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        )
+      : null,
+  // ...
+)
+```
+
+**Option 3: System Back Button Only**
+- Don't add back arrow to AppBar
+- Rely on system back button (Android) or gesture (iOS)
+- Works after navigation fixes (Bug #1, #2)
+- Zero risk, preserves custom AppBar
+
+**Recommendation:** For screens with complex custom AppBar (chat, route preview, public profile), use Option 3 (system back button only) to preserve existing UI/UX.
+
+---
+
+### Route Metadata: Documentation vs Enforcement
+
+Route metadata in this codebase serves as **documentation and reference**, not runtime enforcement.
+
+#### Current Role of Metadata
+
+**Documentation:**
+- Describes route characteristics (type, back arrow requirement, PopScope requirement)
+- Provides centralized information about all routes
+- Helps developers understand expected behavior
+
+**Reference:**
+- DetailPageScaffold uses `showBackArrow` metadata to automatically show/hide back arrow
+- Can be queried by tools and tests
+- Provides single source of truth for route information
+
+**Not Enforced:**
+- Screens can ignore metadata (e.g., custom Scaffold with no back arrow despite `showBackArrow: true`)
+- No runtime validation that screens match their metadata
+- Metadata is advisory, not mandatory
+
+#### Why Documentation-Only?
+
+**Benefits:**
+- Flexibility for complex screens (custom AppBar, special behavior)
+- No runtime overhead from enforcement layer
+- Simpler architecture (no wrapper components needed)
+- Zero risk of breaking existing screens
+
+**Trade-offs:**
+- Inconsistent behavior possible if screens ignore metadata
+- Requires developer discipline to follow metadata
+- Metadata can become outdated if not maintained
+
+#### Best Practices
+
+1. **Keep metadata accurate:** Update metadata when screen behavior changes
+2. **Follow metadata when possible:** Use DetailPageScaffold for standard screens
+3. **Document deviations:** If screen ignores metadata, add comment explaining why
+4. **Review metadata regularly:** Ensure metadata matches actual implementation
+
+#### Future Enhancement: Lint Rules
+
+To improve metadata adherence without runtime enforcement, consider adding custom lint rules:
+- Check if screen with `showBackArrow: true` has back arrow
+- Check if screen with `requirePopScope: true` has PopScope
+- Warn on metadata mismatches
+
+This provides development-time feedback without runtime overhead.
+
+---
+
 ## Route Registry
 
 All 33 routes are registered with metadata in `lib/src/core/navigation/app_router.dart`.
