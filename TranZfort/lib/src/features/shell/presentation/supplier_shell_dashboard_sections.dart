@@ -471,7 +471,7 @@ class _RecentLoadCard extends StatelessWidget {
           ),
         ],
       ),
-      onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
+      onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
     );
   }
 }
