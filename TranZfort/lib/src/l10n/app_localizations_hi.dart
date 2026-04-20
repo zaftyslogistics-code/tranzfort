@@ -330,7 +330,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierDashboardQuickActionChatLabel => 'चैट';
 
   @override
-  String get supplierDashboardPostLoadAction => 'Post Load';
+  String get supplierDashboardPostLoadAction => 'लोड पोस्ट करें';
 
   @override
   String get supplierDashboardHeroSummaryBody =>
@@ -2772,7 +2772,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'Reset advanced filters';
 
   @override
-  String get supplierPostLoadTitle => 'Post Load';
+  String get supplierPostLoadTitle => 'लोड पोस्ट करें';
 
   @override
   String get supplierPostLoadHeroTitle => 'सप्लायर लोड बनाएं';
@@ -2949,7 +2949,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'Complete verification to post load';
 
   @override
-  String get supplierPostLoadSubmitAction => 'Post Load';
+  String get supplierPostLoadSubmitAction => 'लोड पोस्ट करें';
 
   @override
   String get supplierPostLoadCreatedSuccess => 'Load created successfully';
@@ -3660,13 +3660,13 @@ class AppLocalizationsHi extends AppLocalizations {
       'अगर यह dispute current single-image flow से आगे additional documents पर निर्भर करती है, तो उन missing proofs को related support ticket replies में साफ summarize करें।';
 
   @override
-  String get verificationTitle => 'Verification';
+  String get verificationTitle => 'वेरिफिकेशन';
 
   @override
-  String get verificationTitleSupplier => 'Supplier Verification';
+  String get verificationTitleSupplier => 'सप्लायर वेरिफिकेशन';
 
   @override
-  String get verificationTitleTrucker => 'Trucker Verification';
+  String get verificationTitleTrucker => 'ट्रकर वेरिफिकेशन';
 
   @override
   String get verificationLoadFailureTitle =>
