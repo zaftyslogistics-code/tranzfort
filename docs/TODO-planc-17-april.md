@@ -1555,6 +1555,187 @@ if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Durat
 
 ---
 
+## Comprehensive Bug Review: Other Potential Issues
+
+### Bug #2: Load Detail Navigation Uses context.go() Instead of context.push()
+
+**Location:** `lib/src/features/shell/presentation/supplier_shell_dashboard_sections.dart` line 474
+
+**Current Code:**
+```dart
+onTap: () => context.go('${AppRoutes.loadDetailPath}/${load.id}'),
+```
+
+**Issue:**
+- Load detail is a nested/detail route (`showBackArrow: true` in metadata)
+- Using `context.go()` replaces the route instead of pushing onto stack
+- Same issue as chat screen - back button won't work correctly
+
+**Expected Behavior:**
+```dart
+onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
+```
+
+**Impact:**
+- Back button from load detail will exit app instead of returning to dashboard
+- Affects all load cards in supplier dashboard
+
+**Status:** NOT YET FIXED
+
+---
+
+### Bug #3: Route Preview and Public Profile Screens Have No Back Arrow
+
+**Location:** 
+- `lib/src/features/trucker/presentation/trucker_route_preview_screen.dart`
+- `lib/src/features/profile/presentation/supplier_public_profile_screen.dart`
+- `lib/src/features/profile/presentation/trucker_public_profile_screen.dart`
+
+**Issue:**
+- These routes have `showBackArrow: true` metadata
+- They use regular Scaffold instead of DetailPageScaffold
+- Metadata is ignored - no back arrow shown
+
+**Impact:**
+- Users can't navigate back using the app bar back button
+- Must use system back button (which may have the same issue as chat)
+
+**Status:** NOT YET FIXED
+
+---
+
+### Bug #4: PopScope Implementations Inconsistent with Shell Pattern
+
+**Analysis:**
+
+All form screen PopScope implementations use:
+```dart
+canPop: !_hasUnsavedChanges(),
+```
+
+This is a **method call**, not a state variable, so they don't have the setState() bug. However, they use a different pattern than the shell:
+
+**Shell Pattern (BUGGY):**
+```dart
+final canPop = !topLevel || (_lastBackPressed != null && DateTime.now().difference(_lastBackPressed!) < const Duration(seconds: 2));
+```
+- Uses state variable in build
+- Needs setState() to update
+
+**Form Screen Pattern (WORKS):**
+```dart
+canPop: !_hasUnsavedChanges(),
+```
+- Uses method call
+- Recalculated on each build
+- No setState() needed
+
+**Conclusion:** Form screens are safe, but the pattern inconsistency is confusing.
+
+**Status:** NO ACTION NEEDED (form screens work correctly)
+
+---
+
+### Bug #5: No Unit Tests for Navigation Logic
+
+**Issue:**
+- No unit tests for PopScope timing logic
+- No unit tests for route metadata system
+- No unit tests for navigation service
+- No unit tests for monitoring service
+
+**Impact:**
+- Bugs like setState() missing go undetected
+- No regression protection for navigation changes
+- Hard to verify edge cases
+
+**Status:** NOT ADDRESSED (was out of scope for Plan C)
+
+---
+
+### Bug #6: Navigation Pattern Inconsistency Across Codebase
+
+**Analysis:**
+
+**context.go() usage:**
+- Top-level routes: dashboard, my-loads, trips, find-loads, messages, fleet, verification, support ✓ CORRECT
+- Detail routes: load-detail ✗ WRONG (should be push)
+- Sub-flows: fleet?returnTo=verification, support with extra ✓ CORRECT (go is appropriate)
+
+**context.push() usage:**
+- Chat ✓ CORRECT (fixed)
+- Load detail in trucker_load_detail_shared.dart ✓ CORRECT
+- Trip detail chat ✓ CORRECT
+
+**Conclusion:** Mixed usage - some detail routes use push, some use go. Inconsistent.
+
+**Status:** PARTIALLY FIXED (chat fixed, load-detail still wrong)
+
+---
+
+### Bug #7: Route Metadata Not Enforced
+
+**Issue:**
+- Route metadata is registered but not enforced
+- Screens can ignore metadata (e.g., route preview, public profile)
+- No validation that metadata matches actual screen behavior
+
+**Impact:**
+- Metadata becomes documentation only, not functional
+- Inconsistent behavior across similar routes
+
+**Example:**
+- `/route-preview` has `showBackArrow: true` metadata
+- Screen uses regular Scaffold with no back arrow
+- Metadata is ignored
+
+**Status:** NOT ADDRESSED (would require architectural change)
+
+---
+
+### Bug #8: Shell PopScope Only Checks Exact Route Matches
+
+**Location:** `lib/src/features/shell/presentation/user_app_shell.dart` line 236-241
+
+**Current Code:**
+```dart
+bool _isTopLevel(String location, List<_ShellTab> tabs) {
+  final normalizedLocation = _normalizeRoute(location);
+  return tabs.any((tab) {
+    return _normalizeRoute(tab.route) == normalizedLocation;  // Exact match only
+  });
+}
+```
+
+**Issue:**
+- Only checks if location exactly matches tab route
+- Doesn't check `associatedRoutes` in tab
+- Could cause issues with nested routes
+
+**Example:**
+- `/messages` is top-level ✓
+- `/chat/123` is not in tabs, so not top-level ✓ (correct)
+- But what about other nested routes?
+
+**Status:** WORKS CORRECTLY (associatedRoutes used for tab highlighting, not top-level detection)
+
+---
+
+### Summary of Bugs Found
+
+| # | Bug | Severity | Status |
+|---|-----|----------|--------|
+| 1 | Shell PopScope missing setState() | HIGH | NOT FIXED |
+| 2 | Load detail uses context.go() | HIGH | NOT FIXED |
+| 3 | Route preview/public profile no back arrow | MEDIUM | NOT FIXED |
+| 4 | PopScope pattern inconsistency | LOW | NO ACTION |
+| 5 | No unit tests for navigation | MEDIUM | OUT OF SCOPE |
+| 6 | Navigation pattern inconsistency | MEDIUM | PARTIALLY FIXED |
+| 7 | Route metadata not enforced | LOW | NOT ADDRESSED |
+| 8 | Shell top-level detection | INFO | WORKS CORRECTLY |
+
+---
+
 ## Risk Mitigation
 
 ### Before Each Batch:
