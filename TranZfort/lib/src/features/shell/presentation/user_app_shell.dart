@@ -56,7 +56,9 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
           final now = DateTime.now();
           if (_lastBackPressed == null || now.difference(_lastBackPressed!) >= const Duration(seconds: 2)) {
             // First press - show toast message
-            _lastBackPressed = now;
+            setState(() {
+              _lastBackPressed = now;
+            });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Press back again to exit'),
