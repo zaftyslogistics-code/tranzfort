@@ -1804,7 +1804,9 @@ bool _isTopLevel(String location, List<_ShellTab> tabs) {
 **Reason:** Document when to use each pattern
 **Files to Modify:**
 - `docs/navigation-architecture.md` - Add PopScope pattern documentation
-**Status:** PENDING - Documentation update needed
+**Status:** ✅ COMPLETE - Documentation updated
+
+**Commit:** `ed06983` - Add PopScope patterns, Scaffold choice, and metadata documentation to navigation-architecture.md (Bug #4 fix)
 
 ### Bug #7: Route Metadata Not Enforced
 **Action:** Accept as documentation-only
@@ -1820,7 +1822,7 @@ bool _isTopLevel(String location, List<_ShellTab> tabs) {
 | 1 | Shell PopScope missing setState() | HIGH | ✅ FIXED |
 | 2 | Load detail uses context.go() | HIGH | ✅ FIXED |
 | 3 | Route preview/public profile no back arrow | MEDIUM | ✅ ACCEPTED (no action) |
-| 4 | PopScope pattern inconsistency | LOW | PENDING (documentation) |
+| 4 | PopScope pattern inconsistency | LOW | ✅ FIXED (documentation) |
 | 5 | No unit tests for navigation | MEDIUM | OUT OF SCOPE |
 | 6 | Navigation pattern inconsistency | MEDIUM | ✅ FIXED |
 | 7 | Route metadata not enforced | LOW | ✅ ACCEPTED (no action) |
