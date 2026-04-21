@@ -22,6 +22,7 @@ import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/static_route_map.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/curved_arc_route.dart';
 import '../data/diesel_price_repository.dart';
 import '../data/trip_costing_service.dart';
 import '../data/trucker_load_detail_repository.dart';
