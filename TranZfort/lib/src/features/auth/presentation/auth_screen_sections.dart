@@ -105,128 +105,249 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
     final authScreenState = ref.watch(authScreenControllerProvider);
     final ttsSummary = '${l10n.authWelcomeTitle}. ${l10n.authWelcomeSubtitle}';
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          TtsActionButton(fallbackSummary: ttsSummary),
-        ],
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 420),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (!appConfig.isSupabaseConfigured) ...[
-                        WarningBlock(
-                          title: l10n.authConfigIncompleteTitle,
-                          message: l10n.authConfigIncompleteSignInMessage,
+      backgroundColor: AppColors.canvas,
+      body: Stack(
+        children: [
+          // ─── Dark hero banner (top third) ───
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.38,
+              decoration: BoxDecoration(
+                gradient: AppColors.heroDark,
+              ),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: AppColors.heroDarkGlow,
+                      ),
+                    ),
+                  ),
+                  // TTS button in top-right
+                  Positioned(
+                    top: MediaQuery.of(context).padding.top + 8,
+                    right: 8,
+                    child: Theme(
+                      data: Theme.of(context).copyWith(
+                        iconTheme: const IconThemeData(color: Colors.white),
+                      ),
+                      child: TtsActionButton(fallbackSummary: ttsSummary),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // ─── Content ───
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 440),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 16),
+                    // ── Brand logo + welcome on dark hero ──
+                    Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(AppRadius.hero),
+                          border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
                         ),
-                        const SizedBox(height: 16),
-                      ],
-                      Center(
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(12),
                           child: Image.asset(
                             'assets/images/main-logo-transparent.png',
-                            height: 80,
-                            errorBuilder: (context, error, stackTrace) => const Icon(Icons.local_shipping_outlined, size: 64),
+                            height: 64,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(Icons.local_shipping_outlined, size: 56, color: Colors.white),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
-                      Text(
-                        l10n.authWelcomeTitle,
-                        style: Theme.of(context).textTheme.displayLarge,
-                        textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      l10n.authWelcomeTitle,
+                      style: AppTypography.displayHero.copyWith(
+                        color: AppColors.inkTextPrimary,
+                        fontSize: 30,
+                        letterSpacing: -0.6,
                       ),
-                      const SizedBox(height: 8),
-                      Text(
-                        l10n.authWelcomeSubtitle,
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 28),
-                      GoogleSignInButton(
-                        label: l10n.authContinueWithGoogle,
-                        onPressed: _continueWithGoogle,
-                        isLoading: authScreenState.isLoading,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        l10n.authGoogleFastestMessage,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
-                        textAlign: TextAlign.center,
-                      ),
-                      const SizedBox(height: 20),
-                      Row(
-                        children: [
-                          const Expanded(child: Divider()),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            child: Text(l10n.authOrWithEmail, style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted)),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      l10n.authWelcomeSubtitle,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.inkTextSecondary,
+                            height: 1.5,
                           ),
-                          const Expanded(child: Divider()),
-                        ],
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 28),
+                    // ── Primary Sign-In Card (lifts out of hero onto light canvas) ──
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: AppColors.surfaceBase,
+                        borderRadius: BorderRadius.circular(AppRadius.hero),
+                        boxShadow: AppShadows.elevation3,
+                        border: Border.all(color: AppColors.divider),
                       ),
-                      const SizedBox(height: 20),
-                      AppTextField(
-                        controller: _emailController,
-                        label: l10n.profileEmailLabel,
-                        keyboardType: TextInputType.emailAddress,
-                        hintText: l10n.authEmailHint,
-                      ),
-                      const SizedBox(height: 16),
-                      AppTextField(
-                        controller: _passwordController,
-                        label: l10n.authPasswordLabel,
-                        hintText: l10n.authPasswordHint,
-                        obscureText: _obscurePassword,
-                        suffixIcon: IconButton(
-                          icon: Icon(_obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined, size: 20),
-                          onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      OutlineButton(
-                        label: l10n.authPasswordSignInAction,
-                        onPressed: _signInWithEmail,
-                        isLoading: authScreenState.isLoading,
-                      ),
-                      const SizedBox(height: 16),
-                      Wrap(
-                        alignment: WrapAlignment.spaceBetween,
-                        runSpacing: 8,
-                        spacing: 12,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          TextActionButton(
-                            label: l10n.authPasswordSwitchToSignUp,
-                            onPressed: () => context.go(AppRoutes.authPasswordPath),
-                          ),
-                          _isForgotPasswordLoading
-                              ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                              : TextActionButton(
-                                  label: l10n.authForgotPasswordAction,
-                                  onPressed: _forgotPassword,
+                          if (!appConfig.isSupabaseConfigured) ...[
+                            WarningBlock(
+                              title: l10n.authConfigIncompleteTitle,
+                              message: l10n.authConfigIncompleteSignInMessage,
+                            ),
+                            const SizedBox(height: 16),
+                          ],
+                          // Recommended banner
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                decoration: BoxDecoration(
+                                  color: AppColors.primaryChipBg,
+                                  borderRadius: BorderRadius.circular(AppRadius.chip),
                                 ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.bolt, size: 12, color: AppColors.primary),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      'RECOMMENDED',
+                                      style: AppTypography.labelMicro.copyWith(
+                                        color: AppColors.primaryChipText,
+                                        fontSize: 10,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const Spacer(),
+                              Text(
+                                'Fastest · Most secure',
+                                style: AppTypography.labelMicro.copyWith(
+                                  color: AppColors.textMuted,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          // Big prominent Google sign-in
+                          GoogleSignInButton(
+                            label: l10n.authContinueWithGoogle,
+                            onPressed: _continueWithGoogle,
+                            isLoading: authScreenState.isLoading,
+                            height: 56,
+                          ),
+                          const SizedBox(height: 10),
+                          // Trust row
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.lock_outline, size: 14, color: AppColors.success),
+                              const SizedBox(width: 6),
+                              Text(
+                                'One-tap · No password · Secure',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.textMuted,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(height: 20),
+                    // ── Divider: "or sign in with email" ──
+                    Row(
+                      children: [
+                        Expanded(child: Divider(color: AppColors.divider)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text(
+                            l10n.authOrWithEmail.toUpperCase(),
+                            style: AppTypography.labelMicro.copyWith(
+                              color: AppColors.textMuted,
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                        ),
+                        Expanded(child: Divider(color: AppColors.divider)),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+                    // ── Email + password (de-emphasized) ──
+                    AppTextField(
+                      controller: _emailController,
+                      label: l10n.profileEmailLabel,
+                      keyboardType: TextInputType.emailAddress,
+                      hintText: l10n.authEmailHint,
+                    ),
+                    const SizedBox(height: 12),
+                    AppTextField(
+                      controller: _passwordController,
+                      label: l10n.authPasswordLabel,
+                      hintText: l10n.authPasswordHint,
+                      obscureText: _obscurePassword,
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                          size: 20,
+                        ),
+                        onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    OutlineButton(
+                      label: l10n.authPasswordSignInAction,
+                      onPressed: _signInWithEmail,
+                      isLoading: authScreenState.isLoading,
+                      height: 48,
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      alignment: WrapAlignment.spaceBetween,
+                      runSpacing: 4,
+                      spacing: 12,
+                      children: [
+                        TextActionButton(
+                          label: l10n.authPasswordSwitchToSignUp,
+                          onPressed: () => context.go(AppRoutes.authPasswordPath),
+                        ),
+                        _isForgotPasswordLoading
+                            ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
+                            : TextActionButton(
+                                label: l10n.authForgotPasswordAction,
+                                onPressed: _forgotPassword,
+                              ),
+                      ],
+                    ),
+                    const SizedBox(height: 24),
+                  ],
                 ),
               ),
             ),
-            TtsScreenSummaryEffect(
-              summary: ttsSummary,
-              screenKey: AppRoutes.authPath,
-            ),
-          ],
-        ),
+          ),
+          TtsScreenSummaryEffect(
+            summary: ttsSummary,
+            screenKey: AppRoutes.authPath,
+          ),
+        ],
       ),
     );
   }

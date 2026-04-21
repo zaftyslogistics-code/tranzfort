@@ -230,61 +230,18 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.sectionGap),
-        DetailSectionCard(
-          title: l10n.truckerLoadDetailTripCostEstimateTitle,
-          children: [
-            if (tripCost == null)
+        if (tripCost == null)
+          DetailSectionCard(
+            title: l10n.truckerLoadDetailTripCostEstimateTitle,
+            children: [
               WarningBlock(
                 title: l10n.truckerLoadDetailTripCostUnavailableTitle,
                 message: l10n.truckerLoadDetailTripCostUnavailableMessage,
-              )
-            else ...[
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(AppSpacing.md),
-                decoration: BoxDecoration(
-                  color: AppColors.successBg,
-                  borderRadius: BorderRadius.circular(AppRadius.button),
-                  border: Border.all(color: AppColors.success.withValues(alpha: 0.18)),
-                ),
-                child: Text(
-                  tripCost.compactLabel,
-                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.success,
-                        fontWeight: FontWeight.w700,
-                      ),
-                ),
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Wrap(
-                spacing: AppSpacing.xs,
-                runSpacing: AppSpacing.xs,
-                children: [
-                  _DetailFactChip(
-                    icon: Icons.local_gas_station_outlined,
-                    text: l10n.truckerLoadDetailDieselLabel(tripCost.dieselCost.toStringAsFixed(0)),
-                  ),
-                  _DetailFactChip(
-                    icon: Icons.toll_outlined,
-                    text: l10n.truckerLoadDetailTollsLabel(tripCost.tollCost.toStringAsFixed(0)),
-                  ),
-                  _DetailFactChip(
-                    icon: Icons.speed,
-                    text: l10n.truckerLoadDetailMileageUsedLabel(tripCost.mileageUsed.toStringAsFixed(2)),
-                  ),
-                  _DetailFactChip(
-                    icon: Icons.currency_rupee,
-                    text: l10n.truckerLoadDetailDieselPriceLabel(tripCost.dieselPricePerLitre.toStringAsFixed(1)),
-                  ),
-                  _DetailFactChip(
-                    icon: Icons.account_tree_outlined,
-                    text: l10n.truckerLoadDetailEstimatedTollPlazasLabel(tripCost.tollPlazas),
-                  ),
-                ],
               ),
             ],
-          ],
-        ),
+          )
+        else
+          _EarningsEstimateCard(tripCost: tripCost),
         const SizedBox(height: AppSpacing.sectionGap),
         DetailSectionCard(
           title: l10n.truckerLoadDetailSupplierSummaryTitle,
