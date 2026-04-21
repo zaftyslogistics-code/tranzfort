@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../l10n/app_localizations.dart';
 import '../../features/trucker/data/trip_costing_service.dart';
@@ -480,13 +481,7 @@ class _AvatarImage extends StatelessWidget {
         shape: BoxShape.circle,
         color: Colors.white,
         border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x26000000),
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
+        boxShadow: AppShadows.card,
       ),
       clipBehavior: Clip.antiAlias,
       child: Image.network(
@@ -518,13 +513,7 @@ class _AvatarFallback extends StatelessWidget {
         shape: BoxShape.circle,
         color: colorScheme.primary,
         border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x26000000),
-            blurRadius: 10,
-            offset: Offset(0, 3),
-          ),
-        ],
+        boxShadow: AppShadows.card,
       ),
       child: Center(
         child: Text(

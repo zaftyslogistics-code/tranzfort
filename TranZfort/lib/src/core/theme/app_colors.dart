@@ -28,6 +28,10 @@ class AppColors {
   // ─── Elevated Surface (New for Phase 2) ───
   static const Color surfaceElevated = Color(0xFFFFFFFF);
 
+  // ─── Optional Texture Tokens (New for Phase 3) ───
+  static const Color noiseOverlay = Color(0x0A000000); // 4% black alpha
+  static const Color gridPattern = Color(0x0AFFFFFF); // 4% white alpha
+
   // ─── Text ───
   static const Color textPrimary = Color(0xFF1C1917);
   static const Color textSecondary = Color(0xFF57534E);
@@ -64,8 +68,8 @@ class AppColors {
     begin: Alignment.topLeft,
     end: Alignment.bottomRight,
     colors: [
-      Color(0x140F6F69), // 8% teal
-      Color(0x0FB45309), // 6% orange
+      Color(0x1F0E8C84), // 12% teal
+      Color(0x19D97706), // 10% orange
     ],
   );
 
@@ -126,6 +130,19 @@ class AppColors {
           color: Colors.black.withValues(alpha: 0.12),
           blurRadius: 20,
           offset: const Offset(0, 8),
+        ),
+      ];
+
+  static List<BoxShadow> get glowTeal => [
+        BoxShadow(
+          color: primary.withValues(alpha: 0.35),
+          blurRadius: 60,
+          offset: const Offset(0, 20),
+        ),
+        BoxShadow(
+          color: primary.withValues(alpha: 0.20),
+          blurRadius: 20,
+          offset: const Offset(0, 0),
         ),
       ];
 }

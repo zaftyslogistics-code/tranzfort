@@ -16,4 +16,6 @@ class AppShadows {
   static List<BoxShadow> get bottomSheet => AppColors.bottomSheetShadow;
 
   static List<BoxShadow> get raised => AppColors.shadowRaised;
+
+  static List<BoxShadow> get glowTeal => AppColors.glowTeal;
 }
