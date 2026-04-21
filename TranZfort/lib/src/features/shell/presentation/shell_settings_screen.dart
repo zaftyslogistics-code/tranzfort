@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import '../../../core/logger/app_logger.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/providers/tts_state_provider.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -70,6 +72,22 @@ class SettingsScreen extends ConsumerWidget {
                         }
                       },
               ),
+              const SizedBox(height: AppSpacing.sm),
+              Consumer(
+                builder: (context, ref, child) {
+                  final isMuted = ref.watch(ttsMutedProvider);
+                  return SwitchListTile(
+                    title: const Text('Voice Assistant'),
+                    subtitle: const Text('Read screen summaries aloud when you open pages'),
+                    secondary: const Icon(Icons.record_voice_over_outlined),
+                    value: !isMuted,
+                    onChanged: (value) async {
+                      await ref.read(ttsMutedProvider.notifier).setMuted(!value);
+                    },
+                  );
+                },
+              ),
+              const SizedBox(height: AppSpacing.sm),
               if ((profile?.roleType ?? '').trim().isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.sm),
                 InfoRow(
@@ -133,6 +151,43 @@ class SettingsScreen extends ConsumerWidget {
                 icon: Icons.delete_outline,
                 label: l10n.navDeleteAccount,
                 onTap: () => context.go(AppRoutes.deleteAccountPath),
+              ),
+            ],
+          ),
+        ),
+        SectionCard(
+          title: l10n.settingsLegalTitle,
+          child: Column(
+            children: [
+              NavListTile(
+                icon: Icons.privacy_tip_outlined,
+                label: l10n.settingsPrivacyPolicy,
+                onTap: () async {
+                  final uri = Uri.parse('https://tranzfort.com/privacy-policy');
+                  if (await url_launcher.canLaunchUrl(uri)) {
+                    await url_launcher.launchUrl(uri, mode: url_launcher.LaunchMode.externalApplication);
+                  }
+                },
+              ),
+              NavListTile(
+                icon: Icons.description_outlined,
+                label: l10n.settingsTermsOfService,
+                onTap: () async {
+                  final uri = Uri.parse('https://tranzfort.com/terms-of-service');
+                  if (await url_launcher.canLaunchUrl(uri)) {
+                    await url_launcher.launchUrl(uri, mode: url_launcher.LaunchMode.externalApplication);
+                  }
+                },
+              ),
+              NavListTile(
+                icon: Icons.email_outlined,
+                label: l10n.settingsSupportEmail,
+                onTap: () async {
+                  final uri = Uri.parse('mailto:support@tranzfort.com');
+                  if (await url_launcher.canLaunchUrl(uri)) {
+                    await url_launcher.launchUrl(uri);
+                  }
+                },
               ),
             ],
           ),
