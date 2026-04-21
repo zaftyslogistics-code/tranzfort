@@ -41,6 +41,7 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final double height;
   final Widget? icon;
+  final bool useDarkVariant; // Phase 4: use primaryOnDark for dark surfaces
 
   const PrimaryButton({
     super.key,
@@ -49,6 +50,7 @@ class PrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.height = 52,
     this.icon,
+    this.useDarkVariant = false,
   });
 
   factory PrimaryButton.icon({
@@ -58,6 +60,7 @@ class PrimaryButton extends StatelessWidget {
     VoidCallback? onPressed,
     bool isLoading = false,
     double height = 52,
+    bool useDarkVariant = false,
   }) {
     return PrimaryButton(
       key: key,
@@ -66,25 +69,29 @@ class PrimaryButton extends StatelessWidget {
       isLoading: isLoading,
       height: height,
       icon: icon,
+      useDarkVariant: useDarkVariant,
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = useDarkVariant ? AppColors.primaryOnDark : AppColors.primary;
+    final textColor = useDarkVariant ? AppColors.inkDeep : AppColors.inkTextOnAccent;
     final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-      color: Colors.white,
+      color: textColor,
     );
 
     return _ActionButtonFrame(
       height: height,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: Colors.white,
+      foregroundColor: textColor,
       decoration: BoxDecoration(
-        gradient: AppColors.heroCta,
+        color: backgroundColor,
         borderRadius: BorderRadius.circular(AppRadius.button),
-        boxShadow: AppShadows.heroCta,
+        boxShadow: useDarkVariant ? AppShadows.elevation4Dark : AppShadows.elevation4,
       ),
+      pressedShadow: AppShadows.elevation2, // Phase 4: drop to elevation2 on press
       child: icon == null
           ? Text(label, style: textStyle)
           : Row(
@@ -105,7 +112,7 @@ class OutlineButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
-  final bool filled;
+  final bool filled; // Phase 4: legacy mode
 
   const OutlineButton({
     super.key,
@@ -118,21 +125,40 @@ class OutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (filled) {
+      // Legacy filled mode (backward compatibility)
+      final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
+            color: Colors.white,
+          );
+
+      return _ActionButtonFrame(
+        height: height,
+        onPressed: onPressed,
+        isLoading: isLoading,
+        foregroundColor: Colors.white,
+        decoration: BoxDecoration(
+          gradient: AppColors.heroCta,
+          borderRadius: BorderRadius.circular(AppRadius.button),
+          boxShadow: AppShadows.heroCta,
+        ),
+        child: Text(label, style: textStyle),
+      );
+    }
+
+    // Phase 4 GhostButton spec
     final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: filled ? Colors.white : AppColors.primary,
+          color: AppColors.primary,
         );
 
     return _ActionButtonFrame(
       height: height,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: filled ? Colors.white : AppColors.primary,
+      foregroundColor: AppColors.primary,
       decoration: BoxDecoration(
-        gradient: filled ? AppColors.heroCta : null,
-        color: filled ? null : Colors.transparent,
+        color: Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.button),
         border: Border.all(color: AppColors.primary, width: 1.5),
-        boxShadow: filled ? AppShadows.heroCta : null,
       ),
       child: Text(label, style: textStyle),
     );
@@ -150,7 +176,7 @@ class TextActionButton extends StatelessWidget {
     required this.label,
     this.onPressed,
     this.isLoading = false,
-    this.height = 48,
+    this.height = 44, // Phase 4: reduced from 48
   });
 
   @override
@@ -168,8 +194,7 @@ class TextActionButton extends StatelessWidget {
         label,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
               color: AppColors.primary,
-              decoration: TextDecoration.underline,
-              decorationColor: AppColors.primary,
+              decoration: TextDecoration.none, // Phase 4: no default underline
             ),
       ),
     );
@@ -196,15 +221,17 @@ class DestructiveButton extends StatelessWidget {
       height: height,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: AppColors.error,
+      foregroundColor: Colors.white,
       decoration: BoxDecoration(
-        color: AppColors.errorBg,
+        color: AppColors.error, // Phase 4: solid error color instead of errorBg
         borderRadius: BorderRadius.circular(AppRadius.button),
+        boxShadow: AppShadows.elevation2, // Phase 4: elevation2 shadow
       ),
+      pressedShadow: AppShadows.elevation1, // Phase 4: drop to elevation1 on press
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: AppColors.error,
+              color: Colors.white,
             ),
       ),
     );
@@ -218,6 +245,7 @@ class _ActionButtonFrame extends StatefulWidget {
   final bool isLoading;
   final Color foregroundColor;
   final double height;
+  final List<BoxShadow>? pressedShadow; // Phase 4: shadow tier to drop to on press
 
   const _ActionButtonFrame({
     required this.child,
@@ -226,6 +254,7 @@ class _ActionButtonFrame extends StatefulWidget {
     required this.isLoading,
     required this.foregroundColor,
     required this.height,
+    this.pressedShadow, // Phase 4: optional pressed shadow
   });
 
   @override
@@ -238,16 +267,22 @@ class _ActionButtonFrameState extends State<_ActionButtonFrame> {
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onPressed != null && !widget.isLoading;
+    final shadow = _pressed && enabled && widget.pressedShadow != null
+        ? widget.pressedShadow
+        : widget.decoration.boxShadow;
 
     return Opacity(
       opacity: enabled ? 1 : 0.5,
       child: AnimatedScale(
         scale: _pressed && enabled ? 0.97 : 1,
-        duration: const Duration(milliseconds: 120),
+        duration: const Duration(milliseconds: 150), // Phase 4: 150ms ease-out
+        curve: Curves.easeOut,
         child: Material(
           color: Colors.transparent,
           child: Ink(
-            decoration: widget.decoration,
+            decoration: widget.decoration.copyWith(
+              boxShadow: shadow,
+            ),
             child: InkWell(
               onTap: enabled ? widget.onPressed : null,
               onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
