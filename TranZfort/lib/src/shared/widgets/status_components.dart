@@ -85,6 +85,10 @@ class StatusChip extends StatelessWidget {
       decoration: BoxDecoration(
         color: resolvedPalette.background,
         borderRadius: BorderRadius.circular(AppRadius.chip),
+        border: Border.all(
+          color: resolvedPalette.foreground.withValues(alpha: 0.15),
+          width: 1,
+        ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -104,6 +108,7 @@ class StatusChip extends StatelessWidget {
             label.toUpperCase(),
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
                   color: resolvedPalette.foreground,
+                  fontWeight: FontWeight.w600,
                 ),
           ),
         ],
