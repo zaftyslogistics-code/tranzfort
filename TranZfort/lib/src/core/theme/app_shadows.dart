@@ -18,4 +18,12 @@ class AppShadows {
   static List<BoxShadow> get raised => AppColors.shadowRaised;
 
   static List<BoxShadow> get glowTeal => AppColors.glowTeal;
+
+  // ─── Elevation Tiers (Phase 4) ───
+  static List<BoxShadow> get elevation0 => AppColors.elevation0;
+  static List<BoxShadow> get elevation1 => AppColors.elevation1;
+  static List<BoxShadow> get elevation2 => AppColors.elevation2;
+  static List<BoxShadow> get elevation3 => AppColors.elevation3;
+  static List<BoxShadow> get elevation4 => AppColors.elevation4;
+  static List<BoxShadow> get elevation4Dark => AppColors.elevation4Dark;
 }

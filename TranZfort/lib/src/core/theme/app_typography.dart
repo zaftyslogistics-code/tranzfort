@@ -8,6 +8,24 @@ import 'app_colors.dart';
 class AppTypography {
   AppTypography._();
 
+  // ─── Phase 4 Extended Scale ───
+  static TextStyle get displayHero => GoogleFonts.inter(
+        fontSize: 40,
+        fontWeight: FontWeight.w800,
+        height: 1.1,
+        letterSpacing: -0.8,
+        color: AppColors.textPrimary,
+      );
+
+  static TextStyle get labelMicro => GoogleFonts.inter(
+        fontSize: 11,
+        fontWeight: FontWeight.w600,
+        height: 1.3,
+        letterSpacing: 1.2,
+        color: AppColors.textMuted,
+      );
+
+  // ─── Original Scale ───
   static TextStyle get display => GoogleFonts.inter(
         fontSize: 24,
         fontWeight: FontWeight.w700,

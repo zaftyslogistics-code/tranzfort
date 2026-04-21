@@ -30,11 +30,16 @@ class AppSpacing {
 class AppRadius {
   AppRadius._();
 
-  static const double card = 12.0;
-  static const double button = 12.0;
-  static const double input = 8.0;
-  static const double chip = 20.0;
-  static const double bottomSheet = 16.0;
+  // ─── Phase 4 Tiered Radii ───
+  static const double button = 14.0; // balanced — not pill-like, not boxy
+  static const double input = 12.0; // up from 8
+  static const double card = 16.0; // modern sweet spot (list cards, stat cards)
+  static const double hero = 20.0; // premium feel without being playful
+  static const double bottomSheet = 24.0; // modern mobile standard
+  static const double iconChip = 14.0; // rounded square for leading icons
+
+  // ─── Legacy (for backward compatibility) ───
+  static const double chip = 20.0; // fully rounded / pill (status chips, badges)
 }
 
 /// Minimum touch target size (48x48 px) — non-negotiable
