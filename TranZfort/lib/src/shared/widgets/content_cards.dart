@@ -252,6 +252,7 @@ class StandardListCard extends StatelessWidget {
   final Color accent;
   final String title;
   final String subtitle;
+  final Widget? leading; // Legacy: custom leading widget
   final IconData? leadingIcon; // Phase 4: icon for LeadingIconChip
   final Widget? trailing;
   final Widget? footer;
@@ -263,6 +264,7 @@ class StandardListCard extends StatelessWidget {
     required this.accent,
     required this.title,
     required this.subtitle,
+    this.leading,
     this.leadingIcon,
     this.trailing,
     this.footer,
@@ -272,6 +274,81 @@ class StandardListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // If legacy leading widget is provided, use legacy style
+    if (leading != null) {
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppRadius.card),
+          child: Ink(
+            decoration: BoxDecoration(
+              color: AppColors.cardSurface,
+              borderRadius: BorderRadius.circular(AppRadius.card),
+              boxShadow: AppShadows.card,
+              border: Border.all(color: AppColors.divider),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  left: 0,
+                  top: 0,
+                  bottom: 0,
+                  child: Container(
+                    width: 4,
+                    decoration: BoxDecoration(
+                      color: accent,
+                      borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(AppRadius.card),
+                        bottomLeft: Radius.circular(AppRadius.card),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (leading != null) ...[
+                            leading!,
+                            const SizedBox(width: AppSpacing.md),
+                          ],
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(title, style: Theme.of(context).textTheme.titleMedium),
+                                const SizedBox(height: AppSpacing.xs),
+                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                              ],
+                            ),
+                          ),
+                          if (trailing != null) ...[
+                            const SizedBox(width: AppSpacing.md),
+                            trailing!,
+                          ],
+                        ],
+                      ),
+                      if (footer != null) ...[
+                        const SizedBox(height: AppSpacing.md),
+                        footer!,
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
+    // If useLegacyStyle is explicitly true
     if (useLegacyStyle) {
       // Legacy style with 4px left bar (backward compatibility)
       return Material(
