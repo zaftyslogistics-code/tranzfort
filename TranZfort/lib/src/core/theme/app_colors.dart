@@ -7,23 +7,26 @@ class AppColors {
   AppColors._();
 
   // ─── Brand Primary (Teal) ───
-  static const Color primary = Color(0xFF0F6F69);
+  static const Color primary = Color(0xFF0E8C84);
   static const Color primaryLight = Color(0xFF14B8A6);
   static const Color primaryDark = Color(0xFF0A5550);
 
   // ─── Brand Secondary (Orange) ───
-  static const Color secondary = Color(0xFFB45309);
+  static const Color secondary = Color(0xFFD97706);
   static const Color secondaryLight = Color(0xFFF59E0B);
   static const Color secondaryDark = Color(0xFF92400E);
 
   // ─── User App Surfaces ───
-  static const Color canvas = Color(0xFFFAFAF8);
+  static const Color canvas = Color(0xFFF7F5F1);
   static const Color canvasTop = Color(0xFFFDFDFC);
   static const Color canvasBottom = Color(0xFFF3F1EE);
-  static const Color cardSurface = Color(0xFFFFFEFC);
+  static const Color cardSurface = Color(0xFFFFFFFF);
   static const Color raisedSurface = Color(0xFFFFFFFF);
-  static const Color subtleSurface = Color(0xFFF5F3F0);
+  static const Color subtleSurface = Color(0xFFEFEDE9);
   static const Color divider = Color(0xFFE7E5E4);
+
+  // ─── Elevated Surface (New for Phase 2) ───
+  static const Color surfaceElevated = Color(0xFFFFFFFF);
 
   // ─── Text ───
   static const Color textPrimary = Color(0xFF1C1917);
@@ -115,6 +118,14 @@ class AppColors {
           color: Colors.black.withValues(alpha: 0.10),
           blurRadius: 16,
           offset: const Offset(0, -4),
+        ),
+      ];
+
+  static List<BoxShadow> get shadowRaised => [
+        BoxShadow(
+          color: Colors.black.withValues(alpha: 0.12),
+          blurRadius: 20,
+          offset: const Offset(0, 8),
         ),
       ];
 }
