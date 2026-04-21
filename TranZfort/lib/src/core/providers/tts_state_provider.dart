@@ -70,7 +70,7 @@ class TtsMutedNotifier extends StateNotifier<bool> {
   /// Load muted state from SharedPreferences
   Future<void> _loadMutedState() async {
     final prefs = await SharedPreferences.getInstance();
-    state = prefs.getBool(_mutedKey) ?? false;
+    state = prefs.getBool(_mutedKey) ?? false; // Default to unmuted
     _initialized = true;
   }
 
@@ -83,6 +83,11 @@ class TtsMutedNotifier extends StateNotifier<bool> {
   /// Set muted state explicitly
   Future<void> setMuted(bool muted) async {
     await _setMuted(muted);
+  }
+
+  /// Reset to unmuted state (call on app startup to ensure default behavior)
+  Future<void> resetToUnmuted() async {
+    await _setMuted(false);
   }
 
   Future<void> _setMuted(bool muted) async {

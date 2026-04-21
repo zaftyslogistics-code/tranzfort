@@ -131,11 +131,14 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                   Positioned(
                     top: MediaQuery.of(context).padding.top + 8,
                     right: 8,
-                    child: Theme(
-                      data: Theme.of(context).copyWith(
-                        iconTheme: const IconThemeData(color: Colors.white),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          iconTheme: const IconThemeData(color: Colors.white),
+                        ),
+                        child: const TtsActionButton(),
                       ),
-                      child: const TtsActionButton(),
                     ),
                   ),
                 ],
