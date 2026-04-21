@@ -213,7 +213,83 @@ class _EarningsEstimateCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
-          // ── Hero: Net Profit / Loss ──
+          // ── Total Fare (Load Value) ──
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: AppColors.primaryOnDark.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(AppRadius.card),
+              border: Border.all(
+                color: AppColors.primaryOnDark.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'TOTAL FARE (LOAD VALUE)',
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.primaryOnDark,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    Text(
+                      '₹${_fmt(tripCost.totalLoadValue)}',
+                      style: AppTypography.displayHero.copyWith(
+                        color: AppColors.primaryOnDark,
+                        fontSize: 32,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Expanded(
+                      child: Text(
+                        '${tripCost.distanceKm.toStringAsFixed(0)} km trip',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColors.inkTextSecondary,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          // ── Total Expense ──
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: AppColors.inkBorder.withValues(alpha: 0.3),
+              borderRadius: BorderRadius.circular(AppRadius.card),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'TOTAL EXPENSE',
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.inkTextSecondary,
+                    letterSpacing: 1.1,
+                  ),
+                ),
+                Text(
+                  '₹${_fmt(tripCost.totalExpense)}',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        color: AppColors.inkTextPrimary,
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          // ── Net Profit / Loss Hero ──
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
@@ -258,7 +334,9 @@ class _EarningsEstimateCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'Load value ₹${_fmt(tripCost.totalLoadValue)} − Expense ₹${_fmt(tripCost.totalExpense)}',
+                  tripCost.isProfitable
+                      ? 'After all expenses deducted from total fare'
+                      : 'Expenses exceed total fare',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.inkTextSecondary,
                       ),

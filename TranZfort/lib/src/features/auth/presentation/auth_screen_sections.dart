@@ -246,12 +246,14 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          // Big prominent Google sign-in
-                          GoogleSignInButton(
-                            label: l10n.authContinueWithGoogle,
-                            onPressed: _continueWithGoogle,
-                            isLoading: authScreenState.isLoading,
-                            height: 56,
+                          // Big prominent Google sign-in (centered icon)
+                          Center(
+                            child: GoogleSignInButton(
+                              label: l10n.authContinueWithGoogle,
+                              onPressed: _continueWithGoogle,
+                              isLoading: authScreenState.isLoading,
+                              height: 56,
+                            ),
                           ),
                           const SizedBox(height: 10),
                           // Trust row

@@ -34,6 +34,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
       distanceKm: routeSnapshot?.distanceKm,
       loadWeightTonnes: detail.summary.weightTonnes,
       dieselPricePerLitre: dieselPrice,
+      priceAmountPerTonne: detail.summary.priceAmount,
       mileageEmptyKmpl: selectedTruck?.mileageEmptyKmpl,
       mileageLoadedKmpl: selectedTruck?.mileageLoadedKmpl,
       payloadKg: selectedTruck?.payloadKg?.toDouble(),

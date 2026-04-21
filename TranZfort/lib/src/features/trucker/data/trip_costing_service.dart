@@ -39,7 +39,7 @@ class TripCostEstimate {
 class TripCostingService {
   // ─── Phase 5 Cost Constants ───
   static const double defaultDieselPricePerLitre = 90; // ₹90/L default
-  static const double defaultMileageKmpl = 2.5;
+  static const double defaultMileageKmpl = 2.0; // Updated to 2 km/L average
   static const int defaultAxles = 4;
   static const double tollPerKm = 11; // Phase 5: ₹11/km realistic highway toll
   static const double driverCostPerKm = 5; // ₹5/km: driver allowance + batta + food

@@ -239,14 +239,14 @@ class MarketplaceLoadCard extends StatelessWidget {
                           color: (costEstimate.isProfitable
                                   ? AppColors.success
                                   : AppColors.error)
-                              .withValues(alpha: 0.18),
+                              .withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(AppRadius.chip),
                           border: Border.all(
                             color: (costEstimate.isProfitable
                                     ? AppColors.success
                                     : AppColors.error)
-                                .withValues(alpha: 0.35),
-                            width: 1,
+                                .withValues(alpha: 0.5),
+                            width: 1.5,
                           ),
                         ),
                         child: Column(
@@ -259,15 +259,14 @@ class MarketplaceLoadCard extends StatelessWidget {
                                 color: costEstimate.isProfitable
                                     ? AppColors.success
                                     : AppColors.error,
-                                fontSize: 9,
+                                fontSize: 10,
+                                fontWeight: FontWeight.w700,
                               ),
                             ),
                             Text(
                               '₹${_formatAmount(costEstimate.netProfit.abs())}',
                               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: costEstimate.isProfitable
-                                        ? AppColors.success
-                                        : AppColors.error,
+                                    color: Colors.white,
                                     fontWeight: FontWeight.w800,
                                   ),
                             ),
