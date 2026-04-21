@@ -41,7 +41,7 @@ class DetailPageScaffold extends StatelessWidget {
               )
             : null,
         actions: [
-          TtsActionButton(fallbackSummary: resolvedSummary),
+          const TtsActionButton(),
           const LanguageToggleAction(),
         ],
       ),

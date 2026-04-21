@@ -135,7 +135,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                       data: Theme.of(context).copyWith(
                         iconTheme: const IconThemeData(color: Colors.white),
                       ),
-                      child: TtsActionButton(fallbackSummary: ttsSummary),
+                      child: const TtsActionButton(),
                     ),
                   ),
                 ],

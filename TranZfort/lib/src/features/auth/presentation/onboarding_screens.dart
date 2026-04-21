@@ -208,7 +208,7 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
         appBar: AppBar(
           title: Text(l10n.onboardingChooseRoleTitle),
           actions: [
-            TtsActionButton(fallbackSummary: ttsSummary),
+            const TtsActionButton(),
           ],
         ),
         body: SafeArea(

@@ -7,7 +7,6 @@ import '../../../core/logger/app_logger.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/providers/tts_state_provider.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -71,21 +70,6 @@ class SettingsScreen extends ConsumerWidget {
                           ref.invalidate(authStateProvider);
                         }
                       },
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              Consumer(
-                builder: (context, ref, child) {
-                  final isMuted = ref.watch(ttsMutedProvider);
-                  return SwitchListTile(
-                    title: const Text('Voice Assistant'),
-                    subtitle: const Text('Read screen summaries aloud when you open pages'),
-                    secondary: const Icon(Icons.record_voice_over_outlined),
-                    value: !isMuted,
-                    onChanged: (value) async {
-                      await ref.read(ttsMutedProvider.notifier).setMuted(!value);
-                    },
-                  );
-                },
               ),
               const SizedBox(height: AppSpacing.sm),
               if ((profile?.roleType ?? '').trim().isNotEmpty) ...[

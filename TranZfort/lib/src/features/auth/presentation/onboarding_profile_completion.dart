@@ -453,7 +453,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
         appBar: AppBar(
           title: Text(l10n.onboardingCompleteProfileTitle),
           actions: [
-            TtsActionButton(fallbackSummary: ttsSummary),
+            const TtsActionButton(),
           ],
         ),
         body: SafeArea(

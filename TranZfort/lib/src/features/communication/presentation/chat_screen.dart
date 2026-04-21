@@ -206,7 +206,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
           ],
         ),
         actions: [
-          TtsActionButton(fallbackSummary: ttsSummary),
+          const TtsActionButton(),
           if (callUri != null)
             IconButton(
               tooltip: l10n.chatTooltipCall,

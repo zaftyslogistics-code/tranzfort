@@ -44,7 +44,7 @@ class NotificationsScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(l10n.notificationsTitle),
         actions: [
-          TtsActionButton(fallbackSummary: ttsSummary),
+          const TtsActionButton(),
           if (state.notifications.isNotEmpty)
             Padding(
               padding: const EdgeInsets.only(right: AppSpacing.sm),

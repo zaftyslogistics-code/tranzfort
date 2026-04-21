@@ -84,7 +84,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
                       count: unreadNotificationCount,
                     ),
                   ),
-                  TtsActionButton(fallbackSummary: currentTab.title),
+                  const TtsActionButton(),
                   const LanguageToggleAction(),
                   Builder(
                     builder: (scaffoldContext) {
