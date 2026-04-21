@@ -81,6 +81,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
           subtitle: isSupplier
               ? l10n.supportHeroSubtitleSupplier
               : l10n.supportHeroSubtitleTrucker,
+          useDarkTheme: true,
           primaryAction: GradientButton(
             label: l10n.supportCreateTicketAction,
             onPressed: () => context.push(AppRoutes.createSupportTicketPath),

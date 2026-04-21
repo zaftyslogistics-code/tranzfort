@@ -59,6 +59,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
         HeroActionCard(
           title: l10n.truckerFleetHeroTitle,
           subtitle: l10n.truckerFleetHeroSubtitle,
+          useDarkTheme: true,
           primaryAction: GradientButton(
             label: state.isEditing ? l10n.truckerFleetEditingTruckAction : l10n.truckerFleetAddTruckAction,
             onPressed: () => ref.read(truckerFleetProvider.notifier).startCreate(),

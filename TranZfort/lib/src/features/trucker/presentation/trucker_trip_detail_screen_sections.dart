@@ -34,6 +34,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
         HeroActionCard(
           title: detail.routeLabel,
           subtitle: l10n.truckerTripDetailHeroSubtitle(detail.truckNumber),
+          useDarkTheme: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -51,6 +51,7 @@ class _ShellMessagesScreenState extends ConsumerState<ShellMessagesScreen> {
           subtitle: isSupplier
               ? l10n.shellMessagesSupplierSubtitle
               : l10n.shellMessagesTruckerSubtitle,
+          useDarkTheme: true,
           child: Wrap(
             spacing: AppSpacing.md,
             runSpacing: AppSpacing.md,

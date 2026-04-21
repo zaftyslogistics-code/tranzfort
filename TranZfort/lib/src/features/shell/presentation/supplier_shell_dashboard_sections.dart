@@ -498,6 +498,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
           title: _heroTitle(context, profile),
           subtitle: '',
           compact: true,
+          useDarkTheme: true,
           primaryAction: GradientButton(
             label: !profileResolved
                 ? l10n.navSupport

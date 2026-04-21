@@ -35,6 +35,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
           title: _heroTitle(profile, l10n),
           subtitle: '',
           compact: true,
+          useDarkTheme: true,
           primaryAction: GradientButton(
             label: l10n.shellTitleFindLoads,
             onPressed: () => context.go(AppRoutes.findLoadsPath),
