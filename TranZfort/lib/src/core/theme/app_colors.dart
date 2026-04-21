@@ -28,13 +28,14 @@ class AppColors {
   // ─── Text ───
   static const Color textPrimary = Color(0xFF1C1917);
   static const Color textSecondary = Color(0xFF57534E);
-  static const Color textMuted = Color(0xFFA8A29E);
+  static const Color textMuted = Color(0xFF8A8481);
   static const Color textOnPrimary = Color(0xFFFFFFFF);
+  static const Color textOnDisabled = Color(0xFF6B6560);
 
   // ─── Semantic Status ───
-  static const Color success = Color(0xFF059669);
+  static const Color success = Color(0xFF047857);
   static const Color successBg = Color(0xFFD1FAE5);
-  static const Color warning = Color(0xFFD97706);
+  static const Color warning = Color(0xFF92400E);
   static const Color warningBg = Color(0xFFFEF3C7);
   static const Color error = Color(0xFFDC2626);
   static const Color errorBg = Color(0xFFFEE2E2);
