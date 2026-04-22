@@ -118,30 +118,10 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
               decoration: BoxDecoration(
                 gradient: AppColors.heroDark,
               ),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: DecoratedBox(
-                      decoration: BoxDecoration(
-                        gradient: AppColors.heroDarkGlow,
-                      ),
-                    ),
-                  ),
-                  // TTS button in top-right
-                  Positioned(
-                    top: MediaQuery.of(context).padding.top + 8,
-                    right: 8,
-                    child: Material(
-                      color: Colors.transparent,
-                      child: Theme(
-                        data: Theme.of(context).copyWith(
-                          iconTheme: const IconThemeData(color: Colors.white),
-                        ),
-                        child: const TtsActionButton(),
-                      ),
-                    ),
-                  ),
-                ],
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: AppColors.heroDarkGlow,
+                ),
               ),
             ),
           ),
@@ -351,6 +331,20 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
           TtsScreenSummaryEffect(
             summary: ttsSummary,
             screenKey: AppRoutes.authPath,
+          ),
+          // TTS button in top-right (last child for tap priority)
+          Positioned(
+            top: MediaQuery.of(context).padding.top + 8,
+            right: 8,
+            child: Material(
+              color: Colors.transparent,
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  iconTheme: const IconThemeData(color: Colors.white),
+                ),
+                child: const TtsActionButton(),
+              ),
+            ),
           ),
         ],
       ),
