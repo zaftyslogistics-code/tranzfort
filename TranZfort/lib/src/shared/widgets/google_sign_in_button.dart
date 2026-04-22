@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 
-/// A branded Google Sign-In button with white background, Google "G" icon,
+/// A branded Google Sign-In button with white background, horizontal Google logo,
 /// and elevated styling to visually promote Google as the primary login option.
 class GoogleSignInButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
+  final double? width;
 
   const GoogleSignInButton({
     super.key,
@@ -17,6 +18,7 @@ class GoogleSignInButton extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.height = 52,
+    this.width,
   });
 
   @override
@@ -36,7 +38,7 @@ class GoogleSignInButton extends StatelessWidget {
           duration: const Duration(milliseconds: 100),
           child: SizedBox(
             height: height,
-            width: height, // Make it square
+            width: width ?? double.infinity, // Fill width by default
             child: Center(
               child: isLoading
                   ? SizedBox(
@@ -49,9 +51,9 @@ class GoogleSignInButton extends StatelessWidget {
                     )
                   : Image.asset(
                       'assets/images/google-logo.png',
-                      height: 80,
+                      height: height * 0.6, // Use 60% of button height for logo
                       fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.error_outline, size: 80),
+                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.error_outline, size: 32),
                     ),
             ),
           ),
