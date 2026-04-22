@@ -139,43 +139,6 @@ class SettingsScreen extends ConsumerWidget {
             ],
           ),
         ),
-        SectionCard(
-          title: l10n.settingsLegalTitle,
-          child: Column(
-            children: [
-              NavListTile(
-                icon: Icons.privacy_tip_outlined,
-                label: l10n.settingsPrivacyPolicy,
-                onTap: () async {
-                  final uri = Uri.parse('https://tranzfort.com/privacy-policy');
-                  if (await url_launcher.canLaunchUrl(uri)) {
-                    await url_launcher.launchUrl(uri, mode: url_launcher.LaunchMode.externalApplication);
-                  }
-                },
-              ),
-              NavListTile(
-                icon: Icons.description_outlined,
-                label: l10n.settingsTermsOfService,
-                onTap: () async {
-                  final uri = Uri.parse('https://tranzfort.com/terms-of-service');
-                  if (await url_launcher.canLaunchUrl(uri)) {
-                    await url_launcher.launchUrl(uri, mode: url_launcher.LaunchMode.externalApplication);
-                  }
-                },
-              ),
-              NavListTile(
-                icon: Icons.email_outlined,
-                label: l10n.settingsSupportEmail,
-                onTap: () async {
-                  final uri = Uri.parse('mailto:support@tranzfort.com');
-                  if (await url_launcher.canLaunchUrl(uri)) {
-                    await url_launcher.launchUrl(uri);
-                  }
-                },
-              ),
-            ],
-          ),
-        ),
       ],
     );
   }
