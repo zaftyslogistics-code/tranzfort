@@ -16,6 +16,7 @@ const List<String> postLoadMaterials = <String>[
   'Grains',
   'Fertilizer',
   'Machinery',
+  'Other',
 ];
 
 const List<String> postLoadBodyTypes = <String>[
@@ -44,6 +45,7 @@ class PostLoadState {
   final bool isResolvingRoute;
   final RoutePreview? routePreview;
   final String material;
+  final String customMaterial;
   final String weightTonnes;
   final String bodyType;
   final Set<int> selectedTyres;
@@ -71,6 +73,7 @@ class PostLoadState {
     required this.isResolvingRoute,
     required this.routePreview,
     required this.material,
+    required this.customMaterial,
     required this.weightTonnes,
     required this.bodyType,
     required this.selectedTyres,
@@ -101,6 +104,7 @@ class PostLoadState {
       isResolvingRoute: false,
       routePreview: null,
       material: postLoadMaterials.first,
+      customMaterial: '',
       weightTonnes: '',
       bodyType: postLoadBodyTypes.first,
       selectedTyres: const <int>{},
@@ -133,6 +137,7 @@ class PostLoadState {
     RoutePreview? routePreview,
     bool? clearRoutePreview,
     String? material,
+    String? customMaterial,
     String? weightTonnes,
     String? bodyType,
     Set<int>? selectedTyres,
@@ -162,6 +167,7 @@ class PostLoadState {
       isResolvingRoute: isResolvingRoute ?? this.isResolvingRoute,
       routePreview: clearRoutePreview == true ? null : routePreview ?? this.routePreview,
       material: material ?? this.material,
+      customMaterial: customMaterial ?? this.customMaterial,
       weightTonnes: weightTonnes ?? this.weightTonnes,
       bodyType: bodyType ?? this.bodyType,
       selectedTyres: selectedTyres ?? this.selectedTyres,
@@ -275,9 +281,21 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       return;
     }
 
+    // Clear customMaterial when switching away from "Other"
+    final shouldClearCustom = value != 'Other';
     state = state.copyWith(
       material: value,
-      fieldErrors: _withoutErrors(const <String>['material']),
+      customMaterial: shouldClearCustom ? '' : null,
+      fieldErrors: _withoutErrors(const <String>['material', 'custom_material']),
+      clearSubmissionFailure: true,
+      clearLastCreatedLoadId: true,
+    );
+  }
+
+  void setCustomMaterial(String value) {
+    state = state.copyWith(
+      customMaterial: value,
+      fieldErrors: _withoutErrors(const <String>['custom_material']),
       clearSubmissionFailure: true,
       clearLastCreatedLoadId: true,
     );
@@ -405,7 +423,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeDurationMinutes: state.routePreview?.durationMinutes,
       routePolyline: null,
       routeSnapshotSource: state.routePreview?.source,
-      material: state.material,
+      material: state.material == 'Other' ? state.customMaterial.trim() : state.material,
       weightTonnes: double.parse(state.weightTonnes.trim()),
       requiredBodyType: state.bodyType == 'Any' ? null : state.bodyType,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),
@@ -442,6 +460,9 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     }
     if (state.material.trim().isEmpty) {
       errors['material'] = l10n?.postLoadValidationMaterialRequired ?? 'Material is required';
+    }
+    if (state.material == 'Other' && state.customMaterial.trim().isEmpty) {
+      errors['custom_material'] = 'Please specify the material';
     }
 
     final weight = double.tryParse(state.weightTonnes.trim());

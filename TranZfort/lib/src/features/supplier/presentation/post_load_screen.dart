@@ -41,6 +41,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   late final String _initialTrucks;
   late final String _initialPrice;
   late final String _initialMaterial;
+  late final String _initialCustomMaterial;
   late final String _initialBodyType;
   late final Set<String> _initialTyres;
   late final String _initialPriceType;
@@ -68,6 +69,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     _initialTrucks = state.trucksNeeded;
     _initialPrice = state.priceAmount;
     _initialMaterial = state.material;
+    _initialCustomMaterial = state.customMaterial;
     _initialBodyType = state.bodyType;
     _initialTyres = Set.from(state.selectedTyres);
     _initialPriceType = state.priceType;
@@ -85,6 +87,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         _trucksController.text != _initialTrucks ||
         _priceController.text != _initialPrice ||
         state.material != _initialMaterial ||
+        state.customMaterial != _initialCustomMaterial ||
         state.bodyType != _initialBodyType ||
         state.selectedTyres.length != _initialTyres.length ||
         state.priceType != _initialPriceType ||
@@ -297,6 +300,15 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
               onChanged: ref.read(postLoadProvider.notifier).setMaterial,
             ),
             const SizedBox(height: AppSpacing.md),
+            if (state.material == 'Other') ...[
+              AppTextField(
+                label: 'Specify Material',
+                hintText: 'e.g., Fruits, Iron Ore, Bricks',
+                errorText: state.fieldErrors['custom_material'],
+                onChanged: ref.read(postLoadProvider.notifier).setCustomMaterial,
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
             AppTextField(
               controller: _weightController,
               label: l10n.supplierPostLoadWeightLabel,
