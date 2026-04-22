@@ -163,10 +163,12 @@ class StatCard extends StatelessWidget {
           Flexible(
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.md),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
+              child: SingleChildScrollView(
+                physics: const NeverScrollableScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
                 Row(
                   children: [
                     Container(
@@ -224,6 +226,7 @@ class StatCard extends StatelessWidget {
                 ],
               ],
             ),
+              ),
             ),
           ),
           // Gradient wash at bottom (8% alpha)
