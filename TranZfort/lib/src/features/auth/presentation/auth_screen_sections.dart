@@ -235,7 +235,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                               label: l10n.authContinueWithGoogle,
                               onPressed: _continueWithGoogle,
                               isLoading: authScreenState.isLoading,
-                              height: 56,
+                              height: 80,
                             ),
                           ),
                           const SizedBox(height: 10),
