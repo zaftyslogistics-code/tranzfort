@@ -160,15 +160,12 @@ class StatCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Flexible(
-            child: Padding(
-              padding: const EdgeInsets.all(AppSpacing.md),
-              child: SingleChildScrollView(
-                physics: const NeverScrollableScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
+          Padding(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
                 Row(
                   children: [
                     Container(
@@ -186,6 +183,8 @@ class StatCard extends StatelessWidget {
                         style: AppTypography.labelMicro.copyWith(
                           color: AppColors.textMuted,
                         ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ),
                     if (delta != null)
@@ -204,6 +203,8 @@ class StatCard extends StatelessWidget {
                                 color: AppColors.success,
                                 fontWeight: FontWeight.w600,
                               ),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                   ],
@@ -214,6 +215,8 @@ class StatCard extends StatelessWidget {
                   style: AppTypography.displayHero.copyWith(
                     color: AppColors.textPrimary,
                   ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                 ),
                 if (helperText != null) ...[
                   const SizedBox(height: 4),
@@ -222,11 +225,11 @@ class StatCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.textMuted,
                         ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
                   ),
                 ],
               ],
-            ),
-              ),
             ),
           ),
           // Gradient wash at bottom (8% alpha)
