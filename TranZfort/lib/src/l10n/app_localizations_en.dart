@@ -12,9 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
-  String get splashLoadingWorkspace => 'Loading your workspace...';
-
-  @override
   String get authGoogleFailureMessage =>
       'We could not continue with Google right now. Retry shortly or use email sign-in instead.';
 
@@ -29,9 +26,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authEmailHint => 'you@example.com';
 
   @override
-  String get authSignInDividerLabel => 'OR';
-
-  @override
   String get authForgotPasswordAction => 'Forgot password?';
 
   @override
@@ -39,37 +33,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Supabase is not configured in this build, so sign-in and live account data will remain unavailable until the environment is fixed.';
 
   @override
-  String get splashSetupTitle => 'Set up device access';
-
-  @override
-  String get splashSetupSubtitle =>
-      'Allow notifications, voice guidance, and location access now so your first login and verification flow can continue smoothly.';
-
-  @override
-  String get splashSetupEnableVoiceAction => 'Enable voice guidance';
-
-  @override
-  String get splashSetupOpenLocationSettingsAction => 'Open location settings';
-
-  @override
   String get authContinueWithGoogle => 'Continue with Google';
 
   @override
-  String get authGoogleFastestMessage =>
-      'Fastest way to get started — no password to remember';
-
-  @override
   String get authOrWithEmail => 'Or continue with email';
-
-  @override
-  String get authContinueWithPassword => 'Continue with email and password';
-
-  @override
-  String get authTermsOfService => 'Terms of service';
-
-  @override
-  String get authTermsInfoMessage =>
-      'TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.';
 
   @override
   String get authPasswordTitle => 'Email and password';
@@ -123,10 +90,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authPasswordSignUpFailureMessage =>
       'We could not create your account right now. Retry shortly with the same details.';
-
-  @override
-  String get authPasswordSignUpSuccessMessage =>
-      'Your account was created. If email confirmation is required, finish that step and then sign in with your new password.';
 
   @override
   String get authPasswordCheckEmailTitle => 'Check your email';
@@ -228,9 +191,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonRetry => 'Retry';
 
   @override
-  String get shellTooltipVoiceAssistance => 'Voice assistance';
-
-  @override
   String get supplierQuickActionNotifications => 'Notifications';
 
   @override
@@ -313,10 +273,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierDashboardHeroSubtitle =>
-      'Track supplier verification, review Super Load readiness, and keep your latest loads and execution activity in view.';
-
-  @override
   String get supplierDashboardOverviewTitle => 'Dashboard overview';
 
   @override
@@ -332,36 +288,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierDashboardPostLoadAction => 'Post Load';
 
   @override
-  String get supplierDashboardHeroSummaryBody =>
-      'Keep your supplier verification current, monitor active loads, and follow the latest Super Load readiness signals visible in this workspace.';
-
-  @override
   String get supplierDashboardStatsActiveLoadsLabel => 'Active loads';
-
-  @override
-  String get supplierDashboardStatsActiveLoadsHelper =>
-      'Loads currently open for supplier-side tracking.';
 
   @override
   String get supplierDashboardStatsPendingBookingsLabel => 'Pending bookings';
 
   @override
-  String get supplierDashboardStatsPendingBookingsHelper =>
-      'Booking requests that still need supplier attention.';
-
-  @override
   String get supplierDashboardStatsInTransitTripsLabel => 'Trips in transit';
 
   @override
-  String get supplierDashboardStatsInTransitTripsHelper =>
-      'Linked trips currently moving against your loads.';
-
-  @override
   String get supplierDashboardStatsCompletedTripsLabel => 'Completed trips';
-
-  @override
-  String get supplierDashboardStatsCompletedTripsHelper =>
-      'Trips that have reached their recorded completion state.';
 
   @override
   String get supplierDashboardOpenMyLoadsAction => 'Open my loads';
@@ -434,13 +370,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shellDrawerDashboard => 'Dashboard';
 
   @override
-  String get shellDrawerAssistant => 'Guided help';
-
-  @override
   String get shellDrawerFleet => 'Fleet';
-
-  @override
-  String get shellDrawerMessages => 'Messages';
 
   @override
   String get navNotifications => 'Notifications';
@@ -450,9 +380,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shellDrawerProfile => 'Profile';
-
-  @override
-  String get shellDrawerLanguage => 'Language';
 
   @override
   String get shellDrawerSignOut => 'Sign out';
@@ -1914,10 +1841,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageSaving => 'Saving language preference...';
 
   @override
-  String get truckerDashboardHeroSubtitle =>
-      'Use your trucker dashboard as the command center for freight discovery, readiness, and active work visibility.';
-
-  @override
   String truckerDashboardWelcomeBack(Object fullName) {
     return 'Welcome back, $fullName';
   }
@@ -1956,30 +1879,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerDashboardVerificationPendingTitle => 'Verification pending';
 
   @override
-  String get truckerDashboardVerificationPendingDescription =>
-      'You can browse loads while review is pending, but chat and call stay locked until verification is complete.';
-
-  @override
   String get truckerDashboardOpenVerificationAction => 'Open verification';
-
-  @override
-  String get truckerDashboardVerificationCompleteTitle =>
-      'Verification complete';
-
-  @override
-  String get truckerDashboardVerificationCompleteDescription =>
-      'Your trucker verification is complete. Chat and call stay unlocked on open loads while your readiness remains healthy.';
-
-  @override
-  String get truckerDashboardReviewVerificationAction => 'Review verification';
 
   @override
   String get truckerDashboardVerificationNeedsAttentionTitle =>
       'Verification needs attention';
-
-  @override
-  String get truckerDashboardVerificationNeedsAttentionDescription =>
-      'Your verification was rejected. Browsing stays open, but communication and assignment readiness remain blocked.';
 
   @override
   String get truckerDashboardFixVerificationAction => 'Fix verification';
@@ -1987,10 +1891,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get truckerDashboardCompleteFleetVerificationTitle =>
       'Complete fleet and verification setup';
-
-  @override
-  String get truckerDashboardCompleteFleetVerificationMessage =>
-      'You can browse the marketplace now, but chat, call, and booking stay locked until you finish Aadhaar, PAN, profile photo, and get at least one truck approved.';
 
   @override
   String get truckerDashboardOpenFleetVerificationAction =>
@@ -2001,19 +1901,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add and approve your first truck';
 
   @override
-  String get truckerDashboardAddApproveFirstTruckMessage =>
-      'Marketplace browsing is available now, but your first approved truck is required before full trucker verification can complete.';
-
-  @override
   String get truckerDashboardOpenFleetAction => 'Open fleet';
 
   @override
   String get truckerDashboardCompleteVerificationTitle =>
       'Complete trucker verification';
-
-  @override
-  String get truckerDashboardCompleteVerificationMessage =>
-      'You can browse the marketplace now. Finish Aadhaar, PAN, profile photo, and at least one approved truck to unlock chat and call.';
 
   @override
   String get truckerDashboardLoadFailureTitle =>
@@ -2053,36 +1945,16 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerDashboardHeroSummary =>
-      'Dashboard-first remains the trucker home rule: understand readiness, scan active work, then jump into freight discovery from here.';
-
-  @override
   String get truckerDashboardStatActiveBidsLabel => 'Active bids';
-
-  @override
-  String get truckerDashboardStatActiveBidsHelper =>
-      'Submitted requests still waiting for supplier decision';
 
   @override
   String get truckerDashboardStatUpcomingTripsLabel => 'Upcoming trips';
 
   @override
-  String get truckerDashboardStatUpcomingTripsHelper =>
-      'Assigned and pickup-stage work approaching execution';
-
-  @override
   String get truckerDashboardStatInTransitLabel => 'In-transit';
 
   @override
-  String get truckerDashboardStatInTransitHelper =>
-      'Trips currently moving on the road';
-
-  @override
   String get truckerDashboardStatCompletedLabel => 'Completed';
-
-  @override
-  String get truckerDashboardStatCompletedHelper =>
-      'Trips already closed in your trucker history';
 
   @override
   String get truckerDashboardRecentActivityUnavailableTitle =>
@@ -2173,14 +2045,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerDashboardVerificationStatusTitle => 'Verification status';
 
   @override
-  String get truckerDashboardVerificationReadyMessage =>
-      'Chat and call are unlocked on open loads because your verification is complete.';
-
-  @override
-  String get truckerDashboardVerificationLockedMessage =>
-      'Browsing is open now. Chat and call unlock only after verification and at least one approved truck.';
-
-  @override
   String truckerDashboardDlLabel(Object value) {
     return 'DL: $value';
   }
@@ -2201,14 +2065,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerDashboardActionNeededStatus => 'action needed';
-
-  @override
-  String get truckerDashboardFleetReadyMessage =>
-      'You have at least one approved truck available for verification-dependent workflows.';
-
-  @override
-  String get truckerDashboardFleetNeedFirstTruckMessage =>
-      'Add and approve your first truck in the fleet slice to complete trucker readiness.';
 
   @override
   String truckerDashboardTruckAwaitingReview(int count) {
@@ -2613,9 +2469,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsSortPickupDate => 'Pickup Date';
 
   @override
-  String get truckerFindLoadsMarketplaceTabsTitle => 'Marketplace tabs';
-
-  @override
   String get truckerFindLoadsAllLoadsTab => 'All Loads';
 
   @override
@@ -2659,7 +2512,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice) {
-    return '₹$minPrice-$maxPrice';
+    return 'â‚¹$minPrice-$maxPrice';
   }
 
   @override
@@ -2691,45 +2544,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsStatusUnknown => 'Unknown';
 
   @override
-  String get truckerFindLoadsStatusUnknownFallback => 'Unknown status';
-
-  @override
-  String truckerFindLoadsPriceAdvancePickup(
-    Object priceAmount,
-    int advancePercentage,
-    Object pickupDate,
-  ) {
-    return '₹$priceAmount - $advancePercentage% adv - $pickupDate';
-  }
-
-  @override
-  String get truckerFindLoadsTruckMatchAvailable => 'Truck match available';
-
-  @override
-  String get truckerFindLoadsNoApprovedTruckMatch =>
-      'No approved truck match yet';
-
-  @override
-  String get truckerFindLoadsTripCostUnavailable => 'Trip cost unavailable';
-
-  @override
-  String truckerFindLoadsDistanceUnavailable(Object tyres) {
-    return 'Distance unavailable - Tyres $tyres';
-  }
-
-  @override
-  String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres) {
-    return 'Distance $distanceKm km - Tyres $tyres';
-  }
-
-  @override
-  String get truckerFindLoadsTyresAny => 'Any';
-
-  @override
-  String get truckerFindLoadsSuperLoadBanner =>
-      'Super Load - Payment Guarantee';
-
-  @override
   String get truckerFindLoadsViewDetailsAction => 'View details';
 
   @override
@@ -2757,10 +2571,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsTyreRequirementTitle => 'Tyre requirement';
 
   @override
-  String get truckerFindLoadsMinPriceLabel => 'Min price (₹)';
+  String get truckerFindLoadsMinPriceLabel => 'Min price (â‚¹)';
 
   @override
-  String get truckerFindLoadsMaxPriceLabel => 'Max price (₹)';
+  String get truckerFindLoadsMaxPriceLabel => 'Max price (â‚¹)';
 
   @override
   String get truckerFindLoadsApplyFiltersAction => 'Apply filters';
@@ -2878,7 +2692,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPostLoadPricingScheduleTitle => 'Pricing and schedule';
 
   @override
-  String get supplierPostLoadPriceAmountLabel => 'Price amount (₹)';
+  String get supplierPostLoadPriceAmountLabel => 'Price amount (â‚¹)';
 
   @override
   String get supplierPostLoadPriceAmountHint => '54000';
@@ -2905,7 +2719,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object advanceAmount,
     Object balanceAmount,
   ) {
-    return 'Advance: ₹$advanceAmount - Balance: ₹$balanceAmount';
+    return 'Advance: â‚¹$advanceAmount - Balance: â‚¹$balanceAmount';
   }
 
   @override
@@ -2933,7 +2747,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount - $priceType';
+    return 'Price: â‚¹$priceAmount - $priceType';
   }
 
   @override
@@ -3057,14 +2871,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your verification is under review. Keep documents ready in case the support team asks for clarification.';
 
   @override
-  String get supplierVerificationRejectedTitle =>
-      'Verification needs attention';
-
-  @override
-  String get supplierVerificationCompleteDescription =>
-      'Your supplier verification is complete. You can keep posting loads and monitoring readiness from this dashboard.';
-
-  @override
   String get supplierVerificationNeedsAttentionTitle =>
       'Verification needs attention';
 
@@ -3077,10 +2883,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supplierReviewVerification => 'Review verification';
-
-  @override
-  String get supplierDashboardVerificationStatusUnknownFallback =>
-      'Unknown verification status';
 
   @override
   String get supplierFixVerification => 'Fix verification';
@@ -3096,16 +2898,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierCompleteVerification => 'Complete verification';
 
   @override
-  String get supplierDashboardSuperLoadReadinessIntro =>
-      'Super Load eligibility is still partially admin-managed in the current app. This surface shows only the readiness facts the current profile model can confirm honestly.';
-
-  @override
   String get supplierDashboardSuperLoadVerificationComplete =>
       'Verification complete';
-
-  @override
-  String get supplierDashboardSuperLoadVerificationRequired =>
-      'Verification still required';
 
   @override
   String get supplierDashboardSuperLoadBusinessLicenceOnFile =>
@@ -3118,54 +2912,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get supplierDashboardSuperLoadCompanyAgeUnavailable =>
       'Company-age readiness unavailable in current app data';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryReady =>
-      'Your current profile can confirm supplier verification and the business licence prerequisite, but final Super Load eligibility still cannot be determined here because company-age/readiness fields are not yet present in the current source model.';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence =>
-      'Your supplier verification is complete, but the business licence prerequisite is still missing from the current profile. Final Super Load eligibility remains blocked until that verification requirement is satisfied.';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryMissingVerification =>
-      'Your current profile can confirm a business licence on file, but supplier verification is still incomplete. Final Super Load eligibility remains blocked until verification is completed and company-age/readiness fields exist in the current source model.';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryPendingVerification =>
-      'Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryRejectedVerification =>
-      'Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.';
-
-  @override
-  String get supplierDashboardSuperLoadReadinessSummaryNeedsAttention =>
-      'Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepReady =>
-      'Next best action: keep your verification details accurate, monitor your loads normally, and use support only if you need follow-up on Super Load review or policy questions.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepBusinessLicence =>
-      'Next best action: update or upload the business licence through verification first, then re-check this readiness surface.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepVerification =>
-      'Next best action: complete supplier verification so the platform can confirm your trust baseline before any future Super Load review.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepPendingVerification =>
-      'Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepRejectedVerification =>
-      'Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.';
-
-  @override
-  String get supplierDashboardSuperLoadNextStepNeedsAttention =>
-      'Next best action: complete supplier verification and business licence requirements first, then return here for the remaining readiness summary.';
 
   @override
   String get supplierDashboardLoadStatusActive => 'Active';
@@ -3575,12 +3321,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierTripDetailVerificationStatusUnknown => 'Unknown';
 
   @override
-  String get supplierTripDetailDisputeCategoryFallback => 'Trip dispute';
-
-  @override
-  String get supplierTripDetailDisputeStatusFallback => 'Open';
-
-  @override
   String get supplierTripDetailDisputeStatusGuidanceOpen =>
       'Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.';
 
@@ -3682,62 +3422,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationDetailsUnavailableSubtitle =>
       'We could not find the current verification record for this account. Please retry shortly.';
-
-  @override
-  String get verificationHeroPendingSupplierTitle =>
-      'Supplier verification under review';
-
-  @override
-  String get verificationHeroPendingTruckerTitle =>
-      'Trucker verification under review';
-
-  @override
-  String get verificationHeroVerifiedSupplierTitle =>
-      'Supplier verification complete';
-
-  @override
-  String get verificationHeroVerifiedTruckerTitle =>
-      'Trucker verification complete';
-
-  @override
-  String get verificationHeroRejectedSupplierTitle =>
-      'Resubmit supplier verification';
-
-  @override
-  String get verificationHeroRejectedTruckerTitle =>
-      'Resubmit trucker verification';
-
-  @override
-  String get verificationHeroInitialSupplierTitle =>
-      'Complete supplier trust setup';
-
-  @override
-  String get verificationHeroInitialTruckerTitle =>
-      'Complete trucker trust setup';
-
-  @override
-  String get verificationHeroPendingSubtitle =>
-      'Your verification packet is already under review. We will notify you when approval is complete.';
-
-  @override
-  String get verificationHeroVerifiedSubtitle =>
-      'Your verification packet is already approved. You can review the captured documents and readiness details below.';
-
-  @override
-  String get verificationHeroRejectedWithFeedbackSubtitle =>
-      'Review the rejected document markers below, replace any affected items, and resubmit when you are ready.';
-
-  @override
-  String get verificationHeroRejectedFallbackSubtitle =>
-      'Review the rejection summary, replace any affected items, and resubmit the full packet when you are ready.';
-
-  @override
-  String get verificationHeroInitialSupplierSubtitle =>
-      'Upload the required business and identity documents, capture supplier verification location, and submit them for review from this single verification surface.';
-
-  @override
-  String get verificationHeroInitialTruckerSubtitle =>
-      'Upload identity documents, confirm truck readiness, and submit the full verification packet for review from this single setup surface.';
 
   @override
   String get verificationResubmitForReviewAction => 'Resubmit for review';
@@ -4048,49 +3732,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Something went wrong while submitting verification.';
 
   @override
-  String get verificationWizardProfilePhotoRequired =>
-      'Profile photo is required';
-
-  @override
-  String get verificationWizardAadhaarRequired => 'Aadhaar must be 12 digits';
-
-  @override
-  String get verificationWizardPanRequired => 'Invalid PAN format';
-
-  @override
-  String get verificationWizardAadhaarFrontRequired =>
-      'Aadhaar front photo required';
-
-  @override
-  String get verificationWizardAadhaarBackRequired =>
-      'Aadhaar back photo required';
-
-  @override
-  String get verificationWizardPanPhotoRequired => 'PAN photo required';
-
-  @override
-  String get verificationWizardTruckNumberRequired =>
-      'Truck number is required';
-
-  @override
-  String get verificationWizardRcRequired => 'RC document is required';
-
-  @override
-  String get verificationWizardCompanyNameRequired =>
-      'Company name is required';
-
-  @override
-  String get verificationWizardLicenseRequired => 'License number is required';
-
-  @override
-  String get verificationWizardLicenseDocumentRequired =>
-      'License document is required';
-
-  @override
-  String get verificationWizardLocationRequired =>
-      'Verification location is required';
-
-  @override
   String get verificationActionNeedsAttentionTitle =>
       'Verification action needs attention';
 
@@ -4171,19 +3812,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationManualLocationAction => 'Enter location manually';
 
   @override
-  String get verificationManualLocationTitle =>
-      'Add verification location manually';
-
-  @override
-  String get verificationManualLocationCityLabel => 'City';
-
-  @override
-  String get verificationManualLocationStateLabel => 'State (optional)';
-
-  @override
-  String get verificationManualLocationSaveAction => 'Save location';
-
-  @override
   String get verificationDocTypeAadhaarFront => 'Aadhaar front';
 
   @override
@@ -4214,16 +3842,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not upload that verification document right now. Try another image or retry shortly.';
 
   @override
-  String get verificationReadinessSupplierTitle => 'Verification readiness';
-
-  @override
-  String get verificationReadinessTruckerTitle =>
-      'Verification and truck readiness';
-
-  @override
-  String get verificationCurrentStateTitle => 'Current verification state';
-
-  @override
   String get verificationStatusVerified => 'Verified';
 
   @override
@@ -4239,59 +3857,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationStatusUnknown => 'Unknown';
 
   @override
-  String get verificationCurrentStateSupplierFooter =>
-      'Supplier verification keeps load-posting readiness and trust visibility aligned to one authoritative state.';
-
-  @override
-  String get verificationCurrentStateTruckerFooter =>
-      'Trucker verification unlocks chat and call on open loads once identity documents and truck readiness are complete.';
-
-  @override
-  String get verificationBusinessReadinessTitle => 'Business readiness';
-
-  @override
-  String get verificationTruckReadinessTitle => 'Truck readiness';
-
-  @override
-  String get verificationCompanyNameNeedsAttention =>
-      'Company name still needs attention';
-
-  @override
-  String approvedTruckCountLabel(Object count, Object s) {
-    return '$count approved truck$s';
-  }
-
-  @override
-  String get verificationCheckProfileStatus => 'check profile';
-
-  @override
-  String get verificationCapturedStatus => 'captured';
-
-  @override
-  String get verificationReadyStatus => 'ready';
-
-  @override
-  String get verificationActionNeededStatus => 'action needed';
-
-  @override
-  String get verificationBusinessReadinessFooter =>
-      'Business licence is required for supplier verification. GST certificate remains optional.';
-
-  @override
-  String get verificationTruckReadyFooter =>
-      'You already have at least one approved truck available for verification-dependent workflows.';
-
-  @override
-  String get verificationTruckRequiredFooter =>
-      'At least one approved truck is still required before trucker verification can be submitted.';
-
-  @override
   String get verificationPacketDetailsSectionTitle =>
       'Verification packet details';
-
-  @override
-  String get verificationIdentityPacketSectionTitle =>
-      'Identity packet details';
 
   @override
   String verificationReadyTruckCountLabel(int count) {
@@ -4309,10 +3876,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'You already have at least one complete truck packet with RC document attached.';
 
   @override
-  String get verificationTruckRequiredWithRcFooter =>
-      'Add one truck with its RC document before submitting trucker verification.';
-
-  @override
   String get verificationTruckPacketStillRequiredTitle =>
       'A truck packet is still required';
 
@@ -4321,42 +3884,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Open your fleet to add the first truck or upload the RC document so trucker verification can be submitted as one packet.';
 
   @override
-  String get verificationTruckPacketRequiredBadge => 'Truck packet required';
-
-  @override
-  String get verificationTruckApprovalRequiredTitle =>
-      'Truck approval is still required';
-
-  @override
-  String get verificationTruckApprovalRequiredMessage =>
-      'Open your fleet to add the first truck, review rejection guidance, or resubmit edited truck details for approval.';
-
-  @override
   String get verificationOpenFleetAction => 'Open fleet';
 
   @override
-  String get verificationUnlocksTitle => 'What this unlocks';
-
-  @override
-  String get verificationUnlocksSupplierMessage =>
-      'Once verified, your supplier account becomes trust-ready for broader marketplace and account workflows.';
-
-  @override
-  String get verificationUnlocksTruckerMessage =>
-      'Once verified, chat and call stay unlocked on open loads and your trucker account becomes assignment-ready.';
-
-  @override
-  String get verificationSourceOfTruthBadge => 'Verification source of truth';
-
-  @override
   String get verificationChatAndCallGatingBadge => 'Chat and call gating';
-
-  @override
-  String get verificationApprovedTruckRequiredBadge =>
-      'Approved truck required';
-
-  @override
-  String get verificationBackToAccountAction => 'Back to account';
 
   @override
   String verificationUploadSourceTitle(Object documentLabel) {
@@ -4432,15 +3963,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationSubmitLockedFooter =>
       'Once submitted, your details stay locked until the admin completes the review.';
-
-  @override
-  String verificationRequiredUploadedLabel(Object required, Object uploaded) {
-    return '$uploaded/$required required uploaded';
-  }
-
-  @override
-  String get verificationPrerequisitesSatisfiedMessage =>
-      'All current client-side verification prerequisites are satisfied for submission.';
 
   @override
   String get verificationDocumentStatusPending => 'pending';
@@ -4619,9 +4141,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerTripDetailStageCancelled => 'Cancelled';
-
-  @override
-  String get truckerTripDetailStageUnknown => 'Unknown';
 
   @override
   String get truckerTripDetailProofStatusPodUploaded => 'POD uploaded';
@@ -5829,79 +5348,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierTripDetailBackToTripsAction => 'Back to supplier trips';
 
   @override
-  String assistantHeroTitleWithName(Object firstName) {
-    return 'Guided help for $firstName';
-  }
-
-  @override
-  String get assistantHeroSubtitleSupplier =>
-      'Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.';
-
-  @override
-  String get assistantHeroSubtitleTrucker =>
-      'Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.';
-
-  @override
-  String get assistantWorkflowGuidanceSupplier => 'Supplier workflow guidance';
-
-  @override
-  String get assistantWorkflowGuidanceTrucker => 'Trucker workflow guidance';
-
-  @override
-  String get assistantProfileComplete => 'Profile complete';
-
-  @override
-  String get assistantProfileIncomplete => 'Profile incomplete';
-
-  @override
-  String get assistantRecommendedNextActionsTitle => 'Recommended next actions';
-
-  @override
-  String get assistantOpenSupplierTripsAction => 'Open supplier trips';
-
-  @override
-  String get assistantFindLoadsAction => 'Find loads';
-
-  @override
-  String get assistantOpenTripsAction => 'Open trips';
-
-  @override
-  String get assistantOpenMessagesAction => 'Open messages';
-
-  @override
-  String get assistantGuidedHelpTitle => 'Guided help';
-
-  @override
-  String get assistantBestForLabel => 'Best for';
-
-  @override
-  String get assistantBestForSupplier =>
-      'Posting loads, checking active load execution, reviewing conversations, and opening support quickly.';
-
-  @override
-  String get assistantBestForTrucker =>
-      'Finding loads, checking trip execution, reviewing conversations, and opening support quickly.';
-
-  @override
-  String get assistantVoiceBehaviorLabel => 'Voice behavior';
-
-  @override
-  String get assistantVoiceBehaviorValue =>
-      'Manual entry only right now. Full conversational bot, STT, and auto-speak remain in the dedicated communication and localization phases.';
-
-  @override
-  String get assistantCurrentRoleLabel => 'Current role';
-
-  @override
-  String get assistantMoreActionsTitle => 'More actions';
-
-  @override
-  String get assistantOpenNotificationsAction => 'Open notifications';
-
-  @override
-  String get assistantOpenSupportAction => 'Open support';
-
-  @override
   String get shellAccessRestrictedTitle => 'Access restricted';
 
   @override
@@ -5911,12 +5357,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get shellAccessRestrictedBannedSubtitle =>
       'Your account access is restricted. Signing you out safely...';
-
-  @override
-  String get shellAccountDeactivatedMessage => 'Account deactivated';
-
-  @override
-  String get shellAccountBannedMessage => 'Account banned';
 
   @override
   String get shellRouteNotFoundTitle => 'Route not found';
@@ -5987,15 +5427,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType) {
-    return '₹$priceAmount - $priceType';
+    return 'â‚¹$priceAmount - $priceType';
   }
 
   @override
   String get truckerLoadDetailTruckMatchAvailable => 'Truck match available';
-
-  @override
-  String get truckerLoadDetailNoApprovedTruckMatchYet =>
-      'No approved truck match yet';
 
   @override
   String truckerLoadDetailMaterialSummary(
@@ -6015,23 +5451,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Route and price summary';
 
   @override
-  String truckerLoadDetailOriginLabel(Object origin) {
-    return 'Origin: $origin';
-  }
-
-  @override
-  String truckerLoadDetailDestinationLabel(Object destination) {
-    return 'Destination: $destination';
-  }
-
-  @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
     return 'Pickup: $pickupDate';
   }
 
   @override
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType) {
-    return 'Price: ₹$priceAmount - $priceType';
+    return 'Price: â‚¹$priceAmount - $priceType';
   }
 
   @override
@@ -6114,37 +5540,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.';
 
   @override
-  String truckerLoadDetailDieselLabel(Object amount) {
-    return 'Diesel: ₹$amount';
-  }
-
-  @override
-  String truckerLoadDetailTollsLabel(Object amount) {
-    return 'Tolls: ₹$amount';
-  }
-
-  @override
-  String truckerLoadDetailMileageUsedLabel(Object value) {
-    return 'Mileage used: $value km/L';
-  }
-
-  @override
-  String truckerLoadDetailDieselPriceLabel(Object value) {
-    return 'Diesel price: ₹$value/L';
-  }
-
-  @override
-  String truckerLoadDetailEstimatedTollPlazasLabel(Object count) {
-    return 'Estimated toll plazas: $count';
-  }
-
-  @override
   String get truckerLoadDetailSupplierSummaryTitle => 'Supplier summary';
-
-  @override
-  String truckerLoadDetailContactOwnerLabel(Object name) {
-    return 'Contact owner: $name';
-  }
 
   @override
   String get truckerLoadDetailVerifiedSupplier => 'Verified supplier';
@@ -6174,12 +5570,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerLoadDetailBookingBlockedTitle => 'Booking is blocked';
-
-  @override
-  String get truckerLoadDetailMessageSupplierAction => 'Message supplier';
-
-  @override
-  String get truckerLoadDetailCallSupplierAction => 'Call supplier';
 
   @override
   String truckerLoadDetailUsingTruckLabel(Object truckNumber) {
@@ -6304,26 +5694,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not refresh your session right now. Please continue and try again if needed.';
 
   @override
-  String get authNotificationPermissionFailureMessage =>
-      'Notification permission could not be enabled right now.';
-
-  @override
-  String get authTtsVoiceGuidanceEnabled => 'Voice guidance is now enabled.';
-
-  @override
   String get authConfigIncompleteTitle => 'Setup incomplete';
-
-  @override
-  String get authConfigIncompleteMessage =>
-      'Some app configuration is missing. Sign-in may not work until setup is completed.';
-
-  @override
-  String get authTtsSignInPrompt =>
-      'Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.';
-
-  @override
-  String get authTtsOnboardingRolePrompt =>
-      'Choose your role to continue onboarding.';
 
   @override
   String get postLoadValidationOriginCityRequired => 'Select the origin city';
@@ -6773,13 +6144,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'You are offline. Actions that need network access should stay disabled.';
 
   @override
-  String get localeSelectSupportedLanguage => 'Select a supported language';
-
-  @override
-  String get localeFieldSupportedLanguages =>
-      'Supported languages are English and Hindi';
-
-  @override
   String get onboardingGateTimeoutMessage =>
       'Loading is taking longer than expected.';
 
@@ -6817,115 +6181,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatPreviewSystem => 'System update';
 
   @override
-  String get chatPreviewEmpty => 'No messages yet';
-
-  @override
   String reportSourceSupplierLoad(Object routeLabel) {
     return 'Supplier load - $routeLabel';
   }
-
-  @override
-  String get supplierProfileTitle => 'Supplier Profile';
-
-  @override
-  String get truckerProfileTitle => 'Trucker Profile';
-
-  @override
-  String get reviewsSectionTitle => 'Reviews & Comments';
-
-  @override
-  String reviewsCount(int count) {
-    return '($count total)';
-  }
-
-  @override
-  String get noReviewsYet => 'No reviews yet';
-
-  @override
-  String get noReviewsSubtitle => 'Reviews will appear here after interactions';
-
-  @override
-  String get noRatingYet => 'No rating yet';
-
-  @override
-  String get newTruckerBadge => 'New Trucker';
-
-  @override
-  String get newSupplierBadge => 'New Supplier';
-
-  @override
-  String get reviewerProfileHint => 'Tap to view reviewer profile';
-
-  @override
-  String get addReplyTitle => 'Reply to Review';
-
-  @override
-  String get replyButton => 'Reply';
-
-  @override
-  String get rateInteractionTitle => 'Rate Your Interaction';
-
-  @override
-  String rateInteractionSubtitle(Object name) {
-    return 'How was your experience with $name?';
-  }
-
-  @override
-  String get submitReviewButton => 'Submit Review';
-
-  @override
-  String get skipReviewButton => 'Skip';
-
-  @override
-  String get reviewSubmitted => 'Review submitted';
-
-  @override
-  String get reviewSubmittedSuccess => 'Review submitted successfully';
-
-  @override
-  String get alreadyReviewedError => 'You have already reviewed this user';
-
-  @override
-  String get loadHistoryTitle => 'Recent Loads';
-
-  @override
-  String get loadMoreButton => 'Load More';
-
-  @override
-  String avgRatingLabel(Object rating) {
-    return '$rating out of 5';
-  }
-
-  @override
-  String reviewCountLabel(int count) {
-    return '($count reviews)';
-  }
-
-  @override
-  String memberSinceLabel(Object date) {
-    return 'Member since $date';
-  }
-
-  @override
-  String get trustScoreTitle => 'Trust & Reviews';
-
-  @override
-  String get reviewsReceivedLabel => 'Reviews received';
-
-  @override
-  String get tripsCompletedLabel => 'Trips completed';
-
-  @override
-  String get loadsPostedLabel => 'Loads posted';
-
-  @override
-  String get trucksInFleetLabel => 'Trucks in fleet';
-
-  @override
-  String get superLoadEligibleLabel => 'Super Load eligible';
-
-  @override
-  String get fleetTitle => 'Fleet';
 
   @override
   String truckCount(int count) {
@@ -6936,45 +6194,5 @@ class AppLocalizationsEn extends AppLocalizations {
       one: '',
     );
     return '$count truck$_temp0';
-  }
-
-  @override
-  String get replyHint =>
-      'You can reply to this review once. Your response will be visible to everyone...';
-
-  @override
-  String get replySuccess => 'Reply added successfully';
-
-  @override
-  String get replyFailure =>
-      'Failed to add reply. You may have already replied.';
-
-  @override
-  String get addReplyHint =>
-      'Your reply will be visible to everyone viewing your profile';
-
-  @override
-  String get noComments => 'No comments';
-
-  @override
-  String get newMemberBadge => 'New member';
-
-  @override
-  String get insufficientInteractionError =>
-      'More interaction needed to review';
-
-  @override
-  String activeLoadsTitle(int count) {
-    return 'Active Loads ($count)';
-  }
-
-  @override
-  String responseRateLabel(Object rate) {
-    return '$rate% response rate';
-  }
-
-  @override
-  String memberForMonthsLabel(int count) {
-    return 'Member for $count months';
   }
 }

@@ -1,27 +1,17 @@
 {
   "@@locale": "en",
-  "@_sectionCommon": "═══ Common & App ═══",
+  "@_sectionCommon": "â•â•â• Common & App â•â•â•",
   "appTitle": "TranZfort",
-  "@_sectionSplash": "═══ Splash & Device Setup ═══",
-  "splashLoadingWorkspace": "Loading your workspace...",
-  "@_sectionAuth": "═══ Auth ═══",
+  "@_sectionSplash": "â•â•â• Splash & Device Setup â•â•â•",
+  "@_sectionAuth": "â•â•â• Auth â•â•â•",
   "authGoogleFailureMessage": "We could not continue with Google right now. Retry shortly or use email sign-in instead.",
   "authWelcomeTitle": "Welcome to TranZfort",
   "authWelcomeSubtitle": "Choose Google or email sign-in to continue into your supplier or trucker workspace.",
   "authEmailHint": "you@example.com",
-  "authSignInDividerLabel": "OR",
   "authForgotPasswordAction": "Forgot password?",
   "authConfigIncompleteSignInMessage": "Supabase is not configured in this build, so sign-in and live account data will remain unavailable until the environment is fixed.",
-  "splashSetupTitle": "Set up device access",
-  "splashSetupSubtitle": "Allow notifications, voice guidance, and location access now so your first login and verification flow can continue smoothly.",
-  "splashSetupEnableVoiceAction": "Enable voice guidance",
-  "splashSetupOpenLocationSettingsAction": "Open location settings",
   "authContinueWithGoogle": "Continue with Google",
-  "authGoogleFastestMessage": "Fastest way to get started — no password to remember",
   "authOrWithEmail": "Or continue with email",
-  "authContinueWithPassword": "Continue with email and password",
-  "authTermsOfService": "Terms of service",
-  "authTermsInfoMessage": "TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.",
   "authPasswordTitle": "Email and password",
   "authPasswordSubtitle": "Sign in with your email and password, or create a new TranZfort account to continue.",
   "authPasswordLabel": "Password",
@@ -38,7 +28,6 @@
   "authPasswordConfirmMismatchMessage": "The password confirmation does not match.",
   "authPasswordSignInFailureMessage": "We could not sign you in with email and password right now. Retry shortly or use another sign-in method.",
   "authPasswordSignUpFailureMessage": "We could not create your account right now. Retry shortly with the same details.",
-  "authPasswordSignUpSuccessMessage": "Your account was created. If email confirmation is required, finish that step and then sign in with your new password.",
   "authPasswordCheckEmailTitle": "Check your email",
   "authPasswordCheckEmailSubtitle": "We sent a verification link to {email}. Open that email, finish verification, and then return here to sign in.",
   "@authPasswordCheckEmailSubtitle": {
@@ -82,9 +71,8 @@
   "onboardingTermsAcceptance": "By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.",
   "onboardingSaveAndContinue": "Save and continue",
   "commonRetry": "Retry",
-  "@_sectionShell": "═══ Shell & Navigation ═══",
-  "shellTooltipVoiceAssistance": "Voice assistance",
-  "@_sectionSupplierLoads": "═══ Supplier My Loads ═══",
+  "@_sectionShell": "â•â•â• Shell & Navigation â•â•â•",
+  "@_sectionSupplierLoads": "â•â•â• Supplier My Loads â•â•â•",
   "supplierQuickActionNotifications": "Notifications",
   "supplierMyLoadsTitle": "My loads",
   "supplierMyLoadsSubtitle": "Monitor active supplier loads, booking demand, and completed load history from one place.",
@@ -107,7 +95,7 @@
   "supplierLoadCardViewHistory": "View history",
   "supplierLoadCardViewDetails": "View details",
   "supplierRecentLoadsTitle": "Recent loads",
-  "@_sectionSupplierDashboard": "═══ Supplier Dashboard ═══",
+  "@_sectionSupplierDashboard": "â•â•â• Supplier Dashboard â•â•â•",
   "supplierDashboardWelcomeBack": "Welcome back, {name}",
   "@supplierDashboardWelcomeBack": {
     "description": "Welcome message on supplier dashboard. Placeholder {name} is the user's display name.",
@@ -115,21 +103,15 @@
       "name": {}
     }
   },
-  "supplierDashboardHeroSubtitle": "Track supplier verification, review Super Load readiness, and keep your latest loads and execution activity in view.",
   "supplierDashboardOverviewTitle": "Dashboard overview",
   "supplierDashboardSuperLoadReadinessTitle": "Super Load readiness",
   "supplierDashboardQuickActionsTitle": "Quick actions",
   "supplierDashboardQuickActionChatLabel": "Chat",
   "supplierDashboardPostLoadAction": "Post Load",
-  "supplierDashboardHeroSummaryBody": "Keep your supplier verification current, monitor active loads, and follow the latest Super Load readiness signals visible in this workspace.",
   "supplierDashboardStatsActiveLoadsLabel": "Active loads",
-  "supplierDashboardStatsActiveLoadsHelper": "Loads currently open for supplier-side tracking.",
   "supplierDashboardStatsPendingBookingsLabel": "Pending bookings",
-  "supplierDashboardStatsPendingBookingsHelper": "Booking requests that still need supplier attention.",
   "supplierDashboardStatsInTransitTripsLabel": "Trips in transit",
-  "supplierDashboardStatsInTransitTripsHelper": "Linked trips currently moving against your loads.",
   "supplierDashboardStatsCompletedTripsLabel": "Completed trips",
-  "supplierDashboardStatsCompletedTripsHelper": "Trips that have reached their recorded completion state.",
   "supplierDashboardOpenMyLoadsAction": "Open my loads",
   "supplierDashboardLoadFailureTitle": "Unable to load your supplier dashboard",
   "supplierDashboardLoadFailureMessage": "We could not load your supplier dashboard right now. Retry shortly to refresh the latest overview metrics.",
@@ -139,7 +121,7 @@
   "supplierDashboardRecentLoadsUnavailableMessage": "We could not load your recent supplier loads right now. Retry shortly to refresh the latest load list.",
   "supplierDashboardNoLoadsPostedTitle": "No loads posted yet",
   "supplierDashboardNoLoadsPostedSubtitle": "Post your first supplier load to start receiving booking requests and linked trip activity.",
-  "@_sectionShellTabs": "═══ Shell Tabs & Drawer ═══",
+  "@_sectionShellTabs": "â•â•â• Shell Tabs & Drawer â•â•â•",
   "shellTabHome": "Home",
   "shellTitleSupplierDashboard": "Supplier dashboard",
   "shellTabLoads": "Loads",
@@ -152,13 +134,10 @@
   "shellDrawerSupplierWorkspace": "Supplier workspace",
   "shellDrawerTruckerWorkspace": "Trucker workspace",
   "shellDrawerDashboard": "Dashboard",
-  "shellDrawerAssistant": "Guided help",
   "shellDrawerFleet": "Fleet",
-  "shellDrawerMessages": "Messages",
   "navNotifications": "Notifications",
   "shellDrawerSupport": "Support",
   "shellDrawerProfile": "Profile",
-  "shellDrawerLanguage": "Language",
   "shellDrawerSignOut": "Sign out",
   "shellSignOutFailureMessage": "We could not sign you out right now. Retry shortly.",
   "shellMessagesTitle": "Messages",
@@ -198,7 +177,7 @@
       "timestamp": {}
     }
   },
-  "@_sectionChat": "═══ Chat & Communication ═══",
+  "@_sectionChat": "â•â•â• Chat & Communication â•â•â•",
   "truckerChatSupplierAction": "Chat with supplier",
   "truckerLoadChatStartFailureMessage": "We could not start this supplier chat right now. Retry shortly from the load detail.",
   "truckerTripChatStartFailureMessage": "We could not start this supplier chat right now. Retry shortly from the trip detail.",
@@ -298,11 +277,11 @@
   "chatStopRecordingTooltip": "Stop recording",
   "chatVoiceRecordingTooltip": "Voice recording",
   "chatSendAction": "Send",
-  "@_sectionCommonVoice": "═══ Common Voice & TTS ═══",
+  "@_sectionCommonVoice": "â•â•â• Common Voice & TTS â•â•â•",
   "commonHearSummary": "Hear summary",
   "commonVoiceMuted": "Voice guidance is muted on this device.",
   "commonVoiceUnavailable": "Voice guidance is unavailable right now.",
-  "@_sectionNotifications": "═══ Notifications ═══",
+  "@_sectionNotifications": "â•â•â• Notifications â•â•â•",
   "notificationsTitle": "Notifications",
   "notificationsMarkedAllReadSuccess": "All notifications marked as read",
   "notificationsMarkAllRead": "Mark All Read",
@@ -357,11 +336,11 @@
   "notificationFallbackAccountUpdate": "Account update",
   "notificationFallbackSystemNotice": "System notice",
   "notificationFallbackLoadExpiryWarning": "Load expiry warning",
-  "@_sectionAccountNav": "═══ Account Navigation ═══",
+  "@_sectionAccountNav": "â•â•â• Account Navigation â•â•â•",
   "navProfile": "Profile",
   "navSupport": "Support",
   "navDeleteAccount": "Delete account",
-  "@_sectionDeleteAccount": "═══ Delete Account ═══",
+  "@_sectionDeleteAccount": "â•â•â• Delete Account â•â•â•",
   "deleteAccountRequestedOnLabel": "Deletion requested on",
   "deleteAccountGracePeriodEndsLabel": "Grace period ends",
   "deleteAccountGracePeriodPassedLabel": "Grace-period end date has passed. Permanent deletion processing may happen at any time.",
@@ -426,7 +405,7 @@
   "deleteAccountHeroSubtitleDefault": "This action can deactivate your account immediately if no active blockers exist. Review the consequences carefully before continuing.",
   "deleteAccountHeroBodyPendingCleanup": "The deletion request has already been accepted and the account is in pending-cleanup state. Cancel the request if you want to restore normal account access before permanent deletion is processed.",
   "deleteAccountHeroBodyDefault": "Before deletion can proceed, the platform checks for active trips, unresolved disputes, and compliance or verification records that still require retention.",
-  "@_sectionAccount": "═══ Account ═══",
+  "@_sectionAccount": "â•â•â• Account â•â•â•",
   "accountSignOutFailureMessage": "We could not sign you out right now. Retry shortly from this screen.",
   "accountRoleSupplier": "Supplier",
   "accountRoleTrucker": "Trucker",
@@ -450,7 +429,7 @@
   "accountSignedInAsLabel": "Signed in as",
   "accountCurrentAuthenticatedSession": "Current authenticated session",
   "accountSignOutAction": "Sign out",
-  "@_sectionProfile": "═══ Profile ═══",
+  "@_sectionProfile": "â•â•â• Profile â•â•â•",
   "profileTitle": "Profile",
   "profileLoadFailureTitle": "Profile unavailable",
   "profileLoadFailureMessage": "We could not load your profile right now. Retry shortly from this screen.",
@@ -479,7 +458,7 @@
       "deletionStatus": {}
     }
   },
-  "@_sectionSettings": "═══ Settings ═══",
+  "@_sectionSettings": "â•â•â• Settings â•â•â•",
   "settingsTitle": "Settings",
   "settingsPreferencesTitle": "Preferences",
   "settingsRoleContextLabel": "Role context",
@@ -512,7 +491,7 @@
   "settingsPushGuidanceBlocked": "Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.",
   "settingsPushGuidanceNotRequested": "Push permission has not been requested yet on this device session.",
   "settingsPushGuidanceUnavailable": "Push runtime is unavailable here until Firebase/device support is fully configured.",
-  "@_sectionSupport": "═══ Support & Disputes ═══",
+  "@_sectionSupport": "â•â•â• Support & Disputes â•â•â•",
   "supportActiveTicketCount": "{count} ticket{s}",
   "@supportActiveTicketCount": {
     "description": "Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.",
@@ -743,7 +722,7 @@
   "supportTrustStatusBanned": "Banned",
   "supportTrustStatusUnknown": "Unknown",
   "supportTrustBadge": "Trust: {status}",
-  "@_sectionTrustSafety": "═══ Trust & Safety ═══",
+  "@_sectionTrustSafety": "â•â•â• Trust & Safety â•â•â•",
   "trustSafetyLabel": "Trust & safety",
   "trustSafetyWarningTitle": "Trust & safety warning active",
   "trustSafetyWarningMessage": "Your account has a warning on record. Marketplace and support surfaces remain available, but you should avoid further violations and use support if you need clarification on the warning or next-step expectations.",
@@ -779,8 +758,7 @@
   "settingsLanguageSavedHindi": "Language saved: Hindi",
   "settingsLanguageSaveFailed": "We could not save your language preference right now. Retry shortly from settings.",
   "settingsLanguageSaving": "Saving language preference...",
-  "@_sectionTruckerDashboard": "═══ Trucker Dashboard ═══",
-  "truckerDashboardHeroSubtitle": "Use your trucker dashboard as the command center for freight discovery, readiness, and active work visibility.",
+  "@_sectionTruckerDashboard": "â•â•â• Trucker Dashboard â•â•â•",
   "truckerDashboardWelcomeBack": "Welcome back, {fullName}",
   "@truckerDashboardWelcomeBack": {
     "description": "Welcome message on trucker dashboard. Placeholder {fullName} is the user's full name.",
@@ -798,22 +776,14 @@
   "truckerDashboardReadinessUnavailableTitle": "Readiness state unavailable",
   "truckerDashboardReadinessFailureMessage": "Your trucker readiness state is temporarily unavailable. Retry shortly to refresh verification and fleet readiness.",
   "truckerDashboardVerificationPendingTitle": "Verification pending",
-  "truckerDashboardVerificationPendingDescription": "You can browse loads while review is pending, but chat and call stay locked until verification is complete.",
   "truckerDashboardOpenVerificationAction": "Open verification",
-  "truckerDashboardVerificationCompleteTitle": "Verification complete",
-  "truckerDashboardVerificationCompleteDescription": "Your trucker verification is complete. Chat and call stay unlocked on open loads while your readiness remains healthy.",
-  "truckerDashboardReviewVerificationAction": "Review verification",
   "truckerDashboardVerificationNeedsAttentionTitle": "Verification needs attention",
-  "truckerDashboardVerificationNeedsAttentionDescription": "Your verification was rejected. Browsing stays open, but communication and assignment readiness remain blocked.",
   "truckerDashboardFixVerificationAction": "Fix verification",
   "truckerDashboardCompleteFleetVerificationTitle": "Complete fleet and verification setup",
-  "truckerDashboardCompleteFleetVerificationMessage": "You can browse the marketplace now, but chat, call, and booking stay locked until you finish Aadhaar, PAN, profile photo, and get at least one truck approved.",
   "truckerDashboardOpenFleetVerificationAction": "Open fleet and verification",
   "truckerDashboardAddApproveFirstTruckTitle": "Add and approve your first truck",
-  "truckerDashboardAddApproveFirstTruckMessage": "Marketplace browsing is available now, but your first approved truck is required before full trucker verification can complete.",
   "truckerDashboardOpenFleetAction": "Open fleet",
   "truckerDashboardCompleteVerificationTitle": "Complete trucker verification",
-  "truckerDashboardCompleteVerificationMessage": "You can browse the marketplace now. Finish Aadhaar, PAN, profile photo, and at least one approved truck to unlock chat and call.",
   "truckerDashboardLoadFailureTitle": "Unable to load your trucker dashboard",
   "truckerDashboardLoadFailureMessage": "We could not load your trucker dashboard right now. Retry shortly to refresh the latest KPIs and activity summary.",
   "truckerDashboardSetupInProgress": "Setup in progress",
@@ -830,15 +800,10 @@
       }
     }
   },
-  "truckerDashboardHeroSummary": "Dashboard-first remains the trucker home rule: understand readiness, scan active work, then jump into freight discovery from here.",
   "truckerDashboardStatActiveBidsLabel": "Active bids",
-  "truckerDashboardStatActiveBidsHelper": "Submitted requests still waiting for supplier decision",
   "truckerDashboardStatUpcomingTripsLabel": "Upcoming trips",
-  "truckerDashboardStatUpcomingTripsHelper": "Assigned and pickup-stage work approaching execution",
   "truckerDashboardStatInTransitLabel": "In-transit",
-  "truckerDashboardStatInTransitHelper": "Trips currently moving on the road",
   "truckerDashboardStatCompletedLabel": "Completed",
-  "truckerDashboardStatCompletedHelper": "Trips already closed in your trucker history",
   "truckerDashboardRecentActivityUnavailableTitle": "Recent activity unavailable",
   "truckerDashboardRecentActivityUnavailableMessage": "We could not load your latest booking, trip, and fleet activity right now.",
   "truckerDashboardNoRecentActivityTitle": "No recent activity yet",
@@ -892,8 +857,6 @@
   "truckerDashboardProfileSetupInProgressTitle": "Profile setup still in progress",
   "truckerDashboardProfileSetupInProgressSubtitle": "Your dashboard will show readiness details once your trucker profile finishes loading.",
   "truckerDashboardVerificationStatusTitle": "Verification status",
-  "truckerDashboardVerificationReadyMessage": "Chat and call are unlocked on open loads because your verification is complete.",
-  "truckerDashboardVerificationLockedMessage": "Browsing is open now. Chat and call unlock only after verification and at least one approved truck.",
   "truckerDashboardDlLabel": "DL: {value}",
   "@truckerDashboardDlLabel": {
     "placeholders": {
@@ -914,8 +877,6 @@
   },
   "truckerDashboardReadyStatus": "ready",
   "truckerDashboardActionNeededStatus": "action needed",
-  "truckerDashboardFleetReadyMessage": "You have at least one approved truck available for verification-dependent workflows.",
-  "truckerDashboardFleetNeedFirstTruckMessage": "Add and approve your first truck in the fleet slice to complete trucker readiness.",
   "truckerDashboardTruckAwaitingReview": "{count} awaiting review",
   "@truckerDashboardTruckAwaitingReview": {
     "placeholders": {
@@ -946,7 +907,7 @@
       "segments": {}
     }
   },
-  "@_sectionTruckerTrips": "═══ Trucker Trips ═══",
+  "@_sectionTruckerTrips": "â•â•â• Trucker Trips â•â•â•",
   "truckerTripsTitle": "My trips",
   "truckerTripsSubtitle": "Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.",
   "truckerTripsStageAssigned": "Assigned",
@@ -1007,7 +968,7 @@
       "truckNumber": {}
     }
   },
-  "@_sectionTruckerFleet": "═══ Trucker Fleet ═══",
+  "@_sectionTruckerFleet": "â•â•â• Trucker Fleet â•â•â•",
   "truckerFleetHeroTitle": "Manage truck readiness",
   "truckerFleetHeroSubtitle": "Track truck approval, review rejection guidance, and keep RC details current so booking-ready trucks stay available.",
   "truckerFleetEditingTruckAction": "Editing truck",
@@ -1123,7 +1084,7 @@
   "truckerFleetStatusEditedPendingReapprovalMessage": "This truck stays visible, but recent edits sent it back for reapproval before it can be used again.",
   "truckerFleetStatusArchivedMessage": "This truck is archived and no longer available for normal booking workflows.",
   "truckerFleetStatusUnknownMessage": "Truck review state is currently unavailable.",
-  "@_sectionTruckerFindLoads": "═══ Trucker Find Loads ═══",
+  "@_sectionTruckerFindLoads": "â•â•â• Trucker Find Loads â•â•â•",
   "truckerFindLoadsHeroSubtitle": "Scan compact freight cards, keep filters tight, and move quickly from route interest to load evaluation.",
   "truckerFindLoadsAdvancedFiltersAction": "Advanced filters",
   "truckerFindLoadsOriginHint": "Origin city",
@@ -1134,7 +1095,6 @@
   "truckerFindLoadsSortPriceHighToLow": "Price High>Low",
   "truckerFindLoadsSortPriceLowToHigh": "Price Low>High",
   "truckerFindLoadsSortPickupDate": "Pickup Date",
-  "truckerFindLoadsMarketplaceTabsTitle": "Marketplace tabs",
   "truckerFindLoadsAllLoadsTab": "All Loads",
   "truckerFindLoadsSuperLoadsTab": "Super Loads",
   "truckerFindLoadsLoadFailureTitle": "Unable to load freight",
@@ -1161,7 +1121,7 @@
       "value": {}
     }
   },
-  "truckerFindLoadsSummaryPriceRange": "₹{minPrice}-{maxPrice}",
+  "truckerFindLoadsSummaryPriceRange": "â‚¹{minPrice}-{maxPrice}",
   "@truckerFindLoadsSummaryPriceRange": {
     "placeholders": {
       "minPrice": {},
@@ -1191,38 +1151,6 @@
   "truckerFindLoadsStatusActive": "Active",
   "truckerFindLoadsStatusAssignedPartial": "Assigned Partial",
   "truckerFindLoadsStatusUnknown": "Unknown",
-  "truckerFindLoadsStatusUnknownFallback": "Unknown status",
-  "@truckerFindLoadsStatusUnknownFallback": {
-    "placeholders": {}
-  },
-  "truckerFindLoadsPriceAdvancePickup": "₹{priceAmount} - {advancePercentage}% adv - {pickupDate}",
-  "@truckerFindLoadsPriceAdvancePickup": {
-    "placeholders": {
-      "priceAmount": {},
-      "advancePercentage": {
-        "type": "int"
-      },
-      "pickupDate": {}
-    }
-  },
-  "truckerFindLoadsTruckMatchAvailable": "Truck match available",
-  "truckerFindLoadsNoApprovedTruckMatch": "No approved truck match yet",
-  "truckerFindLoadsTripCostUnavailable": "Trip cost unavailable",
-  "truckerFindLoadsDistanceUnavailable": "Distance unavailable - Tyres {tyres}",
-  "@truckerFindLoadsDistanceUnavailable": {
-    "placeholders": {
-      "tyres": {}
-    }
-  },
-  "truckerFindLoadsDistanceAvailable": "Distance {distanceKm} km - Tyres {tyres}",
-  "@truckerFindLoadsDistanceAvailable": {
-    "placeholders": {
-      "distanceKm": {},
-      "tyres": {}
-    }
-  },
-  "truckerFindLoadsTyresAny": "Any",
-  "truckerFindLoadsSuperLoadBanner": "Super Load - Payment Guarantee",
   "truckerFindLoadsViewDetailsAction": "View details",
   "truckerFindLoadsAdvancedFiltersTitle": "Advanced filters",
   "truckerFindLoadsTruckBodyTypeLabel": "Truck body type",
@@ -1232,11 +1160,11 @@
   "truckerFindLoadsBodyTypeTanker": "Tanker",
   "truckerFindLoadsBodyTypeUnknown": "Unknown",
   "truckerFindLoadsTyreRequirementTitle": "Tyre requirement",
-  "truckerFindLoadsMinPriceLabel": "Min price (₹)",
-  "truckerFindLoadsMaxPriceLabel": "Max price (₹)",
+  "truckerFindLoadsMinPriceLabel": "Min price (â‚¹)",
+  "truckerFindLoadsMaxPriceLabel": "Max price (â‚¹)",
   "truckerFindLoadsApplyFiltersAction": "Apply filters",
   "truckerFindLoadsResetAdvancedFiltersAction": "Reset advanced filters",
-  "@_sectionSupplierPostLoad": "═══ Supplier Post Load ═══",
+  "@_sectionSupplierPostLoad": "â•â•â• Supplier Post Load â•â•â•",
   "supplierPostLoadTitle": "Post Load",
   "supplierPostLoadHeroTitle": "Create a supplier load",
   "supplierPostLoadHeroSubtitle": "Use one clean scrolling form to define route, cargo, vehicle requirements, pricing, and pickup timing.",
@@ -1283,7 +1211,7 @@
   "supplierPostLoadTrucksNeededLabel": "Trucks needed",
   "supplierPostLoadTrucksNeededHint": "1",
   "supplierPostLoadPricingScheduleTitle": "Pricing and schedule",
-  "supplierPostLoadPriceAmountLabel": "Price amount (₹)",
+  "supplierPostLoadPriceAmountLabel": "Price amount (â‚¹)",
   "supplierPostLoadPriceAmountHint": "54000",
   "supplierPostLoadPriceTypeTitle": "Price type",
   "supplierPostLoadPriceTypeFixed": "Fixed",
@@ -1298,7 +1226,7 @@
       }
     }
   },
-  "supplierPostLoadAdvanceBalanceLabel": "Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}",
+  "supplierPostLoadAdvanceBalanceLabel": "Advance: â‚¹{advanceAmount} - Balance: â‚¹{balanceAmount}",
   "@supplierPostLoadAdvanceBalanceLabel": {
     "placeholders": {
       "advanceAmount": {},
@@ -1323,7 +1251,7 @@
       "trucksNeeded": {}
     }
   },
-  "supplierPostLoadPriceSummary": "Price: ₹{priceAmount} - {priceType}",
+  "supplierPostLoadPriceSummary": "Price: â‚¹{priceAmount} - {priceType}",
   "@supplierPostLoadPriceSummary": {
     "placeholders": {
       "priceAmount": {},
@@ -1346,7 +1274,7 @@
   "supplierPostLoadVerificationUnavailableMessage": "Unable to confirm supplier verification right now. Retry shortly or open verification to review your trust status.",
   "supplierPostLoadProfileUnavailableMessage": "Supplier profile is unavailable right now. Retry shortly before posting this load.",
   "supplierPostLoadVerificationRequiredMessage": "Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.",
-  "@_sectionVerification": "═══ Verification ═══",
+  "@_sectionVerification": "â•â•â• Verification â•â•â•",
   "verificationReadinessCheckAadhaarNumber": "Aadhaar number",
   "verificationReadinessCheckPanNumber": "PAN number",
   "verificationReadinessCheckAadhaarFrontPhoto": "Aadhaar front photo",
@@ -1385,38 +1313,18 @@
   "supplierDashboardVerificationStatusUnknown": "Unknown",
   "supplierVerificationPendingTitle": "Verification pending",
   "supplierVerificationPendingMessage": "Your verification is under review. Keep documents ready in case the support team asks for clarification.",
-  "supplierVerificationRejectedTitle": "Verification needs attention",
-  "supplierVerificationCompleteDescription": "Your supplier verification is complete. You can keep posting loads and monitoring readiness from this dashboard.",
   "supplierVerificationNeedsAttentionTitle": "Verification needs attention",
   "supplierVerificationNeedsAttentionDescription": "Review the latest verification feedback, update the required documents, and resubmit when you are ready.",
   "supplierOpenVerification": "Open verification",
   "supplierReviewVerification": "Review verification",
-  "supplierDashboardVerificationStatusUnknownFallback": "Unknown verification status",
-  "@supplierDashboardVerificationStatusUnknownFallback": {
-    "placeholders": {}
-  },
   "supplierFixVerification": "Fix verification",
   "supplierCompleteSetupTitle": "Complete your supplier setup",
   "supplierCompleteSetupMessage": "Complete supplier verification and add your company details before using the full supplier workspace.",
   "supplierCompleteVerification": "Complete verification",
-  "supplierDashboardSuperLoadReadinessIntro": "Super Load eligibility is still partially admin-managed in the current app. This surface shows only the readiness facts the current profile model can confirm honestly.",
   "supplierDashboardSuperLoadVerificationComplete": "Verification complete",
-  "supplierDashboardSuperLoadVerificationRequired": "Verification still required",
   "supplierDashboardSuperLoadBusinessLicenceOnFile": "Business licence on file",
   "supplierDashboardSuperLoadBusinessLicenceMissing": "Business licence missing",
   "supplierDashboardSuperLoadCompanyAgeUnavailable": "Company-age readiness unavailable in current app data",
-  "supplierDashboardSuperLoadReadinessSummaryReady": "Your current profile can confirm supplier verification and the business licence prerequisite, but final Super Load eligibility still cannot be determined here because company-age/readiness fields are not yet present in the current source model.",
-  "supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence": "Your supplier verification is complete, but the business licence prerequisite is still missing from the current profile. Final Super Load eligibility remains blocked until that verification requirement is satisfied.",
-  "supplierDashboardSuperLoadReadinessSummaryMissingVerification": "Your current profile can confirm a business licence on file, but supplier verification is still incomplete. Final Super Load eligibility remains blocked until verification is completed and company-age/readiness fields exist in the current source model.",
-  "supplierDashboardSuperLoadReadinessSummaryPendingVerification": "Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.",
-  "supplierDashboardSuperLoadReadinessSummaryRejectedVerification": "Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.",
-  "supplierDashboardSuperLoadReadinessSummaryNeedsAttention": "Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.",
-  "supplierDashboardSuperLoadNextStepReady": "Next best action: keep your verification details accurate, monitor your loads normally, and use support only if you need follow-up on Super Load review or policy questions.",
-  "supplierDashboardSuperLoadNextStepBusinessLicence": "Next best action: update or upload the business licence through verification first, then re-check this readiness surface.",
-  "supplierDashboardSuperLoadNextStepVerification": "Next best action: complete supplier verification so the platform can confirm your trust baseline before any future Super Load review.",
-  "supplierDashboardSuperLoadNextStepPendingVerification": "Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.",
-  "supplierDashboardSuperLoadNextStepRejectedVerification": "Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.",
-  "supplierDashboardSuperLoadNextStepNeedsAttention": "Next best action: complete supplier verification and business licence requirements first, then return here for the remaining readiness summary.",
   "supplierDashboardLoadStatusActive": "Active",
   "supplierLoadStatusAssignedPartial": "Assigned partial",
   "supplierLoadStatusAssignedFull": "Assigned full",
@@ -1479,7 +1387,7 @@
     }
   },
   "supplierLinkedTripTrackAction": "Track trip",
-  "@_sectionSupplierTripDetail": "═══ Supplier Trip Detail ═══",
+  "@_sectionSupplierTripDetail": "â•â•â• Supplier Trip Detail â•â•â•",
   "supplierTripDetailTitle": "Trip Detail",
   "supplierTripDetailLoadFailureTitle": "Unable to load supplier trip detail",
   "supplierTripDetailLoadFailureMessage": "We could not load this supplier trip detail right now. Retry shortly to refresh the latest trip status and proof review context.",
@@ -1677,8 +1585,6 @@
   "supplierTripDetailVerificationStatusPending": "Pending",
   "supplierTripDetailVerificationStatusRejected": "Rejected",
   "supplierTripDetailVerificationStatusUnknown": "Unknown",
-  "supplierTripDetailDisputeCategoryFallback": "Trip dispute",
-  "supplierTripDetailDisputeStatusFallback": "Open",
   "supplierTripDetailDisputeStatusGuidanceOpen": "Support has received this dispute and review should begin shortly. Keep the related support replies clear if more proof context is needed.",
   "supplierTripDetailDisputeStatusGuidanceInProgress": "Support or operations are actively reviewing the dispute. Watch the related support ticket for visible updates or clarification requests.",
   "supplierTripDetailDisputeStatusGuidanceWaitingForUser": "Support is waiting for your clarification or additional context. Reply on the related support ticket so the review can continue.",
@@ -1720,20 +1626,6 @@
   "verificationLoadFailureMessage": "We could not load your verification status right now. Retry shortly to refresh the latest verification state.",
   "verificationDetailsUnavailableTitle": "Verification details unavailable",
   "verificationDetailsUnavailableSubtitle": "We could not find the current verification record for this account. Please retry shortly.",
-  "verificationHeroPendingSupplierTitle": "Supplier verification under review",
-  "verificationHeroPendingTruckerTitle": "Trucker verification under review",
-  "verificationHeroVerifiedSupplierTitle": "Supplier verification complete",
-  "verificationHeroVerifiedTruckerTitle": "Trucker verification complete",
-  "verificationHeroRejectedSupplierTitle": "Resubmit supplier verification",
-  "verificationHeroRejectedTruckerTitle": "Resubmit trucker verification",
-  "verificationHeroInitialSupplierTitle": "Complete supplier trust setup",
-  "verificationHeroInitialTruckerTitle": "Complete trucker trust setup",
-  "verificationHeroPendingSubtitle": "Your verification packet is already under review. We will notify you when approval is complete.",
-  "verificationHeroVerifiedSubtitle": "Your verification packet is already approved. You can review the captured documents and readiness details below.",
-  "verificationHeroRejectedWithFeedbackSubtitle": "Review the rejected document markers below, replace any affected items, and resubmit when you are ready.",
-  "verificationHeroRejectedFallbackSubtitle": "Review the rejection summary, replace any affected items, and resubmit the full packet when you are ready.",
-  "verificationHeroInitialSupplierSubtitle": "Upload the required business and identity documents, capture supplier verification location, and submit them for review from this single verification surface.",
-  "verificationHeroInitialTruckerSubtitle": "Upload identity documents, confirm truck readiness, and submit the full verification packet for review from this single setup surface.",
   "verificationResubmitForReviewAction": "Resubmit for review",
   "verificationSubmitForReviewAction": "Submit for review",
   "verificationResubmittedSuccess": "Verification resubmitted for review",
@@ -1831,18 +1723,6 @@
   "verificationWizardValidationError": "Please complete the required fields before submitting.",
   "verificationWizardUnauthorizedError": "Your session is unavailable. Please sign in again.",
   "verificationWizardUnknownError": "Something went wrong while submitting verification.",
-  "verificationWizardProfilePhotoRequired": "Profile photo is required",
-  "verificationWizardAadhaarRequired": "Aadhaar must be 12 digits",
-  "verificationWizardPanRequired": "Invalid PAN format",
-  "verificationWizardAadhaarFrontRequired": "Aadhaar front photo required",
-  "verificationWizardAadhaarBackRequired": "Aadhaar back photo required",
-  "verificationWizardPanPhotoRequired": "PAN photo required",
-  "verificationWizardTruckNumberRequired": "Truck number is required",
-  "verificationWizardRcRequired": "RC document is required",
-  "verificationWizardCompanyNameRequired": "Company name is required",
-  "verificationWizardLicenseRequired": "License number is required",
-  "verificationWizardLicenseDocumentRequired": "License document is required",
-  "verificationWizardLocationRequired": "Verification location is required",
   "verificationActionNeedsAttentionTitle": "Verification action needs attention",
   "verificationActionFailureMessage": "The latest verification action could not be completed right now. Review the current checklist and retry shortly.",
   "verificationLatestRejectionReasonTitle": "Latest rejection reason",
@@ -1866,10 +1746,6 @@
   "verificationPermissionDeniedMessage": "Location access is permanently denied. Please enable location permission in your app settings to continue.",
   "verificationOpenAppSettingsAction": "Open App Settings",
   "verificationManualLocationAction": "Enter location manually",
-  "verificationManualLocationTitle": "Add verification location manually",
-  "verificationManualLocationCityLabel": "City",
-  "verificationManualLocationStateLabel": "State (optional)",
-  "verificationManualLocationSaveAction": "Save location",
   "verificationDocTypeAadhaarFront": "Aadhaar front",
   "verificationDocTypeAadhaarBack": "Aadhaar back",
   "verificationDocTypePan": "PAN card",
@@ -1884,29 +1760,12 @@
     }
   },
   "verificationDocumentUploadFailureMessage": "We could not upload that verification document right now. Try another image or retry shortly.",
-  "verificationReadinessSupplierTitle": "Verification readiness",
-  "verificationReadinessTruckerTitle": "Verification and truck readiness",
-  "verificationCurrentStateTitle": "Current verification state",
   "verificationStatusVerified": "Verified",
   "verificationStatusPending": "Pending",
   "verificationStatusRejected": "Rejected",
   "verificationStatusUnverified": "Unverified",
   "verificationStatusUnknown": "Unknown",
-  "verificationCurrentStateSupplierFooter": "Supplier verification keeps load-posting readiness and trust visibility aligned to one authoritative state.",
-  "verificationCurrentStateTruckerFooter": "Trucker verification unlocks chat and call on open loads once identity documents and truck readiness are complete.",
-  "verificationBusinessReadinessTitle": "Business readiness",
-  "verificationTruckReadinessTitle": "Truck readiness",
-  "verificationCompanyNameNeedsAttention": "Company name still needs attention",
-  "approvedTruckCountLabel": "{count} approved truck{s}",
-  "verificationCheckProfileStatus": "check profile",
-  "verificationCapturedStatus": "captured",
-  "verificationReadyStatus": "ready",
-  "verificationActionNeededStatus": "action needed",
-  "verificationBusinessReadinessFooter": "Business licence is required for supplier verification. GST certificate remains optional.",
-  "verificationTruckReadyFooter": "You already have at least one approved truck available for verification-dependent workflows.",
-  "verificationTruckRequiredFooter": "At least one approved truck is still required before trucker verification can be submitted.",
   "verificationPacketDetailsSectionTitle": "Verification packet details",
-  "verificationIdentityPacketSectionTitle": "Identity packet details",
   "verificationReadyTruckCountLabel": "{count} ready {count, plural, =1{truck} other{trucks}}",
   "@verificationReadyTruckCountLabel": {
     "placeholders": {
@@ -1916,20 +1775,10 @@
     }
   },
   "verificationTruckReadyWithRcFooter": "You already have at least one complete truck packet with RC document attached.",
-  "verificationTruckRequiredWithRcFooter": "Add one truck with its RC document before submitting trucker verification.",
   "verificationTruckPacketStillRequiredTitle": "A truck packet is still required",
   "verificationTruckPacketStillRequiredMessage": "Open your fleet to add the first truck or upload the RC document so trucker verification can be submitted as one packet.",
-  "verificationTruckPacketRequiredBadge": "Truck packet required",
-  "verificationTruckApprovalRequiredTitle": "Truck approval is still required",
-  "verificationTruckApprovalRequiredMessage": "Open your fleet to add the first truck, review rejection guidance, or resubmit edited truck details for approval.",
   "verificationOpenFleetAction": "Open fleet",
-  "verificationUnlocksTitle": "What this unlocks",
-  "verificationUnlocksSupplierMessage": "Once verified, your supplier account becomes trust-ready for broader marketplace and account workflows.",
-  "verificationUnlocksTruckerMessage": "Once verified, chat and call stay unlocked on open loads and your trucker account becomes assignment-ready.",
-  "verificationSourceOfTruthBadge": "Verification source of truth",
   "verificationChatAndCallGatingBadge": "Chat and call gating",
-  "verificationApprovedTruckRequiredBadge": "Approved truck required",
-  "verificationBackToAccountAction": "Back to account",
   "verificationUploadSourceTitle": "Upload {documentLabel}",
   "verificationTakePhotoAction": "Take photo",
   "verificationChooseFromGalleryAction": "Choose from gallery",
@@ -1950,8 +1799,6 @@
   "verificationLockedStatusVerifiedMessage": "Your verification has been approved. No action is needed right now.",
   "verificationLockedStatusPendingMessage": "Your documents are being reviewed. You will be notified once the review is complete.",
   "verificationSubmitLockedFooter": "Once submitted, your details stay locked until the admin completes the review.",
-  "verificationRequiredUploadedLabel": "{uploaded}/{required} required uploaded",
-  "verificationPrerequisitesSatisfiedMessage": "All current client-side verification prerequisites are satisfied for submission.",
   "verificationDocumentStatusPending": "pending",
   "verificationDocumentStatusVerified": "verified",
   "verificationDocumentStatusRejected": "rejected",
@@ -1967,7 +1814,7 @@
   "verificationDocumentMissingMessage": "This document is still missing from the current packet.",
   "verificationReplaceDocumentAction": "Replace document",
   "verificationUploadDocumentAction": "Upload document",
-  "@_sectionTruckerTripDetail": "═══ Trucker Trip Detail ═══",
+  "@_sectionTruckerTripDetail": "â•â•â• Trucker Trip Detail â•â•â•",
   "truckerTripDetailTitle": "Trip Detail",
   "truckerTripDetailLoadFailureTitle": "Unable to load trip detail",
   "truckerTripDetailLoadFailureMessage": "We could not load this trip detail right now. Retry shortly to refresh the latest trip status and actions.",
@@ -2003,7 +1850,6 @@
   "truckerTripDetailStageCompleted": "Completed",
   "truckerTripDetailStageDisputed": "Disputed",
   "truckerTripDetailStageCancelled": "Cancelled",
-  "truckerTripDetailStageUnknown": "Unknown",
   "truckerTripDetailProofStatusPodUploaded": "POD uploaded",
   "truckerTripDetailProofStatusLrUploaded": "LR uploaded",
   "truckerTripDetailProofStatusAwaitingPod": "Awaiting POD",
@@ -2113,7 +1959,7 @@
   "truckerTripDetailNextStepDefaultTitle": "Check execution status",
   "truckerTripDetailNextStepDefaultMessage": "Review the current trip state and recent timestamps to understand the latest movement.",
   "truckerTripDetailPending": "Pending",
-  "@_sectionRaiseDispute": "═══ Raise Dispute ═══",
+  "@_sectionRaiseDispute": "â•â•â• Raise Dispute â•â•â•",
   "supplierRaiseDisputeTitle": "Raise Dispute",
   "supplierRaiseDisputeTripUnavailableTitle": "Trip detail unavailable",
   "supplierRaiseDisputeTripLoadFailureMessage": "We could not load this trip detail right now. Retry shortly to review the latest dispute context.",
@@ -2326,33 +2172,9 @@
   "supplierTripDetailNotFoundTitle": "Trip not found",
   "supplierTripDetailNotFoundSubtitle": "This supplier trip is no longer available or you no longer have access to it.",
   "supplierTripDetailBackToTripsAction": "Back to supplier trips",
-  "assistantHeroTitleWithName": "Guided help for {firstName}",
-  "assistantHeroSubtitleSupplier": "Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.",
-  "assistantHeroSubtitleTrucker": "Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.",
-  "assistantWorkflowGuidanceSupplier": "Supplier workflow guidance",
-  "assistantWorkflowGuidanceTrucker": "Trucker workflow guidance",
-  "assistantProfileComplete": "Profile complete",
-  "assistantProfileIncomplete": "Profile incomplete",
-  "assistantRecommendedNextActionsTitle": "Recommended next actions",
-  "assistantOpenSupplierTripsAction": "Open supplier trips",
-  "assistantFindLoadsAction": "Find loads",
-  "assistantOpenTripsAction": "Open trips",
-  "assistantOpenMessagesAction": "Open messages",
-  "assistantGuidedHelpTitle": "Guided help",
-  "assistantBestForLabel": "Best for",
-  "assistantBestForSupplier": "Posting loads, checking active load execution, reviewing conversations, and opening support quickly.",
-  "assistantBestForTrucker": "Finding loads, checking trip execution, reviewing conversations, and opening support quickly.",
-  "assistantVoiceBehaviorLabel": "Voice behavior",
-  "assistantVoiceBehaviorValue": "Manual entry only right now. Full conversational bot, STT, and auto-speak remain in the dedicated communication and localization phases.",
-  "assistantCurrentRoleLabel": "Current role",
-  "assistantMoreActionsTitle": "More actions",
-  "assistantOpenNotificationsAction": "Open notifications",
-  "assistantOpenSupportAction": "Open support",
   "shellAccessRestrictedTitle": "Access restricted",
   "shellAccessRestrictedDeactivatedSubtitle": "Your account is deactivated pending cleanup. Signing you out safely...",
   "shellAccessRestrictedBannedSubtitle": "Your account access is restricted. Signing you out safely...",
-  "shellAccountDeactivatedMessage": "Account deactivated",
-  "shellAccountBannedMessage": "Account banned",
   "shellRouteNotFoundTitle": "Route not found",
   "shellMessagesLoadFailureMessage": "We could not load your messages right now. Retry shortly to refresh the latest conversations.",
   "shellMessagesBookingStatusSubmitted": "Submitted",
@@ -2372,16 +2194,13 @@
   "truckerLoadDetailActionFailureMessage": "The latest load action could not be completed right now. Review the current load details and retry shortly.",
   "truckerLoadDetailBookingSubmitFailureMessage": "We could not submit this booking request right now. Review the selected truck and retry shortly.",
   "truckerLoadDetailHeroSubtitle": "Pickup {pickupDate}",
-  "truckerLoadDetailPriceBadge": "₹{priceAmount} - {priceType}",
+  "truckerLoadDetailPriceBadge": "â‚¹{priceAmount} - {priceType}",
   "truckerLoadDetailTruckMatchAvailable": "Truck match available",
-  "truckerLoadDetailNoApprovedTruckMatchYet": "No approved truck match yet",
   "truckerLoadDetailMaterialSummary": "{material} - {weightTonnes}T - Advance {advancePercentage}%",
   "truckerLoadDetailSuperLoadGuarantee": "Super Load - Payment Guarantee",
   "truckerLoadDetailRoutePriceSummaryTitle": "Route and price summary",
-  "truckerLoadDetailOriginLabel": "Origin: {origin}",
-  "truckerLoadDetailDestinationLabel": "Destination: {destination}",
   "truckerLoadDetailPickupLabel": "Pickup: {pickupDate}",
-  "truckerLoadDetailPriceLabel": "Price: ₹{priceAmount} - {priceType}",
+  "truckerLoadDetailPriceLabel": "Price: â‚¹{priceAmount} - {priceType}",
   "truckerLoadDetailDistanceLabel": "Distance: {distance} km",
   "truckerLoadDetailDriveTimeLabel": "Estimated drive time: {minutes} min",
   "truckerLoadDetailTruckRequirementTitle": "Truck requirement summary",
@@ -2400,13 +2219,7 @@
   "truckerLoadDetailTripCostEstimateTitle": "Trip cost estimate",
   "truckerLoadDetailTripCostUnavailableTitle": "Trip cost unavailable",
   "truckerLoadDetailTripCostUnavailableMessage": "Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.",
-  "truckerLoadDetailDieselLabel": "Diesel: ₹{amount}",
-  "truckerLoadDetailTollsLabel": "Tolls: ₹{amount}",
-  "truckerLoadDetailMileageUsedLabel": "Mileage used: {value} km/L",
-  "truckerLoadDetailDieselPriceLabel": "Diesel price: ₹{value}/L",
-  "truckerLoadDetailEstimatedTollPlazasLabel": "Estimated toll plazas: {count}",
   "truckerLoadDetailSupplierSummaryTitle": "Supplier summary",
-  "truckerLoadDetailContactOwnerLabel": "Contact owner: {name}",
   "truckerLoadDetailVerifiedSupplier": "Verified supplier",
   "truckerLoadDetailSupplierProfile": "Supplier profile",
   "truckerLoadDetailNextStepTitle": "Next step",
@@ -2421,8 +2234,6 @@
   },
   "truckerLoadDetailBookingFeedbackTitle": "Booking feedback",
   "truckerLoadDetailBookingBlockedTitle": "Booking is blocked",
-  "truckerLoadDetailMessageSupplierAction": "Message supplier",
-  "truckerLoadDetailCallSupplierAction": "Call supplier",
   "truckerLoadDetailUsingTruckLabel": "Using {truckNumber}",
   "truckerLoadDetailSelectedTruckSummary": "This load will be booked with {truckNumber} - {bodyType} - {tyres} tyres.",
   "truckerLoadDetailApprovedTruckLabel": "Approved truck for this request",
@@ -2453,12 +2264,7 @@
   "truckerLoadDetailCancelAction": "Cancel",
   "authTtsSplashWelcome": "Welcome to TranZfort. I will help you finish a quick setup before you continue.",
   "authSessionRefreshFailureMessage": "We could not refresh your session right now. Please continue and try again if needed.",
-  "authNotificationPermissionFailureMessage": "Notification permission could not be enabled right now.",
-  "authTtsVoiceGuidanceEnabled": "Voice guidance is now enabled.",
   "authConfigIncompleteTitle": "Setup incomplete",
-  "authConfigIncompleteMessage": "Some app configuration is missing. Sign-in may not work until setup is completed.",
-  "authTtsSignInPrompt": "Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.",
-  "authTtsOnboardingRolePrompt": "Choose your role to continue onboarding.",
   "postLoadValidationOriginCityRequired": "Select the origin city",
   "postLoadValidationOriginLocationRequired": "Enter the pickup location",
   "postLoadValidationDestinationCityRequired": "Select the destination city",
@@ -2708,17 +2514,15 @@
     }
   },
   "appBarLanguageToggleTooltip": "Switch language",
-  "@_sectionConnectivity": "═══ Connectivity ═══",
+  "@_sectionConnectivity": "â•â•â• Connectivity â•â•â•",
   "connectivityOfflineBanner": "You are offline. Features may be limited.",
   "connectivityOfflineActionsMessage": "You are offline. Actions that need network access should stay disabled.",
-  "@_sectionLocaleValidation": "═══ Locale Validation ═══",
-  "localeSelectSupportedLanguage": "Select a supported language",
-  "localeFieldSupportedLanguages": "Supported languages are English and Hindi",
-  "@_sectionOnboardingGate": "═══ Onboarding Gate Timeout ═══",
+  "@_sectionLocaleValidation": "â•â•â• Locale Validation â•â•â•",
+  "@_sectionOnboardingGate": "â•â•â• Onboarding Gate Timeout â•â•â•",
   "onboardingGateTimeoutMessage": "Loading is taking longer than expected.",
   "onboardingGateRetryAction": "Retry",
   "onboardingGateBackToSignInAction": "Back to sign in",
-  "@_sectionAuthPasswordReset": "═══ Auth Password Reset ═══",
+  "@_sectionAuthPasswordReset": "â•â•â• Auth Password Reset â•â•â•",
   "authPasswordResetSentSuccess": "Password reset link sent to {email}. Check your inbox.",
   "@authPasswordResetSentSuccess": {
     "description": "Success message after sending password reset. Placeholder {email} is the recipient email.",
@@ -2727,15 +2531,14 @@
     }
   },
   "authPasswordResetSentFailure": "Unable to send reset link. Please try again.",
-  "@_sectionChatPreviews": "═══ Chat Message Previews ═══",
+  "@_sectionChatPreviews": "â•â•â• Chat Message Previews â•â•â•",
   "chatPreviewVoice": "Voice message",
   "chatPreviewLocation": "Location shared",
   "chatPreviewDocument": "Document shared",
   "chatPreviewMapCard": "Route card shared",
   "chatPreviewTruckCard": "Truck details shared",
   "chatPreviewSystem": "System update",
-  "chatPreviewEmpty": "No messages yet",
-  "@_sectionReportSource": "═══ Report Source ═══",
+  "@_sectionReportSource": "â•â•â• Report Source â•â•â•",
   "reportSourceSupplierLoad": "Supplier load - {routeLabel}",
   "@reportSourceSupplierLoad": {
     "description": "Report source label for supplier load. Placeholder {routeLabel} is the route description.",
@@ -2745,9 +2548,6 @@
   },
   "@appTitle": {
     "description": "App Title - User-facing text for the app interface."
-  },
-  "@splashLoadingWorkspace": {
-    "description": "Splash Loading Workspace - User-facing text for the app interface."
   },
   "@authGoogleFailureMessage": {
     "description": "Auth Google Failure Message - User-facing text for the app interface."
@@ -2761,38 +2561,14 @@
   "@authEmailHint": {
     "description": "Auth Email Hint - User-facing text for the app interface."
   },
-  "@authSignInDividerLabel": {
-    "description": "Auth Sign In Divider Label - User-facing text for the app interface."
-  },
   "@authForgotPasswordAction": {
     "description": "Auth Forgot Password Action - User-facing text for the app interface."
   },
   "@authConfigIncompleteSignInMessage": {
     "description": "Auth Config Incomplete Sign In Message - User-facing text for the app interface."
   },
-  "@splashSetupTitle": {
-    "description": "Splash Setup Title - User-facing text for the app interface."
-  },
-  "@splashSetupSubtitle": {
-    "description": "Splash Setup Subtitle - User-facing text for the app interface."
-  },
-  "@splashSetupEnableVoiceAction": {
-    "description": "Splash Setup Enable Voice Action - User-facing text for the app interface."
-  },
-  "@splashSetupOpenLocationSettingsAction": {
-    "description": "Splash Setup Open Location Settings Action - User-facing text for the app interface."
-  },
   "@authContinueWithGoogle": {
     "description": "Auth Continue With Google - User-facing text for the app interface."
-  },
-  "@authContinueWithPassword": {
-    "description": "Auth Continue With Password - User-facing text for the app interface."
-  },
-  "@authTermsOfService": {
-    "description": "Auth Terms Of Service - User-facing text for the app interface."
-  },
-  "@authTermsInfoMessage": {
-    "description": "Auth Terms Info Message - User-facing text for the app interface."
   },
   "@authPasswordTitle": {
     "description": "Auth Password Title - User-facing text for the app interface."
@@ -2841,81 +2617,11 @@
   "@authPasswordSignUpFailureMessage": {
     "description": "Auth Password Sign Up Failure Message - User-facing text for the app interface."
   },
-  "@_sectionReviewsAndProfile": "═══ Reviews & Public Profile ═══",
+  "@_sectionReviewsAndProfile": "â•â•â• Reviews & Public Profile â•â•â•",
   "profileTitle": "Profile",
-  "supplierProfileTitle": "Supplier Profile",
-  "truckerProfileTitle": "Trucker Profile",
-  "reviewsSectionTitle": "Reviews & Comments",
-  "reviewsCount": "({count} total)",
-  "@reviewsCount": {
-    "placeholders": {
-      "count": {"type": "int"}
-    }
-  },
-  "noReviewsYet": "No reviews yet",
-  "noReviewsSubtitle": "Reviews will appear here after interactions",
-  "noRatingYet": "No rating yet",
-  "newTruckerBadge": "New Trucker",
-  "newSupplierBadge": "New Supplier",
-  "reviewerProfileHint": "Tap to view reviewer profile",
-  "addReplyTitle": "Reply to Review",
-  "replyButton": "Reply",
-  "rateInteractionTitle": "Rate Your Interaction",
-  "rateInteractionSubtitle": "How was your experience with {name}?",
-  "@rateInteractionSubtitle": {
-    "placeholders": {"name": {}}
-  },
-  "submitReviewButton": "Submit Review",
-  "skipReviewButton": "Skip",
-  "reviewSubmitted": "Review submitted",
-  "reviewSubmittedSuccess": "Review submitted successfully",
-  "alreadyReviewedError": "You have already reviewed this user",
-  "loadHistoryTitle": "Recent Loads",
-  "loadMoreButton": "Load More",
-  "avgRatingLabel": "{rating} out of 5",
-  "@avgRatingLabel": {
-    "placeholders": {"rating": {}}
-  },
-  "reviewCountLabel": "({count} reviews)",
-  "@reviewCountLabel": {
-    "placeholders": {"count": {"type": "int"}}
-  },
-  "memberSinceLabel": "Member since {date}",
-  "@memberSinceLabel": {
-    "placeholders": {"date": {}}
-  },
-  "trustScoreTitle": "Trust & Reviews",
-  "reviewsReceivedLabel": "Reviews received",
-  "tripsCompletedLabel": "Trips completed",
-  "loadsPostedLabel": "Loads posted",
-  "trucksInFleetLabel": "Trucks in fleet",
-  "superLoadEligibleLabel": "Super Load eligible",
-  "fleetTitle": "Fleet",
   "truckCount": "{count} truck{count, plural, one {} other {s}}",
   "@truckCount": {
     "placeholders": {"count": {"type": "int"}}
-  },
-  "replyHint": "You can reply to this review once. Your response will be visible to everyone...",
-  "replySuccess": "Reply added successfully",
-  "replyFailure": "Failed to add reply. You may have already replied.",
-  "addReplyHint": "Your reply will be visible to everyone viewing your profile",
-  "noComments": "No comments",
-  "newMemberBadge": "New member",
-  "insufficientInteractionError": "More interaction needed to review",
-  "activeLoadsTitle": "Active Loads ({count})",
-  "@activeLoadsTitle": {
-    "placeholders": {"count": {"type": "int"}}
-  },
-  "responseRateLabel": "{rate}% response rate",
-  "@responseRateLabel": {
-    "placeholders": {"rate": {}}
-  },
-  "memberForMonthsLabel": "Member for {count} months",
-  "@memberForMonthsLabel": {
-    "placeholders": {"count": {"type": "int"}}
-  },
-  "@authPasswordSignUpSuccessMessage": {
-    "description": "Auth Password Sign Up Success Message - User-facing text for the app interface."
   },
   "@authPasswordCheckEmailTitle": {
     "description": "Auth Password Check Email Title - User-facing text for the app interface."
@@ -2992,9 +2698,6 @@
   "@commonRetry": {
     "description": "Common Retry - User-facing text for the app interface."
   },
-  "@shellTooltipVoiceAssistance": {
-    "description": "Shell Tooltip Voice Assistance - User-facing text for the app interface."
-  },
   "@supplierQuickActionNotifications": {
     "description": "Supplier Quick Action Notifications - User-facing text for the app interface."
   },
@@ -3061,9 +2764,6 @@
   "@supplierRecentLoadsTitle": {
     "description": "Supplier Recent Loads Title - User-facing text for the app interface."
   },
-  "@supplierDashboardHeroSubtitle": {
-    "description": "Supplier Dashboard Hero Subtitle - User-facing text for the app interface."
-  },
   "@supplierDashboardOverviewTitle": {
     "description": "Supplier Dashboard Overview Title - User-facing text for the app interface."
   },
@@ -3079,32 +2779,17 @@
   "@supplierDashboardPostLoadAction": {
     "description": "Supplier Dashboard Post Load Action - User-facing text for the app interface."
   },
-  "@supplierDashboardHeroSummaryBody": {
-    "description": "Supplier Dashboard Hero Summary Body - User-facing text for the app interface."
-  },
   "@supplierDashboardStatsActiveLoadsLabel": {
     "description": "Supplier Dashboard Stats Active Loads Label - User-facing text for the app interface."
-  },
-  "@supplierDashboardStatsActiveLoadsHelper": {
-    "description": "Supplier Dashboard Stats Active Loads Helper - User-facing text for the app interface."
   },
   "@supplierDashboardStatsPendingBookingsLabel": {
     "description": "Supplier Dashboard Stats Pending Bookings Label - User-facing text for the app interface."
   },
-  "@supplierDashboardStatsPendingBookingsHelper": {
-    "description": "Supplier Dashboard Stats Pending Bookings Helper - User-facing text for the app interface."
-  },
   "@supplierDashboardStatsInTransitTripsLabel": {
     "description": "Supplier Dashboard Stats In Transit Trips Label - User-facing text for the app interface."
   },
-  "@supplierDashboardStatsInTransitTripsHelper": {
-    "description": "Supplier Dashboard Stats In Transit Trips Helper - User-facing text for the app interface."
-  },
   "@supplierDashboardStatsCompletedTripsLabel": {
     "description": "Supplier Dashboard Stats Completed Trips Label - User-facing text for the app interface."
-  },
-  "@supplierDashboardStatsCompletedTripsHelper": {
-    "description": "Supplier Dashboard Stats Completed Trips Helper - User-facing text for the app interface."
   },
   "@supplierDashboardOpenMyLoadsAction": {
     "description": "Supplier Dashboard Open My Loads Action - User-facing text for the app interface."
@@ -3169,14 +2854,8 @@
   "@shellDrawerDashboard": {
     "description": "Shell Drawer Dashboard - User-facing text for the app interface."
   },
-  "@shellDrawerAssistant": {
-    "description": "Shell Drawer Assistant - User-facing text for the app interface."
-  },
   "@shellDrawerFleet": {
     "description": "Shell Drawer Fleet - User-facing text for the app interface."
-  },
-  "@shellDrawerMessages": {
-    "description": "Shell Drawer Messages - User-facing text for the app interface."
   },
   "@navNotifications": {
     "description": "Nav Notifications - User-facing text for the app interface."
@@ -3186,9 +2865,6 @@
   },
   "@shellDrawerProfile": {
     "description": "Shell Drawer Profile - User-facing text for the app interface."
-  },
-  "@shellDrawerLanguage": {
-    "description": "Shell Drawer Language - User-facing text for the app interface."
   },
   "@shellDrawerSignOut": {
     "description": "Shell Drawer Sign Out - User-facing text for the app interface."
@@ -4306,9 +3982,6 @@
   "@settingsLanguageSaving": {
     "description": "Settings Language Saving - User-facing text for the app interface."
   },
-  "@truckerDashboardHeroSubtitle": {
-    "description": "Trucker Dashboard Hero Subtitle - User-facing text for the app interface."
-  },
   "@truckerDashboardTitle": {
     "description": "Trucker Dashboard Title - User-facing text for the app interface."
   },
@@ -4339,26 +4012,11 @@
   "@truckerDashboardVerificationPendingTitle": {
     "description": "Trucker Dashboard Verification Pending Title - User-facing text for the app interface."
   },
-  "@truckerDashboardVerificationPendingDescription": {
-    "description": "Trucker Dashboard Verification Pending Description - User-facing text for the app interface."
-  },
   "@truckerDashboardOpenVerificationAction": {
     "description": "Trucker Dashboard Open Verification Action - User-facing text for the app interface."
   },
-  "@truckerDashboardVerificationCompleteTitle": {
-    "description": "Trucker Dashboard Verification Complete Title - User-facing text for the app interface."
-  },
-  "@truckerDashboardVerificationCompleteDescription": {
-    "description": "Trucker Dashboard Verification Complete Description - User-facing text for the app interface."
-  },
-  "@truckerDashboardReviewVerificationAction": {
-    "description": "Trucker Dashboard Review Verification Action - User-facing text for the app interface."
-  },
   "@truckerDashboardVerificationNeedsAttentionTitle": {
     "description": "Trucker Dashboard Verification Needs Attention Title - User-facing text for the app interface."
-  },
-  "@truckerDashboardVerificationNeedsAttentionDescription": {
-    "description": "Trucker Dashboard Verification Needs Attention Description - User-facing text for the app interface."
   },
   "@truckerDashboardFixVerificationAction": {
     "description": "Trucker Dashboard Fix Verification Action - User-facing text for the app interface."
@@ -4366,26 +4024,17 @@
   "@truckerDashboardCompleteFleetVerificationTitle": {
     "description": "Trucker Dashboard Complete Fleet Verification Title - User-facing text for the app interface."
   },
-  "@truckerDashboardCompleteFleetVerificationMessage": {
-    "description": "Trucker Dashboard Complete Fleet Verification Message - User-facing text for the app interface."
-  },
   "@truckerDashboardOpenFleetVerificationAction": {
     "description": "Trucker Dashboard Open Fleet Verification Action - User-facing text for the app interface."
   },
   "@truckerDashboardAddApproveFirstTruckTitle": {
     "description": "Trucker Dashboard Add Approve First Truck Title - User-facing text for the app interface."
   },
-  "@truckerDashboardAddApproveFirstTruckMessage": {
-    "description": "Trucker Dashboard Add Approve First Truck Message - User-facing text for the app interface."
-  },
   "@truckerDashboardOpenFleetAction": {
     "description": "Trucker Dashboard Open Fleet Action - User-facing text for the app interface."
   },
   "@truckerDashboardCompleteVerificationTitle": {
     "description": "Trucker Dashboard Complete Verification Title - User-facing text for the app interface."
-  },
-  "@truckerDashboardCompleteVerificationMessage": {
-    "description": "Trucker Dashboard Complete Verification Message - User-facing text for the app interface."
   },
   "@truckerDashboardLoadFailureTitle": {
     "description": "Trucker Dashboard Load Failure Title - User-facing text for the app interface."
@@ -4411,32 +4060,17 @@
   "@truckerDashboardVerificationStatusUnknown": {
     "description": "Trucker Dashboard Verification Status Unknown - User-facing text for the app interface."
   },
-  "@truckerDashboardHeroSummary": {
-    "description": "Trucker Dashboard Hero Summary - User-facing text for the app interface."
-  },
   "@truckerDashboardStatActiveBidsLabel": {
     "description": "Trucker Dashboard Stat Active Bids Label - User-facing text for the app interface."
-  },
-  "@truckerDashboardStatActiveBidsHelper": {
-    "description": "Trucker Dashboard Stat Active Bids Helper - User-facing text for the app interface."
   },
   "@truckerDashboardStatUpcomingTripsLabel": {
     "description": "Trucker Dashboard Stat Upcoming Trips Label - User-facing text for the app interface."
   },
-  "@truckerDashboardStatUpcomingTripsHelper": {
-    "description": "Trucker Dashboard Stat Upcoming Trips Helper - User-facing text for the app interface."
-  },
   "@truckerDashboardStatInTransitLabel": {
     "description": "Trucker Dashboard Stat In Transit Label - User-facing text for the app interface."
   },
-  "@truckerDashboardStatInTransitHelper": {
-    "description": "Trucker Dashboard Stat In Transit Helper - User-facing text for the app interface."
-  },
   "@truckerDashboardStatCompletedLabel": {
     "description": "Trucker Dashboard Stat Completed Label - User-facing text for the app interface."
-  },
-  "@truckerDashboardStatCompletedHelper": {
-    "description": "Trucker Dashboard Stat Completed Helper - User-facing text for the app interface."
   },
   "@truckerDashboardRecentActivityUnavailableTitle": {
     "description": "Trucker Dashboard Recent Activity Unavailable Title - User-facing text for the app interface."
@@ -4489,12 +4123,6 @@
   "@truckerDashboardVerificationStatusTitle": {
     "description": "Trucker Dashboard Verification Status Title - User-facing text for the app interface."
   },
-  "@truckerDashboardVerificationReadyMessage": {
-    "description": "Trucker Dashboard Verification Ready Message - User-facing text for the app interface."
-  },
-  "@truckerDashboardVerificationLockedMessage": {
-    "description": "Trucker Dashboard Verification Locked Message - User-facing text for the app interface."
-  },
   "@truckerDashboardFleetReadinessTitle": {
     "description": "Trucker Dashboard Fleet Readiness Title - User-facing text for the app interface."
   },
@@ -4503,12 +4131,6 @@
   },
   "@truckerDashboardActionNeededStatus": {
     "description": "Trucker Dashboard Action Needed Status - User-facing text for the app interface."
-  },
-  "@truckerDashboardFleetReadyMessage": {
-    "description": "Trucker Dashboard Fleet Ready Message - User-facing text for the app interface."
-  },
-  "@truckerDashboardFleetNeedFirstTruckMessage": {
-    "description": "Trucker Dashboard Fleet Need First Truck Message - User-facing text for the app interface."
   },
   "@truckerTripsTitle": {
     "description": "Trucker Trips Title - User-facing text for the app interface."
@@ -4789,9 +4411,6 @@
   "@truckerFindLoadsSortPickupDate": {
     "description": "Trucker Find Loads Sort Pickup Date - User-facing text for the app interface."
   },
-  "@truckerFindLoadsMarketplaceTabsTitle": {
-    "description": "Trucker Find Loads Marketplace Tabs Title - User-facing text for the app interface."
-  },
   "@truckerFindLoadsAllLoadsTab": {
     "description": "Trucker Find Loads All Loads Tab - User-facing text for the app interface."
   },
@@ -4833,21 +4452,6 @@
   },
   "@truckerFindLoadsStatusUnknown": {
     "description": "Trucker Find Loads Status Unknown - User-facing text for the app interface."
-  },
-  "@truckerFindLoadsTruckMatchAvailable": {
-    "description": "Trucker Find Loads Truck Match Available - User-facing text for the app interface."
-  },
-  "@truckerFindLoadsNoApprovedTruckMatch": {
-    "description": "Trucker Find Loads No Approved Truck Match - User-facing text for the app interface."
-  },
-  "@truckerFindLoadsTripCostUnavailable": {
-    "description": "Trucker Find Loads Trip Cost Unavailable - User-facing text for the app interface."
-  },
-  "@truckerFindLoadsTyresAny": {
-    "description": "Trucker Find Loads Tyres Any - User-facing text for the app interface."
-  },
-  "@truckerFindLoadsSuperLoadBanner": {
-    "description": "Trucker Find Loads Super Load Banner - User-facing text for the app interface."
   },
   "@truckerFindLoadsViewDetailsAction": {
     "description": "Trucker Find Loads View Details Action - User-facing text for the app interface."
@@ -5095,12 +4699,6 @@
   "@supplierVerificationPendingMessage": {
     "description": "Supplier Verification Pending Message - User-facing text for the app interface."
   },
-  "@supplierVerificationRejectedTitle": {
-    "description": "Supplier Verification Rejected Title - User-facing text for the app interface."
-  },
-  "@supplierVerificationCompleteDescription": {
-    "description": "Supplier Verification Complete Description - User-facing text for the app interface."
-  },
   "@supplierVerificationNeedsAttentionTitle": {
     "description": "Supplier Verification Needs Attention Title - User-facing text for the app interface."
   },
@@ -5125,14 +4723,8 @@
   "@supplierCompleteVerification": {
     "description": "Supplier Complete Verification - User-facing text for the app interface."
   },
-  "@supplierDashboardSuperLoadReadinessIntro": {
-    "description": "Supplier Dashboard Super Load Readiness Intro - User-facing text for the app interface."
-  },
   "@supplierDashboardSuperLoadVerificationComplete": {
     "description": "Supplier Dashboard Super Load Verification Complete - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadVerificationRequired": {
-    "description": "Supplier Dashboard Super Load Verification Required - User-facing text for the app interface."
   },
   "@supplierDashboardSuperLoadBusinessLicenceOnFile": {
     "description": "Supplier Dashboard Super Load Business Licence On File - User-facing text for the app interface."
@@ -5142,42 +4734,6 @@
   },
   "@supplierDashboardSuperLoadCompanyAgeUnavailable": {
     "description": "Supplier Dashboard Super Load Company Age Unavailable - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryReady": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Ready - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Missing Business Licence - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryMissingVerification": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Missing Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryPendingVerification": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Pending Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryRejectedVerification": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Rejected Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadReadinessSummaryNeedsAttention": {
-    "description": "Supplier Dashboard Super Load Readiness Summary Needs Attention - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepReady": {
-    "description": "Supplier Dashboard Super Load Next Step Ready - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepBusinessLicence": {
-    "description": "Supplier Dashboard Super Load Next Step Business Licence - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepVerification": {
-    "description": "Supplier Dashboard Super Load Next Step Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepPendingVerification": {
-    "description": "Supplier Dashboard Super Load Next Step Pending Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepRejectedVerification": {
-    "description": "Supplier Dashboard Super Load Next Step Rejected Verification - User-facing text for the app interface."
-  },
-  "@supplierDashboardSuperLoadNextStepNeedsAttention": {
-    "description": "Supplier Dashboard Super Load Next Step Needs Attention - User-facing text for the app interface."
   },
   "@supplierDashboardLoadStatusActive": {
     "description": "Supplier Dashboard Load Status Active - User-facing text for the app interface."
@@ -5416,12 +4972,6 @@
   "@supplierTripDetailVerificationStatusUnknown": {
     "description": "Supplier Trip Detail Verification Status Unknown - User-facing text for the app interface."
   },
-  "@supplierTripDetailDisputeCategoryFallback": {
-    "description": "Supplier Trip Detail Dispute Category Fallback - User-facing text for the app interface."
-  },
-  "@supplierTripDetailDisputeStatusFallback": {
-    "description": "Supplier Trip Detail Dispute Status Fallback - User-facing text for the app interface."
-  },
   "@supplierTripDetailDisputeStatusGuidanceOpen": {
     "description": "Supplier Trip Detail Dispute Status Guidance Open - User-facing text for the app interface."
   },
@@ -5487,48 +5037,6 @@
   },
   "@verificationDetailsUnavailableSubtitle": {
     "description": "Verification Details Unavailable Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroPendingSupplierTitle": {
-    "description": "Verification Hero Pending Supplier Title - User-facing text for the app interface."
-  },
-  "@verificationHeroPendingTruckerTitle": {
-    "description": "Verification Hero Pending Trucker Title - User-facing text for the app interface."
-  },
-  "@verificationHeroVerifiedSupplierTitle": {
-    "description": "Verification Hero Verified Supplier Title - User-facing text for the app interface."
-  },
-  "@verificationHeroVerifiedTruckerTitle": {
-    "description": "Verification Hero Verified Trucker Title - User-facing text for the app interface."
-  },
-  "@verificationHeroRejectedSupplierTitle": {
-    "description": "Verification Hero Rejected Supplier Title - User-facing text for the app interface."
-  },
-  "@verificationHeroRejectedTruckerTitle": {
-    "description": "Verification Hero Rejected Trucker Title - User-facing text for the app interface."
-  },
-  "@verificationHeroInitialSupplierTitle": {
-    "description": "Verification Hero Initial Supplier Title - User-facing text for the app interface."
-  },
-  "@verificationHeroInitialTruckerTitle": {
-    "description": "Verification Hero Initial Trucker Title - User-facing text for the app interface."
-  },
-  "@verificationHeroPendingSubtitle": {
-    "description": "Verification Hero Pending Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroVerifiedSubtitle": {
-    "description": "Verification Hero Verified Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroRejectedWithFeedbackSubtitle": {
-    "description": "Verification Hero Rejected With Feedback Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroRejectedFallbackSubtitle": {
-    "description": "Verification Hero Rejected Fallback Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroInitialSupplierSubtitle": {
-    "description": "Verification Hero Initial Supplier Subtitle - User-facing text for the app interface."
-  },
-  "@verificationHeroInitialTruckerSubtitle": {
-    "description": "Verification Hero Initial Trucker Subtitle - User-facing text for the app interface."
   },
   "@verificationResubmitForReviewAction": {
     "description": "Verification Resubmit For Review Action - User-facing text for the app interface."
@@ -5803,42 +5311,6 @@
   "@verificationWizardUnknownError": {
     "description": "Verification Wizard Unknown Error - User-facing text for the app interface."
   },
-  "@verificationWizardProfilePhotoRequired": {
-    "description": "Verification Wizard Profile Photo Required - User-facing text for the app interface."
-  },
-  "@verificationWizardAadhaarRequired": {
-    "description": "Verification Wizard Aadhaar Required - User-facing text for the app interface."
-  },
-  "@verificationWizardPanRequired": {
-    "description": "Verification Wizard Pan Required - User-facing text for the app interface."
-  },
-  "@verificationWizardAadhaarFrontRequired": {
-    "description": "Verification Wizard Aadhaar Front Required - User-facing text for the app interface."
-  },
-  "@verificationWizardAadhaarBackRequired": {
-    "description": "Verification Wizard Aadhaar Back Required - User-facing text for the app interface."
-  },
-  "@verificationWizardPanPhotoRequired": {
-    "description": "Verification Wizard Pan Photo Required - User-facing text for the app interface."
-  },
-  "@verificationWizardTruckNumberRequired": {
-    "description": "Verification Wizard Truck Number Required - User-facing text for the app interface."
-  },
-  "@verificationWizardRcRequired": {
-    "description": "Verification Wizard Rc Required - User-facing text for the app interface."
-  },
-  "@verificationWizardCompanyNameRequired": {
-    "description": "Verification Wizard Company Name Required - User-facing text for the app interface."
-  },
-  "@verificationWizardLicenseRequired": {
-    "description": "Verification Wizard License Required - User-facing text for the app interface."
-  },
-  "@verificationWizardLicenseDocumentRequired": {
-    "description": "Verification Wizard License Document Required - User-facing text for the app interface."
-  },
-  "@verificationWizardLocationRequired": {
-    "description": "Verification Wizard Location Required - User-facing text for the app interface."
-  },
   "@verificationActionNeedsAttentionTitle": {
     "description": "Verification Action Needs Attention Title - User-facing text for the app interface."
   },
@@ -5890,18 +5362,6 @@
   "@verificationManualLocationAction": {
     "description": "Verification Manual Location Action - User-facing text for the app interface."
   },
-  "@verificationManualLocationTitle": {
-    "description": "Verification Manual Location Title - User-facing text for the app interface."
-  },
-  "@verificationManualLocationCityLabel": {
-    "description": "Verification Manual Location City Label - User-facing text for the app interface."
-  },
-  "@verificationManualLocationStateLabel": {
-    "description": "Verification Manual Location State Label - User-facing text for the app interface."
-  },
-  "@verificationManualLocationSaveAction": {
-    "description": "Verification Manual Location Save Action - User-facing text for the app interface."
-  },
   "@verificationDocTypeAadhaarFront": {
     "description": "Verification Doc Type Aadhaar Front - User-facing text for the app interface."
   },
@@ -5926,15 +5386,6 @@
   "@verificationDocumentUploadFailureMessage": {
     "description": "Verification Document Upload Failure Message - User-facing text for the app interface."
   },
-  "@verificationReadinessSupplierTitle": {
-    "description": "Verification Readiness Supplier Title - User-facing text for the app interface."
-  },
-  "@verificationReadinessTruckerTitle": {
-    "description": "Verification Readiness Trucker Title - User-facing text for the app interface."
-  },
-  "@verificationCurrentStateTitle": {
-    "description": "Verification Current State Title - User-facing text for the app interface."
-  },
   "@verificationStatusVerified": {
     "description": "Verification Status Verified - User-facing text for the app interface."
   },
@@ -5950,56 +5401,11 @@
   "@verificationStatusUnknown": {
     "description": "Verification Status Unknown - User-facing text for the app interface."
   },
-  "@verificationCurrentStateSupplierFooter": {
-    "description": "Verification Current State Supplier Footer - User-facing text for the app interface."
-  },
-  "@verificationCurrentStateTruckerFooter": {
-    "description": "Verification Current State Trucker Footer - User-facing text for the app interface."
-  },
-  "@verificationBusinessReadinessTitle": {
-    "description": "Verification Business Readiness Title - User-facing text for the app interface."
-  },
-  "@verificationTruckReadinessTitle": {
-    "description": "Verification Truck Readiness Title - User-facing text for the app interface."
-  },
-  "@verificationCompanyNameNeedsAttention": {
-    "description": "Verification Company Name Needs Attention - User-facing text for the app interface."
-  },
-  "@approvedTruckCountLabel": {
-    "description": "Approved Truck Count Label - User-facing text for the app interface."
-  },
-  "@verificationCheckProfileStatus": {
-    "description": "Verification Check Profile Status - User-facing text for the app interface."
-  },
-  "@verificationCapturedStatus": {
-    "description": "Verification Captured Status - User-facing text for the app interface."
-  },
-  "@verificationReadyStatus": {
-    "description": "Verification Ready Status - User-facing text for the app interface."
-  },
-  "@verificationActionNeededStatus": {
-    "description": "Verification Action Needed Status - User-facing text for the app interface."
-  },
-  "@verificationBusinessReadinessFooter": {
-    "description": "Verification Business Readiness Footer - User-facing text for the app interface."
-  },
-  "@verificationTruckReadyFooter": {
-    "description": "Verification Truck Ready Footer - User-facing text for the app interface."
-  },
-  "@verificationTruckRequiredFooter": {
-    "description": "Verification Truck Required Footer - User-facing text for the app interface."
-  },
   "@verificationPacketDetailsSectionTitle": {
     "description": "Verification Packet Details Section Title - User-facing text for the app interface."
   },
-  "@verificationIdentityPacketSectionTitle": {
-    "description": "Verification Identity Packet Section Title - User-facing text for the app interface."
-  },
   "@verificationTruckReadyWithRcFooter": {
     "description": "Verification Truck Ready With Rc Footer - User-facing text for the app interface."
-  },
-  "@verificationTruckRequiredWithRcFooter": {
-    "description": "Verification Truck Required With Rc Footer - User-facing text for the app interface."
   },
   "@verificationTruckPacketStillRequiredTitle": {
     "description": "Verification Truck Packet Still Required Title - User-facing text for the app interface."
@@ -6007,38 +5413,11 @@
   "@verificationTruckPacketStillRequiredMessage": {
     "description": "Verification Truck Packet Still Required Message - User-facing text for the app interface."
   },
-  "@verificationTruckPacketRequiredBadge": {
-    "description": "Verification Truck Packet Required Badge - User-facing text for the app interface."
-  },
-  "@verificationTruckApprovalRequiredTitle": {
-    "description": "Verification Truck Approval Required Title - User-facing text for the app interface."
-  },
-  "@verificationTruckApprovalRequiredMessage": {
-    "description": "Verification Truck Approval Required Message - User-facing text for the app interface."
-  },
   "@verificationOpenFleetAction": {
     "description": "Verification Open Fleet Action - User-facing text for the app interface."
   },
-  "@verificationUnlocksTitle": {
-    "description": "Verification Unlocks Title - User-facing text for the app interface."
-  },
-  "@verificationUnlocksSupplierMessage": {
-    "description": "Verification Unlocks Supplier Message - User-facing text for the app interface."
-  },
-  "@verificationUnlocksTruckerMessage": {
-    "description": "Verification Unlocks Trucker Message - User-facing text for the app interface."
-  },
-  "@verificationSourceOfTruthBadge": {
-    "description": "Verification Source Of Truth Badge - User-facing text for the app interface."
-  },
   "@verificationChatAndCallGatingBadge": {
     "description": "Verification Chat And Call Gating Badge - User-facing text for the app interface."
-  },
-  "@verificationApprovedTruckRequiredBadge": {
-    "description": "Verification Approved Truck Required Badge - User-facing text for the app interface."
-  },
-  "@verificationBackToAccountAction": {
-    "description": "Verification Back To Account Action - User-facing text for the app interface."
   },
   "@verificationUploadSourceTitle": {
     "description": "Verification Upload Source Title - User-facing text for the app interface."
@@ -6099,12 +5478,6 @@
   },
   "@verificationSubmitLockedFooter": {
     "description": "Verification Submit Locked Footer - User-facing text for the app interface."
-  },
-  "@verificationRequiredUploadedLabel": {
-    "description": "Verification Required Uploaded Label - User-facing text for the app interface."
-  },
-  "@verificationPrerequisitesSatisfiedMessage": {
-    "description": "Verification Prerequisites Satisfied Message - User-facing text for the app interface."
   },
   "@verificationDocumentStatusPending": {
     "description": "Verification Document Status Pending - User-facing text for the app interface."
@@ -7204,72 +6577,6 @@
   "@supplierTripDetailBackToTripsAction": {
     "description": "Supplier Trip Detail Back To Trips Action - User-facing text for the app interface."
   },
-  "@assistantHeroTitleWithName": {
-    "description": "Assistant Hero Title With Name - User-facing text for the app interface."
-  },
-  "@assistantHeroSubtitleSupplier": {
-    "description": "Assistant Hero Subtitle Supplier - User-facing text for the app interface."
-  },
-  "@assistantHeroSubtitleTrucker": {
-    "description": "Assistant Hero Subtitle Trucker - User-facing text for the app interface."
-  },
-  "@assistantWorkflowGuidanceSupplier": {
-    "description": "Assistant Workflow Guidance Supplier - User-facing text for the app interface."
-  },
-  "@assistantWorkflowGuidanceTrucker": {
-    "description": "Assistant Workflow Guidance Trucker - User-facing text for the app interface."
-  },
-  "@assistantProfileComplete": {
-    "description": "Assistant Profile Complete - User-facing text for the app interface."
-  },
-  "@assistantProfileIncomplete": {
-    "description": "Assistant Profile Incomplete - User-facing text for the app interface."
-  },
-  "@assistantRecommendedNextActionsTitle": {
-    "description": "Assistant Recommended Next Actions Title - User-facing text for the app interface."
-  },
-  "@assistantOpenSupplierTripsAction": {
-    "description": "Assistant Open Supplier Trips Action - User-facing text for the app interface."
-  },
-  "@assistantFindLoadsAction": {
-    "description": "Assistant Find Loads Action - User-facing text for the app interface."
-  },
-  "@assistantOpenTripsAction": {
-    "description": "Assistant Open Trips Action - User-facing text for the app interface."
-  },
-  "@assistantOpenMessagesAction": {
-    "description": "Assistant Open Messages Action - User-facing text for the app interface."
-  },
-  "@assistantGuidedHelpTitle": {
-    "description": "Assistant Guided Help Title - User-facing text for the app interface."
-  },
-  "@assistantBestForLabel": {
-    "description": "Assistant Best For Label - User-facing text for the app interface."
-  },
-  "@assistantBestForSupplier": {
-    "description": "Assistant Best For Supplier - User-facing text for the app interface."
-  },
-  "@assistantBestForTrucker": {
-    "description": "Assistant Best For Trucker - User-facing text for the app interface."
-  },
-  "@assistantVoiceBehaviorLabel": {
-    "description": "Assistant Voice Behavior Label - User-facing text for the app interface."
-  },
-  "@assistantVoiceBehaviorValue": {
-    "description": "Assistant Voice Behavior Value - User-facing text for the app interface."
-  },
-  "@assistantCurrentRoleLabel": {
-    "description": "Assistant Current Role Label - User-facing text for the app interface."
-  },
-  "@assistantMoreActionsTitle": {
-    "description": "Assistant More Actions Title - User-facing text for the app interface."
-  },
-  "@assistantOpenNotificationsAction": {
-    "description": "Assistant Open Notifications Action - User-facing text for the app interface."
-  },
-  "@assistantOpenSupportAction": {
-    "description": "Assistant Open Support Action - User-facing text for the app interface."
-  },
   "@shellAccessRestrictedTitle": {
     "description": "Shell Access Restricted Title - User-facing text for the app interface."
   },
@@ -7278,12 +6585,6 @@
   },
   "@shellAccessRestrictedBannedSubtitle": {
     "description": "Shell Access Restricted Banned Subtitle - User-facing text for the app interface."
-  },
-  "@shellAccountDeactivatedMessage": {
-    "description": "Shell Account Deactivated Message - User-facing text for the app interface."
-  },
-  "@shellAccountBannedMessage": {
-    "description": "Shell Account Banned Message - User-facing text for the app interface."
   },
   "@shellRouteNotFoundTitle": {
     "description": "Shell Route Not Found Title - User-facing text for the app interface."
@@ -7348,9 +6649,6 @@
   "@truckerLoadDetailTruckMatchAvailable": {
     "description": "Trucker Load Detail Truck Match Available - User-facing text for the app interface."
   },
-  "@truckerLoadDetailNoApprovedTruckMatchYet": {
-    "description": "Trucker Load Detail No Approved Truck Match Yet - User-facing text for the app interface."
-  },
   "@truckerLoadDetailMaterialSummary": {
     "description": "Trucker Load Detail Material Summary - User-facing text for the app interface."
   },
@@ -7359,12 +6657,6 @@
   },
   "@truckerLoadDetailRoutePriceSummaryTitle": {
     "description": "Trucker Load Detail Route Price Summary Title - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailOriginLabel": {
-    "description": "Trucker Load Detail Origin Label - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailDestinationLabel": {
-    "description": "Trucker Load Detail Destination Label - User-facing text for the app interface."
   },
   "@truckerLoadDetailPickupLabel": {
     "description": "Trucker Load Detail Pickup Label - User-facing text for the app interface."
@@ -7426,26 +6718,8 @@
   "@truckerLoadDetailTripCostUnavailableMessage": {
     "description": "Trucker Load Detail Trip Cost Unavailable Message - User-facing text for the app interface."
   },
-  "@truckerLoadDetailDieselLabel": {
-    "description": "Trucker Load Detail Diesel Label - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailTollsLabel": {
-    "description": "Trucker Load Detail Tolls Label - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailMileageUsedLabel": {
-    "description": "Trucker Load Detail Mileage Used Label - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailDieselPriceLabel": {
-    "description": "Trucker Load Detail Diesel Price Label - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailEstimatedTollPlazasLabel": {
-    "description": "Trucker Load Detail Estimated Toll Plazas Label - User-facing text for the app interface."
-  },
   "@truckerLoadDetailSupplierSummaryTitle": {
     "description": "Trucker Load Detail Supplier Summary Title - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailContactOwnerLabel": {
-    "description": "Trucker Load Detail Contact Owner Label - User-facing text for the app interface."
   },
   "@truckerLoadDetailVerifiedSupplier": {
     "description": "Trucker Load Detail Verified Supplier - User-facing text for the app interface."
@@ -7470,12 +6744,6 @@
   },
   "@truckerLoadDetailBookingBlockedTitle": {
     "description": "Trucker Load Detail Booking Blocked Title - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailMessageSupplierAction": {
-    "description": "Trucker Load Detail Message Supplier Action - User-facing text for the app interface."
-  },
-  "@truckerLoadDetailCallSupplierAction": {
-    "description": "Trucker Load Detail Call Supplier Action - User-facing text for the app interface."
   },
   "@truckerLoadDetailUsingTruckLabel": {
     "description": "Trucker Load Detail Using Truck Label - User-facing text for the app interface."
@@ -7567,23 +6835,8 @@
   "@authSessionRefreshFailureMessage": {
     "description": "Auth Session Refresh Failure Message - User-facing text for the app interface."
   },
-  "@authNotificationPermissionFailureMessage": {
-    "description": "Auth Notification Permission Failure Message - User-facing text for the app interface."
-  },
-  "@authTtsVoiceGuidanceEnabled": {
-    "description": "Auth Tts Voice Guidance Enabled - User-facing text for the app interface."
-  },
   "@authConfigIncompleteTitle": {
     "description": "Auth Config Incomplete Title - User-facing text for the app interface."
-  },
-  "@authConfigIncompleteMessage": {
-    "description": "Auth Config Incomplete Message - User-facing text for the app interface."
-  },
-  "@authTtsSignInPrompt": {
-    "description": "Auth Tts Sign In Prompt - User-facing text for the app interface."
-  },
-  "@authTtsOnboardingRolePrompt": {
-    "description": "Auth Tts Onboarding Role Prompt - User-facing text for the app interface."
   },
   "@postLoadValidationOriginCityRequired": {
     "description": "Post Load Validation Origin City Required - User-facing text for the app interface."
@@ -7852,12 +7105,6 @@
   "@connectivityOfflineActionsMessage": {
     "description": "Connectivity Offline Actions Message - User-facing text for the app interface."
   },
-  "@localeSelectSupportedLanguage": {
-    "description": "Locale Select Supported Language - User-facing text for the app interface."
-  },
-  "@localeFieldSupportedLanguages": {
-    "description": "Locale Field Supported Languages - User-facing text for the app interface."
-  },
   "@onboardingGateTimeoutMessage": {
     "description": "Onboarding Gate Timeout Message - User-facing text for the app interface."
   },
@@ -7887,8 +7134,5 @@
   },
   "@chatPreviewSystem": {
     "description": "Chat Preview System - User-facing text for the app interface."
-  },
-  "@chatPreviewEmpty": {
-    "description": "Chat Preview Empty - User-facing text for the app interface."
   }
 }

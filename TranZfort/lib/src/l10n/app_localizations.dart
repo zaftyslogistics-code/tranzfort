@@ -104,12 +104,6 @@ abstract class AppLocalizations {
   /// **'TranZfort'**
   String get appTitle;
 
-  /// Splash Loading Workspace - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Loading your workspace...'**
-  String get splashLoadingWorkspace;
-
   /// Auth Google Failure Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -134,12 +128,6 @@ abstract class AppLocalizations {
   /// **'you@example.com'**
   String get authEmailHint;
 
-  /// Auth Sign In Divider Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'OR'**
-  String get authSignInDividerLabel;
-
   /// Auth Forgot Password Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -152,65 +140,17 @@ abstract class AppLocalizations {
   /// **'Supabase is not configured in this build, so sign-in and live account data will remain unavailable until the environment is fixed.'**
   String get authConfigIncompleteSignInMessage;
 
-  /// Splash Setup Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Set up device access'**
-  String get splashSetupTitle;
-
-  /// Splash Setup Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Allow notifications, voice guidance, and location access now so your first login and verification flow can continue smoothly.'**
-  String get splashSetupSubtitle;
-
-  /// Splash Setup Enable Voice Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Enable voice guidance'**
-  String get splashSetupEnableVoiceAction;
-
-  /// Splash Setup Open Location Settings Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open location settings'**
-  String get splashSetupOpenLocationSettingsAction;
-
   /// Auth Continue With Google - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Continue with Google'**
   String get authContinueWithGoogle;
 
-  /// No description provided for @authGoogleFastestMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Fastest way to get started — no password to remember'**
-  String get authGoogleFastestMessage;
-
   /// No description provided for @authOrWithEmail.
   ///
   /// In en, this message translates to:
   /// **'Or continue with email'**
   String get authOrWithEmail;
-
-  /// Auth Continue With Password - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Continue with email and password'**
-  String get authContinueWithPassword;
-
-  /// Auth Terms Of Service - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Terms of service'**
-  String get authTermsOfService;
-
-  /// Auth Terms Info Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'TranZfort access is currently limited to verified supplier and trucker workflows. Continue only if you agree to the platform terms.'**
-  String get authTermsInfoMessage;
 
   /// Auth Password Title - User-facing text for the app interface.
   ///
@@ -307,12 +247,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We could not create your account right now. Retry shortly with the same details.'**
   String get authPasswordSignUpFailureMessage;
-
-  /// Auth Password Sign Up Success Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your account was created. If email confirmation is required, finish that step and then sign in with your new password.'**
-  String get authPasswordSignUpSuccessMessage;
 
   /// Auth Password Check Email Title - User-facing text for the app interface.
   ///
@@ -482,12 +416,6 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get commonRetry;
 
-  /// Shell Tooltip Voice Assistance - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Voice assistance'**
-  String get shellTooltipVoiceAssistance;
-
   /// Supplier Quick Action Notifications - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -626,12 +554,6 @@ abstract class AppLocalizations {
   /// **'Welcome back, {name}'**
   String supplierDashboardWelcomeBack(Object name);
 
-  /// Supplier Dashboard Hero Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Track supplier verification, review Super Load readiness, and keep your latest loads and execution activity in view.'**
-  String get supplierDashboardHeroSubtitle;
-
   /// Supplier Dashboard Overview Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -662,23 +584,11 @@ abstract class AppLocalizations {
   /// **'Post Load'**
   String get supplierDashboardPostLoadAction;
 
-  /// Supplier Dashboard Hero Summary Body - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Keep your supplier verification current, monitor active loads, and follow the latest Super Load readiness signals visible in this workspace.'**
-  String get supplierDashboardHeroSummaryBody;
-
   /// Supplier Dashboard Stats Active Loads Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active loads'**
   String get supplierDashboardStatsActiveLoadsLabel;
-
-  /// Supplier Dashboard Stats Active Loads Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Loads currently open for supplier-side tracking.'**
-  String get supplierDashboardStatsActiveLoadsHelper;
 
   /// Supplier Dashboard Stats Pending Bookings Label - User-facing text for the app interface.
   ///
@@ -686,35 +596,17 @@ abstract class AppLocalizations {
   /// **'Pending bookings'**
   String get supplierDashboardStatsPendingBookingsLabel;
 
-  /// Supplier Dashboard Stats Pending Bookings Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Booking requests that still need supplier attention.'**
-  String get supplierDashboardStatsPendingBookingsHelper;
-
   /// Supplier Dashboard Stats In Transit Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Trips in transit'**
   String get supplierDashboardStatsInTransitTripsLabel;
 
-  /// Supplier Dashboard Stats In Transit Trips Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Linked trips currently moving against your loads.'**
-  String get supplierDashboardStatsInTransitTripsHelper;
-
   /// Supplier Dashboard Stats Completed Trips Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed trips'**
   String get supplierDashboardStatsCompletedTripsLabel;
-
-  /// Supplier Dashboard Stats Completed Trips Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips that have reached their recorded completion state.'**
-  String get supplierDashboardStatsCompletedTripsHelper;
 
   /// Supplier Dashboard Open My Loads Action - User-facing text for the app interface.
   ///
@@ -842,23 +734,11 @@ abstract class AppLocalizations {
   /// **'Dashboard'**
   String get shellDrawerDashboard;
 
-  /// Shell Drawer Assistant - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Guided help'**
-  String get shellDrawerAssistant;
-
   /// Shell Drawer Fleet - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Fleet'**
   String get shellDrawerFleet;
-
-  /// Shell Drawer Messages - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Messages'**
-  String get shellDrawerMessages;
 
   /// Nav Notifications - User-facing text for the app interface.
   ///
@@ -877,12 +757,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get shellDrawerProfile;
-
-  /// Shell Drawer Language - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Language'**
-  String get shellDrawerLanguage;
 
   /// Shell Drawer Sign Out - User-facing text for the app interface.
   ///
@@ -3358,12 +3232,6 @@ abstract class AppLocalizations {
   /// **'Saving language preference...'**
   String get settingsLanguageSaving;
 
-  /// Trucker Dashboard Hero Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Use your trucker dashboard as the command center for freight discovery, readiness, and active work visibility.'**
-  String get truckerDashboardHeroSubtitle;
-
   /// Welcome message on trucker dashboard. Placeholder {fullName} is the user's full name.
   ///
   /// In en, this message translates to:
@@ -3430,47 +3298,17 @@ abstract class AppLocalizations {
   /// **'Verification pending'**
   String get truckerDashboardVerificationPendingTitle;
 
-  /// Trucker Dashboard Verification Pending Description - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'You can browse loads while review is pending, but chat and call stay locked until verification is complete.'**
-  String get truckerDashboardVerificationPendingDescription;
-
   /// Trucker Dashboard Open Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open verification'**
   String get truckerDashboardOpenVerificationAction;
 
-  /// Trucker Dashboard Verification Complete Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification complete'**
-  String get truckerDashboardVerificationCompleteTitle;
-
-  /// Trucker Dashboard Verification Complete Description - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your trucker verification is complete. Chat and call stay unlocked on open loads while your readiness remains healthy.'**
-  String get truckerDashboardVerificationCompleteDescription;
-
-  /// Trucker Dashboard Review Verification Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Review verification'**
-  String get truckerDashboardReviewVerificationAction;
-
   /// Trucker Dashboard Verification Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
   String get truckerDashboardVerificationNeedsAttentionTitle;
-
-  /// Trucker Dashboard Verification Needs Attention Description - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your verification was rejected. Browsing stays open, but communication and assignment readiness remain blocked.'**
-  String get truckerDashboardVerificationNeedsAttentionDescription;
 
   /// Trucker Dashboard Fix Verification Action - User-facing text for the app interface.
   ///
@@ -3484,12 +3322,6 @@ abstract class AppLocalizations {
   /// **'Complete fleet and verification setup'**
   String get truckerDashboardCompleteFleetVerificationTitle;
 
-  /// Trucker Dashboard Complete Fleet Verification Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'You can browse the marketplace now, but chat, call, and booking stay locked until you finish Aadhaar, PAN, profile photo, and get at least one truck approved.'**
-  String get truckerDashboardCompleteFleetVerificationMessage;
-
   /// Trucker Dashboard Open Fleet Verification Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -3502,12 +3334,6 @@ abstract class AppLocalizations {
   /// **'Add and approve your first truck'**
   String get truckerDashboardAddApproveFirstTruckTitle;
 
-  /// Trucker Dashboard Add Approve First Truck Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Marketplace browsing is available now, but your first approved truck is required before full trucker verification can complete.'**
-  String get truckerDashboardAddApproveFirstTruckMessage;
-
   /// Trucker Dashboard Open Fleet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -3519,12 +3345,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Complete trucker verification'**
   String get truckerDashboardCompleteVerificationTitle;
-
-  /// Trucker Dashboard Complete Verification Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'You can browse the marketplace now. Finish Aadhaar, PAN, profile photo, and at least one approved truck to unlock chat and call.'**
-  String get truckerDashboardCompleteVerificationMessage;
 
   /// Trucker Dashboard Load Failure Title - User-facing text for the app interface.
   ///
@@ -3580,23 +3400,11 @@ abstract class AppLocalizations {
   /// **'{count, plural, =1 {# approved truck} other {# approved trucks}}'**
   String truckerDashboardApprovedTruckCount(int count);
 
-  /// Trucker Dashboard Hero Summary - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Dashboard-first remains the trucker home rule: understand readiness, scan active work, then jump into freight discovery from here.'**
-  String get truckerDashboardHeroSummary;
-
   /// Trucker Dashboard Stat Active Bids Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Active bids'**
   String get truckerDashboardStatActiveBidsLabel;
-
-  /// Trucker Dashboard Stat Active Bids Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Submitted requests still waiting for supplier decision'**
-  String get truckerDashboardStatActiveBidsHelper;
 
   /// Trucker Dashboard Stat Upcoming Trips Label - User-facing text for the app interface.
   ///
@@ -3604,35 +3412,17 @@ abstract class AppLocalizations {
   /// **'Upcoming trips'**
   String get truckerDashboardStatUpcomingTripsLabel;
 
-  /// Trucker Dashboard Stat Upcoming Trips Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned and pickup-stage work approaching execution'**
-  String get truckerDashboardStatUpcomingTripsHelper;
-
   /// Trucker Dashboard Stat In Transit Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'In-transit'**
   String get truckerDashboardStatInTransitLabel;
 
-  /// Trucker Dashboard Stat In Transit Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips currently moving on the road'**
-  String get truckerDashboardStatInTransitHelper;
-
   /// Trucker Dashboard Stat Completed Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get truckerDashboardStatCompletedLabel;
-
-  /// Trucker Dashboard Stat Completed Helper - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips already closed in your trucker history'**
-  String get truckerDashboardStatCompletedHelper;
 
   /// Trucker Dashboard Recent Activity Unavailable Title - User-facing text for the app interface.
   ///
@@ -3762,18 +3552,6 @@ abstract class AppLocalizations {
   /// **'Verification status'**
   String get truckerDashboardVerificationStatusTitle;
 
-  /// Trucker Dashboard Verification Ready Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Chat and call are unlocked on open loads because your verification is complete.'**
-  String get truckerDashboardVerificationReadyMessage;
-
-  /// Trucker Dashboard Verification Locked Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Browsing is open now. Chat and call unlock only after verification and at least one approved truck.'**
-  String get truckerDashboardVerificationLockedMessage;
-
   /// No description provided for @truckerDashboardDlLabel.
   ///
   /// In en, this message translates to:
@@ -3806,18 +3584,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'action needed'**
   String get truckerDashboardActionNeededStatus;
-
-  /// Trucker Dashboard Fleet Ready Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'You have at least one approved truck available for verification-dependent workflows.'**
-  String get truckerDashboardFleetReadyMessage;
-
-  /// Trucker Dashboard Fleet Need First Truck Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Add and approve your first truck in the fleet slice to complete trucker readiness.'**
-  String get truckerDashboardFleetNeedFirstTruckMessage;
 
   /// No description provided for @truckerDashboardTruckAwaitingReview.
   ///
@@ -4489,12 +4255,6 @@ abstract class AppLocalizations {
   /// **'Pickup Date'**
   String get truckerFindLoadsSortPickupDate;
 
-  /// Trucker Find Loads Marketplace Tabs Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Marketplace tabs'**
-  String get truckerFindLoadsMarketplaceTabsTitle;
-
   /// Trucker Find Loads All Loads Tab - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -4564,7 +4324,7 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsSummaryPriceRange.
   ///
   /// In en, this message translates to:
-  /// **'₹{minPrice}-{maxPrice}'**
+  /// **'â‚¹{minPrice}-{maxPrice}'**
   String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice);
 
   /// Trucker Find Loads Summary Super Loads - User-facing text for the app interface.
@@ -4614,64 +4374,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unknown'**
   String get truckerFindLoadsStatusUnknown;
-
-  /// No description provided for @truckerFindLoadsStatusUnknownFallback.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown status'**
-  String get truckerFindLoadsStatusUnknownFallback;
-
-  /// No description provided for @truckerFindLoadsPriceAdvancePickup.
-  ///
-  /// In en, this message translates to:
-  /// **'₹{priceAmount} - {advancePercentage}% adv - {pickupDate}'**
-  String truckerFindLoadsPriceAdvancePickup(
-    Object priceAmount,
-    int advancePercentage,
-    Object pickupDate,
-  );
-
-  /// Trucker Find Loads Truck Match Available - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck match available'**
-  String get truckerFindLoadsTruckMatchAvailable;
-
-  /// Trucker Find Loads No Approved Truck Match - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'No approved truck match yet'**
-  String get truckerFindLoadsNoApprovedTruckMatch;
-
-  /// Trucker Find Loads Trip Cost Unavailable - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip cost unavailable'**
-  String get truckerFindLoadsTripCostUnavailable;
-
-  /// No description provided for @truckerFindLoadsDistanceUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Distance unavailable - Tyres {tyres}'**
-  String truckerFindLoadsDistanceUnavailable(Object tyres);
-
-  /// No description provided for @truckerFindLoadsDistanceAvailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Distance {distanceKm} km - Tyres {tyres}'**
-  String truckerFindLoadsDistanceAvailable(Object distanceKm, Object tyres);
-
-  /// Trucker Find Loads Tyres Any - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Any'**
-  String get truckerFindLoadsTyresAny;
-
-  /// Trucker Find Loads Super Load Banner - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Load - Payment Guarantee'**
-  String get truckerFindLoadsSuperLoadBanner;
 
   /// Trucker Find Loads View Details Action - User-facing text for the app interface.
   ///
@@ -4730,13 +4432,13 @@ abstract class AppLocalizations {
   /// Trucker Find Loads Min Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Min price (₹)'**
+  /// **'Min price (â‚¹)'**
   String get truckerFindLoadsMinPriceLabel;
 
   /// Trucker Find Loads Max Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Max price (₹)'**
+  /// **'Max price (â‚¹)'**
   String get truckerFindLoadsMaxPriceLabel;
 
   /// Trucker Find Loads Apply Filters Action - User-facing text for the app interface.
@@ -4946,7 +4648,7 @@ abstract class AppLocalizations {
   /// Supplier Post Load Price Amount Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price amount (₹)'**
+  /// **'Price amount (â‚¹)'**
   String get supplierPostLoadPriceAmountLabel;
 
   /// Supplier Post Load Price Amount Hint - User-facing text for the app interface.
@@ -4988,7 +4690,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadAdvanceBalanceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}'**
+  /// **'Advance: â‚¹{advanceAmount} - Balance: â‚¹{balanceAmount}'**
   String supplierPostLoadAdvanceBalanceLabel(
     Object advanceAmount,
     Object balanceAmount,
@@ -5031,7 +4733,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadPriceSummary.
   ///
   /// In en, this message translates to:
-  /// **'Price: ₹{priceAmount} - {priceType}'**
+  /// **'Price: â‚¹{priceAmount} - {priceType}'**
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType);
 
   /// No description provided for @supplierPostLoadPickupSummary.
@@ -5232,18 +4934,6 @@ abstract class AppLocalizations {
   /// **'Your verification is under review. Keep documents ready in case the support team asks for clarification.'**
   String get supplierVerificationPendingMessage;
 
-  /// Supplier Verification Rejected Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification needs attention'**
-  String get supplierVerificationRejectedTitle;
-
-  /// Supplier Verification Complete Description - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your supplier verification is complete. You can keep posting loads and monitoring readiness from this dashboard.'**
-  String get supplierVerificationCompleteDescription;
-
   /// Supplier Verification Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -5267,12 +4957,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review verification'**
   String get supplierReviewVerification;
-
-  /// No description provided for @supplierDashboardVerificationStatusUnknownFallback.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown verification status'**
-  String get supplierDashboardVerificationStatusUnknownFallback;
 
   /// Supplier Fix Verification - User-facing text for the app interface.
   ///
@@ -5298,23 +4982,11 @@ abstract class AppLocalizations {
   /// **'Complete verification'**
   String get supplierCompleteVerification;
 
-  /// Supplier Dashboard Super Load Readiness Intro - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Load eligibility is still partially admin-managed in the current app. This surface shows only the readiness facts the current profile model can confirm honestly.'**
-  String get supplierDashboardSuperLoadReadinessIntro;
-
   /// Supplier Dashboard Super Load Verification Complete - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification complete'**
   String get supplierDashboardSuperLoadVerificationComplete;
-
-  /// Supplier Dashboard Super Load Verification Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification still required'**
-  String get supplierDashboardSuperLoadVerificationRequired;
 
   /// Supplier Dashboard Super Load Business Licence On File - User-facing text for the app interface.
   ///
@@ -5333,78 +5005,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Company-age readiness unavailable in current app data'**
   String get supplierDashboardSuperLoadCompanyAgeUnavailable;
-
-  /// Supplier Dashboard Super Load Readiness Summary Ready - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your current profile can confirm supplier verification and the business licence prerequisite, but final Super Load eligibility still cannot be determined here because company-age/readiness fields are not yet present in the current source model.'**
-  String get supplierDashboardSuperLoadReadinessSummaryReady;
-
-  /// Supplier Dashboard Super Load Readiness Summary Missing Business Licence - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your supplier verification is complete, but the business licence prerequisite is still missing from the current profile. Final Super Load eligibility remains blocked until that verification requirement is satisfied.'**
-  String get supplierDashboardSuperLoadReadinessSummaryMissingBusinessLicence;
-
-  /// Supplier Dashboard Super Load Readiness Summary Missing Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your current profile can confirm a business licence on file, but supplier verification is still incomplete. Final Super Load eligibility remains blocked until verification is completed and company-age/readiness fields exist in the current source model.'**
-  String get supplierDashboardSuperLoadReadinessSummaryMissingVerification;
-
-  /// Supplier Dashboard Super Load Readiness Summary Pending Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your supplier verification is already under review. Super Load readiness cannot move forward until that review completes, and final eligibility still remains admin-managed until company-age/readiness fields exist in the current source model.'**
-  String get supplierDashboardSuperLoadReadinessSummaryPendingVerification;
-
-  /// Supplier Dashboard Super Load Readiness Summary Rejected Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your supplier verification needs correction before Super Load readiness can move forward. Review the latest verification feedback, update the required documents, and then re-check this readiness surface once the packet is resubmitted.'**
-  String get supplierDashboardSuperLoadReadinessSummaryRejectedVerification;
-
-  /// Supplier Dashboard Super Load Readiness Summary Needs Attention - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Both supplier verification and the business licence prerequisite still need attention before Super Load readiness can move closer to eligibility. Even after that, final eligibility remains admin-managed until company-age/readiness fields exist in the current source model.'**
-  String get supplierDashboardSuperLoadReadinessSummaryNeedsAttention;
-
-  /// Supplier Dashboard Super Load Next Step Ready - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: keep your verification details accurate, monitor your loads normally, and use support only if you need follow-up on Super Load review or policy questions.'**
-  String get supplierDashboardSuperLoadNextStepReady;
-
-  /// Supplier Dashboard Super Load Next Step Business Licence - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: update or upload the business licence through verification first, then re-check this readiness surface.'**
-  String get supplierDashboardSuperLoadNextStepBusinessLicence;
-
-  /// Supplier Dashboard Super Load Next Step Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: complete supplier verification so the platform can confirm your trust baseline before any future Super Load review.'**
-  String get supplierDashboardSuperLoadNextStepVerification;
-
-  /// Supplier Dashboard Super Load Next Step Pending Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: monitor the current verification review, keep business documents stable, and use support only if the review needs clarification while approval is still pending.'**
-  String get supplierDashboardSuperLoadNextStepPendingVerification;
-
-  /// Supplier Dashboard Super Load Next Step Rejected Verification - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: fix the rejected verification items first, resubmit the packet for review, and then return here for the refreshed readiness summary.'**
-  String get supplierDashboardSuperLoadNextStepRejectedVerification;
-
-  /// Supplier Dashboard Super Load Next Step Needs Attention - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Next best action: complete supplier verification and business licence requirements first, then return here for the remaining readiness summary.'**
-  String get supplierDashboardSuperLoadNextStepNeedsAttention;
 
   /// Supplier Dashboard Load Status Active - User-facing text for the app interface.
   ///
@@ -6051,18 +5651,6 @@ abstract class AppLocalizations {
   /// **'Unknown'**
   String get supplierTripDetailVerificationStatusUnknown;
 
-  /// Supplier Trip Detail Dispute Category Fallback - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip dispute'**
-  String get supplierTripDetailDisputeCategoryFallback;
-
-  /// Supplier Trip Detail Dispute Status Fallback - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open'**
-  String get supplierTripDetailDisputeStatusFallback;
-
   /// Supplier Trip Detail Dispute Status Guidance Open - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -6215,90 +5803,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'We could not find the current verification record for this account. Please retry shortly.'**
   String get verificationDetailsUnavailableSubtitle;
-
-  /// Verification Hero Pending Supplier Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier verification under review'**
-  String get verificationHeroPendingSupplierTitle;
-
-  /// Verification Hero Pending Trucker Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker verification under review'**
-  String get verificationHeroPendingTruckerTitle;
-
-  /// Verification Hero Verified Supplier Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier verification complete'**
-  String get verificationHeroVerifiedSupplierTitle;
-
-  /// Verification Hero Verified Trucker Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker verification complete'**
-  String get verificationHeroVerifiedTruckerTitle;
-
-  /// Verification Hero Rejected Supplier Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Resubmit supplier verification'**
-  String get verificationHeroRejectedSupplierTitle;
-
-  /// Verification Hero Rejected Trucker Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Resubmit trucker verification'**
-  String get verificationHeroRejectedTruckerTitle;
-
-  /// Verification Hero Initial Supplier Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Complete supplier trust setup'**
-  String get verificationHeroInitialSupplierTitle;
-
-  /// Verification Hero Initial Trucker Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Complete trucker trust setup'**
-  String get verificationHeroInitialTruckerTitle;
-
-  /// Verification Hero Pending Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your verification packet is already under review. We will notify you when approval is complete.'**
-  String get verificationHeroPendingSubtitle;
-
-  /// Verification Hero Verified Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Your verification packet is already approved. You can review the captured documents and readiness details below.'**
-  String get verificationHeroVerifiedSubtitle;
-
-  /// Verification Hero Rejected With Feedback Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Review the rejected document markers below, replace any affected items, and resubmit when you are ready.'**
-  String get verificationHeroRejectedWithFeedbackSubtitle;
-
-  /// Verification Hero Rejected Fallback Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Review the rejection summary, replace any affected items, and resubmit the full packet when you are ready.'**
-  String get verificationHeroRejectedFallbackSubtitle;
-
-  /// Verification Hero Initial Supplier Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Upload the required business and identity documents, capture supplier verification location, and submit them for review from this single verification surface.'**
-  String get verificationHeroInitialSupplierSubtitle;
-
-  /// Verification Hero Initial Trucker Subtitle - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Upload identity documents, confirm truck readiness, and submit the full verification packet for review from this single setup surface.'**
-  String get verificationHeroInitialTruckerSubtitle;
 
   /// Verification Resubmit For Review Action - User-facing text for the app interface.
   ///
@@ -6852,78 +6356,6 @@ abstract class AppLocalizations {
   /// **'Something went wrong while submitting verification.'**
   String get verificationWizardUnknownError;
 
-  /// Verification Wizard Profile Photo Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile photo is required'**
-  String get verificationWizardProfilePhotoRequired;
-
-  /// Verification Wizard Aadhaar Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Aadhaar must be 12 digits'**
-  String get verificationWizardAadhaarRequired;
-
-  /// Verification Wizard Pan Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Invalid PAN format'**
-  String get verificationWizardPanRequired;
-
-  /// Verification Wizard Aadhaar Front Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Aadhaar front photo required'**
-  String get verificationWizardAadhaarFrontRequired;
-
-  /// Verification Wizard Aadhaar Back Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Aadhaar back photo required'**
-  String get verificationWizardAadhaarBackRequired;
-
-  /// Verification Wizard Pan Photo Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'PAN photo required'**
-  String get verificationWizardPanPhotoRequired;
-
-  /// Verification Wizard Truck Number Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck number is required'**
-  String get verificationWizardTruckNumberRequired;
-
-  /// Verification Wizard Rc Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'RC document is required'**
-  String get verificationWizardRcRequired;
-
-  /// Verification Wizard Company Name Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Company name is required'**
-  String get verificationWizardCompanyNameRequired;
-
-  /// Verification Wizard License Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'License number is required'**
-  String get verificationWizardLicenseRequired;
-
-  /// Verification Wizard License Document Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'License document is required'**
-  String get verificationWizardLicenseDocumentRequired;
-
-  /// Verification Wizard Location Required - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification location is required'**
-  String get verificationWizardLocationRequired;
-
   /// Verification Action Needs Attention Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7062,30 +6494,6 @@ abstract class AppLocalizations {
   /// **'Enter location manually'**
   String get verificationManualLocationAction;
 
-  /// Verification Manual Location Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Add verification location manually'**
-  String get verificationManualLocationTitle;
-
-  /// Verification Manual Location City Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'City'**
-  String get verificationManualLocationCityLabel;
-
-  /// Verification Manual Location State Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'State (optional)'**
-  String get verificationManualLocationStateLabel;
-
-  /// Verification Manual Location Save Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Save location'**
-  String get verificationManualLocationSaveAction;
-
   /// Verification Doc Type Aadhaar Front - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7140,24 +6548,6 @@ abstract class AppLocalizations {
   /// **'We could not upload that verification document right now. Try another image or retry shortly.'**
   String get verificationDocumentUploadFailureMessage;
 
-  /// Verification Readiness Supplier Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification readiness'**
-  String get verificationReadinessSupplierTitle;
-
-  /// Verification Readiness Trucker Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification and truck readiness'**
-  String get verificationReadinessTruckerTitle;
-
-  /// Verification Current State Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Current verification state'**
-  String get verificationCurrentStateTitle;
-
   /// Verification Status Verified - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7188,95 +6578,11 @@ abstract class AppLocalizations {
   /// **'Unknown'**
   String get verificationStatusUnknown;
 
-  /// Verification Current State Supplier Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier verification keeps load-posting readiness and trust visibility aligned to one authoritative state.'**
-  String get verificationCurrentStateSupplierFooter;
-
-  /// Verification Current State Trucker Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker verification unlocks chat and call on open loads once identity documents and truck readiness are complete.'**
-  String get verificationCurrentStateTruckerFooter;
-
-  /// Verification Business Readiness Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Business readiness'**
-  String get verificationBusinessReadinessTitle;
-
-  /// Verification Truck Readiness Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck readiness'**
-  String get verificationTruckReadinessTitle;
-
-  /// Verification Company Name Needs Attention - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Company name still needs attention'**
-  String get verificationCompanyNameNeedsAttention;
-
-  /// Approved Truck Count Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} approved truck{s}'**
-  String approvedTruckCountLabel(Object count, Object s);
-
-  /// Verification Check Profile Status - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'check profile'**
-  String get verificationCheckProfileStatus;
-
-  /// Verification Captured Status - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'captured'**
-  String get verificationCapturedStatus;
-
-  /// Verification Ready Status - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'ready'**
-  String get verificationReadyStatus;
-
-  /// Verification Action Needed Status - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'action needed'**
-  String get verificationActionNeededStatus;
-
-  /// Verification Business Readiness Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Business licence is required for supplier verification. GST certificate remains optional.'**
-  String get verificationBusinessReadinessFooter;
-
-  /// Verification Truck Ready Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'You already have at least one approved truck available for verification-dependent workflows.'**
-  String get verificationTruckReadyFooter;
-
-  /// Verification Truck Required Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'At least one approved truck is still required before trucker verification can be submitted.'**
-  String get verificationTruckRequiredFooter;
-
   /// Verification Packet Details Section Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Verification packet details'**
   String get verificationPacketDetailsSectionTitle;
-
-  /// Verification Identity Packet Section Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Identity packet details'**
-  String get verificationIdentityPacketSectionTitle;
 
   /// No description provided for @verificationReadyTruckCountLabel.
   ///
@@ -7290,12 +6596,6 @@ abstract class AppLocalizations {
   /// **'You already have at least one complete truck packet with RC document attached.'**
   String get verificationTruckReadyWithRcFooter;
 
-  /// Verification Truck Required With Rc Footer - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Add one truck with its RC document before submitting trucker verification.'**
-  String get verificationTruckRequiredWithRcFooter;
-
   /// Verification Truck Packet Still Required Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -7308,71 +6608,17 @@ abstract class AppLocalizations {
   /// **'Open your fleet to add the first truck or upload the RC document so trucker verification can be submitted as one packet.'**
   String get verificationTruckPacketStillRequiredMessage;
 
-  /// Verification Truck Packet Required Badge - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck packet required'**
-  String get verificationTruckPacketRequiredBadge;
-
-  /// Verification Truck Approval Required Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck approval is still required'**
-  String get verificationTruckApprovalRequiredTitle;
-
-  /// Verification Truck Approval Required Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open your fleet to add the first truck, review rejection guidance, or resubmit edited truck details for approval.'**
-  String get verificationTruckApprovalRequiredMessage;
-
   /// Verification Open Fleet Action - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Open fleet'**
   String get verificationOpenFleetAction;
 
-  /// Verification Unlocks Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'What this unlocks'**
-  String get verificationUnlocksTitle;
-
-  /// Verification Unlocks Supplier Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Once verified, your supplier account becomes trust-ready for broader marketplace and account workflows.'**
-  String get verificationUnlocksSupplierMessage;
-
-  /// Verification Unlocks Trucker Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Once verified, chat and call stay unlocked on open loads and your trucker account becomes assignment-ready.'**
-  String get verificationUnlocksTruckerMessage;
-
-  /// Verification Source Of Truth Badge - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification source of truth'**
-  String get verificationSourceOfTruthBadge;
-
   /// Verification Chat And Call Gating Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Chat and call gating'**
   String get verificationChatAndCallGatingBadge;
-
-  /// Verification Approved Truck Required Badge - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Approved truck required'**
-  String get verificationApprovedTruckRequiredBadge;
-
-  /// Verification Back To Account Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Back to account'**
-  String get verificationBackToAccountAction;
 
   /// Verification Upload Source Title - User-facing text for the app interface.
   ///
@@ -7493,18 +6739,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Once submitted, your details stay locked until the admin completes the review.'**
   String get verificationSubmitLockedFooter;
-
-  /// Verification Required Uploaded Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'{uploaded}/{required} required uploaded'**
-  String verificationRequiredUploadedLabel(Object required, Object uploaded);
-
-  /// Verification Prerequisites Satisfied Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'All current client-side verification prerequisites are satisfied for submission.'**
-  String get verificationPrerequisitesSatisfiedMessage;
 
   /// Verification Document Status Pending - User-facing text for the app interface.
   ///
@@ -7805,12 +7039,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancelled'**
   String get truckerTripDetailStageCancelled;
-
-  /// No description provided for @truckerTripDetailStageUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerTripDetailStageUnknown;
 
   /// Trucker Trip Detail Proof Status Pod Uploaded - User-facing text for the app interface.
   ///
@@ -9714,138 +8942,6 @@ abstract class AppLocalizations {
   /// **'Back to supplier trips'**
   String get supplierTripDetailBackToTripsAction;
 
-  /// Assistant Hero Title With Name - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Guided help for {firstName}'**
-  String assistantHeroTitleWithName(Object firstName);
-
-  /// Assistant Hero Subtitle Supplier - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Use guided shortcuts for posting loads, checking active load execution, and opening the right communication or support surface quickly.'**
-  String get assistantHeroSubtitleSupplier;
-
-  /// Assistant Hero Subtitle Trucker - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Use guided shortcuts for finding loads, checking trip execution, and opening the right communication or support surface quickly.'**
-  String get assistantHeroSubtitleTrucker;
-
-  /// Assistant Workflow Guidance Supplier - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier workflow guidance'**
-  String get assistantWorkflowGuidanceSupplier;
-
-  /// Assistant Workflow Guidance Trucker - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker workflow guidance'**
-  String get assistantWorkflowGuidanceTrucker;
-
-  /// Assistant Profile Complete - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile complete'**
-  String get assistantProfileComplete;
-
-  /// Assistant Profile Incomplete - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile incomplete'**
-  String get assistantProfileIncomplete;
-
-  /// Assistant Recommended Next Actions Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Recommended next actions'**
-  String get assistantRecommendedNextActionsTitle;
-
-  /// Assistant Open Supplier Trips Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open supplier trips'**
-  String get assistantOpenSupplierTripsAction;
-
-  /// Assistant Find Loads Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Find loads'**
-  String get assistantFindLoadsAction;
-
-  /// Assistant Open Trips Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open trips'**
-  String get assistantOpenTripsAction;
-
-  /// Assistant Open Messages Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open messages'**
-  String get assistantOpenMessagesAction;
-
-  /// Assistant Guided Help Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Guided help'**
-  String get assistantGuidedHelpTitle;
-
-  /// Assistant Best For Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Best for'**
-  String get assistantBestForLabel;
-
-  /// Assistant Best For Supplier - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Posting loads, checking active load execution, reviewing conversations, and opening support quickly.'**
-  String get assistantBestForSupplier;
-
-  /// Assistant Best For Trucker - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Finding loads, checking trip execution, reviewing conversations, and opening support quickly.'**
-  String get assistantBestForTrucker;
-
-  /// Assistant Voice Behavior Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Voice behavior'**
-  String get assistantVoiceBehaviorLabel;
-
-  /// Assistant Voice Behavior Value - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Manual entry only right now. Full conversational bot, STT, and auto-speak remain in the dedicated communication and localization phases.'**
-  String get assistantVoiceBehaviorValue;
-
-  /// Assistant Current Role Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Current role'**
-  String get assistantCurrentRoleLabel;
-
-  /// Assistant More Actions Title - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'More actions'**
-  String get assistantMoreActionsTitle;
-
-  /// Assistant Open Notifications Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open notifications'**
-  String get assistantOpenNotificationsAction;
-
-  /// Assistant Open Support Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Open support'**
-  String get assistantOpenSupportAction;
-
   /// Shell Access Restricted Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -9863,18 +8959,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your account access is restricted. Signing you out safely...'**
   String get shellAccessRestrictedBannedSubtitle;
-
-  /// Shell Account Deactivated Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Account deactivated'**
-  String get shellAccountDeactivatedMessage;
-
-  /// Shell Account Banned Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Account banned'**
-  String get shellAccountBannedMessage;
 
   /// Shell Route Not Found Title - User-facing text for the app interface.
   ///
@@ -9993,7 +9077,7 @@ abstract class AppLocalizations {
   /// Trucker Load Detail Price Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'₹{priceAmount} - {priceType}'**
+  /// **'â‚¹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType);
 
   /// Trucker Load Detail Truck Match Available - User-facing text for the app interface.
@@ -10001,12 +9085,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Truck match available'**
   String get truckerLoadDetailTruckMatchAvailable;
-
-  /// Trucker Load Detail No Approved Truck Match Yet - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'No approved truck match yet'**
-  String get truckerLoadDetailNoApprovedTruckMatchYet;
 
   /// Trucker Load Detail Material Summary - User-facing text for the app interface.
   ///
@@ -10030,18 +9108,6 @@ abstract class AppLocalizations {
   /// **'Route and price summary'**
   String get truckerLoadDetailRoutePriceSummaryTitle;
 
-  /// Trucker Load Detail Origin Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Origin: {origin}'**
-  String truckerLoadDetailOriginLabel(Object origin);
-
-  /// Trucker Load Detail Destination Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Destination: {destination}'**
-  String truckerLoadDetailDestinationLabel(Object destination);
-
   /// Trucker Load Detail Pickup Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -10051,7 +9117,7 @@ abstract class AppLocalizations {
   /// Trucker Load Detail Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price: ₹{priceAmount} - {priceType}'**
+  /// **'Price: â‚¹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType);
 
   /// Trucker Load Detail Distance Label - User-facing text for the app interface.
@@ -10162,47 +9228,11 @@ abstract class AppLocalizations {
   /// **'Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.'**
   String get truckerLoadDetailTripCostUnavailableMessage;
 
-  /// Trucker Load Detail Diesel Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Diesel: ₹{amount}'**
-  String truckerLoadDetailDieselLabel(Object amount);
-
-  /// Trucker Load Detail Tolls Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Tolls: ₹{amount}'**
-  String truckerLoadDetailTollsLabel(Object amount);
-
-  /// Trucker Load Detail Mileage Used Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Mileage used: {value} km/L'**
-  String truckerLoadDetailMileageUsedLabel(Object value);
-
-  /// Trucker Load Detail Diesel Price Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Diesel price: ₹{value}/L'**
-  String truckerLoadDetailDieselPriceLabel(Object value);
-
-  /// Trucker Load Detail Estimated Toll Plazas Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Estimated toll plazas: {count}'**
-  String truckerLoadDetailEstimatedTollPlazasLabel(Object count);
-
   /// Trucker Load Detail Supplier Summary Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Supplier summary'**
   String get truckerLoadDetailSupplierSummaryTitle;
-
-  /// Trucker Load Detail Contact Owner Label - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Contact owner: {name}'**
-  String truckerLoadDetailContactOwnerLabel(Object name);
 
   /// Trucker Load Detail Verified Supplier - User-facing text for the app interface.
   ///
@@ -10257,18 +9287,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Booking is blocked'**
   String get truckerLoadDetailBookingBlockedTitle;
-
-  /// Trucker Load Detail Message Supplier Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Message supplier'**
-  String get truckerLoadDetailMessageSupplierAction;
-
-  /// Trucker Load Detail Call Supplier Action - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Call supplier'**
-  String get truckerLoadDetailCallSupplierAction;
 
   /// Trucker Load Detail Using Truck Label - User-facing text for the app interface.
   ///
@@ -10462,41 +9480,11 @@ abstract class AppLocalizations {
   /// **'We could not refresh your session right now. Please continue and try again if needed.'**
   String get authSessionRefreshFailureMessage;
 
-  /// Auth Notification Permission Failure Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Notification permission could not be enabled right now.'**
-  String get authNotificationPermissionFailureMessage;
-
-  /// Auth Tts Voice Guidance Enabled - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Voice guidance is now enabled.'**
-  String get authTtsVoiceGuidanceEnabled;
-
   /// Auth Config Incomplete Title - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
   /// **'Setup incomplete'**
   String get authConfigIncompleteTitle;
-
-  /// Auth Config Incomplete Message - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Some app configuration is missing. Sign-in may not work until setup is completed.'**
-  String get authConfigIncompleteMessage;
-
-  /// Auth Tts Sign In Prompt - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose how you want to sign in. Google sign-in is the fastest option — just one tap. Or you can use your email and password.'**
-  String get authTtsSignInPrompt;
-
-  /// Auth Tts Onboarding Role Prompt - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose your role to continue onboarding.'**
-  String get authTtsOnboardingRolePrompt;
 
   /// Post Load Validation Origin City Required - User-facing text for the app interface.
   ///
@@ -11184,18 +10172,6 @@ abstract class AppLocalizations {
   /// **'You are offline. Actions that need network access should stay disabled.'**
   String get connectivityOfflineActionsMessage;
 
-  /// Locale Select Supported Language - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a supported language'**
-  String get localeSelectSupportedLanguage;
-
-  /// Locale Field Supported Languages - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'Supported languages are English and Hindi'**
-  String get localeFieldSupportedLanguages;
-
   /// Onboarding Gate Timeout Message - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
@@ -11262,269 +10238,17 @@ abstract class AppLocalizations {
   /// **'System update'**
   String get chatPreviewSystem;
 
-  /// Chat Preview Empty - User-facing text for the app interface.
-  ///
-  /// In en, this message translates to:
-  /// **'No messages yet'**
-  String get chatPreviewEmpty;
-
   /// Report source label for supplier load. Placeholder {routeLabel} is the route description.
   ///
   /// In en, this message translates to:
   /// **'Supplier load - {routeLabel}'**
   String reportSourceSupplierLoad(Object routeLabel);
 
-  /// No description provided for @supplierProfileTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Supplier Profile'**
-  String get supplierProfileTitle;
-
-  /// No description provided for @truckerProfileTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker Profile'**
-  String get truckerProfileTitle;
-
-  /// No description provided for @reviewsSectionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reviews & Comments'**
-  String get reviewsSectionTitle;
-
-  /// No description provided for @reviewsCount.
-  ///
-  /// In en, this message translates to:
-  /// **'({count} total)'**
-  String reviewsCount(int count);
-
-  /// No description provided for @noReviewsYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No reviews yet'**
-  String get noReviewsYet;
-
-  /// No description provided for @noReviewsSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reviews will appear here after interactions'**
-  String get noReviewsSubtitle;
-
-  /// No description provided for @noRatingYet.
-  ///
-  /// In en, this message translates to:
-  /// **'No rating yet'**
-  String get noRatingYet;
-
-  /// No description provided for @newTruckerBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'New Trucker'**
-  String get newTruckerBadge;
-
-  /// No description provided for @newSupplierBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'New Supplier'**
-  String get newSupplierBadge;
-
-  /// No description provided for @reviewerProfileHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Tap to view reviewer profile'**
-  String get reviewerProfileHint;
-
-  /// No description provided for @addReplyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Reply to Review'**
-  String get addReplyTitle;
-
-  /// No description provided for @replyButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Reply'**
-  String get replyButton;
-
-  /// No description provided for @rateInteractionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Rate Your Interaction'**
-  String get rateInteractionTitle;
-
-  /// No description provided for @rateInteractionSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'How was your experience with {name}?'**
-  String rateInteractionSubtitle(Object name);
-
-  /// No description provided for @submitReviewButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Submit Review'**
-  String get submitReviewButton;
-
-  /// No description provided for @skipReviewButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Skip'**
-  String get skipReviewButton;
-
-  /// No description provided for @reviewSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Review submitted'**
-  String get reviewSubmitted;
-
-  /// No description provided for @reviewSubmittedSuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Review submitted successfully'**
-  String get reviewSubmittedSuccess;
-
-  /// No description provided for @alreadyReviewedError.
-  ///
-  /// In en, this message translates to:
-  /// **'You have already reviewed this user'**
-  String get alreadyReviewedError;
-
-  /// No description provided for @loadHistoryTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Recent Loads'**
-  String get loadHistoryTitle;
-
-  /// No description provided for @loadMoreButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Load More'**
-  String get loadMoreButton;
-
-  /// No description provided for @avgRatingLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'{rating} out of 5'**
-  String avgRatingLabel(Object rating);
-
-  /// No description provided for @reviewCountLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'({count} reviews)'**
-  String reviewCountLabel(int count);
-
-  /// No description provided for @memberSinceLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Member since {date}'**
-  String memberSinceLabel(Object date);
-
-  /// No description provided for @trustScoreTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Trust & Reviews'**
-  String get trustScoreTitle;
-
-  /// No description provided for @reviewsReceivedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Reviews received'**
-  String get reviewsReceivedLabel;
-
-  /// No description provided for @tripsCompletedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips completed'**
-  String get tripsCompletedLabel;
-
-  /// No description provided for @loadsPostedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Loads posted'**
-  String get loadsPostedLabel;
-
-  /// No description provided for @trucksInFleetLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucks in fleet'**
-  String get trucksInFleetLabel;
-
-  /// No description provided for @superLoadEligibleLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Load eligible'**
-  String get superLoadEligibleLabel;
-
-  /// No description provided for @fleetTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Fleet'**
-  String get fleetTitle;
-
   /// No description provided for @truckCount.
   ///
   /// In en, this message translates to:
   /// **'{count} truck{count, plural, one {} other {s}}'**
   String truckCount(int count);
-
-  /// No description provided for @replyHint.
-  ///
-  /// In en, this message translates to:
-  /// **'You can reply to this review once. Your response will be visible to everyone...'**
-  String get replyHint;
-
-  /// No description provided for @replySuccess.
-  ///
-  /// In en, this message translates to:
-  /// **'Reply added successfully'**
-  String get replySuccess;
-
-  /// No description provided for @replyFailure.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to add reply. You may have already replied.'**
-  String get replyFailure;
-
-  /// No description provided for @addReplyHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Your reply will be visible to everyone viewing your profile'**
-  String get addReplyHint;
-
-  /// No description provided for @noComments.
-  ///
-  /// In en, this message translates to:
-  /// **'No comments'**
-  String get noComments;
-
-  /// No description provided for @newMemberBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'New member'**
-  String get newMemberBadge;
-
-  /// No description provided for @insufficientInteractionError.
-  ///
-  /// In en, this message translates to:
-  /// **'More interaction needed to review'**
-  String get insufficientInteractionError;
-
-  /// No description provided for @activeLoadsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Active Loads ({count})'**
-  String activeLoadsTitle(int count);
-
-  /// No description provided for @responseRateLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'{rate}% response rate'**
-  String responseRateLabel(Object rate);
-
-  /// No description provided for @memberForMonthsLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Member for {count} months'**
-  String memberForMonthsLabel(int count);
 }
 
 class _AppLocalizationsDelegate
