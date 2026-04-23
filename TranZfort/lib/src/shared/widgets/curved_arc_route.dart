@@ -15,6 +15,8 @@ import '../../core/theme/app_typography.dart';
 class CurvedArcRoute extends StatelessWidget {
   final String origin;
   final String destination;
+  final String? originSubtitle; // e.g., state name below origin city
+  final String? destinationSubtitle; // e.g., state name below destination city
   final String? distanceLabel; // e.g., "842 km"
   final String? durationLabel; // e.g., "14h 20m"
   final bool onDarkSurface; // text + arc adapt for dark bg
@@ -24,6 +26,8 @@ class CurvedArcRoute extends StatelessWidget {
     super.key,
     required this.origin,
     required this.destination,
+    this.originSubtitle,
+    this.destinationSubtitle,
     this.distanceLabel,
     this.durationLabel,
     this.onDarkSurface = false,
@@ -34,19 +38,23 @@ class CurvedArcRoute extends StatelessWidget {
     super.key,
     required this.origin,
     required this.destination,
+    this.originSubtitle,
+    this.destinationSubtitle,
     this.distanceLabel,
     this.durationLabel,
   })  : onDarkSurface = false,
-        height = 68;
+        height = 108;
 
   const CurvedArcRoute.hero({
     super.key,
     required this.origin,
     required this.destination,
+    this.originSubtitle,
+    this.destinationSubtitle,
     this.distanceLabel,
     this.durationLabel,
     this.onDarkSurface = true,
-  }) : height = 92;
+  }) : height = 128;
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +68,48 @@ class CurvedArcRoute extends StatelessWidget {
       ?durationLabel,
     ].join(' · ');
 
+    // Reserve vertical bands to prevent pins overlapping labels:
+    //   top chip band ~20px, arc+pins band (flex), label band ~56px
+    //   (FROM + city + optional state/subtitle).
+    const double labelBandHeight = 56;
+    final hasOriginSubtitle = (originSubtitle ?? '').trim().isNotEmpty;
+    final hasDestinationSubtitle = (destinationSubtitle ?? '').trim().isNotEmpty;
+
     return SizedBox(
       height: height,
-      child: Stack(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          // The curved arc
-          Positioned.fill(
+          // Top chip: km · duration
+          SizedBox(
+            height: 20,
+            child: inlineLabel.isEmpty
+                ? const SizedBox.shrink()
+                : Center(
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+                      decoration: BoxDecoration(
+                        color: onDarkSurface ? AppColors.inkMid : AppColors.surfaceSoft,
+                        borderRadius: BorderRadius.circular(AppRadius.chip),
+                        border: Border.all(
+                          color: onDarkSurface ? AppColors.inkBorder : AppColors.divider,
+                          width: 0.5,
+                        ),
+                      ),
+                      child: Text(
+                        inlineLabel,
+                        style: AppTypography.labelMicro.copyWith(
+                          color: textMuted,
+                          letterSpacing: 0.8,
+                        ),
+                      ),
+                    ),
+                  ),
+          ),
+          // Arc + pins band (no labels overlap)
+          Expanded(
             child: CustomPaint(
+              size: Size.infinite,
               painter: _ArcPainter(
                 arcColor: arcColor,
                 originColor: arcColor,
@@ -75,42 +118,9 @@ class CurvedArcRoute extends StatelessWidget {
               ),
             ),
           ),
-          // Inline label (km · duration) on top-center
-          if (inlineLabel.isNotEmpty)
-            Positioned(
-              top: 0,
-              left: 0,
-              right: 0,
-              child: Center(
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                  decoration: BoxDecoration(
-                    color: onDarkSurface
-                        ? AppColors.inkMid
-                        : AppColors.surfaceSoft,
-                    borderRadius: BorderRadius.circular(AppRadius.chip),
-                    border: Border.all(
-                      color: onDarkSurface
-                          ? AppColors.inkBorder
-                          : AppColors.divider,
-                      width: 0.5,
-                    ),
-                  ),
-                  child: Text(
-                    inlineLabel,
-                    style: AppTypography.labelMicro.copyWith(
-                      color: textMuted,
-                      letterSpacing: 0.8,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          // Bottom row: origin ↔ destination labels
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
+          // Labels band: FROM/city left-aligned under origin pin, TO/city right-aligned under dest pin.
+          SizedBox(
+            height: labelBandHeight,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -121,18 +131,36 @@ class CurvedArcRoute extends StatelessWidget {
                     children: [
                       Text(
                         'FROM',
-                        style: AppTypography.labelMicro.copyWith(color: textMuted),
+                        style: AppTypography.labelMicro.copyWith(
+                          color: textMuted,
+                          letterSpacing: 1.1,
+                        ),
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 4),
                       Text(
                         origin,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: textPrimary,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: -0.2,
+                              height: 1.1,
                             ),
                       ),
+                      if (hasOriginSubtitle) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          originSubtitle!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: textMuted,
+                                fontWeight: FontWeight.w500,
+                                height: 1.1,
+                              ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -144,19 +172,38 @@ class CurvedArcRoute extends StatelessWidget {
                     children: [
                       Text(
                         'TO',
-                        style: AppTypography.labelMicro.copyWith(color: textMuted),
+                        style: AppTypography.labelMicro.copyWith(
+                          color: textMuted,
+                          letterSpacing: 1.1,
+                        ),
                       ),
-                      const SizedBox(height: 2),
+                      const SizedBox(height: 4),
                       Text(
                         destination,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.end,
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               color: textPrimary,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w800,
+                              letterSpacing: -0.2,
+                              height: 1.1,
                             ),
                       ),
+                      if (hasDestinationSubtitle) ...[
+                        const SizedBox(height: 2),
+                        Text(
+                          destinationSubtitle!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.end,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: textMuted,
+                                fontWeight: FontWeight.w500,
+                                height: 1.1,
+                              ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -184,9 +231,10 @@ class _ArcPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Reserve bottom 28px for origin/destination labels, top 16px for km chip
-    final arcTop = 18.0;
-    final arcBottom = size.height - 26.0;
+    // Painter owns only the arc+pins band (labels render below in the widget).
+    // Pins sit near the bottom of this band so the arc has room to breathe.
+    final arcTop = 4.0;
+    final arcBottom = size.height - 6.0;
     final midY = (arcTop + arcBottom) / 2;
 
     final originX = 6.0;

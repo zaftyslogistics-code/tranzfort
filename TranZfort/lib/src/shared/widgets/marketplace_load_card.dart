@@ -131,6 +131,8 @@ class MarketplaceLoadCard extends StatelessWidget {
                 child: CurvedArcRoute.compact(
                   origin: load.originCity,
                   destination: load.destinationCity,
+                  originSubtitle: load.originState,
+                  destinationSubtitle: load.destinationState,
                   distanceLabel: routeSnapshot != null
                       ? '${routeSnapshot.distanceKm.toStringAsFixed(0)} km'
                       : null,

@@ -147,6 +147,21 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           mapsLauncher: mapsLauncher,
           formatDate: _formatDate,
         ),
+        if (hasRoutePreview) ...[
+          const SizedBox(height: AppSpacing.sectionGap),
+          _LoadRouteMapSection(
+            originLat: detail.originLat!,
+            originLng: detail.originLng!,
+            destinationLat: detail.destinationLat!,
+            destinationLng: detail.destinationLng!,
+            originLabel: '${detail.originCity}${detail.originState == null ? '' : ', ${detail.originState}'}',
+            destinationLabel:
+                '${detail.destinationCity}${detail.destinationState == null ? '' : ', ${detail.destinationState}'}',
+            mapsUri: mapsUri,
+            mapsLauncher: mapsLauncher,
+            l10n: l10n,
+          ),
+        ],
         const SizedBox(height: AppSpacing.sectionGap),
         DetailSectionCard(
           title: l10n.truckerLoadDetailTruckRequirementTitle,
@@ -480,6 +495,156 @@ class _AvatarCircle extends StatelessWidget {
     } catch (_) {
       return null;
     }
+  }
+}
+
+class _LoadRouteMapSection extends StatelessWidget {
+  final double originLat;
+  final double originLng;
+  final double destinationLat;
+  final double destinationLng;
+  final String originLabel;
+  final String destinationLabel;
+  final Uri? mapsUri;
+  final MapsLauncherService mapsLauncher;
+  final AppLocalizations l10n;
+
+  const _LoadRouteMapSection({
+    required this.originLat,
+    required this.originLng,
+    required this.destinationLat,
+    required this.destinationLng,
+    required this.originLabel,
+    required this.destinationLabel,
+    required this.mapsUri,
+    required this.mapsLauncher,
+    required this.l10n,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final origin = LatLng(originLat, originLng);
+    final destination = LatLng(destinationLat, destinationLng);
+    final bounds = LatLngBounds.fromPoints(<LatLng>[origin, destination]);
+
+    return DetailSectionCard(
+      title: l10n.truckerLoadDetailRoutePriceSummaryTitle,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(AppRadius.card),
+          child: SizedBox(
+            height: 220,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                FlutterMap(
+                  options: MapOptions(
+                    initialCameraFit: CameraFit.bounds(
+                      bounds: bounds,
+                      padding: const EdgeInsets.all(AppSpacing.lg),
+                    ),
+                    interactionOptions: const InteractionOptions(
+                      flags: InteractiveFlag.pinchZoom | InteractiveFlag.drag | InteractiveFlag.doubleTapZoom,
+                    ),
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                      userAgentPackageName: 'com.tranzfort.app',
+                    ),
+                    PolylineLayer(
+                      polylines: [
+                        Polyline(
+                          points: <LatLng>[origin, destination],
+                          strokeWidth: 4,
+                          color: AppColors.primary,
+                        ),
+                      ],
+                    ),
+                    MarkerLayer(
+                      markers: [
+                        Marker(
+                          point: origin,
+                          width: 36,
+                          height: 36,
+                          alignment: Alignment.topCenter,
+                          child: const Icon(Icons.trip_origin, color: AppColors.primary, size: 28),
+                        ),
+                        Marker(
+                          point: destination,
+                          width: 36,
+                          height: 36,
+                          alignment: Alignment.topCenter,
+                          child: const Icon(Icons.location_on, color: AppColors.secondary, size: 32),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                // Floating legend with from/to city labels.
+                Positioned(
+                  left: AppSpacing.sm,
+                  right: AppSpacing.sm,
+                  bottom: AppSpacing.sm,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm,
+                      vertical: AppSpacing.xs,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.94),
+                      borderRadius: BorderRadius.circular(AppRadius.chip),
+                      boxShadow: AppShadows.card,
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.trip_origin, size: 12, color: AppColors.primary),
+                        const SizedBox(width: AppSpacing.xs),
+                        Flexible(
+                          child: Text(
+                            originLabel,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  color: AppColors.textPrimary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.xs),
+                        const Icon(Icons.arrow_forward, size: 12, color: AppColors.textSecondary),
+                        const SizedBox(width: AppSpacing.xs),
+                        Flexible(
+                          child: Text(
+                            destinationLabel,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.end,
+                            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                                  color: AppColors.textPrimary,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (mapsUri != null) ...[
+          const SizedBox(height: AppSpacing.md),
+          OutlineButton(
+            label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
+            onPressed: () async {
+              await mapsLauncher.launchDirectionsUri(mapsUri!);
+            },
+          ),
+        ],
+      ],
+    );
   }
 }
 

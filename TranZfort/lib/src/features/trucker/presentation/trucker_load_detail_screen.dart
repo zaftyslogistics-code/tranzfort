@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -14,13 +16,11 @@ import '../../../l10n/app_localizations.dart';
 import '../../communication/data/chat_repository.dart';
 import '../../../features/shell/presentation/shell_components.dart';
 import '../../support/providers/support_compose_providers.dart';
-import 'trucker_route_preview_screen.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
-import '../../../shared/widgets/static_route_map.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/curved_arc_route.dart';
 import '../data/diesel_price_repository.dart';

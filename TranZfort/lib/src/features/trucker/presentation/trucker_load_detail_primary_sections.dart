@@ -76,6 +76,8 @@ class _LoadRoutePriceSection extends StatelessWidget {
             child: CurvedArcRoute.hero(
               origin: detail.originCity,
               destination: detail.destinationCity,
+              originSubtitle: detail.originState,
+              destinationSubtitle: detail.destinationState,
               distanceLabel: distanceKm != null ? '${distanceKm.toStringAsFixed(0)} km' : null,
               durationLabel: durationMin != null ? _durationCompact(durationMin) : null,
             ),

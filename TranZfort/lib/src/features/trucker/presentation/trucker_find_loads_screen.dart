@@ -101,7 +101,9 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
               sliver: SliverToBoxAdapter(
                 child: HeroActionCard(
                   title: l10n.shellTitleFindLoads,
-                  subtitle: l10n.truckerFindLoadsHeroSubtitle,
+                  // Keep the hero tight when collapsed; only show the longer
+                  // helper copy when the user expands the advanced section.
+                  subtitle: _quickAdvancedExpanded ? l10n.truckerFindLoadsHeroSubtitle : '',
                   compact: true,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
