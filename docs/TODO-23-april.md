@@ -194,15 +194,17 @@ relied on. Phase 2 is now entirely "add new keys + wire them" rather than
 - [x] **B2.9** Added 2 new keys and wired them into
     `onboarding_profile_completion.dart` (suggestion-source labels)
 
-**Total shipped in Phase 2 (so far): 14 keys across 5 files, fully localized in EN + HI.**
+**Total shipped in Phase 2: 48 keys across 10 files, fully localized in EN + HI.**
 
 **Remaining Phase 2 work (profile / reviews / trust-score cluster):**
 
-- [ ] **B2.1** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart` — survey the hardcoded labels, add keys, wire them.
-- [ ] **B2.2** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart` — survey hardcoded labels, add keys, wire them.
-- [ ] **B2.3** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\reviews_section.dart` — survey hardcoded labels, add keys, wire them.
-- [ ] **B2.4** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reply_dialog.dart` — survey hardcoded labels, add keys, wire them.
-- [ ] **B2.5** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart` — survey hardcoded labels, add keys, wire them.
+- [x] **B2.1** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart` — survey the hardcoded labels, add keys, wire them.
+- [x] **B2.2** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart` — survey hardcoded labels, add keys, wire them.
+- [x] **B2.3** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\reviews_section.dart` — survey hardcoded labels, add keys, wire them.
+- [x] **B2.4** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reply_dialog.dart` — survey hardcoded labels, add keys, wire them.
+- [x] **B2.5** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart` — survey hardcoded labels, add keys, wire them.
+
+**Phase 2 complete!** All 4 clusters shipped (A, B, C, D) with 48 keys across 10 files, fully localized in EN + HI.
 
 ### B3. Phase 3 — Hindi parity (needs translator)
 
