@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../data/public_profile_models.dart';
 
 /// Trust score card displaying rating metrics.
@@ -15,6 +16,7 @@ class TrustScoreCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
     final hasRating = profile.hasReviews;
 
     return Card(
@@ -26,7 +28,7 @@ class TrustScoreCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Trust & Reviews',
+              l10n.trustScoreTitle,
               style: theme.textTheme.titleMedium?.copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -54,6 +56,7 @@ class TrustScoreCard extends StatelessWidget {
   Widget _buildMainRating(BuildContext context, bool hasRating) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -79,14 +82,14 @@ class TrustScoreCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
-            'out of 5',
+            l10n.trustScoreOutOfFive,
             style: theme.textTheme.bodySmall?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            '(${profile.reviewCount} reviews)',
+            '(${profile.reviewCount} ${l10n.trustScoreReviews})',
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -99,7 +102,7 @@ class TrustScoreCard extends StatelessWidget {
           ),
           const SizedBox(height: AppSpacing.sm),
           Text(
-            'No rating yet',
+            l10n.trustScoreNoRatingYet,
             style: theme.textTheme.bodyMedium?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -112,6 +115,7 @@ class TrustScoreCard extends StatelessWidget {
   Widget _buildMetrics(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     final metrics = <Widget>[];
 
@@ -119,7 +123,7 @@ class TrustScoreCard extends StatelessWidget {
     metrics.add(_buildMetricRow(
       context,
       icon: Icons.rate_review_outlined,
-      label: 'Reviews received',
+      label: l10n.trustScoreReviewsReceived,
       value: profile.reviewCount.toString(),
     ));
 
@@ -129,7 +133,7 @@ class TrustScoreCard extends StatelessWidget {
       metrics.add(_buildMetricRow(
         context,
         icon: Icons.local_shipping_outlined,
-        label: 'Trips completed',
+        label: l10n.trustScoreTripsCompleted,
         value: profile.completedTripsCount.toString(),
       ));
     } else if (profile.role == 'supplier' && profile.totalLoadsPosted != null) {
@@ -137,7 +141,7 @@ class TrustScoreCard extends StatelessWidget {
       metrics.add(_buildMetricRow(
         context,
         icon: Icons.inventory_2_outlined,
-        label: 'Loads posted',
+        label: l10n.trustScoreLoadsPosted,
         value: profile.totalLoadsPosted.toString(),
       ));
     }
@@ -148,7 +152,7 @@ class TrustScoreCard extends StatelessWidget {
       metrics.add(_buildMetricRow(
         context,
         icon: Icons.directions_bus_outlined,
-        label: 'Trucks in fleet',
+        label: l10n.trustScoreTrucksInFleet,
         value: profile.truckCount.toString(),
       ));
     }
@@ -159,7 +163,7 @@ class TrustScoreCard extends StatelessWidget {
       metrics.add(_buildMetricRow(
         context,
         icon: Icons.verified_outlined,
-        label: 'Super Load eligible',
+        label: l10n.trustScoreSuperLoadEligible,
         value: 'Yes',
         valueColor: Colors.green,
       ));

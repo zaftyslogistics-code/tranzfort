@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/core/error/result.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../data/public_profile_models.dart';
 import '../../data/public_profile_repository.dart';
 
@@ -141,6 +142,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
 
   Widget _buildErrorState(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -153,13 +155,13 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
           ),
           const SizedBox(height: 8),
           Text(
-            'Failed to load history',
+            l10n.loadHistoryFailedToLoad,
             style: TextStyle(color: colorScheme.error),
           ),
           const SizedBox(height: 8),
           TextButton(
             onPressed: _loadInitial,
-            child: const Text('Retry'),
+            child: Text(l10n.loadHistoryRetry),
           ),
         ],
       ),
@@ -168,6 +170,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
 
   Widget _buildEmptyState(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -181,7 +184,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
             ),
             const SizedBox(height: 8),
             Text(
-              'No loads to display',
+              l10n.loadHistoryNoLoads,
               style: TextStyle(
                 color: colorScheme.onSurfaceVariant,
               ),
@@ -195,6 +198,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
   Widget _buildLoadList(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       children: [
@@ -219,7 +223,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
             child: OutlinedButton.icon(
               onPressed: _loadMore,
               icon: const Icon(Icons.expand_more),
-              label: const Text('Load More'),
+              label: Text(l10n.loadHistoryLoadMore),
             ),
           ),
       ],
@@ -281,12 +285,13 @@ class _LoadItemTile extends StatelessWidget {
 
   Widget _buildStatusChip(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     final (color, label) = switch (load.status) {
-      'active' => (Colors.green, 'Active'),
-      'completed' => (colorScheme.primary, 'Completed'),
-      'assigned_partial' => (Colors.orange, 'Partial'),
-      'assigned_full' => (Colors.blue, 'Assigned'),
+      'active' => (Colors.green, l10n.loadHistoryStatusActive),
+      'completed' => (colorScheme.primary, l10n.loadHistoryStatusCompleted),
+      'assigned_partial' => (Colors.orange, l10n.loadHistoryStatusPartial),
+      'assigned_full' => (Colors.blue, l10n.loadHistoryStatusAssigned),
       _ => (colorScheme.onSurfaceVariant, load.status),
     };
 

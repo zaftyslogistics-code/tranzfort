@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../data/review_models.dart';
 import '../data/review_repository.dart';
-import '../providers/review_providers.dart';
 import 'widgets/reply_dialog.dart';
 import 'widgets/review_card.dart';
 import 'widgets/star_rating_input.dart';
@@ -196,6 +196,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
   Widget _buildHeader(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
     final hasSummaryOverride = widget.summaryReviewCount != null;
     final displayedReviewCount = widget.summaryReviewCount ?? _reviews.length;
     final displayedAvgRating = hasSummaryOverride
@@ -208,7 +209,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Reviews & Comments',
+            l10n.reviewsTitle,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
@@ -224,14 +225,14 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  '${displayedAvgRating.toStringAsFixed(1)} average',
+                  '${displayedAvgRating.toStringAsFixed(1)} ${l10n.reviewsAverage}',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
                 ),
                 const SizedBox(width: 16),
                 Text(
-                  '($displayedReviewCount total)',
+                  '($displayedReviewCount ${l10n.reviewsTotal})',
                   style: theme.textTheme.bodyMedium?.copyWith(
                     color: colorScheme.onSurfaceVariant,
                   ),
@@ -246,6 +247,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
 
   Widget _buildErrorState(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 0,
@@ -262,14 +264,14 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               ),
               const SizedBox(height: 12),
               Text(
-                'Unable to load reviews',
+                l10n.reviewsUnableToLoad,
                 style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
               ),
               const SizedBox(height: 8),
               Text(
-                _loadFailure?.message ?? 'Please retry to load the latest reviews.',
+                _loadFailure?.message ?? l10n.reviewsRetryMessage,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: colorScheme.onSurfaceVariant,
@@ -279,7 +281,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               OutlinedButton.icon(
                 onPressed: _loadInitial,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
+                label: Text(l10n.loadHistoryRetry),
               ),
             ],
           ),
@@ -290,6 +292,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
 
   Widget _buildEmptyState(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Card(
       elevation: 0,
@@ -306,7 +309,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               ),
               const SizedBox(height: 12),
               Text(
-                'No reviews yet',
+                l10n.reviewsNoReviewsYet,
                 style: TextStyle(
                   color: colorScheme.onSurfaceVariant,
                   fontWeight: FontWeight.w500,
@@ -314,7 +317,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               ),
               const SizedBox(height: 4),
               Text(
-                'Reviews will appear here after interactions',
+                l10n.reviewsWillAppearHere,
                 style: TextStyle(
                   color: colorScheme.onSurfaceVariant.withOpacity(0.7),
                   fontSize: 12,
@@ -328,6 +331,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
   }
 
   Widget _buildReviewsList(BuildContext context, bool isOwner) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         ListView.builder(
@@ -355,7 +359,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
             child: OutlinedButton.icon(
               onPressed: _loadMore,
               icon: const Icon(Icons.expand_more),
-              label: const Text('Load More Reviews'),
+              label: Text(l10n.reviewsLoadMore),
             ),
           ),
       ],

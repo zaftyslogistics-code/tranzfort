@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../l10n/app_localizations.dart';
 
 /// Dialog for adding a one-time reply to a review.
 class ReplyDialog extends StatefulWidget {
@@ -46,15 +47,16 @@ class _ReplyDialogState extends State<ReplyDialog> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return AlertDialog(
-      title: const Text('Reply to Review'),
+      title: Text(l10n.replyDialogTitle),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'You can reply to this review once. Your response will be visible to everyone who views your profile.',
+            l10n.replyDialogDescription,
             style: theme.textTheme.bodySmall?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -65,7 +67,7 @@ class _ReplyDialogState extends State<ReplyDialog> {
             maxLines: 3,
             maxLength: _maxLength,
             decoration: InputDecoration(
-              hintText: 'Write your reply to ${widget.reviewerName}...',
+              hintText: l10n.replyDialogHint(widget.reviewerName),
               border: const OutlineInputBorder(),
               counterText: '$_charCount / $_maxLength',
             ),
@@ -75,11 +77,11 @@ class _ReplyDialogState extends State<ReplyDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancel'),
+          child: Text(l10n.replyDialogCancel),
         ),
         FilledButton(
           onPressed: _charCount > 0 ? () => Navigator.of(context).pop(_controller.text.trim()) : null,
-          child: const Text('Submit Reply'),
+          child: Text(l10n.replyDialogSubmit),
         ),
       ],
     );

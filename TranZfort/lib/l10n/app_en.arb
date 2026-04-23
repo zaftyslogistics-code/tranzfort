@@ -7198,5 +7198,179 @@
   "truckerLoadDetailCostTileDisclaimer": "Estimates assume \u20b911/km toll, \u20b95/km driver, \u20b92/km misc. Actual costs vary.",
   "@truckerLoadDetailCostTileDisclaimer": {
     "description": "Disclaimer shown beneath the cost tile grid on the trucker load detail screen, warning that real-world costs may differ from the estimate."
+  },
+
+  "@_sectionProfileTrustScore": "=== Profile Trust Score Card ===",
+  "trustScoreTitle": "Trust & Reviews",
+  "@trustScoreTitle": {
+    "description": "Title of the trust score card on the profile screen."
+  },
+  "trustScoreOutOfFive": "out of 5",
+  "@trustScoreOutOfFive": {
+    "description": "Label shown below the star rating indicating the scale (out of 5)."
+  },
+  "trustScoreReviews": "reviews",
+  "@trustScoreReviews": {
+    "description": "Word 'reviews' shown in the count label on the trust score card."
+  },
+  "trustScoreNoRatingYet": "No rating yet",
+  "@trustScoreNoRatingYet": {
+    "description": "Text shown when the user has no ratings yet."
+  },
+  "trustScoreReviewsReceived": "Reviews received",
+  "@trustScoreReviewsReceived": {
+    "description": "Label for the number of reviews received metric."
+  },
+  "trustScoreTripsCompleted": "Trips completed",
+  "@trustScoreTripsCompleted": {
+    "description": "Label for the number of trips completed metric (for truckers)."
+  },
+  "trustScoreLoadsPosted": "Loads posted",
+  "@trustScoreLoadsPosted": {
+    "description": "Label for the number of loads posted metric (for suppliers)."
+  },
+  "trustScoreTrucksInFleet": "Trucks in fleet",
+  "@trustScoreTrucksInFleet": {
+    "description": "Label for the number of trucks in fleet metric (for truckers)."
+  },
+  "trustScoreSuperLoadEligible": "Super Load eligible",
+  "@trustScoreSuperLoadEligible": {
+    "description": "Label for the Super Load eligibility metric (for suppliers)."
+  },
+
+  "@_sectionLoadHistory": "=== Load History Section ===",
+  "loadHistoryFailedToLoad": "Failed to load history",
+  "@loadHistoryFailedToLoad": {
+    "description": "Error message shown when load history fails to load."
+  },
+  "loadHistoryRetry": "Retry",
+  "@loadHistoryRetry": {
+    "description": "Button label to retry loading load history."
+  },
+  "loadHistoryNoLoads": "No loads to display",
+  "@loadHistoryNoLoads": {
+    "description": "Empty state message when there are no loads to show."
+  },
+  "loadHistoryLoadMore": "Load More",
+  "@loadHistoryLoadMore": {
+    "description": "Button label to load more loads in pagination."
+  },
+  "loadHistoryStatusActive": "Active",
+  "@loadHistoryStatusActive": {
+    "description": "Status label for active loads."
+  },
+  "loadHistoryStatusCompleted": "Completed",
+  "@loadHistoryStatusCompleted": {
+    "description": "Status label for completed loads."
+  },
+  "loadHistoryStatusPartial": "Partial",
+  "@loadHistoryStatusPartial": {
+    "description": "Status label for partially assigned loads."
+  },
+  "loadHistoryStatusAssigned": "Assigned",
+  "@loadHistoryStatusAssigned": {
+    "description": "Status label for fully assigned loads."
+  },
+
+  "@_sectionReviews": "=== Reviews Section ===",
+  "reviewsTitle": "Reviews & Comments",
+  "@reviewsTitle": {
+    "description": "Title of the reviews section on the profile screen."
+  },
+  "reviewsAverage": "average",
+  "@reviewsAverage": {
+    "description": "Label shown next to the average rating."
+  },
+  "reviewsTotal": "total",
+  "@reviewsTotal": {
+    "description": "Label shown next to the total review count."
+  },
+  "reviewsUnableToLoad": "Unable to load reviews",
+  "@reviewsUnableToLoad": {
+    "description": "Error message shown when reviews fail to load."
+  },
+  "reviewsRetryMessage": "Please retry to load the latest reviews.",
+  "@reviewsRetryMessage": {
+    "description": "Subtitle message encouraging user to retry loading reviews."
+  },
+  "reviewsNoReviewsYet": "No reviews yet",
+  "@reviewsNoReviewsYet": {
+    "description": "Empty state message when there are no reviews."
+  },
+  "reviewsWillAppearHere": "Reviews will appear here after interactions",
+  "@reviewsWillAppearHere": {
+    "description": "Subtitle explaining when reviews will appear."
+  },
+  "reviewsLoadMore": "Load More Reviews",
+  "@reviewsLoadMore": {
+    "description": "Button label to load more reviews in pagination."
+  },
+
+  "@_sectionReplyDialog": "=== Reply Dialog ===",
+  "replyDialogTitle": "Reply to Review",
+  "@replyDialogTitle": {
+    "description": "Title of the reply dialog."
+  },
+  "replyDialogDescription": "You can reply to this review once. Your response will be visible to everyone who views your profile.",
+  "@replyDialogDescription": {
+    "description": "Description explaining the one-time reply policy."
+  },
+  "replyDialogHint": "Write your reply to {name}...",
+  "@replyDialogHint": {
+    "description": "Hint text in the reply text field with placeholder for reviewer name.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "John"
+      }
+    }
+  },
+  "replyDialogCancel": "Cancel",
+  "@replyDialogCancel": {
+    "description": "Button label to cancel the reply."
+  },
+  "replyDialogSubmit": "Submit Reply",
+  "@replyDialogSubmit": {
+    "description": "Button label to submit the reply."
+  },
+
+  "@_sectionReviewPrompt": "=== Review Prompt Sheet ===",
+  "reviewPromptTitle": "Rate Your Interaction",
+  "@reviewPromptTitle": {
+    "description": "Title of the review prompt bottom sheet."
+  },
+  "reviewPromptSubtitle": "How was your experience with {name}?",
+  "@reviewPromptSubtitle": {
+    "description": "Subtitle asking about the experience with the other user.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Rahul"
+      }
+    }
+  },
+  "reviewPromptCommentHint": "Add a comment (optional)...",
+  "@reviewPromptCommentHint": {
+    "description": "Hint text in the comment field."
+  },
+  "reviewPromptSubmit": "Submit Review",
+  "@reviewPromptSubmit": {
+    "description": "Button label to submit the review."
+  },
+  "reviewPromptSkip": "Skip",
+  "@reviewPromptSkip": {
+    "description": "Button label to skip the review."
+  },
+  "reviewPromptSuccessTitle": "Review Submitted!",
+  "@reviewPromptSuccessTitle": {
+    "description": "Success message shown after submitting a review."
+  },
+  "reviewPromptSuccessMessage": "Thank you for sharing your experience.",
+  "@reviewPromptSuccessMessage": {
+    "description": "Thank you message shown after submitting a review."
+  },
+  "reviewPromptDone": "Done",
+  "@reviewPromptDone": {
+    "description": "Button label to close the success state."
   }
 }

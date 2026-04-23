@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/action_buttons.dart';
-import '../../../../shared/widgets/content_cards.dart';
-import '../../../../shared/widgets/layout_components.dart';
-import '../../data/review_models.dart';
 import '../../data/review_repository.dart';
 import 'star_rating_input.dart';
 
@@ -123,6 +121,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
   }
 
   Widget _buildFormState(ThemeData theme, ColorScheme colorScheme) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -142,7 +141,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
 
         // Title
         Text(
-          'Rate Your Interaction',
+          l10n.reviewPromptTitle,
           style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -150,7 +149,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'How was your experience with ${widget.targetUserName}?',
+          l10n.reviewPromptSubtitle(widget.targetUserName),
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -172,9 +171,9 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
         TextField(
           maxLines: 3,
           maxLength: 500,
-          decoration: const InputDecoration(
-            hintText: 'Add a comment (optional)...',
-            border: OutlineInputBorder(),
+          decoration: InputDecoration(
+            hintText: l10n.reviewPromptCommentHint,
+            border: const OutlineInputBorder(),
           ),
           onChanged: (value) => _comment = value,
         ),
@@ -182,7 +181,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
 
         // Submit button
         PrimaryButton(
-          label: 'Submit Review',
+          label: l10n.reviewPromptSubmit,
           onPressed: _rating > 0 ? _submit : null,
           isLoading: _isSubmitting,
         ),
@@ -190,7 +189,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
 
         // Skip button
         OutlineButton(
-          label: 'Skip',
+          label: l10n.reviewPromptSkip,
           onPressed: _skip,
         ),
         const SizedBox(height: AppSpacing.lg),
@@ -199,6 +198,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
   }
 
   Widget _buildSuccessState(ThemeData theme, ColorScheme colorScheme) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -211,7 +211,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
         ),
         const SizedBox(height: AppSpacing.lg),
         Text(
-          'Review Submitted!',
+          l10n.reviewPromptSuccessTitle,
           style: theme.textTheme.headlineSmall?.copyWith(
             fontWeight: FontWeight.bold,
           ),
@@ -219,7 +219,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
         ),
         const SizedBox(height: AppSpacing.sm),
         Text(
-          'Thank you for sharing your experience.',
+          l10n.reviewPromptSuccessMessage,
           style: theme.textTheme.bodyMedium?.copyWith(
             color: colorScheme.onSurfaceVariant,
           ),
@@ -227,7 +227,7 @@ class _ReviewPromptSheetState extends ConsumerState<ReviewPromptSheet> {
         ),
         const SizedBox(height: AppSpacing.xl),
         PrimaryButton(
-          label: 'Done',
+          label: l10n.reviewPromptDone,
           onPressed: () => context.pop(),
         ),
         const SizedBox(height: AppSpacing.lg),
