@@ -172,32 +172,37 @@ silently skipped. Phase 3 (translation) will shrink this back down.
    measured in the audit (delta of 108 = keys used in code but missing HI,
    which will be addressed in Phase 3).
 
-### B2. Phase 2 — Wire existing keys into hardcoded spots
+### B2. Phase 2 — Wire existing keys into hardcoded spots ✅ PARTIALLY SHIPPED 24 Apr
 
 **Why second:** many screens have **both** unused keys **and** hardcoded
 English strings — the keys are there, nobody wired them. This is free
 Hindi coverage without writing translations.
 
-- [ ] **B2.1** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart` — replace hardcoded labels with `trustScoreTitle`, `memberSinceLabel`, `avgRatingLabel`, `reviewsReceivedLabel` (or the subset we decide to keep in Phase 1).
-- [ ] **B2.2** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart` — wire `loadHistoryTitle`, `loadsPostedLabel`, `tripsCompletedLabel`, `trucksInFleetLabel`, `responseRateLabel`.
-- [ ] **B2.3** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\reviews_section.dart` — wire `reviewsSectionTitle`, `noReviewsYet`, `noReviewsSubtitle`, `reviewsCount`.
-- [ ] **B2.4** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reply_dialog.dart` — wire `replyHint`, `replyButton`, `replySuccess`, `replyFailure`.
-- [ ] **B2.5** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart` — wire `rateInteractionTitle`, `rateInteractionSubtitle`, `submitReviewButton`, `skipReviewButton`.
-- [ ] **B2.6** Add five new keys (`authRecommendedChip`,
-      `authFastestMostSecure`, `authOneTapNoPasswordSecure`,
-      `commonCallTooltip`, `commonChatTooltip`) and wire them into:
-  - [ ] `auth_screen_sections.dart:213,224,249` (trust copy on the Google card).
-  - [ ] `marketplace_load_card.dart:307,315` (`'Call'` / `'Chat'` tooltips).
-- [ ] **B2.7** Localize the `TtsActionButton` tooltip — either reuse an
-      existing key or add `commonMuteVoice` / `commonTurnVoiceOn`. Mirror
-      values into `app_hi.arb` in the same commit.
-- [ ] **B2.8** Localize `trucker_load_detail_shared.dart` cost-tile labels
-      (`'DIESEL'`, `'TOLL (₹11/km)'`, `'DRIVER (₹5/km)'`, `'MISC (₹2/km)'`).
-- [ ] **B2.9** Localize `onboarding_profile_completion.dart:372-373`
-      suggestion-source labels (`'Google Places'` / `'Offline database'`).
+**NOTE:** Phase 1 removed the "existing unused keys" that the original plan
+relied on. Phase 2 is now entirely "add new keys + wire them" rather than
+"wire existing keys."
 
-Each sub-task above ships independently — commit per sub-task so rollbacks
-are surgical.
+**Completed clusters (shipped in commit `0928c86`):**
+
+- [x] **B2.6** Added 7 new keys and wired them:
+  - `authRecommendedChip`, `authFastestMostSecure`, `authOneTapNoPasswordSecure`
+    → `auth_screen_sections.dart` (Google card trust copy)
+  - `commonMuteVoice`, `commonTurnVoiceOn` → `tts_action_button.dart` tooltip
+  - `commonCallTooltip`, `commonChatTooltip` → `marketplace_load_card.dart`
+- [x] **B2.8** Added 5 new keys and wired them into
+    `trucker_load_detail_shared.dart` (cost-tile labels + disclaimer)
+- [x] **B2.9** Added 2 new keys and wired them into
+    `onboarding_profile_completion.dart` (suggestion-source labels)
+
+**Total shipped in Phase 2 (so far): 14 keys across 5 files, fully localized in EN + HI.**
+
+**Remaining Phase 2 work (profile / reviews / trust-score cluster):**
+
+- [ ] **B2.1** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart` — survey the hardcoded labels, add keys, wire them.
+- [ ] **B2.2** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart` — survey hardcoded labels, add keys, wire them.
+- [ ] **B2.3** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\reviews_section.dart` — survey hardcoded labels, add keys, wire them.
+- [ ] **B2.4** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reply_dialog.dart` — survey hardcoded labels, add keys, wire them.
+- [ ] **B2.5** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart` — survey hardcoded labels, add keys, wire them.
 
 ### B3. Phase 3 — Hindi parity (needs translator)
 
