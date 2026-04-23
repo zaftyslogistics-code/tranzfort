@@ -12,6 +12,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
 import '../providers/auth_providers.dart';
 
 class OnboardingGateScreen extends ConsumerStatefulWidget {
@@ -207,8 +208,9 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.onboardingChooseRoleTitle),
-          actions: [
-            const TtsActionButton(),
+          actions: const [
+            TtsActionButton(),
+            LanguageToggleAction(),
           ],
         ),
         body: SafeArea(

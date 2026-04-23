@@ -229,12 +229,14 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                             ],
                           ),
                           const SizedBox(height: 12),
-                          // Big prominent Google sign-in (horizontal full-width)
+                          // Big prominent Google sign-in: the Google wordmark
+                          // fills most of the card from left to right so the
+                          // one-tap path is visually dominant.
                           GoogleSignInButton(
                             label: l10n.authContinueWithGoogle,
                             onPressed: _continueWithGoogle,
                             isLoading: authScreenState.isLoading,
-                            height: 56,
+                            height: 96,
                           ),
                           const SizedBox(height: 10),
                           // Trust row
@@ -330,7 +332,10 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
             summary: ttsSummary,
             screenKey: AppRoutes.authPath,
           ),
-          // TTS button in top-right (last child for tap priority)
+          // Voice + language controls in top-right (last children for tap priority).
+          // Language toggle is surfaced here so new users can switch English/Hindi
+          // before signing in — the onboarding flow intentionally keeps the rest
+          // of the top-bar minimal.
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             right: 8,
@@ -340,7 +345,13 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                 data: Theme.of(context).copyWith(
                   iconTheme: const IconThemeData(color: Colors.white),
                 ),
-                child: const TtsActionButton(),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    TtsActionButton(),
+                    LanguageToggleAction(),
+                  ],
+                ),
               ),
             ),
           ),

@@ -17,7 +17,7 @@ class GoogleSignInButton extends StatelessWidget {
     required this.label,
     this.onPressed,
     this.isLoading = false,
-    this.height = 52,
+    this.height = 84,
     this.width,
   });
 
@@ -39,23 +39,32 @@ class GoogleSignInButton extends StatelessWidget {
           child: SizedBox(
             height: height,
             width: width ?? double.infinity, // Fill width by default
-            child: Center(
-              child: isLoading
-                  ? SizedBox(
-                      width: 20,
-                      height: 20,
+            child: isLoading
+                ? Center(
+                    child: SizedBox(
+                      width: 24,
+                      height: 24,
                       child: CircularProgressIndicator(
                         strokeWidth: 2,
                         valueColor: AlwaysStoppedAnimation<Color>(AppColors.primary),
                       ),
-                    )
-                  : Image.asset(
-                      'assets/images/google-logo.png',
-                      height: height * 0.6, // Use 60% of button height for logo
-                      fit: BoxFit.contain,
-                      errorBuilder: (context, error, stackTrace) => const Icon(Icons.error_outline, size: 32),
                     ),
-            ),
+                  )
+                : Padding(
+                    // Let the Google wordmark breathe edge-to-edge while keeping
+                    // a small safe inset so the rounded corners don't clip.
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                      vertical: AppSpacing.sm,
+                    ),
+                    child: Image.asset(
+                      'assets/images/google-logo.png',
+                      fit: BoxFit.contain,
+                      semanticLabel: label,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const Icon(Icons.error_outline, size: 32),
+                    ),
+                  ),
           ),
         ),
       ),

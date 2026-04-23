@@ -12,6 +12,7 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
 import '../providers/auth_providers.dart';
 import '../../verification/data/verification_location_service.dart' as location_service;
 import '../../supplier/data/supplier_location_services.dart';
@@ -452,8 +453,9 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.onboardingCompleteProfileTitle),
-          actions: [
-            const TtsActionButton(),
+          actions: const [
+            TtsActionButton(),
+            LanguageToggleAction(),
           ],
         ),
         body: SafeArea(

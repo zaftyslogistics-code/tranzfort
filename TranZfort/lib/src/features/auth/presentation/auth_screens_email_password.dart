@@ -193,8 +193,9 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
       child: Scaffold(
         appBar: AppBar(
           title: Text(l10n.authPasswordTitle),
-          actions: [
-            const TtsActionButton(),
+          actions: const [
+            TtsActionButton(),
+            LanguageToggleAction(),
           ],
         ),
         body: SafeArea(

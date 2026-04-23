@@ -77,7 +77,10 @@ class ContextualTtsService {
   }
 
   String _voiceLanguage(String languageCode) {
-    return languageCode.trim().toLowerCase() == 'hi' ? 'hi-IN' : 'en-IN';
+    // English defaults to UK (en-GB) per product direction; Hindi stays en-IN.
+    // The device TTS engine will gracefully fall back to another English voice
+    // if en-GB isn't installed.
+    return languageCode.trim().toLowerCase() == 'hi' ? 'hi-IN' : 'en-GB';
   }
 
   String _sanitizeMessage(String message) {
