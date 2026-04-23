@@ -7134,5 +7134,69 @@
   },
   "@chatPreviewSystem": {
     "description": "Chat Preview System - User-facing text for the app interface."
+  },
+
+  "@_sectionAuthTrustCopy": "=== Auth Trust Copy ===",
+  "authRecommendedChip": "RECOMMENDED",
+  "@authRecommendedChip": {
+    "description": "Chip label on the Google sign-in card indicating the recommended sign-in method."
+  },
+  "authFastestMostSecure": "Fastest \u00b7 Most secure",
+  "@authFastestMostSecure": {
+    "description": "Tagline shown next to the RECOMMENDED chip on the Google sign-in card."
+  },
+  "authOneTapNoPasswordSecure": "One-tap \u00b7 No password \u00b7 Secure",
+  "@authOneTapNoPasswordSecure": {
+    "description": "Trust row shown below the Google sign-in button emphasizing the benefits of Google sign-in."
+  },
+
+  "@_sectionCommonTooltips": "=== Common Tooltips ===",
+  "commonMuteVoice": "Mute voice",
+  "@commonMuteVoice": {
+    "description": "Tooltip on the voice assistant button when it is currently unmuted; tapping will mute it."
+  },
+  "commonTurnVoiceOn": "Turn voice on",
+  "@commonTurnVoiceOn": {
+    "description": "Tooltip on the voice assistant button when it is currently muted; tapping will unmute it."
+  },
+  "commonCallTooltip": "Call",
+  "@commonCallTooltip": {
+    "description": "Tooltip on the phone / call icon button used across marketplace load cards and supplier contact rows."
+  },
+  "commonChatTooltip": "Chat",
+  "@commonChatTooltip": {
+    "description": "Tooltip on the chat icon button used across marketplace load cards and supplier contact rows."
+  },
+
+  "@_sectionCommonSuggestionSources": "=== Suggestion Sources ===",
+  "commonSuggestionSourceGooglePlaces": "Google Places",
+  "@commonSuggestionSourceGooglePlaces": {
+    "description": "Subtitle for a location suggestion returned from the Google Places Autocomplete API."
+  },
+  "commonSuggestionSourceOffline": "Offline database",
+  "@commonSuggestionSourceOffline": {
+    "description": "Subtitle for a location suggestion resolved from the bundled offline city database."
+  },
+
+  "@_sectionTruckerLoadDetailCostTiles": "=== Trucker Load Detail Cost Tiles ===",
+  "truckerLoadDetailCostTileDieselLabel": "DIESEL",
+  "@truckerLoadDetailCostTileDieselLabel": {
+    "description": "Short uppercase label for the diesel cost tile on the trucker load detail screen."
+  },
+  "truckerLoadDetailCostTileTollLabel": "TOLL (\u20b911/km)",
+  "@truckerLoadDetailCostTileTollLabel": {
+    "description": "Short uppercase label for the toll cost tile including the per-km rate used in the estimate."
+  },
+  "truckerLoadDetailCostTileDriverLabel": "DRIVER (\u20b95/km)",
+  "@truckerLoadDetailCostTileDriverLabel": {
+    "description": "Short uppercase label for the driver cost tile including the per-km rate used in the estimate."
+  },
+  "truckerLoadDetailCostTileMiscLabel": "MISC (\u20b92/km)",
+  "@truckerLoadDetailCostTileMiscLabel": {
+    "description": "Short uppercase label for the miscellaneous cost tile including the per-km rate used in the estimate."
+  },
+  "truckerLoadDetailCostTileDisclaimer": "Estimates assume \u20b911/km toll, \u20b95/km driver, \u20b92/km misc. Actual costs vary.",
+  "@truckerLoadDetailCostTileDisclaimer": {
+    "description": "Disclaimer shown beneath the cost tile grid on the trucker load detail screen, warning that real-world costs may differ from the estimate."
   }
 }

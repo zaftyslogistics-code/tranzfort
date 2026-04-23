@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers/tts_state_provider.dart';
 import '../../core/theme/app_colors.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Voice assistant mute toggle for the app bar.
 ///
@@ -21,8 +22,9 @@ class TtsActionButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
     final isMuted = ref.watch(ttsMutedProvider);
-    final tooltip = isMuted ? 'Turn voice on' : 'Mute voice';
+    final tooltip = isMuted ? l10n.commonTurnVoiceOn : l10n.commonMuteVoice;
 
     return IconButton(
       tooltip: tooltip,

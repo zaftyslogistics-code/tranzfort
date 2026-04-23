@@ -153,6 +153,7 @@ class _EarningsEstimateCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final profitColor = tripCost.isProfitable ? AppColors.primaryOnDark : AppColors.error;
     final profitBg = tripCost.isProfitable
         ? AppColors.primaryOnDark.withValues(alpha: 0.15)
@@ -359,7 +360,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               Expanded(
                 child: _CostBreakdownTile(
                   icon: Icons.local_gas_station_outlined,
-                  label: 'DIESEL',
+                  label: l10n.truckerLoadDetailCostTileDieselLabel,
                   value: '₹${_fmt(tripCost.dieselCost)}',
                   accent: AppColors.primaryOnDark,
                 ),
@@ -368,7 +369,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               Expanded(
                 child: _CostBreakdownTile(
                   icon: Icons.toll_outlined,
-                  label: 'TOLL (₹11/km)',
+                  label: l10n.truckerLoadDetailCostTileTollLabel,
                   value: '₹${_fmt(tripCost.tollCost)}',
                   accent: AppColors.secondaryOnDark,
                 ),
@@ -381,7 +382,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               Expanded(
                 child: _CostBreakdownTile(
                   icon: Icons.person_outline,
-                  label: 'DRIVER (₹5/km)',
+                  label: l10n.truckerLoadDetailCostTileDriverLabel,
                   value: '₹${_fmt(tripCost.driverCost)}',
                   accent: AppColors.info,
                 ),
@@ -390,7 +391,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               Expanded(
                 child: _CostBreakdownTile(
                   icon: Icons.build_outlined,
-                  label: 'MISC (₹2/km)',
+                  label: l10n.truckerLoadDetailCostTileMiscLabel,
                   value: '₹${_fmt(tripCost.miscCost)}',
                   accent: AppColors.neutral,
                 ),
@@ -441,7 +442,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
-                  'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.',
+                  l10n.truckerLoadDetailCostTileDisclaimer,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.inkTextMuted,
                         fontSize: 11,

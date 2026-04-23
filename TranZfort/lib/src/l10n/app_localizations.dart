@@ -10249,6 +10249,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} truck{count, plural, one {} other {s}}'**
   String truckCount(int count);
+
+  /// Chip label on the Google sign-in card indicating the recommended sign-in method.
+  ///
+  /// In en, this message translates to:
+  /// **'RECOMMENDED'**
+  String get authRecommendedChip;
+
+  /// Tagline shown next to the RECOMMENDED chip on the Google sign-in card.
+  ///
+  /// In en, this message translates to:
+  /// **'Fastest · Most secure'**
+  String get authFastestMostSecure;
+
+  /// Trust row shown below the Google sign-in button emphasizing the benefits of Google sign-in.
+  ///
+  /// In en, this message translates to:
+  /// **'One-tap · No password · Secure'**
+  String get authOneTapNoPasswordSecure;
+
+  /// Tooltip on the voice assistant button when it is currently unmuted; tapping will mute it.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute voice'**
+  String get commonMuteVoice;
+
+  /// Tooltip on the voice assistant button when it is currently muted; tapping will unmute it.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn voice on'**
+  String get commonTurnVoiceOn;
+
+  /// Tooltip on the phone / call icon button used across marketplace load cards and supplier contact rows.
+  ///
+  /// In en, this message translates to:
+  /// **'Call'**
+  String get commonCallTooltip;
+
+  /// Tooltip on the chat icon button used across marketplace load cards and supplier contact rows.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get commonChatTooltip;
+
+  /// Subtitle for a location suggestion returned from the Google Places Autocomplete API.
+  ///
+  /// In en, this message translates to:
+  /// **'Google Places'**
+  String get commonSuggestionSourceGooglePlaces;
+
+  /// Subtitle for a location suggestion resolved from the bundled offline city database.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline database'**
+  String get commonSuggestionSourceOffline;
+
+  /// Short uppercase label for the diesel cost tile on the trucker load detail screen.
+  ///
+  /// In en, this message translates to:
+  /// **'DIESEL'**
+  String get truckerLoadDetailCostTileDieselLabel;
+
+  /// Short uppercase label for the toll cost tile including the per-km rate used in the estimate.
+  ///
+  /// In en, this message translates to:
+  /// **'TOLL (₹11/km)'**
+  String get truckerLoadDetailCostTileTollLabel;
+
+  /// Short uppercase label for the driver cost tile including the per-km rate used in the estimate.
+  ///
+  /// In en, this message translates to:
+  /// **'DRIVER (₹5/km)'**
+  String get truckerLoadDetailCostTileDriverLabel;
+
+  /// Short uppercase label for the miscellaneous cost tile including the per-km rate used in the estimate.
+  ///
+  /// In en, this message translates to:
+  /// **'MISC (₹2/km)'**
+  String get truckerLoadDetailCostTileMiscLabel;
+
+  /// Disclaimer shown beneath the cost tile grid on the trucker load detail screen, warning that real-world costs may differ from the estimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.'**
+  String get truckerLoadDetailCostTileDisclaimer;
 }
 
 class _AppLocalizationsDelegate

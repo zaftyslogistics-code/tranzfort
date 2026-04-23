@@ -2253,5 +2253,27 @@
   "chatPreviewDocument": "दस्तावेज़ साझा किया गया",
   "chatPreviewMapCard": "मार्ग कार्ड साझा किया गया",
   "chatPreviewTruckCard": "ट्रक विवरण साझा किए गए",
-  "chatPreviewSystem": "सिस्टम अद्यतन"
+  "chatPreviewSystem": "सिस्टम अद्यतन",
+
+  "@_sectionAuthTrustCopy": "═══ Auth Trust Copy ═══",
+  "authRecommendedChip": "सुझाया गया",
+  "authFastestMostSecure": "सबसे तेज़ · सबसे सुरक्षित",
+  "authOneTapNoPasswordSecure": "एक-टैप · पासवर्ड नहीं · सुरक्षित",
+
+  "@_sectionCommonTooltips": "═══ Common Tooltips ═══",
+  "commonMuteVoice": "आवाज़ बंद करें",
+  "commonTurnVoiceOn": "आवाज़ चालू करें",
+  "commonCallTooltip": "कॉल",
+  "commonChatTooltip": "चैट",
+
+  "@_sectionCommonSuggestionSources": "═══ Suggestion Sources ═══",
+  "commonSuggestionSourceGooglePlaces": "Google Places",
+  "commonSuggestionSourceOffline": "ऑफ़लाइन डेटाबेस",
+
+  "@_sectionTruckerLoadDetailCostTiles": "═══ Trucker Load Detail Cost Tiles ═══",
+  "truckerLoadDetailCostTileDieselLabel": "डीज़ल",
+  "truckerLoadDetailCostTileTollLabel": "टोल (₹11/किमी)",
+  "truckerLoadDetailCostTileDriverLabel": "ड्राइवर (₹5/किमी)",
+  "truckerLoadDetailCostTileMiscLabel": "अन्य (₹2/किमी)",
+  "truckerLoadDetailCostTileDisclaimer": "अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।"
 }

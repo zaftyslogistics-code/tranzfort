@@ -304,7 +304,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     if (onCall != null)
                       _IconActionButton(
                         icon: Icons.phone_outlined,
-                        tooltip: 'Call',
+                        tooltip: l10n.commonCallTooltip,
                         color: AppColors.success,
                         onPressed: onCall,
                       ),
@@ -312,7 +312,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                       const SizedBox(width: AppSpacing.xs),
                       _IconActionButton(
                         icon: Icons.chat_bubble_outline,
-                        tooltip: 'Chat',
+                        tooltip: l10n.commonChatTooltip,
                         color: AppColors.primary,
                         onPressed: onChat,
                       ),

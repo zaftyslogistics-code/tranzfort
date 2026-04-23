@@ -210,7 +210,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                                     Icon(Icons.bolt, size: 12, color: AppColors.primary),
                                     const SizedBox(width: 4),
                                     Text(
-                                      'RECOMMENDED',
+                                      l10n.authRecommendedChip,
                                       style: AppTypography.labelMicro.copyWith(
                                         color: AppColors.primaryChipText,
                                         fontSize: 10,
@@ -221,7 +221,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                               ),
                               const Spacer(),
                               Text(
-                                'Fastest · Most secure',
+                                l10n.authFastestMostSecure,
                                 style: AppTypography.labelMicro.copyWith(
                                   color: AppColors.textMuted,
                                 ),
@@ -246,7 +246,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                               Icon(Icons.lock_outline, size: 14, color: AppColors.success),
                               const SizedBox(width: 6),
                               Text(
-                                'One-tap · No password · Secure',
+                                l10n.authOneTapNoPasswordSecure,
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: AppColors.textMuted,
                                       fontWeight: FontWeight.w500,

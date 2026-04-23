@@ -6194,4 +6194,47 @@ class AppLocalizationsHi extends AppLocalizations {
     );
     return '$count truck$_temp0';
   }
+
+  @override
+  String get authRecommendedChip => 'सुझाया गया';
+
+  @override
+  String get authFastestMostSecure => 'सबसे तेज़ · सबसे सुरक्षित';
+
+  @override
+  String get authOneTapNoPasswordSecure => 'एक-टैप · पासवर्ड नहीं · सुरक्षित';
+
+  @override
+  String get commonMuteVoice => 'आवाज़ बंद करें';
+
+  @override
+  String get commonTurnVoiceOn => 'आवाज़ चालू करें';
+
+  @override
+  String get commonCallTooltip => 'कॉल';
+
+  @override
+  String get commonChatTooltip => 'चैट';
+
+  @override
+  String get commonSuggestionSourceGooglePlaces => 'Google Places';
+
+  @override
+  String get commonSuggestionSourceOffline => 'ऑफ़लाइन डेटाबेस';
+
+  @override
+  String get truckerLoadDetailCostTileDieselLabel => 'डीज़ल';
+
+  @override
+  String get truckerLoadDetailCostTileTollLabel => 'टोल (₹11/किमी)';
+
+  @override
+  String get truckerLoadDetailCostTileDriverLabel => 'ड्राइवर (₹5/किमी)';
+
+  @override
+  String get truckerLoadDetailCostTileMiscLabel => 'अन्य (₹2/किमी)';
+
+  @override
+  String get truckerLoadDetailCostTileDisclaimer =>
+      'अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।';
 }

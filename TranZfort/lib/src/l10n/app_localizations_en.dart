@@ -6195,4 +6195,47 @@ class AppLocalizationsEn extends AppLocalizations {
     );
     return '$count truck$_temp0';
   }
+
+  @override
+  String get authRecommendedChip => 'RECOMMENDED';
+
+  @override
+  String get authFastestMostSecure => 'Fastest · Most secure';
+
+  @override
+  String get authOneTapNoPasswordSecure => 'One-tap · No password · Secure';
+
+  @override
+  String get commonMuteVoice => 'Mute voice';
+
+  @override
+  String get commonTurnVoiceOn => 'Turn voice on';
+
+  @override
+  String get commonCallTooltip => 'Call';
+
+  @override
+  String get commonChatTooltip => 'Chat';
+
+  @override
+  String get commonSuggestionSourceGooglePlaces => 'Google Places';
+
+  @override
+  String get commonSuggestionSourceOffline => 'Offline database';
+
+  @override
+  String get truckerLoadDetailCostTileDieselLabel => 'DIESEL';
+
+  @override
+  String get truckerLoadDetailCostTileTollLabel => 'TOLL (₹11/km)';
+
+  @override
+  String get truckerLoadDetailCostTileDriverLabel => 'DRIVER (₹5/km)';
+
+  @override
+  String get truckerLoadDetailCostTileMiscLabel => 'MISC (₹2/km)';
+
+  @override
+  String get truckerLoadDetailCostTileDisclaimer =>
+      'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.';
 }

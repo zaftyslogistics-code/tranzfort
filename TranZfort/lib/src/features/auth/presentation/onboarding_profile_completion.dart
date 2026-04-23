@@ -304,6 +304,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   Future<void> _handleManualLocation() async {
+    final l10n = AppLocalizations.of(context);
     final searchController = TextEditingController();
     PlaceSuggestion? selectedSuggestion;
     List<PlaceSuggestion> suggestions = [];
@@ -369,8 +370,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                         return ListTile(
                           title: Text(suggestion.label),
                           subtitle: suggestion.source == 'google_places'
-                              ? const Text('Google Places')
-                              : const Text('Offline database'),
+                              ? Text(l10n.commonSuggestionSourceGooglePlaces)
+                              : Text(l10n.commonSuggestionSourceOffline),
                           onTap: () {
                             setDialogState(() => selectedSuggestion = suggestion);
                             Navigator.pop(context, suggestion);
