@@ -1,0 +1,20 @@
+Localization Triage Summary
+===========================
+Generated: 2026-04-24T21:09:14.334153
+
+Total EN keys: 1733
+Total HI keys: 1627
+Identical EN/HI values (need triage): 402
+Translated (different values): 1225
+Missing in HI: 106
+Orphan HI keys: 0
+
+Files written to C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\tool:
+- identical_keys.csv    : keys where HI == EN (needs manual triage)
+- missing_hi.csv        : keys present in EN but missing in HI
+- orphan_hi.csv         : keys present in HI but not in EN
+- translated.csv        : keys already translated (for reference)
+
+Next step: Review identical_keys.csv and mark category column as:
+  'pass'    = brand names, emails, technical terms (keep as-is)
+  'translate' = genuine untranslated strings (hand to translator)
