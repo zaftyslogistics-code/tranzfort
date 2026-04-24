@@ -238,9 +238,12 @@ impact of consolidation.
       `ReadinessSummary*` mirror keys become a single
       `supplierSuperLoadNextStep` key taking a `status` argument.
 - [ ] **B4.2** Audit `trucker*VerificationStatus*` family similarly.
-- [ ] **B4.3** Strip `@metadata` `description` fields on mechanical keys
+- [x] **B4.3** Strip `@metadata` `description` fields on mechanical keys
       (plain nouns, button labels). Keep descriptions only where the key
       takes parameters or is ambiguous without context.
+      **Shipped** commit `be1487e` — 1578 metadata descriptions stripped,
+      141 kept (have placeholders). Significant ARB + generated Dart
+      payload reduction.
 - [ ] **B4.4** Target metrics: EN key count ≤ 1,500, `app_en.arb` ≤ 350 KB,
       generated Dart payload < 750 KB.
 
