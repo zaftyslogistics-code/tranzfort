@@ -6237,4 +6237,126 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get truckerLoadDetailCostTileDisclaimer =>
       'अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।';
+
+  @override
+  String get trustScoreTitle => 'विश्वास और समीक्षाएं';
+
+  @override
+  String get trustScoreOutOfFive => '5 में से';
+
+  @override
+  String get trustScoreReviews => 'समीक्षाएं';
+
+  @override
+  String get trustScoreNoRatingYet => 'अभी तक कोई रेटिंग नहीं';
+
+  @override
+  String get trustScoreReviewsReceived => 'प्राप्त समीक्षाएं';
+
+  @override
+  String get trustScoreTripsCompleted => 'पूर्ण की गई यात्राएं';
+
+  @override
+  String get trustScoreLoadsPosted => 'पोस्ट किए गए लोड';
+
+  @override
+  String get trustScoreTrucksInFleet => 'बेड़े में ट्रक';
+
+  @override
+  String get trustScoreSuperLoadEligible => 'सुपर लोड पात्र';
+
+  @override
+  String get loadHistoryFailedToLoad => 'इतिहास लोड करने में विफल';
+
+  @override
+  String get loadHistoryRetry => 'पुनः प्रयास करें';
+
+  @override
+  String get loadHistoryNoLoads => 'प्रदर्शित करने के लिए कोई लोड नहीं';
+
+  @override
+  String get loadHistoryLoadMore => 'और लोड करें';
+
+  @override
+  String get loadHistoryStatusActive => 'सक्रिय';
+
+  @override
+  String get loadHistoryStatusCompleted => 'पूर्ण';
+
+  @override
+  String get loadHistoryStatusPartial => 'आंशिक';
+
+  @override
+  String get loadHistoryStatusAssigned => 'सौंपा गया';
+
+  @override
+  String get reviewsTitle => 'समीक्षाएं और टिप्पणियां';
+
+  @override
+  String get reviewsAverage => 'औसत';
+
+  @override
+  String get reviewsTotal => 'कुल';
+
+  @override
+  String get reviewsUnableToLoad => 'समीक्षाएं लोड करने में असमर्थ';
+
+  @override
+  String get reviewsRetryMessage =>
+      'कृपया नवीनतम समीक्षाएं लोड करने के लिए पुनः प्रयास करें।';
+
+  @override
+  String get reviewsNoReviewsYet => 'अभी तक कोई समीक्षा नहीं';
+
+  @override
+  String get reviewsWillAppearHere =>
+      'इंटरैक्शन के बाद यहां समीक्षाएं दिखाई देंगी';
+
+  @override
+  String get reviewsLoadMore => 'और समीक्षाएं लोड करें';
+
+  @override
+  String get replyDialogTitle => 'समीक्षा का जवाब दें';
+
+  @override
+  String get replyDialogDescription =>
+      'आप इस समीक्षा का एक बार जवाब दे सकते हैं। आपकी प्रतिक्रिया आपकी प्रोफ़ाइल देखने वाले सभी को दिखाई देगी।';
+
+  @override
+  String replyDialogHint(String name) {
+    return '$name को अपना जवाब लिखें...';
+  }
+
+  @override
+  String get replyDialogCancel => 'रद्द करें';
+
+  @override
+  String get replyDialogSubmit => 'जवाब भेजें';
+
+  @override
+  String get reviewPromptTitle => 'अपने इंटरैक्शन को रेट करें';
+
+  @override
+  String reviewPromptSubtitle(String name) {
+    return '$name के साथ आपका अनुभव कैसा रहा?';
+  }
+
+  @override
+  String get reviewPromptCommentHint => 'टिप्पणी जोड़ें (वैकल्पिक)...';
+
+  @override
+  String get reviewPromptSubmit => 'समीक्षा जमा करें';
+
+  @override
+  String get reviewPromptSkip => 'छोड़ें';
+
+  @override
+  String get reviewPromptSuccessTitle => 'समीक्षा जमा हो गई!';
+
+  @override
+  String get reviewPromptSuccessMessage =>
+      'अपना अनुभव साझा करने के लिए धन्यवाद।';
+
+  @override
+  String get reviewPromptDone => 'हो गया';
 }
