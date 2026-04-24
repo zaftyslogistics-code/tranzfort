@@ -4324,7 +4324,7 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsSummaryPriceRange.
   ///
   /// In en, this message translates to:
-  /// **'â‚¹{minPrice}-{maxPrice}'**
+  /// **'₹{minPrice}-{maxPrice}'**
   String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice);
 
   /// Trucker Find Loads Summary Super Loads - User-facing text for the app interface.
@@ -4432,13 +4432,13 @@ abstract class AppLocalizations {
   /// Trucker Find Loads Min Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Min price (â‚¹)'**
+  /// **'Min price (₹)'**
   String get truckerFindLoadsMinPriceLabel;
 
   /// Trucker Find Loads Max Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Max price (â‚¹)'**
+  /// **'Max price (₹)'**
   String get truckerFindLoadsMaxPriceLabel;
 
   /// Trucker Find Loads Apply Filters Action - User-facing text for the app interface.
@@ -4648,7 +4648,7 @@ abstract class AppLocalizations {
   /// Supplier Post Load Price Amount Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price amount (â‚¹)'**
+  /// **'Price amount (₹)'**
   String get supplierPostLoadPriceAmountLabel;
 
   /// Supplier Post Load Price Amount Hint - User-facing text for the app interface.
@@ -4690,7 +4690,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadAdvanceBalanceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Advance: â‚¹{advanceAmount} - Balance: â‚¹{balanceAmount}'**
+  /// **'Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}'**
   String supplierPostLoadAdvanceBalanceLabel(
     Object advanceAmount,
     Object balanceAmount,
@@ -4733,7 +4733,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierPostLoadPriceSummary.
   ///
   /// In en, this message translates to:
-  /// **'Price: â‚¹{priceAmount} - {priceType}'**
+  /// **'Price: ₹{priceAmount} - {priceType}'**
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType);
 
   /// No description provided for @supplierPostLoadPickupSummary.
@@ -9077,7 +9077,7 @@ abstract class AppLocalizations {
   /// Trucker Load Detail Price Badge - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'â‚¹{priceAmount} - {priceType}'**
+  /// **'₹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType);
 
   /// Trucker Load Detail Truck Match Available - User-facing text for the app interface.
@@ -9117,7 +9117,7 @@ abstract class AppLocalizations {
   /// Trucker Load Detail Price Label - User-facing text for the app interface.
   ///
   /// In en, this message translates to:
-  /// **'Price: â‚¹{priceAmount} - {priceType}'**
+  /// **'Price: ₹{priceAmount} - {priceType}'**
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType);
 
   /// Trucker Load Detail Distance Label - User-facing text for the app interface.
@@ -10333,6 +10333,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.'**
   String get truckerLoadDetailCostTileDisclaimer;
+
+  /// Title of the trust score card on the profile screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Trust & Reviews'**
+  String get trustScoreTitle;
+
+  /// Label shown below the star rating indicating the scale (out of 5).
+  ///
+  /// In en, this message translates to:
+  /// **'out of 5'**
+  String get trustScoreOutOfFive;
+
+  /// Word 'reviews' shown in the count label on the trust score card.
+  ///
+  /// In en, this message translates to:
+  /// **'reviews'**
+  String get trustScoreReviews;
+
+  /// Text shown when the user has no ratings yet.
+  ///
+  /// In en, this message translates to:
+  /// **'No rating yet'**
+  String get trustScoreNoRatingYet;
+
+  /// Label for the number of reviews received metric.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews received'**
+  String get trustScoreReviewsReceived;
+
+  /// Label for the number of trips completed metric (for truckers).
+  ///
+  /// In en, this message translates to:
+  /// **'Trips completed'**
+  String get trustScoreTripsCompleted;
+
+  /// Label for the number of loads posted metric (for suppliers).
+  ///
+  /// In en, this message translates to:
+  /// **'Loads posted'**
+  String get trustScoreLoadsPosted;
+
+  /// Label for the number of trucks in fleet metric (for truckers).
+  ///
+  /// In en, this message translates to:
+  /// **'Trucks in fleet'**
+  String get trustScoreTrucksInFleet;
+
+  /// Label for the Super Load eligibility metric (for suppliers).
+  ///
+  /// In en, this message translates to:
+  /// **'Super Load eligible'**
+  String get trustScoreSuperLoadEligible;
+
+  /// Error message shown when load history fails to load.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load history'**
+  String get loadHistoryFailedToLoad;
+
+  /// Button label to retry loading load history.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get loadHistoryRetry;
+
+  /// Empty state message when there are no loads to show.
+  ///
+  /// In en, this message translates to:
+  /// **'No loads to display'**
+  String get loadHistoryNoLoads;
+
+  /// Button label to load more loads in pagination.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More'**
+  String get loadHistoryLoadMore;
+
+  /// Status label for active loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get loadHistoryStatusActive;
+
+  /// Status label for completed loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get loadHistoryStatusCompleted;
+
+  /// Status label for partially assigned loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Partial'**
+  String get loadHistoryStatusPartial;
+
+  /// Status label for fully assigned loads.
+  ///
+  /// In en, this message translates to:
+  /// **'Assigned'**
+  String get loadHistoryStatusAssigned;
+
+  /// Title of the reviews section on the profile screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews & Comments'**
+  String get reviewsTitle;
+
+  /// Label shown next to the average rating.
+  ///
+  /// In en, this message translates to:
+  /// **'average'**
+  String get reviewsAverage;
+
+  /// Label shown next to the total review count.
+  ///
+  /// In en, this message translates to:
+  /// **'total'**
+  String get reviewsTotal;
+
+  /// Error message shown when reviews fail to load.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load reviews'**
+  String get reviewsUnableToLoad;
+
+  /// Subtitle message encouraging user to retry loading reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Please retry to load the latest reviews.'**
+  String get reviewsRetryMessage;
+
+  /// Empty state message when there are no reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews yet'**
+  String get reviewsNoReviewsYet;
+
+  /// Subtitle explaining when reviews will appear.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews will appear here after interactions'**
+  String get reviewsWillAppearHere;
+
+  /// Button label to load more reviews in pagination.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More Reviews'**
+  String get reviewsLoadMore;
+
+  /// Title of the reply dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply to Review'**
+  String get replyDialogTitle;
+
+  /// Description explaining the one-time reply policy.
+  ///
+  /// In en, this message translates to:
+  /// **'You can reply to this review once. Your response will be visible to everyone who views your profile.'**
+  String get replyDialogDescription;
+
+  /// Hint text in the reply text field with placeholder for reviewer name.
+  ///
+  /// In en, this message translates to:
+  /// **'Write your reply to {name}...'**
+  String replyDialogHint(String name);
+
+  /// Button label to cancel the reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get replyDialogCancel;
+
+  /// Button label to submit the reply.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Reply'**
+  String get replyDialogSubmit;
+
+  /// Title of the review prompt bottom sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate Your Interaction'**
+  String get reviewPromptTitle;
+
+  /// Subtitle asking about the experience with the other user.
+  ///
+  /// In en, this message translates to:
+  /// **'How was your experience with {name}?'**
+  String reviewPromptSubtitle(String name);
+
+  /// Hint text in the comment field.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a comment (optional)...'**
+  String get reviewPromptCommentHint;
+
+  /// Button label to submit the review.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit Review'**
+  String get reviewPromptSubmit;
+
+  /// Button label to skip the review.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get reviewPromptSkip;
+
+  /// Success message shown after submitting a review.
+  ///
+  /// In en, this message translates to:
+  /// **'Review Submitted!'**
+  String get reviewPromptSuccessTitle;
+
+  /// Thank you message shown after submitting a review.
+  ///
+  /// In en, this message translates to:
+  /// **'Thank you for sharing your experience.'**
+  String get reviewPromptSuccessMessage;
+
+  /// Button label to close the success state.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get reviewPromptDone;
 }
 
 class _AppLocalizationsDelegate

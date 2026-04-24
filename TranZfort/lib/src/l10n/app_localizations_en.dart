@@ -2512,7 +2512,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerFindLoadsSummaryPriceRange(Object minPrice, Object maxPrice) {
-    return 'â‚¹$minPrice-$maxPrice';
+    return '₹$minPrice-$maxPrice';
   }
 
   @override
@@ -2571,10 +2571,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsTyreRequirementTitle => 'Tyre requirement';
 
   @override
-  String get truckerFindLoadsMinPriceLabel => 'Min price (â‚¹)';
+  String get truckerFindLoadsMinPriceLabel => 'Min price (₹)';
 
   @override
-  String get truckerFindLoadsMaxPriceLabel => 'Max price (â‚¹)';
+  String get truckerFindLoadsMaxPriceLabel => 'Max price (₹)';
 
   @override
   String get truckerFindLoadsApplyFiltersAction => 'Apply filters';
@@ -2692,7 +2692,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPostLoadPricingScheduleTitle => 'Pricing and schedule';
 
   @override
-  String get supplierPostLoadPriceAmountLabel => 'Price amount (â‚¹)';
+  String get supplierPostLoadPriceAmountLabel => 'Price amount (₹)';
 
   @override
   String get supplierPostLoadPriceAmountHint => '54000';
@@ -2719,7 +2719,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object advanceAmount,
     Object balanceAmount,
   ) {
-    return 'Advance: â‚¹$advanceAmount - Balance: â‚¹$balanceAmount';
+    return 'Advance: ₹$advanceAmount - Balance: ₹$balanceAmount';
   }
 
   @override
@@ -2747,7 +2747,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String supplierPostLoadPriceSummary(Object priceAmount, Object priceType) {
-    return 'Price: â‚¹$priceAmount - $priceType';
+    return 'Price: ₹$priceAmount - $priceType';
   }
 
   @override
@@ -5427,7 +5427,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailPriceBadge(Object priceAmount, Object priceType) {
-    return 'â‚¹$priceAmount - $priceType';
+    return '₹$priceAmount - $priceType';
   }
 
   @override
@@ -5457,7 +5457,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String truckerLoadDetailPriceLabel(Object priceAmount, Object priceType) {
-    return 'Price: â‚¹$priceAmount - $priceType';
+    return 'Price: ₹$priceAmount - $priceType';
   }
 
   @override
@@ -6238,4 +6238,125 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get truckerLoadDetailCostTileDisclaimer =>
       'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.';
+
+  @override
+  String get trustScoreTitle => 'Trust & Reviews';
+
+  @override
+  String get trustScoreOutOfFive => 'out of 5';
+
+  @override
+  String get trustScoreReviews => 'reviews';
+
+  @override
+  String get trustScoreNoRatingYet => 'No rating yet';
+
+  @override
+  String get trustScoreReviewsReceived => 'Reviews received';
+
+  @override
+  String get trustScoreTripsCompleted => 'Trips completed';
+
+  @override
+  String get trustScoreLoadsPosted => 'Loads posted';
+
+  @override
+  String get trustScoreTrucksInFleet => 'Trucks in fleet';
+
+  @override
+  String get trustScoreSuperLoadEligible => 'Super Load eligible';
+
+  @override
+  String get loadHistoryFailedToLoad => 'Failed to load history';
+
+  @override
+  String get loadHistoryRetry => 'Retry';
+
+  @override
+  String get loadHistoryNoLoads => 'No loads to display';
+
+  @override
+  String get loadHistoryLoadMore => 'Load More';
+
+  @override
+  String get loadHistoryStatusActive => 'Active';
+
+  @override
+  String get loadHistoryStatusCompleted => 'Completed';
+
+  @override
+  String get loadHistoryStatusPartial => 'Partial';
+
+  @override
+  String get loadHistoryStatusAssigned => 'Assigned';
+
+  @override
+  String get reviewsTitle => 'Reviews & Comments';
+
+  @override
+  String get reviewsAverage => 'average';
+
+  @override
+  String get reviewsTotal => 'total';
+
+  @override
+  String get reviewsUnableToLoad => 'Unable to load reviews';
+
+  @override
+  String get reviewsRetryMessage => 'Please retry to load the latest reviews.';
+
+  @override
+  String get reviewsNoReviewsYet => 'No reviews yet';
+
+  @override
+  String get reviewsWillAppearHere =>
+      'Reviews will appear here after interactions';
+
+  @override
+  String get reviewsLoadMore => 'Load More Reviews';
+
+  @override
+  String get replyDialogTitle => 'Reply to Review';
+
+  @override
+  String get replyDialogDescription =>
+      'You can reply to this review once. Your response will be visible to everyone who views your profile.';
+
+  @override
+  String replyDialogHint(String name) {
+    return 'Write your reply to $name...';
+  }
+
+  @override
+  String get replyDialogCancel => 'Cancel';
+
+  @override
+  String get replyDialogSubmit => 'Submit Reply';
+
+  @override
+  String get reviewPromptTitle => 'Rate Your Interaction';
+
+  @override
+  String reviewPromptSubtitle(String name) {
+    return 'How was your experience with $name?';
+  }
+
+  @override
+  String get reviewPromptCommentHint => 'Add a comment (optional)...';
+
+  @override
+  String get reviewPromptSubmit => 'Submit Review';
+
+  @override
+  String get reviewPromptSkip => 'Skip';
+
+  @override
+  String get reviewPromptSuccessTitle => 'Review Submitted!';
+
+  @override
+  String get reviewPromptSuccessMessage =>
+      'Thank you for sharing your experience.';
+
+  @override
+  String get reviewPromptDone => 'Done';
 }

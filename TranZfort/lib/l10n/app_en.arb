@@ -1121,7 +1121,7 @@
       "value": {}
     }
   },
-  "truckerFindLoadsSummaryPriceRange": "â‚¹{minPrice}-{maxPrice}",
+  "truckerFindLoadsSummaryPriceRange": "₹{minPrice}-{maxPrice}",
   "@truckerFindLoadsSummaryPriceRange": {
     "placeholders": {
       "minPrice": {},
@@ -1160,8 +1160,8 @@
   "truckerFindLoadsBodyTypeTanker": "Tanker",
   "truckerFindLoadsBodyTypeUnknown": "Unknown",
   "truckerFindLoadsTyreRequirementTitle": "Tyre requirement",
-  "truckerFindLoadsMinPriceLabel": "Min price (â‚¹)",
-  "truckerFindLoadsMaxPriceLabel": "Max price (â‚¹)",
+  "truckerFindLoadsMinPriceLabel": "Min price (₹)",
+  "truckerFindLoadsMaxPriceLabel": "Max price (₹)",
   "truckerFindLoadsApplyFiltersAction": "Apply filters",
   "truckerFindLoadsResetAdvancedFiltersAction": "Reset advanced filters",
   "@_sectionSupplierPostLoad": "â•â•â• Supplier Post Load â•â•â•",
@@ -1211,7 +1211,7 @@
   "supplierPostLoadTrucksNeededLabel": "Trucks needed",
   "supplierPostLoadTrucksNeededHint": "1",
   "supplierPostLoadPricingScheduleTitle": "Pricing and schedule",
-  "supplierPostLoadPriceAmountLabel": "Price amount (â‚¹)",
+  "supplierPostLoadPriceAmountLabel": "Price amount (₹)",
   "supplierPostLoadPriceAmountHint": "54000",
   "supplierPostLoadPriceTypeTitle": "Price type",
   "supplierPostLoadPriceTypeFixed": "Fixed",
@@ -1226,7 +1226,7 @@
       }
     }
   },
-  "supplierPostLoadAdvanceBalanceLabel": "Advance: â‚¹{advanceAmount} - Balance: â‚¹{balanceAmount}",
+  "supplierPostLoadAdvanceBalanceLabel": "Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}",
   "@supplierPostLoadAdvanceBalanceLabel": {
     "placeholders": {
       "advanceAmount": {},
@@ -1251,7 +1251,7 @@
       "trucksNeeded": {}
     }
   },
-  "supplierPostLoadPriceSummary": "Price: â‚¹{priceAmount} - {priceType}",
+  "supplierPostLoadPriceSummary": "Price: ₹{priceAmount} - {priceType}",
   "@supplierPostLoadPriceSummary": {
     "placeholders": {
       "priceAmount": {},
@@ -2194,13 +2194,13 @@
   "truckerLoadDetailActionFailureMessage": "The latest load action could not be completed right now. Review the current load details and retry shortly.",
   "truckerLoadDetailBookingSubmitFailureMessage": "We could not submit this booking request right now. Review the selected truck and retry shortly.",
   "truckerLoadDetailHeroSubtitle": "Pickup {pickupDate}",
-  "truckerLoadDetailPriceBadge": "â‚¹{priceAmount} - {priceType}",
+  "truckerLoadDetailPriceBadge": "₹{priceAmount} - {priceType}",
   "truckerLoadDetailTruckMatchAvailable": "Truck match available",
   "truckerLoadDetailMaterialSummary": "{material} - {weightTonnes}T - Advance {advancePercentage}%",
   "truckerLoadDetailSuperLoadGuarantee": "Super Load - Payment Guarantee",
   "truckerLoadDetailRoutePriceSummaryTitle": "Route and price summary",
   "truckerLoadDetailPickupLabel": "Pickup: {pickupDate}",
-  "truckerLoadDetailPriceLabel": "Price: â‚¹{priceAmount} - {priceType}",
+  "truckerLoadDetailPriceLabel": "Price: ₹{priceAmount} - {priceType}",
   "truckerLoadDetailDistanceLabel": "Distance: {distance} km",
   "truckerLoadDetailDriveTimeLabel": "Estimated drive time: {minutes} min",
   "truckerLoadDetailTruckRequirementTitle": "Truck requirement summary",
