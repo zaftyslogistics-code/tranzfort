@@ -172,7 +172,7 @@ silently skipped. Phase 3 (translation) will shrink this back down.
    measured in the audit (delta of 108 = keys used in code but missing HI,
    which will be addressed in Phase 3).
 
-### B2. Phase 2 — Wire existing keys into hardcoded spots ✅ PARTIALLY SHIPPED 24 Apr
+### B2. Phase 2 — Wire existing keys into hardcoded spots ✅ COMPLETE 24 Apr
 
 **Why second:** many screens have **both** unused keys **and** hardcoded
 English strings — the keys are there, nobody wired them. This is free
@@ -182,29 +182,21 @@ Hindi coverage without writing translations.
 relied on. Phase 2 is now entirely "add new keys + wire them" rather than
 "wire existing keys."
 
-**Completed clusters (shipped in commit `0928c86`):**
+**Completed clusters:**
 
-- [x] **B2.6** Added 7 new keys and wired them:
+- [x] **B2.6** Added 7 new keys and wired them (commit `0928c86`):
   - `authRecommendedChip`, `authFastestMostSecure`, `authOneTapNoPasswordSecure`
     → `auth_screen_sections.dart` (Google card trust copy)
   - `commonMuteVoice`, `commonTurnVoiceOn` → `tts_action_button.dart` tooltip
   - `commonCallTooltip`, `commonChatTooltip` → `marketplace_load_card.dart`
-- [x] **B2.8** Added 5 new keys and wired them into
+- [x] **B2.8** Added 5 new keys and wired them (commit `0928c86`):
     `trucker_load_detail_shared.dart` (cost-tile labels + disclaimer)
-- [x] **B2.9** Added 2 new keys and wired them into
+- [x] **B2.9** Added 2 new keys and wired them (commit `0928c86`):
     `onboarding_profile_completion.dart` (suggestion-source labels)
+- [x] **B2.1-B2.5** Added 34 new keys and wired them (commit `e63a2be`):
+    Profile trust score, load history, reviews section, reply dialog, review prompt sheet
 
 **Total shipped in Phase 2: 48 keys across 10 files, fully localized in EN + HI.**
-
-**Remaining Phase 2 work (profile / reviews / trust-score cluster):**
-
-- [x] **B2.1** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart` — survey the hardcoded labels, add keys, wire them.
-- [x] **B2.2** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart` — survey hardcoded labels, add keys, wire them.
-- [x] **B2.3** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\reviews_section.dart` — survey hardcoded labels, add keys, wire them.
-- [x] **B2.4** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reply_dialog.dart` — survey hardcoded labels, add keys, wire them.
-- [x] **B2.5** `@c:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart` — survey hardcoded labels, add keys, wire them.
-
-**Phase 2 complete!** All 4 clusters shipped (A, B, C, D) with 48 keys across 10 files, fully localized in EN + HI.
 
 ### B3. Phase 3 — Hindi parity (needs translator)
 
@@ -271,5 +263,7 @@ fires on 200 pre-existing violations just gets disabled.
 
 ## Current focus
 
-Proceeding with **B1 (Phase 1 — Delete dead keys)** now because it is the
-lowest-risk highest-ROI next action and unblocks everything else in Part B.
+**Phase 1 (Delete dead keys) ✅ Complete** — Shipped 24 Apr in commit `01c9350`.
+**Phase 2 (Wire hardcoded strings) ✅ Complete** — Shipped 24 Apr in commits `0928c86` (Clusters A-C) and `e63a2be` (Cluster D).
+
+Next: **Phase 3 (Hindi parity)** — Requires human translator to translate ~400 untranslated keys and 165 missing HI keys.
