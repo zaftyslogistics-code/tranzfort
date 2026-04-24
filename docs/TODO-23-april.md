@@ -210,12 +210,15 @@ relied on. Phase 2 is now entirely "add new keys + wire them" rather than
 this by finishing Phase 1 first (fewer keys to translate) and Phase 2
 (keys are actually used, so translating them has ROI).
 
-- [ ] **B3.1** Triage the 439 "HI == EN" keys into two buckets:
-      *intentional passthrough* (brand names, emails, `TranZfort`, etc. ≈ 40
-      keys) and *genuine untranslated* (≈ 400). Produce a CSV for the
-      translator.
-- [ ] **B3.2** Translate the ~400 untranslated bucket.
-- [ ] **B3.3** Translate the 165 HI-missing keys, prioritized in this order:
+- [x] **B3.1** Triage complete (commit `a1e3cd0`). Results:
+      - 402 identical EN/HI keys analyzed (down from 439 after Phase 1/2 cleanup)
+      - 122 marked **pass** (brand names, format strings, numeric hints,
+        technical abbreviations) — auto-categorized via heuristics
+      - 280 marked **translate** (genuine untranslated strings)
+      - Output: `TranZfort/tool/identical_keys_triage.csv`
+      - 106 keys still **missing in HI** (output: `missing_hi.csv`)
+- [ ] **B3.2** Translate the 280 genuine untranslated bucket.
+- [ ] **B3.3** Translate the 106 HI-missing keys, prioritized in this order:
   1. **Verification wizard** (`verificationWizard*` — critical path,
      currently 100% English in Hindi builds).
   2. Onboarding (`onboarding*`).
