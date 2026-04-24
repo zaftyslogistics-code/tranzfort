@@ -171,6 +171,12 @@ silently skipped. Phase 3 (translation) will shrink this back down.
    keys already missing. Sanity check: matches the 165 "missing HI keys"
    measured in the audit (delta of 108 = keys used in code but missing HI,
    which will be addressed in Phase 3).
+4. **Rupee symbol corruption**: The Phase 1 script corrupted the rupee
+   symbol ₹ (U+20B9) to â‚¹ (UTF-8 bytes E0 82 B9 read as Windows-1252) in
+   9 locations in `app_en.arb`. Hindi ARB was unaffected because we added
+   explicit UTF-8 encoding for Hindi, but English ARB still got corrupted.
+   Fixed in commit `7b30c07` by replacing all â‚¹ with ₹ and regenerating
+   localization files.
 
 ### B2. Phase 2 — Wire existing keys into hardcoded spots ✅ COMPLETE 24 Apr
 
