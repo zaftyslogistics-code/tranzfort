@@ -187,7 +187,8 @@ bool truckMatchesLoad(TruckerApprovedTruck truck, MarketplaceLoadItem load) {
   final normalizedBodyType = truck.bodyType.trim().toLowerCase();
   final bodyMatches = requiredBodyType == null || requiredBodyType.isEmpty || normalizedBodyType == requiredBodyType;
   final tyreMatches = load.requiredTyres.isEmpty || load.requiredTyres.contains(truck.tyres);
-  final capacityMatches = truck.capacityTonnes >= load.weightTonnes;
+  final perTruckWeight = load.weightTonnes / load.trucksNeeded;
+  final capacityMatches = truck.capacityTonnes >= perTruckWeight;
   return bodyMatches && tyreMatches && capacityMatches;
 }
 

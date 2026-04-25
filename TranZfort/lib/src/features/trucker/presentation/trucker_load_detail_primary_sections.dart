@@ -82,40 +82,6 @@ class _LoadRoutePriceSection extends StatelessWidget {
               durationLabel: durationMin != null ? _durationCompact(durationMin) : null,
             ),
           ),
-          const SizedBox(height: AppSpacing.lg),
-          // Key stats strip
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1C2A27),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFF2A3B37), width: 1),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _StatItem(
-                    icon: Icons.trip_origin,
-                    label: detail.summary.originLabel,
-                    value: 'Origin',
-                  ),
-                ),
-                Container(
-                  width: 1,
-                  height: 32,
-                  color: const Color(0xFF2A3B37),
-                ),
-                Expanded(
-                  child: _StatItem(
-                    icon: Icons.location_on_outlined,
-                    label: detail.summary.destinationLabel,
-                    value: 'Destination',
-                  ),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: AppSpacing.md),
           // Distance and duration chips
           Padding(
@@ -169,6 +135,7 @@ class _LoadNextStepSection extends ConsumerWidget {
   final bool bookingAllowed;
   final bool hasSingleApprovedTruck;
   final TruckerApprovedTruck? selectedTruck;
+  final bool selectedTruckMatches;
   final String bookingLabel;
   final String? gatingMessage;
   final String routeLabel;
@@ -187,6 +154,7 @@ class _LoadNextStepSection extends ConsumerWidget {
     required this.bookingAllowed,
     required this.hasSingleApprovedTruck,
     required this.selectedTruck,
+    required this.selectedTruckMatches,
     required this.bookingLabel,
     required this.gatingMessage,
     required this.routeLabel,
@@ -290,6 +258,24 @@ class _LoadNextStepSection extends ConsumerWidget {
                       context.go(AppRoutes.fleetPath);
                     }
                   },
+                ),
+              ],
+              if (selectedTruck != null) ...[
+                const SizedBox(height: AppSpacing.md),
+                StatusBadge(
+                  label: selectedTruckMatches
+                      ? l10n.truckerLoadDetailSelectedTruckMatches
+                      : l10n.truckerLoadDetailSelectedTruckMayNotMatch,
+                  icon: selectedTruckMatches ? Icons.check_circle_outline : Icons.info_outline,
+                  palette: selectedTruckMatches
+                      ? const StatusPalette(
+                          foreground: AppColors.success,
+                          background: AppColors.successBg,
+                        )
+                      : const StatusPalette(
+                          foreground: AppColors.warning,
+                          background: AppColors.warningBg,
+                        ),
                 ),
               ],
             ],
@@ -409,48 +395,6 @@ class _LoadNextStepSection extends ConsumerWidget {
               ),
             ],
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _StatItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
-
-  const _StatItem({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icon, size: 20, color: const Color(0xFF2DD4BF)),
-        const SizedBox(height: AppSpacing.xs),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF6B807B),
-            letterSpacing: 0.8,
-          ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFFA8BAB6),
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
         ),
       ],
     );
