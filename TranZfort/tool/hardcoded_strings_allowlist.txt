@@ -1,0 +1,64 @@
+# Known hardcoded UI strings in presentation files.
+# These should be wired to l10n keys over time; listed here so the CI guardrail stays clean.
+# Format: one string literal per line (exactly as it appears in the Dart source, including case).
+
+# Onboarding flow dialogs
+Cancel
+Discard
+Discard Selection?
+You have selected a role. Do you want to discard it?
+Location Services Disabled
+
+# Public profile screens (supplier/trucker)
+Supplier Profile
+Failed to load profile
+Retry
+Profile not found
+This user may have been removed or does not exist.
+Recent Loads
+Trucker Profile
+Fleet
+
+# Auth / onboarding dialogs
+Discard Changes?
+You have unsaved changes. Do you want to discard them?
+You have unsaved profile changes. Do you want to discard them?
+
+# Verification wizard
+Go Back?
+You will lose your progress on this step. Do you want to go back?
+Go Back
+Failed to capture location. Please try again.
+Selected city is missing coordinates. Please choose another result.
+Ready
+Step 2: Truck Details
+Face detected
+Good lighting
+
+# Truck load detail
+TOTAL EXPENSE
+COST BREAKDOWN
+
+# Shared widgets
+FROM
+Reset
+LOAD VALUE
+SUPER
+Maps
+
+# Reviews
+No rating yet
+Reply
+Reply to this review
+
+# Shell / supplier / trucker
+Press back again to exit
+You have unsaved load details. Do you want to discard them?
+Specify Material
+Discard Dispute?
+You have unsaved dispute details. Do you want to discard them?
+TRIP EARNINGS ESTIMATE
+TOTAL FARE (LOAD VALUE)
+
+# Wizard
+Step ${currentStep + 1} of $totalSteps

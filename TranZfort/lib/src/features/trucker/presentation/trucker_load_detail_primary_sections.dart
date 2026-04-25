@@ -145,7 +145,7 @@ class _LoadRoutePriceSection extends StatelessWidget {
               child: SizedBox(
                 width: double.infinity,
                 child: OutlineButton(
-                  label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
+                  label: l10n.commonOpenInGoogleMapsAction,
                   onPressed: () async {
                     await mapsLauncher.launchDirectionsUri(mapsUri!);
                   },
@@ -199,7 +199,7 @@ class _LoadNextStepSection extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return DetailSectionCard(
-      title: l10n.truckerLoadDetailNextStepTitle,
+      title: l10n.commonNextStepTitle,
       children: [
         if (detail.latestBookingRequest != null)
           StatusBadge(
@@ -396,7 +396,7 @@ class _LoadNextStepSection extends ConsumerWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               OutlineButton(
-                label: l10n.truckerLoadDetailReportSpamOrAbuseAction,
+                label: l10n.commonReportSpamOrAbuseAction,
                 onPressed: () => context.push(
                   AppRoutes.reportIssuePath,
                   extra: ReportIssueContext(

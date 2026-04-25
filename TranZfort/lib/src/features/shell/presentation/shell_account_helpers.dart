@@ -4,68 +4,42 @@ import '../../../l10n/app_localizations.dart';
 import '../../notifications/data/push_runtime_service.dart';
 
 String localizedTrustSafetyStatus(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'warned':
-      return l10n.supportTrustStatusWarned;
-    case 'restricted':
-      return l10n.supportTrustStatusRestricted;
-    case 'suspended':
-      return l10n.supportTrustStatusSuspended;
-    case 'banned':
-      return l10n.supportTrustStatusBanned;
-    case 'normal':
-    case '':
-      return l10n.supportTrustStatusNormal;
-    default:
-      return l10n.supportTrustStatusUnknown;
+  final normalized = value.trim().toLowerCase();
+  if (normalized.isEmpty) {
+    return l10n.supportTrustStatusValue('normal');
   }
+  return l10n.supportTrustStatusValue(normalized);
 }
 
 String localizedAccountState(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'deactivated_pending_cleanup':
-      return l10n.accountStateDeactivatedPendingCleanup;
-    case 'restricted':
-      return l10n.accountStateRestricted;
-    case 'active':
-    case '':
-      return l10n.accountStateActive;
-    default:
-      return l10n.accountStateUnknown;
+  final normalized = value.trim().toLowerCase();
+  if (normalized.isEmpty) {
+    return l10n.accountStateValue('active');
   }
+  return l10n.accountStateValue(normalized);
 }
 
 String localizedRoleTypeLabel(AppLocalizations l10n, String? roleType) {
-  switch ((roleType ?? '').trim().toLowerCase()) {
-    case 'supplier':
-      return l10n.accountRoleSupplier;
-    case 'trucker':
-      return l10n.accountRoleTrucker;
-    case 'unknown':
-      return l10n.accountRoleUnknown;
-    default:
-      return (roleType ?? '').trim();
-  }
+  final normalized = (roleType ?? '').trim().toLowerCase();
+  return l10n.accountRoleValue(normalized.isEmpty ? 'unknown' : normalized);
+}
+
+String _pushStatusName(PushPermissionStatus status) {
+  return switch (status) {
+    PushPermissionStatus.authorized => 'allowed',
+    PushPermissionStatus.provisional => 'allowed_quietly',
+    PushPermissionStatus.denied => 'blocked',
+    PushPermissionStatus.notDetermined => 'not_requested',
+    PushPermissionStatus.unavailable => 'unavailable',
+  };
 }
 
 String pushStatusLabel(PushPermissionStatus status, AppLocalizations l10n) {
-  return switch (status) {
-    PushPermissionStatus.authorized => l10n.settingsPushStatusAllowed,
-    PushPermissionStatus.provisional => l10n.settingsPushStatusAllowedQuietly,
-    PushPermissionStatus.denied => l10n.settingsPushStatusBlocked,
-    PushPermissionStatus.notDetermined => l10n.settingsPushStatusNotRequested,
-    PushPermissionStatus.unavailable => l10n.settingsPushStatusUnavailable,
-  };
+  return l10n.settingsPushStatusValue(_pushStatusName(status));
 }
 
 String pushStatusGuidance(PushPermissionStatus status, AppLocalizations l10n) {
-  return switch (status) {
-    PushPermissionStatus.authorized => l10n.settingsPushGuidanceAllowed,
-    PushPermissionStatus.provisional => l10n.settingsPushGuidanceAllowedQuietly,
-    PushPermissionStatus.denied => l10n.settingsPushGuidanceBlocked,
-    PushPermissionStatus.notDetermined => l10n.settingsPushGuidanceNotRequested,
-    PushPermissionStatus.unavailable => l10n.settingsPushGuidanceUnavailable,
-  };
+  return l10n.settingsPushGuidanceValue(_pushStatusName(status));
 }
 
 String pushRuntimeIssuesMessage(AppLocalizations l10n, Set<PushRuntimeIssue> issues) {

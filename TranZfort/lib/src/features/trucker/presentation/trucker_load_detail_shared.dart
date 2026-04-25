@@ -140,7 +140,7 @@ class _TruckerLoadDetailFailureBlock extends StatelessWidget {
     return WarningBlock(
       title: l10n.truckerLoadDetailLoadFailureTitle,
       message: l10n.truckerLoadDetailLoadFailureMessage,
-      action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+      action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
     );
   }
 }

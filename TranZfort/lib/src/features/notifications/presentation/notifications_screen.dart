@@ -42,7 +42,7 @@ class NotificationsScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.notificationsTitle),
+        title: Text(l10n.commonNotificationsLabel),
         actions: [
           const TtsActionButton(),
           if (state.notifications.isNotEmpty)
@@ -150,7 +150,7 @@ class _NotificationsBody extends ConsumerWidget {
         icon: Icons.notifications_none_outlined,
         title: l10n.notificationsEmptyTitle,
         subtitle: l10n.notificationsEmptySubtitle,
-        actionLabel: isSupplier ? l10n.supplierTripsEmptyActiveAction : l10n.truckerTripsEmptyActiveAction,
+        actionLabel: isSupplier ? l10n.commonOpenMyLoadsAction : l10n.truckerTripsEmptyActiveAction,
         onAction: () => context.go(isSupplier ? AppRoutes.myLoadsPath : AppRoutes.findLoadsPath),
       );
     }
@@ -256,7 +256,7 @@ class _NotificationsBody extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(top: AppSpacing.md),
             child: OutlineButton(
-              label: l10n.notificationsLoadMore,
+              label: l10n.commonLoadMoreAction,
               onPressed: () => ref.read(notificationsProvider.notifier).loadMore(),
             ),
           ),
@@ -436,19 +436,20 @@ String _formatNotificationTimestamp(BuildContext context, DateTime date) {
 }
 
 String _fallbackTitle(AppNotificationType type, AppLocalizations l10n) {
-  return switch (type) {
-    AppNotificationType.verificationUpdate => l10n.notificationFallbackVerificationUpdate,
-    AppNotificationType.bookingUpdate => l10n.notificationFallbackBookingUpdate,
-    AppNotificationType.tripUpdate => l10n.notificationFallbackTripUpdate,
-    AppNotificationType.proofUpdate => l10n.notificationFallbackProofUpdate,
-    AppNotificationType.superLoadUpdate => l10n.notificationFallbackSuperLoadUpdate,
-    AppNotificationType.messageReceived => l10n.notificationFallbackMessageReceived,
-    AppNotificationType.supportUpdate => l10n.notificationFallbackSupportUpdate,
-    AppNotificationType.disputeUpdate => l10n.notificationFallbackDisputeUpdate,
-    AppNotificationType.accountUpdate => l10n.notificationFallbackAccountUpdate,
-    AppNotificationType.systemNotice => l10n.notificationFallbackSystemNotice,
-    AppNotificationType.loadExpiryWarning => l10n.notificationFallbackLoadExpiryWarning,
+  final typeValue = switch (type) {
+    AppNotificationType.verificationUpdate => 'verification_update',
+    AppNotificationType.bookingUpdate => 'booking_update',
+    AppNotificationType.tripUpdate => 'trip_update',
+    AppNotificationType.proofUpdate => 'proof_update',
+    AppNotificationType.superLoadUpdate => 'super_load_update',
+    AppNotificationType.messageReceived => 'message_received',
+    AppNotificationType.supportUpdate => 'support_update',
+    AppNotificationType.disputeUpdate => 'dispute_update',
+    AppNotificationType.accountUpdate => 'account_update',
+    AppNotificationType.systemNotice => 'system_notice',
+    AppNotificationType.loadExpiryWarning => 'load_expiry_warning',
   };
+  return l10n.notificationFallbackValue(typeValue);
 }
 
 IconData _iconFor(AppNotificationType type) {

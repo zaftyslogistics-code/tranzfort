@@ -130,7 +130,7 @@ class _TruckCardMessageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final payload = message.structuredPayload;
-    final title = _payloadString(payload, const ['truck_display_label', 'truck_number', 'title']) ?? l10n.chatTruckDetailsSharedFallback;
+    final title = _payloadString(payload, const ['truck_display_label', 'truck_number', 'title']) ?? l10n.commonTruckDetailsLabel;
     final bodyType = _payloadString(payload, const ['body_type', 'bodyType']);
     final tyres = _payloadString(payload, const ['tyres', 'tyre_count']);
     final rcName = _payloadString(payload, const ['rc_file_name', 'rc_name']);

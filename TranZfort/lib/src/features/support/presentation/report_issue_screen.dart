@@ -277,7 +277,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
     }
     AppSnackbar.show(
       context: context,
-      message: l10n.reportIssueAttachmentFailureMessage,
+      message: l10n.commonAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
   }

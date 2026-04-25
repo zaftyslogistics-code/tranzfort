@@ -135,7 +135,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
             title: l10n.supplierRaiseDisputeTripUnavailableTitle,
             message: l10n.supplierRaiseDisputeTripLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(supplierTripDetailProvider(widget.tripId).notifier).load(),
             ),
           )
@@ -197,7 +197,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
                   title: l10n.supplierRaiseDisputeSubmissionBlockedTitle,
                   message: l10n.supplierRaiseDisputeSubmissionBlockedMessage,
                   action: OutlineButton(
-                    label: l10n.navSupport,
+                    label: l10n.commonSupportLabel,
                     onPressed: () => context.push(AppRoutes.supportPath),
                   ),
                 ),
@@ -407,28 +407,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
   }
 
   String _localizedSupplierTripStage(AppLocalizations l10n, String stage) {
-    switch (stage.trim().toLowerCase()) {
-      case 'assigned':
-        return l10n.supplierTripDetailStageAssigned;
-      case 'pickup_pending':
-        return l10n.supplierTripDetailStagePickupPending;
-      case 'picked_up':
-        return l10n.supplierTripDetailStagePickedUp;
-      case 'in_transit':
-        return l10n.supplierTripDetailStageInTransit;
-      case 'delivered':
-        return l10n.supplierTripDetailStageDelivered;
-      case 'proof_submitted':
-        return l10n.supplierTripDetailStageProofSubmitted;
-      case 'completed':
-        return l10n.supplierTripDetailStageCompleted;
-      case 'disputed':
-        return l10n.supplierTripDetailStageDisputed;
-      case 'cancelled':
-        return l10n.supplierTripDetailStageCancelled;
-      default:
-        return l10n.supplierTripDetailStageUnknown;
-    }
+    return l10n.tripStageValue(stage.trim().toLowerCase());
   }
 
   Future<void> _pickAndUploadAttachment(
@@ -461,7 +440,7 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
     }
     AppSnackbar.show(
       context: context,
-      message: l10n.supplierRaiseDisputeAttachmentFailureMessage,
+      message: l10n.commonAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
   }

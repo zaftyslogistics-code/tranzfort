@@ -239,7 +239,7 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
     }
     AppSnackbar.show(
       context: context,
-      message: AppLocalizations.of(context).supportComposeAttachmentFailureMessage,
+      message: AppLocalizations.of(context).commonAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
   }

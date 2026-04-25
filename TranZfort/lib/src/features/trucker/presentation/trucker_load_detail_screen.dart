@@ -80,18 +80,7 @@ class TruckerLoadDetailScreen extends ConsumerWidget {
 }
 
 String _localizedBookingRequestStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'submitted':
-      return l10n.shellMessagesBookingStatusSubmitted;
-    case 'approved':
-      return l10n.shellMessagesBookingStatusApproved;
-    case 'rejected':
-      return l10n.shellMessagesBookingStatusRejected;
-    case 'pending':
-      return l10n.shellMessagesBookingStatusPending;
-    default:
-      return l10n.shellMessagesBookingStatusUnknown;
-  }
+  return l10n.shellMessagesBookingStatusValue(status.trim().toLowerCase());
 }
 
 String _loadSupportFailureMessage(AppLocalizations l10n) {
@@ -107,25 +96,16 @@ String _bookingSubmitFailureMessage(AppLocalizations l10n) {
 }
 
 String _localizedLoadDetailStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'active':
-      return l10n.truckerLoadDetailStatusActive;
-    case 'assigned_partial':
-      return l10n.truckerLoadDetailStatusAssignedPartial;
-    default:
-      return l10n.truckerLoadDetailStatusUnknown;
-  }
+  return l10n.truckerLoadDetailStatusValue(status.trim().toLowerCase());
 }
 
 String _localizedLoadPriceType(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'fixed':
-      return l10n.supplierPostLoadPriceTypeFixed;
-    case 'negotiable':
-      return l10n.supplierPostLoadPriceTypeNegotiable;
-    default:
-      return l10n.supplierPostLoadPriceTypeUnknown;
-  }
+  final normalized = value.trim().toLowerCase();
+  return l10n.supplierPostLoadPriceTypeValue(switch (normalized) {
+    'fixed' => 'fixed',
+    'per_ton' || 'negotiable' => 'per_ton',
+    _ => 'unknown',
+  });
 }
 
 String _durationCompact(int minutes) {

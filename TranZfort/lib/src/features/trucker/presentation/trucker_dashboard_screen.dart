@@ -43,7 +43,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
           child: _HeroSummary(profile: profile),
         ),
         DetailSectionCard(
-          title: l10n.truckerDashboardOverviewTitle,
+          title: l10n.commonDashboardOverviewTitle,
           children: [
             _DashboardStatsSection(
               dashboardAsync: dashboardAsync,
@@ -52,7 +52,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
           ],
         ),
         DetailSectionCard(
-          title: l10n.truckerDashboardQuickActionsTitle,
+          title: l10n.commonQuickActionsTitle,
           children: [
             QuickActionGrid(
               items: [
@@ -63,7 +63,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
                 ),
                 QuickActionItem(
                   icon: Icons.local_shipping_outlined,
-                  label: l10n.shellDrawerFleet,
+                  label: l10n.commonFleetLabel,
                   onTap: () => context.go(AppRoutes.fleetPath),
                 ),
                 QuickActionItem(
@@ -73,7 +73,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
                 ),
                 QuickActionItem(
                   icon: Icons.chat_bubble_outline,
-                  label: l10n.truckerDashboardQuickActionChatLabel,
+                  label: l10n.commonChatLabel,
                   onTap: () => context.go(AppRoutes.messagesPath),
                 ),
               ],
@@ -123,7 +123,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
         message: l10n.truckerDashboardReadinessFailureMessage,
         compact: true,
         action: OutlineButton(
-          label: l10n.commonRetry,
+          label: l10n.commonRetryAction,
           onPressed: () => ref.refresh(truckerProfileProvider),
         ),
       );
@@ -140,8 +140,8 @@ class TruckerDashboardScreen extends ConsumerWidget {
     if (verificationStatus == 'pending') {
       return _CompactDashboardBanner(
         status: VerificationBannerStatus.pending,
-        title: l10n.truckerDashboardVerificationPendingTitle,
-        actionLabel: l10n.truckerDashboardOpenVerificationAction,
+        title: l10n.commonVerificationPendingTitle,
+        actionLabel: l10n.commonOpenVerificationAction,
         onTap: () => context.go(AppRoutes.truckerVerificationPath),
       );
     }
@@ -149,7 +149,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
     if (verificationStatus == 'rejected') {
       return _CompactDashboardBanner(
         status: VerificationBannerStatus.rejected,
-        title: l10n.truckerDashboardVerificationNeedsAttentionTitle,
+        title: l10n.commonVerificationNeedsAttentionTitle,
         actionLabel: l10n.truckerDashboardFixVerificationAction,
         onTap: () => context.go(AppRoutes.truckerVerificationPath),
       );
@@ -295,17 +295,17 @@ String _localizedTruckerDashboardVerificationStatus(AppLocalizations l10n, Strin
   final normalized = (status ?? '').trim().toLowerCase();
   switch (normalized) {
     case 'verified':
-      return l10n.truckerDashboardVerificationStatusVerified;
+      return l10n.verificationStatusVerified;
     case 'pending':
-      return l10n.truckerDashboardVerificationStatusPending;
+      return l10n.commonPendingLabel;
     case 'rejected':
-      return l10n.truckerDashboardVerificationStatusRejected;
+      return l10n.verificationStatusRejected;
     case 'unverified':
-      return l10n.truckerDashboardVerificationStatusUnverified;
+      return l10n.verificationStatusUnverified;
     case '':
       return l10n.truckerDashboardSetupInProgress;
     default:
-      return l10n.truckerDashboardVerificationStatusUnknown;
+      return l10n.commonUnknownLabel;
   }
 }
 
@@ -329,7 +329,7 @@ class _DashboardStatsSection extends StatelessWidget {
       return WarningBlock(
         title: l10n.truckerDashboardLoadFailureTitle,
         message: l10n.truckerDashboardLoadFailureMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
 
@@ -370,7 +370,7 @@ class _DashboardStatsSection extends StatelessWidget {
           accent: AppColors.info,
         ),
         StatCard(
-          label: l10n.truckerDashboardStatCompletedLabel,
+          label: l10n.commonCompletedLabel,
           value: '${stats.completedTrips}',
           accent: AppColors.success,
         ),
@@ -396,7 +396,7 @@ class _RecentActivitySection extends StatelessWidget {
       return WarningBlock(
         title: l10n.truckerDashboardRecentActivityUnavailableTitle,
         message: l10n.truckerDashboardRecentActivityUnavailableMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
     final stats = dashboardAsync.valueOrNull ?? const TruckerDashboardStats(activeBids: 0, upcomingTrips: 0, inTransitTrips: 0, completedTrips: 0, totalTrucks: 0, approvedTrucks: 0, pendingTrucks: 0, rejectedTrucks: 0, pendingReapprovalTrucks: 0);
@@ -414,7 +414,7 @@ class _RecentActivitySection extends StatelessWidget {
           accent: AppColors.secondary,
           title: l10n.truckerDashboardBookingActivityTitle,
           subtitle: l10n.truckerDashboardBookingActivitySubtitle(stats.activeBids),
-          trailing: StatusChip(label: stats.activeBids > 0 ? l10n.truckerDashboardStatusOpen : l10n.truckerDashboardStatusClear),
+          trailing: StatusChip(label: l10n.truckerDashboardStatusValue(stats.activeBids > 0 ? 'open' : 'clear')),
         ),
         const SizedBox(height: AppSpacing.md),
         StandardListCard(
@@ -425,7 +425,7 @@ class _RecentActivitySection extends StatelessWidget {
             stats.inTransitTrips,
             stats.completedTrips,
           ),
-          trailing: StatusChip(label: stats.inTransitTrips > 0 ? l10n.truckerDashboardStatusMoving : l10n.truckerDashboardStatusTracked),
+          trailing: StatusChip(label: l10n.truckerDashboardStatusValue(stats.inTransitTrips > 0 ? 'moving' : 'tracked')),
         ),
         if (stats.hasTruckLifecycleAttention) ...[
           const SizedBox(height: AppSpacing.md),
@@ -437,7 +437,7 @@ class _RecentActivitySection extends StatelessWidget {
               stats.rejectedTrucks,
               stats.pendingReapprovalTrucks,
             ),
-            trailing: StatusChip(label: l10n.truckerDashboardStatusAttention),
+            trailing: StatusChip(label: l10n.truckerDashboardStatusValue('attention')),
           ),
         ],
       ],

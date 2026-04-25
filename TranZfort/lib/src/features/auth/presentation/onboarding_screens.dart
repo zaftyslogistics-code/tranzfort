@@ -74,7 +74,7 @@ class _OnboardingGateScreenState extends ConsumerState<OnboardingGateScreen> {
                 ),
                 const SizedBox(height: 16),
                 PrimaryButton(
-                  label: AppLocalizations.of(context).onboardingGateRetryAction,
+                  label: AppLocalizations.of(context).commonRetryAction,
                   onPressed: () {
                     ref.invalidate(authStateProvider);
                     ref.invalidate(currentProfileProvider);
@@ -90,7 +90,7 @@ class _OnboardingGateScreenState extends ConsumerState<OnboardingGateScreen> {
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () => context.go(AppRoutes.authPath),
-                  child: Text(AppLocalizations.of(context).onboardingGateBackToSignInAction),
+                  child: Text(AppLocalizations.of(context).commonBackToSignInAction),
                 ),
               ],
             ),

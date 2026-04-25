@@ -1,0 +1,300 @@
+2 keys: ['authPasswordBackToSignInAction', 'onboardingGateBackToSignInAction']
+  -> Back to sign in
+
+2 keys: ['supplierLoadCardViewDetails', 'truckerFindLoadsViewDetailsAction']
+  -> View details
+
+2 keys: ['supplierDashboardOverviewTitle', 'truckerDashboardOverviewTitle']
+  -> Dashboard overview
+
+2 keys: ['supplierDashboardQuickActionsTitle', 'truckerDashboardQuickActionsTitle']
+  -> Quick actions
+
+2 keys: ['supplierDashboardOpenMyLoadsAction', 'supplierTripsEmptyActiveAction']
+  -> Open my loads
+
+2 keys: ['shellTabTrips', 'shellQuickActionTrips']
+  -> Trips
+
+2 keys: ['shellDrawerFleet', 'accountFleetLabel']
+  -> Fleet
+
+2 keys: ['shellDrawerSignOut', 'accountSignOutAction']
+  -> Sign out
+
+2 keys: ['chatTooltipCall', 'commonCallTooltip']
+  -> Call
+
+2 keys: ['chatMenuReportSpamOrAbuse', 'truckerLoadDetailReportSpamOrAbuseAction']
+  -> Report spam or abuse
+
+2 keys: ['chatBookingStatusUnknown', 'verificationStatusUnknown']
+  -> Unknown
+
+2 keys: ['chatSystemUpdateFallback', 'chatPreviewSystem']
+  -> System update
+
+2 keys: ['chatVoiceMessageLabel', 'chatPreviewVoice']
+  -> Voice message
+
+2 keys: ['chatTruckDetailsSharedFallback', 'verificationWizardTruckTitle']
+  -> Truck details
+
+2 keys: ['notificationsLoadMore', 'loadHistoryLoadMore']
+  -> Load More
+
+2 keys: ['deleteAccountBlockerActionOpenSupport', 'trustSafetyOpenSupport']
+  -> Open support
+
+2 keys: ['deleteAccountWhatHappensNextTitle', 'verificationWhatHappensNextTitle']
+  -> What happens next
+
+2 keys: ['deleteAccountCancelRequestTitle', 'deleteAccountCancelRequestButton']
+  -> Cancel deletion request
+
+2 keys: ['deleteAccountHeroTitleDefault', 'profileRequestAccountDeletion']
+  -> Request account deletion
+
+2 keys: ['accountProfileStatusComplete', 'profileCompletenessComplete']
+  -> Complete
+
+2 keys: ['accountVerificationLabel', 'verificationTitle']
+  -> Verification
+
+2 keys: ['accountSettingsLabel', 'settingsTitle']
+  -> Settings
+
+2 keys: ['profileValueNotSet', 'profileLocationNotSet']
+  -> Not set
+
+2 keys: ['profileLocationLabel', 'verificationWizardReviewLocation']
+  -> Location
+
+2 keys: ['supportCreateTicketAction', 'supportCreateTicketScreenTitle']
+  -> Create support ticket
+
+2 keys: ['supportDisputeCategoryNonPayment', 'reportIssueCategoryNonPaymentLabel']
+  -> Non-payment
+
+2 keys: ['supportDisputeCategoryFakePayoutProof', 'reportIssueCategoryFakePayoutProofLabel']
+  -> Fake payout proof
+
+2 keys: ['supportDisputeCategoryAbusiveBehavior', 'reportIssueCategoryAbusiveBehaviorLabel']
+  -> Abusive behavior
+
+2 keys: ['supportDisputeCategorySpamOrScam', 'reportIssueCategorySpamOrScamLabel']
+  -> Spam or scam
+
+2 keys: ['supportDisputeCategoryOther', 'supportComposeCategoryOther']
+  -> Other
+
+2 keys: ['supportTicketReference', 'supportTicketIdValue']
+  -> Support ticket on record
+
+2 keys: ['supportRelatedTripValue', 'reportIssueRelatedTripLabel']
+  -> Related trip linked
+
+2 keys: ['supportRelatedLoadValue', 'reportIssueRelatedLoadLabel']
+  -> Related load linked
+
+2 keys: ['supportDisputeBannerTitleWaiting', 'truckerTripDetailDisputeBannerWaitingTitle']
+  -> Dispute waiting for your reply
+
+2 keys: ['supportDisputeBannerTitleInProgress', 'supplierTripDetailDisputeBannerInProgressTitle']
+  -> Dispute review in progress
+
+2 keys: ['truckerDashboardFixVerificationAction', 'supplierFixVerification']
+  -> Fix verification
+
+2 keys: ['truckerDashboardOpenFleetAction', 'verificationOpenFleetAction']
+  -> Open fleet
+
+2 keys: ['truckerDashboardVerificationStatusTitle', 'verificationLockedStatusSectionTitle']
+  -> Verification status
+
+2 keys: ['truckerTripsEmptyCompletedTitle', 'supplierTripsEmptyCompletedTitle']
+  -> No completed trips yet
+
+2 keys: ['truckerTripsEmptyCompletedAction', 'supplierTripsEmptyCompletedAction']
+  -> View active trips
+
+2 keys: ['truckerTripDetailNotFoundTitle', 'supplierTripDetailNotFoundTitle']
+  -> Trip not found
+
+2 keys: ['truckerFleetEditTruckTitle', 'truckerFleetEditTruckAction']
+  -> Edit truck
+
+2 keys: ['truckerFleetBodyTypeLabel', 'verificationWizardBodyTypeLabel']
+  -> Body type
+
+2 keys: ['truckerFleetTyresLabel', 'verificationWizardTyresLabel']
+  -> Tyres
+
+2 keys: ['truckerFleetRcDocumentTitle', 'verificationWizardRcDocumentLabel']
+  -> RC document
+
+2 keys: ['truckerFleetRequiredStatus', 'verificationLocationRequiredStatus']
+  -> required
+
+2 keys: ['truckerFleetUploadRcAction', 'truckerFleetSelectRcSourceTitle']
+  -> Upload RC document
+
+2 keys: ['truckerFindLoadsAdvancedFiltersAction', 'truckerFindLoadsAdvancedFiltersTitle']
+  -> Advanced filters
+
+2 keys: ['truckerFindLoadsOriginHint', 'supplierPostLoadOriginCityLabel']
+  -> Origin city
+
+2 keys: ['truckerFindLoadsDestinationHint', 'supplierPostLoadDestinationCityLabel']
+  -> Destination city
+
+2 keys: ['truckerFindLoadsMaterialHint', 'supplierPostLoadMaterialLabel']
+  -> Material
+
+2 keys: ['truckerFindLoadsSuperLoadsTab', 'truckerFindLoadsSummarySuperLoads']
+  -> Super Loads
+
+2 keys: ['truckerFindLoadsTruckBodyTypeLabel', 'supplierPostLoadTruckBodyTypeLabel']
+  -> Truck body type
+
+2 keys: ['truckerFindLoadsTyreRequirementTitle', 'supplierPostLoadTyreRequirementTitle']
+  -> Tyre requirement
+
+2 keys: ['supplierPostLoadSearchCityHint', 'verificationWizardSearchCityTitle']
+  -> Search city
+
+2 keys: ['supplierPostLoadRoutePreviewUnavailableTitle', 'supplierLoadDetailRoutePreviewUnavailableTitle']
+  -> Route preview unavailable
+
+2 keys: ['supplierPostLoadTrucksNeededTitle', 'supplierPostLoadTrucksNeededLabel']
+  -> Trucks needed
+
+2 keys: ['verificationReadinessCheckBusinessLicenceNumber', 'verificationFieldBusinessLicenceNumber']
+  -> Business licence number
+
+2 keys: ['verificationReadinessCheckBusinessLicenceDocument', 'verificationWizardLicenseDocumentLabel']
+  -> Business licence document
+
+2 keys: ['verificationReadinessCheckLocation', 'verificationLocationTitle']
+  -> Verification location
+
+2 keys: ['supplierDashboardSuperLoadVerificationComplete', 'verificationCompleteBannerTitle']
+  -> Verification complete
+
+2 keys: ['supplierLinkedTripTrackAction', 'supplierTripsTrackTripAction']
+  -> Track trip
+
+2 keys: ['supplierTripDetailTitle', 'truckerTripDetailTitle']
+  -> Trip Detail
+
+2 keys: ['supplierTripDetailRatingSectionTitle', 'truckerTripDetailRatingSectionTitle']
+  -> Rate this trip
+
+2 keys: ['supplierTripDetailRatingAlreadySubmitted', 'truckerTripDetailRatingAlreadySubmitted']
+  -> You already rated this trip.
+
+2 keys: ['supplierTripDetailCommentLabel', 'truckerTripDetailCommentLabel']
+  -> Comment (optional)
+
+2 keys: ['supplierTripDetailCommentHint', 'truckerTripDetailCommentHint']
+  -> Share anything useful about the trip outcome
+
+2 keys: ['supplierTripDetailRatingUnavailableTitle', 'truckerTripDetailRatingUnavailableTitle']
+  -> Rating unavailable
+
+2 keys: ['supplierTripDetailSubmitRatingAction', 'truckerTripDetailSubmitRatingAction']
+  -> Submit Rating
+
+2 keys: ['supplierTripDetailRatingSubmittedSuccess', 'truckerTripDetailRatingSubmittedSuccess']
+  -> Rating submitted successfully.
+
+2 keys: ['supplierTripDetailNextStepCompletedTitle', 'truckerTripDetailNextStepCompletedTitle']
+  -> Trip completed
+
+2 keys: ['supplierTripDetailDisputeStatusTitle', 'truckerTripDetailDisputeStatusTitle']
+  -> Dispute status
+
+2 keys: ['supplierTripDetailDisputeStateRaised', 'truckerTripDetailDisputeStateRaised']
+  -> Current state: Dispute raised
+
+2 keys: ['supplierTripDetailActionsTitle', 'truckerTripDetailActionsTitle']
+  -> Actions
+
+2 keys: ['supplierTripDetailDisputeStatusGuidanceOpen', 'truckerTripDetailDisputeStatusGuidanceOpen']
+  -> Support has received this dispute and review should begin shortly. Keep the related support replies 
+
+2 keys: ['supplierTripDetailDisputeStatusGuidanceInProgress', 'truckerTripDetailDisputeStatusGuidanceInProgress']
+  -> Support or operations are actively reviewing the dispute. Watch the related support ticket for visib
+
+2 keys: ['supplierTripDetailDisputeStatusGuidanceWaitingForUser', 'truckerTripDetailDisputeStatusGuidanceWaitingForUser']
+  -> Support is waiting for your clarification or additional context. Reply on the related support ticket
+
+2 keys: ['supplierTripDetailDisputeStatusGuidanceResolved', 'truckerTripDetailDisputeStatusGuidanceResolved']
+  -> This dispute has reached a final review state. Check the linked support ticket outcome before raisin
+
+2 keys: ['supplierTripDetailDisputeStatusGuidanceDefault', 'truckerTripDetailDisputeStatusGuidanceDefault']
+  -> Keep following the related support ticket for the latest visible review updates.
+
+2 keys: ['supplierTripDetailSharedVisibilityClosed', 'truckerTripDetailSharedVisibilityClosed']
+  -> Both parties can still follow the recorded dispute category, final workflow state, and visible suppo
+
+2 keys: ['supplierTripDetailSharedVisibilityInProgress', 'truckerTripDetailSharedVisibilityInProgress']
+  -> Both parties can follow the dispute category, workflow status, and support replies that are intentio
+
+2 keys: ['supplierTripDetailProofGuidanceClosed', 'truckerTripDetailProofGuidanceClosed']
+  -> If you believe important proof was not considered before closure, start a fresh support follow-up on
+
+2 keys: ['verificationWizardStepIdentity', 'verificationWizardReviewIdentity']
+  -> Identity
+
+2 keys: ['verificationWizardStepTruck', 'verificationWizardReviewTruck']
+  -> Truck
+
+2 keys: ['verificationWizardStepBusiness', 'verificationWizardReviewBusiness']
+  -> Business
+
+2 keys: ['verificationWizardProfileTitle', 'verificationDocTypeProfilePhoto']
+  -> Profile photo
+
+2 keys: ['verificationWizardLicenseNumberLabel', 'verificationWizardReviewLicenseNumber']
+  -> License number
+
+2 keys: ['verificationWizardGstCertificateLabel', 'verificationDocTypeGstCertificate']
+  -> GST certificate
+
+2 keys: ['verificationStatusVerified', 'supplierBookingVerifiedLabel']
+  -> Verified
+
+2 keys: ['truckerTripDetailCancelledTitle', 'truckerTripDetailNextStepCancelledTitle']
+  -> Trip cancelled
+
+2 keys: ['truckerTripDetailHeadToPickupAction', 'truckerTripDetailNextStepAssignedTitle']
+  -> Head to pickup
+
+2 keys: ['supplierRaiseDisputeHelpfulDetailsTitle', 'reportIssueHelpfulDetailsTitle']
+  -> Helpful details to include
+
+2 keys: ['supplierRaiseDisputeUseCameraAction', 'reportIssueUseCameraAction']
+  -> Use camera
+
+2 keys: ['supplierRaiseDisputeChoosePhotoAction', 'reportIssueChoosePhotoAction']
+  -> Choose photo
+
+2 keys: ['supplierRaiseDisputeRemoveEvidenceAction', 'reportIssueRemoveEvidenceAction']
+  -> Remove evidence
+
+2 keys: ['supplierRaiseDisputeAttachmentAttachedSuccess', 'reportIssueAttachmentAttachedSuccess']
+  -> Evidence attached successfully
+
+2 keys: ['supportCreateTicketDescriptionTooShortMessage', 'reportIssueDescriptionTooShortMessage']
+  -> Describe the issue in at least 10 characters
+
+2 keys: ['truckerLoadDetailLoadNotFoundTitle', 'supplierLoadDetailNotFoundTitle']
+  -> Load not found
+
+2 keys: ['truckerLoadDetailActionFailureTitle', 'supplierLoadDetailActionUnavailableTitle']
+  -> Action unavailable
+
+2 keys: ['truckerLoadDetailShareLoadAction', 'truckerLoadDetailShareLoadTitle']
+  -> Share load
+

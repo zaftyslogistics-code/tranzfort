@@ -69,7 +69,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         DetailSectionCard(
-          title: l10n.truckerTripDetailNextStepTitle,
+          title: l10n.commonNextStepTitle,
           children: [
             Text(nextStep.$1, style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
@@ -224,14 +224,14 @@ class _TruckerTripDetailBody extends ConsumerWidget {
               if (callUri != null && mapsUri != null) const SizedBox(height: 12),
               if (mapsUri != null)
                 OutlineButton(
-                  label: l10n.truckerTripDetailOpenInGoogleMapsAction,
+                  label: l10n.commonOpenInGoogleMapsAction,
                   onPressed: () async {
                     await mapsLauncher.launchDirectionsUri(mapsUri);
                   },
                 ),
               const SizedBox(height: 12),
               OutlineButton(
-                label: l10n.chatMenuReportSpamOrAbuse,
+                label: l10n.commonReportSpamOrAbuseAction,
                 onPressed: () => context.push(
                   AppRoutes.reportIssuePath,
                   extra: ReportIssueContext(
@@ -316,7 +316,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               OutlineButton(
-                label: l10n.navSupport,
+                label: l10n.commonSupportLabel,
                 onPressed: () => context.push(AppRoutes.supportPath),
               ),
             ],
@@ -381,7 +381,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
         ],
         const SizedBox(height: 16),
         DetailSectionCard(
-          title: l10n.truckerTripDetailRouteScheduleTitle,
+          title: l10n.commonRouteAndScheduleTitle,
           children: [
             Text(l10n.truckerTripDetailOriginLabel(detail.originLabel)),
             const SizedBox(height: 4),

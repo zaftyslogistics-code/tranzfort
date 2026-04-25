@@ -78,11 +78,13 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
     final verificationPath = authState.role == AppUserRole.supplier
         ? AppRoutes.supplierVerificationPath
         : AppRoutes.truckerVerificationPath;
-    final roleLabel = switch (authState.role) {
-      AppUserRole.supplier => l10n.accountRoleSupplier,
-      AppUserRole.trucker => l10n.accountRoleTrucker,
-      AppUserRole.unknown => l10n.accountRoleUnknown,
-    };
+    final roleLabel = l10n.accountRoleValue(
+      switch (authState.role) {
+        AppUserRole.supplier => 'supplier',
+        AppUserRole.trucker => 'trucker',
+        AppUserRole.unknown => 'other',
+      },
+    );
 
     return ShellScrollView(
       children: [
@@ -100,11 +102,13 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               InfoRow(
                 label: l10n.accountAccountStateLabel,
-                value: authState.isDeactivated
-                    ? l10n.accountStateDeactivatedPendingCleanup
-                    : authState.isBanned
-                        ? l10n.accountStateRestricted
-                        : l10n.accountStateActive,
+                value: l10n.accountStateValue(
+                  authState.isDeactivated
+                      ? 'deactivated_pending_cleanup'
+                      : authState.isBanned
+                          ? 'restricted'
+                          : 'active',
+                ),
               ),
               if (profile != null) ...[
                 const SizedBox(height: AppSpacing.md),
@@ -124,7 +128,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
             title: l10n.accountLoadFailureTitle,
             message: l10n.accountLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.refresh(authStateProvider),
             ),
           ),
@@ -134,7 +138,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
             children: [
               NavListTile(
                 icon: Icons.person_outline,
-                label: l10n.navProfile,
+                label: l10n.commonProfileLabel,
                 onTap: () => context.go(AppRoutes.profilePath),
               ),
               NavListTile(
@@ -145,7 +149,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               if (authState.role == AppUserRole.trucker)
                 NavListTile(
                   icon: Icons.local_shipping_outlined,
-                  label: l10n.accountFleetLabel,
+                  label: l10n.commonFleetLabel,
                   onTap: () => context.go(AppRoutes.fleetPath),
                 ),
               NavListTile(
@@ -155,7 +159,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               ),
               NavListTile(
                 icon: Icons.support_agent_outlined,
-                label: l10n.navSupport,
+                label: l10n.commonSupportLabel,
                 onTap: () => context.go(AppRoutes.supportPath),
               ),
               NavListTile(
@@ -178,7 +182,7 @@ class _AccountScreenState extends ConsumerState<AccountScreen> {
               SizedBox(
                 width: double.infinity,
                 child: OutlineButton(
-                  label: l10n.accountSignOutAction,
+                  label: l10n.commonSignOutAction,
                   isLoading: _isSigningOut,
                   onPressed: _isSigningOut ? null : () => _signOut(context),
                 ),

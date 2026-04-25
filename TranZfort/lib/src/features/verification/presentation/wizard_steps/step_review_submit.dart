@@ -47,7 +47,7 @@ class StepReviewSubmit extends ConsumerWidget {
             // Checklist
             _ReviewSection(
               icon: Icons.person,
-              title: l10n.verificationWizardReviewProfile,
+              title: l10n.commonProfileLabel,
               isComplete: draft.hasProfilePhoto,
               details: draft.hasProfilePhoto
                   ? [l10n.verificationWizardReviewProfileUploaded]
@@ -58,8 +58,8 @@ class StepReviewSubmit extends ConsumerWidget {
               title: l10n.verificationWizardReviewIdentity,
               isComplete: draft.hasIdentityComplete,
               details: [
-                '${l10n.verificationWizardAadhaarNumberLabel}: ${draft.aadhaarNumber ?? '-'}',
-                '${l10n.verificationWizardPanNumberLabel}: ${draft.panNumber ?? '-'}',
+                '${l10n.commonAadhaarNumberLabel}: ${draft.aadhaarNumber ?? '-'}',
+                '${l10n.commonPanNumberLabel}: ${draft.panNumber ?? '-'}',
                 if (draft.hasIdentityComplete)
                   l10n.verificationWizardReviewDocumentsUploaded,
               ],
@@ -70,7 +70,7 @@ class StepReviewSubmit extends ConsumerWidget {
                 title: l10n.verificationWizardReviewTruck,
                 isComplete: draft.hasTruckComplete,
                 details: [
-                  '${l10n.verificationWizardReviewTruckNumber}: ${draft.truck?.truckNumber ?? '-'}',
+                  '${l10n.commonTruckNumberLabel}: ${draft.truck?.truckNumber ?? '-'}',
                   if (draft.truck?.rcDocumentPath != null)
                     l10n.verificationWizardReviewRcUploaded,
                   if (draft.truck?.truckPhotoPath != null)
@@ -83,10 +83,10 @@ class StepReviewSubmit extends ConsumerWidget {
                 title: l10n.verificationWizardReviewBusiness,
                 isComplete: draft.hasBusinessComplete,
                 details: [
-                  '${l10n.verificationWizardReviewCompanyName}: ${draft.companyName ?? '-'}',
+                  '${l10n.commonCompanyNameLabel}: ${draft.companyName ?? '-'}',
                   '${l10n.verificationWizardReviewLicenseNumber}: ${draft.businessLicenseNumber ?? '-'}',
                   if (draft.gstNumber?.isNotEmpty ?? false)
-                    '${l10n.verificationWizardReviewGstNumber}: ${draft.gstNumber}',
+                    '${l10n.commonGstNumberLabel}: ${draft.gstNumber}',
                   '${l10n.verificationWizardReviewLocation}: ${draft.location?.city ?? '-'}',
                 ],
               ),

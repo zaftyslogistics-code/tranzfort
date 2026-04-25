@@ -28,7 +28,7 @@ class _SupportTicketListSection extends StatelessWidget {
         title: l10n.supportTicketsUnavailableTitle,
         message: _loadFailureMessage(context),
         action: OutlineButton(
-          label: l10n.commonRetry,
+          label: l10n.commonRetryAction,
           onPressed: onRetry,
         ),
       );

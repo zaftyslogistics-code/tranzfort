@@ -161,7 +161,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
           const SizedBox(height: 8),
           TextButton(
             onPressed: _loadInitial,
-            child: Text(l10n.loadHistoryRetry),
+            child: Text(l10n.commonRetryAction),
           ),
         ],
       ),
@@ -223,7 +223,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
             child: OutlinedButton.icon(
               onPressed: _loadMore,
               icon: const Icon(Icons.expand_more),
-              label: Text(l10n.loadHistoryLoadMore),
+              label: Text(l10n.commonLoadMoreAction),
             ),
           ),
       ],
@@ -288,10 +288,10 @@ class _LoadItemTile extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
 
     final (color, label) = switch (load.status) {
-      'active' => (Colors.green, l10n.loadHistoryStatusActive),
-      'completed' => (colorScheme.primary, l10n.loadHistoryStatusCompleted),
-      'assigned_partial' => (Colors.orange, l10n.loadHistoryStatusPartial),
-      'assigned_full' => (Colors.blue, l10n.loadHistoryStatusAssigned),
+      'active' => (Colors.green, l10n.loadHistoryStatusValue('active')),
+      'completed' => (colorScheme.primary, l10n.loadHistoryStatusValue('completed')),
+      'assigned_partial' => (Colors.orange, l10n.loadHistoryStatusValue('assigned_partial')),
+      'assigned_full' => (Colors.blue, l10n.loadHistoryStatusValue('assigned_full')),
       _ => (colorScheme.onSurfaceVariant, load.status),
     };
 

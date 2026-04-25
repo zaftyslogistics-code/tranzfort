@@ -107,7 +107,7 @@ class SettingsScreen extends ConsumerWidget {
               ),
               const SizedBox(height: AppSpacing.sm),
               InfoRow(label: l10n.settingsVoiceAssistanceLabel, value: l10n.settingsVoiceAssistanceValue),
-              InfoRow(label: l10n.settingsNotificationsLabel, value: l10n.settingsNotificationsValue),
+              InfoRow(label: l10n.commonNotificationsLabel, value: l10n.settingsNotificationsValue),
             ],
           ),
         ),
@@ -118,17 +118,17 @@ class SettingsScreen extends ConsumerWidget {
             children: [
               NavListTile(
                 icon: Icons.person_outline,
-                label: l10n.navProfile,
+                label: l10n.commonProfileLabel,
                 onTap: () => context.go(AppRoutes.profilePath),
               ),
               NavListTile(
                 icon: Icons.notifications_outlined,
-                label: l10n.navNotifications,
+                label: l10n.commonNotificationsLabel,
                 onTap: () => context.go(AppRoutes.notificationsPath),
               ),
               NavListTile(
                 icon: Icons.support_agent_outlined,
-                label: l10n.navSupport,
+                label: l10n.commonSupportLabel,
                 onTap: () => context.go(AppRoutes.supportPath),
               ),
               NavListTile(

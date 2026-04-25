@@ -39,7 +39,7 @@ class TruckerLoadShareService {
     final routeSummary = '${detail.summary.originCity} > ${detail.summary.destinationCity}';
     final requirement = _localizedBodyType(l10n, detail.summary.requiredBodyType);
     final tyreSummary = detail.summary.requiredTyres.isEmpty
-        ? l10n.chatTruckTyresLabel(l10n.truckerLoadDetailAnyOption)
+        ? l10n.chatTruckTyresLabel(l10n.commonAnyLabel)
         : l10n.chatTruckTyresLabel(detail.summary.requiredTyres.join('/'));
     final superLoadLine = detail.summary.isSuperLoad ? 'Super Load - Payment Guarantee' : null;
     final appLink = '${AppRoutes.loadDetailPath}/${detail.summary.id}';
@@ -79,31 +79,20 @@ class TruckerLoadShareService {
   }
 
   static String _localizedBodyType(AppLocalizations l10n, String? value) {
-    final normalized = (value ?? '').trim();
-    switch (normalized.toLowerCase()) {
-      case 'open':
-        return l10n.truckerFindLoadsBodyTypeOpen;
-      case 'trailer':
-        return l10n.truckerFindLoadsBodyTypeTrailer;
-      case 'container':
-        return l10n.truckerFindLoadsBodyTypeContainer;
-      case 'tanker':
-        return l10n.truckerFindLoadsBodyTypeTanker;
-      default:
-        return normalized.isEmpty ? l10n.truckerFindLoadsAnyBodyFallback : normalized;
+    final normalized = (value ?? '').trim().toLowerCase();
+    if (normalized.isEmpty) {
+      return l10n.truckerFindLoadsAnyBodyFallback;
     }
+    return l10n.truckerFindLoadsBodyTypeValue(normalized);
   }
 
   static String _localizedPriceType(AppLocalizations l10n, String value) {
-    switch (value.trim().toLowerCase()) {
-      case 'fixed':
-        return l10n.supplierPostLoadPriceTypeFixed;
-      case 'per_ton':
-      case 'negotiable':
-        return l10n.supplierPostLoadPriceTypeNegotiable;
-      default:
-        return value.trim();
-    }
+    final normalized = value.trim().toLowerCase();
+    return l10n.supplierPostLoadPriceTypeValue(switch (normalized) {
+      'fixed' => 'fixed',
+      'per_ton' || 'negotiable' => 'per_ton',
+      _ => 'unknown',
+    });
   }
 
   static String _tonnes(double value) {

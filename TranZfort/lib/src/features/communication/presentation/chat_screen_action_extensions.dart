@@ -209,7 +209,7 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: Text(l10n.chatActionCancel),
+                child: Text(l10n.commonCancelAction),
               ),
               PrimaryButton(
                 label: l10n.chatActionApprove,
@@ -256,7 +256,7 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
             actions: [
               TextButton(
                 onPressed: () => Navigator.of(context).pop(false),
-                child: Text(l10n.chatActionCancel),
+                child: Text(l10n.commonCancelAction),
               ),
               PrimaryButton(
                 label: l10n.chatActionReject,

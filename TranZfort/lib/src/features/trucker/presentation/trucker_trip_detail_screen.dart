@@ -61,7 +61,7 @@ class TruckerTripDetailScreen extends ConsumerWidget {
             title: l10n.truckerTripDetailLoadFailureTitle,
             message: l10n.truckerTripDetailLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(truckerTripDetailProvider(tripId).notifier).load(),
             ),
           ),

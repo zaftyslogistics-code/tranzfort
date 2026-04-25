@@ -14,12 +14,7 @@ import '../../../core/theme/app_spacing.dart';
 import 'shell_components.dart';
 
 String _localizedDeletionStatus(AppLocalizations l10n, String value) {
-  return switch (value.trim().toLowerCase()) {
-    'active' => l10n.accountStateActive,
-    'deactivated_pending_cleanup' => l10n.accountStateDeactivatedPendingCleanup,
-    'restricted' => l10n.accountStateRestricted,
-    _ => l10n.accountStateUnknown,
-  };
+  return l10n.accountStateValue(value.trim().toLowerCase());
 }
 
 String _blockerRecoveryGuidance(AppLocalizations l10n, String? blocker) {
@@ -42,7 +37,7 @@ String _blockerActionLabel(AppLocalizations l10n, String? blocker) {
   if (normalized.contains('active trip')) {
     return l10n.deleteAccountBlockerActionOpenTrips;
   }
-  return l10n.deleteAccountBlockerActionOpenSupport;
+  return l10n.commonOpenSupportAction;
 }
 
 String _blockerActionRoute({
@@ -187,7 +182,7 @@ class DeleteAccountScreen extends ConsumerWidget {
           ),
         ),
         DetailSectionCard(
-          title: l10n.deleteAccountWhatHappensNextTitle,
+          title: l10n.commonWhatHappensNextTitle,
           children: [
             Text(
               alreadyPendingCleanup
@@ -233,7 +228,7 @@ class DeleteAccountScreen extends ConsumerWidget {
             SizedBox(
               width: double.infinity,
               child: OutlineButton(
-                label: l10n.deleteAccountBlockerActionOpenSupport,
+                label: l10n.commonOpenSupportAction,
                 onPressed: () => context.go(AppRoutes.supportPath),
               ),
             ),
@@ -259,14 +254,14 @@ class DeleteAccountScreen extends ConsumerWidget {
             ),
           if (canCancelPendingDeletion)
             DetailSectionCard(
-              title: l10n.deleteAccountCancelRequestTitle,
+              title: l10n.commonCancelDeletionRequestAction,
               children: [
                 SizedBox(
                   width: double.infinity,
                   child: OutlineButton(
                     label: state.isSubmitting
                         ? l10n.deleteAccountCancellingButton
-                        : l10n.deleteAccountCancelRequestButton,
+                        : l10n.commonCancelDeletionRequestAction,
                     onPressed: state.isSubmitting
                         ? null
                         : () async {

@@ -54,7 +54,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
     _syncControllers(state);
 
     return DetailPageScaffold(
-      title: l10n.shellDrawerFleet,
+      title: l10n.commonFleetLabel,
       children: [
         HeroActionCard(
           title: l10n.truckerFleetHeroTitle,
@@ -104,7 +104,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
           children: [
             AppTextField(
               controller: _truckNumberController,
-              label: l10n.truckerFleetTruckNumberLabel,
+              label: l10n.commonTruckNumberLabel,
               hintText: l10n.truckerFleetTruckNumberHint,
               errorText: state.fieldErrors['truck_number'],
               onChanged: ref.read(truckerFleetProvider.notifier).updateTruckNumber,
@@ -247,7 +247,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                 title: l10n.truckerFleetUnavailableTitle,
                 message: l10n.truckerFleetLoadFailureMessage,
                 action: OutlineButton(
-                  label: l10n.commonRetry,
+                  label: l10n.commonRetryAction,
                   onPressed: () => ref.read(truckerFleetProvider.notifier).load(),
                 ),
               )
@@ -300,12 +300,12 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
       child: Column(
         children: [
           PrimaryButton(
-            label: l10n.truckerFleetTakePhotoAction,
+            label: l10n.commonTakePhotoAction,
             onPressed: () => Navigator.of(context).pop(ImageSource.camera),
           ),
           const SizedBox(height: AppSpacing.md),
           OutlineButton(
-            label: l10n.truckerFleetChooseGalleryAction,
+            label: l10n.commonChooseFromGalleryAction,
             onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
           ),
         ],
@@ -385,24 +385,13 @@ class _FleetTruckCard extends StatelessWidget {
   }
 
   String _truckStatusLabel(AppLocalizations l10n, TruckerFleetTruckStatus status) {
-    return switch (status) {
-      TruckerFleetTruckStatus.pending => l10n.truckerFleetStatusPendingLabel,
-      TruckerFleetTruckStatus.verified => l10n.truckerFleetStatusVerifiedLabel,
-      TruckerFleetTruckStatus.rejected => l10n.truckerFleetStatusRejectedLabel,
-      TruckerFleetTruckStatus.editedPendingReapproval => l10n.truckerFleetStatusEditedPendingReapprovalLabel,
-      TruckerFleetTruckStatus.archived => l10n.truckerFleetStatusArchivedLabel,
-      TruckerFleetTruckStatus.unknown => l10n.truckerFleetStatusUnknownLabel,
-    };
+    return l10n.truckerFleetStatusLabelValue(status.databaseValue);
   }
 
   String _truckStateMessage(TruckerFleetTruck truck, AppLocalizations l10n) {
-    return switch (truck.status) {
-      TruckerFleetTruckStatus.pending => l10n.truckerFleetStatusPendingMessage,
-      TruckerFleetTruckStatus.verified => l10n.truckerFleetStatusVerifiedMessage,
-      TruckerFleetTruckStatus.rejected => truck.reviewFeedback.summary ?? l10n.truckerFleetStatusRejectedFallback,
-      TruckerFleetTruckStatus.editedPendingReapproval => l10n.truckerFleetStatusEditedPendingReapprovalMessage,
-      TruckerFleetTruckStatus.archived => l10n.truckerFleetStatusArchivedMessage,
-      TruckerFleetTruckStatus.unknown => l10n.truckerFleetStatusUnknownMessage,
-    };
+    if (truck.status == TruckerFleetTruckStatus.rejected && (truck.reviewFeedback.summary ?? '').trim().isNotEmpty) {
+      return truck.reviewFeedback.summary!;
+    }
+    return l10n.truckerFleetStatusMessageValue(truck.status.databaseValue);
   }
 }

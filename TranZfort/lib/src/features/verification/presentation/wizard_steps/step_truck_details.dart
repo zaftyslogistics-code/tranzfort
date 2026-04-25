@@ -38,7 +38,7 @@ class StepTruckDetails extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             WizardHeader(
-              title: l10n.verificationWizardTruckTitle,
+              title: l10n.commonTruckDetailsLabel,
               subtitle: l10n.verificationWizardTruckSubtitle,
               currentStep: state.currentStepIndex,
               totalSteps: state.totalSteps,
@@ -52,7 +52,7 @@ class StepTruckDetails extends ConsumerWidget {
             
             // Truck Number
             AppTextField(
-              label: l10n.verificationWizardTruckNumberLabel,
+              label: l10n.commonTruckNumberLabel,
               hintText: 'MH01AB1234',
               initialValue: truck.truckNumber,
               onChanged: controller.updateTruckNumber,

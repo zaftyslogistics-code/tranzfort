@@ -20,20 +20,19 @@ import 'shell_components.dart';
 import 'supplier_shell_shared_helpers.dart';
 
 String _localizedLinkedTripProofStatus(AppLocalizations l10n, LinkedTrip trip) {
+  String normalized;
   if (trip.hasPodProof) {
-    return l10n.truckerTripDetailProofStatusPodUploaded;
+    normalized = 'pod_uploaded';
+  } else if (trip.hasLrProof) {
+    normalized = 'lr_uploaded';
+  } else {
+    normalized = switch (trip.stage.trim().toLowerCase()) {
+      'delivered' => 'awaiting_pod',
+      'proof_submitted' => 'proof_submitted',
+      _ => 'other',
+    };
   }
-  if (trip.hasLrProof) {
-    return l10n.truckerTripDetailProofStatusLrUploaded;
-  }
-  switch (trip.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripDetailProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripDetailProofStatusProofPending;
-  }
+  return l10n.proofStatusValue(normalized);
 }
 
 
@@ -251,7 +250,7 @@ class _DashboardStatsSection extends StatelessWidget {
       return WarningBlock(
         title: l10n.supplierDashboardLoadFailureTitle,
         message: supplierAsyncFailure(dashboardAsync)?.message ?? l10n.supplierDashboardLoadFailureMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
 
@@ -363,14 +362,14 @@ class _SuperLoadReadinessSection extends StatelessWidget {
                         ? l10n.supplierFixVerification
                         : isPending
                             ? l10n.supplierReviewVerification
-                            : l10n.supplierOpenVerification,
+                            : l10n.commonOpenVerificationAction,
                 onPressed: () => context.go(AppRoutes.supplierVerificationPath),
               ),
             ),
             const SizedBox(width: AppSpacing.sm),
             Expanded(
               child: OutlineButton(
-                label: isVerified ? l10n.supplierDashboardOpenMyLoadsAction : l10n.navSupport,
+                label: isVerified ? l10n.commonOpenMyLoadsAction : l10n.commonSupportLabel,
                 onPressed: () => context.go(isVerified ? AppRoutes.myLoadsPath : AppRoutes.supportPath),
               ),
             ),
@@ -401,7 +400,7 @@ class _RecentLoadsSection extends StatelessWidget {
       return WarningBlock(
         title: l10n.supplierDashboardRecentLoadsUnavailableTitle,
         message: l10n.supplierDashboardRecentLoadsUnavailableMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
 
@@ -411,7 +410,7 @@ class _RecentLoadsSection extends StatelessWidget {
         icon: Icons.inventory_2_outlined,
         title: l10n.supplierDashboardNoLoadsPostedTitle,
         subtitle: l10n.supplierDashboardNoLoadsPostedSubtitle,
-        actionLabel: l10n.supplierDashboardOpenMyLoadsAction,
+        actionLabel: l10n.commonOpenMyLoadsAction,
         onAction: () => context.go(AppRoutes.myLoadsPath),
       );
     }
@@ -501,9 +500,9 @@ class SupplierDashboardScreen extends ConsumerWidget {
           useDarkTheme: true,
           primaryAction: GradientButton(
             label: !profileResolved
-                ? l10n.navSupport
+                ? l10n.commonSupportLabel
                 : canPostLoads
-                ? l10n.supplierDashboardPostLoadAction
+                ? l10n.commonPostLoadAction
                 : l10n.supplierCompleteVerification,
             onPressed: () => context.go(
               !profileResolved
@@ -516,7 +515,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
           child: _HeroSummary(profile: profile),
         ),
         DetailSectionCard(
-          title: l10n.supplierDashboardOverviewTitle,
+          title: l10n.commonDashboardOverviewTitle,
           children: [
             _DashboardStatsSection(
               dashboardAsync: dashboardAsync,
@@ -534,14 +533,14 @@ class SupplierDashboardScreen extends ConsumerWidget {
                 title: l10n.supplierDashboardAccountStateUnavailableTitle,
                 message: l10n.supplierDashboardAccountStateUnavailableMessage,
                 action: OutlineButton(
-                  label: l10n.navSupport,
+                  label: l10n.commonSupportLabel,
                   onPressed: () => context.go(AppRoutes.supportPath),
                 ),
               ),
           ],
         ),
         DetailSectionCard(
-          title: l10n.supplierDashboardQuickActionsTitle,
+          title: l10n.commonQuickActionsTitle,
           children: [
             QuickActionGrid(
               items: [
@@ -552,17 +551,17 @@ class SupplierDashboardScreen extends ConsumerWidget {
                 ),
                 QuickActionItem(
                   icon: Icons.alt_route_outlined,
-                  label: l10n.shellQuickActionTrips,
+                  label: l10n.commonTripsLabel,
                   onTap: () => context.go(AppRoutes.supplierTripsPath),
                 ),
                 QuickActionItem(
                   icon: Icons.chat_bubble_outline,
-                  label: l10n.supplierDashboardQuickActionChatLabel,
+                  label: l10n.commonChatLabel,
                   onTap: () => context.go(AppRoutes.messagesPath),
                 ),
                 QuickActionItem(
                   icon: Icons.notifications_outlined,
-                  label: l10n.navNotifications,
+                  label: l10n.commonNotificationsLabel,
                   onTap: () => context.go(AppRoutes.notificationsPath),
                 ),
               ],
@@ -611,7 +610,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
         title: l10n.supplierDashboardAccountStateUnavailableTitle,
         message: supplierAsyncFailure(profileAsync)?.message ?? l10n.supplierDashboardAccountStateUnavailableMessage,
         action: OutlineButton(
-          label: l10n.commonRetry,
+          label: l10n.commonRetryAction,
           onPressed: () => ref.refresh(supplierProfileProvider),
         ),
       );
@@ -626,7 +625,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
         title: l10n.supplierDashboardAccountStateUnavailableTitle,
         message: l10n.supplierDashboardAccountStateUnavailableMessage,
         action: OutlineButton(
-          label: l10n.commonRetry,
+          label: l10n.commonRetryAction,
           onPressed: () => ref.refresh(supplierProfileProvider),
         ),
       );
@@ -636,10 +635,10 @@ class SupplierDashboardScreen extends ConsumerWidget {
       return SupplierVerificationBannerWithAction(
         banner: VerificationBanner(
           status: VerificationBannerStatus.pending,
-          title: l10n.supplierVerificationPendingTitle,
+          title: l10n.commonVerificationPendingTitle,
           description: l10n.supplierVerificationPendingMessage,
         ),
-        actionLabel: l10n.supplierOpenVerification,
+        actionLabel: l10n.commonOpenVerificationAction,
         onTap: () => context.go(AppRoutes.supplierVerificationPath),
       );
     }
@@ -652,7 +651,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
       return SupplierVerificationBannerWithAction(
         banner: VerificationBanner(
           status: VerificationBannerStatus.rejected,
-          title: l10n.supplierVerificationNeedsAttentionTitle,
+          title: l10n.commonVerificationNeedsAttentionTitle,
           description: l10n.supplierVerificationNeedsAttentionDescription,
         ),
         actionLabel: l10n.supplierFixVerification,
@@ -665,7 +664,7 @@ class SupplierDashboardScreen extends ConsumerWidget {
         title: l10n.supplierCompleteSetupTitle,
         message: l10n.supplierCompleteSetupMessage,
         action: OutlineButton(
-          label: l10n.supplierOpenVerification,
+          label: l10n.commonOpenVerificationAction,
           onPressed: () => context.go(AppRoutes.supplierVerificationPath),
         ),
       );

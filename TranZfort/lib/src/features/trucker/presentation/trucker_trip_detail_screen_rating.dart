@@ -209,54 +209,32 @@ class _ProofCountdownLabel extends StatelessWidget {
 String _localizedVerificationStatus(AppLocalizations l10n, String status) {
   switch (status.trim().toLowerCase()) {
     case 'verified':
-      return l10n.truckerTripDetailVerificationStatusVerified;
+      return l10n.verificationStatusVerified;
     case 'pending':
-      return l10n.truckerTripDetailVerificationStatusPending;
+      return l10n.commonPendingLabel;
     case 'rejected':
-      return l10n.truckerTripDetailVerificationStatusRejected;
+      return l10n.verificationStatusRejected;
     default:
-      return l10n.truckerTripDetailVerificationStatusUnknown;
+      return l10n.commonUnknownLabel;
   }
 }
 
 String _localizedTripStage(AppLocalizations l10n, String stage) {
-  switch (stage.trim().toLowerCase()) {
-    case 'assigned':
-      return l10n.truckerTripDetailStageAssigned;
-    case 'pickup_pending':
-      return l10n.truckerTripDetailStagePickupPending;
-    case 'picked_up':
-      return l10n.truckerTripDetailStagePickedUp;
-    case 'in_transit':
-      return l10n.truckerTripDetailStageInTransit;
-    case 'delivered':
-      return l10n.truckerTripDetailStageDelivered;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailStageProofSubmitted;
-    case 'completed':
-      return l10n.truckerTripDetailStageCompleted;
-    case 'disputed':
-      return l10n.truckerTripDetailStageDisputed;
-    case 'cancelled':
-      return l10n.truckerTripDetailStageCancelled;
-    default:
-      return l10n.truckerTripsStageUnknown;
-  }
+  return l10n.tripStageValue(stage.trim().toLowerCase());
 }
 
 String _localizedProofStatus(AppLocalizations l10n, TruckerTripDetail detail) {
+  String normalized;
   if (detail.hasPodProof) {
-    return l10n.truckerTripDetailProofStatusPodUploaded;
+    normalized = 'pod_uploaded';
+  } else if (detail.hasLrProof) {
+    normalized = 'lr_uploaded';
+  } else {
+    normalized = switch (detail.stage.trim().toLowerCase()) {
+      'delivered' => 'awaiting_pod',
+      'proof_submitted' => 'proof_submitted',
+      _ => 'proof_pending',
+    };
   }
-  if (detail.hasLrProof) {
-    return l10n.truckerTripDetailProofStatusLrUploaded;
-  }
-  switch (detail.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripDetailProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripDetailProofStatusProofPending;
-  }
+  return l10n.proofStatusValue(normalized);
 }

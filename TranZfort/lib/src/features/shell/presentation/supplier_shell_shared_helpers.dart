@@ -23,162 +23,94 @@ String formatSupplierDateTime(BuildContext context, DateTime value) {
 }
 
 String localizedSupplierBookingStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'submitted':
-      return l10n.shellMessagesBookingStatusSubmitted;
-    case 'approved':
-      return l10n.shellMessagesBookingStatusApproved;
-    case 'rejected':
-      return l10n.shellMessagesBookingStatusRejected;
-    case 'pending':
-      return l10n.shellMessagesBookingStatusPending;
-    default:
-      return l10n.shellMessagesBookingStatusUnknown;
-  }
+  return l10n.shellMessagesBookingStatusValue(status.trim().toLowerCase());
 }
 
 String localizedSupplierPriceType(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'fixed':
-      return l10n.supplierPostLoadPriceTypeFixed;
-    case 'per_ton':
-    case 'negotiable':
-      return l10n.supplierPostLoadPriceTypeNegotiable;
-    default:
-      return l10n.supplierPostLoadPriceTypeUnknown;
-  }
+  final normalized = switch (value.trim().toLowerCase()) {
+    'fixed' => 'fixed',
+    'per_ton' || 'negotiable' => 'per_ton',
+    _ => 'other',
+  };
+  return l10n.supplierPostLoadPriceTypeValue(normalized);
 }
 
 String localizedSupplierDashboardLoadStatus(AppLocalizations l10n, String status) {
-  switch (status.trim().toLowerCase()) {
-    case 'active':
-      return l10n.supplierDashboardLoadStatusActive;
-    case 'assigned_partial':
-      return l10n.supplierLoadStatusAssignedPartial;
-    case 'assigned_full':
-      return l10n.supplierLoadStatusAssignedFull;
-    case 'in_transit':
-      return l10n.supplierLoadStatusInTransit;
-    case 'completed':
-      return l10n.supplierLoadStatusCompleted;
-    case 'filled_outside_app':
-      return l10n.supplierLoadStatusFilledOutsideApp;
-    case 'cancelled':
-      return l10n.supplierLoadStatusCancelled;
-    case 'expired':
-      return l10n.supplierLoadStatusExpired;
-    case 'deactivated':
-      return l10n.supplierLoadStatusDeactivated;
-    default:
-      return l10n.supplierLoadStatusUnknown;
-  }
+  return l10n.supplierLoadStatusValue(status.trim().toLowerCase());
 }
 
 String localizedSupplierDashboardVerificationStatus(AppLocalizations l10n, String? status) {
   switch ((status ?? '').trim().toLowerCase()) {
     case 'verified':
-      return l10n.supplierDashboardVerificationStatusVerified;
+      return l10n.verificationStatusVerified;
     case 'pending':
-      return l10n.supplierDashboardVerificationStatusPending;
+      return l10n.commonPendingLabel;
     case 'rejected':
-      return l10n.supplierDashboardVerificationStatusRejected;
+      return l10n.verificationStatusRejected;
     case 'unverified':
     case '':
       return l10n.accountProfileStatusNeedsAttention;
     default:
-      return l10n.supplierDashboardVerificationStatusUnknown;
+      return l10n.commonUnknownLabel;
   }
 }
 
 String localizedSupplierTripStage(AppLocalizations l10n, String stage) {
-  switch (stage.trim().toLowerCase()) {
-    case 'assigned':
-      return l10n.supplierTripDetailStageAssigned;
-    case 'pickup_pending':
-      return l10n.supplierTripDetailStagePickupPending;
-    case 'picked_up':
-      return l10n.supplierTripDetailStagePickedUp;
-    case 'in_transit':
-      return l10n.supplierTripDetailStageInTransit;
-    case 'delivered':
-      return l10n.supplierTripDetailStageDelivered;
-    case 'proof_submitted':
-      return l10n.supplierTripDetailStageProofSubmitted;
-    case 'completed':
-      return l10n.supplierTripDetailStageCompleted;
-    case 'disputed':
-      return l10n.supplierTripDetailStageDisputed;
-    case 'cancelled':
-      return l10n.supplierTripDetailStageCancelled;
-    default:
-      return l10n.supplierTripDetailStageUnknown;
+  return l10n.tripStageValue(stage.trim().toLowerCase());
+}
+
+String _normalizedProofStatus(AppLocalizations l10n, {bool hasPodProof = false, bool hasLrProof = false, String stage = ''}) {
+  String normalized;
+  if (hasPodProof) {
+    normalized = 'pod_uploaded';
+  } else if (hasLrProof) {
+    normalized = 'lr_uploaded';
+  } else {
+    normalized = switch (stage.trim().toLowerCase()) {
+      'delivered' => 'awaiting_pod',
+      'proof_submitted' => 'proof_submitted',
+      _ => 'proof_pending',
+    };
   }
+  return l10n.proofStatusValue(normalized);
 }
 
 String localizedLinkedTripProofStatus(AppLocalizations l10n, LinkedTrip trip) {
-  if (trip.hasPodProof) {
-    return l10n.truckerTripDetailProofStatusPodUploaded;
-  }
-  if (trip.hasLrProof) {
-    return l10n.truckerTripDetailProofStatusLrUploaded;
-  }
-  switch (trip.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripDetailProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripDetailProofStatusProofPending;
-  }
+  return _normalizedProofStatus(l10n, hasPodProof: trip.hasPodProof, hasLrProof: trip.hasLrProof, stage: trip.stage);
 }
 
 String localizedSupplierProofStatus(AppLocalizations l10n, SupplierTrip trip) {
-  if (trip.hasPodProof) {
-    return l10n.truckerTripDetailProofStatusPodUploaded;
-  }
-  if (trip.hasLrProof) {
-    return l10n.truckerTripDetailProofStatusLrUploaded;
-  }
-  switch (trip.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripDetailProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripDetailProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripDetailProofStatusProofPending;
-  }
+  return _normalizedProofStatus(l10n, hasPodProof: trip.hasPodProof, hasLrProof: trip.hasLrProof, stage: trip.stage);
 }
 
 bool hasSuperLoadState({required bool isSuperLoad, required String superStatus}) {
   return isSuperLoad || superStatus.trim().toLowerCase() != 'none';
 }
 
-String superLoadStatusLabel(AppLocalizations l10n, String superStatus, {required bool isSuperLoad}) {
+String _normalizedSuperLoadStatusValue(String superStatus, {required bool isSuperLoad}) {
   final normalized = superStatus.trim().toLowerCase();
   return switch (normalized) {
-    'request_submitted' => l10n.supplierDashboardSuperLoadStatusRequestSubmitted,
-    'under_review' => l10n.supplierDashboardSuperLoadStatusUnderReview,
-    'approved_payment_pending' => l10n.supplierDashboardSuperLoadStatusApproved,
-    'active' => l10n.supplierDashboardSuperLoadStatusActive,
-    'rejected' => l10n.supplierDashboardSuperLoadStatusRejected,
-    'expired_or_closed' => l10n.supplierDashboardSuperLoadStatusExpiredOrClosed,
-    _ when isSuperLoad => l10n.supplierDashboardSuperLoadStatusActive,
-    _ => l10n.supplierDashboardSuperLoadStatusNotActive,
+    'request_submitted' => 'request_submitted',
+    'under_review' => 'under_review',
+    'approved_payment_pending' => 'approved_payment_pending',
+    'active' => 'active',
+    'rejected' => 'rejected',
+    'expired_or_closed' => 'expired_or_closed',
+    _ when isSuperLoad => 'active',
+    _ => 'not_requested',
   };
 }
 
+String superLoadStatusLabel(AppLocalizations l10n, String superStatus, {required bool isSuperLoad}) {
+  return l10n.supplierDashboardSuperLoadStatusValue(
+    _normalizedSuperLoadStatusValue(superStatus, isSuperLoad: isSuperLoad),
+  );
+}
+
 String superLoadStatusGuidance(AppLocalizations l10n, String superStatus, {required bool isSuperLoad}) {
-  final normalized = superStatus.trim().toLowerCase();
-  return switch (normalized) {
-    'request_submitted' => l10n.supplierDashboardSuperLoadGuidanceRequestSubmitted,
-    'under_review' => l10n.supplierDashboardSuperLoadGuidanceUnderReview,
-    'approved_payment_pending' => l10n.supplierDashboardSuperLoadGuidanceApproved,
-    'active' => l10n.supplierDashboardSuperLoadGuidanceActive,
-    'rejected' => l10n.supplierDashboardSuperLoadGuidanceRejected,
-    'expired_or_closed' => l10n.supplierDashboardSuperLoadGuidanceExpiredOrClosed,
-    _ when isSuperLoad => l10n.supplierDashboardSuperLoadGuidanceActive,
-    _ => l10n.supplierDashboardSuperLoadGuidanceNotActive,
-  };
+  return l10n.supplierDashboardSuperLoadGuidanceValue(
+    _normalizedSuperLoadStatusValue(superStatus, isSuperLoad: isSuperLoad),
+  );
 }
 
 String shortId(String value) {

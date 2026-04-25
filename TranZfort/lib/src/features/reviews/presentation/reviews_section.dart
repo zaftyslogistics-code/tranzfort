@@ -281,7 +281,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               OutlinedButton.icon(
                 onPressed: _loadInitial,
                 icon: const Icon(Icons.refresh),
-                label: Text(l10n.loadHistoryRetry),
+                label: Text(l10n.commonRetryAction),
               ),
             ],
           ),

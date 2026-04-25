@@ -607,3 +607,330 @@ All navigation errors are logged via MonitoringService:
 - `lib/src/core/services/monitoring_service.dart` - Navigation event tracking
 - `lib/src/features/shell/presentation/user_app_shell.dart` - Shell PopScope implementation
 - `lib/src/features/shell/presentation/shell_components.dart` - DetailPageScaffold with back arrow
+
+---
+
+# Localization Architecture
+
+## Overview
+
+TranZfort uses Flutter's internationalization (intl) package with ARB (Application Resource Bundle) files for localization. The system supports English (`en`) and Hindi (`hi`) with ICU `select` syntax for key consolidation and a CI guardrail to maintain parity and quality.
+
+## Core Components
+
+### 1. ARB Files (Source of Truth)
+
+**Files:**
+- `lib/l10n/app_en.arb` - English translations (primary)
+- `lib/l10n/app_hi.arb` - Hindi translations
+
+**Key Facts:**
+- ARB files are the **source of truth** for all localization
+- Never edit generated Dart files directly
+- UTF-8 encoding required (Hindi Devanagari characters)
+- JSON format with `@<key>` metadata for placeholders/descriptions
+
+**Current Metrics (25 Apr 2026):**
+- EN keys: **1,498** (target ≤ 1,500) ✅
+- HI keys: **1,498** (parity achieved) ✅
+- `app_en.arb` size: **153.7 KB**
+- `app_hi.arb` size: **224.1 KB**
+- Generated Dart payload: **787.2 KB** (346 + 185 + 256)
+
+### 2. Generated Dart Localization Files
+
+**Files:**
+- `lib/src/l10n/app_localizations.dart` - Base class with all getters
+- `lib/src/l10n/app_localizations_en.dart` - English implementation
+- `lib/src/l10n/app_localizations_hi.dart` - Hindi implementation
+
+**Generation:**
+```bash
+flutter gen-l10n
+```
+
+**Policy:**
+- Generated files are **committed to the repo**
+- Ensures app builds out-of-the-box for any developer
+- Regenerate after any ARB file change
+- Do not edit these files directly
+
+### 3. ICU Select Keys
+
+**Purpose:** Consolidate duplicate status/type families into single parameterized keys.
+
+**Example:**
+```json
+"accountStateValue": "{state, select, deactivated_pending_cleanup {Deactivated pending cleanup} restricted {Restricted} active {Active} unknown {Unknown} other {Unknown}}"
+```
+
+**Usage in Dart:**
+```dart
+String localizedStatus = l10n.accountStateValue('active'); // Returns "Active"
+```
+
+**Consolidated Families (60+ keys reduced to 30+ ICU selects):**
+- `accountStateValue` — Account states (active, deactivated, restricted, unknown)
+- `accountRoleValue` — User roles (supplier, trucker, unknown)
+- `supportTicketStatusValue` — Support ticket statuses
+- `shellMessagesBookingStatusValue` — Booking request statuses
+- `proofStatusValue` — Proof upload statuses (POD, LR, awaiting, submitted)
+- `truckerFindLoadsBodyTypeValue` — Truck body types (open, trailer, container, tanker)
+- `trustSafetyStatusValue` — Trust/safety statuses (normal, warned, restricted, suspended, banned)
+- `notificationFallbackValue` — Notification type fallback
+- `tripStageValue` — Trip stages (pending, in_transit, delivered, cancelled)
+- `supplierPostLoadPriceTypeValue` — Price types (fixed, per_ton, unknown)
+
+**Common Shared Keys (consolidated duplicated strings):**
+- `commonDashboardLabel`, `commonSupportLabel`, `commonCancelAction`
+- `commonCompletedLabel`, `commonNotificationsLabel`, `commonActiveLabel`
+- `commonProfileLabel`, `commonCompanyNameLabel`, `commonNextStepTitle`
+- `commonRetryAction`, `commonChatLabel`, `commonPostLoadAction`
+- `commonTakePhotoAction`, `commonAadhaarNumberLabel`, `commonPanNumberLabel`
+- `commonOpenInGoogleMapsAction`, `commonBackToSignInAction`
+- `commonViewDetailsAction`, `commonDashboardOverviewTitle`, `commonQuickActionsTitle`
+- `commonOpenMyLoadsAction`, `commonTripsLabel`, `commonFleetLabel`, `commonSignOutAction`
+- `commonCallAction`, `commonReportSpamOrAbuseAction`, `commonUnknownLabel`
+- `commonSystemUpdateLabel`, `commonVoiceMessageLabel`, `commonTruckDetailsLabel`
+- `commonLoadMoreAction`, `commonOpenSupportAction`, `commonWhatHappensNextTitle`
+- `commonCancelDeletionRequestAction`, `commonAttachmentFailureMessage`
+
+**Normalization Pattern:**
+```dart
+String _localizedAccountState(AppLocalizations l10n, String value) {
+  return l10n.accountStateValue(value.trim().toLowerCase());
+}
+```
+
+### 4. CI Guardrail
+
+**File:** `tool/verify_l10n.dart`
+
+**Purpose:** Prevent localization degradation by checking:
+1. Unused EN keys (no Dart references under `lib/`)
+2. Missing HI keys (present in EN but not in HI)
+3. Unallowlisted identical EN/HI values (untranslated strings)
+4. Hardcoded UI strings (English literals in Dart files)
+
+**Allowlist Files:**
+- `tool/l10n_allowlist.txt` — Keys allowed to have identical EN/HI values (brand names, format strings, technical terms)
+- `tool/hardcoded_strings_allowlist.txt` — Hardcoded strings allowed in Dart (test files, whitelisted screens)
+
+**Run Locally:**
+```bash
+dart tool/verify_l10n.dart
+```
+
+**CI Integration:**
+- File: `.github/workflows/l10n-guardrail.yml`
+- Runs on every PR and push to `main` / `develop`
+- Fails build if guardrail detects violations
+
+**Current Status:** Passes clean (1498 EN keys, 84 allowlisted identical EN/HI values, zero unallowlisted violations)
+
+### 5. Workflow: Adding New Localization Keys
+
+**Step 1: Add to EN ARB**
+```json
+{
+  "myNewKey": "My new English text",
+  "@myNewKey": {
+    "description": "Context for translators"
+  }
+}
+```
+
+**Step 2: Add to HI ARB**
+```json
+{
+  "myNewKey": "मेरा नया हिंदी पाठ",
+  "@myNewKey": {
+    "description": "Context for translators"
+  }
+}
+```
+
+**Step 3: Regenerate Dart files**
+```bash
+flutter gen-l10n
+```
+
+**Step 4: Use in Dart code**
+```dart
+final l10n = AppLocalizations.of(context);
+Text(l10n.myNewKey)
+```
+
+**Step 5: Verify guardrail**
+```bash
+dart tool/verify_l10n.dart
+```
+
+**Step 6: Commit**
+- Commit ARB files + generated Dart files
+- CI guardrail will verify on push
+
+## Key Consolidation Strategy
+
+### When to Use ICU Select
+
+**Use ICU `select` when:**
+- Multiple keys represent the same concept with different values (e.g., status enums)
+- Values map 1:1 to an enum or database field
+- Keys follow a naming pattern like `familyNameVariant` (e.g., `accountStateActive`, `accountStateDeactivated`)
+
+**Example:**
+```dart
+// Before (4 separate keys)
+switch (status) {
+  case 'active': return l10n.accountStateActive;
+  case 'deactivated': return l10n.accountStateDeactivated;
+  case 'restricted': return l10n.accountStateRestricted;
+  default: return l10n.accountStateUnknown;
+}
+
+// After (1 ICU select key)
+return l10n.accountStateValue(status.toLowerCase());
+```
+
+### When to Use Common Keys
+
+**Use shared `common*` keys when:**
+- The same string appears in multiple contexts (e.g., "Dashboard" appears in 3+ screens)
+- The string is a generic UI element (button labels, common actions)
+- No contextual variation is needed
+
+**Example:**
+```dart
+// Before (3 separate keys)
+l10n.supplierDashboardLabel
+l10n.truckerDashboardLabel
+l10n.profileDashboardLabel
+
+// After (1 common key)
+l10n.commonDashboardLabel
+```
+
+### When NOT to Consolidate
+
+**Keep separate keys when:**
+- Strings have different meanings despite identical English text
+- Context matters for translation (e.g., "Submit" on a form vs "Submit" in a chat)
+- Key takes parameters that differ by context
+- Future divergence is likely
+
+## Metadata Descriptions
+
+**Policy:** Strip `@metadata` `description` fields on mechanical keys (plain nouns, button labels). Keep descriptions only where the key takes parameters or is ambiguous without context.
+
+**Examples:**
+- Keep description: `"priceValue": "{price, select, fixed {...}}"` — parameterized
+- Strip description: `"dashboardLabel": "Dashboard"` — plain noun
+
+**Impact:** Commit `be1487e` stripped 1578 descriptions, kept 141. Significant ARB + generated Dart payload reduction.
+
+## Language Toggle
+
+**Files:** `lib/src/core/providers/app_locale_providers.dart`
+
+**Supported Languages:**
+- English (`en`) — default voice: `en-GB` (UK English)
+- Hindi (`hi`) — default voice: `hi-IN` (Hindi)
+
+**Language Switching:**
+- `LanguageToggleAction` widget on auth + onboarding screens
+- Persists to SharedPreferences
+- Triggers MaterialApp rebuild (no data loss)
+- No "language lock" — can switch mid-onboarding
+
+**TTS Voice Mapping:**
+- `en` → `en-GB` (UK English, not US)
+- `hi` → `hi-IN` (Hindi India)
+
+## TTS Integration
+
+**File:** `lib/src/core/services/contextual_tts_service.dart`
+
+**Mute Toggle:**
+- `TtsActionButton` widget provides mute/unmute toggle
+- Persists `tts_muted` flag to SharedPreferences
+- Default state: unmuted
+- Auto-play respects muted state (no replay on unmute)
+
+**Auto-Play:**
+- `TtsScreenSummaryEffect` auto-plays screen summary on mount
+- Short-circuits when `tts_muted == true`
+- Every screen routes through `ContextualTtsService.speakSummary`
+
+## Testing
+
+### Manual Testing Checklist
+- [ ] Fresh install → English UK voice speaks on auth
+- [ ] Tap mute icon → voice stops, next screen stays silent
+- [ ] Tap again → next screen speaks
+- [ ] `अ` / `A` swaps locale instantly on auth without wiping form state
+- [ ] Verify all ICU select keys render correctly for all enum values
+- [ ] Verify Hindi parity (no English strings in Hindi build)
+
+### Guardrail Testing
+```bash
+# Run guardrail locally
+dart tool/verify_l10n.dart
+
+# Should pass with:
+# - 0 unused EN keys
+# - 0 missing HI keys
+# - 0 unallowlisted identical EN/HI values
+# - 0 unallowlisted hardcoded strings
+```
+
+## Performance Considerations
+
+- **ARB file size:** 153.7 KB (EN) + 224.1 KB (HI) = 377.8 KB total
+- **Generated Dart:** 787.2 KB (346 + 185 + 256)
+- **ICU select overhead:** Negligible (runtime string interpolation)
+- **Guardrail runtime:** Fast (pattern matching over Dart files)
+- **CI guardrail:** Runs in ~10-15 seconds on GitHub Actions
+
+## Migration History
+
+**Phase 1 (Delete dead keys)** — Shipped 24 Apr 2026
+- Removed 212 unused EN keys
+- Removed 155 matching HI keys
+- Reduced ARB size by 45 KB (EN) + 24 KB (HI)
+
+**Phase 2 (Wire hardcoded strings)** — Shipped 24 Apr 2026
+- Added 48 new keys and wired them in 10 files
+- Free Hindi coverage without new translations
+
+**Phase 3 (Hindi parity)** — Shipped 25 Apr 2026
+- Translated 280 genuine untranslated strings
+- Added 106 missing HI keys
+- Achieved EN/HI parity at 1498/1498 keys
+
+**Phase 4 (Key consolidation)** — Shipped 25 Apr 2026
+- Collapsed 60+ status/type families into ICU select keys
+- Reduced key count from 1733 to 1498 (-235 keys)
+- Stripped 1578 metadata descriptions
+
+**Phase 5 (CI guardrail)** — Shipped 25 Apr 2026
+- Created `tool/verify_l10n.dart` script
+- Added `.github/workflows/l10n-guardrail.yml`
+- Guardrail passes clean with zero violations
+
+## Related Files
+
+- `lib/l10n/app_en.arb` - English translations (source of truth)
+- `lib/l10n/app_hi.arb` - Hindi translations (source of truth)
+- `lib/src/l10n/app_localizations.dart` - Generated base class
+- `lib/src/l10n/app_localizations_en.dart` - Generated English implementation
+- `lib/src/l10n/app_localizations_hi.dart` - Generated Hindi implementation
+- `tool/verify_l10n.dart` - CI guardrail script
+- `tool/l10n_allowlist.txt` - Allowlist for identical EN/HI values
+- `tool/hardcoded_strings_allowlist.txt` - Allowlist for hardcoded UI strings
+- `.github/workflows/l10n-guardrail.yml` - CI workflow
+- `lib/src/core/providers/app_locale_providers.dart` - Locale state management
+- `lib/src/core/services/contextual_tts_service.dart` - TTS service with voice mapping
+- `lib/src/shared/widgets/tts_action_button.dart` - Mute/unmute toggle
+- `lib/src/core/widgets/tts_screen_summary_effect.dart` - Auto-play TTS effect
+- `docs/TODO-23-april.md` - Localization cleanup project checklist

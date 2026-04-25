@@ -1,12 +1,12 @@
 Localization Triage Summary
 ===========================
-Generated: 2026-04-24T21:09:14.334153
+Generated: 2026-04-25T01:44:41.439745
 
-Total EN keys: 1733
-Total HI keys: 1627
-Identical EN/HI values (need triage): 402
-Translated (different values): 1225
-Missing in HI: 106
+Total EN keys: 1540
+Total HI keys: 1535
+Identical EN/HI values (need triage): 77
+Translated (different values): 1458
+Missing in HI: 5
 Orphan HI keys: 0
 
 Files written to C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\tool:

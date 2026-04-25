@@ -56,7 +56,7 @@ class VerificationScreen extends ConsumerWidget {
             title: l10n.verificationLoadFailureTitle,
             message: l10n.verificationLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(verificationProvider.notifier).load(),
             ),
           )
@@ -65,7 +65,7 @@ class VerificationScreen extends ConsumerWidget {
             icon: Icons.verified_user_outlined,
             title: l10n.verificationDetailsUnavailableTitle,
             subtitle: l10n.verificationDetailsUnavailableSubtitle,
-            actionLabel: l10n.commonRetry,
+            actionLabel: l10n.commonRetryAction,
             onAction: () => ref.read(verificationProvider.notifier).load(),
           )
         else if (detail != null) ...[
@@ -77,7 +77,7 @@ class VerificationScreen extends ConsumerWidget {
             ),
           if (detail.isRejected && (detail.reviewFeedback.nextStep ?? '').trim().isNotEmpty)
             WarningBlock(
-              title: l10n.verificationNextStepTitle,
+              title: l10n.commonNextStepTitle,
               message: detail.reviewFeedback.nextStep!,
             ),
           if (state.actionFailure != null)
@@ -87,7 +87,7 @@ class VerificationScreen extends ConsumerWidget {
             ),
           if (detail.isPending)
             DetailSectionCard(
-              title: l10n.verificationWhatHappensNextTitle,
+              title: l10n.commonWhatHappensNextTitle,
               children: [
                 Text(
                   l10n.verificationWhatHappensNextMessage,
@@ -98,7 +98,7 @@ class VerificationScreen extends ConsumerWidget {
                   events: [
                     TimelineEvent(
                       title: l10n.verificationTimelinePacketSubmittedTitle,
-                      timestamp: l10n.verificationTimelinePacketSubmittedTimestamp,
+                      timestamp: l10n.commonCompletedLabel,
                       description: l10n.verificationTimelinePacketSubmittedDescription,
                     ),
                     TimelineEvent(
@@ -330,12 +330,12 @@ class VerificationScreen extends ConsumerWidget {
       child: Column(
         children: [
           PrimaryButton(
-            label: l10n.verificationTakePhotoAction,
+            label: l10n.commonTakePhotoAction,
             onPressed: () => Navigator.of(context).pop(ImageSource.camera),
           ),
           const SizedBox(height: AppSpacing.md),
           OutlineButton(
-            label: l10n.verificationChooseFromGalleryAction,
+            label: l10n.commonChooseFromGalleryAction,
             onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
           ),
         ],
@@ -393,7 +393,7 @@ class VerificationScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.chatActionCancel),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
@@ -416,7 +416,7 @@ class VerificationScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: Text(l10n.chatActionCancel),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
@@ -469,17 +469,21 @@ class _VerificationDocumentCard extends StatelessWidget {
     final requiredDocument = detail.isDocumentRequired(type);
     final reviewFeedback = detail.reviewFeedback.feedbackFor(type);
     final rejectedByReview = reviewFeedback?.isRejected ?? false;
-    final statusLabel = detail.isPending
-        ? l10n.verificationDocumentStatusPending
-        : detail.isVerified
-            ? l10n.verificationDocumentStatusVerified
-            : rejectedByReview
-                ? l10n.verificationDocumentStatusRejected
-            : uploaded
-                ? l10n.verificationDocumentStatusUploaded
-                : requiredDocument
-                    ? l10n.verificationDocumentStatusRequired
-                    : l10n.verificationDocumentStatusOptional;
+    String documentStatus;
+    if (detail.isPending) {
+      documentStatus = 'pending';
+    } else if (detail.isVerified) {
+      documentStatus = 'verified';
+    } else if (rejectedByReview) {
+      documentStatus = 'rejected';
+    } else if (uploaded) {
+      documentStatus = 'uploaded';
+    } else if (requiredDocument) {
+      documentStatus = 'required';
+    } else {
+      documentStatus = 'optional';
+    }
+    final statusLabel = l10n.verificationDocumentStatusValue(documentStatus);
 
     return StandardListCard(
       accent: statusPaletteFor(statusLabel).foreground,

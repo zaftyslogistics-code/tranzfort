@@ -72,7 +72,7 @@ class _PlayableVoiceMessageContentState extends ConsumerState<_PlayableVoiceMess
                     children: [
                       Expanded(
                         child: Text(
-                          l10n.chatVoiceMessageLabel,
+                          l10n.commonVoiceMessageLabel,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

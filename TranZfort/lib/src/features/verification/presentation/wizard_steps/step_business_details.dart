@@ -50,7 +50,7 @@ class StepBusinessDetails extends ConsumerWidget {
             
             // Company Name
             AppTextField(
-              label: l10n.verificationWizardCompanyNameLabel,
+              label: l10n.commonCompanyNameLabel,
               hintText: l10n.verificationWizardCompanyNameHint,
               initialValue: draft.companyName ?? '',
               onChanged: controller.updateCompanyName,
@@ -303,7 +303,7 @@ class _OptionalGstSectionState extends State<_OptionalGstSection> {
               child: Column(
                 children: [
                   AppTextField(
-                    label: l10n.verificationWizardGstNumberLabel,
+                    label: l10n.commonGstNumberLabel,
                     hintText: '22AAAAA0000A1Z5',
                     initialValue: widget.gstNumber ?? '',
                     onChanged: widget.onGstNumberChanged,

@@ -22,11 +22,11 @@ class _ChatContextBanner extends StatelessWidget {
   String _localizedChatStatus(AppLocalizations l10n, String rawStatus) {
     switch (rawStatus.trim().toLowerCase()) {
       case 'active':
-        return l10n.chatLoadStatusActive;
+        return l10n.commonActiveLabel;
       case 'approved':
         return l10n.chatBookingStatusApproved;
       default:
-        return l10n.chatBookingStatusUnknown;
+        return l10n.commonUnknownLabel;
     }
   }
 
@@ -125,7 +125,7 @@ String? _truckerChatGatingMessage(
 
 String _truckerChatActionLabel(AppLocalizations l10n, TruckerProfile? truckerProfile) {
   if (truckerProfile == null || !truckerProfile.isVerified) {
-    return l10n.truckerDashboardOpenVerificationAction;
+    return l10n.commonOpenVerificationAction;
   }
   return l10n.truckerDashboardOpenFleetAction;
 }

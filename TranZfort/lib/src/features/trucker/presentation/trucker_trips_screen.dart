@@ -36,12 +36,12 @@ class TruckerTripsScreen extends ConsumerWidget {
             FilterChipBar(
               items: [
                 FilterChipItem(
-                  label: l10n.truckerTripsTabActive,
+                  label: l10n.commonActiveLabel,
                   selected: state.selectedTab == TruckerTripsTab.active,
                   onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.active),
                 ),
                 FilterChipItem(
-                  label: l10n.truckerTripsTabCompleted,
+                  label: l10n.commonCompletedLabel,
                   selected: state.selectedTab == TruckerTripsTab.completed,
                   onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.completed),
                 ),
@@ -78,7 +78,7 @@ class _TruckerTripsBody extends StatelessWidget {
       return WarningBlock(
         title: l10n.truckerTripsLoadFailureTitle,
         message: l10n.truckerTripsLoadFailureMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
 
@@ -113,45 +113,23 @@ class _TruckerTripsBody extends StatelessWidget {
 }
 
 String _localizedTruckerTripsStage(AppLocalizations l10n, String stage) {
-  switch (stage.trim().toLowerCase()) {
-    case 'assigned':
-      return l10n.truckerTripsStageAssigned;
-    case 'pickup_pending':
-      return l10n.truckerTripsStagePickupPending;
-    case 'picked_up':
-      return l10n.truckerTripsStagePickedUp;
-    case 'in_transit':
-      return l10n.truckerTripsStageInTransit;
-    case 'delivered':
-      return l10n.truckerTripsStageDelivered;
-    case 'proof_submitted':
-      return l10n.truckerTripsStageProofSubmitted;
-    case 'completed':
-      return l10n.truckerTripsStageCompleted;
-    case 'disputed':
-      return l10n.truckerTripsStageDisputed;
-    case 'cancelled':
-      return l10n.truckerTripsStageCancelled;
-    default:
-      return l10n.truckerTripsStageUnknown;
-  }
+  return l10n.tripStageValue(stage.trim().toLowerCase());
 }
 
 String _localizedTruckerTripsProofStatus(AppLocalizations l10n, TruckerTrip trip) {
+  String normalized;
   if (trip.hasPodProof) {
-    return l10n.truckerTripsProofStatusPodUploaded;
+    normalized = 'pod_uploaded';
+  } else if (trip.hasLrProof) {
+    normalized = 'lr_uploaded';
+  } else {
+    normalized = switch (trip.stage.trim().toLowerCase()) {
+      'delivered' => 'awaiting_pod',
+      'proof_submitted' => 'proof_submitted',
+      _ => 'proof_pending',
+    };
   }
-  if (trip.hasLrProof) {
-    return l10n.truckerTripsProofStatusLrUploaded;
-  }
-  switch (trip.stage.trim().toLowerCase()) {
-    case 'delivered':
-      return l10n.truckerTripsProofStatusAwaitingPod;
-    case 'proof_submitted':
-      return l10n.truckerTripsProofStatusProofSubmitted;
-    default:
-      return l10n.truckerTripsProofStatusProofPending;
-  }
+  return l10n.proofStatusValue(normalized);
 }
 
 String _formatTruckerTripsDate(BuildContext context, DateTime value) {

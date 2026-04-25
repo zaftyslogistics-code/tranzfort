@@ -209,7 +209,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
           const TtsActionButton(),
           if (callUri != null)
             IconButton(
-              tooltip: l10n.chatTooltipCall,
+              tooltip: l10n.commonCallAction,
               onPressed: truckerChatBlocked
                   ? null
                   : () async {
@@ -249,7 +249,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
               ),
               PopupMenuItem<String>(
                 value: 'report_issue',
-                child: Text(l10n.chatMenuReportSpamOrAbuse),
+                child: Text(l10n.commonReportSpamOrAbuseAction),
               ),
             ],
           ),

@@ -1,0 +1,79 @@
+
+Identical EN/HI values outside allowlist (7)
+- authPasswordLabel
+- chatReportSourceLabel
+- truckerTripDetailCompletedOnLabel
+- truckerTripDetailDisputeCategoryLabel
+- truckerTripDetailMaterialPickupSummary
+- truckerTripDetailRatingStarTooltip
+- truckerTripDetailReportSourceLabel
+
+Possible hardcoded UI strings (58)
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\auth_screens_email_password.dart: Text('Discard Changes?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\auth_screens_email_password.dart: Text('You have unsaved changes. Do you want to discard them?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\auth_screens_email_password.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\auth_screens_email_password.dart: Text('Discard'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart: Text('Discard Changes?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart: Text('You have unsaved profile changes. Do you want to discard them?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart: Text('Discard'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart: Text('Location Services Disabled'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_screens.dart: Text('Discard Selection?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_screens.dart: Text('You have selected a role. Do you want to discard it?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_screens.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\auth\presentation\onboarding_screens.dart: Text('Discard'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: Text('Supplier Profile'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: Text(
+               'Failed to load profile'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: Text('Retry'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: Text(
+               'Profile not found'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: Text(
+               'This user may have been removed or does not exist.'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart: title: 'Recent Loads'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart: Text('Trucker Profile'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart: Text(
+                   'Fleet'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart: Text(
+               'Failed to load profile'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart: Text('Retry'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart: Text(
+               'Profile not found'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\reviewer_mini_card.dart: Text(
+           'No rating yet'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_card.dart: Text(
+                 'Reply'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\reviews\presentation\widgets\review_card.dart: Text(
+         'Reply to this review'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\shell\presentation\user_app_shell.dart: Text('Press back again to exit'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\post_load_screen.dart: Text('Discard Changes?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\post_load_screen.dart: Text('You have unsaved load details. Do you want to discard them?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\post_load_screen.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\post_load_screen.dart: Text('Discard'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\post_load_screen.dart: label: 'Specify Material'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\raise_dispute_screen.dart: Text('Discard Dispute?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\raise_dispute_screen.dart: Text('You have unsaved dispute details. Do you want to discard them?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\raise_dispute_screen.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\supplier\presentation\raise_dispute_screen.dart: Text('Discard'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_shared.dart: Text(
+                       'TRIP EARNINGS ESTIMATE'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_shared.dart: Text(
+                   'TOTAL FARE (LOAD VALUE)'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_shared.dart: Text(
+                   'TOTAL EXPENSE'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_shared.dart: Text(
+             'COST BREAKDOWN'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_shared.dart: Text(
+                   'TOTAL EXPENSE'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\components\wizard_progress_bar.dart: Text(
+               'Step ${currentStep + 1} of $totalSteps'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_screen_sections.dart: label: 'Ready'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_screen_sections.dart: title: 'Step 2: Truck Details'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_wizard.dart: Text('Go Back?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_wizard.dart: Text('You will lose your progress on this step. Do you want to go back?'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_wizard.dart: Text('Cancel'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\verification_wizard.dart: Text('Go Back'
+- C:\Users\marte\Desktop\tranzfort.com-v-1.1\TranZfort\lib\src\features\verification\presentation\wizard_steps\step_business_details.dart: Text('Failed to capture location. Please try again.'
+- ... 8 more
+
+Localization verification failed.

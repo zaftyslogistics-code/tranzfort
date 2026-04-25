@@ -55,7 +55,7 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 PrimaryButton(
-                  label: l10n.commonRetry,
+                  label: l10n.commonRetryAction,
                   onPressed: () => ref.invalidate(verificationWizardProvider),
                 ),
               ],
@@ -216,7 +216,7 @@ class _AlreadyVerifiedView extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.lg),
             PrimaryButton(
-              label: l10n.verificationWizardDashboardAction,
+              label: l10n.commonDashboardLabel,
               onPressed: () => context.go(AppRoutes.dashboardPath),
             ),
           ],
@@ -247,7 +247,7 @@ class _PendingStatusView extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.lg),
               Text(
-                l10n.verificationPendingBannerTitle,
+                l10n.commonVerificationPendingTitle,
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: AppSpacing.md),
@@ -259,7 +259,7 @@ class _PendingStatusView extends StatelessWidget {
               _PendingTimeline(),
               const SizedBox(height: AppSpacing.lg),
               OutlineButton(
-                label: l10n.verificationWizardDashboardAction,
+                label: l10n.commonDashboardLabel,
                 onPressed: () => context.go(AppRoutes.dashboardPath),
               ),
             ],

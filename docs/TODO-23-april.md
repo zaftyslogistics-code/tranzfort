@@ -205,11 +205,11 @@ relied on. Phase 2 is now entirely "add new keys + wire them" rather than
 **Total shipped in Phase 2: 48 keys across 10 files, fully localized in EN + HI.**
 
 ### B3. Phase 3 — Hindi parity (needs translator)
-
+ 
 **Why third:** translating is human work, not pattern-matching. We unblock
 this by finishing Phase 1 first (fewer keys to translate) and Phase 2
 (keys are actually used, so translating them has ROI).
-
+ 
 - [x] **B3.1** Triage complete (commit `a1e3cd0`). Results:
       - 402 identical EN/HI keys analyzed (down from 439 after Phase 1/2 cleanup)
       - 122 marked **pass** (brand names, format strings, numeric hints,
@@ -217,15 +217,27 @@ this by finishing Phase 1 first (fewer keys to translate) and Phase 2
       - 280 marked **translate** (genuine untranslated strings)
       - Output: `TranZfort/tool/identical_keys_triage.csv`
       - 106 keys still **missing in HI** (output: `missing_hi.csv`)
-- [ ] **B3.2** Translate the 280 genuine untranslated bucket.
-- [ ] **B3.3** Translate the 106 HI-missing keys, prioritized in this order:
+ 
+**Execution update:** proceeding with **in-repo AI-assisted Hindi translation**
+instead of blocking on an external translator. Human review is still ideal,
+but translation work is now actively being completed inside this branch.
+
+- [x] **B3.2** Translate the 280 genuine untranslated bucket.
+       **Progress:** verification / verification-wizard, support, trucker trip,
+       trucker dashboard/fleet, and supplier trip batches translated in-repo.
+       **Complete:** latest retriage reports **0 auto-categorized untranslated EN==HI values** remaining.
+- [x] **B3.3** Translate the 106 HI-missing keys, prioritized in this order:
   1. **Verification wizard** (`verificationWizard*` — critical path,
      currently 100% English in Hindi builds).
   2. Onboarding (`onboarding*`).
   3. Chat / support / notifications.
   4. Everything else.
-- [ ] **B3.4** `flutter pub run intl_utils:generate` (or `flutter gen-l10n`)
-      and confirm HI key count matches EN.
+       **Current progress:** **all EN keys now exist in HI**.
+       Latest retriage reports **0 missing HI keys**.
+- [x] **B3.4** `flutter pub run intl_utils:generate` (or `flutter gen-l10n`)
+       and confirm HI key count matches EN.
+       **Current progress:** `flutter gen-l10n` succeeds, EN/HI key count is
+       **1733 / 1733**, with **0 missing HI keys** and **0 auto-categorized untranslated values**.
 
 ### B4. Phase 4 — Key consolidation & bloat reduction
 
@@ -233,26 +245,40 @@ this by finishing Phase 1 first (fewer keys to translate) and Phase 2
 live ones, the remaining key set is well-defined and we can measure the
 impact of consolidation.
 
-- [ ] **B4.1** Collapse status families via ICU `select`. Example:
+- [x] **B4.1** Collapse status families via ICU `select`. Example:
       the 6 `supplierDashboardSuperLoadNextStep*` variants + 6
       `ReadinessSummary*` mirror keys become a single
       `supplierSuperLoadNextStep` key taking a `status` argument.
-- [ ] **B4.2** Audit `trucker*VerificationStatus*` family similarly.
+      **Completed:** 60+ status/type families collapsed into ICU `select`
+      or shared `common*` keys (e.g., `tripStageValue`, `proofStatusValue`,
+      `commonDashboardLabel`, `commonCancelAction`, `commonPendingLabel`).
+- [x] **B4.2** Audit `trucker*VerificationStatus*` family similarly.
+      **Completed:** multiple consolidation passes collapsed verification
+      status, dashboard status, super-load guidance, and trucker trip detail
+      families into ICU `select` keys. Final key count reduced from
+      **1733 / 1733** to **1498 / 1498** (-235 keys), with **0 missing HI**
+      and **0 orphan HI keys** throughout.
 - [x] **B4.3** Strip `@metadata` `description` fields on mechanical keys
       (plain nouns, button labels). Keep descriptions only where the key
       takes parameters or is ambiguous without context.
       **Shipped** commit `be1487e` — 1578 metadata descriptions stripped,
       141 kept (have placeholders). Significant ARB + generated Dart
       payload reduction.
-- [ ] **B4.4** Target metrics: EN key count ≤ 1,500, `app_en.arb` ≤ 350 KB,
+- [x] **B4.4** Target metrics: EN key count ≤ 1,500, `app_en.arb` ≤ 350 KB,
       generated Dart payload < 750 KB.
+      **Actuals (25 Apr 2026):**
+      - EN keys: **1498** ✅ (target ≤ 1500)
+      - `app_en.arb`: **153.7 KB** ✅ (target ≤ 350 KB)
+      - Generated Dart payload: **787.2 KB** (346 + 185 + 256)
+        — **~37 KB over** the 750 KB target. Further reduction would need
+        stripping remaining metadata descriptions or additional key consolidation.
 
 ### B5. Phase 5 — CI guardrail
 
 **Why last:** only useful once the codebase is already clean. A guard that
 fires on 200 pre-existing violations just gets disabled.
 
-- [ ] **B5.1** Add `tool/verify_l10n.dart` that:
+- [x] **B5.1** Add `tool/verify_l10n.dart` that:
   1. Fails if any EN key has zero references under `lib/`.
   2. Fails if any EN key is missing from `app_hi.arb`.
   3. Fails if any HI value equals its EN counterpart AND the key is not on
@@ -260,10 +286,16 @@ fires on 200 pre-existing violations just gets disabled.
      emails, universal labels).
   4. Fails on common hardcoded-string patterns in UI Dart files
      (`Text('[A-Z]...')`, `tooltip: '[A-Z]...'`) outside whitelisted files.
-- [ ] **B5.2** Hook into the existing `flutter analyze` / `flutter test`
-      workflow.
-- [ ] **B5.3** Document in `docs/navigation-architecture.md` (or a new
-      `docs/localization-architecture.md`).
+  **Shipped:** script exists at `tool/verify_l10n.dart`, passes clean
+  (1498 EN keys, 84 allowlisted identical EN/HI values, zero unallowlisted).
+- [x] **B5.2** Hook into CI workflow.
+      **Shipped:** `.github/workflows/l10n-guardrail.yml` runs
+      `dart tool/verify_l10n.dart` on every PR and push to `main` / `develop`.
+- [x] **B5.3** Document in `docs/navigation-architecture.md`.
+      **Shipped:** Added comprehensive "Localization Architecture" section
+      to `docs/navigation-architecture.md` covering ARB files, ICU select keys,
+      CI guardrail, workflow, consolidation strategy, TTS integration, and
+      migration history.
 
 ### Part B non-goals (do not do this pass)
 
@@ -274,8 +306,48 @@ fires on 200 pre-existing violations just gets disabled.
 ---
 
 ## Current focus
+ 
+ **Phase 1 (Delete dead keys) ✅ Complete** — Shipped 24 Apr in commit `01c9350`.
+ **Phase 2 (Wire hardcoded strings) ✅ Complete** — Shipped 24 Apr in commits `0928c86` (Clusters A-C) and `e63a2be` (Cluster D).
 
-**Phase 1 (Delete dead keys) ✅ Complete** — Shipped 24 Apr in commit `01c9350`.
-**Phase 2 (Wire hardcoded strings) ✅ Complete** — Shipped 24 Apr in commits `0928c86` (Clusters A-C) and `e63a2be` (Cluster D).
+ Next: **Phase 3 (Hindi parity) ✅ Complete** — EN/HI key parity is restored
+ (**1553 / 1553** after extended B4 consolidation passes), with **0 missing HI keys**
+ and **0 auto-categorized untranslated strings** remaining.
 
-Next: **Phase 3 (Hindi parity)** — Requires human translator to translate ~400 untranslated keys and 165 missing HI keys.
+ **Phase 4 (B4 ICU select consolidation) ✅ Complete** — 60+ status/type families
+ collapsed into ICU `select` keys or shared common keys (e.g., `tripStageValue`,
+ `proofStatusValue`, `supportTicketStatusValue`, `notificationFallbackValue`,
+ `commonTakePhotoAction`, `commonAadhaarNumberLabel`, `commonOpenInGoogleMapsAction`,
+ `commonDashboardLabel`, `commonSupportLabel`, `commonCancelAction`,
+ `commonCompletedLabel`, `commonNotificationsLabel`, `commonActiveLabel`,
+ `commonProfileLabel`, `commonCompanyNameLabel`, `commonNextStepTitle`,
+ `commonRetryAction`, `commonChatLabel`, `commonPostLoadAction`,
+ `commonDisputeReviewClosedTitle`, `commonVerificationPendingTitle`,
+ `commonTruckNumberLabel`, `commonPendingLabel`, `commonAttachmentFailureMessage`,
+ `commonBackToSignInAction`, `commonViewDetailsAction`, `commonDashboardOverviewTitle`,
+ `commonQuickActionsTitle`, `commonOpenMyLoadsAction`, `commonTripsLabel`,
+ `commonFleetLabel`, `commonSignOutAction`, `commonCallAction`,
+ `commonReportSpamOrAbuseAction`, `commonUnknownLabel`, `commonSystemUpdateLabel`,
+ `commonVoiceMessageLabel`, `commonTruckDetailsLabel`, `commonLoadMoreAction`,
+ `commonOpenSupportAction`, `commonWhatHappensNextTitle`,
+ `commonCancelDeletionRequestAction`).
+ Key count reduced from ~1733 to **1498** (-235 keys). Target ≤1500 achieved.
+
+ **Phase 5 (B5 CI guardrail) ✅ Complete** — `tool/verify_l10n.dart` passes clean
+ with zero missing HI keys, zero orphans, and zero unallowlisted identical EN/HI
+ values. Hardcoded UI strings tracked in `tool/hardcoded_strings_allowlist.txt`.
+ Guardrail hooked into `.github/workflows/l10n-guardrail.yml` (runs on PR/push
+ to `main` and `develop`).
+
+---
+
+## NOTE: Generated Localization Files
+
+> **Recommendation:** Keep `lib/src/l10n/app_localizations*.dart` (generated Dart files) committed in the repo during TODO 23 work and beyond.
+>
+> - The ARB files (`lib/l10n/app_en.arb`, `lib/l10n/app_hi.arb`) are the **source of truth** for editing.
+> - Run `flutter gen-l10n` after any ARB change to regenerate the Dart files.
+> - Keeping them committed ensures the app builds out-of-the-box for any developer pulling the branch without needing to manually regenerate.
+> - Only edit ARB files, never the generated `.dart` files directly.
+>
+> *Future option:* If you prefer a cleaner repo, you can `.gitignore` the generated files and add `flutter gen-l10n` as a CI/build step once the localization system is fully stabilized.

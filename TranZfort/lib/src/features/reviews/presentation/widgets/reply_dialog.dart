@@ -77,7 +77,7 @@ class _ReplyDialogState extends State<ReplyDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text(l10n.replyDialogCancel),
+          child: Text(l10n.commonCancelAction),
         ),
         FilledButton(
           onPressed: _charCount > 0 ? () => Navigator.of(context).pop(_controller.text.trim()) : null,

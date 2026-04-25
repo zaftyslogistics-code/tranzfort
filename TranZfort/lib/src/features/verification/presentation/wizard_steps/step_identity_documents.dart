@@ -45,7 +45,7 @@ class StepIdentityDocuments extends ConsumerWidget {
             
             // Aadhaar Number
             AppTextField(
-              label: l10n.verificationWizardAadhaarNumberLabel,
+              label: l10n.commonAadhaarNumberLabel,
               hintText: '1234 5678 9012',
               keyboardType: TextInputType.number,
               initialValue: _formatAadhaar(state.draft.aadhaarNumber) ?? '',
@@ -93,7 +93,7 @@ class StepIdentityDocuments extends ConsumerWidget {
             
             // PAN Number
             AppTextField(
-              label: l10n.verificationWizardPanNumberLabel,
+              label: l10n.commonPanNumberLabel,
               hintText: 'ABCDE1234F',
               initialValue: state.draft.panNumber ?? '',
               inputFormatters: [

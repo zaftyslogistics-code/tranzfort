@@ -258,7 +258,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                             title: l10n.truckerFindLoadsLoadFailureTitle,
                             message: l10n.truckerFindLoadsLoadFailureMessage,
                             action: OutlineButton(
-                              label: l10n.commonRetry,
+                              label: l10n.commonRetryAction,
                               onPressed: () => ref.read(findLoadsProvider.notifier).loadInitial(),
                             ),
                           ),
@@ -312,7 +312,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                                     title: l10n.truckerFindLoadsLoadMoreFailureTitle,
                                     message: l10n.truckerFindLoadsLoadMoreFailureMessage,
                                     action: OutlineButton(
-                                      label: l10n.commonRetry,
+                                      label: l10n.commonRetryAction,
                                       onPressed: () => ref.read(findLoadsProvider.notifier).loadMore(),
                                     ),
                                   ),

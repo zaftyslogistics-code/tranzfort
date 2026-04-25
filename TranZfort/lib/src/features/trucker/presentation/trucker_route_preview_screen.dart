@@ -114,7 +114,7 @@ class TruckerRoutePreviewScreen extends StatelessWidget {
               const SizedBox(height: AppSpacing.md),
               if (mapsUri != null)
                 PrimaryButton(
-                  label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
+                  label: l10n.commonOpenInGoogleMapsAction,
                   onPressed: () async {
                     await mapsLauncher.launchDirectionsUri(mapsUri);
                   },

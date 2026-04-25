@@ -33,23 +33,11 @@ class SupportScreen extends ConsumerStatefulWidget {
 }
 
 String _localizedSupportTrustStatus(AppLocalizations l10n, String? status) {
-  switch ((status ?? '').trim().toLowerCase()) {
-    case 'normal':
-      return l10n.supportTrustStatusNormal;
-    case 'warned':
-      return l10n.supportTrustStatusWarned;
-    case 'restricted':
-      return l10n.supportTrustStatusRestricted;
-    case 'suspended':
-      return l10n.supportTrustStatusSuspended;
-    case 'banned':
-      return l10n.supportTrustStatusBanned;
-    default:
-      if ((status ?? '').trim().isEmpty) {
-        return _supportTrustStatusLoading(l10n);
-      }
-      return l10n.supportTicketStatusUnknown;
+  final trimmed = (status ?? '').trim().toLowerCase();
+  if (trimmed.isEmpty) {
+    return _supportTrustStatusLoading(l10n);
   }
+  return l10n.supportTrustStatusValue(trimmed);
 }
 
 class _SupportScreenState extends ConsumerState<SupportScreen> {
@@ -207,24 +195,26 @@ StatusPalette _ticketStatusPalette(SupportTicketStatus status) {
 }
 
 String _ticketStatusLabel(SupportTicketStatus status, AppLocalizations l10n) {
-  return switch (status) {
-    SupportTicketStatus.open => l10n.supportTicketStatusOpen,
-    SupportTicketStatus.inProgress => l10n.supportTicketStatusInProgress,
-    SupportTicketStatus.waitingForUser => l10n.supportTicketStatusWaitingForYou,
-    SupportTicketStatus.resolved => l10n.supportTicketStatusResolved,
-    SupportTicketStatus.closed => l10n.supportTicketStatusClosed,
-    SupportTicketStatus.unknown => l10n.supportTicketStatusUnknown,
+  final statusValue = switch (status) {
+    SupportTicketStatus.open => 'open',
+    SupportTicketStatus.inProgress => 'in_progress',
+    SupportTicketStatus.waitingForUser => 'waiting_for_you',
+    SupportTicketStatus.resolved => 'resolved',
+    SupportTicketStatus.closed => 'closed',
+    SupportTicketStatus.unknown => 'unknown',
   };
+  return l10n.supportTicketStatusValue(statusValue);
 }
 
 String _ticketPriorityLabel(SupportTicketPriority priority, AppLocalizations l10n) {
-  return switch (priority) {
-    SupportTicketPriority.low => l10n.supportTicketPriorityLow,
-    SupportTicketPriority.medium => l10n.supportTicketPriorityMedium,
-    SupportTicketPriority.high => l10n.supportTicketPriorityHigh,
-    SupportTicketPriority.urgent => l10n.supportTicketPriorityUrgent,
-    SupportTicketPriority.unknown => l10n.supportTicketPriorityNotSet,
+  final priorityValue = switch (priority) {
+    SupportTicketPriority.low => 'low',
+    SupportTicketPriority.medium => 'medium',
+    SupportTicketPriority.high => 'high',
+    SupportTicketPriority.urgent => 'urgent',
+    SupportTicketPriority.unknown => 'not_set',
   };
+  return l10n.supportTicketPriorityValue(priorityValue);
 }
 
 String _workflowStatusGuidance(SupportTicketStatus status, AppLocalizations l10n) {
@@ -239,7 +229,7 @@ String _workflowStatusGuidance(SupportTicketStatus status, AppLocalizations l10n
 
 String _disputeBannerTitle(SupportTicketStatus status, AppLocalizations l10n) {
   return switch (status) {
-    SupportTicketStatus.resolved || SupportTicketStatus.closed => l10n.supportDisputeBannerTitleClosed,
+    SupportTicketStatus.resolved || SupportTicketStatus.closed => l10n.commonDisputeReviewClosedTitle,
     SupportTicketStatus.waitingForUser => l10n.supportDisputeBannerTitleWaiting,
     _ => l10n.supportDisputeBannerTitleInProgress,
   };
@@ -371,7 +361,7 @@ String _supportTicketTitleBase(SupportTicket ticket, AppLocalizations l10n) {
     'delay_or_no_show' => l10n.supportTicketTitleDelayOrNoShowReport,
     'damage_or_shortage' => l10n.supportTicketTitleDamageOrShortageReport,
     'other' => l10n.supportTicketTitleOtherReport,
-    _ => l10n.supportFallbackLabel,
+    _ => l10n.commonSupportLabel,
   };
 }
 
@@ -388,7 +378,7 @@ String _disputeCategoryLabel(String value, AppLocalizations l10n) {
     'abusive_behavior' => l10n.supportDisputeCategoryAbusiveBehavior,
     'spam_or_scam' => l10n.supportDisputeCategorySpamOrScam,
     'other' => l10n.supportDisputeCategoryOther,
-    _ => l10n.supportFallbackLabel,
+    _ => l10n.commonSupportLabel,
   };
 }
 

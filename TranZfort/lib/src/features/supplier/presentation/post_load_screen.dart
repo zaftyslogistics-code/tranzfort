@@ -161,7 +161,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         title: l10n.supplierPostLoadHeroTitle,
         children: [
         HeroActionCard(
-          title: l10n.supplierPostLoadHeroTitle == l10n.supplierPostLoadTitle
+          title: l10n.supplierPostLoadHeroTitle == l10n.commonPostLoadAction
               ? l10n.supplierPostLoadHeroSubtitle
               : l10n.supplierPostLoadHeroTitle,
           subtitle: l10n.supplierPostLoadHeroSubtitle,
@@ -176,12 +176,12 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             message: postingGatingMessage,
             action: profileUnavailable || profileFailure != null
                 ? OutlineButton(
-                    label: l10n.navSupport,
+                    label: l10n.commonSupportLabel,
                     onPressed: () => context.push(AppRoutes.supportPath),
                   )
                 : supplierProfile != null && !supplierProfile.canAccessWorkspace
                 ? OutlineButton(
-                    label: l10n.supplierPostLoadOpenVerificationAction,
+                    label: l10n.commonOpenVerificationAction,
                     onPressed: () => context.go(AppRoutes.supplierVerificationPath),
                   )
                 : null,
@@ -343,7 +343,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
               runSpacing: AppSpacing.sm,
               children: [
                 FilterChip(
-                  label: Text(l10n.supplierPostLoadAnyTyresLabel),
+                  label: Text(l10n.commonAnyLabel),
                   selected: state.selectedTyres.isEmpty,
                   onSelected: (_) => ref.read(postLoadProvider.notifier).toggleTyre(null),
                 ),
@@ -399,8 +399,8 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             const SizedBox(height: AppSpacing.sm),
             SegmentedButton<String>(
               segments: <ButtonSegment<String>>[
-                ButtonSegment<String>(value: 'fixed', label: Text(l10n.supplierPostLoadPriceTypeFixed)),
-                ButtonSegment<String>(value: 'per_ton', label: Text(l10n.supplierPostLoadPriceTypeNegotiable)),
+                ButtonSegment<String>(value: 'fixed', label: Text(l10n.supplierPostLoadPriceTypeValue('fixed'))),
+                ButtonSegment<String>(value: 'per_ton', label: Text(l10n.supplierPostLoadPriceTypeValue('per_ton'))),
               ],
               selected: <String>{state.priceType},
               onSelectionChanged: (selection) {
@@ -473,7 +473,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             message: l10n.supplierPostLoadSubmissionFailureMessage,
           ),
         GradientButton(
-          label: postingBlocked ? l10n.supplierPostLoadCompleteVerificationAction : l10n.supplierPostLoadSubmitAction,
+          label: postingBlocked ? l10n.supplierPostLoadCompleteVerificationAction : l10n.commonPostLoadAction,
           isLoading: state.isSubmitting,
           onPressed: state.isSubmitting || postingBlocked
               ? null
@@ -552,9 +552,9 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   }
 
   String _localizedPriceTypeLabel(AppLocalizations l10n, String value) {
-    return switch (value.trim().toLowerCase()) {
-      'fixed' => l10n.supplierPostLoadPriceTypeFixed,
-      'per_ton' => l10n.supplierPostLoadPriceTypeNegotiable,
+    final normalized = value.trim().toLowerCase();
+    return switch (normalized) {
+      'fixed' || 'per_ton' => l10n.supplierPostLoadPriceTypeValue(normalized),
       _ => value,
     };
   }

@@ -2,402 +2,77 @@ key,value,category,reason
 "appTitle","TranZfort",pass,brand_name
 "authEmailHint","you@example.com",pass,sample_id
 "authPasswordLabel","Password",pass,status_value
-"authPasswordModeSignIn","Sign in",translate,untranslated
 "chatReportSourceLabel","Chat - {source}",pass,format_string
-"chatTitleFallback","Conversation",translate,untranslated
-"chatTooltipCall","Call",translate,untranslated
 "commonSuggestionSourceGooglePlaces","Google Places",pass,brand_name
-"onboardingMobileLabel","Mobile number",translate,untranslated
-"onboardingSupplierTitle","Supplier",translate,untranslated
-"onboardingTruckerTitle","Trucker",translate,untranslated
 "profileEmailLabel","Email",pass,status_value
 "settingsLanguageEnglish","English",pass,language_name
-"shellMessagesActiveConversations","{count} active conversations - {preview}",translate,untranslated
 "shellMessagesLatestBy","Latest by {name} - {timestamp}",pass,format_string
 "supplierDashboardLoadPickup","Pickup {value}",pass,format_string
-"supplierDashboardSuperLoadBadge","Super Load - {status}",translate,untranslated
-"supplierDashboardSuperLoadCompanyAgeUnavailable","Company-age readiness unavailable in current app data",translate,untranslated
 "supplierLoadCardPickupDate","Pickup {value}",pass,format_string
-"supplierLoadStatusUnknown","Unknown",pass,status_value
 "supplierPostLoadAdvanceBalanceLabel","Advance: ₹{advanceAmount} - Balance: ₹{balanceAmount}",pass,format_string
-"supplierPostLoadAdvancePercentageLabel","Advance percentage: {value}%",translate,untranslated
 "supplierPostLoadCargoSummary","{material} - {weightTonnes}T - {trucksNeeded} truck(s)",pass,format_string
-"supplierPostLoadCompleteVerificationAction","Complete verification to post load",translate,untranslated
-"supplierPostLoadCreatedSuccess","Load created successfully",translate,untranslated
-"supplierPostLoadDistanceLabel","Distance: {value} km",translate,untranslated
-"supplierPostLoadDriveTimeLabel","Est. drive time: {minutes} min",translate,untranslated
 "supplierPostLoadPickupSummary","Pickup: {pickupDate}",pass,format_string
 "supplierPostLoadPriceAmountHint","54000",pass,numeric_hint
 "supplierPostLoadPriceSummary","Price: ₹{priceAmount} - {priceType}",pass,format_string
 "supplierPostLoadRouteSummary","{origin} > {destination}",pass,format_string
-"supplierPostLoadSubmissionFailedTitle","Submission failed",translate,untranslated
 "supplierPostLoadSuggestionSubtitle","{label} - {source}",pass,format_string
 "supplierPostLoadTrucksNeededHint","1",pass,numeric_hint
 "supplierPostLoadWeightHint","22",pass,numeric_hint
-"supplierRaiseDisputeAttachmentAttachedSuccess","Evidence attached successfully",translate,untranslated
-"supplierRaiseDisputeCategoryError","Select a valid dispute category",translate,untranslated
-"supplierRaiseDisputeCategoryLabel","Dispute category",translate,untranslated
-"supplierRaiseDisputeChoosePhotoAction","Choose photo",translate,untranslated
 "supplierRaiseDisputeCurrentStageLabel","Current stage: {stageLabel}",pass,format_string
-"supplierRaiseDisputeEvidenceOptionalTitle","Evidence (optional)",translate,untranslated
-"supplierRaiseDisputeHelpfulDetailsTitle","Helpful details to include",translate,untranslated
 "supplierRaiseDisputeHeroSummary","{routeLabel} - {material}",pass,format_string
-"supplierRaiseDisputeHeroTitle","Dispute delivery proof",translate,untranslated
-"supplierRaiseDisputePartialContextUnavailableTitle","Some trip detail context is unavailable",translate,untranslated
-"supplierRaiseDisputeProblemTitle","What is wrong with the POD?",translate,untranslated
-"supplierRaiseDisputePromptActualDelayOrNoShowOutcome","Actual delay or no-show outcome:",translate,untranslated
-"supplierRaiseDisputePromptAmountStillUnpaid","Amount still unpaid:",translate,untranslated
-"supplierRaiseDisputePromptCorrectTripOrPodDetailShouldBe","Correct trip or POD detail should be:",translate,untranslated
-"supplierRaiseDisputePromptDispatchQuantityShownOnProof","Dispatch quantity shown on proof:",translate,untranslated
-"supplierRaiseDisputePromptDocumentFieldDoesNotMatch","Document field that does not match:",translate,untranslated
-"supplierRaiseDisputePromptExpectedReportingOrArrivalTime","Expected reporting or arrival time:",translate,untranslated
-"supplierRaiseDisputePromptExtraUnloadProofNotAttached","Extra unload proof not attached but available:",translate,untranslated
-"supplierRaiseDisputePromptGoodsAffectedByDamageOrShortage","Goods affected by damage or shortage:",translate,untranslated
-"supplierRaiseDisputePromptMainIssueSupportShouldReview","Main issue support should review:",translate,untranslated
-"supplierRaiseDisputePromptOtherLoadingProofNotAttached","Other loading proof not attached but reviewed by support:",translate,untranslated
-"supplierRaiseDisputePromptOtherPaymentProofNotAttached","Other payment proof not attached but relevant:",translate,untranslated
-"supplierRaiseDisputePromptOtherProofOrChatContextNotAttached","Other proof or chat context not attached:",translate,untranslated
-"supplierRaiseDisputePromptOtherRelatedDocumentNotAttached","Other related document not attached but relevant:",translate,untranslated
-"supplierRaiseDisputePromptOtherSupportingProofNotAttached","Other supporting proof not attached but relevant:",translate,untranslated
-"supplierRaiseDisputePromptOtherTimingProofNotAttached","Other timing proof not attached but relevant:",translate,untranslated
-"supplierRaiseDisputePromptPaymentDueDateOrMilestone","Payment due date or milestone:",translate,untranslated
-"supplierRaiseDisputePromptQuantityActuallyChallenged","Quantity actually challenged:",translate,untranslated
-"supplierRaiseDisputePromptQuantityExpectedFromDispatchProof","Quantity expected from dispatch proof:",translate,untranslated
-"supplierRaiseDisputePromptQuantityOrConditionDifferenceNoticed","Quantity or condition difference noticed:",translate,untranslated
-"supplierRaiseDisputePromptQuantityReceivedAtUnloading","Quantity received at unloading:",translate,untranslated
-"supplierRaiseDisputePromptStrongestMissingProofNotAttached","Strongest missing proof not attached:",translate,untranslated
-"supplierRaiseDisputePromptWhatHappenedDuringIncident","What happened during the incident:",translate,untranslated
-"supplierRaiseDisputePromptWhatMisleadingClaimWasMade","What misleading claim was made:",translate,untranslated
-"supplierRaiseDisputePromptWhatOutcomeOrCorrectionNeeded","What outcome or correction is needed:",translate,untranslated
-"supplierRaiseDisputePromptWhatPaymentStatusShouldBe","What payment status should be instead:",translate,untranslated
-"supplierRaiseDisputePromptWhatScamOrSpamBehaviorOccurred","What scam or spam behavior occurred:",translate,untranslated
-"supplierRaiseDisputePromptWhenOrWhereBehaviorOccurred","When or where the behavior occurred:",translate,untranslated
-"supplierRaiseDisputePromptWhyPayoutProofLooksFake","Why the payout proof looks fake or inconsistent:",translate,untranslated
-"supplierRaiseDisputeReasonError","Explain the POD problem in at least 10 characters",translate,untranslated
-"supplierRaiseDisputeReasonLabel","Dispute reason",translate,untranslated
-"supplierRaiseDisputeRemoveEvidenceAction","Remove evidence",translate,untranslated
-"supplierRaiseDisputeSubmissionBlockedTitle","Dispute submission blocked",translate,untranslated
-"supplierRaiseDisputeSubmissionUnavailableTitle","Dispute submission unavailable",translate,untranslated
-"supplierRaiseDisputeSubmitAction","Submit dispute",translate,untranslated
-"supplierRaiseDisputeSubmittedSuccess","Dispute submitted. Support ticket created for review.",translate,untranslated
-"supplierRaiseDisputeSummaryTitle","Dispute summary",translate,untranslated
-"supplierRaiseDisputeTitle","Raise Dispute",translate,untranslated
 "supplierRaiseDisputeTripRouteLabel","Trip route: {routeLabel}",pass,format_string
-"supplierRaiseDisputeTripUnavailableTitle","Trip detail unavailable",translate,untranslated
 "supplierRaiseDisputeTruckLabel","Truck: {truckNumber}",pass,format_string
 "supplierRaiseDisputeTruckerLabel","Trucker: {truckerName}",pass,format_string
-"supplierRaiseDisputeUseCameraAction","Use camera",translate,untranslated
-"supplierTripDetailActionUnavailableTitle","Supplier trip action unavailable",translate,untranslated
-"supplierTripDetailActionsTitle","Actions",translate,untranslated
 "supplierTripDetailAssignedLabel","Assigned: {dateTime}",pass,format_string
 "supplierTripDetailBodyTypeLabel","Body type: {bodyType}",pass,format_string
-"supplierTripDetailCommentLabel","Comment (optional)",translate,untranslated
 "supplierTripDetailCompletedLabel","Completed: {dateTime}",pass,format_string
-"supplierTripDetailConfirmDeliveryAction","Confirm Delivery",translate,untranslated
-"supplierTripDetailConfirmDeliverySuccess","Delivery confirmed. The trip is now completed.",translate,untranslated
 "supplierTripDetailDeliveredLabel","Delivered: {dateTime}",pass,format_string
 "supplierTripDetailDestinationLabel","Destination: {destination}",pass,format_string
-"supplierTripDetailDisputeBannerClosedTitle","Dispute review closed",translate,untranslated
-"supplierTripDetailDisputeBannerInProgressTitle","Dispute review in progress",translate,untranslated
-"supplierTripDetailDisputeBannerWaitingTitle","Dispute review waiting for your reply",translate,untranslated
 "supplierTripDetailDisputeCategoryLabel","{category}",pass,format_string
-"supplierTripDetailDisputeCategorySummary","Category: {category}",pass,format_string
-"supplierTripDetailDisputeCurrentStateLabel","Current state: {status}",translate,untranslated
-"supplierTripDetailDisputeLastUpdatedLabel","Last updated: {date}",translate,untranslated
-"supplierTripDetailDisputePodAction","Dispute POD",translate,untranslated
-"supplierTripDetailDisputeStateRaised","Current state: Dispute raised",translate,untranslated
 "supplierTripDetailDisputeStatusLabel","{status}",pass,format_string
-"supplierTripDetailDisputeStatusTitle","Dispute status",translate,untranslated
 "supplierTripDetailDistanceLabel","Distance: {distance} km",pass,format_string
-"supplierTripDetailDriveTimeLabel","Drive time: {minutes} min",translate,untranslated
-"supplierTripDetailLoadFailureTitle","Unable to load supplier trip detail",translate,untranslated
 "supplierTripDetailMaterialTruckerSummary","{material} - Trucker {truckerName}",pass,format_string
-"supplierTripDetailNextStepCompletedTitle","Trip completed",translate,untranslated
-"supplierTripDetailNextStepDefaultTitle","Track execution",translate,untranslated
-"supplierTripDetailNextStepDisputedTitle","Dispute in progress",translate,untranslated
-"supplierTripDetailNextStepReviewTitle","Review and confirm delivery",translate,untranslated
-"supplierTripDetailNextStepTitle","Next step",translate,untranslated
-"supplierTripDetailOpenLrDocumentAction","Open LR Document",translate,untranslated
-"supplierTripDetailOpenPodPhotoAction","Open POD Photo",translate,untranslated
 "supplierTripDetailOriginLabel","Origin: {origin}",pass,format_string
-"supplierTripDetailPending","Pending",translate,untranslated
-"supplierTripDetailPickupDateLabel","Pickup date: {date}",translate,untranslated
-"supplierTripDetailPodPhotoTitle","POD photo",translate,untranslated
 "supplierTripDetailPodUploadedLabel","POD uploaded: {dateTime}",pass,format_string
-"supplierTripDetailPreviewUnavailable","Unable to open preview",translate,untranslated
-"supplierTripDetailProofDocumentsTitle","Proof documents",translate,untranslated
-"supplierTripDetailRatingAlreadySubmitted","You already rated this trip.",translate,untranslated
-"supplierTripDetailRatingSectionTitle","Rate this trip",translate,untranslated
 "supplierTripDetailRatingStarTooltip","{count} star{s}",pass,format_string
-"supplierTripDetailRatingSubmittedOn","Submitted on {date}",translate,untranslated
-"supplierTripDetailRatingSubmittedSuccess","Rating submitted successfully.",translate,untranslated
-"supplierTripDetailRatingUnavailableTitle","Rating unavailable",translate,untranslated
 "supplierTripDetailReportSourceLabel","Supplier trip - {routeLabel}",pass,format_string
-"supplierTripDetailRouteScheduleTitle","Route and schedule",translate,untranslated
-"supplierTripDetailSubmitRatingAction","Submit Rating",translate,untranslated
-"supplierTripDetailTitle","Trip Detail",translate,untranslated
 "supplierTripDetailTruckNumberLabel","Truck number: {truckNumber}",pass,format_string
-"supplierTripDetailTruckerLabel","Trucker: {name}",translate,untranslated
-"supplierTripDetailTruckerTruckTitle","Trucker and truck",translate,untranslated
 "supplierTripDetailTyresLabel","Tyres: {tyres}",pass,format_string
 "supportActiveTicketCount","{count} ticket{s}",pass,format_string
 "supportCreateTicketRelatedLoadIdHint","load-123",pass,sample_id
 "supportCreateTicketRelatedTripIdHint","trip-123",pass,sample_id
-"supportCurrentWorkflowTitle","Current workflow",translate,untranslated
-"supportDisputeBannerTitleClosed","Dispute review closed",translate,untranslated
-"supportDisputeBannerTitleInProgress","Dispute review in progress",translate,untranslated
-"supportDisputeCategoryLabel","Dispute category: {category}",translate,untranslated
-"supportEscalationPathLabel","Escalation path",translate,untranslated
-"supportEscalationPathSupplier","Supplier support",translate,untranslated
-"supportEscalationPathTrucker","Trucker support",translate,untranslated
-"supportEvidenceVisibilityTitle","Evidence visibility",translate,untranslated
-"supportFallbackLabel","Support",pass,status_value
-"supportLastUpdatedValue","Last updated: {value}",translate,untranslated
-"supportLastVisibleUpdate","Last visible update: {value}",translate,untranslated
-"supportLatestVisibleSender","Latest visible sender: {value}",translate,untranslated
-"supportOpenedAt","Opened at: {value}",translate,untranslated
 "supportPriorityValue","Priority: {priority}",pass,format_string
-"supportReplyGuidanceTitle","Reply guidance",translate,untranslated
-"supportReplyStatusReply","Reply",pass,status_value
-"supportReplyStatusSubmitted","Submitted",pass,status_value
-"supportResolutionOutcomeTitle","Resolution outcome",translate,untranslated
-"supportResolutionValue","Resolution: {value}",translate,untranslated
-"supportResolvedOn","Resolved on: {value}",translate,untranslated
-"supportSupportTeamLabel","Support team",translate,untranslated
 "supportTicketTitleWithPriority","{title} - {priority} priority",pass,format_string
-"supportTrustBadge","Trust: {status}",pass,format_string
-"supportUpdatedAt","Updated at: {value}",translate,untranslated
-"supportVisibleRepliesCount","Visible replies: {count}",translate,untranslated
-"supportVisibleThreadSummaryTitle","Visible thread summary",translate,untranslated
-"supportYouLabel","You",pass,status_value
-"truckerDashboardActionNeededStatus","action needed",translate,untranslated
 "truckerDashboardApprovedTrucksSummary","{approvedTrucks}/{totalTrucks} approved trucks",pass,format_string
-"truckerDashboardBookingActivityTitle","Booking activity",translate,untranslated
 "truckerDashboardDlLabel","DL: {value}",pass,format_string
-"truckerDashboardFixVerificationAction","Fix verification",translate,untranslated
-"truckerDashboardFleetReadinessTitle","Fleet readiness",translate,untranslated
 "truckerDashboardFleetReviewActivitySubtitle","{pendingTrucks} pending - {rejectedTrucks} rejected - {pendingReapprovalTrucks} pending reapproval",pass,format_string
-"truckerDashboardFleetReviewActivityTitle","Fleet review activity",translate,untranslated
-"truckerDashboardOpenFleetAction","Open fleet",translate,untranslated
-"truckerDashboardOpenFleetVerificationAction","Open fleet and verification",translate,untranslated
 "truckerDashboardReadyStatus","ready",pass,status_value
-"truckerDashboardSetupInProgress","Setup in progress",translate,untranslated
-"truckerDashboardStatActiveBidsLabel","Active bids",translate,untranslated
-"truckerDashboardStatCompletedLabel","Completed",pass,status_value
-"truckerDashboardStatInTransitLabel","In-transit",pass,status_value
-"truckerDashboardStatUpcomingTripsLabel","Upcoming trips",translate,untranslated
-"truckerDashboardStatusAttention","attention",pass,status_value
-"truckerDashboardStatusClear","clear",pass,status_value
-"truckerDashboardStatusMoving","moving",pass,status_value
-"truckerDashboardStatusOpen","open",pass,status_value
-"truckerDashboardStatusTracked","tracked",pass,status_value
+"truckerDashboardStatusValue","{status, select, open {open} clear {clear} moving {moving} tracked {tracked} attention {attention} other {attention}}",pass,format_string
 "truckerDashboardTripActivitySubtitle","{upcomingTrips} upcoming - {inTransitTrips} in transit - {completedTrips} completed",pass,format_string
-"truckerDashboardTripActivityTitle","Trip activity",translate,untranslated
-"truckerDashboardTruckAwaitingReview","{count} awaiting review",translate,untranslated
-"truckerDashboardTruckPendingReapproval","{count} pending reapproval",translate,untranslated
 "truckerDashboardTruckRejected","{count} rejected",pass,format_string
-"truckerDashboardVerificationNeedsAttentionTitle","Verification needs attention",translate,untranslated
-"truckerDashboardVerificationStatusTitle","Verification status",translate,untranslated
-"truckerFindLoadsAdvancedFiltersAction","Advanced filters",translate,untranslated
-"truckerFindLoadsAdvancedFiltersTitle","Advanced filters",translate,untranslated
-"truckerFindLoadsAnyBodyFallback","Any body",translate,untranslated
-"truckerFindLoadsApplyFiltersAction","Apply filters",translate,untranslated
-"truckerFindLoadsBodyTypeContainer","Container",translate,untranslated
-"truckerFindLoadsBodyTypeOpen","Open",translate,untranslated
-"truckerFindLoadsBodyTypeTanker","Tanker",translate,untranslated
-"truckerFindLoadsBodyTypeTrailer","Trailer",translate,untranslated
-"truckerFindLoadsBodyTypeUnknown","Unknown",translate,untranslated
-"truckerFindLoadsMaxPriceLabel","Max price (₹)",translate,untranslated
-"truckerFindLoadsMinPriceLabel","Min price (₹)",translate,untranslated
-"truckerFindLoadsResetAdvancedFiltersAction","Reset advanced filters",translate,untranslated
-"truckerFindLoadsStatusActive","Active",pass,status_value
-"truckerFindLoadsStatusAssignedPartial","Assigned Partial",translate,untranslated
-"truckerFindLoadsStatusUnknown","Unknown",pass,status_value
-"truckerFindLoadsSummaryAllLoads","Showing all loads - {resultCount} result(s)",translate,untranslated
 "truckerFindLoadsSummaryFiltered","{pieces} - {resultCount} result(s)",pass,format_string
 "truckerFindLoadsSummaryFrom","From {city}",pass,format_string
 "truckerFindLoadsSummaryPriceRange","₹{minPrice}-{maxPrice}",pass,format_string
-"truckerFindLoadsSummarySuperLoads","Super Loads",translate,untranslated
 "truckerFindLoadsSummaryTo","To {city}",pass,format_string
 "truckerFindLoadsSummaryTyres","{value} tyre",pass,format_string
-"truckerFindLoadsTruckBodyTypeLabel","Truck body type",translate,untranslated
-"truckerFindLoadsTyreRequirementTitle","Tyre requirement",translate,untranslated
-"truckerFindLoadsViewDetailsAction","View details",translate,untranslated
-"truckerFleetActionAttentionTitle","Truck action needs attention",translate,untranslated
-"truckerFleetAddOrUpdateTruckTitle","Add or update truck",translate,untranslated
-"truckerFleetAddTruckAction","Add truck",translate,untranslated
 "truckerFleetApprovedCount","{count} approved",pass,format_string
-"truckerFleetBodyTypeLabel","Body type",translate,untranslated
 "truckerFleetBodyTypeOption","{value}",pass,format_string
 "truckerFleetCapacityHint","25",pass,numeric_hint
-"truckerFleetCapacityLabel","Capacity (tonnes)",translate,untranslated
-"truckerFleetChooseGalleryAction","Choose from gallery",translate,untranslated
-"truckerFleetEditTruckTitle","Edit truck",translate,untranslated
-"truckerFleetEditingTruckAction","Editing truck",translate,untranslated
-"truckerFleetFixResubmitAction","Fix and resubmit truck",translate,untranslated
 "truckerFleetModelLabel","Model: {value}",pass,format_string
-"truckerFleetMyTrucksTitle","My trucks",translate,untranslated
-"truckerFleetNextStepLabel","Next step: {value}",translate,untranslated
-"truckerFleetRcDocumentTitle","RC document",translate,untranslated
-"truckerFleetReplaceRcAction","Replace RC document",translate,untranslated
 "truckerFleetRequiredStatus","required",pass,status_value
-"truckerFleetReviewSummaryLabel","Review summary: {value}",translate,untranslated
-"truckerFleetSaveTruckAction","Save truck",translate,untranslated
-"truckerFleetSaveTruckUpdatesAction","Save truck updates",translate,untranslated
-"truckerFleetSelectRcSourceTitle","Upload RC document",translate,untranslated
-"truckerFleetStoredPath","Stored path: {path}",translate,untranslated
-"truckerFleetTakePhotoAction","Take photo",translate,untranslated
 "truckerFleetTruckCardSubtitle","{bodyType} - {tyres} tyres - {capacityTonnes}T",pass,format_string
-"truckerFleetTruckCount","{count, plural, one {{count} truck} other {{count} trucks}}",translate,untranslated
 "truckerFleetTruckNumberHint","MH12AB1234",pass,sample_id
-"truckerFleetTruckNumberLabel","Truck number",translate,untranslated
-"truckerFleetTyresLabel","Tyres",pass,status_value
 "truckerFleetTyresOption","{tyres} tyres",pass,format_string
-"truckerFleetUploadRcAction","Upload RC document",translate,untranslated
 "truckerFleetUploadedStatus","uploaded",pass,status_value
 "truckerLoadDetailPriceBadge","₹{priceAmount} - {priceType}",pass,format_string
-"truckerTripDetailActionUnavailableTitle","Trip action unavailable",translate,untranslated
-"truckerTripDetailActionsTitle","Actions",translate,untranslated
-"truckerTripDetailAssignedLabel","Assigned: {dateTime}",pass,format_string
 "truckerTripDetailAssignedOnLabel","Assigned on: {dateTime}",pass,format_string
-"truckerTripDetailAutoCompleteDueNow","Auto-complete is due now.",translate,untranslated
 "truckerTripDetailAutoCompleteDuration","{hours}h {minutes}m",pass,format_string
-"truckerTripDetailAutoCompleteIn","Auto-complete in: {duration}",translate,untranslated
-"truckerTripDetailBodyTypeLabel","Body type: {bodyType}",pass,format_string
-"truckerTripDetailCallSupplierAction","Call Supplier",translate,untranslated
-"truckerTripDetailCancellationCurrentState","Current state: cancelled",translate,untranslated
-"truckerTripDetailCancellationSummaryTitle","Cancellation summary",translate,untranslated
-"truckerTripDetailCancelledTitle","Trip cancelled",translate,untranslated
-"truckerTripDetailCargoLoadedAction","Cargo Loaded",translate,untranslated
-"truckerTripDetailChooseFromGalleryAction","Choose from gallery",translate,untranslated
-"truckerTripDetailCommentLabel","Comment (optional)",translate,untranslated
-"truckerTripDetailCompanyLabel","Company: {companyName}",pass,format_string
-"truckerTripDetailCompletedLabel","Completed: {dateTime}",pass,format_string
 "truckerTripDetailCompletedOnLabel","Completed on: {dateTime}",pass,format_string
-"truckerTripDetailDeliveredLabel","Delivered: {dateTime}",pass,format_string
-"truckerTripDetailDestinationLabel","Destination: {destination}",pass,format_string
-"truckerTripDetailDisputeBannerClosedTitle","Dispute review closed",translate,untranslated
-"truckerTripDetailDisputeBannerInProgressTitle","Dispute in progress",translate,untranslated
-"truckerTripDetailDisputeBannerWaitingTitle","Dispute waiting for your reply",translate,untranslated
 "truckerTripDetailDisputeCategoryLabel","{category}",pass,format_string
-"truckerTripDetailDisputeCurrentStateLabel","Current state: {status}",translate,untranslated
-"truckerTripDetailDisputeLastUpdatedLabel","Last updated: {date}",translate,untranslated
-"truckerTripDetailDisputeStateRaised","Current state: Dispute raised",translate,untranslated
-"truckerTripDetailDisputeStatusTitle","Dispute status",translate,untranslated
-"truckerTripDetailDistanceLabel","Distance: {distance} km",pass,format_string
-"truckerTripDetailDriveTimeLabel","Drive time: {minutes} min",translate,untranslated
-"truckerTripDetailHeadToPickupAction","Head to pickup",translate,untranslated
-"truckerTripDetailLoadFailureTitle","Unable to load trip detail",translate,untranslated
-"truckerTripDetailLrUploadedSuccess","LR uploaded successfully.",translate,untranslated
-"truckerTripDetailMarkDeliveredAction","Mark Delivered",translate,untranslated
-"truckerTripDetailMaterialLabel","Material: {material}",pass,format_string
 "truckerTripDetailMaterialPickupSummary","{material} - Pickup {pickupDate}",pass,format_string
-"truckerTripDetailMobileLabel","Mobile: {mobile}",pass,format_string
-"truckerTripDetailNextStepAssignedTitle","Head to pickup",translate,untranslated
-"truckerTripDetailNextStepCancelledTitle","Trip cancelled",translate,untranslated
-"truckerTripDetailNextStepCompletedTitle","Trip completed",translate,untranslated
-"truckerTripDetailNextStepDefaultTitle","Check execution status",translate,untranslated
-"truckerTripDetailNextStepDeliveredTitle","Upload POD",translate,untranslated
-"truckerTripDetailNextStepDisputedTitle","Dispute in progress",translate,untranslated
-"truckerTripDetailNextStepInTransitTitle","Reach destination",translate,untranslated
-"truckerTripDetailNextStepPickedUpTitle","Start the trip",translate,untranslated
-"truckerTripDetailNextStepPickupPendingTitle","Confirm loading",translate,untranslated
-"truckerTripDetailNextStepProofSubmittedTitle","Await supplier confirmation",translate,untranslated
-"truckerTripDetailNextStepTitle","Next step",translate,untranslated
-"truckerTripDetailOpenInGoogleMapsAction","Open in Google Maps",translate,untranslated
-"truckerTripDetailOriginLabel","Origin: {origin}",pass,format_string
-"truckerTripDetailPodUploadedLabel","POD uploaded: {dateTime}",pass,format_string
-"truckerTripDetailPodUploadedSuccess","POD uploaded successfully. Supplier confirmation is now pending.",translate,untranslated
-"truckerTripDetailRatingAlreadySubmitted","You already rated this trip.",translate,untranslated
-"truckerTripDetailRatingSectionTitle","Rate this trip",translate,untranslated
 "truckerTripDetailRatingStarTooltip","{count} star{s}",pass,format_string
-"truckerTripDetailRatingSubmittedOn","Submitted on {date}",translate,untranslated
-"truckerTripDetailRatingSubmittedSuccess","Rating submitted successfully.",translate,untranslated
-"truckerTripDetailRatingUnavailableTitle","Rating unavailable",translate,untranslated
-"truckerTripDetailReplaceLrUploadAction","Replace LR Upload",translate,untranslated
 "truckerTripDetailReportSourceLabel","Trucker trip - {originLabel} > {destinationLabel}",pass,format_string
-"truckerTripDetailReviewCountdownTitle","Delivery review countdown",translate,untranslated
 "truckerTripDetailRouteLabel","Route: {route}",pass,format_string
-"truckerTripDetailRouteScheduleTitle","Route and schedule",translate,untranslated
-"truckerTripDetailStartTripAction","Start Trip",translate,untranslated
-"truckerTripDetailStartedLabel","Started: {dateTime}",pass,format_string
-"truckerTripDetailSubmitRatingAction","Submit Rating",translate,untranslated
-"truckerTripDetailSupplierLabel","Supplier: {name}",translate,untranslated
-"truckerTripDetailTakePhotoAction","Take photo",translate,untranslated
-"truckerTripDetailTitle","Trip Detail",translate,untranslated
-"truckerTripDetailTripSummaryTitle","Trip summary",translate,untranslated
-"truckerTripDetailTruckNumberLabel","Truck number: {truckNumber}",pass,format_string
-"truckerTripDetailTruckSupplierTitle","Truck and supplier",translate,untranslated
-"truckerTripDetailTyresLabel","Tyres: {tyres}",pass,format_string
-"truckerTripDetailUploadLrImageTitle","Upload LR image",translate,untranslated
-"truckerTripDetailUploadLrOptionalAction","Upload LR (Optional)",translate,untranslated
-"truckerTripDetailUploadPodPhotoAction","Upload POD Photo",translate,untranslated
-"truckerTripDetailUploadPodPhotoTitle","Upload POD photo",translate,untranslated
-"truckerTripsTimeContextAssigned","Assigned {date}",translate,untranslated
-"truckerTripsTimeContextCompleted","Completed {date}",translate,untranslated
-"truckerTripsTimeContextDelivered","Delivered {date}",translate,untranslated
-"truckerTripsTimeContextPodUploaded","POD uploaded {date}",translate,untranslated
-"truckerTripsTitle","My trips",translate,untranslated
 "truckerTripsTruckLabel","Truck {truckNumber}",pass,format_string
-"trustSafetyBanTitle","Trust & safety ban active",translate,untranslated
-"trustSafetyCurrentStatus","Current status: {displayLabel}. {fallback}",pass,format_string
-"trustSafetyCurrentStatusWithReason","Current status: {displayLabel}. Reason summary: {reasonSummary}. {fallback}",pass,format_string
-"trustSafetyLabel","Trust & safety",translate,untranslated
-"trustSafetyOpenSupport","Open support",translate,untranslated
-"trustSafetyRestrictionTitle","Trust & safety restriction active",translate,untranslated
-"trustSafetySuspensionTitle","Trust & safety suspension active",translate,untranslated
-"trustSafetyWarningTitle","Trust & safety warning active",translate,untranslated
-"verificationActionNeedsAttentionTitle","Verification action needs attention",translate,untranslated
-"verificationChatAndCallGatingBadge","Chat and call gating",translate,untranslated
-"verificationChooseFromGalleryAction","Choose from gallery",translate,untranslated
-"verificationCompleteBannerTitle","Verification complete",translate,untranslated
-"verificationDetailsUnavailableTitle","Verification details unavailable",translate,untranslated
-"verificationDocTypeBusinessLicence","Business licence",translate,untranslated
-"verificationDocTypeGstCertificate","GST certificate",translate,untranslated
-"verificationDocumentChecklistTitle","Document checklist",translate,untranslated
-"verificationDocumentStatusOptional","optional",pass,status_value
-"verificationDocumentStatusPending","pending",pass,status_value
-"verificationDocumentStatusRejected","rejected",pass,status_value
-"verificationDocumentStatusRequired","required",pass,status_value
-"verificationDocumentStatusUploaded","uploaded",pass,status_value
-"verificationDocumentStatusVerified","verified",pass,status_value
-"verificationDocumentUploadedSuccess","{label} uploaded successfully",translate,untranslated
-"verificationLatestRejectionReasonTitle","Latest rejection reason",translate,untranslated
-"verificationLoadFailureTitle","Unable to load verification state",translate,untranslated
-"verificationLocationCapturedStatus","captured",pass,status_value
-"verificationLocationCapturedSuccess","Verification location captured",translate,untranslated
-"verificationLocationCapturedTitle","Location captured",translate,untranslated
-"verificationLocationRequiredStatus","required",pass,status_value
-"verificationLocationRequiredTitle","Location still required",translate,untranslated
-"verificationLocationTitle","Verification location",translate,untranslated
-"verificationLockedStatusPendingTitle","Under review",translate,untranslated
-"verificationLockedStatusSectionTitle","Verification status",translate,untranslated
-"verificationLockedStatusVerifiedTitle","Verified",pass,status_value
-"verificationNeedsAttentionBannerTitle","Verification needs attention",translate,untranslated
-"verificationNextStepTitle","Next step",translate,untranslated
-"verificationNotSubmittedTitle","Verification not submitted yet",translate,untranslated
-"verificationOpenFleetAction","Open fleet",translate,untranslated
-"verificationPendingBannerTitle","Verification pending",translate,untranslated
-"verificationRefreshLocationAction","Refresh location",translate,untranslated
-"verificationReplaceDocumentAction","Replace document",translate,untranslated
-"verificationResubmitForReviewAction","Resubmit for review",translate,untranslated
-"verificationResubmittedSuccess","Verification resubmitted for review",translate,untranslated
-"verificationReviewNoteLabel","Review note: {reason}",translate,untranslated
-"verificationStatusPending","Pending",pass,status_value
-"verificationStatusRejected","Rejected",pass,status_value
-"verificationStatusUnknown","Unknown",pass,status_value
-"verificationStatusUnverified","Unverified",pass,status_value
-"verificationStatusVerified","Verified",pass,status_value
-"verificationStoredPathLabel","Stored path: {path}",translate,untranslated
-"verificationSubmitForReviewAction","Submit for review",translate,untranslated
-"verificationSubmittedSuccess","Verification submitted for review",translate,untranslated
-"verificationTakePhotoAction","Take photo",translate,untranslated
-"verificationTimelineNotifiedTimestamp","Next",translate,untranslated
-"verificationTimelineNotifiedTitle","You will be notified",translate,untranslated
-"verificationTimelinePacketSubmittedTimestamp","Completed",translate,untranslated
-"verificationTimelinePacketSubmittedTitle","Packet submitted",translate,untranslated
-"verificationTimelineReviewInProgressTimestamp","Now",translate,untranslated
-"verificationTimelineReviewInProgressTitle","Review in progress",translate,untranslated
-"verificationUploadDocumentAction","Upload document",translate,untranslated
-"verificationUploadSourceTitle","Upload {documentLabel}",pass,format_string
-"verificationWhatHappensNextTitle","What happens next",translate,untranslated
+"verificationDocumentStatusValue","{status, select, pending {pending} verified {verified} rejected {rejected} uploaded {uploaded} required {required} optional {optional} other {optional}}",pass,format_string
+"verificationWizardCapacityHint","16",pass,numeric_hint

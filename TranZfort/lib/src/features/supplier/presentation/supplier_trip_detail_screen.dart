@@ -51,7 +51,7 @@ class SupplierTripDetailScreen extends ConsumerWidget {
             title: l10n.supplierTripDetailLoadFailureTitle,
             message: l10n.supplierTripDetailLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(supplierTripDetailProvider(tripId).notifier).load(),
             ),
           ),
@@ -64,39 +64,18 @@ class SupplierTripDetailScreen extends ConsumerWidget {
 String _localizedSupplierTripVerificationStatus(AppLocalizations l10n, String status) {
   switch (status.trim().toLowerCase()) {
     case 'verified':
-      return l10n.supplierTripDetailVerificationStatusVerified;
+      return l10n.verificationStatusVerified;
     case 'pending':
-      return l10n.supplierTripDetailVerificationStatusPending;
+      return l10n.commonPendingLabel;
     case 'rejected':
-      return l10n.supplierTripDetailVerificationStatusRejected;
+      return l10n.verificationStatusRejected;
     default:
-      return l10n.supplierTripDetailVerificationStatusUnknown;
+      return l10n.commonUnknownLabel;
   }
 }
 
 String _localizedSupplierTripStage(AppLocalizations l10n, String stage) {
-  switch (stage.trim().toLowerCase()) {
-    case 'assigned':
-      return l10n.supplierTripDetailStageAssigned;
-    case 'pickup_pending':
-      return l10n.supplierTripDetailStagePickupPending;
-    case 'picked_up':
-      return l10n.supplierTripDetailStagePickedUp;
-    case 'in_transit':
-      return l10n.supplierTripDetailStageInTransit;
-    case 'delivered':
-      return l10n.supplierTripDetailStageDelivered;
-    case 'proof_submitted':
-      return l10n.supplierTripDetailStageProofSubmitted;
-    case 'completed':
-      return l10n.supplierTripDetailStageCompleted;
-    case 'disputed':
-      return l10n.supplierTripDetailStageDisputed;
-    case 'cancelled':
-      return l10n.supplierTripDetailStageCancelled;
-    default:
-      return l10n.supplierTripDetailStageUnknown;
-  }
+  return l10n.tripStageValue(stage.trim().toLowerCase());
 }
 
 class _CompletedTripRatingSection extends ConsumerStatefulWidget {
@@ -338,7 +317,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
         ),
         const SizedBox(height: 16),
         DetailSectionCard(
-          title: l10n.supplierTripDetailNextStepTitle,
+          title: l10n.commonNextStepTitle,
           children: [
             Text(_nextStep(l10n, detail.stage).$1, style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
@@ -399,7 +378,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               OutlineButton(
-                label: l10n.navSupport,
+                label: l10n.commonSupportLabel,
                 onPressed: () => context.go(AppRoutes.supportPath),
               ),
             ],
@@ -500,7 +479,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
               ),
               const SizedBox(height: 12),
               OutlineButton(
-                label: l10n.chatMenuReportSpamOrAbuse,
+                label: l10n.commonReportSpamOrAbuseAction,
                 onPressed: () => context.go(
                   AppRoutes.reportIssuePath,
                   extra: ReportIssueContext(
@@ -520,7 +499,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
         ],
         const SizedBox(height: 16),
         DetailSectionCard(
-          title: l10n.supplierTripDetailRouteScheduleTitle,
+          title: l10n.commonRouteAndScheduleTitle,
           children: [
             Text(l10n.supplierTripDetailOriginLabel(detail.originLabel)),
             const SizedBox(height: 4),
@@ -585,7 +564,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
           l10n.supplierTripDetailNextStepCompletedMessage,
         ),
       'disputed' => (
-          l10n.supplierTripDetailNextStepDisputedTitle,
+          l10n.commonDisputeInProgressTitle,
           l10n.supplierTripDetailNextStepDisputedMessage,
         ),
       _ => (
@@ -643,7 +622,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
   String _formatDate(BuildContext context, DateTime? date) {
     final l10n = AppLocalizations.of(context);
     if (date == null) {
-      return l10n.supplierTripDetailPending;
+      return l10n.commonPendingLabel;
     }
     return MaterialLocalizations.of(context).formatMediumDate(date);
   }
@@ -651,7 +630,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
   String _formatDateTime(BuildContext context, DateTime? date) {
     final l10n = AppLocalizations.of(context);
     if (date == null) {
-      return l10n.supplierTripDetailPending;
+      return l10n.commonPendingLabel;
     }
     final time = MaterialLocalizations.of(context).formatTimeOfDay(
       TimeOfDay.fromDateTime(date),
@@ -673,7 +652,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
   String _disputeBannerTitle(AppLocalizations l10n, String? status) {
     return switch ((status ?? '').trim().toLowerCase()) {
       'waiting_for_user' => l10n.supplierTripDetailDisputeBannerWaitingTitle,
-      'resolved' || 'closed' => l10n.supplierTripDetailDisputeBannerClosedTitle,
+      'resolved' || 'closed' => l10n.commonDisputeReviewClosedTitle,
       _ => l10n.supplierTripDetailDisputeBannerInProgressTitle,
     };
   }
@@ -694,14 +673,9 @@ class _SupplierTripDetailBody extends ConsumerWidget {
   }
 
   String _localizedDisputeStatusLabel(AppLocalizations l10n, String status) {
-    return switch (status.trim().toLowerCase()) {
-      'open' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusOpen),
-      'in_progress' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusInProgress),
-      'waiting_for_user' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusWaitingForYou),
-      'resolved' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusResolved),
-      'closed' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusClosed),
-      _ => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusUnknown),
-    };
+    return l10n.supplierTripDetailDisputeStatusLabel(
+      l10n.supportTicketStatusValue(status.trim().toLowerCase()),
+    );
   }
 
   String _localizedDisputeCategoryLabel(AppLocalizations l10n, String category) {

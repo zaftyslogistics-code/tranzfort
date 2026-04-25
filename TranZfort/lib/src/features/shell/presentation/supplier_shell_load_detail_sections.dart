@@ -115,7 +115,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                   title: l10n.supplierLoadDetailLinkedExecutionUnavailableTitle,
                   message: l10n.supplierLoadSupportFailureMessage,
                   action: OutlineButton(
-                    label: l10n.commonRetry,
+                    label: l10n.commonRetryAction,
                     onPressed: () => ref.read(loadDetailProvider(loadId).notifier).load(),
                   ),
                 ),
@@ -221,7 +221,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                     ),
                   const SizedBox(height: AppSpacing.md),
                   OutlineButton(
-                    label: l10n.chatMenuReportSpamOrAbuse,
+                    label: l10n.commonReportSpamOrAbuseAction,
                     onPressed: () => context.push(
                       AppRoutes.reportIssuePath,
                       extra: ReportIssueContext(
@@ -235,7 +235,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 ],
               ),
           DetailSectionCard(
-            title: l10n.supplierLoadDetailRouteAndScheduleTitle,
+            title: l10n.commonRouteAndScheduleTitle,
             children: [
               Text(
                 l10n.supplierLoadDetailOriginCity(
@@ -275,7 +275,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
               ) case final mapsUri?) ...[
                 const SizedBox(height: AppSpacing.md),
                 OutlineButton(
-                  label: l10n.supplierLoadDetailOpenInGoogleMaps,
+                  label: l10n.commonOpenInGoogleMapsAction,
                   onPressed: () async {
                     await mapsLauncher.launchDirectionsUri(mapsUri);
                   },
@@ -294,12 +294,12 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.xs),
-              Text(l10n.supplierLoadDetailBodyType(detail.summary.requiredBodyType ?? l10n.supplierLoadDetailAnyValue)),
+              Text(l10n.supplierLoadDetailBodyType(detail.summary.requiredBodyType ?? l10n.commonAnyLabel)),
               const SizedBox(height: AppSpacing.xs),
               Text(
                 l10n.supplierLoadDetailTyres(
                   detail.summary.requiredTyres.isEmpty
-                      ? l10n.supplierLoadDetailAnyValue
+                      ? l10n.commonAnyLabel
                       : detail.summary.requiredTyres.join(', '),
                 ),
               ),
@@ -476,7 +476,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(l10n.chatActionCancel),
+            child: Text(l10n.commonCancelAction),
           ),
           PrimaryButton(
             label: l10n.chatActionApprove,
@@ -517,7 +517,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(dialogContext).pop(null),
-              child: Text(l10n.chatActionCancel),
+              child: Text(l10n.commonCancelAction),
             ),
             PrimaryButton(
               label: l10n.chatActionReject,
@@ -549,7 +549,7 @@ class _LoadDetailFailureBlock extends StatelessWidget {
         icon: Icons.inventory_2_outlined,
         title: l10n.supplierLoadDetailNotFoundTitle,
         subtitle: l10n.supplierLoadDetailNotFoundSubtitle,
-        actionLabel: l10n.commonRetry,
+        actionLabel: l10n.commonRetryAction,
         onAction: () => context.go(AppRoutes.myLoadsPath),
       );
     }
@@ -557,7 +557,7 @@ class _LoadDetailFailureBlock extends StatelessWidget {
     return WarningBlock(
       title: l10n.supplierLoadDetailLoadFailureTitle,
       message: l10n.supplierLoadDetailFailureMessage,
-      action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+      action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
     );
   }
 }

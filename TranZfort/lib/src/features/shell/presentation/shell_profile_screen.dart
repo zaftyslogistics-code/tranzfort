@@ -26,14 +26,16 @@ class ProfileScreen extends ConsumerWidget {
     final profile = profileAsync.valueOrNull;
     final languageCode = ref.watch(appLocaleProvider).locale.languageCode;
     final AppLocalizations l10n = AppLocalizations.of(context);
-    final roleLabel = switch (authState.role) {
-      AppUserRole.supplier => l10n.accountRoleSupplier,
-      AppUserRole.trucker => l10n.accountRoleTrucker,
-      AppUserRole.unknown => l10n.accountRoleUnknown,
-    };
+    final roleLabel = l10n.accountRoleValue(
+      switch (authState.role) {
+        AppUserRole.supplier => 'supplier',
+        AppUserRole.trucker => 'trucker',
+        AppUserRole.unknown => 'other',
+      },
+    );
 
     return DetailPageScaffold(
-      title: l10n.profileTitle,
+      title: l10n.commonProfileLabel,
       children: [
         if (profileAsync.isLoading)
           const LoadingShimmer(height: 96, itemCount: 2)
@@ -42,7 +44,7 @@ class ProfileScreen extends ConsumerWidget {
             title: l10n.profileLoadFailureTitle,
             message: l10n.profileLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.refresh(authStateProvider),
             ),
           )
@@ -157,7 +159,7 @@ class TrustSafetyStatusSummary extends StatelessWidget {
         title: l10n.trustSafetyWarningTitle,
         message: l10n.trustSafetyWarningMessage,
         action: OutlineButton(
-          label: l10n.trustSafetyOpenSupport,
+          label: l10n.commonOpenSupportAction,
           onPressed: onOpenSupport,
         ),
       );
@@ -172,7 +174,7 @@ class TrustSafetyStatusSummary extends StatelessWidget {
           fallback: l10n.trustSafetyRestrictionFallback,
         ),
         action: OutlineButton(
-          label: l10n.trustSafetyOpenSupport,
+          label: l10n.commonOpenSupportAction,
           onPressed: onOpenSupport,
         ),
       );
@@ -187,7 +189,7 @@ class TrustSafetyStatusSummary extends StatelessWidget {
           fallback: l10n.trustSafetySuspensionFallback,
         ),
         action: OutlineButton(
-          label: l10n.trustSafetyOpenSupport,
+          label: l10n.commonOpenSupportAction,
           onPressed: onOpenSupport,
         ),
       );
@@ -202,7 +204,7 @@ class TrustSafetyStatusSummary extends StatelessWidget {
           fallback: l10n.trustSafetyBanFallback,
         ),
         action: OutlineButton(
-          label: l10n.trustSafetyOpenSupport,
+          label: l10n.commonOpenSupportAction,
           onPressed: onOpenSupport,
         ),
       );

@@ -149,19 +149,11 @@ class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
 }
 
 String _localizedBodyType(AppLocalizations l10n, String? bodyType) {
-  final normalized = (bodyType ?? '').trim();
-  switch (normalized.toLowerCase()) {
-    case 'open':
-      return l10n.truckerFindLoadsBodyTypeOpen;
-    case 'trailer':
-      return l10n.truckerFindLoadsBodyTypeTrailer;
-    case 'container':
-      return l10n.truckerFindLoadsBodyTypeContainer;
-    case 'tanker':
-      return l10n.truckerFindLoadsBodyTypeTanker;
-    default:
-      return normalized.isEmpty ? l10n.truckerFindLoadsAnyBodyFallback : l10n.truckerFindLoadsBodyTypeUnknown;
+  final normalized = (bodyType ?? '').trim().toLowerCase();
+  if (normalized.isEmpty) {
+    return l10n.truckerFindLoadsAnyBodyFallback;
   }
+  return l10n.truckerFindLoadsBodyTypeValue(normalized);
 }
 
 class _ActiveFilterSummary extends StatelessWidget {
@@ -279,10 +271,10 @@ class _AdvancedFiltersSheetState extends State<_AdvancedFiltersSheet> {
           label: l10n.truckerFindLoadsTruckBodyTypeLabel,
           value: _bodyType.isEmpty ? null : _bodyType,
           items: [
-            DropdownMenuItem(value: 'Open', child: Text(l10n.truckerFindLoadsBodyTypeOpen)),
-            DropdownMenuItem(value: 'Trailer', child: Text(l10n.truckerFindLoadsBodyTypeTrailer)),
-            DropdownMenuItem(value: 'Container', child: Text(l10n.truckerFindLoadsBodyTypeContainer)),
-            DropdownMenuItem(value: 'Tanker', child: Text(l10n.truckerFindLoadsBodyTypeTanker)),
+            DropdownMenuItem(value: 'Open', child: Text(l10n.truckerFindLoadsBodyTypeValue('open'))),
+            DropdownMenuItem(value: 'Trailer', child: Text(l10n.truckerFindLoadsBodyTypeValue('trailer'))),
+            DropdownMenuItem(value: 'Container', child: Text(l10n.truckerFindLoadsBodyTypeValue('container'))),
+            DropdownMenuItem(value: 'Tanker', child: Text(l10n.truckerFindLoadsBodyTypeValue('tanker'))),
           ],
           onChanged: (value) => setState(() => _bodyType = value ?? ''),
         ),

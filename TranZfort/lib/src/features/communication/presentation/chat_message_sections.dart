@@ -74,7 +74,7 @@ class _ChatMessageBubble extends StatelessWidget {
     if (message.type == ChatMessageType.system) {
       return Center(
         child: Text(
-          message.textBody ?? l10n.chatSystemUpdateFallback,
+          message.textBody ?? l10n.commonSystemUpdateLabel,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
           textAlign: TextAlign.center,
         ),

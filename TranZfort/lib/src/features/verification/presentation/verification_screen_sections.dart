@@ -65,14 +65,14 @@ class _VerificationPacketFieldsSectionState extends ConsumerState<_VerificationP
         if (detail.isSupplier) ...[
           AppTextField(
             controller: _companyNameController,
-            label: l10n.verificationFieldCompanyName,
+            label: l10n.commonCompanyNameLabel,
             errorText: fieldErrors['company_name'],
           ),
           const SizedBox(height: AppSpacing.md),
         ],
         AppTextField(
           controller: _aadhaarController,
-          label: l10n.verificationFieldAadhaarNumber,
+          label: l10n.commonAadhaarNumberLabel,
           keyboardType: TextInputType.number,
           errorText: fieldErrors['aadhaar_number'],
         ),
@@ -102,7 +102,7 @@ class _VerificationPacketFieldsSectionState extends ConsumerState<_VerificationP
         const SizedBox(height: AppSpacing.md),
         AppTextField(
           controller: _panController,
-          label: l10n.verificationFieldPanNumber,
+          label: l10n.commonPanNumberLabel,
           errorText: fieldErrors['pan_number'],
         ),
         if (detail.isTrucker) ...[
@@ -124,7 +124,7 @@ class _VerificationPacketFieldsSectionState extends ConsumerState<_VerificationP
           const SizedBox(height: AppSpacing.md),
           AppTextField(
             controller: _gstController,
-            label: l10n.verificationFieldGstNumber,
+            label: l10n.commonGstNumberLabel,
             helperText: l10n.verificationFieldGstOptional,
             errorText: fieldErrors['gst_number'],
           ),
@@ -229,16 +229,16 @@ String _localizedVerificationStatus(AppLocalizations l10n, String status) {
     case 'verified':
       return l10n.verificationStatusVerified;
     case 'pending':
-      return l10n.verificationStatusPending;
+      return l10n.commonPendingLabel;
     case 'rejected':
       return l10n.verificationStatusRejected;
     case 'unverified':
       return l10n.verificationStatusUnverified;
     default:
       if (status.trim().isEmpty) {
-        return l10n.verificationStatusUnknown;
+        return l10n.commonUnknownLabel;
       }
-      return l10n.verificationStatusUnknown;
+      return l10n.commonUnknownLabel;
   }
 }
 
@@ -253,7 +253,7 @@ class _VerificationBannerSection extends StatelessWidget {
     if (detail.isPending) {
       return VerificationBanner(
         status: VerificationBannerStatus.pending,
-        title: l10n.verificationPendingBannerTitle,
+        title: l10n.commonVerificationPendingTitle,
         description: l10n.verificationPendingBannerDescription,
       );
     }
@@ -267,7 +267,7 @@ class _VerificationBannerSection extends StatelessWidget {
     if (detail.isRejected) {
       return VerificationBanner(
         status: VerificationBannerStatus.rejected,
-        title: l10n.verificationNeedsAttentionBannerTitle,
+        title: l10n.commonVerificationNeedsAttentionTitle,
         description: l10n.verificationNeedsAttentionBannerDescription,
       );
     }
@@ -360,10 +360,8 @@ class _VerificationSubmitSection extends ConsumerWidget {
         children: [
           StandardListCard(
             accent: detail.isVerified ? AppColors.success : AppColors.primary,
-            title: detail.isVerified ? l10n.verificationLockedStatusVerifiedTitle : l10n.verificationLockedStatusPendingTitle,
-            subtitle: detail.isVerified
-                ? l10n.verificationLockedStatusVerifiedMessage
-                : l10n.verificationLockedStatusPendingMessage,
+            title: l10n.verificationLockedStatusValue(detail.isVerified ? 'verified_title' : 'pending_title'),
+            subtitle: l10n.verificationLockedStatusValue(detail.isVerified ? 'verified_message' : 'pending_message'),
             trailing: StatusChip(
               label: _localizedVerificationStatus(l10n, detail.verificationStatus),
             ),
@@ -374,11 +372,11 @@ class _VerificationSubmitSection extends ConsumerWidget {
 
     final checks = <_ReadinessCheck>[
       _ReadinessCheck(
-        label: l10n.verificationReadinessCheckAadhaarNumber,
+        label: l10n.commonAadhaarNumberLabel,
         done: (detail.aadhaarNumber ?? '').trim().isNotEmpty,
       ),
       _ReadinessCheck(
-        label: l10n.verificationReadinessCheckPanNumber,
+        label: l10n.commonPanNumberLabel,
         done: (detail.panNumber ?? '').trim().isNotEmpty,
       ),
       _ReadinessCheck(
@@ -395,7 +393,7 @@ class _VerificationSubmitSection extends ConsumerWidget {
       ),
       if (detail.isSupplier) ...[
         _ReadinessCheck(
-          label: l10n.verificationReadinessCheckCompanyName,
+          label: l10n.commonCompanyNameLabel,
           done: (detail.companyName ?? '').trim().isNotEmpty,
         ),
         _ReadinessCheck(
@@ -605,7 +603,7 @@ class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSe
               const SizedBox(height: AppSpacing.md),
               AppTextField(
                 controller: _truckNumberController,
-                label: l10n.truckerFleetTruckNumberLabel,
+                label: l10n.commonTruckNumberLabel,
                 hintText: l10n.truckerFleetTruckNumberHint,
                 errorText: fleetState.fieldErrors['truck_number'],
                 onChanged: ref.read(truckerFleetProvider.notifier).updateTruckNumber,

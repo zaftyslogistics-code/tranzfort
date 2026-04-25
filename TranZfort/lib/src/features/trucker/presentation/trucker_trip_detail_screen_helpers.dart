@@ -19,12 +19,12 @@ Future<ImageSource?> _showTripProofSourceSheet({
     child: Column(
       children: [
         PrimaryButton(
-          label: l10n.truckerTripDetailTakePhotoAction,
+          label: l10n.commonTakePhotoAction,
           onPressed: () => Navigator.of(context).pop(ImageSource.camera),
         ),
         const SizedBox(height: 12),
         OutlineButton(
-          label: l10n.truckerTripDetailChooseFromGalleryAction,
+          label: l10n.commonChooseFromGalleryAction,
           onPressed: () => Navigator.of(context).pop(ImageSource.gallery),
         ),
       ],
@@ -85,7 +85,7 @@ Future<ImageSource?> _showTripProofSourceSheet({
         l10n.truckerTripDetailNextStepCompletedMessage,
       ),
     'disputed' => (
-        l10n.truckerTripDetailNextStepDisputedTitle,
+        l10n.commonDisputeInProgressTitle,
         l10n.truckerTripDetailNextStepDisputedMessage,
       ),
     'cancelled' => (
@@ -109,7 +109,7 @@ String _tripDetailFormatDate(BuildContext context, DateTime? date) {
 String _tripDetailFormatDateTime(BuildContext context, DateTime? value) {
   final l10n = AppLocalizations.of(context);
   if (value == null) {
-    return l10n.truckerTripDetailPending;
+    return l10n.commonPendingLabel;
   }
   final time = MaterialLocalizations.of(context).formatTimeOfDay(
     TimeOfDay.fromDateTime(value),
@@ -131,8 +131,8 @@ String _tripDisputeStatusGuidance(AppLocalizations l10n, String value) {
 String _tripDisputeBannerTitle(AppLocalizations l10n, String? status) {
   return switch ((status ?? '').trim().toLowerCase()) {
     'waiting_for_user' => l10n.truckerTripDetailDisputeBannerWaitingTitle,
-    'resolved' || 'closed' => l10n.truckerTripDetailDisputeBannerClosedTitle,
-    _ => l10n.truckerTripDetailDisputeBannerInProgressTitle,
+    'resolved' || 'closed' => l10n.commonDisputeReviewClosedTitle,
+    _ => l10n.commonDisputeInProgressTitle,
   };
 }
 
@@ -152,14 +152,9 @@ String _tripDisputeBannerMessage(
 }
 
 String _localizedDisputeStatusLabel(AppLocalizations l10n, String status) {
-  return switch (status.trim().toLowerCase()) {
-    'open' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusOpen),
-    'in_progress' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusInProgress),
-    'waiting_for_user' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusWaitingForYou),
-    'resolved' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusResolved),
-    'closed' => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusClosed),
-    _ => l10n.supplierTripDetailDisputeStatusLabel(l10n.supportTicketStatusUnknown),
-  };
+  return l10n.supplierTripDetailDisputeStatusLabel(
+    l10n.supportTicketStatusValue(status.trim().toLowerCase()),
+  );
 }
 
 String _localizedDisputeCategoryLabel(AppLocalizations l10n, String category) {

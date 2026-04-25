@@ -188,11 +188,11 @@ abstract class AppLocalizations {
   /// **'Sign in'**
   String get authPasswordModeSignIn;
 
-  /// No description provided for @authPasswordModeSignUp.
+  /// No description provided for @commonCreateAccountAction.
   ///
   /// In en, this message translates to:
   /// **'Create account'**
-  String get authPasswordModeSignUp;
+  String get commonCreateAccountAction;
 
   /// No description provided for @authPasswordSwitchToSignIn.
   ///
@@ -211,12 +211,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sign in with password'**
   String get authPasswordSignInAction;
-
-  /// No description provided for @authPasswordSignUpAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Create account'**
-  String get authPasswordSignUpAction;
 
   /// No description provided for @authPasswordInvalidEmailMessage.
   ///
@@ -278,11 +272,11 @@ abstract class AppLocalizations {
   /// **'We could not resend the verification email right now. Retry shortly or use a different email.'**
   String get authPasswordResendVerificationFailureMessage;
 
-  /// No description provided for @authPasswordBackToSignInAction.
+  /// No description provided for @commonBackToSignInAction.
   ///
   /// In en, this message translates to:
   /// **'Back to sign in'**
-  String get authPasswordBackToSignInAction;
+  String get commonBackToSignInAction;
 
   /// No description provided for @authPasswordUseDifferentEmailAction.
   ///
@@ -410,17 +404,17 @@ abstract class AppLocalizations {
   /// **'Save and continue'**
   String get onboardingSaveAndContinue;
 
-  /// No description provided for @commonRetry.
+  /// No description provided for @commonRetryAction.
   ///
   /// In en, this message translates to:
   /// **'Retry'**
-  String get commonRetry;
+  String get commonRetryAction;
 
-  /// No description provided for @supplierQuickActionNotifications.
+  /// No description provided for @commonNotificationsLabel.
   ///
   /// In en, this message translates to:
   /// **'Notifications'**
-  String get supplierQuickActionNotifications;
+  String get commonNotificationsLabel;
 
   /// No description provided for @supplierMyLoadsTitle.
   ///
@@ -434,17 +428,17 @@ abstract class AppLocalizations {
   /// **'Monitor active supplier loads, booking demand, and completed load history from one place.'**
   String get supplierMyLoadsSubtitle;
 
-  /// No description provided for @supplierMyLoadsTabActive.
+  /// No description provided for @commonActiveLabel.
   ///
   /// In en, this message translates to:
   /// **'Active'**
-  String get supplierMyLoadsTabActive;
+  String get commonActiveLabel;
 
-  /// No description provided for @supplierMyLoadsTabCompleted.
+  /// No description provided for @commonCompletedLabel.
   ///
   /// In en, this message translates to:
   /// **'Completed'**
-  String get supplierMyLoadsTabCompleted;
+  String get commonCompletedLabel;
 
   /// No description provided for @supplierMyLoadsLoadFailureTitle.
   ///
@@ -536,11 +530,11 @@ abstract class AppLocalizations {
   /// **'View history'**
   String get supplierLoadCardViewHistory;
 
-  /// No description provided for @supplierLoadCardViewDetails.
+  /// No description provided for @commonViewDetailsAction.
   ///
   /// In en, this message translates to:
   /// **'View details'**
-  String get supplierLoadCardViewDetails;
+  String get commonViewDetailsAction;
 
   /// No description provided for @supplierRecentLoadsTitle.
   ///
@@ -554,11 +548,11 @@ abstract class AppLocalizations {
   /// **'Welcome back, {name}'**
   String supplierDashboardWelcomeBack(Object name);
 
-  /// No description provided for @supplierDashboardOverviewTitle.
+  /// No description provided for @commonDashboardOverviewTitle.
   ///
   /// In en, this message translates to:
   /// **'Dashboard overview'**
-  String get supplierDashboardOverviewTitle;
+  String get commonDashboardOverviewTitle;
 
   /// No description provided for @supplierDashboardSuperLoadReadinessTitle.
   ///
@@ -566,23 +560,23 @@ abstract class AppLocalizations {
   /// **'Super Load readiness'**
   String get supplierDashboardSuperLoadReadinessTitle;
 
-  /// No description provided for @supplierDashboardQuickActionsTitle.
+  /// No description provided for @commonQuickActionsTitle.
   ///
   /// In en, this message translates to:
   /// **'Quick actions'**
-  String get supplierDashboardQuickActionsTitle;
+  String get commonQuickActionsTitle;
 
-  /// No description provided for @supplierDashboardQuickActionChatLabel.
+  /// No description provided for @commonChatLabel.
   ///
   /// In en, this message translates to:
   /// **'Chat'**
-  String get supplierDashboardQuickActionChatLabel;
+  String get commonChatLabel;
 
-  /// No description provided for @supplierDashboardPostLoadAction.
+  /// No description provided for @commonPostLoadAction.
   ///
   /// In en, this message translates to:
   /// **'Post Load'**
-  String get supplierDashboardPostLoadAction;
+  String get commonPostLoadAction;
 
   /// No description provided for @supplierDashboardStatsActiveLoadsLabel.
   ///
@@ -608,11 +602,11 @@ abstract class AppLocalizations {
   /// **'Completed trips'**
   String get supplierDashboardStatsCompletedTripsLabel;
 
-  /// No description provided for @supplierDashboardOpenMyLoadsAction.
+  /// No description provided for @commonOpenMyLoadsAction.
   ///
   /// In en, this message translates to:
   /// **'Open my loads'**
-  String get supplierDashboardOpenMyLoadsAction;
+  String get commonOpenMyLoadsAction;
 
   /// No description provided for @supplierDashboardLoadFailureTitle.
   ///
@@ -686,23 +680,17 @@ abstract class AppLocalizations {
   /// **'My Loads'**
   String get shellTitleMyLoads;
 
-  /// No description provided for @shellTabTrips.
+  /// No description provided for @commonTripsLabel.
   ///
   /// In en, this message translates to:
   /// **'Trips'**
-  String get shellTabTrips;
+  String get commonTripsLabel;
 
-  /// No description provided for @shellQuickActionTrips.
-  ///
-  /// In en, this message translates to:
-  /// **'Trips'**
-  String get shellQuickActionTrips;
-
-  /// No description provided for @shellDashboardTitle.
+  /// No description provided for @commonDashboardLabel.
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
-  String get shellDashboardTitle;
+  String get commonDashboardLabel;
 
   /// No description provided for @shellTabFind.
   ///
@@ -728,41 +716,29 @@ abstract class AppLocalizations {
   /// **'Trucker workspace'**
   String get shellDrawerTruckerWorkspace;
 
-  /// No description provided for @shellDrawerDashboard.
-  ///
-  /// In en, this message translates to:
-  /// **'Dashboard'**
-  String get shellDrawerDashboard;
-
-  /// No description provided for @shellDrawerFleet.
+  /// No description provided for @commonFleetLabel.
   ///
   /// In en, this message translates to:
   /// **'Fleet'**
-  String get shellDrawerFleet;
+  String get commonFleetLabel;
 
-  /// No description provided for @navNotifications.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get navNotifications;
-
-  /// No description provided for @shellDrawerSupport.
+  /// No description provided for @commonSupportLabel.
   ///
   /// In en, this message translates to:
   /// **'Support'**
-  String get shellDrawerSupport;
+  String get commonSupportLabel;
 
-  /// No description provided for @shellDrawerProfile.
+  /// No description provided for @commonProfileLabel.
   ///
   /// In en, this message translates to:
   /// **'Profile'**
-  String get shellDrawerProfile;
+  String get commonProfileLabel;
 
-  /// No description provided for @shellDrawerSignOut.
+  /// No description provided for @commonSignOutAction.
   ///
   /// In en, this message translates to:
   /// **'Sign out'**
-  String get shellDrawerSignOut;
+  String get commonSignOutAction;
 
   /// No description provided for @shellSignOutFailureMessage.
   ///
@@ -890,11 +866,11 @@ abstract class AppLocalizations {
   /// **'Conversation'**
   String get chatTitleFallback;
 
-  /// No description provided for @chatTooltipCall.
+  /// No description provided for @commonCallAction.
   ///
   /// In en, this message translates to:
   /// **'Call'**
-  String get chatTooltipCall;
+  String get commonCallAction;
 
   /// Label for reporting chat source. Placeholder {source} is the chat context source.
   ///
@@ -914,11 +890,11 @@ abstract class AppLocalizations {
   /// **'Refresh thread'**
   String get chatMenuRefreshThread;
 
-  /// No description provided for @chatMenuReportSpamOrAbuse.
+  /// No description provided for @commonReportSpamOrAbuseAction.
   ///
   /// In en, this message translates to:
   /// **'Report spam or abuse'**
-  String get chatMenuReportSpamOrAbuse;
+  String get commonReportSpamOrAbuseAction;
 
   /// No description provided for @chatConversationUnavailableTitle.
   ///
@@ -974,11 +950,11 @@ abstract class AppLocalizations {
   /// **'This will reject the trucker booking request from the chat context.'**
   String get chatRejectBookingDialogMessage;
 
-  /// No description provided for @chatActionCancel.
+  /// No description provided for @commonCancelAction.
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
-  String get chatActionCancel;
+  String get commonCancelAction;
 
   /// No description provided for @chatActionApprove.
   ///
@@ -1076,23 +1052,17 @@ abstract class AppLocalizations {
   /// **'Pickup: {value}'**
   String chatPickupLabel(Object value);
 
-  /// No description provided for @chatLoadStatusActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get chatLoadStatusActive;
-
   /// No description provided for @chatBookingStatusApproved.
   ///
   /// In en, this message translates to:
   /// **'Approved'**
   String get chatBookingStatusApproved;
 
-  /// No description provided for @chatBookingStatusUnknown.
+  /// No description provided for @commonUnknownLabel.
   ///
   /// In en, this message translates to:
   /// **'Unknown'**
-  String get chatBookingStatusUnknown;
+  String get commonUnknownLabel;
 
   /// No description provided for @chatMessagesLoadFailureTitle.
   ///
@@ -1118,11 +1088,11 @@ abstract class AppLocalizations {
   /// **'Send a message to start this conversation.'**
   String get chatNoMessagesSubtitle;
 
-  /// No description provided for @chatSystemUpdateFallback.
+  /// No description provided for @commonSystemUpdateLabel.
   ///
   /// In en, this message translates to:
   /// **'System update'**
-  String get chatSystemUpdateFallback;
+  String get commonSystemUpdateLabel;
 
   /// No description provided for @chatSendingLabel.
   ///
@@ -1142,11 +1112,11 @@ abstract class AppLocalizations {
   /// **'Play voice message'**
   String get chatPlayVoiceMessageTooltip;
 
-  /// No description provided for @chatVoiceMessageLabel.
+  /// No description provided for @commonVoiceMessageLabel.
   ///
   /// In en, this message translates to:
   /// **'Voice message'**
-  String get chatVoiceMessageLabel;
+  String get commonVoiceMessageLabel;
 
   /// No description provided for @chatVoicePlaybackUnavailable.
   ///
@@ -1208,11 +1178,11 @@ abstract class AppLocalizations {
   /// **'View route'**
   String get chatViewRouteAction;
 
-  /// No description provided for @chatTruckDetailsSharedFallback.
+  /// No description provided for @commonTruckDetailsLabel.
   ///
   /// In en, this message translates to:
   /// **'Truck details'**
-  String get chatTruckDetailsSharedFallback;
+  String get commonTruckDetailsLabel;
 
   /// No description provided for @chatTruckTyresLabel.
   ///
@@ -1261,12 +1231,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Voice guidance is unavailable right now.'**
   String get commonVoiceUnavailable;
-
-  /// No description provided for @notificationsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get notificationsTitle;
 
   /// No description provided for @notificationsMarkedAllReadSuccess.
   ///
@@ -1328,11 +1292,11 @@ abstract class AppLocalizations {
   /// **'{count} high priority'**
   String notificationsHighPriorityCountLabel(int count);
 
-  /// No description provided for @notificationsLoadMore.
+  /// No description provided for @commonLoadMoreAction.
   ///
   /// In en, this message translates to:
   /// **'Load More'**
-  String get notificationsLoadMore;
+  String get commonLoadMoreAction;
 
   /// No description provided for @notificationsTtsSummary.
   ///
@@ -1364,83 +1328,11 @@ abstract class AppLocalizations {
   /// **'Open the linked workflow for full context.'**
   String get notificationsBodyFallback;
 
-  /// No description provided for @notificationFallbackVerificationUpdate.
+  /// No description provided for @notificationFallbackValue.
   ///
   /// In en, this message translates to:
-  /// **'Verification update'**
-  String get notificationFallbackVerificationUpdate;
-
-  /// No description provided for @notificationFallbackBookingUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Booking update'**
-  String get notificationFallbackBookingUpdate;
-
-  /// No description provided for @notificationFallbackTripUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Trip update'**
-  String get notificationFallbackTripUpdate;
-
-  /// No description provided for @notificationFallbackProofUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof update'**
-  String get notificationFallbackProofUpdate;
-
-  /// No description provided for @notificationFallbackSuperLoadUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Load update'**
-  String get notificationFallbackSuperLoadUpdate;
-
-  /// No description provided for @notificationFallbackMessageReceived.
-  ///
-  /// In en, this message translates to:
-  /// **'New message'**
-  String get notificationFallbackMessageReceived;
-
-  /// No description provided for @notificationFallbackSupportUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Support update'**
-  String get notificationFallbackSupportUpdate;
-
-  /// No description provided for @notificationFallbackDisputeUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute update'**
-  String get notificationFallbackDisputeUpdate;
-
-  /// No description provided for @notificationFallbackAccountUpdate.
-  ///
-  /// In en, this message translates to:
-  /// **'Account update'**
-  String get notificationFallbackAccountUpdate;
-
-  /// No description provided for @notificationFallbackSystemNotice.
-  ///
-  /// In en, this message translates to:
-  /// **'System notice'**
-  String get notificationFallbackSystemNotice;
-
-  /// No description provided for @notificationFallbackLoadExpiryWarning.
-  ///
-  /// In en, this message translates to:
-  /// **'Load expiry warning'**
-  String get notificationFallbackLoadExpiryWarning;
-
-  /// No description provided for @navProfile.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get navProfile;
-
-  /// No description provided for @navSupport.
-  ///
-  /// In en, this message translates to:
-  /// **'Support'**
-  String get navSupport;
+  /// **'{type, select, verification_update {Verification update} booking_update {Booking update} trip_update {Trip update} proof_update {Proof update} super_load_update {Super Load update} message_received {New message} support_update {Support update} dispute_update {Dispute update} account_update {Account update} system_notice {System notice} load_expiry_warning {Load expiry warning} other {Notification}}'**
+  String notificationFallbackValue(String type);
 
   /// No description provided for @navDeleteAccount.
   ///
@@ -1550,11 +1442,11 @@ abstract class AppLocalizations {
   /// **'Open trips'**
   String get deleteAccountBlockerActionOpenTrips;
 
-  /// No description provided for @deleteAccountBlockerActionOpenSupport.
+  /// No description provided for @commonOpenSupportAction.
   ///
   /// In en, this message translates to:
   /// **'Open support'**
-  String get deleteAccountBlockerActionOpenSupport;
+  String get commonOpenSupportAction;
 
   /// No description provided for @deleteAccountBlockerTitleActiveTrips.
   ///
@@ -1634,11 +1526,11 @@ abstract class AppLocalizations {
   /// **'Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.'**
   String get deleteAccountSupportDetailDefault;
 
-  /// No description provided for @deleteAccountWhatHappensNextTitle.
+  /// No description provided for @commonWhatHappensNextTitle.
   ///
   /// In en, this message translates to:
   /// **'What happens next'**
-  String get deleteAccountWhatHappensNextTitle;
+  String get commonWhatHappensNextTitle;
 
   /// No description provided for @deleteAccountWhatHappensNextBodyPendingCleanup.
   ///
@@ -1700,23 +1592,17 @@ abstract class AppLocalizations {
   /// **'This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.'**
   String get deleteAccountAlreadyRequestedMessage;
 
-  /// No description provided for @deleteAccountCancelRequestTitle.
+  /// No description provided for @commonCancelDeletionRequestAction.
   ///
   /// In en, this message translates to:
   /// **'Cancel deletion request'**
-  String get deleteAccountCancelRequestTitle;
+  String get commonCancelDeletionRequestAction;
 
   /// No description provided for @deleteAccountCancellingButton.
   ///
   /// In en, this message translates to:
   /// **'Cancelling deletion...'**
   String get deleteAccountCancellingButton;
-
-  /// No description provided for @deleteAccountCancelRequestButton.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel deletion request'**
-  String get deleteAccountCancelRequestButton;
 
   /// No description provided for @deleteAccountUnavailableTitle.
   ///
@@ -1790,23 +1676,11 @@ abstract class AppLocalizations {
   /// **'We could not sign you out right now. Retry shortly from this screen.'**
   String get accountSignOutFailureMessage;
 
-  /// No description provided for @accountRoleSupplier.
+  /// No description provided for @accountRoleValue.
   ///
   /// In en, this message translates to:
-  /// **'Supplier'**
-  String get accountRoleSupplier;
-
-  /// No description provided for @accountRoleTrucker.
-  ///
-  /// In en, this message translates to:
-  /// **'Trucker'**
-  String get accountRoleTrucker;
-
-  /// No description provided for @accountRoleUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get accountRoleUnknown;
+  /// **'{role, select, supplier {Supplier} trucker {Trucker} other {Unknown}}'**
+  String accountRoleValue(String role);
 
   /// No description provided for @accountStatusTitle.
   ///
@@ -1838,29 +1712,11 @@ abstract class AppLocalizations {
   /// **'Account state'**
   String get accountAccountStateLabel;
 
-  /// No description provided for @accountStateDeactivatedPendingCleanup.
+  /// No description provided for @accountStateValue.
   ///
   /// In en, this message translates to:
-  /// **'Deactivated pending cleanup'**
-  String get accountStateDeactivatedPendingCleanup;
-
-  /// No description provided for @accountStateRestricted.
-  ///
-  /// In en, this message translates to:
-  /// **'Restricted'**
-  String get accountStateRestricted;
-
-  /// No description provided for @accountStateActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get accountStateActive;
-
-  /// No description provided for @accountStateUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get accountStateUnknown;
+  /// **'{state, select, deactivated_pending_cleanup {Deactivated pending cleanup} restricted {Restricted} active {Active} unknown {Unknown} other {Unknown}}'**
+  String accountStateValue(String state);
 
   /// No description provided for @accountLoadFailureTitle.
   ///
@@ -1886,12 +1742,6 @@ abstract class AppLocalizations {
   /// **'Verification'**
   String get accountVerificationLabel;
 
-  /// No description provided for @accountFleetLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Fleet'**
-  String get accountFleetLabel;
-
   /// No description provided for @accountSettingsLabel.
   ///
   /// In en, this message translates to:
@@ -1915,18 +1765,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Current authenticated session'**
   String get accountCurrentAuthenticatedSession;
-
-  /// No description provided for @accountSignOutAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign out'**
-  String get accountSignOutAction;
-
-  /// No description provided for @profileTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get profileTitle;
 
   /// No description provided for @profileLoadFailureTitle.
   ///
@@ -2082,12 +1920,6 @@ abstract class AppLocalizations {
   /// **'Manual contextual summaries are available from supported screens.'**
   String get settingsVoiceAssistanceValue;
 
-  /// No description provided for @settingsNotificationsLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Notifications'**
-  String get settingsNotificationsLabel;
-
   /// No description provided for @settingsNotificationsValue.
   ///
   /// In en, this message translates to:
@@ -2136,65 +1968,17 @@ abstract class AppLocalizations {
   /// **'Unable to read device notification permission right now. Refresh after Firebase/device support is available.'**
   String get settingsPushStatusUnavailableMessage;
 
-  /// No description provided for @settingsPushStatusAllowed.
+  /// No description provided for @settingsPushStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Allowed'**
-  String get settingsPushStatusAllowed;
+  /// **'{status, select, allowed {Allowed} allowed_quietly {Allowed quietly} blocked {Blocked in system settings} not_requested {Not requested yet} unavailable {Unavailable on this device/build} other {Unavailable}}'**
+  String settingsPushStatusValue(String status);
 
-  /// No description provided for @settingsPushStatusAllowedQuietly.
+  /// No description provided for @settingsPushGuidanceValue.
   ///
   /// In en, this message translates to:
-  /// **'Allowed quietly'**
-  String get settingsPushStatusAllowedQuietly;
-
-  /// No description provided for @settingsPushStatusBlocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Blocked in system settings'**
-  String get settingsPushStatusBlocked;
-
-  /// No description provided for @settingsPushStatusNotRequested.
-  ///
-  /// In en, this message translates to:
-  /// **'Not requested yet'**
-  String get settingsPushStatusNotRequested;
-
-  /// No description provided for @settingsPushStatusUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Unavailable on this device/build'**
-  String get settingsPushStatusUnavailable;
-
-  /// No description provided for @settingsPushGuidanceAllowed.
-  ///
-  /// In en, this message translates to:
-  /// **'Foreground and opened push flows are enabled when Firebase delivery is configured.'**
-  String get settingsPushGuidanceAllowed;
-
-  /// No description provided for @settingsPushGuidanceAllowedQuietly.
-  ///
-  /// In en, this message translates to:
-  /// **'Push is allowed quietly. You can promote alerts in the device notification settings if needed.'**
-  String get settingsPushGuidanceAllowedQuietly;
-
-  /// No description provided for @settingsPushGuidanceBlocked.
-  ///
-  /// In en, this message translates to:
-  /// **'Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.'**
-  String get settingsPushGuidanceBlocked;
-
-  /// No description provided for @settingsPushGuidanceNotRequested.
-  ///
-  /// In en, this message translates to:
-  /// **'Push permission has not been requested yet on this device session.'**
-  String get settingsPushGuidanceNotRequested;
-
-  /// No description provided for @settingsPushGuidanceUnavailable.
-  ///
-  /// In en, this message translates to:
-  /// **'Push runtime is unavailable here until Firebase/device support is fully configured.'**
-  String get settingsPushGuidanceUnavailable;
+  /// **'{status, select, allowed {Foreground and opened push flows are enabled when Firebase delivery is configured.} allowed_quietly {Push is allowed quietly. You can promote alerts in the device notification settings if needed.} blocked {Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.} not_requested {Push permission has not been requested yet on this device session.} unavailable {Push runtime is unavailable here until Firebase/device support is fully configured.} other {Push runtime is unavailable here until Firebase/device support is fully configured.}}'**
+  String settingsPushGuidanceValue(String status);
 
   /// Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.
   ///
@@ -2382,71 +2166,17 @@ abstract class AppLocalizations {
   /// **'This support ticket is unavailable right now for the current account.'**
   String get supportTicketUnavailableSubtitle;
 
-  /// No description provided for @supportTicketStatusOpen.
+  /// No description provided for @supportTicketStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Open'**
-  String get supportTicketStatusOpen;
+  /// **'{status, select, open {Open} in_progress {In progress} waiting_for_you {Waiting for you} resolved {Resolved} closed {Closed} unknown {Unknown} other {Unknown}}'**
+  String supportTicketStatusValue(String status);
 
-  /// No description provided for @supportTicketStatusInProgress.
+  /// No description provided for @supportTicketPriorityValue.
   ///
   /// In en, this message translates to:
-  /// **'In progress'**
-  String get supportTicketStatusInProgress;
-
-  /// No description provided for @supportTicketStatusWaitingForYou.
-  ///
-  /// In en, this message translates to:
-  /// **'Waiting for you'**
-  String get supportTicketStatusWaitingForYou;
-
-  /// No description provided for @supportTicketStatusResolved.
-  ///
-  /// In en, this message translates to:
-  /// **'Resolved'**
-  String get supportTicketStatusResolved;
-
-  /// No description provided for @supportTicketStatusClosed.
-  ///
-  /// In en, this message translates to:
-  /// **'Closed'**
-  String get supportTicketStatusClosed;
-
-  /// No description provided for @supportTicketStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supportTicketStatusUnknown;
-
-  /// No description provided for @supportTicketPriorityLow.
-  ///
-  /// In en, this message translates to:
-  /// **'low'**
-  String get supportTicketPriorityLow;
-
-  /// No description provided for @supportTicketPriorityMedium.
-  ///
-  /// In en, this message translates to:
-  /// **'medium'**
-  String get supportTicketPriorityMedium;
-
-  /// No description provided for @supportTicketPriorityHigh.
-  ///
-  /// In en, this message translates to:
-  /// **'high'**
-  String get supportTicketPriorityHigh;
-
-  /// No description provided for @supportTicketPriorityUrgent.
-  ///
-  /// In en, this message translates to:
-  /// **'urgent'**
-  String get supportTicketPriorityUrgent;
-
-  /// No description provided for @supportTicketPriorityNotSet.
-  ///
-  /// In en, this message translates to:
-  /// **'not set'**
-  String get supportTicketPriorityNotSet;
+  /// **'{priority, select, low {low} medium {medium} high {high} urgent {urgent} not_set {not set} other {not set}}'**
+  String supportTicketPriorityValue(String priority);
 
   /// No description provided for @supportTicketTitleTripDisputeReview.
   ///
@@ -2682,11 +2412,11 @@ abstract class AppLocalizations {
   /// **'Review the latest visible ticket updates for the current workflow state.'**
   String get supportWorkflowGuidanceUnknown;
 
-  /// No description provided for @supportDisputeBannerTitleClosed.
+  /// No description provided for @commonDisputeReviewClosedTitle.
   ///
   /// In en, this message translates to:
   /// **'Dispute review closed'**
-  String get supportDisputeBannerTitleClosed;
+  String get commonDisputeReviewClosedTitle;
 
   /// No description provided for @supportDisputeBannerTitleWaiting.
   ///
@@ -3048,47 +2778,11 @@ abstract class AppLocalizations {
   /// **'{title} - {priority} priority'**
   String supportTicketTitleWithPriority(Object title, Object priority);
 
-  /// No description provided for @supportFallbackLabel.
+  /// No description provided for @supportTrustStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Support'**
-  String get supportFallbackLabel;
-
-  /// No description provided for @supportTrustStatusNormal.
-  ///
-  /// In en, this message translates to:
-  /// **'Normal'**
-  String get supportTrustStatusNormal;
-
-  /// No description provided for @supportTrustStatusWarned.
-  ///
-  /// In en, this message translates to:
-  /// **'Warned'**
-  String get supportTrustStatusWarned;
-
-  /// No description provided for @supportTrustStatusRestricted.
-  ///
-  /// In en, this message translates to:
-  /// **'Restricted'**
-  String get supportTrustStatusRestricted;
-
-  /// No description provided for @supportTrustStatusSuspended.
-  ///
-  /// In en, this message translates to:
-  /// **'Suspended'**
-  String get supportTrustStatusSuspended;
-
-  /// No description provided for @supportTrustStatusBanned.
-  ///
-  /// In en, this message translates to:
-  /// **'Banned'**
-  String get supportTrustStatusBanned;
-
-  /// No description provided for @supportTrustStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supportTrustStatusUnknown;
+  /// **'{status, select, normal {Normal} warned {Warned} restricted {Restricted} suspended {Suspended} banned {Banned} unknown {Unknown} other {Unknown}}'**
+  String supportTrustStatusValue(String status);
 
   /// No description provided for @supportTrustBadge.
   ///
@@ -3149,12 +2843,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'This account is blocked from normal platform use. Use support only for policy-allowed clarification or final review outcome questions.'**
   String get trustSafetyBanFallback;
-
-  /// No description provided for @trustSafetyOpenSupport.
-  ///
-  /// In en, this message translates to:
-  /// **'Open support'**
-  String get trustSafetyOpenSupport;
 
   /// No description provided for @trustSafetyHealthyMessageLine1.
   ///
@@ -3244,29 +2932,11 @@ abstract class AppLocalizations {
   /// **'Trucker Dashboard'**
   String get truckerDashboardTitle;
 
-  /// No description provided for @truckerDashboardOverviewTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Dashboard overview'**
-  String get truckerDashboardOverviewTitle;
-
-  /// No description provided for @truckerDashboardQuickActionsTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Quick actions'**
-  String get truckerDashboardQuickActionsTitle;
-
   /// No description provided for @truckerDashboardQuickActionTripsLabel.
   ///
   /// In en, this message translates to:
   /// **'My Trips'**
   String get truckerDashboardQuickActionTripsLabel;
-
-  /// No description provided for @truckerDashboardQuickActionChatLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Chat'**
-  String get truckerDashboardQuickActionChatLabel;
 
   /// No description provided for @truckerDashboardRecentActivityTitle.
   ///
@@ -3292,23 +2962,23 @@ abstract class AppLocalizations {
   /// **'Your trucker readiness state is temporarily unavailable. Retry shortly to refresh verification and fleet readiness.'**
   String get truckerDashboardReadinessFailureMessage;
 
-  /// No description provided for @truckerDashboardVerificationPendingTitle.
+  /// No description provided for @commonVerificationPendingTitle.
   ///
   /// In en, this message translates to:
   /// **'Verification pending'**
-  String get truckerDashboardVerificationPendingTitle;
+  String get commonVerificationPendingTitle;
 
-  /// No description provided for @truckerDashboardOpenVerificationAction.
+  /// No description provided for @commonOpenVerificationAction.
   ///
   /// In en, this message translates to:
   /// **'Open verification'**
-  String get truckerDashboardOpenVerificationAction;
+  String get commonOpenVerificationAction;
 
-  /// No description provided for @truckerDashboardVerificationNeedsAttentionTitle.
+  /// No description provided for @commonVerificationNeedsAttentionTitle.
   ///
   /// In en, this message translates to:
   /// **'Verification needs attention'**
-  String get truckerDashboardVerificationNeedsAttentionTitle;
+  String get commonVerificationNeedsAttentionTitle;
 
   /// No description provided for @truckerDashboardFixVerificationAction.
   ///
@@ -3364,36 +3034,6 @@ abstract class AppLocalizations {
   /// **'Setup in progress'**
   String get truckerDashboardSetupInProgress;
 
-  /// No description provided for @truckerDashboardVerificationStatusVerified.
-  ///
-  /// In en, this message translates to:
-  /// **'Verified'**
-  String get truckerDashboardVerificationStatusVerified;
-
-  /// No description provided for @truckerDashboardVerificationStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get truckerDashboardVerificationStatusPending;
-
-  /// No description provided for @truckerDashboardVerificationStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get truckerDashboardVerificationStatusRejected;
-
-  /// No description provided for @truckerDashboardVerificationStatusUnverified.
-  ///
-  /// In en, this message translates to:
-  /// **'Unverified'**
-  String get truckerDashboardVerificationStatusUnverified;
-
-  /// No description provided for @truckerDashboardVerificationStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerDashboardVerificationStatusUnknown;
-
   /// No description provided for @truckerDashboardApprovedTruckCount.
   ///
   /// In en, this message translates to:
@@ -3417,12 +3057,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'In-transit'**
   String get truckerDashboardStatInTransitLabel;
-
-  /// No description provided for @truckerDashboardStatCompletedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get truckerDashboardStatCompletedLabel;
 
   /// No description provided for @truckerDashboardRecentActivityUnavailableTitle.
   ///
@@ -3492,35 +3126,11 @@ abstract class AppLocalizations {
     int pendingReapprovalTrucks,
   );
 
-  /// No description provided for @truckerDashboardStatusOpen.
+  /// No description provided for @truckerDashboardStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'open'**
-  String get truckerDashboardStatusOpen;
-
-  /// No description provided for @truckerDashboardStatusClear.
-  ///
-  /// In en, this message translates to:
-  /// **'clear'**
-  String get truckerDashboardStatusClear;
-
-  /// No description provided for @truckerDashboardStatusMoving.
-  ///
-  /// In en, this message translates to:
-  /// **'moving'**
-  String get truckerDashboardStatusMoving;
-
-  /// No description provided for @truckerDashboardStatusTracked.
-  ///
-  /// In en, this message translates to:
-  /// **'tracked'**
-  String get truckerDashboardStatusTracked;
-
-  /// No description provided for @truckerDashboardStatusAttention.
-  ///
-  /// In en, this message translates to:
-  /// **'attention'**
-  String get truckerDashboardStatusAttention;
+  /// **'{status, select, open {open} clear {clear} moving {moving} tracked {tracked} attention {attention} other {attention}}'**
+  String truckerDashboardStatusValue(String status);
 
   /// No description provided for @truckerDashboardReadinessSummaryUnavailableTitle.
   ///
@@ -3621,107 +3231,17 @@ abstract class AppLocalizations {
   /// **'Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.'**
   String get truckerTripsSubtitle;
 
-  /// No description provided for @truckerTripsStageAssigned.
+  /// No description provided for @tripStageValue.
   ///
   /// In en, this message translates to:
-  /// **'Assigned'**
-  String get truckerTripsStageAssigned;
+  /// **'{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} proof_submitted {Proof submitted} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}'**
+  String tripStageValue(String stage);
 
-  /// No description provided for @truckerTripsStagePickupPending.
+  /// No description provided for @proofStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Pickup pending'**
-  String get truckerTripsStagePickupPending;
-
-  /// No description provided for @truckerTripsStagePickedUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Picked up'**
-  String get truckerTripsStagePickedUp;
-
-  /// No description provided for @truckerTripsStageInTransit.
-  ///
-  /// In en, this message translates to:
-  /// **'In transit'**
-  String get truckerTripsStageInTransit;
-
-  /// No description provided for @truckerTripsStageDelivered.
-  ///
-  /// In en, this message translates to:
-  /// **'Delivered'**
-  String get truckerTripsStageDelivered;
-
-  /// No description provided for @truckerTripsStageProofSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof submitted'**
-  String get truckerTripsStageProofSubmitted;
-
-  /// No description provided for @truckerTripsStageCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get truckerTripsStageCompleted;
-
-  /// No description provided for @truckerTripsStageDisputed.
-  ///
-  /// In en, this message translates to:
-  /// **'Disputed'**
-  String get truckerTripsStageDisputed;
-
-  /// No description provided for @truckerTripsStageCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get truckerTripsStageCancelled;
-
-  /// No description provided for @truckerTripsStageUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerTripsStageUnknown;
-
-  /// No description provided for @truckerTripsProofStatusPodUploaded.
-  ///
-  /// In en, this message translates to:
-  /// **'POD uploaded'**
-  String get truckerTripsProofStatusPodUploaded;
-
-  /// No description provided for @truckerTripsProofStatusLrUploaded.
-  ///
-  /// In en, this message translates to:
-  /// **'LR uploaded'**
-  String get truckerTripsProofStatusLrUploaded;
-
-  /// No description provided for @truckerTripsProofStatusAwaitingPod.
-  ///
-  /// In en, this message translates to:
-  /// **'Awaiting POD'**
-  String get truckerTripsProofStatusAwaitingPod;
-
-  /// No description provided for @truckerTripsProofStatusProofSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof submitted'**
-  String get truckerTripsProofStatusProofSubmitted;
-
-  /// No description provided for @truckerTripsProofStatusProofPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof pending'**
-  String get truckerTripsProofStatusProofPending;
-
-  /// No description provided for @truckerTripsTabActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get truckerTripsTabActive;
-
-  /// No description provided for @truckerTripsTabCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get truckerTripsTabCompleted;
+  /// **'{status, select, pod_uploaded {POD uploaded} lr_uploaded {LR uploaded} awaiting_pod {Awaiting POD} proof_submitted {Proof submitted} other {Proof pending}}'**
+  String proofStatusValue(String status);
 
   /// No description provided for @truckerTripsLoadFailureTitle.
   ///
@@ -3879,11 +3399,11 @@ abstract class AppLocalizations {
   /// **'Add or update truck'**
   String get truckerFleetAddOrUpdateTruckTitle;
 
-  /// No description provided for @truckerFleetTruckNumberLabel.
+  /// No description provided for @commonTruckNumberLabel.
   ///
   /// In en, this message translates to:
   /// **'Truck number'**
-  String get truckerFleetTruckNumberLabel;
+  String get commonTruckNumberLabel;
 
   /// No description provided for @truckerFleetTruckNumberHint.
   ///
@@ -4047,17 +3567,17 @@ abstract class AppLocalizations {
   /// **'Upload RC document'**
   String get truckerFleetSelectRcSourceTitle;
 
-  /// No description provided for @truckerFleetTakePhotoAction.
+  /// No description provided for @commonTakePhotoAction.
   ///
   /// In en, this message translates to:
   /// **'Take photo'**
-  String get truckerFleetTakePhotoAction;
+  String get commonTakePhotoAction;
 
-  /// No description provided for @truckerFleetChooseGalleryAction.
+  /// No description provided for @commonChooseFromGalleryAction.
   ///
   /// In en, this message translates to:
   /// **'Choose from gallery'**
-  String get truckerFleetChooseGalleryAction;
+  String get commonChooseFromGalleryAction;
 
   /// No description provided for @truckerFleetRcUploadFailureMessage.
   ///
@@ -4123,77 +3643,17 @@ abstract class AppLocalizations {
   /// **'Edit truck'**
   String get truckerFleetEditTruckAction;
 
-  /// No description provided for @truckerFleetStatusPendingLabel.
+  /// No description provided for @truckerFleetStatusLabelValue.
   ///
   /// In en, this message translates to:
-  /// **'Pending review'**
-  String get truckerFleetStatusPendingLabel;
+  /// **'{status, select, pending {Pending review} verified {Approved} rejected {Rejected} edited_pending_reapproval {Pending reapproval} archived {Archived} unknown {Unknown} other {Unknown}}'**
+  String truckerFleetStatusLabelValue(String status);
 
-  /// No description provided for @truckerFleetStatusVerifiedLabel.
+  /// No description provided for @truckerFleetStatusMessageValue.
   ///
   /// In en, this message translates to:
-  /// **'Approved'**
-  String get truckerFleetStatusVerifiedLabel;
-
-  /// No description provided for @truckerFleetStatusRejectedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get truckerFleetStatusRejectedLabel;
-
-  /// No description provided for @truckerFleetStatusEditedPendingReapprovalLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending reapproval'**
-  String get truckerFleetStatusEditedPendingReapprovalLabel;
-
-  /// No description provided for @truckerFleetStatusArchivedLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Archived'**
-  String get truckerFleetStatusArchivedLabel;
-
-  /// No description provided for @truckerFleetStatusUnknownLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerFleetStatusUnknownLabel;
-
-  /// No description provided for @truckerFleetStatusPendingMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Your truck is waiting for admin review. Approval is required before this truck can be used for booking.'**
-  String get truckerFleetStatusPendingMessage;
-
-  /// No description provided for @truckerFleetStatusVerifiedMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This truck is approved and available for verification-dependent workflows.'**
-  String get truckerFleetStatusVerifiedMessage;
-
-  /// No description provided for @truckerFleetStatusRejectedFallback.
-  ///
-  /// In en, this message translates to:
-  /// **'This truck was rejected. Review the guidance below and update the affected details or RC document.'**
-  String get truckerFleetStatusRejectedFallback;
-
-  /// No description provided for @truckerFleetStatusEditedPendingReapprovalMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This truck stays visible, but recent edits sent it back for reapproval before it can be used again.'**
-  String get truckerFleetStatusEditedPendingReapprovalMessage;
-
-  /// No description provided for @truckerFleetStatusArchivedMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'This truck is archived and no longer available for normal booking workflows.'**
-  String get truckerFleetStatusArchivedMessage;
-
-  /// No description provided for @truckerFleetStatusUnknownMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck review state is currently unavailable.'**
-  String get truckerFleetStatusUnknownMessage;
+  /// **'{status, select, pending {Your truck is waiting for admin review. Approval is required before this truck can be used for booking.} verified {This truck is approved and available for verification-dependent workflows.} rejected {This truck was rejected. Review the guidance below and update the affected details or RC document.} edited_pending_reapproval {This truck stays visible, but recent edits sent it back for reapproval before it can be used again.} archived {This truck is archived and no longer available for normal booking workflows.} unknown {Truck review state is currently unavailable.} other {Truck review state is currently unavailable.}}'**
+  String truckerFleetStatusMessageValue(String status);
 
   /// No description provided for @truckerFindLoadsHeroSubtitle.
   ///
@@ -4357,29 +3817,11 @@ abstract class AppLocalizations {
   /// **'Any body'**
   String get truckerFindLoadsAnyBodyFallback;
 
-  /// No description provided for @truckerFindLoadsStatusActive.
+  /// No description provided for @truckerFindLoadsStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Active'**
-  String get truckerFindLoadsStatusActive;
-
-  /// No description provided for @truckerFindLoadsStatusAssignedPartial.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned Partial'**
-  String get truckerFindLoadsStatusAssignedPartial;
-
-  /// No description provided for @truckerFindLoadsStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerFindLoadsStatusUnknown;
-
-  /// No description provided for @truckerFindLoadsViewDetailsAction.
-  ///
-  /// In en, this message translates to:
-  /// **'View details'**
-  String get truckerFindLoadsViewDetailsAction;
+  /// **'{status, select, active {Active} assigned_partial {Assigned Partial} unknown {Unknown} other {Unknown}}'**
+  String truckerFindLoadsStatusValue(String status);
 
   /// No description provided for @truckerFindLoadsAdvancedFiltersTitle.
   ///
@@ -4393,35 +3835,11 @@ abstract class AppLocalizations {
   /// **'Truck body type'**
   String get truckerFindLoadsTruckBodyTypeLabel;
 
-  /// No description provided for @truckerFindLoadsBodyTypeOpen.
+  /// No description provided for @truckerFindLoadsBodyTypeValue.
   ///
   /// In en, this message translates to:
-  /// **'Open'**
-  String get truckerFindLoadsBodyTypeOpen;
-
-  /// No description provided for @truckerFindLoadsBodyTypeTrailer.
-  ///
-  /// In en, this message translates to:
-  /// **'Trailer'**
-  String get truckerFindLoadsBodyTypeTrailer;
-
-  /// No description provided for @truckerFindLoadsBodyTypeContainer.
-  ///
-  /// In en, this message translates to:
-  /// **'Container'**
-  String get truckerFindLoadsBodyTypeContainer;
-
-  /// No description provided for @truckerFindLoadsBodyTypeTanker.
-  ///
-  /// In en, this message translates to:
-  /// **'Tanker'**
-  String get truckerFindLoadsBodyTypeTanker;
-
-  /// No description provided for @truckerFindLoadsBodyTypeUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerFindLoadsBodyTypeUnknown;
+  /// **'{type, select, open {Open} trailer {Trailer} container {Container} tanker {Tanker} other {Unknown}}'**
+  String truckerFindLoadsBodyTypeValue(String type);
 
   /// No description provided for @truckerFindLoadsTyreRequirementTitle.
   ///
@@ -4453,12 +3871,6 @@ abstract class AppLocalizations {
   /// **'Reset advanced filters'**
   String get truckerFindLoadsResetAdvancedFiltersAction;
 
-  /// No description provided for @supplierPostLoadTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Post Load'**
-  String get supplierPostLoadTitle;
-
   /// No description provided for @supplierPostLoadHeroTitle.
   ///
   /// In en, this message translates to:
@@ -4482,12 +3894,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Posting is blocked'**
   String get supplierPostLoadPostingBlockedTitle;
-
-  /// No description provided for @supplierPostLoadOpenVerificationAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Open verification'**
-  String get supplierPostLoadOpenVerificationAction;
 
   /// No description provided for @supplierPostLoadRouteTimingTitle.
   ///
@@ -4615,11 +4021,11 @@ abstract class AppLocalizations {
   /// **'Tyre requirement'**
   String get supplierPostLoadTyreRequirementTitle;
 
-  /// No description provided for @supplierPostLoadAnyTyresLabel.
+  /// No description provided for @commonAnyLabel.
   ///
   /// In en, this message translates to:
   /// **'Any'**
-  String get supplierPostLoadAnyTyresLabel;
+  String get commonAnyLabel;
 
   /// No description provided for @supplierPostLoadTrucksNeededTitle.
   ///
@@ -4663,23 +4069,11 @@ abstract class AppLocalizations {
   /// **'Price type'**
   String get supplierPostLoadPriceTypeTitle;
 
-  /// No description provided for @supplierPostLoadPriceTypeFixed.
+  /// No description provided for @supplierPostLoadPriceTypeValue.
   ///
   /// In en, this message translates to:
-  /// **'Fixed'**
-  String get supplierPostLoadPriceTypeFixed;
-
-  /// No description provided for @supplierPostLoadPriceTypeNegotiable.
-  ///
-  /// In en, this message translates to:
-  /// **'Per Ton'**
-  String get supplierPostLoadPriceTypeNegotiable;
-
-  /// No description provided for @supplierPostLoadPriceTypeUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supplierPostLoadPriceTypeUnknown;
+  /// **'{type, select, fixed {Fixed} per_ton {Per Ton} other {Unknown}}'**
+  String supplierPostLoadPriceTypeValue(String type);
 
   /// Shows advance payment percentage. Placeholder {value} is the percentage amount.
   ///
@@ -4754,12 +4148,6 @@ abstract class AppLocalizations {
   /// **'Complete verification to post load'**
   String get supplierPostLoadCompleteVerificationAction;
 
-  /// No description provided for @supplierPostLoadSubmitAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Post Load'**
-  String get supplierPostLoadSubmitAction;
-
   /// No description provided for @supplierPostLoadCreatedSuccess.
   ///
   /// In en, this message translates to:
@@ -4802,17 +4190,17 @@ abstract class AppLocalizations {
   /// **'Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.'**
   String get supplierPostLoadVerificationRequiredMessage;
 
-  /// No description provided for @verificationReadinessCheckAadhaarNumber.
+  /// No description provided for @commonAadhaarNumberLabel.
   ///
   /// In en, this message translates to:
   /// **'Aadhaar number'**
-  String get verificationReadinessCheckAadhaarNumber;
+  String get commonAadhaarNumberLabel;
 
-  /// No description provided for @verificationReadinessCheckPanNumber.
+  /// No description provided for @commonPanNumberLabel.
   ///
   /// In en, this message translates to:
   /// **'PAN number'**
-  String get verificationReadinessCheckPanNumber;
+  String get commonPanNumberLabel;
 
   /// No description provided for @verificationReadinessCheckAadhaarFrontPhoto.
   ///
@@ -4832,11 +4220,11 @@ abstract class AppLocalizations {
   /// **'PAN photo'**
   String get verificationReadinessCheckPanPhoto;
 
-  /// No description provided for @verificationReadinessCheckCompanyName.
+  /// No description provided for @commonCompanyNameLabel.
   ///
   /// In en, this message translates to:
   /// **'Company name'**
-  String get verificationReadinessCheckCompanyName;
+  String get commonCompanyNameLabel;
 
   /// No description provided for @verificationReadinessCheckBusinessLicenceNumber.
   ///
@@ -4898,59 +4286,17 @@ abstract class AppLocalizations {
   /// **'{label} - {source}'**
   String supplierPostLoadSuggestionSubtitle(Object label, Object source);
 
-  /// No description provided for @supplierDashboardVerificationStatusVerified.
-  ///
-  /// In en, this message translates to:
-  /// **'Verified'**
-  String get supplierDashboardVerificationStatusVerified;
-
-  /// No description provided for @supplierDashboardVerificationStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get supplierDashboardVerificationStatusPending;
-
-  /// No description provided for @supplierDashboardVerificationStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get supplierDashboardVerificationStatusRejected;
-
-  /// No description provided for @supplierDashboardVerificationStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supplierDashboardVerificationStatusUnknown;
-
-  /// No description provided for @supplierVerificationPendingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification pending'**
-  String get supplierVerificationPendingTitle;
-
   /// No description provided for @supplierVerificationPendingMessage.
   ///
   /// In en, this message translates to:
   /// **'Your verification is under review. Keep documents ready in case the support team asks for clarification.'**
   String get supplierVerificationPendingMessage;
 
-  /// No description provided for @supplierVerificationNeedsAttentionTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification needs attention'**
-  String get supplierVerificationNeedsAttentionTitle;
-
   /// No description provided for @supplierVerificationNeedsAttentionDescription.
   ///
   /// In en, this message translates to:
   /// **'Review the latest verification feedback, update the required documents, and resubmit when you are ready.'**
   String get supplierVerificationNeedsAttentionDescription;
-
-  /// No description provided for @supplierOpenVerification.
-  ///
-  /// In en, this message translates to:
-  /// **'Open verification'**
-  String get supplierOpenVerification;
 
   /// No description provided for @supplierReviewVerification.
   ///
@@ -5006,65 +4352,11 @@ abstract class AppLocalizations {
   /// **'Company-age readiness unavailable in current app data'**
   String get supplierDashboardSuperLoadCompanyAgeUnavailable;
 
-  /// No description provided for @supplierDashboardLoadStatusActive.
+  /// No description provided for @supplierLoadStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Active'**
-  String get supplierDashboardLoadStatusActive;
-
-  /// No description provided for @supplierLoadStatusAssignedPartial.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned partial'**
-  String get supplierLoadStatusAssignedPartial;
-
-  /// No description provided for @supplierLoadStatusAssignedFull.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned full'**
-  String get supplierLoadStatusAssignedFull;
-
-  /// No description provided for @supplierLoadStatusInTransit.
-  ///
-  /// In en, this message translates to:
-  /// **'In transit'**
-  String get supplierLoadStatusInTransit;
-
-  /// No description provided for @supplierLoadStatusCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get supplierLoadStatusCompleted;
-
-  /// No description provided for @supplierLoadStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supplierLoadStatusUnknown;
-
-  /// No description provided for @supplierLoadStatusFilledOutsideApp.
-  ///
-  /// In en, this message translates to:
-  /// **'Filled outside app'**
-  String get supplierLoadStatusFilledOutsideApp;
-
-  /// No description provided for @supplierLoadStatusCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get supplierLoadStatusCancelled;
-
-  /// No description provided for @supplierLoadStatusExpired.
-  ///
-  /// In en, this message translates to:
-  /// **'Expired'**
-  String get supplierLoadStatusExpired;
-
-  /// No description provided for @supplierLoadStatusDeactivated.
-  ///
-  /// In en, this message translates to:
-  /// **'Deactivated'**
-  String get supplierLoadStatusDeactivated;
+  /// **'{status, select, active {Active} assigned_partial {Assigned partial} assigned_full {Assigned full} in_transit {In transit} completed {Completed} filled_outside_app {Filled outside app} cancelled {Cancelled} expired {Expired} deactivated {Deactivated} unknown {Unknown} other {Unknown}}'**
+  String supplierLoadStatusValue(String status);
 
   /// No description provided for @supplierDashboardTrucksBooked.
   ///
@@ -5084,47 +4376,11 @@ abstract class AppLocalizations {
   /// **'Open loads workspace'**
   String get supplierDashboardOpenLoadsWorkspace;
 
-  /// No description provided for @supplierDashboardSuperLoadStatusRequestSubmitted.
+  /// No description provided for @supplierDashboardSuperLoadStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Request submitted'**
-  String get supplierDashboardSuperLoadStatusRequestSubmitted;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusUnderReview.
-  ///
-  /// In en, this message translates to:
-  /// **'Under review'**
-  String get supplierDashboardSuperLoadStatusUnderReview;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusApproved.
-  ///
-  /// In en, this message translates to:
-  /// **'Approved - payment pending'**
-  String get supplierDashboardSuperLoadStatusApproved;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get supplierDashboardSuperLoadStatusRejected;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusExpiredOrClosed.
-  ///
-  /// In en, this message translates to:
-  /// **'Closed'**
-  String get supplierDashboardSuperLoadStatusExpiredOrClosed;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get supplierDashboardSuperLoadStatusActive;
-
-  /// No description provided for @supplierDashboardSuperLoadStatusNotActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Not requested'**
-  String get supplierDashboardSuperLoadStatusNotActive;
+  /// **'{status, select, request_submitted {Request submitted} under_review {Under review} approved_payment_pending {Approved - payment pending} rejected {Rejected} expired_or_closed {Closed} active {Active} not_requested {Not requested} other {Not requested}}'**
+  String supplierDashboardSuperLoadStatusValue(String status);
 
   /// No description provided for @supplierDashboardSuperLoadBadge.
   ///
@@ -5132,47 +4388,11 @@ abstract class AppLocalizations {
   /// **'Super Load - {status}'**
   String supplierDashboardSuperLoadBadge(Object status);
 
-  /// No description provided for @supplierDashboardSuperLoadGuidanceRequestSubmitted.
+  /// No description provided for @supplierDashboardSuperLoadGuidanceValue.
   ///
   /// In en, this message translates to:
-  /// **'This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.'**
-  String get supplierDashboardSuperLoadGuidanceRequestSubmitted;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceUnderReview.
-  ///
-  /// In en, this message translates to:
-  /// **'This Super Load request is under admin review. Keep load details stable while review is in progress.'**
-  String get supplierDashboardSuperLoadGuidanceUnderReview;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceApproved.
-  ///
-  /// In en, this message translates to:
-  /// **'This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.'**
-  String get supplierDashboardSuperLoadGuidanceApproved;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.'**
-  String get supplierDashboardSuperLoadGuidanceRejected;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceExpiredOrClosed.
-  ///
-  /// In en, this message translates to:
-  /// **'This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.'**
-  String get supplierDashboardSuperLoadGuidanceExpiredOrClosed;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceActive.
-  ///
-  /// In en, this message translates to:
-  /// **'This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.'**
-  String get supplierDashboardSuperLoadGuidanceActive;
-
-  /// No description provided for @supplierDashboardSuperLoadGuidanceNotActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Super Load state is not active for this load.'**
-  String get supplierDashboardSuperLoadGuidanceNotActive;
+  /// **'{status, select, request_submitted {This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.} under_review {This Super Load request is under admin review. Keep load details stable while review is in progress.} approved_payment_pending {This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.} rejected {This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.} expired_or_closed {This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.} active {This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.} not_requested {Super Load state is not active for this load.} other {Super Load state is not active for this load.}}'**
+  String supplierDashboardSuperLoadGuidanceValue(String status);
 
   /// No description provided for @supplierLinkedTripAssignedLabel.
   ///
@@ -5309,11 +4529,11 @@ abstract class AppLocalizations {
     Object truckerName,
   );
 
-  /// No description provided for @supplierTripDetailNextStepTitle.
+  /// No description provided for @commonNextStepTitle.
   ///
   /// In en, this message translates to:
   /// **'Next step'**
-  String get supplierTripDetailNextStepTitle;
+  String get commonNextStepTitle;
 
   /// No description provided for @supplierTripDetailNextStepReviewTitle.
   ///
@@ -5339,11 +4559,11 @@ abstract class AppLocalizations {
   /// **'Delivery has been confirmed. Rating and post-trip follow-up continue from this completed state.'**
   String get supplierTripDetailNextStepCompletedMessage;
 
-  /// No description provided for @supplierTripDetailNextStepDisputedTitle.
+  /// No description provided for @commonDisputeInProgressTitle.
   ///
   /// In en, this message translates to:
   /// **'Dispute in progress'**
-  String get supplierTripDetailNextStepDisputedTitle;
+  String get commonDisputeInProgressTitle;
 
   /// No description provided for @supplierTripDetailNextStepDisputedMessage.
   ///
@@ -5471,11 +4691,11 @@ abstract class AppLocalizations {
   /// **'Supplier trip - {routeLabel}'**
   String supplierTripDetailReportSourceLabel(Object routeLabel);
 
-  /// No description provided for @supplierTripDetailRouteScheduleTitle.
+  /// No description provided for @commonRouteAndScheduleTitle.
   ///
   /// In en, this message translates to:
   /// **'Route and schedule'**
-  String get supplierTripDetailRouteScheduleTitle;
+  String get commonRouteAndScheduleTitle;
 
   /// No description provided for @supplierTripDetailOriginLabel.
   ///
@@ -5561,95 +4781,11 @@ abstract class AppLocalizations {
   /// **'Tyres: {tyres}'**
   String supplierTripDetailTyresLabel(Object tyres);
 
-  /// No description provided for @supplierTripDetailPending.
+  /// No description provided for @commonPendingLabel.
   ///
   /// In en, this message translates to:
   /// **'Pending'**
-  String get supplierTripDetailPending;
-
-  /// No description provided for @supplierTripDetailStageAssigned.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned'**
-  String get supplierTripDetailStageAssigned;
-
-  /// No description provided for @supplierTripDetailStagePickupPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pickup pending'**
-  String get supplierTripDetailStagePickupPending;
-
-  /// No description provided for @supplierTripDetailStagePickedUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Picked up'**
-  String get supplierTripDetailStagePickedUp;
-
-  /// No description provided for @supplierTripDetailStageInTransit.
-  ///
-  /// In en, this message translates to:
-  /// **'In transit'**
-  String get supplierTripDetailStageInTransit;
-
-  /// No description provided for @supplierTripDetailStageDelivered.
-  ///
-  /// In en, this message translates to:
-  /// **'Delivered'**
-  String get supplierTripDetailStageDelivered;
-
-  /// No description provided for @supplierTripDetailStageProofSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof submitted'**
-  String get supplierTripDetailStageProofSubmitted;
-
-  /// No description provided for @supplierTripDetailStageCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get supplierTripDetailStageCompleted;
-
-  /// No description provided for @supplierTripDetailStageDisputed.
-  ///
-  /// In en, this message translates to:
-  /// **'Disputed'**
-  String get supplierTripDetailStageDisputed;
-
-  /// No description provided for @supplierTripDetailStageCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get supplierTripDetailStageCancelled;
-
-  /// No description provided for @supplierTripDetailStageUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supplierTripDetailStageUnknown;
-
-  /// No description provided for @supplierTripDetailVerificationStatusVerified.
-  ///
-  /// In en, this message translates to:
-  /// **'Verified'**
-  String get supplierTripDetailVerificationStatusVerified;
-
-  /// No description provided for @supplierTripDetailVerificationStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get supplierTripDetailVerificationStatusPending;
-
-  /// No description provided for @supplierTripDetailVerificationStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get supplierTripDetailVerificationStatusRejected;
-
-  /// No description provided for @supplierTripDetailVerificationStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get supplierTripDetailVerificationStatusUnknown;
+  String get commonPendingLabel;
 
   /// No description provided for @supplierTripDetailDisputeStatusGuidanceOpen.
   ///
@@ -5686,12 +4822,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dispute review waiting for your reply'**
   String get supplierTripDetailDisputeBannerWaitingTitle;
-
-  /// No description provided for @supplierTripDetailDisputeBannerClosedTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute review closed'**
-  String get supplierTripDetailDisputeBannerClosedTitle;
 
   /// No description provided for @supplierTripDetailDisputeBannerInProgressTitle.
   ///
@@ -5834,12 +4964,6 @@ abstract class AppLocalizations {
   /// **'We could not submit this verification packet right now. Review the current checklist and retry shortly.'**
   String get verificationSubmitFailureMessage;
 
-  /// No description provided for @verificationWhatHappensNextTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'What happens next'**
-  String get verificationWhatHappensNextTitle;
-
   /// No description provided for @verificationWhatHappensNextMessage.
   ///
   /// In en, this message translates to:
@@ -5851,12 +4975,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Packet submitted'**
   String get verificationTimelinePacketSubmittedTitle;
-
-  /// No description provided for @verificationTimelinePacketSubmittedTimestamp.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get verificationTimelinePacketSubmittedTimestamp;
 
   /// No description provided for @verificationTimelinePacketSubmittedDescription.
   ///
@@ -5960,12 +5078,6 @@ abstract class AppLocalizations {
   /// **'Exit'**
   String get verificationWizardExitAction;
 
-  /// No description provided for @verificationWizardDashboardAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Dashboard'**
-  String get verificationWizardDashboardAction;
-
   /// No description provided for @verificationWizardProfileTitle.
   ///
   /// In en, this message translates to:
@@ -5996,29 +5108,11 @@ abstract class AppLocalizations {
   /// **'Add Aadhaar and PAN details with document uploads.'**
   String get verificationWizardIdentitySubtitle;
 
-  /// No description provided for @verificationWizardAadhaarNumberLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Aadhaar number'**
-  String get verificationWizardAadhaarNumberLabel;
-
-  /// No description provided for @verificationWizardPanNumberLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'PAN number'**
-  String get verificationWizardPanNumberLabel;
-
   /// No description provided for @verificationWizardPanDocumentLabel.
   ///
   /// In en, this message translates to:
   /// **'PAN document'**
   String get verificationWizardPanDocumentLabel;
-
-  /// No description provided for @verificationWizardTruckTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck details'**
-  String get verificationWizardTruckTitle;
 
   /// No description provided for @verificationWizardTruckSubtitle.
   ///
@@ -6031,12 +5125,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'At least one truck with an RC document is required for trucker verification.'**
   String get verificationWizardTruckInfo;
-
-  /// No description provided for @verificationWizardTruckNumberLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck number'**
-  String get verificationWizardTruckNumberLabel;
 
   /// No description provided for @verificationWizardBodyTypeLabel.
   ///
@@ -6098,12 +5186,6 @@ abstract class AppLocalizations {
   /// **'Add your company, licence, optional GST, and verification location.'**
   String get verificationWizardBusinessSubtitle;
 
-  /// No description provided for @verificationWizardCompanyNameLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Company name'**
-  String get verificationWizardCompanyNameLabel;
-
   /// No description provided for @verificationWizardCompanyNameHint.
   ///
   /// In en, this message translates to:
@@ -6146,11 +5228,11 @@ abstract class AppLocalizations {
   /// **'GST is optional'**
   String get verificationWizardGstOptional;
 
-  /// No description provided for @verificationWizardGstNumberLabel.
+  /// No description provided for @commonGstNumberLabel.
   ///
   /// In en, this message translates to:
   /// **'GST number'**
-  String get verificationWizardGstNumberLabel;
+  String get commonGstNumberLabel;
 
   /// No description provided for @verificationWizardGstCertificateLabel.
   ///
@@ -6242,12 +5324,6 @@ abstract class AppLocalizations {
   /// **'Confirm your details before sending the verification packet.'**
   String get verificationWizardReviewSubtitle;
 
-  /// No description provided for @verificationWizardReviewProfile.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile'**
-  String get verificationWizardReviewProfile;
-
   /// No description provided for @verificationWizardReviewProfileUploaded.
   ///
   /// In en, this message translates to:
@@ -6278,12 +5354,6 @@ abstract class AppLocalizations {
   /// **'Truck'**
   String get verificationWizardReviewTruck;
 
-  /// No description provided for @verificationWizardReviewTruckNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'Truck number'**
-  String get verificationWizardReviewTruckNumber;
-
   /// No description provided for @verificationWizardReviewRcUploaded.
   ///
   /// In en, this message translates to:
@@ -6302,23 +5372,11 @@ abstract class AppLocalizations {
   /// **'Business'**
   String get verificationWizardReviewBusiness;
 
-  /// No description provided for @verificationWizardReviewCompanyName.
-  ///
-  /// In en, this message translates to:
-  /// **'Company name'**
-  String get verificationWizardReviewCompanyName;
-
   /// No description provided for @verificationWizardReviewLicenseNumber.
   ///
   /// In en, this message translates to:
   /// **'License number'**
   String get verificationWizardReviewLicenseNumber;
-
-  /// No description provided for @verificationWizardReviewGstNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'GST number'**
-  String get verificationWizardReviewGstNumber;
 
   /// No description provided for @verificationWizardReviewLocation.
   ///
@@ -6373,12 +5431,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Latest rejection reason'**
   String get verificationLatestRejectionReasonTitle;
-
-  /// No description provided for @verificationNextStepTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Next step'**
-  String get verificationNextStepTitle;
 
   /// No description provided for @verificationLocationTitle.
   ///
@@ -6554,12 +5606,6 @@ abstract class AppLocalizations {
   /// **'Verified'**
   String get verificationStatusVerified;
 
-  /// No description provided for @verificationStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get verificationStatusPending;
-
   /// No description provided for @verificationStatusRejected.
   ///
   /// In en, this message translates to:
@@ -6571,12 +5617,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unverified'**
   String get verificationStatusUnverified;
-
-  /// No description provided for @verificationStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get verificationStatusUnknown;
 
   /// No description provided for @verificationPacketDetailsSectionTitle.
   ///
@@ -6626,18 +5666,6 @@ abstract class AppLocalizations {
   /// **'Upload {documentLabel}'**
   String verificationUploadSourceTitle(Object documentLabel);
 
-  /// No description provided for @verificationTakePhotoAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Take photo'**
-  String get verificationTakePhotoAction;
-
-  /// No description provided for @verificationChooseFromGalleryAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose from gallery'**
-  String get verificationChooseFromGalleryAction;
-
   /// No description provided for @verificationRejectionSummaryWithMarkers.
   ///
   /// In en, this message translates to:
@@ -6649,12 +5677,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{summary}\n\nCurrent review feedback is returned as one packet-level reason when document-specific review markers are not provided.'**
   String verificationRejectionSummaryPacketLevel(Object summary);
-
-  /// No description provided for @verificationPendingBannerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification pending'**
-  String get verificationPendingBannerTitle;
 
   /// No description provided for @verificationPendingBannerDescription.
   ///
@@ -6673,12 +5695,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your account is already verified. You can still review the uploaded document checklist below.'**
   String get verificationCompleteBannerDescription;
-
-  /// No description provided for @verificationNeedsAttentionBannerTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Verification needs attention'**
-  String get verificationNeedsAttentionBannerTitle;
 
   /// No description provided for @verificationNeedsAttentionBannerDescription.
   ///
@@ -6710,29 +5726,11 @@ abstract class AppLocalizations {
   /// **'Verification status'**
   String get verificationLockedStatusSectionTitle;
 
-  /// No description provided for @verificationLockedStatusVerifiedTitle.
+  /// No description provided for @verificationLockedStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Verified'**
-  String get verificationLockedStatusVerifiedTitle;
-
-  /// No description provided for @verificationLockedStatusPendingTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Under review'**
-  String get verificationLockedStatusPendingTitle;
-
-  /// No description provided for @verificationLockedStatusVerifiedMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Your verification has been approved. No action is needed right now.'**
-  String get verificationLockedStatusVerifiedMessage;
-
-  /// No description provided for @verificationLockedStatusPendingMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Your documents are being reviewed. You will be notified once the review is complete.'**
-  String get verificationLockedStatusPendingMessage;
+  /// **'{status, select, verified_title {Verified} pending_title {Under review} verified_message {Your verification has been approved. No action is needed right now.} pending_message {Your documents are being reviewed. You will be notified once the review is complete.} other {Unknown}}'**
+  String verificationLockedStatusValue(String status);
 
   /// No description provided for @verificationSubmitLockedFooter.
   ///
@@ -6740,41 +5738,11 @@ abstract class AppLocalizations {
   /// **'Once submitted, your details stay locked until the admin completes the review.'**
   String get verificationSubmitLockedFooter;
 
-  /// No description provided for @verificationDocumentStatusPending.
+  /// No description provided for @verificationDocumentStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'pending'**
-  String get verificationDocumentStatusPending;
-
-  /// No description provided for @verificationDocumentStatusVerified.
-  ///
-  /// In en, this message translates to:
-  /// **'verified'**
-  String get verificationDocumentStatusVerified;
-
-  /// No description provided for @verificationDocumentStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'rejected'**
-  String get verificationDocumentStatusRejected;
-
-  /// No description provided for @verificationDocumentStatusUploaded.
-  ///
-  /// In en, this message translates to:
-  /// **'uploaded'**
-  String get verificationDocumentStatusUploaded;
-
-  /// No description provided for @verificationDocumentStatusRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'required'**
-  String get verificationDocumentStatusRequired;
-
-  /// No description provided for @verificationDocumentStatusOptional.
-  ///
-  /// In en, this message translates to:
-  /// **'optional'**
-  String get verificationDocumentStatusOptional;
+  /// **'{status, select, pending {pending} verified {verified} rejected {rejected} uploaded {uploaded} required {required} optional {optional} other {optional}}'**
+  String verificationDocumentStatusValue(String status);
 
   /// No description provided for @verificationDocumentCorrectionFallback.
   ///
@@ -6962,114 +5930,6 @@ abstract class AppLocalizations {
   /// **'Auto-complete in: {duration}'**
   String truckerTripDetailAutoCompleteIn(Object duration);
 
-  /// No description provided for @truckerTripDetailVerificationStatusVerified.
-  ///
-  /// In en, this message translates to:
-  /// **'Verified'**
-  String get truckerTripDetailVerificationStatusVerified;
-
-  /// No description provided for @truckerTripDetailVerificationStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get truckerTripDetailVerificationStatusPending;
-
-  /// No description provided for @truckerTripDetailVerificationStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get truckerTripDetailVerificationStatusRejected;
-
-  /// No description provided for @truckerTripDetailVerificationStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerTripDetailVerificationStatusUnknown;
-
-  /// No description provided for @truckerTripDetailStageAssigned.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned'**
-  String get truckerTripDetailStageAssigned;
-
-  /// No description provided for @truckerTripDetailStagePickupPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pickup pending'**
-  String get truckerTripDetailStagePickupPending;
-
-  /// No description provided for @truckerTripDetailStagePickedUp.
-  ///
-  /// In en, this message translates to:
-  /// **'Picked up'**
-  String get truckerTripDetailStagePickedUp;
-
-  /// No description provided for @truckerTripDetailStageInTransit.
-  ///
-  /// In en, this message translates to:
-  /// **'In transit'**
-  String get truckerTripDetailStageInTransit;
-
-  /// No description provided for @truckerTripDetailStageDelivered.
-  ///
-  /// In en, this message translates to:
-  /// **'Delivered'**
-  String get truckerTripDetailStageDelivered;
-
-  /// No description provided for @truckerTripDetailStageProofSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof submitted'**
-  String get truckerTripDetailStageProofSubmitted;
-
-  /// No description provided for @truckerTripDetailStageCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get truckerTripDetailStageCompleted;
-
-  /// No description provided for @truckerTripDetailStageDisputed.
-  ///
-  /// In en, this message translates to:
-  /// **'Disputed'**
-  String get truckerTripDetailStageDisputed;
-
-  /// No description provided for @truckerTripDetailStageCancelled.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancelled'**
-  String get truckerTripDetailStageCancelled;
-
-  /// No description provided for @truckerTripDetailProofStatusPodUploaded.
-  ///
-  /// In en, this message translates to:
-  /// **'POD uploaded'**
-  String get truckerTripDetailProofStatusPodUploaded;
-
-  /// No description provided for @truckerTripDetailProofStatusLrUploaded.
-  ///
-  /// In en, this message translates to:
-  /// **'LR uploaded'**
-  String get truckerTripDetailProofStatusLrUploaded;
-
-  /// No description provided for @truckerTripDetailProofStatusAwaitingPod.
-  ///
-  /// In en, this message translates to:
-  /// **'Awaiting POD'**
-  String get truckerTripDetailProofStatusAwaitingPod;
-
-  /// No description provided for @truckerTripDetailProofStatusProofSubmitted.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof submitted'**
-  String get truckerTripDetailProofStatusProofSubmitted;
-
-  /// No description provided for @truckerTripDetailProofStatusProofPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Proof pending'**
-  String get truckerTripDetailProofStatusProofPending;
-
   /// No description provided for @truckerTripDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
@@ -7084,12 +5944,6 @@ abstract class AppLocalizations {
     Object material,
     Object pickupDate,
   );
-
-  /// No description provided for @truckerTripDetailNextStepTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Next step'**
-  String get truckerTripDetailNextStepTitle;
 
   /// No description provided for @truckerTripDetailActionUnavailableTitle.
   ///
@@ -7151,11 +6005,11 @@ abstract class AppLocalizations {
   /// **'Call Supplier'**
   String get truckerTripDetailCallSupplierAction;
 
-  /// No description provided for @truckerTripDetailOpenInGoogleMapsAction.
+  /// No description provided for @commonOpenInGoogleMapsAction.
   ///
   /// In en, this message translates to:
   /// **'Open in Google Maps'**
-  String get truckerTripDetailOpenInGoogleMapsAction;
+  String get commonOpenInGoogleMapsAction;
 
   /// No description provided for @truckerTripDetailReportSourceLabel.
   ///
@@ -7243,18 +6097,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dispute waiting for your reply'**
   String get truckerTripDetailDisputeBannerWaitingTitle;
-
-  /// No description provided for @truckerTripDetailDisputeBannerClosedTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute review closed'**
-  String get truckerTripDetailDisputeBannerClosedTitle;
-
-  /// No description provided for @truckerTripDetailDisputeBannerInProgressTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute in progress'**
-  String get truckerTripDetailDisputeBannerInProgressTitle;
 
   /// No description provided for @truckerTripDetailDisputeBannerNoSummaryMessage.
   ///
@@ -7382,12 +6224,6 @@ abstract class AppLocalizations {
   /// **'Completed on: {dateTime}'**
   String truckerTripDetailCompletedOnLabel(Object dateTime);
 
-  /// No description provided for @truckerTripDetailRouteScheduleTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Route and schedule'**
-  String get truckerTripDetailRouteScheduleTitle;
-
   /// No description provided for @truckerTripDetailOriginLabel.
   ///
   /// In en, this message translates to:
@@ -7483,18 +6319,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mobile: {mobile}'**
   String truckerTripDetailMobileLabel(Object mobile);
-
-  /// No description provided for @truckerTripDetailTakePhotoAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Take photo'**
-  String get truckerTripDetailTakePhotoAction;
-
-  /// No description provided for @truckerTripDetailChooseFromGalleryAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose from gallery'**
-  String get truckerTripDetailChooseFromGalleryAction;
 
   /// No description provided for @truckerTripDetailHeadToPickupAction.
   ///
@@ -7628,12 +6452,6 @@ abstract class AppLocalizations {
   /// **'Execution is closed and this trip now serves as a historical record.'**
   String get truckerTripDetailNextStepCompletedMessage;
 
-  /// No description provided for @truckerTripDetailNextStepDisputedTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Dispute in progress'**
-  String get truckerTripDetailNextStepDisputedTitle;
-
   /// No description provided for @truckerTripDetailNextStepDisputedMessage.
   ///
   /// In en, this message translates to:
@@ -7663,12 +6481,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review the current trip state and recent timestamps to understand the latest movement.'**
   String get truckerTripDetailNextStepDefaultMessage;
-
-  /// No description provided for @truckerTripDetailPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get truckerTripDetailPending;
 
   /// No description provided for @supplierRaiseDisputeTitle.
   ///
@@ -7892,11 +6704,11 @@ abstract class AppLocalizations {
   /// **'Evidence attached successfully'**
   String get supplierRaiseDisputeAttachmentAttachedSuccess;
 
-  /// No description provided for @supplierRaiseDisputeAttachmentFailureMessage.
+  /// No description provided for @commonAttachmentFailureMessage.
   ///
   /// In en, this message translates to:
   /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
-  String get supplierRaiseDisputeAttachmentFailureMessage;
+  String get commonAttachmentFailureMessage;
 
   /// No description provided for @supplierRaiseDisputeEvidenceGuidanceLoadedQuantityMismatch.
   ///
@@ -8522,12 +7334,6 @@ abstract class AppLocalizations {
   /// **'Evidence attached successfully'**
   String get reportIssueAttachmentAttachedSuccess;
 
-  /// No description provided for @reportIssueAttachmentFailureMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
-  String get reportIssueAttachmentFailureMessage;
-
   /// No description provided for @reportIssueCategorySpamOrScamLabel.
   ///
   /// In en, this message translates to:
@@ -8732,12 +7538,6 @@ abstract class AppLocalizations {
   /// **'Attachment added successfully'**
   String get supportComposeAttachmentAddedSuccess;
 
-  /// No description provided for @supportComposeAttachmentFailureMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'We could not attach that evidence image right now. Try another image or retry shortly.'**
-  String get supportComposeAttachmentFailureMessage;
-
   /// No description provided for @supportCreateTicketInvalidCategoryMessage.
   ///
   /// In en, this message translates to:
@@ -8846,18 +7646,6 @@ abstract class AppLocalizations {
   /// **'Track active movements and recent trip outcomes from one supplier execution surface.'**
   String get supplierTripsSectionSubtitle;
 
-  /// No description provided for @supplierTripsTabActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get supplierTripsTabActive;
-
-  /// No description provided for @supplierTripsTabCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get supplierTripsTabCompleted;
-
   /// No description provided for @supplierTripsLoadFailureTitle.
   ///
   /// In en, this message translates to:
@@ -8893,12 +7681,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Completed supplier trips will appear here once deliveries are closed out.'**
   String get supplierTripsEmptyCompletedSubtitle;
-
-  /// No description provided for @supplierTripsEmptyActiveAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Open my loads'**
-  String get supplierTripsEmptyActiveAction;
 
   /// No description provided for @supplierTripsEmptyCompletedAction.
   ///
@@ -8972,35 +7754,11 @@ abstract class AppLocalizations {
   /// **'We could not load your messages right now. Retry shortly to refresh the latest conversations.'**
   String get shellMessagesLoadFailureMessage;
 
-  /// No description provided for @shellMessagesBookingStatusSubmitted.
+  /// No description provided for @shellMessagesBookingStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Submitted'**
-  String get shellMessagesBookingStatusSubmitted;
-
-  /// No description provided for @shellMessagesBookingStatusApproved.
-  ///
-  /// In en, this message translates to:
-  /// **'Approved'**
-  String get shellMessagesBookingStatusApproved;
-
-  /// No description provided for @shellMessagesBookingStatusRejected.
-  ///
-  /// In en, this message translates to:
-  /// **'Rejected'**
-  String get shellMessagesBookingStatusRejected;
-
-  /// No description provided for @shellMessagesBookingStatusPending.
-  ///
-  /// In en, this message translates to:
-  /// **'Pending'**
-  String get shellMessagesBookingStatusPending;
-
-  /// No description provided for @shellMessagesBookingStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get shellMessagesBookingStatusUnknown;
+  /// **'{status, select, submitted {Submitted} approved {Approved} rejected {Rejected} pending {Pending} unknown {Unknown} other {Unknown}}'**
+  String shellMessagesBookingStatusValue(String status);
 
   /// No description provided for @truckerLoadDetailTitle.
   ///
@@ -9156,12 +7914,6 @@ abstract class AppLocalizations {
   /// **'Trucks needed: {booked}/{needed} booked'**
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed);
 
-  /// No description provided for @truckerLoadDetailAnyOption.
-  ///
-  /// In en, this message translates to:
-  /// **'Any'**
-  String get truckerLoadDetailAnyOption;
-
   /// No description provided for @truckerLoadDetailNoApprovedTruckSelected.
   ///
   /// In en, this message translates to:
@@ -9246,29 +7998,11 @@ abstract class AppLocalizations {
   /// **'Supplier profile'**
   String get truckerLoadDetailSupplierProfile;
 
-  /// No description provided for @truckerLoadDetailNextStepTitle.
+  /// No description provided for @truckerLoadDetailStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Next step'**
-  String get truckerLoadDetailNextStepTitle;
-
-  /// No description provided for @truckerLoadDetailStatusActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get truckerLoadDetailStatusActive;
-
-  /// No description provided for @truckerLoadDetailStatusAssignedPartial.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned partial'**
-  String get truckerLoadDetailStatusAssignedPartial;
-
-  /// No description provided for @truckerLoadDetailStatusUnknown.
-  ///
-  /// In en, this message translates to:
-  /// **'Unknown'**
-  String get truckerLoadDetailStatusUnknown;
+  /// **'{status, select, active {Active} assigned_partial {Assigned partial} unknown {Unknown} other {Unknown}}'**
+  String truckerLoadDetailStatusValue(String status);
 
   /// No description provided for @truckerLoadDetailBookingStatusLabel.
   ///
@@ -9392,18 +8126,6 @@ abstract class AppLocalizations {
   /// **'WhatsApp is unavailable on this device. Use system share instead.'**
   String get truckerLoadDetailWhatsAppUnavailableMessage;
 
-  /// No description provided for @truckerLoadDetailOpenInGoogleMapsAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Open in Google Maps'**
-  String get truckerLoadDetailOpenInGoogleMapsAction;
-
-  /// No description provided for @truckerLoadDetailReportSpamOrAbuseAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Report spam or abuse'**
-  String get truckerLoadDetailReportSpamOrAbuseAction;
-
   /// No description provided for @truckerLoadDetailReportSourceLabel.
   ///
   /// In en, this message translates to:
@@ -9461,12 +8183,6 @@ abstract class AppLocalizations {
     Object routeLabel,
     Object truckNumber,
   );
-
-  /// No description provided for @truckerLoadDetailCancelAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get truckerLoadDetailCancelAction;
 
   /// No description provided for @authTtsSplashWelcome.
   ///
@@ -9726,12 +8442,6 @@ abstract class AppLocalizations {
   /// **'Could not close this load right now. Please try again.'**
   String get supplierLoadCloseFailureMessage;
 
-  /// No description provided for @supplierLoadDetailRouteAndScheduleTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Route and schedule'**
-  String get supplierLoadDetailRouteAndScheduleTitle;
-
   /// Label showing origin city. Placeholder {value} is the city name.
   ///
   /// In en, this message translates to:
@@ -9786,12 +8496,6 @@ abstract class AppLocalizations {
   /// **'Route preview details are unavailable for this load right now.'**
   String get supplierLoadDetailRoutePreviewUnavailableMessage;
 
-  /// No description provided for @supplierLoadDetailOpenInGoogleMaps.
-  ///
-  /// In en, this message translates to:
-  /// **'Open in Google Maps'**
-  String get supplierLoadDetailOpenInGoogleMaps;
-
   /// No description provided for @supplierLoadDetailCargoAndRequirementsTitle.
   ///
   /// In en, this message translates to:
@@ -9809,12 +8513,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Weight: {value}'**
   String supplierLoadDetailWeight(Object value);
-
-  /// No description provided for @supplierLoadDetailAnyValue.
-  ///
-  /// In en, this message translates to:
-  /// **'Any'**
-  String get supplierLoadDetailAnyValue;
 
   /// Label showing truck body type. Placeholder {value} is the body type name.
   ///
@@ -10022,35 +8720,11 @@ abstract class AppLocalizations {
   /// **'Example: vehicle mismatch or route timing issue'**
   String get supplierBookingRejectReasonHint;
 
-  /// No description provided for @verificationFieldCompanyName.
-  ///
-  /// In en, this message translates to:
-  /// **'Company name'**
-  String get verificationFieldCompanyName;
-
-  /// No description provided for @verificationFieldAadhaarNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'Aadhaar number'**
-  String get verificationFieldAadhaarNumber;
-
-  /// No description provided for @verificationFieldPanNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'PAN number'**
-  String get verificationFieldPanNumber;
-
   /// No description provided for @verificationFieldBusinessLicenceNumber.
   ///
   /// In en, this message translates to:
   /// **'Business licence number'**
   String get verificationFieldBusinessLicenceNumber;
-
-  /// No description provided for @verificationFieldGstNumber.
-  ///
-  /// In en, this message translates to:
-  /// **'GST number'**
-  String get verificationFieldGstNumber;
 
   /// No description provided for @verificationFieldGstOptional.
   ///
@@ -10178,18 +8852,6 @@ abstract class AppLocalizations {
   /// **'Loading is taking longer than expected.'**
   String get onboardingGateTimeoutMessage;
 
-  /// No description provided for @onboardingGateRetryAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Retry'**
-  String get onboardingGateRetryAction;
-
-  /// No description provided for @onboardingGateBackToSignInAction.
-  ///
-  /// In en, this message translates to:
-  /// **'Back to sign in'**
-  String get onboardingGateBackToSignInAction;
-
   /// Success message after sending password reset. Placeholder {email} is the recipient email.
   ///
   /// In en, this message translates to:
@@ -10201,12 +8863,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Unable to send reset link. Please try again.'**
   String get authPasswordResetSentFailure;
-
-  /// No description provided for @chatPreviewVoice.
-  ///
-  /// In en, this message translates to:
-  /// **'Voice message'**
-  String get chatPreviewVoice;
 
   /// No description provided for @chatPreviewLocation.
   ///
@@ -10231,12 +8887,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Truck details shared'**
   String get chatPreviewTruckCard;
-
-  /// No description provided for @chatPreviewSystem.
-  ///
-  /// In en, this message translates to:
-  /// **'System update'**
-  String get chatPreviewSystem;
 
   /// Report source label for supplier load. Placeholder {routeLabel} is the route description.
   ///
@@ -10279,18 +8929,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Turn voice on'**
   String get commonTurnVoiceOn;
-
-  /// No description provided for @commonCallTooltip.
-  ///
-  /// In en, this message translates to:
-  /// **'Call'**
-  String get commonCallTooltip;
-
-  /// No description provided for @commonChatTooltip.
-  ///
-  /// In en, this message translates to:
-  /// **'Chat'**
-  String get commonChatTooltip;
 
   /// No description provided for @commonSuggestionSourceGooglePlaces.
   ///
@@ -10394,47 +9032,17 @@ abstract class AppLocalizations {
   /// **'Failed to load history'**
   String get loadHistoryFailedToLoad;
 
-  /// No description provided for @loadHistoryRetry.
-  ///
-  /// In en, this message translates to:
-  /// **'Retry'**
-  String get loadHistoryRetry;
-
   /// No description provided for @loadHistoryNoLoads.
   ///
   /// In en, this message translates to:
   /// **'No loads to display'**
   String get loadHistoryNoLoads;
 
-  /// No description provided for @loadHistoryLoadMore.
+  /// No description provided for @loadHistoryStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'Load More'**
-  String get loadHistoryLoadMore;
-
-  /// No description provided for @loadHistoryStatusActive.
-  ///
-  /// In en, this message translates to:
-  /// **'Active'**
-  String get loadHistoryStatusActive;
-
-  /// No description provided for @loadHistoryStatusCompleted.
-  ///
-  /// In en, this message translates to:
-  /// **'Completed'**
-  String get loadHistoryStatusCompleted;
-
-  /// No description provided for @loadHistoryStatusPartial.
-  ///
-  /// In en, this message translates to:
-  /// **'Partial'**
-  String get loadHistoryStatusPartial;
-
-  /// No description provided for @loadHistoryStatusAssigned.
-  ///
-  /// In en, this message translates to:
-  /// **'Assigned'**
-  String get loadHistoryStatusAssigned;
+  /// **'{status, select, active {Active} completed {Completed} assigned_partial {Partial} assigned_full {Assigned} other {{status}}}'**
+  String loadHistoryStatusValue(String status);
 
   /// No description provided for @reviewsTitle.
   ///
@@ -10501,12 +9109,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Write your reply to {name}...'**
   String replyDialogHint(String name);
-
-  /// No description provided for @replyDialogCancel.
-  ///
-  /// In en, this message translates to:
-  /// **'Cancel'**
-  String get replyDialogCancel;
 
   /// No description provided for @replyDialogSubmit.
   ///

@@ -182,7 +182,7 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
     }
     AppSnackbar.show(
       context: context,
-      message: AppLocalizations.of(context).supportComposeAttachmentFailureMessage,
+      message: AppLocalizations.of(context).commonAttachmentFailureMessage,
       variant: AppSnackbarVariant.error,
     );
   }

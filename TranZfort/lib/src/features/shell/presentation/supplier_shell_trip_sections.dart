@@ -36,12 +36,12 @@ class SupplierTripsScreen extends ConsumerWidget {
             FilterChipBar(
               items: [
                 FilterChipItem(
-                  label: l10n.supplierTripsTabActive,
+                  label: l10n.commonActiveLabel,
                   selected: state.selectedTab == SupplierTripsTab.active,
                   onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.active),
                 ),
                 FilterChipItem(
-                  label: l10n.supplierTripsTabCompleted,
+                  label: l10n.commonCompletedLabel,
                   selected: state.selectedTab == SupplierTripsTab.completed,
                   onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.completed),
                 ),
@@ -78,7 +78,7 @@ class _SupplierTripsBody extends StatelessWidget {
       return WarningBlock(
         title: l10n.supplierTripsLoadFailureTitle,
         message: l10n.supplierTripsLoadFailureMessage,
-        action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+        action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
       );
     }
 
@@ -92,7 +92,7 @@ class _SupplierTripsBody extends StatelessWidget {
             ? l10n.supplierTripsEmptyActiveSubtitle
             : l10n.supplierTripsEmptyCompletedSubtitle,
         actionLabel: state.selectedTab == SupplierTripsTab.active
-            ? l10n.supplierTripsEmptyActiveAction
+            ? l10n.commonOpenMyLoadsAction
             : l10n.supplierTripsEmptyCompletedAction,
         onAction: () => context.go(
           state.selectedTab == SupplierTripsTab.active ? AppRoutes.myLoadsPath : AppRoutes.supplierTripsPath,

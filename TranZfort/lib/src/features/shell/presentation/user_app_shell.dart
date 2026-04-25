@@ -77,7 +77,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
                 title: Text(currentTab.title),
                 actions: [
                   IconButton(
-                    tooltip: l10n.supplierQuickActionNotifications,
+                    tooltip: l10n.commonNotificationsLabel,
                     onPressed: () => context.go(AppRoutes.notificationsPath),
                     icon: _ShellUtilityBadgeIcon(
                       icon: Icons.notifications_none_outlined,
@@ -94,7 +94,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
                       return Padding(
                         padding: const EdgeInsets.only(right: AppSpacing.sm),
                         child: IconButton(
-                          tooltip: l10n.navProfile,
+                          tooltip: l10n.commonProfileLabel,
                           onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
                           icon: _AvatarCircle(avatarUrl: avatarUrl, radius: 16),
                         ),
@@ -172,10 +172,10 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
         ),
         _ShellTab(
           route: AppRoutes.supplierTripsPath,
-          label: l10n.shellTabTrips,
+          label: l10n.commonTripsLabel,
           icon: Icons.alt_route_outlined,
           activeIcon: Icons.alt_route,
-          title: l10n.shellQuickActionTrips,
+          title: l10n.commonTripsLabel,
           associatedRoutes: const <String>[
             AppRoutes.supplierTripsPath,
             AppRoutes.tripDetailPath,
@@ -191,7 +191,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
         label: l10n.shellTabHome,
         icon: Icons.home_outlined,
         activeIcon: Icons.home,
-        title: l10n.shellDashboardTitle,
+        title: l10n.commonDashboardLabel,
         associatedRoutes: const <String>[
           AppRoutes.truckerDashboardPath,
           AppRoutes.truckerVerificationPath,
@@ -224,10 +224,10 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
       ),
       _ShellTab(
         route: AppRoutes.tripsPath,
-        label: l10n.shellTabTrips,
+        label: l10n.commonTripsLabel,
         icon: Icons.alt_route_outlined,
         activeIcon: Icons.alt_route,
-        title: l10n.shellQuickActionTrips,
+        title: l10n.commonTripsLabel,
         associatedRoutes: const <String>[
           AppRoutes.tripsPath,
           AppRoutes.tripDetailPath,
@@ -338,19 +338,19 @@ class UserAppDrawerContent extends ConsumerWidget {
               children: [
                 DrawerNavItem(
                   icon: Icons.dashboard_outlined,
-                  label: l10n.shellDrawerDashboard,
+                  label: l10n.commonDashboardLabel,
                   onTap: () => _go(context, dashboardRoute),
                 ),
                 if (role == AppUserRole.supplier)
                   DrawerNavItem(
                     icon: Icons.add_box_outlined,
-                    label: l10n.supplierDashboardPostLoadAction,
+                    label: l10n.commonPostLoadAction,
                     onTap: () => _go(context, AppRoutes.postLoadPath),
                   ),
                 if (role == AppUserRole.trucker)
                   DrawerNavItem(
                     icon: Icons.local_shipping_outlined,
-                    label: l10n.shellDrawerFleet,
+                    label: l10n.commonFleetLabel,
                     onTap: () => _go(context, AppRoutes.fleetPath),
                   ),
                 DrawerNavItem(
@@ -360,12 +360,12 @@ class UserAppDrawerContent extends ConsumerWidget {
                 ),
                 DrawerNavItem(
                   icon: Icons.support_agent_outlined,
-                  label: l10n.shellDrawerSupport,
+                  label: l10n.commonSupportLabel,
                   onTap: () => _go(context, AppRoutes.supportPath),
                 ),
                 DrawerNavItem(
                   icon: Icons.person_outline,
-                  label: l10n.shellDrawerProfile,
+                  label: l10n.commonProfileLabel,
                   onTap: () => _go(context, AppRoutes.profilePath),
                 ),
                 DrawerNavItem(
@@ -375,7 +375,7 @@ class UserAppDrawerContent extends ConsumerWidget {
                 ),
                 DrawerNavItem(
                   icon: Icons.logout,
-                  label: l10n.shellDrawerSignOut,
+                  label: l10n.commonSignOutAction,
                   onTap: () => _signOut(context, ref),
                 ),
               ],

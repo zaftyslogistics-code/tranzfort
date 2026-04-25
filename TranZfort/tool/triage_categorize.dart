@@ -3,7 +3,7 @@ import 'dart:io';
 
 /// Auto-categorize identical EN/HI keys into 'pass' or 'translate'.
 void main() {
-  final toolDir = Directory('TranZfort/tool');
+  final toolDir = Directory('tool');
   final input = File(p.join(toolDir.path, 'identical_keys.csv'));
   final output = File(p.join(toolDir.path, 'identical_keys_triage.csv'));
 

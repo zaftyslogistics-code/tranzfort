@@ -16,6 +16,7 @@ import '../../../shared/widgets/status_components.dart';
 import '../../communication/data/chat_repository.dart';
 import '../../communication/providers/chat_providers.dart';
 import 'shell_components.dart';
+import 'supplier_shell_shared_helpers.dart';
 
 class ShellMessagesScreen extends ConsumerStatefulWidget {
   const ShellMessagesScreen({super.key});
@@ -80,7 +81,7 @@ class _ShellMessagesScreenState extends ConsumerState<ShellMessagesScreen> {
             title: l10n.shellMessagesLoadFailureTitle,
             message: l10n.shellMessagesLoadFailureMessage,
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(inboxProvider.notifier).load(),
             ),
           )
@@ -91,7 +92,7 @@ class _ShellMessagesScreenState extends ConsumerState<ShellMessagesScreen> {
             subtitle: isSupplier
                 ? l10n.shellMessagesSupplierEmptySubtitle
                 : l10n.shellMessagesTruckerEmptySubtitle,
-            actionLabel: isSupplier ? l10n.supplierTripsEmptyActiveAction : l10n.truckerTripsEmptyActiveAction,
+            actionLabel: isSupplier ? l10n.commonOpenMyLoadsAction : l10n.truckerTripsEmptyActiveAction,
             onAction: () => context.go(isSupplier ? AppRoutes.myLoadsPath : AppRoutes.findLoadsPath),
           )
         else if (isSupplier)
@@ -281,7 +282,7 @@ class _SupplierConversationRow extends StatelessWidget {
               ],
               if ((conversation.bookingStatusLabel ?? '').trim().isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.xs),
-                StatusChip(label: _localizedShellBookingStatus(l10n, conversation.bookingStatusLabel!)),
+                StatusChip(label: localizedSupplierBookingStatus(l10n, conversation.bookingStatusLabel!)),
               ],
               const SizedBox(height: AppSpacing.xs),
               Text(
@@ -439,21 +440,6 @@ List<_SupplierConversationGroup> _groupSupplierConversations(List<ConversationPr
   return groups;
 }
 
-String _localizedShellBookingStatus(AppLocalizations l10n, String value) {
-  switch (value.trim().toLowerCase()) {
-    case 'submitted':
-      return l10n.shellMessagesBookingStatusSubmitted;
-    case 'approved':
-      return l10n.shellMessagesBookingStatusApproved;
-    case 'rejected':
-      return l10n.shellMessagesBookingStatusRejected;
-    case 'pending':
-      return l10n.shellMessagesBookingStatusPending;
-    default:
-      return l10n.shellMessagesBookingStatusUnknown;
-  }
-}
-
 String _localizedMessagePreview(AppLocalizations l10n, ConversationPreview conversation) {
   final type = conversation.latestMessageTypeHint;
   final text = conversation.latestMessagePreview;
@@ -461,12 +447,12 @@ String _localizedMessagePreview(AppLocalizations l10n, ConversationPreview conve
     return text;
   }
   return switch (type) {
-    ChatMessageType.voice => l10n.chatPreviewVoice,
+    ChatMessageType.voice => l10n.commonVoiceMessageLabel,
     ChatMessageType.location => l10n.chatPreviewLocation,
     ChatMessageType.document => l10n.chatPreviewDocument,
     ChatMessageType.mapCard => l10n.chatPreviewMapCard,
     ChatMessageType.truckCard => l10n.chatPreviewTruckCard,
-    ChatMessageType.system => l10n.chatPreviewSystem,
+    ChatMessageType.system => l10n.commonSystemUpdateLabel,
     ChatMessageType.text => text,
   };
 }

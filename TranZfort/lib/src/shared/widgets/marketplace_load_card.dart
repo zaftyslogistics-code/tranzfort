@@ -292,7 +292,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                       child: TextButton.icon(
                         onPressed: onViewDetails,
                         icon: const Icon(Icons.arrow_forward, size: 18),
-                        label: Text(l10n.truckerFindLoadsViewDetailsAction),
+                        label: Text(l10n.commonViewDetailsAction),
                         style: TextButton.styleFrom(
                           foregroundColor: AppColors.primary,
                           alignment: Alignment.centerLeft,
@@ -304,7 +304,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     if (onCall != null)
                       _IconActionButton(
                         icon: Icons.phone_outlined,
-                        tooltip: l10n.commonCallTooltip,
+                        tooltip: l10n.commonCallAction,
                         color: AppColors.success,
                         onPressed: onCall,
                       ),
@@ -312,7 +312,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                       const SizedBox(width: AppSpacing.xs),
                       _IconActionButton(
                         icon: Icons.chat_bubble_outline,
-                        tooltip: l10n.commonChatTooltip,
+                        tooltip: l10n.commonChatLabel,
                         color: AppColors.primary,
                         onPressed: onChat,
                       ),
@@ -367,32 +367,15 @@ class MarketplaceLoadCard extends StatelessWidget {
   }
 
   static String _localizedLoadStatus(AppLocalizations l10n, String status) {
-    switch (status.trim().toLowerCase()) {
-      case 'active':
-        return l10n.truckerFindLoadsStatusActive;
-      case 'assigned_partial':
-        return l10n.truckerFindLoadsStatusAssignedPartial;
-      default:
-        return l10n.truckerFindLoadsStatusUnknown;
-    }
+    return l10n.truckerFindLoadsStatusValue(status.trim().toLowerCase());
   }
 
   static String _localizedBodyType(AppLocalizations l10n, String? bodyType) {
     final normalized = (bodyType ?? '').trim();
-    switch (normalized.toLowerCase()) {
-      case 'open':
-        return l10n.truckerFindLoadsBodyTypeOpen;
-      case 'trailer':
-        return l10n.truckerFindLoadsBodyTypeTrailer;
-      case 'container':
-        return l10n.truckerFindLoadsBodyTypeContainer;
-      case 'tanker':
-        return l10n.truckerFindLoadsBodyTypeTanker;
-      default:
-        return normalized.isEmpty
-            ? l10n.truckerFindLoadsAnyBodyFallback
-            : l10n.truckerFindLoadsBodyTypeUnknown;
+    if (normalized.isEmpty) {
+      return l10n.truckerFindLoadsAnyBodyFallback;
     }
+    return l10n.truckerFindLoadsBodyTypeValue(normalized.toLowerCase());
   }
 }
 

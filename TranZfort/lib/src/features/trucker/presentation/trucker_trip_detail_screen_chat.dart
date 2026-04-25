@@ -73,7 +73,7 @@ class _TripChatButtonState extends ConsumerState<_TripChatButton> {
           if (showOpenVerification) ...[
             const SizedBox(height: 8),
             TextActionButton(
-              label: l10n.truckerDashboardOpenVerificationAction,
+              label: l10n.commonOpenVerificationAction,
               onPressed: () => context.go(AppRoutes.truckerVerificationPath),
             ),
           ] else if (showOpenFleet) ...[

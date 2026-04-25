@@ -5,8 +5,8 @@ import 'dart:io';
 /// Outputs CSVs for translator handoff.
 void main() {
   final repoRoot = Directory.current.path;
-  final arbDir = Directory(p.join(repoRoot, 'TranZfort', 'lib', 'l10n'));
-  final outDir = Directory(p.join(repoRoot, 'TranZfort', 'tool'));
+  final arbDir = Directory(p.join(repoRoot, 'lib', 'l10n'));
+  final outDir = Directory(p.join(repoRoot, 'tool'));
 
   final enPath = File(p.join(arbDir.path, 'app_en.arb'));
   final hiPath = File(p.join(arbDir.path, 'app_hi.arb'));
@@ -73,12 +73,15 @@ void main() {
 
   // Write CSVs
   void writeCsv(String name, List<Map<String, String>> rows) {
-    if (rows.isEmpty) return;
     final buf = StringBuffer();
-    final keys = rows.first.keys.toList();
-    buf.writeln(keys.join(','));
-    for (final row in rows) {
-      buf.writeln(keys.map((k) => '"${row[k]?.replaceAll('"', '""') ?? ''}"').join(','));
+    if (rows.isNotEmpty) {
+      final keys = rows.first.keys.toList();
+      buf.writeln(keys.join(','));
+      for (final row in rows) {
+        buf.writeln(keys.map((k) => '"${row[k]?.replaceAll('"', '""') ?? ''}"').join(','));
+      }
+    } else {
+      buf.writeln('key,value');
     }
     File(p.join(outDir.path, name)).writeAsStringSync(buf.toString(), encoding: utf8);
   }

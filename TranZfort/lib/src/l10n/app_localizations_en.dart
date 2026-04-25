@@ -58,7 +58,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authPasswordModeSignIn => 'Sign in';
 
   @override
-  String get authPasswordModeSignUp => 'Create account';
+  String get commonCreateAccountAction => 'Create account';
 
   @override
   String get authPasswordSwitchToSignIn => 'Already have an account? Sign in';
@@ -68,9 +68,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authPasswordSignInAction => 'Sign in with password';
-
-  @override
-  String get authPasswordSignUpAction => 'Create account';
 
   @override
   String get authPasswordInvalidEmailMessage => 'Enter a valid email address.';
@@ -113,7 +110,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not resend the verification email right now. Retry shortly or use a different email.';
 
   @override
-  String get authPasswordBackToSignInAction => 'Back to sign in';
+  String get commonBackToSignInAction => 'Back to sign in';
 
   @override
   String get authPasswordUseDifferentEmailAction => 'Use a different email';
@@ -188,10 +185,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingSaveAndContinue => 'Save and continue';
 
   @override
-  String get commonRetry => 'Retry';
+  String get commonRetryAction => 'Retry';
 
   @override
-  String get supplierQuickActionNotifications => 'Notifications';
+  String get commonNotificationsLabel => 'Notifications';
 
   @override
   String get supplierMyLoadsTitle => 'My loads';
@@ -201,10 +198,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Monitor active supplier loads, booking demand, and completed load history from one place.';
 
   @override
-  String get supplierMyLoadsTabActive => 'Active';
+  String get commonActiveLabel => 'Active';
 
   @override
-  String get supplierMyLoadsTabCompleted => 'Completed';
+  String get commonCompletedLabel => 'Completed';
 
   @override
   String get supplierMyLoadsLoadFailureTitle =>
@@ -262,7 +259,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierLoadCardViewHistory => 'View history';
 
   @override
-  String get supplierLoadCardViewDetails => 'View details';
+  String get commonViewDetailsAction => 'View details';
 
   @override
   String get supplierRecentLoadsTitle => 'Recent loads';
@@ -273,19 +270,19 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierDashboardOverviewTitle => 'Dashboard overview';
+  String get commonDashboardOverviewTitle => 'Dashboard overview';
 
   @override
   String get supplierDashboardSuperLoadReadinessTitle => 'Super Load readiness';
 
   @override
-  String get supplierDashboardQuickActionsTitle => 'Quick actions';
+  String get commonQuickActionsTitle => 'Quick actions';
 
   @override
-  String get supplierDashboardQuickActionChatLabel => 'Chat';
+  String get commonChatLabel => 'Chat';
 
   @override
-  String get supplierDashboardPostLoadAction => 'Post Load';
+  String get commonPostLoadAction => 'Post Load';
 
   @override
   String get supplierDashboardStatsActiveLoadsLabel => 'Active loads';
@@ -300,7 +297,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierDashboardStatsCompletedTripsLabel => 'Completed trips';
 
   @override
-  String get supplierDashboardOpenMyLoadsAction => 'Open my loads';
+  String get commonOpenMyLoadsAction => 'Open my loads';
 
   @override
   String get supplierDashboardLoadFailureTitle =>
@@ -346,13 +343,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shellTitleMyLoads => 'My Loads';
 
   @override
-  String get shellTabTrips => 'Trips';
+  String get commonTripsLabel => 'Trips';
 
   @override
-  String get shellQuickActionTrips => 'Trips';
-
-  @override
-  String get shellDashboardTitle => 'Dashboard';
+  String get commonDashboardLabel => 'Dashboard';
 
   @override
   String get shellTabFind => 'Find';
@@ -367,22 +361,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shellDrawerTruckerWorkspace => 'Trucker workspace';
 
   @override
-  String get shellDrawerDashboard => 'Dashboard';
+  String get commonFleetLabel => 'Fleet';
 
   @override
-  String get shellDrawerFleet => 'Fleet';
+  String get commonSupportLabel => 'Support';
 
   @override
-  String get navNotifications => 'Notifications';
+  String get commonProfileLabel => 'Profile';
 
   @override
-  String get shellDrawerSupport => 'Support';
-
-  @override
-  String get shellDrawerProfile => 'Profile';
-
-  @override
-  String get shellDrawerSignOut => 'Sign out';
+  String get commonSignOutAction => 'Sign out';
 
   @override
   String get shellSignOutFailureMessage =>
@@ -464,7 +452,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatTitleFallback => 'Conversation';
 
   @override
-  String get chatTooltipCall => 'Call';
+  String get commonCallAction => 'Call';
 
   @override
   String chatReportSourceLabel(Object source) {
@@ -478,7 +466,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatMenuRefreshThread => 'Refresh thread';
 
   @override
-  String get chatMenuReportSpamOrAbuse => 'Report spam or abuse';
+  String get commonReportSpamOrAbuseAction => 'Report spam or abuse';
 
   @override
   String get chatConversationUnavailableTitle => 'Conversation unavailable';
@@ -512,7 +500,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'This will reject the trucker booking request from the chat context.';
 
   @override
-  String get chatActionCancel => 'Cancel';
+  String get commonCancelAction => 'Cancel';
 
   @override
   String get chatActionApprove => 'Approve';
@@ -575,13 +563,10 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get chatLoadStatusActive => 'Active';
-
-  @override
   String get chatBookingStatusApproved => 'Approved';
 
   @override
-  String get chatBookingStatusUnknown => 'Unknown';
+  String get commonUnknownLabel => 'Unknown';
 
   @override
   String get chatMessagesLoadFailureTitle => 'Unable to load messages';
@@ -598,7 +583,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Send a message to start this conversation.';
 
   @override
-  String get chatSystemUpdateFallback => 'System update';
+  String get commonSystemUpdateLabel => 'System update';
 
   @override
   String get chatSendingLabel => 'sending...';
@@ -610,7 +595,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatPlayVoiceMessageTooltip => 'Play voice message';
 
   @override
-  String get chatVoiceMessageLabel => 'Voice message';
+  String get commonVoiceMessageLabel => 'Voice message';
 
   @override
   String get chatVoicePlaybackUnavailable =>
@@ -646,7 +631,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatViewRouteAction => 'View route';
 
   @override
-  String get chatTruckDetailsSharedFallback => 'Truck details';
+  String get commonTruckDetailsLabel => 'Truck details';
 
   @override
   String chatTruckTyresLabel(Object value) {
@@ -674,9 +659,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get commonVoiceUnavailable =>
       'Voice guidance is unavailable right now.';
-
-  @override
-  String get notificationsTitle => 'Notifications';
 
   @override
   String get notificationsMarkedAllReadSuccess =>
@@ -716,7 +698,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get notificationsLoadMore => 'Load More';
+  String get commonLoadMoreAction => 'Load More';
 
   @override
   String notificationsTtsSummary(int unreadCount, int highPriorityUnreadCount) {
@@ -737,43 +719,23 @@ class AppLocalizationsEn extends AppLocalizations {
       'Open the linked workflow for full context.';
 
   @override
-  String get notificationFallbackVerificationUpdate => 'Verification update';
-
-  @override
-  String get notificationFallbackBookingUpdate => 'Booking update';
-
-  @override
-  String get notificationFallbackTripUpdate => 'Trip update';
-
-  @override
-  String get notificationFallbackProofUpdate => 'Proof update';
-
-  @override
-  String get notificationFallbackSuperLoadUpdate => 'Super Load update';
-
-  @override
-  String get notificationFallbackMessageReceived => 'New message';
-
-  @override
-  String get notificationFallbackSupportUpdate => 'Support update';
-
-  @override
-  String get notificationFallbackDisputeUpdate => 'Dispute update';
-
-  @override
-  String get notificationFallbackAccountUpdate => 'Account update';
-
-  @override
-  String get notificationFallbackSystemNotice => 'System notice';
-
-  @override
-  String get notificationFallbackLoadExpiryWarning => 'Load expiry warning';
-
-  @override
-  String get navProfile => 'Profile';
-
-  @override
-  String get navSupport => 'Support';
+  String notificationFallbackValue(String type) {
+    String _temp0 = intl.Intl.selectLogic(type, {
+      'verification_update': 'Verification update',
+      'booking_update': 'Booking update',
+      'trip_update': 'Trip update',
+      'proof_update': 'Proof update',
+      'super_load_update': 'Super Load update',
+      'message_received': 'New message',
+      'support_update': 'Support update',
+      'dispute_update': 'Dispute update',
+      'account_update': 'Account update',
+      'system_notice': 'System notice',
+      'load_expiry_warning': 'Load expiry warning',
+      'other': 'Notification',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get navDeleteAccount => 'Delete account';
@@ -851,7 +813,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get deleteAccountBlockerActionOpenTrips => 'Open trips';
 
   @override
-  String get deleteAccountBlockerActionOpenSupport => 'Open support';
+  String get commonOpenSupportAction => 'Open support';
 
   @override
   String get deleteAccountBlockerTitleActiveTrips =>
@@ -904,7 +866,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Support can explain the current blocker or retention requirement, but they cannot bypass required cleanup, dispute review, or compliance policy.';
 
   @override
-  String get deleteAccountWhatHappensNextTitle => 'What happens next';
+  String get commonWhatHappensNextTitle => 'What happens next';
 
   @override
   String get deleteAccountWhatHappensNextBodyPendingCleanup =>
@@ -945,13 +907,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'This account is currently deactivated pending cleanup. Cancel the request below if you need to restore access during the grace-period lifecycle.';
 
   @override
-  String get deleteAccountCancelRequestTitle => 'Cancel deletion request';
+  String get commonCancelDeletionRequestAction => 'Cancel deletion request';
 
   @override
   String get deleteAccountCancellingButton => 'Cancelling deletion...';
-
-  @override
-  String get deleteAccountCancelRequestButton => 'Cancel deletion request';
 
   @override
   String get deleteAccountUnavailableTitle => 'Account deletion unavailable';
@@ -996,13 +955,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not sign you out right now. Retry shortly from this screen.';
 
   @override
-  String get accountRoleSupplier => 'Supplier';
-
-  @override
-  String get accountRoleTrucker => 'Trucker';
-
-  @override
-  String get accountRoleUnknown => 'Unknown';
+  String accountRoleValue(String role) {
+    String _temp0 = intl.Intl.selectLogic(role, {
+      'supplier': 'Supplier',
+      'trucker': 'Trucker',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get accountStatusTitle => 'Account status';
@@ -1020,17 +980,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountAccountStateLabel => 'Account state';
 
   @override
-  String get accountStateDeactivatedPendingCleanup =>
-      'Deactivated pending cleanup';
-
-  @override
-  String get accountStateRestricted => 'Restricted';
-
-  @override
-  String get accountStateActive => 'Active';
-
-  @override
-  String get accountStateUnknown => 'Unknown';
+  String accountStateValue(String state) {
+    String _temp0 = intl.Intl.selectLogic(state, {
+      'deactivated_pending_cleanup': 'Deactivated pending cleanup',
+      'restricted': 'Restricted',
+      'active': 'Active',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get accountLoadFailureTitle => 'Account details unavailable';
@@ -1046,9 +1005,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountVerificationLabel => 'Verification';
 
   @override
-  String get accountFleetLabel => 'Fleet';
-
-  @override
   String get accountSettingsLabel => 'Settings';
 
   @override
@@ -1060,12 +1016,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get accountCurrentAuthenticatedSession =>
       'Current authenticated session';
-
-  @override
-  String get accountSignOutAction => 'Sign out';
-
-  @override
-  String get profileTitle => 'Profile';
 
   @override
   String get profileLoadFailureTitle => 'Profile unavailable';
@@ -1153,9 +1103,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Manual contextual summaries are available from supported screens.';
 
   @override
-  String get settingsNotificationsLabel => 'Notifications';
-
-  @override
   String get settingsNotificationsValue =>
       'In-app inbox and push status controls are available here.';
 
@@ -1183,40 +1130,36 @@ class AppLocalizationsEn extends AppLocalizations {
       'Unable to read device notification permission right now. Refresh after Firebase/device support is available.';
 
   @override
-  String get settingsPushStatusAllowed => 'Allowed';
+  String settingsPushStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'allowed': 'Allowed',
+      'allowed_quietly': 'Allowed quietly',
+      'blocked': 'Blocked in system settings',
+      'not_requested': 'Not requested yet',
+      'unavailable': 'Unavailable on this device/build',
+      'other': 'Unavailable',
+    });
+    return '$_temp0';
+  }
 
   @override
-  String get settingsPushStatusAllowedQuietly => 'Allowed quietly';
-
-  @override
-  String get settingsPushStatusBlocked => 'Blocked in system settings';
-
-  @override
-  String get settingsPushStatusNotRequested => 'Not requested yet';
-
-  @override
-  String get settingsPushStatusUnavailable =>
-      'Unavailable on this device/build';
-
-  @override
-  String get settingsPushGuidanceAllowed =>
-      'Foreground and opened push flows are enabled when Firebase delivery is configured.';
-
-  @override
-  String get settingsPushGuidanceAllowedQuietly =>
-      'Push is allowed quietly. You can promote alerts in the device notification settings if needed.';
-
-  @override
-  String get settingsPushGuidanceBlocked =>
-      'Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.';
-
-  @override
-  String get settingsPushGuidanceNotRequested =>
-      'Push permission has not been requested yet on this device session.';
-
-  @override
-  String get settingsPushGuidanceUnavailable =>
-      'Push runtime is unavailable here until Firebase/device support is fully configured.';
+  String settingsPushGuidanceValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'allowed':
+          'Foreground and opened push flows are enabled when Firebase delivery is configured.',
+      'allowed_quietly':
+          'Push is allowed quietly. You can promote alerts in the device notification settings if needed.',
+      'blocked':
+          'Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.',
+      'not_requested':
+          'Push permission has not been requested yet on this device session.',
+      'unavailable':
+          'Push runtime is unavailable here until Firebase/device support is fully configured.',
+      'other':
+          'Push runtime is unavailable here until Firebase/device support is fully configured.',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supportActiveTicketCount(Object count, Object s) {
@@ -1322,37 +1265,31 @@ class AppLocalizationsEn extends AppLocalizations {
       'This support ticket is unavailable right now for the current account.';
 
   @override
-  String get supportTicketStatusOpen => 'Open';
+  String supportTicketStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'open': 'Open',
+      'in_progress': 'In progress',
+      'waiting_for_you': 'Waiting for you',
+      'resolved': 'Resolved',
+      'closed': 'Closed',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
-  String get supportTicketStatusInProgress => 'In progress';
-
-  @override
-  String get supportTicketStatusWaitingForYou => 'Waiting for you';
-
-  @override
-  String get supportTicketStatusResolved => 'Resolved';
-
-  @override
-  String get supportTicketStatusClosed => 'Closed';
-
-  @override
-  String get supportTicketStatusUnknown => 'Unknown';
-
-  @override
-  String get supportTicketPriorityLow => 'low';
-
-  @override
-  String get supportTicketPriorityMedium => 'medium';
-
-  @override
-  String get supportTicketPriorityHigh => 'high';
-
-  @override
-  String get supportTicketPriorityUrgent => 'urgent';
-
-  @override
-  String get supportTicketPriorityNotSet => 'not set';
+  String supportTicketPriorityValue(String priority) {
+    String _temp0 = intl.Intl.selectLogic(priority, {
+      'low': 'low',
+      'medium': 'medium',
+      'high': 'high',
+      'urgent': 'urgent',
+      'not_set': 'not set',
+      'other': 'not set',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get supportTicketTitleTripDisputeReview => 'Trip dispute review';
@@ -1495,7 +1432,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Review the latest visible ticket updates for the current workflow state.';
 
   @override
-  String get supportDisputeBannerTitleClosed => 'Dispute review closed';
+  String get commonDisputeReviewClosedTitle => 'Dispute review closed';
 
   @override
   String get supportDisputeBannerTitleWaiting =>
@@ -1733,25 +1670,18 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supportFallbackLabel => 'Support';
-
-  @override
-  String get supportTrustStatusNormal => 'Normal';
-
-  @override
-  String get supportTrustStatusWarned => 'Warned';
-
-  @override
-  String get supportTrustStatusRestricted => 'Restricted';
-
-  @override
-  String get supportTrustStatusSuspended => 'Suspended';
-
-  @override
-  String get supportTrustStatusBanned => 'Banned';
-
-  @override
-  String get supportTrustStatusUnknown => 'Unknown';
+  String supportTrustStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'normal': 'Normal',
+      'warned': 'Warned',
+      'restricted': 'Restricted',
+      'suspended': 'Suspended',
+      'banned': 'Banned',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supportTrustBadge(Object status) {
@@ -1788,9 +1718,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get trustSafetyBanFallback =>
       'This account is blocked from normal platform use. Use support only for policy-allowed clarification or final review outcome questions.';
-
-  @override
-  String get trustSafetyOpenSupport => 'Open support';
 
   @override
   String get trustSafetyHealthyMessageLine1 =>
@@ -1849,16 +1776,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerDashboardTitle => 'Trucker Dashboard';
 
   @override
-  String get truckerDashboardOverviewTitle => 'Dashboard overview';
-
-  @override
-  String get truckerDashboardQuickActionsTitle => 'Quick actions';
-
-  @override
   String get truckerDashboardQuickActionTripsLabel => 'My Trips';
-
-  @override
-  String get truckerDashboardQuickActionChatLabel => 'Chat';
 
   @override
   String get truckerDashboardRecentActivityTitle => 'Recent activity';
@@ -1876,13 +1794,13 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your trucker readiness state is temporarily unavailable. Retry shortly to refresh verification and fleet readiness.';
 
   @override
-  String get truckerDashboardVerificationPendingTitle => 'Verification pending';
+  String get commonVerificationPendingTitle => 'Verification pending';
 
   @override
-  String get truckerDashboardOpenVerificationAction => 'Open verification';
+  String get commonOpenVerificationAction => 'Open verification';
 
   @override
-  String get truckerDashboardVerificationNeedsAttentionTitle =>
+  String get commonVerificationNeedsAttentionTitle =>
       'Verification needs attention';
 
   @override
@@ -1919,21 +1837,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerDashboardSetupInProgress => 'Setup in progress';
 
   @override
-  String get truckerDashboardVerificationStatusVerified => 'Verified';
-
-  @override
-  String get truckerDashboardVerificationStatusPending => 'Pending';
-
-  @override
-  String get truckerDashboardVerificationStatusRejected => 'Rejected';
-
-  @override
-  String get truckerDashboardVerificationStatusUnverified => 'Unverified';
-
-  @override
-  String get truckerDashboardVerificationStatusUnknown => 'Unknown';
-
-  @override
   String truckerDashboardApprovedTruckCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
@@ -1952,9 +1855,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerDashboardStatInTransitLabel => 'In-transit';
-
-  @override
-  String get truckerDashboardStatCompletedLabel => 'Completed';
 
   @override
   String get truckerDashboardRecentActivityUnavailableTitle =>
@@ -2011,19 +1911,17 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerDashboardStatusOpen => 'open';
-
-  @override
-  String get truckerDashboardStatusClear => 'clear';
-
-  @override
-  String get truckerDashboardStatusMoving => 'moving';
-
-  @override
-  String get truckerDashboardStatusTracked => 'tracked';
-
-  @override
-  String get truckerDashboardStatusAttention => 'attention';
+  String truckerDashboardStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'open': 'open',
+      'clear': 'clear',
+      'moving': 'moving',
+      'tracked': 'tracked',
+      'attention': 'attention',
+      'other': 'attention',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerDashboardReadinessSummaryUnavailableTitle =>
@@ -2094,55 +1992,33 @@ class AppLocalizationsEn extends AppLocalizations {
       'Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.';
 
   @override
-  String get truckerTripsStageAssigned => 'Assigned';
+  String tripStageValue(String stage) {
+    String _temp0 = intl.Intl.selectLogic(stage, {
+      'assigned': 'Assigned',
+      'pickup_pending': 'Pickup pending',
+      'picked_up': 'Picked up',
+      'in_transit': 'In transit',
+      'delivered': 'Delivered',
+      'proof_submitted': 'Proof submitted',
+      'completed': 'Completed',
+      'disputed': 'Disputed',
+      'cancelled': 'Cancelled',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
-  String get truckerTripsStagePickupPending => 'Pickup pending';
-
-  @override
-  String get truckerTripsStagePickedUp => 'Picked up';
-
-  @override
-  String get truckerTripsStageInTransit => 'In transit';
-
-  @override
-  String get truckerTripsStageDelivered => 'Delivered';
-
-  @override
-  String get truckerTripsStageProofSubmitted => 'Proof submitted';
-
-  @override
-  String get truckerTripsStageCompleted => 'Completed';
-
-  @override
-  String get truckerTripsStageDisputed => 'Disputed';
-
-  @override
-  String get truckerTripsStageCancelled => 'Cancelled';
-
-  @override
-  String get truckerTripsStageUnknown => 'Unknown';
-
-  @override
-  String get truckerTripsProofStatusPodUploaded => 'POD uploaded';
-
-  @override
-  String get truckerTripsProofStatusLrUploaded => 'LR uploaded';
-
-  @override
-  String get truckerTripsProofStatusAwaitingPod => 'Awaiting POD';
-
-  @override
-  String get truckerTripsProofStatusProofSubmitted => 'Proof submitted';
-
-  @override
-  String get truckerTripsProofStatusProofPending => 'Proof pending';
-
-  @override
-  String get truckerTripsTabActive => 'Active';
-
-  @override
-  String get truckerTripsTabCompleted => 'Completed';
+  String proofStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'pod_uploaded': 'POD uploaded',
+      'lr_uploaded': 'LR uploaded',
+      'awaiting_pod': 'Awaiting POD',
+      'proof_submitted': 'Proof submitted',
+      'other': 'Proof pending',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerTripsLoadFailureTitle => 'Unable to load trips';
@@ -2249,7 +2125,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFleetAddOrUpdateTruckTitle => 'Add or update truck';
 
   @override
-  String get truckerFleetTruckNumberLabel => 'Truck number';
+  String get commonTruckNumberLabel => 'Truck number';
 
   @override
   String get truckerFleetTruckNumberHint => 'MH12AB1234';
@@ -2343,10 +2219,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFleetSelectRcSourceTitle => 'Upload RC document';
 
   @override
-  String get truckerFleetTakePhotoAction => 'Take photo';
+  String get commonTakePhotoAction => 'Take photo';
 
   @override
-  String get truckerFleetChooseGalleryAction => 'Choose from gallery';
+  String get commonChooseFromGalleryAction => 'Choose from gallery';
 
   @override
   String get truckerFleetRcUploadFailureMessage =>
@@ -2395,47 +2271,37 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFleetEditTruckAction => 'Edit truck';
 
   @override
-  String get truckerFleetStatusPendingLabel => 'Pending review';
+  String truckerFleetStatusLabelValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'pending': 'Pending review',
+      'verified': 'Approved',
+      'rejected': 'Rejected',
+      'edited_pending_reapproval': 'Pending reapproval',
+      'archived': 'Archived',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
-  String get truckerFleetStatusVerifiedLabel => 'Approved';
-
-  @override
-  String get truckerFleetStatusRejectedLabel => 'Rejected';
-
-  @override
-  String get truckerFleetStatusEditedPendingReapprovalLabel =>
-      'Pending reapproval';
-
-  @override
-  String get truckerFleetStatusArchivedLabel => 'Archived';
-
-  @override
-  String get truckerFleetStatusUnknownLabel => 'Unknown';
-
-  @override
-  String get truckerFleetStatusPendingMessage =>
-      'Your truck is waiting for admin review. Approval is required before this truck can be used for booking.';
-
-  @override
-  String get truckerFleetStatusVerifiedMessage =>
-      'This truck is approved and available for verification-dependent workflows.';
-
-  @override
-  String get truckerFleetStatusRejectedFallback =>
-      'This truck was rejected. Review the guidance below and update the affected details or RC document.';
-
-  @override
-  String get truckerFleetStatusEditedPendingReapprovalMessage =>
-      'This truck stays visible, but recent edits sent it back for reapproval before it can be used again.';
-
-  @override
-  String get truckerFleetStatusArchivedMessage =>
-      'This truck is archived and no longer available for normal booking workflows.';
-
-  @override
-  String get truckerFleetStatusUnknownMessage =>
-      'Truck review state is currently unavailable.';
+  String truckerFleetStatusMessageValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'pending':
+          'Your truck is waiting for admin review. Approval is required before this truck can be used for booking.',
+      'verified':
+          'This truck is approved and available for verification-dependent workflows.',
+      'rejected':
+          'This truck was rejected. Review the guidance below and update the affected details or RC document.',
+      'edited_pending_reapproval':
+          'This truck stays visible, but recent edits sent it back for reapproval before it can be used again.',
+      'archived':
+          'This truck is archived and no longer available for normal booking workflows.',
+      'unknown': 'Truck review state is currently unavailable.',
+      'other': 'Truck review state is currently unavailable.',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerFindLoadsHeroSubtitle =>
@@ -2535,16 +2401,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsAnyBodyFallback => 'Any body';
 
   @override
-  String get truckerFindLoadsStatusActive => 'Active';
-
-  @override
-  String get truckerFindLoadsStatusAssignedPartial => 'Assigned Partial';
-
-  @override
-  String get truckerFindLoadsStatusUnknown => 'Unknown';
-
-  @override
-  String get truckerFindLoadsViewDetailsAction => 'View details';
+  String truckerFindLoadsStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'active': 'Active',
+      'assigned_partial': 'Assigned Partial',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerFindLoadsAdvancedFiltersTitle => 'Advanced filters';
@@ -2553,19 +2418,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFindLoadsTruckBodyTypeLabel => 'Truck body type';
 
   @override
-  String get truckerFindLoadsBodyTypeOpen => 'Open';
-
-  @override
-  String get truckerFindLoadsBodyTypeTrailer => 'Trailer';
-
-  @override
-  String get truckerFindLoadsBodyTypeContainer => 'Container';
-
-  @override
-  String get truckerFindLoadsBodyTypeTanker => 'Tanker';
-
-  @override
-  String get truckerFindLoadsBodyTypeUnknown => 'Unknown';
+  String truckerFindLoadsBodyTypeValue(String type) {
+    String _temp0 = intl.Intl.selectLogic(type, {
+      'open': 'Open',
+      'trailer': 'Trailer',
+      'container': 'Container',
+      'tanker': 'Tanker',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerFindLoadsTyreRequirementTitle => 'Tyre requirement';
@@ -2584,9 +2446,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Reset advanced filters';
 
   @override
-  String get supplierPostLoadTitle => 'Post Load';
-
-  @override
   String get supplierPostLoadHeroTitle => 'Create a supplier load';
 
   @override
@@ -2599,9 +2458,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supplierPostLoadPostingBlockedTitle => 'Posting is blocked';
-
-  @override
-  String get supplierPostLoadOpenVerificationAction => 'Open verification';
 
   @override
   String get supplierPostLoadRouteTimingTitle => 'Route and timing';
@@ -2677,7 +2533,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPostLoadTyreRequirementTitle => 'Tyre requirement';
 
   @override
-  String get supplierPostLoadAnyTyresLabel => 'Any';
+  String get commonAnyLabel => 'Any';
 
   @override
   String get supplierPostLoadTrucksNeededTitle => 'Trucks needed';
@@ -2701,13 +2557,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPostLoadPriceTypeTitle => 'Price type';
 
   @override
-  String get supplierPostLoadPriceTypeFixed => 'Fixed';
-
-  @override
-  String get supplierPostLoadPriceTypeNegotiable => 'Per Ton';
-
-  @override
-  String get supplierPostLoadPriceTypeUnknown => 'Unknown';
+  String supplierPostLoadPriceTypeValue(String type) {
+    String _temp0 = intl.Intl.selectLogic(type, {
+      'fixed': 'Fixed',
+      'per_ton': 'Per Ton',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supplierPostLoadAdvancePercentageLabel(int value) {
@@ -2763,9 +2620,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Complete verification to post load';
 
   @override
-  String get supplierPostLoadSubmitAction => 'Post Load';
-
-  @override
   String get supplierPostLoadCreatedSuccess => 'Load created successfully';
 
   @override
@@ -2793,10 +2647,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Complete supplier verification before posting loads. Upload identity and business documents, then submit them for review.';
 
   @override
-  String get verificationReadinessCheckAadhaarNumber => 'Aadhaar number';
+  String get commonAadhaarNumberLabel => 'Aadhaar number';
 
   @override
-  String get verificationReadinessCheckPanNumber => 'PAN number';
+  String get commonPanNumberLabel => 'PAN number';
 
   @override
   String get verificationReadinessCheckAadhaarFrontPhoto =>
@@ -2809,7 +2663,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationReadinessCheckPanPhoto => 'PAN photo';
 
   @override
-  String get verificationReadinessCheckCompanyName => 'Company name';
+  String get commonCompanyNameLabel => 'Company name';
 
   @override
   String get verificationReadinessCheckBusinessLicenceNumber =>
@@ -2852,34 +2706,12 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierDashboardVerificationStatusVerified => 'Verified';
-
-  @override
-  String get supplierDashboardVerificationStatusPending => 'Pending';
-
-  @override
-  String get supplierDashboardVerificationStatusRejected => 'Rejected';
-
-  @override
-  String get supplierDashboardVerificationStatusUnknown => 'Unknown';
-
-  @override
-  String get supplierVerificationPendingTitle => 'Verification pending';
-
-  @override
   String get supplierVerificationPendingMessage =>
       'Your verification is under review. Keep documents ready in case the support team asks for clarification.';
 
   @override
-  String get supplierVerificationNeedsAttentionTitle =>
-      'Verification needs attention';
-
-  @override
   String get supplierVerificationNeedsAttentionDescription =>
       'Review the latest verification feedback, update the required documents, and resubmit when you are ready.';
-
-  @override
-  String get supplierOpenVerification => 'Open verification';
 
   @override
   String get supplierReviewVerification => 'Review verification';
@@ -2914,34 +2746,22 @@ class AppLocalizationsEn extends AppLocalizations {
       'Company-age readiness unavailable in current app data';
 
   @override
-  String get supplierDashboardLoadStatusActive => 'Active';
-
-  @override
-  String get supplierLoadStatusAssignedPartial => 'Assigned partial';
-
-  @override
-  String get supplierLoadStatusAssignedFull => 'Assigned full';
-
-  @override
-  String get supplierLoadStatusInTransit => 'In transit';
-
-  @override
-  String get supplierLoadStatusCompleted => 'Completed';
-
-  @override
-  String get supplierLoadStatusUnknown => 'Unknown';
-
-  @override
-  String get supplierLoadStatusFilledOutsideApp => 'Filled outside app';
-
-  @override
-  String get supplierLoadStatusCancelled => 'Cancelled';
-
-  @override
-  String get supplierLoadStatusExpired => 'Expired';
-
-  @override
-  String get supplierLoadStatusDeactivated => 'Deactivated';
+  String supplierLoadStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'active': 'Active',
+      'assigned_partial': 'Assigned partial',
+      'assigned_full': 'Assigned full',
+      'in_transit': 'In transit',
+      'completed': 'Completed',
+      'filled_outside_app': 'Filled outside app',
+      'cancelled': 'Cancelled',
+      'expired': 'Expired',
+      'deactivated': 'Deactivated',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supplierDashboardTrucksBooked(int booked, int needed) {
@@ -2957,27 +2777,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierDashboardOpenLoadsWorkspace => 'Open loads workspace';
 
   @override
-  String get supplierDashboardSuperLoadStatusRequestSubmitted =>
-      'Request submitted';
-
-  @override
-  String get supplierDashboardSuperLoadStatusUnderReview => 'Under review';
-
-  @override
-  String get supplierDashboardSuperLoadStatusApproved =>
-      'Approved - payment pending';
-
-  @override
-  String get supplierDashboardSuperLoadStatusRejected => 'Rejected';
-
-  @override
-  String get supplierDashboardSuperLoadStatusExpiredOrClosed => 'Closed';
-
-  @override
-  String get supplierDashboardSuperLoadStatusActive => 'Active';
-
-  @override
-  String get supplierDashboardSuperLoadStatusNotActive => 'Not requested';
+  String supplierDashboardSuperLoadStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'request_submitted': 'Request submitted',
+      'under_review': 'Under review',
+      'approved_payment_pending': 'Approved - payment pending',
+      'rejected': 'Rejected',
+      'expired_or_closed': 'Closed',
+      'active': 'Active',
+      'not_requested': 'Not requested',
+      'other': 'Not requested',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supplierDashboardSuperLoadBadge(Object status) {
@@ -2985,32 +2797,25 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierDashboardSuperLoadGuidanceRequestSubmitted =>
-      'This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceUnderReview =>
-      'This Super Load request is under admin review. Keep load details stable while review is in progress.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceApproved =>
-      'This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceRejected =>
-      'This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceExpiredOrClosed =>
-      'This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceActive =>
-      'This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.';
-
-  @override
-  String get supplierDashboardSuperLoadGuidanceNotActive =>
-      'Super Load state is not active for this load.';
+  String supplierDashboardSuperLoadGuidanceValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'request_submitted':
+          'This Super Load request is submitted and waiting for admin review. The dedicated supplier-side eligibility controls are still pending, so current state is admin-managed.',
+      'under_review':
+          'This Super Load request is under admin review. Keep load details stable while review is in progress.',
+      'approved_payment_pending':
+          'This Super Load request is approved, but activation still depends on the off-platform payment confirmation step.',
+      'rejected':
+          'This Super Load request was not approved. Use support if you need follow-up while the dedicated supplier readiness surface is still pending.',
+      'expired_or_closed':
+          'This Super Load lifecycle is closed. Review the current load status and use support if follow-up is still needed.',
+      'active':
+          'This load is marked as a Super Load in the current lifecycle. Dedicated supplier-side eligibility controls are still being expanded.',
+      'not_requested': 'Super Load state is not active for this load.',
+      'other': 'Super Load state is not active for this load.',
+    });
+    return '$_temp0';
+  }
 
   @override
   String supplierLinkedTripAssignedLabel(Object date) {
@@ -3104,7 +2909,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierTripDetailNextStepTitle => 'Next step';
+  String get commonNextStepTitle => 'Next step';
 
   @override
   String get supplierTripDetailNextStepReviewTitle =>
@@ -3122,7 +2927,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Delivery has been confirmed. Rating and post-trip follow-up continue from this completed state.';
 
   @override
-  String get supplierTripDetailNextStepDisputedTitle => 'Dispute in progress';
+  String get commonDisputeInProgressTitle => 'Dispute in progress';
 
   @override
   String get supplierTripDetailNextStepDisputedMessage =>
@@ -3205,7 +3010,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierTripDetailRouteScheduleTitle => 'Route and schedule';
+  String get commonRouteAndScheduleTitle => 'Route and schedule';
 
   @override
   String supplierTripDetailOriginLabel(Object origin) {
@@ -3276,49 +3081,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierTripDetailPending => 'Pending';
-
-  @override
-  String get supplierTripDetailStageAssigned => 'Assigned';
-
-  @override
-  String get supplierTripDetailStagePickupPending => 'Pickup pending';
-
-  @override
-  String get supplierTripDetailStagePickedUp => 'Picked up';
-
-  @override
-  String get supplierTripDetailStageInTransit => 'In transit';
-
-  @override
-  String get supplierTripDetailStageDelivered => 'Delivered';
-
-  @override
-  String get supplierTripDetailStageProofSubmitted => 'Proof submitted';
-
-  @override
-  String get supplierTripDetailStageCompleted => 'Completed';
-
-  @override
-  String get supplierTripDetailStageDisputed => 'Disputed';
-
-  @override
-  String get supplierTripDetailStageCancelled => 'Cancelled';
-
-  @override
-  String get supplierTripDetailStageUnknown => 'Unknown';
-
-  @override
-  String get supplierTripDetailVerificationStatusVerified => 'Verified';
-
-  @override
-  String get supplierTripDetailVerificationStatusPending => 'Pending';
-
-  @override
-  String get supplierTripDetailVerificationStatusRejected => 'Rejected';
-
-  @override
-  String get supplierTripDetailVerificationStatusUnknown => 'Unknown';
+  String get commonPendingLabel => 'Pending';
 
   @override
   String get supplierTripDetailDisputeStatusGuidanceOpen =>
@@ -3343,10 +3106,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get supplierTripDetailDisputeBannerWaitingTitle =>
       'Dispute review waiting for your reply';
-
-  @override
-  String get supplierTripDetailDisputeBannerClosedTitle =>
-      'Dispute review closed';
 
   @override
   String get supplierTripDetailDisputeBannerInProgressTitle =>
@@ -3442,17 +3201,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not submit this verification packet right now. Review the current checklist and retry shortly.';
 
   @override
-  String get verificationWhatHappensNextTitle => 'What happens next';
-
-  @override
   String get verificationWhatHappensNextMessage =>
       'Your verification packet is queued for review. You do not need to resubmit anything unless our team rejects the case with a correction request.';
 
   @override
   String get verificationTimelinePacketSubmittedTitle => 'Packet submitted';
-
-  @override
-  String get verificationTimelinePacketSubmittedTimestamp => 'Completed';
 
   @override
   String get verificationTimelinePacketSubmittedDescription =>
@@ -3510,9 +3263,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationWizardExitAction => 'Exit';
 
   @override
-  String get verificationWizardDashboardAction => 'Dashboard';
-
-  @override
   String get verificationWizardProfileTitle => 'Profile photo';
 
   @override
@@ -3531,16 +3281,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add Aadhaar and PAN details with document uploads.';
 
   @override
-  String get verificationWizardAadhaarNumberLabel => 'Aadhaar number';
-
-  @override
-  String get verificationWizardPanNumberLabel => 'PAN number';
-
-  @override
   String get verificationWizardPanDocumentLabel => 'PAN document';
-
-  @override
-  String get verificationWizardTruckTitle => 'Truck details';
 
   @override
   String get verificationWizardTruckSubtitle =>
@@ -3549,9 +3290,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationWizardTruckInfo =>
       'At least one truck with an RC document is required for trucker verification.';
-
-  @override
-  String get verificationWizardTruckNumberLabel => 'Truck number';
 
   @override
   String get verificationWizardBodyTypeLabel => 'Body type';
@@ -3586,9 +3324,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add your company, licence, optional GST, and verification location.';
 
   @override
-  String get verificationWizardCompanyNameLabel => 'Company name';
-
-  @override
   String get verificationWizardCompanyNameHint => 'Enter your company name';
 
   @override
@@ -3612,7 +3347,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationWizardGstOptional => 'GST is optional';
 
   @override
-  String get verificationWizardGstNumberLabel => 'GST number';
+  String get commonGstNumberLabel => 'GST number';
 
   @override
   String get verificationWizardGstCertificateLabel => 'GST certificate';
@@ -3668,9 +3403,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Confirm your details before sending the verification packet.';
 
   @override
-  String get verificationWizardReviewProfile => 'Profile';
-
-  @override
   String get verificationWizardReviewProfileUploaded =>
       'Profile photo uploaded';
 
@@ -3687,9 +3419,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationWizardReviewTruck => 'Truck';
 
   @override
-  String get verificationWizardReviewTruckNumber => 'Truck number';
-
-  @override
   String get verificationWizardReviewRcUploaded => 'RC document uploaded';
 
   @override
@@ -3700,13 +3429,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationWizardReviewBusiness => 'Business';
 
   @override
-  String get verificationWizardReviewCompanyName => 'Company name';
-
-  @override
   String get verificationWizardReviewLicenseNumber => 'License number';
-
-  @override
-  String get verificationWizardReviewGstNumber => 'GST number';
 
   @override
   String get verificationWizardReviewLocation => 'Location';
@@ -3742,9 +3465,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationLatestRejectionReasonTitle =>
       'Latest rejection reason';
-
-  @override
-  String get verificationNextStepTitle => 'Next step';
 
   @override
   String get verificationLocationTitle => 'Verification location';
@@ -3845,16 +3565,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationStatusVerified => 'Verified';
 
   @override
-  String get verificationStatusPending => 'Pending';
-
-  @override
   String get verificationStatusRejected => 'Rejected';
 
   @override
   String get verificationStatusUnverified => 'Unverified';
-
-  @override
-  String get verificationStatusUnknown => 'Unknown';
 
   @override
   String get verificationPacketDetailsSectionTitle =>
@@ -3895,12 +3609,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get verificationTakePhotoAction => 'Take photo';
-
-  @override
-  String get verificationChooseFromGalleryAction => 'Choose from gallery';
-
-  @override
   String verificationRejectionSummaryWithMarkers(Object summary) {
     return '$summary\n\nRejected documents are marked below with document-specific correction notes.';
   }
@@ -3909,9 +3617,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String verificationRejectionSummaryPacketLevel(Object summary) {
     return '$summary\n\nCurrent review feedback is returned as one packet-level reason when document-specific review markers are not provided.';
   }
-
-  @override
-  String get verificationPendingBannerTitle => 'Verification pending';
 
   @override
   String get verificationPendingBannerDescription =>
@@ -3923,10 +3628,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationCompleteBannerDescription =>
       'Your account is already verified. You can still review the uploaded document checklist below.';
-
-  @override
-  String get verificationNeedsAttentionBannerTitle =>
-      'Verification needs attention';
 
   @override
   String get verificationNeedsAttentionBannerDescription =>
@@ -3947,40 +3648,36 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationLockedStatusSectionTitle => 'Verification status';
 
   @override
-  String get verificationLockedStatusVerifiedTitle => 'Verified';
-
-  @override
-  String get verificationLockedStatusPendingTitle => 'Under review';
-
-  @override
-  String get verificationLockedStatusVerifiedMessage =>
-      'Your verification has been approved. No action is needed right now.';
-
-  @override
-  String get verificationLockedStatusPendingMessage =>
-      'Your documents are being reviewed. You will be notified once the review is complete.';
+  String verificationLockedStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'verified_title': 'Verified',
+      'pending_title': 'Under review',
+      'verified_message':
+          'Your verification has been approved. No action is needed right now.',
+      'pending_message':
+          'Your documents are being reviewed. You will be notified once the review is complete.',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get verificationSubmitLockedFooter =>
       'Once submitted, your details stay locked until the admin completes the review.';
 
   @override
-  String get verificationDocumentStatusPending => 'pending';
-
-  @override
-  String get verificationDocumentStatusVerified => 'verified';
-
-  @override
-  String get verificationDocumentStatusRejected => 'rejected';
-
-  @override
-  String get verificationDocumentStatusUploaded => 'uploaded';
-
-  @override
-  String get verificationDocumentStatusRequired => 'required';
-
-  @override
-  String get verificationDocumentStatusOptional => 'optional';
+  String verificationDocumentStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'pending': 'pending',
+      'verified': 'verified',
+      'rejected': 'rejected',
+      'uploaded': 'uploaded',
+      'required': 'required',
+      'optional': 'optional',
+      'other': 'optional',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get verificationDocumentCorrectionFallback =>
@@ -4104,60 +3801,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerTripDetailVerificationStatusVerified => 'Verified';
-
-  @override
-  String get truckerTripDetailVerificationStatusPending => 'Pending';
-
-  @override
-  String get truckerTripDetailVerificationStatusRejected => 'Rejected';
-
-  @override
-  String get truckerTripDetailVerificationStatusUnknown => 'Unknown';
-
-  @override
-  String get truckerTripDetailStageAssigned => 'Assigned';
-
-  @override
-  String get truckerTripDetailStagePickupPending => 'Pickup pending';
-
-  @override
-  String get truckerTripDetailStagePickedUp => 'Picked up';
-
-  @override
-  String get truckerTripDetailStageInTransit => 'In transit';
-
-  @override
-  String get truckerTripDetailStageDelivered => 'Delivered';
-
-  @override
-  String get truckerTripDetailStageProofSubmitted => 'Proof submitted';
-
-  @override
-  String get truckerTripDetailStageCompleted => 'Completed';
-
-  @override
-  String get truckerTripDetailStageDisputed => 'Disputed';
-
-  @override
-  String get truckerTripDetailStageCancelled => 'Cancelled';
-
-  @override
-  String get truckerTripDetailProofStatusPodUploaded => 'POD uploaded';
-
-  @override
-  String get truckerTripDetailProofStatusLrUploaded => 'LR uploaded';
-
-  @override
-  String get truckerTripDetailProofStatusAwaitingPod => 'Awaiting POD';
-
-  @override
-  String get truckerTripDetailProofStatusProofSubmitted => 'Proof submitted';
-
-  @override
-  String get truckerTripDetailProofStatusProofPending => 'Proof pending';
-
-  @override
   String truckerTripDetailHeroSubtitle(Object truckNumber) {
     return 'Truck $truckNumber';
   }
@@ -4169,9 +3812,6 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return '$material - Pickup $pickupDate';
   }
-
-  @override
-  String get truckerTripDetailNextStepTitle => 'Next step';
 
   @override
   String get truckerTripDetailActionUnavailableTitle =>
@@ -4206,7 +3846,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerTripDetailCallSupplierAction => 'Call Supplier';
 
   @override
-  String get truckerTripDetailOpenInGoogleMapsAction => 'Open in Google Maps';
+  String get commonOpenInGoogleMapsAction => 'Open in Google Maps';
 
   @override
   String truckerTripDetailReportSourceLabel(
@@ -4269,14 +3909,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get truckerTripDetailDisputeBannerWaitingTitle =>
       'Dispute waiting for your reply';
-
-  @override
-  String get truckerTripDetailDisputeBannerClosedTitle =>
-      'Dispute review closed';
-
-  @override
-  String get truckerTripDetailDisputeBannerInProgressTitle =>
-      'Dispute in progress';
 
   @override
   String get truckerTripDetailDisputeBannerNoSummaryMessage =>
@@ -4368,9 +4000,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerTripDetailRouteScheduleTitle => 'Route and schedule';
-
-  @override
   String truckerTripDetailOriginLabel(Object origin) {
     return 'Origin: $origin';
   }
@@ -4447,12 +4076,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String truckerTripDetailMobileLabel(Object mobile) {
     return 'Mobile: $mobile';
   }
-
-  @override
-  String get truckerTripDetailTakePhotoAction => 'Take photo';
-
-  @override
-  String get truckerTripDetailChooseFromGalleryAction => 'Choose from gallery';
 
   @override
   String get truckerTripDetailHeadToPickupAction => 'Head to pickup';
@@ -4533,9 +4156,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Execution is closed and this trip now serves as a historical record.';
 
   @override
-  String get truckerTripDetailNextStepDisputedTitle => 'Dispute in progress';
-
-  @override
   String get truckerTripDetailNextStepDisputedMessage =>
       'A dispute is active on this trip and operational review is required before closure.';
 
@@ -4552,9 +4172,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get truckerTripDetailNextStepDefaultMessage =>
       'Review the current trip state and recent timestamps to understand the latest movement.';
-
-  @override
-  String get truckerTripDetailPending => 'Pending';
 
   @override
   String get supplierRaiseDisputeTitle => 'Raise Dispute';
@@ -4698,7 +4315,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'Evidence attached successfully';
 
   @override
-  String get supplierRaiseDisputeAttachmentFailureMessage =>
+  String get commonAttachmentFailureMessage =>
       'We could not attach that evidence image right now. Try another image or retry shortly.';
 
   @override
@@ -5103,10 +4720,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Evidence attached successfully';
 
   @override
-  String get reportIssueAttachmentFailureMessage =>
-      'We could not attach that evidence image right now. Try another image or retry shortly.';
-
-  @override
   String get reportIssueCategorySpamOrScamLabel => 'Spam or scam';
 
   @override
@@ -5222,10 +4835,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Attachment added successfully';
 
   @override
-  String get supportComposeAttachmentFailureMessage =>
-      'We could not attach that evidence image right now. Try another image or retry shortly.';
-
-  @override
   String get supportCreateTicketInvalidCategoryMessage =>
       'Select a valid support category';
 
@@ -5292,12 +4901,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Track active movements and recent trip outcomes from one supplier execution surface.';
 
   @override
-  String get supplierTripsTabActive => 'Active';
-
-  @override
-  String get supplierTripsTabCompleted => 'Completed';
-
-  @override
   String get supplierTripsLoadFailureTitle => 'Unable to load supplier trips';
 
   @override
@@ -5317,9 +4920,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get supplierTripsEmptyCompletedSubtitle =>
       'Completed supplier trips will appear here once deliveries are closed out.';
-
-  @override
-  String get supplierTripsEmptyActiveAction => 'Open my loads';
 
   @override
   String get supplierTripsEmptyCompletedAction => 'View active trips';
@@ -5366,19 +4966,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not load your messages right now. Retry shortly to refresh the latest conversations.';
 
   @override
-  String get shellMessagesBookingStatusSubmitted => 'Submitted';
-
-  @override
-  String get shellMessagesBookingStatusApproved => 'Approved';
-
-  @override
-  String get shellMessagesBookingStatusRejected => 'Rejected';
-
-  @override
-  String get shellMessagesBookingStatusPending => 'Pending';
-
-  @override
-  String get shellMessagesBookingStatusUnknown => 'Unknown';
+  String shellMessagesBookingStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'submitted': 'Submitted',
+      'approved': 'Approved',
+      'rejected': 'Rejected',
+      'pending': 'Pending',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get truckerLoadDetailTitle => 'Load Detail';
@@ -5490,9 +5088,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerLoadDetailAnyOption => 'Any';
-
-  @override
   String get truckerLoadDetailNoApprovedTruckSelected =>
       'No approved truck selected';
 
@@ -5549,16 +5144,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerLoadDetailSupplierProfile => 'Supplier profile';
 
   @override
-  String get truckerLoadDetailNextStepTitle => 'Next step';
-
-  @override
-  String get truckerLoadDetailStatusActive => 'Active';
-
-  @override
-  String get truckerLoadDetailStatusAssignedPartial => 'Assigned partial';
-
-  @override
-  String get truckerLoadDetailStatusUnknown => 'Unknown';
+  String truckerLoadDetailStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'active': 'Active',
+      'assigned_partial': 'Assigned partial',
+      'unknown': 'Unknown',
+      'other': 'Unknown',
+    });
+    return '$_temp0';
+  }
 
   @override
   String truckerLoadDetailBookingStatusLabel(Object status) {
@@ -5639,12 +5233,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'WhatsApp is unavailable on this device. Use system share instead.';
 
   @override
-  String get truckerLoadDetailOpenInGoogleMapsAction => 'Open in Google Maps';
-
-  @override
-  String get truckerLoadDetailReportSpamOrAbuseAction => 'Report spam or abuse';
-
-  @override
   String truckerLoadDetailReportSourceLabel(Object routeLabel) {
     return 'Trucker load - $routeLabel';
   }
@@ -5681,9 +5269,6 @@ class AppLocalizationsEn extends AppLocalizations {
   ) {
     return 'Book $material $routeLabel with $truckNumber?';
   }
-
-  @override
-  String get truckerLoadDetailCancelAction => 'Cancel';
 
   @override
   String get authTtsSplashWelcome =>
@@ -5845,9 +5430,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not close this load right now. Please try again.';
 
   @override
-  String get supplierLoadDetailRouteAndScheduleTitle => 'Route and schedule';
-
-  @override
   String supplierLoadDetailOriginCity(Object value) {
     return 'Origin city: $value';
   }
@@ -5891,9 +5473,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Route preview details are unavailable for this load right now.';
 
   @override
-  String get supplierLoadDetailOpenInGoogleMaps => 'Open in Google Maps';
-
-  @override
   String get supplierLoadDetailCargoAndRequirementsTitle =>
       'Cargo and requirements';
 
@@ -5906,9 +5485,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String supplierLoadDetailWeight(Object value) {
     return 'Weight: $value';
   }
-
-  @override
-  String get supplierLoadDetailAnyValue => 'Any';
 
   @override
   String supplierLoadDetailBodyType(Object value) {
@@ -6050,20 +5626,8 @@ class AppLocalizationsEn extends AppLocalizations {
       'Example: vehicle mismatch or route timing issue';
 
   @override
-  String get verificationFieldCompanyName => 'Company name';
-
-  @override
-  String get verificationFieldAadhaarNumber => 'Aadhaar number';
-
-  @override
-  String get verificationFieldPanNumber => 'PAN number';
-
-  @override
   String get verificationFieldBusinessLicenceNumber =>
       'Business licence number';
-
-  @override
-  String get verificationFieldGstNumber => 'GST number';
 
   @override
   String get verificationFieldGstOptional => 'Optional';
@@ -6148,12 +5712,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Loading is taking longer than expected.';
 
   @override
-  String get onboardingGateRetryAction => 'Retry';
-
-  @override
-  String get onboardingGateBackToSignInAction => 'Back to sign in';
-
-  @override
   String authPasswordResetSentSuccess(Object email) {
     return 'Password reset link sent to $email. Check your inbox.';
   }
@@ -6161,9 +5719,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get authPasswordResetSentFailure =>
       'Unable to send reset link. Please try again.';
-
-  @override
-  String get chatPreviewVoice => 'Voice message';
 
   @override
   String get chatPreviewLocation => 'Location shared';
@@ -6176,9 +5731,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get chatPreviewTruckCard => 'Truck details shared';
-
-  @override
-  String get chatPreviewSystem => 'System update';
 
   @override
   String reportSourceSupplierLoad(Object routeLabel) {
@@ -6210,12 +5762,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonTurnVoiceOn => 'Turn voice on';
-
-  @override
-  String get commonCallTooltip => 'Call';
-
-  @override
-  String get commonChatTooltip => 'Chat';
 
   @override
   String get commonSuggestionSourceGooglePlaces => 'Google Places';
@@ -6270,25 +5816,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadHistoryFailedToLoad => 'Failed to load history';
 
   @override
-  String get loadHistoryRetry => 'Retry';
-
-  @override
   String get loadHistoryNoLoads => 'No loads to display';
 
   @override
-  String get loadHistoryLoadMore => 'Load More';
-
-  @override
-  String get loadHistoryStatusActive => 'Active';
-
-  @override
-  String get loadHistoryStatusCompleted => 'Completed';
-
-  @override
-  String get loadHistoryStatusPartial => 'Partial';
-
-  @override
-  String get loadHistoryStatusAssigned => 'Assigned';
+  String loadHistoryStatusValue(String status) {
+    String _temp0 = intl.Intl.selectLogic(status, {
+      'active': 'Active',
+      'completed': 'Completed',
+      'assigned_partial': 'Partial',
+      'assigned_full': 'Assigned',
+      'other': '$status',
+    });
+    return '$_temp0';
+  }
 
   @override
   String get reviewsTitle => 'Reviews & Comments';
@@ -6326,9 +5866,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String replyDialogHint(String name) {
     return 'Write your reply to $name...';
   }
-
-  @override
-  String get replyDialogCancel => 'Cancel';
 
   @override
   String get replyDialogSubmit => 'Submit Reply';

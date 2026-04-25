@@ -171,7 +171,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
     final screenState = ref.watch(authScreenControllerProvider);
     final ttsSummary = screenState.showCheckEmailState
         ? '${l10n.authPasswordCheckEmailTitle}. ${l10n.authPasswordCheckEmailSubtitle(screenState.pendingVerificationEmail ?? '')}'
-        : '${screenState.isSignUpMode ? l10n.authPasswordModeSignUp : l10n.authPasswordModeSignIn}. ${l10n.authPasswordSubtitle}';
+        : '${screenState.isSignUpMode ? l10n.commonCreateAccountAction : l10n.authPasswordModeSignIn}. ${l10n.authPasswordSubtitle}';
     return PopScope(
       canPop: !_hasUnsavedChanges(),
       onPopInvokedWithResult: (didPop, result) async {
@@ -225,7 +225,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
                           ),
                           const SizedBox(height: 24),
                           PrimaryButton(
-                            label: l10n.authPasswordBackToSignInAction,
+                            label: l10n.commonBackToSignInAction,
                             onPressed: () {
                               _passwordController.clear();
                               _confirmPasswordController.clear();
@@ -254,7 +254,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Text(
-                            screenState.isSignUpMode ? l10n.authPasswordModeSignUp : l10n.authPasswordModeSignIn,
+                            screenState.isSignUpMode ? l10n.commonCreateAccountAction : l10n.authPasswordModeSignIn,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
                           const SizedBox(height: 12),
@@ -281,7 +281,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
                           ],
                           const SizedBox(height: 24),
                           PrimaryButton(
-                            label: screenState.isSignUpMode ? l10n.authPasswordSignUpAction : l10n.authPasswordSignInAction,
+                            label: screenState.isSignUpMode ? l10n.commonCreateAccountAction : l10n.authPasswordSignInAction,
                             onPressed: _submit,
                             isLoading: screenState.isLoading,
                           ),

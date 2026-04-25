@@ -1,0 +1,24 @@
+name: Localization Guardrail
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  verify-l10n:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: TranZfort/pubspec.yaml
+
+      - name: Run localization verification
+        working-directory: TranZfort
+        run: dart tool/verify_l10n.dart

@@ -53,7 +53,7 @@ class DocumentUploadBox extends ConsumerWidget {
             if (!isRequired) ...[
               const SizedBox(width: 4),
               Text(
-                '(${l10n.verificationDocumentStatusOptional})',
+                '(${l10n.verificationDocumentStatusValue('optional')})',
                 style: theme.textTheme.bodySmall?.copyWith(
                   color: AppColors.textMuted,
                 ),
@@ -128,7 +128,7 @@ class _EmptyContent extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          '${l10n.verificationTakePhotoAction} / ${l10n.verificationChooseFromGalleryAction}',
+          '${l10n.commonTakePhotoAction} / ${l10n.commonChooseFromGalleryAction}',
           style: theme.textTheme.bodySmall?.copyWith(
             color: AppColors.textMuted,
           ),
@@ -382,12 +382,12 @@ class ImageSourcePicker extends StatelessWidget {
       children: [
         ListTile(
           leading: const Icon(Icons.camera_alt),
-          title: Text(l10n.verificationTakePhotoAction),
+          title: Text(l10n.commonTakePhotoAction),
           onTap: () => Navigator.pop(context, ImageSource.camera),
         ),
         ListTile(
           leading: const Icon(Icons.photo_library),
-          title: Text(l10n.verificationChooseFromGalleryAction),
+          title: Text(l10n.commonChooseFromGalleryAction),
           onTap: () => Navigator.pop(context, ImageSource.gallery),
         ),
       ],

@@ -131,7 +131,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
             title: l10n.truckerLoadDetailSupportUnavailableTitle,
             message: _loadSupportFailureMessage(l10n),
             action: OutlineButton(
-              label: l10n.commonRetry,
+              label: l10n.commonRetryAction,
               onPressed: () => ref.read(truckerLoadDetailProvider(loadId).notifier).load(),
             ),
           ),
@@ -173,14 +173,14 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                 _DetailFactChip(
                   icon: Icons.local_shipping_outlined,
                   text: l10n.truckerLoadDetailBodyTypeLabel(
-                    detail.summary.requiredBodyType ?? l10n.truckerLoadDetailAnyOption,
+                    detail.summary.requiredBodyType ?? l10n.commonAnyLabel,
                   ),
                 ),
                 _DetailFactChip(
                   icon: Icons.tire_repair_outlined,
                   text: l10n.truckerLoadDetailTyresLabel(
                     detail.summary.requiredTyres.isEmpty
-                        ? l10n.truckerLoadDetailAnyOption
+                        ? l10n.commonAnyLabel
                         : detail.summary.requiredTyres.join(', '),
                   ),
                 ),
@@ -425,7 +425,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(l10n.truckerLoadDetailCancelAction),
+            child: Text(l10n.commonCancelAction),
           ),
           PrimaryButton(
             label: l10n.truckerLoadDetailBookThisLoadAction,
@@ -637,7 +637,7 @@ class _LoadRouteMapSection extends StatelessWidget {
         if (mapsUri != null) ...[
           const SizedBox(height: AppSpacing.md),
           OutlineButton(
-            label: l10n.truckerLoadDetailOpenInGoogleMapsAction,
+            label: l10n.commonOpenInGoogleMapsAction,
             onPressed: () async {
               await mapsLauncher.launchDirectionsUri(mapsUri!);
             },
