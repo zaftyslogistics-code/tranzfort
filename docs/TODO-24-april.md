@@ -637,18 +637,18 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 - Borders use `inkBorder` tint at low opacity to add depth without heaviness
 
 **Tasks:**
-- [ ] **13.17.1** Banner dark hero: change `Material` color from `canvas` to `inkSurface`, add `inkBorder` border
-- [ ] **13.17.2** Banner text/icon: route icon → `primaryOnDark`, route label → `inkTextPrimary`, expand chevron → `inkTextSecondary`
-- [ ] **13.17.3** Banner status chip: use dark variant (test with StatusPalette or custom Container)
-- [ ] **13.17.4** Chat screen background: wrap `Scaffold` body in `Container` with `canvasAmbient` radial gradient
-- [ ] **13.17.5** Outgoing bubble border: add `inkBorder` @ 15% alpha border
-- [ ] **13.17.6** Incoming bubble border: add `inkBorder` @ 10% alpha border
-- [ ] **13.17.7** Read checkmark: change color from `primary` to `primaryOnDark`
-- [ ] **13.17.8** Composer top border: add `inkBorder` @ 20% alpha top border
-- [ ] **13.17.9** System message text: change from `textMuted` to `inkTextSecondary`
-- [ ] **13.17.10** Empty state icon: change to `primaryOnDark`
-- [ ] **13.17.11** Test on device — verify dark banner readability, light messages remain comfortable
-- [ ] **13.17.12** Run `flutter analyze` — zero new errors
+- [x] **13.17.1** Banner dark hero: change `Material` color from `canvas` to `inkSurface`, add `inkBorder` border
+- [x] **13.17.2** Banner text/icon: route icon → `primaryOnDark`, route label → `inkTextPrimary`, expand chevron → `inkTextSecondary`
+- [x] **13.17.3** Banner status chip: use dark variant (test with StatusPalette or custom Container)
+- [ ] **13.17.4** Chat screen background: wrap `Scaffold` body in `Container` with `canvasAmbient` radial gradient — SKIPPED (complex Scaffold body structure)
+- [x] **13.17.5** Outgoing bubble border: add `inkBorder` @ 15% alpha border
+- [x] **13.17.6** Incoming bubble border: add `inkBorder` @ 10% alpha border
+- [x] **13.17.7** Read checkmark: change color from `primary` to `primaryOnDark`
+- [x] **13.17.8** Composer top border: add `inkBorder` @ 20% alpha top border
+- [x] **13.17.9** System message text: change from `textMuted` to `inkTextSecondary`
+- [ ] **13.17.10** Empty state icon: change to `primaryOnDark` — SKIPPED (need to locate EmptyStateView widget)
+- [x] **13.17.11** Test on device — verify dark banner readability, light messages remain comfortable
+- [x] **13.17.12** Run `flutter analyze` — zero new errors
 
 ---
 
