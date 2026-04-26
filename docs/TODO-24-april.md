@@ -756,4 +756,14 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 
 **Status:** ✅ Merge completed and pushed (commit 0e5b2b2)
 
+### Chat Bubble Alignment Issue (27 Apr 2026)
+
+**Issue:** Chat bubbles still showing centered instead of left (incoming) / right (outgoing) alignment despite implementing 13.18.3-4.
+
+**Root Cause:** Parent Column in ListView.builder (chat_message_sections.dart) was defaulting to `CrossAxisAlignment.center`, which prevented message bubbles from expanding to full width. The internal alignment in `_ChatMessageBubble` was correct, but the parent was centering the bubble widget itself instead of allowing it to expand.
+
+**Fix:** Added `crossAxisAlignment: CrossAxisAlignment.start` to the parent Column at line 53, allowing bubbles to expand and their internal alignment to work properly.
+
+**Status:** ✅ Fixed and pushed (commit f0df65a)
+
 ---
