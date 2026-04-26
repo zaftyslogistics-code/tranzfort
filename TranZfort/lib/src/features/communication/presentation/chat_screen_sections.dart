@@ -165,7 +165,7 @@ void _openTruckerChatReadiness(BuildContext context, TruckerProfile? truckerProf
   context.go(destination);
 }
 
-class _ChatComposer extends StatelessWidget {
+class _ChatComposer extends StatefulWidget {
   final TextEditingController controller;
   final bool isSending;
   final bool isRecordingVoice;
@@ -183,9 +183,28 @@ class _ChatComposer extends StatelessWidget {
   });
 
   @override
+  State<_ChatComposer> createState() => _ChatComposerState();
+}
+
+class _ChatComposerState extends State<_ChatComposer> {
+  double _sendButtonScale = 1.0;
+
+  void _scaleDown() {
+    setState(() {
+      _sendButtonScale = 0.9;
+    });
+  }
+
+  void _scaleUp() {
+    setState(() {
+      _sendButtonScale = 1.0;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
-    final hasText = controller.text.trim().isNotEmpty;
+    final hasText = widget.controller.text.trim().isNotEmpty;
     final bottomInset = MediaQuery.viewInsetsOf(context).bottom;
     return AnimatedPadding(
       duration: const Duration(milliseconds: 180),
@@ -209,7 +228,7 @@ class _ChatComposer extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
                 child: TextField(
-                  controller: controller,
+                  controller: widget.controller,
                   decoration: InputDecoration(
                     hintText: l10n.chatTypeMessageHint,
                     hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
@@ -234,26 +253,35 @@ class _ChatComposer extends StatelessWidget {
                       width: 48,
                       height: 48,
                       child: IconButton(
-                        onPressed: onVoiceAction,
-                        icon: Icon(isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
-                        tooltip: isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
+                        onPressed: widget.onVoiceAction,
+                        icon: Icon(widget.isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
+                        tooltip: widget.isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
                       ),
                     )
-                  : Container(
-                      width: 48,
-                      height: 48,
-                      decoration: const BoxDecoration(
-                        gradient: AppColors.heroCta,
-                        shape: BoxShape.circle,
-                      ),
-                      child: IconButton(
-                        onPressed: isSending ? null : onSend,
-                        icon: const Icon(Icons.send, color: AppColors.textOnPrimary),
-                        tooltip: l10n.chatSendAction,
+                  : GestureDetector(
+                      onTapDown: (_) => _scaleDown(),
+                      onTapUp: (_) => _scaleUp(),
+                      onTapCancel: () => _scaleUp(),
+                      child: AnimatedScale(
+                        scale: _sendButtonScale,
+                        duration: const Duration(milliseconds: 100),
+                        child: Container(
+                          width: 48,
+                          height: 48,
+                          decoration: const BoxDecoration(
+                            gradient: AppColors.heroCta,
+                            shape: BoxShape.circle,
+                          ),
+                          child: IconButton(
+                            onPressed: widget.isSending ? null : widget.onSend,
+                            icon: const Icon(Icons.send, color: AppColors.textOnPrimary),
+                            tooltip: l10n.chatSendAction,
+                          ),
+                        ),
                       ),
                     ),
             ),
-            if (!hasText && isRecordingVoice) ...[
+            if (!hasText && widget.isRecordingVoice) ...[
               const SizedBox(width: AppSpacing.sm),
               Row(
                 children: [
@@ -267,7 +295,7 @@ class _ChatComposer extends StatelessWidget {
                   ),
                   const SizedBox(width: AppSpacing.xs),
                   Text(
-                    _formatDuration(recordingElapsedSeconds),
+                    _formatDuration(widget.recordingElapsedSeconds),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.error),
                   ),
                 ],
