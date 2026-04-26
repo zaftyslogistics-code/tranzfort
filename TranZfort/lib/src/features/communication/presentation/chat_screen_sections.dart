@@ -71,7 +71,13 @@ class _ChatContextBanner extends StatelessWidget {
                   if (statusLabel != null)
                     Padding(
                       padding: const EdgeInsets.only(right: AppSpacing.sm),
-                      child: StatusChip(label: statusLabel),
+                      child: StatusChip(
+                        label: statusLabel,
+                        palette: const StatusPalette(
+                          foreground: AppColors.primaryOnDark,
+                          background: AppColors.primaryChipBgDark,
+                        ),
+                      ),
                     ),
                   IconButton(
                     onPressed: onToggleExpanded,
