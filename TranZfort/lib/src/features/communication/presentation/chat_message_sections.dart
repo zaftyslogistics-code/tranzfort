@@ -119,6 +119,10 @@ class _ChatMessageBubble extends StatelessWidget {
           child: Container(
             constraints: const BoxConstraints(maxWidth: 320),
             padding: const EdgeInsets.all(AppSpacing.lg),
+            margin: EdgeInsets.only(
+              left: message.isFromCurrentUser ? AppSpacing.md : 0,
+              right: message.isFromCurrentUser ? 0 : AppSpacing.md,
+            ),
             decoration: BoxDecoration(
               color: background,
               borderRadius: BorderRadius.circular(AppRadius.card),
@@ -149,7 +153,7 @@ class _ChatMessageBubble extends StatelessWidget {
                   )
                 else
                   Text(
-                    message.isRead ? '✓✓' : '✓✓',
+                    message.isRead ? '✓✓' : '✓',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: AppColors.primaryOnDark,
                         ),

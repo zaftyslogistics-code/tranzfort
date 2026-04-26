@@ -224,37 +224,24 @@ class _ChatComposerState extends State<_ChatComposer> {
       padding: EdgeInsets.only(bottom: bottomInset),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.canvas,
-          boxShadow: AppShadows.elevation1,
-          border: Border(
-            top: BorderSide(
-              color: AppColors.inkBorder.withValues(alpha: 0.20),
-              width: 1,
-            ),
-          ),
+          color: AppColors.cardSurface,
+          borderRadius: BorderRadius.circular(AppRadius.input),
+          border: Border.all(color: AppColors.divider),
         ),
         padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: AppColors.cardSurface,
-                  borderRadius: BorderRadius.circular(AppRadius.input),
-                  border: Border.all(color: AppColors.divider),
+              child: TextField(
+                controller: widget.controller,
+                decoration: InputDecoration(
+                  hintText: l10n.chatTypeMessageHint,
+                  hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.zero,
                 ),
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-                child: TextField(
-                  controller: widget.controller,
-                  decoration: InputDecoration(
-                    hintText: l10n.chatTypeMessageHint,
-                    hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-                    border: InputBorder.none,
-                    contentPadding: EdgeInsets.zero,
-                  ),
-                  maxLines: 4,
-                ),
+                maxLines: 4,
               ),
             ),
             const SizedBox(width: AppSpacing.md),

@@ -9,7 +9,12 @@ class _ChatMessageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (message.type) {
-      ChatMessageType.text => Text(message.textBody ?? ''),
+      ChatMessageType.text => Text(
+          message.textBody ?? '',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: message.isFromCurrentUser ? AppColors.primaryChipText : AppColors.textPrimary,
+          ),
+        ),
       ChatMessageType.voice => _VoiceMessageContent(message: message),
       ChatMessageType.location => _LocationMessageContent(message: message),
       ChatMessageType.document => _DocumentMessageContent(message: message),
