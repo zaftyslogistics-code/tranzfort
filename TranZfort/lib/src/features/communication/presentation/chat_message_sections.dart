@@ -43,16 +43,40 @@ class _ChatMessagesBody extends StatelessWidget {
       );
     }
 
-    return ListView.separated(
+    return ListView.builder(
       controller: scrollController,
       padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
-      itemBuilder: (context, index) => _ChatMessageBubble(
-        message: renderedMessages[index].message,
-        isSending: renderedMessages[index].isSending,
-        loadId: loadId,
-      ),
-      separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.md),
       itemCount: renderedMessages.length,
+      itemBuilder: (context, index) {
+        final rendered = renderedMessages[index];
+        return Column(
+          children: [
+            if (rendered.showDateDivider && rendered.dateLabel != null) ...[
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceSoft,
+                    borderRadius: BorderRadius.circular(AppRadius.chip),
+                  ),
+                  child: Text(
+                    rendered.dateLabel!,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+            ],
+            _ChatMessageBubble(
+              message: rendered.message,
+              isSending: rendered.isSending,
+              showTimestamp: rendered.showTimestamp,
+              loadId: loadId,
+            ),
+            if (index < renderedMessages.length - 1) const SizedBox(height: AppSpacing.md),
+          ],
+        );
+      },
     );
   }
 }
@@ -60,11 +84,13 @@ class _ChatMessagesBody extends StatelessWidget {
 class _ChatMessageBubble extends StatelessWidget {
   final ChatMessage message;
   final bool isSending;
+  final bool showTimestamp;
   final String? loadId;
 
   const _ChatMessageBubble({
     required this.message,
     this.isSending = false,
+    this.showTimestamp = true,
     this.loadId,
   });
 
@@ -96,11 +122,35 @@ class _ChatMessageBubble extends StatelessWidget {
           ),
           child: _ChatMessageContent(message: message, loadId: loadId),
         ),
-        const SizedBox(height: AppSpacing.xs),
-        Text(
-          isSending ? l10n.chatSendingLabel : _formatTimestamp(message.createdAt),
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
+        if (showTimestamp) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                isSending ? l10n.chatSendingLabel : _formatTimestamp(message.createdAt),
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+              if (message.isFromCurrentUser) ...[
+                const SizedBox(width: AppSpacing.xs),
+                if (isSending)
+                  const SizedBox(
+                    width: 12,
+                    height: 12,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  )
+                else
+                  Text(
+                    message.isRead ? '✓✓' : '✓✓',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: message.isRead ? AppColors.primary : AppColors.textMuted,
+                          fontSize: 12,
+                        ),
+                  ),
+              ],
+            ],
+          ),
+        ],
       ],
     );
   }
@@ -109,10 +159,16 @@ class _ChatMessageBubble extends StatelessWidget {
 class _RenderedChatMessage {
   final ChatMessage message;
   final bool isSending;
+  final bool showTimestamp;
+  final bool showDateDivider;
+  final String? dateLabel;
 
   const _RenderedChatMessage({
     required this.message,
     required this.isSending,
+    this.showTimestamp = true,
+    this.showDateDivider = false,
+    this.dateLabel,
   });
 }
 

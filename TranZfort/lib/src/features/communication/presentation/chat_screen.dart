@@ -60,8 +60,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
   bool _isBannerExpanded = true;
   bool _isRecordingVoice = false;
   int _recordingElapsedSeconds = 0;
+  bool _showNewMessagePill = false;
   final List<_PendingChatMessage> _pendingMessages = <_PendingChatMessage>[];
   Timer? _recordingTimer;
+  Timer? _newMessagePillTimer;
 
   TextEditingController get messageController => _messageController;
 
@@ -83,6 +85,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
 
   void updateRecordingTimer(Timer? value) => _recordingTimer = value;
 
+  bool get showNewMessagePill => _showNewMessagePill;
+
+  void updateShowNewMessagePill(bool value) => _showNewMessagePill = value;
+
+  Timer? get newMessagePillTimer => _newMessagePillTimer;
+
+  void updateNewMessagePillTimer(Timer? value) => _newMessagePillTimer = value;
+
   @override
   void initState() {
     super.initState();
@@ -93,10 +103,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
 
   @override
   void dispose() {
-    _recordingTimer?.cancel();
-    unawaited(_voiceMessageService.cancelRecording());
     _messageController.dispose();
     _scrollController.dispose();
+    _recordingTimer?.cancel();
+    _newMessagePillTimer?.cancel();
     super.dispose();
   }
 
@@ -356,6 +366,32 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
               summary: ttsSummary,
               screenKey: '${AppRoutes.chatPath}/${widget.conversationId}',
             ),
+            if (_showNewMessagePill)
+              Positioned(
+                bottom: AppSpacing.xxxl + AppSpacing.lg,
+                left: 0,
+                right: 0,
+                child: Center(
+                  child: GestureDetector(
+                    onTap: () => _scrollToBottom(force: true),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+                      decoration: BoxDecoration(
+                        color: AppColors.cardSurface,
+                        borderRadius: BorderRadius.circular(AppRadius.chip),
+                        boxShadow: AppShadows.elevation2,
+                      ),
+                      child: Text(
+                        'New message',
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

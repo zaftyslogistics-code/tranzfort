@@ -186,6 +186,62 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         ),
       )
       ..sort((a, b) => a.message.createdAt.compareTo(b.message.createdAt));
+
+    // Compute grouping metadata
+    for (var i = 0; i < rendered.length; i++) {
+      final current = rendered[i];
+      final next = i < rendered.length - 1 ? rendered[i + 1] : null;
+      final prev = i > 0 ? rendered[i - 1] : null;
+
+      // Check if next message is from same sender within 2 minutes
+      if (next != null &&
+          current.message.isFromCurrentUser == next.message.isFromCurrentUser &&
+          next.message.createdAt.difference(current.message.createdAt).inMinutes < 2) {
+        // Hide timestamp on current message
+        rendered[i] = _RenderedChatMessage(
+          message: current.message,
+          isSending: current.isSending,
+          showTimestamp: false,
+          showDateDivider: current.showDateDivider,
+          dateLabel: current.dateLabel,
+        );
+      }
+
+      // Check for day change - show date divider
+      if (prev == null ||
+          prev.message.createdAt.day != current.message.createdAt.day ||
+          prev.message.createdAt.month != current.message.createdAt.month ||
+          prev.message.createdAt.year != current.message.createdAt.year) {
+        final now = DateTime.now();
+        final today = DateTime(now.year, now.month, now.day);
+        final messageDate = DateTime(
+          current.message.createdAt.year,
+          current.message.createdAt.month,
+          current.message.createdAt.day,
+        );
+        
+        String? dateLabel;
+        if (messageDate == today) {
+          dateLabel = 'Today';
+        } else {
+          final yesterday = today.subtract(const Duration(days: 1));
+          if (messageDate == yesterday) {
+            dateLabel = 'Yesterday';
+          } else {
+            dateLabel = '${current.message.createdAt.day}/${current.message.createdAt.month}/${current.message.createdAt.year}';
+          }
+        }
+
+        rendered[i] = _RenderedChatMessage(
+          message: current.message,
+          isSending: current.isSending,
+          showTimestamp: current.showTimestamp,
+          showDateDivider: true,
+          dateLabel: dateLabel,
+        );
+      }
+    }
+
     return rendered;
   }
 
@@ -328,15 +384,47 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
     return l10n.chatBookingActionFailureMessage;
   }
 
-  void _scrollToBottom() {
+  void _scrollToBottom({bool force = false}) {
     final state = this as _ChatScreenState;
     if (!state.scrollController.hasClients) {
       return;
     }
+    
+    final position = state.scrollController.position;
+    final maxScroll = position.maxScrollExtent;
+    final currentScroll = position.pixels;
+    final threshold = 100.0;
+    
+    // If scrolled up more than threshold and not forcing, show pill instead of scrolling
+    if (!force && (maxScroll - currentScroll) > threshold) {
+      setState(() {
+        state.updateShowNewMessagePill(true);
+      });
+      // Auto-dismiss after 3 seconds
+      state.newMessagePillTimer?.cancel();
+      state.updateNewMessagePillTimer(Timer(const Duration(seconds: 3), () {
+        if (mounted) {
+          setState(() {
+            state.updateShowNewMessagePill(false);
+          });
+        }
+      }));
+      return;
+    }
+    
+    // Scroll to bottom
     state.scrollController.animateTo(
-      state.scrollController.position.maxScrollExtent,
+      maxScroll,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeOut,
     );
+    
+    // Hide pill if visible
+    if (state.showNewMessagePill) {
+      setState(() {
+        state.updateShowNewMessagePill(false);
+      });
+      state.newMessagePillTimer?.cancel();
+    }
   }
 }
