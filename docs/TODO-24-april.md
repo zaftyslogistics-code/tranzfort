@@ -603,4 +603,53 @@ Expanded (trucker):
 
 ---
 
+### 13.17 Chat Dark+Light Color Mix Improvements
+
+**Observation from Load Detail Page:**
+The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses a sophisticated dark+light mix that creates strong visual hierarchy. The route/price section uses `inkSurface` (0xFF1C2A27) dark gradient with `primaryOnDark` (0xFF2DD4BF) bright teal accents. The earnings card uses `inkSurface` → `inkMid` → `inkDeep` gradient. This creates a "dark hero, light body" pattern.
+
+**Current Chat Problem:**
+- Chat screen is entirely light-themed — flat, no visual hierarchy
+- Banner, messages, composer all use similar light surfaces (`canvas`, `surfaceSoft`, `cardSurface`)
+- No "hero" element to anchor the eye
+- Outgoing bubble uses `infoBg` (blue-tinted) — doesn't match teal brand
+- No use of `primaryOnDark` (brighter teal) or `inkSurface` dark layers
+
+**Proposed Dark+Light Mix (Existing Tokens Only):**
+
+| Element | Current | Proposed | Token | Rationale |
+|---|---|---|---|---|
+| Banner | `canvas` flat | Dark hero card | `inkSurface` bg + `inkBorder` border | Mirrors load detail hero — visual anchor |
+| Banner route icon | `primary` | `primaryOnDark` | `0xFF2DD4BF` | Brighter teal pops on dark |
+| Banner text | Default | Light-on-dark | `inkTextPrimary` / `inkTextSecondary` | Readability on dark |
+| Banner status chip | Standard | Dark variant | `primaryChipBgDark` / `orangeChipBgDark` | Designed for dark surfaces |
+| Message list bg | Plain scaffold | Subtle ambient | `canvasAmbient` radial | 4% teal glow top-left |
+| Outgoing bubble bg | `primaryChipBg` | Keep + border tint | `primaryChipBg` + `inkBorder` @ 15% | Subtle depth |
+| Incoming bubble bg | `subtleSurface` | Keep + border tint | `subtleSurface` + `inkBorder` @ 10% | Consistent depth |
+| Read checkmark | `primary` | `primaryOnDark` | `0xFF2DD4BF` | Brighter teal for visibility |
+| Composer top border | None | `inkBorder` @ 20% | Separation from messages |
+| System messages | `textMuted` | `inkTextSecondary` | `0xFFA8BAB6` | Teal-tinted muted |
+
+**Design Principle:**
+- One dark hero (banner) creates visual hierarchy and anchors the top
+- Body stays light (messages) for readability during long conversations
+- Accent colors shift from `primary` → `primaryOnDark` where they sit on darker surfaces
+- Borders use `inkBorder` tint at low opacity to add depth without heaviness
+
+**Tasks:**
+- [ ] **13.17.1** Banner dark hero: change `Material` color from `canvas` to `inkSurface`, add `inkBorder` border
+- [ ] **13.17.2** Banner text/icon: route icon → `primaryOnDark`, route label → `inkTextPrimary`, expand chevron → `inkTextSecondary`
+- [ ] **13.17.3** Banner status chip: use dark variant (test with StatusPalette or custom Container)
+- [ ] **13.17.4** Chat screen background: wrap `Scaffold` body in `Container` with `canvasAmbient` radial gradient
+- [ ] **13.17.5** Outgoing bubble border: add `inkBorder` @ 15% alpha border
+- [ ] **13.17.6** Incoming bubble border: add `inkBorder` @ 10% alpha border
+- [ ] **13.17.7** Read checkmark: change color from `primary` to `primaryOnDark`
+- [ ] **13.17.8** Composer top border: add `inkBorder` @ 20% alpha top border
+- [ ] **13.17.9** System message text: change from `textMuted` to `inkTextSecondary`
+- [ ] **13.17.10** Empty state icon: change to `primaryOnDark`
+- [ ] **13.17.11** Test on device — verify dark banner readability, light messages remain comfortable
+- [ ] **13.17.12** Run `flutter analyze` — zero new errors
+
+---
+
 ## Issue Log: Verification Status Bug (26 Apr 2026)
