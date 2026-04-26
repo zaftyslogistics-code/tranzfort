@@ -56,7 +56,7 @@ class _ChatMessagesBody extends StatelessWidget {
                 child: Container(
                   padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
                   decoration: BoxDecoration(
-                    color: AppColors.surfaceSoft,
+                    color: AppColors.surfaceTint,
                     borderRadius: BorderRadius.circular(AppRadius.chip),
                   ),
                   child: Text(
@@ -108,7 +108,7 @@ class _ChatMessageBubble extends StatelessWidget {
     }
 
     final alignment = message.isFromCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start;
-    final background = message.isFromCurrentUser ? AppColors.infoBg : Theme.of(context).colorScheme.surfaceContainerLow;
+    final background = message.isFromCurrentUser ? AppColors.primaryChipBg : AppColors.subtleSurface;
 
     return Column(
       crossAxisAlignment: alignment,
@@ -133,7 +133,7 @@ class _ChatMessageBubble extends StatelessWidget {
             children: [
               Text(
                 isSending ? l10n.chatSendingLabel : _formatTimestamp(message.createdAt),
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
               ),
               if (message.isFromCurrentUser) ...[
                 const SizedBox(width: AppSpacing.xs),

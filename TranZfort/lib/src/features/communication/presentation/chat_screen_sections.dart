@@ -44,21 +44,26 @@ class _ChatContextBanner extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md),
       child: Material(
         elevation: 1,
-        color: AppColors.surfaceSoft,
+        color: AppColors.inkSurface,
         borderRadius: BorderRadius.circular(AppRadius.card),
-        child: Padding(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            border: Border.all(color: AppColors.inkBorder, width: 1),
+          ),
+          child: Padding(
           padding: const EdgeInsets.all(AppSpacing.md),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(Icons.local_shipping_outlined, size: 18, color: AppColors.primary),
+                  const Icon(Icons.local_shipping_outlined, size: 18, color: AppColors.primaryOnDark),
                   const SizedBox(width: AppSpacing.sm),
                   Expanded(
                     child: Text(
                       conversation.routeLabel,
-                      style: Theme.of(context).textTheme.titleSmall,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(color: AppColors.inkTextPrimary),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -70,7 +75,7 @@ class _ChatContextBanner extends StatelessWidget {
                     ),
                   IconButton(
                     onPressed: onToggleExpanded,
-                    icon: Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
+                    icon: Icon(isExpanded ? Icons.expand_less : Icons.expand_more, color: AppColors.inkTextSecondary),
                     tooltip: isExpanded ? l10n.chatCollapseLoadContextTooltip : l10n.chatExpandLoadContextTooltip,
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
@@ -86,17 +91,17 @@ class _ChatContextBanner extends StatelessWidget {
                     if ((conversation.loadMaterial ?? '').trim().isNotEmpty)
                       Text(
                         conversation.loadMaterial!,
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
                       ),
                     if (conversation.loadPriceAmount != null)
                       Text(
                         '₹${conversation.loadPriceAmount!.toStringAsFixed(0)}',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
                       ),
                     if ((conversation.pickupDate?.toIso8601String() ?? '').isNotEmpty)
                       Text(
                         '${conversation.pickupDate!.day}/${conversation.pickupDate!.month}/${conversation.pickupDate!.year}',
-                        style: Theme.of(context).textTheme.bodySmall,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
                       ),
                   ],
                 ),
@@ -124,6 +129,7 @@ class _ChatContextBanner extends StatelessWidget {
                 ],
               ],
             ],
+          ),
           ),
         ),
       ),
@@ -212,7 +218,7 @@ class _ChatComposerState extends State<_ChatComposer> {
       padding: EdgeInsets.only(bottom: bottomInset),
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.surfaceSoft,
+          color: AppColors.canvas,
           boxShadow: AppShadows.elevation1,
         ),
         padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
