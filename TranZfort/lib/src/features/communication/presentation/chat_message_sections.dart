@@ -113,14 +113,18 @@ class _ChatMessageBubble extends StatelessWidget {
     return Column(
       crossAxisAlignment: alignment,
       children: [
-        Container(
-          constraints: const BoxConstraints(maxWidth: 320),
-          padding: const EdgeInsets.all(AppSpacing.lg),
-          decoration: BoxDecoration(
-            color: background,
-            borderRadius: BorderRadius.circular(AppRadius.card),
+        AnimatedOpacity(
+          opacity: isSending ? 0.7 : 1.0,
+          duration: const Duration(milliseconds: 200),
+          child: Container(
+            constraints: const BoxConstraints(maxWidth: 320),
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            decoration: BoxDecoration(
+              color: background,
+              borderRadius: BorderRadius.circular(AppRadius.card),
+            ),
+            child: _ChatMessageContent(message: message, loadId: loadId),
           ),
-          child: _ChatMessageContent(message: message, loadId: loadId),
         ),
         if (showTimestamp) ...[
           const SizedBox(height: AppSpacing.xs),
