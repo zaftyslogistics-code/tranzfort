@@ -1,0 +1,202 @@
+Resolving dependencies...
+Downloading packages...
+  _fe_analyzer_shared 85.0.0 (100.0.0 available)
+  _flutterfire_internals 1.3.59 (1.3.69 available)
+  analyzer 7.6.0 (13.0.0 available)
+  analyzer_plugin 0.13.4 (0.14.9 available)
+  app_links 6.4.1 (7.0.0 available)
+  async 2.13.0 (2.13.1 available)
+  audio_session 0.1.25 (0.2.3 available)
+  build 2.5.4 (4.0.5 available)
+  build_config 1.1.2 (1.3.0 available)
+  build_resolvers 2.5.4 (3.0.4 available)
+  build_runner 2.5.4 (2.14.1 available)
+  build_runner_core 9.1.2 (9.3.2 available)
+  built_value 8.12.4 (8.12.5 available)
+  characters 1.4.0 (1.4.1 available)
+  connectivity_plus 7.0.0 (7.1.1 available)
+  connectivity_plus_platform_interface 2.0.1 (2.1.0 available)
+  cupertino_icons 1.0.8 (1.0.9 available)
+  custom_lint_core 0.7.5 (0.8.2 available)
+  custom_lint_visitor 1.0.0+7.7.0 (1.0.0+9.0.0 available)
+  dart_jsonwebtoken 3.3.2 (3.4.1 available)
+  dart_style 3.1.1 (3.1.8 available)
+  firebase_core 3.15.2 (4.7.0 available)
+  firebase_core_platform_interface 6.0.2 (6.0.3 available)
+  firebase_core_web 2.24.1 (3.6.0 available)
+  firebase_messaging 15.2.10 (16.2.0 available)
+  firebase_messaging_platform_interface 4.6.10 (4.7.9 available)
+  firebase_messaging_web 3.10.10 (4.1.5 available)
+  flutter_dotenv 5.2.1 (6.0.1 available)
+  flutter_local_notifications 18.0.1 (21.0.0 available)
+  flutter_local_notifications_linux 5.0.0 (8.0.0 available)
+  flutter_local_notifications_platform_interface 8.0.0 (11.0.0 available)
+  flutter_map 7.0.2 (8.3.0 available)
+  flutter_plugin_android_lifecycle 2.0.33 (2.0.34 available)
+  flutter_riverpod 2.6.1 (3.3.1 available)
+  geolocator 13.0.4 (14.0.2 available)
+  geolocator_android 4.6.2 (5.0.2 available)
+  go_router 14.8.1 (17.2.2 available)
+  google_fonts 6.3.3 (8.0.2 available)
+  google_sign_in 6.3.0 (7.2.0 available)
+  google_sign_in_android 6.2.1 (7.2.10 available)
+  google_sign_in_ios 5.9.0 (6.3.0 available)
+  google_sign_in_platform_interface 2.5.0 (3.1.0 available)
+  google_sign_in_web 0.12.4+4 (1.1.3 available)
+  gotrue 2.18.0 (2.20.0 available)
+  hooks 1.0.2 (1.0.3 available)
+  image_picker_android 0.8.13+14 (0.8.13+16 available)
+  just_audio 0.9.46 (0.10.5 available)
+  logger 2.6.2 (2.7.0 available)
+  matcher 0.12.17 (0.12.19 available)
+  material_color_utilities 0.11.1 (0.13.0 available)
+  meta 1.17.0 (1.18.2 available)
+  mgrs_dart 2.0.0 (3.0.0 available)
+  mocktail 1.0.4 (1.0.5 available)
+  native_toolchain_c 0.17.5 (0.18.0 available)
+  path_provider_android 2.2.22 (2.3.1 available)
+  permission_handler 11.4.0 (12.0.1 available)
+  permission_handler_android 12.1.0 (13.0.1 available)
+  postgrest 2.6.0 (2.7.0 available)
+  proj4dart 2.1.0 (3.0.0 available)
+  realtime_client 2.7.0 (2.7.3 available)
+  record 5.2.1 (6.2.0 available)
+! record_linux 1.3.0 (overridden)
+  riverpod 2.6.1 (3.2.1 available)
+  riverpod_annotation 2.6.1 (4.0.2 available)
+  riverpod_generator 2.6.5 (4.0.3 available)
+  share_plus 10.1.4 (13.1.0 available)
+  share_plus_platform_interface 5.0.2 (7.1.0 available)
+  shared_preferences 2.5.4 (2.5.5 available)
+  shared_preferences_android 2.4.21 (2.4.23 available)
+  shared_preferences_platform_interface 2.4.1 (2.4.2 available)
+  source_gen 2.0.0 (4.2.2 available)
+  sqflite 2.4.2 (2.4.2+1 available)
+  sqflite_android 2.4.2+2 (2.4.2+3 available)
+  sqflite_common 2.5.6 (2.5.6+1 available)
+  storage_client 2.4.1 (2.5.2 available)
+  supabase 2.10.2 (2.10.6 available)
+  supabase_flutter 2.12.0 (2.12.4 available)
+  synchronized 3.4.0 (3.4.0+1 available)
+  test_api 0.7.7 (0.7.11 available)
+  timezone 0.10.1 (0.11.0 available)
+  unicode 0.3.1 (1.1.9 available)
+  url_launcher_android 6.3.28 (6.3.29 available)
+  vector_math 2.2.0 (2.3.0 available)
+  vm_service 15.0.2 (15.1.0 available)
+  win32 5.15.0 (6.1.0 available)
+Got dependencies!
+84 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+Analyzing TranZfort...                                          
+
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:94:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:95:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:97:9 - avoid_print
+warning - The value of the local variable 'client' isn't used - integration_test\avatar_integration_test.dart:104:13 - unused_local_variable
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:108:7 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:109:7 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:127:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:128:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:130:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:153:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:174:11 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:175:11 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:176:11 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:178:11 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:181:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:199:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:200:9 - avoid_print
+   info - Don't invoke 'print' in production code - integration_test\avatar_integration_test.dart:202:9 - avoid_print
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\navigation\navigation_service.dart:110:11 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\navigation\navigation_service.dart:111:11 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\navigation\navigation_service.dart:195:11 - use_null_aware_elements
+warning - Unused import: 'package:flutter/foundation.dart' - lib\src\core\providers\app_state_providers.dart:1:8 - unused_import
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\services\monitoring_service.dart:33:9 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\services\monitoring_service.dart:52:9 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - lib\src\core\services\monitoring_service.dart:90:9 - use_null_aware_elements
+warning - The stack trace variable 'stackTrace' isn't used and can be removed - lib\src\core\widgets\tts_focus_field.dart:100:21 - unused_catch_stack
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - lib\src\features\auth\presentation\onboarding_profile_completion.dart:269:21 - use_build_context_synchronously
+warning - The value of the local variable 'selectedSuggestion' isn't used - lib\src\features\auth\presentation\onboarding_profile_completion.dart:309:22 - unused_local_variable
+warning - The declaration '_fetchConversationPreview' isn't referenced - lib\src\features\communication\data\chat_repository.dart:359:40 - unused_element
+warning - The declaration '_sortConversationPreviews' isn't referenced - lib\src\features\communication\data\chat_repository.dart:385:29 - unused_element
+warning - The declaration '_mapEquals' isn't referenced - lib\src\features\communication\data\chat_repository.dart:395:8 - unused_element
+warning - Unused import: 'package:flutter/foundation.dart' - lib\src\features\notifications\data\push_runtime_service.dart:5:8 - unused_import
+   info - Dangling library doc comment - lib\src\features\profile\data\public_profile_models.dart:1:1 - dangling_library_doc_comments
+warning - Unused import: '../../../core/error/result.dart' - lib\src\features\profile\presentation\supplier_public_profile_screen.dart:4:8 - unused_import
+warning - Unused import: '../data/public_profile_repository.dart' - lib\src\features\profile\presentation\supplier_public_profile_screen.dart:6:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\supplier_public_profile_screen.dart:153:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\trucker_public_profile_screen.dart:237:51 - deprecated_member_use
+warning - Unused import: 'package:tranzfort/src/core/error/app_failure.dart' - lib\src\features\profile\presentation\widgets\load_history_section.dart:3:8 - unused_import
+warning - Unused import: 'package:tranzfort/src/core/error/result.dart' - lib\src\features\profile\presentation\widgets\load_history_section.dart:4:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\load_history_section.dart:182:51 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - lib\src\features\profile\presentation\widgets\load_history_section.dart:200:11 - unused_local_variable
+   info - Unnecessary use of multiple underscores - lib\src\features\profile\presentation\widgets\load_history_section.dart:209:33 - unnecessary_underscores
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\load_history_section.dart:301:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\profile_header_card.dart:149:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\profile_header_card.dart:163:24 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\profile_header_card.dart:165:29 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\profile_header_card.dart:210:53 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - lib\src\features\profile\presentation\widgets\trust_score_card.dart:18:11 - unused_local_variable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\profile\presentation\widgets\trust_score_card.dart:100:49 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - lib\src\features\profile\presentation\widgets\trust_score_card.dart:117:11 - unused_local_variable
+   info - Dangling library doc comment - lib\src\features\reviews\data\review_models.dart:1:1 - dangling_library_doc_comments
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\reviews_section.dart:308:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\reviews_section.dart:322:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\widgets\review_card.dart:47:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\widgets\review_card.dart:144:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart:135:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - lib\src\features\reviews\presentation\widgets\reviewer_mini_card.dart:29:54 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - lib\src\features\reviews\utils\review_trigger_helper.dart:69:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\src\features\reviews\utils\review_trigger_helper.dart:95:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\src\features\reviews\utils\review_trigger_helper.dart:121:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - lib\src\features\reviews\utils\review_trigger_helper.dart:155:7 - use_build_context_synchronously
+   info - The 'children' argument should be last in widget constructor invocations - lib\src\features\shell\presentation\shell_components.dart:53:13 - sort_child_properties_last
+warning - The receiver can't be null, so the null-aware operator '?.' is unnecessary - lib\src\features\shell\presentation\shell_profile_screen.dart:64:54 - invalid_null_aware_operator
+warning - The '!' will have no effect because the receiver can't be null - lib\src\features\shell\presentation\shell_profile_screen.dart:64:103 - unnecessary_non_null_assertion
+warning - Unused import: 'package:url_launcher/url_launcher.dart' - lib\src\features\shell\presentation\shell_settings_screen.dart:4:8 - unused_import
+   info - The import of 'package:flutter/foundation.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\src\features\shell\presentation\supplier_shell_load_detail_sections.dart:1:8 - unnecessary_import
+warning - Unnecessary cast - lib\src\features\supplier\data\supplier_load_repository_backend.dart:140:48 - unnecessary_cast
+warning - The declaration '_localizedLoadDetailStatus' isn't referenced - lib\src\features\trucker\presentation\trucker_load_detail_screen.dart:102:8 - unused_element
+   info - The import of 'package:flutter/foundation.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - lib\src\shared\widgets\feedback_components.dart:1:8 - unnecessary_import
+   info - Library names are not necessary - test\core\mocks.dart:1:9 - unnecessary_library_name
+  error - '_FakeOnboardingAuthRepository.updateProfile' ('Future<Result<void>> Function({required String fullName, required String mobile})') isn't a valid override of 'AuthRepository.updateProfile' ('Future<Result<void>> Function({String? city, required String fullName, double? latitude, double? longitude, required String mobile, String? state})') - test\features\auth\presentation\onboarding_screens_test.dart:35:24 - invalid_override
+   info - The imported package 'async' isn't a dependency of the importing package - test\features\communication\data\chat_repository_test.dart:1:8 - depend_on_referenced_packages
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - test\features\trucker\data\trucker_marketplace_repository_test.dart:8:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - test\features\trucker\presentation\trucker_find_loads_screen_test.dart:67:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - test\features\trucker\providers\find_loads_provider_test.dart:5:7 - non_abstract_class_inherits_abstract_member
+warning - A value for optional parameter 'signedUrl' isn't ever given - test\features\verification\presentation\verification_screen_test.dart:22:39 - unused_element_parameter
+warning - The getter doesn't override an inherited getter - test\features\verification\presentation\verification_screen_test.dart:47:25 - override_on_non_overriding_member
+warning - The getter doesn't override an inherited getter - test\features\verification\presentation\verification_screen_test.dart:66:23 - override_on_non_overriding_member
+  error - Missing concrete implementation of 'abstract class ReviewBackend.getAllUserFeedback' - test\reviews\review_repository_test.dart:8:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - test\widget_test.dart:63:7 - non_abstract_class_inherits_abstract_member
+   info - Use interpolation to compose strings and values - tool\strip_metadata_descriptions.dart:45:29 - prefer_interpolation_to_compose_strings
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:47:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:48:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:49:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:50:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:51:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:53:5 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:55:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:56:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\strip_metadata_descriptions.dart:58:5 - avoid_print
+warning - The value of the local variable 'header' isn't used - tool\triage_categorize.dart:37:9 - unused_local_variable
+   info - Use interpolation to compose strings and values - tool\triage_categorize.dart:117:28 - prefer_interpolation_to_compose_strings
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:123:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:124:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:125:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:126:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:127:3 - avoid_print
+   info - Don't invoke 'print' in production code - tool\triage_categorize.dart:128:3 - avoid_print
+   info - The type name 'p' isn't an UpperCamelCase identifier - tool\triage_categorize.dart:142:7 - camel_case_types
+warning - The value of the local variable 'passthroughPatterns' isn't used - tool\triage_l10n.dart:18:9 - unused_local_variable
+   info - Don't invoke 'print' in production code - tool\triage_l10n.dart:121:3 - avoid_print
+   info - The type name 'p' isn't an UpperCamelCase identifier - tool\triage_l10n.dart:124:7 - camel_case_types
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - tool\triage_l10n.dart:126:34 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - tool\triage_l10n.dart:126:60 - use_null_aware_elements
+warning - The value of the local variable 'toolDir' isn't used - tool\verify_l10n.dart:7:9 - unused_local_variable
+   info - Unnecessary braces in a string interpolation - tool\verify_l10n.dart:149:20 - unnecessary_brace_in_string_interps
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - tool\verify_l10n.dart:169:32 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - tool\verify_l10n.dart:169:58 - use_null_aware_elements
+
+108 issues found. (ran in 14.8s)

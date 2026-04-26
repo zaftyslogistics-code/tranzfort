@@ -153,50 +153,75 @@ class _SupplierConversationGroupCard extends StatelessWidget {
     final unreadCount = group.conversations.where((conversation) => conversation.hasUnread).length;
     final latestConversation = group.conversations.first;
 
-    return StandardListCard(
-      accent: unreadCount > 0 ? AppColors.info : AppColors.neutral,
-      title: group.routeLabel,
-      subtitle: l10n.shellMessagesActiveConversations(
-        group.conversations.length,
-        _localizedMessagePreview(l10n, latestConversation),
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        boxShadow: AppShadows.card,
+        border: Border.all(color: AppColors.divider),
       ),
-      trailing: StatusChip(
-        label: unreadCount > 0 ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
-        showDot: unreadCount > 0,
-      ),
-      onTap: onToggle,
-      footer: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
+      child: InkWell(
+        onTap: onToggle,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(
-                isExpanded ? Icons.expand_less : Icons.expand_more,
-                size: 18,
-                color: Theme.of(context).colorScheme.primary,
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      group.routeLabel,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  StatusChip(
+                    label: unreadCount > 0 ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
+                    showDot: unreadCount > 0,
+                  ),
+                ],
               ),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Text(
-                  isExpanded
-                      ? l10n.shellMessagesHideTruckerConversations
-                      : l10n.shellMessagesLatestBy(
-                          latestConversation.truckerName,
-                          _formatInboxTimestamp(context, latestConversation.lastMessageAt ?? latestConversation.createdAt),
-                        ),
-                  style: Theme.of(context).textTheme.bodySmall,
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                l10n.shellMessagesActiveConversations(
+                  group.conversations.length,
+                  _localizedMessagePreview(l10n, latestConversation),
                 ),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
+              const SizedBox(height: AppSpacing.sm),
+              Row(
+                children: [
+                  Icon(
+                    isExpanded ? Icons.expand_less : Icons.expand_more,
+                    size: 16,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: AppSpacing.xs),
+                  Expanded(
+                    child: Text(
+                      isExpanded
+                          ? l10n.shellMessagesHideTruckerConversations
+                          : l10n.shellMessagesLatestBy(
+                              latestConversation.truckerName,
+                              _formatInboxTimestamp(context, latestConversation.lastMessageAt ?? latestConversation.createdAt),
+                            ),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+                    ),
+                  ),
+                ],
+              ),
+              if (isExpanded) ...[
+                const SizedBox(height: AppSpacing.md),
+                for (var index = 0; index < group.conversations.length; index++) ...[
+                  _SupplierConversationRow(conversation: group.conversations[index]),
+                  if (index != group.conversations.length - 1) const SizedBox(height: AppSpacing.sm),
+                ],
+              ],
             ],
           ),
-          if (isExpanded) ...[
-            const SizedBox(height: AppSpacing.md),
-            for (var index = 0; index < group.conversations.length; index++) ...[
-              _SupplierConversationRow(conversation: group.conversations[index]),
-              if (index != group.conversations.length - 1) const SizedBox(height: AppSpacing.sm),
-            ],
-          ],
-        ],
+        ),
       ),
     );
   }
@@ -216,7 +241,7 @@ class _SupplierConversationRow extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.card),
         onTap: () => context.push('${AppRoutes.chatPath}/${conversation.id}'),
         child: Ink(
-          padding: const EdgeInsets.all(AppSpacing.md),
+          padding: const EdgeInsets.all(AppSpacing.sm),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainerLowest,
             borderRadius: BorderRadius.circular(AppRadius.card),
@@ -285,9 +310,11 @@ class _SupplierConversationRow extends StatelessWidget {
                 StatusChip(label: localizedSupplierBookingStatus(l10n, conversation.bookingStatusLabel!)),
               ],
               const SizedBox(height: AppSpacing.xs),
+              const Divider(),
+              const SizedBox(height: AppSpacing.xs),
               Text(
                 _formatInboxTimestamp(context, conversation.lastMessageAt ?? conversation.createdAt),
-                style: Theme.of(context).textTheme.bodySmall,
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
               ),
             ],
           ),
@@ -327,72 +354,77 @@ class _TruckerConversationCard extends StatelessWidget {
         ? '${conversation.supplierName} - ${conversation.supplierCompanyName}'
         : conversation.supplierName;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        boxShadow: AppShadows.card,
-        border: Border.all(color: AppColors.divider),
-      ),
+    return Material(
+      color: Colors.transparent,
       child: InkWell(
         onTap: () => context.push('${AppRoutes.chatPath}/${conversation.id}'),
         borderRadius: BorderRadius.circular(AppRadius.card),
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          child: Row(
-            children: [
-              InkWell(
-                onTap: () => context.push(AppRoutes.publicProfileLocation(conversation.supplierId)),
-                borderRadius: BorderRadius.circular(20),
-                child: _AvatarCircle(
-                  avatarUrl: conversation.supplierAvatarUrl,
-                  radius: 20,
-                  fallback: Container(
-                    width: 40,
-                    height: 40,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        supplierLabel.isNotEmpty ? supplierLabel[0].toUpperCase() : 'S',
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w700,
-                            ),
+        child: Ink(
+          decoration: BoxDecoration(
+            color: AppColors.cardSurface,
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            boxShadow: AppShadows.card,
+            border: Border.all(color: AppColors.divider),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: Row(
+              children: [
+                InkWell(
+                  onTap: () => context.push(AppRoutes.publicProfileLocation(conversation.supplierId)),
+                  borderRadius: BorderRadius.circular(20),
+                  child: _AvatarCircle(
+                    avatarUrl: conversation.supplierAvatarUrl,
+                    radius: 20,
+                    fallback: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: Text(
+                          supplierLabel.isNotEmpty ? supplierLabel[0].toUpperCase() : 'S',
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w700,
+                              ),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      supplierLabel,
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      '${conversation.routeLabel} - ${_localizedMessagePreview(l10n, conversation)}',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    const SizedBox(height: AppSpacing.xs),
-                    Text(
-                      _formatInboxTimestamp(context, conversation.lastMessageAt ?? conversation.createdAt),
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                  ],
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        supplierLabel,
+                        style: Theme.of(context).textTheme.titleSmall,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        '${conversation.routeLabel} - ${_localizedMessagePreview(l10n, conversation)}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: AppSpacing.xs),
+                      const Divider(),
+                      const SizedBox(height: AppSpacing.xs),
+                      Text(
+                        _formatInboxTimestamp(context, conversation.lastMessageAt ?? conversation.createdAt),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              StatusChip(
-                label: conversation.hasUnread ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
-                showDot: conversation.hasUnread,
-              ),
-            ],
+                StatusChip(
+                  label: conversation.hasUnread ? l10n.shellMessagesUnreadStatus : l10n.shellMessagesReadStatus,
+                  showDot: conversation.hasUnread,
+                ),
+              ],
+            ),
           ),
         ),
       ),

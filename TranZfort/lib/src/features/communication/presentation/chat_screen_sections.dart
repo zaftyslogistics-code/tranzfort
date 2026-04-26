@@ -33,71 +33,99 @@ class _ChatContextBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
+    
+    // Determine which status to show: booking status if present, else load status
+    final statusToShow = (conversation.bookingStatusLabel ?? '').trim().isNotEmpty
+        ? conversation.bookingStatusLabel
+        : conversation.loadStatusLabel;
+    final statusLabel = statusToShow != null ? _localizedChatStatus(l10n, statusToShow) : null;
+    
     return Padding(
-      padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, AppSpacing.md),
-      child: DetailSectionCard(
-        title: l10n.chatLoadContextTitle,
-        children: [
-          Row(
+      padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.md),
+      child: Material(
+        elevation: 1,
+        color: AppColors.surfaceSoft,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(conversation.routeLabel, style: Theme.of(context).textTheme.titleSmall),
-              ),
-              IconButton(
-                onPressed: onToggleExpanded,
-                icon: Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
-                tooltip: isExpanded ? l10n.chatCollapseLoadContextTooltip : l10n.chatExpandLoadContextTooltip,
-              ),
-            ],
-          ),
-          if (isExpanded) ...[
-            if ((conversation.loadMaterial ?? '').trim().isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(l10n.chatMaterialLabel(conversation.loadMaterial!)),
-            ],
-            if (conversation.loadPriceAmount != null) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(l10n.chatPriceLabel('₹${conversation.loadPriceAmount!.toStringAsFixed(0)}')),
-            ],
-            if ((conversation.pickupDate?.toIso8601String() ?? '').isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(l10n.chatPickupLabel('${conversation.pickupDate!.day}/${conversation.pickupDate!.month}/${conversation.pickupDate!.year}')),
-            ],
-            const SizedBox(height: AppSpacing.sm),
-            Wrap(
-              spacing: AppSpacing.sm,
-              runSpacing: AppSpacing.sm,
-              children: [
-                if ((conversation.loadStatusLabel ?? '').trim().isNotEmpty)
-                  StatusChip(label: _localizedChatStatus(l10n, conversation.loadStatusLabel!)),
-                if ((conversation.bookingStatusLabel ?? '').trim().isNotEmpty)
-                  StatusChip(label: _localizedChatStatus(l10n, conversation.bookingStatusLabel!)),
-              ],
-            ),
-            if (canShowBookingActions) ...[
-              const SizedBox(height: AppSpacing.md),
               Row(
                 children: [
+                  const Icon(Icons.local_shipping_outlined, size: 18, color: AppColors.primary),
+                  const SizedBox(width: AppSpacing.sm),
                   Expanded(
-                    child: PrimaryButton(
-                      label: l10n.chatActionApprove,
-                      isLoading: isProcessingBookingAction,
-                      onPressed: isProcessingBookingAction ? null : onApprove,
+                    child: Text(
+                      conversation.routeLabel,
+                      style: Theme.of(context).textTheme.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: OutlineButton(
-                      label: l10n.chatActionReject,
-                      isLoading: isProcessingBookingAction,
-                      onPressed: isProcessingBookingAction ? null : onReject,
+                  if (statusLabel != null)
+                    Padding(
+                      padding: const EdgeInsets.only(right: AppSpacing.sm),
+                      child: StatusChip(label: statusLabel),
                     ),
+                  IconButton(
+                    onPressed: onToggleExpanded,
+                    icon: Icon(isExpanded ? Icons.expand_less : Icons.expand_more),
+                    tooltip: isExpanded ? l10n.chatCollapseLoadContextTooltip : l10n.chatExpandLoadContextTooltip,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
                   ),
                 ],
               ),
+              if (isExpanded) ...[
+                const SizedBox(height: AppSpacing.sm),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  children: [
+                    if ((conversation.loadMaterial ?? '').trim().isNotEmpty)
+                      Text(
+                        conversation.loadMaterial!,
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    if (conversation.loadPriceAmount != null)
+                      Text(
+                        '₹${conversation.loadPriceAmount!.toStringAsFixed(0)}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    if ((conversation.pickupDate?.toIso8601String() ?? '').isNotEmpty)
+                      Text(
+                        '${conversation.pickupDate!.day}/${conversation.pickupDate!.month}/${conversation.pickupDate!.year}',
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                  ],
+                ),
+                if (canShowBookingActions) ...[
+                  const SizedBox(height: AppSpacing.md),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          label: l10n.chatActionApprove,
+                          isLoading: isProcessingBookingAction,
+                          onPressed: isProcessingBookingAction ? null : onApprove,
+                        ),
+                      ),
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: OutlineButton(
+                          label: l10n.chatActionReject,
+                          isLoading: isProcessingBookingAction,
+                          onPressed: isProcessingBookingAction ? null : onReject,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ],
             ],
-          ],
-        ],
+          ),
+        ),
       ),
     );
   }
@@ -163,49 +191,89 @@ class _ChatComposer extends StatelessWidget {
       duration: const Duration(milliseconds: 180),
       curve: Curves.easeOut,
       padding: EdgeInsets.only(bottom: bottomInset),
-      child: Material(
-        elevation: 8,
-        color: Theme.of(context).scaffoldBackgroundColor,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Expanded(
-                child: AppTextField(
+      child: Container(
+        decoration: BoxDecoration(
+          color: AppColors.surfaceSoft,
+          boxShadow: AppShadows.elevation1,
+        ),
+        padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.cardSurface,
+                  borderRadius: BorderRadius.circular(AppRadius.input),
+                  border: Border.all(color: AppColors.divider),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                child: TextField(
                   controller: controller,
-                  hintText: l10n.chatTypeMessageHint,
+                  decoration: InputDecoration(
+                    hintText: l10n.chatTypeMessageHint,
+                    hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
+                    border: InputBorder.none,
+                    contentPadding: EdgeInsets.zero,
+                  ),
                   maxLines: 4,
                 ),
               ),
-              const SizedBox(width: AppSpacing.md),
-              if (!hasText)
-                SizedBox(
-                  width: 64,
-                  child: IconButton(
-                    onPressed: onVoiceAction,
-                    icon: Icon(isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
-                    tooltip: isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
+            ),
+            const SizedBox(width: AppSpacing.md),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 180),
+              transitionBuilder: (child, animation) {
+                return ScaleTransition(
+                  scale: animation,
+                  child: child,
+                );
+              },
+              child: !hasText
+                  ? SizedBox(
+                      width: 48,
+                      height: 48,
+                      child: IconButton(
+                        onPressed: onVoiceAction,
+                        icon: Icon(isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
+                        tooltip: isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
+                      ),
+                    )
+                  : Container(
+                      width: 48,
+                      height: 48,
+                      decoration: const BoxDecoration(
+                        gradient: AppColors.heroCta,
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        onPressed: isSending ? null : onSend,
+                        icon: const Icon(Icons.send, color: AppColors.textOnPrimary),
+                        tooltip: l10n.chatSendAction,
+                      ),
+                    ),
+            ),
+            if (!hasText && isRecordingVoice) ...[
+              const SizedBox(width: AppSpacing.sm),
+              Row(
+                children: [
+                  Container(
+                    width: 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      color: AppColors.error,
+                      shape: BoxShape.circle,
+                    ),
                   ),
-                )
-              else
-                SizedBox(
-                  width: 96,
-                  child: PrimaryButton(
-                    label: l10n.chatSendAction,
-                    isLoading: isSending,
-                    onPressed: onSend,
+                  const SizedBox(width: AppSpacing.xs),
+                  Text(
+                    _formatDuration(recordingElapsedSeconds),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.error),
                   ),
-                ),
-              if (!hasText && isRecordingVoice) ...[
-                const SizedBox(width: AppSpacing.sm),
-                Text(
-                  _formatDuration(recordingElapsedSeconds),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.error),
-                ),
-              ],
+                ],
+              ),
             ],
-          ),
+          ],
         ),
       ),
     );
