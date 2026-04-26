@@ -198,7 +198,7 @@ class PublicLoadPreview {
     );
   }
 
-  String get routeLabel => '$originCity > $destinationCity';
+  String get routeLabel => '$originCity to $destinationCity';
 }
 
 // Private helper functions

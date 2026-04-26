@@ -56,6 +56,9 @@ class TruckerLoadDetailScreen extends ConsumerWidget {
 
     return DetailPageScaffold(
       title: l10n.truckerLoadDetailTitle,
+      bottomWidget: !state.isLoading && detail != null
+          ? _StickyBookingBar(loadId: loadId)
+          : null,
       children: [
         if (state.isLoading) const LoadingShimmer(height: 120, itemCount: 4),
         if (!state.isLoading && state.failure != null && detail == null)

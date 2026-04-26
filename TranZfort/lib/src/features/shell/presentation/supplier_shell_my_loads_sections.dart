@@ -226,7 +226,7 @@ class _SupplierLoadListCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} > ${load.destinationLabel}',
+      title: '${load.originLabel} to ${load.destinationLabel}',
       subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
       trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(

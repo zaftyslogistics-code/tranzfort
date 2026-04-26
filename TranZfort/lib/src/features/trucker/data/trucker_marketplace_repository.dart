@@ -181,6 +181,40 @@ class MarketplaceLoadItem {
     );
   }
 
+  /// Derived acceptable truck capacity range from selected tyre counts.
+  /// Based on Indian CMVR payload norms (typical usable payload, not GVW).
+  static const Map<int, ({double min, double max})> _tyreToPayloadRange = {
+    10: (min: 18.0, max: 21.0),
+    12: (min: 21.0, max: 24.0),
+    14: (min: 28.0, max: 32.0),
+    16: (min: 31.0, max: 35.0),
+    18: (min: 34.0, max: 42.0),
+    22: (min: 42.0, max: 42.0),
+  };
+
+  /// Minimum truck capacity acceptable for this load, derived from selected tyre counts.
+  /// Returns a wide fallback (7T) when any tyre count is selected.
+  double? get derivedMinTruckCapacityTonnes {
+    if (requiredTyres.isEmpty) return 7.0;
+    final mins = requiredTyres
+        .map((t) => _tyreToPayloadRange[t]?.min)
+        .whereType<double>();
+    return mins.isEmpty ? null : mins.reduce((a, b) => a < b ? a : b);
+  }
+
+  /// Maximum truck capacity acceptable for this load, derived from selected tyre counts.
+  /// Returns a wide fallback (42T) when any tyre count is selected.
+  double? get derivedMaxTruckCapacityTonnes {
+    if (requiredTyres.isEmpty) return 42.0;
+    final maxs = requiredTyres
+        .map((t) => _tyreToPayloadRange[t]?.max)
+        .whereType<double>();
+    return maxs.isEmpty ? null : maxs.reduce((a, b) => a > b ? a : b);
+  }
+
+  /// Per-truck weight this load expects.
+  double get perTruckWeightTonnes => weightTonnes / trucksNeeded;
+
   // Private helpers removed - using shared map_readers.dart helpers where applicable
   // _readTyres remains as it's used internally
   static List<int> _readTyres(Object? value) {

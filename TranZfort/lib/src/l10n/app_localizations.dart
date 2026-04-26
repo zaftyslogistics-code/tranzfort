@@ -6014,7 +6014,7 @@ abstract class AppLocalizations {
   /// No description provided for @truckerTripDetailReportSourceLabel.
   ///
   /// In en, this message translates to:
-  /// **'Trucker trip - {originLabel} > {destinationLabel}'**
+  /// **'Trucker trip - {originLabel} to {destinationLabel}'**
   String truckerTripDetailReportSourceLabel(
     Object destinationLabel,
     Object originLabel,
@@ -7866,6 +7866,12 @@ abstract class AppLocalizations {
   /// **'Route and price summary'**
   String get truckerLoadDetailRoutePriceSummaryTitle;
 
+  /// No description provided for @truckerLoadDetailRouteMapTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Route map'**
+  String get truckerLoadDetailRouteMapTitle;
+
   /// No description provided for @truckerLoadDetailPickupLabel.
   ///
   /// In en, this message translates to:
@@ -7913,6 +7919,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Trucks needed: {booked}/{needed} booked'**
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed);
+
+  /// No description provided for @truckerLoadDetailPerTruckWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Per truck: {weight}T'**
+  String truckerLoadDetailPerTruckWeightLabel(Object weight);
+
+  /// No description provided for @truckerLoadDetailCapacityRangeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Acceptable truck: {minT}T – {maxT}T'**
+  String truckerLoadDetailCapacityRangeLabel(Object maxT, Object minT);
+
+  /// No description provided for @truckerLoadDetailSlotsOpenLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} slots open'**
+  String truckerLoadDetailSlotsOpenLabel(Object count);
 
   /// No description provided for @truckerLoadDetailNoApprovedTruckSelected.
   ///
@@ -8971,6 +8995,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.'**
   String get truckerLoadDetailCostTileDisclaimer;
+
+  /// No description provided for @truckerLoadDetailEarningsEstimateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'TRIP EARNINGS ESTIMATE'**
+  String get truckerLoadDetailEarningsEstimateTitle;
+
+  /// No description provided for @truckerLoadDetailTotalFareLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL FARE (LOAD VALUE)'**
+  String get truckerLoadDetailTotalFareLabel;
+
+  /// No description provided for @truckerLoadDetailTotalExpenseLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TOTAL EXPENSE'**
+  String get truckerLoadDetailTotalExpenseLabel;
+
+  /// No description provided for @truckerLoadDetailEstimatedNetProfitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ESTIMATED NET PROFIT'**
+  String get truckerLoadDetailEstimatedNetProfitLabel;
+
+  /// No description provided for @truckerLoadDetailEstimatedNetLossLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ESTIMATED NET LOSS'**
+  String get truckerLoadDetailEstimatedNetLossLabel;
+
+  /// No description provided for @truckerLoadDetailNetProfitSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'After all expenses deducted from total fare'**
+  String get truckerLoadDetailNetProfitSubtitle;
+
+  /// No description provided for @truckerLoadDetailNetLossSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Expenses exceed total fare'**
+  String get truckerLoadDetailNetLossSubtitle;
+
+  /// No description provided for @truckerLoadDetailCostBreakdownLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'COST BREAKDOWN'**
+  String get truckerLoadDetailCostBreakdownLabel;
 
   /// No description provided for @trustScoreTitle.
   ///

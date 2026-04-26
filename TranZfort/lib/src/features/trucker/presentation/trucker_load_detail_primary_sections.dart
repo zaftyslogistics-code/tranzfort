@@ -9,6 +9,8 @@ class _LoadRoutePriceSection extends StatelessWidget {
   final String routeLabel;
   final MapsLauncherService mapsLauncher;
   final String Function(BuildContext, DateTime) formatDate;
+  final bool anyMatch;
+  final bool isSuperLoad;
 
   const _LoadRoutePriceSection({
     required this.l10n,
@@ -19,12 +21,15 @@ class _LoadRoutePriceSection extends StatelessWidget {
     required this.routeLabel,
     required this.mapsLauncher,
     required this.formatDate,
+    required this.anyMatch,
+    required this.isSuperLoad,
   });
 
   @override
   Widget build(BuildContext context) {
     final distanceKm = routeSnapshot?.distanceKm;
-    final durationMin = routeSnapshot?.durationMinutes;
+    final calculatedDurationMin = distanceKm != null ? _calculateDriveTimeMinutes(distanceKm) : null;
+    final durationLabel = calculatedDurationMin != null ? _formatDriveTime(calculatedDurationMin) : null;
 
     return Container(
       width: double.infinity,
@@ -40,7 +45,52 @@ class _LoadRoutePriceSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Price header on dark gradient
+          // Route label + badges header
+          Padding(
+            padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  routeLabel,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    letterSpacing: -0.3,
+                  ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                Wrap(
+                  spacing: AppSpacing.sm,
+                  runSpacing: AppSpacing.sm,
+                  children: [
+                    if (anyMatch)
+                      StatusBadge(
+                        label: l10n.truckerLoadDetailTruckMatchAvailable,
+                        icon: Icons.verified_outlined,
+                        palette: const StatusPalette(
+                          foreground: AppColors.success,
+                          background: AppColors.successBg,
+                        ),
+                      ),
+                    if (isSuperLoad)
+                      StatusBadge(
+                        label: l10n.truckerLoadDetailSuperLoadGuarantee,
+                        icon: Icons.workspace_premium_outlined,
+                        palette: const StatusPalette(
+                          foreground: AppColors.superLoadText,
+                          background: AppColors.superLoadBg,
+                        ),
+                      ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          // Price + pickup header
           Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
@@ -59,12 +109,30 @@ class _LoadRoutePriceSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
-                Text(
-                  l10n.truckerLoadDetailPickupLabel(formatDate(context, detail.summary.pickupDate)),
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFFA8BAB6),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppSpacing.sm,
+                    vertical: AppSpacing.xs,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF1C2A27),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFF2A3B37), width: 1),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.event, size: 14, color: Color(0xFF2DD4BF)),
+                      const SizedBox(width: AppSpacing.xs),
+                      Text(
+                        formatDate(context, detail.summary.pickupDate),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFA8BAB6),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -79,41 +147,7 @@ class _LoadRoutePriceSection extends StatelessWidget {
               originSubtitle: detail.originState,
               destinationSubtitle: detail.destinationState,
               distanceLabel: distanceKm != null ? '${distanceKm.toStringAsFixed(0)} km' : null,
-              durationLabel: durationMin != null ? _durationCompact(durationMin) : null,
-            ),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          // Key stats strip
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            padding: const EdgeInsets.all(AppSpacing.md),
-            decoration: BoxDecoration(
-              color: const Color(0xFF1C2A27),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: const Color(0xFF2A3B37), width: 1),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: _StatItem(
-                    icon: Icons.trip_origin,
-                    label: detail.summary.originLabel,
-                    value: 'Origin',
-                  ),
-                ),
-                Container(
-                  width: 1,
-                  height: 32,
-                  color: const Color(0xFF2A3B37),
-                ),
-                Expanded(
-                  child: _StatItem(
-                    icon: Icons.location_on_outlined,
-                    label: detail.summary.destinationLabel,
-                    value: 'Destination',
-                  ),
-                ),
-              ],
+              durationLabel: durationLabel,
             ),
           ),
           const SizedBox(height: AppSpacing.md),
@@ -129,10 +163,10 @@ class _LoadRoutePriceSection extends StatelessWidget {
                     icon: Icons.straighten,
                     text: l10n.truckerLoadDetailDistanceLabel(distanceKm.toStringAsFixed(1)),
                   ),
-                if (durationMin != null)
+                if (durationLabel != null)
                   _DarkChip(
                     icon: Icons.schedule,
-                    text: l10n.truckerLoadDetailDriveTimeLabel(durationMin),
+                    text: 'Est. drive time: $durationLabel',
                   ),
               ],
             ),
@@ -169,6 +203,7 @@ class _LoadNextStepSection extends ConsumerWidget {
   final bool bookingAllowed;
   final bool hasSingleApprovedTruck;
   final TruckerApprovedTruck? selectedTruck;
+  final bool selectedTruckMatches;
   final String bookingLabel;
   final String? gatingMessage;
   final String routeLabel;
@@ -187,6 +222,7 @@ class _LoadNextStepSection extends ConsumerWidget {
     required this.bookingAllowed,
     required this.hasSingleApprovedTruck,
     required this.selectedTruck,
+    required this.selectedTruckMatches,
     required this.bookingLabel,
     required this.gatingMessage,
     required this.routeLabel,
@@ -230,107 +266,76 @@ class _LoadNextStepSection extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: AppSpacing.md),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.subtleSurface,
-            borderRadius: BorderRadius.circular(AppRadius.button),
-            border: Border.all(color: AppColors.divider),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l10n.truckerLoadDetailApprovedTruckLabel,
-                style: Theme.of(context).textTheme.titleSmall,
-              ),
-              const SizedBox(height: AppSpacing.sm),
-              if (hasSingleApprovedTruck && selectedTruck != null) ...[
-                StatusBadge(
-                  label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck!.truckNumber),
-                  icon: Icons.local_shipping_outlined,
-                ),
-                const SizedBox(height: AppSpacing.sm),
-                Text(
-                  l10n.truckerLoadDetailSelectedTruckSummary(
-                    selectedTruck!.bodyType,
-                    selectedTruck!.truckNumber,
-                    selectedTruck!.tyres,
-                  ),
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-              ] else if (state.approvedTrucks.isNotEmpty)
-                AppDropdown<String>(
-                  label: l10n.truckerLoadDetailApprovedTruckLabel,
-                  value: state.selectedTruckId,
-                  items: [
-                    for (final truck in state.approvedTrucks)
-                      DropdownMenuItem(
-                        value: truck.id,
-                        child: Text(
-                          l10n.truckerLoadDetailTruckOptionLabel(
-                            truck.truckNumber,
-                            truck.bodyType,
-                            truck.tyres,
-                          ),
-                        ),
-                      ),
-                  ],
-                  onChanged: (value) => ref.read(truckerLoadDetailProvider(loadId).notifier).selectTruck(value),
-                ),
-              if (hasNoApprovedTrucks) ...[
-                Text(l10n.truckerLoadDetailNoApprovedTrucksAvailable),
-                const SizedBox(height: AppSpacing.md),
-                OutlineButton(
-                  label: l10n.truckerLoadDetailAddTruckFirstAction,
-                  onPressed: () async {
-                    final goToFleet = await confirmGoToFleet(context, l10n);
-                    if (goToFleet == true && context.mounted) {
-                      context.go(AppRoutes.fleetPath);
-                    }
-                  },
-                ),
-              ],
-            ],
-          ),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        GradientButton(
-          label: bookingLabel,
-          isLoading: state.isSubmittingBooking,
-          onPressed: bookingAllowed
-              ? () async {
-                  final selectedTruckId = state.selectedTruckId;
-                  final selectedTruckLabel = selectedTruck?.truckNumber ?? 'selected truck';
-                  if (selectedTruckId == null || selectedTruckId.trim().isEmpty) {
-                    return;
-                  }
-
-                  final confirmed = await confirmBooking(
-                    context,
-                    detail,
-                    selectedTruckLabel,
-                  );
-                  if (confirmed != true || !context.mounted) {
-                    return;
-                  }
-
-                  final result = await ref.read(truckerLoadDetailProvider(loadId).notifier).submitBookingRequest();
-                  if (!context.mounted) {
-                    return;
-                  }
-                  AppSnackbar.show(
-                    context: context,
-                    message: result.isSuccess
-                        ? l10n.truckerLoadDetailLoadBookedSuccess
-                        : _bookingSubmitFailureMessage(l10n),
-                    variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
-                  );
-                }
-              : null,
+        Text(
+          l10n.truckerLoadDetailApprovedTruckLabel,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         const SizedBox(height: AppSpacing.sm),
+        if (hasSingleApprovedTruck && selectedTruck != null) ...[
+          StatusBadge(
+            label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck!.truckNumber),
+            icon: Icons.local_shipping_outlined,
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            l10n.truckerLoadDetailSelectedTruckSummary(
+              selectedTruck!.bodyType,
+              selectedTruck!.truckNumber,
+              selectedTruck!.tyres,
+            ),
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ] else if (state.approvedTrucks.isNotEmpty)
+          AppDropdown<String>(
+            label: l10n.truckerLoadDetailApprovedTruckLabel,
+            value: state.selectedTruckId,
+            items: [
+              for (final truck in state.approvedTrucks)
+                DropdownMenuItem(
+                  value: truck.id,
+                  child: Text(
+                    l10n.truckerLoadDetailTruckOptionLabel(
+                      truck.truckNumber,
+                      truck.bodyType,
+                      truck.tyres,
+                    ),
+                  ),
+                ),
+            ],
+            onChanged: (value) => ref.read(truckerLoadDetailProvider(loadId).notifier).selectTruck(value),
+          ),
+        if (hasNoApprovedTrucks) ...[
+          Text(l10n.truckerLoadDetailNoApprovedTrucksAvailable),
+          const SizedBox(height: AppSpacing.md),
+          OutlineButton(
+            label: l10n.truckerLoadDetailAddTruckFirstAction,
+            onPressed: () async {
+              final goToFleet = await confirmGoToFleet(context, l10n);
+              if (goToFleet == true && context.mounted) {
+                context.go(AppRoutes.fleetPath);
+              }
+            },
+          ),
+        ],
+        if (selectedTruck != null) ...[
+          const SizedBox(height: AppSpacing.md),
+          StatusBadge(
+            label: selectedTruckMatches
+                ? l10n.truckerLoadDetailSelectedTruckMatches
+                : l10n.truckerLoadDetailSelectedTruckMayNotMatch,
+            icon: selectedTruckMatches ? Icons.check_circle_outline : Icons.info_outline,
+            palette: selectedTruckMatches
+                ? const StatusPalette(
+                    foreground: AppColors.success,
+                    background: AppColors.successBg,
+                  )
+                : const StatusPalette(
+                    foreground: AppColors.warning,
+                    background: AppColors.warningBg,
+                  ),
+          ),
+        ],
+        const SizedBox(height: AppSpacing.md),
         _StartConversationButton(
           supplierId: detail.supplierId,
           truckerId: profile?.id,
@@ -338,18 +343,12 @@ class _LoadNextStepSection extends ConsumerWidget {
           blockedReason: gatingMessage,
         ),
         const SizedBox(height: AppSpacing.md),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.cardSurface,
-            borderRadius: BorderRadius.circular(AppRadius.button),
-            border: Border.all(color: AppColors.divider),
-          ),
-          child: Column(
-            children: [
-              OutlineButton(
-                label: l10n.truckerLoadDetailShareLoadAction,
+        Row(
+          children: [
+            Expanded(
+              child: TextButton.icon(
+                icon: const Icon(Icons.share_outlined, size: 18),
+                label: Text(l10n.truckerLoadDetailShareLoadAction),
                 onPressed: () async {
                   final action = await showAppBottomSheet<String>(
                     context: context,
@@ -394,9 +393,11 @@ class _LoadNextStepSection extends ConsumerWidget {
                   }
                 },
               ),
-              const SizedBox(height: AppSpacing.sm),
-              OutlineButton(
-                label: l10n.commonReportSpamOrAbuseAction,
+            ),
+            Expanded(
+              child: TextButton.icon(
+                icon: const Icon(Icons.flag_outlined, size: 18),
+                label: Text(l10n.commonReportSpamOrAbuseAction),
                 onPressed: () => context.push(
                   AppRoutes.reportIssuePath,
                   extra: ReportIssueContext(
@@ -407,53 +408,119 @@ class _LoadNextStepSection extends ConsumerWidget {
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ],
     );
   }
 }
 
-class _StatItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final String value;
+class _StickyBookingBar extends ConsumerWidget {
+  final String loadId;
 
-  const _StatItem({
-    required this.icon,
-    required this.label,
-    required this.value,
-  });
+  const _StickyBookingBar({required this.loadId});
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Icon(icon, size: 20, color: const Color(0xFF2DD4BF)),
-        const SizedBox(height: AppSpacing.xs),
-        Text(
-          value,
-          style: const TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF6B807B),
-            letterSpacing: 0.8,
-          ),
-        ),
-        const SizedBox(height: 2),
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: Color(0xFFA8BAB6),
-          ),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final state = ref.watch(truckerLoadDetailProvider(loadId));
+    final detail = state.detail;
+    final profileAsync = ref.watch(truckerProfileProvider);
+    final profile = profileAsync.valueOrNull;
+
+    if (detail == null) return const SizedBox.shrink();
+
+    final selectedTruck = state.approvedTrucks.where((t) => t.id == state.selectedTruckId).firstOrNull;
+    final bookingStatus = detail.latestBookingRequest?.status;
+
+    final bool bookingAllowed;
+    {
+      final gating = _trustGatingMessageSticky(l10n, profile, state.approvedTrucks);
+      if (gating != null) {
+        bookingAllowed = false;
+      } else {
+        final loadStatus = detail.summary.status;
+        if (loadStatus != 'active' && loadStatus != 'assigned_partial') {
+          bookingAllowed = false;
+        } else if (bookingStatus == 'submitted' || bookingStatus == 'approved') {
+          bookingAllowed = false;
+        } else {
+          bookingAllowed = state.selectedTruckId != null && state.selectedTruckId!.trim().isNotEmpty;
+        }
+      }
+    }
+
+    final bookingLabel = switch (bookingStatus) {
+      'submitted' => l10n.truckerLoadDetailRequestSubmittedAction,
+      'approved' => l10n.truckerLoadDetailBookedAction,
+      _ => l10n.truckerLoadDetailBookThisLoadAction,
+    };
+
+    return GradientButton(
+      label: bookingLabel,
+      isLoading: state.isSubmittingBooking,
+      onPressed: bookingAllowed
+          ? () async {
+              final selectedTruckId = state.selectedTruckId;
+              final selectedTruckLabel = selectedTruck?.truckNumber ?? 'selected truck';
+              if (selectedTruckId == null || selectedTruckId.trim().isEmpty) {
+                return;
+              }
+
+              final confirmed = await showDialog<bool>(
+                context: context,
+                builder: (dialogContext) => AlertDialog(
+                  title: Text(l10n.truckerLoadDetailConfirmBookingTitle),
+                  content: Text(
+                    l10n.truckerLoadDetailConfirmBookingMessage(
+                      detail.summary.material,
+                      '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
+                      selectedTruckLabel,
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.of(dialogContext).pop(false),
+                      child: Text(l10n.commonCancelAction),
+                    ),
+                    PrimaryButton(
+                      label: l10n.truckerLoadDetailBookThisLoadAction,
+                      onPressed: () => Navigator.of(dialogContext).pop(true),
+                    ),
+                  ],
+                ),
+              );
+              if (confirmed != true || !context.mounted) {
+                return;
+              }
+
+              final result = await ref.read(truckerLoadDetailProvider(loadId).notifier).submitBookingRequest();
+              if (!context.mounted) {
+                return;
+              }
+              AppSnackbar.show(
+                context: context,
+                message: result.isSuccess
+                    ? l10n.truckerLoadDetailLoadBookedSuccess
+                    : _bookingSubmitFailureMessage(l10n),
+                variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+              );
+            }
+          : null,
     );
+  }
+
+  static String? _trustGatingMessageSticky(AppLocalizations? l10n, TruckerProfile? profile, List<TruckerApprovedTruck> approvedTrucks) {
+    if (profile == null || !profile.isVerified) {
+      return l10n?.truckerLoadDetailVerificationRequiredMessage ??
+          'Complete trucker verification before booking loads or starting supplier chat.';
+    }
+    if (approvedTrucks.isEmpty) {
+      return l10n?.truckerLoadDetailTruckApprovalRequiredMessage ??
+          'Add and approve at least one truck before booking this load.';
+    }
+    return null;
   }
 }
 

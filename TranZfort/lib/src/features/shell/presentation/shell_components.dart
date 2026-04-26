@@ -13,6 +13,7 @@ class DetailPageScaffold extends StatelessWidget {
   final String? ttsSummary;
   final String? ttsScreenKey;
   final bool? showBackArrow;
+  final Widget? bottomWidget;
 
   const DetailPageScaffold({
     super.key,
@@ -21,6 +22,7 @@ class DetailPageScaffold extends StatelessWidget {
     this.ttsSummary,
     this.ttsScreenKey,
     this.showBackArrow,
+    this.bottomWidget,
   });
 
   @override
@@ -47,30 +49,44 @@ class DetailPageScaffold extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          ShellScrollView(children: children),
+          ShellScrollView(
+            children: children,
+            bottomWidgetHeight: bottomWidget != null ? AppSpacing.bottomNavSafe + 80 : null,
+          ),
           TtsScreenSummaryEffect(
             summary: resolvedSummary,
             screenKey: ttsScreenKey ?? title,
           ),
         ],
       ),
+      bottomNavigationBar: bottomWidget != null
+          ? SafeArea(
+              minimum: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.lg,
+                vertical: AppSpacing.md,
+              ),
+              child: bottomWidget!,
+            )
+          : null,
     );
   }
 }
 
 class ShellScrollView extends StatelessWidget {
   final List<Widget> children;
+  final double? bottomWidgetHeight;
 
-  const ShellScrollView({super.key, required this.children});
+  const ShellScrollView({super.key, required this.children, this.bottomWidgetHeight});
 
   @override
   Widget build(BuildContext context) {
+    final bottomPadding = bottomWidgetHeight ?? AppSpacing.bottomNavSafe;
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(
+      padding: EdgeInsets.fromLTRB(
         AppSpacing.lg,
         AppSpacing.xl,
         AppSpacing.lg,
-        AppSpacing.bottomNavSafe + AppSpacing.xl,
+        bottomPadding + AppSpacing.xl,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
