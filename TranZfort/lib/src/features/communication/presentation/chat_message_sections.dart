@@ -50,6 +50,7 @@ class _ChatMessagesBody extends StatelessWidget {
       itemBuilder: (context, index) {
         final rendered = renderedMessages[index];
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (rendered.showDateDivider && rendered.dateLabel != null) ...[
               Center(

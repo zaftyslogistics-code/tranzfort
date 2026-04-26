@@ -754,6 +754,6 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 
 **Solution:** Merge `feature/load-detail-redesign-and-capacity-fix` into `feature/message-improvements` to combine both feature sets.
 
-**Status:** 🔄 Merge in progress
+**Status:** ✅ Merge completed and pushed (commit 0e5b2b2)
 
 ---
