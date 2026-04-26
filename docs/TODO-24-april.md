@@ -652,4 +652,54 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 
 ---
 
+### 13.18 Chat UI Polishing Fixes
+
+**Issues Reported:**
+1. Text contrast: Chat bubble backgrounds have good contrast but text is difficult to read
+2. Bubble alignment: Bubbles appear centered instead of standard left/right alignment
+3. Read receipts: Currently shows double ticks for both sent and read states
+4. Composer: "Box under a box" visual issue with nested containers
+
+**Root Cause Analysis:**
+
+| Issue | Current State | Problem |
+|---|---|---|
+| Text contrast | Outgoing: `primaryChipBg` (E6F4F2) with default theme text<br>Incoming: `subtleSurface` (EFEDE9) with default theme text | Default text color likely `textMuted` or `textSecondary` - insufficient contrast on light backgrounds |
+| Bubble alignment | `CrossAxisAlignment.end/start` on Column with `maxWidth: 320` | Bubbles may appear centered due to lack of horizontal margin/padding in ListView |
+| Read receipts | `message.isRead ? '✓✓' : '✓✓'` | Bug: shows double ticks for both states |
+| Composer | Outer Container (`canvas`, shadow, top border) + inner Container (`cardSurface`, border, rounded) | Nested containers create "box under a box" visual |
+
+**Proposed Fixes (Existing Tokens Only):**
+
+| Element | Current | Proposed | Token | Rationale |
+|---|---|---|---|---|
+| Outgoing bubble text | Theme default | `primaryChipText` | 0xFF0A5550 | Designed for primaryChipBg - high contrast dark teal |
+| Incoming bubble text | Theme default | `textPrimary` | 0xFF1C1917 | Highest contrast on subtleSurface |
+| Outgoing bubble margin | None | Left margin `AppSpacing.md` | 16px | Pushes outgoing to right side |
+| Incoming bubble margin | None | Right margin `AppSpacing.md` | 16px | Pushes incoming to left side |
+| Read receipt (sent) | `'✓✓'` | `'✓'` | Single tick | Standard: single tick = sent/delivered |
+| Read receipt (read) | `'✓✓'` | `'✓✓'` | Double tick | Standard: double tick = read |
+| Composer outer box | `canvas` + shadow + border | Remove outer Container | N/A | Eliminate "box under a box" |
+| Composer inner box | `cardSurface` + border + rounded | Keep, remove shadow | N/A | Single clean container |
+
+**Design Principle:**
+- Use designed color pairs (`primaryChipText` for `primaryChipBg`) for guaranteed contrast
+- Add horizontal margins to bubbles for proper left/right positioning
+- Follow standard WhatsApp/Telegram read receipt pattern (single → double)
+- Simplify composer to single container for cleaner visual
+
+**Tasks:**
+- [ ] **13.18.1** Outgoing bubble text: change from default theme text to `primaryChipText`
+- [ ] **13.18.2** Incoming bubble text: change from default theme text to `textPrimary`
+- [ ] **13.18.3** Outgoing bubble: add `margin: EdgeInsets.only(left: AppSpacing.md)`
+- [ ] **13.18.4** Incoming bubble: add `margin: EdgeInsets.only(right: AppSpacing.md)`
+- [ ] **13.18.5** Read receipt (sent state): change from `'✓✓'` to `'✓'`
+- [ ] **13.18.6** Read receipt (read state): keep `'✓✓'` (already correct, just fix logic)
+- [ ] **13.18.7** Composer: remove outer Container wrapper, keep only inner input Container
+- [ ] **13.18.8** Composer: remove shadow from inner Container (no longer needed without outer box)
+- [ ] **13.18.9** Test on device — verify text readability, bubble alignment, read receipts, composer appearance
+- [ ] **13.18.10** Run `flutter analyze` — zero new errors
+
+---
+
 ## Issue Log: Verification Status Bug (26 Apr 2026)
