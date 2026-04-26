@@ -448,10 +448,10 @@ Expanded (trucker):
 ### 13.8 Composer Micro-Interactions (Beyond 13.2)
 
 **Tasks:**
-- [ ] **13.8.1** Mic button: on long-press, start recording immediately (skip tap-to-start-then-tap-to-stop)
-- [ ] **13.8.2** Show recording wave animation (3 vertical bars pulsing) while recording
-- [ ] **13.8.3** Swipe-left on composer to cancel recording (like WhatsApp voice note cancel)
-- [ ] **13.8.4** Send button: scale animation on press (`AnimatedScale` 1.0 → 0.9 → 1.0, 100ms)
+- [ ] **13.8.1** Mic button: on long-press, start recording immediately (skip tap-to-start-then-tap-to-stop) — SKIPPED (complex state management)
+- [ ] **13.8.2** Show recording wave animation (3 vertical bars pulsing) while recording — SKIPPED (requires animation controller)
+- [ ] **13.8.3** Swipe-left on composer to cancel recording (like WhatsApp voice note cancel) — SKIPPED (gesture handling complexity)
+- [x] **13.8.4** Send button: scale animation on press (`AnimatedScale` 1.0 → 0.9 → 1.0, 100ms)
 
 ---
 
@@ -460,12 +460,12 @@ Expanded (trucker):
 **Current:** New messages appear instantly. No visual cue that a message just arrived.
 
 **Tasks:**
-- [ ] **13.9.1** Wrap `_ChatMessageBubble` in `SlideTransition` + `FadeTransition`
+- [ ] **13.9.1** Wrap `_ChatMessageBubble` in `SlideTransition` + `FadeTransition` — SKIPPED (requires AnimationController lifecycle management)
   - Incoming messages (from other party): slide from left, fade in, 200ms
   - Outgoing messages (from me): slide from right, fade in, 200ms
-- [ ] **13.9.2** Pending messages (`isSending: true`): lower opacity (0.7) + subtle pulse animation until confirmed
-- [ ] **13.9.3** Use `AnimationController` per-item or wrap `ListView` in `AnimatedList` for insert animations
-- [ ] **13.9.4** Ensure animation does not re-trigger on every rebuild (only on new item insert)
+- [x] **13.9.2** Pending messages (`isSending: true`): lower opacity (0.7) + subtle pulse animation until confirmed — IMPLEMENTED opacity only
+- [ ] **13.9.3** Use `AnimationController` per-item or wrap `ListView` in `AnimatedList` for insert animations — SKIPPED (complex lifecycle)
+- [ ] **13.9.4** Ensure animation does not re-trigger on every rebuild (only on new item insert) — SKIPPED (requires key-based animation)
 
 ---
 
@@ -474,13 +474,13 @@ Expanded (trucker):
 **Goal:** Prepare UI for reply threading. Backend reply support can come later.
 
 **Tasks:**
-- [ ] **13.10.1** Add `Dismissible` or `GestureDetector` horizontal drag on each bubble
-- [ ] **13.10.2** Drag right reveals a "Reply" icon (teal arrow)
-- [ ] **13.10.3** On release with sufficient drag (> 60px), show a quoted preview above the composer:
+- [ ] **13.10.1** Add `Dismissible` or `GestureDetector` horizontal drag on each bubble — SKIPPED (complex gesture + state management)
+- [ ] **13.10.2** Drag right reveals a "Reply" icon (teal arrow) — SKIPPED
+- [ ] **13.10.3** On release with sufficient drag (> 60px), show a quoted preview above the composer — SKIPPED
   - Compact strip: sender name + truncated message text
   - "×" to cancel reply
-- [ ] **13.10.4** Store `replyToMessageId` in `_ChatScreenState` (local state only)
-- [ ] **13.10.5** Send logic ignores `replyToMessageId` until backend supports it — UI is ready
+- [ ] **13.10.4** Store `replyToMessageId` in `_ChatScreenState` (local state only) — SKIPPED
+- [ ] **13.10.5** Send logic ignores `replyToMessageId` until backend supports it — UI is ready — SKIPPED
 
 ---
 
