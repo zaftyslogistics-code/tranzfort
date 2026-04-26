@@ -689,16 +689,16 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 - Simplify composer to single container for cleaner visual
 
 **Tasks:**
-- [ ] **13.18.1** Outgoing bubble text: change from default theme text to `primaryChipText`
-- [ ] **13.18.2** Incoming bubble text: change from default theme text to `textPrimary`
-- [ ] **13.18.3** Outgoing bubble: add `margin: EdgeInsets.only(left: AppSpacing.md)`
-- [ ] **13.18.4** Incoming bubble: add `margin: EdgeInsets.only(right: AppSpacing.md)`
-- [ ] **13.18.5** Read receipt (sent state): change from `'✓✓'` to `'✓'`
-- [ ] **13.18.6** Read receipt (read state): keep `'✓✓'` (already correct, just fix logic)
-- [ ] **13.18.7** Composer: remove outer Container wrapper, keep only inner input Container
-- [ ] **13.18.8** Composer: remove shadow from inner Container (no longer needed without outer box)
+- [x] **13.18.1** Outgoing bubble text: change from default theme text to `primaryChipText`
+- [x] **13.18.2** Incoming bubble text: change from default theme text to `textPrimary`
+- [x] **13.18.3** Outgoing bubble: add `margin: EdgeInsets.only(left: AppSpacing.md)`
+- [x] **13.18.4** Incoming bubble: add `margin: EdgeInsets.only(right: AppSpacing.md)`
+- [x] **13.18.5** Read receipt (sent state): change from `'✓✓'` to `'✓'`
+- [x] **13.18.6** Read receipt (read state): keep `'✓✓'` (already correct, just fix logic)
+- [x] **13.18.7** Composer: remove outer Container wrapper, keep only inner input Container
+- [x] **13.18.8** Composer: remove shadow from inner Container (no longer needed without outer box)
 - [ ] **13.18.9** Test on device — verify text readability, bubble alignment, read receipts, composer appearance
-- [ ] **13.18.10** Run `flutter analyze` — zero new errors
+- [x] **13.18.10** Run `flutter analyze` — zero new errors
 
 ---
 
