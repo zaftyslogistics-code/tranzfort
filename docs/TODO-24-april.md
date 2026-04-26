@@ -702,4 +702,58 @@ The trucker load detail page (`trucker_load_detail_primary_sections.dart`) uses 
 
 ---
 
-## Issue Log: Verification Status Bug (26 Apr 2026)
+## Issue Log
+
+### Verification Status Bug (26 Apr 2026)
+
+**Issue:** After installing the new APK with TODO-24 changes, a previously verified trucker user was shown as unverified and asked to complete verification again.
+
+**Root Cause Investigation:**
+- The only change that touched database queries was adding a `profile_trust_scores` join to `TruckerLoadDetailRepository.fetchSupplierProfile`
+- This join was intended to fetch `avg_rating` and `review_count` for supplier profiles displayed on the load detail screen
+- The trucker's own verification status is fetched separately via `TruckerProfileRepository.fetchProfile` (no joins)
+- **Unexpected behavior:** Despite being separate repositories, the join somehow affected the trucker's verification status
+
+**Tasks Reverted to Fix Issue:**
+1. Removed `profile_trust_scores!left(avg_rating, review_count)` join from `TruckerLoadDetailRepository.fetchSupplierProfile`
+2. Removed `avgRating` and `reviewCount` fields from `TruckerSupplierSummary` model
+3. Removed `_readTrustScore` and `_readTrustCount` helper methods from `TruckerLoadDetailRepository`
+4. Removed `StarRatingDisplay` widget from supplier row in `trucker_load_detail_sections.dart`
+5. Removed import of `star_rating_input.dart` from `trucker_load_detail_screen.dart`
+
+**Status:** ✅ Issue resolved after revert
+
+**Next Steps for Investigation:**
+- Understand why a join in `TruckerLoadDetailRepository.fetchSupplierProfile` (supplier data) affected `TruckerProfileRepository.fetchProfile` (current user data)
+- Possible causes to investigate:
+  - Supabase query cache or connection pooling issue
+  - Shared Supabase client instance affecting query execution order
+  - RLS (Row Level Security) policy conflict
+  - Data type mismatch in join causing query failure that affected subsequent queries
+- Alternative approach: Fetch rating data separately via a dedicated RPC or separate query, not via join
+- Test in isolation: Create a minimal reproduction case with just the join to verify the issue
+
+### Load Detail Changes Missing on APK (27 Apr 2026)
+
+**Issue:** After building APK from `feature/message-improvements` branch and testing on phone, Load detail redesign changes are missing (hero section, chip cleanup, duplicate button removal), only dark card shows.
+
+**Root Cause:**
+- Load detail redesign was implemented on `feature/load-detail-redesign-and-capacity-fix` branch (commits `1afe153`, `2023b65`)
+- `feature/message-improvements` branch was created from commit `c245ffe` (BEFORE Load detail redesign commits)
+- Current branch only has chat improvements (13.17, 13.18), missing Load detail changes
+- Dark card appears because it's from earlier UI-UX phase work (`a690517`) that's in the history
+
+**Missing Changes:**
+- Hero section chip cleanup (status, price chips removed)
+- Duplicate "Open in Google Maps" button removal
+- Route label truncation (city-only format)
+- Material summary line dropped
+- Capacity matching bug fix (`weightTonnes / trucksNeeded`)
+- Sticky bottom CTA for "Book This Load"
+- Share/Report overflow menu restructure
+
+**Solution:** Merge `feature/load-detail-redesign-and-capacity-fix` into `feature/message-improvements` to combine both feature sets.
+
+**Status:** 🔄 Merge in progress
+
+---
