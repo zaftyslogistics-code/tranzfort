@@ -441,7 +441,7 @@ class _RecentLoadCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} > ${load.destinationLabel}',
+      title: '${load.originLabel} to ${load.destinationLabel}',
       subtitle: '${load.material} - ${tonnes}T - ${localizedSupplierPriceType(l10n, load.priceType)}',
       trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(

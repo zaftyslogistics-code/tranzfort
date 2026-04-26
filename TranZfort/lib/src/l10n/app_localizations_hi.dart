@@ -3867,7 +3867,7 @@ class AppLocalizationsHi extends AppLocalizations {
     Object destinationLabel,
     Object originLabel,
   ) {
-    return 'Trucker trip - $originLabel > $destinationLabel';
+    return 'ट्रकर ट्रिप - $originLabel से $destinationLabel';
   }
 
   @override
@@ -5062,6 +5062,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailRoutePriceSummaryTitle => 'मार्ग और कीमत सारांश';
 
   @override
+  String get truckerLoadDetailRouteMapTitle => 'Route map';
+
+  @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
     return 'पिकअप: $pickupDate';
   }
@@ -5097,6 +5100,21 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed) {
     return 'ट्रक चाहिए: $booked/$needed बुक किए गए';
+  }
+
+  @override
+  String truckerLoadDetailPerTruckWeightLabel(Object weight) {
+    return 'Per truck: ${weight}T';
+  }
+
+  @override
+  String truckerLoadDetailCapacityRangeLabel(Object maxT, Object minT) {
+    return 'Acceptable truck: ${minT}T – ${maxT}T';
+  }
+
+  @override
+  String truckerLoadDetailSlotsOpenLabel(Object count) {
+    return '$count slots open';
   }
 
   @override
@@ -5796,6 +5814,31 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get truckerLoadDetailCostTileDisclaimer =>
       'अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।';
+
+  @override
+  String get truckerLoadDetailEarningsEstimateTitle => 'TRIP EARNINGS ESTIMATE';
+
+  @override
+  String get truckerLoadDetailTotalFareLabel => 'TOTAL FARE (LOAD VALUE)';
+
+  @override
+  String get truckerLoadDetailTotalExpenseLabel => 'TOTAL EXPENSE';
+
+  @override
+  String get truckerLoadDetailEstimatedNetProfitLabel => 'ESTIMATED NET PROFIT';
+
+  @override
+  String get truckerLoadDetailEstimatedNetLossLabel => 'ESTIMATED NET LOSS';
+
+  @override
+  String get truckerLoadDetailNetProfitSubtitle =>
+      'After all expenses deducted from total fare';
+
+  @override
+  String get truckerLoadDetailNetLossSubtitle => 'Expenses exceed total fare';
+
+  @override
+  String get truckerLoadDetailCostBreakdownLabel => 'COST BREAKDOWN';
 
   @override
   String get trustScoreTitle => 'विश्वास और समीक्षाएं';

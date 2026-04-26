@@ -1701,7 +1701,7 @@
   "truckerTripDetailPodUploadedSuccess": "POD सफलतापूर्वक अपलोड हो गया। अब सप्लायर की पुष्टि लंबित है।",
   "truckerTripDetailCallSupplierAction": "सप्लायर को कॉल करें",
   "commonOpenInGoogleMapsAction": "गूगल मैप्स में खोलें",
-  "truckerTripDetailReportSourceLabel": "Trucker trip - {originLabel} > {destinationLabel}",
+  "truckerTripDetailReportSourceLabel": "ट्रकर ट्रिप - {originLabel} से {destinationLabel}",
   "truckerTripDetailReviewCountdownTitle": "डिलीवरी समीक्षा काउंटडाउन",
   "truckerTripDetailReviewCountdownMessage": "Supplier confirmation pending है। अगर कोई action नहीं ली जाती, तो POD upload के 48 घंटे बाद यह trip auto-complete हो जाती है।",
   "truckerTripDetailDisputeStatusTitle": "विवाद स्थिति",

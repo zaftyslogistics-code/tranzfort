@@ -338,7 +338,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
               ),
               const SizedBox(height: 8),
               Text(
-                l10n.truckerTripDetailRouteLabel('${detail.originLabel} > ${detail.destinationLabel}'),
+                l10n.truckerTripDetailRouteLabel('${detail.originLabel} to ${detail.destinationLabel}'),
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 4),

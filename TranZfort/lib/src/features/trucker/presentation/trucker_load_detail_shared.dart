@@ -195,7 +195,7 @@ class _EarningsEstimateCard extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      'TRIP EARNINGS ESTIMATE',
+                      l10n.truckerLoadDetailEarningsEstimateTitle,
                       style: AppTypography.labelMicro.copyWith(
                         color: AppColors.primaryOnDark,
                         letterSpacing: 1.3,
@@ -203,7 +203,7 @@ class _EarningsEstimateCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 2),
                     Text(
-                      '${tripCost.distanceKm.toStringAsFixed(0)} km · @ ${tripCost.mileageUsed.toStringAsFixed(1)} km/L · ₹${tripCost.dieselPricePerLitre.toStringAsFixed(0)}/L',
+                      '${tripCost.distanceKm.toStringAsFixed(0)} km · ₹${(tripCost.totalLoadValue / tripCost.distanceKm).toStringAsFixed(0)}/km · @ ${tripCost.mileageUsed.toStringAsFixed(1)} km/L · ₹${tripCost.dieselPricePerLitre.toStringAsFixed(0)}/L',
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.inkTextSecondary,
                           ),
@@ -230,7 +230,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'TOTAL FARE (LOAD VALUE)',
+                  l10n.truckerLoadDetailTotalFareLabel,
                   style: AppTypography.labelMicro.copyWith(
                     color: AppColors.primaryOnDark,
                     letterSpacing: 1.1,
@@ -273,7 +273,7 @@ class _EarningsEstimateCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'TOTAL EXPENSE',
+                  l10n.truckerLoadDetailTotalExpenseLabel,
                   style: AppTypography.labelMicro.copyWith(
                     color: AppColors.inkTextSecondary,
                     letterSpacing: 1.1,
@@ -317,7 +317,9 @@ class _EarningsEstimateCard extends StatelessWidget {
                     ),
                     const SizedBox(width: 6),
                     Text(
-                      tripCost.isProfitable ? 'ESTIMATED NET PROFIT' : 'ESTIMATED NET LOSS',
+                      tripCost.isProfitable
+                          ? l10n.truckerLoadDetailEstimatedNetProfitLabel
+                          : l10n.truckerLoadDetailEstimatedNetLossLabel,
                       style: AppTypography.labelMicro.copyWith(
                         color: profitColor,
                         letterSpacing: 1.1,
@@ -336,8 +338,8 @@ class _EarningsEstimateCard extends StatelessWidget {
                 const SizedBox(height: 4),
                 Text(
                   tripCost.isProfitable
-                      ? 'After all expenses deducted from total fare'
-                      : 'Expenses exceed total fare',
+                      ? l10n.truckerLoadDetailNetProfitSubtitle
+                      : l10n.truckerLoadDetailNetLossSubtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: AppColors.inkTextSecondary,
                       ),
@@ -348,7 +350,7 @@ class _EarningsEstimateCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.md),
           // ── Breakdown Grid (2 columns) ──
           Text(
-            'COST BREAKDOWN',
+            l10n.truckerLoadDetailCostBreakdownLabel,
             style: AppTypography.labelMicro.copyWith(
               color: AppColors.inkTextMuted,
               letterSpacing: 1.3,
@@ -417,7 +419,7 @@ class _EarningsEstimateCard extends StatelessWidget {
                     size: 16, color: AppColors.inkTextSecondary),
                 const SizedBox(width: 8),
                 Text(
-                  'TOTAL EXPENSE',
+                  l10n.truckerLoadDetailTotalExpenseLabel,
                   style: AppTypography.labelMicro.copyWith(
                     color: AppColors.inkTextSecondary,
                     letterSpacing: 1.1,
@@ -560,4 +562,43 @@ void _startChat(BuildContext context, WidgetRef ref, String loadId, TruckerLoadD
       );
     },
   );
+}
+
+/// Calculate estimated drive time in minutes based on 300km per day.
+/// Formula: (distanceKm / 300) * 1440 (1440 = 24 hours × 60 minutes)
+int _calculateDriveTimeMinutes(double distanceKm) {
+  if (distanceKm <= 0) return 0;
+  final days = distanceKm / 300;
+  return (days * 1440).round();
+}
+
+/// Format drive time in a human-readable format (days and hours).
+/// Example: 2880 minutes -> "2 days", 2160 minutes -> "1 day 12 hours", 120 minutes -> "2 hours"
+String _formatDriveTime(int minutes) {
+  if (minutes <= 0) return '0 min';
+  if (minutes < 60) return '$minutes min';
+  
+  final hours = minutes / 60;
+  if (hours < 24) {
+    final h = hours.floor();
+    final m = (minutes % 60).floor();
+    if (m == 0) return '${h}h';
+    return '${h}h ${m}m';
+  }
+  
+  final days = hours / 24;
+  final d = days.floor();
+  final remainingHours = (hours % 24).floor();
+  final remainingMinutes = (minutes % 60).floor();
+  
+  if (remainingHours == 0 && remainingMinutes == 0) {
+    return '$d day${d == 1 ? '' : 's'}';
+  }
+  if (remainingHours > 0 && remainingMinutes == 0) {
+    return '${d}day${d == 1 ? '' : 's'} ${remainingHours}h';
+  }
+  if (remainingHours == 0 && remainingMinutes > 0) {
+    return '${d}day${d == 1 ? '' : 's'} ${remainingMinutes}m';
+  }
+  return '${d}day${d == 1 ? '' : 's'} ${remainingHours}h ${remainingMinutes}m';
 }

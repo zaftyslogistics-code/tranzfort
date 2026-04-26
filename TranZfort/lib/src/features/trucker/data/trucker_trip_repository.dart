@@ -408,7 +408,7 @@ class TruckerTripsRepository {
       truckerId: (map['trucker_id'] ?? '').toString(),
       supplierId: (map['supplier_id'] ?? '').toString(),
       stage: (map['stage'] ?? 'assigned').toString(),
-      routeLabel: destinationLabel.isEmpty ? originLabel : '$originLabel > $destinationLabel',
+      routeLabel: destinationLabel.isEmpty ? originLabel : '$originLabel to $destinationLabel',
       material: material,
       truckId: (map['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),

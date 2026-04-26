@@ -56,7 +56,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
           ),
         if (!state.isLoading && detail != null) ...[
               HeroActionCard(
-                title: '${detail.summary.originLabel} > ${detail.summary.destinationLabel}',
+                title: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
                   formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),

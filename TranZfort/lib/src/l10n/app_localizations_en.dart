@@ -3853,7 +3853,7 @@ class AppLocalizationsEn extends AppLocalizations {
     Object destinationLabel,
     Object originLabel,
   ) {
-    return 'Trucker trip - $originLabel > $destinationLabel';
+    return 'Trucker trip - $originLabel to $destinationLabel';
   }
 
   @override
@@ -5049,6 +5049,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Route and price summary';
 
   @override
+  String get truckerLoadDetailRouteMapTitle => 'Route map';
+
+  @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
     return 'Pickup: $pickupDate';
   }
@@ -5085,6 +5088,21 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String truckerLoadDetailTrucksNeededLabel(Object booked, Object needed) {
     return 'Trucks needed: $booked/$needed booked';
+  }
+
+  @override
+  String truckerLoadDetailPerTruckWeightLabel(Object weight) {
+    return 'Per truck: ${weight}T';
+  }
+
+  @override
+  String truckerLoadDetailCapacityRangeLabel(Object maxT, Object minT) {
+    return 'Acceptable truck: ${minT}T – ${maxT}T';
+  }
+
+  @override
+  String truckerLoadDetailSlotsOpenLabel(Object count) {
+    return '$count slots open';
   }
 
   @override
@@ -5784,6 +5802,31 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get truckerLoadDetailCostTileDisclaimer =>
       'Estimates assume ₹11/km toll, ₹5/km driver, ₹2/km misc. Actual costs vary.';
+
+  @override
+  String get truckerLoadDetailEarningsEstimateTitle => 'TRIP EARNINGS ESTIMATE';
+
+  @override
+  String get truckerLoadDetailTotalFareLabel => 'TOTAL FARE (LOAD VALUE)';
+
+  @override
+  String get truckerLoadDetailTotalExpenseLabel => 'TOTAL EXPENSE';
+
+  @override
+  String get truckerLoadDetailEstimatedNetProfitLabel => 'ESTIMATED NET PROFIT';
+
+  @override
+  String get truckerLoadDetailEstimatedNetLossLabel => 'ESTIMATED NET LOSS';
+
+  @override
+  String get truckerLoadDetailNetProfitSubtitle =>
+      'After all expenses deducted from total fare';
+
+  @override
+  String get truckerLoadDetailNetLossSubtitle => 'Expenses exceed total fare';
+
+  @override
+  String get truckerLoadDetailCostBreakdownLabel => 'COST BREAKDOWN';
 
   @override
   String get trustScoreTitle => 'Trust & Reviews';

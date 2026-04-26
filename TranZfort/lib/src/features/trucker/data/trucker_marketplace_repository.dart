@@ -193,9 +193,9 @@ class MarketplaceLoadItem {
   };
 
   /// Minimum truck capacity acceptable for this load, derived from selected tyre counts.
-  /// Returns null when any tyre count is selected (i.e. no filtering).
+  /// Returns a wide fallback (7T) when any tyre count is selected.
   double? get derivedMinTruckCapacityTonnes {
-    if (requiredTyres.isEmpty) return null;
+    if (requiredTyres.isEmpty) return 7.0;
     final mins = requiredTyres
         .map((t) => _tyreToPayloadRange[t]?.min)
         .whereType<double>();
@@ -203,9 +203,9 @@ class MarketplaceLoadItem {
   }
 
   /// Maximum truck capacity acceptable for this load, derived from selected tyre counts.
-  /// Returns null when any tyre count is selected.
+  /// Returns a wide fallback (42T) when any tyre count is selected.
   double? get derivedMaxTruckCapacityTonnes {
-    if (requiredTyres.isEmpty) return null;
+    if (requiredTyres.isEmpty) return 42.0;
     final maxs = requiredTyres
         .map((t) => _tyreToPayloadRange[t]?.max)
         .whereType<double>();

@@ -50,7 +50,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     final gatingMessage = _trustGatingMessage(l10n, profile, state.approvedTrucks);
     final hasNoApprovedTrucks = state.approvedTrucks.isEmpty;
     final hasSingleApprovedTruck = state.approvedTrucks.length == 1 && selectedTruck != null;
-    final routeLabel = '${detail.originCity}, ${detail.originState ?? ''} > ${detail.destinationCity}, ${detail.destinationState ?? ''}';
+    final routeLabel = '${detail.originCity} to ${detail.destinationCity}';
     final hasRoutePreview =
         detail.originLat != null && detail.originLng != null && detail.destinationLat != null && detail.destinationLng != null;
     final mapsUri = mapsLauncher.buildDirectionsUri(
@@ -64,50 +64,6 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        HeroActionCard(
-          title: routeLabel,
-          subtitle: l10n.truckerLoadDetailHeroSubtitle(
-            _formatDate(context, detail.summary.pickupDate),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                spacing: AppSpacing.sm,
-                runSpacing: AppSpacing.sm,
-                children: [
-                  if (anyMatch)
-                    StatusBadge(
-                      label: l10n.truckerLoadDetailTruckMatchAvailable,
-                      icon: Icons.verified_outlined,
-                      palette: const StatusPalette(
-                        foreground: AppColors.success,
-                        background: AppColors.successBg,
-                      ),
-                    ),
-                  if (detail.summary.isSuperLoad)
-                    StatusBadge(
-                      label: l10n.truckerLoadDetailSuperLoadGuarantee,
-                      icon: Icons.workspace_premium_outlined,
-                      palette: const StatusPalette(
-                        foreground: AppColors.superLoadText,
-                        background: AppColors.superLoadBg,
-                      ),
-                    ),
-                ],
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              Text(
-                l10n.truckerLoadDetailMaterialSummary(
-                  detail.summary.advancePercentage,
-                  detail.summary.material,
-                  _tonnes(detail.summary.weightTonnes),
-                ),
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
-            ],
-          ),
-        ),
         if (state.failure != null) ...[
           const SizedBox(height: AppSpacing.sectionGap),
           WarningBlock(
@@ -129,6 +85,8 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           routeLabel: routeLabel,
           mapsLauncher: mapsLauncher,
           formatDate: _formatDate,
+          anyMatch: anyMatch,
+          isSuperLoad: detail.summary.isSuperLoad,
         ),
         if (hasRoutePreview) ...[
           const SizedBox(height: AppSpacing.sectionGap),
@@ -153,6 +111,10 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
               spacing: AppSpacing.xs,
               runSpacing: AppSpacing.xs,
               children: [
+                _DetailFactChip(
+                  icon: Icons.inventory_2_outlined,
+                  text: l10n.truckerLoadDetailMaterialLabel(detail.summary.material),
+                ),
                 _DetailFactChip(
                   icon: Icons.local_shipping_outlined,
                   text: l10n.truckerLoadDetailBodyTypeLabel(
@@ -196,38 +158,6 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                       detail.summary.trucksNeeded - detail.summary.trucksBooked,
                     ),
                   ),
-              ],
-            ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.sectionGap),
-        DetailSectionCard(
-          title: l10n.truckerLoadDetailCargoScheduleTitle,
-          children: [
-            Wrap(
-              spacing: AppSpacing.xs,
-              runSpacing: AppSpacing.xs,
-              children: [
-                _DetailFactChip(
-                  icon: Icons.inventory_2_outlined,
-                  text: l10n.truckerLoadDetailMaterialLabel(detail.summary.material),
-                ),
-                _DetailFactChip(
-                  icon: Icons.scale_outlined,
-                  text: l10n.truckerLoadDetailWeightLabel(_tonnes(detail.summary.weightTonnes)),
-                ),
-                _DetailFactChip(
-                  icon: Icons.trip_origin,
-                  text: l10n.truckerLoadDetailOriginCityLabel(
-                    '${detail.originCity}${detail.originState == null ? '' : ', ${detail.originState}'}',
-                  ),
-                ),
-                _DetailFactChip(
-                  icon: Icons.location_on_outlined,
-                  text: l10n.truckerLoadDetailDestinationCityLabel(
-                    '${detail.destinationCity}${detail.destinationState == null ? '' : ', ${detail.destinationState}'}',
-                  ),
-                ),
               ],
             ),
           ],
@@ -309,16 +239,14 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                       ),
                     ),
                     const SizedBox(width: AppSpacing.sm),
-                    const Icon(Icons.chevron_right, color: AppColors.neutral),
+                    IconButton(
+                      icon: const Icon(Icons.chat_bubble_outline, color: AppColors.primary),
+                      tooltip: l10n.truckerChatSupplierAction,
+                      onPressed: () => _startChat(context, ref, loadId, detail),
+                    ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            OutlineButton(
-              label: l10n.truckerChatSupplierAction,
-              onPressed: () => _startChat(context, ref, loadId, detail),
-              height: 40,
             ),
           ],
         ),
@@ -406,7 +334,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         content: Text(
           l10n.truckerLoadDetailConfirmBookingMessage(
             detail.summary.material,
-            '${detail.summary.originLabel} > ${detail.summary.destinationLabel}',
+            '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
             truckNumber,
           ),
         ),
@@ -516,7 +444,7 @@ class _LoadRouteMapSection extends StatelessWidget {
     final bounds = LatLngBounds.fromPoints(<LatLng>[origin, destination]);
 
     return DetailSectionCard(
-      title: l10n.truckerLoadDetailRoutePriceSummaryTitle,
+      title: l10n.truckerLoadDetailRouteMapTitle,
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(AppRadius.card),
