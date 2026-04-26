@@ -101,7 +101,7 @@ class _ChatMessageBubble extends StatelessWidget {
       return Center(
         child: Text(
           message.textBody ?? l10n.commonSystemUpdateLabel,
-          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
           textAlign: TextAlign.center,
         ),
       );
@@ -122,6 +122,10 @@ class _ChatMessageBubble extends StatelessWidget {
             decoration: BoxDecoration(
               color: background,
               borderRadius: BorderRadius.circular(AppRadius.card),
+              border: Border.all(
+                color: AppColors.inkBorder.withValues(alpha: message.isFromCurrentUser ? 0.15 : 0.10),
+                width: 1,
+              ),
             ),
             child: _ChatMessageContent(message: message, loadId: loadId),
           ),
@@ -147,8 +151,7 @@ class _ChatMessageBubble extends StatelessWidget {
                   Text(
                     message.isRead ? '✓✓' : '✓✓',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: message.isRead ? AppColors.primary : AppColors.textMuted,
-                          fontSize: 12,
+                          color: AppColors.primaryOnDark,
                         ),
                   ),
               ],

@@ -226,6 +226,12 @@ class _ChatComposerState extends State<_ChatComposer> {
         decoration: BoxDecoration(
           color: AppColors.canvas,
           boxShadow: AppShadows.elevation1,
+          border: Border(
+            top: BorderSide(
+              color: AppColors.inkBorder.withValues(alpha: 0.20),
+              width: 1,
+            ),
+          ),
         ),
         padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
         child: Row(
