@@ -333,7 +333,7 @@ class SupplierLoadRepository {
     if (!CreateLoadDto.isSupportedPriceType(dto.priceType)) {
       return const ValidationFailure(
         message: 'Select a valid price type',
-        fieldErrors: {'price_type': 'Price type must be fixed, per_ton, or legacy negotiable'},
+        fieldErrors: {'price_type': 'Price type must be fixed or per_ton'},
       );
     }
 

@@ -29,7 +29,7 @@ String localizedSupplierBookingStatus(AppLocalizations l10n, String status) {
 String localizedSupplierPriceType(AppLocalizations l10n, String value) {
   final normalized = switch (value.trim().toLowerCase()) {
     'fixed' => 'fixed',
-    'per_ton' || 'negotiable' => 'per_ton',
+    'per_ton' => 'per_ton',
     _ => 'other',
   };
   return l10n.supplierPostLoadPriceTypeValue(normalized);

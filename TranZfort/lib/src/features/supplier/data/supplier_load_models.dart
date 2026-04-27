@@ -80,36 +80,23 @@ class CreateLoadDto {
   }
 
   /// Feature flag: when true, 'per_ton' is sent directly to the backend RPC.
-  /// When false (current default), 'per_ton' maps to 'negotiable' for legacy DB enum.
-  ///
-  /// Flip to true only after DB migration adds 'per_ton' to the price_type enum
-  /// and the create_load RPC accepts it directly.
-  static bool backendSupportsPerTonDirectly = false;
+  /// After DB migration and data migration, this is always true.
+  static bool backendSupportsPerTonDirectly = true;
 
   /// Maps UI-facing price type to database enum value.
   ///
-  /// Mapping contract:
-  /// - `'per_ton'` → `'negotiable'` (legacy DB enum does not include 'per_ton')
-  ///   when [backendSupportsPerTonDirectly] is false.
-  /// - `'per_ton'` → `'per_ton'` (direct pass-through)
-  ///   when [backendSupportsPerTonDirectly] is true.
-  /// - `'fixed'` → `'fixed'` (direct pass-through)
-  /// - `'negotiable'` → `'negotiable'` (direct pass-through for backward compatibility)
+  /// All supported values pass through directly. Legacy 'negotiable' was
+  /// migrated to 'per_ton' in migration 20260428000002.
   static String backendPriceType(String value) {
-    final normalized = value.trim().toLowerCase();
-    if (normalized == 'per_ton') {
-      return backendSupportsPerTonDirectly ? 'per_ton' : 'negotiable';
-    }
-    return normalized;
+    return value.trim().toLowerCase();
   }
 
-  /// Validates supported price type values (both UI-facing and DB-facing).
+  /// Validates supported price type values.
   ///
-  /// Accepts: `'fixed'`, `'per_ton'` (UI-facing), `'negotiable'` (DB-facing).
-  /// This allows backward compatibility with existing data that may use either value.
+  /// Accepts: `'fixed'`, `'per_ton'`. Legacy `'negotiable'` data was migrated.
   static bool isSupportedPriceType(String value) {
     final normalized = value.trim().toLowerCase();
-    return normalized == 'fixed' || normalized == 'per_ton' || normalized == 'negotiable';
+    return normalized == 'fixed' || normalized == 'per_ton';
   }
 }
 
@@ -508,7 +495,7 @@ class LoadListItemDto {
       trucksNeeded: _readInt(map['trucks_needed']),
       trucksBooked: _readInt(map['trucks_booked']),
       priceAmount: (map['price_amount'] ?? 0) as num,
-      priceType: _uiPriceType((map['price_type'] ?? 'negotiable').toString()),
+      priceType: _uiPriceType((map['price_type'] ?? 'per_ton').toString()),
       pickupDate: (map['pickup_date'] ?? '').toString(),
       status: (map['status'] ?? 'draft').toString(),
       requiredBodyType: map['required_body_type']?.toString(),
@@ -541,11 +528,7 @@ class LoadListItemDto {
   }
 
   static String _uiPriceType(String value) {
-    final normalized = value.trim().toLowerCase();
-    if (normalized == 'negotiable') {
-      return 'per_ton';
-    }
-    return normalized;
+    return value.trim().toLowerCase();
   }
 
   static int _readInt(Object? value) {

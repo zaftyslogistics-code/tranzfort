@@ -90,7 +90,7 @@ class TruckerLoadShareService {
     final normalized = value.trim().toLowerCase();
     return l10n.supplierPostLoadPriceTypeValue(switch (normalized) {
       'fixed' => 'fixed',
-      'per_ton' || 'negotiable' => 'per_ton',
+      'per_ton' => 'per_ton',
       _ => 'unknown',
     });
   }
