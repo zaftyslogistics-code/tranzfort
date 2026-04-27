@@ -26,7 +26,11 @@ String? Function(BuildContext, GoRouterState) _createRedirectHandler(Ref ref) {
         }
         return AppRoutes.splashPath;
       }
-      return null;
+      // Profile resolution failed or is incomplete. Stay on splash/public routes only.
+      if (path == AppRoutes.splashPath || isPublicRoute) {
+        return null;
+      }
+      return AppRoutes.splashPath;
     }
 
     if (!hasSession && !isPublicRoute) {
