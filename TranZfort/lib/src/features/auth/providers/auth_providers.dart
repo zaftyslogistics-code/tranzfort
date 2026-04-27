@@ -12,6 +12,7 @@ class AuthScreenState {
   final String? pendingVerificationEmail;
   final bool showCheckEmailState;
   final bool isSignUpMode;
+  final bool authRefreshTimedOut;
 
   const AuthScreenState({
     this.isLoading = false,
@@ -19,6 +20,7 @@ class AuthScreenState {
     this.pendingVerificationEmail,
     this.showCheckEmailState = false,
     this.isSignUpMode = false,
+    this.authRefreshTimedOut = false,
   });
 
   AuthScreenState copyWith({
@@ -28,6 +30,7 @@ class AuthScreenState {
     bool? clearPendingEmail,
     bool? showCheckEmailState,
     bool? isSignUpMode,
+    bool? authRefreshTimedOut,
   }) {
     return AuthScreenState(
       isLoading: isLoading ?? this.isLoading,
@@ -35,14 +38,19 @@ class AuthScreenState {
       pendingVerificationEmail: clearPendingEmail == true ? null : pendingVerificationEmail ?? this.pendingVerificationEmail,
       showCheckEmailState: showCheckEmailState ?? this.showCheckEmailState,
       isSignUpMode: isSignUpMode ?? this.isSignUpMode,
+      authRefreshTimedOut: authRefreshTimedOut ?? this.authRefreshTimedOut,
     );
   }
 }
 
 class OnboardingState {
   final bool isSubmitting;
-  
-  const OnboardingState({this.isSubmitting = false});
+  final bool authRefreshTimedOut;
+
+  const OnboardingState({
+    this.isSubmitting = false,
+    this.authRefreshTimedOut = false,
+  });
 }
 
 class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
@@ -65,7 +73,11 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
           BusinessRuleFailure(message: roleWorkspaceFailureCode),
         );
       }
-      await _refreshAuthState();
+      final refreshed = await _refreshAuthState();
+      if (!refreshed) {
+        state = const OnboardingState(isSubmitting: false, authRefreshTimedOut: true);
+        return result;
+      }
     }
     
     state = const OnboardingState(isSubmitting: false);
@@ -105,19 +117,29 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
           BusinessRuleFailure(message: termsAcceptanceRequiredCode),
         );
       }
-      await _refreshAuthState();
+      final refreshed = await _refreshAuthState();
+      if (!refreshed) {
+        this.state = const OnboardingState(isSubmitting: false, authRefreshTimedOut: true);
+        return updateResult;
+      }
     }
     
     this.state = const OnboardingState(isSubmitting: false);
     return updateResult;
   }
 
-  Future<void> _refreshAuthState() async {
+  /// Refreshes auth state with a 4-second timeout.
+  /// Returns `true` if the refresh completed, `false` on timeout.
+  /// Callers should check the return value and set `authRefreshTimedOut`
+  /// in state if the UI needs to warn the user.
+  Future<bool> _refreshAuthState() async {
     ref.invalidate(authStateProvider);
     try {
       await ref.read(authStateProvider.future).timeout(const Duration(seconds: 4));
+      return true;
     } catch (e) {
       AppLogger.warning('Auth state refresh timed out or failed', scope: 'auth', error: e);
+      return false;
     }
   }
 }
@@ -162,7 +184,10 @@ class AuthScreenController extends AutoDisposeNotifier<AuthScreenState> {
     state = state.copyWith(isLoading: false);
     
     if (result.isSuccess) {
-      await _refreshAuthState();
+      final refreshed = await _refreshAuthState();
+      if (!refreshed) {
+        state = state.copyWith(authRefreshTimedOut: true);
+      }
     }
     
     return result;
@@ -174,7 +199,10 @@ class AuthScreenController extends AutoDisposeNotifier<AuthScreenState> {
     state = state.copyWith(isLoading: false);
     
     if (result.isSuccess) {
-      await _refreshAuthState();
+      final refreshed = await _refreshAuthState();
+      if (!refreshed) {
+        state = state.copyWith(authRefreshTimedOut: true);
+      }
     }
     
     return result;
@@ -186,7 +214,10 @@ class AuthScreenController extends AutoDisposeNotifier<AuthScreenState> {
     state = state.copyWith(isLoading: false);
     
     if (result.isSuccess) {
-      await _refreshAuthState();
+      final refreshed = await _refreshAuthState();
+      if (!refreshed) {
+        state = state.copyWith(authRefreshTimedOut: true);
+      }
       final refreshedAuthState = ref.read(currentAuthStateProvider);
       if (!refreshedAuthState.hasSession) {
         openCheckEmailState(email);
@@ -210,12 +241,18 @@ class AuthScreenController extends AutoDisposeNotifier<AuthScreenState> {
     return result;
   }
 
-  Future<void> _refreshAuthState() async {
+  /// Refreshes auth state with a 4-second timeout.
+  /// Returns `true` if the refresh completed, `false` on timeout.
+  /// Callers should check the return value and set `authRefreshTimedOut`
+  /// in state if the UI needs to warn the user.
+  Future<bool> _refreshAuthState() async {
     ref.invalidate(authStateProvider);
     try {
       await ref.read(authStateProvider.future).timeout(const Duration(seconds: 4));
-    } catch (_) {
-      // Ignore timeout, we'll fall back to the current state in the UI routing
+      return true;
+    } catch (e) {
+      AppLogger.warning('Auth state refresh timed out or failed', scope: 'auth', error: e);
+      return false;
     }
   }
 }
