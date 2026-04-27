@@ -162,7 +162,8 @@ class StepReviewSubmit extends ConsumerWidget {
 
     result.when(
       success: (caseId) {
-        context.go(AppRoutes.dashboardPath);
+        final role = state.isSupplier ? 'supplier' : (state.isTrucker ? 'trucker' : null);
+        context.go(AppRoutes.homeForRole(role));
       },
       failure: (error) {
       },

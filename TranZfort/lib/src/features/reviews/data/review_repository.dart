@@ -109,7 +109,7 @@ class SupabaseReviewBackend implements ReviewBackend {
       return response.whereType<Map<String, dynamic>>().toList(growable: false);
     }
 
-    return [];
+    throw FormatException('Unexpected RPC response type: ${response.runtimeType}');
   }
 
   @override
@@ -132,7 +132,7 @@ class SupabaseReviewBackend implements ReviewBackend {
       return response.whereType<Map<String, dynamic>>().toList(growable: false);
     }
 
-    return [];
+    throw FormatException('Unexpected RPC response type: ${response.runtimeType}');
   }
 
   @override

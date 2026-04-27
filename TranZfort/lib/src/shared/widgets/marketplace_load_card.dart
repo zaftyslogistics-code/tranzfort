@@ -45,12 +45,16 @@ class MarketplaceLoadCard extends StatelessWidget {
         : load.weightTonnes.toStringAsFixed(1);
     final routeSnapshot = load.routeSnapshot;
 
-    final totalLoadValue = load.priceAmount * load.weightTonnes;
+    final isPerTon = load.priceType == 'per_ton';
+    final totalLoadValue = isPerTon
+        ? load.priceAmount * load.weightTonnes
+        : load.priceAmount;
     final costEstimate = tripCostingService.estimate(
       distanceKm: routeSnapshot?.distanceKm,
       loadWeightTonnes: load.weightTonnes,
       dieselPricePerLitre: dieselPrice,
-      priceAmountPerTonne: load.priceAmount,
+      priceAmountPerTonne: isPerTon ? load.priceAmount : null,
+      fixedPriceAmount: isPerTon ? null : load.priceAmount,
     );
 
     return Material(
@@ -222,7 +226,9 @@ class MarketplaceLoadCard extends StatelessWidget {
                                 ),
                           ),
                           Text(
-                            '@ ₹${load.priceAmount.toStringAsFixed(0)}/T · ${tonnes}T',
+                            isPerTon
+                                ? '@ ₹${load.priceAmount.toStringAsFixed(0)}/T · ${tonnes}T'
+                                : 'Fixed: ₹${load.priceAmount.toStringAsFixed(0)} · ${tonnes}T',
                             style: AppTypography.labelMicro.copyWith(
                               color: AppColors.inkTextSecondary,
                               letterSpacing: 0.2,

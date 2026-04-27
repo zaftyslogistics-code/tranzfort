@@ -52,6 +52,7 @@ class TripCostingService {
     required double? loadWeightTonnes,
     required double? dieselPricePerLitre,
     double? priceAmountPerTonne,
+    double? fixedPriceAmount,
     double? mileageEmptyKmpl,
     double? mileageLoadedKmpl,
     double? payloadKg,
@@ -79,7 +80,10 @@ class TripCostingService {
     final tollPlazas = (distanceKm / 60).round().clamp(0, 50);
 
     // Net profit (only if we know load value)
-    final totalLoadValue = (priceAmountPerTonne ?? 0) * (loadWeightTonnes ?? 0);
+    // For per-ton loads: multiply by weight; for fixed-price loads: use fixed amount directly
+    final totalLoadValue = fixedPriceAmount != null
+        ? fixedPriceAmount
+        : (priceAmountPerTonne ?? 0) * (loadWeightTonnes ?? 0);
     final netProfit = totalLoadValue - totalExpense;
 
     return TripCostEstimate(

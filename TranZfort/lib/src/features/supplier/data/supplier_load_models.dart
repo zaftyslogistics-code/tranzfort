@@ -79,20 +79,26 @@ class CreateLoadDto {
     };
   }
 
+  /// Feature flag: when true, 'per_ton' is sent directly to the backend RPC.
+  /// When false (current default), 'per_ton' maps to 'negotiable' for legacy DB enum.
+  ///
+  /// Flip to true only after DB migration adds 'per_ton' to the price_type enum
+  /// and the create_load RPC accepts it directly.
+  static bool backendSupportsPerTonDirectly = false;
+
   /// Maps UI-facing price type to database enum value.
   ///
   /// Mapping contract:
-  /// - `'per_ton'` → `'negotiable'` (DB enum does not include 'per_ton')
+  /// - `'per_ton'` → `'negotiable'` (legacy DB enum does not include 'per_ton')
+  ///   when [backendSupportsPerTonDirectly] is false.
+  /// - `'per_ton'` → `'per_ton'` (direct pass-through)
+  ///   when [backendSupportsPerTonDirectly] is true.
   /// - `'fixed'` → `'fixed'` (direct pass-through)
   /// - `'negotiable'` → `'negotiable'` (direct pass-through for backward compatibility)
-  ///
-  /// NOTE: The DB `price_type` enum currently has values: `fixed`, `negotiable`.
-  /// If the DB enum is updated to include `per_ton`, this mapping should be
-  /// revisited to remove the `per_ton` → `negotiable` translation.
   static String backendPriceType(String value) {
     final normalized = value.trim().toLowerCase();
     if (normalized == 'per_ton') {
-      return 'negotiable';
+      return backendSupportsPerTonDirectly ? 'per_ton' : 'negotiable';
     }
     return normalized;
   }

@@ -99,7 +99,7 @@ class NotificationDto {
       actionRouteHint: nullableString(map['action_route_hint']),
       isRead: map['is_read'] == true,
       readAt: readDate(map['read_at']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: readDate(map['created_at']) ?? DateTime.now(),
     );
   }
 

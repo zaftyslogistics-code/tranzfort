@@ -1,0 +1,115 @@
+Analyzing tranzfort.com-v-1.1...                                
+
+warning - The receiver can't be 'null' because of short-circuiting, so the null-aware operator '?.' can't be used - Admin\lib\src\core\providers\admin_app_state_providers.dart:85:49 - invalid_null_aware_operator
+   info - Unnecessary braces in a string interpolation - Admin\lib\src\features\shell\presentation\admin_shell_screens.dart:139:25 - unnecessary_brace_in_string_interps
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:94:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:95:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:97:9 - avoid_print
+warning - The value of the local variable 'client' isn't used - TranZfort\integration_test\avatar_integration_test.dart:104:13 - unused_local_variable
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:108:7 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:109:7 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:127:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:128:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:130:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:153:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:174:11 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:175:11 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:176:11 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:178:11 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:181:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:199:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:200:9 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\integration_test\avatar_integration_test.dart:202:9 - avoid_print
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\navigation\navigation_service.dart:110:11 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\navigation\navigation_service.dart:111:11 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\navigation\navigation_service.dart:195:11 - use_null_aware_elements
+warning - Unused import: 'package:flutter/foundation.dart' - TranZfort\lib\src\core\providers\app_state_providers.dart:1:8 - unused_import
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\services\monitoring_service.dart:33:9 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\services\monitoring_service.dart:52:9 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\lib\src\core\services\monitoring_service.dart:90:9 - use_null_aware_elements
+warning - The stack trace variable 'stackTrace' isn't used and can be removed - TranZfort\lib\src\core\widgets\tts_focus_field.dart:100:21 - unused_catch_stack
+   info - Don't use 'BuildContext's across async gaps, guarded by an unrelated 'mounted' check - TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart:269:21 - use_build_context_synchronously
+warning - The value of the local variable 'selectedSuggestion' isn't used - TranZfort\lib\src\features\auth\presentation\onboarding_profile_completion.dart:309:22 - unused_local_variable
+warning - The declaration '_fetchConversationPreview' isn't referenced - TranZfort\lib\src\features\communication\data\chat_repository.dart:359:40 - unused_element
+warning - The declaration '_sortConversationPreviews' isn't referenced - TranZfort\lib\src\features\communication\data\chat_repository.dart:385:29 - unused_element
+warning - The declaration '_mapEquals' isn't referenced - TranZfort\lib\src\features\communication\data\chat_repository.dart:395:8 - unused_element
+warning - Unused import: 'package:flutter/foundation.dart' - TranZfort\lib\src\features\notifications\data\push_runtime_service.dart:5:8 - unused_import
+   info - Dangling library doc comment - TranZfort\lib\src\features\profile\data\public_profile_models.dart:1:1 - dangling_library_doc_comments
+warning - Unused import: '../../../core/error/result.dart' - TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart:4:8 - unused_import
+warning - Unused import: '../data/public_profile_repository.dart' - TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart:6:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\supplier_public_profile_screen.dart:153:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\trucker_public_profile_screen.dart:237:51 - deprecated_member_use
+warning - Unused import: 'package:tranzfort/src/core/error/app_failure.dart' - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:3:8 - unused_import
+warning - Unused import: 'package:tranzfort/src/core/error/result.dart' - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:4:8 - unused_import
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:182:51 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:200:11 - unused_local_variable
+   info - Unnecessary use of multiple underscores - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:209:33 - unnecessary_underscores
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\load_history_section.dart:301:22 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\profile_header_card.dart:149:42 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\profile_header_card.dart:163:24 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\profile_header_card.dart:165:29 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\profile_header_card.dart:210:53 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart:18:11 - unused_local_variable
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart:100:49 - deprecated_member_use
+warning - The value of the local variable 'colorScheme' isn't used - TranZfort\lib\src\features\profile\presentation\widgets\trust_score_card.dart:117:11 - unused_local_variable
+   info - Dangling library doc comment - TranZfort\lib\src\features\reviews\data\review_models.dart:1:1 - dangling_library_doc_comments
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\reviews_section.dart:308:53 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\reviews_section.dart:322:55 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\widgets\review_card.dart:47:61 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\widgets\review_card.dart:144:45 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\widgets\review_prompt_sheet.dart:135:51 - deprecated_member_use
+   info - 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss - TranZfort\lib\src\features\reviews\presentation\widgets\reviewer_mini_card.dart:29:54 - deprecated_member_use
+   info - Don't use 'BuildContext's across async gaps - TranZfort\lib\src\features\reviews\utils\review_trigger_helper.dart:69:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - TranZfort\lib\src\features\reviews\utils\review_trigger_helper.dart:95:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - TranZfort\lib\src\features\reviews\utils\review_trigger_helper.dart:121:7 - use_build_context_synchronously
+   info - Don't use 'BuildContext's across async gaps - TranZfort\lib\src\features\reviews\utils\review_trigger_helper.dart:155:7 - use_build_context_synchronously
+   info - The 'children' argument should be last in widget constructor invocations - TranZfort\lib\src\features\shell\presentation\shell_components.dart:53:13 - sort_child_properties_last
+warning - The receiver can't be null, so the null-aware operator '?.' is unnecessary - TranZfort\lib\src\features\shell\presentation\shell_profile_screen.dart:64:54 - invalid_null_aware_operator
+warning - The '!' will have no effect because the receiver can't be null - TranZfort\lib\src\features\shell\presentation\shell_profile_screen.dart:64:103 - unnecessary_non_null_assertion
+warning - Unused import: 'package:url_launcher/url_launcher.dart' - TranZfort\lib\src\features\shell\presentation\shell_settings_screen.dart:4:8 - unused_import
+   info - The import of 'package:flutter/foundation.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - TranZfort\lib\src\features\shell\presentation\supplier_shell_load_detail_sections.dart:1:8 - unnecessary_import
+warning - Unnecessary cast - TranZfort\lib\src\features\supplier\data\supplier_load_repository_backend.dart:140:48 - unnecessary_cast
+warning - The declaration '_localizedLoadDetailStatus' isn't referenced - TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_screen.dart:101:8 - unused_element
+warning - The declaration '_durationCompact' isn't referenced - TranZfort\lib\src\features\trucker\presentation\trucker_load_detail_screen.dart:114:8 - unused_element
+   info - The import of 'package:flutter/foundation.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' - TranZfort\lib\src\shared\widgets\feedback_components.dart:1:8 - unnecessary_import
+   info - Library names are not necessary - TranZfort\test\core\mocks.dart:1:9 - unnecessary_library_name
+  error - '_FakeOnboardingAuthRepository.updateProfile' ('Future<Result<void>> Function({required String fullName, required String mobile})') isn't a valid override of 'AuthRepository.updateProfile' ('Future<Result<void>> Function({String? city, required String fullName, double? latitude, double? longitude, required String mobile, String? state})') - TranZfort\test\features\auth\presentation\onboarding_screens_test.dart:35:24 - invalid_override
+   info - The imported package 'async' isn't a dependency of the importing package - TranZfort\test\features\communication\data\chat_repository_test.dart:1:8 - depend_on_referenced_packages
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - TranZfort\test\features\trucker\data\trucker_marketplace_repository_test.dart:8:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - TranZfort\test\features\trucker\presentation\trucker_find_loads_screen_test.dart:67:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - TranZfort\test\features\trucker\providers\find_loads_provider_test.dart:5:7 - non_abstract_class_inherits_abstract_member
+warning - A value for optional parameter 'signedUrl' isn't ever given - TranZfort\test\features\verification\presentation\verification_screen_test.dart:22:39 - unused_element_parameter
+warning - The getter doesn't override an inherited getter - TranZfort\test\features\verification\presentation\verification_screen_test.dart:47:25 - override_on_non_overriding_member
+warning - The getter doesn't override an inherited getter - TranZfort\test\features\verification\presentation\verification_screen_test.dart:66:23 - override_on_non_overriding_member
+  error - Missing concrete implementation of 'abstract class ReviewBackend.getAllUserFeedback' - TranZfort\test\reviews\review_repository_test.dart:8:7 - non_abstract_class_inherits_abstract_member
+  error - Missing concrete implementation of 'abstract class TruckerMarketplaceBackend.fetchSupplierInfo' - TranZfort\test\widget_test.dart:63:7 - non_abstract_class_inherits_abstract_member
+   info - Use interpolation to compose strings and values - TranZfort\tool\strip_metadata_descriptions.dart:45:29 - prefer_interpolation_to_compose_strings
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:47:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:48:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:49:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:50:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:51:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:53:5 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:55:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:56:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\strip_metadata_descriptions.dart:58:5 - avoid_print
+warning - The value of the local variable 'header' isn't used - TranZfort\tool\triage_categorize.dart:37:9 - unused_local_variable
+   info - Use interpolation to compose strings and values - TranZfort\tool\triage_categorize.dart:117:28 - prefer_interpolation_to_compose_strings
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:123:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:124:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:125:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:126:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:127:3 - avoid_print
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_categorize.dart:128:3 - avoid_print
+   info - The type name 'p' isn't an UpperCamelCase identifier - TranZfort\tool\triage_categorize.dart:142:7 - camel_case_types
+warning - The value of the local variable 'passthroughPatterns' isn't used - TranZfort\tool\triage_l10n.dart:18:9 - unused_local_variable
+   info - Don't invoke 'print' in production code - TranZfort\tool\triage_l10n.dart:121:3 - avoid_print
+   info - The type name 'p' isn't an UpperCamelCase identifier - TranZfort\tool\triage_l10n.dart:124:7 - camel_case_types
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\tool\triage_l10n.dart:126:34 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\tool\triage_l10n.dart:126:60 - use_null_aware_elements
+warning - The value of the local variable 'toolDir' isn't used - TranZfort\tool\verify_l10n.dart:7:9 - unused_local_variable
+   info - Unnecessary braces in a string interpolation - TranZfort\tool\verify_l10n.dart:149:20 - unnecessary_brace_in_string_interps
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\tool\verify_l10n.dart:169:32 - use_null_aware_elements
+   info - Use the null-aware marker '?' rather than a null check via an 'if' - TranZfort\tool\verify_l10n.dart:169:58 - use_null_aware_elements
+
+111 issues found. (ran in 21.4s)

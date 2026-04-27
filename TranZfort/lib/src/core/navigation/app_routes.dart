@@ -75,4 +75,13 @@ class AppRoutes {
   static String publicProfileLocation(String userId) {
     return publicProfilePath.replaceAll(':userId', userId);
   }
+
+  /// Returns the role-specific home/dashboard path.
+  /// Falls back to [dashboardPath] if role is unrecognized.
+  static String homeForRole(String? role) {
+    final normalized = (role ?? '').trim().toLowerCase();
+    if (normalized == 'supplier') return supplierDashboardPath;
+    if (normalized == 'trucker') return truckerDashboardPath;
+    return dashboardPath;
+  }
 }

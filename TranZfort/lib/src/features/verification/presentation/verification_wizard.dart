@@ -66,13 +66,17 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
     }
 
     // Already verified - show success
+    final homePath = AppRoutes.homeForRole(
+      state.isSupplier ? 'supplier' : (state.isTrucker ? 'trucker' : null),
+    );
+
     if (state.isAlreadyVerified) {
-      return const _AlreadyVerifiedView();
+      return _AlreadyVerifiedView(homePath: homePath);
     }
 
     // Pending - show status
     if (state.isPending) {
-      return const _PendingStatusView();
+      return _PendingStatusView(homePath: homePath);
     }
 
     return PopScope(
@@ -89,8 +93,8 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
           // On first step, show exit dialog
           final navigator = Navigator.of(context);
           final shouldExit = await _showExitDialog(context, ref);
-          if (shouldExit && mounted) {
-            navigator.pop();
+          if (shouldExit && mounted && context.mounted) {
+            context.go(homePath);
           }
         }
       },
@@ -106,7 +110,12 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
           actions: [
             // Exit button with save draft dialog
             TextButton(
-              onPressed: () => _showExitDialog(context, ref),
+              onPressed: () async {
+                final shouldExit = await _showExitDialog(context, ref);
+                if (shouldExit && context.mounted) {
+                  context.go(homePath);
+                }
+              },
               child: Text(l10n.verificationWizardSaveAndExitAction),
             ),
           ],
@@ -184,15 +193,13 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
       ),
     );
 
-    if (shouldExit == true && context.mounted) {
-      context.go(AppRoutes.dashboardPath);
-    }
     return shouldExit ?? false;
   }
 }
 
 class _AlreadyVerifiedView extends StatelessWidget {
-  const _AlreadyVerifiedView();
+  final String homePath;
+  const _AlreadyVerifiedView({required this.homePath});
 
   @override
   Widget build(BuildContext context) {
@@ -217,7 +224,7 @@ class _AlreadyVerifiedView extends StatelessWidget {
             const SizedBox(height: AppSpacing.lg),
             PrimaryButton(
               label: l10n.commonDashboardLabel,
-              onPressed: () => context.go(AppRoutes.dashboardPath),
+              onPressed: () => context.go(homePath),
             ),
           ],
         ),
@@ -227,7 +234,8 @@ class _AlreadyVerifiedView extends StatelessWidget {
 }
 
 class _PendingStatusView extends StatelessWidget {
-  const _PendingStatusView();
+  final String homePath;
+  const _PendingStatusView({required this.homePath});
 
   @override
   Widget build(BuildContext context) {
@@ -260,7 +268,7 @@ class _PendingStatusView extends StatelessWidget {
               const SizedBox(height: AppSpacing.lg),
               OutlineButton(
                 label: l10n.commonDashboardLabel,
-                onPressed: () => context.go(AppRoutes.dashboardPath),
+                onPressed: () => context.go(homePath),
               ),
             ],
           ),

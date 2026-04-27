@@ -48,7 +48,9 @@ class SupabasePublicProfileBackend implements PublicProfileBackend {
       return response;
     }
 
-    return null;
+    throw FormatException(
+      'Unexpected RPC response type for get_public_profile: ${response.runtimeType}',
+    );
   }
 
   @override

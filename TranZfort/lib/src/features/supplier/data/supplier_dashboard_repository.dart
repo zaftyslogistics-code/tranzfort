@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -42,13 +44,34 @@ class SupabaseSupplierDashboardBackend implements SupplierDashboardBackend {
       params: {'p_supplier_id': supplierId},
     );
 
-    // Response is a single row with columns: active_loads, pending_bookings, etc.
-    final row = response as Map<String, dynamic>;
+    // Defensive parsing: support Map, JSON string, and null-safe count reads
+    Map<String, dynamic> row;
+    if (response is Map<String, dynamic>) {
+      row = response;
+    } else if (response is String) {
+      final decoded = jsonDecode(response);
+      if (decoded is! Map<String, dynamic>) {
+        throw FormatException('Expected Map from JSON string, got ${decoded.runtimeType}');
+      }
+      row = decoded;
+    } else if (response is Map) {
+      row = Map<String, dynamic>.from(response);
+    } else {
+      throw FormatException('Unexpected RPC response type: ${response.runtimeType}');
+    }
+
+    int safeCount(String key) {
+      final value = row[key];
+      if (value == null) return 0;
+      if (value is num) return value.toInt();
+      return int.tryParse(value.toString()) ?? 0;
+    }
+
     return [
-      (row['active_loads'] as num).toInt(),
-      (row['pending_bookings'] as num).toInt(),
-      (row['in_transit_trips'] as num).toInt(),
-      (row['completed_trips'] as num).toInt(),
+      safeCount('active_loads'),
+      safeCount('pending_bookings'),
+      safeCount('in_transit_trips'),
+      safeCount('completed_trips'),
     ];
   }
 }
