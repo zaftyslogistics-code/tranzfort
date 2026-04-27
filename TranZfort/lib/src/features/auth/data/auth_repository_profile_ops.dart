@@ -105,6 +105,7 @@ class AuthProfileRepository {
     String? state,
     double? latitude,
     double? longitude,
+    bool recordTerms = false,
   }) async {
     if (_client == null) {
       return const Failure<void>(UnauthorizedFailure());
@@ -130,6 +131,7 @@ class AuthProfileRepository {
       'p_location_lat': latitude,
       'p_location_lng': longitude,
       'p_location_source': hasGpsCoordinates ? 'gps' : (hasManualLocation ? 'manual' : null),
+      'p_record_terms': recordTerms,
     };
 
     try {
@@ -247,6 +249,7 @@ class AuthProfileRepository {
       state: trimmedState,
       latitude: latitude,
       longitude: longitude,
+      recordTerms: true,
     );
     if (upsertResult.isFailure) {
       return upsertResult;

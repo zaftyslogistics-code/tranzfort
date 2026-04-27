@@ -110,13 +110,6 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     );
     
     if (updateResult.isSuccess) {
-      final termsResult = await repository.recordTermsAcceptance();
-      if (termsResult.isFailure) {
-        this.state = const OnboardingState(isSubmitting: false);
-        return const Failure<void>(
-          BusinessRuleFailure(message: termsAcceptanceRequiredCode),
-        );
-      }
       final refreshed = await _refreshAuthState();
       if (!refreshed) {
         this.state = const OnboardingState(isSubmitting: false, authRefreshTimedOut: true);
