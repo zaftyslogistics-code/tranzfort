@@ -181,14 +181,14 @@ void _initializeRouteMetadata() {
   });
 
   // Detail Routes
-  RouteMetadataHelper.registerMetadata(AppRoutes.loadDetailPath, {
+  RouteMetadataHelper.registerMetadata('${AppRoutes.loadDetailPath}/:loadId', {
     'type': RouteType.nested,
     'showBackArrow': true,
     'requirePopScope': false,
     'testId': 'load_detail',
   });
 
-  RouteMetadataHelper.registerMetadata(AppRoutes.tripDetailPath, {
+  RouteMetadataHelper.registerMetadata('${AppRoutes.tripDetailPath}/:tripId', {
     'type': RouteType.nested,
     'showBackArrow': true,
     'requirePopScope': false,
@@ -202,7 +202,7 @@ void _initializeRouteMetadata() {
     'testId': 'route_preview',
   });
 
-  RouteMetadataHelper.registerMetadata(AppRoutes.chatPath, {
+  RouteMetadataHelper.registerMetadata('${AppRoutes.chatPath}/:conversationId', {
     'type': RouteType.nested,
     'showBackArrow': true,
     'requirePopScope': false,
@@ -231,7 +231,7 @@ void _initializeRouteMetadata() {
     'testId': 'trucker_verification',
   });
 
-  RouteMetadataHelper.registerMetadata(AppRoutes.raiseDisputePath, {
+  RouteMetadataHelper.registerMetadata('${AppRoutes.raiseDisputePath}/:tripId', {
     'type': RouteType.nested,
     'showBackArrow': true,
     'requirePopScope': true,
