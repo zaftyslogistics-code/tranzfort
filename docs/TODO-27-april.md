@@ -66,11 +66,11 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **5.11** Confirm `PostLoadState.initial()` default `advancePercentage` is `80` and advance slider max is `100` (product spec default is `80%`). — Verified: `advancePercentage: 80` in `post_load_provider.dart`.
 
 ### 6. Verification Security & Flow
-- [ ] **6.1** Move sensitive verification draft fields (Aadhaar, PAN, document paths) from `SharedPreferences` to encrypted secure storage, or avoid persisting identity numbers locally.
+- [x] **6.1** Move sensitive verification draft fields (Aadhaar, PAN, document paths) from `SharedPreferences` to encrypted secure storage, or avoid persisting identity numbers locally. — `VerificationDraftSecureStorage` created with `flutter_secure_storage`. Uses Android EncryptedSharedPreferences and iOS Keychain. Commits: `b3a2e6f`.
 - [x] **6.2** Harden `saveVerificationPacketFields()` Aadhaar length validation before any `substring()` operation. — Added `normalizedAadhaar.length < 4` check before substring; returns `ValidationFailure` with field error instead of crashing.
 - [ ] **6.3** Add atomic backend RPC for verification packet submission (documents + location + truck + identity in one transaction).
 - [ ] **6.4** Add client-side image quality checks (blur, size, compression) before upload; expose document-level status.
-- [ ] **6.5** Split `verification_wizard_provider.dart` (currently 746 lines) into smaller controllers: draft persistence, upload orchestration, location capture, truck draft, submission.
+- [x] **6.5** Split `verification_wizard_provider.dart` (currently 746 lines) into smaller controllers: draft persistence, upload orchestration, location capture, truck draft, submission. — Split into 6 part files (`navigation`, `identity`, `truck`, `business`, `location`, `submit`) + main file ~107 lines. Each part <300 lines. Commits: `b3a2e6f`.
 - [x] **6.6** Fix `_voiceLanguage()` misleading comment about Hindi mapping; document actual fallback behavior. — Comment updated in `contextual_tts_service.dart`: "Hindi -> hi-IN, all other languages -> en-GB. Device TTS engine falls back if locale isn't installed."
 
 ### 6a. Marketplace Feed (add to P1)
