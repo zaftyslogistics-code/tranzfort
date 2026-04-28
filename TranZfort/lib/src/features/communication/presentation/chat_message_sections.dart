@@ -4,15 +4,21 @@ class _ChatMessagesBody extends StatelessWidget {
   final ScrollController scrollController;
   final List<_RenderedChatMessage> renderedMessages;
   final bool isLoading;
+  final bool isLoadingOlder;
+  final bool hasMoreOlderMessages;
   final AppFailure? failure;
   final String? loadId;
+  final VoidCallback? onLoadOlder;
 
   const _ChatMessagesBody({
     required this.scrollController,
     required this.renderedMessages,
     required this.isLoading,
+    this.isLoadingOlder = false,
+    this.hasMoreOlderMessages = false,
     required this.failure,
     required this.loadId,
+    this.onLoadOlder,
   });
 
   @override
@@ -46,8 +52,34 @@ class _ChatMessagesBody extends StatelessWidget {
     return ListView.builder(
       controller: scrollController,
       padding: const EdgeInsets.fromLTRB(AppSpacing.lg, 0, AppSpacing.lg, AppSpacing.lg),
-      itemCount: renderedMessages.length,
+      itemCount: renderedMessages.length + (hasMoreOlderMessages || isLoadingOlder ? 1 : 0),
       itemBuilder: (context, index) {
+        if (hasMoreOlderMessages || isLoadingOlder) {
+          if (index == 0) {
+            return Padding(
+              padding: const EdgeInsets.only(top: AppSpacing.md, bottom: AppSpacing.md),
+              child: Center(
+                child: isLoadingOlder
+                    ? const SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : TextButton(
+                        onPressed: onLoadOlder,
+                        child: Text(
+                          'Load older messages',
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
+                      ),
+              ),
+            );
+          }
+          index -= 1;
+        }
         final rendered = renderedMessages[index];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,

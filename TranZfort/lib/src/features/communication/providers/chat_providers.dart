@@ -51,32 +51,42 @@ final unreadConversationCountProvider = StreamProvider.autoDispose<int>((ref) as
 
 class ConversationMessagesState {
   final bool isLoading;
+  final bool isLoadingOlder;
   final List<ChatMessage> messages;
+  final bool hasMoreOlderMessages;
   final AppFailure? failure;
 
   const ConversationMessagesState({
     required this.isLoading,
+    required this.isLoadingOlder,
     required this.messages,
+    required this.hasMoreOlderMessages,
     required this.failure,
   });
 
   factory ConversationMessagesState.initial() {
     return const ConversationMessagesState(
       isLoading: true,
+      isLoadingOlder: false,
       messages: <ChatMessage>[],
+      hasMoreOlderMessages: true,
       failure: null,
     );
   }
 
   ConversationMessagesState copyWith({
     bool? isLoading,
+    bool? isLoadingOlder,
     List<ChatMessage>? messages,
+    bool? hasMoreOlderMessages,
     AppFailure? failure,
     bool? clearFailure,
   }) {
     return ConversationMessagesState(
       isLoading: isLoading ?? this.isLoading,
+      isLoadingOlder: isLoadingOlder ?? this.isLoadingOlder,
       messages: messages ?? this.messages,
+      hasMoreOlderMessages: hasMoreOlderMessages ?? this.hasMoreOlderMessages,
       failure: clearFailure == true ? null : failure ?? this.failure,
     );
   }
@@ -183,12 +193,47 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
         state = state.copyWith(
           isLoading: false,
           messages: messages,
+          hasMoreOlderMessages: messages.length >= 50,
           clearFailure: true,
         );
       },
       failure: (failure) {
         state = state.copyWith(
           isLoading: false,
+          failure: failure,
+        );
+      },
+    );
+  }
+
+  Future<void> loadOlderMessages() async {
+    if (state.isLoadingOlder || !state.hasMoreOlderMessages || state.messages.isEmpty) {
+      return;
+    }
+
+    final oldestMessage = state.messages.first;
+    state = state.copyWith(isLoadingOlder: true, clearFailure: true);
+
+    final result = await _repository.getMessagesPaginated(
+      _conversationId,
+      limit: 50,
+      beforeCreatedAt: oldestMessage.createdAt,
+      beforeMessageId: oldestMessage.id,
+    );
+
+    result.when(
+      success: (olderMessages) {
+        final merged = <ChatMessage>[...olderMessages, ...state.messages];
+        state = state.copyWith(
+          isLoadingOlder: false,
+          messages: merged,
+          hasMoreOlderMessages: olderMessages.length == 50,
+          clearFailure: true,
+        );
+      },
+      failure: (failure) {
+        state = state.copyWith(
+          isLoadingOlder: false,
           failure: failure,
         );
       },

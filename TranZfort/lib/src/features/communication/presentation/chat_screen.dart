@@ -321,8 +321,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                               scrollController: _scrollController,
                               renderedMessages: renderedMessages,
                               isLoading: messagesState.isLoading,
+                              isLoadingOlder: messagesState.isLoadingOlder,
+                              hasMoreOlderMessages: messagesState.hasMoreOlderMessages,
                               failure: messagesState.failure,
                               loadId: conversation.loadId,
+                              onLoadOlder: () async {
+                                await ref.read(conversationMessagesProvider(widget.conversationId).notifier).loadOlderMessages();
+                              },
                             ),
                           ),
                           if (truckerChatBlocked)

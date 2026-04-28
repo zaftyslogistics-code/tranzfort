@@ -78,9 +78,9 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [ ] **6a.2** Move marketplace feed retrieval behind a consolidated RPC/view that returns load + supplier summary + ranking metadata in one paginated contract instead of direct `loads` table read + separate supplier profile query.
 
 ### 7. Chat / Communication
-- [ ] **7.1** Replace disabled realtime conversation watching with enriched realtime strategy: listen to changes, refresh affected RPC summary row only.
-- [ ] **7.2** Implement message pagination with `limit 50`, cursor by `sent_at/id`, and a “load older messages” UI.
-- [ ] **7.3** Make conversation summary mapping resilient: log contract drift and fallback row-level placeholders where safe.
+- [x] **7.1** Replace disabled realtime conversation watching with enriched realtime strategy: listen to changes, refresh affected RPC summary row only. — `watchConversations()` re-enabled: listens to raw table stream as trigger, debounces 300ms, then calls `fetchConversations()` RPC to get enriched data (route_label, has_unread). Yields `Success<List<ConversationPreview>>` with sorted results.
+- [x] **7.2** Implement message pagination with `limit 50`, cursor by `sent_at/id`, and a "load older messages" UI. — Added `fetchMessagesPaginated({limit=50, beforeCreatedAt, beforeMessageId})` to `ChatBackend`/`SupabaseChatBackend`. Added `getMessagesPaginated` to `ChatRepository`. Updated `ConversationMessagesState` with `isLoadingOlder` + `hasMoreOlderMessages`. Added `loadOlderMessages()` to `ConversationMessagesController`. UI: `_ChatMessagesBody` shows "Load older messages" button at top of list (spinner while loading).
+- [x] **7.3** Make conversation summary mapping resilient: log contract drift and fallback row-level placeholders where safe. — Already implemented: `_mapConversationRows()` throws `ServerFailure` with diagnostic message when required fields (route_label, has_unread) are missing, instead of silent empty data.
 - [ ] **7.4** Decide trucker inbox grouping (by load vs flat) and align code + docs.
 - [ ] **7.5** Centralize chat/call permission checks in backend RPCs; expose `canChat`/`canCall` flags in conversation/load detail contracts.
 - [ ] **7.6** Replace raw `✓`/`✓✓` chat read receipts with localized, semantic delivery/read status model (accessible to screen readers).

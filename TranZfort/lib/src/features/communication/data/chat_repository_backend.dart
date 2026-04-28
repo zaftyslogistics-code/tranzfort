@@ -20,6 +20,13 @@ abstract class ChatBackend {
     required String conversationId,
   });
 
+  Future<List<Map<String, dynamic>>> fetchMessagesPaginated({
+    required String conversationId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  });
+
   Stream<List<Map<String, dynamic>>> watchMessages({
     required String conversationId,
   });
@@ -126,6 +133,37 @@ class SupabaseChatBackend implements ChatBackend {
         .order('created_at', ascending: true);
 
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchMessagesPaginated({
+    required String conversationId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    var query = _client
+        .from('messages')
+        .select('id, conversation_id, sender_profile_id, message_type, text_body, attachment_path, structured_payload, is_read, read_at, created_at')
+        .eq('conversation_id', conversationId);
+
+    if (beforeCreatedAt != null) {
+      query = query.lt('created_at', beforeCreatedAt.toUtc().toIso8601String());
+    }
+    if (beforeMessageId != null) {
+      query = query.lt('id', beforeMessageId);
+    }
+
+    final response = await query
+        .order('created_at', ascending: false)
+        .limit(limit);
+
+    // Reverse to ascending order for display
+    return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
   }
 
   @override

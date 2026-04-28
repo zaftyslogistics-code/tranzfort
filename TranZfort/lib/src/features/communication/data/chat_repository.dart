@@ -95,10 +95,20 @@ class ChatRepository {
       return;
     }
 
-    // Disable realtime streaming - use manual load only
-    // The realtime stream from raw conversations table doesn't have enriched fields (route_label, has_unread)
-    // which causes mapping failures. Manual RPC load provides complete data.
-    yield const Success<List<ConversationPreview>>([]);
+    // Enriched realtime strategy: listen to raw table changes as triggers,
+    // then refresh via RPC to get complete enriched data (route_label, has_unread, etc.).
+    // This avoids mapping failures from incomplete realtime row shapes.
+    await for (final _ in _backend
+        .watchConversations(userId: userId, role: role)
+        .debounce(const Duration(milliseconds: 300))) {
+      try {
+        final rows = await _backend.fetchConversations(userId: userId, role: role);
+        final previews = await _mapConversationRows(rows, currentUserId: userId);
+        yield Success<List<ConversationPreview>>(_sortConversationPreviews(previews));
+      } catch (error, stackTrace) {
+        yield Failure<List<ConversationPreview>>(_mapError(error, stackTrace));
+      }
+    }
   }
 
   Stream<Result<int>> watchUnreadConversationCount() async* {
@@ -138,6 +148,46 @@ class ChatRepository {
 
     try {
       final rows = await _backend.fetchMessages(conversationId: normalizedConversationId);
+      return Success<List<ChatMessage>>(
+        rows
+            .whereType<Map<String, dynamic>>()
+            .map(MessageDto.fromMap)
+            .map((dto) => dto.toDomain(userId))
+            .toList(growable: false),
+      );
+    } catch (error, stackTrace) {
+      return Failure<List<ChatMessage>>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<List<ChatMessage>>> getMessagesPaginated(
+    String conversationId, {
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<List<ChatMessage>>(UnauthorizedFailure());
+    }
+
+    final normalizedConversationId = conversationId.trim();
+    if (normalizedConversationId.isEmpty) {
+      return const Failure<List<ChatMessage>>(
+        ValidationFailure(
+          message: 'Conversation id is required',
+          fieldErrors: {'conversation_id': 'Conversation id is required'},
+        ),
+      );
+    }
+
+    try {
+      final rows = await _backend.fetchMessagesPaginated(
+        conversationId: normalizedConversationId,
+        limit: limit,
+        beforeCreatedAt: beforeCreatedAt,
+        beforeMessageId: beforeMessageId,
+      );
       return Success<List<ChatMessage>>(
         rows
             .whereType<Map<String, dynamic>>()
