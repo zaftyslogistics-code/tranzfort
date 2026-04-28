@@ -185,11 +185,10 @@ class _ChatMessageBubble extends StatelessWidget {
                     child: CircularProgressIndicator(strokeWidth: 2),
                   )
                 else
-                  Text(
-                    message.isRead ? '✓✓' : '✓',
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.primaryOnDark,
-                        ),
+                  Icon(
+                    message.isRead ? Icons.done_all : Icons.done,
+                    size: 14,
+                    color: message.isRead ? AppColors.primary : AppColors.textMuted,
                   ),
               ],
             ],
