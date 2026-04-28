@@ -179,7 +179,10 @@ class _TruckerTripDetailBody extends ConsumerWidget {
                           }
                           final result = await ref
                               .read(truckerTripActionProvider(detail.id).notifier)
-                              .uploadPodProof(source);
+                              .uploadPodProof(
+                                currentStage: detail.stage,
+                                source: source,
+                              );
                           if (!context.mounted) {
                             return;
                           }

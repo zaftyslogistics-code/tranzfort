@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/models/domain_statuses.dart';
@@ -108,11 +109,22 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
     return result;
   }
 
-  Future<Result<bool>> uploadPodProof(ImageSource source) async {
+  Future<Result<bool>> uploadPodProof({
+    required String currentStage,
+    required ImageSource source,
+  }) async {
     if (state.isSubmitting) {
       return const Failure<bool>(
         BusinessRuleFailure(message: 'Another trip action is already in progress.'),
       );
+    }
+
+    if (currentStage != 'delivered') {
+      const failure = BusinessRuleFailure(
+        message: 'POD can only be uploaded after the load has been delivered.',
+      );
+      state = state.copyWith(failure: failure, clearFailure: false);
+      return const Failure<bool>(failure);
     }
 
     state = state.copyWith(
@@ -180,9 +192,17 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
       );
     }
 
+    if (!TripStages.allowsLrUpload.contains(currentStage)) {
+      const failure = BusinessRuleFailure(
+        message: 'LR can only be uploaded during pickup stages.',
+      );
+      state = state.copyWith(failure: failure, clearFailure: false);
+      return const Failure<bool>(failure);
+    }
+
     state = state.copyWith(
       isSubmitting: true,
-      pendingStage: currentStage,
+      pendingStage: TripStage.pickupPending.toDatabaseValue(),
       clearPendingStage: false,
       clearFailure: true,
     );

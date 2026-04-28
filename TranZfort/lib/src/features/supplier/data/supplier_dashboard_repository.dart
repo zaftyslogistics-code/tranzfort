@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
@@ -13,13 +14,18 @@ class SupplierDashboardStats {
   final int pendingBookings;
   final int inTransitTrips;
   final int completedTrips;
+  final DateTime? lastRefreshedAt;
 
   const SupplierDashboardStats({
     required this.activeLoads,
     required this.pendingBookings,
     required this.inTransitTrips,
     required this.completedTrips,
+    this.lastRefreshedAt,
   });
+
+  bool get isFresh => lastRefreshedAt != null &&
+      DateTime.now().difference(lastRefreshedAt!).inMinutes < 5;
 }
 
 abstract class SupplierDashboardBackend {
@@ -80,13 +86,6 @@ class SupplierDashboardRepository {
   final SupplierDashboardBackend _backend;
   final String? Function() _currentUserId;
 
-  static const List<String> activeLoadStatuses = [
-    'active',
-    'assigned_partial',
-    'assigned_full',
-    'in_transit',
-  ];
-
   const SupplierDashboardRepository(this._backend, this._currentUserId);
 
   Future<Result<SupplierDashboardStats>> fetchDashboardStats() async {
@@ -104,6 +103,7 @@ class SupplierDashboardRepository {
           pendingBookings: results[1],
           inTransitTrips: results[2],
           completedTrips: results[3],
+          lastRefreshedAt: DateTime.now(),
         ),
       );
     } catch (error, stackTrace) {

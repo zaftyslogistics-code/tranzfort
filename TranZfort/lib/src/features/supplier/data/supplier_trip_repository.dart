@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
@@ -31,28 +32,28 @@ class SupplierTripsRepository {
     'other',
   ];
 
-  static const List<String> activeStages = <String>[
-    'assigned',
-    'pickup_pending',
-    'picked_up',
-    'in_transit',
-    'delivered',
-    'proof_submitted',
-    'disputed',
-  ];
-
-  static const List<String> completedStages = <String>['completed', 'cancelled'];
+  static const List<String> activeStages = TripStages.inProgress;
+  static const List<String> completedStages = TripStages.completed;
 
   const SupplierTripsRepository(this._backend, this._currentUserId);
 
-  Future<Result<List<SupplierTrip>>> fetchTrips(List<String> stages) async {
+  Future<Result<List<SupplierTrip>>> fetchTrips(
+    List<String> stages, {
+    int limit = 15,
+    int offset = 0,
+  }) async {
     final userId = _currentUserId();
     if (userId == null) {
       return const Failure<List<SupplierTrip>>(UnauthorizedFailure());
     }
 
     try {
-      final rows = await _backend.fetchTrips(supplierId: userId, stages: stages);
+      final rows = await _backend.fetchTrips(
+        supplierId: userId,
+        stages: stages,
+        limit: limit,
+        offset: offset,
+      );
       return Success<List<SupplierTrip>>(
         rows.map(_mapTrip).toList(growable: false),
       );

@@ -130,14 +130,18 @@ class TruckerFleetTruck {
       reviewFeedback: TruckerFleetReviewFeedback.fromJson(map['verification_feedback_json']),
       modelLabel: modelLabel,
       verifiedAt: _readDate(map['verified_at']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
-      updatedAt: DateTime.parse((map['updated_at'] ?? '').toString()),
+      createdAt: _readDate(map['created_at']) ?? DateTime.now(),
+      updatedAt: _readDate(map['updated_at']) ?? DateTime.now(),
     );
   }
 }
 
 abstract class TruckerFleetBackend {
-  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId);
+  Future<List<Map<String, dynamic>>> fetchTrucks(
+    String ownerId, {
+    int limit = 50,
+    int offset = 0,
+  });
 
   Future<Map<String, dynamic>> createTruck(Map<String, dynamic> values);
 
@@ -146,6 +150,8 @@ abstract class TruckerFleetBackend {
     required String truckId,
     required Map<String, dynamic> values,
   });
+
+  Future<String?> getSignedUrl(String storagePath, {int expiresInSeconds = 300});
 }
 
 class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
@@ -154,7 +160,11 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
   const SupabaseTruckerFleetBackend(this._client);
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId) async {
+  Future<List<Map<String, dynamic>>> fetchTrucks(
+    String ownerId, {
+    int limit = 50,
+    int offset = 0,
+  }) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
@@ -165,9 +175,24 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
           'id, truck_model_id, truck_number, body_type, tyres, capacity_tonnes, rc_document_path, status, rejection_reason, verification_feedback_json, verified_at, created_at, updated_at, truck_models(make, model)',
         )
         .eq('owner_id', ownerId)
-        .order('created_at', ascending: false);
+        .order('created_at', ascending: false)
+        .range(offset, offset + limit - 1);
 
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
+  }
+
+  @override
+  Future<String?> getSignedUrl(String storagePath, {int expiresInSeconds = 300}) async {
+    if (_client == null) {
+      return null;
+    }
+    try {
+      return await _client.storage
+          .from('truck-documents')
+          .createSignedUrl(storagePath, expiresInSeconds);
+    } catch (_) {
+      return null;
+    }
   }
 
   @override
@@ -200,19 +225,66 @@ class TruckerFleetRepository {
 
   const TruckerFleetRepository(this._backend, this._currentUserId);
 
-  Future<Result<List<TruckerFleetTruck>>> getMyTrucks() async {
+  Future<Result<List<TruckerFleetTruck>>> getMyTrucks({int page = 1, int pageSize = 50}) async {
     final userId = _currentUserId();
     if (userId == null) {
       return const Failure<List<TruckerFleetTruck>>(UnauthorizedFailure());
     }
 
     try {
-      final rows = await _backend.fetchTrucks(userId);
+      final offset = (page - 1) * pageSize;
+      final rows = await _backend.fetchTrucks(userId, limit: pageSize, offset: offset);
       final trucks = rows.map(TruckerFleetTruck.fromMap).toList(growable: false)
         ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
       return Success<List<TruckerFleetTruck>>(trucks);
     } catch (error, stackTrace) {
       return Failure<List<TruckerFleetTruck>>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<String?>> getRcDocumentPreviewUrl(String? rcDocumentPath) async {
+    if ((rcDocumentPath ?? '').trim().isEmpty) {
+      return const Success<String?>(null);
+    }
+    try {
+      final url = await _backend.getSignedUrl(rcDocumentPath!.trim(), expiresInSeconds: 300);
+      return Success<String?>(url);
+    } catch (error, stackTrace) {
+      return Failure<String?>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<void>> archiveTruck(String truckId) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+    try {
+      await _backend.updateTruck(
+        ownerId: userId,
+        truckId: truckId,
+        values: {'status': TruckerFleetTruckStatus.archived.databaseValue},
+      );
+      return const Success<void>(null);
+    } catch (error, stackTrace) {
+      return Failure<void>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<void>> reactivateTruck(String truckId) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+    try {
+      await _backend.updateTruck(
+        ownerId: userId,
+        truckId: truckId,
+        values: {'status': TruckerFleetTruckStatus.pending.databaseValue},
+      );
+      return const Success<void>(null);
+    } catch (error, stackTrace) {
+      return Failure<void>(_mapError(error, stackTrace));
     }
   }
 
@@ -257,29 +329,60 @@ class TruckerFleetRepository {
     }
 
     try {
-      final nextStatus = existingTruck.status == TruckerFleetTruckStatus.verified
+      final normalizedTruckNumber = truckNumber.trim().toUpperCase();
+      final normalizedBodyType = bodyType.trim();
+      final normalizedRcPath = rcDocumentPath.trim();
+
+      final criticalFieldsChanged = _criticalFieldsChanged(
+        existingTruck: existingTruck,
+        truckNumber: normalizedTruckNumber,
+        bodyType: normalizedBodyType,
+        tyres: tyres,
+        capacityTonnes: capacityTonnes,
+        rcDocumentPath: normalizedRcPath,
+      );
+
+      final nextStatus = existingTruck.status == TruckerFleetTruckStatus.verified && criticalFieldsChanged
           ? TruckerFleetTruckStatus.editedPendingReapproval.databaseValue
-          : TruckerFleetTruckStatus.pending.databaseValue;
+          : existingTruck.status.databaseValue;
+
       await _backend.updateTruck(
         ownerId: userId,
         truckId: existingTruck.id,
         values: {
-          'truck_number': truckNumber.trim().toUpperCase(),
-          'body_type': bodyType.trim(),
+          'truck_number': normalizedTruckNumber,
+          'body_type': normalizedBodyType,
           'tyres': tyres,
           'capacity_tonnes': capacityTonnes,
-          'rc_document_path': rcDocumentPath.trim(),
+          'rc_document_path': normalizedRcPath,
           'status': nextStatus,
-          'rejection_reason': null,
-          'verification_feedback_json': null,
-          'verified_at': null,
-          'verified_by_admin_user_id': null,
+          if (criticalFieldsChanged) ...{
+            'rejection_reason': null,
+            'verification_feedback_json': null,
+            'verified_at': null,
+            'verified_by_admin_user_id': null,
+          },
         },
       );
       return const Success<void>(null);
     } catch (error, stackTrace) {
       return Failure<void>(_mapError(error, stackTrace));
     }
+  }
+
+  bool _criticalFieldsChanged({
+    required TruckerFleetTruck existingTruck,
+    required String truckNumber,
+    required String bodyType,
+    required int tyres,
+    required double capacityTonnes,
+    required String rcDocumentPath,
+  }) {
+    return existingTruck.truckNumber != truckNumber ||
+        existingTruck.bodyType != bodyType ||
+        existingTruck.tyres != tyres ||
+        existingTruck.capacityTonnes != capacityTonnes ||
+        (existingTruck.rcDocumentPath ?? '') != rcDocumentPath;
   }
 
   AppFailure _mapError(Object error, StackTrace stackTrace) {

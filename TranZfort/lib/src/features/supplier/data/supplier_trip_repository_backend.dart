@@ -11,12 +11,14 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
   Future<List<Map<String, dynamic>>> fetchTrips({
     required String supplierId,
     required List<String> stages,
+    int limit = 15,
+    int offset = 0,
   }) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
+    var query = _client
         .from('trips')
         .select(
           'id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material)',
@@ -25,6 +27,14 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
         .inFilter('stage', stages)
         .order('assigned_at', ascending: false);
 
+    if (limit > 0) {
+      query = query.limit(limit);
+    }
+    if (offset > 0) {
+      query = query.range(offset, offset + limit - 1);
+    }
+
+    final response = await query;
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
 

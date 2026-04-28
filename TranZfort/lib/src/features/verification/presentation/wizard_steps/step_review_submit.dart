@@ -162,7 +162,8 @@ class StepReviewSubmit extends ConsumerWidget {
 
     result.when(
       success: (caseId) {
-        final role = state.isSupplier ? 'supplier' : (state.isTrucker ? 'trucker' : null);
+        final verificationState = ref.read(verificationWizardProvider);
+        final role = verificationState.isSupplier ? 'supplier' : (verificationState.isTrucker ? 'trucker' : null);
         context.go(AppRoutes.homeForRole(role));
       },
       failure: (error) {

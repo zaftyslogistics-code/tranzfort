@@ -216,12 +216,22 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                         if (result.isSuccess) {
                           ref.invalidate(truckerProfileProvider);
                           ref.invalidate(truckerDashboardProvider);
+                          if (widget.returnToVerification) {
+                            AppSnackbar.show(
+                              context: context,
+                              message: l10n.truckerFleetTruckSavedReturnMessage,
+                              variant: AppSnackbarVariant.success,
+                            );
+                            await Future.delayed(const Duration(milliseconds: 800));
+                            if (context.mounted) {
+                              context.go(AppRoutes.truckerVerificationPath);
+                            }
+                            return;
+                          }
                         }
                         final String snackMessage;
                         if (result.isSuccess) {
-                          snackMessage = widget.returnToVerification
-                              ? l10n.truckerFleetTruckSavedReturnMessage
-                              : (state.isEditing ? l10n.truckerFleetTruckUpdatedSuccess : l10n.truckerFleetTruckAddedSuccess);
+                          snackMessage = state.isEditing ? l10n.truckerFleetTruckUpdatedSuccess : l10n.truckerFleetTruckAddedSuccess;
                         } else if (result.failureOrNull is ConflictFailure) {
                           snackMessage = l10n.truckerFleetTruckNumberConflictMessage;
                         } else {

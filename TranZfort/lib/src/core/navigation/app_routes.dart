@@ -76,6 +76,20 @@ class AppRoutes {
     return publicProfilePath.replaceAll(':userId', userId);
   }
 
+  static String routePreviewLocation({
+    required String routeLabel,
+    required String destinationLabel,
+    required double originLat,
+    required double originLng,
+    required double destinationLat,
+    required double destinationLng,
+  }) {
+    return '$routePreviewPath?routeLabel=${Uri.encodeComponent(routeLabel)}'
+        '&destinationLabel=${Uri.encodeComponent(destinationLabel)}'
+        '&originLat=$originLat&originLng=$originLng'
+        '&destinationLat=$destinationLat&destinationLng=$destinationLng';
+  }
+
   /// Returns the role-specific home/dashboard path.
   /// Falls back to [dashboardPath] if role is unrecognized.
   static String homeForRole(String? role) {

@@ -528,6 +528,10 @@ class LoadListItemDto {
   }
 
   static String _uiPriceType(String value) {
+    // NOTE: 'negotiable' values in the DB are legacy data from before the
+    // per_ton enum was added (migration 20260428000001). New writes always
+    // store 'per_ton' or 'fixed' directly. This normalization simply trims
+    // and lower-cases; the caller is responsible for handling legacy values.
     return value.trim().toLowerCase();
   }
 

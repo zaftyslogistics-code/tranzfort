@@ -184,7 +184,7 @@ class AppNotification {
 abstract class NotificationBackend {
   Future<List<Map<String, dynamic>>> fetchNotifications({
     required String userId,
-    int limit = 20,
+    int limit = 30,
     DateTime? before,
   });
 
@@ -205,7 +205,7 @@ class SupabaseNotificationBackend implements NotificationBackend {
   @override
   Future<List<Map<String, dynamic>>> fetchNotifications({
     required String userId,
-    int limit = 20,
+    int limit = 30,
     DateTime? before,
   }) async {
     if (_client == null) {
@@ -284,7 +284,7 @@ class NotificationRepository {
   const NotificationRepository(this._backend, this._currentUserId);
 
   Future<Result<List<AppNotification>>> getNotifications({
-    int limit = 20,
+    int limit = 30,
     DateTime? before,
   }) async {
     final userId = _currentUserId();

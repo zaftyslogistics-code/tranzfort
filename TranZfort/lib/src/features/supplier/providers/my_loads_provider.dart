@@ -1,25 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/error/app_failure.dart';
 import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
-
-const List<String> supplierActiveLoadStatuses = <String>[
-  'draft',
-  'active',
-  'booked',
-  'assigned_partial',
-  'assigned_full',
-  'in_transit',
-];
-
-const List<String> supplierCompletedLoadStatuses = <String>[
-  'completed',
-  'filled_outside_app',
-  'cancelled',
-  'expired',
-  'deactivated',
-];
 
 enum MyLoadsTab {
   active,
@@ -156,8 +140,8 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
   LoadFilters _filtersFor(MyLoadsTab tab) {
     return LoadFilters(
       statuses: tab == MyLoadsTab.active
-          ? supplierActiveLoadStatuses
-          : supplierCompletedLoadStatuses,
+          ? LoadStatuses.supplierViewActive
+          : LoadStatuses.completed,
     );
   }
 }

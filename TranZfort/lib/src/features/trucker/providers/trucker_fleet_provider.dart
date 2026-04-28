@@ -240,6 +240,28 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     return result;
   }
 
+  Future<Result<void>> archiveTruck(String truckId) async {
+    final result = await _repository.archiveTruck(truckId);
+    result.when(
+      success: (_) => load(),
+      failure: (failure) => state = state.copyWith(actionFailure: failure),
+    );
+    return result;
+  }
+
+  Future<Result<void>> reactivateTruck(String truckId) async {
+    final result = await _repository.reactivateTruck(truckId);
+    result.when(
+      success: (_) => load(),
+      failure: (failure) => state = state.copyWith(actionFailure: failure),
+    );
+    return result;
+  }
+
+  Future<Result<String?>> getRcDocumentPreviewUrl(TruckerFleetTruck truck) async {
+    return _repository.getRcDocumentPreviewUrl(truck.rcDocumentPath);
+  }
+
   Future<Result<void>> save() async {
     if (state.isSaving) {
       return const Failure<void>(BusinessRuleFailure(message: 'Truck save is already in progress.'));

@@ -1,3 +1,4 @@
+import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/services/route_snapshot_service.dart';
 
 class TruckerTrip {
@@ -71,18 +72,7 @@ class TruckerTrip {
   String get stageLabel => stage.replaceAll('_', ' ');
 
   double get progressValue {
-    const stageOrder = <String, int>{
-      'assigned': 1,
-      'pickup_pending': 2,
-      'picked_up': 3,
-      'in_transit': 4,
-      'delivered': 5,
-      'proof_submitted': 6,
-      'completed': 7,
-      'disputed': 6,
-      'cancelled': 7,
-    };
-    final order = stageOrder[stage] ?? 1;
+    final order = TripStages.progressOrder[stage] ?? 1;
     return (order / 7).clamp(0, 1).toDouble();
   }
 
@@ -279,6 +269,8 @@ abstract class TruckerTripsBackend {
   Future<List<Map<String, dynamic>>> fetchTrips({
     required String truckerId,
     required List<String> stages,
+    int limit = 15,
+    int offset = 0,
   });
 
   Future<Map<String, dynamic>?> fetchTripDetail({

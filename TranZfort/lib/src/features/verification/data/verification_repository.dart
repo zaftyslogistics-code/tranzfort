@@ -78,6 +78,9 @@ class VerificationRepository {
       if (rawRole == 'supplier' && (normalizedBusinessLicence ?? '').isEmpty) {
         fieldErrors['business_licence_number'] = 'Business licence number is required';
       }
+      if (normalizedAadhaar.length < 4) {
+        fieldErrors['aadhaar_number'] = 'Aadhaar number must be at least 4 digits';
+      }
       if (fieldErrors.isNotEmpty) {
         return Failure<void>(
           ValidationFailure(

@@ -18,6 +18,7 @@ class TruckerDashboardStats {
   final int pendingTrucks;
   final int rejectedTrucks;
   final int pendingReapprovalTrucks;
+  final DateTime? lastRefreshedAt;
 
   const TruckerDashboardStats({
     required this.activeBids,
@@ -29,10 +30,13 @@ class TruckerDashboardStats {
     required this.pendingTrucks,
     required this.rejectedTrucks,
     required this.pendingReapprovalTrucks,
+    this.lastRefreshedAt,
   });
 
   bool get hasApprovedTruck => approvedTrucks > 0;
   bool get hasTruckLifecycleAttention => pendingTrucks > 0 || rejectedTrucks > 0 || pendingReapprovalTrucks > 0;
+  bool get isFresh => lastRefreshedAt != null &&
+      DateTime.now().difference(lastRefreshedAt!).inMinutes < 5;
 }
 
 abstract class TruckerDashboardBackend {
@@ -86,13 +90,6 @@ class TruckerDashboardRepository {
   final TruckerDashboardBackend _backend;
   final String? Function() _currentUserId;
 
-  static const List<String> activeBidStatuses = ['submitted'];
-  static const List<String> upcomingTripStages = [
-    'assigned',
-    'pickup_pending',
-    'picked_up',
-  ];
-
   const TruckerDashboardRepository(this._backend, this._currentUserId);
 
   Future<Result<TruckerDashboardStats>> fetchDashboardStats() async {
@@ -115,6 +112,7 @@ class TruckerDashboardRepository {
           pendingTrucks: results[6],
           rejectedTrucks: results[7],
           pendingReapprovalTrucks: results[8],
+          lastRefreshedAt: DateTime.now(),
         ),
       );
     } catch (error, stackTrace) {

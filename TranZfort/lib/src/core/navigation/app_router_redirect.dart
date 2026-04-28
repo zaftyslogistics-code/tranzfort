@@ -103,6 +103,28 @@ String? Function(BuildContext, GoRouterState) _createRedirectHandler(Ref ref) {
       return isSupplier ? AppRoutes.supplierDashboardPath : AppRoutes.truckerDashboardPath;
     }
 
+    // ── Role guard: redirect truckers away from supplier-only routes ──
+    const supplierOnlyPaths = <String>{
+      AppRoutes.supplierDashboardPath,
+      AppRoutes.postLoadPath,
+      AppRoutes.myLoadsPath,
+      AppRoutes.supplierTripsPath,
+      AppRoutes.supplierVerificationPath,
+    };
+    const truckerOnlyPaths = <String>{
+      AppRoutes.truckerDashboardPath,
+      AppRoutes.findLoadsPath,
+      AppRoutes.fleetPath,
+      AppRoutes.truckerVerificationPath,
+    };
+
+    if (isSupplier && truckerOnlyPaths.contains(path)) {
+      return AppRoutes.supplierDashboardPath;
+    }
+    if (!isSupplier && supplierOnlyPaths.contains(path)) {
+      return AppRoutes.truckerDashboardPath;
+    }
+
     if (isSupplier) {
       if (path == AppRoutes.dashboardPath) {
         return AppRoutes.supplierDashboardPath;

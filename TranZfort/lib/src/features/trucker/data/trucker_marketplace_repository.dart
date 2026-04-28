@@ -8,7 +8,7 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/map_readers.dart';
 
-const int truckerMarketplacePageSize = 50;
+const int truckerMarketplacePageSize = 20;
 
 class SupplierInfo {
   final String name;
@@ -162,11 +162,11 @@ class MarketplaceLoadItem {
       priceAmount: readDouble(map['price_amount']),
       priceType: (map['price_type'] ?? 'fixed').toString(),
       advancePercentage: readInt(map['advance_percentage']),
-      pickupDate: DateTime.parse((map['pickup_date'] ?? '').toString()),
+      pickupDate: readDate(map['pickup_date']) ?? DateTime.now(),
       status: (map['status'] ?? 'active').toString(),
       isSuperLoad: map['is_super_load'] == true,
       superStatus: (map['super_status'] ?? 'none').toString(),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: readDate(map['created_at']) ?? DateTime.now(),
     );
   }
 
@@ -336,10 +336,9 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     var filteredQuery = _client
         .from('loads')
         .select(
-          'id, supplier_id, origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id',
+          'id, supplier_id, origin_label, origin_city, origin_state, destination_label, destination_city, destination_state, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id, profiles(id, full_name, avatar_url, profile_photo_document_path)',
         )
-        .isFilter('parent_load_id', null)
-        .inFilter('status', const ['active', 'assigned_partial']);
+        .eq('status', 'active');
 
     // Escape SQL LIKE wildcard characters to prevent injection
     String escapeLike(String s) => s.replaceAll(r'%', r'\%').replaceAll(r'_', r'\_');

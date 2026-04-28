@@ -171,13 +171,33 @@ class ReviewRepository {
     required int rating,
     String? comment,
   }) async {
+    final fieldErrors = <String, String>{};
+    if (rating < 1 || rating > 5) {
+      fieldErrors['rating'] = 'Rating must be between 1 and 5.';
+    }
+    if (contextId.trim().isEmpty) {
+      fieldErrors['context_id'] = 'Context ID is required.';
+    }
+    final trimmedComment = comment?.trim();
+    if (trimmedComment != null && trimmedComment.length > 500) {
+      fieldErrors['comment'] = 'Comment must not exceed 500 characters.';
+    }
+    if (fieldErrors.isNotEmpty) {
+      return Failure<String?>(
+        ValidationFailure(
+          message: 'Please correct the review details.',
+          fieldErrors: fieldErrors,
+        ),
+      );
+    }
+
     try {
       final response = await _backend.submitReview(
         reviewedUserId: reviewedUserId,
         contextType: contextType,
         contextId: contextId,
         rating: rating,
-        comment: comment,
+        comment: trimmedComment,
       );
 
       if (response['success'] == true) {

@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/constants/lifecycle_status_constants.dart';
 import 'trucker_trip_repository_models.dart';
 
 class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
@@ -11,12 +12,14 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
   Future<List<Map<String, dynamic>>> fetchTrips({
     required String truckerId,
     required List<String> stages,
+    int limit = 15,
+    int offset = 0,
   }) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
+    var query = _client
         .from('trips')
         .select(
           'id, load_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, origin_lat, origin_lng, destination_label, destination_lat, destination_lng, material), trucks(truck_number)',
@@ -25,6 +28,14 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
         .inFilter('stage', stages)
         .order('assigned_at', ascending: false);
 
+    if (limit > 0) {
+      query = query.limit(limit);
+    }
+    if (offset > 0) {
+      query = query.range(offset, offset + limit - 1);
+    }
+
+    final response = await query;
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
 
@@ -115,7 +126,7 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
           'lr_document_path': lrPath,
         })
         .eq('id', tripId)
-        .inFilter('stage', const <String>['pickup_pending', 'picked_up'])
+        .inFilter('stage', TripStages.allowsLrUpload)
         .select('id')
         .maybeSingle();
   }

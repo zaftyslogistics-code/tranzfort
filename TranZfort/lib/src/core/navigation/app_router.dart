@@ -397,12 +397,23 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.routePreviewPath,
             name: AppRoutes.routePreview,
             builder: (context, state) {
-              final extra = state.extra;
-              if (extra is! TruckerRoutePreviewArgs) {
+              final query = state.uri.queryParameters;
+              final originLat = double.tryParse(query['originLat'] ?? '');
+              final originLng = double.tryParse(query['originLng'] ?? '');
+              final destinationLat = double.tryParse(query['destinationLat'] ?? '');
+              final destinationLng = double.tryParse(query['destinationLng'] ?? '');
+              if (originLat == null || originLng == null || destinationLat == null || destinationLng == null) {
                 return const TruckerDashboardScreen();
               }
               return TruckerRoutePreviewScreen(
-                args: extra,
+                args: TruckerRoutePreviewArgs(
+                  routeLabel: query['routeLabel'] ?? '',
+                  destinationLabel: query['destinationLabel'] ?? '',
+                  originLat: originLat,
+                  originLng: originLng,
+                  destinationLat: destinationLat,
+                  destinationLng: destinationLng,
+                ),
                 mapsLauncher: ref.read(mapsLauncherServiceProvider),
               );
             },
@@ -466,6 +477,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             name: AppRoutes.notifications,
             builder: (context, state) => const NotificationsScreen(),
           ),
+          // NOTE: /profile must be registered BEFORE /profile/:userId.
+          // GoRouter matches routes in declaration order; if the parameterized
+          // route came first, "/profile" would never match.
           GoRoute(
             path: AppRoutes.profilePath,
             name: AppRoutes.profile,
@@ -539,6 +553,13 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.publicProfilePath,
             name: AppRoutes.publicProfile,
+            redirect: (context, state) {
+              final userId = state.pathParameters['userId'] ?? '';
+              if (userId.trim().isEmpty) {
+                return AppRoutes.profilePath;
+              }
+              return null;
+            },
             builder: (context, state) {
               final userId = state.pathParameters['userId'] ?? '';
               return _PublicProfileRouteScreen(userId: userId);
