@@ -107,7 +107,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [ ] **10.4** Enforce ownership check in `fetchTicketMessages()` (currently filters only by `support_ticket_id`; add explicit `owner_profile_id` validation or use an RPC that validates ownership and returns ticket + messages together).
 
 ### 11. Public Profiles / Reviews
-- [ ] **11.1** Pass current `viewerId` into public profile RPCs and let backend return capability flags (`canViewContact`, `canReview`, `canMessage`).
+- [x] **11.1** Pass current `viewerId` into public profile RPCs and let backend return capability flags (`canViewContact`, `canReview`, `canMessage`). — `PublicProfile` model now parses `can_view_contact`, `can_review`, `can_message` from RPC response. `PublicProfileRepository.getPublicProfile()` accepts optional `viewerId` parameter. `publicProfileProvider` passes current authenticated user's ID as `viewerId` to backend. Backend RPC `get_public_profile` already accepted `p_viewer_id`; Flutter contract is now complete.
 - [ ] **11.2** Move public load previews behind an RPC/view that applies visibility and trust-safety rules consistently.
 - [x] **11.3** Treat unexpected review RPC shapes as contract failures with diagnostics, not empty data. — `SupabaseReviewBackend` now throws `FormatException` instead of returning `[]`.
 - [x] **11.4** Add client-side validation for rating range, context IDs, and review comment length. — Added rating range check (1–5), non-empty contextId validation, and 500-character comment limit in `ReviewRepository.submitReview()`.

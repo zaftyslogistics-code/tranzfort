@@ -96,7 +96,9 @@ class PublicProfileRepository {
   const PublicProfileRepository(this._backend);
 
   /// Fetch public profile for any user.
-  Future<Result<PublicProfile?>> getPublicProfile(String userId) async {
+  /// [viewerId] is the current user's ID; backend uses it to determine
+  /// capability flags (canViewContact, canReview, canMessage).
+  Future<Result<PublicProfile?>> getPublicProfile(String userId, {String? viewerId}) async {
     if (userId.trim().isEmpty) {
       return const Failure<PublicProfile?>(
         ValidationFailure(
@@ -109,7 +111,7 @@ class PublicProfileRepository {
     try {
       final response = await _backend.getPublicProfile(
         userId: userId.trim(),
-        viewerId: null,
+        viewerId: viewerId?.trim(),
       );
 
       if (response == null) {

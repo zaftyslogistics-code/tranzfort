@@ -29,6 +29,11 @@ class PublicProfile {
   // Self-only flag
   final bool isSelf;
 
+  // Capability flags (returned by backend based on viewer relationship)
+  final bool canViewContact;
+  final bool canReview;
+  final bool canMessage;
+
   const PublicProfile({
     required this.id,
     required this.fullName,
@@ -47,6 +52,9 @@ class PublicProfile {
     this.totalLoadsPosted,
     this.activeLoadsCount,
     required this.isSelf,
+    this.canViewContact = false,
+    this.canReview = false,
+    this.canMessage = false,
   });
 
   factory PublicProfile.fromMap(Map<String, dynamic> map) {
@@ -85,6 +93,9 @@ class PublicProfile {
       totalLoadsPosted: _readIntNullable(roleSpecific['total_loads_posted']),
       activeLoadsCount: _readIntNullable(roleSpecific['active_loads_count']),
       isSelf: map['is_self'] == true,
+      canViewContact: map['can_view_contact'] == true,
+      canReview: map['can_review'] == true,
+      canMessage: map['can_message'] == true,
     );
   }
 
