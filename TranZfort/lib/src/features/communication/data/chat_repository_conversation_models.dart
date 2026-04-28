@@ -27,6 +27,7 @@ class ConversationPreviewDto {
   final bool hasUnread;
   final bool isArchived;
   final DateTime createdAt;
+  final bool isAttachmentAllowed;
 
   const ConversationPreviewDto({
     required this.id,
@@ -55,6 +56,7 @@ class ConversationPreviewDto {
     required this.hasUnread,
     required this.isArchived,
     required this.createdAt,
+    this.isAttachmentAllowed = true,
   });
 
   ConversationPreview toDomain() {
@@ -85,6 +87,7 @@ class ConversationPreviewDto {
       hasUnread: hasUnread,
       isArchived: isArchived,
       createdAt: createdAt,
+      isAttachmentAllowed: isAttachmentAllowed,
     );
   }
 }
@@ -116,6 +119,7 @@ class ConversationPreview {
   final bool hasUnread;
   final bool isArchived;
   final DateTime createdAt;
+  final bool isAttachmentAllowed;
 
   const ConversationPreview({
     required this.id,
@@ -144,5 +148,6 @@ class ConversationPreview {
     required this.hasUnread,
     required this.isArchived,
     required this.createdAt,
+    this.isAttachmentAllowed = true,
   });
 }
