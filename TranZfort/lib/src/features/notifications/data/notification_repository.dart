@@ -45,14 +45,45 @@ enum AppNotificationPriority {
   low,
   medium,
   high,
+  urgent,
 }
 
 extension AppNotificationPriorityX on AppNotificationPriority {
   static AppNotificationPriority fromDatabase(String value) {
-    return switch (value.trim().toLowerCase()) {
-      'low' => AppNotificationPriority.low,
-      'high' => AppNotificationPriority.high,
-      _ => AppNotificationPriority.medium,
+    switch (value.toLowerCase()) {
+      case 'low':
+        return AppNotificationPriority.low;
+      case 'high':
+        return AppNotificationPriority.high;
+      case 'urgent':
+        return AppNotificationPriority.urgent;
+      case 'normal':
+      case 'medium':
+      default:
+        return AppNotificationPriority.medium;
+    }
+  }
+
+  /// Whether this priority should bypass quiet-hours suppression.
+  bool get bypassesQuietHours => this == AppNotificationPriority.urgent;
+
+  /// Android [Importance] mapping for foreground push display.
+  flutterNotifications.Importance get flutterImportance {
+    return switch (this) {
+      AppNotificationPriority.urgent => flutterNotifications.Importance.max,
+      AppNotificationPriority.high => flutterNotifications.Importance.high,
+      AppNotificationPriority.low => flutterNotifications.Importance.low,
+      _ => flutterNotifications.Importance.defaultImportance,
+    };
+  }
+
+  /// Android [Priority] mapping for foreground push display.
+  flutterNotifications.Priority get flutterPriority {
+    return switch (this) {
+      AppNotificationPriority.urgent => flutterNotifications.Priority.max,
+      AppNotificationPriority.high => flutterNotifications.Priority.high,
+      AppNotificationPriority.low => flutterNotifications.Priority.low,
+      _ => flutterNotifications.Priority.defaultPriority,
     };
   }
 }

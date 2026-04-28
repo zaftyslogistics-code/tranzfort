@@ -114,7 +114,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 12. Notifications
 - [x] **12.1** Align notification pagination with documented `30` per page. — Updated default `limit` from 20 to 30 in `NotificationBackend.fetchNotifications()` and `NotificationRepository.getNotifications()`.
-- [ ] **12.2** Add `urgent` and `normal` priority support; implement quiet-hours override.
+- [x] **12.2** Add `urgent` and `normal` priority support; implement quiet-hours override. — Added `urgent` to `AppNotificationPriority`; `fromDatabase` now maps both `urgent` and `normal` strings. Added `bypassesQuietHours` getter (only `urgent` bypasses). Added `flutterImportance` and `flutterPriority` getters mapping to Android notification levels for use in `PushRuntimeService`.
 - [ ] **12.3** Extend notification settings for per-category toggles, expiry, delivery state, and channel preference.
 - [x] **12.4** Use safe date parsing and row-level fallback for notification mapping. — `NotificationDto.fromMap` now uses `readDate()` for `createdAt` with `DateTime.now()` fallback instead of `DateTime.parse`.
 
