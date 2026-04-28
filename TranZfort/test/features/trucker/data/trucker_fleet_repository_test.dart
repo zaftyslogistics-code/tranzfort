@@ -15,7 +15,7 @@ class _FleetBackend implements TruckerFleetBackend {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId) async {
+  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId, {int limit = 20, int offset = 0}) async {
     return trucks;
   }
 
@@ -25,6 +25,9 @@ class _FleetBackend implements TruckerFleetBackend {
     updatedTruckId = truckId;
     updatedValues = values;
   }
+
+  @override
+  Future<String?> getSignedUrl(String bucketPath, {int expiresInSeconds = 300}) async => null;
 }
 
 void main() {

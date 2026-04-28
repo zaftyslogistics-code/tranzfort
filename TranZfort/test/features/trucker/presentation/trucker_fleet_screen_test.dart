@@ -15,10 +15,13 @@ class _NoopFleetBackend implements TruckerFleetBackend {
   Future<Map<String, dynamic>> createTruck(Map<String, dynamic> values) async => {'id': 'truck-1'};
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId) async => const <Map<String, dynamic>>[];
+  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId, {int limit = 20, int offset = 0}) async => const <Map<String, dynamic>>[];
 
   @override
   Future<void> updateTruck({required String ownerId, required String truckId, required Map<String, dynamic> values}) async {}
+
+  @override
+  Future<String?> getSignedUrl(String bucketPath, {int expiresInSeconds = 300}) async => null;
 }
 
 class _MutableFleetBackend implements TruckerFleetBackend {
@@ -31,7 +34,7 @@ class _MutableFleetBackend implements TruckerFleetBackend {
   Future<Map<String, dynamic>> createTruck(Map<String, dynamic> values) async => {'id': 'truck-new'};
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId) async => truckRows;
+  Future<List<Map<String, dynamic>>> fetchTrucks(String ownerId, {int limit = 20, int offset = 0}) async => truckRows;
 
   @override
   Future<void> updateTruck({required String ownerId, required String truckId, required Map<String, dynamic> values}) async {
@@ -50,6 +53,9 @@ class _MutableFleetBackend implements TruckerFleetBackend {
         )
         .toList(growable: false);
   }
+
+  @override
+  Future<String?> getSignedUrl(String bucketPath, {int expiresInSeconds = 300}) async => null;
 }
 
 class _FakeTruckDocumentUploadService extends TruckDocumentUploadService {

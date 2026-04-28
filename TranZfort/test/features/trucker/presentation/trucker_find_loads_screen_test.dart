@@ -76,6 +76,11 @@ class _NoopTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
 
   @override
   Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => null;
+
+  @override
+  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds) async {
+    return const <String, SupplierInfo>{};
+  }
 }
 
 class _TestFindLoadsController extends FindLoadsController {

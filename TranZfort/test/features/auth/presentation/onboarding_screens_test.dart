@@ -32,7 +32,7 @@ class _FakeOnboardingAuthRepository extends AuthRepository {
   Future<Result<void>> provisionRoleExtension(AppUserRole role) async => provisionRoleResult;
 
   @override
-  Future<Result<void>> updateProfile({required String fullName, required String mobile}) async => updateProfileResult;
+  Future<Result<void>> updateProfile({required String fullName, required String mobile, String? city, String? state, double? latitude, double? longitude}) async => updateProfileResult;
 
   @override
   Future<Result<void>> recordTermsAcceptance() async => const Success<void>(null);

@@ -30,6 +30,11 @@ class _FakeReviewBackend implements ReviewBackend {
   }
 
   @override
+  Future<List<Map<String, dynamic>>> getAllUserFeedback({required String userId, int limit = 5, int offset = 0}) async {
+    return const <Map<String, dynamic>>[];
+  }
+
+  @override
   Future<List<Map<String, dynamic>>> getProfileReviews({
     required String userId,
     int limit = 5,

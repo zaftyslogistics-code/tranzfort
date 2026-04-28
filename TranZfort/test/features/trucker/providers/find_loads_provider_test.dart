@@ -18,6 +18,11 @@ class _PagedTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
 
   @override
   Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId) async => null;
+
+  @override
+  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds) async {
+    return const <String, SupplierInfo>{};
+  }
 }
 
 Map<String, dynamic> _loadRow(String id, {bool superLoad = false}) {

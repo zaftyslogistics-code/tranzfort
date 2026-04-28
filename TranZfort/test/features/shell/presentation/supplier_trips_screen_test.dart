@@ -30,7 +30,7 @@ class _TestSupplierTripsController extends SupplierTripsController {
 
 class _NoopTripsBackend implements SupplierTripsBackend {
   @override
-  Future<List<Map<String, dynamic>>> fetchTrips({required String supplierId, required List<String> stages}) async => const <Map<String, dynamic>>[];
+  Future<List<Map<String, dynamic>>> fetchTrips({required String supplierId, required List<String> stages, int limit = 15, int offset = 0}) async => const <Map<String, dynamic>>[];
 
   @override
   Future<Map<String, dynamic>?> fetchTripDetail({required String supplierId, required String tripId}) async => null;

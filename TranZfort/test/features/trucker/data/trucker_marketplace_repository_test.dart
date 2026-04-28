@@ -29,6 +29,11 @@ class _FakeTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     }
     return supplierProfile;
   }
+
+  @override
+  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds) async {
+    return const <String, SupplierInfo>{};
+  }
 }
 
 void main() {

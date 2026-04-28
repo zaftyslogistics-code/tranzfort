@@ -192,7 +192,7 @@ void main() {
 
     final result = await container
         .read(truckerTripActionProvider('trip-1').notifier)
-        .uploadPodProof(ImageSource.gallery);
+        .uploadPodProof(currentStage: 'delivered', source: ImageSource.gallery);
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isTrue);
@@ -212,7 +212,7 @@ void main() {
 
     final result = await container
         .read(truckerTripActionProvider('trip-1').notifier)
-        .uploadPodProof(ImageSource.camera);
+        .uploadPodProof(currentStage: 'delivered', source: ImageSource.camera);
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isFalse);
@@ -233,7 +233,7 @@ void main() {
 
     final result = await container
         .read(truckerTripActionProvider('trip-1').notifier)
-        .uploadPodProof(ImageSource.gallery);
+        .uploadPodProof(currentStage: 'delivered', source: ImageSource.gallery);
 
     expect(result.failureOrNull, isA<BusinessRuleFailure>());
     expect(backend.uploadedProofTripId, isNull);

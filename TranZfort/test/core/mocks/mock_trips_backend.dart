@@ -87,6 +87,8 @@ class MockTruckerTripsBackend implements TruckerTripsBackend {
   Future<List<Map<String, dynamic>>> fetchTrips({
     required String truckerId,
     required List<String> stages,
+    int limit = 15,
+    int offset = 0,
   }) async {
     _throwIfError();
     fetchedTripsTruckerId = truckerId;

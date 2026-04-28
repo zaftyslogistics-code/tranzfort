@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tranzfort/src/core/constants/lifecycle_status_constants.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/features/supplier/data/supplier_load_models.dart';
 import 'package:tranzfort/src/features/supplier/data/supplier_load_repository.dart';
@@ -78,7 +79,7 @@ Map<String, dynamic> _loadRow(String id, String status) {
 void main() {
   test('my loads provider loads active tab initially and paginates', () async {
     final backend = _FakeSupplierLoadBackend({
-      supplierActiveLoadStatuses.join('|'): [
+      LoadStatuses.active.join('|'): [
         [_loadRow('load-1', 'active')],
         [_loadRow('load-2', 'assigned_partial')],
       ],
@@ -101,10 +102,10 @@ void main() {
 
   test('my loads provider switches tabs and reloads completed items', () async {
     final backend = _FakeSupplierLoadBackend({
-      supplierActiveLoadStatuses.join('|'): [
+      LoadStatuses.active.join('|'): [
         [_loadRow('load-1', 'active')],
       ],
-      supplierCompletedLoadStatuses.join('|'): [
+      LoadStatuses.completed.join('|'): [
         [_loadRow('load-9', 'completed')],
       ],
     });

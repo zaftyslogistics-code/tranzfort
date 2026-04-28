@@ -4,7 +4,7 @@ import 'package:tranzfort/src/features/trucker/providers/trucker_trip_detail_pro
 
 class _DetailBackend implements TruckerTripsBackend {
   @override
-  Future<List<Map<String, dynamic>>> fetchTrips({required String truckerId, required List<String> stages}) async {
+  Future<List<Map<String, dynamic>>> fetchTrips({required String truckerId, required List<String> stages, int limit = 15, int offset = 0}) async {
     return const <Map<String, dynamic>>[];
   }
 

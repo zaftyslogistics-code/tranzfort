@@ -145,6 +145,8 @@ abstract class SupplierTripsBackend {
   Future<List<Map<String, dynamic>>> fetchTrips({
     required String supplierId,
     required List<String> stages,
+    int limit = 15,
+    int offset = 0,
   });
 
   Future<Map<String, dynamic>?> fetchTripDetail({
