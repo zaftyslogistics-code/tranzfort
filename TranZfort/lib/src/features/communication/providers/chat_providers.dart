@@ -49,6 +49,15 @@ final unreadConversationCountProvider = StreamProvider.autoDispose<int>((ref) as
   }
 });
 
+/// A date section in the chat message list: a [date] header followed by
+/// the [messages] sent on that date (local time).
+class ChatMessageGroup {
+  final DateTime date;
+  final List<ChatMessage> messages;
+
+  const ChatMessageGroup({required this.date, required this.messages});
+}
+
 class ConversationMessagesState {
   final bool isLoading;
   final bool isLoadingOlder;
@@ -89,6 +98,22 @@ class ConversationMessagesState {
       hasMoreOlderMessages: hasMoreOlderMessages ?? this.hasMoreOlderMessages,
       failure: clearFailure == true ? null : failure ?? this.failure,
     );
+  }
+
+  /// Messages grouped by calendar date (local time), oldest date first.
+  List<ChatMessageGroup> get groupedMessages {
+    if (messages.isEmpty) return const <ChatMessageGroup>[];
+
+    final groups = <DateTime, List<ChatMessage>>{};
+    for (final message in messages) {
+      final local = message.createdAt.toLocal();
+      final key = DateTime(local.year, local.month, local.day);
+      groups.putIfAbsent(key, () => <ChatMessage>[]).add(message);
+    }
+    final sortedKeys = groups.keys.toList()..sort();
+    return sortedKeys
+        .map((date) => ChatMessageGroup(date: date, messages: groups[date]!))
+        .toList(growable: false);
   }
 }
 
