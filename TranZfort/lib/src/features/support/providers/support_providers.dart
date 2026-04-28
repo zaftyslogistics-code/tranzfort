@@ -138,3 +138,119 @@ final supportTicketDetailProvider = FutureProvider.autoDispose.family<SupportTic
     failure: (failure) => throw failure,
   );
 });
+
+class SupportTicketMessagesState {
+  final bool isLoading;
+  final bool isLoadingOlder;
+  final List<SupportTicketMessage> messages;
+  final bool hasMoreOlderMessages;
+  final AppFailure? failure;
+
+  const SupportTicketMessagesState({
+    required this.isLoading,
+    required this.isLoadingOlder,
+    required this.messages,
+    required this.hasMoreOlderMessages,
+    required this.failure,
+  });
+
+  factory SupportTicketMessagesState.initial() {
+    return const SupportTicketMessagesState(
+      isLoading: true,
+      isLoadingOlder: false,
+      messages: <SupportTicketMessage>[],
+      hasMoreOlderMessages: true,
+      failure: null,
+    );
+  }
+
+  SupportTicketMessagesState copyWith({
+    bool? isLoading,
+    bool? isLoadingOlder,
+    List<SupportTicketMessage>? messages,
+    bool? hasMoreOlderMessages,
+    AppFailure? failure,
+    bool? clearFailure,
+  }) {
+    return SupportTicketMessagesState(
+      isLoading: isLoading ?? this.isLoading,
+      isLoadingOlder: isLoadingOlder ?? this.isLoadingOlder,
+      messages: messages ?? this.messages,
+      hasMoreOlderMessages: hasMoreOlderMessages ?? this.hasMoreOlderMessages,
+      failure: clearFailure == true ? null : failure ?? this.failure,
+    );
+  }
+}
+
+class SupportTicketMessagesController extends StateNotifier<SupportTicketMessagesState> {
+  final SupportRepository _repository;
+  final String _ticketId;
+
+  SupportTicketMessagesController(this._repository, this._ticketId)
+      : super(SupportTicketMessagesState.initial()) {
+    load();
+  }
+
+  Future<void> load() async {
+    state = state.copyWith(isLoading: true, clearFailure: true);
+    final result = await _repository.getTicketMessagesPaginated(
+      _ticketId,
+      limit: 50,
+    );
+    result.when(
+      success: (messages) {
+        state = state.copyWith(
+          isLoading: false,
+          messages: messages,
+          hasMoreOlderMessages: messages.length >= 50,
+          clearFailure: true,
+        );
+      },
+      failure: (failure) {
+        state = state.copyWith(
+          isLoading: false,
+          failure: failure,
+        );
+      },
+    );
+  }
+
+  Future<void> loadOlderMessages() async {
+    if (state.isLoadingOlder || !state.hasMoreOlderMessages || state.messages.isEmpty) {
+      return;
+    }
+
+    final oldestMessage = state.messages.first;
+    state = state.copyWith(isLoadingOlder: true, clearFailure: true);
+
+    final result = await _repository.getTicketMessagesPaginated(
+      _ticketId,
+      limit: 50,
+      beforeCreatedAt: oldestMessage.createdAt,
+      beforeMessageId: oldestMessage.id,
+    );
+
+    result.when(
+      success: (olderMessages) {
+        final merged = <SupportTicketMessage>[...olderMessages, ...state.messages];
+        state = state.copyWith(
+          isLoadingOlder: false,
+          messages: merged,
+          hasMoreOlderMessages: olderMessages.length == 50,
+          clearFailure: true,
+        );
+      },
+      failure: (failure) {
+        state = state.copyWith(
+          isLoadingOlder: false,
+          failure: failure,
+        );
+      },
+    );
+  }
+}
+
+final supportTicketMessagesProvider = StateNotifierProvider.autoDispose
+    .family<SupportTicketMessagesController, SupportTicketMessagesState, String>((ref, ticketId) {
+  return SupportTicketMessagesController(ref.watch(supportRepositoryProvider), ticketId);
+});

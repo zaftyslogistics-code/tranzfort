@@ -101,7 +101,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **9.4** Validate RC document size/type/quality before submission and expose document status to users. — Added `RcDocumentValidationResult` with size (max 10MB), MIME type (JPEG/PNG only), and resolution (min 800x600) checks in `TruckDocumentUploadService.validateRcDocument()`. Validation runs before compression/upload with descriptive error messages surfaced as `ValidationFailure`.
 
 ### 10. Support / Tickets
-- [ ] **10.1** Add pagination for support ticket messages (currently loads all messages).
+- [x] **10.1** Add pagination for support ticket messages (currently loads all messages). — Added `fetchTicketMessagesPaginated({limit=50, beforeCreatedAt, beforeMessageId})` to `SupportBackend`/`SupabaseSupportBackend`. Added `getTicketMessagesPaginated` to `SupportRepository`. Added `SupportTicketMessagesController` + `supportTicketMessagesProvider` for stateful pagination. UI: `_SupportTicketDetailSection` now uses `Consumer` to watch `supportTicketMessagesProvider`, shows "Load older messages" button with spinner.
 - [ ] **10.2** Move validation copy (`Support description is too short`, `Reply is too short`) to l10n or return structured error codes from repositories.
 - [ ] **10.3** Extend attachment contracts for metadata, multiple files, scan status, and retry handling.
 - [ ] **10.4** Enforce ownership check in `fetchTicketMessages()` (currently filters only by `support_ticket_id`; add explicit `owner_profile_id` validation or use an RPC that validates ownership and returns ticket + messages together).

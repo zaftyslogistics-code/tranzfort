@@ -168,25 +168,62 @@ class _SupportTicketDetailSection extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSpacing.md),
-        if (detail.messages.isEmpty)
-          EmptyStateView(
-            icon: Icons.forum_outlined,
-            title: _supportNoVisibleThreadTitle(l10n),
-            subtitle: _emptyThreadSubtitle(detail.ticket.status, l10n),
-          )
-        else
-          Column(
-            children: [
-              for (var index = 0; index < detail.messages.length; index++) ...[
-                _SupportMessageCard(
-                  message: detail.messages[index],
-                  ticketStatus: detail.ticket.status,
-                  isDisputeTicket: _isDisputeTicket(detail.ticket),
-                ),
-                if (index != detail.messages.length - 1) const SizedBox(height: AppSpacing.md),
+        Consumer(
+          builder: (context, ref, _) {
+            final resolvedTicketId = selectedTicketId!;
+            final messagesState = ref.watch(supportTicketMessagesProvider(resolvedTicketId));
+            final messages = messagesState.isLoading && detail.messages.isNotEmpty
+                ? detail.messages
+                : messagesState.messages;
+            final hasMoreOlder = messagesState.hasMoreOlderMessages;
+            final isLoadingOlder = messagesState.isLoadingOlder;
+
+            if (messages.isEmpty) {
+              return EmptyStateView(
+                icon: Icons.forum_outlined,
+                title: _supportNoVisibleThreadTitle(l10n),
+                subtitle: _emptyThreadSubtitle(detail.ticket.status, l10n),
+              );
+            }
+
+            return Column(
+              children: [
+                if (hasMoreOlder || isLoadingOlder)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: AppSpacing.md),
+                    child: Center(
+                      child: isLoadingOlder
+                          ? const SizedBox(
+                              width: 20,
+                              height: 20,
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            )
+                          : TextButton(
+                              onPressed: () {
+                                ref.read(supportTicketMessagesProvider(resolvedTicketId).notifier).loadOlderMessages();
+                              },
+                              child: Text(
+                                'Load older messages',
+                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: AppColors.primary,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                              ),
+                            ),
+                    ),
+                  ),
+                for (var index = 0; index < messages.length; index++) ...[
+                  _SupportMessageCard(
+                    message: messages[index],
+                    ticketStatus: detail.ticket.status,
+                    isDisputeTicket: _isDisputeTicket(detail.ticket),
+                  ),
+                  if (index != messages.length - 1) const SizedBox(height: AppSpacing.md),
+                ],
               ],
-            ],
-          ),
+            );
+          },
+        ),
         const SizedBox(height: AppSpacing.md),
         DetailSectionCard(
           title: _supportCurrentWorkflowTitle(l10n),

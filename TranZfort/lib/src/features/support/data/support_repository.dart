@@ -26,6 +26,14 @@ abstract class SupportBackend {
 
   Future<List<Map<String, dynamic>>> fetchTicketMessages({
     required String ticketId,
+    int limit = 50,
+  });
+
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
   });
 
   Future<String> createTicket({
@@ -96,6 +104,7 @@ class SupabaseSupportBackend implements SupportBackend {
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessages({
     required String ticketId,
+    int limit = 50,
   }) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
@@ -107,8 +116,41 @@ class SupabaseSupportBackend implements SupportBackend {
           'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
         )
         .eq('support_ticket_id', ticketId)
-        .order('created_at', ascending: true);
+        .order('created_at', ascending: true)
+        .limit(limit);
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    var query = _client
+        .from('support_ticket_messages')
+        .select(
+          'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
+        )
+        .eq('support_ticket_id', ticketId);
+
+    if (beforeCreatedAt != null) {
+      query = query.lt('created_at', beforeCreatedAt.toUtc().toIso8601String());
+    }
+    if (beforeMessageId != null) {
+      query = query.lt('id', beforeMessageId);
+    }
+
+    final response = await query
+        .order('created_at', ascending: false)
+        .limit(limit);
+
+    return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
   }
 
   @override
@@ -233,6 +275,45 @@ class SupportRepository {
       );
     } catch (error, stackTrace) {
       return Failure<SupportTicketDetail>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<List<SupportTicketMessage>>> getTicketMessagesPaginated(
+    String ticketId, {
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<List<SupportTicketMessage>>(UnauthorizedFailure());
+    }
+
+    final normalizedTicketId = ticketId.trim();
+    if (normalizedTicketId.isEmpty) {
+      return const Failure<List<SupportTicketMessage>>(
+        ValidationFailure(
+          message: 'Ticket id is required',
+          fieldErrors: {'ticket_id': 'Ticket id is required'},
+        ),
+      );
+    }
+
+    try {
+      final rows = await _backend.fetchTicketMessagesPaginated(
+        ticketId: normalizedTicketId,
+        limit: limit,
+        beforeCreatedAt: beforeCreatedAt,
+        beforeMessageId: beforeMessageId,
+      );
+      final messages = rows
+          .whereType<Map<String, dynamic>>()
+          .map(SupportTicketMessageDto.fromMap)
+          .map((dto) => dto.toDomain())
+          .toList(growable: false);
+      return Success<List<SupportTicketMessage>>(messages);
+    } catch (error, stackTrace) {
+      return Failure<List<SupportTicketMessage>>(_mapError(error, stackTrace));
     }
   }
 
