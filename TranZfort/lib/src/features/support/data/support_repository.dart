@@ -25,11 +25,13 @@ abstract class SupportBackend {
   });
 
   Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
     required String ticketId,
     int limit = 50,
   });
 
   Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
     required String ticketId,
     int limit = 50,
     DateTime? beforeCreatedAt,
@@ -103,6 +105,7 @@ class SupabaseSupportBackend implements SupportBackend {
 
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
     required String ticketId,
     int limit = 50,
   }) async {
@@ -116,6 +119,7 @@ class SupabaseSupportBackend implements SupportBackend {
           'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
         )
         .eq('support_ticket_id', ticketId)
+        .eq('support_tickets.requester_profile_id', userId)
         .order('created_at', ascending: true)
         .limit(limit);
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
@@ -123,6 +127,7 @@ class SupabaseSupportBackend implements SupportBackend {
 
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
     required String ticketId,
     int limit = 50,
     DateTime? beforeCreatedAt,
@@ -137,7 +142,8 @@ class SupabaseSupportBackend implements SupportBackend {
         .select(
           'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
         )
-        .eq('support_ticket_id', ticketId);
+        .eq('support_ticket_id', ticketId)
+        .eq('support_tickets.requester_profile_id', userId);
 
     if (beforeCreatedAt != null) {
       query = query.lt('created_at', beforeCreatedAt.toUtc().toIso8601String());
@@ -262,7 +268,7 @@ class SupportRepository {
       if (ticketRow == null) {
         return const Failure<SupportTicketDetail>(NotFoundFailure());
       }
-      final messageRows = await _backend.fetchTicketMessages(ticketId: normalizedTicketId);
+      final messageRows = await _backend.fetchTicketMessages(userId: userId, ticketId: normalizedTicketId);
       final ticket = SupportTicketDto.fromMap(ticketRow).toDomain();
       final messages = messageRows
           .whereType<Map<String, dynamic>>()
@@ -301,6 +307,7 @@ class SupportRepository {
 
     try {
       final rows = await _backend.fetchTicketMessagesPaginated(
+        userId: userId,
         ticketId: normalizedTicketId,
         limit: limit,
         beforeCreatedAt: beforeCreatedAt,
