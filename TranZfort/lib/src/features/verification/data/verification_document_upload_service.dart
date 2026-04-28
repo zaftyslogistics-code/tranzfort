@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:ui' show decodeImageFromList;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,7 +14,33 @@ import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'verification_repository.dart';
 
+class VerificationDocumentValidationResult {
+  final bool isValid;
+  final String? errorMessage;
+  final int? fileSizeBytes;
+  final String? detectedMimeType;
+  final ({int width, int height})? dimensions;
+
+  const VerificationDocumentValidationResult.valid({
+    this.fileSizeBytes,
+    this.detectedMimeType,
+    this.dimensions,
+  })  : isValid = true,
+        errorMessage = null;
+
+  const VerificationDocumentValidationResult.invalid(this.errorMessage)
+      : isValid = false,
+        fileSizeBytes = null,
+        detectedMimeType = null,
+        dimensions = null;
+}
+
 class VerificationDocumentUploadService {
+  static const int maxFileSizeBytes = 10 * 1024 * 1024; // 10 MB
+  static const int minImageWidth = 800;
+  static const int minImageHeight = 600;
+  static const List<String> allowedMimeTypes = ['image/jpeg', 'image/png'];
+
   final SupabaseClient? _client;
   final Future<XFile?> Function(ImageSource source) _pickImage;
   final Future<Uint8List> Function(XFile file) _readBytes;
@@ -30,6 +57,40 @@ class VerificationDocumentUploadService {
         _readBytes = readBytesFn ?? _defaultReadBytes,
         _compressImage = compressImageFn ?? _defaultCompressImage,
         _uploadBinary = uploadBinaryFn ?? _defaultUploadBinary;
+
+  Future<VerificationDocumentValidationResult> validateDocument(XFile file, Uint8List bytes) async {
+    if (bytes.length > maxFileSizeBytes) {
+      return const VerificationDocumentValidationResult.invalid(
+        'Document exceeds 10 MB limit. Please use a smaller image or compress it.',
+      );
+    }
+
+    final mimeType = file.mimeType;
+    if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
+      return const VerificationDocumentValidationResult.invalid(
+        'Document must be a JPEG or PNG image. Please select a valid image file.',
+      );
+    }
+
+    try {
+      final decodedImage = await decodeImageFromList(bytes);
+      if (decodedImage.width < minImageWidth || decodedImage.height < minImageHeight) {
+        return VerificationDocumentValidationResult.invalid(
+          'Document resolution too low (${decodedImage.width}x${decodedImage.height}). '
+          'Minimum required: ${minImageWidth}x$minImageHeight.',
+        );
+      }
+      return VerificationDocumentValidationResult.valid(
+        fileSizeBytes: bytes.length,
+        detectedMimeType: mimeType,
+        dimensions: (width: decodedImage.width, height: decodedImage.height),
+      );
+    } catch (_) {
+      return const VerificationDocumentValidationResult.invalid(
+        'Unable to read the selected image. Please try a different photo.',
+      );
+    }
+  }
 
   Future<Result<String?>> pickCompressAndUploadDocument({
     required String profileId,
@@ -58,6 +119,16 @@ class VerificationDocumentUploadService {
       }
 
       final originalBytes = await _readBytes(file);
+      final validation = await validateDocument(file, originalBytes);
+      if (!validation.isValid) {
+        return Failure<String?>(
+          ValidationFailure(
+            message: validation.errorMessage ?? 'Document validation failed.',
+            fieldErrors: {_documentFieldKey(type): validation.errorMessage ?? 'Invalid document'},
+          ),
+        );
+      }
+
       final compressedBytes = _compressImage(originalBytes);
       if (compressedBytes == null || compressedBytes.isEmpty) {
         return Failure<String?>(
@@ -163,6 +234,19 @@ class VerificationDocumentUploadService {
             upsert: true,
           ),
         );
+  }
+
+  static String _documentFieldKey(VerificationDocumentType type) {
+    return switch (type) {
+      VerificationDocumentType.aadhaarFront => 'aadhaar_front_document_path',
+      VerificationDocumentType.aadhaarBack => 'aadhaar_back_document_path',
+      VerificationDocumentType.pan => 'pan_document_path',
+      VerificationDocumentType.profilePhoto => 'profile_photo_document_path',
+      VerificationDocumentType.businessLicence => 'business_licence_document_path',
+      VerificationDocumentType.gstCertificate => 'gst_certificate_document_path',
+      VerificationDocumentType.truckRc => 'truck_rc_document_path',
+      VerificationDocumentType.truckPhoto => 'truck_photo_document_path',
+    };
   }
 
   static String _documentFolder(VerificationDocumentType type) {
