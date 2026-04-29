@@ -9235,6 +9235,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Done'**
   String get reviewPromptDone;
+
+  /// No description provided for @publicProfileScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get publicProfileScreenTitle;
+
+  /// No description provided for @publicProfileLoadErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile'**
+  String get publicProfileLoadErrorTitle;
+
+  /// No description provided for @publicProfileNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found'**
+  String get publicProfileNotFoundTitle;
 }
 
 class _AppLocalizationsDelegate

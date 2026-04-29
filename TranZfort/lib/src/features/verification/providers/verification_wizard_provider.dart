@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'verification_draft_secure_storage.dart';
+import 'verification_provider.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';

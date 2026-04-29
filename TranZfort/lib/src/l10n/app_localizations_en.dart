@@ -5939,4 +5939,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reviewPromptDone => 'Done';
+
+  @override
+  String get publicProfileScreenTitle => 'Profile';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'Failed to load profile';
+
+  @override
+  String get publicProfileNotFoundTitle => 'Profile not found';
 }

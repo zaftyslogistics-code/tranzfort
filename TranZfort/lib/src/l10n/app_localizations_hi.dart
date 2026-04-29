@@ -5952,4 +5952,13 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reviewPromptDone => 'हो गया';
+
+  @override
+  String get publicProfileScreenTitle => 'प्रोफाइल';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'प्रोफाइल लोड करने में विफल';
+
+  @override
+  String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
 }

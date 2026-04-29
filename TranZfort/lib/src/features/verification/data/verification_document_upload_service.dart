@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:ui' show decodeImageFromList;
+import 'dart:ui' show decodeImageFromList, Image;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,7 +73,7 @@ class VerificationDocumentUploadService {
     }
 
     try {
-      final decodedImage = await decodeImageFromList(bytes);
+      final decodedImage = await _decodeImageFromList(bytes);
       if (decodedImage.width < minImageWidth || decodedImage.height < minImageHeight) {
         return VerificationDocumentValidationResult.invalid(
           'Document resolution too low (${decodedImage.width}x${decodedImage.height}). '
@@ -273,6 +273,13 @@ class VerificationDocumentUploadService {
       VerificationDocumentType.truckRc => 'truck_rc.jpg',
       VerificationDocumentType.truckPhoto => 'truck_photo.jpg',
     };
+  }
+
+  /// Wraps dart:ui decodeImageFromList callback-based API in a Future
+  static Future<Image> _decodeImageFromList(Uint8List bytes) async {
+    final completer = Completer<Image>();
+    decodeImageFromList(bytes, completer.complete);
+    return completer.future;
   }
 }
 

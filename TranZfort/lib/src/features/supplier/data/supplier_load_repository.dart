@@ -106,7 +106,7 @@ class SupplierLoadRepository {
   }
 
   Future<Result<List<LoadBookingRequest>>> getBookingRequests(String loadId) async {
-    AppLogger.info('Starting getBookingRequests', scope: 'supplier_load_repo', data: {'loadId': loadId});
+    AppLogger.info('Starting getBookingRequests', scope: 'supplier_load_repo');
 
     final userId = _currentUserId();
     if (userId == null) {
@@ -133,9 +133,8 @@ class SupplierLoadRepository {
           .map(LoadBookingRequest.fromMap)
           .toList(growable: false);
       AppLogger.info(
-        'getBookingRequests success',
+        'getBookingRequests success - ${bookings.length} bookings',
         scope: 'supplier_load_repo',
-        data: {'bookingCount': bookings.length},
       );
       return Success<List<LoadBookingRequest>>(bookings);
     } catch (error, stackTrace) {
@@ -150,7 +149,7 @@ class SupplierLoadRepository {
   }
 
   Future<Result<List<LinkedTrip>>> getLinkedTrips(String loadId) async {
-    AppLogger.info('Starting getLinkedTrips', scope: 'supplier_load_repo', data: {'loadId': loadId});
+    AppLogger.info('Starting getLinkedTrips', scope: 'supplier_load_repo');
 
     final userId = _currentUserId();
     if (userId == null) {
@@ -177,9 +176,8 @@ class SupplierLoadRepository {
           .map(LinkedTrip.fromMap)
           .toList(growable: false);
       AppLogger.info(
-        'getLinkedTrips success',
+        'getLinkedTrips success - ${trips.length} trips',
         scope: 'supplier_load_repo',
-        data: {'tripCount': trips.length},
       );
       return Success<List<LinkedTrip>>(trips);
     } catch (error, stackTrace) {

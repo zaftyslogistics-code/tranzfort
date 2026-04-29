@@ -96,7 +96,7 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
     
-    AppLogger.info('Loading details', scope: 'load_detail', data: {'loadId': state.loadId});
+    AppLogger.info('Loading details - loadId: ${state.loadId}', scope: 'load_detail');
 
     final detailResult = await _repository.getLoadDetail(state.loadId);
     if (detailResult.isFailure) {
@@ -128,18 +128,16 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
       return;
     }
     AppLogger.info(
-      'getBookingRequests success',
+      'getBookingRequests success - ${bookingsResult.valueOrNull?.length} bookings',
       scope: 'load_detail',
-      data: {'bookingCount': bookingsResult.valueOrNull?.length},
     );
 
     final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
     linkedTripsResult.when(
       success: (linkedTrips) {
         AppLogger.info(
-          'getLinkedTrips success',
+          'getLinkedTrips success - ${linkedTrips.length} trips',
           scope: 'load_detail',
-          data: {'tripCount': linkedTrips.length},
         );
         state = state.copyWith(
           detail: detailResult.valueOrNull,
@@ -164,7 +162,7 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
       },
     );
 
-    AppLogger.info('Load complete', scope: 'load_detail', data: {'hasFailure': state.failure != null});
+    AppLogger.info('Load complete - hasFailure: ${state.failure != null}', scope: 'load_detail');
   }
 
   Future<Result<void>> cancelLoad() async {

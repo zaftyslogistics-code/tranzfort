@@ -14,7 +14,7 @@ abstract class PublicProfileBackend {
     String? viewerId,
   });
 
-  Future<List<Map<String, dynamic>>> getUserPublicLoads({
+  Future<Map<String, dynamic>> getUserPublicLoads({
     required String userId,
     int limit,
     int offset,
@@ -141,15 +141,22 @@ class PublicProfileRepository {
     }
 
     try {
-      final rows = await _backend.getUserPublicLoads(
+      final response = await _backend.getUserPublicLoads(
         userId: userId.trim(),
         limit: limit,
         offset: offset,
         statusFilter: statusFilter,
       );
 
+      final loads = response['loads'] as List<dynamic>?;
+      if (loads == null) {
+        return const Success<List<PublicLoadPreview>>([]);
+      }
+
       return Success<List<PublicLoadPreview>>(
-        rows.map(PublicLoadPreview.fromMap).toList(growable: false),
+        loads
+            .map((item) => PublicLoadPreview.fromMap(item as Map<String, dynamic>))
+            .toList(growable: false),
       );
     } catch (error, stackTrace) {
       return Failure<List<PublicLoadPreview>>(mapSupabaseError(error, stackTrace));
