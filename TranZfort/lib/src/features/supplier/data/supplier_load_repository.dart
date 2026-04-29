@@ -1,12 +1,12 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'supplier_load_models.dart';
 import 'supplier_load_repository_backend.dart';
@@ -106,16 +106,16 @@ class SupplierLoadRepository {
   }
 
   Future<Result<List<LoadBookingRequest>>> getBookingRequests(String loadId) async {
-    debugPrint('🔍 [getBookingRequests] Starting - loadId: $loadId');
-    
+    AppLogger.info('Starting getBookingRequests', scope: 'supplier_load_repo', data: {'loadId': loadId});
+
     final userId = _currentUserId();
     if (userId == null) {
-      debugPrint('❌ [getBookingRequests] User ID is null');
+      AppLogger.warning('User ID is null', scope: 'supplier_load_repo');
       return const Failure<List<LoadBookingRequest>>(UnauthorizedFailure());
     }
 
     if (loadId.trim().isEmpty) {
-      debugPrint('❌ [getBookingRequests] Load ID is empty');
+      AppLogger.warning('Load ID is empty', scope: 'supplier_load_repo');
       return const Failure<List<LoadBookingRequest>>(
         ValidationFailure(
           message: 'Load id is required',
@@ -125,40 +125,41 @@ class SupplierLoadRepository {
     }
 
     try {
-      debugPrint('📞 [getBookingRequests] Calling backend.fetchBookingRequests');
       final rows = await _backend.fetchBookingRequests(
         supplierId: userId,
         loadId: loadId.trim(),
       );
-      debugPrint('📊 [getBookingRequests] Backend returned ${rows.length} rows');
-      
       final bookings = rows
           .map(LoadBookingRequest.fromMap)
           .toList(growable: false);
-      debugPrint('✅ [getBookingRequests] Mapped ${bookings.length} LoadBookingRequest objects');
+      AppLogger.info(
+        'getBookingRequests success',
+        scope: 'supplier_load_repo',
+        data: {'bookingCount': bookings.length},
+      );
       return Success<List<LoadBookingRequest>>(bookings);
     } catch (error, stackTrace) {
-      debugPrint('❌ [getBookingRequests] ERROR: $error');
-      debugPrint('   Error type: ${error.runtimeType}');
-      debugPrint('   Stack trace: $stackTrace');
       final failure = _mapError(error, stackTrace);
-      debugPrint('   Mapped failure: $failure');
-      debugPrint('   Failure type: ${failure.runtimeType}');
+      AppLogger.warning(
+        'getBookingRequests failed',
+        scope: 'supplier_load_repo',
+        error: failure,
+      );
       return Failure<List<LoadBookingRequest>>(failure);
     }
   }
 
   Future<Result<List<LinkedTrip>>> getLinkedTrips(String loadId) async {
-    debugPrint('🔍 [getLinkedTrips] Starting - loadId: $loadId');
-    
+    AppLogger.info('Starting getLinkedTrips', scope: 'supplier_load_repo', data: {'loadId': loadId});
+
     final userId = _currentUserId();
     if (userId == null) {
-      debugPrint('❌ [getLinkedTrips] User ID is null');
+      AppLogger.warning('User ID is null', scope: 'supplier_load_repo');
       return const Failure<List<LinkedTrip>>(UnauthorizedFailure());
     }
 
     if (loadId.trim().isEmpty) {
-      debugPrint('❌ [getLinkedTrips] Load ID is empty');
+      AppLogger.warning('Load ID is empty', scope: 'supplier_load_repo');
       return const Failure<List<LinkedTrip>>(
         ValidationFailure(
           message: 'Load id is required',
@@ -168,22 +169,27 @@ class SupplierLoadRepository {
     }
 
     try {
-      debugPrint('📞 [getLinkedTrips] Calling backend.fetchLinkedTrips');
       final rows = await _backend.fetchLinkedTrips(
         supplierId: userId,
         loadId: loadId.trim(),
       );
-      debugPrint('📊 [getLinkedTrips] Backend returned ${rows.length} rows');
-      
       final trips = rows
           .map(LinkedTrip.fromMap)
           .toList(growable: false);
-      debugPrint('✅ [getLinkedTrips] Mapped ${trips.length} LinkedTrip objects');
+      AppLogger.info(
+        'getLinkedTrips success',
+        scope: 'supplier_load_repo',
+        data: {'tripCount': trips.length},
+      );
       return Success<List<LinkedTrip>>(trips);
     } catch (error, stackTrace) {
-      debugPrint('❌ [getLinkedTrips] ERROR: $error');
-      debugPrint('   Stack trace: $stackTrace');
-      return Failure<List<LinkedTrip>>(_mapError(error, stackTrace));
+      final failure = _mapError(error, stackTrace);
+      AppLogger.warning(
+        'getLinkedTrips failed',
+        scope: 'supplier_load_repo',
+        error: failure,
+      );
+      return Failure<List<LinkedTrip>>(failure);
     }
   }
 

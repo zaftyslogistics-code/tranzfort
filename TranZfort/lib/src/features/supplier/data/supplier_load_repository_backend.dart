@@ -1,6 +1,6 @@
-import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/logger/app_logger.dart';
 import 'supplier_load_models.dart';
 
 abstract class SupplierLoadBackend {
@@ -117,39 +117,39 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     required String supplierId,
     required String loadId,
   }) async {
-    debugPrint('🔍 [fetchBookingRequests] Starting - supplierId: $supplierId, loadId: $loadId');
+    AppLogger.info('🔍 [fetchBookingRequests] Starting - supplierId: $supplierId, loadId: $loadId');
     
     if (_client == null) {
-      debugPrint('❌ [fetchBookingRequests] Client is null');
+      AppLogger.error('❌ [fetchBookingRequests] Client is null');
       throw const AuthException('Session unavailable');
     }
 
     try {
-      debugPrint('📞 [fetchBookingRequests] Calling RPC get_supplier_booking_requests');
-      debugPrint('   Parameters: p_load_id=$loadId');
+      AppLogger.info('📞 [fetchBookingRequests] Calling RPC get_supplier_booking_requests');
+      AppLogger.info('   Parameters: p_load_id=$loadId');
       
       final response = await _client.rpc(
         'get_supplier_booking_requests',
         params: {'p_load_id': loadId},
       );
       
-      debugPrint('📊 [fetchBookingRequests] RPC returned response type: ${response.runtimeType}');
+      AppLogger.info('📊 [fetchBookingRequests] RPC returned response type: ${response.runtimeType}');
       
       if (response is List) {
-        debugPrint('✅ [fetchBookingRequests] RPC returned ${response.length} rows');
+        AppLogger.info('✅ [fetchBookingRequests] RPC returned ${response.length} rows');
         return List<Map<String, dynamic>>.from(response as List);
       } else {
-        debugPrint('⚠️  [fetchBookingRequests] RPC returned non-list response: $response');
+        AppLogger.warning('⚠️  [fetchBookingRequests] RPC returned non-list response: $response');
         return [];
       }
     } catch (error, stackTrace) {
-      debugPrint('❌ [fetchBookingRequests] ERROR: $error');
-      debugPrint('   Error type: ${error.runtimeType}');
-      debugPrint('   Stack trace: $stackTrace');
+      AppLogger.error('❌ [fetchBookingRequests] ERROR: $error');
+      AppLogger.error('   Error type: ${error.runtimeType}');
+      AppLogger.error('   Stack trace: $stackTrace');
       
       // Try to get more details from PostgrestException if available
       if (error.toString().contains('column') || error.toString().contains('does not exist')) {
-        debugPrint('   🔍 This appears to be a database column error');
+        AppLogger.error('   🔍 This appears to be a database column error');
       }
       
       rethrow;
@@ -161,10 +161,10 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     required String supplierId,
     required String loadId,
   }) async {
-    debugPrint('🔍 [fetchLinkedTrips] Starting - supplierId: $supplierId, loadId: $loadId');
+    AppLogger.info('🔍 [fetchLinkedTrips] Starting - supplierId: $supplierId, loadId: $loadId');
     
     if (_client == null) {
-      debugPrint('❌ [fetchLinkedTrips] Client is null');
+      AppLogger.error('❌ [fetchLinkedTrips] Client is null');
       throw const AuthException('Session unavailable');
     }
 
@@ -175,7 +175,7 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
           .eq('supplier_id', supplierId)
           .or('id.eq.$loadId,parent_load_id.eq.$loadId');
       
-      debugPrint('📊 [fetchLinkedTrips] Related loads query returned: ${relatedLoads.length} rows');
+      AppLogger.info('📊 [fetchLinkedTrips] Related loads query returned: ${relatedLoads.length} rows');
 
       final relatedLoadIds = relatedLoads
           .whereType<Map<String, dynamic>>()
@@ -183,14 +183,14 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
           .where((id) => id.isNotEmpty)
           .toList(growable: false);
 
-      debugPrint('📋 [fetchLinkedTrips] Related load IDs: $relatedLoadIds');
+      AppLogger.info('📋 [fetchLinkedTrips] Related load IDs: $relatedLoadIds');
 
       if (relatedLoadIds.isEmpty) {
-        debugPrint('⚠️  [fetchLinkedTrips] No related loads found, returning empty');
+        AppLogger.warning('⚠️  [fetchLinkedTrips] No related loads found, returning empty');
         return const <Map<String, dynamic>>[];
       }
 
-      debugPrint('🔎 [fetchLinkedTrips] Querying trips table...');
+      AppLogger.info('🔎 [fetchLinkedTrips] Querying trips table...');
       final response = await _client
           .from('trips')
           .select(
@@ -200,11 +200,11 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
           .inFilter('load_id', relatedLoadIds)
           .order('assigned_at', ascending: false);
 
-      debugPrint('✅ [fetchLinkedTrips] Trips query returned: ${response.length} rows');
+      AppLogger.info('✅ [fetchLinkedTrips] Trips query returned: ${response.length} rows');
       return response.whereType<Map<String, dynamic>>().toList(growable: false);
     } catch (error, stackTrace) {
-      debugPrint('❌ [fetchLinkedTrips] ERROR: $error');
-      debugPrint('   Stack trace: $stackTrace');
+      AppLogger.error('❌ [fetchLinkedTrips] ERROR: $error');
+      AppLogger.error('   Stack trace: $stackTrace');
       rethrow;
     }
   }

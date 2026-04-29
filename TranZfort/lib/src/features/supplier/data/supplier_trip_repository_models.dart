@@ -154,6 +154,11 @@ abstract class SupplierTripsBackend {
     required String tripId,
   });
 
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({
+    required String supplierId,
+    required String tripId,
+  });
+
   Future<Map<String, dynamic>?> fetchTruckerProfile(String truckerId);
 
   Future<Map<String, dynamic>?> fetchOwnRating({

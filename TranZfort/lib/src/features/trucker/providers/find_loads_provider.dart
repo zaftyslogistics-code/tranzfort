@@ -16,6 +16,7 @@ class FindLoadsState {
   final bool isLoadingMore;
   final bool hasMore;
   final int page;
+  final int? totalCount;
   final AppFailure? failure;
 
   const FindLoadsState({
@@ -26,6 +27,7 @@ class FindLoadsState {
     required this.isLoadingMore,
     required this.hasMore,
     required this.page,
+    this.totalCount,
     required this.failure,
   });
 
@@ -38,6 +40,7 @@ class FindLoadsState {
       isLoadingMore: false,
       hasMore: true,
       page: 1,
+      totalCount: null,
       failure: null,
     );
   }
@@ -50,6 +53,7 @@ class FindLoadsState {
     bool? isLoadingMore,
     bool? hasMore,
     int? page,
+    int? totalCount,
     AppFailure? failure,
     bool? clearFailure,
   }) {
@@ -61,6 +65,7 @@ class FindLoadsState {
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       hasMore: hasMore ?? this.hasMore,
       page: page ?? this.page,
+      totalCount: totalCount ?? this.totalCount,
       failure: clearFailure == true ? null : failure ?? this.failure,
     );
   }
@@ -77,28 +82,28 @@ class FindLoadsController extends StateNotifier<FindLoadsState> {
     state = state.copyWith(
       isInitialLoading: true,
       isLoadingMore: false,
-      page: 1,
-      loads: const <MarketplaceLoadItem>[],
-      hasMore: true,
       clearFailure: true,
     );
 
     final result = await _repository.searchLoads(_effectiveFilters(state), page: 1);
+
     result.when(
-      success: (value) {
+      success: (searchResult) {
         state = state.copyWith(
-          loads: value,
+          loads: searchResult.items,
           isInitialLoading: false,
-          hasMore: value.length == truckerMarketplacePageSize,
+          isLoadingMore: false,
           page: 1,
+          hasMore: searchResult.hasMore,
+          totalCount: searchResult.total,
           clearFailure: true,
         );
       },
       failure: (failure) {
         state = state.copyWith(
           isInitialLoading: false,
+          isLoadingMore: false,
           failure: failure,
-          hasMore: false,
         );
       },
     );
@@ -113,12 +118,13 @@ class FindLoadsController extends StateNotifier<FindLoadsState> {
     state = state.copyWith(isLoadingMore: true, clearFailure: true);
     final result = await _repository.searchLoads(_effectiveFilters(state), page: nextPage);
     result.when(
-      success: (value) {
+      success: (searchResult) {
         state = state.copyWith(
           isLoadingMore: false,
           page: nextPage,
-          loads: <MarketplaceLoadItem>[...state.loads, ...value],
-          hasMore: value.length == truckerMarketplacePageSize,
+          loads: <MarketplaceLoadItem>[...state.loads, ...searchResult.items],
+          hasMore: searchResult.hasMore,
+          totalCount: searchResult.total,
           clearFailure: true,
         );
       },

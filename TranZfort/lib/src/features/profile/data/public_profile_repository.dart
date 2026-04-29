@@ -54,7 +54,7 @@ class SupabasePublicProfileBackend implements PublicProfileBackend {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> getUserPublicLoads({
+  Future<Map<String, dynamic>> getUserPublicLoads({
     required String userId,
     int limit = 5,
     int offset = 0,
@@ -64,28 +64,28 @@ class SupabasePublicProfileBackend implements PublicProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    // Query loads for this supplier with public visibility
-    var query = _client
-        .from('loads')
-        .select(
-          'id, origin_city, destination_city, material, weight_tonnes, price_amount, price_type, pickup_date, status',
-        )
-        .eq('supplier_id', userId)
-        .isFilter('parent_load_id', null);
+    final response = await _client.rpc(
+      'get_public_load_previews',
+      params: <String, dynamic>{
+        'p_supplier_id': userId,
+        'p_limit': limit,
+        'p_offset': offset,
+        if (statusFilter != null && statusFilter.isNotEmpty)
+          'p_status_filter': statusFilter,
+      },
+    );
 
-    // Apply status filter if provided
-    if (statusFilter != null && statusFilter.isNotEmpty) {
-      query = query.eq('status', statusFilter);
-    } else {
-      // Default: show active and completed loads
-      query = query.inFilter('status', const ['active', 'completed', 'assigned_partial', 'assigned_full']);
+    if (response is Map<String, dynamic>) {
+      return response;
     }
 
-    final response = await query
-        .order('created_at', ascending: false)
-        .range(offset, offset + limit - 1);
+    if (response is List && response.isNotEmpty && response.first is Map<String, dynamic>) {
+      return response.first as Map<String, dynamic>;
+    }
 
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    throw FormatException(
+      'Unexpected RPC response type for get_public_load_previews: ${response.runtimeType}',
+    );
   }
 }
 

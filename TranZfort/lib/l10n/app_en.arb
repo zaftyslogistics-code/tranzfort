@@ -2524,5 +2524,9 @@
   "reviewPromptSkip": "Skip",
   "reviewPromptSuccessTitle": "Review Submitted!",
   "reviewPromptSuccessMessage": "Thank you for sharing your experience.",
-  "reviewPromptDone": "Done"
+  "reviewPromptDone": "Done",
+  "@_sectionPublicProfile": "=== Public Profile ===",
+  "publicProfileScreenTitle": "Profile",
+  "publicProfileLoadErrorTitle": "Failed to load profile",
+  "publicProfileNotFoundTitle": "Profile not found"
 }

@@ -146,15 +146,18 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
     final result = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
+        // TODO(l10n): Add verificationWizardBackTitle key (Phase 4)
         title: const Text('Go Back?'),
+        // TODO(l10n): Add verificationWizardBackMessage key (Phase 4)
         content: const Text('You will lose your progress on this step. Do you want to go back?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
-            child: const Text('Cancel'),
+            child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
+            // TODO(l10n): Add verificationWizardBackAction key (Phase 4)
             child: const Text('Go Back'),
           ),
         ],

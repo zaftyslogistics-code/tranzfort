@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+
+import '../../../core/logger/app_logger.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -66,37 +67,37 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
       return const <TruckerCitySuggestion>[];
     }
 
-    debugPrint('[TruckerLocationSearch] ========== SEARCH START ==========');
-    debugPrint('[TruckerLocationSearch] Searching for: "$query"');
+    AppLogger.info('[TruckerLocationSearch] ========== SEARCH START ==========');
+    AppLogger.info('[TruckerLocationSearch] Searching for: "$query"');
     
     // Try Google Places API first
     final googleSuggestions = await _searchGoogleCities(trimmedQuery);
     if (googleSuggestions.isNotEmpty) {
-      debugPrint('[TruckerLocationSearch] ========== USING GOOGLE PLACES API ==========');
-      debugPrint('[TruckerLocationSearch] Source: Google Places API');
-      debugPrint('[TruckerLocationSearch] Results: ${googleSuggestions.length} cities');
-      debugPrint('[TruckerLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
+      AppLogger.info('[TruckerLocationSearch] ========== USING GOOGLE PLACES API ==========');
+      AppLogger.info('[TruckerLocationSearch] Source: Google Places API');
+      AppLogger.info('[TruckerLocationSearch] Results: ${googleSuggestions.length} cities');
+      AppLogger.info('[TruckerLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
       return googleSuggestions;
     }
 
-    debugPrint('[TruckerLocationSearch] ========== USING OFFLINE DATABASE ==========');
-    debugPrint('[TruckerLocationSearch] Google Places API returned empty or failed');
+    AppLogger.info('[TruckerLocationSearch] ========== USING OFFLINE DATABASE ==========');
+    AppLogger.warning('[TruckerLocationSearch] Google Places API returned empty or failed');
     final offlineSuggestions = await _searchOfflineCities(trimmedQuery);
-    debugPrint('[TruckerLocationSearch] Source: Offline Database');
-    debugPrint('[TruckerLocationSearch] Results: ${offlineSuggestions.length} places');
-    debugPrint('[TruckerLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
-    debugPrint('[TruckerLocationSearch] ========== SEARCH END ==========');
+    AppLogger.info('[TruckerLocationSearch] Source: Offline Database');
+    AppLogger.info('[TruckerLocationSearch] Results: ${offlineSuggestions.length} places');
+    AppLogger.info('[TruckerLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
+    AppLogger.info('[TruckerLocationSearch] ========== SEARCH END ==========');
     return offlineSuggestions;
   }
 
   Future<List<TruckerCitySuggestion>> _searchGoogleCities(String query) async {
     final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
     if (apiKey.isEmpty) {
-      debugPrint('[TruckerLocationSearch] Google Maps API key is empty');
+      AppLogger.warning('[TruckerLocationSearch] Google Maps API key is empty');
       return const [];
     }
 
-    debugPrint('[TruckerLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
+    AppLogger.info('[TruckerLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
 
     final uri = Uri.https(
       'maps.googleapis.com',
@@ -110,15 +111,15 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
     );
 
     try {
-      debugPrint('[TruckerLocationSearch] Calling Google Places API');
+      AppLogger.info('[TruckerLocationSearch] Calling Google Places API');
       final payload = await _getJson(uri);
       final predictions = payload['predictions'];
       if (predictions is! List) {
-        debugPrint('[TruckerLocationSearch] Google API response: predictions is not a List');
+        AppLogger.warning('[TruckerLocationSearch] Google API response: predictions is not a List');
         return const [];
       }
 
-      debugPrint('[TruckerLocationSearch] Google API returned ${predictions.length} predictions');
+      AppLogger.info('[TruckerLocationSearch] Google API returned ${predictions.length} predictions');
       final suggestions = predictions
           .whereType<Map<String, dynamic>>()
           .map((prediction) {
@@ -126,7 +127,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
             final parts = description.split(',').map((part) => part.trim()).where((part) => part.isNotEmpty).toList();
             final city = parts.isNotEmpty ? parts.first : description;
             final state = parts.length > 1 ? parts[1] : null;
-            debugPrint('[TruckerLocationSearch] Google result: "$city, $state"');
+            AppLogger.info('[TruckerLocationSearch] Google result: "$city, $state"');
             return TruckerCitySuggestion(
               city: city,
               state: state ?? '',
@@ -139,10 +140,8 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
           .toList(growable: false);
       return suggestions.cast<TruckerCitySuggestion>().toList();
     } catch (e, stackTrace) {
-      debugPrint('[TruckerLocationSearch] Google API error: $e');
-      if (kDebugMode) {
-        debugPrint('[TruckerLocationSearch] Stack trace: $stackTrace');
-      }
+      AppLogger.warning('[TruckerLocationSearch] Google API error: $e');
+      AppLogger.info('[TruckerLocationSearch] Stack trace: $stackTrace');
       return const [];
     }
   }
@@ -153,7 +152,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
     
     // indian_cities.json doesn't have place_type field, so we can't filter by city/town
     // Just use district field if available to get main city name instead of village
-    debugPrint('[TruckerLocationSearch] Offline database has ${cities.length} total places');
+    AppLogger.info('[TruckerLocationSearch] Offline database has ${cities.length} total places');
     
     final results = cities
         .where((city) => _readCityName(city).toLowerCase().contains(normalized))
@@ -162,7 +161,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
           (city) {
             final cityName = (city['district']?.isNotEmpty == true) ? city['district']!.toString() : _readCityName(city);
             final stateName = (city['state'] ?? '').toString();
-            debugPrint('[TruckerLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
+            AppLogger.info('[TruckerLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
             return TruckerCitySuggestion(
               city: cityName,
               state: stateName,
@@ -175,7 +174,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
         )
         .toList(growable: false);
     
-    debugPrint('[TruckerLocationSearch] Offline search returned ${results.length} results');
+    AppLogger.info('[TruckerLocationSearch] Offline search returned ${results.length} results');
     return results;
   }
 

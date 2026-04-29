@@ -2388,5 +2388,8 @@
   "verificationOpenAppSettingsAction": "ऐप सेटिंग्स खोलें",
   "verificationOpenSettingsAction": "सेटिंग्स खोलें",
   "verificationPermissionDeniedMessage": "लोकेशन एक्सेस स्थायी रूप से अस्वीकृत है। जारी रखने के लिए कृपया ऐप सेटिंग्स में लोकेशन अनुमति सक्षम करें।",
-  "verificationPermissionDeniedTitle": "लोकेशन अनुमति आवश्यक है"
+  "verificationPermissionDeniedTitle": "लोकेशन अनुमति आवश्यक है",
+  "publicProfileScreenTitle": "प्रोफाइल",
+  "publicProfileLoadErrorTitle": "प्रोफाइल लोड करने में विफल",
+  "publicProfileNotFoundTitle": "प्रोफाइल नहीं मिली"
 }

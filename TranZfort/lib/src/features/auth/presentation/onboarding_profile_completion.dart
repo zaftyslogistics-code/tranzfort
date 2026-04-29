@@ -113,8 +113,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           fullName: _nameController.text,
           mobile: _mobileController.text,
           termsAccepted: _termsAccepted,
-          city: _city,
-          state: _state,
           latitude: _latitude,
           longitude: _longitude,
         );

@@ -30,32 +30,22 @@ extension VerificationWizardSubmit on VerificationWizardController {
       _setState(state.copyWith(draft: persistedDraft), persistDraft: false);
     }
 
-    final result = await _repository.fetchCurrentDetail();
-    result.when(
-      success: (detail) {
-        if (detail != null) {
-          final detailDraft = VerificationDraft.fromDetail(detail);
-          _setState(
-            state.copyWith(
-              draft: persistedDraft == null
-                  ? detailDraft
-                  : detailDraft.mergeMissingFrom(state.draft),
-              isLoading: false,
-              verificationStatus: detail.verificationStatus.toLowerCase(),
-            ),
-            persistDraft: false,
-          );
-        } else {
-          _setState(state.copyWith(isLoading: false), persistDraft: false);
-        }
-      },
-      failure: (failure) {
-        _setState(
-          state.copyWith(isLoading: false, error: failure),
-          persistDraft: false,
-        );
-      },
-    );
+    final detail = _initialDetail;
+    if (detail != null) {
+      final detailDraft = VerificationDraft.fromDetail(detail);
+      _setState(
+        state.copyWith(
+          draft: persistedDraft == null
+              ? detailDraft
+              : detailDraft.mergeMissingFrom(state.draft),
+          isLoading: false,
+          verificationStatus: detail.verificationStatus.toLowerCase(),
+        ),
+        persistDraft: false,
+      );
+    } else {
+      _setState(state.copyWith(isLoading: false), persistDraft: false);
+    }
   }
 
   // ─── Submit ───

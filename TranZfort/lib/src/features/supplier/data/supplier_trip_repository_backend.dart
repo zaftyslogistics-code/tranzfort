@@ -133,6 +133,24 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
   }
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({
+    required String supplierId,
+    required String tripId,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    return _client.rpc(
+      'get_supplier_trip_detail',
+      params: <String, dynamic>{
+        'p_trip_id': tripId,
+        'p_supplier_id': supplierId,
+      },
+    ) as Map<String, dynamic>?;
+  }
+
+  @override
   Future<Map<String, dynamic>?> fetchTripDisputeSummary({
     required String tripId,
   }) async {

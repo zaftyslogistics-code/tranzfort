@@ -155,31 +155,30 @@ class SupplierTripsRepository {
     }
 
     try {
-      final row = await _backend.fetchTripDetail(supplierId: userId, tripId: normalizedTripId);
-      if (row == null) {
-        return const Failure<SupplierTripDetail>(NotFoundFailure());
-      }
-      final truckerId = (row['trucker_id'] ?? '').toString();
-      final truckerProfile = await _backend.fetchTruckerProfile(truckerId);
-      if (truckerProfile == null) {
+      final consolidated = await _backend.fetchTripDetailConsolidated(
+        supplierId: userId,
+        tripId: normalizedTripId,
+      );
+      if (consolidated == null) {
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
-      final podPath = (row['pod_document_path'] ?? '').toString().trim();
-      final lrPath = (row['lr_document_path'] ?? '').toString().trim();
+      final tripMap = consolidated['trip'] as Map<String, dynamic>?;
+      if (tripMap == null) {
+        return const Failure<SupplierTripDetail>(NotFoundFailure());
+      }
+
+      final podPath = (tripMap['pod_document_path'] ?? '').toString().trim();
+      final lrPath = (tripMap['lr_document_path'] ?? '').toString().trim();
       final podSignedUrl = podPath.isEmpty ? null : await _backend.createProofSignedUrl(podPath);
       final lrSignedUrl = lrPath.isEmpty ? null : await _backend.createProofSignedUrl(lrPath);
-      final disputeSummary = (row['stage'] ?? '').toString().trim().toLowerCase() == 'disputed'
-          ? await _backend.fetchTripDisputeSummary(tripId: normalizedTripId)
-          : null;
 
       return Success<SupplierTripDetail>(
-        _mapTripDetail(
-          row,
-          truckerProfile,
+        _mapTripDetailConsolidated(
+          tripMap,
+          consolidated,
           podSignedUrl: podSignedUrl,
           lrSignedUrl: lrSignedUrl,
-          disputeSummary: disputeSummary,
         ),
       );
     } catch (error, stackTrace) {
@@ -315,42 +314,50 @@ class SupplierTripsRepository {
     );
   }
 
-  SupplierTripDetail _mapTripDetail(
-    Map<String, dynamic> map,
-    Map<String, dynamic> truckerProfile, {
+  SupplierTripDetail _mapTripDetailConsolidated(
+    Map<String, dynamic> tripMap,
+    Map<String, dynamic> consolidated, {
     required String? podSignedUrl,
     required String? lrSignedUrl,
-    required Map<String, dynamic>? disputeSummary,
   }) {
-    final snapshot = map['load_snapshot_summary'];
-    final snapshotMap = snapshot is Map<String, dynamic> ? snapshot : <String, dynamic>{};
-    final loadMap = map['loads'] is Map<String, dynamic> ? map['loads'] as Map<String, dynamic> : <String, dynamic>{};
-    final truckMap = map['trucks'] is Map<String, dynamic> ? map['trucks'] as Map<String, dynamic> : <String, dynamic>{};
-    final origin = (snapshotMap['origin_label'] ?? loadMap['origin_label'] ?? 'Load').toString();
-    final destination = (snapshotMap['destination_label'] ?? loadMap['destination_label'] ?? '').toString();
-    final material = (snapshotMap['material'] ?? loadMap['material'] ?? 'Material pending').toString();
+    final loadSnapshot = consolidated['load_snapshot'] is Map<String, dynamic>
+        ? consolidated['load_snapshot'] as Map<String, dynamic>
+        : <String, dynamic>{};
+    final truckMap = consolidated['truck'] is Map<String, dynamic>
+        ? consolidated['truck'] as Map<String, dynamic>
+        : <String, dynamic>{};
+    final truckerProfile = consolidated['trucker_profile'] is Map<String, dynamic>
+        ? consolidated['trucker_profile'] as Map<String, dynamic>
+        : <String, dynamic>{};
+    final disputeSummary = consolidated['dispute_summary'] is Map<String, dynamic>
+        ? consolidated['dispute_summary'] as Map<String, dynamic>
+        : null;
+
+    final origin = (loadSnapshot['origin_label'] ?? 'Load').toString();
+    final destination = (loadSnapshot['destination_label'] ?? '').toString();
+    final material = (loadSnapshot['material'] ?? 'Material pending').toString();
 
     return SupplierTripDetail(
-      id: (map['id'] ?? '').toString(),
-      loadId: (map['load_id'] ?? '').toString(),
+      id: (tripMap['id'] ?? '').toString(),
+      loadId: (tripMap['load_id'] ?? '').toString(),
       routeLabel: destination.isEmpty ? origin : '$origin > $destination',
       material: material,
-      stage: (map['stage'] ?? 'assigned').toString(),
-      truckId: (map['truck_id'] ?? '').toString(),
+      stage: (tripMap['stage'] ?? 'assigned').toString(),
+      truckId: (tripMap['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),
       truckBodyType: truckMap['body_type']?.toString(),
       truckTyres: readInt(truckMap['tyres']),
-      assignedAt: DateTime.tryParse((map['assigned_at'] ?? '').toString()) ?? DateTime.now(),
-      deliveredAt: readDate(map['delivered_at']),
-      podUploadedAt: readDate(map['pod_uploaded_at']),
-      completedAt: readDate(map['completed_at']),
+      assignedAt: DateTime.tryParse((tripMap['assigned_at'] ?? '').toString()) ?? DateTime.now(),
+      deliveredAt: readDate(tripMap['delivered_at']),
+      podUploadedAt: readDate(tripMap['pod_uploaded_at']),
+      completedAt: readDate(tripMap['completed_at']),
       originLabel: origin,
       destinationLabel: destination,
-      routeDistanceKm: readDouble(loadMap['route_distance_km']),
-      routeDurationMinutes: readInt(loadMap['route_duration_minutes']),
-      pickupDate: readDate(loadMap['pickup_date']),
-      lrDocumentPath: nullableString(map['lr_document_path']),
-      podDocumentPath: nullableString(map['pod_document_path']),
+      routeDistanceKm: readDoubleNullable(loadSnapshot['route_distance_km']),
+      routeDurationMinutes: readInt(loadSnapshot['route_duration_minutes']),
+      pickupDate: readDate(loadSnapshot['pickup_date']),
+      lrDocumentPath: nullableString(tripMap['lr_document_path']),
+      podDocumentPath: nullableString(tripMap['pod_document_path']),
       lrSignedUrl: lrSignedUrl,
       podSignedUrl: podSignedUrl,
       disputeSummary: disputeSummary == null
@@ -358,7 +365,7 @@ class SupplierTripsRepository {
           : SupplierTripDisputeSummary(
               category: (disputeSummary['category'] ?? 'trip_dispute').toString(),
               status: (disputeSummary['status'] ?? 'open').toString(),
-              updatedAt: DateTime.parse((disputeSummary['updated_at'] ?? '').toString()),
+              updatedAt: readDate(disputeSummary['updated_at']) ?? DateTime.now(),
             ),
       trucker: SupplierTripTrucker(
         id: (truckerProfile['id'] ?? '').toString(),

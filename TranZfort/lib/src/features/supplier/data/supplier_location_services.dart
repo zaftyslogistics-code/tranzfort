@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+
+import '../../../core/logger/app_logger.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -85,26 +86,26 @@ class NetworkSupplierLocationService implements SupplierLocationService {
       return const [];
     }
 
-    debugPrint('[SupplierLocationSearch] ========== SEARCH START ==========');
-    debugPrint('[SupplierLocationSearch] Searching for: "$query"');
+    AppLogger.info('[SupplierLocationSearch] ========== SEARCH START ==========');
+    AppLogger.info('[SupplierLocationSearch] Searching for: "$query"');
     
     // Try Google Places API first
     final googleSuggestions = await _searchGoogleCities(trimmedQuery);
     if (googleSuggestions.isNotEmpty) {
-      debugPrint('[SupplierLocationSearch] ========== USING GOOGLE PLACES API ==========');
-      debugPrint('[SupplierLocationSearch] Source: Google Places API');
-      debugPrint('[SupplierLocationSearch] Results: ${googleSuggestions.length} cities');
-      debugPrint('[SupplierLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
+      AppLogger.info('[SupplierLocationSearch] ========== USING GOOGLE PLACES API ==========');
+      AppLogger.info('[SupplierLocationSearch] Source: Google Places API');
+      AppLogger.info('[SupplierLocationSearch] Results: ${googleSuggestions.length} cities');
+      AppLogger.info('[SupplierLocationSearch] First 3 results: ${googleSuggestions.take(3).map((s) => s.city).join(", ")}');
       return googleSuggestions;
     }
 
-    debugPrint('[SupplierLocationSearch] ========== USING OFFLINE DATABASE ==========');
-    debugPrint('[SupplierLocationSearch] Google Places API returned empty or failed');
+    AppLogger.info('[SupplierLocationSearch] ========== USING OFFLINE DATABASE ==========');
+    AppLogger.warning('[SupplierLocationSearch] Google Places API returned empty or failed');
     final offlineSuggestions = await _searchOfflineCities(trimmedQuery);
-    debugPrint('[SupplierLocationSearch] Source: Offline Database');
-    debugPrint('[SupplierLocationSearch] Results: ${offlineSuggestions.length} places');
-    debugPrint('[SupplierLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
-    debugPrint('[SupplierLocationSearch] ========== SEARCH END ==========');
+    AppLogger.info('[SupplierLocationSearch] Source: Offline Database');
+    AppLogger.info('[SupplierLocationSearch] Results: ${offlineSuggestions.length} places');
+    AppLogger.info('[SupplierLocationSearch] First 3 results: ${offlineSuggestions.take(3).map((s) => s.city).join(", ")}');
+    AppLogger.info('[SupplierLocationSearch] ========== SEARCH END ==========');
     return offlineSuggestions;
   }
 
@@ -175,11 +176,11 @@ class NetworkSupplierLocationService implements SupplierLocationService {
   Future<List<PlaceSuggestion>> _searchGoogleCities(String query) async {
     final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
     if (apiKey.isEmpty) {
-      debugPrint('[SupplierLocationSearch] Google Maps API key is empty');
+      AppLogger.warning('[SupplierLocationSearch] Google Maps API key is empty');
       return const [];
     }
 
-    debugPrint('[SupplierLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
+    AppLogger.info('[SupplierLocationSearch] Using Google Maps API key (length: ${apiKey.length})');
 
     final uri = Uri.https(
       'maps.googleapis.com',
@@ -193,15 +194,15 @@ class NetworkSupplierLocationService implements SupplierLocationService {
     );
 
     try {
-      debugPrint('[SupplierLocationSearch] Calling Google Places API');
+      AppLogger.info('[SupplierLocationSearch] Calling Google Places API');
       final payload = await _getJson(uri);
       final predictions = payload['predictions'];
       if (predictions is! List) {
-        debugPrint('[SupplierLocationSearch] Google API response: predictions is not a List');
+        AppLogger.warning('[SupplierLocationSearch] Google API response: predictions is not a List');
         return const [];
       }
 
-      debugPrint('[SupplierLocationSearch] Google API returned ${predictions.length} predictions');
+      AppLogger.info('[SupplierLocationSearch] Google API returned ${predictions.length} predictions');
       return predictions
           .whereType<Map<String, dynamic>>()
           .map((prediction) {
@@ -209,7 +210,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
             final parts = description.split(',').map((part) => part.trim()).where((part) => part.isNotEmpty).toList();
             final city = parts.isNotEmpty ? parts.first : description;
             final state = parts.length > 1 ? parts[1] : null;
-            debugPrint('[SupplierLocationSearch] Google result: "$city, $state"');
+            AppLogger.info('[SupplierLocationSearch] Google result: "$city, $state"');
             return PlaceSuggestion(
               label: description,
               city: city,
@@ -222,10 +223,8 @@ class NetworkSupplierLocationService implements SupplierLocationService {
           })
           .toList(growable: false);
     } catch (e, stackTrace) {
-      debugPrint('[SupplierLocationSearch] Google API error: $e');
-      if (kDebugMode) {
-        debugPrint('[SupplierLocationSearch] Stack trace: $stackTrace');
-      }
+      AppLogger.warning('[SupplierLocationSearch] Google API error: $e');
+      AppLogger.info('[SupplierLocationSearch] Stack trace: $stackTrace');
       return const [];
     }
   }
@@ -236,7 +235,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
     
     // indian_cities.json doesn't have place_type field, so we can't filter by city/town
     // Use district field if available to get main city name instead of village
-    debugPrint('[SupplierLocationSearch] Offline database has ${cities.length} total places');
+    AppLogger.info('[SupplierLocationSearch] Offline database has ${cities.length} total places');
     
     final results = cities
         .where((city) => _readCityName(city).toLowerCase().contains(normalized))
@@ -245,7 +244,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
           (city) {
             final cityName = (city['district']?.isNotEmpty == true) ? city['district']!.toString() : _readCityName(city);
             final stateName = (city['state'] ?? '').toString();
-            debugPrint('[SupplierLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
+            AppLogger.info('[SupplierLocationSearch] Offline result: "$cityName, $stateName" (using district: ${city['district'] != null})');
             return PlaceSuggestion(
               // Use district if available (main city), otherwise use city name (may be village)
               label: '$cityName, $stateName',
@@ -260,7 +259,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
         )
         .toList(growable: false);
     
-    debugPrint('[SupplierLocationSearch] Offline search returned ${results.length} results');
+    AppLogger.info('[SupplierLocationSearch] Offline search returned ${results.length} results');
     return results;
   }
 

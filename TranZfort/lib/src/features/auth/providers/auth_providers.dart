@@ -88,8 +88,6 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     required String fullName,
     required String mobile,
     required bool termsAccepted,
-    String? city,
-    String? state,
     double? latitude,
     double? longitude,
   }) async {
@@ -103,8 +101,6 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     final updateResult = await repository.updateProfile(
       fullName: fullName,
       mobile: mobile,
-      city: city,
-      state: state,
       latitude: latitude,
       longitude: longitude,
     );

@@ -27,6 +27,16 @@ class SupplierInfo {
       avatarUrl: avatarUrl ?? profilePhotoPath,
     );
   }
+
+  /// Parse from the `supplier_summary` JSONB object returned by `get_marketplace_feed` RPC.
+  factory SupplierInfo.fromRpcSummary(Map<String, dynamic> summary) {
+    final avatarUrl = summary['supplier_avatar_url'] as String?;
+    final photoPath = summary['supplier_photo_path'] as String?;
+    return SupplierInfo(
+      name: (summary['supplier_name'] as String?) ?? '',
+      avatarUrl: avatarUrl ?? photoPath,
+    );
+  }
 }
 
 class MarketplaceLoadItem {
@@ -136,10 +146,17 @@ class MarketplaceLoadItem {
   }
 
   factory MarketplaceLoadItem.fromMap(Map<String, dynamic> map) {
+    // Prefer embedded supplier_summary from consolidated RPC, fall back to top-level fields
+    final supplierSummary = map['supplier_summary'] as Map<String, dynamic>?;
+    final supplierInfo = supplierSummary != null
+        ? SupplierInfo.fromRpcSummary(supplierSummary)
+        : null;
+
     return MarketplaceLoadItem(
       id: (map['id'] ?? '').toString(),
       supplierId: (map['supplier_id'] ?? '').toString(),
-      supplierName: nullableString(map['supplier_name']), // Will be merged via copyWith
+      supplierName: supplierInfo?.name ?? nullableString(map['supplier_name']),
+      supplierAvatarUrl: supplierInfo?.avatarUrl ?? nullableString(map['supplier_avatar_url']),
       originLabel: (map['origin_label'] ?? '').toString(),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: nullableString(map['origin_state']),
@@ -150,16 +167,16 @@ class MarketplaceLoadItem {
       destinationState: nullableString(map['destination_state']),
       destinationLat: readDoubleNullable(map['destination_lat']),
       destinationLng: readDoubleNullable(map['destination_lng']),
-      routeDistanceKm: readDouble(map['route_distance_km']),
+      routeDistanceKm: readDoubleNullable(map['route_distance_km']),
       routeDurationMinutes: readInt(map['route_duration_minutes']),
       routeSnapshotSource: nullableString(map['route_snapshot_source']),
       material: (map['material'] ?? '').toString(),
-      weightTonnes: readDouble(map['weight_tonnes']),
+      weightTonnes: readDoubleNullable(map['weight_tonnes']) ?? 0.0,
       requiredBodyType: nullableString(map['required_body_type']),
       requiredTyres: _readTyres(map['required_tyres']),
       trucksNeeded: readInt(map['trucks_needed']),
       trucksBooked: readInt(map['trucks_booked']),
-      priceAmount: readDouble(map['price_amount']),
+      priceAmount: readDoubleNullable(map['price_amount']) ?? 0.0,
       priceType: (map['price_type'] ?? 'fixed').toString(),
       advancePercentage: readInt(map['advance_percentage']),
       pickupDate: readDate(map['pickup_date']) ?? DateTime.now(),
@@ -303,16 +320,30 @@ class MarketplaceSearchFilters {
   }
 }
 
+class MarketplaceSearchResult {
+  final List<MarketplaceLoadItem> items;
+  final int total;
+  final bool hasMore;
+  final int page;
+  final int pageSize;
+
+  const MarketplaceSearchResult({
+    required this.items,
+    required this.total,
+    required this.hasMore,
+    required this.page,
+    required this.pageSize,
+  });
+}
+
 abstract class TruckerMarketplaceBackend {
-  Future<List<Map<String, dynamic>>> searchLoads(
+  Future<MarketplaceSearchResult> searchLoads(
     MarketplaceSearchFilters filters, {
     required int page,
     required int pageSize,
   });
 
   Future<Map<String, dynamic>?> fetchSupplierProfile(String supplierId);
-
-  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds);
 }
 
 class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
@@ -321,7 +352,7 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
   SupabaseTruckerMarketplaceBackend(this._client);
 
   @override
-  Future<List<Map<String, dynamic>>> searchLoads(
+  Future<MarketplaceSearchResult> searchLoads(
     MarketplaceSearchFilters filters, {
     required int page,
     required int pageSize,
@@ -330,60 +361,53 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final from = (page - 1) * pageSize;
-    final to = from + pageSize - 1;
+    // Use consolidated RPC that returns load + supplier summary + ranking metadata in one call
+    final response = await _client.rpc(
+      'get_marketplace_feed',
+      params: <String, dynamic>{
+        'p_origin_city': _nullableString(filters.originCity.trim()),
+        'p_destination_city': _nullableString(filters.destinationCity.trim()),
+        'p_material': _nullableString(filters.material.trim()),
+        'p_body_type': _nullableString(filters.truckBodyType.trim()),
+        'p_min_price': filters.minPrice,
+        'p_max_price': filters.maxPrice,
+        'p_super_loads_only': filters.superLoadsOnly,
+        'p_required_tyres': filters.tyres.isEmpty ? null : filters.tyres,
+        'p_sort_by': _sortByParam(filters.sortOption),
+        'p_page_size': pageSize,
+        'p_page': page,
+      },
+    );
 
-    var filteredQuery = _client
-        .from('loads')
-        .select(
-          'id, supplier_id, origin_label, origin_city, origin_state, destination_label, destination_city, destination_state, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, created_at, parent_load_id, profiles(id, full_name, avatar_url, profile_photo_document_path)',
-        )
-        .eq('status', 'active');
+    final resultMap = response is Map<String, dynamic> ? response : <String, dynamic>{};
+    final loadsList = resultMap['loads'];
+    final rawItems = loadsList is List ? loadsList : <dynamic>[];
+    final items = rawItems
+        .whereType<Map<String, dynamic>>()
+        .map(MarketplaceLoadItem.fromMap)
+        .toList(growable: false);
 
-    // Escape SQL LIKE wildcard characters to prevent injection
-    String escapeLike(String s) => s.replaceAll(r'%', r'\%').replaceAll(r'_', r'\_');
+    return MarketplaceSearchResult(
+      items: items,
+      total: readInt(resultMap['total']),
+      hasMore: resultMap['has_more'] == true,
+      page: page,
+      pageSize: pageSize,
+    );
+  }
 
-    final origin = escapeLike(filters.originCity.trim());
-    final destination = escapeLike(filters.destinationCity.trim());
-    final material = escapeLike(filters.material.trim());
-    final bodyType = filters.truckBodyType.trim();
-    final minPrice = filters.minPrice;
-    final maxPrice = filters.maxPrice;
+  String? _nullableString(String value) {
+    final trimmed = value.trim();
+    return trimmed.isEmpty ? null : trimmed;
+  }
 
-    if (origin.isNotEmpty) {
-      filteredQuery = filteredQuery.ilike('origin_city', '%$origin%');
-    }
-    if (destination.isNotEmpty) {
-      filteredQuery = filteredQuery.ilike('destination_city', '%$destination%');
-    }
-    if (material.isNotEmpty) {
-      filteredQuery = filteredQuery.ilike('material', '%$material%');
-    }
-    if (bodyType.isNotEmpty) {
-      filteredQuery = filteredQuery.eq('required_body_type', bodyType);
-    }
-    if (filters.superLoadsOnly) {
-      filteredQuery = filteredQuery.eq('is_super_load', true);
-    }
-    if (filters.tyres.isNotEmpty) {
-      filteredQuery = filteredQuery.overlaps('required_tyres', filters.tyres);
-    }
-    if (minPrice != null) {
-      filteredQuery = filteredQuery.gte('price_amount', minPrice);
-    }
-    if (maxPrice != null) {
-      filteredQuery = filteredQuery.lte('price_amount', maxPrice);
-    }
-
-    final sortedQuery = switch (filters.sortOption) {
-      MarketplaceSortOption.newest => filteredQuery.order('created_at', ascending: false),
-      MarketplaceSortOption.priceHighToLow => filteredQuery.order('price_amount', ascending: false),
-      MarketplaceSortOption.priceLowToHigh => filteredQuery.order('price_amount', ascending: true),
-      MarketplaceSortOption.pickupDate => filteredQuery.order('pickup_date', ascending: true),
+  String _sortByParam(MarketplaceSortOption sort) {
+    return switch (sort) {
+      MarketplaceSortOption.newest => 'newest',
+      MarketplaceSortOption.priceHighToLow => 'price_desc',
+      MarketplaceSortOption.priceLowToHigh => 'price_asc',
+      MarketplaceSortOption.pickupDate => 'pickup_date',
     };
-
-    final response = await sortedQuery.range(from, to);
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
 
   @override
@@ -398,27 +422,6 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
         .eq('id', supplierId)
         .maybeSingle();
   }
-
-  @override
-  Future<Map<String, SupplierInfo>> fetchSupplierInfo(List<String> supplierIds) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
-    }
-
-    if (supplierIds.isEmpty) {
-      return {};
-    }
-
-    final response = await _client
-        .from('profiles')
-        .select('id, full_name, avatar_url, profile_photo_document_path')
-        .inFilter('id', supplierIds);
-
-    return {
-      for (var profile in response)
-        profile['id'] as String: SupplierInfo.fromMap(profile),
-    };
-  }
 }
 
 class TruckerMarketplaceRepository {
@@ -426,38 +429,13 @@ class TruckerMarketplaceRepository {
 
   const TruckerMarketplaceRepository(this._backend);
 
-  Future<Result<List<MarketplaceLoadItem>>> searchLoads(
+  Future<Result<MarketplaceSearchResult>> searchLoads(
     MarketplaceSearchFilters filters, {
     int page = 1,
     int pageSize = truckerMarketplacePageSize,
   }) async {
-    try {
-      final rows = await _backend.searchLoads(filters, page: page, pageSize: pageSize);
-
-      // Collect unique supplier IDs
-      final supplierIds = rows
-          .map((row) => (row['supplier_id'] ?? '').toString())
-          .where((id) => id.isNotEmpty)
-          .toSet()
-          .toList();
-
-      // Fetch supplier info (name and avatarUrl)
-      final supplierInfo = await _backend.fetchSupplierInfo(supplierIds);
-
-      // Merge supplier info into load items
-      final loadItems = rows.map((row) {
-        final supplierId = (row['supplier_id'] ?? '').toString();
-        final info = supplierInfo[supplierId];
-        return MarketplaceLoadItem.fromMap(row).copyWith(
-          supplierName: info?.name,
-          supplierAvatarUrl: info?.avatarUrl,
-        );
-      }).toList(growable: false);
-
-      return Success<List<MarketplaceLoadItem>>(loadItems);
-    } catch (error, stackTrace) {
-      return Failure<List<MarketplaceLoadItem>>(_mapError(error, stackTrace));
-    }
+    final result = await _backend.searchLoads(filters, page: page, pageSize: pageSize);
+    return Success<MarketplaceSearchResult>(result);
   }
 
   Future<Result<String?>> getSupplierMobile(String supplierId) async {

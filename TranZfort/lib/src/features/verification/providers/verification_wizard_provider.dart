@@ -35,6 +35,7 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
   final String? _currentUserId;
   final AppUserRole _role;
   final VerificationDraftSecureStorage _secureStorage;
+  final VerificationDetail? _initialDetail;
   late final VerificationWizardUploadHelper _uploadHelper;
   late final VerificationWizardValidationHelper _validationHelper;
 
@@ -47,6 +48,7 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
     TruckerFleetRepository? fleetRepository,
     String? currentUserId,
     VerificationDraftSecureStorage? secureStorage,
+    VerificationDetail? initialDetail,
   })  : _repository = repository,
         _uploadService = uploadService,
         _truckUploadService = truckUploadService,
@@ -55,6 +57,7 @@ class VerificationWizardController extends StateNotifier<VerificationWizardState
         _currentUserId = currentUserId,
         _role = role,
         _secureStorage = secureStorage ?? VerificationDraftSecureStorage(),
+        _initialDetail = initialDetail,
         super(VerificationWizardState.initial(role)) {
     _uploadHelper = VerificationWizardUploadHelper(
       repository: _repository,
@@ -84,6 +87,7 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
   final truckUploadService = ref.watch(truckDocumentUploadServiceProvider);
   final locationService = ref.watch(verificationLocationServiceProvider);
   final client = ref.watch(supabaseClientProvider);
+  final verificationState = ref.watch(verificationProvider);
 
   TruckerFleetRepository? fleetRepo;
   if (role == AppUserRole.trucker) {
@@ -101,5 +105,6 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
     role: role,
     fleetRepository: fleetRepo,
     currentUserId: client?.auth.currentUser?.id,
+    initialDetail: verificationState.detail,
   );
 });

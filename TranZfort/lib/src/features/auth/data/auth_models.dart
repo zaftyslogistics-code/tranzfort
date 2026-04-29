@@ -14,8 +14,6 @@ class UserProfile {
   final String? trustSafetyReasonSummary;
   final DateTime? dataDeletionRequestedAt;
   final String? avatarUrl;
-  final String? city;      // User location for public profile
-  final String? state;     // User location state for public profile
 
   const UserProfile({
     required this.id,
@@ -30,8 +28,6 @@ class UserProfile {
     this.trustSafetyReasonSummary,
     this.dataDeletionRequestedAt,
     this.avatarUrl,
-    this.city,
-    this.state,
   });
 
   bool get hasName => fullName.trim().length >= 2;
@@ -69,8 +65,6 @@ class UserProfile {
       trustSafetyReasonSummary: _nullableText(map['ban_reason']),
       dataDeletionRequestedAt: _parseDateTime(map['data_deletion_requested_at']),
       avatarUrl: avatarUrl ?? verificationPhotoPath,
-      city: _nullableText(map['city']),
-      state: _nullableText(map['state']),
     );
   }
 

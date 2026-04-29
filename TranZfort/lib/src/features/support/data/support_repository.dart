@@ -12,6 +12,12 @@ import 'support_models.dart';
 
 export 'support_models.dart';
 
+// Structured error codes shared with presentation layer for l10n mapping.
+const String _supportCreateTicketDescriptionTooShortCode = 'support_create_ticket_description_too_short';
+const String _supportReplyMessageTooShortCode = 'support_reply_message_too_short';
+const String _supportTicketIdRequiredCode = 'support_ticket_id_required';
+const String _supportCategoryRequiredCode = 'support_category_required';
+
 abstract class SupportBackend {
   Future<List<Map<String, dynamic>>> fetchTickets({
     required String userId,
@@ -113,13 +119,23 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
+    // Explicit ownership check: verify ticket exists and belongs to user
+    final ticket = await _client
+        .from('support_tickets')
+        .select('id')
+        .eq('id', ticketId)
+        .eq('owner_profile_id', userId)
+        .maybeSingle();
+    if (ticket == null) {
+      throw const AuthException('Ticket not found or access denied');
+    }
+
     final response = await _client
         .from('support_ticket_messages')
         .select(
           'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
         )
         .eq('support_ticket_id', ticketId)
-        .eq('support_tickets.requester_profile_id', userId)
         .order('created_at', ascending: true)
         .limit(limit);
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
@@ -137,13 +153,23 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
+    // Explicit ownership check: verify ticket exists and belongs to user
+    final ticket = await _client
+        .from('support_tickets')
+        .select('id')
+        .eq('id', ticketId)
+        .eq('owner_profile_id', userId)
+        .maybeSingle();
+    if (ticket == null) {
+      throw const AuthException('Ticket not found or access denied');
+    }
+
     var query = _client
         .from('support_ticket_messages')
         .select(
           'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
         )
-        .eq('support_ticket_id', ticketId)
-        .eq('support_tickets.requester_profile_id', userId);
+        .eq('support_ticket_id', ticketId);
 
     if (beforeCreatedAt != null) {
       query = query.lt('created_at', beforeCreatedAt.toUtc().toIso8601String());
@@ -254,8 +280,8 @@ class SupportRepository {
     if (normalizedTicketId.isEmpty) {
       return const Failure<SupportTicketDetail>(
         ValidationFailure(
-          message: 'Ticket id is required',
-          fieldErrors: {'ticket_id': 'Ticket id is required'},
+          message: _supportTicketIdRequiredCode,
+          fieldErrors: {'ticket_id': _supportTicketIdRequiredCode},
         ),
       );
     }
@@ -299,8 +325,8 @@ class SupportRepository {
     if (normalizedTicketId.isEmpty) {
       return const Failure<List<SupportTicketMessage>>(
         ValidationFailure(
-          message: 'Ticket id is required',
-          fieldErrors: {'ticket_id': 'Ticket id is required'},
+          message: _supportTicketIdRequiredCode,
+          fieldErrors: {'ticket_id': _supportTicketIdRequiredCode},
         ),
       );
     }
@@ -341,8 +367,8 @@ class SupportRepository {
     if (normalizedCategory.isEmpty) {
       return const Failure<String>(
         ValidationFailure(
-          message: 'Support category is required',
-          fieldErrors: {'category': 'Support category is required'},
+          message: _supportCategoryRequiredCode,
+          fieldErrors: {'category': _supportCategoryRequiredCode},
         ),
       );
     }
@@ -351,8 +377,8 @@ class SupportRepository {
     if (normalizedMessage.length < 10) {
       return const Failure<String>(
         ValidationFailure(
-          message: 'Support description is too short',
-          fieldErrors: {'message_body': 'Support description is too short'},
+          message: _supportCreateTicketDescriptionTooShortCode,
+          fieldErrors: {'message_body': _supportCreateTicketDescriptionTooShortCode},
         ),
       );
     }
@@ -386,8 +412,8 @@ class SupportRepository {
     if (normalizedTicketId.isEmpty) {
       return const Failure<String>(
         ValidationFailure(
-          message: 'Ticket id is required',
-          fieldErrors: {'ticket_id': 'Ticket id is required'},
+          message: _supportTicketIdRequiredCode,
+          fieldErrors: {'ticket_id': _supportTicketIdRequiredCode},
         ),
       );
     }
@@ -396,8 +422,8 @@ class SupportRepository {
     if (normalizedMessage.length < 2) {
       return const Failure<String>(
         ValidationFailure(
-          message: 'Reply is too short',
-          fieldErrors: {'message_body': 'Reply is too short'},
+          message: _supportReplyMessageTooShortCode,
+          fieldErrors: {'message_body': _supportReplyMessageTooShortCode},
         ),
       );
     }

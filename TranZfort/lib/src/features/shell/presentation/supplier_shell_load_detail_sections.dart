@@ -1,8 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/logger/app_logger.dart';
 import '../../../core/models/domain_statuses.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -38,11 +38,12 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
     final mapsLauncher = ref.watch(mapsLauncherServiceProvider);
     final detail = state.detail;
 
-    // Debug log: State monitoring
     if (state.failure != null) {
-      debugPrint('⚠️  [LoadDetail UI] Displaying failure warning: ${state.failure}');
-      debugPrint('   Failure type: ${state.failure.runtimeType}');
-      debugPrint('   Failure message: ${state.failure.toString()}');
+      AppLogger.warning(
+        'Displaying failure warning in LoadDetail UI',
+        scope: 'supplier_shell',
+        error: state.failure,
+      );
     }
 
     return DetailPageScaffold(
