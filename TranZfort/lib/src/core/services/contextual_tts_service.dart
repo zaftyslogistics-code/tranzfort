@@ -123,6 +123,48 @@ class ContextualTtsService {
     return filtered.first;
   }
 
+  /// Saves the selected voice ID for the given language code.
+  /// Uses SharedPreferences for persistence across app restarts.
+  Future<void> saveSelectedVoiceId(String languageCode, String voiceId) async {
+    try {
+      final preferences = await _preferences();
+      final key = _getVoicePreferenceKey(languageCode);
+      await preferences.setString(key, voiceId);
+    } catch (e) {
+      // Silently fail on save errors - voice selection will fall back to default
+    }
+  }
+
+  /// Loads the selected voice ID for the given language code.
+  /// Returns null if no voice has been selected for the language.
+  Future<String?> loadSelectedVoiceId(String languageCode) async {
+    try {
+      final preferences = await _preferences();
+      final key = _getVoicePreferenceKey(languageCode);
+      return preferences.getString(key);
+    } catch (e) {
+      // Return null on load errors - will fall back to default voice
+      return null;
+    }
+  }
+
+  /// Clears the selected voice ID for the given language code.
+  /// Resets to default voice selection behavior.
+  Future<void> clearSelectedVoiceId(String languageCode) async {
+    try {
+      final preferences = await _preferences();
+      final key = _getVoicePreferenceKey(languageCode);
+      await preferences.remove(key);
+    } catch (e) {
+      // Silently fail on clear errors
+    }
+  }
+
+  /// Gets the SharedPreferences key for storing voice selection for a language.
+  String _getVoicePreferenceKey(String languageCode) {
+    return 'tts_selected_voice_$languageCode';
+  }
+
   Future<void> setLanguage(String languageCode) async {
     await _setLanguage(_voiceLanguage(languageCode));
   }
