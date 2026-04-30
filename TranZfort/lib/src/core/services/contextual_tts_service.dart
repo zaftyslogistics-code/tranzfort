@@ -86,6 +86,43 @@ class ContextualTtsService {
     }
   }
 
+  /// Filters voices for the given language code and prioritizes offline voices.
+  /// Returns a filtered and sorted list of voices.
+  /// - Filters for Hindi (hi-IN) or English (en-GB/en-US) voices
+  /// - Prioritizes offline voices at the top of the list
+  /// - Returns empty list if no voices match the language
+  List<TtsVoice> filterVoicesForLanguage(List<TtsVoice> voices, String languageCode) {
+    final filtered = voices.where((voice) {
+      // Filter for the requested language
+      if (languageCode == 'hi') {
+        return voice.isHindi;
+      } else if (languageCode == 'en') {
+        return voice.isEnglish;
+      }
+      return false;
+    }).toList();
+
+    // Sort by offline status (offline voices first)
+    filtered.sort((a, b) {
+      if (a.isOffline && !b.isOffline) return -1;
+      if (!a.isOffline && b.isOffline) return 1;
+      return 0;
+    });
+
+    return filtered;
+  }
+
+  /// Gets the best available voice for the given language code.
+  /// Prioritizes: offline voices > online voices > default voice
+  /// Returns null if no voice is available for the language.
+  TtsVoice? getBestVoiceForLanguage(List<TtsVoice> voices, String languageCode) {
+    final filtered = filterVoicesForLanguage(voices, languageCode);
+    if (filtered.isEmpty) return null;
+    
+    // Return the first voice (already sorted with offline first)
+    return filtered.first;
+  }
+
   Future<void> setLanguage(String languageCode) async {
     await _setLanguage(_voiceLanguage(languageCode));
   }
