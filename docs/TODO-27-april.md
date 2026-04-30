@@ -235,6 +235,21 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
   - Migration guidance added to both parameters
 
 ### 17. Testing & CI
+
+**📋 Testing Strategy Document:** See `docs/automated-testing-strategy.md` for comprehensive testing approach, including:
+- Current test infrastructure analysis
+- 8 testing strategies (fix existing tests, credential management, automation scripts, CI pipeline, test data management, TTS voice testing, E2E flows, test dashboard)
+- Test credentials (supplier: testa@example.com, trucker: testt@example.com, password: Tabish%%Khan721)
+- Implementation plan (3 weeks)
+- Test categories & priorities
+
+**Test Credentials:**
+- Supplier: testa@example.com (UID: 077679ce-f53f-45a8-9f3a-90137e227d6a)
+- Trucker: testt@example.com (UID: b11b7793-0c15-459e-81dc-57ddf72f2869)
+- Password: Tabish%%Khan721
+
+---
+
 - [ ] **17.1** Add unit tests for route guard decisions (banned, deactivated, incomplete profile, role mismatch).
   - [ ] **17.1.1** Create test file `route_guard_test.dart` in test/core/navigation
   - [ ] **17.1.2** Add test for banned user guard: should redirect to banned screen

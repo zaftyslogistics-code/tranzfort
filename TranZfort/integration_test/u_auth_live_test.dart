@@ -40,7 +40,7 @@ String _supplierEmail() {
   if (fromDefine.isNotEmpty) {
     return fromDefine;
   }
-  return dotenv.env['TZ_SUPPLIER_EMAIL'] ?? 'supplier@example.com';
+  return dotenv.env['TZ_SUPPLIER_EMAIL'] ?? 'testa@example.com';
 }
 
 String _truckerEmail() {
@@ -48,7 +48,7 @@ String _truckerEmail() {
   if (fromDefine.isNotEmpty) {
     return fromDefine;
   }
-  return dotenv.env['TZ_TRUCKER_EMAIL'] ?? 'trucker@example.com';
+  return dotenv.env['TZ_TRUCKER_EMAIL'] ?? 'testt@example.com';
 }
 
 Future<Map<String, dynamic>?> _loadProfile(SupabaseClient client, String userId) {
