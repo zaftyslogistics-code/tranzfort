@@ -139,7 +139,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 15. Logging & Observability
 - [x] **15.1** Phase 5: Replace all `debugPrint` with `AppLogger` calls. — Migrated 103 calls across 7 files: `supplier_shell_load_detail_sections.dart` (3 calls), `load_detail_provider.dart` (14 calls), `supplier_load_repository.dart` (19 calls), `supplier_load_repository_backend.dart` (20 calls), `supplier_location_services.dart` (23 calls), `trucker_city_search_service.dart` (23 calls). Removed `kDebugMode`-gated debug prints; `AppLogger` handles debug-build filtering internally.
-- [ ] **15.2** Redact IDs, search payloads, and PII-adjacent data from logs in release builds.
+- [x] **15.2** Redact IDs, search payloads, and PII-adjacent data from logs in release builds. — Created `PiiRedaction` utility in `pii_redaction.dart` with regex patterns to redact: UUIDs, Supabase IDs, emails, Indian phone numbers, API keys, JWT tokens, bearer tokens, and numeric IDs. Integrated into `AppLogger` to automatically redact all log messages, errors, and stack traces in release mode. Debug mode retains full logging for development.
 
 ### 16. Design System Cleanup
 - [x] **16.1** Remove or deprecate legacy button/card variants (light/dark hero, legacy filled `OutlineButton`).
