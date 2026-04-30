@@ -162,18 +162,18 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
   - [x] **14.1.6** Create `TtsVoiceListItem` widget for displaying voice options (name, locale, offline badge) — Created `lib/src/shared/widgets/tts_voice_list_item.dart` with ListTile-based widget displaying voice name, locale, selection radio button, and offline badge chip. Uses withValues for opacity (fixed deprecation). Info-level Radio deprecation warnings from Flutter framework (non-blocking).
   - [x] **14.1.7** Create `TtsVoiceTestButton` widget for previewing selected voice with sample text — Created `lib/src/shared/widgets/tts_voice_test_button.dart` with OutlinedButton that speaks sample text (Hindi: "नमस्ते, यह एक आवाज़ परीक्षण है।", English: "Hello, this is a voice test."). Shows loading indicator while speaking, disables button during speech. Integrates with ContextualTtsService. Flutter analyze passes.
   - [ ] **14.1.8** Create `TtsVoiceSettingsScreen` with voice list, selection UI, and test functionality.
-    - [ ] **14.1.8.1** Create screen file structure in `lib/src/features/shell/presentation/tts_voice_settings_screen.dart`
-    - [ ] **14.1.8.2** Build DetailPageScaffold with title and TTS summary
-    - [ ] **14.1.8.3** Add loading state (LoadingShimmer) while voices are being discovered
-    - [ ] **14.1.8.4** Add error state (WarningBlock) with retry action if voice discovery fails
-    - [ ] **14.1.8.5** Build Hindi voice selection SectionCard with voice list
-    - [ ] **14.1.8.6** Build English voice selection SectionCard with voice list
-    - [ ] **14.1.8.7** Integrate TtsVoiceListItem for each voice in the lists
-    - [ ] **14.1.8.8** Add TtsVoiceTestButton to each voice list item
-    - [ ] **14.1.8.9** Add voice selection logic with AppSnackbar confirmation
-    - [ ] **14.1.8.10** Add refresh button to reload voice list
-    - [ ] **14.1.8.11** Add empty state when no voices are available for a language
-    - [ ] **14.1.8.12** Test screen composition and state management
+    - [x] **14.1.8.1** Create screen file structure in `lib/src/features/shell/presentation/tts_voice_settings_screen.dart` — Created complete screen with DetailPageScaffold, Hindi/English voice sections, loading/error states, voice lists with TtsVoiceListItem and TtsVoiceTestButton, refresh button, empty states. Flutter analyze passes.
+    - [x] **14.1.8.2** Build DetailPageScaffold with title and TTS summary — Integrated DetailPageScaffold with title "Voice Settings" and TTS summary.
+    - [x] **14.1.8.3** Add loading state (LoadingShimmer) while voices are being discovered — Added LoadingShimmer with 2 items when voiceState.isLoading is true.
+    - [x] **14.1.8.4** Add error state (WarningBlock) with retry action if voice discovery fails — Added WarningBlock with retry button calling refreshVoices() when error is present.
+    - [x] **14.1.8.5** Build Hindi voice selection SectionCard with voice list — Created _HindiVoiceSection with SectionCard containing ListView of Hindi voices.
+    - [x] **14.1.8.6** Build English voice selection SectionCard with voice list — Created _EnglishVoiceSection with SectionCard containing ListView of English voices.
+    - [x] **14.1.8.7** Integrate TtsVoiceListItem for each voice in the lists — Each voice displayed with TtsVoiceListItem showing name, locale, selection radio, offline badge.
+    - [x] **14.1.8.8** Add TtsVoiceTestButton to each voice list item — Each voice row includes TtsVoiceTestButton for voice preview.
+    - [ ] **14.1.8.9** Add voice selection logic with AppSnackbar confirmation — Currently calls selectVoice() directly. Need to add AppSnackbar confirmation after successful selection.
+    - [x] **14.1.8.10** Add refresh button to reload voice list — Added "Refresh Voices" OutlineButton in Actions SectionCard calling refreshVoices().
+    - [x] **14.1.8.11** Add empty state when no voices are available for a language — Each section shows "No Hindi/English voices available on this device." when voices list is empty.
+    - [ ] **14.1.8.12** Test screen composition and state management — Manual testing task to verify screen works correctly on device.
   - [ ] **14.1.9** Add navigation route to `app_router.dart` for voice settings screen
   - [ ] **14.1.10** Update `ContextualTtsService.speakSummary` to use persisted voice ID if available
   - [ ] **14.1.11** Add voice settings entry point in shell settings or profile screen

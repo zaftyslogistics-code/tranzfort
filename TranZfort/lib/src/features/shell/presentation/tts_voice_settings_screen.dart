@@ -15,10 +15,29 @@ import 'shell_components.dart';
 class TtsVoiceSettingsScreen extends ConsumerWidget {
   const TtsVoiceSettingsScreen({super.key});
 
+  Future<void> _handleVoiceSelection(
+    BuildContext context,
+    WidgetRef ref,
+    String languageCode,
+    TtsVoice voice,
+  ) async {
+    final voiceNotifier = ref.read(ttsVoiceSelectionProvider.notifier);
+    
+    await voiceNotifier.selectVoice(languageCode, voice);
+    
+    if (!context.mounted) return;
+    
+    final languageName = languageCode == 'hi' ? 'Hindi' : 'English';
+    AppSnackbar.show(
+      context: context,
+      message: '$languageName voice set to "${voice.name}"',
+      variant: AppSnackbarVariant.success,
+    );
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final voiceState = ref.watch(ttsVoiceSelectionProvider);
-    final voiceNotifier = ref.read(ttsVoiceSelectionProvider.notifier);
 
     return DetailPageScaffold(
       title: 'Voice Settings',
@@ -32,20 +51,20 @@ class TtsVoiceSettingsScreen extends ConsumerWidget {
             message: voiceState.error!,
             action: OutlineButton(
               label: 'Retry',
-              onPressed: () => voiceNotifier.refreshVoices(),
+              onPressed: () => ref.read(ttsVoiceSelectionProvider.notifier).refreshVoices(),
             ),
           )
         else ...[
           _HindiVoiceSection(
-            voices: voiceNotifier.getVoicesForLanguage('hi'),
+            voices: ref.read(ttsVoiceSelectionProvider.notifier).getVoicesForLanguage('hi'),
             selectedVoice: voiceState.selectedHindiVoice,
-            onSelectVoice: (voice) => voiceNotifier.selectVoice('hi', voice),
+            onSelectVoice: (voice) => _handleVoiceSelection(context, ref, 'hi', voice),
           ),
           const SizedBox(height: AppSpacing.sectionGap),
           _EnglishVoiceSection(
-            voices: voiceNotifier.getVoicesForLanguage('en'),
+            voices: ref.read(ttsVoiceSelectionProvider.notifier).getVoicesForLanguage('en'),
             selectedVoice: voiceState.selectedEnglishVoice,
-            onSelectVoice: (voice) => voiceNotifier.selectVoice('en', voice),
+            onSelectVoice: (voice) => _handleVoiceSelection(context, ref, 'en', voice),
           ),
           const SizedBox(height: AppSpacing.sectionGap),
           SectionCard(
@@ -54,7 +73,7 @@ class TtsVoiceSettingsScreen extends ConsumerWidget {
               width: double.infinity,
               child: OutlineButton(
                 label: 'Refresh Voices',
-                onPressed: () => voiceNotifier.refreshVoices(),
+                onPressed: () => ref.read(ttsVoiceSelectionProvider.notifier).refreshVoices(),
               ),
             ),
           ),
