@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 import '../../../core/logger/app_logger.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -104,6 +103,12 @@ class SettingsScreen extends ConsumerWidget {
                     );
                   },
                 ),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              NavListTile(
+                icon: Icons.record_voice_over_outlined,
+                label: 'Voice Settings',
+                onTap: () => context.go(AppRoutes.voiceSettingsPath),
               ),
               const SizedBox(height: AppSpacing.sm),
               InfoRow(label: l10n.settingsVoiceAssistanceLabel, value: l10n.settingsVoiceAssistanceValue),
