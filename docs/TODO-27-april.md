@@ -126,6 +126,32 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **13.4** Standardize all map readers for dates/numbers so malformed rows become `ClientFailure`/fallback UI instead of parser crashes. — Fixed `routeDistanceKm` and `weightTonnes` in `MarketplaceLoadItem.fromMap` to use `readDoubleNullable` instead of `readDouble` so null values remain null rather than coerced to `0.0`. Applied to `trucker_marketplace_repository.dart`. Commit: `checkpoint-2`.
 - [x] **13.5** Surface proof-submitted auto-completion rules in UI: countdown, expected auto-close time, supplier confirmation CTA state. — **Complete**: Created migration `20260430000005_add_trip_auto_completion_tracking.sql` with auto-completion tracking fields. Added RPCs for enabling auto-completion, supplier confirmation, status check, and auto-completing expired trips. Added `TripAutoCompletionStatus` model to `trucker_trip_repository_models.dart` with status parsing. Updated `TripProofUploadService.pickCompressAndUploadPod()` to call `enable_trip_auto_completion()` RPC after successful POD upload. Added auto-completion status field to `TruckerTripDetail` model. Migrations pushed to database.
 
+---
+
+## 🔒 Safety Checkpoint — Before Starting P2 14.1 Development
+
+**Current Branch Status:** `feature/safe-fixes-april-27`
+
+**Verified Working Changes (Commits 3cc0656 - 0156954):**
+- ✅ Migration push to database (20260428000001-20260428000006)
+- ✅ Staging Supabase project setup
+- ✅ Chat bubble width responsiveness (P2 14.4)
+- ✅ PII redaction in logs (P3 15.2)
+- ✅ DetailPageScaffold standardization (P2 14.3)
+- ✅ Deprecated widget modes marked (P3 16.2)
+- ✅ All changes pass `flutter analyze`
+
+**Rollback Strategy:**
+- If any P2 14.1 sub-task breaks existing functionality:
+  1. Identify the breaking commit via `git log`
+  2. Roll back to commit `0156954` (last known good state)
+  3. Fix the issue in a separate commit
+  4. Re-apply with proper testing
+
+**Starting Development:** P2 14.1 - Voice Discovery and Selection (15 sub-tasks)
+
+---
+
 ### 14. TTS / Accessibility / Offline
 - [ ] **14.1** Add voice discovery and selection: prefer local/offline Hindi and English voices, persist chosen voice IDs, expose voice test/settings UI.
   - [ ] **14.1.1** Create TTS voice data model (`TtsVoice`) with properties: voiceId, name, locale, language, isOffline, isDefault
