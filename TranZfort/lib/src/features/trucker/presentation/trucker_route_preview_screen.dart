@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
+import '../../shell/presentation/shell_components.dart';
 
 class TruckerRoutePreviewArgs {
   final String routeLabel;
@@ -52,82 +53,73 @@ class TruckerRoutePreviewScreen extends StatelessWidget {
       destinationLabel: args.destinationLabel,
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(l10n.truckerLoadDetailRoutePriceSummaryTitle),
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                args.routeLabel,
-                style: Theme.of(context).textTheme.titleMedium,
+    return DetailPageScaffold(
+      title: l10n.truckerLoadDetailRoutePriceSummaryTitle,
+      children: [
+        Text(
+          args.routeLabel,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        SizedBox(
+          height: 400,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            child: FlutterMap(
+              options: MapOptions(
+                initialCameraFit: CameraFit.bounds(
+                  bounds: bounds,
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                ),
               ),
-              const SizedBox(height: AppSpacing.sm),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppRadius.card),
-                  child: FlutterMap(
-                    options: MapOptions(
-                      initialCameraFit: CameraFit.bounds(
-                        bounds: bounds,
-                        padding: const EdgeInsets.all(AppSpacing.lg),
-                      ),
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.tranzfort.app',
+                ),
+                PolylineLayer(
+                  polylines: [
+                    Polyline(
+                      points: <LatLng>[origin, destination],
+                      strokeWidth: 4,
+                      color: AppColors.primary,
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        userAgentPackageName: 'com.tranzfort.app',
-                      ),
-                      PolylineLayer(
-                        polylines: [
-                          Polyline(
-                            points: <LatLng>[origin, destination],
-                            strokeWidth: 4,
-                            color: AppColors.primary,
-                          ),
-                        ],
-                      ),
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: origin,
-                            width: 28,
-                            height: 28,
-                            child: const Icon(Icons.location_on, color: AppColors.success, size: 26),
-                          ),
-                          Marker(
-                            point: destination,
-                            width: 28,
-                            height: 28,
-                            child: const Icon(Icons.location_on, color: AppColors.error, size: 26),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                  ],
                 ),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              if (mapsUri != null)
-                PrimaryButton(
-                  label: l10n.commonOpenInGoogleMapsAction,
-                  onPressed: () async {
-                    await mapsLauncher.launchDirectionsUri(mapsUri);
-                  },
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: origin,
+                      width: 28,
+                      height: 28,
+                      child: const Icon(Icons.location_on, color: AppColors.success, size: 26),
+                    ),
+                    Marker(
+                      point: destination,
+                      width: 28,
+                      height: 28,
+                      child: const Icon(Icons.location_on, color: AppColors.error, size: 26),
+                    ),
+                  ],
                 ),
-              const SizedBox(height: AppSpacing.sm),
-              OutlineButton(
-                label: l10n.truckerTripsTitle,
-                onPressed: () => context.go(AppRoutes.tripsPath),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: AppSpacing.md),
+        if (mapsUri != null)
+          PrimaryButton(
+            label: l10n.commonOpenInGoogleMapsAction,
+            onPressed: () async {
+              await mapsLauncher.launchDirectionsUri(mapsUri);
+            },
+          ),
+        const SizedBox(height: AppSpacing.sm),
+        OutlineButton(
+          label: l10n.truckerTripsTitle,
+          onPressed: () => context.go(AppRoutes.tripsPath),
+        ),
+      ],
     );
   }
 }

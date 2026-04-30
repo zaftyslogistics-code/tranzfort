@@ -18,6 +18,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../../reviews/utils/review_trigger_helper.dart';
@@ -217,6 +218,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
         ),
         actions: [
           const TtsActionButton(),
+          const LanguageToggleAction(),
           if (callUri != null)
             IconButton(
               tooltip: l10n.commonCallAction,

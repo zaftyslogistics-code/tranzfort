@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/error/app_failure.dart';
+import '../../../shared/widgets/language_toggle_action.dart';
+import '../../../shared/widgets/tts_action_button.dart';
 import '../data/public_profile_models.dart';
 import '../providers/public_profile_providers.dart';
 import 'widgets/profile_header_card.dart';
@@ -23,13 +25,9 @@ class TruckerPublicProfileScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Trucker Profile'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.share_outlined),
-            onPressed: () {
-              // Share profile functionality
-            },
-          ),
+        actions: const [
+          TtsActionButton(),
+          LanguageToggleAction(),
         ],
       ),
       body: profileAsync.when(
@@ -234,7 +232,7 @@ class TruckerPublicProfileScreen extends ConsumerWidget {
             Icon(
               Icons.person_off_outlined,
               size: 64,
-              color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+              color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 16),
             Text(

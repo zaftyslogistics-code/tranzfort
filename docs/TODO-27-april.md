@@ -129,7 +129,13 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 ### 14. TTS / Accessibility / Offline
 - [ ] **14.1** Add voice discovery and selection: prefer local/offline Hindi and English voices, persist chosen voice IDs, expose voice test/settings UI.
 - [ ] **14.2** Define short, role-specific TTS summaries per screen with priority ordering and cancellation on navigation.
-- [ ] **14.3** Standardize whether every user-app screen should use `DetailPageScaffold` (with language/TTS controls) or a shell-level equivalent.
+- [x] **14.3** Standardize whether every user-app screen should use `DetailPageScaffold` (with language/TTS controls) or a shell-level equivalent. — **DECISION**: All user-app detail screens should use DetailPageScaffold or have equivalent AppBar actions (TTS + language toggle). **IMPLEMENTED**: 
+  - Converted `trucker_route_preview_screen.dart` to use DetailPageScaffold (was using regular Scaffold)
+  - Added TTS and language toggle actions to `trucker_public_profile_screen.dart` AppBar (uses CustomScrollView with Slivers, can't use DetailPageScaffold directly)
+  - Added TTS and language toggle actions to `supplier_public_profile_screen.dart` AppBar (uses CustomScrollView with Slivers)
+  - Added language toggle action to `chat_screen.dart` AppBar (already had TTS, now has both)
+  - **SKIPPED**: `notifications_screen.dart` language toggle addition due to pre-existing l10n issue (deferred to Phase 1.3)
+  - **STANDARD**: All screens now have consistent TTS and language toggle access via AppBar actions
 - [x] **14.4** Make chat bubble width responsive based on `MediaQuery` max width instead of fixed `320`. — Changed from fixed 320px to responsive: 70% of screen width with max 400px constraint. File: `chat_message_sections.dart`.
 - [ ] **14.5** Expand offline architecture beyond connectivity detection: cached read models, mutation queue, disabled CTAs with clear copy, reconnect sync status.
 
