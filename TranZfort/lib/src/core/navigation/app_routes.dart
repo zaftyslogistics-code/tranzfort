@@ -30,6 +30,7 @@ class AppRoutes {
   static const supplierVerification = 'supplier-verification';
   static const truckerVerification = 'trucker-verification';
   static const settings = 'settings';
+  static const voiceSettings = 'voice-settings';
   static const support = 'support';
   static const createSupportTicket = 'create-support-ticket';
   static const reportIssue = 'report-issue';
@@ -66,6 +67,7 @@ class AppRoutes {
   static const supplierVerificationPath = '/supplier-verification';
   static const truckerVerificationPath = '/trucker-verification';
   static const settingsPath = '/settings';
+  static const voiceSettingsPath = '/voice-settings';
   static const supportPath = '/support';
   static const createSupportTicketPath = '/create-support-ticket';
   static const reportIssuePath = '/report-issue';

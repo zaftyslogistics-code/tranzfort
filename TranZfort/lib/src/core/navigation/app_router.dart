@@ -28,6 +28,7 @@ import '../../features/profile/presentation/supplier_public_profile_screen.dart'
 import '../../features/profile/presentation/trucker_public_profile_screen.dart';
 import '../../features/shell/presentation/shell_destinations.dart';
 import '../../features/shell/presentation/supplier_shell_screens.dart';
+import '../../features/shell/presentation/tts_voice_settings_screen.dart';
 import '../services/maps_launcher_service.dart';
 import '../providers/app_state_providers.dart';
 import 'auth_router_refresh_notifier.dart';
@@ -127,6 +128,13 @@ void _initializeRouteMetadata() {
     'showBackArrow': false,
     'requirePopScope': false,
     'testId': 'settings',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.voiceSettingsPath, {
+    'type': RouteType.nested,
+    'showBackArrow': true,
+    'requirePopScope': false,
+    'testId': 'voice_settings',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.accountPath, {
@@ -509,6 +517,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.settingsPath,
             name: AppRoutes.settings,
             builder: (context, state) => const SettingsScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.voiceSettingsPath,
+            name: AppRoutes.voiceSettings,
+            builder: (context, state) => const TtsVoiceSettingsScreen(),
           ),
           GoRoute(
             path: AppRoutes.supportPath,
