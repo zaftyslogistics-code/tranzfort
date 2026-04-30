@@ -160,8 +160,20 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
   - [x] **14.1.4** Add SharedPreferences persistence: save selected voice ID per language (hi-IN, en-GB) — Added `saveSelectedVoiceId()`, `loadSelectedVoiceId()`, and `clearSelectedVoiceId()` methods to ContextualTtsService. Uses SharedPreferences with key pattern `tts_selected_voice_$languageCode` for persistence across app restarts. Includes error handling with silent fallback to default voice. Flutter analyze passes.
   - [x] **14.1.5** Create `TtsVoiceSelectionProvider` (Riverpod) for voice list state and selected voice state — Created `lib/src/core/services/tts_voice_selection_provider.dart` with TtsVoiceSelectionState, TtsVoiceSelectionNotifier, and ttsVoiceSelectionProvider. Manages voice discovery, persisted selections, voice selection/clearing, and voice filtering. Auto-initializes on first use. Flutter analyze passes.
   - [x] **14.1.6** Create `TtsVoiceListItem` widget for displaying voice options (name, locale, offline badge) — Created `lib/src/shared/widgets/tts_voice_list_item.dart` with ListTile-based widget displaying voice name, locale, selection radio button, and offline badge chip. Uses withValues for opacity (fixed deprecation). Info-level Radio deprecation warnings from Flutter framework (non-blocking).
-  - [ ] **14.1.7** Create `TtsVoiceTestButton` widget for previewing selected voice with sample text
-  - [ ] **14.1.8** Create `TtsVoiceSettingsScreen` with voice list, selection UI, and test functionality
+  - [x] **14.1.7** Create `TtsVoiceTestButton` widget for previewing selected voice with sample text — Created `lib/src/shared/widgets/tts_voice_test_button.dart` with OutlinedButton that speaks sample text (Hindi: "नमस्ते, यह एक आवाज़ परीक्षण है।", English: "Hello, this is a voice test."). Shows loading indicator while speaking, disables button during speech. Integrates with ContextualTtsService. Flutter analyze passes.
+  - [ ] **14.1.8** Create `TtsVoiceSettingsScreen` with voice list, selection UI, and test functionality.
+    - [ ] **14.1.8.1** Create screen file structure in `lib/src/features/shell/presentation/tts_voice_settings_screen.dart`
+    - [ ] **14.1.8.2** Build DetailPageScaffold with title and TTS summary
+    - [ ] **14.1.8.3** Add loading state (LoadingShimmer) while voices are being discovered
+    - [ ] **14.1.8.4** Add error state (WarningBlock) with retry action if voice discovery fails
+    - [ ] **14.1.8.5** Build Hindi voice selection SectionCard with voice list
+    - [ ] **14.1.8.6** Build English voice selection SectionCard with voice list
+    - [ ] **14.1.8.7** Integrate TtsVoiceListItem for each voice in the lists
+    - [ ] **14.1.8.8** Add TtsVoiceTestButton to each voice list item
+    - [ ] **14.1.8.9** Add voice selection logic with AppSnackbar confirmation
+    - [ ] **14.1.8.10** Add refresh button to reload voice list
+    - [ ] **14.1.8.11** Add empty state when no voices are available for a language
+    - [ ] **14.1.8.12** Test screen composition and state management
   - [ ] **14.1.9** Add navigation route to `app_router.dart` for voice settings screen
   - [ ] **14.1.10** Update `ContextualTtsService.speakSummary` to use persisted voice ID if available
   - [ ] **14.1.11** Add voice settings entry point in shell settings or profile screen
