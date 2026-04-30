@@ -150,7 +150,11 @@ class _ChatMessageBubble extends StatelessWidget {
           opacity: isSending ? 0.7 : 1.0,
           duration: const Duration(milliseconds: 200),
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 320),
+            constraints: BoxConstraints(
+              maxWidth: MediaQuery.of(context).size.width * 0.7 < 400
+                  ? MediaQuery.of(context).size.width * 0.7
+                  : 400,
+            ),
             padding: const EdgeInsets.all(AppSpacing.lg),
             margin: EdgeInsets.only(
               left: message.isFromCurrentUser ? AppSpacing.md : 0,

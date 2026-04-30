@@ -130,7 +130,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [ ] **14.1** Add voice discovery and selection: prefer local/offline Hindi and English voices, persist chosen voice IDs, expose voice test/settings UI.
 - [ ] **14.2** Define short, role-specific TTS summaries per screen with priority ordering and cancellation on navigation.
 - [ ] **14.3** Standardize whether every user-app screen should use `DetailPageScaffold` (with language/TTS controls) or a shell-level equivalent.
-- [ ] **14.4** Make chat bubble width responsive based on `MediaQuery` max width instead of fixed `320`.
+- [x] **14.4** Make chat bubble width responsive based on `MediaQuery` max width instead of fixed `320`. — Changed from fixed 320px to responsive: 70% of screen width with max 400px constraint. File: `chat_message_sections.dart`.
 - [ ] **14.5** Expand offline architecture beyond connectivity detection: cached read models, mutation queue, disabled CTAs with clear copy, reconnect sync status.
 
 ---
