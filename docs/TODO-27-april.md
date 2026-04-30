@@ -154,7 +154,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 14. TTS / Accessibility / Offline
 - [ ] **14.1** Add voice discovery and selection: prefer local/offline Hindi and English voices, persist chosen voice IDs, expose voice test/settings UI.
-  - [ ] **14.1.1** Create TTS voice data model (`TtsVoice`) with properties: voiceId, name, locale, language, isOffline, isDefault
+  - [x] **14.1.1** Create TTS voice data model (`TtsVoice`) with properties: voiceId, name, locale, language, isOffline, isDefault — Created `lib/src/core/services/tts_voice_model.dart` with full model including fromMap/toMap for SharedPreferences, language support checks, and equality operators. Flutter analyze passes.
   - [ ] **14.1.2** Add voice discovery service method to `ContextualTtsService` using `FlutterTts.getVoices`
   - [ ] **14.1.3** Implement voice filtering logic: filter for Hindi (hi-IN) and English (en-GB/en-US) voices, prioritize offline voices
   - [ ] **14.1.4** Add SharedPreferences persistence: save selected voice ID per language (hi-IN, en-GB)

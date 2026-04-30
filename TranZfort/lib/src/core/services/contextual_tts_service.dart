@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'tts_voice_model.dart';
+
 enum ContextualTtsOutcome {
   spoken,
   muted,
@@ -19,6 +21,7 @@ class ContextualTtsService {
   final Future<dynamic> Function(String message) _speak;
   final Future<dynamic> Function() _stop;
   final Future<SharedPreferences> Function() _preferences;
+  final Future<dynamic> _getVoices;
   Future<void> _pendingSpeak = Future<void>.value();
   bool _isSpeaking = false;
 
@@ -28,13 +31,60 @@ class ContextualTtsService {
     required Future<dynamic> Function(String message) speakFn,
     required Future<dynamic> Function() stopFn,
     required Future<SharedPreferences> Function() preferencesFn,
+    required Future<dynamic> getVoices,
   })  : _setLanguage = setLanguageFn,
         _setSpeechRate = setSpeechRateFn,
         _speak = speakFn,
         _stop = stopFn,
-        _preferences = preferencesFn;
+        _preferences = preferencesFn,
+        _getVoices = getVoices;
 
   bool get isSpeaking => _isSpeaking;
+
+  /// Discovers available TTS voices from the device's TTS engine.
+  /// Returns a list of TtsVoice objects.
+  Future<List<TtsVoice>> getVoices() async {
+    try {
+      final voices = await _getVoices;
+      
+      // Handle different return types from FlutterTts.getVoices
+      if (voices is List) {
+        return voices.map((voice) {
+          // FlutterTts returns voices as Map<String, dynamic> with keys: name, locale
+          if (voice is Map<String, dynamic>) {
+            final name = voice['name'] as String? ?? '';
+            final locale = voice['locale'] as String? ?? '';
+            final language = locale.split('-')[0].toLowerCase();
+            
+            // Infer offline status from voice name (offline voices typically have "local" in the name)
+            final isOffline = name.toLowerCase().contains('local');
+            
+            return TtsVoice(
+              voiceId: name,
+              name: name,
+              locale: locale,
+              language: language,
+              isOffline: isOffline,
+            );
+          }
+          // Fallback for non-map responses
+          return TtsVoice(
+            voiceId: voice.toString(),
+            name: voice.toString(),
+            locale: 'unknown',
+            language: 'unknown',
+            isOffline: false,
+          );
+        }).toList();
+      }
+      
+      // If not a list, return empty
+      return [];
+    } catch (e) {
+      // Return empty list on error rather than crashing
+      return [];
+    }
+  }
 
   Future<void> setLanguage(String languageCode) async {
     await _setLanguage(_voiceLanguage(languageCode));
@@ -119,6 +169,7 @@ final contextualTtsServiceProvider = Provider<ContextualTtsService>((ref) {
     speakFn: tts.speak,
     stopFn: tts.stop,
     preferencesFn: SharedPreferences.getInstance,
+    getVoices: tts.getVoices,
   );
   ref.onDispose(() {
     service.dispose();
