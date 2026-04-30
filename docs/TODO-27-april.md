@@ -128,7 +128,33 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 14. TTS / Accessibility / Offline
 - [ ] **14.1** Add voice discovery and selection: prefer local/offline Hindi and English voices, persist chosen voice IDs, expose voice test/settings UI.
+  - [ ] **14.1.1** Create TTS voice data model (`TtsVoice`) with properties: voiceId, name, locale, language, isOffline, isDefault
+  - [ ] **14.1.2** Add voice discovery service method to `ContextualTtsService` using `FlutterTts.getVoices`
+  - [ ] **14.1.3** Implement voice filtering logic: filter for Hindi (hi-IN) and English (en-GB/en-US) voices, prioritize offline voices
+  - [ ] **14.1.4** Add SharedPreferences persistence: save selected voice ID per language (hi-IN, en-GB)
+  - [ ] **14.1.5** Create `TtsVoiceSelectionProvider` (Riverpod) for voice list state and selected voice state
+  - [ ] **14.1.6** Create `TtsVoiceListItem` widget for displaying voice options (name, locale, offline badge)
+  - [ ] **14.1.7** Create `TtsVoiceTestButton` widget for previewing selected voice with sample text
+  - [ ] **14.1.8** Create `TtsVoiceSettingsScreen` with voice list, selection UI, and test functionality
+  - [ ] **14.1.9** Add navigation route to `app_router.dart` for voice settings screen
+  - [ ] **14.1.10** Update `ContextualTtsService.speakSummary` to use persisted voice ID if available
+  - [ ] **14.1.11** Add voice settings entry point in shell settings or profile screen
+  - [ ] **14.1.12** Add error handling: fallback to default voice if selected voice unavailable
+  - [ ] **14.1.13** Test voice discovery on Android/iOS with multiple TTS engines installed
+  - [ ] **14.1.14** Test voice persistence across app restarts
+  - [ ] **14.1.15** Test voice fallback when selected voice is uninstalled
 - [ ] **14.2** Define short, role-specific TTS summaries per screen with priority ordering and cancellation on navigation.
+  - [ ] **14.2.1** Create `TtsScreenSummary` model with properties: screenId, summaryText, priority, languageCode
+  - [ ] **14.2.2** Define TTS summaries for all trucker screens (marketplace, load detail, trip detail, fleet)
+  - [ ] **14.2.3** Define TTS summaries for all supplier screens (load post, load detail, trip detail, dashboard)
+  - [ ] **14.2.4** Define TTS summaries for common screens (notifications, chat, profile, settings)
+  - [ ] **14.2.5** Add priority ordering enum: `TtsPriority.critical`, `TtsPriority.high`, `TtsPriority.normal`, `TtsPriority.low`
+  - [ ] **14.2.6** Implement TTS queue in `ContextualTtsService` with priority-based ordering
+  - [ ] **14.2.7** Add navigation cancellation: cancel pending TTS on route change
+  - [ ] **14.2.8** Add TTS cancellation on user tap/interaction
+  - [ ] **14.2.9** Integrate screen summaries with `TtsScreenSummaryEffect` widget
+  - [ ] **14.2.10** Test TTS cancellation on navigation between screens
+  - [ ] **14.2.11** Test TTS priority ordering with concurrent screen transitions
 - [x] **14.3** Standardize whether every user-app screen should use `DetailPageScaffold` (with language/TTS controls) or a shell-level equivalent. — **DECISION**: All user-app detail screens should use DetailPageScaffold or have equivalent AppBar actions (TTS + language toggle). **IMPLEMENTED**: 
   - Converted `trucker_route_preview_screen.dart` to use DetailPageScaffold (was using regular Scaffold)
   - Added TTS and language toggle actions to `trucker_public_profile_screen.dart` AppBar (uses CustomScrollView with Slivers, can't use DetailPageScaffold directly)
@@ -138,6 +164,21 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
   - **STANDARD**: All screens now have consistent TTS and language toggle access via AppBar actions
 - [x] **14.4** Make chat bubble width responsive based on `MediaQuery` max width instead of fixed `320`. — Changed from fixed 320px to responsive: 70% of screen width with max 400px constraint. File: `chat_message_sections.dart`.
 - [ ] **14.5** Expand offline architecture beyond connectivity detection: cached read models, mutation queue, disabled CTAs with clear copy, reconnect sync status.
+  - [ ] **14.5.1** Create `OfflineCacheService` for caching read models (marketplace loads, trips, notifications)
+  - [ ] **14.5.2** Implement cache key generation based on query parameters and user role
+  - [ ] **14.5.3** Add cache TTL (time-to-live) policy: 5 minutes for marketplace, 30 minutes for trips
+  - [ ] **14.5.4** Create `MutationQueue` model for offline mutation tracking (operation type, payload, timestamp, retry count)
+  - [ ] **14.5.5** Implement mutation queue persistence using SQLite or SharedPreferences
+  - [ ] **14.5.6** Add mutation queue processor: retry mutations on reconnect with exponential backoff
+  - [ ] **14.5.7** Create `OfflineAwareButton` widget with disabled state and offline message
+  - [ ] **14.5.8** Add offline-aware CTAs to load booking, chat send, trip proof upload
+  - [ ] **14.5.9** Create `OfflineSyncStatusBanner` widget showing sync progress and pending mutations count
+  - [ ] **14.5.10** Add connectivity listener to detect network state changes
+  - [ ] **14.5.11** Implement automatic sync on reconnect with conflict resolution (last-write-wins)
+  - [ ] **14.5.12** Add offline indicator in shell (icon or status bar)
+  - [ ] **14.5.13** Test cache hit/miss scenarios with network toggle
+  - [ ] **14.5.14** Test mutation queue with offline booking, then sync on reconnect
+  - [ ] **14.5.15** Test conflict resolution when concurrent mutations occur
 
 ---
 
@@ -157,8 +198,38 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 17. Testing & CI
 - [ ] **17.1** Add unit tests for route guard decisions (banned, deactivated, incomplete profile, role mismatch).
+  - [ ] **17.1.1** Create test file `route_guard_test.dart` in test/core/navigation
+  - [ ] **17.1.2** Add test for banned user guard: should redirect to banned screen
+  - [ ] **17.1.3** Add test for deactivated user guard: should redirect to deactivated screen
+  - [ ] **17.1.4** Add test for incomplete profile guard: should redirect to onboarding
+  - [ ] **17.1.5** Add test for role mismatch guard: trucker accessing supplier routes should be blocked
+  - [ ] **17.1.6** Add test for role mismatch guard: supplier accessing trucker routes should be blocked
+  - [ ] **17.1.7** Add test for authenticated-only guard: unauthenticated users redirected to login
+  - [ ] **17.1.8** Mock auth state provider for test scenarios
+  - [ ] **17.1.9** Run unit tests and ensure 100% coverage for route guards
 - [ ] **17.2** Add widget tests for verification wizard step transitions, exit dialog, and submit navigation.
+  - [ ] **17.2.1** Create test file `verification_wizard_test.dart` in test/features/verification
+  - [ ] **17.2.2** Add test for step 1 (personal info) → step 2 (business details) transition
+  - [ ] **17.2.3** Add test for step 2 → step 3 (document upload) transition
+  - [ ] **17.2.4** Add test for step 3 → step 4 (review) transition
+  - [ ] **17.2.5** Add test for back button navigation between steps
+  - [ ] **17.2.6** Add test for exit dialog on back press from step 1
+  - [ ] **17.2.7** Add test for exit dialog confirmation vs cancel
+  - [ ] **17.2.8** Add test for submit button disabled until all steps complete
+  - [ ] **17.2.9** Add test for submit navigation to dashboard after successful verification
+  - [ ] **17.2.10** Mock verification provider states for test scenarios
+  - [ ] **17.2.11** Run widget tests with goldens for UI verification
 - [ ] **17.3** Add integration tests for marketplace feed → load detail → chat → trip detail navigation flow.
+  - [ ] **17.3.1** Create integration test file `navigation_flow_test.dart` in integration_test
+  - [ ] **17.3.2** Add test for marketplace feed load tap → load detail screen
+  - [ ] **17.3.3** Add test for load detail → chat screen navigation
+  - [ ] **17.3.4** Add test for chat → trip detail navigation (if trip exists)
+  - [ ] **17.3.5** Add test for back button navigation through the flow
+  - [ ] **17.3.6** Add test for shell navigation between tabs (marketplace, trips, profile)
+  - [ ] **17.3.7** Mock Supabase auth and data for integration tests
+  - [ ] **17.3.8** Add test data fixtures for marketplace loads and trips
+  - [ ] **17.3.9** Run integration tests on both Android and iOS
+  - [ ] **17.3.10** Add screenshot capture on test failures for debugging
 - [ ] **17.4** Ensure every new l10n key ships with Hindi translation in ARB files.
 
 ---
