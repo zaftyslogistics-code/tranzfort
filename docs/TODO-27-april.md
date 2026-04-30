@@ -149,7 +149,11 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 16. Design System Cleanup
 - [x] **16.1** Remove or deprecate legacy button/card variants (light/dark hero, legacy filled `OutlineButton`).
-- [ ] **16.2** Mark deprecated widget modes for removal and enforce canonical visual language across screens.
+- [x] **16.2** Mark deprecated widget modes for removal and enforce canonical visual language across screens. — Added @Deprecated annotations:
+  - `OutlineButton.filled` parameter: Use GradientButton or PrimaryButton instead
+  - `PrimaryButton.useDarkVariant` parameter: ThemeExtension will handle dark mode automatically
+  - No current usages found for either deprecated parameter (safe to deprecate)
+  - Migration guidance added to both parameters
 
 ### 17. Testing & CI
 - [ ] **17.1** Add unit tests for route guard decisions (banned, deactivated, incomplete profile, role mismatch).

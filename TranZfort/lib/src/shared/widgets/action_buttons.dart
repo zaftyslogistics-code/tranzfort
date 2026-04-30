@@ -41,6 +41,8 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final double height;
   final Widget? icon;
+  /// @deprecated Dark surface variants will be handled by ThemeExtension. This parameter will be removed in Phase 4.
+  /// Migration: Remove useDarkVariant parameter. Theme will automatically handle dark mode colors.
   final bool useDarkVariant; // Phase 4: use primaryOnDark for dark surfaces
 
   const PrimaryButton({
@@ -60,6 +62,7 @@ class PrimaryButton extends StatelessWidget {
     VoidCallback? onPressed,
     bool isLoading = false,
     double height = 52,
+    @Deprecated('Dark surface variants will be handled by ThemeExtension. Remove useDarkVariant parameter.')
     bool useDarkVariant = false,
   }) {
     return PrimaryButton(
@@ -112,6 +115,8 @@ class OutlineButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
+  /// @deprecated Use GradientButton for filled buttons. This parameter will be removed in Phase 4.
+  /// Migration: Replace `OutlineButton(filled: true)` with `GradientButton` or `PrimaryButton`.
   final bool filled; // Phase 4: legacy mode
 
   const OutlineButton({
