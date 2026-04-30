@@ -22,6 +22,7 @@ class ContextualTtsService {
   final Future<dynamic> Function() _stop;
   final Future<SharedPreferences> Function() _preferences;
   final Future<dynamic> _getVoices;
+  final Future<dynamic> Function(Map<String, String> voice) _setVoice;
   Future<void> _pendingSpeak = Future<void>.value();
   bool _isSpeaking = false;
 
@@ -32,12 +33,14 @@ class ContextualTtsService {
     required Future<dynamic> Function() stopFn,
     required Future<SharedPreferences> Function() preferencesFn,
     required Future<dynamic> getVoices,
+    required Future<dynamic> Function(Map<String, String> voice) setVoiceFn,
   })  : _setLanguage = setLanguageFn,
         _setSpeechRate = setSpeechRateFn,
         _speak = speakFn,
         _stop = stopFn,
         _preferences = preferencesFn,
-        _getVoices = getVoices;
+        _getVoices = getVoices,
+        _setVoice = setVoiceFn;
 
   bool get isSpeaking => _isSpeaking;
 
@@ -191,7 +194,21 @@ class ContextualTtsService {
         return;
       }
       try {
+        // Load persisted voice ID for the language
+        final persistedVoiceId = await loadSelectedVoiceId(languageCode);
+        
+        // Set language
         await setLanguage(languageCode);
+        
+        // Set voice if persisted
+        if (persistedVoiceId != null) {
+          try {
+            await _setVoice({'name': persistedVoiceId});
+          } catch (_) {
+            // Silently fail if voice is unavailable - will use default voice
+          }
+        }
+        
         await setSpeechRate(defaultSpeechRate);
         _isSpeaking = true;
         await _speak(sanitizedMessage);
@@ -249,6 +266,7 @@ final contextualTtsServiceProvider = Provider<ContextualTtsService>((ref) {
     stopFn: tts.stop,
     preferencesFn: SharedPreferences.getInstance,
     getVoices: tts.getVoices,
+    setVoiceFn: tts.setVoice,
   );
   ref.onDispose(() {
     service.dispose();

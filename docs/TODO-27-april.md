@@ -174,7 +174,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
     - [x] **14.1.8.10** Add refresh button to reload voice list — Added "Refresh Voices" OutlineButton in Actions SectionCard calling refreshVoices().
     - [x] **14.1.8.11** Add empty state when no voices are available for a language — Each section shows "No Hindi/English voices available on this device." when voices list is empty.
     - [ ] **14.1.8.12** Test screen composition and state management — Manual testing task to verify screen works correctly on device.
-  - [ ] **14.1.9** Add navigation route to `app_router.dart` for voice settings screen
+  - [x] **14.1.9** Add navigation route to `app_router.dart` for voice settings screen — Added voiceSettings constant and voiceSettingsPath to AppRoutes class. Added TtsVoiceSettingsScreen import to app_router.dart. Added route metadata registration with RouteType.nested, showBackArrow: true. Added GoRoute definition with path: AppRoutes.voiceSettingsPath. Flutter analyze passes.
   - [ ] **14.1.10** Update `ContextualTtsService.speakSummary` to use persisted voice ID if available
   - [ ] **14.1.11** Add voice settings entry point in shell settings or profile screen
   - [ ] **14.1.12** Add error handling: fallback to default voice if selected voice unavailable
