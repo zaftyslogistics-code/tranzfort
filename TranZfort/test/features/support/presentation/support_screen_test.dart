@@ -6,11 +6,33 @@ import 'package:tranzfort/src/core/navigation/app_routes.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
+import 'package:tranzfort/src/features/support/data/support_attachment_upload_service.dart';
 import 'package:tranzfort/src/features/support/data/support_repository.dart';
 import 'package:tranzfort/src/features/support/presentation/support_screen.dart';
 import 'package:tranzfort/src/features/support/providers/support_compose_providers.dart';
 import 'package:tranzfort/src/features/support/providers/support_providers.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+
+TicketAttachmentMetadata _testAttachment({
+  String id = 'att-1',
+  String ticketId = 'ticket-1',
+  String uploadedBy = 'user-1',
+  String filePath = 'user-1/support/evidence_1.jpg',
+}) {
+  return TicketAttachmentMetadata(
+    id: id,
+    ticketId: ticketId,
+    uploadedBy: uploadedBy,
+    fileName: 'evidence_1.jpg',
+    filePath: filePath,
+    fileSize: 1024,
+    mimeType: 'image/jpeg',
+    uploadStatus: 'uploaded',
+    scanStatus: 'clean',
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
+}
 
 class _NoopSupportBackend implements SupportBackend {
   final List<Map<String, dynamic>> ticketRows;
@@ -629,7 +651,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(SupportScreen)));
-    container.read(supportReplyProvider('ticket-reply-1').notifier).setAttachmentPath('user-1/support_ticket/ticket-reply-1/evidence_77.jpg');
+    container.read(supportReplyProvider('ticket-reply-1').notifier).addAttachment(_testAttachment(filePath: 'user-1/support_ticket/ticket-reply-1/evidence_77.jpg'));
     await tester.pumpAndSettle();
 
     expect(find.text('Remove attachment'), findsOneWidget);
@@ -647,7 +669,7 @@ void main() {
     expect(backend.lastReplyTicketId, 'ticket-reply-1');
     expect(backend.lastReplyMessageBody, 'I have attached the clearest POD image you requested.');
     expect(backend.lastReplyAttachmentPath, 'user-1/support_ticket/ticket-reply-1/evidence_77.jpg');
-    expect(container.read(supportReplyProvider('ticket-reply-1')).attachmentPath, isEmpty);
+    expect(container.read(supportReplyProvider('ticket-reply-1')).attachments, isEmpty);
     expect(container.read(supportReplyProvider('ticket-reply-1')).messageBody, isEmpty);
     expect(controller.loadCalls, greaterThanOrEqualTo(1));
     expect(find.text('Reply sent successfully'), findsOneWidget);
@@ -690,14 +712,11 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(SupportScreen)));
-    container.read(supportReplyProvider('ticket-reply-2').notifier).setAttachmentPath('user-1/support_ticket/ticket-reply-2/evidence_remove.jpg');
+    container.read(supportReplyProvider('ticket-reply-2').notifier).addAttachment(_testAttachment(filePath: 'user-1/support_ticket/ticket-reply-2/evidence_remove.jpg'));
     await tester.pumpAndSettle();
 
     expect(find.text('Remove attachment'), findsOneWidget);
-    expect(
-      container.read(supportReplyProvider('ticket-reply-2')).attachmentPath,
-      'user-1/support_ticket/ticket-reply-2/evidence_remove.jpg',
-    );
+    expect(container.read(supportReplyProvider('ticket-reply-2')).attachments, isNotEmpty);
 
     await tester.scrollUntilVisible(find.text('Remove attachment'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
@@ -705,7 +724,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('No evidence image attached yet.'), findsOneWidget);
-    expect(container.read(supportReplyProvider('ticket-reply-2')).attachmentPath, isEmpty);
+    expect(container.read(supportReplyProvider('ticket-reply-2')).attachments, isEmpty);
   });
 
   testWidgets('renders warned trust badge and current trust status on support screen', (tester) async {
