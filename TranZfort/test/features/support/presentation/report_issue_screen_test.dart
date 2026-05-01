@@ -3,11 +3,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
+import 'package:tranzfort/src/features/support/data/support_attachment_upload_service.dart';
 import 'package:tranzfort/src/features/support/data/support_repository.dart';
 import 'package:tranzfort/src/features/support/presentation/report_issue_screen.dart';
 import 'package:tranzfort/src/features/support/providers/support_compose_providers.dart';
 import 'package:tranzfort/src/features/support/providers/support_providers.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+
+TicketAttachmentMetadata _testAttachment({
+  String id = 'att-1',
+  String ticketId = 'ticket-1',
+  String uploadedBy = 'user-1',
+  String filePath = 'user-1/support/evidence_1.jpg',
+}) {
+  return TicketAttachmentMetadata(
+    id: id,
+    ticketId: ticketId,
+    uploadedBy: uploadedBy,
+    fileName: 'evidence_1.jpg',
+    filePath: filePath,
+    fileSize: 1024,
+    mimeType: 'image/jpeg',
+    uploadStatus: 'uploaded',
+    scanStatus: 'clean',
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
+}
 
 class _ReportIssueBackend implements SupportBackend {
   String? lastCategory;
@@ -122,7 +144,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(ReportIssueScreen)));
-    container.read(reportIssueProvider(reportContext).notifier).setAttachmentPath('user-1/report_issue/evidence_77.jpg');
+    container.read(reportIssueProvider(reportContext).notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_77.jpg'));
     await tester.pumpAndSettle();
 
     await tester.enterText(find.byType(TextField).first, 'The other party sent repeated scam messages and fake payment promises.');
@@ -186,7 +208,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(ReportIssueScreen)));
-    container.read(reportIssueProvider(reportContext).notifier).setAttachmentPath('user-1/report_issue/evidence_88.jpg');
+    container.read(reportIssueProvider(reportContext).notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_88.jpg'));
     await tester.pumpAndSettle();
 
     expect(find.text('One evidence image is attached for review.'), findsOneWidget);
@@ -309,7 +331,7 @@ void main() {
     await tester.enterText(find.byType(TextField).first, 'Payment is still pending even after the agreed unload confirmation and promised settlement window.');
     expect(find.text('Attach one evidence image before submitting this report.'), findsOneWidget);
     final container = ProviderScope.containerOf(tester.element(find.byType(ReportIssueScreen)));
-    container.read(reportIssueProvider(reportContext).notifier).setAttachmentPath('user-1/report_issue/evidence_2.jpg');
+    container.read(reportIssueProvider(reportContext).notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_2.jpg'));
     await tester.pump();
     await tester.scrollUntilVisible(find.text('Amount still unpaid:'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
@@ -515,7 +537,7 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(ReportIssueScreen)));
-    container.read(reportIssueProvider(reportContext).notifier).setAttachmentPath('user-1/report_issue/evidence_69.jpg');
+    container.read(reportIssueProvider(reportContext).notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_69.jpg'));
     await tester.pumpAndSettle();
 
     expect(find.text('One evidence image is attached for review.'), findsOneWidget);
