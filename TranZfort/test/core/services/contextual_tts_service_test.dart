@@ -15,7 +15,7 @@ void main() {
         speakCalls += 1;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );
@@ -45,7 +45,7 @@ void main() {
         spokenMessage = value;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );
@@ -71,7 +71,7 @@ void main() {
       setSpeechRateFn: (_) async {},
       speakFn: (_) async {},
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );
@@ -93,7 +93,7 @@ void main() {
         spokenMessage = value;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );
@@ -123,7 +123,7 @@ void main() {
         await completer.future;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );
@@ -155,7 +155,7 @@ void main() {
         await completer.future;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance,
+      preferencesFn: () async => SharedPreferences.getInstance,
       getVoices: Future.value,
       setVoiceFn: (_) async {},
     );

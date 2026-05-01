@@ -129,7 +129,7 @@ class _FakeContextualTtsService extends ContextualTtsService {
           setSpeechRateFn: (_) async {},
           speakFn: (_) async {},
           stopFn: () async {},
-          preferencesFn: SharedPreferences.getInstance,
+          preferencesFn: () async => SharedPreferences.getInstance,
           getVoices: Future.value,
           setVoiceFn: (_) async {},
         );
@@ -185,7 +185,9 @@ Widget _buildApp({
     setSpeechRateFn: (_) async {},
     speakFn: (_) async {},
     stopFn: () async {},
-    preferencesFn: SharedPreferences.getInstance,
+    preferencesFn: () async => SharedPreferences.getInstance,
+    getVoices: Future.value,
+    setVoiceFn: (_) async {},
   );
 
   return ProviderScope(
@@ -235,7 +237,9 @@ Widget _buildRoutedApp({
         setSpeechRateFn: (_) async {},
         speakFn: (_) async {},
         stopFn: () async {},
-        preferencesFn: SharedPreferences.getInstance,
+        preferencesFn: () async => SharedPreferences.getInstance,
+        getVoices: Future.value,
+        setVoiceFn: (_) async {},
       );
 
   final router = GoRouter(

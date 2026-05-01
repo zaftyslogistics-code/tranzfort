@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
@@ -27,7 +28,7 @@ class _FakeContextualTtsService extends ContextualTtsService {
           setSpeechRateFn: (_) async {},
           speakFn: (_) async {},
           stopFn: () async {},
-          preferencesFn: SharedPreferences.getInstance,
+          preferencesFn: () async => SharedPreferences.getInstance,
           getVoices: Future.value,
           setVoiceFn: (_) async {},
         );
