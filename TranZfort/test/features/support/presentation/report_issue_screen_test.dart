@@ -38,7 +38,11 @@ class _ReportIssueBackend implements SupportBackend {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async {
+  Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+  }) async {
     return const <Map<String, dynamic>>[];
   }
 

@@ -42,7 +42,11 @@ class _NoopSupportBackend implements SupportBackend {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async {
+  Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+  }) async {
     return messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
   }
 
@@ -113,7 +117,11 @@ class _RecordingSupportBackend implements SupportBackend {
   }
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async {
+  Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+  }) async {
     return messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
   }
 

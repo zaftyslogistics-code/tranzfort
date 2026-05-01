@@ -114,7 +114,11 @@ class _NoopSupportBackend implements SupportBackend {
   Future<Map<String, dynamic>?> fetchTicket({required String userId, required String ticketId}) async => null;
 
   @override
-  Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async => const <Map<String, dynamic>>[];
+  Future<List<Map<String, dynamic>>> fetchTicketMessages({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+  }) async => const <Map<String, dynamic>>[];
 
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
