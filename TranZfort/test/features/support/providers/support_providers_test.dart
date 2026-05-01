@@ -8,6 +8,27 @@ import 'package:tranzfort/src/features/support/data/support_repository.dart';
 import 'package:tranzfort/src/features/support/providers/support_compose_providers.dart';
 import 'package:tranzfort/src/features/support/providers/support_providers.dart';
 
+TicketAttachmentMetadata _testAttachment({
+  String id = 'att-1',
+  String ticketId = 'ticket-1',
+  String uploadedBy = 'user-1',
+  String filePath = 'user-1/support/evidence_1.jpg',
+}) {
+  return TicketAttachmentMetadata(
+    id: id,
+    ticketId: ticketId,
+    uploadedBy: uploadedBy,
+    fileName: 'evidence_1.jpg',
+    filePath: filePath,
+    fileSize: 1024,
+    mimeType: 'image/jpeg',
+    uploadStatus: 'uploaded',
+    scanStatus: 'clean',
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
+}
+
 class _FakeSupportBackend implements SupportBackend {
   List<Map<String, dynamic>> ticketRows = const <Map<String, dynamic>>[];
   final Map<String, Map<String, dynamic>> ticketById = <String, Map<String, dynamic>>{};
@@ -310,7 +331,7 @@ void main() {
     controller.setCategory('technical');
     controller.setRelatedLoadId('load-42');
     controller.setRelatedTripId('trip-42');
-    controller.setAttachmentPath('user-1/support/evidence_1.jpg');
+    controller.addAttachment(_testAttachment(filePath: 'user-1/support/evidence_1.jpg'));
     controller.setDescription('The trip detail timeline is missing the latest proof update.');
 
     final result = await controller.submit();
@@ -324,7 +345,7 @@ void main() {
     expect(backend.lastCreatedMessageBody, 'The trip detail timeline is missing the latest proof update.');
     expect(uploadService.lastRelocateCurrentPath, 'user-1/support/evidence_1.jpg');
     expect(uploadService.lastRelocateTargetPathSegment, 'support_ticket/ticket-created');
-    expect(container.read(createSupportTicketProvider).attachmentPath, isEmpty);
+    expect(container.read(createSupportTicketProvider).attachments, isEmpty);
   });
 
   test('report issue controller submits linked-context trust report through repository', () async {
@@ -347,7 +368,7 @@ void main() {
     );
     final controller = container.read(reportIssueProvider(context).notifier);
     controller.setCategory('abusive_behavior');
-    controller.setAttachmentPath('user-1/report_issue/evidence_1.jpg');
+    controller.addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_1.jpg'));
     controller.setDescription('The other party sent abusive messages and tried to pressure me off-platform.');
 
     final result = await controller.submit();
@@ -361,7 +382,7 @@ void main() {
     expect(backend.lastCreatedMessageBody, 'The other party sent abusive messages and tried to pressure me off-platform.');
     expect(uploadService.lastRelocateCurrentPath, 'user-1/report_issue/evidence_1.jpg');
     expect(uploadService.lastRelocateTargetPathSegment, 'support_ticket/ticket-created');
-    expect(container.read(reportIssueProvider(context)).attachmentPath, isEmpty);
+    expect(container.read(reportIssueProvider(context)).attachments, isEmpty);
   });
 
   test('report issue controller surfaces finalize failure when attachment relocation fails', () async {
@@ -385,7 +406,7 @@ void main() {
       sourceLabel: 'Trip - Jaipur > Delhi',
     );
     final controller = container.read(reportIssueProvider(context).notifier);
-    controller.setAttachmentPath('user-1/report_issue/evidence_55.jpg');
+    controller.addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_55.jpg'));
     controller.setDescription('The evidence image is ready, but final attachment relocation should surface a safe failure state.');
 
     final result = await controller.submit();
@@ -395,7 +416,7 @@ void main() {
     expect(uploadService.lastRelocateTargetPathSegment, 'support_ticket/ticket-created');
     expect(container.read(reportIssueProvider(context)).failure, isA<ServerFailure>());
     expect(container.read(reportIssueProvider(context)).failure?.message, reportIssueAttachmentFinalizeFailureCode);
-    expect(container.read(reportIssueProvider(context)).attachmentPath, 'user-1/report_issue/evidence_55.jpg');
+    expect(container.read(reportIssueProvider(context)).attachments, isNotEmpty);
   });
 
   test('report issue controller requires an evidence attachment before submitting', () async {
@@ -440,7 +461,7 @@ void main() {
     addTearDown(container.dispose);
 
     final controller = container.read(supportReplyProvider('ticket-1').notifier);
-    controller.setAttachmentPath('user-1/support/evidence_2.jpg');
+    controller.addAttachment(_testAttachment(filePath: 'user-1/support/evidence_2.jpg'));
     controller.setMessageBody('I have now uploaded the clearer POD copy you requested.');
 
     final result = await controller.submit();
@@ -471,7 +492,7 @@ void main() {
     addTearDown(container.dispose);
 
     final controller = container.read(supportReplyProvider('ticket-1').notifier);
-    controller.setAttachmentPath('user-1/support/evidence_3.jpg');
+    controller.addAttachment(_testAttachment(filePath: 'user-1/support/evidence_3.jpg'));
     controller.setMessageBody('This reply should surface a safe finalize failure if relocation does not complete.');
 
     final result = await controller.submit();
@@ -481,7 +502,7 @@ void main() {
     expect(uploadService.lastRelocateTargetPathSegment, 'support_reply/reply-created');
     expect(container.read(supportReplyProvider('ticket-1')).failure, isA<ServerFailure>());
     expect(container.read(supportReplyProvider('ticket-1')).failure?.message, supportReplyAttachmentFinalizeFailureCode);
-    expect(container.read(supportReplyProvider('ticket-1')).attachmentPath, 'user-1/support/evidence_3.jpg');
+    expect(container.read(supportReplyProvider('ticket-1')).attachments, isNotEmpty);
     expect(container.read(supportReplyProvider('ticket-1')).messageBody, 'This reply should surface a safe finalize failure if relocation does not complete.');
   });
 }
