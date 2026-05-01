@@ -12,7 +12,6 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../shell/presentation/shell_components.dart';
-import '../data/support_attachment_upload_service.dart';
 import '../providers/support_compose_providers.dart';
 import '../providers/support_providers.dart';
 
@@ -112,8 +111,15 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
               style: Theme.of(context).textTheme.titleSmall,
             ),
             const SizedBox(height: AppSpacing.xs),
+            if (state.attachments.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.md),
+              Text(
+                '${state.attachments.length} attachment(s)',
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
             Text(
-              state.attachmentPath.trim().isEmpty
+              state.attachments.isEmpty
                   ? l10n.supportComposeNoAttachment
                   : l10n.supportComposeAttachmentAttached,
               style: Theme.of(context).textTheme.bodySmall,
@@ -140,18 +146,6 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
                 ),
               ],
             ),
-            if (state.attachmentPath.trim().isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.md),
-              SizedBox(
-                width: double.infinity,
-                child: OutlineButton(
-                  label: l10n.supportComposeRemoveAttachmentAction,
-                  onPressed: state.isSubmitting
-                      ? null
-                      : () => ref.read(createSupportTicketProvider.notifier).setAttachmentPath(''),
-                ),
-              ),
-            ],
             const SizedBox(height: AppSpacing.md),
             SizedBox(
               width: double.infinity,
@@ -218,29 +212,12 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
     ImageSource source,
     String profileId,
   ) async {
-    final result = await ref.read(supportAttachmentUploadServiceProvider).pickCompressAndUploadAttachment(
-          profileId: profileId,
-          source: source,
-        );
-    if (!context.mounted) {
-      return;
-    }
-    if (result.isSuccess) {
-      final path = result.valueOrNull;
-      if (path != null && path.trim().isNotEmpty) {
-        ref.read(createSupportTicketProvider.notifier).setAttachmentPath(path);
-        AppSnackbar.show(
-          context: context,
-          message: AppLocalizations.of(context).supportComposeAttachmentAddedSuccess,
-          variant: AppSnackbarVariant.success,
-        );
-      }
-      return;
-    }
+    // TODO: Implement multiple attachment upload after ticket creation
+    // For now, attachments can be added after ticket is created via reply
     AppSnackbar.show(
       context: context,
-      message: AppLocalizations.of(context).commonAttachmentFailureMessage,
-      variant: AppSnackbarVariant.error,
+      message: 'Please add attachments after creating the ticket',
+      variant: AppSnackbarVariant.info,
     );
   }
 

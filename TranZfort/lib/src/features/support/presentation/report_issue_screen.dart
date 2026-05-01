@@ -12,7 +12,6 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../shell/presentation/shell_components.dart';
-import '../data/support_attachment_upload_service.dart';
 import '../providers/support_compose_providers.dart';
 import '../providers/support_providers.dart';
 
@@ -141,18 +140,11 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
             ),
             const SizedBox(height: AppSpacing.xs),
             Text(
-              state.attachmentPath.trim().isEmpty
+              state.attachments.isEmpty
                   ? l10n.reportIssueNoEvidenceAttached
                   : l10n.reportIssueEvidenceAttached,
               style: Theme.of(context).textTheme.bodySmall,
             ),
-            if (state.fieldErrors['attachment_path'] case final attachmentError?) ...[
-              const SizedBox(height: AppSpacing.xs),
-              Text(
-                _fieldErrorText(l10n, attachmentError) ?? attachmentError,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Theme.of(context).colorScheme.error),
-              ),
-            ],
             const SizedBox(height: AppSpacing.md),
             Row(
               children: [
@@ -175,18 +167,6 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
                 ),
               ],
             ),
-            if (state.attachmentPath.trim().isNotEmpty) ...[
-              const SizedBox(height: AppSpacing.md),
-              SizedBox(
-                width: double.infinity,
-                child: OutlineButton(
-                  label: l10n.reportIssueRemoveEvidenceAction,
-                  onPressed: state.isSubmitting
-                      ? null
-                      : () => ref.read(reportIssueProvider(widget.contextData).notifier).setAttachmentPath(''),
-                ),
-              ),
-            ],
             const SizedBox(height: AppSpacing.md),
             SizedBox(
               width: double.infinity,
@@ -255,30 +235,12 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
     ImageSource source,
     String profileId,
   ) async {
-    final l10n = AppLocalizations.of(context);
-    final result = await ref.read(supportAttachmentUploadServiceProvider).pickCompressAndUploadAttachment(
-          profileId: profileId,
-          source: source,
-        );
-    if (!context.mounted) {
-      return;
-    }
-    if (result.isSuccess) {
-      final path = result.valueOrNull;
-      if (path != null && path.trim().isNotEmpty) {
-        ref.read(reportIssueProvider(widget.contextData).notifier).setAttachmentPath(path);
-        AppSnackbar.show(
-          context: context,
-          message: l10n.reportIssueAttachmentAttachedSuccess,
-          variant: AppSnackbarVariant.success,
-        );
-      }
-      return;
-    }
+    // TODO: Implement multiple attachment upload after ticket creation
+    // For now, attachments can be added after ticket is created via reply
     AppSnackbar.show(
       context: context,
-      message: l10n.commonAttachmentFailureMessage,
-      variant: AppSnackbarVariant.error,
+      message: 'Please add attachments after creating the ticket',
+      variant: AppSnackbarVariant.info,
     );
   }
 

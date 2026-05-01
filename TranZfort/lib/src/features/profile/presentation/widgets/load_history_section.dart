@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/core/error/result.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../data/public_profile_models.dart';

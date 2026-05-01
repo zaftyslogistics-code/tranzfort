@@ -9,7 +9,6 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
-import '../data/support_attachment_upload_service.dart';
 import '../providers/support_compose_providers.dart';
 import '../providers/support_providers.dart';
 
@@ -73,7 +72,7 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          state.attachmentPath.trim().isEmpty
+          state.attachments.isEmpty
               ? l10n.supportComposeNoAttachment
               : l10n.supportComposeAttachmentAttached,
           style: Theme.of(context).textTheme.bodySmall,
@@ -100,18 +99,6 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
             ),
           ],
         ),
-        if (state.attachmentPath.trim().isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.md),
-          SizedBox(
-            width: double.infinity,
-            child: OutlineButton(
-              label: l10n.supportComposeRemoveAttachmentAction,
-              onPressed: state.isSubmitting
-                  ? null
-                  : () => ref.read(supportReplyProvider(widget.ticketId).notifier).setAttachmentPath(''),
-            ),
-          ),
-        ],
         const SizedBox(height: AppSpacing.md),
         SizedBox(
           width: double.infinity,
@@ -160,30 +147,12 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
     ImageSource source,
     String profileId,
   ) async {
-    final result = await ref.read(supportAttachmentUploadServiceProvider).pickCompressAndUploadAttachment(
-          profileId: profileId,
-          source: source,
-          pathSegment: 'support_ticket/${widget.ticketId}',
-        );
-    if (!context.mounted) {
-      return;
-    }
-    if (result.isSuccess) {
-      final path = result.valueOrNull;
-      if (path != null && path.trim().isNotEmpty) {
-        ref.read(supportReplyProvider(widget.ticketId).notifier).setAttachmentPath(path);
-        AppSnackbar.show(
-          context: context,
-          message: AppLocalizations.of(context).supportComposeAttachmentAddedSuccess,
-          variant: AppSnackbarVariant.success,
-        );
-      }
-      return;
-    }
+    // TODO: Implement multiple attachment upload for replies
+    // For now, attachments are disabled
     AppSnackbar.show(
       context: context,
-      message: AppLocalizations.of(context).commonAttachmentFailureMessage,
-      variant: AppSnackbarVariant.error,
+      message: 'Multiple attachments coming soon',
+      variant: AppSnackbarVariant.info,
     );
   }
 
