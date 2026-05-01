@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/image_upload_service.dart';
 
@@ -120,7 +121,7 @@ class TripProofUploadService {
     } catch (e) {
       // Log error but don't fail the upload if auto-completion fails
       // Auto-completion is a nice-to-have feature
-      print('Failed to enable auto-completion for trip $tripId: $e');
+      AppLogger.warning('Failed to enable auto-completion for trip $tripId', error: e);
     }
   }
 }
