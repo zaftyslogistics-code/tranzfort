@@ -91,7 +91,6 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
           }
         } else {
           // On first step, show exit dialog
-          final navigator = Navigator.of(context);
           final shouldExit = await _showExitDialog(context, ref);
           if (shouldExit && mounted && context.mounted) {
             context.go(homePath);
@@ -143,13 +142,12 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
   }
 
   Future<bool> _showBackDialog(BuildContext context, WidgetRef ref, VerificationWizardState state) async {
+    final l10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        // TODO(l10n): Add verificationWizardBackTitle key (Phase 4)
-        title: const Text('Go Back?'),
-        // TODO(l10n): Add verificationWizardBackMessage key (Phase 4)
-        content: const Text('You will lose your progress on this step. Do you want to go back?'),
+        title: Text(l10n.verificationWizardBackTitle),
+        content: Text(l10n.verificationWizardBackMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, false),
@@ -157,8 +155,7 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
           ),
           TextButton(
             onPressed: () => Navigator.pop(dialogContext, true),
-            // TODO(l10n): Add verificationWizardBackAction key (Phase 4)
-            child: const Text('Go Back'),
+            child: Text(l10n.verificationWizardBackAction),
           ),
         ],
       ),

@@ -15,7 +15,6 @@ class TrustScoreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
     final hasRating = profile.hasReviews;
 
@@ -114,7 +113,6 @@ class TrustScoreCard extends StatelessWidget {
 
   Widget _buildMetrics(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
 
     final metrics = <Widget>[];

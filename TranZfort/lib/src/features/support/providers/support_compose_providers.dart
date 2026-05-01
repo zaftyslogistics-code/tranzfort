@@ -61,7 +61,7 @@ class ReportIssueContext {
 class ReportIssueState {
   final String category;
   final String description;
-  final String attachmentPath;
+  final List<TicketAttachmentMetadata> attachments;
   final bool isSubmitting;
   final AppFailure? failure;
   final String? createdTicketId;
@@ -70,7 +70,7 @@ class ReportIssueState {
   const ReportIssueState({
     required this.category,
     required this.description,
-    required this.attachmentPath,
+    required this.attachments,
     required this.isSubmitting,
     required this.failure,
     required this.createdTicketId,
@@ -83,7 +83,7 @@ class ReportIssueState {
           ? context.initialCategory
           : reportIssueCategories.first,
       description: '',
-      attachmentPath: '',
+      attachments: const [],
       isSubmitting: false,
       failure: null,
       createdTicketId: null,
@@ -94,7 +94,7 @@ class ReportIssueState {
   ReportIssueState copyWith({
     String? category,
     String? description,
-    String? attachmentPath,
+    List<TicketAttachmentMetadata>? attachments,
     bool? isSubmitting,
     AppFailure? failure,
     bool? clearFailure,
@@ -105,7 +105,7 @@ class ReportIssueState {
     return ReportIssueState(
       category: category ?? this.category,
       description: description ?? this.description,
-      attachmentPath: attachmentPath ?? this.attachmentPath,
+      attachments: attachments ?? this.attachments,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       failure: clearFailure == true ? null : failure ?? this.failure,
       createdTicketId: clearCreatedTicketId == true ? null : createdTicketId ?? this.createdTicketId,
@@ -119,7 +119,7 @@ class CreateSupportTicketState {
   final String relatedLoadId;
   final String relatedTripId;
   final String description;
-  final String attachmentPath;
+  final List<TicketAttachmentMetadata> attachments;
   final bool isSubmitting;
   final AppFailure? failure;
   final String? createdTicketId;
@@ -130,7 +130,7 @@ class CreateSupportTicketState {
     required this.relatedLoadId,
     required this.relatedTripId,
     required this.description,
-    required this.attachmentPath,
+    required this.attachments,
     required this.isSubmitting,
     required this.failure,
     required this.createdTicketId,
@@ -143,7 +143,7 @@ class CreateSupportTicketState {
       relatedLoadId: '',
       relatedTripId: '',
       description: '',
-      attachmentPath: '',
+      attachments: [],
       isSubmitting: false,
       failure: null,
       createdTicketId: null,
@@ -156,7 +156,7 @@ class CreateSupportTicketState {
     String? relatedLoadId,
     String? relatedTripId,
     String? description,
-    String? attachmentPath,
+    List<TicketAttachmentMetadata>? attachments,
     bool? isSubmitting,
     AppFailure? failure,
     bool? clearFailure,
@@ -169,7 +169,7 @@ class CreateSupportTicketState {
       relatedLoadId: relatedLoadId ?? this.relatedLoadId,
       relatedTripId: relatedTripId ?? this.relatedTripId,
       description: description ?? this.description,
-      attachmentPath: attachmentPath ?? this.attachmentPath,
+      attachments: attachments ?? this.attachments,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       failure: clearFailure == true ? null : failure ?? this.failure,
       createdTicketId: clearCreatedTicketId == true ? null : createdTicketId ?? this.createdTicketId,
@@ -180,9 +180,8 @@ class CreateSupportTicketState {
 
 class CreateSupportTicketController extends StateNotifier<CreateSupportTicketState> {
   final SupportRepository _repository;
-  final SupportAttachmentUploadService _uploadService;
 
-  CreateSupportTicketController(this._repository, this._uploadService) : super(CreateSupportTicketState.initial());
+  CreateSupportTicketController(this._repository) : super(CreateSupportTicketState.initial());
 
   void setCategory(String? value) {
     if (value == null) {
@@ -221,12 +220,20 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
     );
   }
 
-  void setAttachmentPath(String value) {
+  void addAttachment(TicketAttachmentMetadata attachment) {
     state = state.copyWith(
-      attachmentPath: value,
+      attachments: [...state.attachments, attachment],
       clearFailure: true,
       clearCreatedTicketId: true,
       fieldErrors: _withoutErrors(const <String>['attachment_path']),
+    );
+  }
+
+  void removeAttachment(String attachmentId) {
+    state = state.copyWith(
+      attachments: state.attachments.where((a) => a.id != attachmentId).toList(),
+      clearFailure: true,
+      clearCreatedTicketId: true,
     );
   }
 
@@ -258,30 +265,20 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
       messageBody: state.description,
       relatedLoadId: state.relatedLoadId.trim(),
       relatedTripId: state.relatedTripId.trim(),
-      attachmentPath: state.attachmentPath.trim(),
+      attachmentPath: '', // Empty - attachments are handled separately via ticket_attachments table
     );
 
     String? finalTicketId = result.valueOrNull;
-    if (result.isSuccess && finalTicketId != null && state.attachmentPath.trim().isNotEmpty) {
-      final relocateResult = await _uploadService.relocateAttachment(
-        currentPath: state.attachmentPath.trim(),
-        targetPathSegment: 'support_ticket/$finalTicketId',
-      );
-      if (relocateResult.isFailure) {
-        state = state.copyWith(
-          isSubmitting: false,
-          failure: const ServerFailure(message: supportCreateTicketAttachmentFinalizeFailureCode),
-          createdTicketId: finalTicketId,
-        );
-        return result;
-      }
+    if (result.isSuccess && finalTicketId != null && state.attachments.isNotEmpty) {
+      // Attachments are already stored in ticket_attachments table with correct ticket_id
+      // No need to relocate - they were uploaded with the ticket_id
     }
 
     state = state.copyWith(
       isSubmitting: false,
       failure: result.failureOrNull,
       createdTicketId: finalTicketId,
-      attachmentPath: result.isSuccess ? '' : state.attachmentPath,
+      attachments: result.isSuccess ? [] : state.attachments,
     );
     return result;
   }
@@ -310,16 +307,14 @@ final createSupportTicketProvider =
     StateNotifierProvider.autoDispose<CreateSupportTicketController, CreateSupportTicketState>((ref) {
   return CreateSupportTicketController(
     ref.watch(supportRepositoryProvider),
-    ref.watch(supportAttachmentUploadServiceProvider),
   );
 });
 
 class ReportIssueController extends StateNotifier<ReportIssueState> {
   final SupportRepository _repository;
-  final SupportAttachmentUploadService _uploadService;
   final ReportIssueContext _context;
 
-  ReportIssueController(this._repository, this._uploadService, this._context) : super(ReportIssueState.initial(_context));
+  ReportIssueController(this._repository, this._context) : super(ReportIssueState.initial(_context));
 
   void setCategory(String? value) {
     if (value == null) {
@@ -342,12 +337,20 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
     );
   }
 
-  void setAttachmentPath(String value) {
+  void addAttachment(TicketAttachmentMetadata attachment) {
     state = state.copyWith(
-      attachmentPath: value,
+      attachments: [...state.attachments, attachment],
       clearFailure: true,
       clearCreatedTicketId: true,
       fieldErrors: _withoutErrors(const <String>['attachment_path']),
+    );
+  }
+
+  void removeAttachment(String attachmentId) {
+    state = state.copyWith(
+      attachments: state.attachments.where((a) => a.id != attachmentId).toList(),
+      clearFailure: true,
+      clearCreatedTicketId: true,
     );
   }
 
@@ -379,30 +382,20 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
       messageBody: state.description,
       relatedLoadId: _context.relatedLoadId.trim(),
       relatedTripId: _context.relatedTripId.trim(),
-      attachmentPath: state.attachmentPath.trim(),
+      attachmentPath: '', // Empty - attachments are handled separately via ticket_attachments table
     );
 
     String? finalTicketId = result.valueOrNull;
-    if (result.isSuccess && finalTicketId != null && state.attachmentPath.trim().isNotEmpty) {
-      final relocateResult = await _uploadService.relocateAttachment(
-        currentPath: state.attachmentPath.trim(),
-        targetPathSegment: 'support_ticket/$finalTicketId',
-      );
-      if (relocateResult.isFailure) {
-        state = state.copyWith(
-          isSubmitting: false,
-          failure: const ServerFailure(message: reportIssueAttachmentFinalizeFailureCode),
-          createdTicketId: finalTicketId,
-        );
-        return result;
-      }
+    if (result.isSuccess && finalTicketId != null && state.attachments.isNotEmpty) {
+      // Attachments are already stored in ticket_attachments table with correct ticket_id
+      // No need to relocate - they were uploaded with the ticket_id
     }
 
     state = state.copyWith(
       isSubmitting: false,
       failure: result.failureOrNull,
       createdTicketId: finalTicketId,
-      attachmentPath: result.isSuccess ? '' : state.attachmentPath,
+      attachments: result.isSuccess ? [] : state.attachments,
     );
     return result;
   }
@@ -415,9 +408,7 @@ class ReportIssueController extends StateNotifier<ReportIssueState> {
     if (state.description.trim().length < 10) {
       errors['message_body'] = reportIssueDescriptionTooShortCode;
     }
-    if (state.attachmentPath.trim().isEmpty) {
-      errors['attachment_path'] = reportIssueAttachmentRequiredCode;
-    }
+    // Removed attachment validation - multiple attachments are optional now
     return errors;
   }
 
@@ -434,14 +425,13 @@ final reportIssueProvider = StateNotifierProvider.autoDispose
     .family<ReportIssueController, ReportIssueState, ReportIssueContext>((ref, context) {
   return ReportIssueController(
     ref.watch(supportRepositoryProvider),
-    ref.watch(supportAttachmentUploadServiceProvider),
     context,
   );
 });
 
 class SupportReplyState {
   final String messageBody;
-  final String attachmentPath;
+  final List<TicketAttachmentMetadata> attachments;
   final bool isSubmitting;
   final AppFailure? failure;
   final String? lastReplyId;
@@ -449,7 +439,7 @@ class SupportReplyState {
 
   const SupportReplyState({
     required this.messageBody,
-    required this.attachmentPath,
+    required this.attachments,
     required this.isSubmitting,
     required this.failure,
     required this.lastReplyId,
@@ -459,7 +449,7 @@ class SupportReplyState {
   factory SupportReplyState.initial() {
     return const SupportReplyState(
       messageBody: '',
-      attachmentPath: '',
+      attachments: [],
       isSubmitting: false,
       failure: null,
       lastReplyId: null,
@@ -469,20 +459,19 @@ class SupportReplyState {
 
   SupportReplyState copyWith({
     String? messageBody,
-    String? attachmentPath,
+    List<TicketAttachmentMetadata>? attachments,
     bool? isSubmitting,
     AppFailure? failure,
     bool? clearFailure,
     String? lastReplyId,
-    bool? clearLastReplyId,
     Map<String, String>? fieldErrors,
   }) {
     return SupportReplyState(
       messageBody: messageBody ?? this.messageBody,
-      attachmentPath: attachmentPath ?? this.attachmentPath,
+      attachments: attachments ?? this.attachments,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       failure: clearFailure == true ? null : failure ?? this.failure,
-      lastReplyId: clearLastReplyId == true ? null : lastReplyId ?? this.lastReplyId,
+      lastReplyId: lastReplyId ?? this.lastReplyId,
       fieldErrors: fieldErrors ?? this.fieldErrors,
     );
   }
@@ -490,25 +479,29 @@ class SupportReplyState {
 
 class SupportReplyController extends StateNotifier<SupportReplyState> {
   final SupportRepository _repository;
-  final SupportAttachmentUploadService _uploadService;
   final String _ticketId;
 
-  SupportReplyController(this._repository, this._uploadService, this._ticketId) : super(SupportReplyState.initial());
+  SupportReplyController(this._repository, this._ticketId) : super(SupportReplyState.initial());
 
   void setMessageBody(String value) {
     state = state.copyWith(
       messageBody: value,
       clearFailure: true,
-      clearLastReplyId: true,
       fieldErrors: _withoutErrors(const <String>['message_body']),
     );
   }
 
-  void setAttachmentPath(String value) {
+  void addAttachment(TicketAttachmentMetadata attachment) {
     state = state.copyWith(
-      attachmentPath: value,
+      attachments: [...state.attachments, attachment],
       clearFailure: true,
-      clearLastReplyId: true,
+    );
+  }
+
+  void removeAttachment(String attachmentId) {
+    state = state.copyWith(
+      attachments: state.attachments.where((a) => a.id != attachmentId).toList(),
+      clearFailure: true,
     );
   }
 
@@ -519,7 +512,7 @@ class SupportReplyController extends StateNotifier<SupportReplyState> {
 
     final fieldErrors = _validate();
     if (fieldErrors.isNotEmpty) {
-      state = state.copyWith(fieldErrors: fieldErrors, clearFailure: true, clearLastReplyId: true);
+      state = state.copyWith(fieldErrors: fieldErrors, clearFailure: true);
       return Failure<String>(
         ValidationFailure(
           message: supportReplyValidationFailureCode,
@@ -531,37 +524,26 @@ class SupportReplyController extends StateNotifier<SupportReplyState> {
     state = state.copyWith(
       isSubmitting: true,
       clearFailure: true,
-      clearLastReplyId: true,
       fieldErrors: const <String, String>{},
     );
 
     final result = await _repository.replyToTicket(
       ticketId: _ticketId,
       messageBody: state.messageBody,
-      attachmentPath: state.attachmentPath.trim(),
+      attachmentPath: '', // Empty - attachments are handled separately via ticket_attachments table
     );
 
     final replyId = result.valueOrNull;
-    if (result.isSuccess && replyId != null && state.attachmentPath.trim().isNotEmpty) {
-      final relocateResult = await _uploadService.relocateAttachment(
-        currentPath: state.attachmentPath.trim(),
-        targetPathSegment: 'support_reply/$replyId',
-      );
-      if (relocateResult.isFailure) {
-        state = state.copyWith(
-          isSubmitting: false,
-          failure: const ServerFailure(message: supportReplyAttachmentFinalizeFailureCode),
-          lastReplyId: replyId,
-        );
-        return result;
-      }
+    if (result.isSuccess && replyId != null && state.attachments.isNotEmpty) {
+      // Attachments are already stored in ticket_attachments table with correct ticket_id
+      // No need to relocate - they were uploaded with the ticket_id
     }
 
     state = state.copyWith(
       isSubmitting: false,
       failure: result.failureOrNull,
       lastReplyId: replyId,
-      attachmentPath: result.isSuccess ? '' : state.attachmentPath,
+      attachments: result.isSuccess ? [] : state.attachments,
       messageBody: result.isSuccess ? '' : state.messageBody,
     );
     return result;
@@ -588,7 +570,6 @@ final supportReplyProvider =
     StateNotifierProvider.autoDispose.family<SupportReplyController, SupportReplyState, String>((ref, ticketId) {
   return SupportReplyController(
     ref.watch(supportRepositoryProvider),
-    ref.watch(supportAttachmentUploadServiceProvider),
     ticketId,
   );
 });

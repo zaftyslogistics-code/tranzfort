@@ -97,7 +97,7 @@ class _TtsFocusFieldState extends ConsumerState<TtsFocusField> {
         languageCode: languageCode,
         message: message,
       );
-    } catch (error, stackTrace) {
+    } catch (error) {
       AppLogger.warning('TTS speak failed', scope: 'TtsFocusField', error: error);
     }
   }

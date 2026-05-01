@@ -196,7 +196,6 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
 
   Widget _buildLoadList(BuildContext context) {
     final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
     final l10n = AppLocalizations.of(context);
 
     return Column(
