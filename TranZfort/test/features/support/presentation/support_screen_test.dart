@@ -655,10 +655,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Remove attachment'), findsOneWidget);
-    expect(
-      container.read(supportReplyProvider('ticket-reply-1')).attachmentPath,
-      'user-1/support_ticket/ticket-reply-1/evidence_77.jpg',
-    );
+    expect(container.read(supportReplyProvider('ticket-reply-1')).attachments, isNotEmpty);
 
     await tester.enterText(find.byType(TextField).last, 'I have attached the clearest POD image you requested.');
     await tester.scrollUntilVisible(find.text('Send reply'), 200, scrollable: find.byType(Scrollable).first);

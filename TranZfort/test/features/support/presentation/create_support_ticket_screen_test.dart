@@ -9,6 +9,7 @@ import 'package:tranzfort/src/features/support/data/support_repository.dart';
 import 'package:tranzfort/src/features/support/presentation/create_support_ticket_screen.dart';
 import 'package:tranzfort/src/features/support/providers/support_compose_providers.dart';
 import 'package:tranzfort/src/features/support/providers/support_providers.dart';
+import 'package:tranzfort/src/l10n/app_localizations.dart';
 
 TicketAttachmentMetadata _testAttachment({
   String id = 'att-1',
@@ -30,7 +31,6 @@ TicketAttachmentMetadata _testAttachment({
     updatedAt: DateTime.now(),
   );
 }
-import 'package:tranzfort/src/l10n/app_localizations.dart';
 
 class _CreateTicketBackend implements SupportBackend {
   String? lastCategory;
