@@ -185,8 +185,8 @@ Widget _buildApp({
     setSpeechRateFn: (_) async {},
     speakFn: (_) async {},
     stopFn: () async {},
-    preferencesFn: () async => SharedPreferences.getInstance,
-    getVoices: Future.value,
+    preferencesFn: SharedPreferences.getInstance,
+    getVoices: Future<dynamic>.value([]),
     setVoiceFn: (_) async {},
   );
 
@@ -237,8 +237,8 @@ Widget _buildRoutedApp({
         setSpeechRateFn: (_) async {},
         speakFn: (_) async {},
         stopFn: () async {},
-        preferencesFn: () async => SharedPreferences.getInstance,
-        getVoices: Future.value,
+        preferencesFn: SharedPreferences.getInstance,
+        getVoices: Future<dynamic>.value([]),
         setVoiceFn: (_) async {},
       );
 
