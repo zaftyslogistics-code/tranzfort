@@ -9,6 +9,27 @@ import 'package:tranzfort/src/features/support/data/support_repository.dart';
 import 'package:tranzfort/src/features/support/presentation/create_support_ticket_screen.dart';
 import 'package:tranzfort/src/features/support/providers/support_compose_providers.dart';
 import 'package:tranzfort/src/features/support/providers/support_providers.dart';
+
+TicketAttachmentMetadata _testAttachment({
+  String id = 'att-1',
+  String ticketId = 'ticket-1',
+  String uploadedBy = 'user-1',
+  String filePath = 'user-1/support/evidence_1.jpg',
+}) {
+  return TicketAttachmentMetadata(
+    id: id,
+    ticketId: ticketId,
+    uploadedBy: uploadedBy,
+    fileName: 'evidence_1.jpg',
+    filePath: filePath,
+    fileSize: 1024,
+    mimeType: 'image/jpeg',
+    uploadStatus: 'uploaded',
+    scanStatus: 'clean',
+    createdAt: DateTime.now(),
+    updatedAt: DateTime.now(),
+  );
+}
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
 class _CreateTicketBackend implements SupportBackend {
@@ -178,10 +199,10 @@ void main() {
 
     expect(find.text('No evidence image attached yet.'), findsOneWidget);
     final container = ProviderScope.containerOf(tester.element(find.byType(CreateSupportTicketScreen)));
-    container.read(createSupportTicketProvider.notifier).setAttachmentPath('user-1/report_issue/evidence_99.jpg');
+    container.read(createSupportTicketProvider.notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_99.jpg'));
     await tester.pumpAndSettle();
     expect(find.text('Remove attachment'), findsOneWidget);
-    expect(container.read(createSupportTicketProvider).attachmentPath, 'user-1/report_issue/evidence_99.jpg');
+    expect(container.read(createSupportTicketProvider).attachments, isNotEmpty);
     await tester.enterText(find.byType(TextField).at(0), 'load-77');
     await tester.enterText(find.byType(TextField).at(1), 'trip-77');
     await tester.enterText(find.byType(TextField).at(2), 'The support inbox is missing the expected dispute follow-up entry.');
@@ -230,18 +251,19 @@ void main() {
     await tester.pumpAndSettle();
 
     final container = ProviderScope.containerOf(tester.element(find.byType(CreateSupportTicketScreen)));
-    container.read(createSupportTicketProvider.notifier).setAttachmentPath('user-1/report_issue/evidence_remove.jpg');
+    container.read(createSupportTicketProvider.notifier).addAttachment(_testAttachment(filePath: 'user-1/report_issue/evidence_remove.jpg'));
     await tester.pumpAndSettle();
 
     expect(find.text('Remove attachment'), findsOneWidget);
-    expect(container.read(createSupportTicketProvider).attachmentPath, 'user-1/report_issue/evidence_remove.jpg');
+    expect(container.read(createSupportTicketProvider).attachments, isNotEmpty);
 
     await tester.scrollUntilVisible(find.text('Remove attachment'), 200, scrollable: find.byType(Scrollable).first);
     await tester.pumpAndSettle();
+
     await tester.tap(find.text('Remove attachment'));
     await tester.pumpAndSettle();
 
     expect(find.text('No evidence image attached yet.'), findsOneWidget);
-    expect(container.read(createSupportTicketProvider).attachmentPath, isEmpty);
+    expect(container.read(createSupportTicketProvider).attachments, isEmpty);
   });
 }
