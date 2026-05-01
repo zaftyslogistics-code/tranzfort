@@ -71,8 +71,8 @@ class _NoopTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
     required int page,
     required int pageSize,
   }) async {
-    return const MarketplaceSearchResult(
-      items: <MarketplaceLoadItem>[],
+    return MarketplaceSearchResult(
+      items: const <MarketplaceLoadItem>[],
       total: 0,
       hasMore: false,
       page: page,
