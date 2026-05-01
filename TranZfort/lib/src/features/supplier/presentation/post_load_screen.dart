@@ -103,16 +103,16 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Changes?'),
-        content: const Text('You have unsaved load details. Do you want to discard them?'),
+        title: Text(AppLocalizations.of(context).postLoadDiscardTitle),
+        content: Text(AppLocalizations.of(context).postLoadDiscardMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context).commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(AppLocalizations.of(context).commonDiscardAction),
           ),
         ],
       ),

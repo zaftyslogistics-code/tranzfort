@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/error/app_failure.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../data/public_profile_models.dart';
@@ -25,7 +26,7 @@ class SupplierPublicProfileScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Supplier Profile'),
+        title: Text(AppLocalizations.of(context).supplierProfileTitle),
         actions: const [
           TtsActionButton(),
           LanguageToggleAction(),
@@ -126,7 +127,7 @@ class SupplierPublicProfileScreen extends ConsumerWidget {
                 await ref.read(publicProfileProvider(supplierId).future);
               },
               icon: const Icon(Icons.refresh),
-              label: const Text('Retry'),
+              label: Text(AppLocalizations.of(context).commonRetryAction),
             ),
           ],
         ),

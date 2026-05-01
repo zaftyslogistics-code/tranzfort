@@ -64,16 +64,16 @@ class _RaiseDisputeScreenState extends ConsumerState<RaiseDisputeScreen> {
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Dispute?'),
-        content: const Text('You have unsaved dispute details. Do you want to discard them?'),
+        title: Text(AppLocalizations.of(context).raiseDisputeDiscardTitle),
+        content: Text(AppLocalizations.of(context).raiseDisputeDiscardMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(AppLocalizations.of(context).commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(AppLocalizations.of(context).commonDiscardAction),
           ),
         ],
       ),

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/services/tts_voice_model.dart';
 import '../../../core/services/tts_voice_selection_provider.dart';
 import '../../../core/theme/app_spacing.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
@@ -97,11 +98,11 @@ class _HindiVoiceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionCard(
-      title: 'Hindi Voice',
+      title: AppLocalizations.of(context).ttsHindiVoice,
       child: voices.isEmpty
-          ? const Padding(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              child: Text('No Hindi voices available on this device.'),
+          ? Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Text(AppLocalizations.of(context).ttsNoHindiVoices),
             )
           : ListView.separated(
               shrinkWrap: true,
@@ -147,11 +148,11 @@ class _EnglishVoiceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SectionCard(
-      title: 'English Voice',
+      title: AppLocalizations.of(context).ttsEnglishVoice,
       child: voices.isEmpty
-          ? const Padding(
-              padding: EdgeInsets.all(AppSpacing.lg),
-              child: Text('No English voices available on this device.'),
+          ? Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: Text(AppLocalizations.of(context).ttsNoEnglishVoices),
             )
           : ListView.separated(
               shrinkWrap: true,
