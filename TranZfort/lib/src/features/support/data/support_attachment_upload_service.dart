@@ -339,13 +339,13 @@ class SupportAttachmentUploadService {
     }
 
     try {
-      final response = await _client!.rpc('get_ticket_attachments', params: {'p_ticket_id': ticketId});
+      final response = await _client.rpc('get_ticket_attachments', params: {'p_ticket_id': ticketId});
       
       if (response == null || response is! List) {
         return const Success<List<TicketAttachmentMetadata>>([]);
       }
 
-      final attachments = (response as List)
+      final attachments = response
           .map((item) => TicketAttachmentMetadata.fromMap(item as Map<String, dynamic>))
           .toList();
 
@@ -371,10 +371,10 @@ class SupportAttachmentUploadService {
       }
 
       // Delete from storage
-      await _client!.storage.from('support-attachments').remove([attachment.filePath]);
+      await _client.storage.from('support-attachments').remove([attachment.filePath]);
 
       // Delete from database
-      await _client!.from('ticket_attachments').delete().eq('id', attachmentId);
+      await _client.from('ticket_attachments').delete().eq('id', attachmentId);
 
       return const Success<bool>(true);
     } catch (e, stackTrace) {

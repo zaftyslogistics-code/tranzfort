@@ -139,7 +139,7 @@ class TruckDocumentUploadService {
     final storagePath = '$normalizedOwnerId/$normalizedTruckId/rc/rc_$timestamp.jpg';
 
     try {
-      await _uploadBinary(_client!, storagePath, compressedBytes);
+      await _uploadBinary(_client, storagePath, compressedBytes);
       return Success<String?>(storagePath);
     } on StorageException catch (error) {
       return Failure<String?>(

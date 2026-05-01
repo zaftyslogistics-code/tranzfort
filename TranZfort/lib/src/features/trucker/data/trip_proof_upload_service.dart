@@ -31,13 +31,21 @@ class TripProofUploadService {
   Future<Result<String?>> pickCompressAndUploadPod({
     required String tripId,
     required ImageSource source,
+    bool enableAutoCompletion = true,
   }) async {
-    return _pickCompressAndUploadProof(
+    final uploadResult = await _pickCompressAndUploadProof(
       tripId: tripId,
       source: source,
       storageFilename: 'pod.jpg',
       invalidImageMessage: 'We could not prepare the POD image. Please try another photo.',
     );
+
+    // Enable auto-completion after successful POD upload
+    if (uploadResult.isSuccess && enableAutoCompletion) {
+      await _enableTripAutoCompletion(tripId);
+    }
+
+    return uploadResult;
   }
 
   Future<Result<String?>> pickCompressAndUploadLr({
@@ -95,6 +103,25 @@ class TripProofUploadService {
             upsert: true,
           ),
         );
+  }
+
+  /// Enable auto-completion for a trip after POD upload
+  Future<void> _enableTripAutoCompletion(String tripId) async {
+    if (_client == null) return;
+
+    try {
+      await _client.rpc(
+        'enable_trip_auto_completion',
+        params: <String, dynamic>{
+          'p_trip_id': tripId.trim(),
+          'p_completion_window_hours': 24, // 24-hour default
+        },
+      );
+    } catch (e) {
+      // Log error but don't fail the upload if auto-completion fails
+      // Auto-completion is a nice-to-have feature
+      print('Failed to enable auto-completion for trip $tripId: $e');
+    }
   }
 }
 

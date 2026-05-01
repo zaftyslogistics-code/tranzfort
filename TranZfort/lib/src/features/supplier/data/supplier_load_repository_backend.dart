@@ -137,7 +137,7 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       
       if (response is List) {
         AppLogger.info('✅ [fetchBookingRequests] RPC returned ${response.length} rows');
-        return List<Map<String, dynamic>>.from(response as List);
+        return List<Map<String, dynamic>>.from(response);
       } else {
         AppLogger.warning('⚠️  [fetchBookingRequests] RPC returned non-list response: $response');
         return [];
