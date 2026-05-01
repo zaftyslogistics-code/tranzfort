@@ -63,6 +63,9 @@ class _RaiseDisputeBackend implements SupplierTripsBackend {
   }
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({required String supplierId, required String tripId}) async => null;
+
+  @override
   Future<Map<String, dynamic>?> fetchTruckerProfile(String truckerId) async => {
         'id': truckerId,
         'full_name': 'Ravi Trucker',
@@ -112,6 +115,15 @@ class _NoopSupportBackend implements SupportBackend {
 
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async => const <Map<String, dynamic>>[];
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async => const <Map<String, dynamic>>[];
 
   @override
   Future<List<Map<String, dynamic>>> fetchTickets({required String userId, int limit = 20, DateTime? before}) async => const <Map<String, dynamic>>[];

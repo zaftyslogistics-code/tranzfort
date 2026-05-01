@@ -16,6 +16,8 @@ void main() {
       },
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     final outcome = await service.speakSummary(
@@ -44,6 +46,8 @@ void main() {
       },
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     final outcome = await service.speakSummary(
@@ -68,6 +72,8 @@ void main() {
       speakFn: (_) async {},
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     await service.setLanguage('hi');
@@ -88,6 +94,8 @@ void main() {
       },
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     final message = 'a' * 550;
@@ -116,6 +124,8 @@ void main() {
       },
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     final firstFuture = service.speakSummary(languageCode: 'en', message: 'First summary');
@@ -146,6 +156,8 @@ void main() {
       },
       stopFn: () async {},
       preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future.value,
+      setVoiceFn: (_) async {},
     );
 
     final speakFuture = service.speakSummary(languageCode: 'en', message: 'Active summary');

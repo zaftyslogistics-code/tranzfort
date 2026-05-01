@@ -62,12 +62,18 @@ class _SmokeCitySearchService implements TruckerCitySearchService {
 
 class _SmokeMarketplaceBackend implements TruckerMarketplaceBackend {
   @override
-  Future<List<Map<String, dynamic>>> searchLoads(
+  Future<MarketplaceSearchResult> searchLoads(
     MarketplaceSearchFilters filters, {
     required int page,
     required int pageSize,
   }) async {
-    return const <Map<String, dynamic>>[];
+    return const MarketplaceSearchResult(
+      items: <MarketplaceLoadItem>[],
+      total: 0,
+      hasMore: false,
+      page: page,
+      pageSize: pageSize,
+    );
   }
 
   @override

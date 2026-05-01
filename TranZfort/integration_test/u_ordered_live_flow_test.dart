@@ -96,7 +96,7 @@ Future<MarketplaceLoadItem?> _findMarketplaceLoadByOrigin(
   for (var attempt = 0; attempt < 5; attempt += 1) {
     final result = await repository.searchLoads(MarketplaceSearchFilters(originCity: originCity));
     if (result.isSuccess) {
-      for (final item in result.valueOrNull!) {
+      for (final item in result.valueOrNull!.items) {
         if (item.originCity.trim().toLowerCase() == originCity.trim().toLowerCase()) {
           return item;
         }
@@ -185,8 +185,8 @@ void main() {
       final approvedTrucksResult = await detailRepository.fetchApprovedTrucks();
       expect(approvedTrucksResult.isSuccess, isTrue);
 
-      if (loads.isNotEmpty) {
-        final firstLoad = loads.first;
+      if (loads.items.isNotEmpty) {
+        final firstLoad = loads.items.first;
         expect(firstLoad.id, isNotEmpty);
         expect(firstLoad.originCity.trim(), isNotEmpty);
         expect(firstLoad.destinationCity.trim(), isNotEmpty);
@@ -248,13 +248,13 @@ void main() {
       final searchResult = await marketplaceRepository.searchLoads(const MarketplaceSearchFilters());
       expect(searchResult.isSuccess, isTrue);
       final loads = searchResult.valueOrNull!;
-      if (loads.isEmpty) {
+      if (loads.items.isEmpty) {
         await client.auth.signOut(scope: SignOutScope.local);
         expect(client.auth.currentSession, isNull);
         return;
       }
 
-      final firstLoad = loads.first;
+      final firstLoad = loads.items.first;
       final detailResult = await detailRepository.fetchLoadDetail(firstLoad.id);
       expect(detailResult.isSuccess, isTrue);
       final detail = detailResult.valueOrNull!;

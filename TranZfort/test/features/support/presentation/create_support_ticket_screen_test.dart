@@ -45,9 +45,16 @@ class _CreateTicketBackend implements SupportBackend {
   }
 
   @override
-  Future<Map<String, dynamic>?> fetchTicket({required String userId, required String ticketId}) async {
-    return null;
-  }
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async => const <Map<String, dynamic>>[];
+
+  @override
+  Future<Map<String, dynamic>?> fetchTicket({required String userId, required String ticketId}) async => null;
 
   @override
   Future<List<Map<String, dynamic>>> fetchTickets({required String userId, int limit = 20, DateTime? before}) async {

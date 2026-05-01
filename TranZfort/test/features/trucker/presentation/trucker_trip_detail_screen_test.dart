@@ -69,6 +69,8 @@ class _FakeContextualTtsService extends ContextualTtsService {
           speakFn: (_) async {},
           stopFn: () async {},
           preferencesFn: SharedPreferences.getInstance,
+          getVoices: Future.value,
+          setVoiceFn: (_) async {},
         );
 
   @override
@@ -253,6 +255,14 @@ class _ScreenChatBackend implements ChatBackend {
 
   @override
   Future<List<Map<String, dynamic>>> fetchMessages({required String conversationId}) async => throw UnimplementedError();
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchMessagesPaginated({
+    required String conversationId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async => throw UnimplementedError();
 
   @override
   Stream<List<Map<String, dynamic>>> watchMessages({required String conversationId}) => throw UnimplementedError();

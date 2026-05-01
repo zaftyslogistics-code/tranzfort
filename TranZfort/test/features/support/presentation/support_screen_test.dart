@@ -47,6 +47,18 @@ class _NoopSupportBackend implements SupportBackend {
   }
 
   @override
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    final messages = messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
+    return messages.take(limit).toList(growable: false);
+  }
+
+  @override
   Future<String> createTicket({
     required String category,
     required String messageBody,
@@ -103,6 +115,18 @@ class _RecordingSupportBackend implements SupportBackend {
   @override
   Future<List<Map<String, dynamic>>> fetchTicketMessages({required String ticketId}) async {
     return messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    final messages = messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
+    return messages.take(limit).toList(growable: false);
   }
 
   @override

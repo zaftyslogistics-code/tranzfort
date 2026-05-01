@@ -20,6 +20,9 @@ class _RatingBackend implements SupplierTripsBackend {
   Future<Map<String, dynamic>?> fetchTripDetail({required String supplierId, required String tripId}) async => null;
 
   @override
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({required String supplierId, required String tripId}) async => null;
+
+  @override
   Future<Map<String, dynamic>?> fetchTruckerProfile(String truckerId) async => null;
 
   @override

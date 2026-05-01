@@ -48,6 +48,21 @@ class _FakeSupportBackend implements SupportBackend {
   }
 
   @override
+  Future<List<Map<String, dynamic>>> fetchTicketMessagesPaginated({
+    required String userId,
+    required String ticketId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    if (error != null) {
+      throw error!;
+    }
+    final messages = messagesByTicket[ticketId] ?? const <Map<String, dynamic>>[];
+    return messages.take(limit).toList(growable: false);
+  }
+
+  @override
   Future<String> createTicket({
     required String category,
     required String messageBody,

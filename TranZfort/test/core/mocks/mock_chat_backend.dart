@@ -139,6 +139,20 @@ class MockChatBackend implements ChatBackend {
   }
 
   @override
+  Future<List<Map<String, dynamic>>> fetchMessagesPaginated({
+    required String conversationId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async {
+    _throwIfError();
+    fetchedMessagesConversationId = conversationId;
+    final messages = messagesByConversation[conversationId] ?? const <Map<String, dynamic>>[];
+    // Simple pagination: return first 'limit' messages
+    return messages.take(limit).toList();
+  }
+
+  @override
   Stream<List<Map<String, dynamic>>> watchMessages({
     required String conversationId,
   }) {

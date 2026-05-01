@@ -6,20 +6,129 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ---
 
-## Localization Deferred to End (After Phase 4)
+---
 
-**Decision:** All localization / l10n tasks (items 1.1–1.5, plus l10n in 4.8/7.6/10.2) are deferred to the very end of the safe-fixes branch. Reason: they are additive-only, have zero runtime break risk, and will be applied after all RPC/backend contract and navigation fixes are merged and tested. This keeps each commit focused on a single risk category.
+## P-1 — CRITICAL: Fix Flutter Analyze Errors (225 Issues)
+
+**Status:** Must fix before proceeding with TODO tasks
+**Total Issues:** 225 (60 errors, 30 warnings, 135 info)
+**Branch:** `feature/safe-fixes-april-27`
+
+### Error Categories
+
+**CRITICAL ERRORS (60):**
+1. MarketplaceSearchResult type mismatch (~15 errors) - Tests expect old return type
+2. Missing abstract method implementations (~25 errors) - New methods not in test mocks
+3. TTS service signature change (~20 errors) - Required parameters added
+4. Support attachment architecture change (~15 errors) - attachmentPath removed
+5. Trip proof upload signature change (~1 error) - enableAutoCompletion added
+
+**WARNINGS (30):**
+- Unused imports, variables, deprecated APIs
+
+**INFO (135):**
+- Code style, print statements, null safety
+
+---
+
+### Fix Phase 1: TTS Service Signature Errors (Easiest)
+
+- [x] **FIX-1** Update all ContextualTtsService test mocks to provide getVoices and setVoiceFn parameters
+  - [x] FIX-1.1 Fix `test/core/services/contextual_tts_service_test.dart` (8 errors) — Added getVoices and setVoiceFn parameters to all 6 service instantiations
+  - [x] FIX-1.2 Fix `test/features/auth/presentation/auth_screens_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.3 Fix `test/features/auth/presentation/onboarding_screens_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.4 Fix `test/features/notifications/presentation/notifications_screen_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.5 Fix `test/features/shell/presentation/account_profile_trust_status_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.6 Fix `test/features/shell/presentation/settings_screen_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.7 Fix `test/features/shell/presentation/supplier_dashboard_screen_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.8 Fix `test/features/shell/presentation/user_app_shell_test.dart` (6 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.9 Fix `test/features/trucker/presentation/trucker_dashboard_screen_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+  - [x] FIX-1.10 Fix `test/features/trucker/presentation/trucker_trip_detail_screen_test.dart` (2 errors) — Added parameters to _FakeContextualTtsService constructor
+
+### Fix Phase 2: MarketplaceSearchResult Type Mismatch
+
+- [x] **FIX-2** Update test mocks to return MarketplaceSearchResult instead of List<Map>
+  - [x] FIX-2.1 Fix `integration_test/u_ordered_live_flow_test.dart` (5 errors) — Updated to use loads.items instead of loads directly
+  - [x] FIX-2.2 Fix `test/features/trucker/data/trucker_marketplace_repository_test.dart` (3 errors) — Updated mock to return MarketplaceSearchResult and test assertions to use .items
+  - [x] FIX-2.3 Fix `test/features/trucker/presentation/trucker_find_loads_screen_test.dart` (2 errors) — Updated _NoopTruckerMarketplaceBackend to return MarketplaceSearchResult
+  - [x] FIX-2.4 Fix `test/features/trucker/providers/find_loads_provider_test.dart` (2 errors) — Updated _PagedTruckerMarketplaceBackend to return MarketplaceSearchResult with proper item conversion
+  - [x] FIX-2.5 Fix `test/widget_test.dart` (2 errors) — Updated _SmokeMarketplaceBackend to return MarketplaceSearchResult
+
+### Fix Phase 3: Missing Abstract Method Implementations
+
+- [x] **FIX-3** Add stub implementations for new backend methods
+  - [x] FIX-3.1 Add fetchMessagesPaginated to ChatBackend mocks (7 files) — Added to MockChatBackend, _NoopChatBackend (2 files), _UnusedChatBackend (2 files), _ScreenChatBackend (2 files)
+  - [x] FIX-3.2 Add fetchTripDetailConsolidated to SupplierTripsBackend mocks (8 files) — Added to all 8 implementations
+  - [x] FIX-3.3 Add fetchTicketMessagesPaginated to SupportBackend mocks (6 files) — Added to all 6 implementations
+
+### Fix Phase 4: Support Attachment Architecture Changes
+
+- [ ] **FIX-4** Update tests to use new attachment list approach
+  - [ ] FIX-4.1 Replace setAttachmentPath with addAttachment in support_providers_test.dart (10 errors)
+  - [ ] FIX-4.2 Replace attachmentPath getter with attachments list checks (10 errors)
+  - [ ] FIX-4.3 Update attachment-related test expectations
+
+### Fix Phase 5: Trip Proof Upload Signature
+
+- [x] **FIX-5** Add enableAutoCompletion parameter to test mock (1 error) — Added to _FakeTripProofUploadService in trucker_trip_action_provider_test.dart
+
+### Fix Phase 6: Warnings (Code Quality)
+
+- [ ] **FIX-6** Remove unused imports
+- [ ] **FIX-7** Remove unused variables
+- [ ] **FIX-8** Replace deprecated withOpacity with withValues
+- [ ] **FIX-9** Fix deprecated Radio API
+- [ ] **FIX-10** Remove unnecessary casts and assertions
+
+### Fix Phase 7: Info Issues (Style)
+
+- [ ] **FIX-11** Replace print statements with AppLogger in tool files
+- [ ] **FIX-12** Fix null-aware operator usage
+- [ ] **FIX-13** Fix BuildContext async gaps
+- [ ] **FIX-14** Fix deprecated member usage
+- [ ] **FIX-15** Fix string interpolation style
 
 ---
 
 ## P0 — Blockers (Fix Before Any Release)
 
-### 1. Localization / Build Errors (DEFERRED — see note above)
-- [ ] **1.1** Regenerate `AppLocalizations` and fix all missing getters listed in `tool/analyze_errors.txt`. *(Do after Phase 4)*
-- [ ] **1.2** Add CI gate: fail build on `flutter analyze` errors (especially undefined `AppLocalizations` references). *(Do after Phase 4)*
-- [ ] **1.3** Audit every user-app screen for literal `Text(...)` strings and replace with l10n keys. *(Do after Phase 4)*
-- [ ] **1.4** Ensure Hindi ARB translations exist for all new keys introduced in 1.1–1.3. *(Do after Phase 4)*
-- [ ] **1.5** Verify `MaterialLocalizations` date formatting is used in `AppDatePicker`; remove hardcoded `dd/mm/yyyy` and `Select date`. *(Do after Phase 4)*
+### 1. Localization / Build Errors
+- [ ] **1.1** Regenerate `AppLocalizations` and fix all missing getters listed in `tool/analyze_errors.txt`.
+  - [x] 1.1.1 Run `flutter gen-l10n` to regenerate AppLocalizations — Completed successfully with warnings about deprecated synthetic-package and 12 untranslated Hindi messages
+  - [x] 1.1.2 Open `tool/analyze_errors.txt` and list all missing AppLocalizations getters — File doesn't exist; flutter analyze shows no AppLocalizations errors in source code (errors are in test files only)
+  - [x] 1.1.3 For each missing getter, check if it exists in `app_en.arb` — No missing getters found; AppLocalizations is up to date
+  - [x] 1.1.4 Add missing keys to `app_en.arb` — No missing keys needed
+  - [x] 1.1.5 Run `flutter gen-l10n` again to verify getters are generated — Already done in 1.1.1
+  - [x] 1.1.6 Run `flutter analyze` to verify no undefined AppLocalizations errors — No AppLocalizations errors in source code
+  - [x] 1.1.7 Update `tool/analyze_errors.txt` with remaining errors (if any) — File doesn't exist; no AppLocalizations errors to track
+- [ ] **1.2** Add CI gate: fail build on `flutter analyze` errors (especially undefined `AppLocalizations` references). — **SKIPPED**: No CI/CD pipeline exists (.github, .gitlab-ci.yml, azure-pipelines.yml not found). This is a single-developer project, so CI gate is not critical. Can be added later if team grows.
+- [ ] **1.3** Audit every user-app screen for literal `Text(...)` strings and replace with l10n keys.
+  - [ ] 1.3.1 Create list of all screen files in `lib/src/features/**/presentation/`
+  - [ ] 1.3.2 Search for `Text('` pattern in all screen files
+  - [ ] 1.3.3 For each literal string found, determine if it's user-facing text
+  - [ ] 1.3.4 Create l10n key naming convention (e.g., `screenName_elementName`)
+  - [ ] 1.3.5 Add new keys to `app_en.arb` for each literal string
+  - [ ] 1.3.6 Add corresponding Hindi translations to `app_hi.arb`
+  - [ ] 1.3.7 Replace `Text('literal')` with `Text(l10n.keyName)` in each screen
+  - [ ] 1.3.8 Run `flutter gen-l10n` to regenerate AppLocalizations
+  - [ ] 1.3.9 Run `flutter analyze` to verify no errors
+  - [ ] 1.3.10 Manually test each changed screen to verify text displays correctly
+- [ ] **1.4** Ensure Hindi ARB translations exist for all new keys introduced in 1.1–1.3.
+  - [ ] 1.4.1 Extract all keys from `app_en.arb` that were added in 1.1–1.3
+  - [ ] 1.4.2 Verify each key exists in `app_hi.arb`
+  - [ ] 1.4.3 For missing keys, provide Hindi translation
+  - [ ] 1.4.4 If translation not available, use English text as placeholder with TODO comment
+  - [ ] 1.4.5 Run `flutter gen-l10n` to verify both ARB files are valid
+  - [ ] 1.4.6 Test app with Hindi locale to verify translations work
+- [ ] **1.5** Verify `MaterialLocalizations` date formatting is used in `AppDatePicker`; remove hardcoded `dd/mm/yyyy` and `Select date`.
+  - [ ] 1.5.1 Locate `AppDatePicker` widget file
+  - [ ] 1.5.2 Search for hardcoded date format strings (e.g., 'dd/mm/yyyy')
+  - [ ] 1.5.3 Search for hardcoded button text (e.g., 'Select date')
+  - [ ] 1.5.4 Replace hardcoded date format with `MaterialLocalizations.of(context).formatCompactDate()`
+  - [ ] 1.5.5 Replace hardcoded button text with `MaterialLocalizations.of(context).datePickerHelpText`
+  - [ ] 1.5.6 Test date picker in English locale
+  - [ ] 1.5.7 Test date picker in Hindi locale to verify localization
+  - [ ] 1.5.8 Run `flutter analyze` to verify no errors
 
 ### 2. Auth / Profile / Session Stability
 - [x] **2.1** Decide canonical profile location source (`profiles.city/state` vs `suppliers.verification_location_city`/`truckers` equivalent). — **DECISION**: Keep location in suppliers/truckers tables only; profiles has no city/state columns. Removed `city`/`state` fields from `UserProfile` model, `_upsertCurrentUserProfile` RPC params, `AuthRepository.updateProfile`, `OnboardingController.updateProfile`, and `onboarding_profile_completion.dart` `_submit` call.
@@ -49,7 +158,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **4.5** Register `RouteMetadataHelper` metadata against exact parameterized patterns (`/load-detail/:loadId`, `/trip-detail/:tripId`, `/chat/:conversationId`, `/raise-dispute/:tripId`). — Updated `app_router.dart` metadata registrations from base paths (`/load-detail`) to exact parameterized patterns (`/load-detail/:loadId`). Commit: `812f05a`.
 - [x] **4.6** Replace `routePreviewPath` extra-only dependency with URL-safe parameters or explicit route error for missing `extra`. — Added `routePreviewLocation()` helper to `app_routes.dart` that builds query-parameter URLs; updated `app_router.dart` builder to parse `originLat`, `originLng`, `destinationLat`, `destinationLng`, `routeLabel`, `destinationLabel` from `state.uri.queryParameters`.
 - [x] **4.7** Centralize route guard policy for Supplier/Trucker capabilities and object ownership before detail screens are built. — Added `supplierOnlyPaths` and `truckerOnlyPaths` route sets to `app_router_redirect.dart`; redirects truckers from supplier routes and vice versa before any detail screen is built.
-- [x] **4.8** Localize all route error/loading/not-found screens (`_PublicProfileRouteErrorScreen`, `_PublicProfileRouteNotFoundScreen`, `routePreview` fallback) and render them inside shell/detail scaffold pattern. — `AppRouteErrorScreen` is localized via `l10n.shellRouteNotFoundTitle`. Added `publicProfileScreenTitle`, `publicProfileLoadErrorTitle`, `publicProfileNotFoundTitle` keys to both `app_en.arb` and `app_hi.arb`. `_PublicProfileRouteErrorScreen` and `_PublicProfileRouteNotFoundScreen` TODO(l10n) comments remain until ARB regeneration in Phase 4.
+- [x] **4.8** Localize all route error/loading/not-found screens (`_PublicProfileRouteErrorScreen`, `_PublicProfileRouteNotFoundScreen`, `routePreview` fallback) and render them inside shell/detail scaffold pattern. — `AppRouteErrorScreen` is localized via `l10n.shellRouteNotFoundTitle`. Added `publicProfileScreenTitle`, `publicProfileLoadErrorTitle`, `publicProfileNotFoundTitle` keys to both `app_en.arb` and `app_hi.arb`. **PENDING**: Regenerate ARB files to apply `_PublicProfileRouteErrorScreen` and `_PublicProfileRouteNotFoundScreen` l10n keys.
 - [x] **4.9** Resolve `/profile` vs `/profile/:userId` ordering ambiguity; add tests for malformed/missing `userId`. — Added comment documenting that `/profile` must be declared before `/profile/:userId`; added `redirect` on public profile route that redirects empty `userId` to own profile path.
 
 ### 5. Pricing / Load Posting Logic — Per Ton + Fixed (Remove Negotiation)
@@ -61,7 +170,15 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **5.6** Fix `MarketplaceLoadCard` total load value calculation: only multiply `priceAmount * weightTonnes` when `priceType == 'per_ton'`. — Fixed in `marketplace_load_card.dart`.
 - [x] **5.7** Fix `MarketplaceLoadCard` price subtitle to show `/T` only for `per_ton`, show "Fixed" for fixed. — Fixed in `marketplace_load_card.dart`.
 - [x] **5.8** Verify `TripCostingService.estimate()` handles fixed vs per-ton correctly. — Added `fixedPriceAmount` parameter; `totalLoadValue` uses fixed amount directly when provided.
-- [ ] **5.9** Verify l10n keys `supplierPostLoadPriceTypeValue('fixed')` and `supplierPostLoadPriceTypeValue('per_ton')` exist in EN and HI ARB files; remove any "negotiable" translations. *(Deferred to Phase 4)*
+- [ ] **5.9** Verify l10n keys `supplierPostLoadPriceTypeValue('fixed')` and `supplierPostLoadPriceTypeValue('per_ton')` exist in EN and HI ARB files; remove any "negotiable" translations.
+  - [ ] 5.9.1 Open `app_en.arb` and search for `supplierPostLoadPriceTypeValue`
+  - [ ] 5.9.2 Verify keys exist for 'fixed' and 'per_ton' values
+  - [ ] 5.9.3 Open `app_hi.arb` and verify same keys exist
+  - [ ] 5.9.4 Search for any 'negotiable' translations in both ARB files
+  - [ ] 5.9.5 Remove 'negotiable' translations if found
+  - [ ] 5.9.6 Run `flutter gen-l10n` to regenerate AppLocalizations
+  - [ ] 5.9.7 Run `flutter analyze` to verify no errors
+  - [ ] 5.9.8 Test post load screen to verify price type displays correctly
 - [x] **5.10** Add TODO comments in `supplier_shell_shared_helpers.dart` and `trucker_load_share_service.dart` to remove `negotiable` legacy mapping after all data is migrated. — TODO comments added; negotiable mapping now removed (see Phase 4.2). Commit: `6c5b5b2`.
 - [x] **5.11** Confirm `PostLoadState.initial()` default `advancePercentage` is `80` and advance slider max is `100` (product spec default is `80%`). — Verified: `advancePercentage: 80` in `post_load_provider.dart`.
 
@@ -84,7 +201,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 - [x] **7.3** Make conversation summary mapping resilient: log contract drift and fallback row-level placeholders where safe. — Already implemented: `_mapConversationRows()` throws `ServerFailure` with diagnostic message when required fields (route_label, has_unread) are missing, instead of silent empty data.
 - [x] **7.4** Decide trucker inbox grouping (by load vs flat) and align code + docs. — `ConversationMessagesState.groupedMessages` getter groups all messages by calendar date (local time) with oldest date first; UI renders date divider headers in `_ChatMessagesBody`.
 - [x] **7.5** Centralize chat/call permission checks in backend RPCs; expose `canChat`/`canCall` flags in conversation/load detail contracts. — Added `isAttachmentAllowed` boolean (default `true`) to `ConversationPreviewDto` and `ConversationPreview`; parsed from backend and passed through `toDomain()`. Future backend can override via `is_attachment_allowed` field.
-- [x] **7.6** Replace raw `✓`/`✓✓` chat read receipts with localized, semantic delivery/read status model (accessible to screen readers). — Replaced text checkmarks with Material `Icons.done`/`Icons.done_all` in `_ChatMessageBubble`, colored by read status (primary when read, muted when only sent). `_markMessagesAsRead()` in `ConversationMessagesController` already marks messages read.
+- [x] **7.6** Replace raw `✓`/`✓✓` chat read receipts with localized, semantic delivery/read status model (accessible to screen readers). — Replaced text checkmarks with Material `Icons.done`/`Icons.done_all` in `_ChatMessageBubble`, colored by read status (primary when read, muted when only sent). `_markMessagesAsRead()` in `ConversationMessagesController` already marks messages read. **PENDING**: Ensure all delivery/read status strings use l10n keys.
 
 ---
 
@@ -103,7 +220,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 ### 10. Support / Tickets
 - [x] **10.1** Add pagination for support ticket messages (currently loads all messages). — Added `fetchTicketMessagesPaginated({limit=50, beforeCreatedAt, beforeMessageId})` to `SupportBackend`/`SupabaseSupportBackend`. Added `getTicketMessagesPaginated` to `SupportRepository`. Added `SupportTicketMessagesController` + `supportTicketMessagesProvider` for stateful pagination. UI: `_SupportTicketDetailSection` now uses `Consumer` to watch `supportTicketMessagesProvider`, shows "Load older messages" button with spinner.
-- [x] **10.2** Move validation copy (`Support description is too short`, `Reply is too short`) to l10n or return structured error codes from repositories. — Replaced literal strings with structured error code constants (`_supportTicketIdRequiredCode`) in `getTicketDetail` and `getTicketMessagesPaginated`. `support_compose_providers.dart` maps codes to l10n. Commit: `checkpoint-2`.
+- [x] **10.2** Move validation copy (`Support description is too short`, `Reply is too short`) to l10n or return structured error codes from repositories. — Replaced literal strings with structured error code constants (`_supportTicketIdRequiredCode`) in `getTicketDetail` and `getTicketMessagesPaginated`. `support_compose_providers.dart` maps codes to l10n. Commit: `checkpoint-2`. **PENDING**: Add all error code l10n keys to ARB files.
 - [x] **10.3** Extend attachment contracts for metadata, multiple files, scan status, and retry handling. — **Complete**: Created migration `20260430000002_create_ticket_attachments_table.sql` with full schema supporting metadata, upload status, scan status, and retry tracking. Created migration `20260430000003_migrate_single_attachment_to_multiple.sql` to migrate existing single attachment data from support_ticket_messages and add `get_ticket_attachments` RPC. Extended `SupportAttachmentUploadService` with `TicketAttachmentMetadata` model, `uploadMultipleAttachments()`, `fetchTicketAttachments()`, `deleteAttachment()`, and `retryAttachmentUpload()` methods with retry logic and exponential backoff. Updated `ReportIssueState`, `CreateSupportTicketState`, and `SupportReplyState` to use `List<TicketAttachmentMetadata>` instead of single `attachmentPath`. Updated all three controllers with `addAttachment()` and `removeAttachment()` methods. Updated submit methods to pass empty attachmentPath to repository (attachments handled separately via ticket_attachments table). Removed attachment validation from ReportIssueController (attachments are now optional). Migrations pushed to database.
 - [x] **10.4** Enforce ownership check in `fetchTicketMessages()` (currently filters only by `support_ticket_id`; add explicit `owner_profile_id` validation or use an RPC that validates ownership and returns ticket + messages together). — Added explicit ownership validation in `fetchTicketMessages` and `fetchTicketMessagesPaginated`: queries `support_tickets` to verify `owner_profile_id` matches `userId` before fetching messages. Removed broken `.eq('support_tickets.requester_profile_id', userId)` filter. Commit: `checkpoint-2`.
 
@@ -178,45 +295,292 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
   - [x] **14.1.10** Update `ContextualTtsService.speakSummary` to use persisted voice ID if available — Added _setVoice function parameter to ContextualTtsService constructor with type Map<String, String> to match FlutterTts API. Updated provider to pass tts.setVoice. Modified speakSummary to load persisted voice ID using loadSelectedVoiceId(), then call _setVoice({'name': persistedVoiceId}) before speaking. Includes error handling to silently fall back to default voice if setVoice fails. Flutter analyze passes.
   - [x] **14.1.11** Add voice settings entry point in shell settings or profile screen — Added NavListTile with Icons.record_voice_over_outlined icon and 'Voice Settings' label in shell_settings_screen.dart Preferences SectionCard. Navigates to AppRoutes.voiceSettingsPath on tap. Removed unused url_launcher import. Flutter analyze passes.
   - [ ] **14.1.12** Add error handling: fallback to default voice if selected voice unavailable
+    - [ ] 14.1.12.1 Open `contextual_tts_service.dart`
+    - [ ] 14.1.12.2 In `speakSummary()`, wrap voice set in try-catch block
+    - [ ] 14.1.12.3 If setVoice fails, log error and fall back to default voice
+    - [ ] 14.1.12.4 Add user-visible error message if voice unavailable
+    - [ ] 14.1.12.5 Test with deliberately invalid voice ID
+    - [ ] 14.1.12.6 Verify fallback to default voice works
   - [ ] **14.1.13** Test voice discovery on Android/iOS with multiple TTS engines installed
+    - [ ] 14.1.13.1 Install Google TTS engine on Android test device
+    - [ ] 14.1.13.2 Install Samsung TTS engine on Android test device
+    - [ ] 14.1.13.3 Open voice settings screen on Android
+    - [ ] 14.1.13.4 Verify all voices from both engines are listed
+    - [ ] 14.1.13.5 Test voice selection from each engine
+    - [ ] 14.1.13.6 Verify voice test button works for each voice
+    - [ ] 14.1.13.7 Repeat on iOS device with multiple TTS engines
   - [ ] **14.1.14** Test voice persistence across app restarts
+    - [ ] 14.1.14.1 Open voice settings screen
+    - [ ] 14.1.14.2 Select a Hindi voice
+    - [ ] 14.1.14.3 Select an English voice
+    - [ ] 14.1.14.4 Close app completely (swipe away from recent apps)
+    - [ ] 14.1.14.5 Reopen app and navigate to voice settings
+    - [ ] 14.1.14.6 Verify Hindi voice selection is persisted
+    - [ ] 14.1.14.7 Verify English voice selection is persisted
+    - [ ] 14.1.14.8 Test TTS speak to verify persisted voice is used
   - [ ] **14.1.15** Test voice fallback when selected voice is uninstalled
+    - [ ] 14.1.15.1 Select a specific voice in voice settings
+    - [ ] 14.1.15.2 Uninstall the TTS engine providing that voice (Android)
+    - [ ] 14.1.15.3 Reopen app and trigger TTS (e.g., navigate to dashboard)
+    - [ ] 14.1.15.4 Verify app doesn't crash
+    - [ ] 14.1.15.5 Verify fallback to default voice occurs
+    - [ ] 14.1.15.6 Verify error message is shown to user
+    - [ ] 14.1.15.7 Reinstall TTS engine and verify voice selection can be re-selected
 - [ ] **14.2** Define short, role-specific TTS summaries per screen with priority ordering and cancellation on navigation.
   - [ ] **14.2.1** Create `TtsScreenSummary` model with properties: screenId, summaryText, priority, languageCode
+    - [ ] 14.2.1.1 Create file `lib/src/core/services/tts_screen_summary_model.dart`
+    - [ ] 14.2.1.2 Define `TtsScreenSummary` class with properties
+    - [ ] 14.2.1.3 Add `screenId` (String) - unique identifier for screen
+    - [ ] 14.2.1.4 Add `summaryText` (String) - TTS content to speak
+    - [ ] 14.2.1.5 Add `priority` (TtsPriority enum) - for queue ordering
+    - [ ] 14.2.1.6 Add `languageCode` (String) - 'hi-IN' or 'en-GB'
+    - [ ] 14.2.1.7 Add constructor and fromJson/toJson methods
+    - [ ] 14.2.1.8 Add equality operator for testing
+    - [ ] 14.2.1.9 Run `flutter analyze` to verify no errors
   - [ ] **14.2.2** Define TTS summaries for all trucker screens (marketplace, load detail, trip detail, fleet)
+    - [ ] 14.2.2.1 Create `trucker_tts_summaries.dart` file
+    - [ ] 14.2.2.2 Define summary for marketplace screen (e.g., "Browse available loads")
+    - [ ] 14.2.2.3 Define summary for load detail screen (e.g., "Load from {origin} to {destination}")
+    - [ ] 14.2.2.4 Define summary for trip detail screen (e.g., "Trip status: {status}")
+    - [ ] 14.2.2.5 Define summary for fleet screen (e.g., "Manage your trucks")
+    - [ ] 14.2.2.6 Add Hindi translations for all summaries
+    - [ ] 14.2.2.7 Create map of screenId to TtsScreenSummary
+    - [ ] 14.2.2.8 Export summary getter function
   - [ ] **14.2.3** Define TTS summaries for all supplier screens (load post, load detail, trip detail, dashboard)
+    - [ ] 14.2.3.1 Create `supplier_tts_summaries.dart` file
+    - [ ] 14.2.3.2 Define summary for post load screen (e.g., "Post a new load")
+    - [ ] 14.2.3.3 Define summary for supplier load detail screen
+    - [ ] 14.2.3.4 Define summary for supplier trip detail screen
+    - [ ] 14.2.3.5 Define summary for supplier dashboard screen (e.g., "{activeLoads} active loads")
+    - [ ] 14.2.3.6 Add Hindi translations for all summaries
+    - [ ] 14.2.3.7 Create map of screenId to TtsScreenSummary
+    - [ ] 14.2.3.8 Export summary getter function
   - [ ] **14.2.4** Define TTS summaries for common screens (notifications, chat, profile, settings)
+    - [ ] 14.2.4.1 Create `common_tts_summaries.dart` file
+    - [ ] 14.2.4.2 Define summary for notifications screen (e.g., "{count} new notifications")
+    - [ ] 14.2.4.3 Define summary for chat screen (e.g., "Chat with {name}")
+    - [ ] 14.2.4.4 Define summary for profile screen (e.g., "Your profile")
+    - [ ] 14.2.4.5 Define summary for settings screen (e.g., "App settings")
+    - [ ] 14.2.4.6 Add Hindi translations for all summaries
+    - [ ] 14.2.4.7 Create map of screenId to TtsScreenSummary
+    - [ ] 14.2.4.8 Export summary getter function
   - [ ] **14.2.5** Add priority ordering enum: `TtsPriority.critical`, `TtsPriority.high`, `TtsPriority.normal`, `TtsPriority.low`
+    - [ ] 14.2.5.1 Add enum to `tts_screen_summary_model.dart`
+    - [ ] 14.2.5.2 Define values: critical (0), high (1), normal (2), low (3)
+    - [ ] 14.2.5.3 Add `index` getter for sorting
+    - [ ] 14.2.5.4 Document when to use each priority level
   - [ ] **14.2.6** Implement TTS queue in `ContextualTtsService` with priority-based ordering
+    - [ ] 14.2.6.1 Open `contextual_tts_service.dart`
+    - [ ] 14.2.6.2 Add `Queue<TtsScreenSummary>` field to service
+    - [ ] 14.2.6.3 Add `enqueueSummary()` method to add to queue
+    - [ ] 14.2.6.4 Implement priority-based sorting in queue
+    - [ ] 14.2.6.5 Add `processQueue()` method to speak next summary
+    - [ ] 14.2.6.6 Call `processQueue()` after each speak completes
+    - [ ] 14.2.6.7 Add `clearQueue()` method for cancellation
+    - [ ] 14.2.6.8 Test queue with multiple summaries of different priorities
+    - [ ] 14.2.6.9 Verify critical summaries interrupt normal summaries
   - [ ] **14.2.7** Add navigation cancellation: cancel pending TTS on route change
+    - [ ] 14.2.7.1 Open `app_router.dart` or navigation service
+    - [ ] 14.2.7.2 Add route change listener
+    - [ ] 14.2.7.3 On route change, call `ContextualTtsService.clearQueue()`
+    - [ ] 14.2.7.4 Call `flutterTts.stop()` to stop current speech
+    - [ ] 14.2.7.5 Test navigation while TTS is speaking
+    - [ ] 14.2.7.6 Verify TTS stops immediately on navigation
+    - [ ] 14.2.7.7 Verify queue is cleared on navigation
   - [ ] **14.2.8** Add TTS cancellation on user tap/interaction
+    - [ ] 14.2.8.1 Add global gesture detector or tap listener
+    - [ ] 14.2.8.2 On tap anywhere, cancel current TTS speech
+    - [ ] 14.2.8.3 Clear queue on user tap
+    - [ ] 14.2.8.4 Test tap cancellation during speech
+    - [ ] 14.2.8.5 Verify user can stop TTS by tapping screen
   - [ ] **14.2.9** Integrate screen summaries with `TtsScreenSummaryEffect` widget
+    - [ ] 14.2.9.1 Create `tts_screen_summary_effect.dart` widget
+    - [ ] 14.2.9.2 Widget takes screenId as parameter
+    - [ ] 14.2.9.3 Widget looks up summary from summary maps
+    - [ ] 14.2.9.4 Widget enqueues summary when screen loads
+    - [ ] 14.2.9.5 Add widget to all screen scaffolds
+    - [ ] 14.2.9.6 Test effect on trucker screens
+    - [ ] 14.2.9.7 Test effect on supplier screens
+    - [ ] 14.2.9.8 Test effect on common screens
   - [ ] **14.2.10** Test TTS cancellation on navigation between screens
+    - [ ] 14.2.10.1 Navigate to marketplace screen
+    - [ ] 14.2.10.2 Wait for TTS summary to start
+    - [ ] 14.2.10.3 Navigate to load detail before TTS finishes
+    - [ ] 14.2.10.4 Verify marketplace TTS stops
+    - [ ] 14.2.10.5 Verify load detail TTS starts
+    - [ ] 14.2.10.6 Repeat for other screen transitions
+    - [ ] 14.2.10.7 Test rapid navigation (multiple quick taps)
   - [ ] **14.2.11** Test TTS priority ordering with concurrent screen transitions
+    - [ ] 14.2.11.1 Enqueue multiple summaries with different priorities
+    - [ ] 14.2.11.2 Verify critical summaries play first
+    - [ ] 14.2.11.3 Verify high priority plays before normal
+    - [ ] 14.2.11.4 Verify normal plays before low
+    - [ ] 14.2.11.5 Test queue interruption by new critical summary
+    - [ ] 14.2.11.6 Verify queue reorders correctly after interruption
 - [x] **14.3** Standardize whether every user-app screen should use `DetailPageScaffold` (with language/TTS controls) or a shell-level equivalent. — **DECISION**: All user-app detail screens should use DetailPageScaffold or have equivalent AppBar actions (TTS + language toggle). **IMPLEMENTED**: 
   - Converted `trucker_route_preview_screen.dart` to use DetailPageScaffold (was using regular Scaffold)
   - Added TTS and language toggle actions to `trucker_public_profile_screen.dart` AppBar (uses CustomScrollView with Slivers, can't use DetailPageScaffold directly)
   - Added TTS and language toggle actions to `supplier_public_profile_screen.dart` AppBar (uses CustomScrollView with Slivers)
   - Added language toggle action to `chat_screen.dart` AppBar (already had TTS, now has both)
-  - **SKIPPED**: `notifications_screen.dart` language toggle addition due to pre-existing l10n issue (deferred to Phase 1.3)
+  - **PENDING**: Add language toggle to `notifications_screen.dart` AppBar (blocked by pre-existing l10n issue)
+    - [ ] 14.3.1 Open `notifications_screen.dart`
+    - [ ] 14.3.2 Locate AppBar section
+    - [ ] 14.3.3 Check if TTS action already exists
+    - [ ] 14.3.4 Add language toggle IconButton to AppBar actions
+    - [ ] 14.3.5 Import necessary language toggle widget/service
+    - [ ] 14.3.6 Wire up onPressed to toggle language
+    - [ ] 14.3.7 Test language toggle on notifications screen
+    - [ ] 14.3.8 Verify language persists across navigation
   - **STANDARD**: All screens now have consistent TTS and language toggle access via AppBar actions
 - [x] **14.4** Make chat bubble width responsive based on `MediaQuery` max width instead of fixed `320`. — Changed from fixed 320px to responsive: 70% of screen width with max 400px constraint. File: `chat_message_sections.dart`.
 - [ ] **14.5** Expand offline architecture beyond connectivity detection: cached read models, mutation queue, disabled CTAs with clear copy, reconnect sync status.
   - [ ] **14.5.1** Create `OfflineCacheService` for caching read models (marketplace loads, trips, notifications)
+    - [ ] 14.5.1.1 Create file `lib/src/core/services/offline_cache_service.dart`
+    - [ ] 14.5.1.2 Add dependencies: shared_preferences or hive
+    - [ ] 14.5.1.3 Define `CacheEntry` model (data, timestamp, ttl)
+    - [ ] 14.5.1.4 Implement `get(key)` method with TTL check
+    - [ ] 14.5.1.5 Implement `set(key, data, ttl)` method
+    - [ ] 14.5.1.6 Implement `invalidate(key)` method
+    - [ ] 14.5.1.7 Implement `clearAll()` method
+    - [ ] 14.5.1.8 Add JSON serialization for complex data types
+    - [ ] 14.5.1.9 Run `flutter analyze` to verify no errors
   - [ ] **14.5.2** Implement cache key generation based on query parameters and user role
+    - [ ] 14.5.2.1 Add `generateCacheKey()` method to OfflineCacheService
+    - [ ] 14.5.2.2 Include userId in key for user-specific data
+    - [ ] 14.5.2.3 Include query parameters in key for filtered data
+    - [ ] 14.5.2.4 Include data type in key (marketplace, trips, etc.)
+    - [ ] 14.5.2.5 Hash key to ensure consistent length
+    - [ ] 14.5.2.6 Test key generation with different parameters
+    - [ ] 14.5.2.7 Verify keys are unique for different queries
   - [ ] **14.5.3** Add cache TTL (time-to-live) policy: 5 minutes for marketplace, 30 minutes for trips
+    - [ ] 14.5.3.1 Define TTL constants for each data type
+    - [ ] 14.5.3.2 Marketplace loads: 5 minutes (300 seconds)
+    - [ ] 14.5.3.3 Trips: 30 minutes (1800 seconds)
+    - [ ] 14.5.3.4 Notifications: 10 minutes (600 seconds)
+    - [ ] 14.5.3.5 Profile data: 1 hour (3600 seconds)
+    - [ ] 14.5.3.6 Update `set()` method to accept TTL parameter
+    - [ ] 14.5.3.7 Update `get()` method to check expiry
+    - [ ] 14.5.3.8 Return null for expired cache entries
   - [ ] **14.5.4** Create `MutationQueue` model for offline mutation tracking (operation type, payload, timestamp, retry count)
+    - [ ] 14.5.4.1 Create file `lib/src/core/models/mutation_queue.dart`
+    - [ ] 14.5.4.2 Define `MutationOperation` enum (create, update, delete)
+    - [ ] 14.5.4.3 Define `QueuedMutation` model
+    - [ ] 14.5.4.4 Add `operationType` field
+    - [ ] 14.5.4.5 Add `payload` field (Map<String, dynamic>)
+    - [ ] 14.5.4.6 Add `endpoint` field (API endpoint to call)
+    - [ ] 14.5.4.7 Add `timestamp` field (DateTime)
+    - [ ] 14.5.4.8 Add `retryCount` field (int)
+    - [ ] 14.5.4.9 Add `status` field (pending, retrying, completed, failed)
+    - [ ] 14.5.4.10 Add fromJson/toJson methods
+    - [ ] 14.5.4.11 Run `flutter analyze` to verify no errors
   - [ ] **14.5.5** Implement mutation queue persistence using SQLite or SharedPreferences
+    - [ ] 14.5.5.1 Choose persistence layer (recommend sqflite for reliability)
+    - [ ] 14.5.5.2 Add sqflite dependency to pubspec.yaml
+    - [ ] 14.5.5.3 Create database schema for mutations table
+    - [ ] 14.5.5.4 Implement `MutationQueueRepository`
+    - [ ] 14.5.5.5 Add `enqueue(mutation)` method
+    - [ ] 14.5.5.6 Add `dequeue()` method
+    - [ ] 14.5.5.7 Add `updateStatus(id, status)` method
+    - [ ] 14.5.5.8 Add `getPending()` method
+    - [ ] 14.5.5.9 Add `delete(id)` method
+    - [ ] 14.5.5.10 Test persistence across app restart
   - [ ] **14.5.6** Add mutation queue processor: retry mutations on reconnect with exponential backoff
+    - [ ] 14.5.6.1 Create `MutationQueueProcessor` service
+    - [ ] 14.5.6.2 Implement exponential backoff algorithm
+    - [ ] 14.5.6.3 Base delay: 1 second, max delay: 60 seconds
+    - [ ] 14.5.6.4 Add `processQueue()` method
+    - [ ] 14.5.6.5 For each pending mutation, call API endpoint
+    - [ ] 14.5.6.6 On success, mark as completed and delete from queue
+    - [ ] 14.5.6.7 On failure, increment retry count and schedule retry
+    - [ ] 14.5.6.8 Max retries: 5, then mark as failed
+    - [ ] 14.5.6.9 Add error logging for failed mutations
   - [ ] **14.5.7** Create `OfflineAwareButton` widget with disabled state and offline message
+    - [ ] 14.5.7.1 Create file `lib/src/shared/widgets/offline_aware_button.dart`
+    - [ ] 14.5.7.2 Widget extends ElevatedButton or similar
+    - [ ] 14.5.7.3 Add `isOnline` parameter
+    - [ ] 14.5.7.4 When offline, disable button and show different style
+    - [ ] 14.5.7.5 Add `offlineMessage` parameter for tooltip
+    - [ ] 14.5.7.6 Show snackbar when offline button is tapped
+    - [ ] 14.5.7.7 Test button behavior in online mode
+    - [ ] 14.5.7.8 Test button behavior in offline mode
   - [ ] **14.5.8** Add offline-aware CTAs to load booking, chat send, trip proof upload
+    - [ ] 14.5.8.1 Open `trucker_load_detail_screen.dart`
+    - [ ] 14.5.8.2 Replace book button with OfflineAwareButton
+    - [ ] 14.5.8.3 Wire up connectivity state
+    - [ ] 14.5.8.4 Open `chat_screen.dart`
+    - [ ] 14.5.8.5 Replace send button with OfflineAwareButton
+    - [ ] 14.5.8.6 Open `trucker_trip_detail_screen.dart`
+    - [ ] 14.5.8.7 Replace proof upload buttons with OfflineAwareButton
+    - [ ] 14.5.8.8 Test each CTA in online mode
+    - [ ] 14.5.8.9 Test each CTA in offline mode
   - [ ] **14.5.9** Create `OfflineSyncStatusBanner` widget showing sync progress and pending mutations count
+    - [ ] 14.5.9.1 Create file `lib/src/shared/widgets/offline_sync_status_banner.dart`
+    - [ ] 14.5.9.2 Widget shows when mutations are pending
+    - [ ] 14.5.9.3 Display pending mutation count
+    - [ ] 14.5.9.4 Show sync progress indicator when syncing
+    - [ ] 14.5.9.5 Add "Sync Now" button for manual sync trigger
+    - [ ] 14.5.9.6 Show error message if sync fails
+    - [ ] 14.5.9.7 Add banner to shell or top of screen
+    - [ ] 14.5.9.8 Test banner visibility with pending mutations
+    - [ ] 14.5.9.9 Test banner hides when queue is empty
   - [ ] **14.5.10** Add connectivity listener to detect network state changes
+    - [ ] 14.5.10.1 Add connectivity_plus dependency to pubspec.yaml
+    - [ ] 14.5.10.2 Create `ConnectivityService`
+    - [ ] 14.5.10.3 Implement `isOnline` stream
+    - [ ] 14.5.10.4 Listen to connectivity changes
+    - [ ] 14.5.10.5 Emit online/offline events
+    - [ ] 14.5.10.6 Create provider for connectivity state
+    - [ ] 14.5.10.7 Test connectivity detection on device
+    - [ ] 14.5.10.8 Test airplane mode toggle
   - [ ] **14.5.11** Implement automatic sync on reconnect with conflict resolution (last-write-wins)
+    - [ ] 14.5.11.1 In ConnectivityService, detect transition from offline to online
+    - [ ] 14.5.11.2 On reconnect, trigger MutationQueueProcessor.processQueue()
+    - [ ] 14.5.11.3 Implement conflict detection (check if data changed server-side)
+    - [ ] 14.5.11.4 Implement last-write-wins resolution strategy
+    - [ ] 14.5.11.5 On conflict, update mutation payload with server data
+    - [ ] 14.5.11.6 Retry mutation with updated payload
+    - [ ] 14.5.11.7 Log all conflicts for debugging
+    - [ ] 14.5.11.8 Test automatic sync on reconnect
+    - [ ] 14.5.11.9 Test conflict resolution scenario
   - [ ] **14.5.12** Add offline indicator in shell (icon or status bar)
+    - [ ] 14.5.12.1 Open `user_app_shell.dart`
+    - [ ] 14.5.12.2 Add connectivity state watcher
+    - [ ] 14.5.12.3 Add offline indicator icon to AppBar or status bar
+    - [ ] 14.5.12.4 Use Icons.wifi_off for offline, Icons.wifi for online
+    - [ ] 14.5.12.5 Style indicator to be subtle but visible
+    - [ ] 14.5.12.6 Test indicator shows when offline
+    - [ ] 14.5.12.7 Test indicator hides when online
   - [ ] **14.5.13** Test cache hit/miss scenarios with network toggle
+    - [ ] 14.5.13.1 Load marketplace data while online
+    - [ ] 14.5.13.2 Verify data is cached
+    - [ ] 14.5.13.3 Turn off network (airplane mode)
+    - [ ] 14.5.13.4 Navigate to marketplace screen
+    - [ ] 14.5.13.5 Verify cached data loads (cache hit)
+    - [ ] 14.5.13.6 Navigate to screen with no cached data
+    - [ ] 14.5.13.7 Verify empty state shows (cache miss)
+    - [ ] 14.5.13.8 Turn on network
+    - [ ] 14.5.13.9 Verify fresh data loads and cache updates
   - [ ] **14.5.14** Test mutation queue with offline booking, then sync on reconnect
+    - [ ] 14.5.14.1 Turn off network (airplane mode)
+    - [ ] 14.5.14.2 Navigate to load detail screen
+    - [ ] 14.5.14.3 Tap book button (should be disabled or show offline message)
+    - [ ] 14.5.14.4 If enabled, attempt booking while offline
+    - [ ] 14.5.14.5 Verify mutation is queued
+    - [ ] 14.5.14.6 Verify sync status banner shows pending count
+    - [ ] 14.5.14.7 Turn on network
+    - [ ] 14.5.14.8 Verify automatic sync starts
+    - [ ] 14.5.14.9 Verify booking completes successfully
+    - [ ] 14.5.14.10 Verify sync status banner hides
   - [ ] **14.5.15** Test conflict resolution when concurrent mutations occur
+    - [ ] 14.5.15.1 Create test scenario with concurrent edits
+    - [ ] 14.5.15.2 Queue mutation A (edit profile name)
+    - [ ] 14.5.15.3 Simulate server-side change to same field
+    - [ ] 14.5.15.4 Queue mutation B (edit profile name again)
+    - [ ] 14.5.15.5 Process queue
+    - [ ] 14.5.15.6 Verify conflict is detected for mutation A
+    - [ ] 14.5.15.7 Verify last-write-wins applies
+    - [ ] 14.5.15.8 Verify mutation B succeeds with server data
+    - [ ] 14.5.15.9 Check logs for conflict resolution details
 
 ---
 
@@ -252,42 +616,346 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 - [ ] **17.1** Add unit tests for route guard decisions (banned, deactivated, incomplete profile, role mismatch).
   - [ ] **17.1.1** Create test file `route_guard_test.dart` in test/core/navigation
+    - [ ] 17.1.1.1 Create directory structure `test/core/navigation/`
+    - [ ] 17.1.1.2 Create file `route_guard_test.dart`
+    - [ ] 17.1.1.3 Add flutter_test dependency if not present
+    - [ ] 17.1.1.4 Import necessary packages (flutter_test, mocktail, etc.)
+    - [ ] 17.1.1.5 Import route guard code to test
+    - [ ] 17.1.1.6 Add main() function for test group
   - [ ] **17.1.2** Add test for banned user guard: should redirect to banned screen
+    - [ ] 17.1.2.1 Create test case 'banned user redirects to banned screen'
+    - [ ] 17.1.2.2 Mock auth state with banned status
+    - [ ] 17.1.2.3 Call route guard logic
+    - [ ] 17.1.2.4 Assert redirect target is banned route
+    - [ ] 17.1.2.5 Run test and verify passes
   - [ ] **17.1.3** Add test for deactivated user guard: should redirect to deactivated screen
+    - [ ] 17.1.3.1 Create test case 'deactivated user redirects to deactivated screen'
+    - [ ] 17.1.3.2 Mock auth state with deactivated status
+    - [ ] 17.1.3.3 Call route guard logic
+    - [ ] 17.1.3.4 Assert redirect target is deactivated route
+    - [ ] 17.1.3.5 Run test and verify passes
   - [ ] **17.1.4** Add test for incomplete profile guard: should redirect to onboarding
+    - [ ] 17.1.4.1 Create test case 'incomplete profile redirects to onboarding'
+    - [ ] 17.1.4.2 Mock auth state with incomplete profile
+    - [ ] 17.1.4.3 Call route guard logic
+    - [ ] 17.1.4.4 Assert redirect target is onboarding route
+    - [ ] 17.1.4.5 Run test and verify passes
   - [ ] **17.1.5** Add test for role mismatch guard: trucker accessing supplier routes should be blocked
+    - [ ] 17.1.5.1 Create test case 'trucker blocked from supplier routes'
+    - [ ] 17.1.5.2 Mock auth state with trucker role
+    - [ ] 17.1.5.3 Call route guard logic for supplier route
+    - [ ] 17.1.5.4 Assert redirect to trucker dashboard
+    - [ ] 17.1.5.5 Run test and verify passes
   - [ ] **17.1.6** Add test for role mismatch guard: supplier accessing trucker routes should be blocked
+    - [ ] 17.1.6.1 Create test case 'supplier blocked from trucker routes'
+    - [ ] 17.1.6.2 Mock auth state with supplier role
+    - [ ] 17.1.6.3 Call route guard logic for trucker route
+    - ] 17.1.6.4 Assert redirect to supplier dashboard
+    - [ ] 17.1.6.5 Run test and verify passes
   - [ ] **17.1.7** Add test for authenticated-only guard: unauthenticated users redirected to login
+    - [ ] 17.1.7.1 Create test case 'unauthenticated redirects to login'
+    - [ ] 17.1.7.2 Mock auth state with no session
+    - [ ] 17.1.7.3 Call route guard logic for protected route
+    - [ ] 17.1.7.4 Assert redirect target is login route
+    - [ ] 17.1.7.5 Run test and verify passes
   - [ ] **17.1.8** Mock auth state provider for test scenarios
+    - [ ] 17.1.8.1 Create mock provider setup function
+    - [ ] 17.1.8.2 Implement mock for AuthState
+    - [ ] 17.1.8.3 Implement mock for UserProfile
+    - [ ] 17.1.8.4 Add helper methods for different auth states
+    - [ ] 17.1.8.5 Verify mocks work in test context
   - [ ] **17.1.9** Run unit tests and ensure 100% coverage for route guards
+    - [ ] 17.1.9.1 Run `flutter test test/core/navigation/route_guard_test.dart`
+    - [ ] 17.1.9.2 Verify all tests pass
+    - [ ] 17.1.9.3 Run `flutter test --coverage`
+    - [ ] 17.1.9.4 Generate coverage report
+    - [ ] 17.1.9.5 Verify 100% coverage for route guard code
+    - [ ] 17.1.9.6 Address any uncovered lines
 - [ ] **17.2** Add widget tests for verification wizard step transitions, exit dialog, and submit navigation.
   - [ ] **17.2.1** Create test file `verification_wizard_test.dart` in test/features/verification
+    - [ ] 17.2.1.1 Create directory structure `test/features/verification/`
+    - [ ] 17.2.1.2 Create file `verification_wizard_test.dart`
+    - [ ] 17.2.1.3 Import VerificationWizard widget
+    - [ ] 17.2.1.4 Import verification provider
+    - [ ] 17.2.1.5 Add testWidgets function
   - [ ] **17.2.2** Add test for step 1 (personal info) → step 2 (business details) transition
+    - [ ] 17.2.2.1 Create test case 'step 1 to step 2 transition'
+    - [ ] 17.2.2.2 Pump widget with VerificationWizard
+    - [ ] 17.2.2.3 Fill step 1 form fields
+    - [ ] 17.2.2.4 Tap next button
+    - [ ] 17.2.2.5 Verify step 2 is displayed
+    - [ ] 17.2.2.6 Run test and verify passes
   - [ ] **17.2.3** Add test for step 2 → step 3 (document upload) transition
+    - [ ] 17.2.3.1 Create test case 'step 2 to step 3 transition'
+    - [ ] 17.2.3.2 Pump widget with step 2 pre-filled
+    - [ ] 17.2.3.3 Tap next button
+    - [ ] 17.2.3.4 Verify step 3 is displayed
+    - [ ] 17.2.3.5 Run test and verify passes
   - [ ] **17.2.4** Add test for step 3 → step 4 (review) transition
+    - [ ] 17.2.4.1 Create test case 'step 3 to step 4 transition'
+    - [ ] 17.2.4.2 Pump widget with step 3 pre-filled
+    - [ ] 17.2.4.3 Tap next button
+    - [ ] 17.2.4.4 Verify step 4 is displayed
+    - [ ] 17.2.4.5 Run test and verify passes
   - [ ] **17.2.5** Add test for back button navigation between steps
+    - [ ] 17.2.5.1 Create test case 'back button navigation'
+    - [ ] 17.2.5.2 Pump widget with step 2 displayed
+    - [ ] 17.2.5.3 Tap back button
+    - [ ] 17.2.5.4 Verify step 1 is displayed
+    - [ ] 17.2.5.5 Run test and verify passes
   - [ ] **17.2.6** Add test for exit dialog on back press from step 1
+    - [ ] 17.2.6.1 Create test case 'exit dialog shows on step 1 back'
+    - [ ] 17.2.6.2 Pump widget with step 1 displayed
+    - [ ] 17.2.6.3 Tap back button
+    - [ ] 17.2.6.4 Verify exit dialog is shown
+    - [ ] 17.2.6.5 Run test and verify passes
   - [ ] **17.2.7** Add test for exit dialog confirmation vs cancel
+    - [ ] 17.2.7.1 Create test case 'exit dialog cancel stays on screen'
+    - [ ] 17.2.7.2 Pump widget with step 1 displayed
+    - [ ] 17.2.7.3 Trigger exit dialog
+    - [ ] 17.2.7.4 Tap cancel button
+    - [ ] 17.2.7.5 Verify wizard remains on screen
+    - [ ] 17.2.7.6 Create test case 'exit dialog confirm exits wizard'
+    - [ ] 17.2.7.7 Trigger exit dialog
+    - [ ] 17.2.7.8 Tap confirm button
+    - [ ] 17.2.7.9 Verify wizard is dismissed
+    - [ ] 17.2.7.10 Run tests and verify passes
   - [ ] **17.2.8** Add test for submit button disabled until all steps complete
+    - [ ] 17.2.8.1 Create test case 'submit disabled on incomplete wizard'
+    - [ ] 17.2.8.2 Pump widget with step 1 only
+    - [ ] 17.2.8.3 Navigate to step 4 (review)
+    - [ ] 17.2.8.4 Verify submit button is disabled
+    - [ ] 17.2.8.5 Run test and verify passes
   - [ ] **17.2.9** Add test for submit navigation to dashboard after successful verification
+    - [ ] 17.2.9.1 Create test case 'submit navigates to dashboard'
+    - [ ] 17.2.9.2 Pump widget with all steps complete
+    - [ ] 17.2.9.3 Mock successful verification submission
+    - [ ] 17.2.9.4 Tap submit button
+    - [ ] 17.2.9.5 Verify navigation to dashboard
+    - [ ] 17.2.9.6 Run test and verify passes
   - [ ] **17.2.10** Mock verification provider states for test scenarios
+    - [ ] 17.2.10.1 Create mock provider setup
+    - [ ] 17.2.10.2 Mock loading state
+    - [ ] 17.2.10.3 Mock success state
+    - [ ] 17.2.10.4 Mock error state
+    - [ ] 17.2.10.5 Verify mocks work in widget tests
   - [ ] **17.2.11** Run widget tests with goldens for UI verification
+    - [ ] 17.2.11.1 Add golden tests for each step
+    - [ ] 17.2.11.2 Run `flutter test --update-goldens`
+    - [ ] 17.2.11.3 Compare golden images
+    - [ ] 17.2.11.4 Verify UI matches expected design
+    - [ ] 17.2.11.5 Run tests without update flag
+    - [ ] 17.2.11.6 Verify tests pass
 - [ ] **17.3** Add integration tests for marketplace feed → load detail → chat → trip detail navigation flow.
   - [ ] **17.3.1** Create integration test file `navigation_flow_test.dart` in integration_test
+    - [ ] 17.3.1.1 Create directory `integration_test/`
+    - [ ] 17.3.1.2 Create file `navigation_flow_test.dart`
+    - [ ] 17.3.1.3 Add integration_test dependency
+    - [ ] 17.3.1.4 Import Flutter test driver
+    - [ ] 17.3.1.5 Add main() function
   - [ ] **17.3.2** Add test for marketplace feed load tap → load detail screen
+    - [ ] 17.3.2.1 Create test case 'marketplace to load detail'
+    - [ ] 17.3.2.2 Launch app
+    - [ ] 17.3.2.3 Login as trucker
+    - [ ] 17.3.2.4 Navigate to marketplace
+    - [ ] 17.3.2.5 Tap first load card
+    - [ ] 17.3.2.6 Verify load detail screen loads
+    - [ ] 17.3.2.7 Run test and verify passes
   - [ ] **17.3.3** Add test for load detail → chat screen navigation
+    - [ ] 17.3.3.1 Create test case 'load detail to chat'
+    - [ ] 17.3.3.2 Launch app and login
+    - [ ] 17.3.3.3 Navigate to load detail
+    - [ ] 17.3.3.4 Tap chat button
+    - [ ] 17.3.3.5 Verify chat screen loads
+    - [ ] 17.3.3.6 Run test and verify passes
   - [ ] **17.3.4** Add test for chat → trip detail navigation (if trip exists)
+    - [ ] 17.3.4.1 Create test case 'chat to trip detail'
+    - [ ] 17.3.4.2 Launch app and login
+    - [ ] 17.3.4.3 Navigate to chat with trip context
+    - [ ] 17.3.4.4 Tap trip detail link
+    - [ ] 17.3.4.5 Verify trip detail screen loads
+    - [ ] 17.3.4.6 Run test and verify passes
   - [ ] **17.3.5** Add test for back button navigation through the flow
+    - [ ] 17.3.5.1 Create test case 'back button navigation'
+    - [ ] 17.3.5.2 Navigate marketplace → load detail → chat
+    - [ ] 17.3.5.3 Tap back button
+    - [ ] 17.3.5.4 Verify returns to load detail
+    - [ ] 17.3.5.5 Tap back button again
+    - [ ] 17.3.5.6 Verify returns to marketplace
+    - [ ] 17.3.5.7 Run test and verify passes
   - [ ] **17.3.6** Add test for shell navigation between tabs (marketplace, trips, profile)
+    - [ ] 17.3.6.1 Create test case 'shell tab navigation'
+    - [ ] 17.3.6.2 Launch app and login
+    - [ ] 17.3.6.3 Tap trips tab
+    - [ ] 17.3.6.4 Verify trips screen loads
+    - [ ] 17.3.6.5 Tap profile tab
+    - [ ] 17.3.6.6 Verify profile screen loads
+    - [ ] 17.3.6.7 Tap marketplace tab
+    - [ ] 17.3.6.8 Verify marketplace screen loads
+    - [ ] 17.3.6.9 Run test and verify passes
   - [ ] **17.3.7** Mock Supabase auth and data for integration tests
+    - [ ] 17.3.7.1 Create test Supabase client
+    - [ ] 17.3.7.2 Mock auth endpoints
+    - [ ] 17.3.7.3 Mock data queries
+    - [ ] 17.3.7.4 Provide test data fixtures
+    - [ ] 17.3.7.5 Verify mocks work in integration context
   - [ ] **17.3.8** Add test data fixtures for marketplace loads and trips
+    - [ ] 17.3.8.1 Create fixture data for loads
+    - [ ] 17.3.8.2 Create fixture data for trips
+    - [ ] 17.3.8.3 Create fixture data for conversations
+    - [ ] 17.3.8.4 Load fixtures in test setup
+    - [ ] 17.3.8.5 Verify fixtures load correctly
   - [ ] **17.3.9** Run integration tests on both Android and iOS
+    - [ ] 17.3.9.1 Connect Android device
+    - [ ] 17.3.9.2 Run `flutter drive --target=integration_test/navigation_flow_test.dart`
+    - [ ] 17.3.9.3 Verify tests pass on Android
+    - [ ] 17.3.9.4 Connect iOS device
+    - [ ] 17.3.9.5 Run same test on iOS
+    - [ ] 17.3.9.6 Verify tests pass on iOS
   - [ ] **17.3.10** Add screenshot capture on test failures for debugging
+    - [ ] 17.3.10.1 Add screenshot helper function
+    - [ ] 17.3.10.2 Configure test to capture screenshot on failure
+    - ] 17.3.10.3 Run failing test to verify screenshot capture
+    - [ ] 17.3.10.4 Check screenshots directory
+    - [ ] 17.3.10.5 Verify screenshots are useful for debugging
 - [ ] **17.4** Ensure every new l10n key ships with Hindi translation in ARB files.
+  - [ ] 17.4.1 Create script to check ARB file parity
+  - [ ] 17.4.2 Extract all keys from app_en.arb
+  - [ ] 17.4.3 Extract all keys from app_hi.arb
+  - [ ] 17.4.4 Compare key lists for missing entries
+  - [ ] 17.4.5 Report missing Hindi translations
+  - [ ] 17.4.6 Add CI check to fail build on missing translations
+  - [ ] 17.4.7 Run script on current ARB files
+  - [ ] 17.4.8 Fix any missing translations found
+  - [ ] 17.4.9 Verify script passes on subsequent runs
 
 ---
 
-## Quick Reference: Files Most Often Needing Changes
+## P4 — Code Quality & File Refactoring (From TODO-fix-9-april.md)
+
+**Updated Architecture Rules:**
+- Providers: max 500 lines
+- Repositories: max 750 lines  
+- UI Files: max 500 lines
+
+### 18. File Splitting - Trucker Find Loads Screen
+- [ ] **18.1** Split `trucker_find_loads_screen.dart` (918 lines → components)
+  - [ ] **18.1.1** Analyze current file structure
+    - [ ] 18.1.1.1 Open `trucker_find_loads_screen.dart`
+    - [ ] 18.1.1.2 Count total lines (current: 918)
+    - [ ] 18.1.1.3 Identify main widget classes
+    - [ ] 18.1.1.4 Identify complex list views
+    - [ ] 18.1.1.5 Identify search/filter logic
+    - [ ] 18.1.1.6 Plan component extraction strategy
+  - [ ] **18.1.2** Create component directory structure
+    - [ ] 18.1.2.1 Create `lib/src/features/trucker/presentation/components/`
+    - [ ] 18.1.2.2 Create `lib/src/features/trucker/presentation/providers/`
+    - [ ] 18.1.2.3 Verify directory structure exists
+  - [ ] **18.1.3** Extract LoadSearchBar component
+    - [ ] 18.1.3.1 Create `load_search_bar.dart` (~150 lines)
+    - [ ] 18.1.3.2 Extract search field logic
+    - [ ] 18.1.3.3 Extract filter chip logic
+    - [ ] 18.1.3.4 Add TextEditingController parameter
+    - [ ] 18.1.3.5 Add callbacks for search/filter
+    - [ ] 18.1.3.6 Run `flutter analyze` to verify
+  - [ ] **18.1.4** Extract LoadFilterChips component
+    - [ ] 18.1.4.1 Create `load_filter_chips.dart` (~150 lines)
+    - [ ] 18.1.4.2 Extract filter state logic
+    - [ ] 18.1.4.3 Extract chip rendering logic
+    - [ ] 18.1.4.4 Add filter state parameter
+    - [ ] 18.1.4.5 Add filter change callback
+    - [ ] 18.1.4.6 Run `flutter analyze` to verify
+  - [ ] **18.1.5** Extract LoadListItem component
+    - [ ] 18.1.5.1 Create `load_list_item.dart` (~200 lines)
+    - [ ] 18.1.5.2 Extract load card rendering
+    - [ ] 18.1.5.3 Extract expand/collapse animation
+    - [ ] 18.1.5.4 Add LoadSummary parameter
+    - [ ] 18.1.5.5 Add callbacks (book, view details, chat, call)
+    - [ ] 18.1.5.6 Run `flutter analyze` to verify
+  - [ ] **18.1.6** Extract LoadEmptyState component
+    - [ ] 18.1.6.1 Create `load_empty_state.dart` (~100 lines)
+    - [ ] 18.1.6.2 Extract empty state rendering
+    - [ ] 18.1.6.3 Extract error state rendering
+    - [ ] 18.1.6.4 Add state parameter (empty/error)
+    - [ ] 18.1.6.5 Add retry callback
+    - [ ] 18.1.6.6 Run `flutter analyze` to verify
+  - [ ] **18.1.7** Extract LoadSearchProvider
+    - [ ] 18.1.7.1 Create `load_search_provider.dart`
+    - [ ] 18.1.7.2 Extract search state management
+    - [ ] 18.1.7.3 Extract filter state management
+    - [ ] 18.1.7.4 Add Riverpod provider definition
+    - [ ] 18.1.7.5 Run `flutter analyze` to verify
+  - [ ] **18.1.8** Update main screen file
+    - [ ] 18.1.8.1 Import all new components
+    - [ ] 18.1.8.2 Replace inline widgets with components
+    - [ ] 18.1.8.3 Wire up all callbacks
+    - [ ] 18.1.8.4 Verify no code duplication
+    - [ ] 18.1.8.5 Run `flutter analyze` to verify
+  - [ ] **18.1.9** Verify file sizes
+    - [ ] 18.1.9.1 Check main screen file is under 500 lines
+    - [ ] 18.1.9.2 Check all components are under 500 lines
+    - [ ] 18.1.9.3 Run `wc -l` on all new files
+    - [ ] 18.1.9.4 Document final file sizes
+  - [ ] **18.1.10** Mandatory wiring verification
+    - [ ] 18.1.10.1 Ensure all imports are correct
+    - [ ] 18.1.10.2 Ensure all callbacks are wired
+    - [ ] 18.1.10.3 Ensure no old code remains
+    - [ ] 18.1.10.4 Test search functionality
+    - [ ] 18.1.10.5 Test filter functionality
+    - [ ] 18.1.10.6 Test load booking flow
+    - [ ] 18.1.10.7 Test load detail navigation
+    - [ ] 18.1.10.8 Test chat initiation
+    - [ ] 18.1.10.9 Test supplier call
+    - [ ] 18.1.10.10 Run `flutter analyze` to verify
+
+### 19. File Splitting - Verification Wizard Provider
+- [ ] **19.1** Verify current state of verification wizard provider
+  - [ ] 19.1.1 Check if already split in TODO-27 task 6.5
+  - [ ] 19.1.2 If already split, mark this task as complete
+  - [ ] 19.1.3 If not split, proceed with splitting
+- [ ] **19.2** Split verification_wizard_provider.dart (if not already done)
+  - [ ] 19.2.1 Verify current line count
+  - [ ] 19.2.2 Follow same pattern as task 6.5 (already completed)
+  - [ ] 19.2.3 Ensure each part file is under 300 lines
+  - [ ] 19.2.4 Run `flutter analyze` to verify
+  - [ ] 19.2.5 Test verification flow end-to-end
+
+### 20. Widget Tests - Replace Placeholders
+- [ ] **20.1** Audit existing widget tests
+  - [ ] 20.1.1 Find all placeholder widget tests
+  - [ ] 20.1.2 Identify which need real implementation
+  - [ ] 20.1.3 Prioritize critical screens
+- [ ] **20.2** Implement real widget tests for critical screens
+  - [ ] 20.2.1 Add tests for dashboard screens
+  - [ ] 20.2.2 Add tests for marketplace screen
+  - [ ] 20.2.3 Add tests for load detail screen
+  - [ ] 20.2.4 Add tests for profile screen
+  - [ ] 20.2.5 Run `flutter test` to verify
+- [ ] **20.3** Achieve minimum widget test coverage
+  - [ ] 20.3.1 Run `flutter test --coverage`
+  - [ ] 20.3.2 Check coverage report
+  - [ ] 20.3.3 Aim for 50%+ coverage on UI files
+  - [ ] 20.3.4 Add tests for low-coverage files
+
+### 21. Chat Realtime Optimization
+- [ ] **21.1** Analyze current chat realtime implementation
+  - [ ] 21.1.1 Open chat repository files
+  - [ ] 21.1.2 Check current realtime strategy
+  - [ ] 21.1.3 Identify optimization opportunities
+- [ ] **21.2** Implement incremental refresh
+  - [ ] 21.2.1 Add debouncing to realtime updates (300ms)
+  - [ ] 21.2.2 Only refresh affected conversation rows
+  - [ ] 21.2.3 Cache conversation summaries
+  - [ ] 21.2.4 Add optimistic UI updates
+  - [ ] 21.2.5 Run `flutter analyze` to verify
+- [ ] **21.3** Test chat performance
+  - [ ] 21.3.1 Test with 100+ messages
+  - [ ] 21.3.2 Test rapid message sending
+  - [ ] 21.3.3 Test concurrent chat sessions
+  - [ ] 21.3.4 Verify no UI lag
+  - [ ] 21.3.5 Verify no duplicate messages
+
+---
 
 | File | Priority | Typical Fix |
 |------|----------|-------------|
@@ -360,7 +1028,7 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 
 - [x] **1.1 Pricing dual-path** — `backendPriceType()`: keep `per_ton`→`negotiable` for current DB, add `per_ton` direct passthrough behind a local flag. `LoadListItemDto._uiPriceType()`: accept both `negotiable` and `per_ton`.
 - [x] **1.2 `MarketplaceLoadCard` math fix** — Only multiply by weight when `priceType == 'per_ton'`. No backend dependency.
-- [ ] **1.3 Localization** — Add missing ARB keys, regenerate `AppLocalizations`. Purely additive. *(Deferred to after Phase 4)*
+- [ ] **1.3 Localization** — Add missing ARB keys, regenerate `AppLocalizations`. Purely additive.
 - [x] **1.4 Navigation guards** — Add `homeForRole()` with fallback to `dashboardPath`. Fix `VerificationWizard` exit flow (`pop` if canPop, else `go`).
 - [x] **1.5 Auth defensive selects** — Select only known columns from `profiles` table. No `city`, `state`. Use `maybeSingle()`.
 - [x] **1.6 Defensive mappers** — Wrap all RPC parsing in `try/catch`. One bad row doesn't crash the list.

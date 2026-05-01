@@ -38,6 +38,14 @@ class _UnusedChatBackend implements ChatBackend {
   Future<List<Map<String, dynamic>>> fetchMessages({required String conversationId}) async => throw UnimplementedError();
 
   @override
+  Future<List<Map<String, dynamic>>> fetchMessagesPaginated({
+    required String conversationId,
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async => throw UnimplementedError();
+
+  @override
   Stream<List<Map<String, dynamic>>> watchMessages({required String conversationId}) => throw UnimplementedError();
 
   @override
