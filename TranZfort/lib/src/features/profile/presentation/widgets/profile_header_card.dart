@@ -146,7 +146,7 @@ class ProfileHeaderCard extends StatelessWidget {
         ),
       ),
       backgroundColor: hasRating
-          ? colorScheme.primaryContainer.withOpacity(0.5)
+          ? colorScheme.primaryContainer.withValues(alpha: 0.5)
           : colorScheme.surfaceContainerHighest,
       side: BorderSide.none,
       padding: EdgeInsets.zero,
@@ -160,9 +160,9 @@ class ProfileHeaderCard extends StatelessWidget {
     final isPending = profile.verificationStatus == 'pending';
 
     final bgColor = isVerified
-        ? Colors.green.withOpacity(0.1)
+        ? Colors.green.withValues(alpha: 0.1)
         : isPending
-            ? Colors.orange.withOpacity(0.1)
+            ? Colors.orange.withValues(alpha: 0.1)
             : colorScheme.surfaceContainerHighest;
 
     final iconColor = isVerified
@@ -207,7 +207,7 @@ class ProfileHeaderCard extends StatelessWidget {
           color: colorScheme.primary,
         ),
       ),
-      backgroundColor: colorScheme.primaryContainer.withOpacity(0.5),
+      backgroundColor: colorScheme.primaryContainer.withValues(alpha: 0.5),
       side: BorderSide.none,
       padding: EdgeInsets.zero,
       materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,

@@ -96,7 +96,7 @@ class TrustScoreCard extends StatelessWidget {
         ] else ...[
           Icon(
             Icons.star_border,
-            color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+            color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
             size: 48,
           ),
           const SizedBox(height: AppSpacing.sm),

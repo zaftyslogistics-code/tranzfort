@@ -305,7 +305,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               Icon(
                 Icons.rate_review_outlined,
                 size: 48,
-                color: colorScheme.onSurfaceVariant.withOpacity(0.5),
+                color: colorScheme.onSurfaceVariant.withValues(alpha: 0.5),
               ),
               const SizedBox(height: 12),
               Text(
@@ -319,7 +319,7 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
               Text(
                 l10n.reviewsWillAppearHere,
                 style: TextStyle(
-                  color: colorScheme.onSurfaceVariant.withOpacity(0.7),
+                  color: colorScheme.onSurfaceVariant.withValues(alpha: 0.7),
                   fontSize: 12,
                 ),
               ),
