@@ -57,9 +57,10 @@ Status checklist: `- [ ]` = Not started | `- [x]` = Done | `- [~]` = In progress
 ### Fix Phase 3: Missing Abstract Method Implementations
 
 - [x] **FIX-3** Add stub implementations for new backend methods
-  - [x] FIX-3.1 Add fetchMessagesPaginated to ChatBackend mocks (7 files) — Added to MockChatBackend, _NoopChatBackend (2 files), _UnusedChatBackend (2 files), _ScreenChatBackend (2 files)
+  - [x] FIX-3.1 Add fetchMessagesPaginated to ChatBackend mocks (7 files) — Added to MockChatBackend, _NoopChatBackend (2 files), _UnusedChatBackend (2 files), _ScreenChatBackend (2 files) with beforeMessageId parameter
   - [x] FIX-3.2 Add fetchTripDetailConsolidated to SupplierTripsBackend mocks (8 files) — Added to all 8 implementations
-  - [x] FIX-3.3 Add fetchTicketMessagesPaginated to SupportBackend mocks (6 files) — Added to all 6 implementations
+  - [x] FIX-3.3 Add fetchTicketMessagesPaginated to SupportBackend mocks (6 files) — Added to all 6 implementations with beforeMessageId parameter
+  - [x] FIX-3.4 Add userId and limit parameters to fetchTicketMessages in SupportBackend mocks (6 files) — Updated signature to match interface
 
 ### Fix Phase 4: Support Attachment Architecture Changes
 
