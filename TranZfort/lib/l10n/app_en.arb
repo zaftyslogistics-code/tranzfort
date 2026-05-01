@@ -68,6 +68,7 @@
   "onboardingSaveAndContinue": "Save and continue",
   "commonRetryAction": "Retry",
   "@_sectionShell": "â•â•â• Shell & Navigation â•â•â•",
+  "shellPressBackAgainToExit": "Press back again to exit",
   "@_sectionSupplierLoads": "â•â•â• Supplier My Loads â•â•â•",
   "commonNotificationsLabel": "Notifications",
   "supplierMyLoadsTitle": "My loads",

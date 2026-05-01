@@ -63,7 +63,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
             });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('Press back again to exit'),
+                content: Text(AppLocalizations.of(context).shellPressBackAgainToExit),
                 duration: const Duration(seconds: 2),
               ),
             );

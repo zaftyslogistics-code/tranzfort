@@ -70,6 +70,7 @@
   "commonRetryAction": "फिर कोशिश करें",
 
   "@_sectionShell": "═══ Shell & Navigation ═══",
+  "shellPressBackAgainToExit": "बाहर निकलने के लिए फिर से वापस दबाएं",
   "@_sectionSupplierLoads": "═══ Supplier My Loads ═══",
   "commonNotificationsLabel": "सूचनाएँ",
   "supplierMyLoadsTitle": "मेरे लोड्स",
