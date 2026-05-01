@@ -140,8 +140,8 @@ class _FakeContextualTtsService extends ContextualTtsService {
           setSpeechRateFn: (_) async {},
           speakFn: (_) async {},
           stopFn: () async {},
-          preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-          getVoices: Future.value,
+          preferencesFn: SharedPreferences.getInstance,
+          getVoices: Future<dynamic>.value([]),
           setVoiceFn: (_) async {},
         );
 

@@ -15,8 +15,8 @@ void main() {
         speakCalls += 1;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
@@ -45,8 +45,8 @@ void main() {
         spokenMessage = value;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
@@ -71,8 +71,8 @@ void main() {
       setSpeechRateFn: (_) async {},
       speakFn: (_) async {},
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
@@ -93,8 +93,8 @@ void main() {
         spokenMessage = value;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
@@ -123,8 +123,8 @@ void main() {
         await completer.future;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
@@ -155,8 +155,8 @@ void main() {
         await completer.future;
       },
       stopFn: () async {},
-      preferencesFn: SharedPreferences.getInstance as Future<SharedPreferences> Function(),
-      getVoices: Future.value,
+      preferencesFn: SharedPreferences.getInstance,
+      getVoices: Future<dynamic>.value([]),
       setVoiceFn: (_) async {},
     );
 
