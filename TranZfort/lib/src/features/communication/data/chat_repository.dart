@@ -406,31 +406,32 @@ class ChatRepository {
     }
   }
 
-  Future<Result<ConversationPreview?>> _fetchConversationPreview({
-    required String conversationId,
-  }) async {
-    try {
-      final result = await _backend.fetchConversation(conversationId);
-      if (result == null) {
-        return const Success<ConversationPreview?>(null);
-      }
+  // TODO: Remove if not needed - currently unused
+  // Future<Result<ConversationPreview?>> _fetchConversationPreview({
+  //   required String conversationId,
+  // }) async {
+  //   try {
+  //     final result = await _backend.fetchConversation(conversationId);
+  //     if (result == null) {
+  //       return const Success<ConversationPreview?>(null);
+  //     }
 
-      final Map<String, dynamic>? row = switch (result) {
-        final Map<String, dynamic> map => map,
-        final List<dynamic> rows when rows.isNotEmpty => rows.first is Map<String, dynamic>
-            ? rows.first as Map<String, dynamic>
-            : Map<String, dynamic>.from(rows.first as Map),
-        _ => null,
-      };
-      if (row == null) {
-        return const Success<ConversationPreview?>(null);
-      }
+  //     final Map<String, dynamic>? row = switch (result) {
+  //       final Map<String, dynamic> map => map,
+  //       final List<dynamic> rows when rows.isNotEmpty => rows.first is Map<String, dynamic>
+  //           ? rows.first as Map<String, dynamic>
+  //           : Map<String, dynamic>.from(rows.first as Map),
+  //       _ => null,
+  //     };
+  //     if (row == null) {
+  //       return const Success<ConversationPreview?>(null);
+  //     }
 
-      return Success<ConversationPreview?>(_mapConversationSummaryRow(row));
-    } catch (error, stackTrace) {
-      return Failure<ConversationPreview?>(_mapError(error, stackTrace));
-    }
-  }
+  //     return Success<ConversationPreview?>(_mapConversationSummaryRow(row));
+  //   } catch (error, stackTrace) {
+  //     return Failure<ConversationPreview?>(_mapError(error, stackTrace));
+  //   }
+  // }
 
   List<ConversationPreview> _sortConversationPreviews(Iterable<ConversationPreview> previews) {
     final sorted = previews.toList(growable: false);
@@ -442,20 +443,21 @@ class ChatRepository {
     return sorted;
   }
 
-  bool _mapEquals(Map<String, dynamic>? left, Map<String, dynamic>? right) {
-    if (identical(left, right)) {
-      return true;
-    }
-    if (left == null || right == null || left.length != right.length) {
-      return false;
-    }
-    for (final entry in left.entries) {
-      if (right[entry.key] != entry.value) {
-        return false;
-      }
-    }
-    return true;
-  }
+  // TODO: Remove if not needed - currently unused
+  // bool _mapEquals(Map<String, dynamic>? left, Map<String, dynamic>? right) {
+  //   if (identical(left, right)) {
+  //     return true;
+  //   }
+  //   if (left == null || right == null || left.length != right.length) {
+  //     return false;
+  //   }
+  //   for (final entry in left.entries) {
+  //     if (right[entry.key] != entry.value) {
+  //       return false;
+  //     }
+  //   }
+  //   return true;
+  // }
 
   Future<List<ConversationPreview>> _mapConversationRows(
     List<Map<String, dynamic>> rows, {

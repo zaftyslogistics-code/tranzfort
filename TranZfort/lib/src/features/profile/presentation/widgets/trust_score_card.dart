@@ -112,7 +112,6 @@ class TrustScoreCard extends StatelessWidget {
   }
 
   Widget _buildMetrics(BuildContext context) {
-    final theme = Theme.of(context);
     final l10n = AppLocalizations.of(context);
 
     final metrics = <Widget>[];

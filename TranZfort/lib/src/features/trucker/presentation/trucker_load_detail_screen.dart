@@ -98,9 +98,10 @@ String _bookingSubmitFailureMessage(AppLocalizations l10n) {
   return l10n.truckerLoadDetailBookingSubmitFailureMessage;
 }
 
-String _localizedLoadDetailStatus(AppLocalizations l10n, String status) {
-  return l10n.truckerLoadDetailStatusValue(status.trim().toLowerCase());
-}
+// TODO: Remove if not needed - currently unused
+// String _localizedLoadDetailStatus(AppLocalizations l10n, String status) {
+//   return l10n.truckerLoadDetailStatusValue(status.trim().toLowerCase());
+// }
 
 String _localizedLoadPriceType(AppLocalizations l10n, String value) {
   final normalized = value.trim().toLowerCase();
@@ -111,17 +112,18 @@ String _localizedLoadPriceType(AppLocalizations l10n, String value) {
   });
 }
 
-String _durationCompact(int minutes) {
-  if (minutes <= 0) {
-    return '0m';
-  }
-  final hours = minutes ~/ 60;
-  final mins = minutes % 60;
-  if (hours <= 0) {
-    return '${mins}m';
-  }
-  if (mins == 0) {
-    return '${hours}h';
-  }
-  return '${hours}h ${mins}m';
-}
+// TODO: Remove if not needed - currently unused
+// String _durationCompact(int minutes) {
+//   if (minutes <= 0) {
+//     return '0m';
+//   }
+//   final hours = minutes ~/ 60;
+//   final mins = minutes % 60;
+//   if (hours <= 0) {
+//     return '${mins}m';
+//   }
+//   if (mins == 0) {
+//     return '${hours}h';
+//   }
+//   return '${hours}h ${mins}m';
+// }
