@@ -473,7 +473,7 @@ void main() {
     expect(backend.lastReplyAttachmentPath, 'user-1/support/evidence_2.jpg');
     expect(uploadService.lastRelocateCurrentPath, 'user-1/support/evidence_2.jpg');
     expect(uploadService.lastRelocateTargetPathSegment, 'support_reply/reply-created');
-    expect(container.read(supportReplyProvider('ticket-1')).attachmentPath, isEmpty);
+    expect(container.read(supportReplyProvider('ticket-1')).attachments, isEmpty);
     expect(container.read(supportReplyProvider('ticket-1')).messageBody, isEmpty);
   });
 

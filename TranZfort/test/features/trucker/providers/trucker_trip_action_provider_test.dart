@@ -79,6 +79,7 @@ class _FakeTripProofUploadService extends TripProofUploadService {
   Future<Result<String?>> pickCompressAndUploadPod({
     required String tripId,
     required ImageSource source,
+    bool enableAutoCompletion = false,
   }) async {
     return podResult;
   }

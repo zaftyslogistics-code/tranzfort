@@ -304,7 +304,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   Future<void> _handleManualLocation() async {
     final l10n = AppLocalizations.of(context);
     final searchController = TextEditingController();
-    PlaceSuggestion? selectedSuggestion;
     List<PlaceSuggestion> suggestions = [];
     bool isSearching = false;
 
