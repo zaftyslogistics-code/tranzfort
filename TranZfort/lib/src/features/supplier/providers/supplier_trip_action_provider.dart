@@ -5,6 +5,11 @@ import '../../../core/error/result.dart';
 import '../data/supplier_trip_repository.dart';
 import 'supplier_trip_detail_provider.dart';
 
+// S-004: Error codes for localization (UI should map these to AppLocalizations)
+class SupplierTripActionErrorCodes {
+  static const String actionAlreadyInProgress = 'supplier.trip_action_already_in_progress';
+}
+
 const List<String> supplierTripDisputeCategories = SupplierTripsRepository.disputeCategories;
 
 class SupplierTripActionState {
@@ -52,6 +57,7 @@ class SupplierTripActionController extends StateNotifier<SupplierTripActionState
   Future<Result<String>> cancelTrip() async {
     if (state.isSubmitting) {
       return const Failure<String>(
+        // TODO: Map to SupplierTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another supplier trip action is already in progress.'),
       );
     }
@@ -85,6 +91,7 @@ class SupplierTripActionController extends StateNotifier<SupplierTripActionState
   Future<Result<String>> confirmDelivery() async {
     if (state.isSubmitting) {
       return const Failure<String>(
+        // TODO: Map to SupplierTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another supplier trip action is already in progress.'),
       );
     }
@@ -122,6 +129,7 @@ class SupplierTripActionController extends StateNotifier<SupplierTripActionState
   }) async {
     if (state.isSubmitting) {
       return const Failure<String>(
+        // TODO: Map to SupplierTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another supplier trip action is already in progress.'),
       );
     }

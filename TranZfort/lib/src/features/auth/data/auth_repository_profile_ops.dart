@@ -6,6 +6,15 @@ import '../../../core/providers/app_state_providers.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
 
+// F-005: Error codes for localization (UI should map these to AppLocalizations)
+class AuthProfileErrorCodes {
+  static const String roleRequired = 'auth.role_required';
+  static const String nameTooShort = 'auth.name_too_short';
+  static const String mobileRequired = 'auth.mobile_required';
+  static const String languageUnsupported = 'auth.language_unsupported';
+  static const String unexpectedResponse = 'auth.unexpected_response';
+}
+
 class AuthProfileRepository {
   final SupabaseClient? _client;
 
@@ -154,6 +163,7 @@ class AuthProfileRepository {
     if (roleValue == null) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to AuthProfileErrorCodes.roleRequired in UI layer
           message: 'Select a valid role to continue',
           fieldErrors: {'role': 'Role is required'},
         ),
@@ -182,6 +192,7 @@ class AuthProfileRepository {
     if (roleValue == null) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to AuthProfileErrorCodes.roleRequired in UI layer
           message: 'Select a valid role to continue',
           fieldErrors: {'role': 'Role is required'},
         ),
@@ -216,6 +227,7 @@ class AuthProfileRepository {
     if (trimmedName.length < 2) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to AuthProfileErrorCodes.nameTooShort in UI layer
           message: 'Enter your full name',
           fieldErrors: {'full_name': 'Name must be at least 2 characters'},
         ),
@@ -225,6 +237,7 @@ class AuthProfileRepository {
     if (trimmedMobile.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to AuthProfileErrorCodes.mobileRequired in UI layer
           message: 'Enter a valid mobile number',
           fieldErrors: {'mobile': 'Mobile number is required'},
         ),
@@ -258,6 +271,7 @@ class AuthProfileRepository {
     if (normalizedLanguageCode.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to AuthProfileErrorCodes.languageUnsupported in UI layer
           message: 'Select a supported language',
           fieldErrors: {'preferred_language': 'Supported languages are English and Hindi'},
         ),
@@ -316,6 +330,7 @@ class AuthProfileRepository {
       final response = await _client.rpc('request_account_deletion');
       if (response is! Map) {
         return const Failure<AccountDeletionRequestOutcome>(
+          // TODO: Map to AuthProfileErrorCodes.unexpectedResponse in UI layer
           ServerFailure(message: 'Unexpected response format from account deletion request'),
         );
       }

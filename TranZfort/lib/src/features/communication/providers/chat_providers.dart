@@ -6,6 +6,11 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../data/chat_repository.dart';
 
+// C-006: Error codes for localization (UI should map these to AppLocalizations)
+class ChatErrorCodes {
+  static const String messageAlreadyBeingSent = 'chat.message_already_being_sent';
+}
+
 class InboxState {
   final bool isLoading;
   final List<ConversationPreview> conversations;
@@ -293,6 +298,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
+        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
         BusinessRuleFailure(message: 'Another message is already being sent.'),
       );
     }
@@ -330,6 +336,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
+        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
         BusinessRuleFailure(message: 'Another message is already being sent.'),
       );
     }

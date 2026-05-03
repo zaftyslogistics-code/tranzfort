@@ -5,6 +5,13 @@ import '../../../core/error/result.dart';
 import '../data/trip_gps_capture_service.dart';
 import '../data/trucker_load_detail_repository.dart';
 
+// T-006: Error codes for localization (UI should map these to AppLocalizations)
+class TruckerLoadDetailErrorCodes {
+  static const String loadDetailUnavailable = 'trucker.load_detail_unavailable';
+  static const String bookingAlreadyInProgress = 'trucker.booking_already_in_progress';
+  static const String truckRequired = 'trucker.truck_required';
+}
+
 class TruckerLoadDetailState {
   final String loadId;
   final TruckerLoadDetail? detail;
@@ -114,14 +121,21 @@ class TruckerLoadDetailController extends StateNotifier<TruckerLoadDetailState> 
     final detail = state.detail;
     final truckId = state.selectedTruckId;
     if (detail == null) {
-      return const Failure<String>(NotFoundFailure(message: 'Load detail is unavailable'));
+      return const Failure<String>(
+        // TODO: Map to TruckerLoadDetailErrorCodes.loadDetailUnavailable in UI layer
+        NotFoundFailure(message: 'Load detail is unavailable'),
+      );
     }
     if (state.isSubmittingBooking) {
-      return const Failure<String>(BusinessRuleFailure(message: 'Booking request is already in progress'));
+      return const Failure<String>(
+        // TODO: Map to TruckerLoadDetailErrorCodes.bookingAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Booking request is already in progress'),
+      );
     }
     if (truckId == null || truckId.isEmpty) {
       return const Failure<String>(
         ValidationFailure(
+          // TODO: Map to TruckerLoadDetailErrorCodes.truckRequired in UI layer
           message: 'Select a truck to continue',
           fieldErrors: {'truck_id': 'Truck is required'},
         ),

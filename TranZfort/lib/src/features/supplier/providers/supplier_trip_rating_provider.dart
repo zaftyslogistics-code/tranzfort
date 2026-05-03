@@ -4,6 +4,11 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../data/supplier_trip_repository.dart';
 
+// S-004: Error codes for localization (UI should map these to AppLocalizations)
+class SupplierTripRatingErrorCodes {
+  static const String ratingAlreadySubmitting = 'supplier.rating_already_submitting';
+}
+
 class SupplierTripRatingState {
   final bool isLoading;
   final bool isSubmitting;
@@ -94,6 +99,7 @@ class SupplierTripRatingController extends StateNotifier<SupplierTripRatingState
   Future<Result<SupplierTripRating>> submit() async {
     if (state.isSubmitting) {
       return const Failure<SupplierTripRating>(
+        // TODO: Map to SupplierTripRatingErrorCodes.ratingAlreadySubmitting in UI layer
         BusinessRuleFailure(message: 'Your rating is already being submitted.'),
       );
     }

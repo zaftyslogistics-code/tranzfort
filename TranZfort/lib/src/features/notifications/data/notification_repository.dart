@@ -10,6 +10,11 @@ import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/map_readers.dart';
 
+// SDN-011: Error codes for localization (UI should map these to AppLocalizations)
+class NotificationErrorCodes {
+  static const String notificationIdRequired = 'notification.notification_id_required';
+}
+
 enum AppNotificationType {
   verificationUpdate,
   bookingUpdate,
@@ -409,6 +414,7 @@ class NotificationRepository {
     if (normalizedNotificationId.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to NotificationErrorCodes.notificationIdRequired in UI layer
           message: 'Notification id is required',
           fieldErrors: {'notification_id': 'Notification id is required'},
         ),

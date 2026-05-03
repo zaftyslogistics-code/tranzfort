@@ -12,6 +12,14 @@ import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 
+// C-006: Error codes for localization (UI should map these to AppLocalizations)
+class VoiceMessageErrorCodes {
+  static const String conversationIdRequired = 'chat.voice_conversation_id_required';
+  static const String recordingAlreadyInProgress = 'chat.voice_recording_already_in_progress';
+  static const String microphonePermissionRequired = 'chat.voice_microphone_permission_required';
+  static const String noActiveRecording = 'chat.voice_no_active_recording';
+}
+
 class VoiceMessageUpload {
   final String messageId;
   final String attachmentPath;
@@ -58,6 +66,7 @@ class VoiceMessageService {
     if (normalizedConversationId.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
+          // TODO: Map to VoiceMessageErrorCodes.conversationIdRequired in UI layer
           message: 'Conversation id is required',
           fieldErrors: {'conversation_id': 'Conversation id is required'},
         ),
@@ -65,6 +74,7 @@ class VoiceMessageService {
     }
     if (_activeConversationId != null) {
       return const Failure<void>(
+        // TODO: Map to VoiceMessageErrorCodes.recordingAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'A voice recording is already in progress.'),
       );
     }
@@ -75,6 +85,7 @@ class VoiceMessageService {
       if (!hasPermission) {
         await recorder.dispose();
         return const Failure<void>(
+          // TODO: Map to VoiceMessageErrorCodes.microphonePermissionRequired in UI layer
           PermissionFailure(message: 'Microphone permission is required to record a voice message.'),
         );
       }
@@ -105,6 +116,7 @@ class VoiceMessageService {
     if (normalizedConversationId.isEmpty) {
       return const Failure<VoiceMessageUpload>(
         ValidationFailure(
+          // TODO: Map to VoiceMessageErrorCodes.conversationIdRequired in UI layer
           message: 'Conversation id is required',
           fieldErrors: {'conversation_id': 'Conversation id is required'},
         ),
@@ -112,6 +124,7 @@ class VoiceMessageService {
     }
     if (_activeConversationId != normalizedConversationId || _recorder == null || _startedAt == null) {
       return const Failure<VoiceMessageUpload>(
+        // TODO: Map to VoiceMessageErrorCodes.noActiveRecording in UI layer
         BusinessRuleFailure(message: 'No active voice recording is available for this conversation.'),
       );
     }

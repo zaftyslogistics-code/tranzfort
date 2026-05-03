@@ -10,6 +10,14 @@ import '../data/trip_proof_upload_service.dart';
 import '../data/trucker_trip_repository.dart';
 import 'trucker_trip_detail_provider.dart';
 
+// T-006: Error codes for localization (UI should map these to AppLocalizations)
+class TruckerTripActionErrorCodes {
+  static const String actionAlreadyInProgress = 'trucker.trip_action_already_in_progress';
+  static const String cannotAdvanceFromCurrentStage = 'trucker.trip_cannot_advance_from_current_stage';
+  static const String podUploadOnlyAfterDelivery = 'trucker.trip_pod_upload_only_after_delivery';
+  static const String lrUploadOnlyDuringPickup = 'trucker.trip_lr_upload_only_during_pickup';
+}
+
 class TruckerTripActionState {
   final bool isSubmitting;
   final String? pendingStage;
@@ -62,6 +70,7 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   Future<Result<String>> advanceFromCurrentStage(String currentStage) async {
     if (state.isSubmitting) {
       return const Failure<String>(
+        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another trip action is already in progress.'),
       );
     }
@@ -69,6 +78,7 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
     final nextStage = TruckerTripsRepository.nextStageFor(currentStage);
     if (nextStage == null) {
       const failure = BusinessRuleFailure(
+        // TODO: Map to TruckerTripActionErrorCodes.cannotAdvanceFromCurrentStage in UI layer
         message: 'This trip can no longer be advanced from its current stage.',
       );
       state = state.copyWith(failure: failure, clearFailure: false);
@@ -115,12 +125,14 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   }) async {
     if (state.isSubmitting) {
       return const Failure<bool>(
+        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another trip action is already in progress.'),
       );
     }
 
     if (currentStage != 'delivered') {
       const failure = BusinessRuleFailure(
+        // TODO: Map to TruckerTripActionErrorCodes.podUploadOnlyAfterDelivery in UI layer
         message: 'POD can only be uploaded after the load has been delivered.',
       );
       state = state.copyWith(failure: failure, clearFailure: false);
@@ -188,12 +200,14 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   }) async {
     if (state.isSubmitting) {
       return const Failure<bool>(
+        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Another trip action is already in progress.'),
       );
     }
 
     if (!TripStages.allowsLrUpload.contains(currentStage)) {
       const failure = BusinessRuleFailure(
+        // TODO: Map to TruckerTripActionErrorCodes.lrUploadOnlyDuringPickup in UI layer
         message: 'LR can only be uploaded during pickup stages.',
       );
       state = state.copyWith(failure: failure, clearFailure: false);

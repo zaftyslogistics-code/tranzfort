@@ -7,6 +7,13 @@ import '../../../core/providers/app_state_providers.dart';
 import '../data/truck_document_upload_service.dart';
 import '../data/trucker_fleet_repository.dart';
 
+// T-006: Error codes for localization (UI should map these to AppLocalizations)
+class TruckerFleetErrorCodes {
+  static const String saveAlreadyInProgress = 'trucker.truck_save_already_in_progress';
+  static const String validationFailed = 'trucker.truck_validation_failed';
+  static const String truckNotFound = 'trucker.truck_not_found';
+}
+
 const List<String> truckerFleetBodyTypes = <String>[
   'Open',
   'Container',
@@ -264,7 +271,10 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
 
   Future<Result<void>> save() async {
     if (state.isSaving) {
-      return const Failure<void>(BusinessRuleFailure(message: 'Truck save is already in progress.'));
+      return const Failure<void>(
+        // TODO: Map to TruckerFleetErrorCodes.saveAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Truck save is already in progress.'),
+      );
     }
 
     final fieldErrors = _validate();
@@ -272,6 +282,7 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
       state = state.copyWith(fieldErrors: fieldErrors, clearActionFailure: true);
       return Failure<void>(
         ValidationFailure(
+          // TODO: Map to TruckerFleetErrorCodes.validationFailed in UI layer
           message: 'Please correct the highlighted truck details.',
           fieldErrors: fieldErrors,
         ),
@@ -290,7 +301,10 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     if (state.isEditing) {
       final existingTruck = state.editingTruck;
       if (existingTruck == null) {
-        result = const Failure<void>(NotFoundFailure(message: 'The selected truck was not found.'));
+        result = const Failure<void>(
+          // TODO: Map to TruckerFleetErrorCodes.truckNotFound in UI layer
+          NotFoundFailure(message: 'The selected truck was not found.'),
+        );
       } else {
         result = await _repository.updateTruck(
           existingTruck: existingTruck,

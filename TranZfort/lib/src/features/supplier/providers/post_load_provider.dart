@@ -9,6 +9,11 @@ import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
 import '../data/supplier_location_services.dart';
 
+// S-004: Error codes for localization (UI should map these to AppLocalizations)
+class PostLoadErrorCodes {
+  static const String submissionAlreadyInProgress = 'supplier.load_submission_already_in_progress';
+}
+
 const List<String> postLoadMaterials = <String>[
   'Coal',
   'Steel',
@@ -382,6 +387,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
   Future<Result<String>> submit([AppLocalizations? l10n]) async {
     if (state.isSubmitting) {
       return const Failure<String>(
+        // TODO: Map to PostLoadErrorCodes.submissionAlreadyInProgress in UI layer
         BusinessRuleFailure(message: 'Load submission is already in progress'),
       );
     }

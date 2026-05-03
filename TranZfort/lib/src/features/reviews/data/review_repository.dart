@@ -7,6 +7,13 @@ import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'review_models.dart';
 
+// R-004: Error codes for localization (UI should map these to AppLocalizations)
+class ReviewErrorCodes {
+  static const String validationFailed = 'review.validation_failed';
+  static const String submitFailed = 'review.submit_failed';
+  static const String addReplyFailed = 'review.add_reply_failed';
+}
+
 /// Backend interface for review operations.
 abstract class ReviewBackend {
   Future<Map<String, dynamic>> submitReview({
@@ -185,6 +192,7 @@ class ReviewRepository {
     if (fieldErrors.isNotEmpty) {
       return Failure<String?>(
         ValidationFailure(
+          // TODO: Map to ReviewErrorCodes.validationFailed in UI layer
           message: 'Please correct the review details.',
           fieldErrors: fieldErrors,
         ),
@@ -206,6 +214,7 @@ class ReviewRepository {
 
       return Failure<String?>(
         ValidationFailure(
+          // TODO: Map to ReviewErrorCodes.submitFailed in UI layer
           message: response['error']?.toString() ?? 'Failed to submit review',
         ),
       );
@@ -231,6 +240,7 @@ class ReviewRepository {
 
       return const Failure<bool>(
         ValidationFailure(
+          // TODO: Map to ReviewErrorCodes.addReplyFailed in UI layer
           message: 'Failed to add reply. You may have already replied or are not the reviewed user.',
         ),
       );

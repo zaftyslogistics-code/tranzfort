@@ -7,6 +7,11 @@ import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'public_profile_models.dart';
 
+// R-003: Error codes for localization (UI should map these to AppLocalizations)
+class PublicProfileErrorCodes {
+  static const String userIdRequired = 'profile.user_id_required';
+}
+
 /// Backend interface for public profile operations.
 abstract class PublicProfileBackend {
   Future<Map<String, dynamic>?> getPublicProfile({
@@ -102,6 +107,7 @@ class PublicProfileRepository {
     if (userId.trim().isEmpty) {
       return const Failure<PublicProfile?>(
         ValidationFailure(
+          // TODO: Map to PublicProfileErrorCodes.userIdRequired in UI layer
           message: 'User ID is required',
           fieldErrors: {'user_id': 'User ID is required'},
         ),

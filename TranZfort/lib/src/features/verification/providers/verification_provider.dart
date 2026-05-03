@@ -9,6 +9,16 @@ import '../data/verification_document_upload_service.dart';
 import '../data/verification_location_service.dart';
 import '../data/verification_repository.dart';
 
+// V-001: Error codes for localization (UI should map these to AppLocalizations)
+class VerificationErrorCodes {
+  static const String detailUnavailable = 'verification.detail_unavailable';
+  static const String actionAlreadyInProgress = 'verification.action_already_in_progress';
+  static const String locationCaptureOnlySupplier = 'verification.location_capture_only_supplier';
+  static const String locationCaptureFailed = 'verification.location_capture_failed';
+  static const String cityRequired = 'verification.city_required';
+  static const String submissionBlocked = 'verification.submission_blocked';
+}
+
 class VerificationState {
   final VerificationDetail? detail;
   final bool isLoading;
@@ -110,10 +120,16 @@ class VerificationController extends StateNotifier<VerificationState> {
   }) async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<bool>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<bool>(
+        // TODO: Map to VerificationErrorCodes.detailUnavailable in UI layer
+        NotFoundFailure(message: 'Verification detail is unavailable'),
+      );
     }
     if (state.uploadingDocumentType != null || state.isSubmitting || state.isCapturingLocation) {
-      return const Failure<bool>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<bool>(
+        // TODO: Map to VerificationErrorCodes.actionAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Another verification action is already in progress'),
+      );
     }
 
     state = state.copyWith(
@@ -170,10 +186,16 @@ class VerificationController extends StateNotifier<VerificationState> {
   }) async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<void>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.detailUnavailable in UI layer
+        NotFoundFailure(message: 'Verification detail is unavailable'),
+      );
     }
     if (state.isSubmitting || state.uploadingDocumentType != null || state.isCapturingLocation) {
-      return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.actionAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Another verification action is already in progress'),
+      );
     }
 
     state = state.copyWith(clearActionFailure: true);
@@ -198,15 +220,22 @@ class VerificationController extends StateNotifier<VerificationState> {
   Future<Result<void>> captureSupplierLocation() async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<void>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.detailUnavailable in UI layer
+        NotFoundFailure(message: 'Verification detail is unavailable'),
+      );
     }
     if (!detail.isSupplier) {
       return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.locationCaptureOnlySupplier in UI layer
         BusinessRuleFailure(message: 'Verification location capture is only available for supplier verification.'),
       );
     }
     if (state.isCapturingLocation || state.isSubmitting || state.uploadingDocumentType != null) {
-      return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.actionAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Another verification action is already in progress'),
+      );
     }
 
     state = state.copyWith(isCapturingLocation: true, clearActionFailure: true);
@@ -217,6 +246,7 @@ class VerificationController extends StateNotifier<VerificationState> {
         state = state.copyWith(
           isCapturingLocation: false,
           actionFailure: const BusinessRuleFailure(
+            // TODO: Map to VerificationErrorCodes.locationCaptureFailed in UI layer
             message: 'Unable to capture your verification location right now. Check location services and try again.',
           ),
         );
@@ -244,6 +274,7 @@ class VerificationController extends StateNotifier<VerificationState> {
       state = state.copyWith(
         isCapturingLocation: false,
         actionFailure: BusinessRuleFailure(
+          // TODO: Map to VerificationErrorCodes.locationCaptureFailed in UI layer
           message: 'Unable to capture your verification location: $e',
         ),
       );
@@ -279,16 +310,23 @@ class VerificationController extends StateNotifier<VerificationState> {
   }) async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<void>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.detailUnavailable in UI layer
+        NotFoundFailure(message: 'Verification detail is unavailable'),
+      );
     }
     if (!detail.isSupplier) {
       return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.locationCaptureOnlySupplier in UI layer
         BusinessRuleFailure(message: 'Verification location capture is only available for supplier verification.'),
       );
     }
     final manualState = (stateProvince ?? '').trim().isEmpty ? null : stateProvince?.trim();
     if (state.isCapturingLocation || state.isSubmitting || state.uploadingDocumentType != null) {
-      return const Failure<void>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<void>(
+        // TODO: Map to VerificationErrorCodes.actionAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Another verification action is already in progress'),
+      );
     }
 
     state = state.copyWith(isCapturingLocation: true, clearActionFailure: true);
@@ -300,6 +338,7 @@ class VerificationController extends StateNotifier<VerificationState> {
       state = state.copyWith(
         isCapturingLocation: false,
         actionFailure: const ValidationFailure(
+          // TODO: Map to VerificationErrorCodes.cityRequired in UI layer
           message: 'Verification city is required',
           fieldErrors: {'verification_location_city': 'Verification city is required'},
         ),
@@ -333,14 +372,23 @@ class VerificationController extends StateNotifier<VerificationState> {
   Future<Result<String>> submitForReview() async {
     final detail = state.detail;
     if (detail == null) {
-      return const Failure<String>(NotFoundFailure(message: 'Verification detail is unavailable'));
+      return const Failure<String>(
+        // TODO: Map to VerificationErrorCodes.detailUnavailable in UI layer
+        NotFoundFailure(message: 'Verification detail is unavailable'),
+      );
     }
     if (state.isSubmitting || state.uploadingDocumentType != null || state.isCapturingLocation) {
-      return const Failure<String>(BusinessRuleFailure(message: 'Another verification action is already in progress'));
+      return const Failure<String>(
+        // TODO: Map to VerificationErrorCodes.actionAlreadyInProgress in UI layer
+        BusinessRuleFailure(message: 'Another verification action is already in progress'),
+      );
     }
     final blockedReason = detail.submissionBlockedReason;
     if (blockedReason != null) {
-      return Failure<String>(BusinessRuleFailure(message: blockedReason));
+      return Failure<String>(
+        // TODO: Map to VerificationErrorCodes.submissionBlocked in UI layer
+        BusinessRuleFailure(message: blockedReason),
+      );
     }
 
     state = state.copyWith(isSubmitting: true, clearActionFailure: true);
