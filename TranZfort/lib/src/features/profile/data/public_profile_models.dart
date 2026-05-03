@@ -1,3 +1,5 @@
+library;
+
 /// Public profile models for viewing other users' profiles.
 /// Plain Dart classes with fromMap factories (NOT freezed).
 

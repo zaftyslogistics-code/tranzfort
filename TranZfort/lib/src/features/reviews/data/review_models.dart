@@ -1,3 +1,5 @@
+library;
+
 /// Review models for the User Rating & Comments System.
 /// Plain Dart classes with fromMap factories (NOT freezed).
 
