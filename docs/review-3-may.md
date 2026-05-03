@@ -29,6 +29,8 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - **UI/UX Work Preserved:** Color scheme improvements, dark theme cards, TTS improvements, auth redesign, marketplace card redesign, localization cleanup
 - **Reasoning:** Build is stable, UI/UX improvements are separate from review-3-may.md tasks, Phase 5 localization can be done on top of current UI/UX
 
+**Overall Progress:** 7/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4, 5-partial)
+
 **Completed:**
 - Phase 0: Safety, Baseline, and Test Harness - ✅ COMPLETED
 - Phase 1.1: Secure Aadhaar/PAN storage (V-002) - ⚠️ PARTIAL (Flutter-side fix done, backend encrypted table needed)
@@ -39,7 +41,10 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
   - 3.2 Support pagination (SDN-001 parsing only) - ✅ COMPLETED
   - 3.3 Unsafe parsing and cache hardening across app - ✅ COMPLETED
 - Phase 4: Verification and Document Upload Reliability - ✅ COMPLETED
-- Phase 5: Localization and UI Consistency - ❌ NOT STARTED (incorrect implementation reverted)
+- Phase 5: Localization and UI Consistency - ⚠️ PARTIAL
+  - 5.1 Repository/provider error localization - ⚠️ PARTIAL (error codes and ARB keys added, UI mapping deferred)
+  - 5.2 Hardcoded screen/model strings - ⚠️ PARTIAL (public profile, marketplace card, review models done)
+  - 5.3 Design-system consistency - ❌ NOT STARTED
 
 **Not Started:**
 - Phase 2: Backend Authority and Product Contract Gaps - ❌ NOT STARTED
@@ -950,18 +955,18 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 #### 5.1 Repository/provider error localization cleanup
 
-- [ ] **Replace raw messages with codes**
-  - [ ] Auth/profile errors (`F-005`, `F-007`).
-  - [ ] Supplier load errors (`S-004`).
-  - [ ] Trucker trip/action errors (`T-006`).
-  - [ ] Chat errors (`C-006`).
-  - [ ] Verification errors (`V-001`, `V-007`).
-  - [ ] Notification mark-read errors (`SDN-011`).
-  - [ ] Public profile errors (`R-003`).
-  - [ ] Review errors (`R-004`).
-- [ ] **Add ARB keys**
-  - [ ] English keys.
-  - [ ] Hindi keys.
+- [x] **Replace raw messages with codes**
+  - [x] Auth/profile errors (`F-005`, `F-007`).
+  - [x] Supplier load errors (`S-004`).
+  - [x] Trucker trip/action errors (`T-006`).
+  - [x] Chat errors (`C-006`).
+  - [x] Verification errors (`V-001`, `V-007`).
+  - [x] Notification mark-read errors (`SDN-011`).
+  - [x] Public profile errors (`R-003`).
+  - [x] Review errors (`R-004`).
+- [x] **Add ARB keys**
+  - [x] English keys (36 error code keys added).
+  - [x] Hindi keys (36 error code keys added).
   - [ ] Field-level validation keys.
   - [ ] Generic backend failure keys.
   - [ ] Permission failure keys.
@@ -970,6 +975,9 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [ ] Verify all new keys show in English.
   - [ ] Verify all new keys show in Hindi.
   - [ ] Verify no fallback raw codes appear in UI.
+- [ ] **Map error codes to localized strings in UI layer**
+  - [ ] TODO comments added to all error code locations
+  - [ ] Actual UI implementation deferred (requires screen-by-screen changes)
 
 #### 5.2 Hardcoded screen/model strings
 
