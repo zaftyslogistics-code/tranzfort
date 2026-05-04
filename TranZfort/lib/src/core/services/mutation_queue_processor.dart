@@ -129,7 +129,7 @@ class MutationQueueProcessor {
           );
         } else {
           // Calculate backoff delay
-          final delay = _calculateBackoffDelay(mutation.retryCount);
+          final delay = calculateBackoffDelay(mutation.retryCount);
           await Future.delayed(delay);
           await _database.updateStatus(mutation.id, MutationStatus.retrying);
           _eventController.add(
@@ -154,7 +154,7 @@ class MutationQueueProcessor {
           ),
         );
       } else {
-        final delay = _calculateBackoffDelay(mutation.retryCount);
+        final delay = calculateBackoffDelay(mutation.retryCount);
         await Future.delayed(delay);
         await _database.updateStatus(mutation.id, MutationStatus.retrying);
         _eventController.add(
@@ -168,7 +168,8 @@ class MutationQueueProcessor {
   }
 
   /// Calculate exponential backoff delay based on retry count with jitter.
-  Duration _calculateBackoffDelay(int retryCount) {
+  /// Package-private for testing.
+  Duration calculateBackoffDelay(int retryCount) {
     final delayMs = _baseDelay.inMilliseconds *
         math.pow(_backoffMultiplier, retryCount).toInt().clamp(1, 60);
     final clampedMs = delayMs.clamp(
