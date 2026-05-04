@@ -389,7 +389,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                         boxShadow: AppShadows.elevation2,
                       ),
                       child: Text(
-                        'New message',
+                        l10n.chatNewMessage,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: AppColors.textPrimary,
                               fontWeight: FontWeight.w500,

@@ -8346,6 +8346,264 @@ abstract class AppLocalizations {
   /// **'Token sync failed.'**
   String get pushIssueTokenSyncFailed;
 
+  /// No description provided for @offlineSyncPending.
+  ///
+  /// In en, this message translates to:
+  /// **'pending'**
+  String get offlineSyncPending;
+
+  /// No description provided for @offlineSyncRetrying.
+  ///
+  /// In en, this message translates to:
+  /// **'retrying'**
+  String get offlineSyncRetrying;
+
+  /// No description provided for @offlineSyncFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'failed'**
+  String get offlineSyncFailed;
+
+  /// No description provided for @offlineSyncExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'exhausted (max retries)'**
+  String get offlineSyncExhausted;
+
+  /// No description provided for @validationProfilePhotoRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile photo is required'**
+  String get validationProfilePhotoRequired;
+
+  /// No description provided for @validationAadhaarRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Aadhaar number is required'**
+  String get validationAadhaarRequired;
+
+  /// No description provided for @validationTruckNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck number is required'**
+  String get validationTruckNumberRequired;
+
+  /// No description provided for @validationTruckCapacityRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck capacity is required'**
+  String get validationTruckCapacityRequired;
+
+  /// No description provided for @validationRcDocumentRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document is required'**
+  String get validationRcDocumentRequired;
+
+  /// No description provided for @validationCompanyNameRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Company name is required'**
+  String get validationCompanyNameRequired;
+
+  /// No description provided for @validationBusinessLicenseNumberRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'License number is required'**
+  String get validationBusinessLicenseNumberRequired;
+
+  /// No description provided for @validationBusinessLicenseRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'License document is required'**
+  String get validationBusinessLicenseRequired;
+
+  /// No description provided for @validationVerificationLocationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification location is required'**
+  String get validationVerificationLocationRequired;
+
+  /// No description provided for @validationVerificationCityRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification city is required'**
+  String get validationVerificationCityRequired;
+
+  /// No description provided for @validationDocumentPathRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Document path is required'**
+  String get validationDocumentPathRequired;
+
+  /// No description provided for @validationProfileIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile id is required'**
+  String get validationProfileIdRequired;
+
+  /// No description provided for @validationCameraPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera permission is required. Enable it in app settings.'**
+  String get validationCameraPermissionRequired;
+
+  /// No description provided for @validationPhotoAccessRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Photo access is required. Enable it in app settings.'**
+  String get validationPhotoAccessRequired;
+
+  /// No description provided for @validationTruckRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck is required'**
+  String get validationTruckRequired;
+
+  /// No description provided for @validationOwnerIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Owner id is required'**
+  String get validationOwnerIdRequired;
+
+  /// No description provided for @validationTruckIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck id is required'**
+  String get validationTruckIdRequired;
+
+  /// No description provided for @validationTripIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip id is required'**
+  String get validationTripIdRequired;
+
+  /// No description provided for @backendNetworkError.
+  ///
+  /// In en, this message translates to:
+  /// **'Network error. Please check your connection.'**
+  String get backendNetworkError;
+
+  /// No description provided for @backendServerError.
+  ///
+  /// In en, this message translates to:
+  /// **'Server error. Please try again later.'**
+  String get backendServerError;
+
+  /// No description provided for @backendTimeoutError.
+  ///
+  /// In en, this message translates to:
+  /// **'Request timed out. Please try again.'**
+  String get backendTimeoutError;
+
+  /// No description provided for @backendUnknownError.
+  ///
+  /// In en, this message translates to:
+  /// **'An unexpected error occurred. Please try again.'**
+  String get backendUnknownError;
+
+  /// No description provided for @backendUnauthorizedError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unauthorized. Please log in again.'**
+  String get backendUnauthorizedError;
+
+  /// No description provided for @backendForbiddenError.
+  ///
+  /// In en, this message translates to:
+  /// **'You don\'t have permission to perform this action.'**
+  String get backendForbiddenError;
+
+  /// No description provided for @backendNotFoundError.
+  ///
+  /// In en, this message translates to:
+  /// **'The requested resource was not found.'**
+  String get backendNotFoundError;
+
+  /// No description provided for @backendConflictError.
+  ///
+  /// In en, this message translates to:
+  /// **'This action conflicts with existing data.'**
+  String get backendConflictError;
+
+  /// No description provided for @permissionLocationDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission denied. Enable it in app settings.'**
+  String get permissionLocationDenied;
+
+  /// No description provided for @permissionLocationPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission permanently denied. Enable it in app settings.'**
+  String get permissionLocationPermanentlyDenied;
+
+  /// No description provided for @permissionCameraDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera permission denied. Enable it in app settings.'**
+  String get permissionCameraDenied;
+
+  /// No description provided for @permissionCameraPermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Camera permission permanently denied. Enable it in app settings.'**
+  String get permissionCameraPermanentlyDenied;
+
+  /// No description provided for @permissionStorageDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage permission denied. Enable it in app settings.'**
+  String get permissionStorageDenied;
+
+  /// No description provided for @permissionStoragePermanentlyDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Storage permission permanently denied. Enable it in app settings.'**
+  String get permissionStoragePermanentlyDenied;
+
+  /// No description provided for @permissionNotificationsDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification permission denied. Enable it in app settings.'**
+  String get permissionNotificationsDenied;
+
+  /// No description provided for @marketplaceLoadValue.
+  ///
+  /// In en, this message translates to:
+  /// **'LOAD VALUE'**
+  String get marketplaceLoadValue;
+
+  /// No description provided for @marketplaceEstProfit.
+  ///
+  /// In en, this message translates to:
+  /// **'EST. PROFIT'**
+  String get marketplaceEstProfit;
+
+  /// No description provided for @marketplaceEstLoss.
+  ///
+  /// In en, this message translates to:
+  /// **'EST. LOSS'**
+  String get marketplaceEstLoss;
+
+  /// No description provided for @chatNewMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'New message'**
+  String get chatNewMessage;
+
+  /// No description provided for @chatToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get chatToday;
+
+  /// No description provided for @chatYesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get chatYesterday;
+
   /// No description provided for @truckerFleetReturnToVerificationTitle.
   ///
   /// In en, this message translates to:
@@ -9337,6 +9595,216 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No English voices available on this device.'**
   String get ttsNoEnglishVoices;
+
+  /// No description provided for @authRoleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid role to continue'**
+  String get authRoleRequired;
+
+  /// No description provided for @authNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name'**
+  String get authNameTooShort;
+
+  /// No description provided for @authMobileRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number'**
+  String get authMobileRequired;
+
+  /// No description provided for @authLanguageUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a supported language'**
+  String get authLanguageUnsupported;
+
+  /// No description provided for @authUnexpectedResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected response format from account deletion request'**
+  String get authUnexpectedResponse;
+
+  /// No description provided for @supplierRatingAlreadySubmitting.
+  ///
+  /// In en, this message translates to:
+  /// **'Your rating is already being submitted'**
+  String get supplierRatingAlreadySubmitting;
+
+  /// No description provided for @supplierTripActionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Another supplier trip action is already in progress'**
+  String get supplierTripActionAlreadyInProgress;
+
+  /// No description provided for @supplierLoadSubmissionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Load submission is already in progress'**
+  String get supplierLoadSubmissionAlreadyInProgress;
+
+  /// No description provided for @truckerRatingAlreadySubmitting.
+  ///
+  /// In en, this message translates to:
+  /// **'Your rating is already being submitted'**
+  String get truckerRatingAlreadySubmitting;
+
+  /// No description provided for @truckerTripActionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Another trip action is already in progress'**
+  String get truckerTripActionAlreadyInProgress;
+
+  /// No description provided for @truckerTripCannotAdvanceFromCurrentStage.
+  ///
+  /// In en, this message translates to:
+  /// **'This trip can no longer be advanced from its current stage'**
+  String get truckerTripCannotAdvanceFromCurrentStage;
+
+  /// No description provided for @truckerTripPodUploadOnlyAfterDelivery.
+  ///
+  /// In en, this message translates to:
+  /// **'POD can only be uploaded after the load has been delivered'**
+  String get truckerTripPodUploadOnlyAfterDelivery;
+
+  /// No description provided for @truckerTripLrUploadOnlyDuringPickup.
+  ///
+  /// In en, this message translates to:
+  /// **'LR can only be uploaded during pickup stages'**
+  String get truckerTripLrUploadOnlyDuringPickup;
+
+  /// No description provided for @truckerLoadDetailUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Load detail is unavailable'**
+  String get truckerLoadDetailUnavailable;
+
+  /// No description provided for @truckerBookingAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Booking request is already in progress'**
+  String get truckerBookingAlreadyInProgress;
+
+  /// No description provided for @truckerTruckRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a truck to continue'**
+  String get truckerTruckRequired;
+
+  /// No description provided for @truckerTruckSaveAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck save is already in progress'**
+  String get truckerTruckSaveAlreadyInProgress;
+
+  /// No description provided for @truckerTruckValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please correct the highlighted truck details'**
+  String get truckerTruckValidationFailed;
+
+  /// No description provided for @truckerTruckNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The selected truck was not found'**
+  String get truckerTruckNotFound;
+
+  /// No description provided for @chatVoiceConversationIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Conversation id is required'**
+  String get chatVoiceConversationIdRequired;
+
+  /// No description provided for @chatVoiceRecordingAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'A voice recording is already in progress'**
+  String get chatVoiceRecordingAlreadyInProgress;
+
+  /// No description provided for @chatVoiceMicrophonePermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Microphone permission is required to record a voice message'**
+  String get chatVoiceMicrophonePermissionRequired;
+
+  /// No description provided for @chatVoiceNoActiveRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'No active voice recording is available for this conversation'**
+  String get chatVoiceNoActiveRecording;
+
+  /// No description provided for @chatMessageAlreadyBeingSent.
+  ///
+  /// In en, this message translates to:
+  /// **'Another message is already being sent'**
+  String get chatMessageAlreadyBeingSent;
+
+  /// No description provided for @notificationNotificationIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification id is required'**
+  String get notificationNotificationIdRequired;
+
+  /// No description provided for @profileUserIdRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'User ID is required'**
+  String get profileUserIdRequired;
+
+  /// No description provided for @reviewValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please correct the review details'**
+  String get reviewValidationFailed;
+
+  /// No description provided for @reviewSubmitFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to submit review'**
+  String get reviewSubmitFailed;
+
+  /// No description provided for @reviewAddReplyFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to add reply. You may have already replied or are not the reviewed user'**
+  String get reviewAddReplyFailed;
+
+  /// No description provided for @verificationDetailUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification detail is unavailable'**
+  String get verificationDetailUnavailable;
+
+  /// No description provided for @verificationActionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Another verification action is already in progress'**
+  String get verificationActionAlreadyInProgress;
+
+  /// No description provided for @verificationLocationCaptureOnlySupplier.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification location capture is only available for supplier verification'**
+  String get verificationLocationCaptureOnlySupplier;
+
+  /// No description provided for @verificationLocationCaptureFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to capture your verification location right now. Check location services and try again'**
+  String get verificationLocationCaptureFailed;
+
+  /// No description provided for @verificationCityRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification city is required'**
+  String get verificationCityRequired;
+
+  /// No description provided for @verificationSubmissionBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification submission is blocked'**
+  String get verificationSubmissionBlocked;
 }
 
 class _AppLocalizationsDelegate

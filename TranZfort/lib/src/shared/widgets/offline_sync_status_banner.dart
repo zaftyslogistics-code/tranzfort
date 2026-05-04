@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers/mutation_queue_provider.dart';
 import '../../core/providers/mutation_queue_processor_provider.dart';
+import '../../l10n/app_localizations.dart';
 
 /// A banner widget that shows sync status for offline operations.
 /// Displays pending and failed mutation counts with retry functionality.
@@ -54,6 +55,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final pendingCountAsync = ref.watch(pendingMutationCountProvider);
     final retryingCountAsync = ref.watch(retryingMutationCountProvider);
     final failedCountAsync = ref.watch(failedMutationCountProvider);
@@ -103,7 +105,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                         // Show pending count
                                         if (pendingCount > 0)
                                           Text(
-                                            '$pendingCount pending',
+                                            '$pendingCount ${l10n.offlineSyncPending}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium
@@ -114,7 +116,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                         // Show retrying count
                                         if (retryingCount > 0)
                                           Text(
-                                            '$retryingCount retrying',
+                                            '$retryingCount ${l10n.offlineSyncRetrying}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium
@@ -126,7 +128,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                         // Show failed (non-exhausted) count
                                         if (failedCount > exhaustedCount)
                                           Text(
-                                            '${failedCount - exhaustedCount} failed',
+                                            '${failedCount - exhaustedCount} ${l10n.offlineSyncFailed}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium
@@ -137,7 +139,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                         // Show exhausted count
                                         if (exhaustedCount > 0)
                                           Text(
-                                            '$exhaustedCount exhausted (max retries)',
+                                            '$exhaustedCount ${l10n.offlineSyncExhausted}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .bodyMedium

@@ -221,12 +221,13 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         );
         
         String? dateLabel;
+        final l10n = AppLocalizations.of(context);
         if (messageDate == today) {
-          dateLabel = 'Today';
+          dateLabel = l10n.chatToday;
         } else {
           final yesterday = today.subtract(const Duration(days: 1));
           if (messageDate == yesterday) {
-            dateLabel = 'Yesterday';
+            dateLabel = l10n.chatYesterday;
           } else {
             dateLabel = '${current.message.createdAt.day}/${current.message.createdAt.month}/${current.message.createdAt.year}';
           }

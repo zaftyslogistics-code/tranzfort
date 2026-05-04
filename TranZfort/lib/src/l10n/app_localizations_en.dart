@@ -5371,6 +5371,152 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pushIssueTokenSyncFailed => 'Token sync failed.';
 
   @override
+  String get offlineSyncPending => 'pending';
+
+  @override
+  String get offlineSyncRetrying => 'retrying';
+
+  @override
+  String get offlineSyncFailed => 'failed';
+
+  @override
+  String get offlineSyncExhausted => 'exhausted (max retries)';
+
+  @override
+  String get validationProfilePhotoRequired => 'Profile photo is required';
+
+  @override
+  String get validationAadhaarRequired => 'Aadhaar number is required';
+
+  @override
+  String get validationTruckNumberRequired => 'Truck number is required';
+
+  @override
+  String get validationTruckCapacityRequired => 'Truck capacity is required';
+
+  @override
+  String get validationRcDocumentRequired => 'RC document is required';
+
+  @override
+  String get validationCompanyNameRequired => 'Company name is required';
+
+  @override
+  String get validationBusinessLicenseNumberRequired =>
+      'License number is required';
+
+  @override
+  String get validationBusinessLicenseRequired =>
+      'License document is required';
+
+  @override
+  String get validationVerificationLocationRequired =>
+      'Verification location is required';
+
+  @override
+  String get validationVerificationCityRequired =>
+      'Verification city is required';
+
+  @override
+  String get validationDocumentPathRequired => 'Document path is required';
+
+  @override
+  String get validationProfileIdRequired => 'Profile id is required';
+
+  @override
+  String get validationCameraPermissionRequired =>
+      'Camera permission is required. Enable it in app settings.';
+
+  @override
+  String get validationPhotoAccessRequired =>
+      'Photo access is required. Enable it in app settings.';
+
+  @override
+  String get validationTruckRequired => 'Truck is required';
+
+  @override
+  String get validationOwnerIdRequired => 'Owner id is required';
+
+  @override
+  String get validationTruckIdRequired => 'Truck id is required';
+
+  @override
+  String get validationTripIdRequired => 'Trip id is required';
+
+  @override
+  String get backendNetworkError =>
+      'Network error. Please check your connection.';
+
+  @override
+  String get backendServerError => 'Server error. Please try again later.';
+
+  @override
+  String get backendTimeoutError => 'Request timed out. Please try again.';
+
+  @override
+  String get backendUnknownError =>
+      'An unexpected error occurred. Please try again.';
+
+  @override
+  String get backendUnauthorizedError => 'Unauthorized. Please log in again.';
+
+  @override
+  String get backendForbiddenError =>
+      'You don\'t have permission to perform this action.';
+
+  @override
+  String get backendNotFoundError => 'The requested resource was not found.';
+
+  @override
+  String get backendConflictError =>
+      'This action conflicts with existing data.';
+
+  @override
+  String get permissionLocationDenied =>
+      'Location permission denied. Enable it in app settings.';
+
+  @override
+  String get permissionLocationPermanentlyDenied =>
+      'Location permission permanently denied. Enable it in app settings.';
+
+  @override
+  String get permissionCameraDenied =>
+      'Camera permission denied. Enable it in app settings.';
+
+  @override
+  String get permissionCameraPermanentlyDenied =>
+      'Camera permission permanently denied. Enable it in app settings.';
+
+  @override
+  String get permissionStorageDenied =>
+      'Storage permission denied. Enable it in app settings.';
+
+  @override
+  String get permissionStoragePermanentlyDenied =>
+      'Storage permission permanently denied. Enable it in app settings.';
+
+  @override
+  String get permissionNotificationsDenied =>
+      'Notification permission denied. Enable it in app settings.';
+
+  @override
+  String get marketplaceLoadValue => 'LOAD VALUE';
+
+  @override
+  String get marketplaceEstProfit => 'EST. PROFIT';
+
+  @override
+  String get marketplaceEstLoss => 'EST. LOSS';
+
+  @override
+  String get chatNewMessage => 'New message';
+
+  @override
+  String get chatToday => 'Today';
+
+  @override
+  String get chatYesterday => 'Yesterday';
+
+  @override
   String get truckerFleetReturnToVerificationTitle => 'Return to verification';
 
   @override
@@ -5994,4 +6140,132 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ttsNoEnglishVoices =>
       'No English voices available on this device.';
+
+  @override
+  String get authRoleRequired => 'Select a valid role to continue';
+
+  @override
+  String get authNameTooShort => 'Enter your full name';
+
+  @override
+  String get authMobileRequired => 'Enter a valid mobile number';
+
+  @override
+  String get authLanguageUnsupported => 'Select a supported language';
+
+  @override
+  String get authUnexpectedResponse =>
+      'Unexpected response format from account deletion request';
+
+  @override
+  String get supplierRatingAlreadySubmitting =>
+      'Your rating is already being submitted';
+
+  @override
+  String get supplierTripActionAlreadyInProgress =>
+      'Another supplier trip action is already in progress';
+
+  @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'Load submission is already in progress';
+
+  @override
+  String get truckerRatingAlreadySubmitting =>
+      'Your rating is already being submitted';
+
+  @override
+  String get truckerTripActionAlreadyInProgress =>
+      'Another trip action is already in progress';
+
+  @override
+  String get truckerTripCannotAdvanceFromCurrentStage =>
+      'This trip can no longer be advanced from its current stage';
+
+  @override
+  String get truckerTripPodUploadOnlyAfterDelivery =>
+      'POD can only be uploaded after the load has been delivered';
+
+  @override
+  String get truckerTripLrUploadOnlyDuringPickup =>
+      'LR can only be uploaded during pickup stages';
+
+  @override
+  String get truckerLoadDetailUnavailable => 'Load detail is unavailable';
+
+  @override
+  String get truckerBookingAlreadyInProgress =>
+      'Booking request is already in progress';
+
+  @override
+  String get truckerTruckRequired => 'Select a truck to continue';
+
+  @override
+  String get truckerTruckSaveAlreadyInProgress =>
+      'Truck save is already in progress';
+
+  @override
+  String get truckerTruckValidationFailed =>
+      'Please correct the highlighted truck details';
+
+  @override
+  String get truckerTruckNotFound => 'The selected truck was not found';
+
+  @override
+  String get chatVoiceConversationIdRequired => 'Conversation id is required';
+
+  @override
+  String get chatVoiceRecordingAlreadyInProgress =>
+      'A voice recording is already in progress';
+
+  @override
+  String get chatVoiceMicrophonePermissionRequired =>
+      'Microphone permission is required to record a voice message';
+
+  @override
+  String get chatVoiceNoActiveRecording =>
+      'No active voice recording is available for this conversation';
+
+  @override
+  String get chatMessageAlreadyBeingSent =>
+      'Another message is already being sent';
+
+  @override
+  String get notificationNotificationIdRequired =>
+      'Notification id is required';
+
+  @override
+  String get profileUserIdRequired => 'User ID is required';
+
+  @override
+  String get reviewValidationFailed => 'Please correct the review details';
+
+  @override
+  String get reviewSubmitFailed => 'Failed to submit review';
+
+  @override
+  String get reviewAddReplyFailed =>
+      'Failed to add reply. You may have already replied or are not the reviewed user';
+
+  @override
+  String get verificationDetailUnavailable =>
+      'Verification detail is unavailable';
+
+  @override
+  String get verificationActionAlreadyInProgress =>
+      'Another verification action is already in progress';
+
+  @override
+  String get verificationLocationCaptureOnlySupplier =>
+      'Verification location capture is only available for supplier verification';
+
+  @override
+  String get verificationLocationCaptureFailed =>
+      'Unable to capture your verification location right now. Check location services and try again';
+
+  @override
+  String get verificationCityRequired => 'Verification city is required';
+
+  @override
+  String get verificationSubmissionBlocked =>
+      'Verification submission is blocked';
 }

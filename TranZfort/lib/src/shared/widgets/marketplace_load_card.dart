@@ -211,7 +211,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            'LOAD VALUE',
+                            l10n.marketplaceLoadValue,
                             style: AppTypography.labelMicro.copyWith(
                               color: AppColors.inkTextMuted,
                             ),
@@ -262,7 +262,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              costEstimate.isProfitable ? 'EST. PROFIT' : 'EST. LOSS',
+                              costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
                               style: AppTypography.labelMicro.copyWith(
                                 color: costEstimate.isProfitable
                                     ? AppColors.success

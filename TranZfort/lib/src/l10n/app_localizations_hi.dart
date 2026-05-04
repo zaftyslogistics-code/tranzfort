@@ -5383,6 +5383,152 @@ class AppLocalizationsHi extends AppLocalizations {
   String get pushIssueTokenSyncFailed => 'टोकन सिंक विफल हुआ।';
 
   @override
+  String get offlineSyncPending => 'लंबित';
+
+  @override
+  String get offlineSyncRetrying => 'पुनः प्रयास';
+
+  @override
+  String get offlineSyncFailed => 'विफल';
+
+  @override
+  String get offlineSyncExhausted => 'समाप्त (अधिकतम पुनः प्रयास)';
+
+  @override
+  String get validationProfilePhotoRequired => 'प्रोफाइल फोटो आवश्यक है';
+
+  @override
+  String get validationAadhaarRequired => 'आधार नंबर आवश्यक है';
+
+  @override
+  String get validationTruckNumberRequired => 'ट्रक नंबर आवश्यक है';
+
+  @override
+  String get validationTruckCapacityRequired => 'ट्रक क्षमता आवश्यक है';
+
+  @override
+  String get validationRcDocumentRequired => 'आरसी दस्तावेज आवश्यक है';
+
+  @override
+  String get validationCompanyNameRequired => 'कंपनी नाम आवश्यक है';
+
+  @override
+  String get validationBusinessLicenseNumberRequired =>
+      'लाइसेंस नंबर आवश्यक है';
+
+  @override
+  String get validationBusinessLicenseRequired => 'लाइसेंस दस्तावेज आवश्यक है';
+
+  @override
+  String get validationVerificationLocationRequired =>
+      'वेरिफिकेशन स्थान आवश्यक है';
+
+  @override
+  String get validationVerificationCityRequired => 'वेरिफिकेशन शहर आवश्यक है';
+
+  @override
+  String get validationDocumentPathRequired => 'दस्तावेज पथ आवश्यक है';
+
+  @override
+  String get validationProfileIdRequired => 'प्रोफाइल आईडी आवश्यक है';
+
+  @override
+  String get validationCameraPermissionRequired =>
+      'कैमरा अनुमति आवश्यक है। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get validationPhotoAccessRequired =>
+      'फोटो एक्सेस आवश्यक है। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get validationTruckRequired => 'ट्रक आवश्यक है';
+
+  @override
+  String get validationOwnerIdRequired => 'मालिक आईडी आवश्यक है';
+
+  @override
+  String get validationTruckIdRequired => 'ट्रक आईडी आवश्यक है';
+
+  @override
+  String get validationTripIdRequired => 'ट्रिप आईडी आवश्यक है';
+
+  @override
+  String get backendNetworkError =>
+      'नेटवर्क त्रुटि। कृपया अपना कनेक्शन जांचें।';
+
+  @override
+  String get backendServerError =>
+      'सर्वर त्रुटि। कृपया बाद में पुनः प्रयास करें।';
+
+  @override
+  String get backendTimeoutError =>
+      'अनुरोध समय सीमा समाप्त। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get backendUnknownError =>
+      'एक अप्रत्याशित त्रुटि हुई। कृपया पुनः प्रयास करें।';
+
+  @override
+  String get backendUnauthorizedError => 'अनधिकृत। कृपया पुनः लॉग इन करें।';
+
+  @override
+  String get backendForbiddenError =>
+      'आपके पास इस कार्रवाई करने की अनुमति नहीं है।';
+
+  @override
+  String get backendNotFoundError => 'अनुरोधित संसाधन नहीं मिला।';
+
+  @override
+  String get backendConflictError =>
+      'यह कार्रवाई मौजूदा डेटा के साथ विरोध करती है।';
+
+  @override
+  String get permissionLocationDenied =>
+      'स्थान अनुमति अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionLocationPermanentlyDenied =>
+      'स्थान अनुमति स्थायी रूप से अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionCameraDenied =>
+      'कैमरा अनुमति अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionCameraPermanentlyDenied =>
+      'कैमरा अनुमति स्थायी रूप से अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionStorageDenied =>
+      'स्टोरेज अनुमति अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionStoragePermanentlyDenied =>
+      'स्टोरेज अनुमति स्थायी रूप से अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get permissionNotificationsDenied =>
+      'नोटिफिकेशन अनुमति अस्वीकृत। ऐप सेटिंग्स में सक्षम करें।';
+
+  @override
+  String get marketplaceLoadValue => 'लोड मूल्य';
+
+  @override
+  String get marketplaceEstProfit => 'अनुमानित लाभ';
+
+  @override
+  String get marketplaceEstLoss => 'अनुमानित हानि';
+
+  @override
+  String get chatNewMessage => 'नया संदेश';
+
+  @override
+  String get chatToday => 'आज';
+
+  @override
+  String get chatYesterday => 'कल';
+
+  @override
   String get truckerFleetReturnToVerificationTitle => 'वेरिफिकेशन पर लौटें';
 
   @override
@@ -6008,4 +6154,129 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get ttsNoEnglishVoices =>
       'इस डिवाइस पर कोई अंग्रेज़ी आवाज़ उपलब्ध नहीं है।';
+
+  @override
+  String get authRoleRequired => 'जारी रखने के लिए एक मान्य भूमिका चुनें';
+
+  @override
+  String get authNameTooShort => 'अपना पूरा नाम दर्ज करें';
+
+  @override
+  String get authMobileRequired => 'एक मान्य मोबाइल नंबर दर्ज करें';
+
+  @override
+  String get authLanguageUnsupported => 'एक समर्थित भाषा चुनें';
+
+  @override
+  String get authUnexpectedResponse =>
+      'खाता हटाने अनुरोध से अप्रत्याशित प्रतिक्रिया प्रारूप';
+
+  @override
+  String get supplierRatingAlreadySubmitting =>
+      'आपकी रेटिंग पहले ही जमा की जा रही है';
+
+  @override
+  String get supplierTripActionAlreadyInProgress =>
+      'एक अन्य सप्लायर ट्रिप कार्रवाई पहले से प्रगति पर है';
+
+  @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'लोड जमा करना पहले से प्रगति पर है';
+
+  @override
+  String get truckerRatingAlreadySubmitting =>
+      'आपकी रेटिंग पहले ही जमा की जा रही है';
+
+  @override
+  String get truckerTripActionAlreadyInProgress =>
+      'एक अन्य ट्रिप कार्रवाई पहले से प्रगति पर है';
+
+  @override
+  String get truckerTripCannotAdvanceFromCurrentStage =>
+      'इस ट्रिप को अपने वर्तमान चरण से आगे नहीं बढ़ाया जा सकता';
+
+  @override
+  String get truckerTripPodUploadOnlyAfterDelivery =>
+      'POD केवल लोड डिलीवरी के बाद अपलोड किया जा सकता है';
+
+  @override
+  String get truckerTripLrUploadOnlyDuringPickup =>
+      'LR केवल पिकअप चरणों के दौरान अपलोड किया जा सकता है';
+
+  @override
+  String get truckerLoadDetailUnavailable => 'लोड विवरण उपलब्ध नहीं है';
+
+  @override
+  String get truckerBookingAlreadyInProgress =>
+      'बुकिंग अनुरोध पहले से प्रगति पर है';
+
+  @override
+  String get truckerTruckRequired => 'जारी रखने के लिए एक ट्रक चुनें';
+
+  @override
+  String get truckerTruckSaveAlreadyInProgress =>
+      'ट्रक सहेजना पहले से प्रगति पर है';
+
+  @override
+  String get truckerTruckValidationFailed =>
+      'कृपया हाइलाइट किए गए ट्रक विवरणों को सुधारें';
+
+  @override
+  String get truckerTruckNotFound => 'चयनित ट्रक नहीं मिला';
+
+  @override
+  String get chatVoiceConversationIdRequired => 'वार्तालाप आईडी आवश्यक है';
+
+  @override
+  String get chatVoiceRecordingAlreadyInProgress =>
+      'एक वॉइस रिकॉर्डिंग पहले से प्रगति पर है';
+
+  @override
+  String get chatVoiceMicrophonePermissionRequired =>
+      'वॉइस संदेश रिकॉर्ड करने के लिए माइक्रोफोन अनुमति आवश्यक है';
+
+  @override
+  String get chatVoiceNoActiveRecording =>
+      'इस वार्तालाप के लिए कोई सक्रिय वॉइस रिकॉर्डिंग उपलब्ध नहीं है';
+
+  @override
+  String get chatMessageAlreadyBeingSent =>
+      'एक अन्य संदेश पहले ही भेजा जा रहा है';
+
+  @override
+  String get notificationNotificationIdRequired => 'अधिसूचना आईडी आवश्यक है';
+
+  @override
+  String get profileUserIdRequired => 'उपयोगकर्ता आईडी आवश्यक है';
+
+  @override
+  String get reviewValidationFailed => 'कृपया समीक्षा विवरणों को सुधारें';
+
+  @override
+  String get reviewSubmitFailed => 'समीक्षा जमा करने में विफल';
+
+  @override
+  String get reviewAddReplyFailed =>
+      'उत्तर जोड़ने में विफल। आपने पहले ही उत्तर दिया हो सकता है या आप समीक्षित उपयोगकर्ता नहीं हैं';
+
+  @override
+  String get verificationDetailUnavailable => 'वेरिफिकेशन विवरण उपलब्ध नहीं है';
+
+  @override
+  String get verificationActionAlreadyInProgress =>
+      'एक अन्य वेरिफिकेशन कार्रवाई पहले से प्रगति पर है';
+
+  @override
+  String get verificationLocationCaptureOnlySupplier =>
+      'वेरिफिकेशन लोकेशन कैप्चर केवल सप्लायर वेरिफिकेशन के लिए उपलब्ध है';
+
+  @override
+  String get verificationLocationCaptureFailed =>
+      'अभी आपका वेरिफिकेशन स्थान कैप्चर नहीं किया जा सका। लोकेशन सेवाएँ जांचें और पुनः प्रयास करें';
+
+  @override
+  String get verificationCityRequired => 'वेरिफिकेशन शहर आवश्यक है';
+
+  @override
+  String get verificationSubmissionBlocked => 'वेरिफिकेशन जमा करना अवरुद्ध है';
 }
