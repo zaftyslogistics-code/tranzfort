@@ -212,4 +212,24 @@ class MutationQueueDatabase {
 
     return Sqflite.firstIntValue(result) ?? 0;
   }
+
+  Future<int> getRetryingCount() async {
+    final db = await database;
+    final result = await db.rawQuery('''
+      SELECT COUNT(*) FROM $_tableName
+      WHERE status = ?
+    ''', ['retrying']);
+
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
+
+  Future<int> getExhaustedCount() async {
+    final db = await database;
+    final result = await db.rawQuery('''
+      SELECT COUNT(*) FROM $_tableName
+      WHERE status = ? AND retry_count >= max_retries
+    ''', ['failed']);
+
+    return Sqflite.firstIntValue(result) ?? 0;
+  }
 }

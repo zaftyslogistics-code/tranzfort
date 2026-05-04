@@ -20,6 +20,18 @@ final failedMutationCountProvider = FutureProvider<int>((ref) async {
   return db.getFailedCount();
 });
 
+/// Provider for the retrying mutation count.
+final retryingMutationCountProvider = FutureProvider<int>((ref) async {
+  final db = ref.watch(mutationQueueDatabaseProvider);
+  return db.getRetryingCount();
+});
+
+/// Provider for the exhausted mutation count.
+final exhaustedMutationCountProvider = FutureProvider<int>((ref) async {
+  final db = ref.watch(mutationQueueDatabaseProvider);
+  return db.getExhaustedCount();
+});
+
 /// Notifier class for syncing state.
 class SyncingStateNotifier extends StateNotifier<bool> {
   SyncingStateNotifier() : super(false);
