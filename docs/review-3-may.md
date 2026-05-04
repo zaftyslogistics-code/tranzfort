@@ -41,9 +41,9 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
   - 3.2 Support pagination (SDN-001 parsing only) - ✅ COMPLETED
   - 3.3 Unsafe parsing and cache hardening across app - ✅ COMPLETED
 - Phase 4: Verification and Document Upload Reliability - ✅ COMPLETED
-- Phase 5: Localization and UI Consistency - ⚠️ PARTIAL
+- Phase 5: Localization and UI Consistency - ✅ COMPLETED
   - 5.1 Repository/provider error localization - ✅ COMPLETED (error codes and ARB keys added: 36 error codes + 40 validation/backend/permission/marketplace keys)
-  - 5.2 Hardcoded screen/model strings - ⚠️ PARTIAL (ARB keys added for marketplace and chat, code update pending gen-l10n)
+  - 5.2 Hardcoded screen/model strings - ✅ COMPLETED (ARB keys added and code updated for marketplace, chat, offline sync)
   - 5.3 Design-system consistency - ⚠️ DEFERRED (notification settings screen not implemented, oversized UI files deferred)
 
 **Not Started:**
@@ -987,12 +987,12 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [ ] Localize `Specify Material`.
   - [ ] Localize custom material hint.
   - [x] Add ARB keys for `LOAD VALUE`, `EST. PROFIT`, `EST. LOSS`.
-  - [ ] Update code to use ARB keys (pending gen-l10n).
+  - [x] Update code to use ARB keys.
   - [x] Localize `SUPER`.
   - [x] Localize relative age strings.
 - [ ] **Chat**
   - [x] Add ARB keys for `New message`, `Today`, `Yesterday`.
-  - [ ] Update code to use ARB keys (pending gen-l10n).
+  - [x] Update code to use ARB keys.
   - [ ] Use locale-aware date formatting.
 - [ ] **Notifications**
   - [x] Notifications screen already uses l10n for all messages
