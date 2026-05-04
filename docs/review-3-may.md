@@ -967,10 +967,10 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 - [x] **Add ARB keys**
   - [x] English keys (36 error code keys added).
   - [x] Hindi keys (36 error code keys added).
-  - [ ] Field-level validation keys.
-  - [ ] Generic backend failure keys.
-  - [ ] Permission failure keys.
-  - [ ] Offline/cache/sync keys.
+  - [x] Field-level validation keys (18 keys added).
+  - [x] Generic backend failure keys (8 keys added).
+  - [x] Permission failure keys (7 keys added).
+  - [x] Offline/cache/sync keys (4 keys added from Phase 1.2).
 - [ ] **Verify language switching**
   - [ ] Verify all new keys show in English.
   - [ ] Verify all new keys show in Hindi.
@@ -984,8 +984,8 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 - [ ] **Post Load / marketplace card**
   - [ ] Localize `Specify Material`.
   - [ ] Localize custom material hint.
-  - [ ] Localize `LOAD VALUE`.
-  - [ ] Localize `EST. PROFIT` / `EST. LOSS`.
+  - [x] Add ARB keys for `LOAD VALUE`, `EST. PROFIT`, `EST. LOSS`.
+  - [ ] Update code to use ARB keys (pending gen-l10n).
   - [x] Localize `SUPER`.
   - [x] Localize relative age strings.
 - [ ] **Chat**
