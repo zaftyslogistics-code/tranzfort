@@ -989,14 +989,14 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [x] Localize `SUPER`.
   - [x] Localize relative age strings.
 - [ ] **Chat**
-  - [ ] Localize `New message` pill.
-  - [ ] Localize `Today`.
-  - [ ] Localize `Yesterday`.
+  - [x] Add ARB keys for `New message`, `Today`, `Yesterday`.
+  - [ ] Update code to use ARB keys (pending gen-l10n).
   - [ ] Use locale-aware date formatting.
 - [ ] **Notifications**
-  - [ ] Rebuild notification settings copy with ARB keys.
-  - [ ] Replace raw `SnackBar` messages.
-  - [ ] Localize quiet-hours and auto-dismiss text.
+  - [x] Notifications screen already uses l10n for all messages
+  - [x] AppSnackbar used instead of raw SnackBar
+  - [ ] Rebuild notification settings copy with ARB keys (screen not implemented yet)
+  - [ ] Localize quiet-hours and auto-dismiss text (settings not implemented yet)
 - [x] **Public profiles/reviews**
   - [x] Move `verificationBadge` to localized UI.
   - [x] Move `newUserBadge` to localized UI.
