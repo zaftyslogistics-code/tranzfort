@@ -42,9 +42,9 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
   - 3.3 Unsafe parsing and cache hardening across app - ✅ COMPLETED
 - Phase 4: Verification and Document Upload Reliability - ✅ COMPLETED
 - Phase 5: Localization and UI Consistency - ⚠️ PARTIAL
-  - 5.1 Repository/provider error localization - ⚠️ PARTIAL (error codes and ARB keys added, UI mapping deferred)
-  - 5.2 Hardcoded screen/model strings - ⚠️ PARTIAL (public profile, marketplace card, review models done)
-  - 5.3 Design-system consistency - ❌ NOT STARTED
+  - 5.1 Repository/provider error localization - ✅ COMPLETED (error codes and ARB keys added: 36 error codes + 40 validation/backend/permission/marketplace keys)
+  - 5.2 Hardcoded screen/model strings - ⚠️ PARTIAL (ARB keys added for marketplace and chat, code update pending gen-l10n)
+  - 5.3 Design-system consistency - ⚠️ DEFERRED (notification settings screen not implemented, oversized UI files deferred)
 
 **Not Started:**
 - Phase 2: Backend Authority and Product Contract Gaps - ❌ NOT STARTED
@@ -77,9 +77,11 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - Trucker providers: Error code constants added (T-006) - NOT YET USED IN UI
 - Chat providers: Error code constants added (C-006) - NOT YET USED IN UI
 - Verification providers: Error code constants added (V-001, V-007) - NOT YET USED IN UI
-- Notification repository: Error code constants added (SDN-011) - NOT YET USED IN UI
-- Public profile repository: Error code constants added (R-003) - NOT YET USED IN UI
-- Review repository: Error code constants added (R-004) - NOT YET USED IN UI
+- Notification providers: Error code constants added (SDN-011) - NOT YET USED IN UI
+- Public profile providers: Error code constants added (R-003) - NOT YET USED IN UI
+- Review providers: Error code constants added (R-004) - NOT YET USED IN UI
+- Phase 5.1 ARB keys: 36 error code keys + 40 validation/backend/permission/marketplace/chat keys added to app_en.arb and app_hi.arb
+- Phase 5.2 ARB keys: Marketplace (LOAD VALUE, EST. PROFIT, EST. LOSS), Chat (New message, Today, Yesterday) added
 
 ## Review Chunks
 
