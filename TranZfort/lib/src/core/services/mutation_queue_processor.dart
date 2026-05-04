@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 
+import 'dart:math' show Random;
+
 import '../models/mutation_queue.dart';
 import '../services/mutation_queue_database.dart';
 
@@ -14,6 +16,9 @@ class MutationQueueProcessor {
   static const Duration _baseDelay = Duration(seconds: 1);
   static const Duration _maxDelay = Duration(seconds: 60);
   static const int _backoffMultiplier = 2;
+  static const double _jitterFactor = 0.1; // 10% jitter
+
+  final Random _random = Random();
 
   bool _isProcessing = false;
   final StreamController<MutationProcessingEvent> _eventController =
@@ -162,7 +167,7 @@ class MutationQueueProcessor {
     }
   }
 
-  /// Calculate exponential backoff delay based on retry count.
+  /// Calculate exponential backoff delay based on retry count with jitter.
   Duration _calculateBackoffDelay(int retryCount) {
     final delayMs = _baseDelay.inMilliseconds *
         math.pow(_backoffMultiplier, retryCount).toInt().clamp(1, 60);
@@ -170,7 +175,15 @@ class MutationQueueProcessor {
       _baseDelay.inMilliseconds,
       _maxDelay.inMilliseconds,
     );
-    return Duration(milliseconds: clampedMs);
+    
+    // Add jitter to avoid thundering-herd behavior
+    final jitterMs = (clampedMs * _jitterFactor * (_random.nextDouble() * 2 - 1)).toInt();
+    final finalMs = (clampedMs + jitterMs).clamp(
+      _baseDelay.inMilliseconds,
+      _maxDelay.inMilliseconds,
+    );
+    
+    return Duration(milliseconds: finalMs);
   }
 
   /// Enqueue a new mutation for processing.
