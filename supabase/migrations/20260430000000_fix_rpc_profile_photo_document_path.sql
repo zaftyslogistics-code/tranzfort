@@ -81,7 +81,7 @@ BEGIN
         'supplier_avatar_url',  p.avatar_url,
         'supplier_mobile',      p.mobile,
         'supplier_trust_score', COALESCE((
-          SELECT trust_score FROM public.profile_trust_scores WHERE profile_id = p.id
+          SELECT avg_rating FROM public.profile_trust_scores WHERE user_id = p.id
         ), 0)
       ) AS supplier_summary,
       CASE p_sort_by

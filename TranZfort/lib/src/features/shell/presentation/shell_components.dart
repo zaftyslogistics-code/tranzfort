@@ -50,8 +50,8 @@ class DetailPageScaffold extends StatelessWidget {
       body: Stack(
         children: [
           ShellScrollView(
-            children: children,
             bottomWidgetHeight: bottomWidget != null ? AppSpacing.bottomNavSafe + 80 : null,
+            children: children,
           ),
           TtsScreenSummaryEffect(
             summary: resolvedSummary,

@@ -202,7 +202,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: _loads.length,
-          separatorBuilder: (_, __) => const Divider(height: 1),
+          separatorBuilder: (context, index) => const Divider(height: 1),
           itemBuilder: (context, index) {
             final load = _loads[index];
             return _LoadItemTile(load: load);

@@ -189,6 +189,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonRetryAction => 'फिर कोशिश करें';
 
   @override
+  String get shellPressBackAgainToExit =>
+      'बाहर निकलने के लिए फिर से वापस दबाएं';
+
+  @override
   String get commonNotificationsLabel => 'सूचनाएँ';
 
   @override
@@ -503,6 +507,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get commonCancelAction => 'रद्द करें';
+
+  @override
+  String get commonDiscardAction => 'छोड़ें';
 
   @override
   String get chatActionApprove => 'स्वीकृत करें';
@@ -3258,6 +3265,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get verificationWizardBackAction => 'वापस';
 
   @override
+  String get verificationWizardBackTitle => 'वापस जाएं?';
+
+  @override
+  String get verificationWizardBackMessage =>
+      'आप इस चरण पर अपनी प्रगति खो देंगे। क्या आप वापस जाना चाहते हैं?';
+
+  @override
   String get verificationWizardSaveAndExitAction => 'सहेजें और बाहर निकलें';
 
   @override
@@ -5961,4 +5975,37 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
+
+  @override
+  String get truckerProfileTitle => 'ट्रकर प्रोफाइल';
+
+  @override
+  String get supplierProfileTitle => 'सप्लायर प्रोफाइल';
+
+  @override
+  String get raiseDisputeDiscardTitle => 'विवाद छोड़ें?';
+
+  @override
+  String get raiseDisputeDiscardMessage =>
+      'आपके असहेजित विवाद विवरण हैं। क्या आप उन्हें छोड़ना चाहते हैं?';
+
+  @override
+  String get postLoadDiscardTitle => 'परिवर्तन छोड़ें?';
+
+  @override
+  String get postLoadDiscardMessage =>
+      'आपके असहेजित लोड विवरण हैं। क्या आप उन्हें छोड़ना चाहते हैं?';
+
+  @override
+  String get ttsHindiVoice => 'हिंदी आवाज़';
+
+  @override
+  String get ttsEnglishVoice => 'अंग्रेज़ी आवाज़';
+
+  @override
+  String get ttsNoHindiVoices => 'इस डिवाइस पर कोई हिंदी आवाज़ उपलब्ध नहीं है।';
+
+  @override
+  String get ttsNoEnglishVoices =>
+      'इस डिवाइस पर कोई अंग्रेज़ी आवाज़ उपलब्ध नहीं है।';
 }

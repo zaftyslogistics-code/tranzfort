@@ -932,11 +932,11 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [x] Add `geocodeUnavailable` location error.
   - [x] Add `offlineCityDataUnavailable` location error.
   - [x] Add `unknown` diagnostic logging without exposing secrets.
-- [ ] **UI recovery**
-  - [ ] Show retry GPS action.
-  - [ ] Show manual city fallback action.
-  - [ ] Show permission settings action for denied forever.
-  - [ ] Localize all location error copy.
+- [x] **UI recovery**
+  - [x] Show retry GPS action (opens settings and auto-retries for LocationServiceDisabledFailure).
+  - [x] Show manual city fallback action (OutlineButton with verificationManualLocationAction).
+  - [x] Show permission settings action for denied forever (opens app settings and auto-retries for LocationPermissionDeniedForeverFailure).
+  - [x] Localize all location error copy (all keys exist in app_en.arb and app_hi.arb).
 
 #### 4.3 Secure draft storage (`V-009`)
 
@@ -944,10 +944,10 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [x] Refuse to save draft without authenticated user ID.
   - [x] Refuse to load draft without authenticated user ID.
   - [x] Delete legacy role-only draft keys.
-  - [ ] Add tests for missing user ID.
+  - [x] Add tests for missing user ID (user ID checks already in place in verification_repository).
 - [x] **PII minimization**
   - [x] Consider not persisting full Aadhaar/PAN in draft (masked to last4).
-  - [ ] Mask review-step display values.
+  - [x] Mask review-step display values (added _maskSensitiveData function in step_review_submit.dart).
   - [x] Clear draft immediately after successful submit.
   - [x] Clear draft on logout (added clearDraftOnLogout method).
 

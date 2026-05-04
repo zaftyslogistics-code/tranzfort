@@ -81,9 +81,7 @@ class TripCostingService {
 
     // Net profit (only if we know load value)
     // For per-ton loads: multiply by weight; for fixed-price loads: use fixed amount directly
-    final totalLoadValue = fixedPriceAmount != null
-        ? fixedPriceAmount
-        : (priceAmountPerTonne ?? 0) * (loadWeightTonnes ?? 0);
+    final totalLoadValue = fixedPriceAmount ?? (priceAmountPerTonne ?? 0) * (loadWeightTonnes ?? 0);
     final netProfit = totalLoadValue - totalExpense;
 
     return TripCostEstimate(

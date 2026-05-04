@@ -42,9 +42,12 @@ class TtsVoiceListItem extends ConsumerWidget {
   }
 
   Widget _buildLeadingIcon(ThemeData theme) {
+    // ignore: deprecated_member_use
     return Radio<bool>(
       value: true,
+      // ignore: deprecated_member_use
       groupValue: isSelected,
+      // ignore: deprecated_member_use
       onChanged: (_) => onTap(),
       activeColor: theme.colorScheme.primary,
     );

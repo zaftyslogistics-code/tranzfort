@@ -188,6 +188,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonRetryAction => 'Retry';
 
   @override
+  String get shellPressBackAgainToExit => 'Press back again to exit';
+
+  @override
   String get commonNotificationsLabel => 'Notifications';
 
   @override
@@ -501,6 +504,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonCancelAction => 'Cancel';
+
+  @override
+  String get commonDiscardAction => 'Discard';
 
   @override
   String get chatActionApprove => 'Approve';
@@ -3250,6 +3256,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationWizardBackAction => 'Back';
 
   @override
+  String get verificationWizardBackTitle => 'Go Back?';
+
+  @override
+  String get verificationWizardBackMessage =>
+      'You will lose your progress on this step. Do you want to go back?';
+
+  @override
   String get verificationWizardSaveAndExitAction => 'Save & exit';
 
   @override
@@ -5948,4 +5961,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get publicProfileNotFoundTitle => 'Profile not found';
+
+  @override
+  String get truckerProfileTitle => 'Trucker Profile';
+
+  @override
+  String get supplierProfileTitle => 'Supplier Profile';
+
+  @override
+  String get raiseDisputeDiscardTitle => 'Discard Dispute?';
+
+  @override
+  String get raiseDisputeDiscardMessage =>
+      'You have unsaved dispute details. Do you want to discard them?';
+
+  @override
+  String get postLoadDiscardTitle => 'Discard Changes?';
+
+  @override
+  String get postLoadDiscardMessage =>
+      'You have unsaved load details. Do you want to discard them?';
+
+  @override
+  String get ttsHindiVoice => 'Hindi Voice';
+
+  @override
+  String get ttsEnglishVoice => 'English Voice';
+
+  @override
+  String get ttsNoHindiVoices => 'No Hindi voices available on this device.';
+
+  @override
+  String get ttsNoEnglishVoices =>
+      'No English voices available on this device.';
 }

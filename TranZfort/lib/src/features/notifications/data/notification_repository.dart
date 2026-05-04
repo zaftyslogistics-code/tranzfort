@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart' as flutterNotifications;
+import 'package:flutter_local_notifications/flutter_local_notifications.dart' as flutter_notifications;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -74,22 +74,22 @@ extension AppNotificationPriorityX on AppNotificationPriority {
   bool get bypassesQuietHours => this == AppNotificationPriority.urgent;
 
   /// Android [Importance] mapping for foreground push display.
-  flutterNotifications.Importance get flutterImportance {
+  flutter_notifications.Importance get flutterImportance {
     return switch (this) {
-      AppNotificationPriority.urgent => flutterNotifications.Importance.max,
-      AppNotificationPriority.high => flutterNotifications.Importance.high,
-      AppNotificationPriority.low => flutterNotifications.Importance.low,
-      _ => flutterNotifications.Importance.defaultImportance,
+      AppNotificationPriority.urgent => flutter_notifications.Importance.max,
+      AppNotificationPriority.high => flutter_notifications.Importance.high,
+      AppNotificationPriority.low => flutter_notifications.Importance.low,
+      _ => flutter_notifications.Importance.defaultImportance,
     };
   }
 
   /// Android [Priority] mapping for foreground push display.
-  flutterNotifications.Priority get flutterPriority {
+  flutter_notifications.Priority get flutterPriority {
     return switch (this) {
-      AppNotificationPriority.urgent => flutterNotifications.Priority.max,
-      AppNotificationPriority.high => flutterNotifications.Priority.high,
-      AppNotificationPriority.low => flutterNotifications.Priority.low,
-      _ => flutterNotifications.Priority.defaultPriority,
+      AppNotificationPriority.urgent => flutter_notifications.Priority.max,
+      AppNotificationPriority.high => flutter_notifications.Priority.high,
+      AppNotificationPriority.low => flutter_notifications.Priority.low,
+      _ => flutter_notifications.Priority.defaultPriority,
     };
   }
 }

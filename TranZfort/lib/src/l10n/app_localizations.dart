@@ -410,6 +410,12 @@ abstract class AppLocalizations {
   /// **'Retry'**
   String get commonRetryAction;
 
+  /// No description provided for @shellPressBackAgainToExit.
+  ///
+  /// In en, this message translates to:
+  /// **'Press back again to exit'**
+  String get shellPressBackAgainToExit;
+
   /// No description provided for @commonNotificationsLabel.
   ///
   /// In en, this message translates to:
@@ -955,6 +961,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cancel'**
   String get commonCancelAction;
+
+  /// No description provided for @commonDiscardAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard'**
+  String get commonDiscardAction;
 
   /// No description provided for @chatActionApprove.
   ///
@@ -5053,6 +5065,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back'**
   String get verificationWizardBackAction;
+
+  /// No description provided for @verificationWizardBackTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Go Back?'**
+  String get verificationWizardBackTitle;
+
+  /// No description provided for @verificationWizardBackMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You will lose your progress on this step. Do you want to go back?'**
+  String get verificationWizardBackMessage;
 
   /// No description provided for @verificationWizardSaveAndExitAction.
   ///
@@ -9253,6 +9277,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile not found'**
   String get publicProfileNotFoundTitle;
+
+  /// No description provided for @truckerProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trucker Profile'**
+  String get truckerProfileTitle;
+
+  /// No description provided for @supplierProfileTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier Profile'**
+  String get supplierProfileTitle;
+
+  /// No description provided for @raiseDisputeDiscardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard Dispute?'**
+  String get raiseDisputeDiscardTitle;
+
+  /// No description provided for @raiseDisputeDiscardMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved dispute details. Do you want to discard them?'**
+  String get raiseDisputeDiscardMessage;
+
+  /// No description provided for @postLoadDiscardTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard Changes?'**
+  String get postLoadDiscardTitle;
+
+  /// No description provided for @postLoadDiscardMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You have unsaved load details. Do you want to discard them?'**
+  String get postLoadDiscardMessage;
+
+  /// No description provided for @ttsHindiVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi Voice'**
+  String get ttsHindiVoice;
+
+  /// No description provided for @ttsEnglishVoice.
+  ///
+  /// In en, this message translates to:
+  /// **'English Voice'**
+  String get ttsEnglishVoice;
+
+  /// No description provided for @ttsNoHindiVoices.
+  ///
+  /// In en, this message translates to:
+  /// **'No Hindi voices available on this device.'**
+  String get ttsNoHindiVoices;
+
+  /// No description provided for @ttsNoEnglishVoices.
+  ///
+  /// In en, this message translates to:
+  /// **'No English voices available on this device.'**
+  String get ttsNoEnglishVoices;
 }
 
 class _AppLocalizationsDelegate

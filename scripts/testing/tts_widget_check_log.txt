@@ -1,0 +1,41 @@
+[2026-05-02 22:35:12] === TTS Widget Integration Check ===
+[2026-05-02 22:35:12] Checking for TtsScreenSummaryEffect in required screens...
+[2026-05-02 22:35:12] ❌ Trucker Fleet - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] === TTS Widget Integration Check ===
+[2026-05-02 22:35:27] Checking for TtsScreenSummaryEffect in required screens...
+[2026-05-02 22:35:27] ❌ Trucker Fleet - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ File not found: chat_screen.dart
+[2026-05-02 22:35:27] ❌ File not found: supplier_dashboard_screen.dart
+[2026-05-02 22:35:27] ❌ File not found: trucker_marketplace_screen.dart
+[2026-05-02 22:35:27] ❌ Trucker Load Detail - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ Supplier Trip Detail - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ File not found: supplier_load_detail_screen.dart
+[2026-05-02 22:35:27] ✅ Common Notifications - TtsScreenSummaryEffect found
+[2026-05-02 22:35:27] ❌ Trucker Trip Detail - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ File not found: trucker_profile_screen.dart
+[2026-05-02 22:35:27] ❌ Trucker Dashboard - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ File not found: settings_screen.dart
+[2026-05-02 22:35:27] ❌ Supplier Post Load - TtsScreenSummaryEffect NOT found
+[2026-05-02 22:35:27] ❌ File not found: supplier_profile_screen.dart
+[2026-05-02 22:35:27] 
+[2026-05-02 22:35:27] === Summary ===
+[2026-05-02 22:35:27] Total Screens: 14
+[2026-05-02 22:35:27] With Widget: @{Screen=Common Notifications; File=notifications_screen.dart; Status=WIDGET_FOUND; HasWidget=True}.Count
+[2026-05-02 22:35:27] Missing Widget:             .Count
+[2026-05-02 22:35:27] 
+[2026-05-02 22:35:27] ❌ Missing TtsScreenSummaryEffect in:
+[2026-05-02 22:35:27]   - Trucker Fleet
+[2026-05-02 22:35:27]   - Common Chat
+[2026-05-02 22:35:27]   - Supplier Dashboard
+[2026-05-02 22:35:27]   - Trucker Marketplace
+[2026-05-02 22:35:27]   - Trucker Load Detail
+[2026-05-02 22:35:27]   - Supplier Trip Detail
+[2026-05-02 22:35:27]   - Supplier Load Detail
+[2026-05-02 22:35:27]   - Trucker Trip Detail
+[2026-05-02 22:35:27]   - Trucker Profile
+[2026-05-02 22:35:27]   - Trucker Dashboard
+[2026-05-02 22:35:27]   - Common Settings
+[2026-05-02 22:35:27]   - Supplier Post Load
+[2026-05-02 22:35:27]   - Supplier Profile
+[2026-05-02 22:35:27] 
+[2026-05-02 22:35:27] Action: Add TtsScreenSummaryEffect to missing screens

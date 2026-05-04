@@ -12,6 +12,14 @@ import '../../providers/verification_wizard_provider.dart';
 import '../components/step_container.dart';
 import '../components/wizard_progress_bar.dart';
 
+/// Masks sensitive data for display (PII minimization)
+String _maskSensitiveData(String? value, {int visibleChars = 4}) {
+  if (value == null || value.isEmpty) return '-';
+  if (value.length <= visibleChars) return value;
+  final masked = '*' * (value.length - visibleChars);
+  return masked + value.substring(value.length - visibleChars);
+}
+
 class StepReviewSubmit extends ConsumerWidget {
   const StepReviewSubmit({super.key});
 
@@ -58,8 +66,8 @@ class StepReviewSubmit extends ConsumerWidget {
               title: l10n.verificationWizardReviewIdentity,
               isComplete: draft.hasIdentityComplete,
               details: [
-                '${l10n.commonAadhaarNumberLabel}: ${draft.aadhaarNumber ?? '-'}',
-                '${l10n.commonPanNumberLabel}: ${draft.panNumber ?? '-'}',
+                '${l10n.commonAadhaarNumberLabel}: ${_maskSensitiveData(draft.aadhaarNumber)}',
+                '${l10n.commonPanNumberLabel}: ${_maskSensitiveData(draft.panNumber)}',
                 if (draft.hasIdentityComplete)
                   l10n.verificationWizardReviewDocumentsUploaded,
               ],

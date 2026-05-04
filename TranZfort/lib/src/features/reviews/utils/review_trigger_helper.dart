@@ -65,13 +65,16 @@ class ReviewTriggerHelper {
 
     if (!canReview) return;
 
-    await _showPrompt(
-      context,
-      targetUserId: targetUserId,
-      targetUserName: targetUserName,
-      contextType: 'chat',
-      contextId: conversationId,
-    );
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      await _showPrompt(
+        context,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        contextType: 'chat',
+        contextId: conversationId,
+      );
+    }
   }
 
   /// Shows review prompt after load is closed.
@@ -91,13 +94,16 @@ class ReviewTriggerHelper {
 
     if (!canReview) return;
 
-    await _showPrompt(
-      context,
-      targetUserId: targetUserId,
-      targetUserName: targetUserName,
-      contextType: 'load_closed',
-      contextId: loadId,
-    );
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      await _showPrompt(
+        context,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        contextType: 'load_closed',
+        contextId: loadId,
+      );
+    }
   }
 
   /// Shows review prompt after trip is completed.
@@ -117,13 +123,16 @@ class ReviewTriggerHelper {
 
     if (!canReview) return;
 
-    await _showPrompt(
-      context,
-      targetUserId: targetUserId,
-      targetUserName: targetUserName,
-      contextType: 'trip_completed',
-      contextId: tripId,
-    );
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      await _showPrompt(
+        context,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        contextType: 'trip_completed',
+        contextId: tripId,
+      );
+    }
   }
 
   /// Shows manual review prompt from load detail.
@@ -151,12 +160,15 @@ class ReviewTriggerHelper {
       return;
     }
 
-    await _showPrompt(
-      context,
-      targetUserId: targetUserId,
-      targetUserName: targetUserName,
-      contextType: 'load_closed',
-      contextId: loadId,
-    );
+    if (context.mounted) {
+      // ignore: use_build_context_synchronously
+      await _showPrompt(
+        context,
+        targetUserId: targetUserId,
+        targetUserName: targetUserName,
+        contextType: 'load_closed',
+        contextId: loadId,
+      );
+    }
   }
 }

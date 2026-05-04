@@ -107,7 +107,9 @@ class NavigationService {
         toRoute: name,
         type: NavigationTransitionType.goNamed,
         metadata: {
+          // ignore: use_null_aware_elements
           if (pathParameters != null) 'pathParameters': pathParameters,
+          // ignore: use_null_aware_elements
           if (queryParameters != null) 'queryParameters': queryParameters,
         },
       );
@@ -192,6 +194,7 @@ class NavigationService {
         type: NavigationTransitionType.go,
         metadata: {
           'deepLink': true,
+          // ignore: use_null_aware_elements
           if (queryParams != null) 'queryParams': queryParams,
         },
       );

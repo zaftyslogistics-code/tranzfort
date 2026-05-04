@@ -30,6 +30,7 @@ class MonitoringService {
         'fromRoute': fromRoute,
         'toRoute': toRoute,
         'transitionType': type.name,
+        // ignore: use_null_aware_elements
         if (metadata != null) 'metadata': metadata,
       },
     );
@@ -49,6 +50,7 @@ class MonitoringService {
       data: {
         'route': route,
         'action': action.name,
+        // ignore: use_null_aware_elements
         if (context != null) 'context': context,
       },
     );
@@ -87,6 +89,7 @@ class MonitoringService {
       data: {
         'route': route,
         'error': error,
+        // ignore: use_null_aware_elements
         if (stackTrace != null) 'stackTrace': stackTrace,
       },
     );

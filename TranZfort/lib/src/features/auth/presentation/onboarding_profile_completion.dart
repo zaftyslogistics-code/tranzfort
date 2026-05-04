@@ -255,6 +255,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           ),
           TextButton(
             onPressed: () async {
+              // ignore: use_build_context_synchronously
               Navigator.pop(context);
               final granted = await Geolocator.requestPermission();
               if (granted == LocationPermission.whileInUse || granted == LocationPermission.always) {
@@ -262,13 +263,12 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                   _handleCaptureLocation();
                 }
               } else if (granted == LocationPermission.denied) {
-                if (mounted) {
-                  AppSnackbar.show(
-                    context: context,
-                    message: 'Permission denied. Please try again.',
-                    variant: AppSnackbarVariant.error,
-                  );
-                }
+                if (!mounted) return;
+                AppSnackbar.show(
+                  context: context,
+                  message: 'Permission denied. Please try again.',
+                  variant: AppSnackbarVariant.error,
+                );
               }
             },
             child: const Text('Grant Permission'),
@@ -304,6 +304,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   Future<void> _handleManualLocation() async {
     final l10n = AppLocalizations.of(context);
     final searchController = TextEditingController();
+    // ignore: unused_local_variable
+    PlaceSuggestion? selectedSuggestion;
     List<PlaceSuggestion> suggestions = [];
     bool isSearching = false;
 

@@ -1,0 +1,6 @@
+[2026-05-02 22:36:12] === TODO-27 Automated Test Suite ===
+[2026-05-02 22:36:12] Device: 89P7MZVWV4Z9C6GE
+[2026-05-02 22:36:12] Credentials: Supplier=testa@example.com, Trucker=testt@example.com
+[2026-05-02 22:36:12] 
+[2026-05-02 22:36:12] Checking Android device connection...
+[2026-05-02 22:36:12] ❌ No Android device connected
