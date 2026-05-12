@@ -19,9 +19,9 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - Admin-specific code is not reviewed except where shared contracts affect the user app.
 - Each issue includes description, affected file/module, severity, and suggested fix/approach.
 
-## Completion Status (Updated: May 12, 2026)
+## Completion Status (Updated: May 12, 2026 - T-009 fixed)
 
-**Overall Progress:** 7/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4)
+**Overall Progress:** 8/10 phases partially or fully completed (Phase 0, 1.1-partial, 1.2, 1.3, 3, 4, 5, 6)
 
 **UI/UX Rollback Decision:**
 - **Rollback Point:** `e545a13` - "Improve debug logging for supplier location search" (April 20, 2026)
@@ -29,13 +29,11 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - **UI/UX Work Preserved:** Color scheme improvements, dark theme cards, TTS improvements, auth redesign, marketplace card redesign, localization cleanup
 - **Reasoning:** Build is stable, UI/UX improvements are separate from review-3-may.md tasks, Phase 5 localization can be done on top of current UI/UX
 
-**Overall Progress:** 8/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4, 5, 6)
-
 **Completed:**
 - Phase 0: Safety, Baseline, and Test Harness - ✅ COMPLETED
 - Phase 1.1: Secure Aadhaar/PAN storage (V-002) - ⚠️ PARTIAL (Flutter-side fix done, backend encrypted table needed)
 - Phase 1.2: Fix offline mutation queue processing (R-010, R-011, R-013) - ✅ COMPLETED
-- Phase 1.3: Fix Trucker feed supplier avatar (T-010 only) - ⚠️ PARTIAL (T-009, V-004 require backend)
+- Phase 1.3: Fix Trucker feed supplier avatar (T-010 only) - ✅ COMPLETED (T-009 fixed via migration 20260512000005, T-010 Hero tag issue deferred, V-004 requires backend)
 - Phase 3: Pagination, Realtime, and Data Robustness - ✅ COMPLETED
   - 3.1 Chat pagination and hardening (C-005 parsing only) - ✅ COMPLETED
   - 3.2 Support pagination (SDN-001 parsing only) - ✅ COMPLETED
@@ -61,6 +59,7 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - Fixed mutation queue processing logic (added isProcessable, fixed loop)
 - Wired offline sync banner retry button to processor
 - Fixed marketplace load card Hero tag instability
+- Fixed marketplace feed supplier avatar rendering: Restored supplier_photo_path in get_marketplace_feed RPC (migration 20260512000005) - T-009
 - Replaced unsafe DateTime.parse with safe parsing across 12+ files
 - Added defensive parsing for notification preferences, public profile cache
 - Localized public profile displayLocation, verificationBadge, newUserBadge
@@ -324,8 +323,14 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 #### T-009 — Supplier avatar in Trucker Find Loads feed falls back to initials because marketplace RPC only returns `profiles.avatar_url`
 
 - **Description:** The Trucker feed card passes `state.loads[index].supplierAvatarUrl` into `MarketplaceLoadCard`, and the card can render either an HTTP URL or storage path via signed URL. However, the latest `get_marketplace_feed` RPC only returns `p.avatar_url` as `supplier_summary.supplier_avatar_url`. Earlier marketplace RPC versions also returned `supplier_photo_path` / `profile_photo_document_path`, but later migrations removed that fallback. If `profiles.avatar_url` is empty or not synchronized from the approved profile photo, the load card has no real image path and renders the initial badge instead. This matches the observed issue where the top-left supplier area in Trucker load cards does not fetch the actual supplier photo.
-- **Affected file/module:** `supabase/migrations/20260430000001_fix_marketplace_feed_trust_score_column.sql`, `TranZfort/lib/src/features/trucker/data/trucker_marketplace_repository.dart`, `TranZfort/lib/src/features/trucker/presentation/trucker_find_loads_screen.dart`, `TranZfort/lib/src/shared/widgets/marketplace_load_card.dart`
+
+**Root Cause (May 12, 2026):** Migration `20260430000000_fix_rpc_profile_photo_document_path.sql` incorrectly removed `supplier_photo_path` from the RPC's `supplier_summary` JSONB object. The migration comment claimed: *"This column does not exist in the profiles table schema"* — but this is FALSE. The column `profile_photo_document_path` was added to `profiles` in migration `20260310000000_phase9_verification_document_fields.sql:5`. The removal broke the Dart fallback chain: `SupplierInfo.fromRpcSummary` uses `avatarUrl ?? photoPath`, but after the fix, `photoPath` is always `null`. Since `profiles.avatar_url` is typically `NULL` (real photos are stored in `profile_photo_document_path`), avatars always fall back to initials.
+
+**Fix Applied (May 12, 2026):** Created migration `20260512000005_fix_marketplace_feed_restore_supplier_photo_path.sql` which restores `supplier_photo_path` (from `p.profile_photo_document_path`) in the `supplier_summary` JSONB object. This re-enables the `avatarUrl ?? photoPath` fallback chain.
+
+- **Affected file/module:** `supabase/migrations/20260430000000_fix_rpc_profile_photo_document_path.sql`, `supabase/migrations/20260512000005_fix_marketplace_feed_restore_supplier_photo_path.sql`, `TranZfort/lib/src/features/trucker/data/trucker_marketplace_repository.dart`, `TranZfort/lib/src/features/trucker/presentation/trucker_find_loads_screen.dart`, `TranZfort/lib/src/shared/widgets/marketplace_load_card.dart`
 - **Severity:** High
+- **Status:** ✅ FIXED (migration 20260512000005 applied via db push on May 12, 2026)
 - **Suggested fix or approach:** Make the marketplace feed return a canonical display avatar field that always resolves for approved suppliers: `COALESCE(NULLIF(p.avatar_url, ''), <approved profile photo path/source>)`, or ensure the profile-photo approval flow reliably writes `profiles.avatar_url`. If returning storage paths, include the bucket/source or return a signed/public URL from the RPC/repository so the widget does not guess buckets. Add an RPC contract test that asserts `supplier_summary.supplier_avatar_url` is present for suppliers with approved profile photos.
 
 #### T-010 — Marketplace avatar widget creates unstable Hero tags and signs URLs inside each card build
@@ -660,7 +665,7 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 
 - **Sensitive identity storage:** Full Aadhaar/PAN values are written to profile fields (`V-002`).
 - **Offline sync broken:** Pending mutations are skipped/failed by retry eligibility logic and retry UI is a stub (`R-010`, `R-013`).
-- **Trucker feed avatar bug:** Marketplace RPC only returns `profiles.avatar_url`, with no reliable approved profile-photo fallback (`T-009`, `V-004`).
+- ~~**Trucker feed avatar bug:** Marketplace RPC only returns `profiles.avatar_url`, with no reliable approved profile-photo fallback (`T-009`, `V-004`).~~ ✅ FIXED (T-009 fixed via migration 20260512000005, V-004 still requires backend)
 - **Missing Supplier draft flow:** Post Load lacks required Save as Draft/resume workflow (`S-001`).
 - **Direct client-side table mutations:** Fleet create/update/archive/reactivate are client-side table writes instead of authoritative backend RPCs (`T-007`).
 - **Unbounded/unstable chat/support pagination:** Chat initial load is unbounded and cursor logic can skip messages (`C-002`, `C-003`, `SDN-002`).
