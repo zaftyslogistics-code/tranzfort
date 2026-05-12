@@ -19,7 +19,7 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - Admin-specific code is not reviewed except where shared contracts affect the user app.
 - Each issue includes description, affected file/module, severity, and suggested fix/approach.
 
-## Completion Status (Updated: May 4, 2026)
+## Completion Status (Updated: May 12, 2026)
 
 **Overall Progress:** 7/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4)
 
@@ -29,7 +29,7 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - **UI/UX Work Preserved:** Color scheme improvements, dark theme cards, TTS improvements, auth redesign, marketplace card redesign, localization cleanup
 - **Reasoning:** Build is stable, UI/UX improvements are separate from review-3-may.md tasks, Phase 5 localization can be done on top of current UI/UX
 
-**Overall Progress:** 7/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4, 5-partial)
+**Overall Progress:** 8/10 phases partially or fully completed (Phase 0, 1.2, 1.3-partial, 3, 4, 5, 6)
 
 **Completed:**
 - Phase 0: Safety, Baseline, and Test Harness - ✅ COMPLETED
@@ -45,10 +45,12 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
   - 5.1 Repository/provider error localization - ✅ COMPLETED (error codes and ARB keys added: 36 error codes + 40 validation/backend/permission/marketplace keys)
   - 5.2 Hardcoded screen/model strings - ✅ COMPLETED (ARB keys added and code updated for marketplace, chat, offline sync)
   - 5.3 Design-system consistency - ⚠️ DEFERRED (notification settings screen not implemented, oversized UI files deferred)
+- Phase 6: Privacy, Cache, and Offline Storage - ✅ COMPLETED
+  - 6.1 Offline cache classification and lifecycle controls - ✅ COMPLETED
+  - 6.2 Mutation queue privacy (encryption, payload minimization, error redaction) - ✅ COMPLETED
 
 **Not Started:**
 - Phase 2: Backend Authority and Product Contract Gaps - ❌ NOT STARTED
-- Phase 6: Privacy, Cache, and Offline Storage - ❌ NOT STARTED
 - Phase 7: Support, Dispute, and Attachment Finalization - ❌ NOT STARTED
 - Phase 8: Notifications and Push - ❌ NOT STARTED
 - Phase 9: Public Profile and Reviews - ❌ NOT STARTED
@@ -71,6 +73,11 @@ Scope: User app only (`TranZfort` Flutter app: Supplier + Trucker). Admin app re
 - Verification document upload: Added error codes for all user-facing strings (V-007)
 - Verification location service: Added typed failure exceptions (network, geocode, offline, unknown) (V-008)
 - Verification draft storage: Hardened with user ID requirement, PII masking, clear on logout (V-009)
+- Phase 5: Added 76 ARB keys for error codes, validation, backend failures, permissions, marketplace, chat, offline sync
+- Phase 6: Mutation queue encryption with AES-256-GCM (key in flutter_secure_storage)
+- Phase 6: Cache lifecycle controls (LRU eviction, max-size limits, schema versioning)
+- Phase 6: Payload minimization (redact PII from stored mutations)
+- Phase 6: Error redaction (store error codes instead of raw errors, never persist stack traces)
 - Auth/profile repository: Error code constants added (F-005, F-007) - NOT YET USED IN UI
 - Onboarding location: Localized error messages with ARB keys
 - Supplier providers: Error code constants added (S-004) - NOT YET USED IN UI
