@@ -1068,24 +1068,139 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 ### Phase 7 — Support, Dispute, and Attachment Finalization
 
-- [ ] **Redesign support attachment lifecycle**
-  - [ ] Introduce draft attachment session ID.
-  - [ ] Upload files under draft/session namespace.
-  - [ ] Create ticket through RPC.
-  - [ ] Finalize attachments to ticket through RPC.
-  - [ ] Delete draft attachments after failed/cancelled submit.
-  - [ ] Add cleanup job/RPC for stale draft attachments.
-- [ ] **Improve attachment upload validation**
-  - [ ] Validate file before creating attachment row.
-  - [ ] Enforce file size limit.
-  - [ ] Enforce supported image MIME/type.
-  - [ ] Handle picker cancellation without creating failed row.
-  - [ ] Add tests for cancel/failure/finalize flows.
-- [ ] **Support notification deep links**
-  - [ ] Add user support ticket detail route or selected-ticket route state.
-  - [ ] Update `notification_route_resolver.dart` to allow support ticket routes.
-  - [ ] Ensure admin support routes remain blocked in user app.
-  - [ ] Test support notification opens exact ticket.
+**Current State Analysis:**
+- **Support attachments:** Currently has TODO saying attachments should be added AFTER ticket creation (line 215 in create_support_ticket_screen.dart)
+- **SupportAttachmentUploadService:** Has `uploadMultipleAttachments` but requires ticket_id upfront
+- **Dispute attachments:** Uses `pickCompressAndUploadAttachment` which uploads immediately to `{profileId}/report_issue/evidence_{timestamp}.jpg`
+- **Storage paths:**
+  - Support: `{profileId}/support_ticket/{ticketId}/attachment_{timestamp}.jpg`
+  - Dispute: `{profileId}/report_issue/evidence_{timestamp}.jpg`
+- **Backend RPCs:** `create_support_ticket` accepts single `p_attachment_path` parameter
+
+**Risk Assessment:**
+- **HIGH RISK:** Full redesign with draft session IDs requires backend RPC changes
+- **Current TODO:** Code already acknowledges incomplete attachment flow
+- **Recommendation:** Focus on validation improvements first, defer redesign until backend ready
+
+---
+
+### Phase 7.1 — Improve Attachment Upload Validation (LOW RISK, Flutter-only)
+
+**Goal:** Add validation before creating database records and improve error handling
+
+- [ ] **Validate file before creating attachment row**
+  - [ ] Add file size validation (max 10MB) in `SupportAttachmentUploadService._uploadSingleAttachment`
+  - [ ] Add MIME type validation (image/jpeg, image/png only) before compression
+  - [ ] Validate file is not corrupted (image decode check before upload)
+  - [ ] Return `ValidationFailure` with specific error codes for each validation failure
+- [ ] **Enforce file size limit**
+  - [ ] Add constant `maxAttachmentSizeBytes = 10 * 1024 * 1024` (10MB)
+  - [ ] Check size in `_defaultReadBytes` before compression
+  - [ ] Return specific error code `ERR_ATTACHMENT_TOO_LARGE`
+- [ ] **Enforce supported image MIME/type**
+  - [ ] Add whitelist of allowed MIME types: `['image/jpeg', 'image/png', 'image/jpg']`
+  - [ ] Check file extension and actual MIME type from XFile
+  - [ ] Return specific error code `ERR_ATTACHMENT_INVALID_TYPE`
+- [ ] **Handle picker cancellation without creating failed row**
+  - [ ] In `_uploadSingleAttachment`, check if file is null BEFORE creating DB record
+  - [ ] Move `_createAttachmentRecord` call AFTER successful file pick
+  - [ ] This prevents creating "failed" rows when user cancels picker
+- [ ] **Add tests for cancel/failure/finalize flows**
+  - [ ] Test: User cancels picker → no DB record created
+  - [ ] Test: File too large → `ValidationFailure` returned
+  - [ ] Test: Invalid MIME type → `ValidationFailure` returned
+  - [ ] Test: Corrupted image → `ValidationFailure` returned
+  - [ ] Test: Network failure during upload → record marked as failed with retry logic
+
+**Implementation Steps:**
+1. Add validation constants to `SupportAttachmentUploadService`
+2. Create validation method `_validateFile(XFile file)` called before DB record creation
+3. Move `_createAttachmentRecord` call after file pick and validation
+4. Add error code constants to `support_repository.dart`
+5. Add ARB keys for new error messages
+6. Write unit tests for validation logic
+
+**Files to Modify:**
+- `lib/src/features/support/data/support_attachment_upload_service.dart`
+- `lib/src/features/support/data/support_repository.dart` (add error codes)
+- `lib/l10n/app_en.arb` and `app_hi.arb` (add error message keys)
+
+---
+
+### Phase 7.2 — Redesign Support Attachment Lifecycle (HIGH RISK, requires backend)
+
+**DEFERRED until backend RPCs are ready**
+
+- [ ] **Introduce draft attachment session ID**
+  - [ ] Generate UUID on screen init for draft session
+  - [ ] Store draft session in local state
+  - [ ] Upload files under `{profileId}/draft/{session_id}/` namespace
+  - [ ] **BACKEND REQUIRED:** RPC to create ticket from draft session
+- [ ] **Upload files under draft/session namespace**
+  - [ ] Change storage path from `{profileId}/support_ticket/{ticketId}/` to `{profileId}/draft/{session_id}/`
+  - [ ] Update `pickCompressAndUploadAttachment` to accept session_id
+  - [ ] **BACKEND REQUIRED:** RPC to finalize attachments from draft to ticket
+- [ ] **Create ticket through RPC**
+  - [ ] **BACKEND REQUIRED:** `create_support_ticket_from_draft` RPC
+  - [ ] Pass draft session ID instead of attachment path
+  - [ ] Backend moves files from draft to ticket namespace
+- [ ] **Finalize attachments to ticket through RPC**
+  - [ ] **BACKEND REQUIRED:** `finalize_draft_attachments` RPC
+  - [ ] Call after successful ticket creation
+  - [ ] Backend updates attachment records with ticket_id
+- [ ] **Delete draft attachments after failed/cancelled submit**
+  - [ ] On cancel/failure, call cleanup to delete draft files
+  - [ **BACKEND REQUIRED:** RPC or direct storage cleanup
+- [ ] **Add cleanup job/RPC for stale draft attachments**
+  - [ ] **BACKEND REQUIRED:** Scheduled job to delete drafts older than 24h
+  - [ ] **BACKEND REQUIRED:** RPC `cleanup_stale_draft_attachments`
+
+**Implementation Prerequisites:**
+1. Backend RPC `create_support_ticket_from_draft(p_session_id, p_category, p_message_body, ...)`
+2. Backend RPC `finalize_draft_attachments(p_session_id, p_ticket_id)`
+3. Backend RPC `cleanup_stale_draft_attachments()`
+4. Backend storage migration to support draft namespace
+
+**DO NOT START** until backend team confirms RPCs are deployed
+
+---
+
+### Phase 7.3 — Support Notification Deep Links (LOW RISK, Flutter-only)
+
+**Goal:** Allow notifications to open specific support tickets
+
+- [ ] **Add user support ticket detail route or selected-ticket route state**
+  - [ ] Check if route already exists in `app_routes.dart`
+  - [ ] If not, add `supportTicketDetail` route path
+  - [ ] Accept ticket_id as parameter
+- [ ] **Update `notification_route_resolver.dart` to allow support ticket routes**
+  - [ ] Add case for `support_ticket` notification type
+  - [ ] Extract ticket_id from notification data
+  - [ ] Route to `supportTicketDetail` with ticket_id
+- [ ] **Ensure admin support routes remain blocked in user app**
+  - [ ] Verify `notification_route_resolver.dart` doesn't allow admin routes
+  - [ ] Add safety check: if route starts with `/admin/`, block in user app
+- [ ] **Test support notification opens exact ticket**
+  - [ ] Create test notification with support_ticket type
+  - [ ] Tap notification → should open ticket detail screen
+  - [ ] Verify correct ticket is displayed
+
+**Implementation Steps:**
+1. Add route to `app_routes.dart` (if missing)
+2. Update `notification_route_resolver.dart` with support ticket case
+3. Add safety check for admin routes
+4. Manual testing with test notification
+
+**Files to Modify:**
+- `lib/src/core/navigation/app_routes.dart` (if needed)
+- `lib/src/features/notifications/presentation/notification_route_resolver.dart`
+
+---
+
+**Recommended Phase 7 Execution Order:**
+1. **Start with 7.3 (Support Notification Deep Links)** - LOW RISK, independent
+2. **Then 7.1 (Attachment Validation)** - LOW RISK, improves existing flow
+3. **Defer 7.2 (Attachment Lifecycle Redesign)** - HIGH RISK, requires backend
 
 ### Phase 8 — Notifications and Push
 
