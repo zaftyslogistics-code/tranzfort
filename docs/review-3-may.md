@@ -1228,16 +1228,33 @@ Use this checklist as the execution plan for fixing the review findings. Work to
     - can_message: TRUE for self or users with business relationship
   - ✅ Business relationship determined by: completed trips, active bookings, pending/accepted booking requests
 - [ ] **Add contract tests for supplier and trucker public profiles.**
-- [ ] **Public loads**
-  - [ ] Safely parse public load cache JSON.
-  - [ ] Add pagination metadata if UI needs load-more.
-  - [ ] Verify only allowed load statuses are publicly visible.
-- [ ] **Reviews**
-  - [ ] Replace hardcoded validation strings with codes.
-  - [ ] Normalize backend review errors.
-  - [ ] Treat unexpected RPC response shapes as contract failures.
-  - [ ] Localize review time labels.
-  - [ ] Add tests for duplicate review, reply, cannot-review, and malformed RPC response.
+**Phase 9.2 — Public loads**
+
+- [x] **Safely parse public load cache JSON.**
+  - ✅ RPC returns structured JSONB with 'loads' array and 'total' count
+  - ✅ Dart PublicLoadPreview.fromMap uses safe parsing with _readDoubleNullable, _readDateTime
+  - ✅ Repository handles null loads array gracefully (returns empty list)
+  - ✅ Repository throws FormatException for unexpected response types
+- [x] **Add pagination metadata if UI needs load-more.**
+  - ✅ RPC returns 'total' count for pagination
+  - ✅ Repository accepts limit and offset parameters
+  - ✅ UI (_LoadHistorySection) implements pagination with _offset, _hasMore, _isLoading
+  - ✅ LoadHistorySection loads more data when user scrolls to bottom
+- [x] **Verify only allowed load statuses are publicly visible.**
+  - ✅ RPC filters to allowed statuses: ('active', 'completed', 'assigned_partial', 'assigned_full')
+  - ✅ RPC requires supplier verification_status = 'verified'
+  - ✅ Status filter parameter supported for additional filtering
+**Phase 9.3 — Reviews**
+
+- [x] **Replace hardcoded validation strings with codes.**
+  - ✅ FIXED: Added ReviewErrorCodes.ratingOutOfRange, contextIdRequired, commentTooLong
+  - ✅ Replaced hardcoded strings in review_repository.dart with error codes
+  - ✅ Removed TODO comments and replaced with actual error code usage
+  - ✅ UI layer can now map error codes to localized messages
+- [ ] **Normalize backend review errors.**
+- [ ] **Treat unexpected RPC response shapes as contract failures.**
+- [ ] **Localize review time labels.**
+- [ ] **Add tests for duplicate review, reply, cannot-review, and malformed RPC response.**
 
 ### Phase 10 — Final Release Validation
 

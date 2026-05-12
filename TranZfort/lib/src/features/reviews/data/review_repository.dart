@@ -10,6 +10,9 @@ import 'review_models.dart';
 // R-004: Error codes for localization (UI should map these to AppLocalizations)
 class ReviewErrorCodes {
   static const String validationFailed = 'review.validation_failed';
+  static const String ratingOutOfRange = 'review.rating_out_of_range';
+  static const String contextIdRequired = 'review.context_id_required';
+  static const String commentTooLong = 'review.comment_too_long';
   static const String submitFailed = 'review.submit_failed';
   static const String addReplyFailed = 'review.add_reply_failed';
 }
@@ -180,20 +183,19 @@ class ReviewRepository {
   }) async {
     final fieldErrors = <String, String>{};
     if (rating < 1 || rating > 5) {
-      fieldErrors['rating'] = 'Rating must be between 1 and 5.';
+      fieldErrors['rating'] = ReviewErrorCodes.ratingOutOfRange;
     }
     if (contextId.trim().isEmpty) {
-      fieldErrors['context_id'] = 'Context ID is required.';
+      fieldErrors['context_id'] = ReviewErrorCodes.contextIdRequired;
     }
     final trimmedComment = comment?.trim();
     if (trimmedComment != null && trimmedComment.length > 500) {
-      fieldErrors['comment'] = 'Comment must not exceed 500 characters.';
+      fieldErrors['comment'] = ReviewErrorCodes.commentTooLong;
     }
     if (fieldErrors.isNotEmpty) {
       return Failure<String?>(
         ValidationFailure(
-          // TODO: Map to ReviewErrorCodes.validationFailed in UI layer
-          message: 'Please correct the review details.',
+          message: ReviewErrorCodes.validationFailed,
           fieldErrors: fieldErrors,
         ),
       );
@@ -214,8 +216,7 @@ class ReviewRepository {
 
       return Failure<String?>(
         ValidationFailure(
-          // TODO: Map to ReviewErrorCodes.submitFailed in UI layer
-          message: response['error']?.toString() ?? 'Failed to submit review',
+          message: ReviewErrorCodes.submitFailed,
         ),
       );
     } catch (error, stackTrace) {
@@ -240,8 +241,7 @@ class ReviewRepository {
 
       return const Failure<bool>(
         ValidationFailure(
-          // TODO: Map to ReviewErrorCodes.addReplyFailed in UI layer
-          message: 'Failed to add reply. You may have already replied or are not the reviewed user.',
+          message: ReviewErrorCodes.addReplyFailed,
         ),
       );
     } catch (error, stackTrace) {
