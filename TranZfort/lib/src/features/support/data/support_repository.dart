@@ -58,6 +58,11 @@ abstract class SupportBackend {
     required String messageBody,
     String? attachmentPath,
   });
+
+  Future<int> finalizeTicketAttachments({
+    required String ticketId,
+    required String sessionId,
+  });
 }
 
 class SupabaseSupportBackend implements SupportBackend {
@@ -234,6 +239,26 @@ class SupabaseSupportBackend implements SupportBackend {
     );
 
     return (response ?? '').toString();
+  }
+
+  @override
+  Future<int> finalizeTicketAttachments({
+    required String ticketId,
+    required String sessionId,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+
+    final response = await _client.rpc(
+      'finalize_ticket_attachments',
+      params: <String, dynamic>{
+        'p_ticket_id': ticketId,
+        'p_session_id': sessionId,
+      },
+    );
+
+    return (response as int?) ?? 0;
   }
 }
 
@@ -437,6 +462,36 @@ class SupportRepository {
       return Success<String>(messageId);
     } catch (error, stackTrace) {
       return Failure<String>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<int>> finalizeTicketAttachments({
+    required String ticketId,
+    required String sessionId,
+  }) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<int>(UnauthorizedFailure());
+    }
+
+    final normalizedTicketId = ticketId.trim();
+    if (normalizedTicketId.isEmpty) {
+      return const Failure<int>(
+        ValidationFailure(
+          message: _supportTicketIdRequiredCode,
+          fieldErrors: {'ticket_id': _supportTicketIdRequiredCode},
+        ),
+      );
+    }
+
+    try {
+      final count = await _backend.finalizeTicketAttachments(
+        ticketId: normalizedTicketId,
+        sessionId: sessionId,
+      );
+      return Success<int>(count);
+    } catch (error, stackTrace) {
+      return Failure<int>(_mapError(error, stackTrace));
     }
   }
 

@@ -90,6 +90,11 @@ class _CreateTicketBackend implements SupportBackend {
   Future<String> replyToTicket({required String ticketId, required String messageBody, String? attachmentPath}) async {
     return 'reply-created';
   }
+
+  @override
+  Future<int> finalizeTicketAttachments({required String ticketId, required String sessionId}) async {
+    return 0; // Mock implementation
+  }
 }
 
 class _TestSupportTicketsController extends SupportTicketsController {

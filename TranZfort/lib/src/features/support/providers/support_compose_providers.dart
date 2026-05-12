@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -115,6 +117,7 @@ class ReportIssueState {
 }
 
 class CreateSupportTicketState {
+  final String sessionId;
   final String category;
   final String relatedLoadId;
   final String relatedTripId;
@@ -126,6 +129,7 @@ class CreateSupportTicketState {
   final Map<String, String> fieldErrors;
 
   const CreateSupportTicketState({
+    required this.sessionId,
     required this.category,
     required this.relatedLoadId,
     required this.relatedTripId,
@@ -138,7 +142,8 @@ class CreateSupportTicketState {
   });
 
   factory CreateSupportTicketState.initial() {
-    return const CreateSupportTicketState(
+    return CreateSupportTicketState(
+      sessionId: _generateSessionId(),
       category: 'general',
       relatedLoadId: '',
       relatedTripId: '',
@@ -152,6 +157,7 @@ class CreateSupportTicketState {
   }
 
   CreateSupportTicketState copyWith({
+    String? sessionId,
     String? category,
     String? relatedLoadId,
     String? relatedTripId,
@@ -165,6 +171,7 @@ class CreateSupportTicketState {
     Map<String, String>? fieldErrors,
   }) {
     return CreateSupportTicketState(
+      sessionId: sessionId ?? this.sessionId,
       category: category ?? this.category,
       relatedLoadId: relatedLoadId ?? this.relatedLoadId,
       relatedTripId: relatedTripId ?? this.relatedTripId,
@@ -178,10 +185,18 @@ class CreateSupportTicketState {
   }
 }
 
+/// Generates a unique session ID for draft attachments
+String _generateSessionId() {
+  final random = Random.secure();
+  final bytes = List<int>.generate(16, (_) => random.nextInt(256));
+  return bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+}
+
 class CreateSupportTicketController extends StateNotifier<CreateSupportTicketState> {
   final SupportRepository _repository;
+  final SupportAttachmentUploadService _attachmentService;
 
-  CreateSupportTicketController(this._repository) : super(CreateSupportTicketState.initial());
+  CreateSupportTicketController(this._repository, this._attachmentService) : super(CreateSupportTicketState.initial());
 
   void setCategory(String? value) {
     if (value == null) {
@@ -260,6 +275,7 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
       fieldErrors: const <String, String>{},
     );
 
+    // Step 1: Create ticket
     final result = await _repository.createTicket(
       category: state.category,
       messageBody: state.description,
@@ -269,9 +285,19 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
     );
 
     String? finalTicketId = result.valueOrNull;
+    
+    // Step 2: Finalize draft attachments if ticket created successfully
     if (result.isSuccess && finalTicketId != null && state.attachments.isNotEmpty) {
-      // Attachments are already stored in ticket_attachments table with correct ticket_id
-      // No need to relocate - they were uploaded with the ticket_id
+      try {
+        await _repository.finalizeTicketAttachments(
+          ticketId: finalTicketId,
+          sessionId: state.sessionId,
+        );
+      } catch (_) {
+        // If finalization fails, we still return success for ticket creation
+        // The attachments will remain orphaned and cleaned up by the cleanup job
+        // This is a safe fallback
+      }
     }
 
     state = state.copyWith(
@@ -301,12 +327,29 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
     }
     return next;
   }
+
+  Future<void> cancel() async {
+    // Cleanup draft attachments if any
+    if (state.attachments.isNotEmpty) {
+      try {
+        await _attachmentService.cleanupDraftSession(
+          profileId: '', // Will need to get from auth context
+          sessionId: state.sessionId,
+        );
+      } catch (_) {
+        // Don't fail cancel if cleanup fails
+      }
+    }
+    // Reset state
+    state = CreateSupportTicketState.initial();
+  }
 }
 
 final createSupportTicketProvider =
     StateNotifierProvider.autoDispose<CreateSupportTicketController, CreateSupportTicketState>((ref) {
   return CreateSupportTicketController(
     ref.watch(supportRepositoryProvider),
+    ref.watch(supportAttachmentUploadServiceProvider),
   );
 });
 

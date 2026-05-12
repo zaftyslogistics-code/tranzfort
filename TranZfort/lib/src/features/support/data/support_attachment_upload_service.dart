@@ -107,23 +107,28 @@ class SupportAttachmentUploadService {
 
   /// Upload multiple attachments with metadata, scan status tracking, and retry logic
   Future<Result<List<TicketAttachmentMetadata>>> uploadMultipleAttachments({
-    required String ticketId,
     required String profileId,
     required List<ImageSource> sources,
+    String? ticketId,  // Optional: if null, creates draft attachments
+    String? sessionId,  // Required for draft attachments (when ticketId is null)
     String pathSegment = 'support_ticket',
   }) async {
-    final normalizedTicketId = ticketId.trim();
     final normalizedProfileId = profileId.trim();
+    final normalizedTicketId = ticketId?.trim();
+    final normalizedSessionId = sessionId?.trim();
     final normalizedPathSegment = pathSegment.trim().isEmpty ? 'support_ticket' : pathSegment.trim();
 
-    if (normalizedTicketId.isEmpty || normalizedProfileId.isEmpty) {
+    // Validation: if ticketId is null, sessionId must be provided
+    if (normalizedTicketId == null && (normalizedSessionId == null || normalizedSessionId.isEmpty)) {
       return const Failure<List<TicketAttachmentMetadata>>(
         ValidationFailure(
-          message: 'Ticket ID and profile ID are required',
-          fieldErrors: {'ticket_id': 'Ticket ID is required', 'profile_id': 'Profile ID is required'},
+          message: 'Session ID is required for draft attachments',
+          fieldErrors: {'session_id': 'Session ID is required when ticket_id is not provided'},
         ),
       );
     }
+
+    final normalizedPathSegmentFinal = normalizedTicketId == null ? 'temp' : normalizedPathSegment;
 
     if (_client == null) {
       return const Failure<List<TicketAttachmentMetadata>>(UnauthorizedFailure());
@@ -134,10 +139,11 @@ class SupportAttachmentUploadService {
 
     for (final source in sources) {
       final result = await _uploadSingleAttachment(
-        ticketId: normalizedTicketId,
         profileId: normalizedProfileId,
+        ticketId: normalizedTicketId,
+        sessionId: normalizedSessionId,
         source: source,
-        pathSegment: normalizedPathSegment,
+        pathSegment: normalizedPathSegmentFinal,
       );
 
       result.when(
@@ -157,8 +163,9 @@ class SupportAttachmentUploadService {
 
   /// Upload a single attachment with retry logic
   Future<Result<TicketAttachmentMetadata>> _uploadSingleAttachment({
-    required String ticketId,
     required String profileId,
+    String? ticketId,
+    String? sessionId,
     required ImageSource source,
     required String pathSegment,
     int retryCount = 0,
@@ -206,6 +213,7 @@ class SupportAttachmentUploadService {
       }
 
       // Now create attachment record after successful validation
+      // For draft attachments, ticket_id is NULL
       final attachmentId = await _createAttachmentRecord(
         ticketId: ticketId,
         profileId: profileId,
@@ -225,7 +233,9 @@ class SupportAttachmentUploadService {
 
       // Upload to storage
       final timestamp = _now().toUtc().millisecondsSinceEpoch;
-      final storagePath = '$profileId/$pathSegment/$ticketId/attachment_$timestamp.jpg';
+      // Storage path: {profileId}/{pathSegment}/{ticketId_or_sessionId}/attachment_{timestamp}.jpg
+      final identifier = ticketId ?? sessionId;
+      final storagePath = '$profileId/$pathSegment/$identifier/attachment_$timestamp.jpg';
       
       await _uploadBinary(_client!, storagePath, compressedBytes);
 
@@ -260,8 +270,9 @@ class SupportAttachmentUploadService {
       if (retryCount < maxRetries) {
         await Future.delayed(Duration(seconds: retryCount + 1)); // Exponential backoff
         return _uploadSingleAttachment(
-          ticketId: ticketId,
           profileId: profileId,
+          ticketId: ticketId,
+          sessionId: sessionId,
           source: source,
           pathSegment: pathSegment,
           retryCount: retryCount + 1,
@@ -280,7 +291,7 @@ class SupportAttachmentUploadService {
 
   /// Create attachment record in database
   Future<String?> _createAttachmentRecord({
-    required String ticketId,
+    required String? ticketId,  // Can be NULL for draft attachments
     required String profileId,
     required String uploadStatus,
     required int retryCount,
@@ -288,7 +299,7 @@ class SupportAttachmentUploadService {
   }) async {
     try {
       final response = await _client!.from('ticket_attachments').insert({
-        'ticket_id': ticketId,
+        'ticket_id': ticketId,  // Can be NULL for draft attachments
         'uploaded_by': profileId,
         'file_name': '',
         'file_path': '',
@@ -394,11 +405,56 @@ class SupportAttachmentUploadService {
     }
   }
 
+  /// Cleanup draft attachments for a session (called when user cancels)
+  Future<Result<void>> cleanupDraftSession({
+    required String profileId,
+    required String sessionId,
+  }) async {
+    if (_client == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+
+    try {
+      // Step 1: Delete attachment records for this session
+      // Filter by sessionId in file_path (which is unique for draft attachments)
+      await _client
+          .from('ticket_attachments')
+          .delete()
+          .eq('uploaded_by', profileId)
+          .like('file_path', '%$sessionId%');
+
+      // Step 2: Delete files from storage (if storage client available)
+      // Note: This is optional - if storage cleanup fails, the records are already deleted
+      // The cleanup job will eventually remove orphaned storage files
+      try {
+        final files = await _client.storage
+            .from('support-attachments')
+            .list(path: '$profileId/temp/$sessionId');
+        
+        if (files.isNotEmpty) {
+          final fileNames = files.map((f) => f.name).toList();
+          await _client.storage.from('support-attachments').remove(fileNames);
+        }
+      } catch (e) {
+        // Storage cleanup is optional - don't fail the whole operation
+        // The records are already deleted, so the files will be cleaned up by the job
+      }
+
+      return const Success<void>(null);
+    } catch (e, stackTrace) {
+      return Failure<void>(
+        ServerFailure(message: 'Failed to cleanup draft session', debugInfo: '$e\n$stackTrace'),
+      );
+    }
+  }
+
   /// Retry failed attachment upload
   Future<Result<TicketAttachmentMetadata>> retryAttachmentUpload({
     required String attachmentId,
     required String profileId,
     required ImageSource source,
+    String? ticketId,
+    String? sessionId,
     required String pathSegment,
   }) async {
     if (_client == null) {
@@ -421,8 +477,9 @@ class SupportAttachmentUploadService {
 
       // Retry upload with incremented retry count
       return _uploadSingleAttachment(
-        ticketId: attachment.ticketId,
         profileId: profileId,
+        ticketId: ticketId ?? attachment.ticketId,  // Use provided ticketId or fall back to attachment's ticketId
+        sessionId: sessionId,
         source: source,
         pathSegment: pathSegment,
         retryCount: attachment.retryCount + 1,

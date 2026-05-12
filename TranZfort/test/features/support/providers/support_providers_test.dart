@@ -128,6 +128,17 @@ class _FakeSupportBackend implements SupportBackend {
     lastReplyAttachmentPath = attachmentPath;
     return 'reply-created';
   }
+
+  @override
+  Future<int> finalizeTicketAttachments({
+    required String ticketId,
+    required String sessionId,
+  }) async {
+    if (error != null) {
+      throw error!;
+    }
+    return 0; // Mock implementation
+  }
 }
 
 class _FakeSupportAttachmentUploadService extends SupportAttachmentUploadService {

@@ -104,6 +104,11 @@ class _NoopSupportBackend implements SupportBackend {
   }) async {
     return 'reply-created';
   }
+
+  @override
+  Future<int> finalizeTicketAttachments({required String ticketId, required String sessionId}) async {
+    return 0; // Mock implementation
+  }
 }
 
 class _RecordingSupportBackend implements SupportBackend {
@@ -181,6 +186,11 @@ class _RecordingSupportBackend implements SupportBackend {
     lastReplyMessageBody = messageBody;
     lastReplyAttachmentPath = attachmentPath;
     return 'reply-created';
+  }
+
+  @override
+  Future<int> finalizeTicketAttachments({required String ticketId, required String sessionId}) async {
+    return 0; // Mock implementation
   }
 }
 

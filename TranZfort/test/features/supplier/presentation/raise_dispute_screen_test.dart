@@ -134,6 +134,9 @@ class _NoopSupportBackend implements SupportBackend {
 
   @override
   Future<String> replyToTicket({required String ticketId, required String messageBody, String? attachmentPath}) async => 'reply-created';
+
+  @override
+  Future<int> finalizeTicketAttachments({required String ticketId, required String sessionId}) async => 0; // Mock implementation
 }
 
 class _TestSupportTicketsController extends SupportTicketsController {
