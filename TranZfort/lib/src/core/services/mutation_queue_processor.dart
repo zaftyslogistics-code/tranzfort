@@ -5,6 +5,7 @@ import 'dart:math' show Random;
 
 import '../models/mutation_queue.dart';
 import '../services/mutation_queue_database.dart';
+import '../services/mutation_queue_sanitizer.dart';
 
 /// Service for processing queued mutations when connectivity is restored.
 /// Implements exponential backoff for retry logic.
@@ -65,7 +66,7 @@ class MutationQueueProcessor {
             _eventController.add(
               MutationProcessingEventSkipped(
                 mutationId: mutation.id,
-                reason: 'Max retries exceeded',
+                reason: 'ERR_EXHAUSTED',
               ),
             );
             continue;
@@ -87,11 +88,11 @@ class MutationQueueProcessor {
       }
 
       _eventController.add(const MutationProcessingEventCompleted());
-    } catch (error, stackTrace) {
+    } catch (error, _) {
       _eventController.add(
         MutationProcessingEventError(
-          error: error.toString(),
-          stackTrace: stackTrace.toString(),
+          error: MutationQueueSanitizer.sanitizeError(error.toString()),
+          stackTrace: '', // Never persist stack traces
         ),
       );
     } finally {
@@ -116,14 +117,14 @@ class MutationQueueProcessor {
       } else {
         // Update retry count and status
         await _database.incrementRetryCount(mutation.id);
-        await _database.setLastError(mutation.id, result.error);
+        await _database.setLastError(mutation.id, MutationQueueSanitizer.sanitizeError(result.error ?? 'ERR_UNKNOWN'));
 
         if (mutation.isExhausted) {
           await _database.updateStatus(mutation.id, MutationStatus.failed);
           _eventController.add(
             MutationProcessingEventFailed(
               mutationId: mutation.id,
-              error: result.error ?? 'Unknown error',
+              error: MutationQueueSanitizer.sanitizeError(result.error ?? 'ERR_UNKNOWN'),
               exhausted: true,
             ),
           );
@@ -142,14 +143,14 @@ class MutationQueueProcessor {
       }
     } catch (error) {
       await _database.incrementRetryCount(mutation.id);
-      await _database.setLastError(mutation.id, error.toString());
+      await _database.setLastError(mutation.id, MutationQueueSanitizer.sanitizeError(error.toString()));
 
       if (mutation.isExhausted) {
         await _database.updateStatus(mutation.id, MutationStatus.failed);
         _eventController.add(
           MutationProcessingEventFailed(
             mutationId: mutation.id,
-            error: error.toString(),
+            error: MutationQueueSanitizer.sanitizeError(error.toString()),
             exhausted: true,
           ),
         );

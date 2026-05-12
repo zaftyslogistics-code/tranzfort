@@ -2,9 +2,11 @@
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
+import 'dart:convert';
 
 import '../models/mutation_queue.dart';
 import 'mutation_queue_encryption.dart';
+import 'mutation_queue_sanitizer.dart';
 
 class MutationQueueDatabase {
   static const String _databaseName = 'mutation_queue.db';
@@ -88,6 +90,9 @@ class MutationQueueDatabase {
   Future<void> enqueue(QueuedMutation mutation) async {
     final db = await database;
     final json = mutation.toJson();
+    final sanitizer = const MutationQueueSanitizer();
+    final sanitizedPayload = sanitizer.sanitize(mutation.target, mutation.payload);
+    json['payload'] = jsonEncode(sanitizedPayload);
     if (_encryption != null) {
       final encryptedPayload = await _encryption!.encrypt(json['payload'] as String);
       json['payload'] = encryptedPayload;
