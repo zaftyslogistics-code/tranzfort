@@ -7,7 +7,20 @@ import '../models/mutation_queue.dart';
 import '../providers/app_state_providers.dart';
 import '../providers/connectivity_provider.dart';
 import '../providers/mutation_queue_provider.dart';
+import '../services/mutation_queue_encryption.dart';
 import '../services/mutation_queue_processor.dart';
+
+/// Provider for the encryption service.
+final mutationQueueEncryptionProvider = Provider<MutationQueueEncryption>((ref) {
+  return MutationQueueEncryption();
+});
+
+/// Provider that wires encryption into the mutation queue database.
+final mutationQueueDatabaseWithEncryptionProvider = Provider<void>((ref) {
+  final database = ref.watch(mutationQueueDatabaseProvider);
+  final encryption = ref.watch(mutationQueueEncryptionProvider);
+  database.setEncryption(encryption);
+});
 
 /// Simple mutation executor that executes mutations via Supabase RPCs.
 class SupabaseMutationExecutor implements MutationExecutor {

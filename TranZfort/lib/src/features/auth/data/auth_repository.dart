@@ -9,6 +9,8 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/mutation_queue_database.dart';
+import '../../../core/services/mutation_queue_encryption.dart';
 import '../../../core/utils/validators.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
@@ -96,6 +98,13 @@ class AuthRepository {
       if (hasSeenSplash != null) {
         await preferences.setBool('has_seen_splash', hasSeenSplash);
       }
+
+      final userId = _client?.auth.currentUser?.id;
+      if (userId != null) {
+        await MutationQueueDatabase().clearByUserId(userId);
+      }
+
+      await MutationQueueEncryption().deleteKey();
 
       return const Success<void>(null);
     } catch (error, stackTrace) {

@@ -4,22 +4,29 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 import '../models/mutation_queue.dart';
+import 'mutation_queue_encryption.dart';
 
 class MutationQueueDatabase {
   static const String _databaseName = 'mutation_queue.db';
   static const String _tableName = 'mutations';
-  static const int _databaseVersion = 1;
+  static const int _databaseVersion = 2;
 
   static final MutationQueueDatabase _instance = MutationQueueDatabase._internal();
   factory MutationQueueDatabase() => _instance;
   MutationQueueDatabase._internal();
 
   Database? _database;
+  MutationQueueEncryption? _encryption;
 
   Future<Database> get database async {
     if (_database != null) return _database!;
     _database = await _initDatabase();
     return _database!;
+  }
+
+  /// Set the encryption service. Must be called before any write/read operations.
+  void setEncryption(MutationQueueEncryption encryption) {
+    _encryption = encryption;
   }
 
   Future<Database> _initDatabase() async {
@@ -66,11 +73,8 @@ class MutationQueueDatabase {
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
-    // Handle database upgrades here if needed
-    // For now, we'll just recreate the table on version changes
-    if (oldVersion < newVersion) {
-      await db.execute('DROP TABLE IF EXISTS $_tableName');
-      await _onCreate(db, newVersion);
+    if (oldVersion < 2) {
+      await db.execute('ALTER TABLE $_tableName ADD COLUMN schema_version INTEGER NOT NULL DEFAULT 1');
     }
   }
 
@@ -83,9 +87,15 @@ class MutationQueueDatabase {
 
   Future<void> enqueue(QueuedMutation mutation) async {
     final db = await database;
+    final json = mutation.toJson();
+    if (_encryption != null) {
+      final encryptedPayload = await _encryption!.encrypt(json['payload'] as String);
+      json['payload'] = encryptedPayload;
+    }
+    json['schema_version'] = _databaseVersion;
     await db.insert(
       _tableName,
-      mutation.toJson(),
+      json,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
@@ -101,7 +111,7 @@ class MutationQueueDatabase {
     );
 
     if (maps.isEmpty) return null;
-    return QueuedMutation.fromJson(maps.first);
+    return _decryptMutation(maps.first);
   }
 
   Future<void> updateStatus(String id, MutationStatus status) async {
@@ -142,7 +152,12 @@ class MutationQueueDatabase {
       orderBy: 'timestamp ASC',
     );
 
-    return maps.map((map) => QueuedMutation.fromJson(map)).toList();
+    final results = <QueuedMutation>[];
+    for (final map in maps) {
+      final decrypted = await _decryptMutation(map);
+      if (decrypted != null) results.add(decrypted);
+    }
+    return results;
   }
 
   Future<List<QueuedMutation>> getByUserId(String userId) async {
@@ -154,7 +169,12 @@ class MutationQueueDatabase {
       orderBy: 'timestamp DESC',
     );
 
-    return maps.map((map) => QueuedMutation.fromJson(map)).toList();
+    final results = <QueuedMutation>[];
+    for (final map in maps) {
+      final decrypted = await _decryptMutation(map);
+      if (decrypted != null) results.add(decrypted);
+    }
+    return results;
   }
 
   Future<QueuedMutation?> getById(String id) async {
@@ -167,7 +187,7 @@ class MutationQueueDatabase {
     );
 
     if (maps.isEmpty) return null;
-    return QueuedMutation.fromJson(maps.first);
+    return _decryptMutation(maps.first);
   }
 
   Future<void> delete(String id) async {
@@ -191,6 +211,15 @@ class MutationQueueDatabase {
   Future<void> clearAll() async {
     final db = await database;
     await db.delete(_tableName);
+  }
+
+  Future<void> clearByUserId(String userId) async {
+    final db = await database;
+    await db.delete(
+      _tableName,
+      where: 'user_id = ?',
+      whereArgs: [userId],
+    );
   }
 
   Future<int> getPendingCount() async {
@@ -231,5 +260,22 @@ class MutationQueueDatabase {
     ''', ['failed']);
 
     return Sqflite.firstIntValue(result) ?? 0;
+  }
+
+  Future<QueuedMutation?> _decryptMutation(Map<String, dynamic> map) async {
+    if (_encryption == null) {
+      return QueuedMutation.fromJson(map);
+    }
+    try {
+      final payload = map['payload'] as String;
+      final decrypted = await _encryption!.decrypt(payload);
+      if (decrypted != null) {
+        map['payload'] = decrypted;
+      }
+    } catch (_) {
+      // If decryption fails, the payload may be unencrypted (legacy data)
+      // Return as-is so legacy mutations can still be processed
+    }
+    return QueuedMutation.fromJson(map);
   }
 }

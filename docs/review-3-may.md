@@ -1022,13 +1022,15 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 #### 6.1 Offline cache (`R-007`, `R-008`)
 
-- [ ] **Classify cached data**
-  - [ ] Public marketplace data.
-  - [ ] Public profile data.
-  - [ ] Private notifications.
-  - [ ] Support/dispute data.
-  - [ ] Chat data if any.
-  - [ ] Verification/profile data.
+- [x] **Classify cached data**
+  - [x] Public marketplace data — LOW RISK (plaintext cache acceptable).
+  - [x] Public profile data — LOW RISK (plaintext cache acceptable).
+  - [x] Private notifications — HIGH RISK (must move to encrypted storage).
+  - [x] Support/dispute data — HIGH RISK (must move to encrypted storage).
+  - [x] Chat data — HIGH RISK (must move to encrypted storage).
+  - [x] Verification/profile data — HIGH RISK (must move to encrypted storage).
+  - [x] Diesel prices — LOW RISK (in-memory only, no persistence).
+  - [x] City search — LOW RISK (bundled asset, no user data).
 - [ ] **Secure sensitive caches**
   - [ ] Move private notification cache to encrypted storage or remove caching.
   - [ ] Move support/profile cache to encrypted storage or remove caching.
