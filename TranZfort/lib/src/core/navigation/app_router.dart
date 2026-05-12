@@ -282,6 +282,13 @@ void _initializeRouteMetadata() {
     'testId': 'support',
   });
 
+  RouteMetadataHelper.registerMetadata(AppRoutes.supportTicketDetailPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': true,
+    'requirePopScope': false,
+    'testId': 'support_ticket_detail',
+  });
+
   RouteMetadataHelper.registerMetadata(AppRoutes.deleteAccountPath, {
     'type': RouteType.standalone,
     'showBackArrow': false,
@@ -529,6 +536,16 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => SupportScreen(
               initialSelectedTicketId: state.extra is String ? state.extra as String : null,
             ),
+          ),
+          GoRoute(
+            path: AppRoutes.supportTicketDetailPath,
+            name: AppRoutes.supportTicketDetail,
+            builder: (context, state) {
+              final ticketId = state.pathParameters['ticketId'];
+              return SupportScreen(
+                initialSelectedTicketId: ticketId,
+              );
+            },
           ),
           GoRoute(
             path: AppRoutes.createSupportTicketPath,

@@ -27,6 +27,10 @@ String resolveNotificationRouteData({
     relatedCaseId: relatedCaseId,
   );
   if (hintedRoute == null) {
+    // If no route hint but we have a case_id (support ticket), go to support screen with ticket ID
+    if ((relatedCaseId ?? '').trim().isNotEmpty) {
+      return '${AppRoutes.supportPath}/${relatedCaseId!.trim()}';
+    }
     if ((relatedTripId ?? '').trim().isNotEmpty) {
       return '${AppRoutes.tripDetailPath}/${relatedTripId!.trim()}';
     }
@@ -40,8 +44,17 @@ String resolveNotificationRouteData({
     return fallback;
   }
 
+  // Handle support ticket routes
   if (hintedRoute == '/support-ticket' || hintedRoute.startsWith('/support-ticket/')) {
-    return fallback;
+    // Extract ticket ID from route if present
+    final parts = hintedRoute.split('/');
+    if (parts.length > 2) {
+      // Format: /support-ticket/{ticketId} → convert to /support/{ticketId}
+      final ticketId = parts[2];
+      return '${AppRoutes.supportPath}/$ticketId';
+    }
+    // Just /support-ticket without ID, go to support screen
+    return AppRoutes.supportPath;
   }
 
   if (hintedRoute == '/verification') {
@@ -98,6 +111,7 @@ String resolveNotificationRouteData({
     AppRoutes.supplierVerificationPath,
     AppRoutes.truckerDashboardPath,
     AppRoutes.truckerVerificationPath,
+    AppRoutes.supportPath,
   };
 
   if (!supportedExactRoutes.contains(hintedRoute)) {
