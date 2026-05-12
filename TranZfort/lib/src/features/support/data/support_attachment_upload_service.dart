@@ -84,6 +84,12 @@ class SupportAttachmentUploadService {
   final Future<void> Function(SupabaseClient client, String storagePath, Uint8List bytes) _uploadBinary;
   final Future<void> Function(SupabaseClient client, String oldPath, String newPath) _moveFile;
 
+  /// Maximum attachment size in bytes (10MB)
+  static const int maxAttachmentSizeBytes = 10 * 1024 * 1024;
+
+  /// Allowed MIME types for attachments
+  static const List<String> allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+
   SupportAttachmentUploadService(
     this._client, {
     DateTime Function()? nowFn,
@@ -159,7 +165,47 @@ class SupportAttachmentUploadService {
     int maxRetries = 3,
   }) async {
     try {
-      // Create attachment record in pending state
+      // Pick file first (before creating DB record)
+      final file = await _pickImage(source);
+      if (file == null) {
+        // User cancelled picker - don't create DB record
+        return const Failure<TicketAttachmentMetadata>(
+          ValidationFailure(message: 'No file selected'),
+        );
+      }
+
+      // Read bytes for validation
+      final originalBytes = await _readBytes(file);
+
+      // Validate file size
+      if (originalBytes.length > maxAttachmentSizeBytes) {
+        return const Failure<TicketAttachmentMetadata>(
+          ValidationFailure(
+            message: 'File size exceeds maximum limit of 10MB',
+            fieldErrors: {'file': 'File too large (max 10MB)'},
+          ),
+        );
+      }
+
+      // Validate MIME type
+      if (!allowedMimeTypes.contains(file.mimeType)) {
+        return Failure<TicketAttachmentMetadata>(
+          ValidationFailure(
+            message: 'Invalid file type. Only JPEG and PNG images are allowed.',
+            fieldErrors: {'file': 'Invalid file type (${file.mimeType})'},
+          ),
+        );
+      }
+
+      // Validate image can be decoded (not corrupted)
+      final compressedBytes = _compressImage(originalBytes);
+      if (compressedBytes == null || compressedBytes.isEmpty) {
+        return const Failure<TicketAttachmentMetadata>(
+          BusinessRuleFailure(message: 'We could not prepare the evidence image. Please try another photo.'),
+        );
+      }
+
+      // Now create attachment record after successful validation
       final attachmentId = await _createAttachmentRecord(
         ticketId: ticketId,
         profileId: profileId,
@@ -171,24 +217,6 @@ class SupportAttachmentUploadService {
       if (attachmentId == null) {
         return const Failure<TicketAttachmentMetadata>(
           ServerFailure(message: 'Failed to create attachment record'),
-        );
-      }
-
-      // Pick, compress, and upload the file
-      final file = await _pickImage(source);
-      if (file == null) {
-        await _updateAttachmentStatus(attachmentId, 'failed', 'No file selected');
-        return const Failure<TicketAttachmentMetadata>(
-          ValidationFailure(message: 'No file selected'),
-        );
-      }
-
-      final originalBytes = await _readBytes(file);
-      final compressedBytes = _compressImage(originalBytes);
-      if (compressedBytes == null || compressedBytes.isEmpty) {
-        await _updateAttachmentStatus(attachmentId, 'failed', 'Image compression failed');
-        return const Failure<TicketAttachmentMetadata>(
-          BusinessRuleFailure(message: 'We could not prepare the evidence image. Please try another photo.'),
         );
       }
 
@@ -275,24 +303,6 @@ class SupportAttachmentUploadService {
       return response['id'] as String?;
     } catch (e) {
       return null;
-    }
-  }
-
-  /// Update attachment status
-  Future<bool> _updateAttachmentStatus(
-    String attachmentId,
-    String status,
-    String? errorMessage,
-  ) async {
-    try {
-      await _client!.from('ticket_attachments').update({
-        'upload_status': status,
-        'upload_error_message': errorMessage,
-        'updated_at': _now().toIso8601String(),
-      }).eq('id', attachmentId);
-      return true;
-    } catch (e) {
-      return false;
     }
   }
 
@@ -448,6 +458,27 @@ class SupportAttachmentUploadService {
       }
 
       final originalBytes = await _readBytes(file);
+
+      // Validate file size
+      if (originalBytes.length > maxAttachmentSizeBytes) {
+        return const Failure<String?>(
+          ValidationFailure(
+            message: 'File size exceeds maximum limit of 10MB',
+            fieldErrors: {'file': 'File too large (max 10MB)'},
+          ),
+        );
+      }
+
+      // Validate MIME type
+      if (!allowedMimeTypes.contains(file.mimeType)) {
+        return Failure<String?>(
+          ValidationFailure(
+            message: 'Invalid file type. Only JPEG and PNG images are allowed.',
+            fieldErrors: {'file': 'Invalid file type (${file.mimeType})'},
+          ),
+        );
+      }
+
       final compressedBytes = _compressImage(originalBytes);
       if (compressedBytes == null || compressedBytes.isEmpty) {
         return const Failure<String?>(

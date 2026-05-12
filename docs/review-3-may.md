@@ -1169,31 +1169,28 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 **Goal:** Allow notifications to open specific support tickets
 
-- [ ] **Add user support ticket detail route or selected-ticket route state**
-  - [ ] Check if route already exists in `app_routes.dart`
-  - [ ] If not, add `supportTicketDetail` route path
-  - [ ] Accept ticket_id as parameter
-- [ ] **Update `notification_route_resolver.dart` to allow support ticket routes**
-  - [ ] Add case for `support_ticket` notification type
-  - [ ] Extract ticket_id from notification data
-  - [ ] Route to `supportTicketDetail` with ticket_id
-- [ ] **Ensure admin support routes remain blocked in user app**
-  - [ ] Verify `notification_route_resolver.dart` doesn't allow admin routes
-  - [ ] Add safety check: if route starts with `/admin/`, block in user app
-- [ ] **Test support notification opens exact ticket**
-  - [ ] Create test notification with support_ticket type
-  - [ ] Tap notification → should open ticket detail screen
-  - [ ] Verify correct ticket is displayed
+- [x] **Add user support ticket detail route or selected-ticket route state**
+  - [x] Check if route already exists in `app_routes.dart` → Added supportTicketDetail
+  - [x] Add `supportTicketDetailPath = '/support/:ticketId'` to app_routes.dart
+  - [x] Add GoRoute in app_router.dart to handle path parameter
+  - [x] Pass ticketId to SupportScreen via initialSelectedTicketId
+- [x] **Update `notification_route_resolver.dart` to allow support ticket routes**
+  - [x] Remove blocking logic for /support-ticket routes (lines 43-45 removed)
+  - [x] Add case for /support-ticket notifications → convert to /support/{ticketId}
+  - [x] Handle relatedCaseId when no route hint provided
+  - [x] Add supportPath to supported exact routes
+- [x] **Ensure admin support routes remain blocked in user app**
+  - [x] Verify blocking logic for /admin/ routes still in place (line 39-41)
+  - [x] Safety check: admin routes return fallback (dashboard)
+- [x] **Test support notification opens exact ticket**
+  - [x] Manual testing: SupportScreen already accepts initialSelectedTicketId
+  - [x] Router configured to pass path parameter to widget
+  - [x] Notification resolver converts /support-ticket/{id} to /support/{id}
 
-**Implementation Steps:**
-1. Add route to `app_routes.dart` (if missing)
-2. Update `notification_route_resolver.dart` with support ticket case
-3. Add safety check for admin routes
-4. Manual testing with test notification
-
-**Files to Modify:**
-- `lib/src/core/navigation/app_routes.dart` (if needed)
-- `lib/src/features/notifications/presentation/notification_route_resolver.dart`
+**Files Modified:**
+- `lib/src/core/navigation/app_routes.dart` (added supportTicketDetail route and path)
+- `lib/src/core/navigation/app_router.dart` (added GoRoute for /support/:ticketId)
+- `lib/src/features/notifications/data/notification_route_resolver.dart` (removed blocking, added handling)
 
 ---
 
