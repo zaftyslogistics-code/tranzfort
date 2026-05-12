@@ -1195,20 +1195,19 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 ### Phase 8 — Notifications and Push
 
-- [ ] **Harden preferences parsing**
-  - [ ] Add defaults for optional notification preference fields.
-  - [ ] Replace direct casts in `NotificationPreferences.fromMap()`.
-  - [ ] Replace direct `DateTime.parse` in preferences.
-  - [ ] Add tests for missing fields and null timestamps.
-- [ ] **Optimize unread count**
-  - [ ] Replace ID select with count query/RPC.
-  - [ ] Verify realtime unread count for large histories.
-  - [ ] Add tests for unread count after mark-read and mark-all-read.
-- [ ] **Cache safety**
-  - [ ] Version notification cache.
-  - [ ] Safely parse cached notifications.
-  - [ ] Drop invalid cache records without crashing.
-  - [ ] Invalidate cache after preference changes if required.
+**DEFERRED** - Notification preferences feature incomplete:
+- Database table exists (notification_preferences)
+- NotificationPreferences model not implemented in Dart
+- notification_settings_screen.dart commented out (TODO from Phase 5.2)
+- No notificationPreferencesProvider implemented
+- Requires full implementation from scratch (model, provider, screen, tests)
+
+**Tasks Deferred:**
+- [ ] Harden preferences parsing
+- [ ] Optimize unread count
+- [ ] Cache safety
+
+---
 
 ### Phase 9 — Public Profile and Reviews
 
