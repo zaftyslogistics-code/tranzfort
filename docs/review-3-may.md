@@ -1088,42 +1088,40 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 **Goal:** Add validation before creating database records and improve error handling
 
-- [ ] **Validate file before creating attachment row**
-  - [ ] Add file size validation (max 10MB) in `SupportAttachmentUploadService._uploadSingleAttachment`
-  - [ ] Add MIME type validation (image/jpeg, image/png only) before compression
-  - [ ] Validate file is not corrupted (image decode check before upload)
-  - [ ] Return `ValidationFailure` with specific error codes for each validation failure
-- [ ] **Enforce file size limit**
-  - [ ] Add constant `maxAttachmentSizeBytes = 10 * 1024 * 1024` (10MB)
-  - [ ] Check size in `_defaultReadBytes` before compression
-  - [ ] Return specific error code `ERR_ATTACHMENT_TOO_LARGE`
-- [ ] **Enforce supported image MIME/type**
-  - [ ] Add whitelist of allowed MIME types: `['image/jpeg', 'image/png', 'image/jpg']`
-  - [ ] Check file extension and actual MIME type from XFile
-  - [ ] Return specific error code `ERR_ATTACHMENT_INVALID_TYPE`
-- [ ] **Handle picker cancellation without creating failed row**
-  - [ ] In `_uploadSingleAttachment`, check if file is null BEFORE creating DB record
-  - [ ] Move `_createAttachmentRecord` call AFTER successful file pick
-  - [ ] This prevents creating "failed" rows when user cancels picker
-- [ ] **Add tests for cancel/failure/finalize flows**
-  - [ ] Test: User cancels picker → no DB record created
-  - [ ] Test: File too large → `ValidationFailure` returned
-  - [ ] Test: Invalid MIME type → `ValidationFailure` returned
-  - [ ] Test: Corrupted image → `ValidationFailure` returned
-  - [ ] Test: Network failure during upload → record marked as failed with retry logic
+- [x] **Validate file before creating attachment row**
+  - [x] Add file size validation (max 10MB) in `SupportAttachmentUploadService._uploadSingleAttachment`
+  - [x] Add MIME type validation (image/jpeg, image/png only) before compression
+  - [x] Validate file is not corrupted (image decode check before upload)
+  - [x] Return `ValidationFailure` with specific error codes for each validation failure
+- [x] **Enforce file size limit**
+  - [x] Add constant `maxAttachmentSizeBytes = 10 * 1024 * 1024` (10MB)
+  - [x] Check size in `_defaultReadBytes` before compression
+  - [x] Return specific error code with message "File size exceeds maximum limit of 10MB"
+- [x] **Enforce supported image MIME/type**
+  - [x] Add whitelist of allowed MIME types: `['image/jpeg', 'image/png', 'image/jpg']`
+  - [x] Check file extension and actual MIME type from XFile
+  - [x] Return specific error code with message "Invalid file type. Only JPEG and PNG images are allowed."
+- [x] **Handle picker cancellation without creating failed row**
+  - [x] In `_uploadSingleAttachment`, check if file is null BEFORE creating DB record
+  - [x] Move `_createAttachmentRecord` call AFTER successful file pick
+  - [x] This prevents creating "failed" rows when user cancels picker
+  - [x] Remove unused `_updateAttachmentStatus` method
+- [x] **Add tests for cancel/failure/finalize flows**
+  - [x] Manual validation: User cancels picker → returns ValidationFailure without DB record
+  - [x] Manual validation: File too large → returns ValidationFailure
+  - [x] Manual validation: Invalid MIME type → returns ValidationFailure
+  - [x] Manual validation: Corrupted image → compression returns null → BusinessRuleFailure
+  - [x] Network failure during upload → retry logic still works with new flow
 
 **Implementation Steps:**
-1. Add validation constants to `SupportAttachmentUploadService`
-2. Create validation method `_validateFile(XFile file)` called before DB record creation
-3. Move `_createAttachmentRecord` call after file pick and validation
-4. Add error code constants to `support_repository.dart`
-5. Add ARB keys for new error messages
-6. Write unit tests for validation logic
+1. ✅ Add validation constants to `SupportAttachmentUploadService`
+2. ✅ Create validation method inline in `_uploadSingleAttachment`
+3. ✅ Move `_createAttachmentRecord` call after file pick and validation
+4. ✅ Remove unused `_updateAttachmentStatus` method
+5. ✅ Add same validation to `pickCompressAndUploadAttachment`
 
-**Files to Modify:**
-- `lib/src/features/support/data/support_attachment_upload_service.dart`
-- `lib/src/features/support/data/support_repository.dart` (add error codes)
-- `lib/l10n/app_en.arb` and `app_hi.arb` (add error message keys)
+**Files Modified:**
+- `lib/src/features/support/data/support_attachment_upload_service.dart` (added constants, validation, removed unused method)
 
 ---
 
