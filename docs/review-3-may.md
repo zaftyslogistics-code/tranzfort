@@ -1211,11 +1211,23 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 ### Phase 9 — Public Profile and Reviews
 
-- [ ] **Public profile data contract**
-  - [ ] Ensure `get_public_profile` returns canonical avatar field.
-  - [ ] Ensure location source does not reference non-existent profile city/state columns.
-  - [ ] Ensure capability flags are backend-authoritative.
-  - [ ] Add contract tests for supplier and trucker public profiles.
+**Phase 9.1 — Public profile data contract**
+
+- [x] **Ensure `get_public_profile` returns canonical avatar field.**
+  - ✅ RPC returns `avatar_url` from profiles table
+  - ✅ Dart model handles both `avatar_url` and `profile_photo_document_path` as fallback
+- [x] **Ensure location source does not reference non-existent profile city/state columns.**
+  - ✅ Profiles table has city/state columns (added in migration 20260324000001)
+  - ✅ RPC correctly references p.city and p.state
+- [x] **Ensure capability flags are backend-authoritative.**
+  - ✅ FIXED: Migration 20260512000004_add_capability_flags_to_get_public_profile.sql
+  - ✅ RPC now returns `can_view_contact`, `can_review`, `can_message`
+  - ✅ Capability flags computed based on viewer relationship:
+    - can_view_contact: TRUE for self or users with business relationship
+    - can_review: TRUE only if there is a business relationship (completed trip, active booking)
+    - can_message: TRUE for self or users with business relationship
+  - ✅ Business relationship determined by: completed trips, active bookings, pending/accepted booking requests
+- [ ] **Add contract tests for supplier and trucker public profiles.**
 - [ ] **Public loads**
   - [ ] Safely parse public load cache JSON.
   - [ ] Add pagination metadata if UI needs load-more.
