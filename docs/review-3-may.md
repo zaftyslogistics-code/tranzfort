@@ -1344,11 +1344,57 @@ Use this checklist as the execution plan for fixing the review findings. Work to
       - Google Maps API Key
       - Test credentials (emails, passwords, UIDs)
     - ❌ .env.test is also tracked in git (contains dummy values, acceptable)
-    - **Required Fix:**
-      1. Remove .env from git: `git rm --cached TranZfort/.env`
-      2. Remove .env from pubspec.yaml assets
-      3. Use different strategy for production secrets (e.g., environment-specific config, build-time injection)
-      4. Rotate all exposed secrets immediately
+    - **Recommended Fix (Build-time Configuration):**
+      
+      **Step 1: Remove .env from git and assets**
+      ```bash
+      cd TranZfort
+      git rm --cached .env
+      git rm --cached .env.test
+      ```
+      Edit `pubspec.yaml`, remove line 90: `- .env`
+      
+      **Step 2: Update SupabaseConfig to use build-time defines**
+      Edit `lib/src/core/config/supabase_config.dart`:
+      ```dart
+      import 'package:flutter/foundation.dart';
+      
+      class SupabaseConfig {
+        static String get url => 
+          const String.fromEnvironment('SUPABASE_URL', 
+          defaultValue: 'https://jgtgdfhdtjhidywpautk.supabase.co');
+        
+        static String get anonKey => 
+          const String.fromEnvironment('SUPABASE_ANON_KEY',
+          defaultValue: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...');
+        
+        static String get googleMapsApiKey => 
+          const String.fromEnvironment('GOOGLE_MAPS_API_KEY',
+          defaultValue: 'AIzaSyCZJT8NoW2LqlM8qaubd3dfOeXOuTn6LVQ');
+      }
+      ```
+      
+      **Step 3: Update main.dart to use new config**
+      Remove flutter_dotenv import, use SupabaseConfig instead
+      
+      **Step 4: Build release with secrets**
+      ```bash
+      flutter build apk --release \
+        --dart-define=SUPABASE_URL=https://jgtgdfhdtjhidywpautk.supabase.co \
+        --dart-define=SUPABASE_ANON_KEY=YOUR_NEW_ANON_KEY \
+        --dart-define=GOOGLE_MAPS_API_KEY=YOUR_RESTRICTED_API_KEY
+      ```
+      
+      **Step 5: Rotate exposed secrets (CRITICAL)**
+      1. Regenerate Supabase anon key in dashboard
+      2. Restrict Google Maps API key to Android app with SHA-256
+      3. Remove test credentials from .env
+      
+      **Step 6: Add Firebase Crashlytics (Optional)**
+      Add `firebase_crashlytics: ^4.1.3` to pubspec.yaml
+      Initialize in main.dart with error recording
+      
+      **Total time: ~45 minutes**
   - [ ] Verify crash/error reporting is configured for production.
     - ❌ No crash reporting configured (Firebase Crashlytics not in pubspec)
     - ❌ Privacy policy mentions Firebase crash analytics but not implemented
