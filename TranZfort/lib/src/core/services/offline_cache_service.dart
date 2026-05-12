@@ -49,6 +49,15 @@ class OfflineCacheService {
   static OfflineCacheService? _instance;
   SharedPreferences? _prefs;
 
+  /// Current cache schema version. Increment when cache data shapes change.
+  static const int currentSchemaVersion = 1;
+
+  /// Maximum number of cache entries before eviction kicks in.
+  static const int _maxEntries = 200;
+
+  /// Maximum total cache size in bytes (~5 MB) before eviction.
+  static const int _maxSizeBytes = 5 * 1024 * 1024;
+
   /// Get the singleton instance.
   static OfflineCacheService get instance {
     _instance ??= OfflineCacheService._();
@@ -118,6 +127,7 @@ class OfflineCacheService {
   /// - Key doesn't exist in cache
   /// - Cache entry is expired
   /// - Cache entry is corrupt
+  /// - Cache entry schema version doesn't match
   /// 
   /// Use generic type parameter [T] to deserialize JSON to the expected type.
   T? get<T>(String key) {
@@ -128,15 +138,18 @@ class OfflineCacheService {
       final json = jsonDecode(jsonStr) as Map<String, dynamic>;
       final entry = CacheEntry.fromJson(json);
       
+      if (entry.version != currentSchemaVersion) {
+        invalidate(key);
+        return null;
+      }
+      
       if (entry.isExpired) {
-        // Auto-delete expired entry
         invalidate(key);
         return null;
       }
       
       return jsonDecode(entry.data) as T?;
     } catch (e) {
-      // If cache is corrupt, invalidate it
       invalidate(key);
       return null;
     }
@@ -153,12 +166,49 @@ class OfflineCacheService {
       final entry = CacheEntry(
         data: jsonStr,
         timestamp: DateTime.now(),
-        ttl: ttl ?? const Duration(hours: 1), // Default 1 hour
+        ttl: ttl ?? const Duration(hours: 1),
+        version: currentSchemaVersion,
       );
       final entryJson = jsonEncode(entry.toJson());
       _prefsInstance.setString(key, entryJson);
+      
+      _evictIfNeeded();
     } catch (e) {
       // Silently fail on cache write errors
+    }
+  }
+
+  /// Evict oldest entries if cache exceeds size or count limits.
+  void _evictIfNeeded() {
+    final keys = _prefsInstance.getKeys().toList();
+    if (keys.length <= _maxEntries && getCacheSize() <= _maxSizeBytes) {
+      return;
+    }
+
+    // Collect entries with timestamps for LRU eviction
+    final entries = <_CacheEntryMeta>[];
+    for (final key in keys) {
+      final jsonStr = _prefsInstance.getString(key);
+      if (jsonStr == null) continue;
+      try {
+        final json = jsonDecode(jsonStr) as Map<String, dynamic>;
+        final entry = CacheEntry.fromJson(json);
+        entries.add(_CacheEntryMeta(key: key, timestamp: entry.timestamp));
+      } catch (_) {
+        // Corrupt entry — remove immediately
+        _prefsInstance.remove(key);
+      }
+    }
+
+    // Sort by timestamp ascending (oldest first)
+    entries.sort((a, b) => a.timestamp.compareTo(b.timestamp));
+
+    // Evict until under limits
+    while (entries.isNotEmpty &&
+           (_prefsInstance.getKeys().length > _maxEntries ||
+            getCacheSize() > _maxSizeBytes)) {
+      final oldest = entries.removeAt(0);
+      _prefsInstance.remove(oldest.key);
     }
   }
 
@@ -183,8 +233,6 @@ class OfflineCacheService {
   }
 
   /// Get the size of the cache in bytes (approximate).
-  /// 
-  /// This is an estimate based on SharedPreferences storage.
   int getCacheSize() {
     final keys = _prefsInstance.getKeys();
     int size = 0;
@@ -198,4 +246,10 @@ class OfflineCacheService {
   int getCacheCount() {
     return _prefsInstance.getKeys().length;
   }
+}
+
+class _CacheEntryMeta {
+  final String key;
+  final DateTime timestamp;
+  const _CacheEntryMeta({required this.key, required this.timestamp});
 }
