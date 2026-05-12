@@ -12,6 +12,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../shell/presentation/shell_components.dart';
+import '../data/support_attachment_upload_service.dart';
 import '../providers/support_compose_providers.dart';
 import '../providers/support_providers.dart';
 
@@ -41,6 +42,16 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
     _loadIdController.dispose();
     _tripIdController.dispose();
     _descriptionController.dispose();
+    // Cleanup draft attachments if any
+    final state = ref.read(createSupportTicketProvider);
+    final profile = ref.read(currentProfileProvider).valueOrNull;
+    if (state.attachments.isNotEmpty && profile != null) {
+      final attachmentService = ref.read(supportAttachmentUploadServiceProvider);
+      attachmentService.cleanupDraftSession(
+        profileId: profile.id,
+        sessionId: state.sessionId,
+      );
+    }
     super.dispose();
   }
 
@@ -212,12 +223,34 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
     ImageSource source,
     String profileId,
   ) async {
-    // TODO: Implement multiple attachment upload after ticket creation
-    // For now, attachments can be added after ticket is created via reply
-    AppSnackbar.show(
-      context: context,
-      message: 'Please add attachments after creating the ticket',
-      variant: AppSnackbarVariant.info,
+    final state = ref.read(createSupportTicketProvider);
+    final attachmentService = ref.read(supportAttachmentUploadServiceProvider);
+
+    final result = await attachmentService.uploadMultipleAttachments(
+      profileId: profileId,
+      sources: [source],
+      sessionId: state.sessionId, // Use sessionId for draft attachments
+      pathSegment: 'temp',
+    );
+
+    result.when(
+      success: (attachments) {
+        for (final attachment in attachments) {
+          ref.read(createSupportTicketProvider.notifier).addAttachment(attachment);
+        }
+        AppSnackbar.show(
+          context: context,
+          message: 'Attachment added successfully',
+          variant: AppSnackbarVariant.success,
+        );
+      },
+      failure: (failure) {
+        AppSnackbar.show(
+          context: context,
+          message: failure.message.isNotEmpty ? failure.message : 'Failed to add attachment',
+          variant: AppSnackbarVariant.error,
+        );
+      },
     );
   }
 
