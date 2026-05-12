@@ -1140,21 +1140,22 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 - ✅ Update SupportAttachmentUploadService for temp namespace and optional ticketId
 - ✅ Update submit flow to call finalize RPC after ticket creation
 - ✅ Add cleanupDraftSession method for cancel cleanup
-- ⏳ UI integration: Update create_support_ticket_screen.dart to pass sessionId (pending)
+- ✅ UI integration: Update create_support_ticket_screen.dart to pass sessionId
+- ✅ Add dispose cleanup to clean up orphaned files on navigation away
 
-**Backend Prerequisites (DEPLOYED):**
+**Backend Prerequisites (CREATED - NEED DEPLOYMENT):**
 1. ✅ Migration: `ALTER TABLE ticket_attachments ALTER COLUMN ticket_id DROP NOT NULL`
 2. ✅ RPC: `finalize_ticket_attachments(p_ticket_id, p_session_id)` - Finalizes draft attachments to ticket
 3. ✅ RPC: `cleanup_orphaned_attachments(p_hours_older_than)` - Optional, can defer
 
-**Flutter Implementation (CORE COMPLETED):**
+**Flutter Implementation (FULLY COMPLETED):**
 - ✅ Add sessionId to CreateSupportTicketState
 - ✅ Update SupportAttachmentUploadService to use temp namespace
 - ✅ Update submit flow to call finalize RPC
 - ✅ Add cancel cleanup for orphaned files
-- ⏳ Update UI to pass sessionId to upload service (requires screen modification)
+- ✅ Update UI to pass sessionId to upload service
 
-**Note:** The core backend and service layer changes are complete. The UI integration (passing sessionId from screen to upload service) is pending and can be done as a follow-up. The backend migrations need to be deployed to the live Supabase instance.
+**Note:** All Flutter changes are complete. The backend migrations need to be deployed to the live Supabase instance before the feature works in production.
 
 ---
 
