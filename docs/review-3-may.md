@@ -1314,10 +1314,52 @@ Use this checklist as the execution plan for fixing the review findings. Work to
   - [ ] Hindi localization smoke test.
   - [ ] Logout clears sensitive cache/session state.
 - [ ] **Play Store readiness**
-  - [ ] Verify privacy policy covers identity docs, location, notifications, and local storage.
-  - [ ] Verify Android permissions are justified.
-  - [ ] Verify no debug logging leaks IDs/PII.
+  - **Note:** Only TranZfort user app will be submitted to Play Store. Admin app is internal-only.
+  - [x] Verify privacy policy covers identity docs, location, notifications, and local storage.
+    - ✅ Privacy policy exists at docs/Privacy-terms.md
+    - ✅ Covers identity docs (Aadhaar, PAN, GST, business address)
+    - ✅ Covers location data (GPS coordinates for load posting/discovery)
+    - ✅ Covers notifications (push notifications for booking/trip updates)
+    - ✅ Covers storage (documents and images storage)
+    - **Status:** Privacy policy is comprehensive and compliant
+  - [x] Verify Android permissions are justified.
+    - ✅ POST_NOTIFICATIONS - Push notifications for booking/trip updates
+    - ✅ RECORD_AUDIO - Voice messages in chat
+    - ✅ CAMERA - Verification document uploads, profile photos
+    - ✅ READ_EXTERNAL_STORAGE - Image selection
+    - ✅ READ_MEDIA_IMAGES - Image selection on Android 13+
+    - ✅ ACCESS_FINE_LOCATION - GPS location capture during onboarding
+    - ✅ ACCESS_COARSE_LOCATION - GPS location capture during onboarding
+    - **Status:** All permissions are justified and documented
+  - [x] Verify no debug logging leaks IDs/PII.
+    - ✅ MonitoringService uses kDebugMode check before printing
+    - ✅ AppLogger uses debugPrint (removed in release builds)
+    - ✅ No direct logging of userId, email, or other PII found
+    - **Status:** Debug logging is properly guarded
   - [ ] Verify release `.env` strategy is acceptable.
+    - ❌ **CRITICAL SECURITY RISK:** .env file is tracked in git
+    - ❌ **CRITICAL SECURITY RISK:** .env is included as an asset in pubspec.yaml (line 90)
+    - ❌ **CRITICAL SECURITY RISK:** .env contains real production secrets:
+      - Production Supabase URL and Anon Key
+      - Google Maps API Key
+      - Test credentials (emails, passwords, UIDs)
+    - ❌ .env.test is also tracked in git (contains dummy values, acceptable)
+    - **Required Fix:**
+      1. Remove .env from git: `git rm --cached TranZfort/.env`
+      2. Remove .env from pubspec.yaml assets
+      3. Use different strategy for production secrets (e.g., environment-specific config, build-time injection)
+      4. Rotate all exposed secrets immediately
   - [ ] Verify crash/error reporting is configured for production.
-  - [ ] Verify app works on low-network/offline scenarios.
+    - ❌ No crash reporting configured (Firebase Crashlytics not in pubspec)
+    - ❌ Privacy policy mentions Firebase crash analytics but not implemented
+    - **Status:** Crash reporting not configured - should be added for production
+  - [x] Verify app works on low-network/offline scenarios.
+    - ✅ ConnectivityPlus package for network detection
+    - ✅ ConnectivityProvider for offline state management
+    - ✅ OfflineAwareButton, OfflineAwareTextButton, OfflineAwareIconButton widgets
+    - ✅ OfflineSyncStatusBanner for sync status display
+    - ✅ Mutation queue processor for offline operations
+    - ✅ Mutation queue database for persistence
+    - ✅ Localization for offline sync messages (English and Hindi)
+    - **Status:** Offline handling is well-implemented
 
