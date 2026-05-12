@@ -1129,35 +1129,24 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 
 **DEFERRED until backend RPCs are ready**
 
-- [ ] **Introduce draft attachment session ID**
-  - [ ] Generate UUID on screen init for draft session
-  - [ ] Store draft session in local state
-  - [ ] Upload files under `{profileId}/draft/{session_id}/` namespace
-  - [ ] **BACKEND REQUIRED:** RPC to create ticket from draft session
-- [ ] **Upload files under draft/session namespace**
-  - [ ] Change storage path from `{profileId}/support_ticket/{ticketId}/` to `{profileId}/draft/{session_id}/`
-  - [ ] Update `pickCompressAndUploadAttachment` to accept session_id
-  - [ ] **BACKEND REQUIRED:** RPC to finalize attachments from draft to ticket
-- [ ] **Create ticket through RPC**
-  - [ ] **BACKEND REQUIRED:** `create_support_ticket_from_draft` RPC
-  - [ ] Pass draft session ID instead of attachment path
-  - [ ] Backend moves files from draft to ticket namespace
-- [ ] **Finalize attachments to ticket through RPC**
-  - [ ] **BACKEND REQUIRED:** `finalize_draft_attachments` RPC
-  - [ ] Call after successful ticket creation
-  - [ ] Backend updates attachment records with ticket_id
-- [ ] **Delete draft attachments after failed/cancelled submit**
-  - [ ] On cancel/failure, call cleanup to delete draft files
-  - [ **BACKEND REQUIRED:** RPC or direct storage cleanup
-- [ ] **Add cleanup job/RPC for stale draft attachments**
-  - [ ] **BACKEND REQUIRED:** Scheduled job to delete drafts older than 24h
-  - [ ] **BACKEND REQUIRED:** RPC `cleanup_stale_draft_attachments`
+**Brainstorming Document:** See `docs/phase-7.2-brainstorm.md` for detailed analysis of 4 solution options
 
-**Implementation Prerequisites:**
-1. Backend RPC `create_support_ticket_from_draft(p_session_id, p_category, p_message_body, ...)`
-2. Backend RPC `finalize_draft_attachments(p_session_id, p_ticket_id)`
-3. Backend RPC `cleanup_stale_draft_attachments()`
-4. Backend storage migration to support draft namespace
+**Recommended Approach: Option D (Hybrid)**
+- Minimal schema change: DROP NOT NULL on ticket_id
+- 1 new backend RPC: `finalize_ticket_attachments(p_ticket_id, p_session_id)`
+- Session tracking via storage path instead of database column
+- Best balance of risk, complexity, and UX
+
+**Backend Prerequisites:**
+1. Migration: `ALTER TABLE ticket_attachments ALTER COLUMN ticket_id DROP NOT NULL`
+2. RPC: `finalize_ticket_attachments(p_ticket_id, p_session_id)` - Finalizes draft attachments to ticket
+3. RPC: `cleanup_orphaned_attachments()` - Optional, can defer
+
+**Flutter Implementation (Pending Backend):**
+- [ ] Add sessionId to CreateSupportTicketState
+- [ ] Update SupportAttachmentUploadService to use temp namespace
+- [ ] Update submit flow to call finalize RPC
+- [ ] Add cancel cleanup for orphaned files
 
 **DO NOT START** until backend team confirms RPCs are deployed
 
