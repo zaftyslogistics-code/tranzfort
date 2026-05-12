@@ -1143,10 +1143,10 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 - ✅ UI integration: Update create_support_ticket_screen.dart to pass sessionId
 - ✅ Add dispose cleanup to clean up orphaned files on navigation away
 
-**Backend Prerequisites (CREATED - NEED DEPLOYMENT):**
-1. ✅ Migration: `ALTER TABLE ticket_attachments ALTER COLUMN ticket_id DROP NOT NULL`
-2. ✅ RPC: `finalize_ticket_attachments(p_ticket_id, p_session_id)` - Finalizes draft attachments to ticket
-3. ✅ RPC: `cleanup_orphaned_attachments(p_hours_older_than)` - Optional, can defer
+**Backend Prerequisites (DEPLOYED):**
+1. ✅ Migration: `ALTER TABLE ticket_attachments ALTER COLUMN ticket_id DROP NOT NULL` - DEPLOYED
+2. ✅ RPC: `finalize_ticket_attachments(p_ticket_id, p_session_id)` - Finalizes draft attachments to ticket - DEPLOYED
+3. ✅ RPC: `cleanup_orphaned_attachments(p_hours_older_than)` - Optional, can defer - DEPLOYED
 
 **Flutter Implementation (FULLY COMPLETED):**
 - ✅ Add sessionId to CreateSupportTicketState
@@ -1155,7 +1155,7 @@ Use this checklist as the execution plan for fixing the review findings. Work to
 - ✅ Add cancel cleanup for orphaned files
 - ✅ Update UI to pass sessionId to upload service
 
-**Note:** All Flutter changes are complete. The backend migrations need to be deployed to the live Supabase instance before the feature works in production.
+**Note:** All Flutter changes are complete. The backend migrations have been deployed to the live Supabase instance. Phase 7.2 is now fully complete and ready for testing.
 
 ---
 
