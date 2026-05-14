@@ -3,12 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../core/services/avatar_url_service.dart';
 import '../../core/providers/app_state_providers.dart';
-import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
-import '../../core/theme/app_spacing.dart';
-import '../../core/theme/app_typography.dart';
 
 /// Shared user avatar widget with caching, shimmer loading, and stable Hero tags.
 /// Replaces duplicate _AvatarCircle implementations across the app.
