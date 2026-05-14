@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
+import '../../../../core/logger/app_logger.dart';
+import '../../../../core/navigation/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../data/public_profile_models.dart';
 import '../../data/public_profile_repository.dart';
@@ -74,6 +77,7 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
         });
       },
       failure: (failure) {
+        AppLogger.error('LoadHistorySection._loadInitial failed', scope: 'LoadHistorySection', error: failure);
         setState(() {
           _error = failure.message;
           _isLoading = false;
@@ -274,7 +278,7 @@ class _LoadItemTile extends StatelessWidget {
         ],
       ),
       onTap: () {
-        // Navigate to load detail (implementation depends on routing)
+        GoRouter.of(context).push('${AppRoutes.loadDetailPath}/${load.id}');
       },
     );
   }
