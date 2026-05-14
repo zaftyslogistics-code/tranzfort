@@ -186,26 +186,12 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(vertical: AppSpacing.xs),
                 child: Row(
                   children: [
-                    _AvatarCircle(
+                    UserAvatar(
                       avatarUrl: detail.supplier.avatarUrl,
+                      userId: detail.supplierId,
+                      initials: detail.supplier.fullName.isNotEmpty ? detail.supplier.fullName[0].toUpperCase() : 'S',
                       radius: 20,
-                      fallback: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppRadius.chip),
-                        ),
-                        child: Center(
-                          child: Text(
-                            detail.supplier.fullName.isNotEmpty ? detail.supplier.fullName[0].toUpperCase() : 'S',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                        ),
-                      ),
+                      fallbackColor: AppColors.primary.withValues(alpha: 0.1),
                     ),
                     const SizedBox(width: AppSpacing.sm),
                     Expanded(
@@ -361,59 +347,6 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
   }
 }
 
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
-      return SizedBox(
-        width: radius * 2,
-        height: radius * 2,
-        child: fallback,
-      );
-    }
-
-    return FutureBuilder<String?>(
-      future: _createSignedUrl(avatarUrl!),
-      builder: (context, snapshot) {
-        final resolvedUrl = snapshot.data;
-        if (resolvedUrl == null) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        }
-        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-      },
-    );
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      // Try verification-documents bucket first (for user's own profile)
-      try {
-        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-      } catch (_) {
-        // Fallback to profile-photos bucket (for supplier profiles)
-        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
-      }
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
 class _LoadRouteMapSection extends StatelessWidget {
   final double originLat;
   final double originLng;
@@ -504,45 +437,6 @@ class _LoadRouteMapSection extends StatelessWidget {
         ),
         // Open in Maps action is in the route section above.
       ],
-    );
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.network(
-        url,
-        width: radius * 2,
-        height: radius * 2,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
-      ),
     );
   }
 }
