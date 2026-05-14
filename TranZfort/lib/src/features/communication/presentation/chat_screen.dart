@@ -11,6 +11,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
+import '../../../shared/widgets/avatar_widget.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -181,26 +182,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                 borderRadius: BorderRadius.circular(18),
                 child: Padding(
                   padding: const EdgeInsets.all(AppSpacing.sm),
-                  child: _AvatarCircle(
+                  child: UserAvatar(
                     avatarUrl: _otherPartyAvatarUrl(conversation, authState.role),
+                    userId: _otherPartyId(conversation, authState.role),
+                    initials: otherPartyName.isNotEmpty ? otherPartyName[0].toUpperCase() : '?',
                     radius: 18,
-                    fallback: Container(
-                      width: 36,
-                      height: 36,
-                      decoration: BoxDecoration(
-                        color: AppColors.primary.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      child: Center(
-                        child: Text(
-                          otherPartyName.isNotEmpty ? otherPartyName[0].toUpperCase() : '?',
-                          style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                                color: AppColors.primary,
-                                fontWeight: FontWeight.w700,
-                              ),
-                        ),
-                      ),
-                    ),
+                    fallbackColor: AppColors.primary.withValues(alpha: 0.1),
                   ),
                 ),
               )
@@ -401,96 +388,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
               ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
-      return SizedBox(
-        width: radius * 2,
-        height: radius * 2,
-        child: fallback,
-      );
-    }
-
-    return FutureBuilder<String?>(
-      future: _createSignedUrl(avatarUrl!),
-      builder: (context, snapshot) {
-        final resolvedUrl = snapshot.data;
-        if (resolvedUrl == null) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        }
-        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-      },
-    );
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      try {
-        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-      } catch (_) {
-        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
-      }
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.network(
-        url,
-        width: radius * 2,
-        height: radius * 2,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
       ),
     );
   }
