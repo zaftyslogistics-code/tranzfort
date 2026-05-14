@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
+
 import '../../../../core/navigation/app_routes.dart';
 import '../../data/review_models.dart';
 import 'star_rating_input.dart';

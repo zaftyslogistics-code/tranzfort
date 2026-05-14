@@ -1,12 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
-import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../shared/widgets/avatar_widget.dart';
@@ -92,7 +90,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
                       final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
                       final authState = ref.watch(currentAuthStateProvider);
                       final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
-                      final userId = liveProfile?.id ?? authState.profile?.id ?? authState.userId;
+                      final userId = liveProfile?.id ?? authState.profile?.id;
                       final fullName = liveProfile?.fullName ?? authState.profile?.fullName ?? '';
                       return Padding(
                         padding: const EdgeInsets.only(right: AppSpacing.sm),
@@ -312,7 +310,7 @@ class UserAppDrawerContent extends ConsumerWidget {
     final authState = ref.watch(currentAuthStateProvider);
     final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
     final fullName = liveProfile?.fullName ?? authState.profile?.fullName ?? '';
-    final userId = liveProfile?.id ?? authState.profile?.id ?? authState.userId;
+    final userId = liveProfile?.id ?? authState.profile?.id;
 
     return SafeArea(
       child: Column(
