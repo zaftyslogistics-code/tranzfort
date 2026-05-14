@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../../core/theme/app_shadows.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/avatar_widget.dart';
 import '../../data/public_profile_models.dart';
 
 /// Profile header card displaying user identity with new user states.
@@ -82,18 +83,35 @@ class ProfileHeaderCard extends StatelessWidget {
     final isVerified = profile.verificationStatus == 'verified';
     final radius = 28.0;
 
-    return GestureDetector(
+    return UserAvatar(
+      avatarUrl: profile.avatarUrl,
+      userId: profile.id,
+      initials: _getInitials(),
+      radius: radius,
       onTap: onAvatarTap,
-      child: Hero(
-        tag: 'profile_avatar_${profile.id}',
-        child: _AvatarCircle(
-          avatarUrl: profile.avatarUrl,
-          radius: radius,
-          fallback: _AvatarFallback(
-            radius: radius,
-            initials: _getInitials(),
-            colorScheme: colorScheme,
-            isVerified: isVerified,
+      fallback: _buildVerifiedFallback(context, colorScheme, isVerified, radius),
+    );
+  }
+
+  Widget _buildVerifiedFallback(BuildContext context, ColorScheme colorScheme, bool isVerified, double radius) {
+    return Container(
+      width: radius * 2,
+      height: radius * 2,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: colorScheme.primaryContainer,
+        border: isVerified
+            ? Border.all(color: colorScheme.primary, width: 2)
+            : Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
+        boxShadow: AppShadows.card,
+      ),
+      child: Center(
+        child: Text(
+          _getInitials(),
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: colorScheme.onPrimaryContainer,
           ),
         ),
       ),
@@ -223,128 +241,5 @@ class ProfileHeaderCard extends StatelessWidget {
       return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
     }
     return name[0].toUpperCase();
-  }
-}
-
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final url = avatarUrl?.trim();
-
-    if (url == null || url.isEmpty) {
-      return fallback;
-    }
-
-    if (!url.startsWith('http')) {
-      return FutureBuilder<String?>(
-        future: _createSignedUrl(url),
-        builder: (context, snapshot) {
-          final resolvedUrl = snapshot.data;
-          if (resolvedUrl == null || resolvedUrl.isEmpty) {
-            return fallback;
-          }
-          return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-        },
-      );
-    }
-
-    return _AvatarImage(url: url, radius: radius, fallback: fallback);
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      // Try verification-documents bucket first (for user's own profile)
-      try {
-        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-      } catch (_) {
-        // Fallback to profile-photos bucket (for supplier profiles)
-        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
-      }
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Image.network(
-        url,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => fallback,
-      ),
-    );
-  }
-}
-
-class _AvatarFallback extends StatelessWidget {
-  final double radius;
-  final String initials;
-  final ColorScheme colorScheme;
-  final bool isVerified;
-
-  const _AvatarFallback({
-    required this.radius,
-    required this.initials,
-    required this.colorScheme,
-    required this.isVerified,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: colorScheme.primaryContainer,
-        border: isVerified
-            ? Border.all(color: colorScheme.primary, width: 2)
-            : Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      child: Center(
-        child: Text(
-          initials,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-            color: colorScheme.onPrimaryContainer,
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -8,6 +8,7 @@ import '../../core/theme/app_typography.dart';
 import '../../l10n/app_localizations.dart';
 import '../../features/trucker/data/trip_costing_service.dart';
 import '../../features/trucker/data/trucker_marketplace_repository.dart';
+import 'avatar_widget.dart';
 import 'curved_arc_route.dart';
 import 'status_components.dart';
 
@@ -83,9 +84,11 @@ class MarketplaceLoadCard extends StatelessWidget {
                 child: Row(
                   children: [
                     if (supplierInitial != null) ...[
-                      _SupplierAvatarBadge(
-                        initial: supplierInitial!,
+                      UserAvatar(
                         avatarUrl: supplierAvatarUrl,
+                        userId: load.supplierId,
+                        initials: supplierInitial,
+                        radius: 14.0,
                         onTap: onSupplierTap,
                       ),
                       const SizedBox(width: AppSpacing.sm),
@@ -488,160 +491,6 @@ class _SuperLoadPill extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// Supplier avatar badge that navigates to supplier profile on tap.
-class _SupplierAvatarBadge extends StatelessWidget {
-  final String initial;
-  final String? avatarUrl;
-  final VoidCallback? onTap;
-
-  const _SupplierAvatarBadge({
-    required this.initial,
-    this.avatarUrl,
-    this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final radius = 16.0;
-
-    return GestureDetector(
-      onTap: onTap,
-      child: Hero(
-        tag: 'supplier_avatar_${initial}_${DateTime.now().millisecondsSinceEpoch}',
-        child: _AvatarCircle(
-          avatarUrl: avatarUrl,
-          radius: radius,
-          fallback: _AvatarFallback(
-            radius: radius,
-            initial: initial,
-            colorScheme: colorScheme,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final url = avatarUrl?.trim();
-
-    if (url == null || url.isEmpty) {
-      return fallback;
-    }
-
-    if (!url.startsWith('http')) {
-      return FutureBuilder<String?>(
-        future: _createSignedUrl(url),
-        builder: (context, snapshot) {
-          final resolvedUrl = snapshot.data;
-          if (resolvedUrl == null || resolvedUrl.isEmpty) {
-            return fallback;
-          }
-          return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-        },
-      );
-    }
-
-    return _AvatarImage(url: url, radius: radius, fallback: fallback);
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      // Try verification-documents bucket first (for user's own profile)
-      try {
-        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-      } catch (_) {
-        // Fallback to profile-photos bucket (for supplier profiles)
-        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
-      }
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Image.network(
-        url,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => fallback,
-      ),
-    );
-  }
-}
-
-class _AvatarFallback extends StatelessWidget {
-  final double radius;
-  final String initial;
-  final ColorScheme colorScheme;
-
-  const _AvatarFallback({
-    required this.radius,
-    required this.initial,
-    required this.colorScheme,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: colorScheme.primary,
-        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      child: Center(
-        child: Text(
-          initial.toUpperCase(),
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-            color: colorScheme.onPrimary,
-          ),
-        ),
       ),
     );
   }

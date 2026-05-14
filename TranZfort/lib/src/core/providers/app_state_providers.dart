@@ -5,6 +5,7 @@ import '../config/supabase_config.dart';
 import '../error/app_failure.dart';
 import '../logger/app_logger.dart';
 import '../../features/auth/data/auth_repository.dart';
+import '../services/avatar_url_service.dart';
 
 enum AppUserRole {
   supplier,
@@ -246,4 +247,18 @@ final currentAuthStateProvider = Provider<AuthStateSnapshot>((ref) {
   final authState = ref.watch(authStateProvider);
   return authState.valueOrNull ??
       AuthStateSnapshot.fromClient(ref.watch(supabaseClientProvider));
+});
+
+/// Provider for avatar URL service with automatic cache clearing on logout.
+final avatarUrlServiceProvider = Provider<AvatarUrlService>((ref) {
+  final service = AvatarUrlService(Supabase.instance.client);
+  
+  // Listen to auth state changes and clear cache on logout
+  ref.listen(currentAuthStateProvider, (previous, next) {
+    if ((previous?.hasSession ?? false) && !next.hasSession) {
+      service.clearCache();
+    }
+  });
+  
+  return service;
 });
