@@ -9,6 +9,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
+import '../../../shared/widgets/avatar_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/tts_action_button.dart';
@@ -91,12 +92,19 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
                       final liveProfile = ref.watch(currentProfileProvider).valueOrNull;
                       final authState = ref.watch(currentAuthStateProvider);
                       final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
+                      final userId = liveProfile?.id ?? authState.profile?.id ?? authState.userId;
+                      final fullName = liveProfile?.fullName ?? authState.profile?.fullName ?? '';
                       return Padding(
                         padding: const EdgeInsets.only(right: AppSpacing.sm),
                         child: IconButton(
                           tooltip: l10n.commonProfileLabel,
                           onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
-                          icon: _AvatarCircle(avatarUrl: avatarUrl, radius: 16),
+                          icon: UserAvatar(
+                            avatarUrl: avatarUrl,
+                            userId: userId,
+                            initials: fullName.isNotEmpty ? fullName[0].toUpperCase() : '?',
+                            radius: 16,
+                          ),
                         ),
                       );
                     },
@@ -304,6 +312,7 @@ class UserAppDrawerContent extends ConsumerWidget {
     final authState = ref.watch(currentAuthStateProvider);
     final avatarUrl = liveProfile?.avatarUrl ?? authState.profile?.avatarUrl;
     final fullName = liveProfile?.fullName ?? authState.profile?.fullName ?? '';
+    final userId = liveProfile?.id ?? authState.profile?.id ?? authState.userId;
 
     return SafeArea(
       child: Column(
@@ -318,7 +327,13 @@ class UserAppDrawerContent extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _AvatarCircle(avatarUrl: avatarUrl, radius: 28, fallbackIcon: Icons.local_shipping_outlined),
+                UserAvatar(
+                  avatarUrl: avatarUrl,
+                  userId: userId,
+                  initials: fullName.isNotEmpty ? fullName[0].toUpperCase() : '?',
+                  radius: 28,
+                  fallbackColor: Colors.white.withValues(alpha: 0.2),
+                ),
                 const SizedBox(height: AppSpacing.lg),
                 Text(
                   fullName.isNotEmpty ? fullName : 'TranZfort',
@@ -517,121 +532,6 @@ class ShellCountBadge extends StatelessWidget {
               fontWeight: FontWeight.w700,
               fontSize: compact ? 9 : 10,
             ),
-      ),
-    );
-  }
-}
-
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final IconData? fallbackIcon;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    this.fallbackIcon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final url = avatarUrl?.trim();
-    final iconSize = radius * 1.125;
-    final fallback = _AvatarFallback(
-      radius: radius,
-      iconSize: iconSize,
-      icon: fallbackIcon ?? Icons.person_outline,
-    );
-
-    if (url == null || url.isEmpty) {
-      return fallback;
-    }
-
-    if (!url.startsWith('http')) {
-      return FutureBuilder<String?>(
-        future: _createSignedUrl(url),
-        builder: (context, snapshot) {
-          final resolvedUrl = snapshot.data;
-          if (resolvedUrl == null || resolvedUrl.isEmpty) {
-            return fallback;
-          }
-          return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-        },
-      );
-    }
-
-    return _AvatarImage(url: url, radius: radius, fallback: fallback);
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Image.network(
-        url,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => fallback,
-      ),
-    );
-  }
-}
-
-class _AvatarFallback extends StatelessWidget {
-  final double radius;
-  final double iconSize;
-  final IconData icon;
-
-  const _AvatarFallback({
-    required this.radius,
-    required this.iconSize,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: radius * 2,
-      height: radius * 2,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: Colors.white,
-        border: Border.all(color: Colors.white.withValues(alpha: 0.92), width: 2),
-        boxShadow: AppShadows.card,
-      ),
-      child: Icon(
-        icon,
-        size: iconSize,
-        color: AppColors.primary,
       ),
     );
   }
