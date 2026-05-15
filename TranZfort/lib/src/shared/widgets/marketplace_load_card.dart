@@ -84,9 +84,9 @@ class MarketplaceLoadCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(
                   20,
+                  14,
                   16,
-                  16,
-                  12,
+                  10,
                 ),
                 child: Row(
                   children: [
@@ -98,7 +98,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                         radius: 14.0,
                         onTap: onSupplierTap,
                       ),
-                      const SizedBox(width: AppSpacing.sm),
+                      const SizedBox(width: 8),
                     ],
                     Expanded(
                       child: Column(
@@ -109,12 +109,11 @@ class MarketplaceLoadCard extends StatelessWidget {
                             load.supplierName ?? 'Supplier',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
                                   color: AppColors.textPrimary,
                                   fontWeight: FontWeight.w700,
                                 ),
                           ),
-                          const SizedBox(height: 2),
                           Row(
                             children: [
                               if (load.isSuperLoad) ...[
@@ -140,7 +139,7 @@ class MarketplaceLoadCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
-                  vertical: 12,
+                  vertical: 8,
                 ),
                 child: CurvedArcRoute.compact(
                   origin: load.originCity,
@@ -193,7 +192,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.fromLTRB(
                   20,
-                  12,
+                  8,
                   20,
                   0,
                 ),
@@ -462,7 +461,7 @@ class _CompactChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final fg = accent ?? AppColors.textSecondary;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.surfaceSoft,
         borderRadius: BorderRadius.circular(AppRadius.chip),
@@ -471,7 +470,7 @@ class _CompactChip extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 13, color: fg),
+          Icon(icon, size: 12, color: fg),
           const SizedBox(width: 4),
           Text(
             label,
