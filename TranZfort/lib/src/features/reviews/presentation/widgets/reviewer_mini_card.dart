@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/navigation/app_routes.dart';
+import '../../../../shared/widgets/avatar_widget.dart';
 import '../../data/review_models.dart';
 import 'star_rating_input.dart';
 
 /// Clickable reviewer mini-card for review cards.
-class ReviewerMiniCard extends StatelessWidget {
+class ReviewerMiniCard extends ConsumerWidget {
   final Review review;
   final VoidCallback? onTap;
 
@@ -17,7 +19,7 @@ class ReviewerMiniCard extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
 
@@ -34,27 +36,12 @@ class ReviewerMiniCard extends StatelessWidget {
             InkWell(
               onTap: () => context.push(AppRoutes.publicProfileLocation(review.reviewerId)),
               borderRadius: BorderRadius.circular(20),
-              child: _AvatarCircle(
+              child: UserAvatar(
                 avatarUrl: review.reviewerAvatarUrl,
+                userId: review.reviewerId,
+                initials: _getInitials(),
                 radius: 20,
-                fallback: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primaryContainer,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Center(
-                    child: Text(
-                      _getInitials(),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Theme.of(context).colorScheme.onPrimaryContainer,
-                      ),
-                    ),
-                  ),
-                ),
+                fallbackColor: Theme.of(context).colorScheme.primaryContainer,
               ),
             ),
             const SizedBox(width: 12),
@@ -153,95 +140,5 @@ class ReviewerMiniCard extends StatelessWidget {
       return '${parts[0][0]}${parts[1][0]}'.toUpperCase();
     }
     return name[0].toUpperCase();
-  }
-}
-
-class _AvatarCircle extends StatelessWidget {
-  final String? avatarUrl;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarCircle({
-    required this.avatarUrl,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    if (avatarUrl == null || avatarUrl!.trim().isEmpty) {
-      return SizedBox(
-        width: radius * 2,
-        height: radius * 2,
-        child: fallback,
-      );
-    }
-
-    return FutureBuilder<String?>(
-      future: _createSignedUrl(avatarUrl!),
-      builder: (context, snapshot) {
-        final resolvedUrl = snapshot.data;
-        if (resolvedUrl == null) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        }
-        return _AvatarImage(url: resolvedUrl, radius: radius, fallback: fallback);
-      },
-    );
-  }
-
-  Future<String?> _createSignedUrl(String path) async {
-    try {
-      final client = Supabase.instance.client;
-      try {
-        return await client.storage.from('verification-documents').createSignedUrl(path, 3600);
-      } catch (_) {
-        return await client.storage.from('profile-photos').createSignedUrl(path, 3600);
-      }
-    } catch (_) {
-      return null;
-    }
-  }
-}
-
-class _AvatarImage extends StatelessWidget {
-  final String url;
-  final double radius;
-  final Widget fallback;
-
-  const _AvatarImage({
-    required this.url,
-    required this.radius,
-    required this.fallback,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.network(
-        url,
-        width: radius * 2,
-        height: radius * 2,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return SizedBox(
-            width: radius * 2,
-            height: radius * 2,
-            child: fallback,
-          );
-        },
-      ),
-    );
   }
 }

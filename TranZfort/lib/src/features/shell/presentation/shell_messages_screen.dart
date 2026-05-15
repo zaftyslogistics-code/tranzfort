@@ -255,26 +255,12 @@ class _SupplierConversationRow extends StatelessWidget {
                   InkWell(
                     onTap: () => context.push(AppRoutes.publicProfileLocation(conversation.truckerId)),
                     borderRadius: BorderRadius.circular(20),
-                    child: _AvatarCircle(
+                    child: UserAvatar(
                       avatarUrl: conversation.truckerAvatarUrl,
+                      userId: conversation.truckerId,
+                      initials: conversation.truckerName.isNotEmpty ? conversation.truckerName[0].toUpperCase() : 'T',
                       radius: 20,
-                      fallback: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          color: AppColors.primary.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Center(
-                          child: Text(
-                            conversation.truckerName.isNotEmpty ? conversation.truckerName[0].toUpperCase() : 'T',
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                  color: AppColors.primary,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                          ),
-                        ),
-                      ),
+                      fallbackColor: AppColors.primary.withValues(alpha: 0.1),
                     ),
                   ),
                   const SizedBox(width: AppSpacing.sm),
