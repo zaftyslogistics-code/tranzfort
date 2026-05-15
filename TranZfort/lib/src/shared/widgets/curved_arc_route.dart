@@ -43,7 +43,7 @@ class CurvedArcRoute extends StatelessWidget {
     this.distanceLabel,
     this.durationLabel,
   })  : onDarkSurface = false,
-        height = 108;
+        height = 80;
 
   const CurvedArcRoute.hero({
     super.key,
@@ -69,9 +69,9 @@ class CurvedArcRoute extends StatelessWidget {
     ].join(' · ');
 
     // Reserve vertical bands to prevent pins overlapping labels:
-    //   top chip band ~20px, arc+pins band (flex), label band ~56px
+    //   top chip band ~20px, arc+pins band (flex), label band ~40px
     //   (FROM + city + optional state/subtitle).
-    const double labelBandHeight = 56;
+    const double labelBandHeight = 40;
     final hasOriginSubtitle = (originSubtitle ?? '').trim().isNotEmpty;
     final hasDestinationSubtitle = (destinationSubtitle ?? '').trim().isNotEmpty;
 
@@ -134,22 +134,23 @@ class CurvedArcRoute extends StatelessWidget {
                         style: AppTypography.labelMicro.copyWith(
                           color: textMuted,
                           letterSpacing: 1.1,
+                          fontSize: 9,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
                         origin,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: textPrimary,
                               fontWeight: FontWeight.w800,
                               letterSpacing: -0.2,
-                              height: 1.1,
+                              height: 1.0,
                             ),
                       ),
                       if (hasOriginSubtitle) ...[
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 1),
                         Text(
                           originSubtitle!,
                           maxLines: 1,
@@ -157,14 +158,15 @@ class CurvedArcRoute extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: textMuted,
                                 fontWeight: FontWeight.w500,
-                                height: 1.1,
+                                height: 1.0,
+                                fontSize: 10,
                               ),
                         ),
                       ],
                     ],
                   ),
                 ),
-                const SizedBox(width: AppSpacing.sm),
+                const SizedBox(width: AppSpacing.xs),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -175,23 +177,24 @@ class CurvedArcRoute extends StatelessWidget {
                         style: AppTypography.labelMicro.copyWith(
                           color: textMuted,
                           letterSpacing: 1.1,
+                          fontSize: 9,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 2),
                       Text(
                         destination,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.end,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
                               color: textPrimary,
                               fontWeight: FontWeight.w800,
                               letterSpacing: -0.2,
-                              height: 1.1,
+                              height: 1.0,
                             ),
                       ),
                       if (hasDestinationSubtitle) ...[
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 1),
                         Text(
                           destinationSubtitle!,
                           maxLines: 1,
@@ -200,7 +203,8 @@ class CurvedArcRoute extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: textMuted,
                                 fontWeight: FontWeight.w500,
-                                height: 1.1,
+                                height: 1.0,
+                                fontSize: 10,
                               ),
                         ),
                       ],
