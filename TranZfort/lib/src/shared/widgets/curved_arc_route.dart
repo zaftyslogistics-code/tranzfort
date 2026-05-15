@@ -4,10 +4,10 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
 
-/// Phase 5: Premium curved arc route visualization.
+/// Phase 5: Premium route visualization (straight line).
 ///
-/// Renders origin (teal dot) → curved arc → destination (orange pin) with
-/// optional km/duration label floating above the arc's apex.
+/// Renders origin (teal dot) → straight dashed line → destination (orange pin) with
+/// optional km/duration label floating above the line's midpoint.
 ///
 /// Variants:
 ///   - CurvedArcRoute.compact(): for marketplace list cards (height 56)
@@ -242,8 +242,8 @@ class _ArcPainter extends CustomPainter {
     final originPoint = Offset(originX, arcBottom);
     final destPoint = Offset(destX, arcBottom);
 
-    // Curved arc control point: apex in the middle, above
-    final controlPoint = Offset((originX + destX) / 2, arcTop - 4);
+    // Straight line control point: in line with origin and destination
+    final controlPoint = Offset((originX + destX) / 2, arcBottom);
 
     // Draw dashed arc path
     final dashPaint = Paint()
@@ -262,18 +262,18 @@ class _ArcPainter extends CustomPainter {
       gapLength: 4,
     );
 
-    // Subtle glow along arc midpoint (truck icon "travels" here)
-    final apex = _quadraticBezier(originPoint, controlPoint, destPoint, 0.5);
+    // Subtle glow along line midpoint (truck icon "travels" here)
+    final midpoint = _quadraticBezier(originPoint, controlPoint, destPoint, 0.5);
     final glowPaint = Paint()
       ..color = arcColor.withValues(alpha: onDark ? 0.22 : 0.14)
       ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 6);
-    canvas.drawCircle(apex, 10, glowPaint);
+    canvas.drawCircle(midpoint, 10, glowPaint);
 
-    // Tiny truck dot at apex
+    // Tiny truck dot at midpoint
     final truckPaint = Paint()
       ..color = arcColor
       ..style = PaintingStyle.fill;
-    canvas.drawCircle(apex, 3.5, truckPaint);
+    canvas.drawCircle(midpoint, 3.5, truckPaint);
 
     // Origin: solid teal dot with ring
     final originRing = Paint()

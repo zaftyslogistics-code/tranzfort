@@ -158,10 +158,10 @@ class MarketplaceLoadCard extends StatelessWidget {
               // ── Meta chips: material, tonnes, body type ──
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  20,
-                  12,
-                  20,
-                  12,
+                  16,
+                  8,
+                  16,
+                  8,
                 ),
                 child: Wrap(
                   spacing: AppSpacing.xs,
@@ -199,7 +199,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 16,
+                  vertical: 10,
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.inkSurface,
@@ -318,7 +318,7 @@ class MarketplaceLoadCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
-                  vertical: 12,
+                  vertical: 8,
                 ),
                 child: Row(
                   children: [
