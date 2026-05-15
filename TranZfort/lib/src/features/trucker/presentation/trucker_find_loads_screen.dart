@@ -300,7 +300,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                                     onChat: () => _startChatFromFeedAction(context, ref, state.loads[index]),
                                     onCall: () => _callSupplierFromFeedAction(context, ref, state.loads[index]),
                                   ),
-                                  if (index != state.loads.length - 1) const SizedBox(height: AppSpacing.md),
+                                  if (index != state.loads.length - 1) const SizedBox(height: AppSpacing.lg),
                                 ],
                                 if (state.isLoadingMore) ...[
                                   const SizedBox(height: AppSpacing.md),

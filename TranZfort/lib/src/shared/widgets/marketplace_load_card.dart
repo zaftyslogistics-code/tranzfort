@@ -44,6 +44,11 @@ class MarketplaceLoadCard extends StatelessWidget {
         ? load.weightTonnes.toStringAsFixed(0)
         : load.weightTonnes.toStringAsFixed(1);
     final routeSnapshot = load.routeSnapshot;
+    final minCapacity = load.derivedMinTruckCapacityTonnes;
+    final maxCapacity = load.derivedMaxTruckCapacityTonnes;
+    final weightLabel = minCapacity != null && maxCapacity != null
+        ? '${minCapacity.toStringAsFixed(0)}-${maxCapacity.toStringAsFixed(0)}T'
+        : '${tonnes}T';
 
     final isPerTon = load.priceType == 'per_ton';
     final totalLoadValue = isPerTon
@@ -67,7 +72,10 @@ class MarketplaceLoadCard extends StatelessWidget {
             color: AppColors.surfaceBase,
             borderRadius: BorderRadius.circular(AppRadius.card),
             boxShadow: AppShadows.elevation2,
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(
+              color: AppColors.primaryDark.withValues(alpha: 0.5),
+              width: 1.2,
+            ),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,10 +83,10 @@ class MarketplaceLoadCard extends StatelessWidget {
               // ── Top: Supplier avatar + name + super-load badge + age ──
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  AppSpacing.md,
-                  AppSpacing.md,
-                  AppSpacing.sm,
+                  20,
+                  16,
+                  16,
+                  12,
                 ),
                 child: Row(
                   children: [
@@ -131,8 +139,8 @@ class MarketplaceLoadCard extends StatelessWidget {
               // ── Curved Arc Route visualization ──
               Padding(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.lg,
-                  vertical: AppSpacing.sm,
+                  horizontal: 20,
+                  vertical: 12,
                 ),
                 child: CurvedArcRoute.compact(
                   origin: load.originCity,
@@ -150,10 +158,10 @@ class MarketplaceLoadCard extends StatelessWidget {
               // ── Meta chips: material, tonnes, body type ──
               Padding(
                 padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  AppSpacing.sm,
-                  AppSpacing.lg,
-                  AppSpacing.sm,
+                  20,
+                  12,
+                  20,
+                  12,
                 ),
                 child: Wrap(
                   spacing: AppSpacing.xs,
@@ -165,7 +173,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     ),
                     _CompactChip(
                       icon: Icons.scale_outlined,
-                      label: '${tonnes}T',
+                      label: weightLabel,
                     ),
                     _CompactChip(
                       icon: Icons.local_shipping_outlined,
@@ -184,14 +192,14 @@ class MarketplaceLoadCard extends StatelessWidget {
               Container(
                 width: double.infinity,
                 margin: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  AppSpacing.xs,
-                  AppSpacing.lg,
-                  AppSpacing.md,
+                  20,
+                  12,
+                  20,
+                  0,
                 ),
                 padding: const EdgeInsets.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: AppSpacing.sm,
+                  horizontal: 16,
+                  vertical: 16,
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.inkSurface,
