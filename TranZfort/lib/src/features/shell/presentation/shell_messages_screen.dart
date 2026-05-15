@@ -158,7 +158,10 @@ class _SupplierConversationGroupCard extends StatelessWidget {
         color: AppColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.card),
         boxShadow: AppShadows.card,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(
+          color: AppColors.primaryDark.withValues(alpha: 0.5),
+          width: 1.2,
+        ),
       ),
       child: InkWell(
         onTap: onToggle,
@@ -350,7 +353,10 @@ class _TruckerConversationCard extends StatelessWidget {
             color: AppColors.cardSurface,
             borderRadius: BorderRadius.circular(AppRadius.card),
             boxShadow: AppShadows.card,
-            border: Border.all(color: AppColors.divider),
+            border: Border.all(
+          color: AppColors.primaryDark.withValues(alpha: 0.5),
+          width: 1.2,
+        ),
           ),
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.md),

@@ -291,48 +291,99 @@ class MarketplaceLoadCard extends StatelessWidget {
                           ],
                         ),
                       ),
+                    OutlinedButton.icon(
+                      onPressed: onViewDetails,
+                      icon: const Icon(Icons.arrow_forward, size: 16),
+                      label: Text(l10n.commonViewDetailsAction),
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: AppColors.primaryOnDark,
+                        side: BorderSide(color: AppColors.primaryOnDark),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(AppRadius.button),
+                        ),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppSpacing.sm,
+                          vertical: 8,
+                        ),
+                        textStyle: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
-              // ── Footer: View details CTA + quick actions ──
+              // ── Footer: Call/Message split action row ──
               Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  0,
-                  AppSpacing.md,
-                  AppSpacing.md,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 12,
                 ),
                 child: Row(
                   children: [
                     Expanded(
-                      child: TextButton.icon(
-                        onPressed: onViewDetails,
-                        icon: const Icon(Icons.arrow_forward, size: 18),
-                        label: Text(l10n.commonViewDetailsAction),
-                        style: TextButton.styleFrom(
-                          foregroundColor: AppColors.primary,
+                      child: InkWell(
+                        onTap: onCall,
+                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        child: Container(
+                          height: 44,
                           alignment: Alignment.centerLeft,
-                          padding: EdgeInsets.zero,
-                          textStyle: const TextStyle(fontWeight: FontWeight.w700),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(
+                                Icons.phone_outlined,
+                                color: AppColors.success,
+                                size: 20,
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Text(
+                                l10n.commonCallAction,
+                                style: TextStyle(
+                                  color: AppColors.success,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    if (onCall != null)
-                      _IconActionButton(
-                        icon: Icons.phone_outlined,
-                        tooltip: l10n.commonCallAction,
-                        color: AppColors.success,
-                        onPressed: onCall,
+                    const VerticalDivider(
+                      width: 1,
+                      color: AppColors.divider,
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: onChat,
+                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        child: Container(
+                          height: 44,
+                          alignment: Alignment.centerRight,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                l10n.commonChatLabel,
+                                style: TextStyle(
+                                  color: AppColors.primary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Icon(
+                                Icons.chat_bubble_outline,
+                                color: AppColors.primary,
+                                size: 20,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
-                    if (onChat != null) ...[
-                      const SizedBox(width: AppSpacing.xs),
-                      _IconActionButton(
-                        icon: Icons.chat_bubble_outline,
-                        tooltip: l10n.commonChatLabel,
-                        color: AppColors.primary,
-                        onPressed: onChat,
-                      ),
-                    ],
+                    ),
                   ],
                 ),
               ),
@@ -430,42 +481,6 @@ class _CompactChip extends StatelessWidget {
                 ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-/// Circular icon action button for Call / Chat.
-class _IconActionButton extends StatelessWidget {
-  final IconData icon;
-  final String tooltip;
-  final Color color;
-  final VoidCallback? onPressed;
-
-  const _IconActionButton({
-    required this.icon,
-    required this.tooltip,
-    required this.color,
-    this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      child: Material(
-        color: color.withValues(alpha: 0.1),
-        shape: const CircleBorder(),
-        child: InkWell(
-          onTap: onPressed,
-          customBorder: const CircleBorder(),
-          child: Container(
-            width: 40,
-            height: 40,
-            alignment: Alignment.center,
-            child: Icon(icon, size: 18, color: color),
-          ),
-        ),
       ),
     );
   }

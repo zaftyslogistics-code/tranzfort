@@ -153,7 +153,10 @@ class StatCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.cardSurface,
         borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(
+          color: AppColors.primaryDark.withValues(alpha: 0.5),
+          width: 1.2,
+        ),
         boxShadow: AppShadows.elevation2,
       ),
       child: Column(
@@ -294,7 +297,10 @@ class StandardListCard extends StatelessWidget {
               color: AppColors.cardSurface,
               borderRadius: BorderRadius.circular(AppRadius.card),
               boxShadow: AppShadows.card,
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(
+                color: AppColors.primaryDark.withValues(alpha: 0.5),
+                width: 1.2,
+              ),
             ),
             child: Stack(
               children: [
@@ -369,7 +375,10 @@ class StandardListCard extends StatelessWidget {
               color: AppColors.cardSurface,
               borderRadius: BorderRadius.circular(AppRadius.card),
               boxShadow: AppShadows.card,
-              border: Border.all(color: AppColors.divider),
+              border: Border.all(
+                color: AppColors.primaryDark.withValues(alpha: 0.5),
+                width: 1.2,
+              ),
             ),
             child: Stack(
               children: [
