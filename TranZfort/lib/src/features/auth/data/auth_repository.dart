@@ -15,6 +15,7 @@ import '../../../core/utils/validators.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
 import 'auth_repository_profile_ops.dart';
+import 'auth_validation_error_codes.dart';
 
 export 'auth_models.dart';
 export 'auth_repository_profile_ops.dart';
@@ -42,7 +43,7 @@ class AuthRepository {
     if (_googleWebClientId.isEmpty) {
       return const Failure<void>(
         BusinessRuleFailure(
-          message: 'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.',
+          message: AuthValidationErrorCodes.googleNotConfigured,
         ),
       );
     }
@@ -53,7 +54,7 @@ class AuthRepository {
       if (googleUser == null) {
         return const Failure<void>(
           ValidationFailure(
-            message: 'Google sign in was cancelled. Please try again.',
+            message: AuthValidationErrorCodes.googleSignInCancelled,
           ),
         );
       }
@@ -64,7 +65,7 @@ class AuthRepository {
       if (accessToken == null || idToken == null) {
         return const Failure<void>(
           ValidationFailure(
-            message: 'Unable to fetch Google sign-in token. Please try again.',
+            message: AuthValidationErrorCodes.googleTokenFetchFailed,
           ),
         );
       }
@@ -124,8 +125,8 @@ class AuthRepository {
     if (normalizedEmail == null) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a valid email address',
-          fieldErrors: {'email': 'Valid email is required'},
+          message: AuthValidationErrorCodes.emailInvalid,
+          fieldErrors: {'email': AuthValidationErrorCodes.emailInvalid},
         ),
       );
     }
@@ -133,8 +134,8 @@ class AuthRepository {
     if (!_isValidPassword(password)) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a password with at least 8 characters',
-          fieldErrors: {'password': 'Minimum 8 characters required'},
+          message: AuthValidationErrorCodes.passwordTooShort,
+          fieldErrors: {'password': AuthValidationErrorCodes.passwordTooShort},
         ),
       );
     }
@@ -162,8 +163,8 @@ class AuthRepository {
     if (normalizedEmail == null) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a valid email address',
-          fieldErrors: {'email': 'Valid email is required'},
+          message: AuthValidationErrorCodes.emailInvalid,
+          fieldErrors: {'email': AuthValidationErrorCodes.emailInvalid},
         ),
       );
     }
@@ -171,8 +172,8 @@ class AuthRepository {
     if (!_isValidPassword(password)) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a password with at least 8 characters',
-          fieldErrors: {'password': 'Minimum 8 characters required'},
+          message: AuthValidationErrorCodes.passwordTooShort,
+          fieldErrors: {'password': AuthValidationErrorCodes.passwordTooShort},
         ),
       );
     }
@@ -197,8 +198,8 @@ class AuthRepository {
     if (normalizedEmail == null) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a valid email address',
-          fieldErrors: {'email': 'Valid email is required'},
+          message: AuthValidationErrorCodes.emailInvalid,
+          fieldErrors: {'email': AuthValidationErrorCodes.emailInvalid},
         ),
       );
     }
@@ -220,8 +221,8 @@ class AuthRepository {
     if (normalizedEmail == null) {
       return const Failure<void>(
         ValidationFailure(
-          message: 'Enter a valid email address',
-          fieldErrors: {'email': 'Valid email is required'},
+          message: AuthValidationErrorCodes.emailInvalid,
+          fieldErrors: {'email': AuthValidationErrorCodes.emailInvalid},
         ),
       );
     }
