@@ -298,8 +298,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
-        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
-        BusinessRuleFailure(message: 'Another message is already being sent.'),
+        BusinessRuleFailure(message: ChatErrorCodes.messageAlreadyBeingSent),
       );
     }
 
@@ -336,8 +335,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
-        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
-        BusinessRuleFailure(message: 'Another message is already being sent.'),
+        BusinessRuleFailure(message: ChatErrorCodes.messageAlreadyBeingSent),
       );
     }
 
