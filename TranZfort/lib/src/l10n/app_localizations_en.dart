@@ -309,6 +309,21 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please correct the highlighted truck details';
 
   @override
+  String get truckerFleetBodyTypeOpen => 'Open';
+
+  @override
+  String get truckerFleetBodyTypeContainer => 'Container';
+
+  @override
+  String get truckerFleetBodyTypeTrailer => 'Trailer';
+
+  @override
+  String get truckerFleetBodyTypeTanker => 'Tanker';
+
+  @override
+  String get truckerFleetBodyTypeRefrigerated => 'Refrigerated';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 

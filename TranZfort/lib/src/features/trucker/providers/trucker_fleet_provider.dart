@@ -16,11 +16,11 @@ class TruckerFleetErrorCodes {
 }
 
 const List<String> truckerFleetBodyTypes = <String>[
-  'Open',
-  'Container',
-  'Trailer',
-  'Tanker',
-  'Refrigerated',
+  'open',
+  'container',
+  'trailer',
+  'tanker',
+  'refrigerated',
 ];
 
 const List<int> truckerFleetTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];

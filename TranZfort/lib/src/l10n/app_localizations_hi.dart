@@ -309,6 +309,21 @@ class AppLocalizationsHi extends AppLocalizations {
       'highlighted truck details को सुधारें';
 
   @override
+  String get truckerFleetBodyTypeOpen => 'खुला';
+
+  @override
+  String get truckerFleetBodyTypeContainer => 'कंटेनर';
+
+  @override
+  String get truckerFleetBodyTypeTrailer => 'ट्रेलर';
+
+  @override
+  String get truckerFleetBodyTypeTanker => 'टैंकर';
+
+  @override
+  String get truckerFleetBodyTypeRefrigerated => 'रेफ्रिजरेटेड';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

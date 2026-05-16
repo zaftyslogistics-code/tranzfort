@@ -638,6 +638,36 @@ abstract class AppLocalizations {
   /// **'Please correct the highlighted truck details'**
   String get truckerFleetErrorValidationFailed;
 
+  /// No description provided for @truckerFleetBodyTypeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get truckerFleetBodyTypeOpen;
+
+  /// No description provided for @truckerFleetBodyTypeContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get truckerFleetBodyTypeContainer;
+
+  /// No description provided for @truckerFleetBodyTypeTrailer.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer'**
+  String get truckerFleetBodyTypeTrailer;
+
+  /// No description provided for @truckerFleetBodyTypeTanker.
+  ///
+  /// In en, this message translates to:
+  /// **'Tanker'**
+  String get truckerFleetBodyTypeTanker;
+
+  /// No description provided for @truckerFleetBodyTypeRefrigerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Refrigerated'**
+  String get truckerFleetBodyTypeRefrigerated;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
