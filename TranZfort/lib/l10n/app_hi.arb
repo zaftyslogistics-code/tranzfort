@@ -126,6 +126,7 @@
   "reportIssueCategoryFakePayoutProof": "फर्जी payout प्रूफ",
   "reportIssueCategoryNonPayment": "गैर-भुगतान",
   "reportIssueCategoryAbusiveBehavior": "दुर्व्यवहार",
+  "reportIssueContextSourceLabel": "वर्तमान बातचीत या यात्रा संदर्भ",
   "@_sectionOnboarding": "═══ Onboarding ═══",
   "onboardingSelectRoleError": "चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।",
   "onboardingRoleWorkspaceFailure": "अभी आपका role workspace तैयार नहीं हो सका। अपना role फिर चुनकर थोड़ी देर बाद फिर कोशिश करें।",

@@ -126,6 +126,7 @@
   "reportIssueCategoryFakePayoutProof": "Fake payout proof",
   "reportIssueCategoryNonPayment": "Non-payment",
   "reportIssueCategoryAbusiveBehavior": "Abusive behavior",
+  "reportIssueContextSourceLabel": "Current conversation or trip context",
   "onboardingSelectRoleError": "Select whether you are joining as a supplier or trucker.",
   "onboardingRoleWorkspaceFailure": "We could not prepare your role workspace right now. Retry shortly after selecting your role again.",
   "onboardingRoleSaveFailure": "We could not save your role right now. Retry shortly.",
