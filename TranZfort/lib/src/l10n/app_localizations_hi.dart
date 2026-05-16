@@ -332,6 +332,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String get verificationCompleteAllFields => 'सभी आवश्यक फ़ील्ड पूरी करें';
 
   @override
+  String get verificationLocationSourceManualCityEntry =>
+      'मैन्युअल रूप से जोड़ा गया';
+
+  @override
+  String get verificationLocationSourceGoogleGeocode =>
+      'GPS के माध्यम से कैप्चर किया गया';
+
+  @override
+  String get verificationLocationSourceOfflineNearestCity => 'ऑफ़लाइन स्थान';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

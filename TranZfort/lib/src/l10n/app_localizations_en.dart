@@ -333,6 +333,15 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please complete all required fields';
 
   @override
+  String get verificationLocationSourceManualCityEntry => 'Added manually';
+
+  @override
+  String get verificationLocationSourceGoogleGeocode => 'Captured via GPS';
+
+  @override
+  String get verificationLocationSourceOfflineNearestCity => 'Offline location';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 

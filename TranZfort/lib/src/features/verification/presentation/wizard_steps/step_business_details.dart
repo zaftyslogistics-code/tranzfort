@@ -440,9 +440,7 @@ class _LocationDisplay extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          location.source == 'gps'
-              ? l10n.verificationWizardCapturedViaGps
-              : l10n.verificationWizardAddedManually,
+          _localizedLocationSourceLabel(l10n, location.source),
           style: theme.textTheme.bodySmall?.copyWith(
             color: AppColors.textMuted,
           ),
@@ -497,4 +495,14 @@ class _LocationEmpty extends StatelessWidget {
       ],
     );
   }
+}
+
+String _localizedLocationSourceLabel(AppLocalizations l10n, String source) {
+  final normalized = source.trim().toLowerCase();
+  return switch (normalized) {
+    'manual_city_entry' => l10n.verificationLocationSourceManualCityEntry,
+    'google_geocode' => l10n.verificationLocationSourceGoogleGeocode,
+    'offline_nearest_city' => l10n.verificationLocationSourceOfflineNearestCity,
+    _ => l10n.verificationWizardAddedManually,
+  };
 }

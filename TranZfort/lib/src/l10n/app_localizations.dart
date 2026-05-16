@@ -680,6 +680,24 @@ abstract class AppLocalizations {
   /// **'Please complete all required fields'**
   String get verificationCompleteAllFields;
 
+  /// No description provided for @verificationLocationSourceManualCityEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Added manually'**
+  String get verificationLocationSourceManualCityEntry;
+
+  /// No description provided for @verificationLocationSourceGoogleGeocode.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured via GPS'**
+  String get verificationLocationSourceGoogleGeocode;
+
+  /// No description provided for @verificationLocationSourceOfflineNearestCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline location'**
+  String get verificationLocationSourceOfflineNearestCity;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
