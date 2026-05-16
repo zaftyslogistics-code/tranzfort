@@ -584,6 +584,12 @@ abstract class AppLocalizations {
   /// **'Refrigerated'**
   String get supplierPostLoadBodyTypeRefrigerated;
 
+  /// No description provided for @postLoadValidationCustomMaterialRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please specify the material'**
+  String get postLoadValidationCustomMaterialRequired;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

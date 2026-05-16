@@ -276,6 +276,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierPostLoadBodyTypeRefrigerated => 'Refrigerated';
 
   @override
+  String get postLoadValidationCustomMaterialRequired =>
+      'Please specify the material';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 
