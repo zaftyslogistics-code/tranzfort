@@ -295,15 +295,18 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
               label: l10n.supplierPostLoadMaterialLabel,
               value: state.material,
               items: postLoadMaterials
-                  .map((material) => DropdownMenuItem<String>(value: material, child: Text(material)))
+                  .map((material) => DropdownMenuItem<String>(
+                        value: material,
+                        child: Text(_localizedMaterialLabel(l10n, material)),
+                      ))
                   .toList(growable: false),
               onChanged: ref.read(postLoadProvider.notifier).setMaterial,
             ),
             const SizedBox(height: AppSpacing.md),
-            if (state.material == 'Other') ...[
+            if (state.material == 'other') ...[
               AppTextField(
-                label: 'Specify Material',
-                hintText: 'e.g., Fruits, Iron Ore, Bricks',
+                label: l10n.supplierPostLoadSpecifyMaterialLabel,
+                hintText: l10n.supplierPostLoadSpecifyMaterialHint,
                 errorText: state.fieldErrors['custom_material'],
                 onChanged: ref.read(postLoadProvider.notifier).setCustomMaterial,
               ),
@@ -329,7 +332,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
                   .map(
                     (bodyType) => DropdownMenuItem<String>(
                       value: bodyType,
-                      child: Text(l10n.truckerFleetBodyTypeOption(bodyType)),
+                      child: Text(_localizedBodyTypeLabel(l10n, bodyType)),
                     ),
                   )
                   .toList(growable: false),
@@ -444,7 +447,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             const SizedBox(height: AppSpacing.sm),
             Text(
               l10n.supplierPostLoadCargoSummary(
-                state.material,
+                _localizedMaterialLabel(l10n, state.material),
                 state.weightTonnes.isEmpty ? '--' : state.weightTonnes,
                 state.trucksNeeded,
               ),
@@ -555,6 +558,33 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     final normalized = value.trim().toLowerCase();
     return switch (normalized) {
       'fixed' || 'per_ton' => l10n.supplierPostLoadPriceTypeValue(normalized),
+      _ => value,
+    };
+  }
+
+  String _localizedMaterialLabel(AppLocalizations l10n, String value) {
+    final normalized = value.trim().toLowerCase();
+    return switch (normalized) {
+      'coal' => l10n.supplierPostLoadMaterialCoal,
+      'steel' => l10n.supplierPostLoadMaterialSteel,
+      'cement' => l10n.supplierPostLoadMaterialCement,
+      'grains' => l10n.supplierPostLoadMaterialGrains,
+      'fertilizer' => l10n.supplierPostLoadMaterialFertilizer,
+      'machinery' => l10n.supplierPostLoadMaterialMachinery,
+      'other' => l10n.supplierPostLoadMaterialOther,
+      _ => value,
+    };
+  }
+
+  String _localizedBodyTypeLabel(AppLocalizations l10n, String value) {
+    final normalized = value.trim().toLowerCase();
+    return switch (normalized) {
+      'any' => l10n.supplierPostLoadBodyTypeAny,
+      'open' => l10n.supplierPostLoadBodyTypeOpen,
+      'container' => l10n.supplierPostLoadBodyTypeContainer,
+      'trailer' => l10n.supplierPostLoadBodyTypeTrailer,
+      'tanker' => l10n.supplierPostLoadBodyTypeTanker,
+      'refrigerated' => l10n.supplierPostLoadBodyTypeRefrigerated,
       _ => value,
     };
   }

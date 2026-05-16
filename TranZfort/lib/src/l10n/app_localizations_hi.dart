@@ -230,6 +230,52 @@ class AppLocalizationsHi extends AppLocalizations {
   String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
 
   @override
+  String get supplierPostLoadSpecifyMaterialLabel => 'Material specify करें';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialHint =>
+      'जैसे, Fruits, Iron Ore, Bricks';
+
+  @override
+  String get supplierPostLoadMaterialCoal => 'कोयला';
+
+  @override
+  String get supplierPostLoadMaterialSteel => 'स्टील';
+
+  @override
+  String get supplierPostLoadMaterialCement => 'सीमेंट';
+
+  @override
+  String get supplierPostLoadMaterialGrains => 'अनाज';
+
+  @override
+  String get supplierPostLoadMaterialFertilizer => 'खाद';
+
+  @override
+  String get supplierPostLoadMaterialMachinery => 'मशीनरी';
+
+  @override
+  String get supplierPostLoadMaterialOther => 'अन्य';
+
+  @override
+  String get supplierPostLoadBodyTypeAny => 'कोई भी';
+
+  @override
+  String get supplierPostLoadBodyTypeOpen => 'खुला';
+
+  @override
+  String get supplierPostLoadBodyTypeContainer => 'कंटेनर';
+
+  @override
+  String get supplierPostLoadBodyTypeTrailer => 'ट्रेलर';
+
+  @override
+  String get supplierPostLoadBodyTypeTanker => 'टैंकर';
+
+  @override
+  String get supplierPostLoadBodyTypeRefrigerated => 'रेफ्रिजरेटेड';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

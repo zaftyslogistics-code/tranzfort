@@ -230,6 +230,52 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicProfileNotFoundTitle => 'Profile not found';
 
   @override
+  String get supplierPostLoadSpecifyMaterialLabel => 'Specify Material';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialHint =>
+      'e.g., Fruits, Iron Ore, Bricks';
+
+  @override
+  String get supplierPostLoadMaterialCoal => 'Coal';
+
+  @override
+  String get supplierPostLoadMaterialSteel => 'Steel';
+
+  @override
+  String get supplierPostLoadMaterialCement => 'Cement';
+
+  @override
+  String get supplierPostLoadMaterialGrains => 'Grains';
+
+  @override
+  String get supplierPostLoadMaterialFertilizer => 'Fertilizer';
+
+  @override
+  String get supplierPostLoadMaterialMachinery => 'Machinery';
+
+  @override
+  String get supplierPostLoadMaterialOther => 'Other';
+
+  @override
+  String get supplierPostLoadBodyTypeAny => 'Any';
+
+  @override
+  String get supplierPostLoadBodyTypeOpen => 'Open';
+
+  @override
+  String get supplierPostLoadBodyTypeContainer => 'Container';
+
+  @override
+  String get supplierPostLoadBodyTypeTrailer => 'Trailer';
+
+  @override
+  String get supplierPostLoadBodyTypeTanker => 'Tanker';
+
+  @override
+  String get supplierPostLoadBodyTypeRefrigerated => 'Refrigerated';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 

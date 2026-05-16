@@ -494,6 +494,96 @@ abstract class AppLocalizations {
   /// **'Profile not found'**
   String get publicProfileNotFoundTitle;
 
+  /// No description provided for @supplierPostLoadSpecifyMaterialLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Specify Material'**
+  String get supplierPostLoadSpecifyMaterialLabel;
+
+  /// No description provided for @supplierPostLoadSpecifyMaterialHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Fruits, Iron Ore, Bricks'**
+  String get supplierPostLoadSpecifyMaterialHint;
+
+  /// No description provided for @supplierPostLoadMaterialCoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Coal'**
+  String get supplierPostLoadMaterialCoal;
+
+  /// No description provided for @supplierPostLoadMaterialSteel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steel'**
+  String get supplierPostLoadMaterialSteel;
+
+  /// No description provided for @supplierPostLoadMaterialCement.
+  ///
+  /// In en, this message translates to:
+  /// **'Cement'**
+  String get supplierPostLoadMaterialCement;
+
+  /// No description provided for @supplierPostLoadMaterialGrains.
+  ///
+  /// In en, this message translates to:
+  /// **'Grains'**
+  String get supplierPostLoadMaterialGrains;
+
+  /// No description provided for @supplierPostLoadMaterialFertilizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer'**
+  String get supplierPostLoadMaterialFertilizer;
+
+  /// No description provided for @supplierPostLoadMaterialMachinery.
+  ///
+  /// In en, this message translates to:
+  /// **'Machinery'**
+  String get supplierPostLoadMaterialMachinery;
+
+  /// No description provided for @supplierPostLoadMaterialOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get supplierPostLoadMaterialOther;
+
+  /// No description provided for @supplierPostLoadBodyTypeAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get supplierPostLoadBodyTypeAny;
+
+  /// No description provided for @supplierPostLoadBodyTypeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supplierPostLoadBodyTypeOpen;
+
+  /// No description provided for @supplierPostLoadBodyTypeContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get supplierPostLoadBodyTypeContainer;
+
+  /// No description provided for @supplierPostLoadBodyTypeTrailer.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer'**
+  String get supplierPostLoadBodyTypeTrailer;
+
+  /// No description provided for @supplierPostLoadBodyTypeTanker.
+  ///
+  /// In en, this message translates to:
+  /// **'Tanker'**
+  String get supplierPostLoadBodyTypeTanker;
+
+  /// No description provided for @supplierPostLoadBodyTypeRefrigerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Refrigerated'**
+  String get supplierPostLoadBodyTypeRefrigerated;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

@@ -15,22 +15,22 @@ class PostLoadErrorCodes {
 }
 
 const List<String> postLoadMaterials = <String>[
-  'Coal',
-  'Steel',
-  'Cement',
-  'Grains',
-  'Fertilizer',
-  'Machinery',
-  'Other',
+  'coal',
+  'steel',
+  'cement',
+  'grains',
+  'fertilizer',
+  'machinery',
+  'other',
 ];
 
 const List<String> postLoadBodyTypes = <String>[
-  'Any',
-  'Open',
-  'Container',
-  'Trailer',
-  'Tanker',
-  'Refrigerated',
+  'any',
+  'open',
+  'container',
+  'trailer',
+  'tanker',
+  'refrigerated',
 ];
 
 const List<int> postLoadTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];
