@@ -70,16 +70,14 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   Future<Result<String>> advanceFromCurrentStage(String currentStage) async {
     if (state.isSubmitting) {
       return const Failure<String>(
-        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Another trip action is already in progress.'),
+        BusinessRuleFailure(message: TruckerTripActionErrorCodes.actionAlreadyInProgress),
       );
     }
 
     final nextStage = TruckerTripsRepository.nextStageFor(currentStage);
     if (nextStage == null) {
       const failure = BusinessRuleFailure(
-        // TODO: Map to TruckerTripActionErrorCodes.cannotAdvanceFromCurrentStage in UI layer
-        message: 'This trip can no longer be advanced from its current stage.',
+        message: TruckerTripActionErrorCodes.cannotAdvanceFromCurrentStage,
       );
       state = state.copyWith(failure: failure, clearFailure: false);
       return const Failure<String>(failure);
@@ -125,15 +123,13 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   }) async {
     if (state.isSubmitting) {
       return const Failure<bool>(
-        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Another trip action is already in progress.'),
+        BusinessRuleFailure(message: TruckerTripActionErrorCodes.actionAlreadyInProgress),
       );
     }
 
     if (currentStage != 'delivered') {
       const failure = BusinessRuleFailure(
-        // TODO: Map to TruckerTripActionErrorCodes.podUploadOnlyAfterDelivery in UI layer
-        message: 'POD can only be uploaded after the load has been delivered.',
+        message: TruckerTripActionErrorCodes.podUploadOnlyAfterDelivery,
       );
       state = state.copyWith(failure: failure, clearFailure: false);
       return const Failure<bool>(failure);
@@ -200,15 +196,13 @@ class TruckerTripActionController extends StateNotifier<TruckerTripActionState> 
   }) async {
     if (state.isSubmitting) {
       return const Failure<bool>(
-        // TODO: Map to TruckerTripActionErrorCodes.actionAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Another trip action is already in progress.'),
+        BusinessRuleFailure(message: TruckerTripActionErrorCodes.actionAlreadyInProgress),
       );
     }
 
     if (!TripStages.allowsLrUpload.contains(currentStage)) {
       const failure = BusinessRuleFailure(
-        // TODO: Map to TruckerTripActionErrorCodes.lrUploadOnlyDuringPickup in UI layer
-        message: 'LR can only be uploaded during pickup stages.',
+        message: TruckerTripActionErrorCodes.lrUploadOnlyDuringPickup,
       );
       state = state.copyWith(failure: failure, clearFailure: false);
       return const Failure<bool>(failure);
