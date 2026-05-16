@@ -343,6 +343,39 @@ class AppLocalizationsHi extends AppLocalizations {
   String get verificationLocationSourceOfflineNearestCity => 'ऑफ़लाइन स्थान';
 
   @override
+  String get supportCategoryGeneral => 'सामान्य';
+
+  @override
+  String get supportCategoryAccount => 'खाता';
+
+  @override
+  String get supportCategoryLoad => 'लोड';
+
+  @override
+  String get supportCategoryTrip => 'यात्रा';
+
+  @override
+  String get supportCategoryPayment => 'भुगतान';
+
+  @override
+  String get supportCategoryTechnical => 'तकनीकल';
+
+  @override
+  String get supportCategoryOther => 'अन्य';
+
+  @override
+  String get reportIssueCategorySpamOrScam => 'स्पैम या घोटाला';
+
+  @override
+  String get reportIssueCategoryFakePayoutProof => 'फर्जी payout प्रूफ';
+
+  @override
+  String get reportIssueCategoryNonPayment => 'गैर-भुगतान';
+
+  @override
+  String get reportIssueCategoryAbusiveBehavior => 'दुर्व्यवहार';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

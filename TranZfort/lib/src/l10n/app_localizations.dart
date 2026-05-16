@@ -698,6 +698,72 @@ abstract class AppLocalizations {
   /// **'Offline location'**
   String get verificationLocationSourceOfflineNearestCity;
 
+  /// No description provided for @supportCategoryGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get supportCategoryGeneral;
+
+  /// No description provided for @supportCategoryAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get supportCategoryAccount;
+
+  /// No description provided for @supportCategoryLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Load'**
+  String get supportCategoryLoad;
+
+  /// No description provided for @supportCategoryTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip'**
+  String get supportCategoryTrip;
+
+  /// No description provided for @supportCategoryPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get supportCategoryPayment;
+
+  /// No description provided for @supportCategoryTechnical.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical'**
+  String get supportCategoryTechnical;
+
+  /// No description provided for @supportCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get supportCategoryOther;
+
+  /// No description provided for @reportIssueCategorySpamOrScam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or scam'**
+  String get reportIssueCategorySpamOrScam;
+
+  /// No description provided for @reportIssueCategoryFakePayoutProof.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake payout proof'**
+  String get reportIssueCategoryFakePayoutProof;
+
+  /// No description provided for @reportIssueCategoryNonPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-payment'**
+  String get reportIssueCategoryNonPayment;
+
+  /// No description provided for @reportIssueCategoryAbusiveBehavior.
+  ///
+  /// In en, this message translates to:
+  /// **'Abusive behavior'**
+  String get reportIssueCategoryAbusiveBehavior;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

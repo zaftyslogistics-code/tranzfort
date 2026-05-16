@@ -342,6 +342,39 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationLocationSourceOfflineNearestCity => 'Offline location';
 
   @override
+  String get supportCategoryGeneral => 'General';
+
+  @override
+  String get supportCategoryAccount => 'Account';
+
+  @override
+  String get supportCategoryLoad => 'Load';
+
+  @override
+  String get supportCategoryTrip => 'Trip';
+
+  @override
+  String get supportCategoryPayment => 'Payment';
+
+  @override
+  String get supportCategoryTechnical => 'Technical';
+
+  @override
+  String get supportCategoryOther => 'Other';
+
+  @override
+  String get reportIssueCategorySpamOrScam => 'Spam or scam';
+
+  @override
+  String get reportIssueCategoryFakePayoutProof => 'Fake payout proof';
+
+  @override
+  String get reportIssueCategoryNonPayment => 'Non-payment';
+
+  @override
+  String get reportIssueCategoryAbusiveBehavior => 'Abusive behavior';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 
