@@ -164,9 +164,8 @@ class AuthProfileRepository {
     if (roleValue == null) {
       return const Failure<void>(
         ValidationFailure(
-          // TODO: Map to AuthProfileErrorCodes.roleRequired in UI layer
-          message: 'Select a valid role to continue',
-          fieldErrors: {'role': 'Role is required'},
+          message: AuthProfileErrorCodes.roleRequired,
+          fieldErrors: {'role': AuthProfileErrorCodes.roleRequired},
         ),
       );
     }
@@ -193,9 +192,8 @@ class AuthProfileRepository {
     if (roleValue == null) {
       return const Failure<void>(
         ValidationFailure(
-          // TODO: Map to AuthProfileErrorCodes.roleRequired in UI layer
-          message: 'Select a valid role to continue',
-          fieldErrors: {'role': 'Role is required'},
+          message: AuthProfileErrorCodes.roleRequired,
+          fieldErrors: {'role': AuthProfileErrorCodes.roleRequired},
         ),
       );
     }
@@ -228,9 +226,8 @@ class AuthProfileRepository {
     if (trimmedName.length < 2) {
       return const Failure<void>(
         ValidationFailure(
-          // TODO: Map to AuthProfileErrorCodes.nameTooShort in UI layer
-          message: 'Enter your full name',
-          fieldErrors: {'full_name': 'Name must be at least 2 characters'},
+          message: AuthProfileErrorCodes.nameTooShort,
+          fieldErrors: {'full_name': AuthProfileErrorCodes.nameTooShort},
         ),
       );
     }
@@ -238,9 +235,8 @@ class AuthProfileRepository {
     if (trimmedMobile.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
-          // TODO: Map to AuthProfileErrorCodes.mobileRequired in UI layer
-          message: 'Enter a valid mobile number',
-          fieldErrors: {'mobile': 'Mobile number is required'},
+          message: AuthProfileErrorCodes.mobileRequired,
+          fieldErrors: {'mobile': AuthProfileErrorCodes.mobileRequired},
         ),
       );
     }
@@ -272,9 +268,8 @@ class AuthProfileRepository {
     if (normalizedLanguageCode.isEmpty) {
       return const Failure<void>(
         ValidationFailure(
-          // TODO: Map to AuthProfileErrorCodes.languageUnsupported in UI layer
-          message: 'Select a supported language',
-          fieldErrors: {'preferred_language': 'Supported languages are English and Hindi'},
+          message: AuthProfileErrorCodes.languageUnsupported,
+          fieldErrors: {'preferred_language': AuthProfileErrorCodes.languageUnsupported},
         ),
       );
     }
@@ -331,13 +326,10 @@ class AuthProfileRepository {
       final response = await _client.rpc('request_account_deletion');
       if (response is! Map) {
         return const Failure<AccountDeletionRequestOutcome>(
-          // TODO: Map to AuthProfileErrorCodes.unexpectedResponse in UI layer
-          ServerFailure(message: 'Unexpected response format from account deletion request'),
+          ServerFailure(message: AuthProfileErrorCodes.unexpectedResponse),
         );
       }
-      final payload = response is Map<String, dynamic>
-          ? response
-          : Map<String, dynamic>.from(response);
+      final payload = safeMap(response) ?? <String, dynamic>{};
       return Success<AccountDeletionRequestOutcome>(
         AccountDeletionRequestOutcome.fromMap(payload),
       );
