@@ -7,6 +7,7 @@ import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/type_safety.dart';
 
 const int truckerMarketplacePageSize = 20;
 
@@ -20,21 +21,21 @@ class SupplierInfo {
   });
 
   factory SupplierInfo.fromMap(Map<String, dynamic> map) {
-    final avatarUrl = map['avatar_url'] as String?;
-    final profilePhotoPath = map['profile_photo_document_path'] as String?;
+    final avatarUrl = safeString(map['avatar_url']);
+    final profilePhotoPath = safeString(map['profile_photo_document_path']);
     return SupplierInfo(
-      name: (map['full_name'] as String?) ?? '',
-      avatarUrl: avatarUrl ?? profilePhotoPath,
+      name: safeString(map['full_name']),
+      avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : (profilePhotoPath.isNotEmpty ? profilePhotoPath : null),
     );
   }
 
   /// Parse from the `supplier_summary` JSONB object returned by `get_marketplace_feed` RPC.
   factory SupplierInfo.fromRpcSummary(Map<String, dynamic> summary) {
-    final avatarUrl = summary['supplier_avatar_url'] as String?;
-    final photoPath = summary['supplier_photo_path'] as String?;
+    final avatarUrl = safeString(summary['supplier_avatar_url']);
+    final photoPath = safeString(summary['supplier_photo_path']);
     return SupplierInfo(
-      name: (summary['supplier_name'] as String?) ?? '',
-      avatarUrl: avatarUrl ?? photoPath,
+      name: safeString(summary['supplier_name']),
+      avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : (photoPath.isNotEmpty ? photoPath : null),
     );
   }
 }
@@ -147,7 +148,7 @@ class MarketplaceLoadItem {
 
   factory MarketplaceLoadItem.fromMap(Map<String, dynamic> map) {
     // Prefer embedded supplier_summary from consolidated RPC, fall back to top-level fields
-    final supplierSummary = map['supplier_summary'] as Map<String, dynamic>?;
+    final supplierSummary = safeMap(map['supplier_summary']);
     final supplierInfo = supplierSummary != null
         ? SupplierInfo.fromRpcSummary(supplierSummary)
         : null;

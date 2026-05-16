@@ -3,6 +3,8 @@ library;
 /// Public profile models for viewing other users' profiles.
 /// Plain Dart classes with fromMap factories (NOT freezed).
 
+import '../../../core/utils/type_safety.dart';
+
 class PublicProfile {
   // Identity
   final String id;
@@ -60,17 +62,9 @@ class PublicProfile {
   });
 
   factory PublicProfile.fromMap(Map<String, dynamic> map) {
-    final trustScores = map['trust_scores'] is Map<String, dynamic>
-        ? map['trust_scores'] as Map<String, dynamic>
-        : <String, dynamic>{};
-
-    final roleSpecific = map['role_specific'] is Map<String, dynamic>
-        ? map['role_specific'] as Map<String, dynamic>
-        : <String, dynamic>{};
-
-    final fleetList = roleSpecific['fleet'] is List
-        ? (roleSpecific['fleet'] as List).cast<Map<String, dynamic>>()
-        : <Map<String, dynamic>>[];
+    final trustScores = safeMap(map['trust_scores']) ?? <String, dynamic>{};
+    final roleSpecific = safeMap(map['role_specific']) ?? <String, dynamic>{};
+    final fleetList = safeList<Map<String, dynamic>>(roleSpecific['fleet']) ?? <Map<String, dynamic>>[];
 
     final avatarUrl = _nullableString(map['avatar_url']);
     final profilePhotoPath = _nullableString(map['profile_photo_document_path']);
