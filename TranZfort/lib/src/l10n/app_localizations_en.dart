@@ -280,6 +280,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Please specify the material';
 
   @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'Load submission is already in progress';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 
@@ -6306,10 +6310,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get supplierTripActionAlreadyInProgress =>
       'Another supplier trip action is already in progress';
-
-  @override
-  String get supplierLoadSubmissionAlreadyInProgress =>
-      'Load submission is already in progress';
 
   @override
   String get truckerRatingAlreadySubmitting =>

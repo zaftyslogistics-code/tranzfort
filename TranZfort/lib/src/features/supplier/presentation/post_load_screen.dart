@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -473,7 +474,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         if (state.submissionFailure != null)
           WarningBlock(
             title: l10n.supplierPostLoadSubmissionFailedTitle,
-            message: l10n.supplierPostLoadSubmissionFailureMessage,
+            message: _localizedSubmissionErrorMessage(l10n, state.submissionFailure!),
           ),
         GradientButton(
           label: postingBlocked ? l10n.supplierPostLoadCompleteVerificationAction : l10n.commonPostLoadAction,
@@ -587,6 +588,13 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
       'refrigerated' => l10n.supplierPostLoadBodyTypeRefrigerated,
       _ => value,
     };
+  }
+
+  String _localizedSubmissionErrorMessage(AppLocalizations l10n, AppFailure failure) {
+    if (failure.message == PostLoadErrorCodes.submissionAlreadyInProgress) {
+      return l10n.supplierLoadSubmissionAlreadyInProgress;
+    }
+    return failure.message;
   }
 
   String _formatPickupDate(BuildContext context, DateTime value) {

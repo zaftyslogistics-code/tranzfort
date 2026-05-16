@@ -280,6 +280,10 @@ class AppLocalizationsHi extends AppLocalizations {
       'कृपया material specify करें';
 
   @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'लोड जमा करना पहले से प्रगति पर है';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 
@@ -6319,10 +6323,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get supplierTripActionAlreadyInProgress =>
       'एक अन्य सप्लायर ट्रिप कार्रवाई पहले से प्रगति पर है';
-
-  @override
-  String get supplierLoadSubmissionAlreadyInProgress =>
-      'लोड जमा करना पहले से प्रगति पर है';
 
   @override
   String get truckerRatingAlreadySubmitting =>

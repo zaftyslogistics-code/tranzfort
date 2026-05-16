@@ -590,6 +590,12 @@ abstract class AppLocalizations {
   /// **'Please specify the material'**
   String get postLoadValidationCustomMaterialRequired;
 
+  /// No description provided for @supplierLoadSubmissionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Load submission is already in progress'**
+  String get supplierLoadSubmissionAlreadyInProgress;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
@@ -9901,12 +9907,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Another supplier trip action is already in progress'**
   String get supplierTripActionAlreadyInProgress;
-
-  /// No description provided for @supplierLoadSubmissionAlreadyInProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Load submission is already in progress'**
-  String get supplierLoadSubmissionAlreadyInProgress;
 
   /// No description provided for @truckerRatingAlreadySubmitting.
   ///

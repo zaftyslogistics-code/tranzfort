@@ -387,8 +387,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
   Future<Result<String>> submit([AppLocalizations? l10n]) async {
     if (state.isSubmitting) {
       return const Failure<String>(
-        // TODO: Map to PostLoadErrorCodes.submissionAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Load submission is already in progress'),
+        BusinessRuleFailure(message: PostLoadErrorCodes.submissionAlreadyInProgress),
       );
     }
 

@@ -97,6 +97,7 @@
   "supplierPostLoadBodyTypeTanker": "Tanker",
   "supplierPostLoadBodyTypeRefrigerated": "Refrigerated",
   "postLoadValidationCustomMaterialRequired": "Please specify the material",
+  "supplierLoadSubmissionAlreadyInProgress": "Load submission is already in progress",
   "onboardingSelectRoleError": "Select whether you are joining as a supplier or trucker.",
   "onboardingRoleWorkspaceFailure": "We could not prepare your role workspace right now. Retry shortly after selecting your role again.",
   "onboardingRoleSaveFailure": "We could not save your role right now. Retry shortly.",
