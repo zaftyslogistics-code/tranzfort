@@ -284,6 +284,31 @@ class AppLocalizationsEn extends AppLocalizations {
       'Load submission is already in progress';
 
   @override
+  String get truckerFleetValidationTruckNumber => 'Enter a valid truck number';
+
+  @override
+  String get truckerFleetValidationTyreCount => 'Select a valid tyre count';
+
+  @override
+  String get truckerFleetValidationCapacityTonnes =>
+      'Capacity must be between 0 and 100 tonnes';
+
+  @override
+  String get truckerFleetValidationRcDocument => 'RC document is required';
+
+  @override
+  String get truckerFleetErrorTruckNotFound =>
+      'The selected truck was not found';
+
+  @override
+  String get truckerFleetErrorSaveAlreadyInProgress =>
+      'Truck save is already in progress';
+
+  @override
+  String get truckerFleetErrorValidationFailed =>
+      'Please correct the highlighted truck details';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 

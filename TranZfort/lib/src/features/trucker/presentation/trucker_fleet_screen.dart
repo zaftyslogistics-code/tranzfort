@@ -209,7 +209,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                 onPressed: state.isSaving
                     ? null
                     : () async {
-                        final result = await ref.read(truckerFleetProvider.notifier).save();
+                        final result = await ref.read(truckerFleetProvider.notifier).save(l10n);
                         if (!context.mounted) {
                           return;
                         }

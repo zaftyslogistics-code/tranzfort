@@ -596,6 +596,48 @@ abstract class AppLocalizations {
   /// **'Load submission is already in progress'**
   String get supplierLoadSubmissionAlreadyInProgress;
 
+  /// No description provided for @truckerFleetValidationTruckNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid truck number'**
+  String get truckerFleetValidationTruckNumber;
+
+  /// No description provided for @truckerFleetValidationTyreCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid tyre count'**
+  String get truckerFleetValidationTyreCount;
+
+  /// No description provided for @truckerFleetValidationCapacityTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity must be between 0 and 100 tonnes'**
+  String get truckerFleetValidationCapacityTonnes;
+
+  /// No description provided for @truckerFleetValidationRcDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document is required'**
+  String get truckerFleetValidationRcDocument;
+
+  /// No description provided for @truckerFleetErrorTruckNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The selected truck was not found'**
+  String get truckerFleetErrorTruckNotFound;
+
+  /// No description provided for @truckerFleetErrorSaveAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck save is already in progress'**
+  String get truckerFleetErrorSaveAlreadyInProgress;
+
+  /// No description provided for @truckerFleetErrorValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please correct the highlighted truck details'**
+  String get truckerFleetErrorValidationFailed;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

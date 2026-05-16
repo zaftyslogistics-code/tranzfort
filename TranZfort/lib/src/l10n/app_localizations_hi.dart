@@ -284,6 +284,31 @@ class AppLocalizationsHi extends AppLocalizations {
       'लोड जमा करना पहले से प्रगति पर है';
 
   @override
+  String get truckerFleetValidationTruckNumber =>
+      'एक वैध truck number दर्ज करें';
+
+  @override
+  String get truckerFleetValidationTyreCount => 'एक वैध tyre count चुनें';
+
+  @override
+  String get truckerFleetValidationCapacityTonnes =>
+      'Capacity 0 और 100 tonnes के बीच होनी चाहिए';
+
+  @override
+  String get truckerFleetValidationRcDocument => 'RC document आवश्यक है';
+
+  @override
+  String get truckerFleetErrorTruckNotFound => 'चयनित truck नहीं मिला';
+
+  @override
+  String get truckerFleetErrorSaveAlreadyInProgress =>
+      'Truck save पहले से ही progress में है';
+
+  @override
+  String get truckerFleetErrorValidationFailed =>
+      'highlighted truck details को सुधारें';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 
