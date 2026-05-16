@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/type_safety.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
 
@@ -357,9 +358,7 @@ class AuthProfileRepository {
 
     try {
       final response = await _client.rpc('cancel_account_deletion_request');
-      final payload = response is Map<String, dynamic>
-          ? response
-          : Map<String, dynamic>.from(response as Map);
+      final payload = safeMap(response) ?? <String, dynamic>{};
       return Success<AccountDeletionRequestOutcome>(
         AccountDeletionRequestOutcome.fromMap(payload),
       );

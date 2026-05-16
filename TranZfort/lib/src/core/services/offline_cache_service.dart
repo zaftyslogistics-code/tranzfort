@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/type_safety.dart';
+
 /// Cache entry model for storing cached data with metadata.
 class CacheEntry {
   final String data;
@@ -148,7 +150,7 @@ class OfflineCacheService {
         return null;
       }
       
-      return jsonDecode(entry.data) as T?;
+      return safeCast<T>(jsonDecode(entry.data));
     } catch (e) {
       invalidate(key);
       return null;
