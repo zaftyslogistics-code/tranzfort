@@ -192,13 +192,13 @@ class MarketplaceLoadCard extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.fromLTRB(
                   20,
-                  8,
+                  12,
                   20,
                   0,
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
-                  vertical: 10,
+                  vertical: 16,
                 ),
                 decoration: BoxDecoration(
                   color: AppColors.inkSurface,
@@ -246,7 +246,8 @@ class MarketplaceLoadCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    if (costEstimate != null)
+                    if (costEstimate != null) ...[
+                      const SizedBox(width: 8),
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: AppSpacing.sm,
@@ -290,23 +291,41 @@ class MarketplaceLoadCard extends StatelessWidget {
                           ],
                         ),
                       ),
-                    OutlinedButton.icon(
-                      onPressed: onViewDetails,
-                      icon: const Icon(Icons.arrow_forward, size: 16),
-                      label: Text(l10n.commonViewDetailsAction),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: AppColors.primaryOnDark,
-                        side: BorderSide(color: AppColors.primaryOnDark),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(AppRadius.button),
-                        ),
+                    ],
+                    const SizedBox(width: 8),
+                    InkWell(
+                      onTap: onViewDetails,
+                      borderRadius: BorderRadius.circular(AppRadius.chip),
+                      child: Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.sm,
+                          horizontal: 10,
                           vertical: 8,
                         ),
-                        textStyle: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: AppColors.primaryOnDark,
+                            width: 1,
+                          ),
+                          borderRadius: BorderRadius.circular(AppRadius.chip),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              l10n.commonViewDetailsAction,
+                              style: TextStyle(
+                                color: AppColors.primaryOnDark,
+                                fontSize: 11,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(width: 4),
+                            Icon(
+                              Icons.arrow_forward,
+                              size: 14,
+                              color: AppColors.primaryOnDark,
+                            ),
+                          ],
                         ),
                       ),
                     ),
