@@ -329,6 +329,9 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String get verificationCompleteAllFields => 'सभी आवश्यक फ़ील्ड पूरी करें';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

@@ -10,6 +10,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../trucker/data/truck_document_upload_service.dart';
 import '../../trucker/data/trucker_fleet_repository.dart';
 import '../data/verification_document_upload_service.dart';

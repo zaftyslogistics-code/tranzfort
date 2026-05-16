@@ -7,8 +7,8 @@ part of 'verification_wizard_provider.dart';
 // ═══════════════════════════════════════════════════════════════════════════════
 
 extension VerificationWizardSubmit on VerificationWizardController {
-  Future<Result<String>> submit() async {
-    return _verificationSubmit();
+  Future<Result<String>> submit([AppLocalizations? l10n]) async {
+    return _verificationSubmit(l10n);
   }
 
   void setTermsAccepted(bool value) {
@@ -49,12 +49,12 @@ extension VerificationWizardSubmit on VerificationWizardController {
   }
 
   // ─── Submit ───
-  Future<Result<String>> _verificationSubmit() async {
+  Future<Result<String>> _verificationSubmit([AppLocalizations? l10n]) async {
     if (!state.isLastStep) {
       return Failure(BusinessRuleFailure(message: 'Complete all steps first'));
     }
 
-    final validationError = _verificationValidateAll();
+    final validationError = _verificationValidateAll(l10n);
     if (validationError != null) {
       final failure = ValidationFailure(
         message: validationError,
@@ -155,8 +155,8 @@ extension VerificationWizardSubmit on VerificationWizardController {
   }
 
   // ─── Validation ───
-  String? _verificationValidateAll() {
-    final result = _validationHelper.validateAll(state.draft);
+  String? _verificationValidateAll([AppLocalizations? l10n]) {
+    final result = _validationHelper.validateAll(state.draft, l10n);
     if (!result.isValid) {
       _setState(state.copyWith(fieldErrors: result.fieldErrors), persistDraft: false);
       return result.errorMessage;

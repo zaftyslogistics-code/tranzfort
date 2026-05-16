@@ -124,7 +124,7 @@ class StepReviewSubmit extends ConsumerWidget {
                   ? l10n.verificationResubmitForReviewAction
                   : l10n.verificationSubmitForReviewAction,
               onPressed: state.canProceed && !state.isSubmitting
-                  ? () => _submit(context, ref)
+                  ? () => _submit(context, ref, l10n)
                   : null,
               isLoading: state.isSubmitting,
             ),
@@ -163,8 +163,8 @@ class StepReviewSubmit extends ConsumerWidget {
     return l10n.verificationWizardUnknownError;
   }
 
-  Future<void> _submit(BuildContext context, WidgetRef ref) async {
-    final result = await ref.read(verificationWizardProvider.notifier).submit();
+  Future<void> _submit(BuildContext context, WidgetRef ref, AppLocalizations l10n) async {
+    final result = await ref.read(verificationWizardProvider.notifier).submit(l10n);
 
     if (!context.mounted) return;
 

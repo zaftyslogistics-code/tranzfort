@@ -674,6 +674,12 @@ abstract class AppLocalizations {
   /// **'{value}T'**
   String chatTonnesCompact(Object value);
 
+  /// No description provided for @verificationCompleteAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete all required fields'**
+  String get verificationCompleteAllFields;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
