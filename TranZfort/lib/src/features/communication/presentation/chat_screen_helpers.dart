@@ -38,13 +38,13 @@ double? _payloadDouble(Map<String, dynamic>? payload, List<String> keys) {
   return null;
 }
 
-String _formatCurrencyCompact(double value) {
-  return NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0).format(value);
+String _formatCurrencyCompact(double value, AppLocalizations l10n) {
+  return NumberFormat.currency(locale: l10n.localeName, symbol: '₹', decimalDigits: 0).format(value);
 }
 
-String _formatTonnesCompact(double value) {
+String _formatTonnesCompact(double value, AppLocalizations l10n) {
   final formatted = value % 1 == 0 ? value.toStringAsFixed(0) : value.toStringAsFixed(1);
-  return '${formatted}T';
+  return l10n.chatTonnesCompact(formatted);
 }
 
 Uri? _externalUri(String? raw) {

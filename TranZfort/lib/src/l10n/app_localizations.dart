@@ -668,6 +668,12 @@ abstract class AppLocalizations {
   /// **'Refrigerated'**
   String get truckerFleetBodyTypeRefrigerated;
 
+  /// No description provided for @chatTonnesCompact.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}T'**
+  String chatTonnesCompact(Object value);
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

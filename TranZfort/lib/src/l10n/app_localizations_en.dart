@@ -324,6 +324,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerFleetBodyTypeRefrigerated => 'Refrigerated';
 
   @override
+  String chatTonnesCompact(Object value) {
+    return '${value}T';
+  }
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 
