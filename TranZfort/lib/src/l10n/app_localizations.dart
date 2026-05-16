@@ -284,6 +284,186 @@ abstract class AppLocalizations {
   /// **'Use a different email'**
   String get authPasswordUseDifferentEmailAction;
 
+  /// No description provided for @authErrorEmailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get authErrorEmailRequired;
+
+  /// No description provided for @authErrorEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get authErrorEmailInvalid;
+
+  /// No description provided for @authErrorPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get authErrorPasswordRequired;
+
+  /// No description provided for @authErrorPasswordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get authErrorPasswordTooShort;
+
+  /// No description provided for @authErrorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get authErrorUserNotFound;
+
+  /// No description provided for @authErrorWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password'**
+  String get authErrorWrongPassword;
+
+  /// No description provided for @authErrorEmailAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already registered'**
+  String get authErrorEmailAlreadyInUse;
+
+  /// No description provided for @authErrorWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak'**
+  String get authErrorWeakPassword;
+
+  /// No description provided for @authRoleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid role to continue'**
+  String get authRoleRequired;
+
+  /// No description provided for @authNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name'**
+  String get authNameTooShort;
+
+  /// No description provided for @authMobileRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number'**
+  String get authMobileRequired;
+
+  /// No description provided for @authLanguageUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a supported language'**
+  String get authLanguageUnsupported;
+
+  /// No description provided for @authUnexpectedResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected response format from account deletion request'**
+  String get authUnexpectedResponse;
+
+  /// No description provided for @authGoogleNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.'**
+  String get authGoogleNotConfigured;
+
+  /// No description provided for @authGoogleSignInCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign in was cancelled. Please try again.'**
+  String get authGoogleSignInCancelled;
+
+  /// No description provided for @authGoogleTokenFetchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to fetch Google sign-in token. Please try again.'**
+  String get authGoogleTokenFetchFailed;
+
+  /// No description provided for @onboardingDiscardRoleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard role selection?'**
+  String get onboardingDiscardRoleTitle;
+
+  /// No description provided for @onboardingDiscardRoleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your selected role will be lost'**
+  String get onboardingDiscardRoleMessage;
+
+  /// No description provided for @onboardingDiscardChangesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard changes?'**
+  String get onboardingDiscardChangesTitle;
+
+  /// No description provided for @onboardingDiscardChangesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your unsaved changes will be lost'**
+  String get onboardingDiscardChangesMessage;
+
+  /// No description provided for @locationServicesDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are disabled'**
+  String get locationServicesDisabled;
+
+  /// No description provided for @locationPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required'**
+  String get locationPermissionRequired;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @searchYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Search your location'**
+  String get searchYourLocation;
+
+  /// No description provided for @useCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current location'**
+  String get useCurrentLocation;
+
+  /// No description provided for @addManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Add manually'**
+  String get addManually;
+
+  /// No description provided for @clearLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear location'**
+  String get clearLocation;
+
+  /// No description provided for @routePreviewInvalidError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load route preview'**
+  String get routePreviewInvalidError;
+
+  /// No description provided for @publicProfileLoadErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile'**
+  String get publicProfileLoadErrorTitle;
+
+  /// No description provided for @publicProfileNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found'**
+  String get publicProfileNotFoundTitle;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
@@ -9524,18 +9704,6 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get publicProfileScreenTitle;
 
-  /// No description provided for @publicProfileLoadErrorTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to load profile'**
-  String get publicProfileLoadErrorTitle;
-
-  /// No description provided for @publicProfileNotFoundTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile not found'**
-  String get publicProfileNotFoundTitle;
-
   /// No description provided for @truckerProfileTitle.
   ///
   /// In en, this message translates to:
@@ -9595,36 +9763,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'No English voices available on this device.'**
   String get ttsNoEnglishVoices;
-
-  /// No description provided for @authRoleRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a valid role to continue'**
-  String get authRoleRequired;
-
-  /// No description provided for @authNameTooShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your full name'**
-  String get authNameTooShort;
-
-  /// No description provided for @authMobileRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a valid mobile number'**
-  String get authMobileRequired;
-
-  /// No description provided for @authLanguageUnsupported.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a supported language'**
-  String get authLanguageUnsupported;
-
-  /// No description provided for @authUnexpectedResponse.
-  ///
-  /// In en, this message translates to:
-  /// **'Unexpected response format from account deletion request'**
-  String get authUnexpectedResponse;
 
   /// No description provided for @supplierRatingAlreadySubmitting.
   ///

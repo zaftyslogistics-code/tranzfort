@@ -117,6 +117,101 @@ class AppLocalizationsHi extends AppLocalizations {
       'कोई दूसरा email इस्तेमाल करें';
 
   @override
+  String get authErrorEmailRequired => 'Email आवश्यक है';
+
+  @override
+  String get authErrorEmailInvalid => 'कृपया एक वैध email दर्ज करें';
+
+  @override
+  String get authErrorPasswordRequired => 'Password आवश्यक है';
+
+  @override
+  String get authErrorPasswordTooShort =>
+      'Password कम से कम 8 characters का होना चाहिए';
+
+  @override
+  String get authErrorUserNotFound => 'User नहीं मिला';
+
+  @override
+  String get authErrorWrongPassword => 'गलत password';
+
+  @override
+  String get authErrorEmailAlreadyInUse => 'Email पहले से registered है';
+
+  @override
+  String get authErrorWeakPassword => 'Password बहुत कमजोर है';
+
+  @override
+  String get authRoleRequired => 'जारी रखने के लिए एक मान्य भूमिका चुनें';
+
+  @override
+  String get authNameTooShort => 'अपना पूरा नाम दर्ज करें';
+
+  @override
+  String get authMobileRequired => 'एक मान्य मोबाइल नंबर दर्ज करें';
+
+  @override
+  String get authLanguageUnsupported => 'एक समर्थित भाषा चुनें';
+
+  @override
+  String get authUnexpectedResponse =>
+      'खाता हटाने अनुरोध से अप्रत्याशित प्रतिक्रिया प्रारूप';
+
+  @override
+  String get authGoogleNotConfigured =>
+      'Google sign-in configured नहीं है। App environment में GOOGLE_WEB_CLIENT_ID सेट करें और फिर कोशिश करें।';
+
+  @override
+  String get authGoogleSignInCancelled =>
+      'Google sign in cancel हो गया। फिर कोशिश करें।';
+
+  @override
+  String get authGoogleTokenFetchFailed =>
+      'Google sign-in token लाने में असमर्थ। फिर कोशिश करें।';
+
+  @override
+  String get onboardingDiscardRoleTitle => 'Role selection छोड़ें?';
+
+  @override
+  String get onboardingDiscardRoleMessage => 'आपका चयनित role खो जाएगा';
+
+  @override
+  String get onboardingDiscardChangesTitle => 'Changes छोड़ें?';
+
+  @override
+  String get onboardingDiscardChangesMessage => 'आपका unsaved changes खो जाएगा';
+
+  @override
+  String get locationServicesDisabled => 'Location services बंद हैं';
+
+  @override
+  String get locationPermissionRequired => 'Location permission आवश्यक है';
+
+  @override
+  String get locationPermissionDenied => 'Location permission denied हो गया';
+
+  @override
+  String get searchYourLocation => 'अपनी location खोजें';
+
+  @override
+  String get useCurrentLocation => 'Current location इस्तेमाल करें';
+
+  @override
+  String get addManually => 'Manually जोड़ें';
+
+  @override
+  String get clearLocation => 'Location साफ करें';
+
+  @override
+  String get routePreviewInvalidError => 'Route preview load नहीं हो सका';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'प्रोफाइल लोड करने में विफल';
+
+  @override
+  String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 
@@ -6117,12 +6212,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get publicProfileScreenTitle => 'प्रोफाइल';
 
   @override
-  String get publicProfileLoadErrorTitle => 'प्रोफाइल लोड करने में विफल';
-
-  @override
-  String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
-
-  @override
   String get truckerProfileTitle => 'ट्रकर प्रोफाइल';
 
   @override
@@ -6154,22 +6243,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get ttsNoEnglishVoices =>
       'इस डिवाइस पर कोई अंग्रेज़ी आवाज़ उपलब्ध नहीं है।';
-
-  @override
-  String get authRoleRequired => 'जारी रखने के लिए एक मान्य भूमिका चुनें';
-
-  @override
-  String get authNameTooShort => 'अपना पूरा नाम दर्ज करें';
-
-  @override
-  String get authMobileRequired => 'एक मान्य मोबाइल नंबर दर्ज करें';
-
-  @override
-  String get authLanguageUnsupported => 'एक समर्थित भाषा चुनें';
-
-  @override
-  String get authUnexpectedResponse =>
-      'खाता हटाने अनुरोध से अप्रत्याशित प्रतिक्रिया प्रारूप';
 
   @override
   String get supplierRatingAlreadySubmitting =>

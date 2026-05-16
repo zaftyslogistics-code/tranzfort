@@ -116,6 +116,102 @@ class AppLocalizationsEn extends AppLocalizations {
   String get authPasswordUseDifferentEmailAction => 'Use a different email';
 
   @override
+  String get authErrorEmailRequired => 'Email is required';
+
+  @override
+  String get authErrorEmailInvalid => 'Please enter a valid email';
+
+  @override
+  String get authErrorPasswordRequired => 'Password is required';
+
+  @override
+  String get authErrorPasswordTooShort =>
+      'Password must be at least 8 characters';
+
+  @override
+  String get authErrorUserNotFound => 'User not found';
+
+  @override
+  String get authErrorWrongPassword => 'Incorrect password';
+
+  @override
+  String get authErrorEmailAlreadyInUse => 'Email already registered';
+
+  @override
+  String get authErrorWeakPassword => 'Password is too weak';
+
+  @override
+  String get authRoleRequired => 'Select a valid role to continue';
+
+  @override
+  String get authNameTooShort => 'Enter your full name';
+
+  @override
+  String get authMobileRequired => 'Enter a valid mobile number';
+
+  @override
+  String get authLanguageUnsupported => 'Select a supported language';
+
+  @override
+  String get authUnexpectedResponse =>
+      'Unexpected response format from account deletion request';
+
+  @override
+  String get authGoogleNotConfigured =>
+      'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.';
+
+  @override
+  String get authGoogleSignInCancelled =>
+      'Google sign in was cancelled. Please try again.';
+
+  @override
+  String get authGoogleTokenFetchFailed =>
+      'Unable to fetch Google sign-in token. Please try again.';
+
+  @override
+  String get onboardingDiscardRoleTitle => 'Discard role selection?';
+
+  @override
+  String get onboardingDiscardRoleMessage => 'Your selected role will be lost';
+
+  @override
+  String get onboardingDiscardChangesTitle => 'Discard changes?';
+
+  @override
+  String get onboardingDiscardChangesMessage =>
+      'Your unsaved changes will be lost';
+
+  @override
+  String get locationServicesDisabled => 'Location services are disabled';
+
+  @override
+  String get locationPermissionRequired => 'Location permission is required';
+
+  @override
+  String get locationPermissionDenied => 'Location permission was denied';
+
+  @override
+  String get searchYourLocation => 'Search your location';
+
+  @override
+  String get useCurrentLocation => 'Use current location';
+
+  @override
+  String get addManually => 'Add manually';
+
+  @override
+  String get clearLocation => 'Clear location';
+
+  @override
+  String get routePreviewInvalidError => 'Unable to load route preview';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'Failed to load profile';
+
+  @override
+  String get publicProfileNotFoundTitle => 'Profile not found';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 
@@ -6103,12 +6199,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicProfileScreenTitle => 'Profile';
 
   @override
-  String get publicProfileLoadErrorTitle => 'Failed to load profile';
-
-  @override
-  String get publicProfileNotFoundTitle => 'Profile not found';
-
-  @override
   String get truckerProfileTitle => 'Trucker Profile';
 
   @override
@@ -6140,22 +6230,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get ttsNoEnglishVoices =>
       'No English voices available on this device.';
-
-  @override
-  String get authRoleRequired => 'Select a valid role to continue';
-
-  @override
-  String get authNameTooShort => 'Enter your full name';
-
-  @override
-  String get authMobileRequired => 'Enter a valid mobile number';
-
-  @override
-  String get authLanguageUnsupported => 'Select a supported language';
-
-  @override
-  String get authUnexpectedResponse =>
-      'Unexpected response format from account deletion request';
 
   @override
   String get supplierRatingAlreadySubmitting =>
