@@ -272,8 +272,7 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
   Future<Result<void>> save() async {
     if (state.isSaving) {
       return const Failure<void>(
-        // TODO: Map to TruckerFleetErrorCodes.saveAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Truck save is already in progress.'),
+        BusinessRuleFailure(message: TruckerFleetErrorCodes.saveAlreadyInProgress),
       );
     }
 
@@ -282,8 +281,7 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
       state = state.copyWith(fieldErrors: fieldErrors, clearActionFailure: true);
       return Failure<void>(
         ValidationFailure(
-          // TODO: Map to TruckerFleetErrorCodes.validationFailed in UI layer
-          message: 'Please correct the highlighted truck details.',
+          message: TruckerFleetErrorCodes.validationFailed,
           fieldErrors: fieldErrors,
         ),
       );
