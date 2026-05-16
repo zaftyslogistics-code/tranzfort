@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-
-/// Safe type casting helpers that return null on type mismatch instead of throwing.
+// Safe type casting helpers that return null on type mismatch instead of throwing.
 
 /// Generic safe cast that returns null if value is not of type T.
 T? safeCast<T>(dynamic value) {
