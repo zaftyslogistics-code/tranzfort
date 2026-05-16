@@ -215,15 +215,16 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showLocationServiceDisabledDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Services Disabled'),
-        content: const Text('Please enable location services (GPS) to capture your current location.'),
+        title: Text(l10n.locationServicesDisabled),
+        content: Text(l10n.locationEnableServicesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () async {
@@ -235,7 +236,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 _handleCaptureLocation();
               }
             },
-            child: const Text('Enable GPS'),
+            child: Text(l10n.locationEnableGps),
           ),
         ],
       ),
@@ -243,15 +244,16 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showPermissionDeniedDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Permission Required'),
-        content: const Text('Please grant location permission to capture your current location.'),
+        title: Text(l10n.locationPermissionRequired),
+        content: Text(l10n.locationGrantPermissionMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () async {
@@ -279,22 +281,23 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showPermissionDeniedForeverDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Permission Denied'),
-        content: const Text('Location permission was permanently denied. Please enable it in app settings.'),
+        title: Text(l10n.locationPermissionDenied),
+        content: Text(l10n.locationPermissionDeniedForeverMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
               await Geolocator.openAppSettings();
             },
-            child: const Text('Open Settings'),
+            child: Text(l10n.locationOpenSettings),
           ),
         ],
       ),
@@ -313,7 +316,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          title: const Text('Search your location'),
+          title: Text(l10n.searchYourLocation),
           content: SizedBox(
             width: double.maxFinite,
             child: Column(
@@ -526,7 +529,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                             child: OutlinedButton.icon(
                               onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
                               icon: const Icon(Icons.location_on, size: 18),
-                              label: Text(_isCapturingLocation ? 'Capturing...' : 'Use current location'),
+                              label: Text(_isCapturingLocation ? 'Capturing...' : l10n.useCurrentLocation),
                               style: OutlinedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
@@ -537,7 +540,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                             child: OutlinedButton.icon(
                               onPressed: _isCapturingLocation ? null : _handleManualLocation,
                               icon: const Icon(Icons.edit_location, size: 18),
-                              label: const Text('Add manually'),
+                              label: Text(l10n.addManually),
                               style: OutlinedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
@@ -545,20 +548,25 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                           ),
                         ],
                       ),
-                      if (_city != null && _state != null) ...[
-                        const SizedBox(height: 8),
-                        TextButton(
-                          onPressed: _isCapturingLocation ? null : () {
-                            setState(() {
-                              _city = null;
-                              _state = null;
-                              _latitude = null;
-                              _longitude = null;
-                            });
-                          },
-                          child: const Text('Clear location', style: TextStyle(fontSize: 12)),
+                      if (_city != null && _state != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: TextButton.icon(
+                            onPressed: _isCapturingLocation ? null : () {
+                              setState(() {
+                                _city = null;
+                                _state = null;
+                                _latitude = null;
+                                _longitude = null;
+                              });
+                            },
+                            icon: const Icon(Icons.clear, size: 16),
+                            label: Text(l10n.clearLocation),
+                            style: ButtonStyle(
+                              textStyle: WidgetStateProperty.all(TextStyle(fontSize: 12)),
+                            ),
+                          ),
                         ),
-                      ],
                     ],
                   ),
                 ),

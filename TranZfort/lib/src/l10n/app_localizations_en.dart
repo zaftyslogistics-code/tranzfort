@@ -191,6 +191,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get locationPermissionDenied => 'Location permission was denied';
 
   @override
+  String get locationEnableGps => 'Enable GPS';
+
+  @override
+  String get locationEnableServicesMessage =>
+      'Please enable location services (GPS) to capture your current location.';
+
+  @override
+  String get locationGrantPermissionMessage =>
+      'Please grant location permission to capture your current location.';
+
+  @override
+  String get locationOpenSettings => 'Open Settings';
+
+  @override
+  String get locationPermissionDeniedForeverMessage =>
+      'Location permission was permanently denied. Please enable it in app settings.';
+
+  @override
   String get searchYourLocation => 'Search your location';
 
   @override

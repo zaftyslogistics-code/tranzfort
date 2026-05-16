@@ -422,6 +422,36 @@ abstract class AppLocalizations {
   /// **'Location permission was denied'**
   String get locationPermissionDenied;
 
+  /// No description provided for @locationEnableGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable GPS'**
+  String get locationEnableGps;
+
+  /// No description provided for @locationEnableServicesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable location services (GPS) to capture your current location.'**
+  String get locationEnableServicesMessage;
+
+  /// No description provided for @locationGrantPermissionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please grant location permission to capture your current location.'**
+  String get locationGrantPermissionMessage;
+
+  /// No description provided for @locationOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get locationOpenSettings;
+
+  /// No description provided for @locationPermissionDeniedForeverMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was permanently denied. Please enable it in app settings.'**
+  String get locationPermissionDeniedForeverMessage;
+
   /// No description provided for @searchYourLocation.
   ///
   /// In en, this message translates to:

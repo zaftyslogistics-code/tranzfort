@@ -191,6 +191,24 @@ class AppLocalizationsHi extends AppLocalizations {
   String get locationPermissionDenied => 'Location permission denied हो गया';
 
   @override
+  String get locationEnableGps => 'GPS enable करें';
+
+  @override
+  String get locationEnableServicesMessage =>
+      'Current location capture करने के लिए location services (GPS) enable करें।';
+
+  @override
+  String get locationGrantPermissionMessage =>
+      'Current location capture करने के लिए location permission grant करें।';
+
+  @override
+  String get locationOpenSettings => 'Settings खोलें';
+
+  @override
+  String get locationPermissionDeniedForeverMessage =>
+      'Location permission permanently denied हो गया। App settings में enable करें।';
+
+  @override
   String get searchYourLocation => 'अपनी location खोजें';
 
   @override
