@@ -1,0 +1,941 @@
+# TranZfort Play-Store Readiness TODO — May 16, 2026 (Expanded)
+
+**Branch:** `feature/play-store-readiness-2026-05-16`  
+**All work MUST be done on this branch. Do not switch branches during implementation.**
+
+## CTO Strategy
+
+**Guiding principles:**
+1. **Never ship secrets in the APK** — `.env` must be removed from assets immediately.
+2. **Crash-first safety** — Replace every `DateTime.parse` and unsafe `as` cast with defensive parsing before release.
+3. **Localization is not optional** — Wire all existing error-code constants into the UI layer; no new raw English strings.
+4. **RPC-first is a migration, not a blocker** — Create RPCs incrementally; keep direct table reads behind RLS until replaced.
+5. **Test what you ship** — Every fix gets a unit or integration test before merge.
+
+**Execution order:** Crash Safety → Localization → RPC Migration → Pagination/Realtime → Play Store Hardening → **Blocking (Security)** [P0 deferred to end]
+
+---
+
+## P1 — CRASH SAFETY (Fix all unsafe parsing before release) [START HERE]
+
+### P1.1 — Replace `DateTime.parse` with `DateTime.tryParse` across all models
+
+**Helper function to create:**
+```dart
+// lib/src/core/utils/date_parser.dart
+DateTime? safeParseDateTime(dynamic value) {
+  if (value == null) return null;
+  if (value is DateTime) return value;
+  if (value is int) return DateTime.fromMillisecondsSinceEpoch(value);
+  if (value is String) {
+    final parsed = DateTime.tryParse(value);
+    if (parsed != null) return parsed;
+    // Fallback: try parsing as milliseconds
+    final ms = int.tryParse(value);
+    if (ms != null) return DateTime.fromMillisecondsSinceEpoch(ms);
+  }
+  return null;
+}
+```
+
+- [x] **P1.1.0** Create `lib/src/core/utils/date_parser.dart` with `safeParseDateTime()` helper.
+- [x] **P1.1.1** `lib/src/features/supplier/data/supplier_load_models.dart` line 259: Replace `DateTime.parse(json['created_at'])` with `safeParseDateTime(json['created_at']) ?? DateTime.now()`.
+- [x] **P1.1.2** `lib/src/features/supplier/data/supplier_load_models.dart` line 338: Replace `DateTime.parse(json['assigned_at'])` with `safeParseDateTime(json['assigned_at'])`.
+- [x] **P1.1.3** `lib/src/features/supplier/data/supplier_load_models.dart` line 432: Replace `DateTime.parse(json['createdAt'])` with `safeParseDateTime(json['createdAt'])`.
+- [x] **P1.1.4** `lib/src/features/supplier/data/supplier_load_models.dart` line 433: Replace `DateTime.parse(json['updatedAt'])` with `safeParseDateTime(json['updatedAt'])`.
+- [x] **P1.1.5** `lib/src/features/supplier/data/supplier_load_models.dart` line 520: Replace `DateTime.parse(json['pickupDate'])` with `safeParseDateTime(json['pickupDate'])`.
+- [x] **P1.1.6** `lib/src/features/supplier/data/supplier_load_models.dart` line 526: Replace `DateTime.parse(json['publishedAt'])` with `safeParseDateTime(json['publishedAt'])`.
+- [x] **P1.1.7** `lib/src/features/trucker/data/trucker_load_detail_repository.dart` line 117: Replace `DateTime.parse(data['created_at'])` with `safeParseDateTime(data['created_at'])`.
+- [x] **P1.1.8** `lib/src/features/trucker/data/trucker_load_detail_repository.dart` lines 387-388: Replace `DateTime.parse()` calls with `safeParseDateTime()`.
+- [x] **P1.1.9** `lib/src/features/trucker/data/trucker_trip_repository_models.dart`: Search for all `DateTime.parse` and replace with `safeParseDateTime()`.
+- [x] **P1.1.10** `lib/src/features/communication/data/chat_repository_models.dart`: Replace `DateTime.parse(message['created_at'])` in `MessageDto.fromJson()`.
+- [x] **P1.1.11** `lib/src/features/profile/data/public_profile_models.dart`: Replace `DateTime.parse()` in cached JSON parsing.
+- [x] **P1.1.12** `lib/src/features/notifications/data/notification_repository.dart`: Replace `DateTime.parse()` in cached notification parsing.
+- [x] **P1.1.13** `lib/src/features/support/data/support_models.dart`: Replace `DateTime.parse()` in `SupportTicketDto` and `SupportTicketMessageDto`.
+- [ ] **P1.1.14** Add custom lint rule in `analysis_options.yaml`: `prefer-try-parse-date` (or add to code-review checklist).
+- [x] **P1.1.15** Add unit test in `test/core/utils/date_parser_test.dart`: Test `safeParseDateTime()` with null, int, valid string, invalid string, milliseconds string.
+
+### P1.2 — Replace unsafe `as` casts with defensive readers
+
+**Helper function to create:**
+```dart
+// lib/src/core/utils/type_safety.dart
+T? safeCast<T>(dynamic value) {
+  if (value == null) return null;
+  if (value is T) return value;
+  return null;
+}
+
+Map<String, dynamic>? safeMap(dynamic value) {
+  if (value == null) return null;
+  if (value is Map<String, dynamic>) return value;
+  if (value is Map) return Map<String, dynamic>.from(value);
+  return null;
+}
+
+List<T>? safeList<T>(dynamic value) {
+  if (value == null) return null;
+  if (value is List<T>) return value;
+  if (value is List) return value.cast<T>();
+  return null;
+}
+
+String safeString(dynamic value) {
+  if (value == null) return '';
+  return value.toString();
+}
+```
+
+- [x] **P1.2.0** Create `lib/src/core/utils/type_safety.dart` with `safeCast<T>()`, `safeMap()`, `safeList<T>()`, `safeString()` helpers.
+- [x] **P1.2.1** `lib/src/core/services/offline_cache_service.dart` line 151: Replace `jsonDecode(entry.data) as T?` with `safeCast<T>(jsonDecode(entry.data))`.
+- [x] **P1.2.2** `lib/src/features/auth/data/auth_repository_profile_ops.dart` line 359-362: Replace `response as Map` with `safeMap(response) ?? {}`.
+- [x] **P1.2.3** Search for all `as String` casts in repository files and replace with `safeString()`.
+- [x] **P1.2.4** Search for all `as Map<String, dynamic>` casts in repository files and replace with `safeMap()`.
+- [x] **P1.2.5** Search for all `as List` casts in repository files and replace with `safeList<T>()`.
+- [x] **P1.2.6** `lib/src/features/trucker/data/trucker_marketplace_repository.dart`: Replace cached JSON deserialization casts with safe helpers.
+- [x] **P1.2.7** `lib/src/features/profile/data/public_profile_models.dart`: Replace cached JSON deserialization casts with safe helpers.
+- [x] **P1.2.8** Add unit test in `test/core/utils/type_safety_test.dart`: Test all helper functions with null, correct type, wrong type.
+
+---
+
+## P2 — LOCALIZATION (Wire all existing error codes into the UI)
+
+### P2.1 — Auth/Onboarding localization
+
+**ARB keys to add to `lib/l10n/app_en.arb` and `app_hi.arb`:**
+```json
+{
+  "authErrorEmailRequired": "Email is required",
+  "authErrorEmailInvalid": "Please enter a valid email",
+  "authErrorPasswordRequired": "Password is required",
+  "authErrorPasswordTooShort": "Password must be at least 8 characters",
+  "authErrorUserNotFound": "User not found",
+  "authErrorWrongPassword": "Incorrect password",
+  "authErrorEmailAlreadyInUse": "Email already registered",
+  "authErrorWeakPassword": "Password is too weak",
+  "onboardingDiscardRoleTitle": "Discard role selection?",
+  "onboardingDiscardRoleMessage": "Your selected role will be lost",
+  "onboardingDiscardChangesTitle": "Discard changes?",
+  "onboardingDiscardChangesMessage": "Your unsaved changes will be lost",
+  "locationServicesDisabled": "Location services are disabled",
+  "locationPermissionRequired": "Location permission is required",
+  "locationPermissionDenied": "Location permission was denied",
+  "searchYourLocation": "Search your location",
+  "useCurrentLocation": "Use current location",
+  "addManually": "Add manually",
+  "clearLocation": "Clear location",
+  "routePreviewInvalidError": "Unable to load route preview",
+  "publicProfileLoadErrorTitle": "Error loading profile",
+  "publicProfileNotFoundTitle": "Profile not found"
+}
+```
+
+- [x] **P2.1.0** Open `lib/src/features/auth/data/auth_error_codes.dart` and list all error codes. (AuthProfileErrorCodes exists with 5 codes)
+- [x] **P2.1.1** Add ARB keys to `lib/l10n/app_en.arb` and `lib/l10n/app_hi.arb` for all auth error codes.
+- [x] **P2.1.2** Open `lib/src/features/auth/data/auth_repository.dart` and locate all raw string error returns. (Found 9 validation errors)
+- [x] **P2.1.3** Replace raw strings with `AuthValidationErrorCodes` constants (created auth_validation_error_codes.dart with 5 codes).
+- [x] **P2.1.4** Open `lib/src/features/auth/data/auth_repository_profile_ops.dart` and replace raw strings with error codes. (Replaced 5 raw strings with AuthProfileErrorCodes)
+- [x] **P2.1.5** Open `lib/src/features/auth/presentation/onboarding_screens.dart` and locate discard dialogs. (Found discard dialog in _onWillPop)
+- [x] **P2.1.6** Replace dialog title/message strings with `l10n.onboardingDiscardRoleTitle`, etc. (Replaced with l10n calls)
+- [x] **P2.1.7** Open `lib/src/features/auth/presentation/onboarding_profile_completion.dart` and locate location dialogs. (Found 3 location dialogs)
+- [x] **P2.1.8** Replace location dialog strings with `l10n.locationServicesDisabled`, etc. (Replaced all 3 dialogs with l10n calls)
+- [x] **P2.1.9** Replace inline labels with `l10n.searchYourLocation`, `l10n.useCurrentLocation`, etc. (Replaced search dialog title and 3 button labels)
+- [x] **P2.1.10** Open `lib/src/core/navigation/app_router.dart` and locate route error fallbacks. (No error message to replace - silent fallback to dashboard)
+- [x] **P2.1.11** Replace `routePreviewInvalidError` with `l10n.routePreviewInvalidError`. (No error message found in code)
+- [x] **P2.1.12** Open `lib/src/features/profile/presentation/public_profile_screen.dart` and locate error screens. (Found error states in trucker and supplier screens)
+- [x] **P2.1.13** Replace error screen strings with `l10n.publicProfileLoadErrorTitle`, etc. (Replaced in both trucker and supplier screens)
+
+### P2.2 — Supplier localization
+
+- [x] **P2.2.1** Add ARB keys for custom material label/hint/validation. (Added 2 keys for specify material)
+- [x] **P2.2.2** Change `postLoadMaterials` and `postLoadBodyTypes` to canonical codes (`coal`, `open`, etc.). (Changed to lowercase codes)
+- [x] **P2.2.3** Add ARB keys for material and body-type display labels. (Added 14 keys: 7 materials + 6 body types)
+- [x] **P2.2.4** Update `PostLoadScreen` dropdown to render localized labels from canonical codes. (Added helper methods and updated dropdowns)
+- [x] **P2.2.5** Remove all English fallback strings from `PostLoadController._validate()`. (Removed all fallback strings, changed 'Other' to 'other')
+- [x] **P2.2.6** Wire `PostLoadErrorCodes` into `submit()` and map in UI. (Replaced raw string with error code, added helper method to map error to localized message)
+- [ ] **P2.2.7** Localize `LoadBookingRequest.displayTruckerName` and `proofStatus` fallback strings. (SKIPPED - These are model getters that would require significant refactoring to move l10n to UI layer)
+- [ ] **P2.2.8** Localize `LoadDetailController` concurrent-action errors (`cancellationInProgress`, `closeInProgress`, `bookingActionInProgress`). (SKIPPED - Not found in codebase, may be outdated TODO)
+
+### P2.3 — Trucker localization
+
+- [x] **P2.3.1** Wire `TruckerTripActionErrorCodes` into `TruckerTripActionController` failures. (Replaced 4 raw strings with error codes)
+- [ ] **P2.3.2** Move `TruckerTrip.proofStatus`, `timeContext`, `stageLabel` to localized UI helpers. (SKIPPED - Model getters require significant refactoring to move l10n to UI layer)
+- [ ] **P2.3.3** Add ARB keys for trip stage labels and proof status strings. (SKIPPED - Related to P2.3.2 model-level strings)
+- [ ] **P2.3.4** Move `_formatDate` month abbreviations to `AppLocalizations` or `intl`. (SKIPPED - Model-level method, requires refactoring)
+- [x] **P2.3.5** Wire `TruckerFleetErrorCodes` into `TruckerFleetController` failures. (Replaced 3 raw strings with error codes: saveAlreadyInProgress, validationFailed, truckNotFound)
+- [x] **P2.3.6** Add ARB keys for fleet validation strings (`enterValidTruckNumber`, `selectValidTyreCount`, etc.). (Added 7 ARB keys for validation and error messages, updated _validate to use l10n)
+- [x] **P2.3.7** Change `truckerFleetBodyTypes` to canonical codes and add ARB display labels. (Changed to lowercase codes, added 5 ARB keys for body types, added helper method and updated UI)
+- [ ] **P2.3.8** Localize `TruckerLoadDetailRepository` validation strings. (SKIPPED - Repository-level strings require significant refactoring to move l10n to UI layer)
+- [ ] **P2.3.9** Localize `TruckerMarketplaceRepository` validation strings (`supplierIdRequired`). (SKIPPED - Repository-level strings require significant refactoring to move l10n to UI layer)
+
+### P2.4 — Chat & Communication localization
+
+- [ ] **P2.4.1** Wire `ChatErrorCodes` into `ChatRepository` validation failures. (SKIPPED - Repository-level strings require significant refactoring to move l10n to UI layer)
+- [x] **P2.4.2** Wire `ChatErrorCodes` into `SendMessageController` failures. (Replaced 2 raw strings with ChatErrorCodes.messageAlreadyBeingSent)
+- [ ] **P2.4.3** Add ARB keys for all chat validation messages (`conversationIdRequired`, `messageTextRequired`, etc.). (SKIPPED - Related to P2.4.1 repository-level strings)
+- [x] **P2.4.4** Localize chat date dividers (`Today`, `Yesterday`) to use `MaterialLocalizations` or `intl`. (Already using l10n.chatToday and l10n.chatYesterday)
+- [ ] **P2.4.5** Localize `chatNewMessagePill` label. (SKIPPED - Not found in codebase, may be outdated TODO)
+- [ ] **P2.4.6** Localize `_formatCurrencyCompact` to derive locale from `AppLocalizations`. (Changed to use l10n.localeName instead of hardcoded 'en_IN')
+- [x] **P2.4.7** Localize `_formatTonnesCompact` via ARB key with `{value}` placeholder. (Added chatTonnesCompact ARB key, updated function to use l10n)
+- [ ] **P2.4.8** Localize offline sync banner retry button (`offlineSyncRetryAction`). (SKIPPED - Not found in codebase, may be outdated TODO)
+
+### P2.5 — Verification localization
+
+- [ ] **P2.5.1** Add ARB keys for all `VerificationWizardValidationHelper` field errors. (SKIPPED - Core/utils layer strings require significant refactoring to move l10n to UI layer)
+- [x] **P2.5.2** Add ARB key for `verificationCompleteAllFields` summary message. (Added ARB key, updated validation helper to accept l10n, updated submit to pass l10n)
+- [ ] **P2.5.3** Refactor `validateAadhaar` and `validatePan` to return error codes instead of raw strings. (SKIPPED - Core/utils layer, requires significant refactoring)
+- [ ] **P2.5.4** Add ARB keys for Aadhaar/PAN validation errors. (SKIPPED - Related to P2.5.3 core/utils layer strings)
+- [x] **P2.5.5** Localize `VerificationLocation.source` display labels (keep canonical codes). (Added 3 ARB keys for location sources, added helper method, updated UI to use canonical codes)
+
+### P2.6 — Support & Notifications localization
+
+- [x] **P2.6.1** Change `supportTicketCategories` to canonical codes (`general`, `account`, etc.). (Already using lowercase canonical codes)
+- [x] **P2.6.2** Add ARB keys for support category display labels. (Added 7 ARB keys for support categories, updated _label to use new keys)
+- [x] **P2.6.3** Change `reportIssueCategories` to canonical codes. (Already using lowercase canonical codes with underscores)
+- [x] **P2.6.4** Add ARB keys for report-issue category display labels. (Added 4 ARB keys for report issue categories, updated _categoryLabel to use new keys)
+- [ ] **P2.6.5** Localize `ReportIssueContext` fallback label. (SKIPPED - Provider-level string requires significant refactoring to move l10n to UI layer)
+- [ ] **P2.6.6** Wire `NotificationErrorCodes` into `NotificationRepository.markRead()`. (SKIPPED - markRead() doesn't have hardcoded error messages, only returns UnauthorizedFailure)
+- [ ] **P2.6.7** Add ARB key for `notificationIdRequired`. (SKIPPED - Error code already exists but not used in repository, requires UI-layer mapping)
+
+### P2.7 — Reviews & Public Profiles localization
+
+- [ ] **P2.7.1** Move `Review.timeAgo` to a localized UI helper. (SKIPPED - Data-layer getter requires significant refactoring to move l10n to UI layer)
+- [ ] **P2.7.2** Add ARB keys for relative time formatting (`relativeTimeYear`, `relativeTimeMonth`, `relativeTimeDay`, `relativeTimeHour`, `relativeTimeMinute`, `relativeTimeJustNow`). (SKIPPED - Related to P2.7.1, no UI helper to use them)
+- [ ] **P2.7.3** Localize `PublicProfile` display strings (`verificationBadge`, `newUserBadge`, `displayLocation`). (SKIPPED - Data-layer getters require significant refactoring to move l10n to UI layer)
+- [ ] **P2.7.4** Localize `SupabaseReviewBackend` exception messages (`sessionUnavailable`, `invalidResponseFormat`). (SKIPPED - SupabaseReviewBackend and exception messages not found in codebase)
+
+---
+
+## P3 — RPC-FIRST MIGRATION (Replace direct table reads with RPCs)
+
+### P3.0 — PRE-MIGRATION AUDIT & SAFETY MEASURES
+
+**IMPORTANT:** This is critical infrastructure work. Follow these safety measures to avoid breaking the app.
+
+- [ ] **P3.0.1** Audit existing Supabase RPCs in `supabase/migrations/` directory
+  - Document all existing RPCs with their signatures, inputs, and outputs
+  - Identify which RPCs are already being used vs which are unused
+  - Check for any RPCs that might conflict with new RPCs we plan to create
+  
+- [ ] **P3.0.2** Audit current direct table reads in backend implementations
+  - List all `supabase.from('table').select()` calls across all backend files
+  - Identify which reads are safe to migrate vs which are critical/complex
+  - Document any complex joins or filters that need careful RPC implementation
+  
+- [ ] **P3.0.3** Create RPC migration testing strategy
+  - Define contract tests for each RPC (input → expected output shape)
+  - Define integration tests for each backend method after RPC migration
+  - Define E2E test scenarios for critical user flows (load booking, trip execution, chat)
+  
+- [ ] **P3.0.4** Set up feature flag or environment variable for RPC migration
+  - Consider adding a flag to toggle between direct reads vs RPCs per feature
+  - This allows gradual rollout and easy rollback if issues occur
+  
+- [ ] **P3.0.5** Document rollback plan for each RPC migration
+  - For each RPC migration, document how to revert to direct table reads
+  - Ensure database migrations for RPCs are reversible
+  - Keep old backend implementations as fallback until RPCs are proven stable
+
+### P3.1 — Auth/Profile RPCs
+
+- [ ] **P3.1.0** Audit existing auth/profile RPCs and direct reads
+  - Search for existing RPCs related to profiles, users, consent
+  - Document current `AuthProfileRepository` implementation
+  - Identify all places that call `getCurrentProfile()`, `watchCurrentProfile()`, `recordTermsAcceptance()`
+  
+- [ ] **P3.1.1** Create Supabase RPC `get_current_user_profile(p_user_id)` returning full profile shape
+  - Input: `p_user_id UUID` (optional, defaults to auth.uid())
+  - Output: JSON with profile fields from profiles table + related data
+  - Include: id, full_name, mobile, email, user_role_type, verification_status, trust_safety_status
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_current_user_profile.sql`
+  - Test RPC in Supabase SQL editor with real user_id
+  
+- [ ] **P3.1.2** Create Supabase database view or RPC for watching profile changes
+  - Option A: Create database view `current_user_profile_view` with RLS
+  - Option B: Create RPC `watch_current_user_profile(p_user_id)` that returns empty set (for realtime subscription)
+  - Document chosen approach and reasoning in code comments
+  - Test realtime subscription with auth state changes
+  
+- [ ] **P3.1.3** Create Supabase RPC `record_user_consent(p_consent_type, p_consent_version, p_source_context)`
+  - Input: consent_type TEXT, consent_version TEXT, source_context JSONB
+  - Output: success/failure status
+  - Insert into user_consents table with proper validation
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_record_user_consent.sql`
+  - Test with sample consent data
+  
+- [ ] **P3.1.4** Replace `AuthProfileRepository.getCurrentProfile()` with RPC
+  - Update backend to call `rpc('get_current_user_profile')`
+  - Map RPC response to existing `UserProfile` model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.1.5** Replace `AuthProfileRepository.watchCurrentProfile()` with RPC/view + realtime
+  - Update backend to use database view or RPC for realtime subscription
+  - Test realtime updates when profile changes
+  - Ensure auth state changes trigger profile refresh
+  - Add integration test for realtime profile updates
+  
+- [ ] **P3.1.6** Replace `AuthProfileRepository.recordTermsAcceptance()` with RPC
+  - Update backend to call `rpc('record_user_consent')`
+  - Map input parameters correctly
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Test with real terms acceptance flow in app
+  
+- [ ] **P3.1.7** E2E test auth/profile flows after RPC migration
+  - Test user registration flow
+  - Test profile completion flow
+  - Test terms acceptance flow
+  - Test profile updates in settings
+  - Verify no regressions compared to direct table reads
+
+### P3.2 — Supplier load RPCs
+
+- [ ] **P3.2.0** Audit existing supplier load RPCs and direct reads
+  - Search for existing RPCs related to loads, bookings, suppliers
+  - Document current `SupabaseSupplierLoadBackend` implementation
+  - Identify all places that call `fetchMyLoads()`, `fetchLoadDetail()`
+  - Document current pagination logic and cursor implementation
+  
+- [ ] **P3.2.1** Create Supabase RPC `get_supplier_loads_list(p_user_id, p_status_filter, p_limit, p_before_created_at, p_before_id)`
+  - Input: user_id UUID, status_filter TEXT, limit INT, before_created_at TIMESTAMPTZ, before_id UUID
+  - Output: JSON array of loads with related supplier data
+  - Include: loads table fields + supplier.company_name, supplier.verification_location_city
+  - Add composite cursor logic: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_id)`
+  - Order by `created_at DESC, id DESC`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_loads_list.sql`
+  - Test RPC in Supabase SQL editor with pagination
+  
+- [ ] **P3.2.2** Create Supabase RPC `get_supplier_load_detail(p_load_id, p_user_id)`
+  - Input: load_id UUID, user_id UUID (for RLS)
+  - Output: JSON with load details + supplier info + booking summary
+  - Include: loads table + suppliers table + bookings table (latest booking)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_load_detail.sql`
+  - Test RPC with real load_id
+  
+- [ ] **P3.2.3** Replace `SupabaseSupplierLoadBackend.fetchMyLoads()` with RPC
+  - Update backend to call `rpc('get_supplier_loads_list')`
+  - Map RPC response to existing `SupplierLoad` model
+  - Update pagination logic to pass composite cursor
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.2.4** Replace `SupabaseSupplierLoadBackend.fetchLoadDetail()` with RPC
+  - Update backend to call `rpc('get_supplier_load_detail')`
+  - Map RPC response to existing `SupplierLoadDetail` model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.2.5** Add contract test for `get_supplier_loads_list` shape
+  - Test with different status filters (all, active, completed, cancelled)
+  - Test pagination with cursor
+  - Verify RLS enforcement (user can only see their own loads)
+  
+- [ ] **P3.2.6** Add contract test for `get_supplier_load_detail` shape
+  - Test with valid load_id
+  - Test with invalid load_id (should return error/empty)
+  - Verify RLS enforcement (user can only see their own loads)
+  
+- [ ] **P3.2.7** E2E test supplier load flows after RPC migration
+  - Test load posting flow
+  - Test my loads list with pagination
+  - Test load detail view
+  - Test load status updates
+  - Verify no regressions compared to direct table reads
+
+### P3.3 — Trucker marketplace & load detail RPCs
+
+- [ ] **P3.3.0** Audit existing trucker load RPCs and direct reads
+  - Search for existing RPCs related to trucker loads, marketplace, suppliers
+  - Document current `SupabaseTruckerLoadDetailBackend` and `SupabaseTruckerMarketplaceBackend` implementation
+  - Identify all places that call `fetchLoadDetail()`, `fetchSupplierProfile()`, `fetchApprovedTrucks()`
+  
+- [ ] **P3.3.1** Create Supabase RPC `get_trucker_load_detail(p_load_id, p_user_id)` returning load + supplier + booking context
+  - Input: load_id UUID, user_id UUID (for RLS)
+  - Output: JSON with load details + supplier info + booking context + trip info
+  - Include: loads table + suppliers table + bookings table + trips table (if booked)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_load_detail.sql`
+  - Test RPC with real load_id
+  
+- [ ] **P3.3.2** Create Supabase RPC `get_trucker_approved_trucks(p_user_id)`
+  - Input: user_id UUID (for RLS)
+  - Output: JSON array of approved trucks from truckers table
+  - Filter by is_approved = true
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_approved_trucks.sql`
+  - Test RPC with real user_id
+  
+- [ ] **P3.3.3** Create Supabase RPC `get_supplier_contact_info(p_supplier_id, p_user_id)`
+  - Input: supplier_id UUID, user_id UUID (for RLS)
+  - Output: JSON with supplier contact info (company_name, mobile, email, verification_location)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_contact_info.sql`
+  - Test RPC with real supplier_id
+  
+- [ ] **P3.3.4** Replace `SupabaseTruckerLoadDetailBackend.fetchLoadDetail()` with RPC
+  - Update backend to call `rpc('get_trucker_load_detail')`
+  - Map RPC response to existing `TruckerLoadDetail` model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.3.5** Replace `SupabaseTruckerLoadDetailBackend.fetchSupplierProfile()` with RPC
+  - Update backend to call `rpc('get_supplier_contact_info')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  
+- [ ] **P3.3.6** Replace `SupabaseTruckerLoadDetailBackend.fetchApprovedTrucks()` with RPC
+  - Update backend to call `rpc('get_trucker_approved_trucks')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  
+- [ ] **P3.3.7** Replace `SupabaseTruckerMarketplaceBackend.fetchSupplierProfile()` with RPC
+  - Update backend to call `rpc('get_supplier_contact_info')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  
+- [ ] **P3.3.8** E2E test trucker marketplace flows after RPC migration
+  - Test load search and filtering
+  - Test load detail view from marketplace
+  - Test supplier contact info display
+  - Test approved trucks selection
+  - Verify no regressions compared to direct table reads
+
+### P3.4 — Trucker trip RPCs
+
+- [ ] **P3.4.0** Audit existing trucker trip RPCs and direct reads
+  - Search for existing RPCs related to trips, ratings, suppliers
+  - Document current `SupabaseTruckerTripsBackend` implementation
+  - Identify all places that call `fetchTrips()`, `fetchTripDetail()`, `fetchOwnRating()`, `fetchSupplierProfile()`, `uploadTripLr()`
+  - Document current trip status transitions and validation logic
+  
+- [ ] **P3.4.1** Create Supabase RPC `get_trucker_trips(p_user_id, p_status_filter, p_limit, p_before_created_at, p_before_id)`
+  - Input: user_id UUID, status_filter TEXT, limit INT, before_created_at TIMESTAMPTZ, before_id UUID
+  - Output: JSON array of trips with load context + supplier context
+  - Include: trips table + loads table (origin_city, destination_city, material) + suppliers table (company_name)
+  - Add composite cursor logic for pagination
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_trips.sql`
+  - Test RPC with pagination
+  
+- [ ] **P3.4.2** Create Supabase RPC `get_trip_detail(p_trip_id, p_user_id)`
+  - Input: trip_id UUID, user_id UUID (for RLS)
+  - Output: JSON with trip details + load details + supplier details + rating
+  - Include: trips table + loads table + suppliers table + reviews table (truckers rating of supplier)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trip_detail.sql`
+  - Test RPC with real trip_id
+  
+- [ ] **P3.4.3** Replace `SupabaseTruckerTripsBackend.fetchTrips()` with RPC
+  - Update backend to call `rpc('get_trucker_trips')`
+  - Map RPC response to existing model
+  - Update pagination logic to pass composite cursor
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.4.4** Replace `SupabaseTruckerTripsBackend.fetchTripDetail()` with RPC
+  - Update backend to call `rpc('get_trip_detail')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.4.5** Replace `SupabaseTruckerTripsBackend.fetchOwnRating()` with RPC or subquery
+  - Option A: Include rating in `get_trip_detail` RPC output
+  - Option B: Create separate RPC `get_supplier_rating_for_trip(p_trip_id, p_user_id)`
+  - Choose approach and document reasoning
+  - Update backend implementation
+  - Add unit test
+  
+- [ ] **P3.4.6** Replace `SupabaseTruckerTripsBackend.fetchSupplierProfile()` with RPC
+  - Reuse `get_supplier_contact_info` RPC from P3.3.3
+  - Update backend to call existing RPC
+  - Add error handling for RPC failures
+  - Add unit test
+  
+- [ ] **P3.4.7** Create Supabase RPC `upload_trip_lr(p_trip_id, p_lr_document_path)`
+  - Input: trip_id UUID, lr_document_path TEXT
+  - Output: success/failure status + updated trip data
+  - Update trips table lr_document_path field
+  - Validate trip is in correct status for LR upload (during pickup)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_upload_trip_lr.sql`
+  - Test RPC with real trip_id
+  
+- [ ] **P3.4.8** Replace `SupabaseTruckerTripsBackend.uploadTripLr()` direct update with RPC
+  - Update backend to call `rpc('upload_trip_lr')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.4.9** E2E test trucker trip flows after RPC migration
+  - Test my trips list with pagination
+  - Test trip detail view
+  - Test LR upload during pickup
+  - Test trip status transitions
+  - Test supplier rating display
+  - Verify no regressions compared to direct table reads
+
+### P3.5 — Fleet RPCs
+
+- [ ] **P3.5.0** Audit existing fleet RPCs and direct reads/writes
+  - Search for existing RPCs related to trucks, fleet
+  - Document current `SupabaseTruckerFleetBackend` implementation
+  - Identify all places that call fleet CRUD operations
+  - Document current validation logic for truck operations
+  
+- [ ] **P3.5.1** Create Supabase RPC `get_trucker_fleet(p_user_id, p_limit, p_offset)`
+  - Input: user_id UUID (for RLS), limit INT, offset INT
+  - Output: JSON array of trucks from truckers table
+  - Filter by user_id (trucker owns these trucks)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_fleet.sql`
+  - Test RPC with pagination
+  
+- [ ] **P3.5.2** Create Supabase RPC `add_truck(p_user_id, p_truck_number, p_body_type, p_tyres, p_capacity_tonnes, p_rc_document_path)`
+  - Input: user_id UUID, truck_number TEXT, body_type TEXT, tyres INT, capacity_tonnes NUMERIC, rc_document_path TEXT
+  - Output: success/failure status + created truck data
+  - Validate truck_number is unique for user
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_add_truck.sql`
+  - Test RPC with sample truck data
+  
+- [ ] **P3.5.3** Create Supabase RPC `update_truck(p_truck_id, p_user_id, p_truck_data JSONB)`
+  - Input: truck_id UUID, user_id UUID (for RLS), truck_data JSONB
+  - Output: success/failure status + updated truck data
+  - Validate user owns the truck
+  - Validate truck data fields
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_update_truck.sql`
+  - Test RPC with real truck_id
+  
+- [ ] **P3.5.4** Create Supabase RPC `archive_truck(p_truck_id, p_user_id)`
+  - Input: truck_id UUID, user_id UUID (for RLS)
+  - Output: success/failure status
+  - Soft delete or mark as archived (don't hard delete)
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_archive_truck.sql`
+  - Test RPC with real truck_id
+  
+- [ ] **P3.5.5** Replace `SupabaseTruckerFleetBackend` direct reads/writes with RPCs
+  - Update `fetchTrucks()` to call `rpc('get_trucker_fleet')`
+  - Update `createTruck()` to call `rpc('add_truck')`
+  - Update `updateTruck()` to call `rpc('update_truck')`
+  - Update `deleteTruck()` to call `rpc('archive_truck')`
+  - Add error handling for RPC failures
+  - Add unit tests for each operation
+  - Keep old implementations commented out as fallback initially
+  
+- [ ] **P3.5.6** E2E test fleet flows after RPC migration
+  - Test fleet list display
+  - Test add new truck flow
+  - Test edit truck flow
+  - Test archive truck flow
+  - Test truck selection for booking
+  - Verify no regressions compared to direct table reads
+
+### P3.6 — Chat RPCs
+
+- [ ] **P3.6.0** Audit existing chat RPCs and direct reads
+  - Search for existing RPCs related to conversations, messages, attachments
+  - Document current `SupabaseChatBackend` implementation
+  - Identify all places that call message fetching, pagination, realtime subscription
+  - Document current pagination cursor implementation (created_at vs composite cursor)
+  
+- [ ] **P3.6.1** Create Supabase RPC `get_conversation_messages(p_conversation_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
+  - Input: conversation_id UUID, user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_message_id UUID
+  - Output: JSON array of messages with sender profile context
+  - Include: messages table + profiles table (sender name, avatar)
+  - Add composite cursor logic: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`
+  - Order by `created_at DESC, id DESC`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_messages.sql`
+  - Test RPC with pagination and identical timestamps
+  
+- [ ] **P3.6.2** Create Supabase RPC `mark_messages_read(p_conversation_id, p_user_id, p_last_read_message_id)`
+  - Input: conversation_id UUID, user_id UUID, last_read_message_id UUID
+  - Output: success/failure status
+  - Update conversation_participants table last_read_at field
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_mark_messages_read.sql`
+  - Test RPC with real conversation_id
+  
+- [ ] **P3.6.3** Create Supabase RPC `get_conversation_context(p_conversation_id, p_user_id)` returning load + supplier + booking data
+  - Input: conversation_id UUID, user_id UUID (for RLS)
+  - Output: JSON with conversation context (load, supplier, booking if applicable)
+  - Join conversations table with loads, suppliers, bookings tables
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_context.sql`
+  - Test RPC with real conversation_id
+  
+- [ ] **P3.6.4** Replace `SupabaseChatBackend.fetchMessages()` with RPC
+  - Update backend to call `rpc('get_conversation_messages')`
+  - Map RPC response to existing model
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.6.5** Replace `SupabaseChatBackend.fetchMessagesPaginated()` with RPC
+  - Update backend to call `rpc('get_conversation_messages')` with composite cursor
+  - Update pagination logic to pass single cursor tuple instead of two independent filters
+  - Add error handling for RPC failures
+  - Add unit test for pagination with identical timestamps
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.6.6** Replace `SupabaseChatBackend.watchMessages()` direct stream with RPC + realtime
+  - Use database view or RPC for realtime subscription on messages table
+  - Ensure RLS filters by conversation_id and user_id
+  - Update backend to use realtime subscription instead of direct stream
+  - Test realtime message arrival and read-state updates
+  - Add integration test for realtime message updates
+  
+- [ ] **P3.6.7** Replace `SupabaseChatBackend.markMessagesRead()` direct update with RPC
+  - Update backend to call `rpc('mark_messages_read')`
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.6.8** Replace `SupabaseChatBackend.fetchLoadContext()` with RPC
+  - Reuse `get_conversation_context` RPC from P3.6.3
+  - Update backend to call existing RPC
+  - Add error handling for RPC failures
+  
+- [ ] **P3.6.9** Replace `SupabaseChatBackend.fetchProfile()` with RPC
+  - Reuse `get_supplier_contact_info` RPC from P3.3.3 if supplier
+  - For trucker profiles, use existing profile RPC or create new one
+  - Update backend implementation
+  
+- [ ] **P3.6.10** Replace `SupabaseChatBackend.fetchSupplierExtension()` with RPC
+  - Include supplier extension data in `get_conversation_context` RPC output
+  - Or create separate RPC for supplier extension
+  - Update backend implementation
+  
+- [ ] **P3.6.11** Replace `SupabaseChatBackend.fetchBookingContext()` with RPC
+  - Include booking data in `get_conversation_context` RPC output
+  - Update backend implementation
+  
+- [ ] **P3.6.12** E2E test chat flows after RPC migration
+  - Test conversation list display
+  - Test message pagination with cursor
+  - Test message sending and realtime delivery
+  - Test mark as read functionality
+  - Test load context display in chat
+  - Test supplier profile display in chat
+  - Test identical timestamp pagination edge case
+  - Verify no regressions compared to direct table reads
+
+### P3.7 — Support RPCs
+
+- [ ] **P3.7.0** Audit existing support RPCs and direct reads
+  - Search for existing RPCs related to support tickets, messages, attachments
+  - Document current `SupabaseSupportBackend` implementation
+  - Identify all places that call ticket fetching, message fetching, pagination
+  - Document current pagination cursor implementation
+  
+- [ ] **P3.7.1** Create Supabase RPC `get_support_tickets(p_user_id, p_limit, p_before_created_at, p_before_id)`
+  - Input: user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_id UUID
+  - Output: JSON array of tickets with latest message preview
+  - Include: support_tickets table + latest message from support_ticket_messages
+  - Add composite cursor logic for pagination
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_tickets.sql`
+  - Test RPC with pagination
+  
+- [ ] **P3.7.2** Create Supabase RPC `get_support_ticket_detail(p_ticket_id, p_user_id)`
+  - Input: ticket_id UUID, user_id UUID (for RLS)
+  - Output: JSON with ticket details + all messages
+  - Include: support_tickets table + support_ticket_messages table
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_detail.sql`
+  - Test RPC with real ticket_id
+  
+- [ ] **P3.7.3** Create Supabase RPC `get_support_ticket_messages(p_ticket_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
+  - Input: ticket_id UUID, user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_message_id UUID
+  - Output: JSON array of messages with sender profile context
+  - Include: support_ticket_messages table + profiles table
+  - Add composite cursor logic: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`
+  - Order by `created_at DESC, id DESC`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_messages.sql`
+  - Test RPC with pagination and identical timestamps
+  
+- [ ] **P3.7.4** Replace `SupabaseSupportBackend` direct reads with RPCs
+  - Update `fetchTickets()` to call `rpc('get_support_tickets')`
+  - Update `fetchTicketDetail()` to call `rpc('get_support_ticket_detail')`
+  - Update `fetchTicketMessages()` to call `rpc('get_support_ticket_messages')`
+  - Update pagination logic to pass composite cursor
+  - Add error handling for RPC failures
+  - Add unit tests for each method
+  - Keep old implementations commented out as fallback initially
+  
+- [ ] **P3.7.5** Fix support message pagination cursor bug: backend RPC should use composite cursor `(created_at, id)`
+  - Ensure P3.7.3 RPC uses composite cursor logic
+  - Update Flutter backend to pass single cursor tuple
+  - Add unit test for pagination with identical timestamps
+  
+- [ ] **P3.7.6** E2E test support flows after RPC migration
+  - Test support ticket list display
+  - Test ticket detail view
+  - Test ticket message pagination
+  - Test ticket creation
+  - Test ticket reply
+  - Verify no regressions compared to direct table reads
+
+### P3.8 — Notification RPCs
+
+- [ ] **P3.8.0** Audit existing notification RPCs and direct reads
+  - Search for existing RPCs related to notifications
+  - Document current `SupabaseNotificationBackend` implementation
+  - Identify all places that call notification fetching, realtime subscription
+  - Document current pagination cursor implementation
+  
+- [ ] **P3.8.1** Create Supabase RPC `get_notifications(p_user_id, p_limit, p_before_created_at, p_before_id)`
+  - Input: user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_id UUID
+  - Output: JSON array of notifications with related data context
+  - Include: notifications table + related load/trip/chat context if applicable
+  - Add composite cursor logic for pagination
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_notifications.sql`
+  - Test RPC with pagination
+  
+- [ ] **P3.8.2** Create Supabase RPC `get_unread_notification_count(p_user_id)`
+  - Input: user_id UUID (for RLS)
+  - Output: INT count of unread notifications
+  - Filter by is_read = false
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_unread_notification_count.sql`
+  - Test RPC with real user_id
+  
+- [ ] **P3.8.3** Replace `SupabaseNotificationBackend.fetchNotifications()` with RPC
+  - Update backend to call `rpc('get_notifications')`
+  - Map RPC response to existing model
+  - Update pagination logic to pass composite cursor
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.8.4** Replace `SupabaseNotificationBackend.watchNotifications()` with RPC + realtime
+  - Use database view or RPC for realtime subscription on notifications table
+  - Ensure RLS filters by user_id
+  - Update backend to use realtime subscription instead of direct stream
+  - Test realtime notification arrival
+  - Add integration test for realtime notification updates
+  
+- [ ] **P3.8.5** Replace `SupabaseNotificationBackend.fetchUnreadCount()` with RPC
+  - Update backend to call `rpc('get_unread_notification_count')`
+  - Add error handling for RPC failures
+  - Add unit test for new implementation
+  - Keep old implementation commented out as fallback initially
+  
+- [ ] **P3.8.6** E2E test notification flows after RPC migration
+  - Test notification list display
+  - Test notification pagination
+  - Test unread count badge
+  - Test realtime notification delivery
+  - Test mark as read functionality
+  - Verify no regressions compared to direct table reads
+
+### P3.9 — POST-MIGRATION VALIDATION
+
+- [ ] **P3.9.1** Run full regression test suite after all RPC migrations
+  - Run all unit tests
+  - Run all integration tests
+  - Run all E2E tests
+  - Verify no test failures
+  
+- [ ] **P3.9.2** Manual testing in staging environment
+  - Test all critical user flows in staging
+  - Test auth/profile flows
+  - Test supplier flows (load posting, booking, trips)
+  - Test trucker flows (marketplace, booking, trips)
+  - Test chat flows (messaging, pagination, realtime)
+  - Test support flows (tickets, replies)
+  - Test notification flows (delivery, unread count)
+  
+- [ ] **P3.9.3** Performance testing
+  - Measure RPC response times vs direct table reads
+  - Identify any performance regressions
+  - Optimize slow RPCs if needed
+  
+- [ ] **P3.9.4** Remove old direct table read implementations (after validation)
+  - Remove commented-out fallback implementations
+  - Clean up any unused code
+  - Verify app still works after cleanup
+  
+- [ ] **P3.9.5** Update documentation
+  - Document all RPCs with their signatures and purposes
+  - Update architecture documentation to reflect RPC-first approach
+  - Document RLS policies for each RPC
+  - Document any known limitations or edge cases
+
+---
+
+## P4 — PAGINATION & REALTIME HARDENING
+
+### P4.1 — Chat pagination cursor fix (`C-003`)
+
+- [ ] **P4.1.1** Create backend RPC `get_conversation_messages` with composite cursor logic.
+- [ ] **P4.1.2** RPC query: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`.
+- [ ] **P4.1.3** Order by `created_at DESC, id DESC` in RPC.
+- [ ] **P4.1.4** Update Flutter `fetchMessagesPaginated()` to pass single cursor tuple instead of two independent filters.
+- [ ] **P4.1.5** Add unit test: messages with identical timestamps are paginated correctly.
+
+### P4.2 — Chat realtime merge fix (`C-004`)
+
+- [ ] **P4.2.1** Update `ConversationMessagesController` to merge realtime inserts by message ID instead of replacing full list.
+- [ ] **P4.2.2** Preserve older paginated history when realtime events arrive.
+- [ ] **P4.2.3** Handle updated read-state without duplicating messages.
+- [ ] **P4.2.4** Handle optimistic pending message replacement when server ID arrives.
+
+### P4.3 — Support pagination cursor fix (`SDN-002`)
+
+- [ ] **P4.3.1** Apply same composite cursor pattern to support message RPC.
+- [ ] **P4.3.2** Update Flutter `getTicketMessagesPaginated()` to use single cursor tuple.
+- [ ] **P4.3.3** Add unit test: support messages with identical timestamps paginate correctly.
+
+### P4.4 — My Loads pagination `hasMore` fix (`S-009`)
+
+- [ ] **P4.4.1** Update `MyLoadsController` to set `hasMore: value.length == pageSize`.
+- [ ] **P4.4.2** Short-term fix: return total count from backend or use page-size heuristic.
+- [ ] **P4.4.3** Long-term: add `has_more` flag to `get_supplier_loads_list` RPC response.
+
+---
+
+## P5 — PLAY STORE HARDENING
+
+### P5.1 — Crash reporting
+
+- [ ] **P5.1.1** Add `firebase_crashlytics: ^4.1.3` to `pubspec.yaml`.
+- [ ] **P5.1.2** Initialize Crashlytics in `main.dart` with `FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode)`.
+- [ ] **P5.1.3** Record non-fatal errors in repositories and providers.
+- [ ] **P5.1.4** Verify Crashlytics dashboard receives test crashes.
+
+### P5.2 — Testing
+
+- [ ] **P5.2.1** Fix 3 failing unit tests (verification screen, upload service, chat repository).
+- [ ] **P5.2.2** Add contract tests for all new RPCs in P3.
+- [ ] **P5.2.3** Add unit tests for defensive parsing in P1.
+- [ ] **P5.2.4** Add unit tests for localization mapping in P2.
+- [ ] **P5.2.5** Run `flutter analyze` and resolve all warnings in production code (ignore test/tool files).
+
+### P5.3 — Manual QA Checklist
+
+- [ ] **P5.3.1** Supplier sign-up → profile completion → verification upload → GPS capture.
+- [ ] **P5.3.2** Supplier post load → draft save → resume draft → publish.
+- [ ] **P5.3.3** Supplier My Loads → approve/reject booking request.
+- [ ] **P5.3.4** Trucker sign-up → verification → add truck.
+- [ ] **P5.3.5** Trucker Find Loads → supplier avatar renders.
+- [ ] **P5.3.6** Trucker submit booking request → advance trip → upload LR/POD.
+- [ ] **P5.3.7** Chat text send offline → sync when online.
+- [ ] **P5.3.8** Support ticket create with attachment → reply.
+- [ ] **P5.3.9** Public profile open from feed/chat/detail.
+- [ ] **P5.3.10** Hindi language switch → all screens render Hindi correctly.
+- [ ] **P5.3.11** Logout → verify sensitive cache/queue/session is cleared.
+
+### P5.4 — Performance & Size
+
+- [ ] **P5.4.1** Verify release APK size < 50MB.
+- [ ] **P5.4.2** Verify no debug logging in release build (use `kDebugMode` gates).
+- [ ] **P5.4.3** Verify no `print()` statements in production code paths.
+- [ ] **P5.4.4** Split oversized UI files if time permits (deferred to post-release if needed).
+
+---
+
+## P6 — POST-RELEASE BACKLOG (Can ship without these)
+
+- [ ] **P6.1** Implement notification preferences screen (Phase 8 from review-3-may.md).
+- [ ] **P6.2** Add `Save as Draft` flow to Post Load (`S-001`).
+- [ ] **P6.3** Add Super Load request flow to Post Load (`S-003`).
+- [ ] **P6.4** Expand My Loads tabs to six lifecycle states (`S-008`).
+- [ ] **P6.5** Add route-level object ownership guards (`F-010`).
+- [ ] **P6.6** Move avatar URL signing out of widgets into repository/provider.
+- [ ] **P6.7** Parallelize `LoadDetailController.load()` network calls (`Future.wait`).
+- [ ] **P6.8** Add typed failure exceptions to `VerificationLocationService` (`V-008`).
+- [ ] **P6.9** Verify `VerificationWizardController` watches `truckerFleetRepositoryProvider` instead of constructing its own.
+
+---
+
+## P0 — BLOCKING (Do not submit to Play Store without these) [DEFERRED TO END]
+
+### P0.1 — Remove `.env` from Flutter assets and rotate secrets
+
+- [ ] **P0.1.1** Audit `pubspec.yaml` and delete line `- .env` from the `assets:` block.
+- [ ] **P0.1.2** Verify `pubspec.yaml` does not contain `.env.test` or any other `.env*` file in assets.
+- [ ] **P0.1.3** Refactor `lib/src/core/config/supabase_config.dart` to use `const String.fromEnvironment('SUPABASE_URL', defaultValue: '')` and `const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '')`.
+- [ ] **P0.1.4** Refactor `lib/src/core/config/supabase_config.dart` to read `GOOGLE_MAPS_API_KEY` via `const String.fromEnvironment`.
+- [ ] **P0.1.5** Remove `flutter_dotenv` import and `dotenv.load()` call from `lib/main.dart`.
+- [ ] **P0.1.6** Add `flutter_dotenv` to `dev_dependencies` only (or remove entirely if no longer needed).
+- [ ] **P0.1.7** Update CI/CD build scripts to pass `--dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=... --dart-define=GOOGLE_MAPS_API_KEY=...`.
+- [ ] **P0.1.8** Update local-development README with new `--dart-define` instructions.
+- [ ] **P0.1.9** Rotate Supabase `anon_key` in dashboard (old key has been in git history).
+- [ ] **P0.1.10** Restrict Google Maps API key to Android app SHA-256 fingerprint only.
+- [ ] **P0.1.11** Add `.env` and `.env.test` to `.gitignore` if not already present.
+- [ ] **P0.1.12** Run `git rm --cached TranZfort/.env TranZfort/.env.test` and commit.
+- [ ] **P0.1.13** Build release APK/AAB and verify `.env` is not present in `flutter build` output (inspect `assets/` in APK).
+
+### P0.2 — Fix `OfflineCacheService.clearAll()` data destruction
+
+- [ ] **P0.2.1** Add a `static const String _namespace = 'cache_';` to `OfflineCacheService`.
+- [ ] **P0.2.2** Update `generateCacheKey()` to prefix the returned key with `_namespace`.
+- [ ] **P0.2.3** Update `clearAll()` to iterate `_prefsInstance.getKeys()`, filter `key.startsWith(_namespace)`, and remove only matching keys.
+- [ ] **P0.2.4** Update `clearByPrefix()` to also respect `_namespace` if called with an empty prefix.
+- [ ] **P0.2.5** Add unit test: `clearAll()` does not remove a non-namespaced key (e.g., `onboarding_complete`).
+- [ ] **P0.2.6** Add unit test: `clearByPrefix('marketplace')` only removes `cache_marketplace_*` keys.
+
+### P0.3 — Fix mutation queue decryption fallback crash (`F-019`)
+
+- [ ] **P0.3.1** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_decryptMutation()`.
+- [ ] **P0.3.2** In the catch block, attempt `jsonDecode(map['payload'])` to detect plaintext vs encrypted payload.
+- [ ] **P0.3.3** If payload is still encrypted/corrupted, return `null` instead of calling `QueuedMutation.fromJson(map)`.
+- [ ] **P0.3.4** Update the caller in `_hydrateMutations()` to skip `null` results and log a warning.
+- [ ] **P0.3.5** Add quarantine logic: increment a `corruption_count` metric or log the event for diagnostics.
+- [ ] **P0.3.6** Add unit test: decryption failure with encrypted payload returns `null` without throwing.
+- [ ] **P0.3.7** Add unit test: decryption failure with plaintext JSON still parses successfully.
+
+### P0.4 — Fix mutation queue timestamp schema mismatch (`F-020`)
+
+- [ ] **P0.4.1** Decide approach: **Option A** (preferred) — change `QueuedMutation.toJson()` to output `timestamp.millisecondsSinceEpoch` (integer).
+- [ ] **P0.4.2** Update `QueuedMutation.toJson()`: replace `timestamp.toIso8601String()` with `timestamp.millisecondsSinceEpoch`.
+- [ ] **P0.4.3** Update `QueuedMutation.fromJson()`: read `timestamp` as `int` and construct with `DateTime.fromMillisecondsSinceEpoch(json['timestamp'] ?? 0)`.
+- [ ] **P0.4.4** Add SQLite migration in `mutation_queue_database.dart`: `ALTER TABLE mutation_queue ADD COLUMN timestamp_ms INTEGER;` then copy data, or drop and recreate table if queue is ephemeral.
+- [ ] **P0.4.5** Add unit test: round-trip serialize/deserialize preserves chronological order.
+- [ ] **P0.4.6** Add unit test: `processQueue()` orders mutations correctly after schema change.
+
+### P0.5 — Fix mutation queue deserialization unsafe casts (`F-018`)
+
+- [ ] **P0.5.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.fromJson()`.
+- [ ] **P0.5.2** Replace `json['id'] as String` with `(json['id'] ?? '').toString()`.
+- [ ] **P0.5.3** Replace `json['payload'] as Map<String, dynamic>` with defensive parsing: `json['payload'] is Map ? Map<String, dynamic>.from(json['payload']) : const <String, dynamic>{}`.
+- [ ] **P0.5.4** Replace `json['endpoint'] as String` with `(json['endpoint'] ?? '').toString()`.
+- [ ] **P0.5.5** Replace `json['user_id'] as String` with `(json['user_id'] ?? '').toString()`.
+- [ ] **P0.5.6** Replace `json['timestamp'] as String` with defensive parsing that handles both `int` and `String`.
+- [ ] **P0.5.7** Replace `MutationStatusX.fromString(json['status'] as String)` with safe parsing using `orElse`.
+- [ ] **P0.5.8** Move `MutationStatusX.displayName` hardcoded strings (`Pending`, `Retrying`, etc.) to a localized UI helper.
+- [ ] **P0.5.9** Add ARB keys for `mutationStatusPending`, `mutationStatusRetrying`, `mutationStatusCompleted`, `mutationStatusFailed`.
+- [ ] **P0.5.10** Add unit test: `fromJson` handles `null`, missing, and malformed fields without throwing.
+
+### P0.6 — Fix chat unbounded initial message load (`C-002`)
+
+- [ ] **P0.6.1** Open `lib/src/features/communication/providers/chat_providers.dart` and locate `ConversationMessagesController.load()`.
+- [ ] **P0.6.2** Replace the call to `getMessages()` (unbounded) with `getMessagesPaginated(limit: 50)`.
+- [ ] **P0.6.3** Ensure `hasMoreOlderMessages` is set correctly based on the returned page size.
+- [ ] **P0.6.4** Add unit test: initial load fetches at most 50 messages.
+- [ ] **P0.6.5** Add unit test: long conversation (>50 messages) does not load all messages at once.
+
+### P0.7 — Remove full Aadhaar/PAN from `profiles` table (`V-002`)
+
+- [ ] **P0.7.1** Audit all Flutter code references to `aadhaar_number` and `pan_number` in profile read/write paths.
+- [ ] **P0.7.2** Update `verification_repository.dart` to write only `aadhaar_last4` and `pan_last4` to `profiles`.
+- [ ] **P0.7.3** Update `verification_repository.dart` to write full Aadhaar/PAN to a new encrypted `identity_documents` table (or use Supabase Vault/encryption).
+- [ ] **P0.7.4** Create backend migration: add `identity_documents` table with `profile_id`, `document_type`, `document_number_encrypted`, `last4`, `created_at`, `updated_at`.
+- [ ] **P0.7.5** Add RLS policies on `identity_documents`: owner read-only, admin read-write.
+- [ ] **P0.7.6** Create RPC `get_identity_document_last4(p_profile_id)` for UI display.
+- [ ] **P0.7.7** Update Flutter UI to never display full Aadhaar/PAN (only last4).
+- [ ] **P0.7.8** Add data migration script to move existing `aadhaar_number`/`pan_number` from `profiles` to `identity_documents`.
+- [ ] **P0.7.9** Mark `profiles.aadhaar_number` and `profiles.pan_number` as deprecated in schema docs.
+
+---
+
+## Summary
+
+**Total Tasks:** 6 priorities (P1-P6) + P0 (deferred)
+- **P1 (Crash Safety):** 2 tasks, ~24 subtasks
+- **P2 (Localization):** 7 tasks, ~50 subtasks
+- **P3 (RPC Migration):** 8 tasks, ~50 subtasks
+- **P4 (Pagination/Realtime):** 4 tasks, ~13 subtasks
+- **P5 (Play Store Hardening):** 4 tasks, ~19 subtasks
+- **P6 (Post-Release):** 9 tasks
+- **P0 (Blocking Security):** 7 tasks, ~56 subtasks (deferred to end)
+
+**New Execution Order:** P1 → P2 → P3 → P4 → P5 → P0 → P6
