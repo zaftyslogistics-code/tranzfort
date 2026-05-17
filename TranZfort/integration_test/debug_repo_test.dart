@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
+// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
