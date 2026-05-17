@@ -1181,19 +1181,19 @@ These tasks can be done after code implementation:
 
 ### P0.1 — Remove `.env` from Flutter assets and use --dart-define
 
-- [ ] **P0.1.1** Audit `pubspec.yaml` and delete line `- .env` from the `assets:` block.
-- [ ] **P0.1.2** Verify `pubspec.yaml` does not contain `.env.test` or any other `.env*` file in assets.
-- [ ] **P0.1.3** Refactor `lib/src/core/config/supabase_config.dart` to use `const String.fromEnvironment('SUPABASE_URL', defaultValue: '')` and `const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '')`.
-- [ ] **P0.1.4** Refactor `lib/src/core/config/supabase_config.dart` to read `GOOGLE_MAPS_API_KEY` via `const String.fromEnvironment`.
-- [ ] **P0.1.5** Remove `flutter_dotenv` import and `dotenv.load()` call from `lib/main.dart`.
-- [ ] **P0.1.6** Add `flutter_dotenv` to `dev_dependencies` only (or remove entirely if no longer needed).
-- [ ] **P0.1.7** Create build script `build-apk.sh` or `build-apk.bat` with `--dart-define` flags using existing keys.
+- [x] **P0.1.1** Audit `pubspec.yaml` and delete line `- .env` from the `assets:` block.
+- [x] **P0.1.2** Verify `pubspec.yaml` does not contain `.env.test` or any other `.env*` file in assets.
+- [x] **P0.1.3** Refactor `lib/src/core/config/supabase_config.dart` to use `const String.fromEnvironment('SUPABASE_URL', defaultValue: '')` and `const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '')`.
+- [x] **P0.1.4** Refactor `lib/src/core/config/supabase_config.dart` to read `GOOGLE_MAPS_API_KEY` via `const String.fromEnvironment`.
+- [x] **P0.1.5** Remove `flutter_dotenv` import and `dotenv.load()` call from `lib/main.dart`.
+- [x] **P0.1.6** Add `flutter_dotenv` to `dev_dependencies` only (or remove entirely if no longer needed).
+- [x] **P0.1.7** Create build script `build-apk.sh` or `build-apk.bat` with `--dart-define` flags using existing keys.
   - **Example:** `flutter build apk --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=... --dart-define=GOOGLE_MAPS_API_KEY=...`
   - **Note:** Use existing keys for now, rotate later
-- [ ] **P0.1.8** Update local-development README with new `--dart-define` instructions.
-- [ ] **P0.1.9** Add `.env` and `.env.test` to `.gitignore` if not already present.
-- [ ] **P0.1.10** Run `git rm --cached TranZfort/.env TranZfort/.env.test` and commit.
-- [ ] **P0.1.11** Build release APK/AAB and verify `.env` is not present in `flutter build` output (inspect `assets/` in APK).
+- [x] **P0.1.8** Update local-development README with new `--dart-define` instructions.
+- [x] **P0.1.9** Add `.env` and `.env.test` to `.gitignore` if not already present.
+- [x] **P0.1.10** Run `git rm --cached TranZfort/.env TranZfort/.env.test` and commit.
+- [x] **P0.1.11** Build release APK/AAB and verify `.env` is not present in `flutter build` output (inspect `assets/` in APK).
 - [ ] **P0.1.12** ⏭️ **DEFERRED:** Rotate Supabase `anon_key` in dashboard (old key has been in git history).
   - **When:** After code implementation and testing
   - **Platform:** Supabase Dashboard → Settings → API → Regenerate anon key
