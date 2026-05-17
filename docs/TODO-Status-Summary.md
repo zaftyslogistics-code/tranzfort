@@ -259,7 +259,10 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - ✅ P2: Localization (high-priority UI-layer strings)
 - ✅ P3: RPC migration (17 new RPCs, 5 backends updated)
 - ✅ P4: Pagination & realtime (4 critical fixes)
-- ✅ P0.1: Remove .env from assets (11/14 tasks complete, 3 manual tasks deferred)
+- ✅ P0.1: Remove .env from assets (12/14 tasks complete, 2 manual tasks deferred to pre-release)
+  - P0.1.12: Rotate Supabase key (deferred - requires Supabase dashboard access)
+  - P0.1.13: Restrict Maps key (deferred - requires Google Cloud Console access)
+  - P0.1.14: Update CI/CD scripts (complete - already uses --dart-define)
 - ✅ P0.2: Fix cache destruction (4/6 tasks complete, 2 unit tests deferred)
 - ✅ P0.3: Fix decryption crash (4/7 tasks complete, 3 tasks deferred)
 - ✅ P0.4: Fix timestamp schema mismatch (8/12 tasks complete, 4 unit tests deferred)
@@ -268,7 +271,7 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - ✅ P0.7: Remove full Aadhaar/PAN from profiles (3/15 tasks complete, simplified version, 12 tasks deferred to post-release)
 
 **Critical Pending (Blocking for Professional App):**
-- ⏸️ P0.1.12-P0.1.14: Manual tasks (key rotation, API restriction, CI/CD) - Security
+- ⏸️ P0.1.12-P0.1.13: Manual tasks (key rotation, API restriction) - Security (deferred to pre-release)
 
 **Quality Pending (Recommended for Professional App):**
 - ⏸️ P5: Play Store Hardening (45 tasks) - Crash reporting, testing, QA, performance
@@ -286,12 +289,12 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
 
 **Recommended Order for Professional App:**
-1. **Phase 1: P0 Manual Tasks** (P0.1.12-P0.1.14: key rotation, API restriction) - ~0.5 hrs
-2. **Phase 2: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
-3. **Phase 3: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
-4. **Phase 4: Manual Testing** - ~2 hrs
+1. **Phase 1: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
+2. **Phase 2: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
+3. **Phase 3: Manual Testing** - ~2 hrs
+4. **Phase 4: P0 Manual Tasks** (P0.1.12-P0.1.13: key rotation, API restriction) - ~0.5 hrs (pre-release)
 5. **Phase 5: P6 Optimizations** (post-release backlog, including P0.7 full encryption) - ~8 hrs
 
-**Total Remaining Work:** ~39.5 hours (excluding P6)
+**Total Remaining Work:** ~39.5 hours (excluding P6 and pre-release manual tasks)
 
-**Ready for:** P0.1.12-P0.1.14 manual tasks (key rotation, API restriction) or proceed to P5 Hardening
+**Ready for:** P5.1 - Crash Reporting Setup (Firebase Crashlytics)
