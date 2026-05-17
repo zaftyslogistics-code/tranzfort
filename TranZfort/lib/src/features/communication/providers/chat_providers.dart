@@ -275,7 +275,11 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
-    final result = await _repository.getMessages(_conversationId);
+    // P0.6: Use paginated query with limit to prevent loading all messages at once
+    final result = await _repository.getMessagesPaginated(
+      _conversationId,
+      limit: 50,
+    );
     result.when(
       success: (messages) {
         _cancelErrorDisplay();
