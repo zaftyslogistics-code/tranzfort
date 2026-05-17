@@ -974,10 +974,21 @@ String safeString(dynamic value) {
 
 ### P4.2 — Chat realtime merge fix (`C-004`)
 
-- [ ] **P4.2.1** Update `ConversationMessagesController` to merge realtime inserts by message ID instead of replacing full list.
-- [ ] **P4.2.2** Preserve older paginated history when realtime events arrive.
-- [ ] **P4.2.3** Handle updated read-state without duplicating messages.
-- [ ] **P4.2.4** Handle optimistic pending message replacement when server ID arrives.
+- [x] **P4.2.1** Update `ConversationMessagesController` to merge realtime inserts by message ID instead of replacing full list.
+  - ✅ Added _mergeMessages() method to merge messages by ID
+  - ✅ Updated _start() to use merge instead of replace
+
+- [x] **P4.2.2** Preserve older paginated history when realtime events arrive.
+  - ✅ Merge logic adds older paginated messages that aren't in realtime stream
+  - ✅ Messages loaded via loadOlderMessages() are preserved
+
+- [x] **P4.2.3** Handle updated read-state without duplicating messages.
+  - ✅ Merge logic updates existing messages with new data by ID
+  - ✅ No duplicates when read-state changes arrive via realtime
+
+- [x] **P4.2.4** Handle optimistic pending message replacement when server ID arrives.
+  - ✅ Merge logic replaces optimistic messages when server ID arrives
+  - ✅ Sorted by created_at to maintain correct order
 
 ### P4.3 — Support pagination cursor fix (`SDN-002`)
 
