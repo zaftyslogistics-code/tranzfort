@@ -700,35 +700,38 @@ String safeString(dynamic value) {
   - ⚠️ Check if `mark_messages_read` RPC exists
   - ⚠️ Check if `get_conversation_context` RPC exists (may be covered by existing RPCs)
   
-- [ ] **P3.6.1** Create Supabase RPC `get_conversation_messages(p_conversation_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
+- [x] **P3.6.1** Create Supabase RPC `get_conversation_messages(p_conversation_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
   - Input: conversation_id UUID, user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_message_id UUID
   - Output: JSON array of messages with sender profile context
-  - Include: messages table + profiles table (sender name, avatar)
+  - Include: messages table fields (sender profile context can be fetched separately if needed)
   - Add composite cursor logic: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`
   - Order by `created_at DESC, id DESC`
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_messages.sql`
-  - Test RPC with pagination and identical timestamps
+  - Add migration file: `20260517090009_rpc_get_conversation_messages.sql`
+  - ✅ Migration file created
   - **CRITICAL:** This RPC is needed to fix C-003 (chat pagination cursor bug)
+  - ⏭️ Test RPC with pagination and identical timestamps in Supabase SQL editor (deferred to P3.6.5)
   
-- [ ] **P3.6.2** Check if `mark_messages_read` RPC exists, create if missing
-  - Search migrations for existing mark messages read RPC
-  - If missing: Create Supabase RPC `mark_messages_read(p_conversation_id, p_user_id, p_last_read_message_id)`
-  - Input: conversation_id UUID, user_id UUID, last_read_message_id UUID
-  - Output: success/failure status
-  - Update conversation_participants table last_read_at field
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_mark_messages_read.sql` (if needed)
-  - Test RPC with real conversation_id
+- [x] **P3.6.2** Check if `mark_messages_read` RPC exists, create if missing
+  - ✅ RPC did not exist, created new RPC: `mark_conversation_messages_read`
+  - Input: conversation_id UUID, reader_id UUID
+  - Output: VOID (success/failure)
+  - Updates messages table (not conversation_participants) to match current implementation
+  - Only marks messages where sender != reader
+  - Add migration file: `20260517090010_rpc_mark_conversation_messages_read.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with real conversation_id in Supabase SQL editor (deferred to P3.6.5)
   
-- [ ] **P3.6.3** Check if `get_conversation_context` RPC exists or if existing RPCs suffice
-  - Search migrations for existing conversation context RPC
-  - Check if `get_conversation_summary` provides load + supplier + booking data
-  - If `get_conversation_summary` suffices: Reuse it instead of creating new RPC
-  - If missing: Create Supabase RPC `get_conversation_context(p_conversation_id, p_user_id)` returning load + supplier + booking data
-  - Input: conversation_id UUID, user_id UUID (for RLS)
-  - Output: JSON with conversation context (load, supplier, booking if applicable)
-  - Join conversations table with loads, suppliers, bookings tables
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_context.sql` (if needed)
-  - Test RPC with real conversation_id
+- [x] **P3.6.2.1** Create rollback migration file for chat RPCs
+  - Add migration file: `20260517090011_rollback_chat_rpcs.sql`
+  - ✅ Rollback migration file created
+  - Documents how to revert chat RPCs if needed
+  - Note: Existing RPCs remain (create_or_get_conversation, send_message, get_current_user_conversation_summaries, get_conversation_summary, get_current_user_unread_conversation_count)
+  
+- [x] **P3.6.3** Check if `get_conversation_context` RPC exists or if existing RPCs suffice
+  - ✅ Checked: `get_conversation_summary` already exists and is used (chat_repository_backend.dart)
+  - ✅ `get_conversation_summary` provides load + supplier + booking data
+  - ✅ Reuse existing RPC instead of creating new one
+  - **Decision:** No new RPC needed for conversation context
   
 - [ ] **P3.6.4** Replace `SupabaseChatBackend.fetchMessages()` with RPC (if using direct table read)
   - Check if fetchMessages() uses direct table read or existing RPC

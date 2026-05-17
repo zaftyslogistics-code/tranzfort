@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/config/app_config.dart';
+import '../../../core/error/app_failure.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'chat_repository_models.dart';
 
@@ -126,6 +128,28 @@ class SupabaseChatBackend implements ChatBackend {
       throw const AuthException('Session unavailable');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for message fetching (without pagination)
+      final response = await _client.rpc(
+        'get_conversation_messages',
+        params: {
+          'p_conversation_id': conversationId,
+          'p_user_id': _client.auth.currentUser?.id,
+          'p_limit': 100, // Fetch all messages for initial load
+          'p_before_created_at': null,
+          'p_before_message_id': null,
+        },
+      );
+      
+      if (response is! List) {
+        throw const ServerFailure(message: 'Invalid response format from get_conversation_messages RPC');
+      }
+      
+      // Reverse to ascending order for display (RPC returns DESC, display needs ASC)
+      return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
+    }
+
+    // Old implementation (fallback)
     final response = await _client
         .from('messages')
         .select('id, conversation_id, sender_profile_id, message_type, text_body, attachment_path, structured_payload, is_read, read_at, created_at')
@@ -146,6 +170,28 @@ class SupabaseChatBackend implements ChatBackend {
       throw const AuthException('Session unavailable');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for paginated message fetching with composite cursor (FIXES C-003)
+      final response = await _client.rpc(
+        'get_conversation_messages',
+        params: {
+          'p_conversation_id': conversationId,
+          'p_user_id': _client.auth.currentUser?.id,
+          'p_limit': limit,
+          'p_before_created_at': beforeCreatedAt?.toUtc().toIso8601String(),
+          'p_before_message_id': beforeMessageId,
+        },
+      );
+      
+      if (response is! List) {
+        throw const ServerFailure(message: 'Invalid response format from get_conversation_messages RPC');
+      }
+      
+      // Reverse to ascending order for display (RPC returns DESC, display needs ASC)
+      return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
+    }
+
+    // Old implementation (fallback) - BUG: Uses two independent filters (C-003)
     var query = _client
         .from('messages')
         .select('id, conversation_id, sender_profile_id, message_type, text_body, attachment_path, structured_payload, is_read, read_at, created_at')
@@ -358,6 +404,19 @@ class SupabaseChatBackend implements ChatBackend {
       return;
     }
 
+    if (useRpcMigration) {
+      // Use RPC for marking messages as read
+      await _client.rpc(
+        'mark_conversation_messages_read',
+        params: {
+          'p_conversation_id': conversationId,
+          'p_reader_id': readerId,
+        },
+      );
+      return;
+    }
+
+    // Old implementation (fallback)
     await _client
         .from('messages')
         .update(<String, dynamic>{
