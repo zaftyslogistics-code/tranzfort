@@ -623,34 +623,50 @@ String safeString(dynamic value) {
   - ⚠️ All fleet CRUD operations currently use direct table reads/writes
   - ⚠️ Need all fleet RPCs: get, add, update, archive
   
-- [ ] **P3.5.1** Create Supabase RPC `get_trucker_fleet(p_user_id, p_limit, p_offset)`
+- [x] **P3.5.1** Create Supabase RPC `get_trucker_fleet(p_user_id, p_limit, p_offset)`
   - Input: user_id UUID (for RLS), limit INT, offset INT
   - Output: JSON array of trucks from truckers table
   - Filter by user_id (trucker owns these trucks)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_fleet.sql`
-  - Test RPC with pagination
+  - Exclude archived trucks by default (status != 'archived')
+  - Join with truck_models table to get make/model
+  - Add migration file: `20260517090001_rpc_get_trucker_fleet.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with pagination in Supabase SQL editor (deferred to P3.5.5)
   
-- [ ] **P3.5.2** Create Supabase RPC `add_truck(p_user_id, p_truck_number, p_body_type, p_tyres, p_capacity_tonnes, p_rc_document_path)`
-  - Input: user_id UUID, truck_number TEXT, body_type TEXT, tyres INT, capacity_tonnes NUMERIC, rc_document_path TEXT
-  - Output: success/failure status + created truck data
-  - Validate truck_number is unique for user
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_add_truck.sql`
-  - Test RPC with sample truck data
+- [x] **P3.5.2** Create Supabase RPC `add_truck(p_truck_number, p_body_type, p_tyres, p_capacity_tonnes, p_rc_document_path)`
+  - Input: truck_number TEXT, body_type TEXT, tyres INTEGER, capacity_tonnes NUMERIC, rc_document_path TEXT
+  - Output: UUID of created truck
+  - Validate inputs (non-empty, positive values)
+  - Set status to 'pending' by default
+  - Normalize truck_number to uppercase
+  - Add migration file: `20260517090002_rpc_add_truck.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with real truck data in Supabase SQL editor (deferred to P3.5.5)
   
-- [ ] **P3.5.3** Create Supabase RPC `update_truck(p_truck_id, p_user_id, p_truck_data JSONB)`
-  - Input: truck_id UUID, user_id UUID (for RLS), truck_data JSONB
-  - Output: success/failure status + updated truck data
-  - Validate user owns the truck
-  - Validate truck data fields
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_update_truck.sql`
-  - Test RPC with real truck_id
+- [x] **P3.5.3** Create Supabase RPC `update_truck(p_truck_id, p_truck_number, p_body_type, p_tyres, p_capacity_tonnes, p_rc_document_path)`
+  - Input: truck_id UUID, truck_number TEXT, body_type TEXT, tyres INTEGER, capacity_tonnes NUMERIC, rc_document_path TEXT
+  - Output: VOID (success/failure)
+  - Check ownership (user_id matches owner_id)
+  - Detect critical field changes (truck_number, body_type, tyres, capacity, rc_document)
+  - If verified truck with critical changes: set status to 'edited_pending_reapproval', clear verification fields
+  - Otherwise: keep existing status, just update fields
+  - Add migration file: `20260517090003_rpc_update_truck.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with verified truck critical field change in Supabase SQL editor (deferred to P3.5.5)
   
-- [ ] **P3.5.4** Create Supabase RPC `archive_truck(p_truck_id, p_user_id)`
-  - Input: truck_id UUID, user_id UUID (for RLS)
-  - Output: success/failure status
-  - Soft delete or mark as archived (don't hard delete)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_archive_truck.sql`
-  - Test RPC with real truck_id
+- [x] **P3.5.4** Create Supabase RPC `archive_truck(p_truck_id)`
+  - Input: truck_id UUID
+  - Output: VOID (success/failure)
+  - Check ownership (user_id matches owner_id)
+  - Update status to 'archived'
+  - Add migration file: `20260517090004_rpc_archive_truck.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with real truck_id in Supabase SQL editor (deferred to P3.5.5)
+  
+- [x] **P3.5.4.1** Create rollback migration file for fleet RPCs
+  - Add migration file: `20260517090005_rollback_fleet_rpcs.sql`
+  - ✅ Rollback migration file created
+  - Documents how to revert all fleet RPCs if needed
   
 - [ ] **P3.5.5** Replace `SupabaseTruckerFleetBackend` direct reads/writes with RPCs
   - Update `fetchTrucks()` to call `rpc('get_trucker_fleet')`
