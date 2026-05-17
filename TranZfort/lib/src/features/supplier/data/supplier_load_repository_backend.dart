@@ -67,7 +67,7 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       'get_supplier_loads_list',
       params: <String, dynamic>{
         'p_supplier_id': supplierId,
-        'p_status_filter': filters.hasStatuses ? filters.statuses : null,
+        'p_status_filter': (filters.hasStatuses && filters.statuses.isNotEmpty) ? filters.statuses : null,
         'p_search_query': filters.hasSearchQuery ? filters.searchQuery!.trim() : null,
         'p_limit': pageSize,
         'p_offset': (page - 1) * pageSize,
