@@ -1076,7 +1076,110 @@ String safeString(dynamic value) {
 
 ## P0 — BLOCKING (Do not submit to Play Store without these) [DEFERRED TO END]
 
-### P0.1 — Remove `.env` from Flutter assets and rotate secrets
+### P0 Implementation Strategy
+
+**Approach:** Remove `.env` from assets, use existing keys via `--dart-define`, rotate keys later at convenience.
+
+**Why this approach:**
+- Unblocks P0 code work immediately
+- Improves security (keys not in APK assets)
+- Allows key rotation at your convenience
+- No blocking on manual dashboard tasks
+
+---
+
+### Key Storage & Rotation Strategy
+
+#### **Where Keys Will Be Stored (After Implementation)**
+
+**Option 1: Build Script (Simple - Recommended for Manual Builds)**
+- **Location:** `build-apk.sh` or `build-apk.bat` in project root
+- **Format:**
+  ```bash
+  flutter build apk \
+    --dart-define=SUPABASE_URL=https://jgtgdfhdtjhidywpautk.supabase.co \
+    --dart-define=SUPABASE_ANON_KEY=your_existing_key_here \
+    --dart-define=GOOGLE_MAPS_API_KEY=your_existing_key_here
+  ```
+- **To rotate keys:** Edit this file with new keys
+
+**Option 2: Environment Variables (More Secure)**
+- **Location:** System environment variables
+- **Windows:** System Properties → Environment Variables
+- **Format:**
+  ```
+  SUPABASE_URL=https://jgtgdfhdtjhidywpautk.supabase.co
+  SUPABASE_ANON_KEY=your_key_here
+  GOOGLE_MAPS_API_KEY=your_key_here
+  ```
+- **Build command:**
+  ```bash
+  flutter build apk \
+    --dart-define=SUPABASE_URL=$SUPABASE_URL \
+    --dart-define=SUPABASE_ANON_KEY=$SUPABASE_ANON_KEY \
+    --dart-define=GOOGLE_MAPS_API_KEY=$GOOGLE_MAPS_API_KEY
+  ```
+- **To rotate keys:** Update environment variables
+
+**Option 3: CI/CD Secrets (For Automated Builds)**
+- **Location:** GitHub/GitLab/Bitbucket repository secrets
+- **Format:** Repository settings → Secrets
+- **Build command:**
+  ```yaml
+  flutter build apk \
+    --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} \
+    --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }} \
+    --dart-define=GOOGLE_MAPS_API_KEY=${{ secrets.GOOGLE_MAPS_API_KEY }}
+  ```
+- **To rotate keys:** Update secrets in CI/CD platform
+
+---
+
+#### **How to Rotate Keys Later**
+
+**Step 1: Update Key Storage**
+- **If using build script:** Edit the script with new keys
+- **If using environment variables:** Update system environment variables
+- **If using CI/CD:** Update secrets in CI/CD platform
+
+**Step 2: Rebuild APK**
+```bash
+flutter build apk \
+  --dart-define=SUPABASE_ANON_KEY=new_rotated_key \
+  --dart-define=GOOGLE_MAPS_API_KEY=new_restricted_key
+```
+
+**Step 3: Deploy New APK**
+- Old APK with old keys stops working (if you invalidated old keys)
+- New APK with new keys works
+
+---
+
+#### **Manual Dashboard Tasks (Deferred)**
+
+These tasks can be done after code implementation:
+
+**Task 1: Rotate Supabase anon_key**
+- **Platform:** Supabase Dashboard
+- **Steps:** Settings → API → Project API keys → Regenerate anon key
+- **Time:** 5 minutes
+- **Priority:** Medium (keys already in git history, rotation improves security)
+
+**Task 2: Restrict Google Maps API Key**
+- **Platform:** Google Cloud Console
+- **Steps:** APIs & Services → Credentials → Edit API Key → Android apps restriction
+- **Time:** 10 minutes
+- **Priority:** Medium (prevents API key abuse)
+
+**Task 3: Update CI/CD Scripts (if applicable)**
+- **Platform:** Your CI/CD system
+- **Steps:** Update build configuration with `--dart-define` flags
+- **Time:** 15-30 minutes
+- **Priority:** Low (only if using CI/CD)
+
+---
+
+### P0.1 — Remove `.env` from Flutter assets and use --dart-define
 
 - [ ] **P0.1.1** Audit `pubspec.yaml` and delete line `- .env` from the `assets:` block.
 - [ ] **P0.1.2** Verify `pubspec.yaml` does not contain `.env.test` or any other `.env*` file in assets.
@@ -1084,13 +1187,25 @@ String safeString(dynamic value) {
 - [ ] **P0.1.4** Refactor `lib/src/core/config/supabase_config.dart` to read `GOOGLE_MAPS_API_KEY` via `const String.fromEnvironment`.
 - [ ] **P0.1.5** Remove `flutter_dotenv` import and `dotenv.load()` call from `lib/main.dart`.
 - [ ] **P0.1.6** Add `flutter_dotenv` to `dev_dependencies` only (or remove entirely if no longer needed).
-- [ ] **P0.1.7** Update CI/CD build scripts to pass `--dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=... --dart-define=GOOGLE_MAPS_API_KEY=...`.
+- [ ] **P0.1.7** Create build script `build-apk.sh` or `build-apk.bat` with `--dart-define` flags using existing keys.
+  - **Example:** `flutter build apk --dart-define=SUPABASE_URL=... --dart-define=SUPABASE_ANON_KEY=... --dart-define=GOOGLE_MAPS_API_KEY=...`
+  - **Note:** Use existing keys for now, rotate later
 - [ ] **P0.1.8** Update local-development README with new `--dart-define` instructions.
-- [ ] **P0.1.9** Rotate Supabase `anon_key` in dashboard (old key has been in git history).
-- [ ] **P0.1.10** Restrict Google Maps API key to Android app SHA-256 fingerprint only.
-- [ ] **P0.1.11** Add `.env` and `.env.test` to `.gitignore` if not already present.
-- [ ] **P0.1.12** Run `git rm --cached TranZfort/.env TranZfort/.env.test` and commit.
-- [ ] **P0.1.13** Build release APK/AAB and verify `.env` is not present in `flutter build` output (inspect `assets/` in APK).
+- [ ] **P0.1.9** Add `.env` and `.env.test` to `.gitignore` if not already present.
+- [ ] **P0.1.10** Run `git rm --cached TranZfort/.env TranZfort/.env.test` and commit.
+- [ ] **P0.1.11** Build release APK/AAB and verify `.env` is not present in `flutter build` output (inspect `assets/` in APK).
+- [ ] **P0.1.12** ⏭️ **DEFERRED:** Rotate Supabase `anon_key` in dashboard (old key has been in git history).
+  - **When:** After code implementation and testing
+  - **Platform:** Supabase Dashboard → Settings → API → Regenerate anon key
+  - **Action:** Update build script with new key after rotation
+- [ ] **P0.1.13** ⏭️ **DEFERRED:** Restrict Google Maps API key to Android app SHA-256 fingerprint only.
+  - **When:** After code implementation and testing
+  - **Platform:** Google Cloud Console → APIs & Services → Credentials → Edit API Key
+  - **Action:** Update build script with new key after restriction
+- [ ] **P0.1.14** ⏭️ **DEFERRED:** Update CI/CD build scripts to pass `--dart-define` flags (if using CI/CD).
+  - **When:** After code implementation
+  - **Platform:** Your CI/CD system (GitHub Actions, GitLab CI, etc.)
+  - **Action:** Use CI/CD secrets instead of hardcoded keys
 
 ### P0.2 — Fix `OfflineCacheService.clearAll()` data destruction
 
