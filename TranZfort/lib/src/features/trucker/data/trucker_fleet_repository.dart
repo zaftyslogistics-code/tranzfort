@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
@@ -151,6 +152,8 @@ abstract class TruckerFleetBackend {
     required Map<String, dynamic> values,
   });
 
+  Future<void> archiveTruck(String truckId);
+
   Future<String?> getSignedUrl(String storagePath, {int expiresInSeconds = 300});
 }
 
@@ -169,6 +172,25 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Session unavailable');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for fleet fetching
+      final response = await _client.rpc(
+        'get_trucker_fleet',
+        params: {
+          'p_user_id': ownerId,
+          'p_limit': limit,
+          'p_offset': offset,
+        },
+      );
+      
+      if (response is! List) {
+        throw const ServerFailure(message: 'Invalid response format from get_trucker_fleet RPC');
+      }
+      
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    }
+
+    // Old implementation (fallback)
     final response = await _client
         .from('trucks')
         .select(
@@ -201,6 +223,27 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Trucker session is not available');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for truck creation
+      final response = await _client.rpc(
+        'add_truck',
+        params: {
+          'p_truck_number': values['truck_number'],
+          'p_body_type': values['body_type'],
+          'p_tyres': values['tyres'],
+          'p_capacity_tonnes': values['capacity_tonnes'],
+          'p_rc_document_path': values['rc_document_path'],
+        },
+      );
+      
+      if (response is! Map) {
+        throw const ServerFailure(message: 'Invalid response format from add_truck RPC');
+      }
+      
+      return response as Map<String, dynamic>;
+    }
+
+    // Old implementation (fallback)
     final response = await _client.from('trucks').insert(values).select('id').single();
     return response;
   }
@@ -215,7 +258,45 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Trucker session is not available');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for truck update
+      await _client.rpc(
+        'update_truck',
+        params: {
+          'p_truck_id': truckId,
+          'p_truck_number': values['truck_number'],
+          'p_body_type': values['body_type'],
+          'p_tyres': values['tyres'],
+          'p_capacity_tonnes': values['capacity_tonnes'],
+          'p_rc_document_path': values['rc_document_path'],
+        },
+      );
+      return;
+    }
+
+    // Old implementation (fallback)
     await _client.from('trucks').update(values).eq('owner_id', ownerId).eq('id', truckId);
+  }
+
+  @override
+  Future<void> archiveTruck(String truckId) async {
+    if (_client == null) {
+      throw const AuthException('Trucker session is not available');
+    }
+
+    if (useRpcMigration) {
+      // Use RPC for truck archiving
+      await _client.rpc(
+        'archive_truck',
+        params: {
+          'p_truck_id': truckId,
+        },
+      );
+      return;
+    }
+
+    // Old implementation (fallback)
+    await _client.from('trucks').update({'status': 'archived'}).eq('id', truckId);
   }
 }
 
@@ -260,11 +341,7 @@ class TruckerFleetRepository {
       return const Failure<void>(UnauthorizedFailure());
     }
     try {
-      await _backend.updateTruck(
-        ownerId: userId,
-        truckId: truckId,
-        values: {'status': TruckerFleetTruckStatus.archived.databaseValue},
-      );
+      await _backend.archiveTruck(truckId);
       return const Success<void>(null);
     } catch (error, stackTrace) {
       return Failure<void>(_mapError(error, stackTrace));
