@@ -7,6 +7,12 @@ import 'pii_redaction.dart';
 class AppLogger {
   AppLogger._();
 
+  static void debug(String message, {String? scope}) {
+    if (kDebugMode) {
+      _log('DEBUG', message, scope: scope);
+    }
+  }
+
   static void info(String message, {String? scope}) {
     final redactedMessage = PiiRedaction.redact(message);
     _log('INFO', redactedMessage, scope: scope);
