@@ -764,6 +764,12 @@ abstract class AppLocalizations {
   /// **'Abusive behavior'**
   String get reportIssueCategoryAbusiveBehavior;
 
+  /// No description provided for @reportIssueContextSourceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current conversation or trip context'**
+  String get reportIssueContextSourceLabel;
+
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:

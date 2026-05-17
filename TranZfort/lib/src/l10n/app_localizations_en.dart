@@ -375,6 +375,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reportIssueCategoryAbusiveBehavior => 'Abusive behavior';
 
   @override
+  String get reportIssueContextSourceLabel =>
+      'Current conversation or trip context';
+
+  @override
   String get onboardingSelectRoleError =>
       'Select whether you are joining as a supplier or trucker.';
 

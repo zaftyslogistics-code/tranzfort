@@ -376,6 +376,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get reportIssueCategoryAbusiveBehavior => 'दुर्व्यवहार';
 
   @override
+  String get reportIssueContextSourceLabel => 'वर्तमान बातचीत या यात्रा संदर्भ';
+
+  @override
   String get onboardingSelectRoleError =>
       'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
 

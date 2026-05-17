@@ -212,15 +212,22 @@ String safeString(dynamic value) {
 
 **IMPORTANT:** This is critical infrastructure work. Follow these safety measures to avoid breaking the app.
 
-- [ ] **P3.0.1** Audit existing Supabase RPCs in `supabase/migrations/` directory
-  - Document all existing RPCs with their signatures, inputs, and outputs
-  - Identify which RPCs are already being used vs which are unused
-  - Check for any RPCs that might conflict with new RPCs we plan to create
+- [x] **P3.0.1** Audit existing Supabase RPCs in `supabase/migrations/` directory
+  - Documented all existing RPCs with their signatures, inputs, and outputs (30+ RPCs found)
+  - Identified which RPCs are already being used vs which are unused (15+ actively used)
+  - Checked for any RPCs that might conflict with new RPCs we plan to create (found 1 potential conflict: get_trip_detail_with_supplier vs get_trip_detail)
+  - Created comprehensive audit document: docs/P3.0.1-RPC-Audit.md
+  - **Key Finding:** Many RPCs already exist and are being used (create_load, approve_booking_request, advance_trip_stage, send_message, etc.)
+  - **Key Finding:** 94 direct table reads still require migration across 29 backend files
+  - **Recommendation:** Adjust P3 task scope to account for existing RPCs and avoid duplication
   
-- [ ] **P3.0.2** Audit current direct table reads in backend implementations
-  - List all `supabase.from('table').select()` calls across all backend files
-  - Identify which reads are safe to migrate vs which are critical/complex
-  - Document any complex joins or filters that need careful RPC implementation
+- [x] **P3.0.2** Audit current direct table reads in backend implementations
+  - Listed all 94 `supabase.from('table').select()` calls across 29 backend files
+  - Identified which reads are safe to migrate vs which are critical/complex (categorized by priority in audit doc)
+  - Documented complex joins and filters that need careful RPC implementation (chat pagination, support pagination, etc.)
+  - **Key Finding:** Chat has 11 direct reads (highest priority for pagination fix C-003)
+  - **Key Finding:** Support has 6 direct reads (medium priority)
+  - **Key Finding:** Supplier loads, trucker trips, fleet, notifications all have direct reads requiring migration
   
 - [ ] **P3.0.3** Create RPC migration testing strategy
   - Define contract tests for each RPC (input → expected output shape)
