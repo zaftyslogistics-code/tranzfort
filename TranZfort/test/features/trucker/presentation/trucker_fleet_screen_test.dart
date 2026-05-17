@@ -21,6 +21,9 @@ class _NoopFleetBackend implements TruckerFleetBackend {
   Future<void> updateTruck({required String ownerId, required String truckId, required Map<String, dynamic> values}) async {}
 
   @override
+  Future<void> archiveTruck(String truckId) async {}
+
+  @override
   Future<String?> getSignedUrl(String bucketPath, {int expiresInSeconds = 300}) async => null;
 }
 
@@ -29,6 +32,7 @@ class _MutableFleetBackend implements TruckerFleetBackend {
   String? updatedOwnerId;
   String? updatedTruckId;
   Map<String, dynamic>? updatedValues;
+  String? archivedTruckId;
 
   @override
   Future<Map<String, dynamic>> createTruck(Map<String, dynamic> values) async => {'id': 'truck-new'};
@@ -52,6 +56,11 @@ class _MutableFleetBackend implements TruckerFleetBackend {
               : row,
         )
         .toList(growable: false);
+  }
+
+  @override
+  Future<void> archiveTruck(String truckId) async {
+    archivedTruckId = truckId;
   }
 
   @override
