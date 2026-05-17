@@ -245,10 +245,19 @@ String safeString(dynamic value) {
 
 ### P3.1 — Auth/Profile RPCs
 
-- [ ] **P3.1.0** Audit existing auth/profile RPCs and direct reads
-  - Search for existing RPCs related to profiles, users, consent
-  - Document current `AuthProfileRepository` implementation
-  - Identify all places that call `getCurrentProfile()`, `watchCurrentProfile()`, `recordTermsAcceptance()`
+**NOTE:** Per P3.0.1 audit, many RPCs already exist. Only create missing RPCs.
+
+- [x] **P3.1.0** Audit existing auth/profile RPCs and direct reads
+  - ✅ `ensure_role_extension` already exists and is used (20260308000010_phase8_auth_onboarding_rpc.sql)
+  - ✅ `upsert_current_user_profile` already exists and is used (auth_repository_profile_ops.dart)
+  - ✅ `get_public_profile` already exists and is used (20260428000005_canonical_user_app_rpc_contracts.sql)
+  - ✅ `get_profile_reviews` already exists and is used (20260428000005_canonical_user_app_rpc_contracts.sql)
+  - ✅ `set_current_user_preferred_language` already exists and is used (auth_repository_profile_ops.dart)
+  - ✅ `request_account_deletion` already exists and is used (auth_repository_profile_ops.dart)
+  - ✅ `cancel_account_deletion_request` already exists and is used (auth_repository_profile_ops.dart)
+  - ⚠️ Still need: `get_current_user_profile` RPC (for current user's own profile, distinct from get_public_profile)
+  - ⚠️ Still need: `watch_current_user_profile` RPC or database view for realtime
+  - ⚠️ Still need: `record_user_consent` RPC (may not exist, check)
   
 - [ ] **P3.1.1** Create Supabase RPC `get_current_user_profile(p_user_id)` returning full profile shape
   - Input: `p_user_id UUID` (optional, defaults to auth.uid())
@@ -263,28 +272,32 @@ String safeString(dynamic value) {
   - Document chosen approach and reasoning in code comments
   - Test realtime subscription with auth state changes
   
-- [ ] **P3.1.3** Create Supabase RPC `record_user_consent(p_consent_type, p_consent_version, p_source_context)`
+- [ ] **P3.1.3** Check if `record_user_consent` RPC exists, create if missing
+  - Search migrations for existing consent RPC
   - Input: consent_type TEXT, consent_version TEXT, source_context JSONB
   - Output: success/failure status
   - Insert into user_consents table with proper validation
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_record_user_consent.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_record_user_consent.sql` (if needed)
   - Test with sample consent data
   
-- [ ] **P3.1.4** Replace `AuthProfileRepository.getCurrentProfile()` with RPC
-  - Update backend to call `rpc('get_current_user_profile')`
+- [ ] **P3.1.4** Replace `AuthProfileRepository.getCurrentProfile()` with RPC (if using direct table read)
+  - Check if getCurrentProfile() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_current_user_profile')`
   - Map RPC response to existing `UserProfile` model
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.1.5** Replace `AuthProfileRepository.watchCurrentProfile()` with RPC/view + realtime
-  - Update backend to use database view or RPC for realtime subscription
+- [ ] **P3.1.5** Replace `AuthProfileRepository.watchCurrentProfile()` with RPC/view + realtime (if using direct table read)
+  - Check if watchCurrentProfile() uses direct table read or existing RPC
+  - If direct read: Update backend to use database view or RPC for realtime subscription
   - Test realtime updates when profile changes
   - Ensure auth state changes trigger profile refresh
   - Add integration test for realtime profile updates
   
-- [ ] **P3.1.6** Replace `AuthProfileRepository.recordTermsAcceptance()` with RPC
-  - Update backend to call `rpc('record_user_consent')`
+- [ ] **P3.1.6** Replace `AuthProfileRepository.recordTermsAcceptance()` with RPC (if using direct table read)
+  - Check if recordTermsAcceptance() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('record_user_consent')`
   - Map input parameters correctly
   - Add error handling for RPC failures
   - Add unit test for new implementation
@@ -299,11 +312,17 @@ String safeString(dynamic value) {
 
 ### P3.2 — Supplier load RPCs
 
-- [ ] **P3.2.0** Audit existing supplier load RPCs and direct reads
-  - Search for existing RPCs related to loads, bookings, suppliers
-  - Document current `SupabaseSupplierLoadBackend` implementation
-  - Identify all places that call `fetchMyLoads()`, `fetchLoadDetail()`
-  - Document current pagination logic and cursor implementation
+**NOTE:** Per P3.0.1 audit, `create_load` and `cancel_load` already exist. Only create missing RPCs.
+
+- [x] **P3.2.0** Audit existing supplier load RPCs and direct reads
+  - ✅ `create_load` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `cancel_load` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `approve_booking_request` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `reject_booking_request` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `get_supplier_booking_requests` already exists and is used (supplier_load_repository_backend.dart)
+  - ✅ `close_load_filled_outside_app` already exists and is used (supplier_load_repository_backend.dart)
+  - ⚠️ Still need: `get_supplier_loads_list` RPC with pagination (6 direct reads in supplier_load_repository_backend.dart)
+  - ⚠️ Still need: `get_supplier_load_detail` RPC (check if exists, may be covered by existing RPCs)
   
 - [ ] **P3.2.1** Create Supabase RPC `get_supplier_loads_list(p_user_id, p_status_filter, p_limit, p_before_created_at, p_before_id)`
   - Input: user_id UUID, status_filter TEXT, limit INT, before_created_at TIMESTAMPTZ, before_id UUID
@@ -314,23 +333,27 @@ String safeString(dynamic value) {
   - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_loads_list.sql`
   - Test RPC in Supabase SQL editor with pagination
   
-- [ ] **P3.2.2** Create Supabase RPC `get_supplier_load_detail(p_load_id, p_user_id)`
+- [ ] **P3.2.2** Check if `get_supplier_load_detail` RPC exists, create if missing
+  - Search migrations for existing supplier load detail RPC
+  - If missing: Create Supabase RPC `get_supplier_load_detail(p_load_id, p_user_id)`
   - Input: load_id UUID, user_id UUID (for RLS)
   - Output: JSON with load details + supplier info + booking summary
   - Include: loads table + suppliers table + bookings table (latest booking)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_load_detail.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_load_detail.sql` (if needed)
   - Test RPC with real load_id
   
-- [ ] **P3.2.3** Replace `SupabaseSupplierLoadBackend.fetchMyLoads()` with RPC
-  - Update backend to call `rpc('get_supplier_loads_list')`
+- [ ] **P3.2.3** Replace `SupabaseSupplierLoadBackend.fetchMyLoads()` with RPC (if using direct table read)
+  - Check if fetchMyLoads() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_supplier_loads_list')`
   - Map RPC response to existing `SupplierLoad` model
   - Update pagination logic to pass composite cursor
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.2.4** Replace `SupabaseSupplierLoadBackend.fetchLoadDetail()` with RPC
-  - Update backend to call `rpc('get_supplier_load_detail')`
+- [ ] **P3.2.4** Replace `SupabaseSupplierLoadBackend.fetchLoadDetail()` with RPC (if using direct table read)
+  - Check if fetchLoadDetail() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_supplier_load_detail')`
   - Map RPC response to existing `SupplierLoadDetail` model
   - Add error handling for RPC failures
   - Add unit test for new implementation
@@ -355,16 +378,27 @@ String safeString(dynamic value) {
 
 ### P3.3 — Trucker marketplace & load detail RPCs
 
-- [ ] **P3.3.0** Audit existing trucker load RPCs and direct reads
-  - Search for existing RPCs related to trucker loads, marketplace, suppliers
-  - Document current `SupabaseTruckerLoadDetailBackend` and `SupabaseTruckerMarketplaceBackend` implementation
-  - Identify all places that call `fetchLoadDetail()`, `fetchSupplierProfile()`, `fetchApprovedTrucks()`
+**NOTE:** Per P3.0.1 audit, `get_trip_detail_with_supplier` already exists. Use existing RPCs where possible.
+
+- [x] **P3.3.0** Audit existing trucker load RPCs and direct reads
+  - ✅ `get_trip_detail_with_supplier` already exists and is used (20260428000005_canonical_user_app_rpc_contracts.sql)
+  - ✅ `advance_trip_stage` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `upload_trip_proof` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `confirm_trip_delivery` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `submit_rating` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `get_trip_dispute_summary` already exists and is used (trucker_trip_repository_backend.dart)
+  - ⚠️ Still need: `get_trucker_load_detail` RPC (may be same as get_trip_detail_with_supplier)
+  - ⚠️ Still need: `get_trucker_approved_trucks` RPC (5 direct reads in trucker_load_detail_repository.dart)
+  - ⚠️ Check if `get_supplier_contact_info` is needed (may be covered by get_public_profile)
   
-- [ ] **P3.3.1** Create Supabase RPC `get_trucker_load_detail(p_load_id, p_user_id)` returning load + supplier + booking context
+- [ ] **P3.3.1** Check if `get_trucker_load_detail` RPC exists or if `get_trip_detail_with_supplier` suffices
+  - Search migrations for existing trucker load detail RPC
+  - Check if `get_trip_detail_with_supplier` provides all needed data for trucker marketplace
+  - If missing: Create Supabase RPC `get_trucker_load_detail(p_load_id, p_user_id)` returning load + supplier + booking context
   - Input: load_id UUID, user_id UUID (for RLS)
   - Output: JSON with load details + supplier info + booking context + trip info
   - Include: loads table + suppliers table + bookings table + trips table (if booked)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_load_detail.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_load_detail.sql` (if needed)
   - Test RPC with real load_id
   
 - [ ] **P3.3.2** Create Supabase RPC `get_trucker_approved_trucks(p_user_id)`
@@ -374,21 +408,27 @@ String safeString(dynamic value) {
   - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_approved_trucks.sql`
   - Test RPC with real user_id
   
-- [ ] **P3.3.3** Create Supabase RPC `get_supplier_contact_info(p_supplier_id, p_user_id)`
+- [ ] **P3.3.3** Check if `get_supplier_contact_info` RPC exists or if `get_public_profile` suffices
+  - Search migrations for existing supplier contact info RPC
+  - Check if `get_public_profile(p_supplier_id)` provides company_name, mobile (masked), verification_location
+  - If `get_public_profile` suffices: Reuse it instead of creating new RPC
+  - If missing: Create Supabase RPC `get_supplier_contact_info(p_supplier_id, p_user_id)`
   - Input: supplier_id UUID, user_id UUID (for RLS)
   - Output: JSON with supplier contact info (company_name, mobile, email, verification_location)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_contact_info.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_supplier_contact_info.sql` (if needed)
   - Test RPC with real supplier_id
   
-- [ ] **P3.3.4** Replace `SupabaseTruckerLoadDetailBackend.fetchLoadDetail()` with RPC
-  - Update backend to call `rpc('get_trucker_load_detail')`
+- [ ] **P3.3.4** Replace `SupabaseTruckerLoadDetailBackend.fetchLoadDetail()` with RPC (if using direct table read)
+  - Check if fetchLoadDetail() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_trucker_load_detail')` or `rpc('get_trip_detail_with_supplier')`
   - Map RPC response to existing `TruckerLoadDetail` model
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.3.5** Replace `SupabaseTruckerLoadDetailBackend.fetchSupplierProfile()` with RPC
-  - Update backend to call `rpc('get_supplier_contact_info')`
+- [ ] **P3.3.5** Replace `SupabaseTruckerLoadDetailBackend.fetchSupplierProfile()` with RPC (if using direct table read)
+  - Check if fetchSupplierProfile() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_public_profile')` or `rpc('get_supplier_contact_info')`
   - Map RPC response to existing model
   - Add error handling for RPC failures
   - Add unit test for new implementation
@@ -399,8 +439,9 @@ String safeString(dynamic value) {
   - Add error handling for RPC failures
   - Add unit test for new implementation
   
-- [ ] **P3.3.7** Replace `SupabaseTruckerMarketplaceBackend.fetchSupplierProfile()` with RPC
-  - Update backend to call `rpc('get_supplier_contact_info')`
+- [ ] **P3.3.7** Replace `SupabaseTruckerMarketplaceBackend.fetchSupplierProfile()` with RPC (if using direct table read)
+  - Check if fetchSupplierProfile() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_public_profile')` or `rpc('get_supplier_contact_info')`
   - Map RPC response to existing model
   - Add error handling for RPC failures
   - Add unit test for new implementation
@@ -414,11 +455,17 @@ String safeString(dynamic value) {
 
 ### P3.4 — Trucker trip RPCs
 
-- [ ] **P3.4.0** Audit existing trucker trip RPCs and direct reads
-  - Search for existing RPCs related to trips, ratings, suppliers
-  - Document current `SupabaseTruckerTripsBackend` implementation
-  - Identify all places that call `fetchTrips()`, `fetchTripDetail()`, `fetchOwnRating()`, `fetchSupplierProfile()`, `uploadTripLr()`
-  - Document current trip status transitions and validation logic
+**NOTE:** Per P3.0.1 audit, most trip RPCs already exist. Only create missing RPCs.
+
+- [x] **P3.4.0** Audit existing trucker trip RPCs and direct reads
+  - ✅ `advance_trip_stage` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `upload_trip_proof` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `confirm_trip_delivery` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `submit_rating` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `get_trip_detail_with_supplier` already exists and is used (20260428000005_canonical_user_app_rpc_contracts.sql)
+  - ✅ `get_trip_dispute_summary` already exists and is used (trucker_trip_repository_backend.dart)
+  - ⚠️ Still need: `get_trucker_trips` RPC with pagination (6 direct reads in trucker_trip_repository_backend.dart)
+  - ⚠️ Check if `upload_trip_lr` RPC exists or if `upload_trip_proof` suffices
   
 - [ ] **P3.4.1** Create Supabase RPC `get_trucker_trips(p_user_id, p_status_filter, p_limit, p_before_created_at, p_before_id)`
   - Input: user_id UUID, status_filter TEXT, limit INT, before_created_at TIMESTAMPTZ, before_id UUID
@@ -428,51 +475,62 @@ String safeString(dynamic value) {
   - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trucker_trips.sql`
   - Test RPC with pagination
   
-- [ ] **P3.4.2** Create Supabase RPC `get_trip_detail(p_trip_id, p_user_id)`
+- [ ] **P3.4.2** Check if `get_trip_detail` RPC exists or if `get_trip_detail_with_supplier` suffices
+  - Search migrations for existing trip detail RPC
+  - Check if `get_trip_detail_with_supplier` provides all needed data for trucker trips
+  - If `get_trip_detail_with_supplier` suffices: Reuse it instead of creating new RPC
+  - If missing: Create Supabase RPC `get_trip_detail(p_trip_id, p_user_id)`
   - Input: trip_id UUID, user_id UUID (for RLS)
   - Output: JSON with trip details + load details + supplier details + rating
   - Include: trips table + loads table + suppliers table + reviews table (truckers rating of supplier)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trip_detail.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_trip_detail.sql` (if needed)
   - Test RPC with real trip_id
   
-- [ ] **P3.4.3** Replace `SupabaseTruckerTripsBackend.fetchTrips()` with RPC
-  - Update backend to call `rpc('get_trucker_trips')`
+- [ ] **P3.4.3** Replace `SupabaseTruckerTripsBackend.fetchTrips()` with RPC (if using direct table read)
+  - Check if fetchTrips() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_trucker_trips')`
   - Map RPC response to existing model
   - Update pagination logic to pass composite cursor
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.4.4** Replace `SupabaseTruckerTripsBackend.fetchTripDetail()` with RPC
-  - Update backend to call `rpc('get_trip_detail')`
+- [ ] **P3.4.4** Replace `SupabaseTruckerTripsBackend.fetchTripDetail()` with RPC (if using direct table read)
+  - Check if fetchTripDetail() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_trip_detail')` or `rpc('get_trip_detail_with_supplier')`
   - Map RPC response to existing model
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
 - [ ] **P3.4.5** Replace `SupabaseTruckerTripsBackend.fetchOwnRating()` with RPC or subquery
-  - Option A: Include rating in `get_trip_detail` RPC output
+  - Option A: Include rating in `get_trip_detail_with_supplier` RPC output
   - Option B: Create separate RPC `get_supplier_rating_for_trip(p_trip_id, p_user_id)`
   - Choose approach and document reasoning
   - Update backend implementation
   - Add unit test
   
 - [ ] **P3.4.6** Replace `SupabaseTruckerTripsBackend.fetchSupplierProfile()` with RPC
-  - Reuse `get_supplier_contact_info` RPC from P3.3.3
+  - Reuse `get_public_profile` RPC from P3.3.3
   - Update backend to call existing RPC
   - Add error handling for RPC failures
   - Add unit test
   
-- [ ] **P3.4.7** Create Supabase RPC `upload_trip_lr(p_trip_id, p_lr_document_path)`
+- [ ] **P3.4.7** Check if `upload_trip_lr` RPC exists or if `upload_trip_proof` suffices
+  - Search migrations for existing LR upload RPC
+  - Check if `upload_trip_proof` accepts lr_document_path parameter
+  - If `upload_trip_proof` suffices: Reuse it instead of creating new RPC
+  - If missing: Create Supabase RPC `upload_trip_lr(p_trip_id, p_lr_document_path)`
   - Input: trip_id UUID, lr_document_path TEXT
   - Output: success/failure status + updated trip data
   - Update trips table lr_document_path field
   - Validate trip is in correct status for LR upload (during pickup)
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_upload_trip_lr.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_upload_trip_lr.sql` (if needed)
   - Test RPC with real trip_id
   
-- [ ] **P3.4.8** Replace `SupabaseTruckerTripsBackend.uploadTripLr()` direct update with RPC
-  - Update backend to call `rpc('upload_trip_lr')`
+- [ ] **P3.4.8** Replace `SupabaseTruckerTripsBackend.uploadTripLr()` direct update with RPC (if using direct table read)
+  - Check if uploadTripLr() uses direct table update or existing RPC
+  - If direct read: Update backend to call `rpc('upload_trip_lr')` or `rpc('upload_trip_proof')`
   - Map RPC response to existing model
   - Add error handling for RPC failures
   - Add unit test for new implementation
@@ -488,11 +546,13 @@ String safeString(dynamic value) {
 
 ### P3.5 — Fleet RPCs
 
-- [ ] **P3.5.0** Audit existing fleet RPCs and direct reads/writes
-  - Search for existing RPCs related to trucks, fleet
-  - Document current `SupabaseTruckerFleetBackend` implementation
-  - Identify all places that call fleet CRUD operations
-  - Document current validation logic for truck operations
+**NOTE:** Per P3.0.1 audit, no fleet RPCs exist yet. All RPCs need to be created.
+
+- [x] **P3.5.0** Audit existing fleet RPCs and direct reads/writes
+  - ❌ No fleet RPCs found in migrations
+  - ⚠️ 4 direct reads/writes in trucker_fleet_repository.dart require migration
+  - ⚠️ All fleet CRUD operations currently use direct table reads/writes
+  - ⚠️ Need all fleet RPCs: get, add, update, archive
   
 - [ ] **P3.5.1** Create Supabase RPC `get_trucker_fleet(p_user_id, p_limit, p_offset)`
   - Input: user_id UUID (for RLS), limit INT, offset INT
@@ -542,11 +602,17 @@ String safeString(dynamic value) {
 
 ### P3.6 — Chat RPCs
 
-- [ ] **P3.6.0** Audit existing chat RPCs and direct reads
-  - Search for existing RPCs related to conversations, messages, attachments
-  - Document current `SupabaseChatBackend` implementation
-  - Identify all places that call message fetching, pagination, realtime subscription
-  - Document current pagination cursor implementation (created_at vs composite cursor)
+**NOTE:** Per P3.0.1 audit, many chat RPCs already exist. Only create missing RPCs.
+
+- [x] **P3.6.0** Audit existing chat RPCs and direct reads
+  - ✅ `create_or_get_conversation` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `send_message` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `get_current_user_conversation_summaries` already exists and is used (chat_repository_backend.dart)
+  - ✅ `get_conversation_summary` already exists and is used (chat_repository_backend.dart)
+  - ✅ `get_current_user_unread_conversation_count` already exists and is used (chat_repository_backend.dart)
+  - ⚠️ Still need: `get_conversation_messages` RPC with pagination (11 direct reads in chat_repository_backend.dart - CRITICAL for C-003)
+  - ⚠️ Check if `mark_messages_read` RPC exists
+  - ⚠️ Check if `get_conversation_context` RPC exists (may be covered by existing RPCs)
   
 - [ ] **P3.6.1** Create Supabase RPC `get_conversation_messages(p_conversation_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
   - Input: conversation_id UUID, user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_message_id UUID
@@ -556,64 +622,75 @@ String safeString(dynamic value) {
   - Order by `created_at DESC, id DESC`
   - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_messages.sql`
   - Test RPC with pagination and identical timestamps
+  - **CRITICAL:** This RPC is needed to fix C-003 (chat pagination cursor bug)
   
-- [ ] **P3.6.2** Create Supabase RPC `mark_messages_read(p_conversation_id, p_user_id, p_last_read_message_id)`
+- [ ] **P3.6.2** Check if `mark_messages_read` RPC exists, create if missing
+  - Search migrations for existing mark messages read RPC
+  - If missing: Create Supabase RPC `mark_messages_read(p_conversation_id, p_user_id, p_last_read_message_id)`
   - Input: conversation_id UUID, user_id UUID, last_read_message_id UUID
   - Output: success/failure status
   - Update conversation_participants table last_read_at field
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_mark_messages_read.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_mark_messages_read.sql` (if needed)
   - Test RPC with real conversation_id
   
-- [ ] **P3.6.3** Create Supabase RPC `get_conversation_context(p_conversation_id, p_user_id)` returning load + supplier + booking data
+- [ ] **P3.6.3** Check if `get_conversation_context` RPC exists or if existing RPCs suffice
+  - Search migrations for existing conversation context RPC
+  - Check if `get_conversation_summary` provides load + supplier + booking data
+  - If `get_conversation_summary` suffices: Reuse it instead of creating new RPC
+  - If missing: Create Supabase RPC `get_conversation_context(p_conversation_id, p_user_id)` returning load + supplier + booking data
   - Input: conversation_id UUID, user_id UUID (for RLS)
   - Output: JSON with conversation context (load, supplier, booking if applicable)
   - Join conversations table with loads, suppliers, bookings tables
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_context.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_conversation_context.sql` (if needed)
   - Test RPC with real conversation_id
   
-- [ ] **P3.6.4** Replace `SupabaseChatBackend.fetchMessages()` with RPC
-  - Update backend to call `rpc('get_conversation_messages')`
+- [ ] **P3.6.4** Replace `SupabaseChatBackend.fetchMessages()` with RPC (if using direct table read)
+  - Check if fetchMessages() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_conversation_messages')`
   - Map RPC response to existing model
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.6.5** Replace `SupabaseChatBackend.fetchMessagesPaginated()` with RPC
-  - Update backend to call `rpc('get_conversation_messages')` with composite cursor
+- [ ] **P3.6.5** Replace `SupabaseChatBackend.fetchMessagesPaginated()` with RPC (if using direct table read)
+  - Check if fetchMessagesPaginated() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_conversation_messages')` with composite cursor
   - Update pagination logic to pass single cursor tuple instead of two independent filters
   - Add error handling for RPC failures
   - Add unit test for pagination with identical timestamps
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.6.6** Replace `SupabaseChatBackend.watchMessages()` direct stream with RPC + realtime
-  - Use database view or RPC for realtime subscription on messages table
+- [ ] **P3.6.6** Replace `SupabaseChatBackend.watchMessages()` direct stream with RPC + realtime (if using direct table read)
+  - Check if watchMessages() uses direct stream or existing RPC
+  - If direct stream: Use database view or RPC for realtime subscription on messages table
   - Ensure RLS filters by conversation_id and user_id
   - Update backend to use realtime subscription instead of direct stream
   - Test realtime message arrival and read-state updates
   - Add integration test for realtime message updates
   
-- [ ] **P3.6.7** Replace `SupabaseChatBackend.markMessagesRead()` direct update with RPC
-  - Update backend to call `rpc('mark_messages_read')`
+- [ ] **P3.6.7** Replace `SupabaseChatBackend.markMessagesRead()` direct update with RPC (if using direct table update)
+  - Check if markMessagesRead() uses direct table update or existing RPC
+  - If direct update: Update backend to call `rpc('mark_messages_read')`
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.6.8** Replace `SupabaseChatBackend.fetchLoadContext()` with RPC
-  - Reuse `get_conversation_context` RPC from P3.6.3
+- [ ] **P3.6.8** Replace `SupabaseChatBackend.fetchLoadContext()` with RPC (if using direct table read)
+  - Reuse `get_conversation_context` RPC from P3.6.3 or `get_conversation_summary`
   - Update backend to call existing RPC
   - Add error handling for RPC failures
   
-- [ ] **P3.6.9** Replace `SupabaseChatBackend.fetchProfile()` with RPC
-  - Reuse `get_supplier_contact_info` RPC from P3.3.3 if supplier
+- [ ] **P3.6.9** Replace `SupabaseChatBackend.fetchProfile()` with RPC (if using direct table read)
+  - Reuse `get_public_profile` RPC from P3.3.3 if supplier
   - For trucker profiles, use existing profile RPC or create new one
   - Update backend implementation
   
-- [ ] **P3.6.10** Replace `SupabaseChatBackend.fetchSupplierExtension()` with RPC
+- [ ] **P3.6.10** Replace `SupabaseChatBackend.fetchSupplierExtension()` with RPC (if using direct table read)
   - Include supplier extension data in `get_conversation_context` RPC output
   - Or create separate RPC for supplier extension
   - Update backend implementation
   
-- [ ] **P3.6.11** Replace `SupabaseChatBackend.fetchBookingContext()` with RPC
+- [ ] **P3.6.11** Replace `SupabaseChatBackend.fetchBookingContext()` with RPC (if using direct table read)
   - Include booking data in `get_conversation_context` RPC output
   - Update backend implementation
   
@@ -629,47 +706,50 @@ String safeString(dynamic value) {
 
 ### P3.7 — Support RPCs
 
+**NOTE:** Per P3.0.1 audit, need to audit support RPCs. Some may already exist.
+
 - [ ] **P3.7.0** Audit existing support RPCs and direct reads
-  - Search for existing RPCs related to support tickets, messages, attachments
+  - Search migrations for existing support ticket and support message RPCs
   - Document current `SupabaseSupportBackend` implementation
   - Identify all places that call ticket fetching, message fetching, pagination
   - Document current pagination cursor implementation
+  - ⚠️ 6 direct reads in support_repository.dart require migration
   
-- [ ] **P3.7.1** Create Supabase RPC `get_support_tickets(p_user_id, p_limit, p_before_created_at, p_before_id)`
+- [ ] **P3.7.1** Create Supabase RPC `get_support_tickets(p_user_id, p_limit, p_before_created_at, p_before_id)` (if missing)
   - Input: user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_id UUID
   - Output: JSON array of tickets with latest message preview
   - Include: support_tickets table + latest message from support_ticket_messages
   - Add composite cursor logic for pagination
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_tickets.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_tickets.sql` (if needed)
   - Test RPC with pagination
   
-- [ ] **P3.7.2** Create Supabase RPC `get_support_ticket_detail(p_ticket_id, p_user_id)`
+- [ ] **P3.7.2** Create Supabase RPC `get_support_ticket_detail(p_ticket_id, p_user_id)` (if missing)
   - Input: ticket_id UUID, user_id UUID (for RLS)
   - Output: JSON with ticket details + all messages
   - Include: support_tickets table + support_ticket_messages table
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_detail.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_detail.sql` (if needed)
   - Test RPC with real ticket_id
   
-- [ ] **P3.7.3** Create Supabase RPC `get_support_ticket_messages(p_ticket_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)`
+- [ ] **P3.7.3** Create Supabase RPC `get_support_ticket_messages(p_ticket_id, p_user_id, p_limit, p_before_created_at, p_before_message_id)` (if missing)
   - Input: ticket_id UUID, user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_message_id UUID
   - Output: JSON array of messages with sender profile context
   - Include: support_ticket_messages table + profiles table
   - Add composite cursor logic: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`
   - Order by `created_at DESC, id DESC`
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_messages.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_support_ticket_messages.sql` (if needed)
   - Test RPC with pagination and identical timestamps
   
-- [ ] **P3.7.4** Replace `SupabaseSupportBackend` direct reads with RPCs
-  - Update `fetchTickets()` to call `rpc('get_support_tickets')`
-  - Update `fetchTicketDetail()` to call `rpc('get_support_ticket_detail')`
-  - Update `fetchTicketMessages()` to call `rpc('get_support_ticket_messages')`
+- [ ] **P3.7.4** Replace `SupabaseSupportBackend` direct reads with RPCs (if using direct table reads)
+  - Update `fetchTickets()` to call `rpc('get_support_tickets')` (if direct read)
+  - Update `fetchTicketDetail()` to call `rpc('get_support_ticket_detail')` (if direct read)
+  - Update `fetchTicketMessages()` to call `rpc('get_support_ticket_messages')` (if direct read)
   - Update pagination logic to pass composite cursor
   - Add error handling for RPC failures
   - Add unit tests for each method
   - Keep old implementations commented out as fallback initially
   
 - [ ] **P3.7.5** Fix support message pagination cursor bug: backend RPC should use composite cursor `(created_at, id)`
-  - Ensure P3.7.3 RPC uses composite cursor logic
+  - Ensure P3.7.3 RPC uses composite cursor logic if created
   - Update Flutter backend to pass single cursor tuple
   - Add unit test for pagination with identical timestamps
   
@@ -683,44 +763,51 @@ String safeString(dynamic value) {
 
 ### P3.8 — Notification RPCs
 
-- [ ] **P3.8.0** Audit existing notification RPCs and direct reads
-  - Search for existing RPCs related to notifications
-  - Document current `SupabaseNotificationBackend` implementation
-  - Identify all places that call notification fetching, realtime subscription
-  - Document current pagination cursor implementation
+**NOTE:** Per P3.0.1 audit, `mark_notification_read` and `mark_all_notifications_read` already exist. Only create missing RPCs.
+
+- [x] **P3.8.0** Audit existing notification RPCs and direct reads
+  - ✅ `mark_notification_read` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ✅ `mark_all_notifications_read` already exists and is used (20260308000008_phase7_core_rpcs.sql)
+  - ⚠️ Still need: `get_notifications` RPC with pagination (3 direct reads in notification_repository.dart)
+  - ⚠️ Still need: `get_unread_notification_count` RPC (may exist, check)
   
-- [ ] **P3.8.1** Create Supabase RPC `get_notifications(p_user_id, p_limit, p_before_created_at, p_before_id)`
+- [ ] **P3.8.1** Create Supabase RPC `get_notifications(p_user_id, p_limit, p_before_created_at, p_before_id)` (if missing)
   - Input: user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_id UUID
   - Output: JSON array of notifications with related data context
   - Include: notifications table + related load/trip/chat context if applicable
   - Add composite cursor logic for pagination
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_notifications.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_notifications.sql` (if needed)
   - Test RPC with pagination
   
-- [ ] **P3.8.2** Create Supabase RPC `get_unread_notification_count(p_user_id)`
+- [ ] **P3.8.2** Check if `get_unread_notification_count` RPC exists, create if missing
+  - Search migrations for existing unread count RPC
+  - If missing: Create Supabase RPC `get_unread_notification_count(p_user_id)`
   - Input: user_id UUID (for RLS)
   - Output: INT count of unread notifications
   - Filter by is_read = false
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_unread_notification_count.sql`
+  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_unread_notification_count.sql` (if needed)
   - Test RPC with real user_id
   
-- [ ] **P3.8.3** Replace `SupabaseNotificationBackend.fetchNotifications()` with RPC
-  - Update backend to call `rpc('get_notifications')`
+- [ ] **P3.8.3** Replace `SupabaseNotificationBackend.fetchNotifications()` with RPC (if using direct table read)
+  - Check if fetchNotifications() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_notifications')`
   - Map RPC response to existing model
   - Update pagination logic to pass composite cursor
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
   
-- [ ] **P3.8.4** Replace `SupabaseNotificationBackend.watchNotifications()` with RPC + realtime
-  - Use database view or RPC for realtime subscription on notifications table
+- [ ] **P3.8.4** Replace `SupabaseNotificationBackend.watchNotifications()` with RPC + realtime (if using direct table read)
+  - Check if watchNotifications() uses direct stream or existing RPC
+  - If direct stream: Use database view or RPC for realtime subscription on notifications table
   - Ensure RLS filters by user_id
   - Update backend to use realtime subscription instead of direct stream
   - Test realtime notification arrival
   - Add integration test for realtime notification updates
   
-- [ ] **P3.8.5** Replace `SupabaseNotificationBackend.fetchUnreadCount()` with RPC
-  - Update backend to call `rpc('get_unread_notification_count')`
+- [ ] **P3.8.5** Replace `SupabaseNotificationBackend.fetchUnreadCount()` with RPC (if using direct table read)
+  - Check if fetchUnreadCount() uses direct table read or existing RPC
+  - If direct read: Update backend to call `rpc('get_unread_notification_count')`
   - Add error handling for RPC failures
   - Add unit test for new implementation
   - Keep old implementation commented out as fallback initially
