@@ -119,7 +119,7 @@ class MutationQueueDatabase {
   Future<QueuedMutation?> dequeue() async {
     final db = await database;
     // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
-    final orderBy = 'COALESCE(timestamp_ms, CAST(strftime('%s', timestamp) * 1000 AS INTEGER)) ASC';
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) ASC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'status = ?',
@@ -164,7 +164,7 @@ class MutationQueueDatabase {
   Future<List<QueuedMutation>> getPending() async {
     final db = await database;
     // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
-    final orderBy = 'COALESCE(timestamp_ms, CAST(strftime('%s', timestamp) * 1000 AS INTEGER)) ASC';
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) ASC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'status = ? OR status = ?',
@@ -183,7 +183,7 @@ class MutationQueueDatabase {
   Future<List<QueuedMutation>> getByUserId(String userId) async {
     final db = await database;
     // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
-    final orderBy = 'COALESCE(timestamp_ms, CAST(strftime('%s', timestamp) * 1000 AS INTEGER)) DESC';
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) DESC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'user_id = ?',
@@ -290,12 +290,11 @@ class MutationQueueDatabase {
     if (_encryption == null) {
       try {
         return QueuedMutation.fromJson(map);
-      } catch (error, stackTrace) {
+      } catch (error) {
         AppLogger.warning(
           'Mutation queue: Failed to parse mutation (no encryption)',
           scope: 'mutation_queue',
           error: error,
-          stackTrace: stackTrace,
         );
         return null;
       }
@@ -329,12 +328,11 @@ class MutationQueueDatabase {
     
     try {
       return QueuedMutation.fromJson(map);
-    } catch (error, stackTrace) {
+    } catch (error) {
       AppLogger.warning(
         'Mutation queue: Failed to parse mutation $mutationId after decryption',
         scope: 'mutation_queue',
         error: error,
-        stackTrace: stackTrace,
       );
       return null;
     }

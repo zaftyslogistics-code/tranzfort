@@ -1545,29 +1545,14 @@ These tasks can be done after code implementation:
 
 **Issue:** `QueuedMutation.toJson()` uses `timestamp.toIso8601String()` (string) but SQLite expects integer for chronological ordering.
 
-- [ ] **P0.4.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.toJson()`.
-- [ ] **P0.4.2** Replace `timestamp.toIso8601String()` with `timestamp.millisecondsSinceEpoch` in `toJson()`.
-- [ ] **P0.4.3** Open `QueuedMutation.fromJson()` and locate timestamp parsing.
-- [ ] **P0.4.4** Update `fromJson()` to handle both `int` (new format) and `String` (legacy format):
-  ```dart
-  final timestampValue = json['timestamp'];
-  if (timestampValue is int) {
-    timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue);
-  } else if (timestampValue is String) {
-    timestamp = DateTime.tryParse(timestampValue) ?? DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestampValue) ?? 0);
-  } else {
-    timestamp = DateTime.now();
-  }
-  ```
-- [ ] **P0.4.5** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_onUpgrade()`.
-- [ ] **P0.4.6** Add database migration for version 3:
-  ```sql
-  ALTER TABLE mutations ADD COLUMN timestamp_ms INTEGER;
-  UPDATE mutations SET timestamp_ms = CAST(strftime('%s', timestamp) * 1000 AS INTEGER);
-  -- Note: timestamp column is TEXT with ISO8601 format
-  ```
-- [ ] **P0.4.7** Update `_databaseVersion` from 2 to 3.
-- [ ] **P0.4.8** Add fallback in `fromJson()` if `timestamp_ms` column doesn't exist (for older DB versions).
+- [x] **P0.4.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.toJson()`.
+- [x] **P0.4.2** Replace `timestamp.toIso8601String()` with `timestamp.millisecondsSinceEpoch` in `toJson()`.
+- [x] **P0.4.3** Open `QueuedMutation.fromJson()` and locate timestamp parsing.
+- [x] **P0.4.4** Update `fromJson()` to handle both `int` (new format) and `String` (legacy format).
+- [x] **P0.4.5** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_onUpgrade()`.
+- [x] **P0.4.6** Add database migration for version 3: ALTER TABLE mutations ADD COLUMN timestamp_ms INTEGER.
+- [x] **P0.4.7** Update `_databaseVersion` from 2 to 3.
+- [x] **P0.4.8** Add fallback in orderBy clauses to use COALESCE(timestamp_ms, timestamp) for backward compatibility.
 - [ ] **P0.4.9** Add unit test: round-trip serialize/deserialize preserves chronological order.
 - [ ] **P0.4.10** Add unit test: `fromJson()` handles both int (new) and string (legacy) timestamp formats.
 - [ ] **P0.4.11** Add unit test: `processQueue()` orders mutations correctly after schema change.
@@ -1577,37 +1562,18 @@ These tasks can be done after code implementation:
 
 **Issue:** `QueuedMutation.fromJson()` uses unsafe `as` casts that can crash on malformed data.
 
-- [ ] **P0.5.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.fromJson()`.
-- [ ] **P0.5.2** Replace `json['id'] as String` with `(json['id'] ?? '').toString()`.
-- [ ] **P0.5.3** Replace `json['operation_type'] as String` with `(json['operation_type'] ?? '').toString()`.
-- [ ] **P0.5.4** Replace `json['target'] as String` with `(json['target'] ?? '').toString()`.
-- [ ] **P0.5.5** Replace `json['payload'] as Map<String, dynamic>` with defensive parsing:
-  ```dart
-  if (json['payload'] is Map<String, dynamic>) {
-    payload = json['payload'] as Map<String, dynamic>;
-  } else if (json['payload'] is Map) {
-    payload = Map<String, dynamic>.from(json['payload'] as Map);
-  } else {
-    payload = <String, dynamic>{};
-  }
-  ```
-- [ ] **P0.5.6** Replace `json['endpoint'] as String` with `(json['endpoint'] ?? '').toString()`.
-- [ ] **P0.5.7** Replace `json['user_id'] as String` with `(json['user_id'] ?? '').toString()`.
-- [ ] **P0.5.8** Replace `json['timestamp'] as String` with defensive parsing (handle both int and string):
-  ```dart
-  final timestampValue = json['timestamp'];
-  if (timestampValue is int) {
-    timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue);
-  } else if (timestampValue is String) {
-    timestamp = DateTime.tryParse(timestampValue) ?? DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestampValue) ?? 0);
-  } else {
-    timestamp = DateTime.now();
-  }
-  ```
-- [ ] **P0.5.9** Replace `json['retry_count'] as int` with `(json['retry_count'] ?? 0) as int`.
-- [ ] **P0.5.10** Replace `json['max_retries'] as int` with `(json['max_retries'] ?? 5) as int`.
-- [ ] **P0.5.11** Replace `json['last_error'] as String?` with `json['last_error']?.toString()`.
-- [ ] **P0.5.12** Replace `MutationStatusX.fromString(json['status'] as String)` with safe parsing:
+- [x] **P0.5.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.fromJson()`.
+- [x] **P0.5.2** Replace `json['id'] as String` with `(json['id'] ?? '').toString()`.
+- [x] **P0.5.3** Replace `json['operation_type'] as String` with `(json['operation_type'] ?? '').toString()`.
+- [x] **P0.5.4** Replace `json['target'] as String` with `(json['target'] ?? '').toString()`.
+- [x] **P0.5.5** Replace `json['payload'] as Map<String, dynamic>` with defensive parsing.
+- [x] **P0.5.6** Replace `json['endpoint'] as String` with `(json['endpoint'] ?? '').toString()`.
+- [x] **P0.5.7** Replace `json['user_id'] as String` with `(json['user_id'] ?? '').toString()`.
+- [x] **P0.5.8** Replace `json['timestamp'] as String` with defensive parsing (handle both int and string).
+- [x] **P0.5.9** Replace `json['retry_count'] as int` with `(json['retry_count'] ?? 0) as int`.
+- [x] **P0.5.10** Replace `json['max_retries` as int` with `(json['max_retries'] ?? 5) as int`.
+- [x] **P0.5.11** Replace `json['last_error` as String?` with `json['last_error']?.toString()`.
+- [x] **P0.5.12** Replace `MutationStatusX.fromString(json['status'] as String)` with safe parsing:
   ```dart
   final statusStr = (json['status'] ?? '').toString();
   status = MutationStatusX.values.firstWhere(
