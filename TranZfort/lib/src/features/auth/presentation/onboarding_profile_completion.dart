@@ -256,8 +256,9 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
             child: Text(l10n.commonCancelAction),
           ),
           TextButton(
+            // ignore: use_build_context_synchronously
             onPressed: () async {
-              // ignore: use_build_context_synchronously
+              final snackbarContext = context;
               Navigator.pop(context);
               final granted = await Geolocator.requestPermission();
               if (granted == LocationPermission.whileInUse || granted == LocationPermission.always) {
@@ -267,7 +268,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
               } else if (granted == LocationPermission.denied) {
                 if (!mounted) return;
                 AppSnackbar.show(
-                  context: context,
+                  // ignore: use_build_context_synchronously
+                  context: snackbarContext,
                   message: 'Permission denied. Please try again.',
                   variant: AppSnackbarVariant.error,
                 );
