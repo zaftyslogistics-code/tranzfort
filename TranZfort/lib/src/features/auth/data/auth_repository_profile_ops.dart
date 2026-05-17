@@ -57,18 +57,13 @@ class AuthProfileRepository {
         return const Success<UserProfile?>(null);
       }
 
-      final response = await _client
-          .from('profiles')
-          .select('id, full_name, mobile, email, user_role_type, preferred_language, is_banned, account_deletion_status, trust_safety_status, ban_reason, data_deletion_requested_at, avatar_url, profile_photo_document_path')
-          .eq('id', user.id)
-          .maybeSingle()
-          .timeout(const Duration(seconds: 8));
+      final response = await _client.rpc('get_current_user_profile').timeout(const Duration(seconds: 8));
 
-      if (response == null) {
+      if (response == null || (response is Map<String, dynamic> && response.isEmpty)) {
         return const Success<UserProfile?>(null);
       }
 
-      return Success<UserProfile?>(UserProfile.fromMap(response));
+      return Success<UserProfile?>(UserProfile.fromMap(response as Map<String, dynamic>));
     } catch (error, stackTrace) {
       return Failure<UserProfile?>(mapAuthError(error, stackTrace));
     }
@@ -296,18 +291,9 @@ class AuthProfileRepository {
     }
 
     try {
-      await _client.from('user_consents').insert({
-        'profile_id': user.id,
-        'consent_type': 'terms_of_service',
-        'consent_version': 'v1',
-        'source_context': 'onboarding_profile',
-      });
+      await _client.rpc('record_user_consent');
       return const Success<void>(null);
     } catch (error, stackTrace) {
-      if (error is PostgrestException && error.code == '23505') {
-        return const Success<void>(null);
-      }
-
       return Failure<void>(mapAuthError(error, stackTrace));
     }
   }

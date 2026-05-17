@@ -417,11 +417,15 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('profiles')
-        .select('id, mobile')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_public_profile',
+      params: <String, dynamic>{'p_profile_id': supplierId},
+    );
+
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 }
 

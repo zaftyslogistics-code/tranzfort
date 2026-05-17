@@ -80,19 +80,19 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client
-        .from('support_tickets')
-        .select(
-          'id, category, status, priority, related_load_id, related_trip_id, resolution_summary, created_at, updated_at, resolved_at',
-        )
-        .eq('owner_profile_id', userId);
+    final response = await _client.rpc(
+      'get_support_tickets',
+      params: <String, dynamic>{
+        'p_user_id': userId,
+        'p_limit': limit,
+        'p_before_updated_at': before?.toUtc().toIso8601String(),
+      },
+    );
 
-    if (before != null) {
-      query = query.lt('updated_at', before.toUtc().toIso8601String());
+    if (response is List) {
+      return List<Map<String, dynamic>>.from(response);
     }
-
-    final response = await query.order('updated_at', ascending: false).limit(limit);
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    return const <Map<String, dynamic>>[];
   }
 
   @override
@@ -104,14 +104,21 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('support_tickets')
-        .select(
-          'id, category, status, priority, related_load_id, related_trip_id, resolution_summary, created_at, updated_at, resolved_at',
-        )
-        .eq('owner_profile_id', userId)
-        .eq('id', ticketId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_support_ticket_detail',
+      params: <String, dynamic>{
+        'p_ticket_id': ticketId,
+        'p_user_id': userId,
+      },
+    );
+
+    if (response is Map<String, dynamic>) {
+      final ticket = response['ticket'];
+      if (ticket is Map<String, dynamic> && ticket.isNotEmpty) {
+        return ticket;
+      }
+    }
+    return null;
   }
 
   @override
@@ -124,26 +131,21 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
-    // Explicit ownership check: verify ticket exists and belongs to user
-    final ticket = await _client
-        .from('support_tickets')
-        .select('id')
-        .eq('id', ticketId)
-        .eq('owner_profile_id', userId)
-        .maybeSingle();
-    if (ticket == null) {
-      throw const AuthException('Ticket not found or access denied');
-    }
+    final response = await _client.rpc(
+      'get_support_ticket_detail',
+      params: <String, dynamic>{
+        'p_ticket_id': ticketId,
+        'p_user_id': userId,
+      },
+    );
 
-    final response = await _client
-        .from('support_ticket_messages')
-        .select(
-          'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
-        )
-        .eq('support_ticket_id', ticketId)
-        .order('created_at', ascending: true)
-        .limit(limit);
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    if (response is Map<String, dynamic>) {
+      final messages = response['messages'];
+      if (messages is List) {
+        return List<Map<String, dynamic>>.from(messages);
+      }
+    }
+    return const <Map<String, dynamic>>[];
   }
 
   @override
@@ -158,36 +160,21 @@ class SupabaseSupportBackend implements SupportBackend {
       throw const AuthException('Session unavailable');
     }
 
-    // Explicit ownership check: verify ticket exists and belongs to user
-    final ticket = await _client
-        .from('support_tickets')
-        .select('id')
-        .eq('id', ticketId)
-        .eq('owner_profile_id', userId)
-        .maybeSingle();
-    if (ticket == null) {
-      throw const AuthException('Ticket not found or access denied');
+    final response = await _client.rpc(
+      'get_support_ticket_messages',
+      params: <String, dynamic>{
+        'p_ticket_id': ticketId,
+        'p_user_id': userId,
+        'p_limit': limit,
+        'p_before_created_at': beforeCreatedAt?.toUtc().toIso8601String(),
+        'p_before_message_id': beforeMessageId,
+      },
+    );
+
+    if (response is List) {
+      return List<Map<String, dynamic>>.from(response).reversed.toList();
     }
-
-    var query = _client
-        .from('support_ticket_messages')
-        .select(
-          'id, support_ticket_id, sender_profile_id, sender_admin_user_id, message_body, attachment_path, visibility_class, created_at',
-        )
-        .eq('support_ticket_id', ticketId);
-
-    if (beforeCreatedAt != null) {
-      query = query.lt('created_at', beforeCreatedAt.toUtc().toIso8601String());
-    }
-    if (beforeMessageId != null) {
-      query = query.lt('id', beforeMessageId);
-    }
-
-    final response = await query
-        .order('created_at', ascending: false)
-        .limit(limit);
-
-    return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
+    return const <Map<String, dynamic>>[];
   }
 
   @override

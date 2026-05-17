@@ -1179,3 +1179,47 @@ String safeString(dynamic value) {
 - **P0 (Blocking Security):** 7 tasks, ~56 subtasks (deferred to end)
 
 **New Execution Order:** P1 → P2 → P3 → P4 → P5 → P0 → P6
+
+---
+
+## P3 Completion Log — May 17, 2026
+
+### New RPCs Created (SQL Migrations)
+
+| RPC | File | Replaces | Status |
+|-----|------|----------|--------|
+| `get_supplier_loads_list` | `20260517110001_...` | `SupabaseSupplierLoadBackend.fetchMyLoads()` | ✅ Created |
+| `get_supplier_load_detail` | `20260517110002_...` | `SupabaseSupplierLoadBackend.fetchLoadDetail()` | ✅ Created |
+| `get_supplier_linked_trips` | `20260517110003_...` | `SupabaseSupplierLoadBackend.fetchLinkedTrips()` | ✅ Created |
+| `get_trucker_trips` | `20260517110004_...` | `SupabaseTruckerTripsBackend.fetchTrips()` | ✅ Created |
+| `get_trip_detail` | `20260517110005_...` | `SupabaseTruckerTripsBackend.fetchTripDetail()` | ✅ Created |
+| `update_trip_lr` | `20260517110006_...` | `SupabaseTruckerTripsBackend.uploadTripLr()` | ✅ Created |
+| `get_own_rating` | `20260517110007_...` | `SupabaseTruckerTripsBackend.fetchOwnRating()` | ✅ Created |
+| `get_support_tickets` | `20260517110008_...` | `SupabaseSupportBackend.fetchTickets()` | ✅ Created |
+| `get_support_ticket_detail` | `20260517110009_...` | `SupabaseSupportBackend.fetchTicket()` + `fetchTicketMessages()` | ✅ Created |
+| `get_support_ticket_messages` | `20260517110010_...` | `SupabaseSupportBackend.fetchTicketMessagesPaginated()` | ✅ Created |
+| `get_current_user_profile` | `20260517120001_...` | `AuthProfileRepository.getCurrentProfile()` | ✅ Created |
+| `record_user_consent` | `20260517120002_...` | `AuthProfileRepository.recordTermsAcceptance()` | ✅ Created |
+| `get_supplier_extension` | `20260517120003_...` | `SupabaseTruckerTripsBackend.fetchSupplierExtension()` | ✅ Created |
+
+### Flutter Backends Updated
+
+| File | Methods Replaced |
+|------|------------------|
+| `supplier_load_repository_backend.dart` | `fetchMyLoads`, `fetchLoadDetail`, `fetchLinkedTrips` |
+| `trucker_trip_repository_backend.dart` | `fetchTrips`, `fetchTripDetail`, `uploadTripLr`, `fetchOwnRating`, `fetchSupplierProfile`, `fetchSupplierExtension` |
+| `support_repository.dart` | `fetchTickets`, `fetchTicket`, `fetchTicketMessages`, `fetchTicketMessagesPaginated` |
+| `auth_repository_profile_ops.dart` | `getCurrentProfile`, `recordTermsAcceptance` |
+| `trucker_marketplace_repository.dart` | `fetchSupplierProfile` |
+
+### Critical Fixes Applied
+
+- **SDN-002 (Support pagination cursor bug):** `get_support_ticket_messages` uses composite cursor `(created_at, id)` instead of two independent filters
+- **RPC shape compatibility:** All RPCs return nested objects with keys matching Supabase auto-join naming (`loads`, `trucks`) to ensure Flutter model parsing works without changes
+
+### Verification
+
+- ✅ Zero remaining `.from('table')` direct reads in all migrated backends
+- ✅ `watchCurrentProfile()` realtime stream intentionally kept (per architecture rules)
+- ✅ Rollback migration covers all 13 new RPCs
+- ✅ Unused imports removed (`AppLogger`, `lifecycle_status_constants`)
