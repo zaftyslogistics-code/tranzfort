@@ -1,5 +1,6 @@
--- P3.2.1 — RPC to fetch supplier's loads with filtering and offset pagination
--- Replaces direct table read in SupabaseSupplierLoadBackend.fetchMyLoads()
+-- Fix: Cast status to text in get_supplier_loads_list RPC
+-- Issue: status column is enum type, cannot directly compare with TEXT[] using = ANY()
+-- Fix: Cast status::text before comparison
 
 CREATE OR REPLACE FUNCTION get_supplier_loads_list(
   p_supplier_id UUID,
