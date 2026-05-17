@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'dart:convert';
 
 import '../models/mutation_queue.dart';
+import '../logger/app_logger.dart';
 import 'mutation_queue_encryption.dart';
 import 'mutation_queue_sanitizer.dart';
 
@@ -268,9 +269,22 @@ class MutationQueueDatabase {
   }
 
   Future<QueuedMutation?> _decryptMutation(Map<String, dynamic> map) async {
+    final mutationId = map['id'] as String?;
+    
     if (_encryption == null) {
-      return QueuedMutation.fromJson(map);
+      try {
+        return QueuedMutation.fromJson(map);
+      } catch (error, stackTrace) {
+        AppLogger.warning(
+          'Mutation queue: Failed to parse mutation (no encryption)',
+          scope: 'mutation_queue',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return null;
+      }
     }
+    
     try {
       final payload = map['payload'] as String;
       final decrypted = await _encryption!.decrypt(payload);
@@ -278,9 +292,35 @@ class MutationQueueDatabase {
         map['payload'] = decrypted;
       }
     } catch (_) {
-      // If decryption fails, the payload may be unencrypted (legacy data)
-      // Return as-is so legacy mutations can still be processed
+      // Decryption failed - try to parse as plaintext JSON (legacy data)
+      try {
+        final payload = map['payload'] as String;
+        jsonDecode(payload); // Validate it's valid JSON
+        // If valid JSON, it's unencrypted legacy data - use as-is
+        AppLogger.info(
+          'Mutation queue: Using unencrypted legacy payload for mutation $mutationId',
+          scope: 'mutation_queue',
+        );
+      } catch (_) {
+        // Payload is encrypted/corrupted and cannot be parsed
+        AppLogger.warning(
+          'Mutation queue: Skipping corrupted mutation $mutationId (payload cannot be decrypted or parsed)',
+          scope: 'mutation_queue',
+        );
+        return null;
+      }
     }
-    return QueuedMutation.fromJson(map);
+    
+    try {
+      return QueuedMutation.fromJson(map);
+    } catch (error, stackTrace) {
+      AppLogger.warning(
+        'Mutation queue: Failed to parse mutation $mutationId after decryption',
+        scope: 'mutation_queue',
+        error: error,
+        stackTrace: stackTrace,
+      );
+      return null;
+    }
   }
 }
