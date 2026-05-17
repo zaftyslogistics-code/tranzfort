@@ -4,6 +4,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart' as
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
@@ -249,6 +250,26 @@ class SupabaseNotificationBackend implements NotificationBackend {
       throw const AuthException('Session unavailable');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for notification fetching
+      final response = await _client.rpc(
+        'get_notifications',
+        params: {
+          'p_user_id': userId,
+          'p_limit': limit,
+          'p_before_created_at': before?.toUtc().toIso8601String(),
+          'p_before_id': null, // TODO: Add composite cursor support if needed
+        },
+      );
+      
+      if (response is! List) {
+        throw const ServerFailure(message: 'Invalid response format from get_notifications RPC');
+      }
+      
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    }
+
+    // Old implementation (fallback)
     var query = _client
         .from('notifications')
         .select(
@@ -283,6 +304,23 @@ class SupabaseNotificationBackend implements NotificationBackend {
       throw const AuthException('Session unavailable');
     }
 
+    if (useRpcMigration) {
+      // Use RPC for unread count
+      final response = await _client.rpc(
+        'get_unread_notification_count',
+        params: {
+          'p_user_id': userId,
+        },
+      );
+      
+      if (response is! int) {
+        throw const ServerFailure(message: 'Invalid response format from get_unread_notification_count RPC');
+      }
+      
+      return response;
+    }
+
+    // Old implementation (fallback)
     final response = await _client
         .from('notifications')
         .select('id')

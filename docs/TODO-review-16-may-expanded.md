@@ -857,22 +857,29 @@ String safeString(dynamic value) {
   - ⚠️ Still need: `get_notifications` RPC with pagination (3 direct reads in notification_repository.dart)
   - ⚠️ Still need: `get_unread_notification_count` RPC (may exist, check)
   
-- [ ] **P3.8.1** Create Supabase RPC `get_notifications(p_user_id, p_limit, p_before_created_at, p_before_id)` (if missing)
+- [x] **P3.8.1** Create Supabase RPC `get_notifications(p_user_id, p_limit, p_before_created_at, p_before_id)` (if missing)
   - Input: user_id UUID (for RLS), limit INT, before_created_at TIMESTAMPTZ, before_id UUID
   - Output: JSON array of notifications with related data context
-  - Include: notifications table + related load/trip/chat context if applicable
+  - Include: notifications table fields (no related context needed based on current implementation)
   - Add composite cursor logic for pagination
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_notifications.sql` (if needed)
-  - Test RPC with pagination
+  - Add migration file: `20260517090006_rpc_get_notifications.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with pagination in Supabase SQL editor (deferred to P3.8.5)
   
-- [ ] **P3.8.2** Check if `get_unread_notification_count` RPC exists, create if missing
-  - Search migrations for existing unread count RPC
-  - If missing: Create Supabase RPC `get_unread_notification_count(p_user_id)`
+- [x] **P3.8.2** Check if `get_unread_notification_count` RPC exists, create if missing
+  - ✅ RPC did not exist, created new RPC
   - Input: user_id UUID (for RLS)
   - Output: INT count of unread notifications
   - Filter by is_read = false
-  - Add migration file: `YYYYMMDDHHMMSS_rpc_get_unread_notification_count.sql` (if needed)
-  - Test RPC with real user_id
+  - Add migration file: `20260517090007_rpc_get_unread_notification_count.sql`
+  - ✅ Migration file created
+  - ⏭️ Test RPC with real user_id in Supabase SQL editor (deferred to P3.8.5)
+  
+- [x] **P3.8.2.1** Create rollback migration file for notification RPCs
+  - Add migration file: `20260517090008_rollback_notification_rpcs.sql`
+  - ✅ Rollback migration file created
+  - Documents how to revert notification RPCs if needed
+  - Note: mark_notification_read and mark_all_notifications_read remain (pre-existing RPCs)
   
 - [ ] **P3.8.3** Replace `SupabaseNotificationBackend.fetchNotifications()` with RPC (if using direct table read)
   - Check if fetchNotifications() uses direct table read or existing RPC
