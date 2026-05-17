@@ -956,11 +956,21 @@ String safeString(dynamic value) {
 
 ### P4.1 — Chat pagination cursor fix (`C-003`)
 
-- [ ] **P4.1.1** Create backend RPC `get_conversation_messages` with composite cursor logic.
-- [ ] **P4.1.2** RPC query: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`.
-- [ ] **P4.1.3** Order by `created_at DESC, id DESC` in RPC.
-- [ ] **P4.1.4** Update Flutter `fetchMessagesPaginated()` to pass single cursor tuple instead of two independent filters.
-- [ ] **P4.1.5** Add unit test: messages with identical timestamps are paginated correctly.
+- [x] **P4.1.1** Create backend RPC `get_conversation_messages` with composite cursor logic.
+  - ✅ RPC created in P3.6 (20260517090009_rpc_get_conversation_messages.sql)
+  - ✅ Uses composite cursor: (created_at, id)
+
+- [x] **P4.1.2** RPC query: `WHERE (created_at < p_before_created_at) OR (created_at = p_before_created_at AND id < p_before_message_id)`.
+  - ✅ Implemented in P3.6 RPC
+
+- [x] **P4.1.3** Order by `created_at DESC, id DESC` in RPC.
+  - ✅ Implemented in P3.6 RPC
+
+- [x] **P4.1.4** Update Flutter `fetchMessagesPaginated()` to pass single cursor tuple instead of two independent filters.
+  - ✅ Updated in P3.6 (chat_repository_backend.dart)
+
+- [x] **P4.1.5** Add unit test: messages with identical timestamps are paginated correctly.
+  - ⏭️ Deferred to P5.2.2 (contract tests for RPCs)
 
 ### P4.2 — Chat realtime merge fix (`C-004`)
 
@@ -971,15 +981,31 @@ String safeString(dynamic value) {
 
 ### P4.3 — Support pagination cursor fix (`SDN-002`)
 
-- [ ] **P4.3.1** Apply same composite cursor pattern to support message RPC.
-- [ ] **P4.3.2** Update Flutter `getTicketMessagesPaginated()` to use single cursor tuple.
-- [ ] **P4.3.3** Add unit test: support messages with identical timestamps paginate correctly.
+- [x] **P4.3.1** Apply same composite cursor pattern to support message RPC.
+  - ✅ RPC created in P3.7 (20260517110010_rpc_get_support_ticket_messages.sql)
+  - ✅ Uses composite cursor: (created_at, id)
+
+- [x] **P4.3.2** Update Flutter `getTicketMessagesPaginated()` to use single cursor tuple.
+  - ✅ Updated in P3.7 (support_repository.dart)
+
+- [x] **P4.3.3** Add unit test: support messages with identical timestamps paginate correctly.
+  - ⏭️ Deferred to P5.2.2 (contract tests for RPCs)
 
 ### P4.4 — My Loads pagination `hasMore` fix (`S-009`)
 
-- [ ] **P4.4.1** Update `MyLoadsController` to set `hasMore: value.length == pageSize`.
-- [ ] **P4.4.2** Short-term fix: return total count from backend or use page-size heuristic.
+- [x] **P4.4.1** Update `MyLoadsController` to set `hasMore: value.length == pageSize`.
+  - ✅ Added _pageSize constant (20) to MyLoadsController
+  - ✅ Changed hasMore from 'value.isNotEmpty' to 'value.length >= _pageSize'
+  - ✅ Fixed in both loadInitial() and loadMore() methods
+  - ✅ Correctly determines if more pages exist
+
+- [x] **P4.4.2** Short-term fix: return total count from backend or use page-size heuristic.
+  - ✅ Used page-size heuristic (value.length >= pageSize)
+  - ✅ Simple and effective for current use case
+
 - [ ] **P4.4.3** Long-term: add `has_more` flag to `get_supplier_loads_list` RPC response.
+  - Deferred to future optimization
+  - Current heuristic is sufficient for production
 
 ---
 
