@@ -1590,10 +1590,11 @@ These tasks can be done after code implementation:
   - **When:** After code implementation and testing
   - **Platform:** Google Cloud Console → APIs & Services → Credentials → Edit API Key
   - **Action:** Update build script with new key after restriction
-- [ ] **P0.1.14** ⏭️ **DEFERRED:** Update CI/CD build scripts to pass `--dart-define` flags (if using CI/CD).
-  - **When:** After code implementation
-  - **Platform:** Your CI/CD system (GitHub Actions, GitLab CI, etc.)
-  - **Action:** Use CI/CD secrets instead of hardcoded keys
+- [x] **P0.1.14** ⏭️ **COMPLETE:** Update CI/CD build scripts to pass `--dart-define` flags (if using CI/CD).
+  - ✅ Verified: TranZfort/build-apk.bat already uses --dart-define (lines 10-13)
+  - ✅ Verified: No other CI/CD scripts found
+  - ✅ Verified: GitHub workflow (l10n-guardrail.yml) doesn't use environment variables
+  - Status: **COMPLETE** - No changes needed
 
 ### P0.2 — Fix `OfflineCacheService.clearAll()` data destruction
 
