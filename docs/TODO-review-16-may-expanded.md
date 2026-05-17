@@ -1024,26 +1024,24 @@ String safeString(dynamic value) {
 
 ### P5.1 — Crash reporting (Firebase Crashlytics)
 
-- [ ] **P5.1.1** Add `firebase_crashlytics: ^4.1.3` to `pubspec.yaml` dependencies.
-- [ ] **P5.1.2** Run `flutter pub get` to install Crashlytics.
-- [ ] **P5.1.3** Initialize Crashlytics in `main.dart` before `runApp()`:
-  ```dart
-  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
-  };
-  ```
-- [ ] **P5.1.4** Add non-fatal error recording in critical repositories:
-  - `auth_repository.dart` - record auth failures
-  - `supplier_load_repository_backend.dart` - record RPC failures
-  - `trucker_trip_repository_backend.dart` - record RPC failures
-  - `chat_repository.dart` - record message send failures
-- [ ] **P5.1.5** Add user identifier to Crashlytics for better crash grouping:
-  ```dart
-  await FirebaseCrashlytics.instance.setUserIdentifier(userId);
-  ```
-- [ ] **P5.1.6** Test crash reporting: Force a test crash in debug mode to verify Crashlytics receives it.
-- [ ] **P5.1.7** Verify Crashlytics dashboard shows test crash with correct stack trace and user info.
+- [x] **P5.1.1** Add `firebase_crashlytics: ^4.1.3` to `pubspec.yaml` dependencies.
+- [x] **P5.1.2** Run `flutter pub get` to install Crashlytics.
+- [x] **P5.1.3** Initialize Crashlytics in `main.dart` before `runApp()`:
+  - ✅ Added FirebaseCrashlytics initialization in _initializeFirebaseIfAvailable()
+  - ✅ Set up error recording in _reportUnhandledError()
+  - ✅ Set crashlytics collection enabled
+- ⏸️ **DEFERRED (P5.2):** P5.1.4 Add non-fatal error recording in critical repositories
+  - auth_repository.dart - record auth failures
+  - supplier_load_repository_backend.dart - record RPC failures
+  - trucker_trip_repository_backend.dart - record RPC failures
+  - chat_repository.dart - record message send failures
+- [x] **P5.1.5** Add user identifier to Crashlytics for better crash grouping:
+  - ✅ Created CrashReportingService with setUserIdentifier method
+  - ✅ Created crashlyticsUserIdentifierProvider to track auth state
+  - ✅ Automatically sets user identifier on login, clears on logout
+  - ✅ Sets custom key for user role in crash reports
+- ⏸️ **DEFERRED (Manual Testing):** P5.1.6 Test crash reporting: Force a test crash in debug mode to verify Crashlytics receives it.
+- ⏸️ **DEFERRED (Manual Testing):** P5.1.7 Verify Crashlytics dashboard shows test crash with correct stack trace and user info.
 
 ### P5.2 — Testing
 
