@@ -19,7 +19,8 @@ dependencies:
   # --- Routing ---
   go_router: ^14.8.1
 
-  # --- Backend (Supabase) ---
+  # --- Environment Variables ---
+  flutter_dotenv: ^5.1.0
   supabase_flutter: ^2.9.0
   google_sign_in: ^6.3.0
 
@@ -87,3 +88,4 @@ flutter:
   assets:
     - assets/data/
     - assets/images/
+    - .env  # For local development only (removed in production builds)
