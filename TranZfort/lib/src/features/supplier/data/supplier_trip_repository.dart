@@ -7,6 +7,7 @@ import '../../../core/constants/lifecycle_status_constants.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
+import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/map_readers.dart';
 import 'supplier_trip_repository_models.dart';
@@ -154,17 +155,21 @@ class SupplierTripsRepository {
       );
     }
 
+    AppLogger.debug('Fetching trip detail: tripId=$normalizedTripId, supplierId=$userId', scope: 'supplier_trips');
+
     try {
       final consolidated = await _backend.fetchTripDetailConsolidated(
         supplierId: userId,
         tripId: normalizedTripId,
       );
       if (consolidated == null) {
+        AppLogger.warning('Trip detail RPC returned null: tripId=$normalizedTripId', scope: 'supplier_trips');
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
       final tripMap = consolidated['trip'] as Map<String, dynamic>?;
       if (tripMap == null) {
+        AppLogger.warning('Trip detail missing trip map: tripId=$normalizedTripId', scope: 'supplier_trips');
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
@@ -172,6 +177,8 @@ class SupplierTripsRepository {
       final lrPath = (tripMap['lr_document_path'] ?? '').toString().trim();
       final podSignedUrl = podPath.isEmpty ? null : await _backend.createProofSignedUrl(podPath);
       final lrSignedUrl = lrPath.isEmpty ? null : await _backend.createProofSignedUrl(lrPath);
+
+      AppLogger.debug('Trip detail loaded successfully: tripId=$normalizedTripId', scope: 'supplier_trips');
 
       return Success<SupplierTripDetail>(
         _mapTripDetailConsolidated(
@@ -182,6 +189,7 @@ class SupplierTripsRepository {
         ),
       );
     } catch (error, stackTrace) {
+      AppLogger.error('Failed to fetch trip detail: tripId=$normalizedTripId', scope: 'supplier_trips', error: error, stackTrace: stackTrace);
       return Failure<SupplierTripDetail>(_mapError(error, stackTrace));
     }
   }
