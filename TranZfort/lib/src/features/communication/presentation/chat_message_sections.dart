@@ -31,10 +31,14 @@ class _ChatMessagesBody extends StatelessWidget {
       );
     }
 
-    // Don't show error immediately - give realtime stream time to provide data
-    // The flicker is caused by RPC being slower than direct read, but realtime stream provides data
     if (failure != null && renderedMessages.isEmpty) {
-      return const SizedBox.shrink();
+      return Padding(
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: WarningBlock(
+          title: l10n.chatMessagesLoadFailureTitle,
+          message: l10n.chatMessagesLoadFailureMessage,
+        ),
+      );
     }
 
     if (renderedMessages.isEmpty) {

@@ -188,10 +188,26 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
   final ChatRepository _repository;
   final String _conversationId;
   StreamSubscription<Result<List<ChatMessage>>>? _subscription;
+  Timer? _errorDebounceTimer;
 
   ConversationMessagesController(this._repository, this._conversationId)
       : super(ConversationMessagesState.initial()) {
     _start();
+  }
+
+  void _scheduleErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(const Duration(seconds: 2), () {
+      // Only show error if we still have no messages after debounce
+      if (state.messages.isEmpty) {
+        state = state.copyWith(failure: failure);
+      }
+    });
+  }
+
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
   }
 
   Future<void> _start() async {
@@ -199,6 +215,7 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
     _subscription = _repository.watchMessages(_conversationId).listen((result) {
       result.when(
         success: (messages) {
+          _cancelErrorDisplay();
           state = state.copyWith(
             isLoading: false,
             messages: messages,
@@ -206,10 +223,8 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
           );
         },
         failure: (failure) {
-          state = state.copyWith(
-            isLoading: false,
-            failure: failure,
-          );
+          _scheduleErrorDisplay(failure);
+          state = state.copyWith(isLoading: false);
         },
       );
     });
@@ -220,6 +235,7 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
     final result = await _repository.getMessages(_conversationId);
     result.when(
       success: (messages) {
+        _cancelErrorDisplay();
         state = state.copyWith(
           isLoading: false,
           messages: messages,
@@ -228,10 +244,8 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
         );
       },
       failure: (failure) {
-        state = state.copyWith(
-          isLoading: false,
-          failure: failure,
-        );
+        _scheduleErrorDisplay(failure);
+        state = state.copyWith(isLoading: false);
       },
     );
   }
@@ -282,6 +296,7 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   @override
   void dispose() {
+    _errorDebounceTimer?.cancel();
     _subscription?.cancel();
     super.dispose();
   }
