@@ -210,15 +210,58 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
     _errorDebounceTimer = null;
   }
 
+  /// Merges realtime messages with existing messages by ID
+  /// - Preserves paginated older messages
+  /// - Updates existing messages with new data (read-state changes)
+  /// - Adds new messages from realtime stream
+  /// - Handles optimistic message replacement
+  List<ChatMessage> _mergeMessages(List<ChatMessage> existing, List<ChatMessage> realtime) {
+    final existingMap = <String, ChatMessage>{};
+    for (final msg in existing) {
+      existingMap[msg.id] = msg;
+    }
+
+    final realtimeMap = <String, ChatMessage>{};
+    for (final msg in realtime) {
+      realtimeMap[msg.id] = msg;
+    }
+
+    // Start with realtime messages (they're the source of truth for recent messages)
+    final merged = <ChatMessage>[];
+    final mergedIds = <String>{};
+
+    // Add realtime messages (newest first, as they come from stream)
+    for (final msg in realtime) {
+      merged.add(msg);
+      mergedIds.add(msg.id);
+    }
+
+    // Add older paginated messages that aren't in realtime stream
+    // These are messages loaded via loadOlderMessages()
+    for (final msg in existing) {
+      if (!mergedIds.contains(msg.id)) {
+        merged.add(msg);
+        mergedIds.add(msg.id);
+      }
+    }
+
+    // Sort by created_at descending (newest first)
+    merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return merged;
+  }
+
   Future<void> _start() async {
     await load();
     _subscription = _repository.watchMessages(_conversationId).listen((result) {
       result.when(
         success: (messages) {
           _cancelErrorDisplay();
+          // Merge realtime messages with existing paginated history
+          final merged = _mergeMessages(state.messages, messages);
           state = state.copyWith(
             isLoading: false,
-            messages: messages,
+            messages: merged,
             clearFailure: true,
           );
         },
