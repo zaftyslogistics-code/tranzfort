@@ -1747,7 +1747,82 @@ These tasks can be done after code implementation:
 | `get_support_ticket_messages` | `20260517110010_...` | `SupabaseSupportBackend.fetchTicketMessagesPaginated()` | ✅ Created |
 | `get_current_user_profile` | `20260517120001_...` | `AuthProfileRepository.getCurrentProfile()` | ✅ Created |
 | `record_user_consent` | `20260517120002_...` | `AuthProfileRepository.recordTermsAcceptance()` | ✅ Created |
-| `get_supplier_extension` | `20260517120003_...` | `SupabaseTruckerTripsBackend.fetchSupplierExtension()` | ✅ Created |
+| `get_supplier_extension` | `20260517120003_...` | `SupplierProfileRepository.getSupplierExtension()` | ✅ Created |
+
+---
+
+## Session Notes — May 17, 2026 (Evening)
+
+### Issues Encountered During Testing
+
+#### Issue 1: Rollback Migration Accidentally Applied
+- **Problem:** Migration `20260517110099_rollback_p3_core_rpcs.sql` was placed in migrations directory
+- **Impact:** All P3 RPCs were dropped immediately after creation
+- **Root Cause:** Rollback script meant for manual emergency use was automatically applied by Supabase
+- **Fix:** Archived rollback migration to `.archived` and re-applied RPC migrations
+- **Files:** `20260517110099_rollback_p3_core_rpcs.sql.archived`
+
+#### Issue 2: SQL Type Mismatch in get_supplier_loads_list RPC
+- **Problem:** `operator does not exist: load_status = text`
+- **Root Cause:** `status` column is enum type, cannot directly compare with `TEXT[]` using `= ANY()`
+- **Fix:** Cast `status::text` before comparison in WHERE clause
+- **Migration:** `20260517120004_fix_get_supplier_loads_list_status_cast.sql`
+
+#### Issue 3: Notifications Page Flickering (UNRESOLVED)
+- **Problem:** "Unable to load" flickers for microsecond when opening notifications page on first app start
+- **Behavior:** Flicker only occurs on first app start; subsequent navigations work smoothly
+- **Attempts:**
+  1. Removed `autoDispose` from `notificationsProvider` - Provider now persists
+  2. Added minimum loading duration (300ms) before showing failure state
+  3. Added minimum loading duration to stream listener failure callback
+  4. Increased minimum loading duration to 500ms
+  5. Added minimum loading duration to success case (not just failure)
+- **Status:** Still flickers on first app start
+- **Next Steps (deferred to next session):**
+  - Consider showing loading shimmer for fixed duration on all loads (not just failures)
+  - Add a "first load" flag to enforce minimum duration only on initial load
+  - Investigate if the issue is with the screen rendering logic rather than provider state
+  - Check if there's a race condition between initial state and first state update
+
+#### Issue 4: RenderFlex Overflow (Minor)
+- **Problem:** RenderFlex overflowed by 11 pixels on bottom in StatCard
+- **Impact:** Visual issue only, yellow/black striped warning
+- **Status:** Not addressed (low priority)
+- **Next Steps:** Fix StatCard layout to use proper constraints
+
+---
+
+## Session Summary — May 17, 2026
+
+### Completed Work
+1. ✅ Fixed rollback migration issue - Archived and restored P3 RPCs
+2. ✅ Fixed SQL type mismatch in get_supplier_loads_list RPC
+3. ✅ Added VS Code launch configuration with --dart-define flags
+4. ✅ Added debug logging to supplier load repository
+5. ✅ Added debug logging to SupabaseConfig for environment variable loading
+6. ✅ Removed autoDispose from load detail, trip detail, and notifications providers
+7. ✅ Added minimum loading duration to prevent UI flickering (partial fix)
+
+### Commits Made
+- `045559f` - fix: Archive rollback migration and restore P3 RPCs
+- `1fa69d4` - fix: Remove autoDispose from load detail and trip detail providers
+- `c81c23c` - fix: Add minimum loading duration to prevent notification flicker
+- `b02817e` - fix: Add minimum loading duration to notification stream listener
+- `06487fb` - fix: Increase minimum loading duration to 500ms for notifications
+- `e0252d2` - fix: Cast status to text in get_supplier_loads_list RPC
+
+### Open Issues (Deferred to Next Session)
+1. ⏸️ Notifications page flickering on first app start
+2. ⏸️ RenderFlex overflow in StatCard (low priority)
+
+### Next Session Priorities
+1. Resolve notifications page flickering issue
+2. Test all P3 RPCs with real data
+3. Complete P3.2.5-P3.2.7 (contract tests and E2E tests for supplier load RPCs)
+4. Complete P3.3.8 (E2E test trucker marketplace flows)
+5. Complete P3.4-P3.7 RPC migrations and tests
+
+---
 
 ### Flutter Backends Updated
 
