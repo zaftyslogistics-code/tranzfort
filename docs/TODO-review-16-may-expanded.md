@@ -1593,12 +1593,12 @@ These tasks can be done after code implementation:
 
 **Issue:** Chat loads all messages on first load instead of paginating, causing slow performance for long conversations.
 
-- [ ] **P0.6.1** Open `lib/src/features/communication/providers/chat_providers.dart` and locate `ConversationMessagesController.load()`.
-- [ ] **P0.6.2** Find the call to `getMessages()` or `getMessagesPaginated()` in the initial load.
-- [ ] **P0.6.3** If using `getMessages()` (unbounded), replace with `getMessagesPaginated(limit: 50)`.
-- [ ] **P0.6.4** If using `getMessagesPaginated()` without limit, add `limit: 50` parameter.
-- [ ] **P0.6.5** Ensure `hasMoreOlderMessages` is set to `messages.length >= 50` in initial load.
-- [ ] **P0.6.6** Verify `loadOlderMessages()` correctly uses pagination cursor for subsequent loads.
+- [x] **P0.6.1** Open `lib/src/features/communication/providers/chat_providers.dart` and locate `ConversationMessagesController.load()`.
+- [x] **P0.6.2** Find the call to `getMessages()` or `getMessagesPaginated()` in the initial load.
+- [x] **P0.6.3** Replace unbounded `getMessages()` with `getMessagesPaginated(limit: 50)`.
+- [x] **P0.6.4** Ensure `hasMoreOlderMessages` is set to `messages.length >= 50` in initial load.
+- [x] **P0.6.5** Verify `loadOlderMessages()` correctly uses pagination cursor for subsequent loads.
+- [x] **P0.6.6** Added comment explaining P0.6 fix in load() method.
 - [ ] **P0.6.7** Add unit test: initial load fetches at most 50 messages.
 - [ ] **P0.6.8** Add unit test: long conversation (>50 messages) does not load all messages at once.
 - [ ] **P0.6.9** Add unit test: `hasMoreOlderMessages` is set correctly after initial load.
