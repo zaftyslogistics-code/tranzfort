@@ -1,7 +1,6 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 /// Supabase configuration loader.
-/// Reads from .env file. Never hardcode keys in code.
+/// Reads from compile-time environment variables via --dart-define.
+/// Never hardcode keys in code.
 class SupabaseConfig {
   final String url;
   final String anonKey;
@@ -21,9 +20,9 @@ class SupabaseConfig {
 
   factory SupabaseConfig.fromEnvironment() {
     return SupabaseConfig(
-      url: dotenv.env['SUPABASE_URL'] ?? '',
-      anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
-      googleWebClientId: dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? '',
+      url: const String.fromEnvironment('SUPABASE_URL', defaultValue: ''),
+      anonKey: const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: ''),
+      googleWebClientId: const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID', defaultValue: ''),
     );
   }
 }

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -24,12 +23,6 @@ Future<void> main() async {
     try {
       WidgetsFlutterBinding.ensureInitialized();
       _configureGlobalErrorHandling();
-
-      try {
-        await dotenv.load(fileName: '.env');
-      } catch (dotenvError) {
-        AppLogger.warning('dotenv.load() failed — continuing with platform env', scope: 'main', error: dotenvError);
-      }
 
       final config = SupabaseConfig.fromEnvironment();
 

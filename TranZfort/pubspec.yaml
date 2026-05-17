@@ -23,9 +23,6 @@ dependencies:
   supabase_flutter: ^2.9.0
   google_sign_in: ^6.3.0
 
-  # --- Environment ---
-  flutter_dotenv: ^5.2.1
-
   # --- Connectivity ---
   connectivity_plus: ^7.0.0
 
@@ -87,6 +84,5 @@ flutter:
   generate: true
 
   assets:
-    - .env
     - assets/data/
     - assets/images/

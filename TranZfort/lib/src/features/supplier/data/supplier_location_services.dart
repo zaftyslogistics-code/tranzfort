@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 
 import '../../../core/logger/app_logger.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/services/osrm_route_snapshot_service.dart';
@@ -115,7 +114,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
       return suggestion;
     }
 
-    final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
+    final apiKey = const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
     if (apiKey.isEmpty) {
       return suggestion;
     }
@@ -174,7 +173,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
   }
 
   Future<List<PlaceSuggestion>> _searchGoogleCities(String query) async {
-    final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
+    final apiKey = const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
     if (apiKey.isEmpty) {
       AppLogger.warning('[SupplierLocationSearch] Google Maps API key is empty');
       return const [];

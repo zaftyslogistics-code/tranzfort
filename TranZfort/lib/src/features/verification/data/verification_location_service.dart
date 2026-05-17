@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -308,11 +307,7 @@ class VerificationLocationService {
   }
 
   static String _readGoogleMapsApiKey() {
-    try {
-      return dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
-    } catch (_) {
-      return '';
-    }
+    return const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
   }
 
   static Future<Position> _defaultGetCurrentPosition() {
