@@ -668,14 +668,15 @@ String safeString(dynamic value) {
   - ✅ Rollback migration file created
   - Documents how to revert all fleet RPCs if needed
   
-- [ ] **P3.5.5** Replace `SupabaseTruckerFleetBackend` direct reads/writes with RPCs
-  - Update `fetchTrucks()` to call `rpc('get_trucker_fleet')`
-  - Update `createTruck()` to call `rpc('add_truck')`
-  - Update `updateTruck()` to call `rpc('update_truck')`
-  - Update `deleteTruck()` to call `rpc('archive_truck')`
-  - Add error handling for RPC failures
-  - Add unit tests for each operation
-  - Keep old implementations commented out as fallback initially
+- [x] **P3.5.5** Replace `SupabaseTruckerFleetBackend` direct reads/writes with RPCs
+  - ✅ Updated `fetchTrucks()` to call `rpc('get_trucker_fleet')` with feature flag
+  - ✅ Updated `createTruck()` to call `rpc('add_truck')` with feature flag
+  - ✅ Updated `updateTruck()` to call `rpc('update_truck')` with feature flag
+  - ✅ Updated `archiveTruck()` to call `rpc('archive_truck')` with feature flag
+  - ✅ Added error handling for RPC failures (invalid response format checks)
+  - ✅ Old implementations kept as fallback when feature flag is false
+  - ✅ Flutter analyze passes with no errors
+  - ⏭️ Add unit tests for each operation (deferred to P3.9.2)
   
 - [ ] **P3.5.6** E2E test fleet flows after RPC migration
   - Test fleet list display
