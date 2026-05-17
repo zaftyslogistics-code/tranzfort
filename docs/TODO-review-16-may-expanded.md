@@ -1218,10 +1218,10 @@ These tasks can be done after code implementation:
 
 ### P0.3 — Fix mutation queue decryption fallback crash (`F-019`)
 
-- [ ] **P0.3.1** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_decryptMutation()`.
-- [ ] **P0.3.2** In the catch block, attempt `jsonDecode(map['payload'])` to detect plaintext vs encrypted payload.
-- [ ] **P0.3.3** If payload is still encrypted/corrupted, return `null` instead of calling `QueuedMutation.fromJson(map)`.
-- [ ] **P0.3.4** Update the caller in `_hydrateMutations()` to skip `null` results and log a warning.
+- [x] **P0.3.1** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_decryptMutation()`.
+- [x] **P0.3.2** In the catch block, attempt `jsonDecode(map['payload'])` to detect plaintext vs encrypted payload.
+- [x] **P0.3.3** If payload is still encrypted/corrupted, return `null` instead of calling `QueuedMutation.fromJson(map)`.
+- [x] **P0.3.4** Update the caller in `_hydrateMutations()` to skip `null` results and log a warning.
 - [ ] **P0.3.5** Add quarantine logic: increment a `corruption_count` metric or log the event for diagnostics.
 - [ ] **P0.3.6** Add unit test: decryption failure with encrypted payload returns `null` without throwing.
 - [ ] **P0.3.7** Add unit test: decryption failure with plaintext JSON still parses successfully.
