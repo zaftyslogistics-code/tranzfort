@@ -24,32 +24,31 @@
 
 **CRITICAL:** Do NOT submit to Play Store without completing P0.
 
-### Pending Tasks (0/3 sub-tasks complete)
-- [ ] P0.1: Remove `.env` from Flutter assets and rotate secrets (13 tasks)
-  - Remove `.env` from pubspec.yaml assets
-  - Refactor to use `String.fromEnvironment`
-  - Remove `flutter_dotenv` dependency
-  - Update CI/CD build scripts
-  - Rotate Supabase anon_key
-  - Restrict Google Maps API key
-  - Verify `.env` not in APK
+**Implementation Strategy:** Remove `.env` from assets, use existing keys via `--dart-define`, rotate keys later at convenience.
 
-- [ ] P0.2: Fix `OfflineCacheService.clearAll()` data destruction (6 tasks)
-  - Add namespace prefix to cache keys
-  - Update `clearAll()` to only remove namespaced keys
-  - Update `clearByPrefix()` to respect namespace
-  - Add unit tests for namespace safety
+### Pending Tasks (0/14 tasks complete)
 
-- [ ] P0.3: Fix mutation queue decryption fallback crash (4 tasks)
-  - Detect plaintext vs encrypted payload
-  - Return `null` instead of crashing
-  - Skip null results in hydration
-  - Log warnings for corrupted data
+**Code Implementation Tasks (I will do):**
+- [ ] P0.1.1-P0.1.6: Remove .env from assets, refactor to String.fromEnvironment (6 tasks)
+- [ ] P0.1.7: Create build script with --dart-define using existing keys
+- [ ] P0.1.8: Update README with --dart-define instructions
+- [ ] P0.1.9-P0.1.10: Add .env to .gitignore, remove from git (2 tasks)
+- [ ] P0.1.11: Build APK and verify .env not present
+- [ ] P0.2.1-P0.2.6: Fix OfflineCacheService.clearAll() data destruction (6 tasks)
+- [ ] P0.3.1-P0.3.4: Fix mutation queue decryption fallback crash (4 tasks)
+
+**Manual Tasks (You will do later):**
+- [ ] P0.1.12: Rotate Supabase anon_key in dashboard (5 min, medium priority)
+- [ ] P0.1.13: Restrict Google Maps API key to Android SHA-256 (10 min, medium priority)
+- [ ] P0.1.14: Update CI/CD scripts with --dart-define (15-30 min, low priority, if using CI/CD)
 
 **Files to Modify:**
 - `pubspec.yaml`
 - `lib/src/core/config/supabase_config.dart`
 - `lib/main.dart`
+- `build-apk.sh` or `build-apk.bat` (new)
+- `README.md` (update build instructions)
+- `.gitignore`
 - `lib/src/core/services/offline_cache_service.dart`
 - `lib/src/core/services/mutation_queue_database.dart`
 
@@ -256,15 +255,19 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 **Critical Pending (Blocking):**
 - ⏸️ P0: Security (remove .env from assets, fix cache destruction, fix decryption crash) - **MUST complete before Play Store**
 
-**Next Steps:**
-1. **P0 - Blocking Security** (CRITICAL - must do before P5)
-   - Remove `.env` from assets and rotate secrets
-   - Fix `OfflineCacheService.clearAll()` data destruction
-   - Fix mutation queue decryption fallback crash
-2. P5: Play Store Hardening
-   - Add Firebase Crashlytics
-   - Fix failing tests, add contract tests, flutter analyze
-   - Manual QA testing
-   - Performance & size verification
+**P0 Implementation Strategy:**
+- Remove `.env` from assets
+- Use existing keys via `--dart-define` (build script)
+- Rotate keys later at your convenience
+- I will do code implementation (11 tasks)
+- You will do manual tasks later (3 tasks: key rotation, API restriction, CI/CD update)
 
-**Ready for:** P0 implementation (blocking security) OR P5 implementation (after P0)
+**Next Steps:**
+1. **P0 - Blocking Security** (CRITICAL - I will start now)
+   - I implement: P0.1.1-P0.1.11 (code changes), P0.2 (cache fix), P0.3 (decryption fix)
+   - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
+2. Manual test P1-P4 (after P0 code implementation)
+3. P5: Play Store Hardening
+4. Manual QA testing
+
+**Ready for:** P0 code implementation (I will start now)
