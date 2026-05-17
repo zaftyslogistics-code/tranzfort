@@ -91,9 +91,9 @@ class VerificationRepository {
       }
 
       await _backend.updateProfileFields(userId, {
-        'aadhaar_number': normalizedAadhaar,
+        // P0.7 Simplified: Only write last4 to profiles, not full numbers
         'aadhaar_last4': normalizedAadhaar.substring(normalizedAadhaar.length - 4),
-        'pan_number': normalizedPan,
+        'pan_last4': normalizedPan.substring(normalizedPan.length - 4),
       });
       if (rawRole == 'supplier') {
         await _backend.updateSupplierFields(userId, {
