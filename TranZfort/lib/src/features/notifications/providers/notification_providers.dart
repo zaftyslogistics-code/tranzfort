@@ -54,12 +54,14 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 
   final NotificationRepository _repository;
   StreamSubscription<Result<List<AppNotification>>>? _subscription;
+  DateTime? _loadStartTime;
 
   NotificationsController(this._repository) : super(NotificationsState.initial()) {
     _start();
   }
 
   Future<void> _start() async {
+    _loadStartTime = DateTime.now();
     await load();
     _subscription = _repository.watchNotifications().listen((result) {
       result.when(
@@ -75,7 +77,14 @@ class NotificationsController extends StateNotifier<NotificationsState> {
             clearFailure: true,
           );
         },
-        failure: (failure) {
+        failure: (failure) async {
+          // Ensure minimum loading duration to prevent UI flicker
+          if (_loadStartTime != null) {
+            final elapsed = DateTime.now().difference(_loadStartTime!).inMilliseconds;
+            if (elapsed < 300) {
+              await Future.delayed(Duration(milliseconds: 300 - elapsed));
+            }
+          }
           state = state.copyWith(
             isLoading: false,
             isLoadingMore: false,
