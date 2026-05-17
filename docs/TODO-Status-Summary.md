@@ -264,9 +264,9 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - ✅ P0.3: Fix decryption crash (4/7 tasks complete, 3 tasks deferred)
 - ✅ P0.4: Fix timestamp schema mismatch (8/12 tasks complete, 4 unit tests deferred)
 - ✅ P0.5: Fix unsafe casts (12/19 tasks complete, 7 tasks deferred)
+- ✅ P0.6: Chat unbounded message load (6/10 tasks complete, 4 unit tests deferred)
 
 **Critical Pending (Blocking for Professional App):**
-- ⏸️ P0.6: Chat unbounded message load (10 tasks) - Performance
 - ⏸️ P0.7: Remove full Aadhaar/PAN from profiles (15 tasks) - Privacy
 - ⏸️ P0.1.12-P0.1.14: Manual tasks (key rotation, API restriction, CI/CD) - Security
 
@@ -286,12 +286,12 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
 
 **Recommended Order for Professional App:**
-1. **Phase 1: P0 Critical** (P0.7, P0.6, P0.1.12-P0.1.14, unit tests) - ~10.5 hrs
+1. **Phase 1: P0 Critical** (P0.7, P0.1.12-P0.1.14, unit tests) - ~4.5 hrs
 2. **Phase 2: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
 3. **Phase 3: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
 4. **Phase 4: Manual Testing** - ~2 hrs
 5. **Phase 5: P6 Optimizations** (post-release backlog) - ~6 hrs
 
-**Total Remaining Work:** ~47.5 hours (excluding P6)
+**Total Remaining Work:** ~41.5 hours (excluding P6)
 
-**Ready for:** P0.6 implementation (fix chat unbounded message load)
+**Ready for:** P0.7 implementation (remove full Aadhaar/PAN from profiles)
