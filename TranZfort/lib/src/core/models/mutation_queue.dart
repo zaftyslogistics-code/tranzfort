@@ -49,27 +49,80 @@ class QueuedMutation {
   });
 
   factory QueuedMutation.fromJson(Map<String, dynamic> json) {
+    // Defensive parsing for all fields to prevent crashes on malformed data
+    
+    // Parse id
+    final id = (json['id'] ?? '').toString();
+    
+    // Parse operation_type
+    final operationTypeStr = (json['operation_type'] ?? '').toString();
+    final operationType = MutationOperation.values.firstWhere(
+      (e) => e.name == operationTypeStr,
+      orElse: () => MutationOperation.custom,
+    );
+    
+    // Parse target
+    final targetStr = (json['target'] ?? '').toString();
+    final target = MutationTarget.values.firstWhere(
+      (e) => e.name == targetStr,
+      orElse: () => MutationTarget.custom,
+    );
+    
+    // Parse payload with defensive Map parsing
+    Map<String, dynamic> payload;
+    if (json['payload'] is Map<String, dynamic>) {
+      payload = json['payload'] as Map<String, dynamic>;
+    } else if (json['payload'] is Map) {
+      payload = Map<String, dynamic>.from(json['payload'] as Map);
+    } else {
+      payload = <String, dynamic>{};
+    }
+    
+    // Parse endpoint
+    final endpoint = (json['endpoint'] ?? '').toString();
+    
+    // Parse timestamp (handle both int and string formats)
+    final timestampValue = json['timestamp'];
+    DateTime timestamp;
+    if (timestampValue is int) {
+      timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue);
+    } else if (timestampValue is String) {
+      timestamp = DateTime.tryParse(timestampValue) ?? DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestampValue) ?? 0);
+    } else {
+      timestamp = DateTime.now();
+    }
+    
+    // Parse retry_count
+    final retryCount = (json['retry_count'] ?? 0) as int;
+    
+    // Parse max_retries
+    final maxRetries = (json['max_retries'] ?? 5) as int;
+    
+    // Parse status
+    final statusStr = (json['status'] ?? '').toString();
+    final status = MutationStatus.values.firstWhere(
+      (e) => e.name == statusStr,
+      orElse: () => MutationStatus.pending,
+    );
+    
+    // Parse last_error
+    final lastError = json['last_error']?.toString();
+    
+    // Parse user_id
+    final userId = (json['user_id'] ?? '').toString();
+    
     return QueuedMutation(
-      id: json['id'] as String,
-      operationType: MutationOperation.values.firstWhere(
-        (e) => e.name == json['operation_type'],
-        orElse: () => MutationOperation.custom,
-      ),
-      target: MutationTarget.values.firstWhere(
-        (e) => e.name == json['target'],
-        orElse: () => MutationTarget.custom,
-      ),
-      payload: json['payload'] as Map<String, dynamic>,
-      endpoint: json['endpoint'] as String,
-      timestamp: DateTime.tryParse(json['timestamp'] as String) ?? DateTime.fromMillisecondsSinceEpoch(0),
-      retryCount: json['retry_count'] as int? ?? 0,
-      maxRetries: json['max_retries'] as int? ?? 5,
-      status: MutationStatus.values.firstWhere(
-        (e) => e.name == json['status'],
-        orElse: () => MutationStatus.pending,
-      ),
-      lastError: json['last_error'] as String?,
-      userId: json['user_id'] as String,
+      id: id,
+      operationType: operationType,
+      target: target,
+      payload: payload,
+      endpoint: endpoint,
+      timestamp: timestamp,
+      retryCount: retryCount,
+      maxRetries: maxRetries,
+      status: status,
+      lastError: lastError,
+      userId: userId,
     );
   }
 
@@ -80,7 +133,7 @@ class QueuedMutation {
       'target': target.name,
       'payload': payload,
       'endpoint': endpoint,
-      'timestamp': timestamp.toIso8601String(),
+      'timestamp': timestamp.millisecondsSinceEpoch, // Changed from ISO8601 string to integer for better SQLite ordering
       'retry_count': retryCount,
       'max_retries': maxRetries,
       'status': status.name,
