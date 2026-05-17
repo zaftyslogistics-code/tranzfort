@@ -1209,10 +1209,10 @@ These tasks can be done after code implementation:
 
 ### P0.2 — Fix `OfflineCacheService.clearAll()` data destruction
 
-- [ ] **P0.2.1** Add a `static const String _namespace = 'cache_';` to `OfflineCacheService`.
-- [ ] **P0.2.2** Update `generateCacheKey()` to prefix the returned key with `_namespace`.
-- [ ] **P0.2.3** Update `clearAll()` to iterate `_prefsInstance.getKeys()`, filter `key.startsWith(_namespace)`, and remove only matching keys.
-- [ ] **P0.2.4** Update `clearByPrefix()` to also respect `_namespace` if called with an empty prefix.
+- [x] **P0.2.1** Add a `static const String _namespace = 'cache_';` to `OfflineCacheService`.
+- [x] **P0.2.2** Update `generateCacheKey()` to prefix the returned key with `_namespace`.
+- [x] **P0.2.3** Update `clearAll()` to iterate `_prefsInstance.getKeys()`, filter `key.startsWith(_namespace)`, and remove only matching keys.
+- [x] **P0.2.4** Update `clearByPrefix()` to also respect `_namespace` if called with an empty prefix.
 - [ ] **P0.2.5** Add unit test: `clearAll()` does not remove a non-namespaced key (e.g., `onboarding_complete`).
 - [ ] **P0.2.6** Add unit test: `clearByPrefix('marketplace')` only removes `cache_marketplace_*` keys.
 
