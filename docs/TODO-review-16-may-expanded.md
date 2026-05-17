@@ -804,6 +804,45 @@ String safeString(dynamic value) {
   - Test identical timestamp pagination edge case
   - Verify no regressions compared to direct table reads
 
+- [x] **P3.6.13** Testing Improvements & UI Polish (Fixed during staging validation)
+  - ✅ Fixed timestamp display showing UTC instead of local time
+    - Issue: Timestamps showed UTC time (e.g., 4:16) instead of local time (e.g., 9:48)
+    - Cause: `_formatTimestamp()` in chat_screen_helpers.dart was not converting to local time
+    - Fix: Added `.toLocal()` before formatting hour and minute
+    - File: `TranZfort/lib/src/features/communication/presentation/chat_screen_helpers.dart`
+  
+  - ✅ Fixed timestamp display only showing on first/last message in group
+    - Issue: Only first and last messages in a group showed timestamps
+    - Cause: Logic in chat_screen_action_extensions.dart hid timestamps for messages from same sender within 2 minutes
+    - Fix: Removed the 2-minute grouping logic to show timestamps on all messages
+    - File: `TranZfort/lib/src/features/communication/presentation/chat_screen_action_extensions.dart`
+  
+  - ✅ Fixed "Unable to load messages" flicker when opening chat
+    - Issue: Error message flickered briefly before messages loaded
+    - Cause: RPC is slightly slower than direct table read, causing brief error state before realtime stream provides data
+    - Fix: Implemented debounced error display (2-second delay)
+      - Errors only show if no data arrives within 2 seconds
+      - If data arrives during debounce, error display is cancelled
+      - Professional industry-standard pattern for async loading
+    - Files: 
+      - `TranZfort/lib/src/features/communication/providers/chat_providers.dart` (added Timer-based debounce)
+      - `TranZfort/lib/src/features/communication/presentation/chat_message_sections.dart` (reverted workaround)
+  
+  - ✅ Removed feature flag complexity
+    - Issue: Build flags (`--dart-define=USE_RPC_MIGRATION=true`) were confusing
+    - Cause: Feature flag approach was overly complex for production
+    - Fix: Removed feature flag, made RPC migration permanent and simple
+      - Removed `USE_RPC_MIGRATION` from app_config.dart
+      - Removed all `if (useRpcMigration)` checks from backend files
+      - RPCs are now default and only implementation
+      - No build flags needed anymore
+    - Files:
+      - `TranZfort/lib/src/core/config/app_config.dart`
+      - `TranZfort/lib/src/features/trucker/data/trucker_fleet_repository.dart`
+      - `TranZfort/lib/src/features/notifications/data/notification_repository.dart`
+      - `TranZfort/lib/src/features/communication/data/chat_repository_backend.dart`
+      - Test files updated to include archiveTruck method
+
 ### P3.7 — Support RPCs
 
 **NOTE:** Per P3.0.1 audit, need to audit support RPCs. Some may already exist.
