@@ -65,6 +65,7 @@ class MyLoadsState {
 
 class MyLoadsController extends StateNotifier<MyLoadsState> {
   final SupplierLoadRepository _repository;
+  static const int _pageSize = 20;
 
   MyLoadsController(this._repository) : super(MyLoadsState.initial()) {
     loadInitial();
@@ -86,7 +87,7 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
         state = state.copyWith(
           loads: value,
           isInitialLoading: false,
-          hasMore: value.isNotEmpty,
+          hasMore: value.length >= _pageSize,
           page: 1,
           clearFailure: true,
         );
@@ -124,7 +125,7 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
           isLoadingMore: false,
           page: nextPage,
           loads: <Load>[...state.loads, ...value],
-          hasMore: value.isNotEmpty,
+          hasMore: value.length >= _pageSize,
           clearFailure: true,
         );
       },
