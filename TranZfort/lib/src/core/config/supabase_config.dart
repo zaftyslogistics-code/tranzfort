@@ -29,8 +29,13 @@ class SupabaseConfig {
     final anonKeyFromDefine = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
     final googleClientIdFromDefine = const String.fromEnvironment('GOOGLE_WEB_CLIENT_ID', defaultValue: '');
 
+    AppLogger.debug('SupabaseConfig: Checking --dart-define values', scope: 'supabase_config');
+    AppLogger.debug('SUPABASE_URL from --dart-define: ${urlFromDefine.isNotEmpty ? "SET" : "EMPTY"}', scope: 'supabase_config');
+    AppLogger.debug('SUPABASE_ANON_KEY from --dart-define: ${anonKeyFromDefine.isNotEmpty ? "SET" : "EMPTY"}', scope: 'supabase_config');
+
     // If --dart-define values are present, use them (production build)
     if (urlFromDefine.isNotEmpty && anonKeyFromDefine.isNotEmpty) {
+      AppLogger.info('Using --dart-define for Supabase configuration', scope: 'supabase_config');
       return SupabaseConfig(
         url: urlFromDefine,
         anonKey: anonKeyFromDefine,
@@ -39,11 +44,21 @@ class SupabaseConfig {
     }
 
     // Fallback: Read from .env file (local IDE development)
+    AppLogger.info('--dart-define not provided, falling back to .env file', scope: 'supabase_config');
     try {
       dotenv.load(fileName: '.env');
       final url = dotenv.env['SUPABASE_URL'] ?? '';
       final anonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? '';
       final googleClientId = dotenv.env['GOOGLE_WEB_CLIENT_ID'] ?? '';
+      
+      AppLogger.debug('SUPABASE_URL from .env: ${url.isNotEmpty ? "SET" : "EMPTY"}', scope: 'supabase_config');
+      AppLogger.debug('SUPABASE_ANON_KEY from .env: ${anonKey.isNotEmpty ? "SET" : "EMPTY"}', scope: 'supabase_config');
+      
+      if (url.isEmpty || anonKey.isEmpty) {
+        AppLogger.warning('.env file loaded but SUPABASE_URL or SUPABASE_ANON_KEY is empty', scope: 'supabase_config');
+      } else {
+        AppLogger.info('Using .env file for Supabase configuration', scope: 'supabase_config');
+      }
       
       return SupabaseConfig(
         url: url,
