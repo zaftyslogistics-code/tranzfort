@@ -81,8 +81,8 @@ class NotificationsController extends StateNotifier<NotificationsState> {
           // Ensure minimum loading duration to prevent UI flicker
           if (_loadStartTime != null) {
             final elapsed = DateTime.now().difference(_loadStartTime!).inMilliseconds;
-            if (elapsed < 300) {
-              await Future.delayed(Duration(milliseconds: 300 - elapsed));
+            if (elapsed < 500) {
+              await Future.delayed(Duration(milliseconds: 500 - elapsed));
             }
           }
           state = state.copyWith(
@@ -104,6 +104,11 @@ class NotificationsController extends StateNotifier<NotificationsState> {
     final result = await _repository.getNotifications(limit: _pageSize);
     await result.when(
       success: (notifications) async {
+        // Ensure minimum loading duration for smooth UI
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 500) {
+          await Future.delayed(Duration(milliseconds: 500 - elapsed));
+        }
         state = state.copyWith(
           isLoading: false,
           notifications: notifications,
@@ -114,8 +119,8 @@ class NotificationsController extends StateNotifier<NotificationsState> {
       failure: (failure) async {
         // Ensure minimum loading duration to prevent UI flicker
         final elapsed = DateTime.now().difference(startTime).inMilliseconds;
-        if (elapsed < 300) {
-          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        if (elapsed < 500) {
+          await Future.delayed(Duration(milliseconds: 500 - elapsed));
         }
         state = state.copyWith(
           isLoading: false,
