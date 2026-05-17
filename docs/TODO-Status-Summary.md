@@ -275,6 +275,10 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 
 **Quality Pending (Recommended for Professional App):**
 - ⏸️ P5: Play Store Hardening (45 tasks) - Crash reporting, testing, QA, performance
+  - P5.1: Crash reporting (5/7 tasks complete, 2 manual testing deferred)
+  - P5.2: Testing (flutter_dotenv migration deferred to P5.2)
+  - P5.3: Manual QA (13 tasks - requires manual testing)
+  - P5.4: Performance & Size (4/12 tasks complete, 8 deferred)
 - ⏸️ P2 Deferred: Model/repository-level localization (61 tasks) - UX consistency
 - ⏸️ P3 Deferred: RPC testing & E2E tests (40 tasks) - Regression prevention
 
@@ -289,12 +293,14 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
 
 **Recommended Order for Professional App:**
-1. **Phase 1: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
+1. **Phase 1: P5 Hardening - Part 1** (crash reporting, logging) - ~2 hrs
+   - P5.1: Crash reporting (5/7 complete, 2 manual testing tasks deferred)
+   - P5.4: Performance & Size (4/12 complete, 8 tasks deferred)
 2. **Phase 2: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
-3. **Phase 3: Manual Testing** - ~2 hrs
+3. **Phase 3: Manual Testing** (P5.3 QA) - ~2 hrs
 4. **Phase 4: P0 Manual Tasks** (P0.1.12-P0.1.13: key rotation, API restriction) - ~0.5 hrs (pre-release)
 5. **Phase 5: P6 Optimizations** (post-release backlog, including P0.7 full encryption) - ~8 hrs
 
-**Total Remaining Work:** ~39.5 hours (excluding P6 and pre-release manual tasks)
+**Total Remaining Work:** ~30.5 hours (excluding P6, manual testing, and pre-release tasks)
 
-**Ready for:** P5.1 - Crash Reporting Setup (Firebase Crashlytics)
+**Ready for:** P5.2 (Testing - flutter_dotenv migration) or P2/P3 Quality (localization, RPC tests)
