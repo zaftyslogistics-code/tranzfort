@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/logger/app_logger.dart';
 import 'supplier_load_models.dart';
 
 abstract class SupplierLoadBackend {
