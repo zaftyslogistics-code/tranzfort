@@ -1022,41 +1022,356 @@ String safeString(dynamic value) {
 
 ## P5 — PLAY STORE HARDENING
 
-### P5.1 — Crash reporting
+### P5.1 — Crash reporting (Firebase Crashlytics)
 
-- [ ] **P5.1.1** Add `firebase_crashlytics: ^4.1.3` to `pubspec.yaml`.
-- [ ] **P5.1.2** Initialize Crashlytics in `main.dart` with `FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode)`.
-- [ ] **P5.1.3** Record non-fatal errors in repositories and providers.
-- [ ] **P5.1.4** Verify Crashlytics dashboard receives test crashes.
+- [ ] **P5.1.1** Add `firebase_crashlytics: ^4.1.3` to `pubspec.yaml` dependencies.
+- [ ] **P5.1.2** Run `flutter pub get` to install Crashlytics.
+- [ ] **P5.1.3** Initialize Crashlytics in `main.dart` before `runApp()`:
+  ```dart
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+  };
+  ```
+- [ ] **P5.1.4** Add non-fatal error recording in critical repositories:
+  - `auth_repository.dart` - record auth failures
+  - `supplier_load_repository_backend.dart` - record RPC failures
+  - `trucker_trip_repository_backend.dart` - record RPC failures
+  - `chat_repository.dart` - record message send failures
+- [ ] **P5.1.5** Add user identifier to Crashlytics for better crash grouping:
+  ```dart
+  await FirebaseCrashlytics.instance.setUserIdentifier(userId);
+  ```
+- [ ] **P5.1.6** Test crash reporting: Force a test crash in debug mode to verify Crashlytics receives it.
+- [ ] **P5.1.7** Verify Crashlytics dashboard shows test crash with correct stack trace and user info.
 
 ### P5.2 — Testing
 
-- [ ] **P5.2.1** Fix 3 failing unit tests (verification screen, upload service, chat repository).
-- [ ] **P5.2.2** Add contract tests for all new RPCs in P3.
-- [ ] **P5.2.3** Add unit tests for defensive parsing in P1.
-- [ ] **P5.2.4** Add unit tests for localization mapping in P2.
-- [ ] **P5.2.5** Run `flutter analyze` and resolve all warnings in production code (ignore test/tool files).
+- [ ] **P5.2.1** Run `flutter test` and capture all failing tests in a text file.
+- [ ] **P5.2.2** Review failing tests and categorize by type (flaky, outdated, broken by recent changes).
+- [ ] **P5.2.3** Fix verification screen test failures (if any).
+- [ ] **P5.2.4** Fix upload service test failures (if any).
+- [ ] **P5.2.5** Fix chat repository test failures (if any).
+- [ ] **P5.2.6** Add contract tests for all new RPCs created in P3:
+  - Test each RPC with valid inputs
+  - Test each RPC with invalid inputs (null, wrong type)
+  - Test each RPC with edge cases (empty results, pagination boundaries)
+  - Test RLS enforcement (user can only access their own data)
+- [ ] **P5.2.7** Add unit tests for defensive parsing helpers in P1:
+  - Test `safeParseDateTime()` with null, int, valid string, invalid string, milliseconds string
+  - Test `safeCast<T>()`, `safeMap()`, `safeList<T>()`, `safeString()` with various inputs
+- [ ] **P5.2.8** Add unit tests for localization mapping in P2:
+  - Test error code to localized message mapping
+  - Test canonical code to display label mapping
+- [ ] **P5.2.9** Run `flutter analyze` and capture all warnings.
+- [ ] **P5.2.10** Resolve all warnings in production code (ignore test/tool files).
+- [ ] **P5.2.11** Fix any `prefer-const-constructors` warnings.
+- [ ] **P5.2.12** Fix any `avoid_print` warnings (replace with AppLogger).
+- [ ] **P5.2.13** Fix any `unawaited_futures` warnings.
 
 ### P5.3 — Manual QA Checklist
 
 - [ ] **P5.3.1** Supplier sign-up → profile completion → verification upload → GPS capture.
+  - Test: Email signup, fill profile, upload Aadhaar/PAN, capture GPS location
+  - Verify: All steps complete successfully, verification status updates
 - [ ] **P5.3.2** Supplier post load → draft save → resume draft → publish.
+  - Test: Create load, save as draft, exit, resume draft, publish
+  - Verify: Draft saved correctly, resume works, load published
 - [ ] **P5.3.3** Supplier My Loads → approve/reject booking request.
+  - Test: View booking requests, approve one, reject another
+  - Verify: Status updates correctly, trucker notified
 - [ ] **P5.3.4** Trucker sign-up → verification → add truck.
+  - Test: Email signup, upload verification documents, add truck details
+  - Verify: Verification submitted, truck added to fleet
 - [ ] **P5.3.5** Trucker Find Loads → supplier avatar renders.
+  - Test: Browse marketplace, check supplier avatars
+  - Verify: Avatars load correctly, no broken images
 - [ ] **P5.3.6** Trucker submit booking request → advance trip → upload LR/POD.
+  - Test: Book load, advance trip stages, upload proof documents
+  - Verify: Booking accepted, trip advances, documents upload
 - [ ] **P5.3.7** Chat text send offline → sync when online.
+  - Test: Send message offline, go online, verify sync
+  - Verify: Message queued offline, synced when online, no duplicates
 - [ ] **P5.3.8** Support ticket create with attachment → reply.
+  - Test: Create ticket with image attachment, reply to ticket
+  - Verify: Ticket created, attachment uploaded, reply sent
 - [ ] **P5.3.9** Public profile open from feed/chat/detail.
+  - Test: Open profile from different entry points
+  - Verify: Profile loads correctly from all sources
 - [ ] **P5.3.10** Hindi language switch → all screens render Hindi correctly.
+  - Test: Switch language to Hindi, navigate through app
+  - Verify: All screens show Hindi text, no English fallbacks
 - [ ] **P5.3.11** Logout → verify sensitive cache/queue/session is cleared.
+  - Test: Logout, check SharedPreferences and SQLite
+  - Verify: Session cleared, cache cleared, queue preserved (for offline sync)
+- [ ] **P5.3.12** Deep link handling → app opens to correct screen.
+  - Test: Use deep link to open specific load/chat/profile
+  - Verify: App opens to correct screen with correct data
+- [ ] **P5.3.13** Push notification tap → app opens to relevant screen.
+  - Test: Send test notification, tap it
+  - Verify: App opens to relevant screen (load, chat, etc.)
 
 ### P5.4 — Performance & Size
 
-- [ ] **P5.4.1** Verify release APK size < 50MB.
-- [ ] **P5.4.2** Verify no debug logging in release build (use `kDebugMode` gates).
-- [ ] **P5.4.3** Verify no `print()` statements in production code paths.
-- [ ] **P5.4.4** Split oversized UI files if time permits (deferred to post-release if needed).
+- [ ] **P5.4.1** Build release APK and check file size.
+- [ ] **P5.4.2** If APK size > 50MB, investigate large assets (images, fonts).
+- [ ] **P5.4.3** Optimize images: Use webp format, compress where possible.
+- [ ] **P5.4.4** Verify release APK size < 50MB.
+- [ ] **P5.4.5** Search for all `print()` statements in production code.
+- [ ] **P5.4.6** Replace `print()` with `AppLogger.debug()` or remove.
+- [ ] **P5.4.7** Ensure all debug logging is gated by `kDebugMode`:
+  ```dart
+  if (kDebugMode) {
+    AppLogger.debug('Debug info');
+  }
+  ```
+- [ ] **P5.4.8** Verify no debug logging in release build (check compiled APK or run release build with logging enabled).
+- [ ] **P5.4.9** Test app startup time: Should be < 3 seconds on mid-range device.
+- [ ] **P5.4.10** If startup time > 3s, investigate heavy initialization (database, large assets).
+- [ ] **P5.4.11** Split oversized UI files if time permits (deferred to post-release if needed).
+- [ ] **P5.4.12** Profile app performance: Check for janky animations, slow list scrolling.
+
+---
+
+## P2 DEFERRED — Localization (Model/Repository-level strings)
+
+### P2.2.7 — Supplier model-level localization (SKIPPED)
+
+- [ ] **P2.2.7.1** Open `lib/src/features/supplier/data/supplier_load_models.dart` and locate `LoadBookingRequest.displayTruckerName`.
+- [ ] **P2.2.7.2** Create UI helper function in presentation layer to format trucker name with localization.
+- [ ] **P2.2.7.3** Update all UI references to use the new helper instead of model getter.
+- [ ] **P2.2.7.4** Open `LoadBookingRequest.proofStatus` getter.
+- [ ] **P2.2.7.5** Create UI helper function to map proof status to localized string.
+- [ ] **P2.2.7.6** Update all UI references to use the new helper.
+- [ ] **P2.2.7.7** Add ARB keys for proof status strings if needed.
+
+### P2.2.8 — Supplier controller localization (SKIPPED)
+
+- [ ] **P2.2.8.1** Open `lib/src/features/supplier/controllers/post_load_controller.dart` and locate concurrent-action errors.
+- [ ] **P2.2.8.2** Search for `cancellationInProgress`, `closeInProgress`, `bookingActionInProgress` strings.
+- [ ] **P2.2.8.3** If found, add to error codes and localize via error code mapping.
+- [ ] **P2.2.8.4** If not found, mark task as N/A (may be outdated TODO).
+
+### P2.3.2 — Trucker model-level localization (SKIPPED)
+
+- [ ] **P2.3.2.1** Open `lib/src/features/trucker/data/trucker_trip_repository_models.dart` and locate `TruckerTrip.proofStatus`.
+- [ ] **P2.3.2.2** Create UI helper function to map proof status to localized string.
+- [ ] **P2.3.2.3** Update all UI references to use the new helper.
+- [ ] **P2.3.2.4** Open `TruckerTrip.timeContext` getter.
+- [ ] **P2.3.2.5** Create UI helper function to format time context with localization.
+- [ ] **P2.3.2.6** Update all UI references to use the new helper.
+- [ ] **P2.3.2.7** Open `TruckerTrip.stageLabel` getter.
+- [ ] **P2.3.2.8** Create UI helper function to map stage to localized string.
+- [ ] **P2.3.2.9** Update all UI references to use the new helper.
+
+### P2.3.3 — Trucker ARB keys for trip stages (SKIPPED)
+
+- [ ] **P2.3.3.1** Add ARB keys for all trip stage labels (pending, in_transit, completed, etc.).
+- [ ] **P2.3.3.2** Add ARB keys for proof status labels (pending, uploaded, verified, rejected).
+- [ ] **P2.3.3.3** Update UI helper from P2.3.2 to use new ARB keys.
+
+### P2.3.4 — Trucker model date formatting (SKIPPED)
+
+- [ ] **P2.3.4.1** Open `TruckerTrip._formatDate` method.
+- [ ] **P2.3.4.2** Replace hardcoded month abbreviations with `intl` package or `AppLocalizations`.
+- [ ] **P2.3.4.3** Update all date formatting in model to use localized versions.
+- [ ] **P2.3.4.4** Test date formatting with different locales.
+
+### P2.3.8 — Trucker repository localization (SKIPPED)
+
+- [ ] **P2.3.8.1** Open `lib/src/features/trucker/data/trucker_load_detail_repository.dart`.
+- [ ] **P2.3.8.2** Search for hardcoded validation/error strings.
+- [ ] **P2.3.8.3** Create error codes for all validation strings.
+- [ ] **P2.3.8.4** Update repository to return error codes instead of raw strings.
+- [ ] **P2.3.8.5** Add error code to localized message mapping in UI layer.
+
+### P2.3.9 — Trucker marketplace repository localization (SKIPPED)
+
+- [ ] **P2.3.9.1** Open `lib/src/features/trucker/data/trucker_marketplace_repository.dart`.
+- [ ] **P2.3.9.2** Search for `supplierIdRequired` validation string.
+- [ ] **P2.3.9.3** If found, create error code and localize via mapping.
+- [ ] **P2.3.9.4** If not found, mark task as N/A (may be fixed elsewhere).
+
+### P2.4.1 — Chat repository localization (SKIPPED)
+
+- [ ] **P2.4.1.1** Open `lib/src/features/communication/data/chat_repository.dart`.
+- [ ] **P2.4.1.2** Search for validation failures with raw strings.
+- [ ] **P2.4.1.3** Create error codes for all validation strings.
+- [ ] **P2.4.1.4** Update repository to return error codes instead of raw strings.
+- [ ] **P2.4.1.5** Add error code to localized message mapping in UI layer.
+
+### P2.4.3 — Chat ARB keys for validation (SKIPPED)
+
+- [ ] **P2.4.3.1** Add ARB keys for chat validation messages (conversationIdRequired, messageTextRequired, etc.).
+- [ ] **P2.4.3.2** Update UI layer to map error codes to new ARB keys.
+
+### P2.4.5 — Chat new message pill localization (SKIPPED)
+
+- [ ] **P2.4.5.1** Search for `chatNewMessagePill` label in codebase.
+- [ ] **P2.4.5.2** If found, add ARB key and localize.
+- [ ] **P2.4.5.3** If not found, mark task as N/A (may be outdated TODO).
+
+### P2.4.6 — Chat currency formatting (PARTIALLY DONE)
+
+- [x] **P2.4.6.1** Changed `_formatCurrencyCompact` to use `l10n.localeName` instead of hardcoded 'en_IN'.
+- [ ] **P2.4.6.2** Verify currency formatting works correctly for Hindi locale.
+
+### P2.4.8 — Chat offline sync banner (SKIPPED)
+
+- [ ] **P2.4.8.1** Search for `offlineSyncRetryAction` button label.
+- [ ] **P2.4.8.2** If found, add ARB key and localize.
+- [ ] **P2.4.8.3** If not found, mark task as N/A (may be outdated TODO).
+
+### P2.5.1 — Verification validation helper localization (SKIPPED)
+
+- [ ] **P2.5.1.1** Open `lib/src/core/utils/verification_validation_helper.dart`.
+- [ ] **P2.5.1.2** Search for all field error messages.
+- [ ] **P2.5.1.3** Create error codes for all validation messages.
+- [ ] **P2.5.1.4** Update helper to accept l10n parameter and return error codes.
+- [ ] **P2.5.1.5** Add error code to localized message mapping in UI layer.
+
+### P2.5.3 — Aadhaar/PAN validation error codes (SKIPPED)
+
+- [ ] **P2.5.3.1** Open `validateAadhaar` and `validatePan` functions.
+- [ ] **P2.5.3.2** Change return type from string to error code.
+- [ ] **P2.5.3.3** Create error codes for Aadhaar/PAN validation failures.
+- [ ] **P2.5.3.4** Update all callers to handle error codes instead of strings.
+
+### P2.5.4 — Aadhaar/PAN ARB keys (SKIPPED)
+
+- [ ] **P2.5.4.1** Add ARB keys for Aadhaar/PAN validation errors.
+- [ ] **P2.5.4.2** Update UI layer to map error codes to new ARB keys.
+
+### P2.6.5 — Report issue context localization (SKIPPED)
+
+- [ ] **P2.6.5.1** Open `lib/src/features/support/providers/report_issue_context.dart`.
+- [ ] **P2.6.5.2** Search for fallback label.
+- [ ] **P2.6.5.3** Add ARB key and localize.
+- [ ] **P2.6.5.4** Update provider to use localized string.
+
+### P2.6.6 — Notification error codes (SKIPPED)
+
+- [ ] **P2.6.6.1** Open `lib/src/features/notifications/data/notification_repository.dart`.
+- [ ] **P2.6.6.2** Search for `markRead()` error handling.
+- [ ] **P2.6.6.3** If it returns raw strings, create error codes and localize.
+- [ ] **P2.6.6.4** If it only returns UnauthorizedFailure, mark task as N/A.
+
+### P2.6.7 — Notification ID required ARB key (SKIPPED)
+
+- [ ] **P2.6.7.1** Check if `notificationIdRequired` error code exists.
+- [ ] **P2.6.7.2** If exists, add ARB key and map in UI layer.
+- [ ] **P2.6.7.3** If not used, mark task as N/A.
+
+### P2.7.1 — Review time ago localization (SKIPPED)
+
+- [ ] **P2.7.1.1** Open `lib/src/features/review/data/review_models.dart` and locate `Review.timeAgo`.
+- [ ] **P2.7.1.2** Create UI helper function to format relative time with localization.
+- [ ] **P2.7.1.3** Update all UI references to use the new helper.
+
+### P2.7.2 — Relative time ARB keys (SKIPPED)
+
+- [ ] **P2.7.2.1** Add ARB keys for relative time formatting:
+  - `relativeTimeYear`, `relativeTimeMonth`, `relativeTimeDay`, `relativeTimeHour`, `relativeTimeMinute`, `relativeTimeJustNow`
+- [ ] **P2.7.2.2** Update UI helper from P2.7.1 to use new ARB keys.
+
+### P2.7.3 — Public profile display strings (SKIPPED)
+
+- [ ] **P2.7.3.1** Open `lib/src/features/profile/data/public_profile_models.dart`.
+- [ ] **P2.7.3.2** Search for `verificationBadge`, `newUserBadge`, `displayLocation` getters.
+- [ ] **P2.7.3.3** Create UI helper functions for each display string.
+- [ ] **P2.7.3.4** Update all UI references to use the new helpers.
+
+### P2.7.4 — SupabaseReviewBackend exception messages (SKIPPED)
+
+- [ ] **P2.7.4.1** Search for `SupabaseReviewBackend` in codebase.
+- [ ] **P2.7.4.2** If found, locate exception messages (`sessionUnavailable`, `invalidResponseFormat`).
+- [ ] **P2.7.4.3** Create error codes and localize via mapping.
+- [ ] **P2.7.4.4** If not found, mark task as N/A (may be outdated TODO).
+
+---
+
+## P3 DEFERRED — RPC Testing & Quality
+
+### P3.1.7 — Auth/Profile E2E tests
+
+- [ ] **P3.1.7.1** Create E2E test for user registration flow.
+- [ ] **P3.1.7.2** Create E2E test for profile completion flow.
+- [ ] **P3.1.7.3** Create E2E test for terms acceptance flow.
+- [ ] **P3.1.7.4** Create E2E test for profile updates in settings.
+- [ ] **P3.1.7.5** Verify no regressions compared to direct table reads.
+
+### P3.2.5 — Supplier loads contract test
+
+- [ ] **P3.2.5.1** Create contract test for `get_supplier_loads_list` shape.
+- [ ] **P3.2.5.2** Test with different status filters (all, active, completed, cancelled).
+- [ ] **P3.2.5.3** Test pagination with cursor.
+- [ ] **P3.2.5.4** Verify RLS enforcement (user can only see their own loads).
+
+### P3.2.6 — Supplier load detail contract test
+
+- [ ] **P3.2.6.1** Create contract test for `get_supplier_load_detail` shape.
+- [ ] **P3.2.6.2** Test with valid load_id.
+- [ ] **P3.2.6.3** Test with invalid load_id (should return error/empty).
+- [ ] **P3.2.6.4** Verify RLS enforcement (user can only see their own loads).
+
+### P3.2.7 — Supplier loads E2E tests
+
+- [ ] **P3.2.7.1** Create E2E test for load posting flow.
+- [ ] **P3.2.7.2** Create E2E test for my loads list with pagination.
+- [ ] **P3.2.7.3** Create E2E test for load detail view.
+- [ ] **P3.2.7.4** Create E2E test for load status updates.
+- [ ] **P3.2.7.5** Verify no regressions compared to direct table reads.
+
+### P3.3.8 — Trucker marketplace E2E tests
+
+- [ ] **P3.3.8.1** Create E2E test for load search and filtering.
+- [ ] **P3.3.8.2** Create E2E test for load detail view from marketplace.
+- [ ] **P3.3.8.3** Create E2E test for supplier contact info display.
+- [ ] **P3.3.8.4** Create E2E test for approved trucks selection.
+- [ ] **P3.3.8.5** Verify no regressions compared to direct table reads.
+
+### P3.4.7 — Trucker trips contract test
+
+- [ ] **P3.4.7.1** Create contract test for `get_trucker_trips` shape.
+- [ ] **P3.4.7.2** Test with different status filters.
+- [ ] **P3.4.7.3** Test pagination with cursor.
+- [ ] **P3.4.7.4** Verify RLS enforcement.
+
+### P3.4.8 — Trucker trip detail contract test
+
+- [ ] **P3.4.8.1** Create contract test for `get_trip_detail` shape.
+- [ ] **P3.4.8.2** Test with valid trip_id.
+- [ ] **P3.4.8.3** Test with invalid trip_id.
+- [ ] **P3.4.8.4** Verify RLS enforcement.
+
+### P3.4.9 — Trucker trips E2E tests
+
+- [ ] **P3.4.9.1** Create E2E test for trip list with pagination.
+- [ ] **P3.4.9.2** Create E2E test for trip detail view.
+- [ ] **P3.4.9.3** Create E2E test for trip stage advancement.
+- [ ] **P3.4.9.4** Verify no regressions compared to direct table reads.
+
+### P3.5.7 — Fleet E2E tests
+
+- [ ] **P3.5.7.1** Create E2E test for add truck flow.
+- [ ] **P3.5.7.2** Create E2E test for edit truck flow.
+- [ ] **P3.5.7.3** Create E2E test for delete truck flow.
+- [ ] **P3.5.7.4** Verify no regressions compared to direct table reads.
+
+### P3.6.7 — Chat E2E tests
+
+- [ ] **P3.6.7.1** Create E2E test for create_or_get_conversation.
+- [ ] **P3.6.7.2** Create E2E test for send_message.
+- [ ] **P3.6.7.3** Create E2E test for get_conversation_messages with pagination.
+- [ ] **P3.6.7.4** Create E2E test for realtime message updates.
+- [ ] **P3.6.7.5** Verify no regressions compared to direct table reads.
+
+### P3.7.7 — Support E2E tests
+
+- [ ] **P3.7.7.1** Create E2E test for create_ticket.
+- [ ] **P3.7.7.2** Create E2E test for add_message.
+- [ ] **P3.7.7.3** Create E2E test for get_ticket_messages with pagination.
+- [ ] **P3.7.7.4** Verify no regressions compared to direct table reads.
 
 ---
 
@@ -1228,60 +1543,171 @@ These tasks can be done after code implementation:
 
 ### P0.4 — Fix mutation queue timestamp schema mismatch (`F-020`)
 
-- [ ] **P0.4.1** Decide approach: **Option A** (preferred) — change `QueuedMutation.toJson()` to output `timestamp.millisecondsSinceEpoch` (integer).
-- [ ] **P0.4.2** Update `QueuedMutation.toJson()`: replace `timestamp.toIso8601String()` with `timestamp.millisecondsSinceEpoch`.
-- [ ] **P0.4.3** Update `QueuedMutation.fromJson()`: read `timestamp` as `int` and construct with `DateTime.fromMillisecondsSinceEpoch(json['timestamp'] ?? 0)`.
-- [ ] **P0.4.4** Add SQLite migration in `mutation_queue_database.dart`: `ALTER TABLE mutation_queue ADD COLUMN timestamp_ms INTEGER;` then copy data, or drop and recreate table if queue is ephemeral.
-- [ ] **P0.4.5** Add unit test: round-trip serialize/deserialize preserves chronological order.
-- [ ] **P0.4.6** Add unit test: `processQueue()` orders mutations correctly after schema change.
+**Issue:** `QueuedMutation.toJson()` uses `timestamp.toIso8601String()` (string) but SQLite expects integer for chronological ordering.
+
+- [ ] **P0.4.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.toJson()`.
+- [ ] **P0.4.2** Replace `timestamp.toIso8601String()` with `timestamp.millisecondsSinceEpoch` in `toJson()`.
+- [ ] **P0.4.3** Open `QueuedMutation.fromJson()` and locate timestamp parsing.
+- [ ] **P0.4.4** Update `fromJson()` to handle both `int` (new format) and `String` (legacy format):
+  ```dart
+  final timestampValue = json['timestamp'];
+  if (timestampValue is int) {
+    timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue);
+  } else if (timestampValue is String) {
+    timestamp = DateTime.tryParse(timestampValue) ?? DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestampValue) ?? 0);
+  } else {
+    timestamp = DateTime.now();
+  }
+  ```
+- [ ] **P0.4.5** Open `lib/src/core/services/mutation_queue_database.dart` and locate `_onUpgrade()`.
+- [ ] **P0.4.6** Add database migration for version 3:
+  ```sql
+  ALTER TABLE mutations ADD COLUMN timestamp_ms INTEGER;
+  UPDATE mutations SET timestamp_ms = CAST(strftime('%s', timestamp) * 1000 AS INTEGER);
+  -- Note: timestamp column is TEXT with ISO8601 format
+  ```
+- [ ] **P0.4.7** Update `_databaseVersion` from 2 to 3.
+- [ ] **P0.4.8** Add fallback in `fromJson()` if `timestamp_ms` column doesn't exist (for older DB versions).
+- [ ] **P0.4.9** Add unit test: round-trip serialize/deserialize preserves chronological order.
+- [ ] **P0.4.10** Add unit test: `fromJson()` handles both int (new) and string (legacy) timestamp formats.
+- [ ] **P0.4.11** Add unit test: `processQueue()` orders mutations correctly after schema change.
+- [ ] **P0.4.12** Test migration: insert mutation with old format, upgrade DB, verify it reads correctly.
 
 ### P0.5 — Fix mutation queue deserialization unsafe casts (`F-018`)
 
+**Issue:** `QueuedMutation.fromJson()` uses unsafe `as` casts that can crash on malformed data.
+
 - [ ] **P0.5.1** Open `lib/src/core/models/mutation_queue.dart` and locate `QueuedMutation.fromJson()`.
 - [ ] **P0.5.2** Replace `json['id'] as String` with `(json['id'] ?? '').toString()`.
-- [ ] **P0.5.3** Replace `json['payload'] as Map<String, dynamic>` with defensive parsing: `json['payload'] is Map ? Map<String, dynamic>.from(json['payload']) : const <String, dynamic>{}`.
-- [ ] **P0.5.4** Replace `json['endpoint'] as String` with `(json['endpoint'] ?? '').toString()`.
-- [ ] **P0.5.5** Replace `json['user_id'] as String` with `(json['user_id'] ?? '').toString()`.
-- [ ] **P0.5.6** Replace `json['timestamp'] as String` with defensive parsing that handles both `int` and `String`.
-- [ ] **P0.5.7** Replace `MutationStatusX.fromString(json['status'] as String)` with safe parsing using `orElse`.
-- [ ] **P0.5.8** Move `MutationStatusX.displayName` hardcoded strings (`Pending`, `Retrying`, etc.) to a localized UI helper.
-- [ ] **P0.5.9** Add ARB keys for `mutationStatusPending`, `mutationStatusRetrying`, `mutationStatusCompleted`, `mutationStatusFailed`.
-- [ ] **P0.5.10** Add unit test: `fromJson` handles `null`, missing, and malformed fields without throwing.
+- [ ] **P0.5.3** Replace `json['operation_type'] as String` with `(json['operation_type'] ?? '').toString()`.
+- [ ] **P0.5.4** Replace `json['target'] as String` with `(json['target'] ?? '').toString()`.
+- [ ] **P0.5.5** Replace `json['payload'] as Map<String, dynamic>` with defensive parsing:
+  ```dart
+  if (json['payload'] is Map<String, dynamic>) {
+    payload = json['payload'] as Map<String, dynamic>;
+  } else if (json['payload'] is Map) {
+    payload = Map<String, dynamic>.from(json['payload'] as Map);
+  } else {
+    payload = <String, dynamic>{};
+  }
+  ```
+- [ ] **P0.5.6** Replace `json['endpoint'] as String` with `(json['endpoint'] ?? '').toString()`.
+- [ ] **P0.5.7** Replace `json['user_id'] as String` with `(json['user_id'] ?? '').toString()`.
+- [ ] **P0.5.8** Replace `json['timestamp'] as String` with defensive parsing (handle both int and string):
+  ```dart
+  final timestampValue = json['timestamp'];
+  if (timestampValue is int) {
+    timestamp = DateTime.fromMillisecondsSinceEpoch(timestampValue);
+  } else if (timestampValue is String) {
+    timestamp = DateTime.tryParse(timestampValue) ?? DateTime.fromMillisecondsSinceEpoch(int.tryParse(timestampValue) ?? 0);
+  } else {
+    timestamp = DateTime.now();
+  }
+  ```
+- [ ] **P0.5.9** Replace `json['retry_count'] as int` with `(json['retry_count'] ?? 0) as int`.
+- [ ] **P0.5.10** Replace `json['max_retries'] as int` with `(json['max_retries'] ?? 5) as int`.
+- [ ] **P0.5.11** Replace `json['last_error'] as String?` with `json['last_error']?.toString()`.
+- [ ] **P0.5.12** Replace `MutationStatusX.fromString(json['status'] as String)` with safe parsing:
+  ```dart
+  final statusStr = (json['status'] ?? '').toString();
+  status = MutationStatusX.values.firstWhere(
+    (s) => s.name.toLowerCase() == statusStr.toLowerCase(),
+    orElse: () => MutationStatusX.pending,
+  );
+  ```
+- [ ] **P0.5.13** Move `MutationStatusX.displayName` hardcoded strings to localized UI helper (if used in UI).
+- [ ] **P0.5.14** Add ARB keys for `mutationStatusPending`, `mutationStatusRetrying`, `mutationStatusCompleted`, `mutationStatusFailed`.
+- [ ] **P0.5.15** Add unit test: `fromJson` handles `null` fields without throwing.
+- [ ] **P0.5.16** Add unit test: `fromJson` handles missing fields without throwing.
+- [ ] **P0.5.17** Add unit test: `fromJson` handles malformed fields (wrong type) without throwing.
+- [ ] **P0.5.18** Add unit test: `fromJson` handles empty payload map correctly.
+- [ ] **P0.5.19** Add unit test: `fromJson` handles both int and string timestamp formats.
 
 ### P0.6 — Fix chat unbounded initial message load (`C-002`)
 
+**Issue:** Chat loads all messages on first load instead of paginating, causing slow performance for long conversations.
+
 - [ ] **P0.6.1** Open `lib/src/features/communication/providers/chat_providers.dart` and locate `ConversationMessagesController.load()`.
-- [ ] **P0.6.2** Replace the call to `getMessages()` (unbounded) with `getMessagesPaginated(limit: 50)`.
-- [ ] **P0.6.3** Ensure `hasMoreOlderMessages` is set correctly based on the returned page size.
-- [ ] **P0.6.4** Add unit test: initial load fetches at most 50 messages.
-- [ ] **P0.6.5** Add unit test: long conversation (>50 messages) does not load all messages at once.
+- [ ] **P0.6.2** Find the call to `getMessages()` or `getMessagesPaginated()` in the initial load.
+- [ ] **P0.6.3** If using `getMessages()` (unbounded), replace with `getMessagesPaginated(limit: 50)`.
+- [ ] **P0.6.4** If using `getMessagesPaginated()` without limit, add `limit: 50` parameter.
+- [ ] **P0.6.5** Ensure `hasMoreOlderMessages` is set to `messages.length >= 50` in initial load.
+- [ ] **P0.6.6** Verify `loadOlderMessages()` correctly uses pagination cursor for subsequent loads.
+- [ ] **P0.6.7** Add unit test: initial load fetches at most 50 messages.
+- [ ] **P0.6.8** Add unit test: long conversation (>50 messages) does not load all messages at once.
+- [ ] **P0.6.9** Add unit test: `hasMoreOlderMessages` is set correctly after initial load.
+- [ ] **P0.6.10** Manual test: Create conversation with 100+ messages, verify initial load is fast.
 
 ### P0.7 — Remove full Aadhaar/PAN from `profiles` table (`V-002`)
 
+**Issue:** Full Aadhaar/PAN numbers stored in profiles table is a privacy risk.
+
 - [ ] **P0.7.1** Audit all Flutter code references to `aadhaar_number` and `pan_number` in profile read/write paths.
-- [ ] **P0.7.2** Update `verification_repository.dart` to write only `aadhaar_last4` and `pan_last4` to `profiles`.
-- [ ] **P0.7.3** Update `verification_repository.dart` to write full Aadhaar/PAN to a new encrypted `identity_documents` table (or use Supabase Vault/encryption).
-- [ ] **P0.7.4** Create backend migration: add `identity_documents` table with `profile_id`, `document_type`, `document_number_encrypted`, `last4`, `created_at`, `updated_at`.
-- [ ] **P0.7.5** Add RLS policies on `identity_documents`: owner read-only, admin read-write.
-- [ ] **P0.7.6** Create RPC `get_identity_document_last4(p_profile_id)` for UI display.
-- [ ] **P0.7.7** Update Flutter UI to never display full Aadhaar/PAN (only last4).
-- [ ] **P0.7.8** Add data migration script to move existing `aadhaar_number`/`pan_number` from `profiles` to `identity_documents`.
-- [ ] **P0.7.9** Mark `profiles.aadhaar_number` and `profiles.pan_number` as deprecated in schema docs.
+  - Search for `aadhaar_number` in `lib/src/features/verification/`
+  - Search for `pan_number` in `lib/src/features/verification/`
+  - Document all locations where full numbers are read or written
+- [ ] **P0.7.2** Open `lib/src/features/verification/data/verification_repository.dart` and locate Aadhaar/PAN write operations.
+- [ ] **P0.7.3** Update write operations to only write `aadhaar_last4` and `pan_last4` to `profiles` table.
+- [ ] **P0.7.4** Create new database table `identity_documents`:
+  ```sql
+  CREATE TABLE identity_documents (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    profile_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+    document_type TEXT NOT NULL, -- 'aadhaar' or 'pan'
+    document_number_encrypted TEXT NOT NULL, -- Encrypted full number
+    last4 TEXT NOT NULL, -- Last 4 digits for display
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+  );
+  ```
+- [ ] **P0.7.5** Add RLS policies on `identity_documents`:
+  ```sql
+  ALTER TABLE identity_documents ENABLE ROW LEVEL SECURITY;
+  CREATE POLICY "Users can view own identity documents" ON identity_documents
+    FOR SELECT USING (auth.uid() = (SELECT user_id FROM profiles WHERE id = profile_id));
+  CREATE POLICY "Users can insert own identity documents" ON identity_documents
+    FOR INSERT WITH CHECK (auth.uid() = (SELECT user_id FROM profiles WHERE id = profile_id));
+  ```
+- [ ] **P0.7.6** Create RPC `get_identity_document_last4(p_profile_id, p_document_type)`:
+  ```sql
+  CREATE OR REPLACE FUNCTION get_identity_document_last4(p_profile_id UUID, p_document_type TEXT)
+  RETURNS TEXT AS $$
+    SELECT last4 FROM identity_documents
+    WHERE profile_id = p_profile_id AND document_type = p_document_type
+    LIMIT 1;
+  $$ LANGUAGE SQL SECURITY DEFINER;
+  ```
+- [ ] **P0.7.7** Update `verification_repository.dart` to write full Aadhaar/PAN to `identity_documents` table (encrypted).
+- [ ] **P0.7.8** Update `verification_repository.dart` to read last4 from `identity_documents` via RPC for UI display.
+- [ ] **P0.7.9** Update Flutter UI to never display full Aadhaar/PAN (only last4).
+- [ ] **P0.7.10** Search and remove any UI code that displays full Aadhaar/PAN.
+- [ ] **P0.7.11** Add data migration script to move existing `aadhaar_number`/`pan_number` from `profiles` to `identity_documents`.
+- [ ] **P0.7.12** Test migration: Run migration, verify old data moved to new table, verify last4 in profiles.
+- [ ] **P0.7.13** Mark `profiles.aadhaar_number` and `profiles.pan_number` columns as deprecated in schema documentation.
+- [ ] **P0.7.14** Add unit test: verification flow writes to `identity_documents` table.
+- [ ] **P0.7.15** Add unit test: UI only displays last4, never full numbers.
 
 ---
 
 ## Summary
 
-**Total Tasks:** 6 priorities (P1-P6) + P0 (deferred)
-- **P1 (Crash Safety):** 2 tasks, ~24 subtasks
-- **P2 (Localization):** 7 tasks, ~50 subtasks
-- **P3 (RPC Migration):** 8 tasks, ~50 subtasks
-- **P4 (Pagination/Realtime):** 4 tasks, ~13 subtasks
-- **P5 (Play Store Hardening):** 4 tasks, ~19 subtasks
-- **P6 (Post-Release):** 9 tasks
-- **P0 (Blocking Security):** 7 tasks, ~56 subtasks (deferred to end)
+**Total Tasks:** 6 priorities (P1-P6) + P0 (deferred) + P2 Deferred + P3 Deferred
+- **P1 (Crash Safety):** 2 tasks, ~24 subtasks ✅ Complete
+- **P2 (Localization):** 7 tasks, ~50 subtasks ✅ Complete (high-priority UI), 21 subtasks ⏸️ Deferred (model/repository-level)
+- **P3 (RPC Migration):** 8 tasks, ~50 subtasks ✅ Complete (code), 21 subtasks ⏸️ Deferred (testing/E2E)
+- **P4 (Pagination/Realtime):** 4 tasks, ~13 subtasks ✅ Complete
+- **P5 (Play Store Hardening):** 4 tasks, ~19 subtasks ⏸️ Pending
+- **P6 (Post-Release):** 9 tasks ⏸️ Pending
+- **P0 (Blocking Security):** 7 tasks, ~56 subtasks (19 ✅ Complete, 37 ⏸️ Pending)
 
-**New Execution Order:** P1 → P2 → P3 → P4 → P5 → P0 → P6
+**New Execution Order:** P1 → P2 → P3 → P4 → **P0 Deferred** → P5 → P2 Deferred → P3 Deferred → P6
+
+**Recommended Order for Professional App:**
+1. **Phase 1: P0 Critical** (P0.5, P0.7, P0.6, P0.4, P0.1.12-P0.1.14, unit tests) - ~13.5 hrs
+2. **Phase 2: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
+3. **Phase 3: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
+4. **Phase 4: Manual Testing** - ~2 hrs
+5. **Phase 5: P6 Optimizations** (post-release backlog) - ~6 hrs
 
 ---
 
