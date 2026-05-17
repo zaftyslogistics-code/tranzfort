@@ -229,19 +229,88 @@ String safeString(dynamic value) {
   - **Key Finding:** Support has 6 direct reads (medium priority)
   - **Key Finding:** Supplier loads, trucker trips, fleet, notifications all have direct reads requiring migration
   
-- [ ] **P3.0.3** Create RPC migration testing strategy
-  - Define contract tests for each RPC (input → expected output shape)
-  - Define integration tests for each backend method after RPC migration
-  - Define E2E test scenarios for critical user flows (load booking, trip execution, chat)
+- [x] **P3.0.3** Create RPC migration testing strategy
+  - **Contract Tests:** For each RPC, define input → expected output shape test
+    - Test with valid inputs
+    - Test with invalid inputs (null, wrong type, out-of-range values)
+    - Test edge cases (empty results, pagination boundaries)
+    - Test RLS enforcement (user can only access their own data)
+  - **Integration Tests:** For each backend method after RPC migration
+    - Test that RPC is called with correct parameters
+    - Test that RPC response is correctly mapped to model
+    - Test error handling for RPC failures
+    - Test fallback to old implementation (if feature flag enabled)
+  - **E2E Test Scenarios:** For critical user flows
+    - Load booking: create_load → submit_booking_request → approve_booking_request
+    - Trip execution: advance_trip_stage → upload_trip_proof → confirm_trip_delivery
+    - Chat: create_or_get_conversation → send_message → get_conversation_messages (pagination)
+    - Support: create_ticket → add_message → get_ticket_messages (pagination)
+  - **Test Infrastructure:**
+    - Create test database with sample data
+    - Create test fixtures for each RPC
+    - Document how to run contract tests in Supabase SQL editor
+    - Document how to run integration tests in Flutter
   
-- [ ] **P3.0.4** Set up feature flag or environment variable for RPC migration
-  - Consider adding a flag to toggle between direct reads vs RPCs per feature
-  - This allows gradual rollout and easy rollback if issues occur
+- [x] **P3.0.4** Set up feature flag or environment variable for RPC migration
+  - **Decision:** Use environment variable for simplicity (no feature flag library dependency)
+  - **Environment Variable:** `USE_RPC_MIGRATION` (boolean, defaults to false)
+  - **Implementation:**
+    - Add `USE_RPC_MIGRATION` to `lib/core/config/app_config.dart`
+    - Read via `const bool.fromEnvironment('USE_RPC_MIGRATION', defaultValue: false)`
+    - Pass via `--dart-define=USE_RPC_MIGRATION=true` during build
+  - **Per-Feature Flags (Optional):** If needed, can add granular flags:
+    - `USE_RPC_CHAT` (for chat RPCs)
+    - `USE_RPC_NOTIFICATIONS` (for notification RPCs)
+    - `USE_RPC_FLEET` (for fleet RPCs)
+  - **Rollback Process:**
+    - If issues occur, rebuild with `--dart-define=USE_RPC_MIGRATION=false`
+    - No code changes needed, just rebuild with different flag
+  - **Gradual Rollout Strategy:**
+    - Start with P3.5 (Fleet) - isolated feature, low risk
+    - Then P3.8 (Notifications) - simple, low impact
+    - Then P3.6 (Chat) - critical for C-003, high impact
+    - Then P3.2 (Supplier Loads) - core business logic
+    - Then P3.3-P3.4 (Trucker) - core business logic
+    - Then P3.7 (Support) - medium priority
+    - Finally P3.1 (Auth/Profile) - critical, do last
   
-- [ ] **P3.0.5** Document rollback plan for each RPC migration
-  - For each RPC migration, document how to revert to direct table reads
-  - Ensure database migrations for RPCs are reversible
-  - Keep old backend implementations as fallback until RPCs are proven stable
+- [x] **P3.0.5** Document rollback plan for each RPC migration
+  - **Rollback Trigger Conditions:**
+    - RPC returns unexpected errors in production
+    - Performance degradation compared to direct table reads
+    - Data inconsistencies or incorrect results
+    - Integration tests fail after RPC migration
+  - **Rollback Process (Per Feature):**
+    1. Set environment variable `USE_RPC_MIGRATION=false`
+    2. Rebuild app: `flutter build apk --dart-define=USE_RPC_MIGRATION=false`
+    3. Deploy rollback build to production
+    4. Monitor for errors and performance
+    5. Investigate root cause of RPC failure
+  - **Database Migration Rollback:**
+    - All RPC migrations should be reversible (DROP FUNCTION IF EXISTS)
+    - Create rollback migration file for each RPC: `YYYYMMDDHHMMSS_rollback_rpc_<name>.sql`
+    - Document which migration file to revert if rollback needed
+  - **Backend Implementation Rollback:**
+    - Keep old direct table read implementations commented out for at least 1 week
+    - Use environment variable to toggle between RPC and direct read:
+      ```dart
+      if (AppConfig.useRpcMigration) {
+        return rpc('get_data');
+      } else {
+        // Old implementation (fallback)
+        return supabase.from('table').select();
+      }
+      ```
+    - After 1 week of stable production usage, remove commented-out code
+  - **Monitoring During Rollback:**
+    - Monitor error logs for RPC-related failures
+    - Monitor app performance (response times, crash rates)
+    - Monitor user feedback for data inconsistencies
+    - Monitor database query performance
+  - **Rollback Validation:**
+    - After rollback, verify app works correctly with direct table reads
+    - Run regression tests to ensure no new bugs introduced
+    - Compare data consistency before/after rollback
 
 ### P3.1 — Auth/Profile RPCs
 
