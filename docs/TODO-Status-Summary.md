@@ -26,31 +26,39 @@
 
 **Implementation Strategy:** Remove `.env` from assets, use existing keys via `--dart-define`, rotate keys later at convenience.
 
-### Pending Tasks (0/14 tasks complete)
+### Completed Tasks (19/23 tasks)
 
 **Code Implementation Tasks (I will do):**
-- [ ] P0.1.1-P0.1.6: Remove .env from assets, refactor to String.fromEnvironment (6 tasks)
-- [ ] P0.1.7: Create build script with --dart-define using existing keys
-- [ ] P0.1.8: Update README with --dart-define instructions
-- [ ] P0.1.9-P0.1.10: Add .env to .gitignore, remove from git (2 tasks)
-- [ ] P0.1.11: Build APK and verify .env not present
-- [ ] P0.2.1-P0.2.6: Fix OfflineCacheService.clearAll() data destruction (6 tasks)
-- [ ] P0.3.1-P0.3.4: Fix mutation queue decryption fallback crash (4 tasks)
+- [x] P0.1.1-P0.1.6: Remove .env from assets, refactor to String.fromEnvironment (6 tasks)
+- [x] P0.1.7: Create build script with --dart-define using existing keys
+- [x] P0.1.8: Update README with --dart-define instructions
+- [x] P0.1.9-P0.1.10: Add .env to .gitignore, remove from git (2 tasks)
+- [x] P0.1.11: Build APK and verify .env not present
+- [x] P0.2.1-P0.2.4: Fix OfflineCacheService.clearAll() data destruction (4 tasks)
+- [x] P0.3.1-P0.3.4: Fix mutation queue decryption fallback crash (4 tasks)
 
 **Manual Tasks (You will do later):**
 - [ ] P0.1.12: Rotate Supabase anon_key in dashboard (5 min, medium priority)
 - [ ] P0.1.13: Restrict Google Maps API key to Android SHA-256 (10 min, medium priority)
 - [ ] P0.1.14: Update CI/CD scripts with --dart-define (15-30 min, low priority, if using CI/CD)
 
-**Files to Modify:**
-- `pubspec.yaml`
-- `lib/src/core/config/supabase_config.dart`
-- `lib/main.dart`
-- `build-apk.sh` or `build-apk.bat` (new)
-- `README.md` (update build instructions)
-- `.gitignore`
-- `lib/src/core/services/offline_cache_service.dart`
-- `lib/src/core/services/mutation_queue_database.dart`
+**Deferred Unit Tests:**
+- [ ] P0.2.5-P0.2.6: OfflineCacheService namespace unit tests (2 tasks)
+- [ ] P0.3.6-P0.3.7: Mutation queue decryption unit tests (2 tasks)
+
+**Additional P0 Tasks (Not in original plan):**
+- [ ] P0.4: Fix mutation queue timestamp schema mismatch (6 tasks)
+- [ ] P0.5: Fix mutation queue deserialization unsafe casts (10 tasks)
+- [ ] P0.6: Fix chat unbounded initial message load (5 tasks)
+
+**Files Modified:**
+- `pubspec.yaml` ✅
+- `lib/src/core/config/supabase_config.dart` ✅
+- `lib/main.dart` ✅
+- `build-apk.bat` ✅ (created)
+- `.gitignore` ✅
+- `lib/src/core/services/offline_cache_service.dart` ✅
+- `lib/src/core/services/mutation_queue_database.dart` ✅
 
 ---
 
@@ -251,23 +259,26 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - ✅ P2: Localization (high-priority UI-layer strings)
 - ✅ P3: RPC migration (17 new RPCs, 5 backends updated)
 - ✅ P4: Pagination & realtime (4 critical fixes)
+- ✅ P0.1: Remove .env from assets (11/14 tasks complete, 3 manual tasks deferred)
+- ✅ P0.2: Fix cache destruction (4/6 tasks complete, 2 unit tests deferred)
+- ✅ P0.3: Fix decryption crash (4/7 tasks complete, 3 tasks deferred)
 
 **Critical Pending (Blocking):**
-- ⏸️ P0: Security (remove .env from assets, fix cache destruction, fix decryption crash) - **MUST complete before Play Store**
+- ⏸️ P0.1.12-P0.1.14: Manual tasks (key rotation, API restriction, CI/CD) - 25 min total
+- ⏸️ P0.4-P0.6: Additional P0 tasks (21 tasks) - Not in original plan, need assessment
 
 **P0 Implementation Strategy:**
-- Remove `.env` from assets
-- Use existing keys via `--dart-define` (build script)
-- Rotate keys later at your convenience
-- I will do code implementation (11 tasks)
-- You will do manual tasks later (3 tasks: key rotation, API restriction, CI/CD update)
+- Remove `.env` from assets ✅
+- Use existing keys via `--dart-define` (build script) ✅
+- Rotate keys later at your convenience (deferred)
+- I completed: P0.1.1-P0.1.11 (code changes), P0.2 (cache fix), P0.3 (decryption fix)
+- You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
 
 **Next Steps:**
-1. **P0 - Blocking Security** (CRITICAL - I will start now)
-   - I implement: P0.1.1-P0.1.11 (code changes), P0.2 (cache fix), P0.3 (decryption fix)
-   - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
-2. Manual test P1-P4 (after P0 code implementation)
-3. P5: Play Store Hardening
-4. Manual QA testing
+1. **Assess P0.4-P0.6:** Determine if these additional P0 tasks are critical for Play Store or can be deferred
+2. **Manual test P1-P4** (after P0 assessment)
+3. **P0.1.12-P0.1.14:** Manual dashboard tasks (25 min)
+4. P5: Play Store Hardening
+5. Manual QA testing
 
-**Ready for:** P0 code implementation (I will start now)
+**Ready for:** Assessment of P0.4-P0.6 priority OR manual testing of P1-P4
