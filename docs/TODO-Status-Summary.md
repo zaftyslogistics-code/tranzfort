@@ -263,9 +263,20 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - ✅ P0.2: Fix cache destruction (4/6 tasks complete, 2 unit tests deferred)
 - ✅ P0.3: Fix decryption crash (4/7 tasks complete, 3 tasks deferred)
 
-**Critical Pending (Blocking):**
-- ⏸️ P0.1.12-P0.1.14: Manual tasks (key rotation, API restriction, CI/CD) - 25 min total
-- ⏸️ P0.4-P0.6: Additional P0 tasks (21 tasks) - Not in original plan, need assessment
+**Critical Pending (Blocking for Professional App):**
+- ⏸️ P0.4: Mutation queue timestamp schema mismatch (12 tasks) - Data integrity
+- ⏸️ P0.5: Mutation queue unsafe casts (19 tasks) - Crash safety
+- ⏸️ P0.6: Chat unbounded message load (10 tasks) - Performance
+- ⏸️ P0.7: Remove full Aadhaar/PAN from profiles (15 tasks) - Privacy
+- ⏸️ P0.1.12-P0.1.14: Manual tasks (key rotation, API restriction, CI/CD) - Security
+
+**Quality Pending (Recommended for Professional App):**
+- ⏸️ P5: Play Store Hardening (45 tasks) - Crash reporting, testing, QA, performance
+- ⏸️ P2 Deferred: Model/repository-level localization (61 tasks) - UX consistency
+- ⏸️ P3 Deferred: RPC testing & E2E tests (40 tasks) - Regression prevention
+
+**Post-Release Backlog:**
+- ⏸️ P6: Optimizations (9 tasks) - Can ship without
 
 **P0 Implementation Strategy:**
 - Remove `.env` from assets ✅
@@ -274,11 +285,13 @@ f061fdb feat: Create P3.8 Notification RPCs (2 RPCs + rollback)
 - I completed: P0.1.1-P0.1.11 (code changes), P0.2 (cache fix), P0.3 (decryption fix)
 - You do later: P0.1.12 (rotate Supabase key), P0.1.13 (restrict Maps key), P0.1.14 (CI/CD if applicable)
 
-**Next Steps:**
-1. **Assess P0.4-P0.6:** Determine if these additional P0 tasks are critical for Play Store or can be deferred
-2. **Manual test P1-P4** (after P0 assessment)
-3. **P0.1.12-P0.1.14:** Manual dashboard tasks (25 min)
-4. P5: Play Store Hardening
-5. Manual QA testing
+**Recommended Order for Professional App:**
+1. **Phase 1: P0 Critical** (P0.5, P0.7, P0.6, P0.4, P0.1.12-P0.1.14, unit tests) - ~13.5 hrs
+2. **Phase 2: P5 Hardening** (crash reporting, testing, QA, performance) - ~11 hrs
+3. **Phase 3: P2/P3 Quality** (localization, RPC tests) - ~18 hrs
+4. **Phase 4: Manual Testing** - ~2 hrs
+5. **Phase 5: P6 Optimizations** (post-release backlog) - ~6 hrs
 
-**Ready for:** Assessment of P0.4-P0.6 priority OR manual testing of P1-P4
+**Total Remaining Work:** ~50.5 hours (excluding P6)
+
+**Ready for:** P0.5 implementation (fix mutation queue unsafe casts)
