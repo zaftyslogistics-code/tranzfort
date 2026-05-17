@@ -248,6 +248,10 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
   }
 }
 
-final loadDetailProvider = StateNotifierProvider.autoDispose.family<LoadDetailController, LoadDetailState, String>((ref, loadId) {
+final loadDetailProvider = StateNotifierProvider
+    .family<LoadDetailController, LoadDetailState, String>((ref, loadId) {
+  ref.onDispose(() {
+    // Optional cleanup if needed
+  });
   return LoadDetailController(ref.watch(supplierLoadRepositoryProvider), loadId);
 });

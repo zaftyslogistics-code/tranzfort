@@ -68,7 +68,10 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
   }
 }
 
-final supplierTripDetailProvider = StateNotifierProvider.autoDispose
+final supplierTripDetailProvider = StateNotifierProvider
     .family<SupplierTripDetailController, SupplierTripDetailState, String>((ref, tripId) {
+  ref.onDispose(() {
+    // Optional cleanup if needed
+  });
   return SupplierTripDetailController(ref.watch(supplierTripsRepositoryProvider), tripId);
 });
