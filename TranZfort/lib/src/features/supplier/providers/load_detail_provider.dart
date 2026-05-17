@@ -98,6 +98,9 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
     
     AppLogger.info('Loading details - loadId: ${state.loadId}', scope: 'load_detail');
 
+    // Add minimum loading duration to prevent flickering
+    final startTime = DateTime.now();
+
     final detailResult = await _repository.getLoadDetail(state.loadId);
     if (detailResult.isFailure) {
       AppLogger.warning(
@@ -105,6 +108,11 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
         scope: 'load_detail',
         error: detailResult.failureOrNull,
       );
+      // Ensure minimum loading duration to prevent UI flicker
+      final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+      if (elapsed < 300) {
+        await Future.delayed(Duration(milliseconds: 300 - elapsed));
+      }
       state = state.copyWith(
         isLoading: false,
         failure: detailResult.failureOrNull,
@@ -114,50 +122,63 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
     AppLogger.info('getLoadDetail success', scope: 'load_detail');
 
     final bookingsResult = await _repository.getBookingRequests(state.loadId);
-    if (bookingsResult.isFailure) {
-      AppLogger.warning(
-        'getBookingRequests failed',
-        scope: 'load_detail',
-        error: bookingsResult.failureOrNull,
-      );
-      state = state.copyWith(
-        isLoading: false,
-        detail: detailResult.valueOrNull,
-        failure: bookingsResult.failureOrNull,
-      );
-      return;
-    }
-    AppLogger.info(
-      'getBookingRequests success - ${bookingsResult.valueOrNull?.length} bookings',
-      scope: 'load_detail',
-    );
-
-    final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
-    linkedTripsResult.when(
-      success: (linkedTrips) {
+    await bookingsResult.when(
+      success: (bookingRequests) async {
         AppLogger.info(
-          'getLinkedTrips success - ${linkedTrips.length} trips',
+          'getBookingRequests success - ${bookingRequests.length} bookings',
           scope: 'load_detail',
         );
-        state = state.copyWith(
-          detail: detailResult.valueOrNull,
-          bookingRequests: bookingsResult.valueOrNull ?? const <LoadBookingRequest>[],
-          linkedTrips: linkedTrips,
-          isLoading: false,
-          clearFailure: true,
+
+        final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
+        await linkedTripsResult.when(
+          success: (linkedTrips) async {
+            AppLogger.info(
+              'getLinkedTrips success - ${linkedTrips.length} trips',
+              scope: 'load_detail',
+            );
+            state = state.copyWith(
+              detail: detailResult.valueOrNull,
+              bookingRequests: bookingRequests,
+              linkedTrips: linkedTrips,
+              isLoading: false,
+              clearFailure: true,
+            );
+          },
+          failure: (failure) async {
+            AppLogger.warning(
+              'getLinkedTrips failed',
+              scope: 'load_detail',
+              error: failure,
+            );
+            // Ensure minimum loading duration to prevent UI flicker
+            final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+            if (elapsed < 300) {
+              await Future.delayed(Duration(milliseconds: 300 - elapsed));
+            }
+            state = state.copyWith(
+              isLoading: false,
+              detail: detailResult.valueOrNull,
+              bookingRequests: bookingRequests,
+              failure: failure,
+            );
+          },
         );
       },
-      failure: (failure) {
+      failure: (failure) async {
         AppLogger.warning(
-          'getLinkedTrips failed',
+          'getBookingRequests failed',
           scope: 'load_detail',
-          error: failure,
+          error: bookingsResult.failureOrNull,
         );
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           isLoading: false,
           detail: detailResult.valueOrNull,
-          bookingRequests: bookingsResult.valueOrNull ?? const <LoadBookingRequest>[],
-          failure: failure,
+          failure: bookingsResult.failureOrNull,
         );
       },
     );

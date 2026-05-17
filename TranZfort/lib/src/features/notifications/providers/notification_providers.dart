@@ -88,9 +88,13 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
+    
+    // Add minimum loading duration to prevent flickering
+    final startTime = DateTime.now();
+
     final result = await _repository.getNotifications(limit: _pageSize);
-    result.when(
-      success: (notifications) {
+    await result.when(
+      success: (notifications) async {
         state = state.copyWith(
           isLoading: false,
           notifications: notifications,
@@ -98,7 +102,12 @@ class NotificationsController extends StateNotifier<NotificationsState> {
           clearFailure: true,
         );
       },
-      failure: (failure) {
+      failure: (failure) async {
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           isLoading: false,
           failure: failure,
@@ -216,7 +225,10 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 }
 
 final notificationsProvider =
-    StateNotifierProvider.autoDispose<NotificationsController, NotificationsState>((ref) {
+    StateNotifierProvider<NotificationsController, NotificationsState>((ref) {
+  ref.onDispose(() {
+    // Optional cleanup if needed
+  });
   return NotificationsController(ref.watch(notificationRepositoryProvider));
 });
 
