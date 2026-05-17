@@ -60,24 +60,42 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     required int pageSize,
   }) async {
     if (_client == null) {
+      AppLogger.warning('fetchMyLoads: Client is null', scope: 'supplier_load_backend');
       return const [];
     }
 
-    final response = await _client.rpc(
-      'get_supplier_loads_list',
-      params: <String, dynamic>{
-        'p_supplier_id': supplierId,
-        'p_status_filter': (filters.hasStatuses && filters.statuses.isNotEmpty) ? filters.statuses : null,
-        'p_search_query': filters.hasSearchQuery ? filters.searchQuery!.trim() : null,
-        'p_limit': pageSize,
-        'p_offset': (page - 1) * pageSize,
-      },
-    );
+    AppLogger.info('fetchMyLoads: Calling RPC get_supplier_loads_list', scope: 'supplier_load_backend');
+    AppLogger.info('  supplierId: $supplierId', scope: 'supplier_load_backend');
+    AppLogger.info('  statusFilter: ${(filters.hasStatuses && filters.statuses.isNotEmpty) ? filters.statuses : null}', scope: 'supplier_load_backend');
+    AppLogger.info('  searchQuery: ${filters.hasSearchQuery ? filters.searchQuery!.trim() : null}', scope: 'supplier_load_backend');
+    AppLogger.info('  limit: $pageSize', scope: 'supplier_load_backend');
+    AppLogger.info('  offset: ${(page - 1) * pageSize}', scope: 'supplier_load_backend');
 
-    if (response is List) {
-      return List<Map<String, dynamic>>.from(response);
+    try {
+      final response = await _client.rpc(
+        'get_supplier_loads_list',
+        params: <String, dynamic>{
+          'p_supplier_id': supplierId,
+          'p_status_filter': (filters.hasStatuses && filters.statuses.isNotEmpty) ? filters.statuses : null,
+          'p_search_query': filters.hasSearchQuery ? filters.searchQuery!.trim() : null,
+          'p_limit': pageSize,
+          'p_offset': (page - 1) * pageSize,
+        },
+      );
+
+      AppLogger.info('fetchMyLoads: RPC response type: ${response.runtimeType}', scope: 'supplier_load_backend');
+
+      if (response is List) {
+        AppLogger.info('fetchMyLoads: RPC returned ${response.length} rows', scope: 'supplier_load_backend');
+        return List<Map<String, dynamic>>.from(response);
+      }
+      
+      AppLogger.warning('fetchMyLoads: RPC returned non-list: ${response.runtimeType}', scope: 'supplier_load_backend');
+      return const <Map<String, dynamic>>[];
+    } catch (error, stackTrace) {
+      AppLogger.error('fetchMyLoads: RPC call failed', scope: 'supplier_load_backend', error: error, stackTrace: stackTrace);
+      return const <Map<String, dynamic>>[];
     }
-    return const <Map<String, dynamic>>[];
   }
 
   @override
