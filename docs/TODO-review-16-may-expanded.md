@@ -1608,50 +1608,23 @@ These tasks can be done after code implementation:
 
 **Issue:** Full Aadhaar/PAN numbers stored in profiles table is a privacy risk.
 
-- [ ] **P0.7.1** Audit all Flutter code references to `aadhaar_number` and `pan_number` in profile read/write paths.
-  - Search for `aadhaar_number` in `lib/src/features/verification/`
-  - Search for `pan_number` in `lib/src/features/verification/`
-  - Document all locations where full numbers are read or written
-- [ ] **P0.7.2** Open `lib/src/features/verification/data/verification_repository.dart` and locate Aadhaar/PAN write operations.
-- [ ] **P0.7.3** Update write operations to only write `aadhaar_last4` and `pan_last4` to `profiles` table.
-- [ ] **P0.7.4** Create new database table `identity_documents`:
-  ```sql
-  CREATE TABLE identity_documents (
-    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-    profile_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
-    document_type TEXT NOT NULL, -- 'aadhaar' or 'pan'
-    document_number_encrypted TEXT NOT NULL, -- Encrypted full number
-    last4 TEXT NOT NULL, -- Last 4 digits for display
-    created_at TIMESTAMPTZ DEFAULT NOW(),
-    updated_at TIMESTAMPTZ DEFAULT NOW()
-  );
-  ```
-- [ ] **P0.7.5** Add RLS policies on `identity_documents`:
-  ```sql
-  ALTER TABLE identity_documents ENABLE ROW LEVEL SECURITY;
-  CREATE POLICY "Users can view own identity documents" ON identity_documents
-    FOR SELECT USING (auth.uid() = (SELECT user_id FROM profiles WHERE id = profile_id));
-  CREATE POLICY "Users can insert own identity documents" ON identity_documents
-    FOR INSERT WITH CHECK (auth.uid() = (SELECT user_id FROM profiles WHERE id = profile_id));
-  ```
-- [ ] **P0.7.6** Create RPC `get_identity_document_last4(p_profile_id, p_document_type)`:
-  ```sql
-  CREATE OR REPLACE FUNCTION get_identity_document_last4(p_profile_id UUID, p_document_type TEXT)
-  RETURNS TEXT AS $$
-    SELECT last4 FROM identity_documents
-    WHERE profile_id = p_profile_id AND document_type = p_document_type
-    LIMIT 1;
-  $$ LANGUAGE SQL SECURITY DEFINER;
-  ```
-- [ ] **P0.7.7** Update `verification_repository.dart` to write full Aadhaar/PAN to `identity_documents` table (encrypted).
-- [ ] **P0.7.8** Update `verification_repository.dart` to read last4 from `identity_documents` via RPC for UI display.
-- [ ] **P0.7.9** Update Flutter UI to never display full Aadhaar/PAN (only last4).
-- [ ] **P0.7.10** Search and remove any UI code that displays full Aadhaar/PAN.
-- [ ] **P0.7.11** Add data migration script to move existing `aadhaar_number`/`pan_number` from `profiles` to `identity_documents`.
-- [ ] **P0.7.12** Test migration: Run migration, verify old data moved to new table, verify last4 in profiles.
-- [ ] **P0.7.13** Mark `profiles.aadhaar_number` and `profiles.pan_number` columns as deprecated in schema documentation.
-- [ ] **P0.7.14** Add unit test: verification flow writes to `identity_documents` table.
-- [ ] **P0.7.15** Add unit test: UI only displays last4, never full numbers.
+**Simplified Implementation (Option B):**
+- Only write last4 digits to profiles table (not full numbers)
+- Remove full numbers from SELECT queries
+- Full encryption implementation deferred to post-release
+
+- [x] **P0.7.1** Audit all Flutter code references to `aadhaar_number` and `pan_number` in profile read/write paths.
+  - Found in: verification_repository.dart, verification_repository_backend.dart, verification_repository_models.dart, verification_screen_sections.dart
+- [x] **P0.7.2** Open `lib/src/features/verification/data/verification_repository.dart` and locate Aadhaar/PAN write operations.
+- [x] **P0.7.3** Update write operations to only write `aadhaar_last4` and `pan_last4` to `profiles` table.
+  - Removed: `'aadhaar_number': normalizedAadhaar`, `'pan_number': normalizedPan`
+  - Added: Only last4 digits
+- ⏭️ **DEFERRED TO POST-RELEASE (P6):** P0.7.4-P0.7.15 - Full encryption implementation with identity_documents table
+  - Create identity_documents table for encrypted full numbers
+  - Add RPCs for secure storage/retrieval
+  - Implement encryption service integration
+  - Data migration for existing records
+  - Unit tests and manual testing
 
 ---
 
