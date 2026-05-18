@@ -10,6 +10,7 @@ import '../../../core/models/domain_statuses.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/type_safety.dart';
 import 'trucker_trip_repository_models.dart';
 import 'trucker_trip_repository_backend.dart';
 
@@ -107,10 +108,10 @@ class TruckerTripsRepository {
         return const Failure<TruckerTripDetail>(NotFoundFailure());
       }
 
-      final tripData = result['trip'] as Map<String, dynamic>?;
-      final supplierProfile = result['supplier_profile'] as Map<String, dynamic>?;
-      final supplierExtension = result['supplier_extension'] as Map<String, dynamic>?;
-      final disputeSummary = result['dispute_summary'] as Map<String, dynamic>?;
+      final tripData = safeMap(result['trip']);
+      final supplierProfile = safeMap(result['supplier_profile']);
+      final supplierExtension = safeMap(result['supplier_extension']);
+      final disputeSummary = safeMap(result['dispute_summary']);
 
       if (tripData == null || supplierProfile == null) {
         return const Failure<TruckerTripDetail>(NotFoundFailure());
@@ -359,9 +360,9 @@ class TruckerTripsRepository {
 
   TruckerTrip _mapTrip(Map<String, dynamic> map) {
     final snapshot = map['load_snapshot_summary'];
-    final snapshotMap = snapshot is Map<String, dynamic> ? snapshot : <String, dynamic>{};
-    final loadMap = map['loads'] is Map<String, dynamic> ? map['loads'] as Map<String, dynamic> : <String, dynamic>{};
-    final truckMap = map['trucks'] is Map<String, dynamic> ? map['trucks'] as Map<String, dynamic> : <String, dynamic>{};
+    final snapshotMap = safeMap(snapshot) ?? <String, dynamic>{};
+    final loadMap = safeMap(map['loads']) ?? <String, dynamic>{};
+    final truckMap = safeMap(map['trucks']) ?? <String, dynamic>{};
     final origin = (snapshotMap['origin_label'] ?? loadMap['origin_label'] ?? 'Load').toString();
     final destination = (snapshotMap['destination_label'] ?? loadMap['destination_label'] ?? '').toString();
     final material = (snapshotMap['material'] ?? loadMap['material'] ?? 'Material pending').toString();
@@ -405,9 +406,9 @@ class TruckerTripsRepository {
     Map<String, dynamic>? disputeSummary,
   ) {
     final snapshot = map['load_snapshot_summary'];
-    final snapshotMap = snapshot is Map<String, dynamic> ? snapshot : <String, dynamic>{};
-    final loadMap = map['loads'] is Map<String, dynamic> ? map['loads'] as Map<String, dynamic> : <String, dynamic>{};
-    final truckMap = map['trucks'] is Map<String, dynamic> ? map['trucks'] as Map<String, dynamic> : <String, dynamic>{};
+    final snapshotMap = safeMap(snapshot) ?? <String, dynamic>{};
+    final loadMap = safeMap(map['loads']) ?? <String, dynamic>{};
+    final truckMap = safeMap(map['trucks']) ?? <String, dynamic>{};
     final originLabel = (snapshotMap['origin_label'] ?? loadMap['origin_label'] ?? 'Load').toString();
     final destinationLabel = (snapshotMap['destination_label'] ?? loadMap['destination_label'] ?? '').toString();
     final material = (snapshotMap['material'] ?? loadMap['material'] ?? 'Material pending').toString();
