@@ -61,7 +61,7 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
   }) async {
     if (_client == null) {
       AppLogger.warning('fetchMyLoads: Client is null', scope: 'supplier_load_backend');
-      return const [];
+      throw const AuthException('Supplier session is not available');
     }
 
     AppLogger.info('fetchMyLoads: Calling RPC get_supplier_loads_list', scope: 'supplier_load_backend');
@@ -94,7 +94,7 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       return const <Map<String, dynamic>>[];
     } catch (error, stackTrace) {
       AppLogger.error('fetchMyLoads: RPC call failed', scope: 'supplier_load_backend', error: error, stackTrace: stackTrace);
-      return const <Map<String, dynamic>>[];
+      rethrow;
     }
   }
 
@@ -126,15 +126,15 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     required String supplierId,
     required String loadId,
   }) async {
-    AppLogger.info('🔍 [fetchBookingRequests] Starting - supplierId: $supplierId, loadId: $loadId');
+    AppLogger.info('[fetchBookingRequests] Starting - supplierId: $supplierId, loadId: $loadId');
     
     if (_client == null) {
-      AppLogger.error('❌ [fetchBookingRequests] Client is null');
+      AppLogger.error('[fetchBookingRequests] Client is null');
       throw const AuthException('Session unavailable');
     }
 
     try {
-      AppLogger.info('📞 [fetchBookingRequests] Calling RPC get_supplier_booking_requests');
+      AppLogger.info('[fetchBookingRequests] Calling RPC get_supplier_booking_requests');
       AppLogger.info('   Parameters: p_load_id=$loadId');
       
       final response = await _client.rpc(
@@ -142,23 +142,23 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
         params: {'p_load_id': loadId},
       );
       
-      AppLogger.info('📊 [fetchBookingRequests] RPC returned response type: ${response.runtimeType}');
+      AppLogger.info('[fetchBookingRequests] RPC returned response type: ${response.runtimeType}');
       
       if (response is List) {
-        AppLogger.info('✅ [fetchBookingRequests] RPC returned ${response.length} rows');
+        AppLogger.info('[fetchBookingRequests] RPC returned ${response.length} rows');
         return List<Map<String, dynamic>>.from(response);
       } else {
-        AppLogger.warning('⚠️  [fetchBookingRequests] RPC returned non-list response: $response');
+        AppLogger.warning('[fetchBookingRequests] RPC returned non-list response: $response');
         return [];
       }
     } catch (error, stackTrace) {
-      AppLogger.error('❌ [fetchBookingRequests] ERROR: $error');
+      AppLogger.error('[fetchBookingRequests] ERROR: $error');
       AppLogger.error('   Error type: ${error.runtimeType}');
       AppLogger.error('   Stack trace: $stackTrace');
       
       // Try to get more details from PostgrestException if available
       if (error.toString().contains('column') || error.toString().contains('does not exist')) {
-        AppLogger.error('   🔍 This appears to be a database column error');
+        AppLogger.error('   This appears to be a database column error');
       }
       
       rethrow;
