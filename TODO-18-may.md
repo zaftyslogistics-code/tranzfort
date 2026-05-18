@@ -24,7 +24,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 5.2:** Repository Null Handling - Standardized unauthenticated behavior (F2-012, F3-002, F4-001)
 - ✅ **Phase 6.1:** Centralize Google Maps API Key - Centralized in AppConfig (F2-007, F3-007, F4-003, F7-002)
 - ✅ **Phase 6.1 (additional):** TripCostingService constants moved to AppConfig (F3-007)
-- ✅ **Phase 7.1 (partial):** Coordinate readers - Fixed LoadDetailDto coordinates (F3-009 partial)
+- ✅ **Phase 7.1:** Coordinate readers - Fixed all coordinate fields to use readDoubleNullable (F3-009 complete)
 - ✅ **Phase 7.2 (partial):** Remove duplicate helpers - Fixed in trucker and verification repos (F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001)
 - ✅ **Phase 8 (partial):** Remove commented-out code - Fixed in chat_repository and trucker_load_detail_screen (F5-007)
 
@@ -43,7 +43,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F2-012, F3-002, F4-001: Repository null handling (Medium)
 - F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
 - F3-007: TripCostingService constants moved to config (Medium)
-- F3-009: Coordinate readers - LoadDetailDto fixed (partial)
+- F3-009: Coordinate readers - All coordinate fields now use readDoubleNullable (Medium complete)
 - F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium)
 - F5-007: Commented-out unused code removed (Low)
 
