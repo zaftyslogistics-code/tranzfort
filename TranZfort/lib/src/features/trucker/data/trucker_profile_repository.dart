@@ -5,6 +5,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
 
 class TruckerProfile {
   final String id;
@@ -45,42 +46,18 @@ class TruckerProfile {
     return TruckerProfile(
       id: (profileMap['id'] ?? '').toString(),
       fullName: (profileMap['full_name'] ?? '').toString(),
-      mobile: _nullableString(profileMap['mobile']),
-      email: _nullableString(profileMap['email']),
+      mobile: nullableString(profileMap['mobile']),
+      email: nullableString(profileMap['email']),
       verificationStatus: (profileMap['verification_status'] ?? 'unverified').toString(),
-      dlNumber: _nullableString(truckerMap?['dl_number']),
-      rating: _readDouble(truckerMap?['rating']),
-      totalTrips: _readInt(truckerMap?['total_trips']),
-      completedTrips: _readInt(truckerMap?['completed_trips']),
+      dlNumber: nullableString(truckerMap?['dl_number']),
+      rating: readDouble(truckerMap?['rating']),
+      totalTrips: readInt(truckerMap?['total_trips']),
+      completedTrips: readInt(truckerMap?['completed_trips']),
       totalTrucks: totalTrucks,
       approvedTrucks: approvedTrucks,
     );
   }
 
-  static int _readInt(Object? value) {
-    if (value is int) {
-      return value;
-    }
-
-    return int.tryParse((value ?? '0').toString()) ?? 0;
-  }
-
-  static double _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-
-    return double.tryParse((value ?? '0').toString()) ?? 0;
-  }
-
-  static String? _nullableString(Object? value) {
-    final raw = (value ?? '').toString().trim();
-    if (raw.isEmpty) {
-      return null;
-    }
-
-    return raw;
-  }
 }
 
 abstract class TruckerProfileBackend {

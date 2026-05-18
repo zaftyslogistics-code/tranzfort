@@ -108,8 +108,8 @@ class TruckerFleetTruck {
   factory TruckerFleetTruck.fromMap(Map<String, dynamic> map) {
     final modelMap = map['truck_models'];
     final resolvedModelMap = modelMap is Map<String, dynamic> ? modelMap : <String, dynamic>{};
-    final make = _nullableString(resolvedModelMap['make']);
-    final model = _nullableString(resolvedModelMap['model']);
+    final make = nullableString(resolvedModelMap['make']);
+    final model = nullableString(resolvedModelMap['model']);
     final modelLabel = switch ((make, model)) {
       (final String makeValue?, final String modelValue?) => '$makeValue $modelValue',
       (final String makeValue?, null) => makeValue,
@@ -119,19 +119,19 @@ class TruckerFleetTruck {
 
     return TruckerFleetTruck(
       id: (map['id'] ?? '').toString(),
-      truckModelId: _nullableString(map['truck_model_id']),
+      truckModelId: nullableString(map['truck_model_id']),
       truckNumber: (map['truck_number'] ?? '').toString(),
       bodyType: (map['body_type'] ?? '').toString(),
-      tyres: _readInt(map['tyres']),
-      capacityTonnes: _readDouble(map['capacity_tonnes']),
-      rcDocumentPath: _nullableString(map['rc_document_path']),
+      tyres: readInt(map['tyres']),
+      capacityTonnes: readDouble(map['capacity_tonnes']),
+      rcDocumentPath: nullableString(map['rc_document_path']),
       status: TruckerFleetTruckStatusX.fromDatabase((map['status'] ?? 'unknown').toString()),
-      rejectionReason: _nullableString(map['rejection_reason']),
+      rejectionReason: nullableString(map['rejection_reason']),
       reviewFeedback: TruckerFleetReviewFeedback.fromJson(map['verification_feedback_json']),
       modelLabel: modelLabel,
-      verifiedAt: _readDate(map['verified_at']),
-      createdAt: _readDate(map['created_at']) ?? DateTime.now(),
-      updatedAt: _readDate(map['updated_at']) ?? DateTime.now(),
+      verifiedAt: readDate(map['verified_at']),
+      createdAt: readDate(map['created_at']) ?? DateTime.now(),
+      updatedAt: readDate(map['updated_at']) ?? DateTime.now(),
     );
   }
 }
@@ -435,36 +435,6 @@ class TruckerFleetRepository {
     }
     return mapSupabaseError(error, stackTrace);
   }
-}
-
-int _readInt(Object? value) {
-  if (value is int) {
-    return value;
-  }
-  return int.tryParse((value ?? '0').toString()) ?? 0;
-}
-
-double _readDouble(Object? value) {
-  if (value is num) {
-    return value.toDouble();
-  }
-  return double.tryParse((value ?? '0').toString()) ?? 0;
-}
-
-DateTime? _readDate(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return DateTime.tryParse(raw);
-}
-
-String? _nullableString(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return raw;
 }
 
 final truckerFleetRepositoryProvider = Provider<TruckerFleetRepository>((ref) {

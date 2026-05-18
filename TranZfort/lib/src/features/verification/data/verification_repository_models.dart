@@ -205,8 +205,8 @@ class VerificationDetail {
       companyName: nullableString(supplierMap?['company_name']),
       verificationLocationCity: nullableString(supplierMap?['verification_location_city']),
       verificationLocationState: nullableString(supplierMap?['verification_location_state']),
-      verificationLatitude: readDouble(supplierMap?['verification_location_lat']),
-      verificationLongitude: readDouble(supplierMap?['verification_location_lng']),
+      verificationLatitude: readDoubleNullable(supplierMap?['verification_location_lat']),
+      verificationLongitude: readDoubleNullable(supplierMap?['verification_location_lng']),
       reviewFeedback: VerificationReviewFeedback.fromJson(profileMap['verification_feedback_json']),
     );
   }
@@ -217,12 +217,9 @@ class VerificationDetail {
   }
 
   static double? readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
     if (value is num) {
       return value.toDouble();
     }
-    return double.tryParse(value.toString());
+    return double.tryParse((value ?? '0').toString());
   }
 }

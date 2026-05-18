@@ -43,34 +43,20 @@ class TruckerApprovedTruck {
       id: (map['id'] ?? '').toString(),
       truckNumber: (map['truck_number'] ?? '').toString(),
       bodyType: (map['body_type'] ?? '').toString(),
-      tyres: _readInt(map['tyres']),
-      capacityTonnes: _readDouble(map['capacity_tonnes']) ?? 0,
+      tyres: readInt(map['tyres']),
+      capacityTonnes: readDouble(map['capacity_tonnes']),
       axles: _readIntNullable(model['axles']),
       payloadKg: _readIntNullable(model['payload_kg']),
-      mileageEmptyKmpl: _readDouble(model['mileage_empty_kmpl']),
-      mileageLoadedKmpl: _readDouble(model['mileage_loaded_kmpl']),
+      mileageEmptyKmpl: readDouble(model['mileage_empty_kmpl']),
+      mileageLoadedKmpl: readDouble(model['mileage_loaded_kmpl']),
     );
-  }
-
-  static int _readInt(Object? value) {
-    if (value is int) {
-      return value;
-    }
-    return int.tryParse((value ?? '0').toString()) ?? 0;
   }
 
   static int? _readIntNullable(Object? value) {
     if (value == null) {
       return null;
     }
-    return _readInt(value);
-  }
-
-  static double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
+    return readInt(value);
   }
 }
 

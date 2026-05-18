@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
 
 part 'verification_repository_backend.dart';
 part 'verification_repository_feedback_models.dart';
