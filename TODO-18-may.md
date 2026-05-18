@@ -16,6 +16,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 **Completed Phases:**
 - ✅ **Phase 0:** Release Stopper (Security) - `.env` removed, flutter_dotenv removed, production fallback removed
+- ✅ **Phase 0.6:** Release Artifact Verification - APK built successfully, no .env in assets, flutter analyze passes on lib/src
 - ✅ **Phase 1:** Crash Safety - All DateTime.parse replaced with safeParseDateTime, unsafe casts replaced
 - ✅ **Phase 3:** RPC Rollback Strategy - Documented rollback as code-change process
 - ✅ **Phase 4.1:** Role State Correctness - Fixed partial state inconsistency (F1-006)
@@ -23,6 +24,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 5.2:** Repository Null Handling - Standardized unauthenticated behavior (F2-012, F3-002, F4-001)
 - ✅ **Phase 6.1:** Centralize Google Maps API Key - Centralized in AppConfig (F2-007, F3-007, F4-003, F7-002)
 - ✅ **Phase 6.1 (additional):** TripCostingService constants moved to AppConfig (F3-007)
+- ✅ **Phase 7.1 (partial):** Coordinate readers - Fixed LoadDetailDto coordinates (F3-009 partial)
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
@@ -39,11 +41,12 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F2-012, F3-002, F4-001: Repository null handling (Medium)
 - F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
 - F3-007: TripCostingService constants moved to config (Medium)
+- F3-009: Coordinate readers - LoadDetailDto fixed (partial)
 
-**Remaining Issues:** 84 (19 medium, 60 low, 5 informational)
+**Remaining Issues:** 83 (18 medium, 60 low, 5 informational)
 
 **Next Steps:**
-1. Complete smaller medium priority fixes (duplicate helpers, coordinate readers, etc.)
+1. Continue with smaller medium priority fixes (commented code, anti-patterns, etc.)
 2. Complete Phase 6.2-6.3 (large refactoring - may defer)
 3. Complete Phase 7-12 (medium/low priority items)
 4. Build release APK/AAB and verify no `.env` in assets
