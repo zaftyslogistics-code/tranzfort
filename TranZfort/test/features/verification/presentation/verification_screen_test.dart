@@ -1,8 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/core/navigation/app_routes.dart';
 import 'package:tranzfort/src/core/error/result.dart';
 import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
@@ -83,7 +86,7 @@ class _FakeAuthRepository extends AuthRepository {
 }
 
 class _FakeAppLocaleController extends AppLocaleController {
-  _FakeAppLocaleController() : super(_FakeAuthRepository(), profileLanguageCode: 'hi');
+  _FakeAppLocaleController() : super(_FakeAuthRepository(), profileLanguageCode: 'en');
 
 }
 
@@ -159,6 +162,22 @@ class _FakeVerificationUploadService extends VerificationDocumentUploadService {
   final String? storagePath;
   VerificationDocumentType? lastType;
   ImageSource? lastSource;
+
+  @override
+  Future<AppFailure?> _ensureImageAccessPermission(ImageSource source) async {
+    // Skip permission checks in tests to avoid hanging
+    return null;
+  }
+
+  @override
+  Future<VerificationDocumentValidationResult> validateDocument(XFile file, Uint8List bytes) async {
+    // Skip actual image decoding in tests to avoid hanging
+    return VerificationDocumentValidationResult.valid(
+      fileSizeBytes: bytes.length,
+      detectedMimeType: file.mimeType ?? 'image/jpeg',
+      dimensions: (width: 1000, height: 800), // Mock dimensions
+    );
+  }
 
   @override
   Future<Result<String?>> pickCompressAndUploadDocument({
@@ -253,7 +272,7 @@ void main() {
     final backend = _FakeVerificationBackend()..profileError = Exception('PostgrestException: leaked detail');
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -297,7 +316,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -381,7 +400,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -420,7 +439,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -467,7 +486,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -512,7 +531,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -550,7 +569,7 @@ void main() {
       ..verificationReadyTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -597,7 +616,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -652,7 +671,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -687,7 +706,7 @@ void main() {
       ..verificationReadyTruckCount = 0;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -717,7 +736,7 @@ void main() {
       ..verificationReadyTruckCount = 0;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -747,7 +766,7 @@ void main() {
       ..verificationReadyTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -787,7 +806,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -816,7 +835,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -855,7 +874,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -894,7 +913,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -953,7 +972,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -992,7 +1011,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -1026,7 +1045,7 @@ void main() {
       ..approvedTruckCount = 1;
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
       ),
@@ -1071,7 +1090,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -1116,7 +1135,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),
@@ -1226,7 +1245,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         locationService: _FakeVerificationLocationService(
@@ -1270,7 +1289,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         locationService: _FakeVerificationLocationService(location: null),
@@ -1300,7 +1319,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
         uploadService: uploadService,
@@ -1339,7 +1358,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         uploadService: uploadService,
@@ -1378,7 +1397,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         uploadService: uploadService,
@@ -1427,7 +1446,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         uploadService: uploadService,
@@ -1484,7 +1503,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
         uploadService: uploadService,
@@ -1532,7 +1551,7 @@ void main() {
     );
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'trucker-1',
         uploadService: uploadService,
@@ -1552,7 +1571,9 @@ void main() {
     expect(uploadService.lastSource, isNull);
   });
 
-  testWidgets('renders supplier verification checklist including optional gst', (tester) async {
+  testWidgets(
+    'renders supplier verification checklist including optional gst',
+    (tester) async {
     final backend = _FakeVerificationBackend()
       ..profileMap = {
         'id': 'supplier-1',
@@ -1576,7 +1597,7 @@ void main() {
       };
 
     await tester.pumpWidget(
-      _buildApp(
+      _buildRoutedApp(
         backend: backend,
         currentUserId: 'supplier-1',
       ),

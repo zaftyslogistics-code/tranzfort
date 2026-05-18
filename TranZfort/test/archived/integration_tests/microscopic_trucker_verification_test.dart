@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -13,29 +10,25 @@ import 'package:tranzfort/src/features/trucker/data/trucker_marketplace_reposito
 /// Tests the complete verification flow from scratch for a fresh trucker account
 /// This test will expose any bugs in the verification flow that regular tests miss
 
+final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
 bool _supabaseReady = false;
 
 Future<void> _ensureSupabaseInitialized() async {
   if (_supabaseReady) return;
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {}
   
-  final url = dotenv.env['SUPABASE_URL'] ?? const String.fromEnvironment('SUPABASE_URL');
-  final anonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? const String.fromEnvironment('SUPABASE_ANON_KEY');
-  
-  if (url.isEmpty || anonKey.isEmpty) {
-    throw Exception('Supabase config missing for microscopic trucker verification test');
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    // Will be handled by group-level skip
+    return;
   }
   
-  await Supabase.initialize(url: url, anonKey: anonKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
   _supabaseReady = true;
 }
 
 String _testPasscode() {
-  final fromDefine = const String.fromEnvironment('TZ_TEST_PASSCODE');
-  if (fromDefine.isNotEmpty) return fromDefine;
-  return dotenv.env['TZ_TEST_PASSCODE'] ?? 'Tabish%%Khan721';
+  return const String.fromEnvironment('TZ_TEST_PASSCODE', defaultValue: 'Tabish%%Khan721');
 }
 
 Future<void> _signInAsTrucker(SupabaseClient client) async {
@@ -55,7 +48,9 @@ Future<void> _signInAsTrucker(SupabaseClient client) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   
-  group('MICROSCOPIC: Trucker Verification from Scratch', () {
+  group(
+    'MICROSCOPIC: Trucker Verification from Scratch',
+    () {
     
     testWidgets('M-T-001: Fresh trucker should have unverified status', (tester) async {
       await _ensureSupabaseInitialized();
@@ -263,5 +258,5 @@ void main() {
       
       await client.auth.signOut(scope: SignOutScope.local);
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

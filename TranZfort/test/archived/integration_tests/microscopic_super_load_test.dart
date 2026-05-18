@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 // ignore: unused_import
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -12,6 +9,12 @@ import 'package:tranzfort/src/core/providers/app_state_providers.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 
 /// MICROSCOPIC SUPER LOAD TEST
+/// Tests the super load feature with actual Supabase backend
+
+final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
+/// MICROSCOPIC SUPER LOAD TEST
 /// Tests Super Load eligibility, creation, and execution flows
 /// This exposes bugs in the premium Super Load feature that regular tests miss
 
@@ -19,25 +22,18 @@ bool _supabaseReady = false;
 
 Future<void> _ensureSupabaseInitialized() async {
   if (_supabaseReady) return;
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {}
   
-  final url = dotenv.env['SUPABASE_URL'] ?? const String.fromEnvironment('SUPABASE_URL');
-  final anonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? const String.fromEnvironment('SUPABASE_ANON_KEY');
-  
-  if (url.isEmpty || anonKey.isEmpty) {
-    throw Exception('Supabase config missing for microscopic Super Load test');
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    // Will be handled by group-level skip
+    return;
   }
   
-  await Supabase.initialize(url: url, anonKey: anonKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
   _supabaseReady = true;
 }
 
 String _testPasscode() {
-  final fromDefine = const String.fromEnvironment('TZ_TEST_PASSCODE');
-  if (fromDefine.isNotEmpty) return fromDefine;
-  return dotenv.env['TZ_TEST_PASSCODE'] ?? 'Tabish%%Khan721';
+  return const String.fromEnvironment('TZ_TEST_PASSCODE', defaultValue: 'Tabish%%Khan721');
 }
 
 Future<void> _signInAsSupplier(SupabaseClient client) async {
@@ -70,7 +66,9 @@ Future<void> _signInAsAdmin(SupabaseClient client) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
   
-  group('MICROSCOPIC: Super Load Flow', () {
+  group(
+    'MICROSCOPIC: Super Load Flow',
+    () {
     
     testWidgets('M-SL-001: Unverified supplier should NOT see Super Load option', (tester) async {
       await _ensureSupabaseInitialized();
@@ -341,5 +339,5 @@ void main() {
         fail('BUG DETECTED: ${invalidNotifications.length} notifications have invalid type values');
       }
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -14,11 +11,13 @@ import 'package:tranzfort/src/features/supplier/data/supplier_load_models.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
   Future<void> initSupabase() async {
-    await dotenv.load(fileName: '.env');
     await Supabase.initialize(
-      url: dotenv.env['SUPABASE_URL']!,
-      anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+      url: supabaseUrl,
+      anonKey: supabaseAnonKey,
     );
   }
 
@@ -40,7 +39,9 @@ void main() {
     );
   }
 
-  group('DEBUG: Supplier loads via repository', () {
+  group(
+    'DEBUG: Supplier loads via repository',
+    () {
     testWidgets('Check loads and their errors', (tester) async {
       await initSupabase();
       final client = Supabase.instance.client;
@@ -80,5 +81,5 @@ void main() {
       await client.auth.signOut();
       expect(true, isTrue);
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

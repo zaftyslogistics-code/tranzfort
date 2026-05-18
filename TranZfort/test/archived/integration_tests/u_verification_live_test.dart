@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
@@ -10,48 +7,33 @@ import 'package:tranzfort/src/features/verification/data/verification_repository
 
 bool _supabaseReady = false;
 
+final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
 Future<void> _ensureSupabaseInitialized() async {
   if (_supabaseReady) {
     return;
   }
 
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {}
-
-  final url = dotenv.env['SUPABASE_URL'] ?? const String.fromEnvironment('SUPABASE_URL');
-  final anonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? const String.fromEnvironment('SUPABASE_ANON_KEY');
-
-  if (url.isEmpty || anonKey.isEmpty) {
-    throw Exception('Supabase config missing for TranZfort live verification tests.');
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    // Will be handled by group-level skip
+    return;
   }
 
-  await Supabase.initialize(url: url, anonKey: anonKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
   _supabaseReady = true;
 }
 
 String _testPasscode() {
-  final fromDefine = const String.fromEnvironment('TZ_TEST_PASSCODE');
-  if (fromDefine.isNotEmpty) {
-    return fromDefine;
-  }
-  return dotenv.env['TZ_TEST_PASSCODE'] ?? 'Tabish%%Khan721';
+  return const String.fromEnvironment('TZ_TEST_PASSCODE', defaultValue: 'Tabish%%Khan721');
 }
 
 String _supplierEmail() {
-  final fromDefine = const String.fromEnvironment('TZ_SUPPLIER_EMAIL');
-  if (fromDefine.isNotEmpty) {
-    return fromDefine;
-  }
-  return dotenv.env['TZ_SUPPLIER_EMAIL'] ?? 'supplier@example.com';
+  return const String.fromEnvironment('TZ_SUPPLIER_EMAIL', defaultValue: 'supplier@example.com');
 }
 
 String _truckerEmail() {
-  final fromDefine = const String.fromEnvironment('TZ_TRUCKER_EMAIL');
-  if (fromDefine.isNotEmpty) {
-    return fromDefine;
-  }
-  return dotenv.env['TZ_TRUCKER_EMAIL'] ?? 'trucker@example.com';
+  return const String.fromEnvironment('TZ_TRUCKER_EMAIL', defaultValue: 'trucker@example.com');
 }
 
 Future<void> _signIn(SupabaseClient client, String email) async {
@@ -71,7 +53,9 @@ Future<void> _signIn(SupabaseClient client, String email) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('U-VER live verification probes', () {
+  group(
+    'U-VER live verification probes',
+    () {
     testWidgets('U-VER-001 trucker verification detail loads through current repository contract', (tester) async {
       await _ensureSupabaseInitialized();
       final client = Supabase.instance.client;
@@ -127,5 +111,5 @@ void main() {
       await client.auth.signOut(scope: SignOutScope.local);
       expect(client.auth.currentSession, isNull);
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

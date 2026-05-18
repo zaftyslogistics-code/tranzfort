@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,15 +6,17 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
+  final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
   Future<void> ensureSupabaseInitialized() async {
-    await dotenv.load(fileName: '.env');
-    final url = dotenv.env['SUPABASE_URL']!;
-    final key = dotenv.env['SUPABASE_ANON_KEY']!;
+    final url = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+    final key = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
     await Supabase.initialize(url: url, anonKey: key);
   }
 
   Future<void> signIn(SupabaseClient client, String email) async {
-    final passcode = dotenv.env['TZ_TEST_PASSCODE'] ?? 'TestPass123!';
+    final passcode = const String.fromEnvironment('TZ_TEST_PASSCODE', defaultValue: 'TestPass123!');
     await client.auth.signInWithPassword(email: email, password: passcode);
     expect(client.auth.currentUser, isNotNull);
   }
@@ -163,5 +162,5 @@ void main() {
 
       await client.auth.signOut();
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

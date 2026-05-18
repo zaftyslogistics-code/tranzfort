@@ -1,38 +1,31 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
 import 'dart:io';
-
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 bool _supabaseReady = false;
 SupabaseClient? _serviceRoleClient;
 
+final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+final serviceRoleKey = const String.fromEnvironment('SUPABASE_SERVICE_ROLE_KEY', defaultValue: '');
+
 Future<void> _ensureSupabaseInitialized() async {
   if (_supabaseReady) {
     return;
   }
 
-  try {
-    await dotenv.load(fileName: '.env');
-  } catch (_) {}
-
-  final url = dotenv.env['SUPABASE_URL'] ?? const String.fromEnvironment('SUPABASE_URL');
-  final anonKey = dotenv.env['SUPABASE_ANON_KEY'] ?? const String.fromEnvironment('SUPABASE_ANON_KEY');
-  final serviceRoleKey = dotenv.env['SUPABASE_SERVICE_ROLE_KEY'] ?? const String.fromEnvironment('SUPABASE_SERVICE_ROLE_KEY');
-
-  if (url.isEmpty || anonKey.isEmpty) {
-    throw Exception('Supabase config missing for avatar integration tests.');
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    // Will be handled by group-level skip
+    return;
   }
 
   // Initialize with anon key for regular operations
-  await Supabase.initialize(url: url, anonKey: anonKey);
+  await Supabase.initialize(url: supabaseUrl, anonKey: supabaseAnonKey);
   
   // Create service role client for admin operations (bypasses RLS)
   if (serviceRoleKey.isNotEmpty) {
     _serviceRoleClient = SupabaseClient(
-      url,
+      supabaseUrl,
       serviceRoleKey,
     );
   }
@@ -73,7 +66,9 @@ Future<T> _withRetry<T>(Future<T> Function() action) async {
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('Avatar Integration Tests (Backend RPC Verification)', () {
+  group(
+    'Avatar Integration Tests (Backend RPC Verification)',
+    () {
     testWidgets('Test 1: Verify reviewer_avatar_url field exists in reviews RPC', (WidgetTester tester) async {
       await _ensureSupabaseInitialized();
       
@@ -203,5 +198,5 @@ void main() {
         print('⚠️  get_public_profile response is not a map');
       }
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

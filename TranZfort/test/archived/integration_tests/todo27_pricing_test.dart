@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,15 +6,21 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  group('TODO-27 P1.5.9.8: Post Load Pricing Test', () {
+  final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+
+  group(
+    'TODO-27 P1.5.9.8: Post Load Pricing Test',
+    () {
     late SupabaseClient client;
 
     setUpAll(() async {
-      await dotenv.load(fileName: '.env');
-      
+      if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+        return;
+      }
       await Supabase.initialize(
-        url: dotenv.env['SUPABASE_URL']!,
-        anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
+        url: supabaseUrl,
+        anonKey: supabaseAnonKey,
       );
 
       client = Supabase.instance.client;
@@ -61,5 +64,5 @@ void main() {
     tearDownAll(() async {
       await client.auth.signOut();
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

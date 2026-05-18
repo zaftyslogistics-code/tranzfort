@@ -1,6 +1,3 @@
-// ignore_for_file: depend_on_referenced_packages, uri_does_not_exist, undefined_identifier
-// P0.1: flutter_dotenv removed - TODO: Fix in P5.2 to use --dart-define
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,23 +6,26 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 /// Validates that all critical RPCs return expected JSONB shapes and required fields.
 /// This is a smoke test - it checks structure, not business logic correctness.
 void main() {
-  group('RPC Contract Smoke Tests', () {
-    late SupabaseClient client;
+  final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+  
+  group(
+    'RPC Contract Smoke Tests',
+    () {
+      late SupabaseClient client;
 
-    setUpAll(() async {
-      await dotenv.load(fileName: '.env.test');
-      
-      await Supabase.initialize(
-        url: dotenv.env['SUPABASE_URL']!,
-        anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
-      );
+      setUpAll(() async {
+        await Supabase.initialize(
+          url: supabaseUrl,
+          anonKey: supabaseAnonKey,
+        );
 
-      client = Supabase.instance.client;
-    });
+        client = Supabase.instance.client;
+      });
 
-    tearDownAll(() async {
-      await Supabase.instance.dispose();
-    });
+      tearDownAll(() async {
+        await Supabase.instance.dispose();
+      });
 
     test('get_marketplace_feed returns valid JSONB structure', () async {
       try {
@@ -213,5 +213,5 @@ void main() {
         rethrow;
       }
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }
