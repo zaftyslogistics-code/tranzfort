@@ -41,9 +41,6 @@ class PrimaryButton extends StatelessWidget {
   final bool isLoading;
   final double height;
   final Widget? icon;
-  /// @deprecated Dark surface variants will be handled by ThemeExtension. This parameter will be removed in Phase 4.
-  /// Migration: Remove useDarkVariant parameter. Theme will automatically handle dark mode colors.
-  final bool useDarkVariant; // Phase 4: use primaryOnDark for dark surfaces
 
   const PrimaryButton({
     super.key,
@@ -52,7 +49,6 @@ class PrimaryButton extends StatelessWidget {
     this.isLoading = false,
     this.height = 52,
     this.icon,
-    this.useDarkVariant = false,
   });
 
   factory PrimaryButton.icon({
@@ -62,8 +58,6 @@ class PrimaryButton extends StatelessWidget {
     VoidCallback? onPressed,
     bool isLoading = false,
     double height = 52,
-    @Deprecated('Dark surface variants will be handled by ThemeExtension. Remove useDarkVariant parameter.')
-    bool useDarkVariant = false,
   }) {
     return PrimaryButton(
       key: key,
@@ -72,14 +66,13 @@ class PrimaryButton extends StatelessWidget {
       isLoading: isLoading,
       height: height,
       icon: icon,
-      useDarkVariant: useDarkVariant,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = useDarkVariant ? AppColors.primaryOnDark : AppColors.primary;
-    final textColor = useDarkVariant ? AppColors.inkDeep : AppColors.inkTextOnAccent;
+    final backgroundColor = AppColors.primary;
+    final textColor = AppColors.inkTextOnAccent;
     final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
       color: textColor,
     );
@@ -92,7 +85,7 @@ class PrimaryButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor,
         borderRadius: BorderRadius.circular(AppRadius.button),
-        boxShadow: useDarkVariant ? AppShadows.elevation4Dark : AppShadows.elevation4,
+        boxShadow: AppShadows.elevation4,
       ),
       pressedShadow: AppShadows.elevation2, // Phase 4: drop to elevation2 on press
       child: icon == null
@@ -115,9 +108,6 @@ class OutlineButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
-  /// @deprecated Use GradientButton for filled buttons. This parameter will be removed in Phase 4.
-  /// Migration: Replace `OutlineButton(filled: true)` with `GradientButton` or `PrimaryButton`.
-  final bool filled; // Phase 4: legacy mode
 
   const OutlineButton({
     super.key,
@@ -125,31 +115,10 @@ class OutlineButton extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.height = 52,
-    this.filled = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (filled) {
-      // Legacy filled mode (backward compatibility)
-      final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-            color: Colors.white,
-          );
-
-      return _ActionButtonFrame(
-        height: height,
-        onPressed: onPressed,
-        isLoading: isLoading,
-        foregroundColor: Colors.white,
-        decoration: BoxDecoration(
-          gradient: AppColors.heroCta,
-          borderRadius: BorderRadius.circular(AppRadius.button),
-          boxShadow: AppShadows.heroCta,
-        ),
-        child: Text(label, style: textStyle),
-      );
-    }
-
     // Phase 4 GhostButton spec
     final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
           color: AppColors.primary,
