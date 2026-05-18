@@ -27,6 +27,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 7.1:** Coordinate readers - Fixed all coordinate fields to use readDoubleNullable (F3-009 complete)
 - ✅ **Phase 7.2:** Remove duplicate helpers - All duplicate helpers removed across codebase (complete)
 - ✅ **Phase 8 (partial):** Remove commented-out code - Fixed in chat_repository and trucker_load_detail_screen (F5-007)
+- ✅ **Phase 12 (partial):** Remove unnecessary library directives - Fixed in app_config, public_profile_models, review_models (F12-002, F12-003, F12-004)
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
@@ -44,10 +45,11 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
 - F3-007: TripCostingService constants moved to config (Medium)
 - F3-009: Coordinate readers - All coordinate fields now use readDoubleNullable (Medium complete)
-- F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium)
+- F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium complete)
 - F5-007: Commented-out unused code removed (Low)
+- F12-002, F12-003, F12-004: Unnecessary library directives removed (Low)
 
-**Remaining Issues:** 76 (11 medium, 60 low, 5 informational)
+**Remaining Issues:** 72 (7 medium, 60 low, 5 informational)
 
 **Next Steps:**
 1. Continue with smaller medium priority fixes (commented code, anti-patterns, etc.)
