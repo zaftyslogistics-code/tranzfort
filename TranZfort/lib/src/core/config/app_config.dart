@@ -1,8 +1,3 @@
-/// Application configuration constants.
-///
-/// This file contains configuration for the TranZfort app.
-library;
-
 /// Google Maps API key configuration.
 ///
 /// The API key is passed via --dart-define at build time:
