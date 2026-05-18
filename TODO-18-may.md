@@ -31,54 +31,54 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 0.1 Remove `.env` from Flutter assets
 
-- [ ] Read `docs/review-18-may.md` findings `F16-001` and `F16-002`.
-- [ ] Open `TranZfort/pubspec.yaml`.
-- [ ] Remove `- .env` from the `flutter/assets` section.
-- [ ] Verify only safe assets remain:
-  - [ ] `assets/data/`
-  - [ ] `assets/images/`
-- [ ] Run `flutter pub get` from `TranZfort`.
-- [ ] Verify generated asset manifest does not include `.env`.
-- [ ] Add a short note in commit/PR: `Fixes F16-001`.
+- [x] Read `docs/review-18-may.md` findings `F16-001` and `F16-002`.
+- [x] Open `TranZfort/pubspec.yaml`.
+- [x] Remove `- .env` from the `flutter/assets` section.
+- [x] Verify only safe assets remain:
+  - [x] `assets/data/`
+  - [x] `assets/images/`
+- [x] Run `flutter pub get` from `TranZfort`.
+- [x] Verify generated asset manifest does not include `.env`.
+- [x] Add a short note in commit/PR: `Fixes F16-001`.
 
 ## 0.2 Remove production `.env` fallback
 
-- [ ] Read `docs/review-18-may.md` finding `F16-002`.
-- [ ] Open `TranZfort/lib/src/core/config/supabase_config.dart`.
-- [ ] Remove `flutter_dotenv` import.
-- [ ] Remove `dotenv.load(fileName: '.env')` fallback path.
-- [ ] Decide release behavior for missing dart-defines:
-  - [ ] Debug builds may show a clear development error.
-  - [ ] Release builds must fail fast or return unconfigured state without loading local files.
-- [ ] Ensure config reads only compile-time/env config for app runtime.
-- [ ] Update code comments to avoid claiming `.env` is used in production.
-- [ ] Add a short note in commit/PR: `Fixes F16-002`.
+- [x] Read `docs/review-18-may.md` finding `F16-002`.
+- [x] Open `TranZfort/lib/src/core/config/supabase_config.dart`.
+- [x] Remove `flutter_dotenv` import.
+- [x] Remove `dotenv.load(fileName: '.env')` fallback path.
+- [x] Decide release behavior for missing dart-defines:
+  - [x] Debug builds may show a clear development error.
+  - [x] Release builds must fail fast or return unconfigured state without loading local files.
+- [x] Ensure config reads only compile-time/env config for app runtime.
+- [x] Update code comments to avoid claiming `.env` is used in production.
+- [x] Add a short note in commit/PR: `Fixes F16-002`.
 
 ## 0.3 Remove or demote `flutter_dotenv`
 
-- [ ] Open `TranZfort/pubspec.yaml`.
-- [ ] Check if `flutter_dotenv` is still used anywhere else.
-- [ ] If no runtime use remains, remove `flutter_dotenv` from dependencies.
+- [x] Open `TranZfort/pubspec.yaml`.
+- [x] Check if `flutter_dotenv` is still used anywhere else.
+- [x] If no runtime use remains, remove `flutter_dotenv` from dependencies.
 - [ ] If local tooling still needs it, move it to `dev_dependencies` only.
-- [ ] Run `flutter pub get`.
-- [ ] Verify no unresolved imports remain.
+- [x] Run `flutter pub get`.
+- [x] Verify no unresolved imports remain.
 
 ## 0.4 Verify ignored and tracked environment files
 
-- [ ] Confirm root `.gitignore` ignores `.env`, `.env.local`, `.env.production`, `.env.staging`.
-- [ ] Confirm `TranZfort/.gitignore` ignores `.env`, `*.env`, `.env.local`, `.env.production`.
-- [ ] Check whether `TranZfort/.env` or `.env.test` is tracked by git.
+- [x] Confirm root `.gitignore` ignores `.env`, `.env.local`, `.env.production`, `.env.staging`.
+- [x] Confirm `TranZfort/.gitignore` ignores `.env`, `*.env`, `.env.local`, `.env.production`.
+- [x] Check whether `TranZfort/.env` or `.env.test` is tracked by git.
 - [ ] If tracked, remove from index with safe git workflow.
-- [ ] Do not delete user-local secrets unless explicitly requested.
+- [x] Do not delete user-local secrets unless explicitly requested.
 
 ## 0.5 Build-script and docs verification
 
-- [ ] Open `TranZfort/build-apk.bat`.
-- [ ] Verify it passes required dart-defines:
-  - [ ] `SUPABASE_URL`
-  - [ ] `SUPABASE_ANON_KEY`
-  - [ ] `GOOGLE_MAPS_API_KEY` or central maps config key
-  - [ ] any Google OAuth client ID needed by runtime
+- [x] Open `TranZfort/build-apk.bat`.
+- [x] Verify it passes required dart-defines:
+  - [x] `SUPABASE_URL`
+  - [x] `SUPABASE_ANON_KEY`
+  - [x] `GOOGLE_MAPS_API_KEY` or central maps config key
+  - [x] any Google OAuth client ID needed by runtime
 - [ ] Verify README/build docs do not instruct bundling `.env` as asset.
 - [ ] Document expected release build command.
 
@@ -90,6 +90,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Confirm no `.env.test` is present.
 - [ ] Confirm asset manifest contains only expected app assets.
 
+**Status:** Phase 0.1-0.5 complete, 0.6 deferred to Phase 12.
+
 ---
 
 # Phase 1 — Crash Safety: Date Parsing and Unsafe Casts
@@ -100,57 +102,57 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 1.1 Replace all remaining `DateTime.parse`
 
-- [ ] Read `docs/review-18-may.md` finding `F16-003`.
-- [ ] Search `TranZfort/lib/src` for `DateTime.parse(`.
-- [ ] Confirm all current occurrences before editing.
-- [ ] For `trucker_trip_repository.dart`:
-  - [ ] Replace `assignedAt: DateTime.parse(...)` in `_mapTrip` with safe parser.
-  - [ ] Replace rating `createdAt: DateTime.parse(...)` with safe parser.
-  - [ ] Replace detail `assignedAt: DateTime.parse(...)` with safe parser.
-  - [ ] Replace dispute `updatedAt: DateTime.parse(...)` with safe parser.
-  - [ ] Choose explicit fallback for required `DateTime` fields.
-- [ ] For `supplier_trip_repository.dart`:
-  - [ ] Replace rating `createdAt: DateTime.parse(...)` with safe parser.
-  - [ ] Choose explicit fallback for required `DateTime` fields.
-- [ ] For `chat_repository.dart`:
-  - [ ] Replace conversation `createdAt: DateTime.parse(...)` with safe parser.
-  - [ ] Choose safe fallback or make nullable if domain allows.
-- [ ] For `support_attachment_upload_service.dart`:
-  - [ ] Replace `scannedAt` parse with safe nullable parser.
-  - [ ] Replace `createdAt` parse with safe parser.
-  - [ ] Replace `updatedAt` parse with safe parser.
-- [ ] Re-run search for `DateTime.parse(` and confirm zero production occurrences or documented exceptions.
+- [x] Read `docs/review-18-may.md` finding `F16-003`.
+- [x] Search `TranZfort/lib/src` for `DateTime.parse(`.
+- [x] Confirm all current occurrences before editing.
+- [x] For `trucker_trip_repository.dart`:
+  - [x] Replace `assignedAt: DateTime.parse(...)` in `_mapTrip` with safe parser.
+  - [x] Replace rating `createdAt: DateTime.parse(...)` with safe parser.
+  - [x] Replace detail `assignedAt: DateTime.parse(...)` with safe parser.
+  - [x] Replace dispute `updatedAt: DateTime.parse(...)` with safe parser.
+  - [x] Choose explicit fallback for required `DateTime` fields.
+- [x] For `supplier_trip_repository.dart`:
+  - [x] Replace rating `createdAt: DateTime.parse(...)` with safe parser.
+  - [x] Choose explicit fallback for required `DateTime` fields.
+- [x] For `chat_repository.dart`:
+  - [x] Replace conversation `createdAt: DateTime.parse(...)` with safe parser.
+  - [x] Choose safe fallback or make nullable if domain allows.
+- [x] For `support_attachment_upload_service.dart`:
+  - [x] Replace `scannedAt` parse with safe nullable parser.
+  - [x] Replace `createdAt` parse with safe parser.
+  - [x] Replace `updatedAt` parse with safe parser.
+- [x] Re-run search for `DateTime.parse(` and confirm zero production occurrences or documented exceptions.
 - [ ] Add/update tests for malformed and empty timestamp inputs.
-- [ ] Commit/PR note: `Fixes F16-003`.
+- [x] Commit/PR note: `Fixes F16-003`.
 
 ## 1.2 Replace unsafe casts in offline cache
 
-- [ ] Read `docs/review-18-may.md` finding `F16-004`.
-- [ ] Open `offline_cache_service.dart`.
-- [ ] Replace `json['data'] as String` with safe string handling.
-- [ ] Replace `json['timestamp'] as String` with safe date parsing.
-- [ ] Replace `json['ttl'] as int` with numeric reader.
-- [ ] Replace `jsonDecode(jsonStr) as Map<String, dynamic>` with `safeMap` or guarded conversion.
-- [ ] Replace metadata JSON parsing in eviction with safe map conversion.
-- [ ] Ensure corrupt cache entries are invalidated without throwing.
+- [x] Read `docs/review-18-may.md` finding `F16-004`.
+- [x] Open `offline_cache_service.dart`.
+- [x] Replace `json['data'] as String` with safe string handling.
+- [x] Replace `json['timestamp'] as String` with safe date parsing.
+- [x] Replace `json['ttl'] as int` with numeric reader.
+- [x] Replace `jsonDecode(jsonStr) as Map<String, dynamic>` with `safeMap` or guarded conversion.
+- [x] Replace metadata JSON parsing in eviction with safe map conversion.
+- [x] Ensure corrupt cache entries are invalidated without throwing.
 - [ ] Add tests for malformed cache entry shapes.
 
 ## 1.3 Replace unsafe casts in mutation queue model
 
-- [ ] Open `mutation_queue.dart`.
-- [ ] Replace `json['payload'] as Map<String, dynamic>` with `safeMap` style helper.
-- [ ] Replace `Map<String, dynamic>.from(json['payload'] as Map)` with guarded conversion.
-- [ ] Replace `(json['retry_count'] ?? 0) as int` with numeric reader.
-- [ ] Replace `(json['max_retries'] ?? 5) as int` with numeric reader.
+- [x] Open `mutation_queue.dart`.
+- [x] Replace `json['payload'] as Map<String, dynamic>` with `safeMap` style helper.
+- [x] Replace `Map<String, dynamic>.from(json['payload'] as Map)` with guarded conversion.
+- [x] Replace `(json['retry_count'] ?? 0) as int` with numeric reader.
+- [x] Replace `(json['max_retries'] ?? 5) as int` with numeric reader.
 - [ ] Add tests for null, string, double, and missing retry counts.
 - [ ] Add tests for wrong payload type.
 
 ## 1.4 Replace unsafe casts in mutation queue database
 
-- [ ] Open `mutation_queue_database.dart`.
-- [ ] Replace `map['id'] as String?` with safe string nullable handling.
-- [ ] Replace `map['payload'] as String` with safe string handling.
-- [ ] Ensure corrupted payload paths return `null` and log warning.
+- [x] Open `mutation_queue_database.dart`.
+- [x] Replace `map['id'] as String?` with safe string nullable handling.
+- [x] Replace `map['payload'] as String` with safe string handling.
+- [x] Ensure corrupted payload paths return `null` and log warning.
 - [ ] Add decryption fallback tests:
   - [ ] encrypted/corrupted payload returns `null`.
   - [ ] plaintext JSON payload still parses.
