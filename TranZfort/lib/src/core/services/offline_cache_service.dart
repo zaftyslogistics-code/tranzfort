@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../utils/map_readers.dart';
 import '../utils/type_safety.dart';
 
 /// Cache entry model for storing cached data with metadata.
@@ -21,10 +22,10 @@ class CacheEntry {
 
   factory CacheEntry.fromJson(Map<String, dynamic> json) {
     return CacheEntry(
-      data: json['data'] as String,
-      timestamp: DateTime.tryParse(json['timestamp'] as String) ?? DateTime.fromMillisecondsSinceEpoch(0),
-      ttl: Duration(seconds: json['ttl'] as int),
-      version: json['version'] as int? ?? 1,
+      data: safeString(json['data']),
+      timestamp: DateTime.tryParse(safeString(json['timestamp'])) ?? DateTime.fromMillisecondsSinceEpoch(0),
+      ttl: Duration(seconds: readInt(json['ttl'])),
+      version: readInt(json['version']),
     );
   }
 
@@ -144,7 +145,11 @@ class OfflineCacheService {
       final jsonStr = _prefsInstance.getString(key);
       if (jsonStr == null) return null;
 
-      final json = jsonDecode(jsonStr) as Map<String, dynamic>;
+      final json = safeMap(jsonDecode(jsonStr));
+      if (json == null) {
+        invalidate(key);
+        return null;
+      }
       final entry = CacheEntry.fromJson(json);
       
       if (entry.version != currentSchemaVersion) {
@@ -203,7 +208,11 @@ class OfflineCacheService {
       final jsonStr = _prefsInstance.getString(key);
       if (jsonStr == null) continue;
       try {
-        final json = jsonDecode(jsonStr) as Map<String, dynamic>;
+        final json = safeMap(jsonDecode(jsonStr));
+        if (json == null) {
+          _prefsInstance.remove(key);
+          continue;
+        }
         final entry = CacheEntry.fromJson(json);
         entries.add(_CacheEntryMeta(key: key, timestamp: entry.timestamp));
       } catch (_) {
