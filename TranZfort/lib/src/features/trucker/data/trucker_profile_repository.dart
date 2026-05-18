@@ -162,7 +162,7 @@ class TruckerProfileRepository {
   Future<Result<TruckerProfile?>> fetchCurrentTruckerProfile() async {
     final userId = _currentUserId();
     if (userId == null) {
-      return const Success<TruckerProfile?>(null);
+      return const Failure<TruckerProfile?>(UnauthorizedFailure());
     }
 
     try {

@@ -21,7 +21,7 @@ class VerificationRepository {
   Future<Result<VerificationDetail?>> fetchCurrentDetail() async {
     final userId = _currentUserId();
     if (userId == null) {
-      return const Success<VerificationDetail?>(null);
+      return const Failure<VerificationDetail?>(UnauthorizedFailure());
     }
 
     try {

@@ -138,7 +138,7 @@ class SupplierProfileRepository {
   Future<Result<SupplierProfile?>> fetchCurrentSupplierProfile() async {
     final userId = _currentUserId();
     if (userId == null) {
-      return const Success<SupplierProfile?>(null);
+      return const Failure<SupplierProfile?>(UnauthorizedFailure());
     }
 
     try {
