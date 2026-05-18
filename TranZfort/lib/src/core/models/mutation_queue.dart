@@ -1,5 +1,8 @@
 import 'package:uuid/uuid.dart';
 
+import '../utils/map_readers.dart';
+import '../utils/type_safety.dart';
+
 enum MutationOperation {
   create,
   update,
@@ -69,14 +72,7 @@ class QueuedMutation {
     );
     
     // Parse payload with defensive Map parsing
-    Map<String, dynamic> payload;
-    if (json['payload'] is Map<String, dynamic>) {
-      payload = json['payload'] as Map<String, dynamic>;
-    } else if (json['payload'] is Map) {
-      payload = Map<String, dynamic>.from(json['payload'] as Map);
-    } else {
-      payload = <String, dynamic>{};
-    }
+    final payload = safeMap(json['payload']) ?? <String, dynamic>{};
     
     // Parse endpoint
     final endpoint = (json['endpoint'] ?? '').toString();
@@ -93,10 +89,10 @@ class QueuedMutation {
     }
     
     // Parse retry_count
-    final retryCount = (json['retry_count'] ?? 0) as int;
+    final retryCount = readInt(json['retry_count']);
     
     // Parse max_retries
-    final maxRetries = (json['max_retries'] ?? 5) as int;
+    final maxRetries = readInt(json['max_retries']);
     
     // Parse status
     final statusStr = (json['status'] ?? '').toString();
