@@ -353,14 +353,16 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 5.2 Standardize unauthenticated repository behavior
 
-- [ ] Read `F2-012`, `F3-002`, `F4-001`.
-- [ ] Update `supplier_profile_repository.dart` no-user case to return `Failure(UnauthorizedFailure())` or agreed failure type.
-- [ ] Update `trucker_profile_repository.dart` no-user case similarly.
-- [ ] Update `verification_repository.dart` no-user case similarly.
-- [ ] Decide behavior for missing profile row separately from missing auth session.
+- [x] Read `F2-012`, `F3-002`, `F4-001`.
+- [x] Update `supplier_profile_repository.dart` no-user case to return `Failure(UnauthorizedFailure())` or agreed failure type.
+- [x] Update `trucker_profile_repository.dart` no-user case similarly.
+- [x] Update `verification_repository.dart` no-user case similarly.
+- [x] Decide behavior for missing profile row separately from missing auth session.
 - [ ] Update providers/UI to handle failure vs no-profile state.
 - [ ] Add tests for no session.
 - [ ] Add tests for session but missing profile row.
+
+**Status:** Core fix complete - repositories now return Failure for missing user. UI updates and tests deferred.
 
 ---
 
