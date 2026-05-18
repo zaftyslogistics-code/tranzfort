@@ -392,12 +392,12 @@ class LoadDetailDto {
       summary: LoadListItemDto.fromMap(map),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: map['origin_state']?.toString(),
-      originLat: _readDouble(map['origin_lat']),
-      originLng: _readDouble(map['origin_lng']),
+      originLat: readDoubleNullable(map['origin_lat']),
+      originLng: readDoubleNullable(map['origin_lng']),
       destinationCity: (map['destination_city'] ?? '').toString(),
       destinationState: map['destination_state']?.toString(),
-      destinationLat: _readDouble(map['destination_lat']),
-      destinationLng: _readDouble(map['destination_lng']),
+      destinationLat: readDoubleNullable(map['destination_lat']),
+      destinationLng: readDoubleNullable(map['destination_lng']),
       routeDistanceKm: _readDouble(map['route_distance_km']),
       routeDurationMinutes: LoadListItemDto._readInt(map['route_duration_minutes']) == 0 && map['route_duration_minutes'] == null
           ? null
