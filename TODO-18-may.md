@@ -21,10 +21,12 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 4.1:** Role State Correctness - Fixed partial state inconsistency (F1-006)
 - ✅ **Phase 5.1:** Supplier High-Priority - Fixed error swallowing in fetchMyLoads (F2-001)
 - ✅ **Phase 5.2:** Repository Null Handling - Standardized unauthenticated behavior (F2-012, F3-002, F4-001)
+- ✅ **Phase 6.1:** Centralize Google Maps API Key - Centralized in AppConfig (F2-007, F3-007, F4-003, F7-002)
+- ✅ **Phase 6.1 (additional):** TripCostingService constants moved to AppConfig (F3-007)
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
-- 🔄 **Phase 6:** Runtime Config & Location Services
+- 🔄 **Phase 6:** Runtime Config & Location Services (remaining items)
 - 🔄 **Phase 7-12:** Medium/Low priority items
 
 **Critical Findings Fixed:**
@@ -35,13 +37,15 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F1-006: Role selection partial state (High)
 - F2-001: Supplier error swallowing (High)
 - F2-012, F3-002, F4-001: Repository null handling (Medium)
+- F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
+- F3-007: TripCostingService constants moved to config (Medium)
 
-**Remaining Issues:** 87 (21 medium, 60 low, 6 informational)
+**Remaining Issues:** 84 (19 medium, 60 low, 5 informational)
 
 **Next Steps:**
-1. Complete Phase 6 (Runtime Config & Location Services)
-2. Complete Phase 7 (Coordinate & Data Reader Consistency)
-3. Complete Phase 8-12 (Additional Medium/Low Priority Items)
+1. Complete smaller medium priority fixes (duplicate helpers, coordinate readers, etc.)
+2. Complete Phase 6.2-6.3 (large refactoring - may defer)
+3. Complete Phase 7-12 (medium/low priority items)
 4. Build release APK/AAB and verify no `.env` in assets
 5. Test core user flows on device
 
