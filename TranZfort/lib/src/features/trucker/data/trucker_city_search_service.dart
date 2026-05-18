@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/logger/app_logger.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -90,7 +91,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
   }
 
   Future<List<TruckerCitySuggestion>> _searchGoogleCities(String query) async {
-    final apiKey = const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
+    final apiKey = AppConfig.googleMapsApiKey;
     if (apiKey.isEmpty) {
       AppLogger.warning('[TruckerLocationSearch] Google Maps API key is empty');
       return const [];

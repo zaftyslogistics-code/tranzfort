@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../core/config/app_config.dart';
+
 class VerificationLocation {
   final String city;
   final String? state;
@@ -307,7 +309,7 @@ class VerificationLocationService {
   }
 
   static String _readGoogleMapsApiKey() {
-    return const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
+    return AppConfig.googleMapsApiKey;
   }
 
   static Future<Position> _defaultGetCurrentPosition() {

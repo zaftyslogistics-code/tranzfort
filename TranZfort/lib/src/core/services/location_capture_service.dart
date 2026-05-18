@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../config/app_config.dart';
+
 /// Location data model for captured or resolved locations
 class LocationData {
   final String city;
@@ -347,7 +349,7 @@ class LocationCaptureService {
   }
 
   static String _readGoogleMapsApiKey() {
-    return const String.fromEnvironment('GOOGLE_MAPS_API_KEY', defaultValue: '');
+    return AppConfig.googleMapsApiKey;
   }
 
   static Future<Position> _defaultGetCurrentPosition() {
