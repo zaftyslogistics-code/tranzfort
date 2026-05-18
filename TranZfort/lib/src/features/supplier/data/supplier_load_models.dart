@@ -261,7 +261,7 @@ class LoadBookingRequest {
       decidedAt: _readDateTime(map['decided_at']),
       truckerName: _nullableString(map['trucker_name']),
       truckerVerificationStatus: _nullableString(map['trucker_verification_status']),
-      truckerRating: _readDouble(map['trucker_rating']),
+      truckerRating: readDouble(map['trucker_rating']),
       truckerAvatarUrl: _nullableString(map['trucker_avatar_url']),
       truckNumber: _nullableString(map['truck_number']),
       truckBodyType: _nullableString(map['truck_body_type']),
@@ -435,17 +435,6 @@ class LoadDetailDto {
       bookingRequest: null,
       linkedTrips: const [],
     );
-  }
-
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-
-    return double.tryParse(value.toString());
   }
 }
 

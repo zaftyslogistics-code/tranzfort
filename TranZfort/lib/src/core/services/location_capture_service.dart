@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 
 import '../config/app_config.dart';
+import '../utils/map_readers.dart';
 
 /// Location data model for captured or resolved locations
 class LocationData {
@@ -155,8 +156,8 @@ class LocationCaptureService {
       break;
     }
 
-    final latitude = _readDouble(matchedCity?['lat']);
-    final longitude = _readDouble(matchedCity?['lng']);
+    final latitude = readDoubleNullable(matchedCity?['lat']);
+    final longitude = readDoubleNullable(matchedCity?['lng']);
     
     // Validate coordinates - reject 0,0 or null coordinates
     if (latitude == null || longitude == null || latitude == 0 || longitude == 0) {
@@ -246,8 +247,8 @@ class LocationCaptureService {
     Map<String, dynamic>? nearest;
     double? bestDistanceKm;
     for (final city in searchCities) {
-      final cityLat = _readDouble(city['lat']);
-      final cityLng = _readDouble(city['lng']);
+      final cityLat = readDoubleNullable(city['lat']);
+      final cityLng = readDoubleNullable(city['lng']);
       if (cityLat == null || cityLng == null) {
         continue;
       }
@@ -319,16 +320,6 @@ class LocationCaptureService {
       }
     }
     return null;
-  }
-
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse(value.toString());
   }
 
   static double _distanceKm(double lat1, double lon1, double lat2, double lon2) {

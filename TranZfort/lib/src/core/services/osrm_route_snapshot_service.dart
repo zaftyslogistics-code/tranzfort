@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import '../utils/map_readers.dart';
 import 'route_snapshot_service.dart';
 
 typedef RouteJsonFetcher = Future<Map<String, dynamic>> Function(Uri uri);
@@ -36,8 +37,8 @@ class OsrmRouteSnapshotService {
         return null;
       }
 
-      final distanceMeters = _readDouble(firstRoute['distance']);
-      final durationSeconds = _readDouble(firstRoute['duration']);
+      final distanceMeters = readDoubleNullable(firstRoute['distance']);
+      final durationSeconds = readDoubleNullable(firstRoute['duration']);
       if (distanceMeters == null || durationSeconds == null) {
         return null;
       }
@@ -67,15 +68,5 @@ class OsrmRouteSnapshotService {
     } finally {
       client.close(force: true);
     }
-  }
-
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse(value.toString());
   }
 }
