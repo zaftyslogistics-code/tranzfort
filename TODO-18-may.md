@@ -57,7 +57,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 **Next Steps:**
 1. ✅ APK build successful after PC restart - file lock resolved
 2. ✅ Fix UI/UX responsiveness issues (8 findings: F17-001 to F17-008) - COMPLETE
-3. Continue with remaining 70 medium/low priority issues
+3. Fix remaining 70 medium/low priority issues (in progress - localized FilterChipBar Reset button)
 4. Complete Phase 6.2-6.3 (large refactoring - may defer)
 5. Test core user flows on device
 
