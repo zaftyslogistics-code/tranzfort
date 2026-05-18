@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../../../core/config/app_config.dart';
 import '../../../core/logger/app_logger.dart';
+import '../../../core/utils/map_readers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/services/osrm_route_snapshot_service.dart';
@@ -139,8 +140,8 @@ class NetworkSupplierLocationService implements SupplierLocationService {
 
       final geometry = result['geometry'];
       final location = geometry is Map<String, dynamic> ? geometry['location'] : null;
-      final lat = location is Map<String, dynamic> ? _readDouble(location['lat']) : null;
-      final lng = location is Map<String, dynamic> ? _readDouble(location['lng']) : null;
+      final lat = location is Map<String, dynamic> ? readDoubleNullable(location['lat']) : null;
+      final lng = location is Map<String, dynamic> ? readDoubleNullable(location['lng']) : null;
       final addressComponents = (result['address_components'] as List<dynamic>? ?? const <dynamic>[])
           .whereType<Map<String, dynamic>>()
           .toList(growable: false);
@@ -250,8 +251,8 @@ class NetworkSupplierLocationService implements SupplierLocationService {
               label: '$cityName, $stateName',
               city: cityName,
               state: stateName,
-              lat: _readDouble(city['lat']),
-              lng: _readDouble(city['lng']),
+              lat: readDoubleNullable(city['lat']),
+              lng: readDoubleNullable(city['lng']),
               placeId: null,
               source: 'offline_asset',
             );
@@ -314,18 +315,7 @@ class NetworkSupplierLocationService implements SupplierLocationService {
     return null;
   }
 
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-
-    return double.tryParse(value.toString());
-  }
-
-  static String _readCityName(Map<String, dynamic> city) {
+  String _readCityName(Map<String, dynamic> city) {
     return (city['name'] ?? city['city'] ?? '').toString();
   }
 }
