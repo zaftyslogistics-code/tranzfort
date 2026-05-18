@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import 'chat_repository_conversation_models.dart';
 import 'chat_repository_models.dart';
@@ -518,7 +519,7 @@ class ChatRepository {
       lastMessageAt: readDate(row['last_message_at']),
       hasUnread: row['has_unread'] == true,
       isArchived: row['is_archived'] == true,
-      createdAt: DateTime.parse((row['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(row['created_at']) ?? DateTime.now(),
     );
   }
 

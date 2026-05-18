@@ -9,6 +9,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import 'supplier_trip_repository_models.dart';
 import 'supplier_trip_repository_backend.dart';
@@ -390,7 +391,7 @@ class SupplierTripsRepository {
       id: (row['id'] ?? '').toString(),
       score: (row['score'] as num?)?.toInt() ?? 0,
       comment: nullableString(row['comment']),
-      createdAt: DateTime.parse((row['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(row['created_at']) ?? DateTime.now(),
     );
   }
 

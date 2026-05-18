@@ -8,6 +8,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/models/domain_statuses.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import 'trucker_trip_repository_models.dart';
 import 'trucker_trip_repository_backend.dart';
@@ -379,7 +380,7 @@ class TruckerTripsRepository {
       stage: (map['stage'] ?? 'assigned').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
       truckNumber: (truckMap['truck_number'] ?? 'Truck pending').toString(),
-      assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
+      assignedAt: safeParseDateTime(map['assigned_at']) ?? DateTime.now(),
       deliveredAt: readDate(map['delivered_at']),
       podUploadedAt: readDate(map['pod_uploaded_at']),
       completedAt: readDate(map['completed_at']),
@@ -393,7 +394,7 @@ class TruckerTripsRepository {
       id: (map['id'] ?? '').toString(),
       score: _readIntNullable(map['score']) ?? 0,
       comment: nullableString(map['comment']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
     );
   }
 
@@ -437,7 +438,7 @@ class TruckerTripsRepository {
       routeDurationMinutes: _readIntNullable(loadMap['route_duration_minutes']),
       routeSnapshotSource: nullableString(loadMap['route_snapshot_source']),
       pickupDate: readDate(loadMap['pickup_date']),
-      assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
+      assignedAt: safeParseDateTime(map['assigned_at']) ?? DateTime.now(),
       startedAt: readDate(map['started_at']),
       deliveredAt: readDate(map['delivered_at']),
       podUploadedAt: readDate(map['pod_uploaded_at']),
@@ -449,7 +450,7 @@ class TruckerTripsRepository {
           : TruckerTripDisputeSummary(
               category: (disputeSummary['category'] ?? 'trip_dispute').toString(),
               status: (disputeSummary['status'] ?? 'open').toString(),
-              updatedAt: DateTime.parse((disputeSummary['updated_at'] ?? '').toString()),
+              updatedAt: safeParseDateTime(disputeSummary['updated_at']) ?? DateTime.now(),
             ),
       supplier: TruckerTripSupplierSummary(
         id: (supplierProfile['id'] ?? '').toString(),
