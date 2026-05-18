@@ -57,8 +57,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 **Next Steps:**
 1. ✅ APK build successful after PC restart - file lock resolved
 2. ✅ Fix UI/UX responsiveness issues (8 findings: F17-001 to F17-008) - COMPLETE
-3. ✅ Build release APK (75.1MB) and AAB (58.5MB) with Supabase credentials - READY FOR TESTING
-4. Test core user flows on device manually
+3. ✅ Build release APK (75.1MB) and AAB (58.5MB) with Supabase + Google credentials - READY FOR TESTING
+4. Test core user flows on device manually (Google login should now work)
 5. Continue with remaining 70 medium/low priority issues after testing
 6. Complete Phase 6.2-6.3 (large refactoring - may defer)
 
