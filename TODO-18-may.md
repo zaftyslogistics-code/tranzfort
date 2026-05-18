@@ -56,9 +56,46 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 **Next Steps:**
 1. ✅ APK build successful after PC restart - file lock resolved
-2. Continue with remaining 70 medium/low priority issues
-3. Complete Phase 6.2-6.3 (large refactoring - may defer)
-4. Test core user flows on device
+2. Fix UI/UX responsiveness issues (8 findings: F17-001 to F17-008)
+3. Continue with remaining 68 medium/low priority issues
+4. Complete Phase 6.2-6.3 (large refactoring - may defer)
+5. Test core user flows on device
+
+---
+
+## Phase 17: UI/UX Responsiveness & Layout Issues
+
+**Status:** In Progress
+**Findings:** 8 (2 High, 3 Medium, 3 Low)
+
+**Critical Findings Fixed:**
+- F16-001: `.env` bundled as asset (Critical)
+- F16-002: Production `.env` fallback (High)
+- F16-003: Unsafe DateTime.parse (High)
+- F16-004: Unsafe casts (High)
+- F1-006: Role selection partial state (High)
+- F2-001: Supplier error swallowing (High)
+- F2-012, F3-002, F4-001: Repository null handling (Medium)
+- F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
+- F3-007: TripCostingService constants moved to config (Medium)
+- F3-009: Coordinate readers - All coordinate fields now use readDoubleNullable (Medium complete)
+- F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium complete)
+- F5-007: Commented-out unused code removed (Low)
+- F1-009: Dead code - unused selectedSuggestion variable removed (Low)
+- F10-001, F10-002: Deprecated parameters removed from action_buttons (Low)
+- F12-002, F12-003, F12-004: Unnecessary library directives removed (Low)
+
+**Responsiveness Findings (NEW):**
+- F17-006: DetailPageScaffold missing resizeToAvoidBottomInset (High) - NOT FIXED
+- F17-007: UserAppShell missing resizeToAvoidBottomInset (High) - NOT FIXED
+- F17-002: QuickActionGrid uses fixed crossAxisCount of 2 (Medium) - NOT FIXED
+- F17-005: StandardListCard subtitle has no overflow handling (Medium) - NOT FIXED
+- F17-001: FilterChipBar uses fixed height of 40 pixels (Low) - NOT FIXED
+- F17-003: LeadingIconChip uses fixed width/height of 48 pixels (Low) - NOT FIXED
+- F17-004: EmptyStateIllustration uses fixed width/height of 96 pixels (Low) - NOT FIXED
+- F17-008: GoogleSignInButton uses fixed height in auth screen (Low) - NOT FIXED
+
+**Remaining Issues:** 76 (7 medium + 60 low + 5 informational + 8 responsiveness = 80 total)
 
 ---
 
