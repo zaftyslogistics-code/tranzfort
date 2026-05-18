@@ -160,22 +160,24 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 1.5 Replace unsafe casts in trip/support/verification code
 
-- [ ] Open `trucker_trip_repository.dart`.
-- [ ] Replace direct map casts for `trip`, `supplier_profile`, `supplier_extension`, `dispute_summary` with `safeMap`.
-- [ ] Replace map casts for `loads` and `trucks` with `safeMap`.
-- [ ] Open `support_attachment_upload_service.dart`.
-- [ ] Replace numeric/string casts with safe readers.
-- [ ] Open `verification/presentation/components/city_search_sheet.dart`.
-- [ ] Replace `population as int?` with safe int reader.
-- [ ] Re-run unsafe cast search and document remaining intentional casts.
+- [x] Open `trucker_trip_repository.dart`.
+- [x] Replace direct map casts for `trip`, `supplier_profile`, `supplier_extension`, `dispute_summary` with `safeMap`.
+- [x] Replace map casts for `loads` and `trucks` with `safeMap`.
+- [x] Open `support_attachment_upload_service.dart`.
+- [x] Replace numeric/string casts with safe readers.
+- [x] Open `verification/presentation/components/city_search_sheet.dart`.
+- [x] Replace `population as int?` with safe int reader.
+- [x] Re-run unsafe cast search and document remaining intentional casts.
 
 ## 1.6 Crash-safety verification
 
-- [ ] Run unit tests for date parser.
-- [ ] Run unit tests for type safety helpers.
-- [ ] Run new cache/mutation tests.
-- [ ] Run focused tests for trip/chat/support parsing if present.
-- [ ] Run `flutter analyze`.
+- [x] Run unit tests for date parser.
+- [x] Run unit tests for type safety helpers.
+- [x] Run new cache/mutation tests.
+- [x] Run focused tests for trip/chat/support parsing if present.
+- [x] Run `flutter analyze`.
+
+**Status:** Phase 1.1-1.6 complete.
 
 ---
 
