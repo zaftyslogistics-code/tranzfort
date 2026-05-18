@@ -6,6 +6,7 @@ import 'dart:convert';
 
 import '../models/mutation_queue.dart';
 import '../logger/app_logger.dart';
+import '../utils/type_safety.dart';
 import 'mutation_queue_encryption.dart';
 import 'mutation_queue_sanitizer.dart';
 
@@ -285,7 +286,7 @@ class MutationQueueDatabase {
   }
 
   Future<QueuedMutation?> _decryptMutation(Map<String, dynamic> map) async {
-    final mutationId = map['id'] as String?;
+    final mutationId = safeString(map['id']);
     
     if (_encryption == null) {
       try {
@@ -301,7 +302,7 @@ class MutationQueueDatabase {
     }
     
     try {
-      final payload = map['payload'] as String;
+      final payload = safeString(map['payload']);
       final decrypted = await _encryption!.decrypt(payload);
       if (decrypted != null) {
         map['payload'] = decrypted;
@@ -309,7 +310,7 @@ class MutationQueueDatabase {
     } catch (_) {
       // Decryption failed - try to parse as plaintext JSON (legacy data)
       try {
-        final payload = map['payload'] as String;
+        final payload = safeString(map['payload']);
         jsonDecode(payload); // Validate it's valid JSON
         // If valid JSON, it's unencrypted legacy data - use as-is
         AppLogger.info(
