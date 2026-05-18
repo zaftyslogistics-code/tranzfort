@@ -54,7 +54,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 **Remaining Issues:** 70 (5 medium, 60 low, 5 informational)
 
 **Next Steps:**
-1. Resolve APK file lock (close file explorers/antivirus) and rebuild release APK/AAB
+1. ✅ APK build successful after PC restart - file lock resolved
 2. Continue with remaining 70 medium/low priority issues
 3. Complete Phase 6.2-6.3 (large refactoring - may defer)
 4. Test core user flows on device
