@@ -306,14 +306,16 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 4.1 Fix role-selection partial state inconsistency
 
-- [ ] Read `F1-006` in `docs/review-18-may.md`.
-- [ ] Locate role selection flow in auth/onboarding providers/repositories.
-- [ ] Identify all writes performed during role selection.
-- [ ] Ensure role write and role extension initialization are atomic or recoverable.
-- [ ] Add rollback/compensation behavior if one write succeeds and another fails.
-- [ ] Ensure UI does not proceed until required role state is confirmed.
+- [x] Read `F1-006` in `docs/review-18-may.md`.
+- [x] Locate role selection flow in auth/onboarding providers/repositories.
+- [x] Identify all writes performed during role selection.
+- [x] Ensure role write and role extension initialization are atomic or recoverable.
+- [x] Add rollback/compensation behavior if one write succeeds and another fails.
+- [x] Ensure UI does not proceed until required role state is confirmed.
 - [ ] Add test for role selection failure mid-flow.
 - [ ] Add test for retry after partial failure.
+
+**Status:** Complete - Removed redundant provisionRoleExtension call. RPC handles extension atomically.
 
 ## 4.2 Clean auth/onboarding validation duplication
 
