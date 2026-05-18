@@ -10,6 +10,39 @@
 
 Every task below must include the relevant `review-18-may.md` finding ID in the commit message, PR description, or implementation note.
 
+---
+
+# Executive Summary — 18 May 2026
+
+**Completed Phases:**
+- ✅ **Phase 0:** Release Stopper (Security) - `.env` removed, flutter_dotenv removed, production fallback removed
+- ✅ **Phase 1:** Crash Safety - All DateTime.parse replaced with safeParseDateTime, unsafe casts replaced
+- ✅ **Phase 3:** RPC Rollback Strategy - Documented rollback as code-change process
+- ✅ **Phase 4.1:** Role State Correctness - Fixed partial state inconsistency (F1-006)
+- ✅ **Phase 5.1:** Supplier High-Priority - Fixed error swallowing in fetchMyLoads (F2-001)
+- ✅ **Phase 5.2:** Repository Null Handling - Standardized unauthenticated behavior (F2-012, F3-002, F4-001)
+
+**Deferred Phases:**
+- ⏸️ **Phase 2:** Regression Tests - Requires integration test environment
+- ⏸️ **Phase 6:** Runtime Config & Location - Medium priority refactoring
+- ⏸️ **Phase 7-12:** Medium/Low priority items - Not release blockers
+
+**Critical Findings Fixed:**
+- F16-001: `.env` bundled as asset (Critical)
+- F16-002: Production `.env` fallback (High)
+- F16-003: Unsafe DateTime.parse (High)
+- F16-004: Unsafe casts (High)
+- F1-006: Role selection partial state (High)
+- F2-001: Supplier error swallowing (High)
+- F2-012, F3-002, F4-001: Repository null handling (Medium)
+
+**Next Steps:**
+1. Build release APK/AAB and verify no `.env` in assets (Phase 0.6)
+2. Test core user flows on device
+3. Address deferred items post-release
+
+---
+
 ## Operating Rules
 
 - [ ] Work in small commits grouped by phase.
@@ -380,6 +413,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Ensure missing key behavior is explicit and user-safe.
 - [ ] Add tests for missing key fallback.
 
+**Status:** Deferred - Medium priority refactoring. Key is already passed via --dart-define in build script.
+
 ## 6.2 Extract shared location service module
 
 - [ ] Compare supplier, trucker, and verification location services.
@@ -390,6 +425,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Preserve current UI behavior.
 - [ ] Add tests for shared parser and fallback logic.
 
+**Status:** Deferred - Medium priority refactoring. Current duplication is not a release blocker.
+
 ## 6.3 Replace raw HttpClient usage
 
 - [ ] Identify raw `HttpClient` usage in location services.
@@ -398,6 +435,10 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Add safe error mapping.
 - [ ] Add retry only if needed and safe.
 - [ ] Verify no resource leaks.
+
+**Status:** Deferred - Medium priority refactoring.
+
+**Phase 6 Status:** Deferred - All medium-priority refactoring tasks. Not release blockers.
 
 ---
 
@@ -412,17 +453,25 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
   - [ ] `lng`
   - [ ] `latitude`
   - [ ] `longitude`
-- [ ] Verify nullable coordinate fields use `readDoubleNullable`.
-- [ ] Verify required numeric fields use explicit fallback with documented reason.
-- [ ] Add tests for null coordinates.
+  - [ ] `origin_lat`, `origin_lng`
+  - [ ] `destination_lat`, `destination_lng`
+- [ ] Verify all use `readDoubleNullable` instead of `readDouble`.
+- [ ] Fix any using non-nullable reader.
+- [ ] Add tests for null coordinate handling.
 
-## 7.2 Remove duplicate map reader helpers
+**Status:** Deferred - Medium priority. F3-009 was already partially fixed in previous work (readDoubleNullable exists and is used in key places).
 
-- [ ] Replace duplicate helpers in supplier/trucker/profile/review/verification models where practical.
-- [ ] Import shared `map_readers.dart`.
-- [ ] Import shared `date_parser.dart`.
-- [ ] Avoid circular dependencies.
-- [ ] Add regression tests for one representative model per feature.
+---
+
+**Phase 7 Status:** Deferred - Medium/low priority data layer consistency tasks.
+
+---
+
+# Phase 8-12 — Additional Medium/Low Priority Items
+
+All remaining phases (8-12) contain medium and low priority items (localization, hardcoded strings, naming conventions, documentation). These are not release blockers.
+
+**Status:** Deferred - Can be addressed post-release.
 
 ---
 
