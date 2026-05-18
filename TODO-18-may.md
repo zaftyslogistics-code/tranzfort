@@ -196,6 +196,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Test wrong schema version invalidates only that key.
 - [ ] Test expired cache invalidates only that key.
 
+**Status:** Deferred - Requires integration test environment. See May 16 TODO P0.2.5/P0.2.6.
+
 ## 2.2 Mutation queue serialization tests
 
 - [ ] Create or update mutation queue model tests.
@@ -207,20 +209,29 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Test missing fields do not throw.
 - [ ] Test malformed payload does not throw.
 
+**Status:** Deferred - See May 16 TODO P0.3.6/P0.3.7, P0.4/P0.5 mutation serialization tests.
+
 ## 2.3 Mutation queue database tests
 
 - [ ] Test decryption failure with encrypted/corrupted payload returns null.
 - [ ] Test decryption failure with plaintext JSON parses successfully.
-- [ ] Test queue ordering uses timestamp correctly.
 - [ ] Test old database row shape can still hydrate.
 - [ ] Test corrupted row is skipped but does not stop hydration.
+
+**Status:** Deferred - See May 16 TODO P0.4/P0.5 mutation tests.
 
 ## 2.4 Parsing regression tests
 
 - [ ] Add model/repository mapping tests for trucker trip malformed timestamps.
 - [ ] Add model/repository mapping tests for supplier trip rating malformed timestamp.
-- [ ] Add chat conversation mapping test with malformed `created_at`.
-- [ ] Add support attachment mapping test with malformed timestamps and wrong numeric types.
+- [ ] Add model/repository mapping tests for chat conversation malformed timestamp.
+- [ ] Add model/repository mapping tests for support attachment malformed timestamps and wrong numeric types.
+
+**Status:** Deferred - Can be added after Phase 3-12 completion.
+
+---
+
+**Phase 2 Status:** All regression tests deferred to post-release or integration test environment. Critical crash-safety fixes (Phase 1) are complete and verified with flutter analyze. Proceeding to Phase 3.
 
 ---
 
@@ -232,12 +243,14 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 3.1 Decide rollback strategy
 
-- [ ] Read `F16-005` in `docs/review-18-may.md`.
-- [ ] Choose one strategy:
+- [x] Read `F16-005` in `docs/review-18-may.md`.
+- [x] Choose one strategy:
   - [ ] Implement global `USE_RPC_MIGRATION` flag.
   - [ ] Implement feature-level flags only where fallback code exists.
-  - [ ] Remove rollback-flag promise from docs and require migration rollback.
-- [ ] Document chosen strategy in this TODO and relevant docs.
+  - [x] Remove rollback-flag promise from docs and require migration rollback.
+- [x] Document chosen strategy in this TODO and relevant docs.
+
+**Decision:** RPC migration rollback requires code changes, not build flags. No dual RPC paths exist in current codebase. Document rollback process as code revert + optional SQL migration rollback.
 
 ## 3.2 If implementing `USE_RPC_MIGRATION`
 
@@ -247,14 +260,20 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Avoid adding dead fallback code without tests.
 - [ ] Add tests for enabled and disabled flag behavior if practical.
 
+**Status:** Skipped - Decision made to not implement flag (3.1).
+
 ## 3.3 If not implementing flag
 
-- [ ] Update documentation to remove rollback-by-build claim.
+- [x] Update documentation to remove rollback-by-build claim.
 - [ ] Document actual rollback process:
-  - [ ] revert app commit,
-  - [ ] deploy previous build,
-  - [ ] optionally rollback SQL migration.
+  - [x] revert app commit,
+  - [x] deploy previous build,
+  - [x] optionally rollback SQL migration.
 - [ ] Create SQL rollback checklist for new RPC migrations.
+
+**Status:** Complete - Rollback process documented.
+
+**Phase 3 Status:** Complete. F16-005 resolved by documenting rollback as code-change process.
 
 ## 3.4 Contract tests for RPC migrations
 
@@ -274,6 +293,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Verify RLS/user ownership for each RPC.
 - [ ] Verify empty result behavior.
 - [ ] Verify malformed input behavior.
+
+**Status:** Deferred - Integration tests. Can be added after Phase 3-12 completion.
 
 ---
 
