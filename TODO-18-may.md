@@ -342,12 +342,14 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 5.1 Resolve Phase 2 high-priority supplier issue
 
-- [ ] Open Phase 2 section in `docs/review-18-may.md`.
-- [ ] Read exact `F2-001` description.
-- [ ] Identify affected supplier files.
-- [ ] Write focused failing test or reproduction steps.
-- [ ] Implement minimal fix.
-- [ ] Verify supplier load/trip flow still works.
+- [x] Open Phase 2 section in `docs/review-18-may.md`.
+- [x] Read exact `F2-001` description.
+- [x] Identify affected supplier files.
+- [x] Write focused failing test or reproduction steps.
+- [x] Implement minimal fix.
+- [x] Verify supplier load/trip flow still works.
+
+**Status:** Complete - Fixed error swallowing in fetchMyLoads, standardized error handling with fetchBookingRequests, removed emoji logging (F2-003).
 
 ## 5.2 Standardize unauthenticated repository behavior
 
