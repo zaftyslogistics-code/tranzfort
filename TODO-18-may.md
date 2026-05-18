@@ -25,6 +25,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 6.1:** Centralize Google Maps API Key - Centralized in AppConfig (F2-007, F3-007, F4-003, F7-002)
 - ✅ **Phase 6.1 (additional):** TripCostingService constants moved to AppConfig (F3-007)
 - ✅ **Phase 7.1 (partial):** Coordinate readers - Fixed LoadDetailDto coordinates (F3-009 partial)
+- ✅ **Phase 7.2 (partial):** Remove duplicate helpers - Fixed in trucker and verification repos (F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001)
+- ✅ **Phase 8 (partial):** Remove commented-out code - Fixed in chat_repository and trucker_load_detail_screen (F5-007)
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
@@ -42,8 +44,10 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F2-007, F3-007, F4-003, F7-002: Google Maps API key centralized (Medium)
 - F3-007: TripCostingService constants moved to config (Medium)
 - F3-009: Coordinate readers - LoadDetailDto fixed (partial)
+- F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium)
+- F5-007: Commented-out unused code removed (Low)
 
-**Remaining Issues:** 83 (18 medium, 60 low, 5 informational)
+**Remaining Issues:** 76 (11 medium, 60 low, 5 informational)
 
 **Next Steps:**
 1. Continue with smaller medium priority fixes (commented code, anti-patterns, etc.)
