@@ -309,8 +309,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   Future<void> _handleManualLocation() async {
     final l10n = AppLocalizations.of(context);
     final searchController = TextEditingController();
-    // ignore: unused_local_variable
-    PlaceSuggestion? selectedSuggestion;
     List<PlaceSuggestion> suggestions = [];
     bool isSearching = false;
 
@@ -377,7 +375,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                               ? Text(l10n.commonSuggestionSourceGooglePlaces)
                               : Text(l10n.commonSuggestionSourceOffline),
                           onTap: () {
-                            setDialogState(() => selectedSuggestion = suggestion);
                             Navigator.pop(context, suggestion);
                           },
                         );
