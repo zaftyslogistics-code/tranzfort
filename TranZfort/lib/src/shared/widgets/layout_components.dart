@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
@@ -90,6 +91,7 @@ class FilterChipBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SizedBox(
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -98,7 +100,7 @@ class FilterChipBar extends StatelessWidget {
         itemBuilder: (context, index) {
           if (onReset != null && index == items.length) {
             return ActionChip(
-              label: const Text('Reset'),
+              label: Text(l10n.truckerFindLoadsResetFiltersAction),
               onPressed: onReset,
             );
           }
