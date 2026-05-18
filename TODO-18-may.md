@@ -48,10 +48,11 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F3-009: Coordinate readers - All coordinate fields now use readDoubleNullable (Medium complete)
 - F1-001, F3-001, F4-005, F4-007, F8-002, F9-004, F12-001: Duplicate helpers removed (Medium complete)
 - F5-007: Commented-out unused code removed (Low)
+- F1-009: Dead code - unused selectedSuggestion variable removed (Low)
 - F10-001, F10-002: Deprecated parameters removed from action_buttons (Low)
 - F12-002, F12-003, F12-004: Unnecessary library directives removed (Low)
 
-**Remaining Issues:** 70 (5 medium, 60 low, 5 informational)
+**Remaining Issues:** 68 (5 medium, 58 low, 5 informational)
 
 **Next Steps:**
 1. ✅ APK build successful after PC restart - file lock resolved
