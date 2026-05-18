@@ -71,6 +71,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: topLevel
             ? AppBar(
                 title: Text(currentTab.title),

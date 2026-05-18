@@ -236,7 +236,6 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
                             label: l10n.authContinueWithGoogle,
                             onPressed: _continueWithGoogle,
                             isLoading: authScreenState.isLoading,
-                            height: 96,
                           ),
                           const SizedBox(height: 10),
                           // Trust row

@@ -338,7 +338,7 @@ class StandardListCard extends StatelessWidget {
                               children: [
                                 Text(title, style: Theme.of(context).textTheme.titleMedium),
                                 const SizedBox(height: AppSpacing.xs),
-                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis, maxLines: 2),
                               ],
                             ),
                           ),
@@ -412,7 +412,7 @@ class StandardListCard extends StatelessWidget {
                               children: [
                                 Text(title, style: Theme.of(context).textTheme.titleMedium),
                                 const SizedBox(height: AppSpacing.xs),
-                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium, overflow: TextOverflow.ellipsis, maxLines: 2),
                               ],
                             ),
                           ),
@@ -462,6 +462,10 @@ class StandardListCard extends StatelessWidget {
                       Container(
                         width: 48,
                         height: 48,
+                        constraints: const BoxConstraints(
+                          maxWidth: 56,
+                          maxHeight: 56,
+                        ),
                         decoration: BoxDecoration(
                           color: accent.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(AppRadius.iconChip),
@@ -665,6 +669,10 @@ class EmptyStateIllustration extends StatelessWidget {
             Container(
               width: 96,
               height: 96,
+              constraints: const BoxConstraints(
+                maxWidth: 120,
+                maxHeight: 120,
+              ),
               decoration: BoxDecoration(
                 color: AppColors.primaryChipBg,
                 shape: BoxShape.circle,
