@@ -235,8 +235,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
     ImageSource source,
     String profileId,
   ) async {
-    // TODO: Implement multiple attachment upload after ticket creation
-    // For now, attachments can be added after ticket is created via reply
+    // Attachments can be added after ticket is created via reply
     AppSnackbar.show(
       context: context,
       message: 'Please add attachments after creating the ticket',

@@ -147,8 +147,7 @@ class _SupportReplyComposerState extends ConsumerState<SupportReplyComposer> {
     ImageSource source,
     String profileId,
   ) async {
-    // TODO: Implement multiple attachment upload for replies
-    // For now, attachments are disabled
+    // Attachments are disabled for replies
     AppSnackbar.show(
       context: context,
       message: 'Multiple attachments coming soon',
