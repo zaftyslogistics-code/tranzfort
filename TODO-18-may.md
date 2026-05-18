@@ -54,11 +54,10 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 **Remaining Issues:** 70 (5 medium, 60 low, 5 informational)
 
 **Next Steps:**
-1. Continue with smaller medium priority fixes (commented code, anti-patterns, etc.)
-2. Complete Phase 6.2-6.3 (large refactoring - may defer)
-3. Complete Phase 7-12 (medium/low priority items)
-4. Build release APK/AAB and verify no `.env` in assets
-5. Test core user flows on device
+1. Resolve APK file lock (close file explorers/antivirus) and rebuild release APK/AAB
+2. Continue with remaining 70 medium/low priority issues
+3. Complete Phase 6.2-6.3 (large refactoring - may defer)
+4. Test core user flows on device
 
 ---
 
