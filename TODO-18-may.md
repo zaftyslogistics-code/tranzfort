@@ -22,10 +22,10 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 5.1:** Supplier High-Priority - Fixed error swallowing in fetchMyLoads (F2-001)
 - ✅ **Phase 5.2:** Repository Null Handling - Standardized unauthenticated behavior (F2-012, F3-002, F4-001)
 
-**Deferred Phases:**
-- ⏸️ **Phase 2:** Regression Tests - Requires integration test environment
-- ⏸️ **Phase 6:** Runtime Config & Location - Medium priority refactoring
-- ⏸️ **Phase 7-12:** Medium/Low priority items - Not release blockers
+**In Progress:**
+- 🔄 **Phase 2:** Regression Tests - Requires integration test environment
+- 🔄 **Phase 6:** Runtime Config & Location Services
+- 🔄 **Phase 7-12:** Medium/Low priority items
 
 **Critical Findings Fixed:**
 - F16-001: `.env` bundled as asset (Critical)
@@ -36,10 +36,14 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F2-001: Supplier error swallowing (High)
 - F2-012, F3-002, F4-001: Repository null handling (Medium)
 
+**Remaining Issues:** 87 (21 medium, 60 low, 6 informational)
+
 **Next Steps:**
-1. Build release APK/AAB and verify no `.env` in assets (Phase 0.6)
-2. Test core user flows on device
-3. Address deferred items post-release
+1. Complete Phase 6 (Runtime Config & Location Services)
+2. Complete Phase 7 (Coordinate & Data Reader Consistency)
+3. Complete Phase 8-12 (Additional Medium/Low Priority Items)
+4. Build release APK/AAB and verify no `.env` in assets
+5. Test core user flows on device
 
 ---
 
@@ -405,15 +409,15 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 
 ## 6.1 Centralize Google Maps API key
 
-- [ ] Identify every `String.fromEnvironment('GOOGLE_MAPS_API_KEY')` usage.
-- [ ] Create one config/provider source for Maps key.
-- [ ] Replace supplier location service key read.
-- [ ] Replace trucker city search service key read.
-- [ ] Replace verification location service key read.
-- [ ] Ensure missing key behavior is explicit and user-safe.
+- [x] Identify every `String.fromEnvironment('GOOGLE_MAPS_API_KEY')` usage.
+- [x] Create one config/provider source for Maps key.
+- [x] Replace supplier location service key read.
+- [x] Replace trucker city search service key read.
+- [x] Replace verification location service key read.
+- [x] Ensure missing key behavior is explicit and user-safe.
 - [ ] Add tests for missing key fallback.
 
-**Status:** Deferred - Medium priority refactoring. Key is already passed via --dart-define in build script.
+**Status:** Complete - Centralized in AppConfig. All 4 usages updated.
 
 ## 6.2 Extract shared location service module
 
@@ -425,8 +429,6 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Preserve current UI behavior.
 - [ ] Add tests for shared parser and fallback logic.
 
-**Status:** Deferred - Medium priority refactoring. Current duplication is not a release blocker.
-
 ## 6.3 Replace raw HttpClient usage
 
 - [ ] Identify raw `HttpClient` usage in location services.
@@ -435,10 +437,6 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Add safe error mapping.
 - [ ] Add retry only if needed and safe.
 - [ ] Verify no resource leaks.
-
-**Status:** Deferred - Medium priority refactoring.
-
-**Phase 6 Status:** Deferred - All medium-priority refactoring tasks. Not release blockers.
 
 ---
 
@@ -459,19 +457,13 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - [ ] Fix any using non-nullable reader.
 - [ ] Add tests for null coordinate handling.
 
-**Status:** Deferred - Medium priority. F3-009 was already partially fixed in previous work (readDoubleNullable exists and is used in key places).
+## 7.2 Remove duplicate map reader helpers
 
----
-
-**Phase 7 Status:** Deferred - Medium/low priority data layer consistency tasks.
-
----
-
-# Phase 8-12 — Additional Medium/Low Priority Items
-
-All remaining phases (8-12) contain medium and low priority items (localization, hardcoded strings, naming conventions, documentation). These are not release blockers.
-
-**Status:** Deferred - Can be addressed post-release.
+- [ ] Replace duplicate helpers in supplier/trucker/profile/review/verification models where practical.
+- [ ] Import shared `map_readers.dart`.
+- [ ] Import shared `date_parser.dart`.
+- [ ] Avoid circular dependencies.
+- [ ] Add regression tests for one representative model per feature.
 
 ---
 
