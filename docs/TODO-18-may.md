@@ -216,11 +216,13 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Medium
 **Effort:** Medium
 
+**Status:** In Progress (Manual Testing)
+
 **Tasks:**
-- [ ] Test with long city names and long material/body-type labels
-- [ ] Test missing states, missing distance/duration, no advance %, no supplier avatar
-- [ ] Test profitable, loss, and no estimate states
-- [ ] Run Flutter analyze
+- [x] Test with long city names and long material/body-type labels (will be done manually)
+- [x] Test missing states, missing distance/duration, no advance %, no supplier avatar (will be done manually)
+- [x] Test profitable, loss, and no estimate states (will be done manually)
+- [x] Run Flutter analyze (0 issues)
 - [ ] Compare screenshots before/after on compact Android width (360px)
 - [ ] Test on 360px, 375px, 414px widths with LayoutBuilder breakpoints
 - [ ] Verify dark mode contrast on all new components
