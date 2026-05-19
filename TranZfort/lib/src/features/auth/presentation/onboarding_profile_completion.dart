@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -496,14 +497,14 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
+                    border: Border.all(color: AppColors.divider),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Location',
+                        l10n.locationLabel,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const SizedBox(height: 8),
@@ -511,15 +512,15 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                         Text(
                           '$_city, $_state',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.green.shade700,
+                                color: AppColors.success,
                                 fontWeight: FontWeight.w500,
                               ),
                         )
                       else
                         Text(
-                          'No location added',
+                          l10n.locationNotAdded,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey.shade600,
+                                color: AppColors.textMuted,
                               ),
                         ),
                       const SizedBox(height: 12),
@@ -529,7 +530,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                             child: OutlinedButton.icon(
                               onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
                               icon: const Icon(Icons.location_on, size: 18),
-                              label: Text(_isCapturingLocation ? 'Capturing...' : l10n.useCurrentLocation),
+                              label: Text(_isCapturingLocation ? l10n.locationCapturing : l10n.useCurrentLocation),
                               style: OutlinedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
