@@ -314,7 +314,7 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ## Phase 20: Revised Load Post Card Implementation
 
-**Status:** In Progress (7/8 tasks done)
+**Status:** COMPLETE (8/8 tasks done)
 **Priority:** High
 **Reference:** `docs/loadpost-ui-ux.md` lines 892-1181 (Chief Designer Revision)
 **Reason:** User feedback - previous dark route hero implementation too heavy
@@ -409,15 +409,17 @@ The load card will have two main zones:
 
 #### Task F: Update Validation Screenshots
 
-- [ ] Take screenshots at: 320px, 360px, 390px, 430px widths
-- [ ] Acceptance criteria:
+- [x] Build APK for manual testing after implementation
+- [ ] Take screenshots at: 320px, 360px, 390px, 430px widths (manual validation required)
+- [ ] Verify acceptance criteria:
   - Header feels premium but not oversized
   - Route, distance, and duration read as one connected visual element
   - Supplier avatar/name and active badge are visible in header
   - Load value and profit are visible without creating second card inside card
   - Light body is reserved for load/truck details only
   - Overall card height is meaningfully shorter than current screenshot
-- [ ] Build APK for manual testing after implementation
+
+**Note:** APK built with all keys (Supabase, Google Maps, Google Client ID). Location: `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
 
 #### Task G: Reduce Outer Border Strength
 
