@@ -91,8 +91,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
 
-    final emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-    if (!emailPattern.hasMatch(email)) {
+    if (!Validators.isValidEmail(email)) {
       AppSnackbar.show(
         context: context,
         message: l10n.authPasswordInvalidEmailMessage,
@@ -101,7 +100,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
       return;
     }
 
-    if (password.trim().length < 8) {
+    if (!Validators.isValidPassword(password)) {
       AppSnackbar.show(
         context: context,
         message: l10n.authPasswordTooShortMessage,
