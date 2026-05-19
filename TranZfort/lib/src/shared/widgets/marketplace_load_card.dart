@@ -81,269 +81,229 @@ class MarketplaceLoadCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // ── Top: Supplier avatar + name + super-load badge + age ──
+              // ── Dark Route Hero Section (top 38-45% of card) ──
+              ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(AppRadius.card),
+                ),
+                child: Container(
+                  decoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        AppColors.inkSurface,
+                        AppColors.inkMid,
+                      ],
+                    ),
+                  ),
+                  padding: const EdgeInsets.fromLTRB(
+                    20,
+                    16,
+                    20,
+                    12,
+                  ),
+                  child: CurvedArcRoute.hero(
+                    origin: load.originCity,
+                    destination: load.destinationCity,
+                    originSubtitle: load.originState,
+                    destinationSubtitle: load.destinationState,
+                    distanceLabel: routeSnapshot != null
+                        ? '${routeSnapshot.distanceKm.toStringAsFixed(0)} km'
+                        : null,
+                    durationLabel: routeSnapshot != null
+                        ? _durationCompact(routeSnapshot.durationMinutes)
+                        : null,
+                  ),
+                ),
+              ),
+              // ── Light Section: Supplier info + chips + compact financial ──
               Padding(
                 padding: const EdgeInsets.fromLTRB(
                   20,
-                  14,
                   16,
-                  10,
+                  20,
+                  12,
                 ),
-                child: Row(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    if (supplierInitial != null) ...[
-                      UserAvatar(
-                        avatarUrl: supplierAvatarUrl,
-                        userId: load.supplierId,
-                        initials: supplierInitial,
-                        radius: 14.0,
-                        onTap: onSupplierTap,
-                      ),
-                      const SizedBox(width: 8),
-                    ],
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            load.supplierName ?? 'Supplier',
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: AppColors.textPrimary,
-                                  fontWeight: FontWeight.w700,
-                                ),
+                    // ── Supplier avatar + name + super-load badge + age + status ──
+                    Row(
+                      children: [
+                        if (supplierInitial != null) ...[
+                          UserAvatar(
+                            avatarUrl: supplierAvatarUrl,
+                            userId: load.supplierId,
+                            initials: supplierInitial,
+                            radius: 14.0,
+                            onTap: onSupplierTap,
                           ),
-                          Row(
+                          const SizedBox(width: 8),
+                        ],
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (load.isSuperLoad) ...[
-                                _SuperLoadPill(),
-                                const SizedBox(width: AppSpacing.xs),
-                              ],
                               Text(
-                                _relativeAge(load.createdAt),
-                                style: AppTypography.labelMicro.copyWith(
-                                  color: AppColors.textMuted,
-                                ),
+                                load.supplierName ?? 'Supplier',
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                                      color: AppColors.textPrimary,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                              ),
+                              Row(
+                                children: [
+                                  if (load.isSuperLoad) ...[
+                                    _SuperLoadPill(),
+                                    const SizedBox(width: AppSpacing.xs),
+                                  ],
+                                  Text(
+                                    _relativeAge(load.createdAt),
+                                    style: AppTypography.labelMicro.copyWith(
+                                      color: AppColors.textMuted,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
+                        ),
+                        StatusChip(label: _localizedLoadStatus(l10n, load.status)),
+                      ],
                     ),
-                    StatusChip(label: _localizedLoadStatus(l10n, load.status)),
-                  ],
-                ),
-              ),
-              // ── Curved Arc Route visualization ──
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 8,
-                ),
-                child: CurvedArcRoute.compact(
-                  origin: load.originCity,
-                  destination: load.destinationCity,
-                  originSubtitle: load.originState,
-                  destinationSubtitle: load.destinationState,
-                  distanceLabel: routeSnapshot != null
-                      ? '${routeSnapshot.distanceKm.toStringAsFixed(0)} km'
-                      : null,
-                  durationLabel: routeSnapshot != null
-                      ? _durationCompact(routeSnapshot.durationMinutes)
-                      : null,
-                ),
-              ),
-              // ── Meta chips: material, tonnes, body type ──
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  16,
-                  8,
-                  16,
-                  8,
-                ),
-                child: LoadChipWrap(
-                  spacing: AppSpacing.xs,
-                  runSpacing: AppSpacing.xs,
-                  chips: [
-                    LoadInfoChip(
-                      icon: Icons.inventory_2_outlined,
-                      label: load.material,
-                      level: LoadChipLevel.primary,
-                    ),
-                    LoadInfoChip(
-                      icon: Icons.scale_outlined,
-                      label: weightLabel,
-                      level: LoadChipLevel.primary,
-                    ),
-                    LoadInfoChip(
-                      icon: Icons.local_shipping_outlined,
-                      label: _localizedBodyType(l10n, load.requiredBodyType),
-                      level: LoadChipLevel.primary,
-                    ),
-                    LoadInfoChip(
-                      icon: Icons.calendar_today_outlined,
-                      label: _formatPickupDate(load.pickupDate),
-                      level: LoadChipLevel.secondary,
-                    ),
-                    if (load.advancePercentage > 0)
-                      LoadInfoChip(
-                        icon: Icons.account_balance_wallet_outlined,
-                        label: '${load.advancePercentage}% adv',
-                        level: LoadChipLevel.secondary,
-                        accentColor: AppColors.info,
-                      ),
-                    if (load.trucksNeeded > 1)
-                      LoadInfoChip(
-                        icon: Icons.local_shipping_outlined,
-                        label: '${load.trucksBooked}/${load.trucksNeeded}',
-                        level: LoadChipLevel.secondary,
-                      ),
-                  ],
-                ),
-              ),
-              // ── Earnings strip: dark band with load value + profit ──
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.fromLTRB(
-                  20,
-                  12,
-                  20,
-                  0,
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.inkSurface,
-                  borderRadius: BorderRadius.circular(AppRadius.iconChip),
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      AppColors.inkSurface,
-                      AppColors.inkMid,
-                    ],
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            l10n.marketplaceLoadValue,
-                            style: AppTypography.labelMicro.copyWith(
-                              color: AppColors.inkTextMuted,
-                            ),
-                          ),
-                          const SizedBox(height: 2),
-                          Text(
-                            '₹${_formatAmount(totalLoadValue)}',
-                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                  color: AppColors.primaryOnDark,
-                                  fontWeight: FontWeight.w800,
-                                  letterSpacing: -0.3,
-                                ),
-                          ),
-                          Text(
-                            isPerTon
-                                ? '@ ₹${load.priceAmount.toStringAsFixed(0)}/T · ${tonnes}T'
-                                : 'Fixed: ₹${load.priceAmount.toStringAsFixed(0)} · ${tonnes}T',
-                            style: AppTypography.labelMicro.copyWith(
-                              color: AppColors.inkTextSecondary,
-                              letterSpacing: 0.2,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    if (costEstimate != null) ...[
-                      const SizedBox(width: 8),
+                    const SizedBox(height: 12),
+                    // ── Compact Financial Summary (light/tonal) ──
+                    if (costEstimate != null)
                       Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: AppSpacing.sm,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: (costEstimate.isProfitable
-                                  ? AppColors.success
-                                  : AppColors.error)
-                              .withValues(alpha: 0.25),
-                          borderRadius: BorderRadius.circular(AppRadius.chip),
-                          border: Border.all(
-                            color: (costEstimate.isProfitable
-                                    ? AppColors.success
-                                    : AppColors.error)
-                                .withValues(alpha: 0.5),
-                            width: 1.5,
-                          ),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text(
-                              costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
-                              style: AppTypography.labelMicro.copyWith(
-                                color: costEstimate.isProfitable
-                                    ? AppColors.success
-                                    : AppColors.error,
-                                fontSize: 10,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            Text(
-                              '₹${_formatAmount(costEstimate.netProfit.abs())}',
-                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w800,
-                                  ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                    const SizedBox(width: 8),
-                    InkWell(
-                      onTap: onViewDetails,
-                      borderRadius: BorderRadius.circular(AppRadius.chip),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 10,
+                          horizontal: 12,
                           vertical: 8,
                         ),
                         decoration: BoxDecoration(
+                          color: AppColors.surfaceSoft,
+                          borderRadius: BorderRadius.circular(AppRadius.iconChip),
                           border: Border.all(
-                            color: AppColors.primaryOnDark,
-                            width: 1,
+                            color: AppColors.divider,
+                            width: 0.5,
                           ),
-                          borderRadius: BorderRadius.circular(AppRadius.chip),
                         ),
                         child: Row(
-                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              l10n.commonViewDetailsAction,
-                              style: TextStyle(
-                                color: AppColors.primaryOnDark,
-                                fontSize: 11,
-                                fontWeight: FontWeight.w600,
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    l10n.marketplaceLoadValue,
+                                    style: AppTypography.labelMicro.copyWith(
+                                      color: AppColors.textMuted,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    '₹${_formatAmount(totalLoadValue)}',
+                                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                          color: AppColors.textPrimary,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                  ),
+                                ],
                               ),
                             ),
-                            const SizedBox(width: 4),
-                            Icon(
-                              Icons.arrow_forward,
-                              size: 14,
-                              color: AppColors.primaryOnDark,
+                            const SizedBox(width: 12),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: AppSpacing.sm,
+                                vertical: 6,
+                              ),
+                              decoration: BoxDecoration(
+                                color: (costEstimate.isProfitable
+                                        ? AppColors.success
+                                        : AppColors.error)
+                                    .withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(AppRadius.chip),
+                                border: Border.all(
+                                  color: (costEstimate.isProfitable
+                                          ? AppColors.success
+                                          : AppColors.error)
+                                      .withValues(alpha: 0.4),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
+                                    style: AppTypography.labelMicro.copyWith(
+                                      color: costEstimate.isProfitable
+                                          ? AppColors.success
+                                          : AppColors.error,
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  Text(
+                                    '₹${_formatAmount(costEstimate.netProfit.abs())}',
+                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                          color: costEstimate.isProfitable
+                                              ? AppColors.success
+                                              : AppColors.error,
+                                          fontWeight: FontWeight.w800,
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
                       ),
+                    const SizedBox(height: 12),
+                    // ── Meta chips: material, tonnes, body type ──
+                    LoadChipWrap(
+                      spacing: AppSpacing.xs,
+                      runSpacing: AppSpacing.xs,
+                      chips: [
+                        LoadInfoChip(
+                          icon: Icons.inventory_2_outlined,
+                          label: load.material,
+                          level: LoadChipLevel.primary,
+                        ),
+                        LoadInfoChip(
+                          icon: Icons.scale_outlined,
+                          label: weightLabel,
+                          level: LoadChipLevel.primary,
+                        ),
+                        LoadInfoChip(
+                          icon: Icons.local_shipping_outlined,
+                          label: _localizedBodyType(l10n, load.requiredBodyType),
+                          level: LoadChipLevel.primary,
+                        ),
+                        LoadInfoChip(
+                          icon: Icons.calendar_today_outlined,
+                          label: _formatPickupDate(load.pickupDate),
+                          level: LoadChipLevel.secondary,
+                        ),
+                        if (load.advancePercentage > 0)
+                          LoadInfoChip(
+                            icon: Icons.account_balance_wallet_outlined,
+                            label: '${load.advancePercentage}% adv',
+                            level: LoadChipLevel.secondary,
+                            accentColor: AppColors.info,
+                          ),
+                        if (load.trucksNeeded > 1)
+                          LoadInfoChip(
+                            icon: Icons.local_shipping_outlined,
+                            label: '${load.trucksBooked}/${load.trucksNeeded}',
+                            level: LoadChipLevel.secondary,
+                          ),
+                      ],
                     ),
                   ],
                 ),
