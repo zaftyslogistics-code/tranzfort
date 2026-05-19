@@ -594,15 +594,51 @@ After reviewing the localization setup, found 20 keys missing in the Hindi ARB f
 
 ---
 
-## Phase 21: Load Post Card Visual Improvements
+## Phase 26: Load Post Card Brand Gradient
 
-**Status:** COMPLETE (5/5 tasks done)
-**Priority:** High
-**Reason:** User feedback after Phase 20 implementation - visual issues with card design
+**Status:** COMPLETE (1/1 tasks done)
+**Priority:** Medium
+**Reason:** Apply brand teal-orange gradient to money row for visual consistency
 
 ### Overview
 
-After reviewing the Phase 20 implementation, several visual improvements are needed:
+The "Find Loads" button in Trucker Dashboard uses the brand teal-orange gradient (`AppColors.heroCta`). Applying this gradient to the money row on the load post card will:
+- Make the pricing section the focal point
+- Reinforce brand identity
+- Create visual hierarchy: gradient money row → teal chips → light text
+- Match the "Find Loads" CTA button style for consistency
+
+### Tasks
+
+#### Task A: Apply HeroCta Gradient to Money Row
+
+- [x] Replace solid teal background with `AppColors.heroCta` gradient
+- [x] Adjust text colors to work with gradient background (ensure contrast)
+- [x] Test visual appearance on both light and dark values
+- [x] Verify no analyzer errors
+
+**Current:** Solid teal background (primary.withValues(alpha: 0.2))
+**Proposed:** Linear gradient from primary (teal) to secondary (orange)
+
+**Files modified:**
+- `lib/src/shared/widgets/load_card_dark_header.dart` (_MoneyRow decoration)
+
+### Implementation Notes
+
+- Replaced solid teal background with AppColors.heroCta gradient (teal to orange)
+- Changed all value text colors from primaryOnDark (teal) to Colors.white for better contrast on gradient
+- Labels remain in inkTextSecondary (muted white) for hierarchy
+- Creates visual hierarchy: gradient money row → teal chips → light text
+- Matches "Find Loads" CTA button style for brand consistency
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
+## Phase 21: Load Post Card Visual Improvements
+
+**Status:** COMPLETE (5/5 tasks done)
 - Half dark/half light background creates visual disconnect
 - Profit/loss pill styling inconsistent with load value
 - Weight label shows both load and truck capacity (should only show truck range)

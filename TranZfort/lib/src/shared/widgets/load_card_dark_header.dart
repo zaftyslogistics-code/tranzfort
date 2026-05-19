@@ -286,7 +286,7 @@ class _MoneyRow extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.2),
+        gradient: AppColors.heroCta,
         borderRadius: BorderRadius.circular(AppRadius.chip),
         border: Border.all(
           color: AppColors.primary.withValues(alpha: 0.4),
@@ -313,7 +313,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   priceDisplay,
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.primaryOnDark,
+                        color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
                       ),
@@ -339,7 +339,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   '₹${LoadCardDarkHeader._formatAmount(totalLoadValue)}',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.primaryOnDark,
+                        color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
                       ),
@@ -366,7 +366,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                        color: AppColors.primaryOnDark,
+                        color: Colors.white,
                         fontWeight: FontWeight.w800,
                         fontSize: 18,
                       ),
