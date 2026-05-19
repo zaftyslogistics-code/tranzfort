@@ -238,14 +238,18 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Low
 **Effort:** Low
 
+**Status:** Deferred (Not needed for current release)
+
 **Tasks:**
 - [ ] Keep existing `MarketplaceLoadCard` as `MarketplaceLoadCardLegacy`
 - [ ] Create new `MarketplaceLoadCard` with redesign
 - [ ] Add feature flag to switch between versions
-- [ ] A/B test with users before full rollout (optional)
+- [ ] A/B test with users before full rollout
 
 **Files:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
+
+**Note:** Full card redesign (Phase 18.2 complete) is also deferred as it's high effort. Current improvements (Phase 18.1, 18.3, 18.4) provide significant UX benefits.
 
 ### Success Metrics
 
