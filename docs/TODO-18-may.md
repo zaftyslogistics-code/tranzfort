@@ -314,7 +314,7 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ## Phase 20: Revised Load Post Card Implementation
 
-**Status:** Not Started
+**Status:** In Progress (7/8 tasks done)
 **Priority:** High
 **Reference:** `docs/loadpost-ui-ux.md` lines 892-1181 (Chief Designer Revision)
 **Reason:** User feedback - previous dark route hero implementation too heavy
@@ -340,25 +340,25 @@ The load card will have two main zones:
 
 #### Task A: Replace Current Hero Usage With Integrated Header
 
-- [ ] Replace `CurvedArcRoute.hero` in `MarketplaceLoadCard` with new `_LoadCardDarkHeader` widget
-- [ ] `_LoadCardDarkHeader` should own supplier/status, integrated route, and money row
-- [ ] Remove duplicate supplier and money rows from light body
-- [ ] Keep existing card body for details/actions
+- [x] Replace `CurvedArcRoute.hero` in `MarketplaceLoadCard` with new `_LoadCardDarkHeader` widget
+- [x] `_LoadCardDarkHeader` should own supplier/status, integrated route, and money row
+- [x] Remove duplicate supplier and money rows from light body
+- [x] Keep existing card body for details/actions
 
 **Files to modify:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
 
 #### Task B: Create Integrated Route Widget
 
-- [ ] Create new `_IntegratedRouteLine` widget
-- [ ] Inputs: originCity, originState, destinationCity, destinationState, distanceLabel, durationLabel
-- [ ] Render FROM/TO text blocks with city/state
-- [ ] Render dashed route line between them
-- [ ] Render center distance/time capsule inside the line
-- [ ] Avoid large vertical blank space
-- [ ] Target height: 70-78px for route row
-- [ ] Preferred implementation: Row-based with small custom dashed-line widgets on both sides of capsule
-- [ ] Alternative: CustomPainter, but constrain total height to 70-78px
+- [x] Create new `_IntegratedRouteLine` widget
+- [x] Inputs: originCity, originState, destinationCity, destinationState, distanceLabel, durationLabel
+- [x] Render FROM/TO text blocks with city/state
+- [x] Render dashed route line between them
+- [x] Render center distance/time capsule inside the line
+- [x] Avoid large vertical blank space
+- [x] Target height: 70-78px for route row
+- [x] Preferred implementation: Row-based with small custom dashed-line widgets on both sides of capsule
+- [x] Alternative: CustomPainter, but constrain total height to 70-78px
 
 **Files to create/modify:**
 - `lib/src/shared/widgets/integrated_route_line.dart` (new)
@@ -366,42 +366,42 @@ The load card will have two main zones:
 
 #### Task C: Move Supplier Row Into Header
 
-- [ ] Move supplier avatar/name/status from light body into dark header
-- [ ] Remove supplier/status row from light body
-- [ ] Dark header supplier styling:
+- [x] Move supplier avatar/name/status from light body into dark header
+- [x] Remove supplier/status row from light body
+- [x] Dark header supplier styling:
   - Avatar radius: 14-16
   - Supplier name color: `AppColors.inkTextPrimary`
   - Age color: `AppColors.inkTextSecondary`
   - Status badge must pass contrast on dark background
-- [ ] Supplier identity remains only image + name (no rating, city, verification details)
+- [x] Supplier identity remains only image + name (no rating, city, verification details)
 
 **Files to modify:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
 
 #### Task D: Move Money Row Into Header
 
-- [ ] Remove large `surfaceSoft` financial summary container from light body
-- [ ] Add compact load value/profit row in dark header
-- [ ] Load value amount: 18-20px, FontWeight.w800, `AppColors.primaryOnDark` or `inkTextPrimary`
-- [ ] Profit pill: success tonal border, compact height 30-34px
-- [ ] Loss pill: error tonal border
-- [ ] This should make light body start directly with load/truck details
+- [x] Remove large `surfaceSoft` financial summary container from light body
+- [x] Add compact load value/profit row in dark header
+- [x] Load value amount: 18-20px, FontWeight.w800, `AppColors.primaryOnDark` or `inkTextPrimary`
+- [x] Profit pill: success tonal border, compact height 30-34px
+- [x] Loss pill: error tonal border
+- [x] This should make light body start directly with load/truck details
 
 **Files to modify:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
 
 #### Task E: Rebalance Light Body Chips
 
-- [ ] Make primary chips compact enough to fit 3-4 facts without looking like large buttons
-- [ ] Make secondary facts inline and quieter
-- [ ] Target sizes:
+- [x] Make primary chips compact enough to fit 3-4 facts without looking like large buttons
+- [x] Make secondary facts inline and quieter
+- [x] Target sizes:
   - Primary pill height: 32-36px
   - Secondary meta height: 26-30px
   - Icon size: 14-16px
   - Text size: 12-13px
-- [ ] Primary pills: Material, Load 28T, Truck 28-42T, Any body
-- [ ] Secondary inline facts: Pickup date, Advance %, Trucks booked/needed
-- [ ] If four pills are too much, combine load and truck capacity as `28T · 28-42T`
+- [x] Primary pills: Material, Load 28T, Truck 28-42T, Any body
+- [x] Secondary inline facts: Pickup date, Advance %, Trucks booked/needed
+- [x] If four pills are too much, combine load and truck capacity as `28T · 28-42T`
 
 **Files to modify:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
@@ -421,19 +421,19 @@ The load card will have two main zones:
 
 #### Task G: Reduce Outer Border Strength
 
-- [ ] Change border from teal to `AppColors.divider` or primary color at lower opacity
-- [ ] Suggested border: `AppColors.divider` width 0.75
-- [ ] Keep shadow very subtle
+- [x] Change border from teal to `AppColors.divider` or primary color at lower opacity
+- [x] Suggested border: `AppColors.divider` width 0.75
+- [x] Keep shadow very subtle
 
 **Files to modify:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
 
 #### Task H: Fix Weight Label Semantics
 
-- [ ] Make label explicit but compact:
+- [x] Make label explicit but compact:
   - `Load 28T` for actual load weight
   - `Truck 28-42T` for derived capacity if shown separately
-- [ ] If only 3 primary pills allowed:
+- [x] If only 3 primary pills allowed:
   - Use `28T · 28-42T` only if it remains readable
   - Otherwise prefer actual load weight on card and capacity in detail page
 
