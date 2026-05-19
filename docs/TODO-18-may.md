@@ -400,6 +400,18 @@ After reviewing the Phase 21 implementation, additional improvements are needed:
 **Files to modify:**
 - `lib/src/shared/widgets/integrated_route_line.dart`
 
+### Implementation Notes
+
+- Removed `_DistanceTimeCapsule` class (no longer needed)
+- Removed `_durationCompact` method from marketplace_load_card.dart (no longer needed)
+- Removed unused import `app_spacing` from integrated_route_line.dart
+- Dashed line now uses `_DashedLineWithArrowPainter` with arrow at the end
+- Dash width: 6px, Dash spacing: 8px (larger for more modern look)
+- Arrow size: 6px, filled triangle pointing right
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
 ---
 
 ## Phase 21: Load Post Card Visual Improvements
