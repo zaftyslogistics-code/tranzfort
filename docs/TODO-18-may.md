@@ -406,6 +406,7 @@ After reviewing the Phase 21 implementation, additional improvements are needed:
 - Dashed line now uses `_DashedLineWithArrowPainter` with arrow at the end
 - Dash width: 6px, Dash spacing: 8px (larger for more modern look)
 - Arrow size: 6px, filled triangle pointing right
+- Fixed call button by reverting fetchSupplierProfile to direct table read (RPC was missing mobile field)
 
 **APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
 **Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
