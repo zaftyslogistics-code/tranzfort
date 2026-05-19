@@ -476,6 +476,24 @@ abstract class AppLocalizations {
   /// **'Clear location'**
   String get clearLocation;
 
+  /// No description provided for @locationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get locationLabel;
+
+  /// No description provided for @locationNotAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'No location added'**
+  String get locationNotAdded;
+
+  /// No description provided for @locationCapturing.
+  ///
+  /// In en, this message translates to:
+  /// **'Capturing...'**
+  String get locationCapturing;
+
   /// No description provided for @routePreviewInvalidError.
   ///
   /// In en, this message translates to:

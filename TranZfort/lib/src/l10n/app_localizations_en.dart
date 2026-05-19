@@ -221,6 +221,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clearLocation => 'Clear location';
 
   @override
+  String get locationLabel => 'Location';
+
+  @override
+  String get locationNotAdded => 'No location added';
+
+  @override
+  String get locationCapturing => 'Capturing...';
+
+  @override
   String get routePreviewInvalidError => 'Unable to load route preview';
 
   @override

@@ -221,6 +221,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get clearLocation => 'Location साफ करें';
 
   @override
+  String get locationLabel => 'स्थान';
+
+  @override
+  String get locationNotAdded => 'कोई स्थान नहीं जोड़ा गया';
+
+  @override
+  String get locationCapturing => 'कैप्चरिंग...';
+
+  @override
   String get routePreviewInvalidError => 'Route preview load नहीं हो सका';
 
   @override
