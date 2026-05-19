@@ -176,13 +176,15 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Medium
 **Effort:** High
 
+**Status:** In Progress (Partial)
+
 **Tasks:**
-- [ ] Create `LoadInfoChip` primitive with primary/secondary hierarchy
+- [x] Create `LoadInfoChip` primitive with primary/secondary hierarchy
   - Primary: 12-13px, 700 weight, surfaceSoft background with divider border
   - Secondary: 12px, 600 weight, transparent or tonal bg
   - Status/Premium: existing status padding, semantic bg
-- [ ] Create `LoadChipWrap` responsive layout
-- [ ] Add must-have chips: material, actual load weight, truck capacity range, body type
+- [x] Create `LoadChipWrap` responsive layout
+- [x] Add must-have chips: material, actual load weight, truck capacity range, body type
 - [ ] Add optional chips: pickup date, advance %, trucks needed/booked, compact estimate
 - [ ] Test chip wrapping at 320/360/390/430px widths
 - [ ] Ensure chip text never below 12px for decision-critical content
