@@ -382,6 +382,17 @@ After reviewing the Phase 20 implementation, several visual improvements are nee
 **Files to modify:**
 - `lib/src/shared/widgets/integrated_route_line.dart`
 
+### Implementation Notes
+
+- Removed `_DashedLineWithCapsule` class (no longer needed)
+- Updated `LoadInfoChip` to use tonal white background for dark theme
+- Updated `_InlineMetaItem` to use `inkTextSecondary` for dark theme
+- Card gradient moved from `LoadCardDarkHeader` to main card container
+- All text colors updated to use inkTextPrimary/inkTextSecondary for dark theme
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
 ---
 
 ## Phase 20: Revised Load Post Card Implementation
