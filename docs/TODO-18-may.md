@@ -125,8 +125,8 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Effort:** Low
 
 **Tasks:**
-- [ ] Improve `textMuted` / `inkTextMuted` contrast in `app_colors.dart` (fails WCAG AA)
-- [ ] Selective typography scale increase in `app_typography.dart` (Option B - controlled approach)
+- [x] Improve `textMuted` / `inkTextMuted` contrast in `app_colors.dart` (fails WCAG AA)
+- [x] Selective typography scale increase in `app_typography.dart` (Option B - controlled approach)
   - `displayHero`: 40px → 48px (+20%)
   - `display`: 24px → 28px (+17%)
   - `pageTitle`: 20px → 22px (+10%)
