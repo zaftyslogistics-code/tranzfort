@@ -23,19 +23,20 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
       return true;
     }
 
+    final l10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Changes?'),
-        content: const Text('You have unsaved changes. Do you want to discard them?'),
+        title: Text(l10n.onboardingDiscardChangesTitle),
+        content: Text(l10n.onboardingDiscardChangesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(l10n.commonDiscardAction),
           ),
         ],
       ),
