@@ -1441,7 +1441,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supportActiveTicketCount(Object count, Object s) {
-    return '$count ticket$s';
+    return '$count टिकट$s';
   }
 
   @override
@@ -5347,7 +5347,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailRoutePriceSummaryTitle => 'मार्ग और कीमत सारांश';
 
   @override
-  String get truckerLoadDetailRouteMapTitle => 'Route map';
+  String get truckerLoadDetailRouteMapTitle => 'रूट मैप';
 
   @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
@@ -5389,17 +5389,17 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String truckerLoadDetailPerTruckWeightLabel(Object weight) {
-    return 'Per truck: ${weight}T';
+    return 'प्रति ट्रक: ${weight}T';
   }
 
   @override
   String truckerLoadDetailCapacityRangeLabel(Object maxT, Object minT) {
-    return 'Acceptable truck: ${minT}T – ${maxT}T';
+    return 'स्वीकार्य ट्रक: ${minT}T – ${maxT}T';
   }
 
   @override
   String truckerLoadDetailSlotsOpenLabel(Object count) {
-    return '$count slots open';
+    return '$count स्लॉट खुले';
   }
 
   @override
@@ -6247,29 +6247,29 @@ class AppLocalizationsHi extends AppLocalizations {
       'अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।';
 
   @override
-  String get truckerLoadDetailEarningsEstimateTitle => 'TRIP EARNINGS ESTIMATE';
+  String get truckerLoadDetailEarningsEstimateTitle => 'ट्रिप कमाई अनुमान';
 
   @override
-  String get truckerLoadDetailTotalFareLabel => 'TOTAL FARE (LOAD VALUE)';
+  String get truckerLoadDetailTotalFareLabel => 'कुल किराया (लोड मूल्य)';
 
   @override
-  String get truckerLoadDetailTotalExpenseLabel => 'TOTAL EXPENSE';
+  String get truckerLoadDetailTotalExpenseLabel => 'कुल खर्च';
 
   @override
-  String get truckerLoadDetailEstimatedNetProfitLabel => 'ESTIMATED NET PROFIT';
+  String get truckerLoadDetailEstimatedNetProfitLabel => 'अनुमानित शुद्ध लाभ';
 
   @override
-  String get truckerLoadDetailEstimatedNetLossLabel => 'ESTIMATED NET LOSS';
+  String get truckerLoadDetailEstimatedNetLossLabel => 'अनुमानित शुद्ध हानि';
 
   @override
   String get truckerLoadDetailNetProfitSubtitle =>
-      'After all expenses deducted from total fare';
+      'कुल किराये से सभी खर्चों को काटने के बाद';
 
   @override
-  String get truckerLoadDetailNetLossSubtitle => 'Expenses exceed total fare';
+  String get truckerLoadDetailNetLossSubtitle => 'खर्च कुल किराये से अधिक हैं';
 
   @override
-  String get truckerLoadDetailCostBreakdownLabel => 'COST BREAKDOWN';
+  String get truckerLoadDetailCostBreakdownLabel => 'लागत विवरण';
 
   @override
   String get trustScoreTitle => 'विश्वास और समीक्षाएं';
@@ -6351,7 +6351,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String replyDialogHint(String name) {
-    return '$name को अपना जवाब लिखें...';
+    return '$name को अपना उत्तर लिखें...';
   }
 
   @override

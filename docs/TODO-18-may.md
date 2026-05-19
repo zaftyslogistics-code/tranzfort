@@ -547,6 +547,48 @@ Price Type | Load Value | Est Profit
 
 ---
 
+## Phase 25: Localization Gap Fix
+
+**Status:** COMPLETE (1/1 tasks done)
+**Priority:** Medium
+**Reason:** Found 20 missing Hindi translations in ARB files
+
+### Overview
+
+After reviewing the localization setup, found 20 keys missing in the Hindi ARB file (app_hi.arb) that exist in the English ARB file (app_en.arb). These missing keys could cause fallback to English for Hindi users in specific screens.
+
+### Tasks
+
+#### Task A: Add Missing Hindi Translations
+
+- [x] Identify 20 missing keys in app_hi.arb
+- [x] Add Hindi translations for all missing keys
+- [x] Ensure placeholder types match English template
+- [x] Regenerate localization files with flutter gen-l10n
+- [x] Verify no analyzer errors
+
+**Missing keys added:**
+- Load Detail Page (10 keys): truckerLoadDetailRouteMapTitle, truckerLoadDetailPerTruckWeightLabel, truckerLoadDetailCapacityRangeLabel, truckerLoadDetailSlotsOpenLabel, truckerLoadDetailEarningsEstimateTitle, truckerLoadDetailTotalFareLabel, truckerLoadDetailTotalExpenseLabel, truckerLoadDetailEstimatedNetProfitLabel, truckerLoadDetailEstimatedNetLossLabel, truckerLoadDetailCostBreakdownLabel
+- Section Headers (5 keys): @_sectionChatPreviews, @_sectionReportSource, @_sectionReviewsAndProfile, @_sectionPublicProfile, @_sectionReplyDialog, @_sectionReviewPrompt
+- Other (5 keys): @supportActiveTicketCount, @truckerFleetBodyTypeOption, verificationTitleTrucker, truckerLoadDetailNetProfitSubtitle, truckerLoadDetailNetLossSubtitle, replyDialogHint, reviewPromptSubtitle
+
+**Files modified:**
+- `lib/l10n/app_hi.arb` (added 20 missing translations)
+- `lib/src/l10n/app_localizations_hi.dart` (regenerated)
+
+### Implementation Notes
+
+- Added 20 missing Hindi translations to app_hi.arb
+- All translations follow existing Hindi localization patterns
+- Placeholder types match English template (String for name, Object for count)
+- Localization files regenerated successfully
+- Flutter analyze: No issues found in lib/
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
 ## Phase 21: Load Post Card Visual Improvements
 
 **Status:** COMPLETE (5/5 tasks done)

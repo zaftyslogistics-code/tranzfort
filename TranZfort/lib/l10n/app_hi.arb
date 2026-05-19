@@ -2571,5 +2571,63 @@
   "verificationLocationCaptureOnlySupplier": "वेरिफिकेशन लोकेशन कैप्चर केवल सप्लायर वेरिफिकेशन के लिए उपलब्ध है",
   "verificationLocationCaptureFailed": "अभी आपका वेरिफिकेशन स्थान कैप्चर नहीं किया जा सका। लोकेशन सेवाएँ जांचें और पुनः प्रयास करें",
   "verificationCityRequired": "वेरिफिकेशन शहर आवश्यक है",
-  "verificationSubmissionBlocked": "वेरिफिकेशन जमा करना अवरुद्ध है"
+  "verificationSubmissionBlocked": "वेरिफिकेशन जमा करना अवरुद्ध है",
+  
+  "@_sectionChatPreviews": "═══ Chat Message Previews ═══",
+  "@_sectionReportSource": "═══ Report Source ═══",
+  "@_sectionReviewsAndProfile": "═══ Reviews & Public Profile ═══",
+  "@_sectionPublicProfile": "=== Public Profile ===",
+  "@_sectionReplyDialog": "=== Reply Dialog ===",
+  "@_sectionReviewPrompt": "=== Review Prompt Sheet ===",
+  
+  "supportActiveTicketCount": "{count} टिकट{s}",
+  "@supportActiveTicketCount": {
+    "description": "Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.",
+    "placeholders": {
+      "count": {},
+      "s": {}
+    }
+  },
+  
+  "truckerFleetBodyTypeOption": "{value}",
+  "@truckerFleetBodyTypeOption": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  
+  "verificationTitleTrucker": "ट्रकर वेरिफिकेशन",
+  
+  "truckerLoadDetailRouteMapTitle": "रूट मैप",
+  "truckerLoadDetailPerTruckWeightLabel": "प्रति ट्रक: {weight}T",
+  "truckerLoadDetailCapacityRangeLabel": "स्वीकार्य ट्रक: {minT}T – {maxT}T",
+  "truckerLoadDetailSlotsOpenLabel": "{count} स्लॉट खुले",
+  "truckerLoadDetailEarningsEstimateTitle": "ट्रिप कमाई अनुमान",
+  "truckerLoadDetailTotalFareLabel": "कुल किराया (लोड मूल्य)",
+  "truckerLoadDetailTotalExpenseLabel": "कुल खर्च",
+  "truckerLoadDetailEstimatedNetProfitLabel": "अनुमानित शुद्ध लाभ",
+  "truckerLoadDetailEstimatedNetLossLabel": "अनुमानित शुद्ध हानि",
+  "truckerLoadDetailNetProfitSubtitle": "कुल किराये से सभी खर्चों को काटने के बाद",
+  "truckerLoadDetailNetLossSubtitle": "खर्च कुल किराये से अधिक हैं",
+  "truckerLoadDetailCostBreakdownLabel": "लागत विवरण",
+  
+  "replyDialogHint": "{name} को अपना उत्तर लिखें...",
+  "@replyDialogHint": {
+    "description": "Hint text in the reply text field with placeholder for reviewer name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "reviewPromptSubtitle": "{name} के साथ आपका अनुभव कैसा रहा?",
+  "@reviewPromptSubtitle": {
+    "description": "Subtitle asking about the experience with the other user.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }
