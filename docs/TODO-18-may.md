@@ -35,6 +35,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 23:** Load Post Card Color Improvements - Changed Load Value and Est Profit to teal color, added teal wrap to smaller widgets
 - ✅ **Phase 24:** Load Post Card Layout Refinements - Added Price Type column, replaced dotted line with arrow icon, wrapped money row in teal container
 - ✅ **Phase 25:** Localization Gap Fix - Added 20 missing Hindi translations to app_hi.arb
+- ✅ **Phase 26:** Load Post Card Brand Gradient - Applied teal-orange gradient to money row for brand consistency
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
