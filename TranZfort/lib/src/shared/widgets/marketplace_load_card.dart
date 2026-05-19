@@ -182,12 +182,23 @@ class MarketplaceLoadCard extends StatelessWidget {
                       label: _localizedBodyType(l10n, load.requiredBodyType),
                       level: LoadChipLevel.primary,
                     ),
+                    LoadInfoChip(
+                      icon: Icons.calendar_today_outlined,
+                      label: _formatPickupDate(load.pickupDate),
+                      level: LoadChipLevel.secondary,
+                    ),
                     if (load.advancePercentage > 0)
                       LoadInfoChip(
                         icon: Icons.account_balance_wallet_outlined,
                         label: '${load.advancePercentage}% adv',
                         level: LoadChipLevel.secondary,
                         accentColor: AppColors.info,
+                      ),
+                    if (load.trucksNeeded > 1)
+                      LoadInfoChip(
+                        icon: Icons.local_shipping_outlined,
+                        label: '${load.trucksBooked}/${load.trucksNeeded}',
+                        level: LoadChipLevel.secondary,
                       ),
                   ],
                 ),
@@ -454,6 +465,32 @@ class MarketplaceLoadCard extends StatelessWidget {
       return '${hours}h';
     }
     return '${hours}h ${mins}m';
+  }
+
+  String _formatPickupDate(DateTime pickupDate) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final pickupDay = DateTime(pickupDate.year, pickupDate.month, pickupDate.day);
+    final daysUntil = pickupDay.difference(today).inDays;
+
+    if (daysUntil == 0) {
+      return 'Pickup Today';
+    }
+    if (daysUntil == 1) {
+      return 'Pickup Tomorrow';
+    }
+    if (daysUntil > 0 && daysUntil <= 7) {
+      return 'Pickup ${pickupDate.day} ${_getMonthAbbreviation(pickupDate.month)}';
+    }
+    return '${pickupDate.day} ${_getMonthAbbreviation(pickupDate.month)}';
+  }
+
+  String _getMonthAbbreviation(int month) {
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    return months[month - 1];
   }
 
   static String _localizedLoadStatus(AppLocalizations l10n, String status) {
