@@ -286,7 +286,7 @@ class _MoneyRow extends StatelessWidget {
               Text(
                 '₹${LoadCardDarkHeader._formatAmount(totalLoadValue)}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppColors.inkTextPrimary,
+                      color: AppColors.primaryOnDark,
                       fontWeight: FontWeight.w800,
                       fontSize: 18,
                     ),
@@ -312,7 +312,7 @@ class _MoneyRow extends StatelessWidget {
             Text(
               '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.inkTextPrimary,
+                    color: AppColors.primaryOnDark,
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
                   ),

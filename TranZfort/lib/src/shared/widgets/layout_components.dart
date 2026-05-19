@@ -304,11 +304,11 @@ class LoadInfoChip extends StatelessWidget {
           : const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: level == LoadChipLevel.primary
-            ? AppColors.inkTextPrimary.withValues(alpha: 0.1)
+            ? AppColors.primary.withValues(alpha: 0.2)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.chip),
         border: level == LoadChipLevel.primary
-            ? Border.all(color: AppColors.inkTextPrimary.withValues(alpha: 0.2), width: 0.5)
+            ? Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1)
             : null,
       ),
       child: Row(

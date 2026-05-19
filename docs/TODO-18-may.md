@@ -413,6 +413,51 @@ After reviewing the Phase 21 implementation, additional improvements are needed:
 
 ---
 
+## Phase 23: Load Post Card Color Improvements
+
+**Status:** COMPLETE (2/2 tasks done)
+**Priority:** High
+**Reason:** User feedback after Phase 22 - color refinements for better visual hierarchy
+
+### Overview
+
+After Phase 22 implementation, additional color improvements needed:
+- Load Value and Est Profit should use teal color (not white)
+- All smaller widgets (material, weight, body type chips) should use teal wrap like "Active" status chip
+
+### Tasks
+
+#### Task A: Change Load Value and Est Profit to Teal Color
+
+- [x] Change Load Value color from inkTextPrimary to primaryOnDark (teal)
+- [x] Change Est Profit color from inkTextPrimary to primaryOnDark (teal)
+- [x] Keep labels in inkTextSecondary (muted)
+
+**Files to modify:**
+- `lib/src/shared/widgets/load_card_dark_header.dart`
+
+#### Task B: Add Teal Wrap to Smaller Widgets
+
+- [x] Change LoadInfoChip primary level background from white to teal (primary.withValues(alpha: 0.2))
+- [x] Change LoadInfoChip primary level border from white to teal (primary.withValues(alpha: 0.4))
+- [x] Match "Active" status chip styling
+
+**Files to modify:**
+- `lib/src/shared/widgets/layout_components.dart`
+
+### Implementation Notes
+
+- Load Value color changed from inkTextPrimary to primaryOnDark (teal)
+- Est Profit color changed from inkTextPrimary to primaryOnDark (teal)
+- LoadInfoChip primary level background changed to primary.withValues(alpha: 0.2)
+- LoadInfoChip primary level border changed to primary.withValues(alpha: 0.4)
+- Matches "Active" status chip styling (teal wrap with white text)
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
 ## Phase 21: Load Post Card Visual Improvements
 
 **Status:** COMPLETE (5/5 tasks done)
