@@ -29,8 +29,6 @@ class LoadCardDarkHeader extends StatelessWidget {
   final String originState;
   final String destinationCity;
   final String destinationState;
-  final String? distanceLabel;
-  final String? durationLabel;
   final double totalLoadValue;
   final TripCostEstimate? costEstimate;
   final VoidCallback? onSupplierTap;
@@ -48,8 +46,6 @@ class LoadCardDarkHeader extends StatelessWidget {
     required this.originState,
     required this.destinationCity,
     required this.destinationState,
-    this.distanceLabel,
-    this.durationLabel,
     required this.totalLoadValue,
     this.costEstimate,
     this.onSupplierTap,
@@ -87,8 +83,6 @@ class LoadCardDarkHeader extends StatelessWidget {
             originState: originState,
             destinationCity: destinationCity,
             destinationState: destinationState,
-            distanceLabel: distanceLabel,
-            durationLabel: durationLabel,
           ),
           const SizedBox(height: 8),
           // Row C: Load Value + Profit (34-42px)
@@ -147,7 +141,7 @@ class _SupplierStatusRow extends StatelessWidget {
             avatarUrl: supplierAvatarUrl,
             userId: supplierId,
             initials: supplierInitial,
-            radius: 14.0,
+            radius: 17.0, // Increased from 14.0 (20% bigger)
             onTap: onSupplierTap,
           ),
           const SizedBox(width: 8),
@@ -164,7 +158,7 @@ class _SupplierStatusRow extends StatelessWidget {
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
                       color: AppColors.inkTextPrimary,
                       fontWeight: FontWeight.w700,
-                      fontSize: 14,
+                      fontSize: 17, // Increased from 14 (20% bigger)
                     ),
               ),
               Row(
@@ -301,7 +295,7 @@ class _MoneyRow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        // Profit/loss (same style as load value, no pill container)
+        // Profit/loss (same style as load value, light color)
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
@@ -309,9 +303,7 @@ class _MoneyRow extends StatelessWidget {
             Text(
               costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
               style: AppTypography.labelMicro.copyWith(
-                color: costEstimate.isProfitable
-                    ? AppColors.success
-                    : AppColors.error,
+                color: AppColors.inkTextSecondary,
                 fontSize: 10,
                 fontWeight: FontWeight.w700,
               ),
@@ -320,9 +312,7 @@ class _MoneyRow extends StatelessWidget {
             Text(
               '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: costEstimate.isProfitable
-                        ? AppColors.success
-                        : AppColors.error,
+                    color: AppColors.inkTextPrimary,
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
                   ),

@@ -103,12 +103,6 @@ class MarketplaceLoadCard extends StatelessWidget {
                 originState: load.originState ?? '',
                 destinationCity: load.destinationCity,
                 destinationState: load.destinationState ?? '',
-                distanceLabel: routeSnapshot != null
-                    ? '${routeSnapshot.distanceKm.toStringAsFixed(0)} km'
-                    : null,
-                durationLabel: routeSnapshot != null
-                    ? _durationCompact(routeSnapshot.durationMinutes)
-                    : null,
                 totalLoadValue: totalLoadValue,
                 costEstimate: costEstimate,
                 onSupplierTap: onSupplierTap,
@@ -191,14 +185,14 @@ class MarketplaceLoadCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.phone_outlined,
-                                color: AppColors.success,
+                                color: AppColors.inkTextPrimary,
                                 size: 20,
                               ),
                               const SizedBox(width: AppSpacing.sm),
                               Text(
                                 l10n.commonCallAction,
                                 style: TextStyle(
-                                  color: AppColors.success,
+                                  color: AppColors.inkTextPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -225,7 +219,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                               Text(
                                 l10n.commonChatLabel,
                                 style: TextStyle(
-                                  color: AppColors.primary,
+                                  color: AppColors.inkTextPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -233,7 +227,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                               const SizedBox(width: AppSpacing.sm),
                               Icon(
                                 Icons.chat_bubble_outline,
-                                color: AppColors.primary,
+                                color: AppColors.inkTextPrimary,
                                 size: 20,
                               ),
                             ],
@@ -263,21 +257,6 @@ class MarketplaceLoadCard extends StatelessWidget {
       return '${age.inMinutes}m';
     }
     return 'now';
-  }
-
-  String _durationCompact(int minutes) {
-    if (minutes <= 0) {
-      return '0m';
-    }
-    final hours = minutes ~/ 60;
-    final mins = minutes % 60;
-    if (hours <= 0) {
-      return '${mins}m';
-    }
-    if (mins == 0) {
-      return '${hours}h';
-    }
-    return '${hours}h ${mins}m';
   }
 
   String _formatPickupDate(DateTime pickupDate) {

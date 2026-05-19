@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
 
 /// Integrated route line widget for load card dark header.
 ///
-/// Renders FROM/TO text blocks with city/state, a dashed route line between them,
-/// and a distance/time capsule centered below the line.
+/// Renders FROM/TO text blocks with city/state and a dashed route line between them.
 ///
 /// Layout:
-/// - Row 1: FROM block + flexible dashed line + TO block
-/// - Row 2: Distance/time capsule (centered)
+/// - Row: FROM block + flexible dashed line + TO block
 ///
-/// Target height: ~70px for the entire route section (60px for row 1 + ~10px for row 2).
+/// Target height: ~60px for the route row.
 class IntegratedRouteLine extends StatelessWidget {
   final String originCity;
   final String originState;
   final String destinationCity;
   final String destinationState;
-  final String? distanceLabel;
-  final String? durationLabel;
 
   const IntegratedRouteLine({
     super.key,
@@ -28,68 +23,41 @@ class IntegratedRouteLine extends StatelessWidget {
     required this.originState,
     required this.destinationCity,
     required this.destinationState,
-    this.distanceLabel,
-    this.durationLabel,
   });
 
   @override
   Widget build(BuildContext context) {
-    final centerLabel = _buildCenterLabel();
-
-    return Column(
-      children: [
-        // Row 1: FROM block + dashed line + TO block
-        SizedBox(
-          height: 60,
-          child: Row(
-            children: [
-              // Left: FROM block (natural width)
-              IntrinsicWidth(
-                child: _LocationBlock(
-                  label: 'FROM',
-                  city: originCity,
-                  state: originState,
-                  isOrigin: true,
-                ),
-              ),
-              // Center: dashed line (flexible, takes remaining space)
-              Expanded(
-                child: _DashedLine(
-                  color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
-                ),
-              ),
-              // Right: TO block (natural width)
-              IntrinsicWidth(
-                child: _LocationBlock(
-                  label: 'TO',
-                  city: destinationCity,
-                  state: destinationState,
-                  isOrigin: false,
-                ),
-              ),
-            ],
-          ),
-        ),
-        // Row 2: Distance/time capsule (centered below)
-        if (centerLabel != null)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Center(
-              child: _DistanceTimeCapsule(label: centerLabel),
+    return SizedBox(
+      height: 60,
+      child: Row(
+        children: [
+          // Left: FROM block (natural width)
+          IntrinsicWidth(
+            child: _LocationBlock(
+              label: 'FROM',
+              city: originCity,
+              state: originState,
+              isOrigin: true,
             ),
           ),
-      ],
+          // Center: dashed line (flexible, takes remaining space)
+          Expanded(
+            child: _DashedLine(
+              color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
+            ),
+          ),
+          // Right: TO block (natural width)
+          IntrinsicWidth(
+            child: _LocationBlock(
+              label: 'TO',
+              city: destinationCity,
+              state: destinationState,
+              isOrigin: false,
+            ),
+          ),
+        ],
+      ),
     );
-  }
-
-  String? _buildCenterLabel() {
-    if (distanceLabel == null && durationLabel == null) {
-      return null;
-    }
-    if (distanceLabel != null && durationLabel != null) {
-      return '$distanceLabel · $durationLabel';
-    }
-    return distanceLabel ?? durationLabel;
   }
 }
 
@@ -151,7 +119,7 @@ class _LocationBlock extends StatelessWidget {
   }
 }
 
-/// Simple dashed line widget.
+/// Simple dashed line widget with arrow.
 class _DashedLine extends StatelessWidget {
   final Color color;
 
@@ -161,16 +129,16 @@ class _DashedLine extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       size: const Size(double.infinity, 2),
-      painter: _DashedLinePainter(color: color),
+      painter: _DashedLineWithArrowPainter(color: color),
     );
   }
 }
 
-/// Custom painter for dashed line.
-class _DashedLinePainter extends CustomPainter {
+/// Custom painter for dashed line with arrow at the end.
+class _DashedLineWithArrowPainter extends CustomPainter {
   final Color color;
 
-  _DashedLinePainter({required this.color});
+  _DashedLineWithArrowPainter({required this.color});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -179,50 +147,38 @@ class _DashedLinePainter extends CustomPainter {
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
-    const dashWidth = 4.0;
-    const dashSpace = 4.0;
+    const dashWidth = 6.0;
+    const dashSpace = 8.0;
+    const arrowSize = 6.0;
 
+    // Draw dashed line (stop before arrow)
     double startX = 0;
-    while (startX < size.width) {
+    final lineEndX = size.width - arrowSize;
+    
+    while (startX < lineEndX) {
+      final endX = (startX + dashWidth).clamp(0.0, lineEndX);
       canvas.drawLine(
         Offset(startX, size.height / 2),
-        Offset(startX + dashWidth, size.height / 2),
+        Offset(endX, size.height / 2),
         paint,
       );
       startX += dashWidth + dashSpace;
     }
+
+    // Draw arrow at the end
+    final arrowPath = Path();
+    arrowPath.moveTo(lineEndX, size.height / 2);
+    arrowPath.lineTo(lineEndX - arrowSize, size.height / 2 - arrowSize / 2);
+    arrowPath.lineTo(lineEndX - arrowSize, size.height / 2 + arrowSize / 2);
+    arrowPath.close();
+
+    final arrowPaint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+    
+    canvas.drawPath(arrowPath, arrowPaint);
   }
 
   @override
-  bool shouldRepaint(_DashedLinePainter oldDelegate) => false;
-}
-
-/// Center capsule for distance/time display.
-class _DistanceTimeCapsule extends StatelessWidget {
-  final String label;
-
-  const _DistanceTimeCapsule({required this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.inkMid,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(
-          color: AppColors.primary.withValues(alpha: 0.3),
-          width: 1,
-        ),
-      ),
-      child: Text(
-        label,
-        style: AppTypography.label.copyWith(
-          color: AppColors.primary,
-          fontSize: 11,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
+  bool shouldRepaint(_DashedLineWithArrowPainter oldDelegate) => false;
 }

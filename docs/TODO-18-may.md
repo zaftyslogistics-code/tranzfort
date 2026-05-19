@@ -312,6 +312,96 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ---
 
+## Phase 22: Load Post Card Final Polish
+
+**Status:** In Progress (5/6 tasks done)
+**Priority:** High
+**Reason:** User feedback after Phase 21 - additional visual and functional improvements
+
+### Overview
+
+After reviewing the Phase 21 implementation, additional improvements are needed:
+- Distance/time chip should be removed from card (keep in details page)
+- EST profit should use light color like Load value (not success/error colors)
+- Bottom Call/Chat buttons should use light color
+- Supplier avatar and name should be 20% bigger
+- Call button showing "failed to get Supplier number" error
+- Dotted line should be shorter with arrow design
+
+### Tasks
+
+#### Task A: Remove Distance/Time Chip from Card
+
+- [x] Remove distance/time capsule from IntegratedRouteLine
+- [x] Keep distance/time in Load Details page only
+- [x] Adjust route line height since capsule is removed
+- [x] Remove _DistanceTimeCapsule class (no longer needed)
+
+**Files to modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart`
+
+#### Task B: Change EST Profit to Light Color
+
+- [x] Change profit/loss text color from success/error to inkTextPrimary
+- [x] Keep the same structure as load value (label + amount)
+- [x] Use subtle color accent only if needed (e.g., icon or small badge)
+
+**Files to modify:**
+- `lib/src/shared/widgets/load_card_dark_header.dart`
+
+#### Task C: Change Bottom Buttons to Light Color
+
+- [x] Change Call button text/icon color from success to inkTextPrimary
+- [x] Change Chat button text/icon color from primary to inkTextPrimary
+- [x] Ensure buttons remain tappable and have proper contrast
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task D: Increase Supplier Avatar and Name Size by 20%
+
+- [x] Increase avatar radius from 14 to ~17 (20% bigger)
+- [x] Increase supplier name font size from 14 to ~17 (20% bigger)
+- [x] Adjust spacing if needed
+
+**Files to modify:**
+- `lib/src/shared/widgets/load_card_dark_header.dart`
+
+#### Task E: Fix Call Button "Failed to get Supplier Number" Error
+
+- [ ] Investigate why call button is failing
+- [ ] Check supplier phone number retrieval logic
+- [ ] Verify supplier phone number is available in load data
+- [ ] Fix the error handling
+
+**Investigation Notes:**
+- Error occurs in `_callSupplierFromFeedAction` in `trucker_find_loads_actions.dart`
+- Calls `getSupplierMobile(supplierId)` from `trucker_marketplace_repository.dart`
+- Repository calls `fetchSupplierProfile` RPC and returns mobile field
+- Failure could be due to:
+  - Supplier profile not found in database
+  - RPC call failing (backend issue)
+  - Mobile field null/empty in profile
+- User reports "earlier it was working fine" - suggests recent change broke it
+- Need to check backend logs and supplier profile data
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart` (onCall handler)
+- `lib/src/features/trucker/presentation/trucker_find_loads_actions.dart`
+- Check supplier data models
+
+#### Task F: Add Arrow Design to Dotted Line
+
+- [x] Make dotted line shorter (increased dash width and spacing)
+- [x] Add arrow design at the end of the line
+- [x] Ensure arrow points in correct direction (left to right)
+- [x] Adjust line aesthetics to be more modern
+
+**Files to modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart`
+
+---
+
 ## Phase 21: Load Post Card Visual Improvements
 
 **Status:** COMPLETE (5/5 tasks done)
