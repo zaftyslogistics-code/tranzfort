@@ -284,7 +284,7 @@ class _MoneyRow extends StatelessWidget {
     final priceLabel = isPerTon ? '₹/T' : 'Fixed';
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
         gradient: AppColors.heroCta,
         borderRadius: BorderRadius.circular(AppRadius.chip),
@@ -305,7 +305,7 @@ class _MoneyRow extends StatelessWidget {
                   priceLabel,
                   style: AppTypography.labelMicro.copyWith(
                     color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 9,
+                    fontSize: 11,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -315,7 +315,7 @@ class _MoneyRow extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                 ),
               ],
@@ -332,7 +332,7 @@ class _MoneyRow extends StatelessWidget {
                   l10n.marketplaceLoadValue,
                   style: AppTypography.labelMicro.copyWith(
                     color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 9,
+                    fontSize: 11,
                   ),
                 ),
                 const SizedBox(height: 2),
@@ -341,7 +341,7 @@ class _MoneyRow extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                 ),
               ],
@@ -358,7 +358,7 @@ class _MoneyRow extends StatelessWidget {
                   costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
                   style: AppTypography.labelMicro.copyWith(
                     color: Colors.white.withValues(alpha: 0.8),
-                    fontSize: 9,
+                    fontSize: 11,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
@@ -368,7 +368,7 @@ class _MoneyRow extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleSmall?.copyWith(
                         color: Colors.white,
                         fontWeight: FontWeight.w800,
-                        fontSize: 18,
+                        fontSize: 20,
                       ),
                 ),
               ],

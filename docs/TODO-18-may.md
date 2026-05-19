@@ -37,6 +37,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 25:** Localization Gap Fix - Added 20 missing Hindi translations to app_hi.arb
 - ✅ **Phase 26:** Load Post Card Brand Gradient - Applied teal-orange gradient to money row for brand consistency
 - ✅ **Phase 27:** Load Card Critical Bug Fixes - Fixed muted text readability, FROM/TO localization, and material case sensitivity bug
+- ✅ **Phase 28:** Price Section Visual Polish - Increased container padding and font sizes for better readability and visual balance
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
@@ -632,6 +633,48 @@ The "Find Loads" button in Trucker Dashboard uses the brand teal-orange gradient
 - Labels remain in inkTextSecondary (muted white) for hierarchy
 - Creates visual hierarchy: gradient money row → teal chips → light text
 - Matches "Find Loads" CTA button style for brand consistency
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
+## Phase 28: Price Section Visual Polish
+
+**Status:** COMPLETE (1/1 tasks done)
+**Priority:** Medium
+**Reason:** User feedback on text readability and container sizing
+
+### Overview
+
+User requested final polish for price section:
+- Text too small, especially muted labels
+- Container has too much blank space on left/right
+- Need to make price section fill more width and look better
+
+### Tasks
+
+#### Task A: Increase Price Section Size and Text
+
+- [x] Increase horizontal padding from 12 to 20px (fills more width)
+- [x] Increase vertical padding from 8 to 12px (more breathing room)
+- [x] Increase label font size from 9 to 11px (more readable)
+- [x] Increase value font size from 18 to 20px (more prominent)
+- [x] Verify no analyzer errors
+
+**Changes:**
+- Container padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12)
+- All three labels (priceLabel, marketplaceLoadValue, marketplaceEstProfit/Loss): fontSize 11
+- All three values (priceDisplay, totalLoadValue, netProfit): fontSize 20
+
+**Result:**
+- Price section fills more horizontal space on the card
+- Labels are more readable at 11px vs 9px
+- Values are more prominent at 20px vs 18px
+- Better visual balance with increased padding
+
+**Files modified:**
+- `lib/src/shared/widgets/load_card_dark_header.dart` (padding and font sizes)
 
 **APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
 **Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
