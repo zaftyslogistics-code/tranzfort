@@ -29,12 +29,17 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 8 (partial):** Remove commented-out code - Fixed in chat_repository and trucker_load_detail_screen (F5-007)
 - ✅ **Phase 10 (partial):** Remove deprecated parameters - Fixed useDarkVariant and filled in action_buttons (F10-001, F10-002)
 - ✅ **Phase 12 (partial):** Remove unnecessary library directives - Fixed in app_config, public_profile_models, review_models (F12-002, F12-003, F12-004)
+- ✅ **Phase 20:** Load Post Card Dark Header - Implemented new dark header with supplier info, route line, and money row
+- ✅ **Phase 21:** Load Post Card Visual Improvements - Made entire card dark, fixed profit/loss styling, simplified weight label, improved city name rendering
+- ✅ **Phase 22:** Load Post Card Polish - Removed distance/time chip, adjusted profit/button colors, increased supplier info size, redesigned dashed line with arrow
+- ✅ **Phase 23:** Load Post Card Color Improvements - Changed Load Value and Est Profit to teal color, added teal wrap to smaller widgets
+- ✅ **Phase 24:** Load Post Card Layout Refinements - Added Price Type column, replaced dotted line with arrow icon, wrapped money row in teal container
+- ✅ **Phase 25:** Localization Gap Fix - Added 20 missing Hindi translations to app_hi.arb
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
 - 🔄 **Phase 6:** Runtime Config & Location Services (remaining items)
 - 🔄 **Phase 7-12:** Medium/Low priority items
-- 🔄 **Phase 18:** Load Post Card UI/UX Redesign - Pending implementation
 - 🔄 **Phase 19:** Additional UI/UX Improvements (Future) - Not started
 
 **Critical Findings Fixed:**
