@@ -314,7 +314,7 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ## Phase 22: Load Post Card Final Polish
 
-**Status:** In Progress (5/6 tasks done)
+**Status:** COMPLETE (6/6 tasks done)
 **Priority:** High
 **Reason:** User feedback after Phase 21 - additional visual and functional improvements
 
@@ -369,26 +369,24 @@ After reviewing the Phase 21 implementation, additional improvements are needed:
 
 #### Task E: Fix Call Button "Failed to get Supplier Number" Error
 
-- [ ] Investigate why call button is failing
-- [ ] Check supplier phone number retrieval logic
-- [ ] Verify supplier phone number is available in load data
-- [ ] Fix the error handling
+- [x] Investigate why call button is failing
+- [x] Check supplier phone number retrieval logic
+- [x] Verify supplier phone number is available in load data
+- [x] Fix the error handling
 
-**Investigation Notes:**
-- Error occurs in `_callSupplierFromFeedAction` in `trucker_find_loads_actions.dart`
-- Calls `getSupplierMobile(supplierId)` from `trucker_marketplace_repository.dart`
-- Repository calls `fetchSupplierProfile` RPC and returns mobile field
-- Failure could be due to:
-  - Supplier profile not found in database
-  - RPC call failing (backend issue)
-  - Mobile field null/empty in profile
-- User reports "earlier it was working fine" - suggests recent change broke it
-- Need to check backend logs and supplier profile data
+**Root Cause:**
+- During codebase refactoring, `fetchSupplierProfile` was changed to call `get_public_profile` RPC
+- The `get_public_profile` RPC does NOT return the `mobile` field
+- It returns: id, full_name, avatar_url, company_name, role, verification_status, location, member_since, is_self, trust_scores, role_specific
+- But NO mobile field, causing the call button to fail
+
+**Fix Applied:**
+- Reverted `fetchSupplierProfile` to directly query profiles table for `id, mobile`
+- Changed from RPC call back to direct table read: `_client.from('profiles').select('id, mobile').eq('id', supplierId).maybeSingle()`
+- This restores the mobile field retrieval functionality
 
 **Files to modify:**
-- `lib/src/shared/widgets/marketplace_load_card.dart` (onCall handler)
-- `lib/src/features/trucker/presentation/trucker_find_loads_actions.dart`
-- Check supplier data models
+- `lib/src/features/trucker/data/trucker_marketplace_repository.dart` (fetchSupplierProfile method)
 
 #### Task F: Add Arrow Design to Dotted Line
 
