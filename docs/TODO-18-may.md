@@ -157,16 +157,18 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Medium
 **Effort:** High
 
+**Status:** In Progress (Partial)
+
 **Tasks:**
+- [x] Ensure from/to city + state are readable and always present (no micro text) - Fixed in CurvedArcRoute
 - [ ] Replace bottom dark earnings strip with top dark route hero
-- [ ] Ensure from/to city + state are readable and always present (no micro text)
 - [ ] Move freight/financial summary into compact light/tonal area
 - [ ] Keep whole card tappable for details
 - [ ] Implement responsive hero section (38-45% card height, rounded top corners)
 
 **Files:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
-- `lib/src/shared/widgets/curved_arc_route.dart` (add hero variant if needed)
+- `lib/src/shared/widgets/curved_arc_route.dart` (partially updated)
 
 ### Phase 18.3: Chip System Implementation
 
