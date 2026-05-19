@@ -124,6 +124,8 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Medium
 **Effort:** Low
 
+**Status:** ✅ COMPLETE
+
 **Tasks:**
 - [x] Improve `textMuted` / `inkTextMuted` contrast in `app_colors.dart` (fails WCAG AA)
 - [x] Selective typography scale increase in `app_typography.dart` (Option B - controlled approach)
@@ -135,7 +137,8 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
   - `bodyPrimary`: 14px → 15px (+7%)
   - `label`: 12px → 13px (+8%)
   - `caption`/`labelMicro`: 11px → 12px (+9%)
-- [ ] Update `docs/38-ui-ux-color-typography-and-elevation-system.md` with new token values
+- [x] Update `docs/38-ui-ux-color-typography-and-elevation-system.md` with new token values
+- [x] Build APK with all credentials for manual testing
 - [ ] Test representative screens for overflow after typography changes
   - `marketplace_load_card.dart`
   - `trucker_dashboard_screen.dart`
