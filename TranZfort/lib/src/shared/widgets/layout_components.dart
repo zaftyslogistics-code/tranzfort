@@ -4,6 +4,7 @@ import '../../l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/theme/app_typography.dart';
 
 Future<T?> showAppBottomSheet<T>({
   required BuildContext context,
@@ -294,20 +295,20 @@ class LoadInfoChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fg = accentColor ?? (level == LoadChipLevel.primary
-        ? AppColors.textPrimary
-        : AppColors.textSecondary);
-    
+        ? AppColors.inkTextPrimary
+        : AppColors.inkTextSecondary);
+
     return Container(
       padding: level == LoadChipLevel.primary
           ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
           : const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
       decoration: BoxDecoration(
         color: level == LoadChipLevel.primary
-            ? AppColors.surfaceSoft
+            ? AppColors.inkTextPrimary.withValues(alpha: 0.1)
             : Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.chip),
         border: level == LoadChipLevel.primary
-            ? Border.all(color: AppColors.divider, width: 0.5)
+            ? Border.all(color: AppColors.inkTextPrimary.withValues(alpha: 0.2), width: 0.5)
             : null,
       ),
       child: Row(
@@ -323,7 +324,7 @@ class LoadInfoChip extends StatelessWidget {
           ],
           Text(
             label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: AppTypography.label.copyWith(
                   color: fg,
                   fontWeight: level == LoadChipLevel.primary
                       ? FontWeight.w700

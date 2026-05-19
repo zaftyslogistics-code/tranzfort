@@ -312,6 +312,78 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ---
 
+## Phase 21: Load Post Card Visual Improvements
+
+**Status:** COMPLETE (5/5 tasks done)
+**Priority:** High
+**Reason:** User feedback after Phase 20 implementation - visual issues with card design
+
+### Overview
+
+After reviewing the Phase 20 implementation, several visual improvements are needed:
+- Half dark/half light background creates visual disconnect
+- Profit/loss pill styling inconsistent with load value
+- Weight label shows both load and truck capacity (should only show truck range)
+- City names truncated due to inline distance/time capsule
+- Dashed line doesn't adjust based on text length
+
+### Tasks
+
+#### Task A: Make Entire Card Background Dark
+
+- [x] Remove light body background (surfaceBase)
+- [x] Extend dark gradient (inkSurface → inkMid) to entire card
+- [x] Use lighter text colors for body section (inkTextPrimary, inkTextSecondary)
+- [x] Adjust chip backgrounds to be tonal on dark (white.withAlpha(10))
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+- `lib/src/shared/widgets/load_card_dark_header.dart` (may need to merge header and body)
+
+#### Task B: Remove Profit/Loss Pill Container
+
+- [x] Remove Container wrapper around profit/loss in _MoneyRow
+- [x] Style profit/loss same as load value: label (micro) + amount (large)
+- [x] Use success color for profit, error color for loss
+- [x] No border, no background, no pill
+
+**Files to modify:**
+- `lib/src/shared/widgets/load_card_dark_header.dart`
+
+#### Task C: Show Only Truck Capacity Range
+
+- [x] Change weightLabel logic to: `${minCapacity}-${maxCapacity}T`
+- [x] Remove "Load" and "Truck" prefixes
+- [x] Keep the icon (scale_outlined)
+- [x] Fallback: if no capacity range, show load weight only
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task D: Make Dashed Line Dynamic Based on Text Length
+
+- [x] Replace `Expanded` for FROM/TO blocks with `IntrinsicWidth`
+- [x] Replace fixed `flex: 2` for dashed line with `Flexible` (Expanded)
+- [x] Set minimum width for dashed line (e.g., 40px)
+- [x] Ensure at least 2-3 dashes visible
+
+**Files to modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart`
+
+#### Task E: Move Distance/Time Capsule Below Route Line
+
+- [x] Implement 2-row layout:
+  - Row 1: [FROM] ---- DASHED LINE ---- [TO]
+  - Row 2: [Distance/Time Capsule centered]
+- [x] Remove capsule from Stack in _DashedLineWithCapsule
+- [x] Add capsule as separate row below the route line
+- [x] Center capsule horizontally
+
+**Files to modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart`
+
+---
+
 ## Phase 20: Revised Load Post Card Implementation
 
 **Status:** COMPLETE (8/8 tasks done)

@@ -59,61 +59,46 @@ class LoadCardDarkHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(
-        top: Radius.circular(AppRadius.card),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
+        16,
+        12,
+        16,
+        10,
       ),
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppColors.inkSurface,
-              AppColors.inkMid,
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Row A: Supplier + Status (34-40px)
+          _SupplierStatusRow(
+            supplierName: supplierName,
+            supplierId: supplierId,
+            supplierInitial: supplierInitial,
+            supplierAvatarUrl: supplierAvatarUrl,
+            age: age,
+            status: status,
+            isSuperLoad: isSuperLoad,
+            onSupplierTap: onSupplierTap,
           ),
-        ),
-        padding: const EdgeInsets.fromLTRB(
-          16,
-          12,
-          16,
-          10,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Row A: Supplier + Status (34-40px)
-            _SupplierStatusRow(
-              supplierName: supplierName,
-              supplierId: supplierId,
-              supplierInitial: supplierInitial,
-              supplierAvatarUrl: supplierAvatarUrl,
-              age: age,
-              status: status,
-              isSuperLoad: isSuperLoad,
-              onSupplierTap: onSupplierTap,
+          const SizedBox(height: 8),
+          // Row B: Integrated Route Line (70-78px)
+          IntegratedRouteLine(
+            originCity: originCity,
+            originState: originState,
+            destinationCity: destinationCity,
+            destinationState: destinationState,
+            distanceLabel: distanceLabel,
+            durationLabel: durationLabel,
+          ),
+          const SizedBox(height: 8),
+          // Row C: Load Value + Profit (34-42px)
+          if (costEstimate != null)
+            _MoneyRow(
+              totalLoadValue: totalLoadValue,
+              costEstimate: costEstimate!,
+              l10n: l10n,
             ),
-            const SizedBox(height: 8),
-            // Row B: Integrated Route Line (70-78px)
-            IntegratedRouteLine(
-              originCity: originCity,
-              originState: originState,
-              destinationCity: destinationCity,
-              destinationState: destinationState,
-              distanceLabel: distanceLabel,
-              durationLabel: durationLabel,
-            ),
-            const SizedBox(height: 8),
-            // Row C: Load Value + Profit (34-42px)
-            if (costEstimate != null)
-              _MoneyRow(
-                totalLoadValue: totalLoadValue,
-                costEstimate: costEstimate!,
-                l10n: l10n,
-              ),
-          ],
-        ),
+        ],
       ),
     );
   }
@@ -316,52 +301,33 @@ class _MoneyRow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 12),
-        // Profit/loss pill
-        Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: AppSpacing.sm,
-            vertical: 6,
-          ),
-          decoration: BoxDecoration(
-            color: (costEstimate.isProfitable
+        // Profit/loss (same style as load value, no pill container)
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
+              style: AppTypography.labelMicro.copyWith(
+                color: costEstimate.isProfitable
                     ? AppColors.success
-                    : AppColors.error)
-                .withValues(alpha: 0.15),
-            borderRadius: BorderRadius.circular(AppRadius.chip),
-            border: Border.all(
-              color: (costEstimate.isProfitable
-                      ? AppColors.success
-                      : AppColors.error)
-                  .withValues(alpha: 0.4),
-              width: 1,
+                    : AppColors.error,
+                fontSize: 10,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
-                style: AppTypography.labelMicro.copyWith(
-                  color: costEstimate.isProfitable
-                      ? AppColors.success
-                      : AppColors.error,
-                  fontSize: 10,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Text(
-                '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: costEstimate.isProfitable
-                          ? AppColors.success
-                          : AppColors.error,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 12,
-                    ),
-              ),
-            ],
-          ),
+            const SizedBox(height: 2),
+            Text(
+              '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: costEstimate.isProfitable
+                        ? AppColors.success
+                        : AppColors.error,
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18,
+                  ),
+            ),
+          ],
         ),
       ],
     );

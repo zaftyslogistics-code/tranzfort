@@ -46,12 +46,12 @@ class MarketplaceLoadCard extends StatelessWidget {
     final minCapacity = load.derivedMinTruckCapacityTonnes;
     final maxCapacity = load.derivedMaxTruckCapacityTonnes;
     
-    // Task H: Fix weight label semantics - make explicit
-    // If capacity range is available, show both load weight and truck capacity
-    // Otherwise show only actual load weight
+    // Task C: Show only truck capacity range
+    // If capacity range is available, show min-max
+    // Otherwise show actual load weight as fallback
     final weightLabel = minCapacity != null && maxCapacity != null
-        ? 'Load ${tonnes}T · Truck ${minCapacity.toStringAsFixed(0)}-${maxCapacity.toStringAsFixed(0)}T'
-        : 'Load ${tonnes}T';
+        ? '${minCapacity.toStringAsFixed(0)}-${maxCapacity.toStringAsFixed(0)}T'
+        : tonnes;
 
     final isPerTon = load.priceType == 'per_ton';
     final totalLoadValue = isPerTon
@@ -72,7 +72,14 @@ class MarketplaceLoadCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.card),
         child: Ink(
           decoration: BoxDecoration(
-            color: AppColors.surfaceBase,
+            gradient: const LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                AppColors.inkSurface,
+                AppColors.inkMid,
+              ],
+            ),
             borderRadius: BorderRadius.circular(AppRadius.card),
             boxShadow: AppShadows.elevation2,
             border: Border.all(
@@ -106,7 +113,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                 costEstimate: costEstimate,
                 onSupplierTap: onSupplierTap,
               ),
-              // ── Light Section: Load/truck details only ──
+              // ── Dark Section: Load/truck details only ──
               Padding(
                 padding: const EdgeInsets.fromLTRB(
                   16,
@@ -328,13 +335,13 @@ class _InlineMetaItem extends StatelessWidget {
         Icon(
           icon,
           size: 14,
-          color: accentColor ?? AppColors.textSecondary,
+          color: accentColor ?? AppColors.inkTextSecondary,
         ),
         const SizedBox(width: 4),
         Text(
           label,
           style: AppTypography.label.copyWith(
-            color: accentColor ?? AppColors.textSecondary,
+            color: accentColor ?? AppColors.inkTextSecondary,
             fontSize: 12,
           ),
         ),

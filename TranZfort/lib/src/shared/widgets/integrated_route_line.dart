@@ -7,9 +7,13 @@ import '../../core/theme/app_typography.dart';
 /// Integrated route line widget for load card dark header.
 ///
 /// Renders FROM/TO text blocks with city/state, a dashed route line between them,
-/// and a center distance/time capsule embedded in the line.
+/// and a distance/time capsule centered below the line.
 ///
-/// Target height: 70-78px for the entire route row.
+/// Layout:
+/// - Row 1: FROM block + flexible dashed line + TO block
+/// - Row 2: Distance/time capsule (centered)
+///
+/// Target height: ~70px for the entire route section (60px for row 1 + ~10px for row 2).
 class IntegratedRouteLine extends StatelessWidget {
   final String originCity;
   final String originState;
@@ -32,32 +36,49 @@ class IntegratedRouteLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final centerLabel = _buildCenterLabel();
 
-    return SizedBox(
-      height: 70, // Target height for route row
-      child: Row(
-        children: [
-          // Left: FROM block
-          Expanded(
-            child: _LocationBlock(
-              label: 'FROM',
-              city: originCity,
-              state: originState,
-              isOrigin: true,
+    return Column(
+      children: [
+        // Row 1: FROM block + dashed line + TO block
+        SizedBox(
+          height: 60,
+          child: Row(
+            children: [
+              // Left: FROM block (natural width)
+              IntrinsicWidth(
+                child: _LocationBlock(
+                  label: 'FROM',
+                  city: originCity,
+                  state: originState,
+                  isOrigin: true,
+                ),
+              ),
+              // Center: dashed line (flexible, takes remaining space)
+              Expanded(
+                child: _DashedLine(
+                  color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
+                ),
+              ),
+              // Right: TO block (natural width)
+              IntrinsicWidth(
+                child: _LocationBlock(
+                  label: 'TO',
+                  city: destinationCity,
+                  state: destinationState,
+                  isOrigin: false,
+                ),
+              ),
+            ],
+          ),
+        ),
+        // Row 2: Distance/time capsule (centered below)
+        if (centerLabel != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Center(
+              child: _DistanceTimeCapsule(label: centerLabel),
             ),
           ),
-          // Center: dashed line with capsule
-          _DashedLineWithCapsule(label: centerLabel),
-          // Right: TO block
-          Expanded(
-            child: _LocationBlock(
-              label: 'TO',
-              city: destinationCity,
-              state: destinationState,
-              isOrigin: false,
-            ),
-          ),
-        ],
-      ),
+      ],
     );
   }
 
@@ -126,48 +147,6 @@ class _LocationBlock extends StatelessWidget {
               ),
         ),
       ],
-    );
-  }
-}
-
-/// Dashed line with center capsule for distance/time.
-class _DashedLineWithCapsule extends StatelessWidget {
-  final String? label;
-
-  const _DashedLineWithCapsule({this.label});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Dashed line (background)
-          Positioned.fill(
-            child: Row(
-              children: [
-                Expanded(
-                  child: _DashedLine(
-                    color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _DashedLine(
-                    color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          // Center capsule
-          if (label != null)
-            Center(
-              child: _DistanceTimeCapsule(label: label!),
-            ),
-        ],
-      ),
     );
   }
 }
