@@ -350,7 +350,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                         onTap: onCall,
                         borderRadius: BorderRadius.circular(AppRadius.button),
                         child: Container(
-                          height: 44,
+                          height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerLeft,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -383,7 +383,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                         onTap: onChat,
                         borderRadius: BorderRadius.circular(AppRadius.button),
                         child: Container(
-                          height: 44,
+                          height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerRight,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
