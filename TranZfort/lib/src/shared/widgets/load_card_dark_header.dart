@@ -31,6 +31,8 @@ class LoadCardDarkHeader extends StatelessWidget {
   final String destinationState;
   final double totalLoadValue;
   final TripCostEstimate? costEstimate;
+  final double priceAmount;
+  final String priceType;
   final VoidCallback? onSupplierTap;
 
   const LoadCardDarkHeader({
@@ -48,6 +50,8 @@ class LoadCardDarkHeader extends StatelessWidget {
     required this.destinationState,
     required this.totalLoadValue,
     this.costEstimate,
+    required this.priceAmount,
+    required this.priceType,
     this.onSupplierTap,
   });
 
@@ -90,6 +94,8 @@ class LoadCardDarkHeader extends StatelessWidget {
             _MoneyRow(
               totalLoadValue: totalLoadValue,
               costEstimate: costEstimate!,
+              priceAmount: priceAmount,
+              priceType: priceType,
               l10n: l10n,
             ),
         ],
@@ -253,23 +259,60 @@ class _SuperLoadPill extends StatelessWidget {
   }
 }
 
-/// Money row in dark header (load value + profit/loss).
+/// Money row in dark header (price type + load value + profit/loss).
 class _MoneyRow extends StatelessWidget {
   final double totalLoadValue;
   final TripCostEstimate costEstimate;
+  final double priceAmount;
+  final String priceType;
   final AppLocalizations l10n;
 
   const _MoneyRow({
     required this.totalLoadValue,
     required this.costEstimate,
+    required this.priceAmount,
+    required this.priceType,
     required this.l10n,
   });
 
   @override
   Widget build(BuildContext context) {
+    final isPerTon = priceType == 'per_ton';
+    final priceDisplay = isPerTon
+        ? '₹${priceAmount.toStringAsFixed(0)}'
+        : LoadCardDarkHeader._formatAmount(priceAmount);
+    final priceLabel = isPerTon ? '₹/T' : 'Fixed';
+
     return Row(
       children: [
-        // Load value
+        // Price type column
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                priceLabel,
+                style: AppTypography.labelMicro.copyWith(
+                  color: AppColors.inkTextSecondary,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                priceDisplay,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: AppColors.primaryOnDark,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 8),
+        // Load value column
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -279,45 +322,47 @@ class _MoneyRow extends StatelessWidget {
                 l10n.marketplaceLoadValue,
                 style: AppTypography.labelMicro.copyWith(
                   color: AppColors.inkTextSecondary,
-                  fontSize: 10,
+                  fontSize: 9,
                 ),
               ),
               const SizedBox(height: 2),
               Text(
                 '₹${LoadCardDarkHeader._formatAmount(totalLoadValue)}',
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
                       color: AppColors.primaryOnDark,
                       fontWeight: FontWeight.w800,
-                      fontSize: 18,
+                      fontSize: 15,
                     ),
               ),
             ],
           ),
         ),
-        const SizedBox(width: 12),
-        // Profit/loss (same style as load value, light color)
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
-              style: AppTypography.labelMicro.copyWith(
-                color: AppColors.inkTextSecondary,
-                fontSize: 10,
-                fontWeight: FontWeight.w700,
+        const SizedBox(width: 8),
+        // Profit/loss column
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
+                style: AppTypography.labelMicro.copyWith(
+                  color: AppColors.inkTextSecondary,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            const SizedBox(height: 2),
-            Text(
-              '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                    color: AppColors.primaryOnDark,
-                    fontWeight: FontWeight.w800,
-                    fontSize: 18,
-                  ),
-            ),
-          ],
+              const SizedBox(height: 2),
+              Text(
+                '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: AppColors.primaryOnDark,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 15,
+                    ),
+              ),
+            ],
+          ),
         ),
       ],
     );

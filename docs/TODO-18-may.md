@@ -458,6 +458,71 @@ After Phase 22 implementation, additional color improvements needed:
 
 ---
 
+## Phase 24: Load Post Card Layout Refinements
+
+**Status:** COMPLETE (2/2 tasks done)
+**Priority:** High
+**Reason:** User feedback after Phase 23 - layout improvements for better space utilization
+
+### Overview
+
+After Phase 23 color improvements, additional layout refinements needed:
+- Add Price Type (Fixed/Per Ton) as third column in money row
+- Replace dotted route line with single arrow icon for more space
+
+### Tasks
+
+#### Task A: Add Price Type Column to Money Row
+
+- [x] Add priceAmount and priceType parameters to LoadCardDarkHeader
+- [x] Modify _MoneyRow to show 3 columns instead of 2
+- [x] For Fixed pricing: show abbreviated price (e.g., 20.5K)
+- [x] For Per Ton pricing: show full price (e.g., ₹2000)
+- [x] Use compact styling for small screens (smaller font, minimal padding)
+- [x] Test on small mobile screens (iPhone SE, etc.)
+
+**Data available:**
+- load.priceType: 'fixed' or 'per_ton'
+- load.priceAmount: double
+
+**Layout:**
+```
+Price Type | Load Value | Est Profit
+20.5K/₹2000 | ₹50K       | ₹15K
+```
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart` (pass priceAmount, priceType)
+- `lib/src/shared/widgets/load_card_dark_header.dart` (add parameters, modify _MoneyRow)
+
+#### Task B: Replace Dotted Line with Arrow Icon
+
+- [x] Replace _DashedLine widget with simple arrow icon
+- [x] Use decent-sized arrow (24-32px) with proper spacing
+- [x] Ensure arrow doesn't look disconnected between city blocks
+- [x] Test with long city names to ensure proper rendering
+
+**Current:** Horizontal dashed line with arrow at end (takes horizontal space)
+**Proposed:** Single arrow icon (more space for city names)
+
+**Files to modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart` (replace _DashedLine with arrow icon)
+
+### Implementation Notes
+
+- Added priceAmount and priceType parameters to LoadCardDarkHeader
+- Modified _MoneyRow to show 3 columns with compact styling (fontSize 15 for values, 9 for labels)
+- Price Type column shows "Fixed" or "₹/T" label with abbreviated/full price
+- Load Value and Est Profit columns use smaller font (15px instead of 18px) to fit 3 columns
+- Replaced _DashedLine and _DashedLineWithArrowPainter with simple arrow icon (Icons.arrow_forward_rounded, 24px)
+- Arrow centered in flexible space between FROM and TO blocks
+- Removed unused CustomPainter classes
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
 ## Phase 21: Load Post Card Visual Improvements
 
 **Status:** COMPLETE (5/5 tasks done)

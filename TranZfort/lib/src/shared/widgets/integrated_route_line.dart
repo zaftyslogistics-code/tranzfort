@@ -5,10 +5,10 @@ import '../../core/theme/app_typography.dart';
 
 /// Integrated route line widget for load card dark header.
 ///
-/// Renders FROM/TO text blocks with city/state and a dashed route line between them.
+/// Renders FROM/TO text blocks with city/state and a simple arrow between them.
 ///
 /// Layout:
-/// - Row: FROM block + flexible dashed line + TO block
+/// - Row: FROM block + flexible space + arrow icon + flexible space + TO block
 ///
 /// Target height: ~60px for the route row.
 class IntegratedRouteLine extends StatelessWidget {
@@ -40,10 +40,17 @@ class IntegratedRouteLine extends StatelessWidget {
               isOrigin: true,
             ),
           ),
-          // Center: dashed line (flexible, takes remaining space)
+          // Center: flexible space + arrow icon + flexible space
           Expanded(
-            child: _DashedLine(
-              color: AppColors.inkTextSecondary.withValues(alpha: 0.3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.arrow_forward_rounded,
+                  color: AppColors.inkTextSecondary.withValues(alpha: 0.4),
+                  size: 24,
+                ),
+              ],
             ),
           ),
           // Right: TO block (natural width)
@@ -117,68 +124,4 @@ class _LocationBlock extends StatelessWidget {
       ],
     );
   }
-}
-
-/// Simple dashed line widget with arrow.
-class _DashedLine extends StatelessWidget {
-  final Color color;
-
-  const _DashedLine({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(double.infinity, 2),
-      painter: _DashedLineWithArrowPainter(color: color),
-    );
-  }
-}
-
-/// Custom painter for dashed line with arrow at the end.
-class _DashedLineWithArrowPainter extends CustomPainter {
-  final Color color;
-
-  _DashedLineWithArrowPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    const dashWidth = 6.0;
-    const dashSpace = 8.0;
-    const arrowSize = 6.0;
-
-    // Draw dashed line (stop before arrow)
-    double startX = 0;
-    final lineEndX = size.width - arrowSize;
-    
-    while (startX < lineEndX) {
-      final endX = (startX + dashWidth).clamp(0.0, lineEndX);
-      canvas.drawLine(
-        Offset(startX, size.height / 2),
-        Offset(endX, size.height / 2),
-        paint,
-      );
-      startX += dashWidth + dashSpace;
-    }
-
-    // Draw arrow at the end
-    final arrowPath = Path();
-    arrowPath.moveTo(lineEndX, size.height / 2);
-    arrowPath.lineTo(lineEndX - arrowSize, size.height / 2 - arrowSize / 2);
-    arrowPath.lineTo(lineEndX - arrowSize, size.height / 2 + arrowSize / 2);
-    arrowPath.close();
-
-    final arrowPaint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-    
-    canvas.drawPath(arrowPath, arrowPaint);
-  }
-
-  @override
-  bool shouldRepaint(_DashedLineWithArrowPainter oldDelegate) => false;
 }

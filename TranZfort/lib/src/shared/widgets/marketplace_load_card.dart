@@ -105,6 +105,8 @@ class MarketplaceLoadCard extends StatelessWidget {
                 destinationState: load.destinationState ?? '',
                 totalLoadValue: totalLoadValue,
                 costEstimate: costEstimate,
+                priceAmount: load.priceAmount,
+                priceType: load.priceType,
                 onSupplierTap: onSupplierTap,
               ),
               // ── Dark Section: Load/truck details only ──
