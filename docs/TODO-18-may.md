@@ -199,11 +199,13 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 **Risk:** Low
 **Effort:** Low
 
+**Status:** ✅ COMPLETE
+
 **Tasks:**
-- [ ] Preserve Call and Chat actions
-- [ ] Increase action row height to at least 48px (AppTouchTarget.min)
-- [ ] Keep icons and labels visible
-- [ ] Ensure disabled/verification-required behavior still works through existing callbacks
+- [x] Preserve Call and Chat actions
+- [x] Increase action row height to at least 48px (AppTouchTarget.min)
+- [x] Keep icons and labels visible
+- [x] Ensure disabled/verification-required behavior still works through existing callbacks
 
 **Files:**
 - `lib/src/shared/widgets/marketplace_load_card.dart`
