@@ -34,6 +34,8 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
 - 🔄 **Phase 6:** Runtime Config & Location Services (remaining items)
 - 🔄 **Phase 7-12:** Medium/Low priority items
+- 🔄 **Phase 18:** Load Post Card UI/UX Redesign - Pending implementation
+- 🔄 **Phase 19:** Additional UI/UX Improvements (Future) - Not started
 
 **Critical Findings Fixed:**
 - F16-001: `.env` bundled as asset (Critical)
@@ -59,8 +61,15 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 2. ✅ Fix UI/UX responsiveness issues (8 findings: F17-001 to F17-008) - COMPLETE
 3. ✅ Build release APK (75.1MB) and AAB (58.5MB) with Supabase + Google credentials - READY FOR TESTING
 4. Test core user flows on device manually (Google login should now work)
-5. Continue with remaining 70 medium/low priority issues after testing
-6. Complete Phase 6.2-6.3 (large refactoring - may defer)
+5. Continue with Phase 18: Load Post Card UI/UX Redesign (6 sub-phases)
+   - 18.1: Design System Token Improvements (contrast + typography)
+   - 18.2: Card Structure Redesign (hero section)
+   - 18.3: Chip System Implementation (primary/secondary hierarchy)
+   - 18.4: Footer Actions Enhancement (touch targets)
+   - 18.5: Responsive Testing & Validation
+   - 18.6: Migration Strategy (feature flag + A/B test)
+6. Continue with Phase 19: Additional UI/UX Improvements (localization, anti-patterns, code quality)
+7. Complete Phase 6.2-6.3 (large refactoring - may defer)
 
 ---
 
@@ -97,6 +106,208 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - F17-008: GoogleSignInButton uses fixed height in auth screen (Low) - ✅ FIXED
 
 **Remaining Issues:** 70 (5 medium, 60 low, 5 informational)
+
+---
+
+## Phase 18: Load Post Card UI/UX Redesign
+
+**Status:** Pending
+**Reference:** `docs/loadpost-ui-ux.md`
+**Priority:** Medium (UX improvements, not blockers)
+
+### Overview
+Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and responsiveness based on comprehensive UI/UX analysis.
+
+### Phase 18.1: Design System Token Improvements
+
+**Priority:** High (affects entire app)
+**Risk:** Medium
+**Effort:** Low
+
+**Tasks:**
+- [ ] Improve `textMuted` / `inkTextMuted` contrast in `app_colors.dart` (fails WCAG AA)
+- [ ] Selective typography scale increase in `app_typography.dart` (Option B - controlled approach)
+  - `displayHero`: 40px → 48px (+20%)
+  - `display`: 24px → 28px (+17%)
+  - `pageTitle`: 20px → 22px (+10%)
+  - `sectionTitle`: 16px → 18px (+12%)
+  - `cardTitle`: 15px → 17px (+13%)
+  - `bodyPrimary`: 14px → 15px (+7%)
+  - `label`: 12px → 13px (+8%)
+  - `caption`/`labelMicro`: 11px → 12px (+9%)
+- [ ] Update `docs/38-ui-ux-color-typography-and-elevation-system.md` with new token values
+- [ ] Test representative screens for overflow after typography changes
+  - `marketplace_load_card.dart`
+  - `trucker_dashboard_screen.dart`
+  - `supplier_shell_dashboard_sections.dart`
+  - `chat_screen_sections.dart`
+  - `verification_wizard.dart`
+
+**Files:**
+- `lib/src/core/theme/app_colors.dart`
+- `lib/src/core/theme/app_typography.dart`
+- `docs/38-ui-ux-color-typography-and-elevation-system.md`
+
+### Phase 18.2: Card Structure Redesign
+
+**Priority:** Medium
+**Risk:** Medium
+**Effort:** High
+
+**Tasks:**
+- [ ] Replace bottom dark earnings strip with top dark route hero
+- [ ] Ensure from/to city + state are readable and always present (no micro text)
+- [ ] Move freight/financial summary into compact light/tonal area
+- [ ] Keep whole card tappable for details
+- [ ] Implement responsive hero section (38-45% card height, rounded top corners)
+
+**Files:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+- `lib/src/shared/widgets/curved_arc_route.dart` (add hero variant if needed)
+
+### Phase 18.3: Chip System Implementation
+
+**Priority:** Medium
+**Risk:** Medium
+**Effort:** High
+
+**Tasks:**
+- [ ] Create `LoadInfoChip` primitive with primary/secondary hierarchy
+  - Primary: 12-13px, 700 weight, surfaceSoft background with divider border
+  - Secondary: 12px, 600 weight, transparent or tonal bg
+  - Status/Premium: existing status padding, semantic bg
+- [ ] Create `LoadChipWrap` responsive layout
+- [ ] Add must-have chips: material, actual load weight, truck capacity range, body type
+- [ ] Add optional chips: pickup date, advance %, trucks needed/booked, compact estimate
+- [ ] Test chip wrapping at 320/360/390/430px widths
+- [ ] Ensure chip text never below 12px for decision-critical content
+
+**Files:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+- `lib/src/shared/widgets/layout_components.dart` (or new file for chip primitives)
+
+### Phase 18.4: Footer Actions Enhancement
+
+**Priority:** Low
+**Risk:** Low
+**Effort:** Low
+
+**Tasks:**
+- [ ] Preserve Call and Chat actions
+- [ ] Increase action row height to at least 48px (AppTouchTarget.min)
+- [ ] Keep icons and labels visible
+- [ ] Ensure disabled/verification-required behavior still works through existing callbacks
+
+**Files:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+### Phase 18.5: Responsive Testing & Validation
+
+**Priority:** High
+**Risk:** Medium
+**Effort:** Medium
+
+**Tasks:**
+- [ ] Test with long city names and long material/body-type labels
+- [ ] Test missing states, missing distance/duration, no advance %, no supplier avatar
+- [ ] Test profitable, loss, and no estimate states
+- [ ] Run Flutter analyze
+- [ ] Compare screenshots before/after on compact Android width (360px)
+- [ ] Test on 360px, 375px, 414px widths with LayoutBuilder breakpoints
+- [ ] Verify dark mode contrast on all new components
+- [ ] Test on actual devices (budget Android, premium Android, tablet)
+
+**Files:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+- All affected screens
+
+### Phase 18.6: Migration Strategy
+
+**Priority:** Low
+**Risk:** Low
+**Effort:** Low
+
+**Tasks:**
+- [ ] Keep existing `MarketplaceLoadCard` as `MarketplaceLoadCardLegacy`
+- [ ] Create new `MarketplaceLoadCard` with redesign
+- [ ] Add feature flag to switch between versions
+- [ ] A/B test with users before full rollout (optional)
+
+**Files:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+### Success Metrics
+
+**User Engagement:**
+- Increase in "view details" tap rate
+- Increase in call/chat initiation
+- Faster load scanning (time per card)
+
+**Business Impact:**
+- Higher conversion rate (load → booking)
+- Better load matching efficiency
+- Reduced time-to-booking
+
+**Technical Metrics:**
+- Render performance (60fps on all devices)
+- Memory usage (no regressions)
+- Accessibility score (100% on Lighthouse)
+
+---
+
+## Phase 19: Additional UI/UX Improvements (Future)
+
+**Status:** Not Started
+**Priority:** Low
+**Reference:** `docs/review-18-may.md` remaining findings
+
+### Tasks
+
+**Localization (14 findings):**
+- [ ] F1-003: Onboarding hardcoded English strings → localize
+- [ ] F2-006, F3-006, F4-010, F5-003, F5-004, F9-005, F9-006: Hardcoded English/error-code localization
+- [ ] F3-004, F3-005, F4-002, F5-001, F5-002, F8-001: Error code TODOs → implement or remove
+- [ ] F5-008: Hardcoded English message preview labels → localize
+- [ ] F8-003: Review.timeAgo hardcoded English time units → localize
+
+**Anti-patterns (4 findings):**
+- [ ] F2-004, F3-010, F4-009: Controllers store Ref dependencies via closures → refactor
+- [ ] F5-006: Custom StreamDebounce → use RxDart
+- [ ] F5-009: Complex message merging logic → add documentation
+
+**Code Quality (42 findings):**
+- [ ] F1-002: EmailPasswordAuthScreen duplicate validation logic → consolidate
+- [ ] F2-008, F3-008, F4-004, F7-003: Raw HttpClient usage → review (properly injected)
+- [ ] F2-009: SupplierTripActionController manual optimistic updates → document
+- [ ] F3-003, F3-005: Trucker controllers error code TODOs → implement or remove
+- [ ] F3-012, F3-013: TruckerFleetController hardcoded validation → refactor
+- [ ] F3-015: TruckerFleetController hardcoded English error messages → localize
+- [ ] F4-006: VerificationRepository substring for last4 → add validation
+- [ ] F4-008: DocumentUrlService direct Supabase.client usage → use provider
+- [ ] F4-011: VerificationDocumentUploadService dart:ui decodeImageFromList → use package
+- [ ] F4-012: VerificationLocationService custom exception classes → standardize
+- [ ] F5-005: ChatRepositoryBackend List/String response formats → unify
+- [ ] F5-010: VoiceMessageService custom UUID generation → use package
+- [ ] F5-011: VoiceMessageService hardcoded audio config → move to config
+- [ ] F5-012: ConversationMessagesController error debounce timer → document
+- [ ] F9-001: Notification settings screen commented out → implement or remove
+- [ ] F9-002: TTS settings SharedPreferences direct usage → use provider
+- [ ] F9-003: Shell settings screen invalidates authStateProvider on language change → fix
+- [ ] F7-001: Duplicate location service implementations → consolidate
+- [ ] F2-008, F3-008, F4-004, F7-003: Raw HttpClient → review (already properly injected)
+
+---
+
+## Phase 6.2-6.3: Large Refactoring Tasks (Deferred)
+
+**Status:** Deferred
+**Priority:** Low
+**Reason:** Large refactoring, may defer to future iteration
+
+**Tasks:**
+- [ ] Extract shared location service module (F7-001)
+- [ ] Refactor controllers to avoid Ref closure anti-patterns (F2-004, F3-010, F4-009)
+- [ ] Replace raw HttpClient with proper HTTP package (F2-008, F3-008, F4-004, F7-003)
 
 ---
 
