@@ -9,6 +9,7 @@ import '../../features/trucker/data/trip_costing_service.dart';
 import '../../features/trucker/data/trucker_marketplace_repository.dart';
 import 'avatar_widget.dart';
 import 'curved_arc_route.dart';
+import 'layout_components.dart';
 import 'status_components.dart';
 
 // AppRadius is defined in app_spacing.dart
@@ -162,27 +163,31 @@ class MarketplaceLoadCard extends StatelessWidget {
                   16,
                   8,
                 ),
-                child: Wrap(
+                child: LoadChipWrap(
                   spacing: AppSpacing.xs,
                   runSpacing: AppSpacing.xs,
-                  children: [
-                    _CompactChip(
+                  chips: [
+                    LoadInfoChip(
                       icon: Icons.inventory_2_outlined,
                       label: load.material,
+                      level: LoadChipLevel.primary,
                     ),
-                    _CompactChip(
+                    LoadInfoChip(
                       icon: Icons.scale_outlined,
                       label: weightLabel,
+                      level: LoadChipLevel.primary,
                     ),
-                    _CompactChip(
+                    LoadInfoChip(
                       icon: Icons.local_shipping_outlined,
                       label: _localizedBodyType(l10n, load.requiredBodyType),
+                      level: LoadChipLevel.primary,
                     ),
                     if (load.advancePercentage > 0)
-                      _CompactChip(
+                      LoadInfoChip(
                         icon: Icons.account_balance_wallet_outlined,
                         label: '${load.advancePercentage}% adv',
-                        accent: AppColors.info,
+                        level: LoadChipLevel.secondary,
+                        accentColor: AppColors.info,
                       ),
                   ],
                 ),
@@ -461,46 +466,6 @@ class MarketplaceLoadCard extends StatelessWidget {
       return l10n.truckerFindLoadsAnyBodyFallback;
     }
     return l10n.truckerFindLoadsBodyTypeValue(normalized.toLowerCase());
-  }
-}
-
-/// Compact pill chip used in marketplace card meta row.
-class _CompactChip extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color? accent;
-
-  const _CompactChip({
-    required this.icon,
-    required this.label,
-    this.accent,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final fg = accent ?? AppColors.textSecondary;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: AppColors.surfaceSoft,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(color: AppColors.divider, width: 0.5),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 12, color: fg),
-          const SizedBox(width: 4),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                  color: fg,
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-        ],
-      ),
-    );
   }
 }
 
