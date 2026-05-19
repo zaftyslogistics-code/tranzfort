@@ -428,7 +428,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeDurationMinutes: state.routePreview?.durationMinutes,
       routePolyline: null,
       routeSnapshotSource: state.routePreview?.source,
-      material: state.material == 'Other' ? state.customMaterial.trim() : state.material,
+      material: state.material == 'other' ? state.customMaterial.trim() : state.material,
       weightTonnes: double.parse(state.weightTonnes.trim()),
       requiredBodyType: state.bodyType == 'Any' ? null : state.bodyType,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),

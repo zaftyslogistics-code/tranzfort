@@ -104,6 +104,18 @@ abstract class AppLocalizations {
   /// **'TranZfort'**
   String get appTitle;
 
+  /// No description provided for @commonFromLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'FROM'**
+  String get commonFromLabel;
+
+  /// No description provided for @commonToLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TO'**
+  String get commonToLabel;
+
   /// No description provided for @authGoogleFailureMessage.
   ///
   /// In en, this message translates to:

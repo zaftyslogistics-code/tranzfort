@@ -1,8 +1,10 @@
 {
   "@@locale": "en",
-  "@_sectionCommon": "â•â•â• Common & App â•â•â•",
+  "@_sectionCommon": "═══ Common & App ═══",
   "appTitle": "TranZfort",
-  "@_sectionSplash": "â•â•â• Splash & Device Setup â•â•â•",
+  "commonFromLabel": "FROM",
+  "commonToLabel": "TO",
+  "@_sectionSplash": "═══ Splash & Device Setup ═══",
   "@_sectionAuth": "â•â•â• Auth â•â•â•",
   "authGoogleFailureMessage": "We could not continue with Google right now. Retry shortly or use email sign-in instead.",
   "authWelcomeTitle": "Welcome to TranZfort",

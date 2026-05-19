@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_typography.dart';
+import '../../l10n/app_localizations.dart';
 
 /// Integrated route line widget for load card dark header.
 ///
@@ -27,6 +28,8 @@ class IntegratedRouteLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    
     return SizedBox(
       height: 60,
       child: Row(
@@ -34,7 +37,7 @@ class IntegratedRouteLine extends StatelessWidget {
           // Left: FROM block (natural width)
           IntrinsicWidth(
             child: _LocationBlock(
-              label: 'FROM',
+              label: l10n.commonFromLabel,
               city: originCity,
               state: originState,
               isOrigin: true,
@@ -56,7 +59,7 @@ class IntegratedRouteLine extends StatelessWidget {
           // Right: TO block (natural width)
           IntrinsicWidth(
             child: _LocationBlock(
-              label: 'TO',
+              label: l10n.commonToLabel,
               city: destinationCity,
               state: destinationState,
               isOrigin: false,

@@ -36,6 +36,7 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 - ✅ **Phase 24:** Load Post Card Layout Refinements - Added Price Type column, replaced dotted line with arrow icon, wrapped money row in teal container
 - ✅ **Phase 25:** Localization Gap Fix - Added 20 missing Hindi translations to app_hi.arb
 - ✅ **Phase 26:** Load Post Card Brand Gradient - Applied teal-orange gradient to money row for brand consistency
+- ✅ **Phase 27:** Load Card Critical Bug Fixes - Fixed muted text readability, FROM/TO localization, and material case sensitivity bug
 
 **In Progress:**
 - 🔄 **Phase 2:** Regression Tests - Requires integration test environment
@@ -631,6 +632,57 @@ The "Find Loads" button in Trucker Dashboard uses the brand teal-orange gradient
 - Labels remain in inkTextSecondary (muted white) for hierarchy
 - Creates visual hierarchy: gradient money row → teal chips → light text
 - Matches "Find Loads" CTA button style for brand consistency
+
+**APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
+**Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID
+
+---
+
+## Phase 27: Load Card Critical Bug Fixes
+
+**Status:** COMPLETE (1/1 tasks done)
+**Priority:** High
+**Reason:** User-reported issues affecting usability and data accuracy
+
+### Overview
+
+Three critical issues identified by user:
+1. Muted text in money row unreadable on gradient background
+2. FROM/TO labels not localized (hardcoded in English)
+3. Load material shows "Other" instead of custom material value
+
+### Tasks
+
+#### Task A: Fix All Three Issues
+
+- [x] Change muted text colors from inkTextSecondary to white with alpha 0.8
+- [x] Add commonFromLabel and commonToLabel localization keys
+- [x] Update IntegratedRouteLine to use localized FROM/TO labels
+- [x] Fix material case sensitivity bug in post_load_provider (Other vs other)
+- [x] Regenerate localization files
+- [x] Verify no analyzer errors
+
+**Issue 1 - Muted Text:**
+- Changed all label colors in money row from AppColors.inkTextSecondary to Colors.white.withValues(alpha: 0.8)
+- Improves readability on teal-orange gradient background
+
+**Issue 2 - FROM/TO Localization:**
+- Added commonFromLabel and commonToLabel to app_en.arb ("FROM", "TO")
+- Added Hindi translations to app_hi.arb ("से", "तक")
+- Updated IntegratedRouteLine to use l10n.commonFromLabel and l10n.commonToLabel
+
+**Issue 3 - Material Bug:**
+- Root cause: Case sensitivity mismatch in post_load_provider.dart line 431
+- Was checking state.material == 'Other' (capital O) but material list uses 'other' (lowercase)
+- Changed to state.material == 'other' to match the actual value in postLoadMaterials list
+- This caused custom material to never be saved, always saving "other" instead
+
+**Files modified:**
+- `lib/src/shared/widgets/load_card_dark_header.dart` (text colors)
+- `lib/src/shared/widgets/integrated_route_line.dart` (localization)
+- `lib/l10n/app_en.arb` (FROM/TO keys)
+- `lib/l10n/app_hi.arb` (FROM/TO Hindi translations)
+- `lib/src/features/supplier/providers/post_load_provider.dart` (material bug fix)
 
 **APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
 **Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID

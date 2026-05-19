@@ -304,7 +304,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   priceLabel,
                   style: AppTypography.labelMicro.copyWith(
-                    color: AppColors.inkTextSecondary,
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
                   ),
@@ -331,7 +331,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   l10n.marketplaceLoadValue,
                   style: AppTypography.labelMicro.copyWith(
-                    color: AppColors.inkTextSecondary,
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 9,
                   ),
                 ),
@@ -357,7 +357,7 @@ class _MoneyRow extends StatelessWidget {
                 Text(
                   costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
                   style: AppTypography.labelMicro.copyWith(
-                    color: AppColors.inkTextSecondary,
+                    color: Colors.white.withValues(alpha: 0.8),
                     fontSize: 9,
                     fontWeight: FontWeight.w700,
                   ),

@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
+  String get commonFromLabel => 'FROM';
+
+  @override
+  String get commonToLabel => 'TO';
+
+  @override
   String get authGoogleFailureMessage =>
       'We could not continue with Google right now. Retry shortly or use email sign-in instead.';
 

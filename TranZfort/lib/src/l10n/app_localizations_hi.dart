@@ -12,6 +12,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
+  String get commonFromLabel => 'से';
+
+  @override
+  String get commonToLabel => 'तक';
+
+  @override
   String get authGoogleFailureMessage =>
       'अभी Google से continue नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या उसकी जगह email sign-in इस्तेमाल करें।';
 

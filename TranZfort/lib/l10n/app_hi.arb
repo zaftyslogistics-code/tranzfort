@@ -3,6 +3,8 @@
 
   "@_sectionCommon": "═══ Common & App ═══",
   "appTitle": "TranZfort",
+  "commonFromLabel": "से",
+  "commonToLabel": "तक",
 
   "@_sectionSplash": "═══ Splash & Device Setup ═══",
   "@_sectionAuth": "═══ Auth ═══",
