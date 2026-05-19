@@ -270,28 +270,24 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 
 ---
 
-## Phase 19: Additional UI/UX Improvements (Future)
+## Phase 19: Additional UI/UX Improvements
 
-**Status:** Not Started
+**Status:** In Progress (4/60 tasks done)
 **Priority:** Low
 **Reference:** `docs/review-18-may.md` remaining findings
 
 ### Tasks
 
 **Localization (14 findings):**
-- [ ] F1-003: Onboarding hardcoded English strings → localize
+- [x] F1-001, F1-002: Hardcoded English strings in discard dialogs → localized
+- [x] F1-010, F1-011: Hardcoded English strings/colors in location section → localized
 - [ ] F2-006, F3-006, F4-010, F5-003, F5-004, F9-005, F9-006: Hardcoded English/error-code localization
 - [ ] F3-004, F3-005, F4-002, F5-001, F5-002, F8-001: Error code TODOs → implement or remove
 - [ ] F5-008: Hardcoded English message preview labels → localize
 - [ ] F8-003: Review.timeAgo hardcoded English time units → localize
 
-**Anti-patterns (4 findings):**
-- [ ] F2-004, F3-010, F4-009: Controllers store Ref dependencies via closures → refactor
-- [ ] F5-006: Custom StreamDebounce → use RxDart
-- [ ] F5-009: Complex message merging logic → add documentation
-
 **Code Quality (42 findings):**
-- [ ] F1-002: EmailPasswordAuthScreen duplicate validation logic → consolidate
+- [x] F1-003, F1-004: Inconsistent email/password validation → fixed with Validators
 - [ ] F2-008, F3-008, F4-004, F7-003: Raw HttpClient usage → review (properly injected)
 - [ ] F2-009: SupplierTripActionController manual optimistic updates → document
 - [ ] F3-003, F3-005: Trucker controllers error code TODOs → implement or remove
@@ -310,6 +306,11 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 - [ ] F9-003: Shell settings screen invalidates authStateProvider on language change → fix
 - [ ] F7-001: Duplicate location service implementations → consolidate
 - [ ] F2-008, F3-008, F4-004, F7-003: Raw HttpClient → review (already properly injected)
+
+**Anti-patterns (4 findings):**
+- [ ] F2-004, F3-010, F4-009: Controllers store Ref dependencies via closures → refactor
+- [ ] F5-006: Custom StreamDebounce → use RxDart
+- [ ] F5-009: Complex message merging logic → add documentation
 
 ---
 
