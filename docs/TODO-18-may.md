@@ -60,16 +60,14 @@ Every task below must include the relevant `review-18-may.md` finding ID in the 
 1. ✅ APK build successful after PC restart - file lock resolved
 2. ✅ Fix UI/UX responsiveness issues (8 findings: F17-001 to F17-008) - COMPLETE
 3. ✅ Build release APK (75.1MB) and AAB (58.5MB) with Supabase + Google credentials - READY FOR TESTING
-4. ✅ Phase 18: Load Post Card UI/UX Redesign (6/6 phases) - COMPLETE
-   - 18.1: Design System Token Improvements (contrast + typography)
-   - 18.2: Card Structure Redesign (dark route hero)
-   - 18.3: Chip System Implementation (primary/secondary hierarchy)
-   - 18.4: Footer Actions Enhancement (touch targets)
-   - 18.5: Responsive Testing & Validation (manual testing in progress)
-   - 18.6: Migration Strategy (complete - new design shipped)
+4. ⚠️ Phase 18: Load Post Card UI/UX Redesign - NEEDS REVISION
+   - User feedback: Previous dark route hero implementation too heavy
+   - New direction: Integrated Dark Header Route Card (see loadpost-ui-ux.md lines 892-1181)
+   - See Phase 20 for revised implementation tasks
 5. 🔄 Phase 18.5: Responsive Testing & Validation (manual testing in progress)
-6. Continue with Phase 19: Additional UI/UX Improvements (localization, anti-patterns, code quality)
-7. Complete Phase 6.2-6.3 (large refactoring - may defer)
+6. 🔄 Phase 19: Additional UI/UX Improvements (localization, anti-patterns, code quality) - 4/60 tasks done
+7. 🔄 Phase 20: Revised Load Post Card Implementation (NEW - based on user feedback)
+8. Complete Phase 6.2-6.3 (large refactoring - may defer)
 
 ---
 
@@ -311,6 +309,164 @@ Redesign the `MarketplaceLoadCard` to improve readability, visual hierarchy, and
 - [ ] F2-004, F3-010, F4-009: Controllers store Ref dependencies via closures → refactor
 - [ ] F5-006: Custom StreamDebounce → use RxDart
 - [ ] F5-009: Complex message merging logic → add documentation
+
+---
+
+## Phase 20: Revised Load Post Card Implementation
+
+**Status:** Not Started
+**Priority:** High
+**Reference:** `docs/loadpost-ui-ux.md` lines 892-1181 (Chief Designer Revision)
+**Reason:** User feedback - previous dark route hero implementation too heavy
+
+### Overview
+
+The previous Phase 18 implementation used `CurvedArcRoute.hero` which was too tall (128px + padding = ~156px) and made the card feel heavy. The new direction is an **Integrated Dark Header Route Card** that:
+
+- Merges route, distance/time into one compact visual row inside a dark header
+- Moves supplier identity and financial summary into the dark header
+- Keeps the light body for load/truck details only
+- Reduces overall card height by 25-35%
+- Maintains premium logistics feel without oversized illustration
+
+### New Card Architecture
+
+The load card will have two main zones:
+
+1. **Dark Header (150-170px max):** supplier identity, status, integrated route, distance/time, load value, estimated profit
+2. **Light Body:** truck/load details, pickup/advance/truck count, bottom Call and Chat actions
+
+### Tasks
+
+#### Task A: Replace Current Hero Usage With Integrated Header
+
+- [ ] Replace `CurvedArcRoute.hero` in `MarketplaceLoadCard` with new `_LoadCardDarkHeader` widget
+- [ ] `_LoadCardDarkHeader` should own supplier/status, integrated route, and money row
+- [ ] Remove duplicate supplier and money rows from light body
+- [ ] Keep existing card body for details/actions
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task B: Create Integrated Route Widget
+
+- [ ] Create new `_IntegratedRouteLine` widget
+- [ ] Inputs: originCity, originState, destinationCity, destinationState, distanceLabel, durationLabel
+- [ ] Render FROM/TO text blocks with city/state
+- [ ] Render dashed route line between them
+- [ ] Render center distance/time capsule inside the line
+- [ ] Avoid large vertical blank space
+- [ ] Target height: 70-78px for route row
+- [ ] Preferred implementation: Row-based with small custom dashed-line widgets on both sides of capsule
+- [ ] Alternative: CustomPainter, but constrain total height to 70-78px
+
+**Files to create/modify:**
+- `lib/src/shared/widgets/integrated_route_line.dart` (new)
+- `lib/src/shared/widgets/curved_arc_route.dart` (if reusing parts)
+
+#### Task C: Move Supplier Row Into Header
+
+- [ ] Move supplier avatar/name/status from light body into dark header
+- [ ] Remove supplier/status row from light body
+- [ ] Dark header supplier styling:
+  - Avatar radius: 14-16
+  - Supplier name color: `AppColors.inkTextPrimary`
+  - Age color: `AppColors.inkTextSecondary`
+  - Status badge must pass contrast on dark background
+- [ ] Supplier identity remains only image + name (no rating, city, verification details)
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task D: Move Money Row Into Header
+
+- [ ] Remove large `surfaceSoft` financial summary container from light body
+- [ ] Add compact load value/profit row in dark header
+- [ ] Load value amount: 18-20px, FontWeight.w800, `AppColors.primaryOnDark` or `inkTextPrimary`
+- [ ] Profit pill: success tonal border, compact height 30-34px
+- [ ] Loss pill: error tonal border
+- [ ] This should make light body start directly with load/truck details
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task E: Rebalance Light Body Chips
+
+- [ ] Make primary chips compact enough to fit 3-4 facts without looking like large buttons
+- [ ] Make secondary facts inline and quieter
+- [ ] Target sizes:
+  - Primary pill height: 32-36px
+  - Secondary meta height: 26-30px
+  - Icon size: 14-16px
+  - Text size: 12-13px
+- [ ] Primary pills: Material, Load 28T, Truck 28-42T, Any body
+- [ ] Secondary inline facts: Pickup date, Advance %, Trucks booked/needed
+- [ ] If four pills are too much, combine load and truck capacity as `28T · 28-42T`
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+- `lib/src/shared/widgets/layout_components.dart` (LoadInfoChip, LoadChipWrap)
+
+#### Task F: Update Validation Screenshots
+
+- [ ] Take screenshots at: 320px, 360px, 390px, 430px widths
+- [ ] Acceptance criteria:
+  - Header feels premium but not oversized
+  - Route, distance, and duration read as one connected visual element
+  - Supplier avatar/name and active badge are visible in header
+  - Load value and profit are visible without creating second card inside card
+  - Light body is reserved for load/truck details only
+  - Overall card height is meaningfully shorter than current screenshot
+- [ ] Build APK for manual testing after implementation
+
+#### Task G: Reduce Outer Border Strength
+
+- [ ] Change border from teal to `AppColors.divider` or primary color at lower opacity
+- [ ] Suggested border: `AppColors.divider` width 0.75
+- [ ] Keep shadow very subtle
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+#### Task H: Fix Weight Label Semantics
+
+- [ ] Make label explicit but compact:
+  - `Load 28T` for actual load weight
+  - `Truck 28-42T` for derived capacity if shown separately
+- [ ] If only 3 primary pills allowed:
+  - Use `28T · 28-42T` only if it remains readable
+  - Otherwise prefer actual load weight on card and capacity in detail page
+
+**Files to modify:**
+- `lib/src/shared/widgets/marketplace_load_card.dart`
+
+### Header Height Target
+
+| Row | Target Height |
+|-----|---------------|
+| Supplier/status row | 34-40px |
+| Route row | 70-78px |
+| Money row | 34-42px |
+| **Total** | **150-170px max** |
+
+### Design Tokens
+
+**Background:**
+- Dark header: `AppColors.inkSurface` to `AppColors.inkMid` gradient
+- Light body: `AppColors.surfaceBase`
+
+**Typography:**
+- Route cities: 17-20px bold (depending on width)
+- Route states: 12-13px readable
+- FROM/TO labels: 10-11px uppercase
+- Load value: 18-20px, FontWeight.w800
+- Profit/loss: 12-13px, FontWeight.w700
+
+**Colors:**
+- Center capsule: `AppColors.inkMid` with teal border/glow
+- Profit pill: success tonal border
+- Loss pill: error tonal border
+- Border: `AppColors.divider` width 0.75
 
 ---
 
