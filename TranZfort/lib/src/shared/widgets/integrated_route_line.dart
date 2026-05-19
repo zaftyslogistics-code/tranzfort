@@ -47,7 +47,7 @@ class IntegratedRouteLine extends StatelessWidget {
               children: [
                 Icon(
                   Icons.arrow_forward_rounded,
-                  color: AppColors.inkTextSecondary.withValues(alpha: 0.4),
+                  color: AppColors.inkTextPrimary.withValues(alpha: 0.6),
                   size: 24,
                 ),
               ],

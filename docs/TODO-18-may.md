@@ -460,7 +460,7 @@ After Phase 22 implementation, additional color improvements needed:
 
 ## Phase 24: Load Post Card Layout Refinements
 
-**Status:** COMPLETE (2/2 tasks done)
+**Status:** COMPLETE (3/3 tasks done)
 **Priority:** High
 **Reason:** User feedback after Phase 23 - layout improvements for better space utilization
 
@@ -508,15 +508,39 @@ Price Type | Load Value | Est Profit
 **Files to modify:**
 - `lib/src/shared/widgets/integrated_route_line.dart` (replace _DashedLine with arrow icon)
 
+#### Task C: Wrap Money Row in Teal Container
+
+- [x] Wrap all 3 columns (Price, Load Value, Est Profit) in single teal container
+- [x] Use same teal styling as LoadInfoChip (primary.withValues(alpha: 0.2) background, primary.withValues(alpha: 0.4) border)
+- [x] Increase font size by 20% for all 3 values (15px -> 18px)
+- [x] Change arrow color to lighter (inkTextPrimary.withValues(alpha: 0.6))
+- [x] Ensure responsive layout with Expanded widgets
+
+**Layout:**
+```
+┌─────────────────────────────────────────┐
+│ Fixed/₹/T  | Load Value | Est Profit   │
+│ 20.5K/₹2000 |   ₹50K     |   ₹15K       │
+└─────────────────────────────────────────┘
+```
+
+**Files to modify:**
+- `lib/src/shared/widgets/load_card_dark_header.dart` (wrap _MoneyRow in Container)
+- `lib/src/shared/widgets/integrated_route_line.dart` (update arrow color)
+
 ### Implementation Notes
 
 - Added priceAmount and priceType parameters to LoadCardDarkHeader
-- Modified _MoneyRow to show 3 columns with compact styling (fontSize 15 for values, 9 for labels)
+- Modified _MoneyRow to show 3 columns with compact styling (fontSize 18 for values, 9 for labels)
 - Price Type column shows "Fixed" or "₹/T" label with abbreviated/full price
-- Load Value and Est Profit columns use smaller font (15px instead of 18px) to fit 3 columns
+- Load Value and Est Profit columns use fontSize 18 (increased from 15 to 18 for better readability)
+- Wrapped all 3 columns in single teal container (same styling as LoadInfoChip)
+- Teal container: primary.withValues(alpha: 0.2) background, primary.withValues(alpha: 0.4) border
 - Replaced _DashedLine and _DashedLineWithArrowPainter with simple arrow icon (Icons.arrow_forward_rounded, 24px)
+- Arrow color: inkTextPrimary.withValues(alpha: 0.6) (lighter for better visibility)
 - Arrow centered in flexible space between FROM and TO blocks
 - Removed unused CustomPainter classes
+- Responsive layout using Expanded widgets for equal distribution
 
 **APK Built:** `TranZfort\build\app\outputs\flutter-apk\app-release.apk` (75.1MB)
 **Includes:** Supabase URL/Key, Google Maps API Key, Google Web Client ID

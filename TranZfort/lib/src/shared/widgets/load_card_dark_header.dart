@@ -283,88 +283,99 @@ class _MoneyRow extends StatelessWidget {
         : LoadCardDarkHeader._formatAmount(priceAmount);
     final priceLabel = isPerTon ? '₹/T' : 'Fixed';
 
-    return Row(
-      children: [
-        // Price type column
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                priceLabel,
-                style: AppTypography.labelMicro.copyWith(
-                  color: AppColors.inkTextSecondary,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                priceDisplay,
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: AppColors.primaryOnDark,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                    ),
-              ),
-            ],
-          ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppColors.primary.withValues(alpha: 0.2),
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.4),
+          width: 1,
         ),
-        const SizedBox(width: 8),
-        // Load value column
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                l10n.marketplaceLoadValue,
-                style: AppTypography.labelMicro.copyWith(
-                  color: AppColors.inkTextSecondary,
-                  fontSize: 9,
+      ),
+      child: Row(
+        children: [
+          // Price type column
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  priceLabel,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.inkTextSecondary,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                '₹${LoadCardDarkHeader._formatAmount(totalLoadValue)}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: AppColors.primaryOnDark,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                    ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(width: 8),
-        // Profit/loss column
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
-                style: AppTypography.labelMicro.copyWith(
-                  color: AppColors.inkTextSecondary,
-                  fontSize: 9,
-                  fontWeight: FontWeight.w700,
+                const SizedBox(height: 2),
+                Text(
+                  priceDisplay,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.primaryOnDark,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                      ),
                 ),
-              ),
-              const SizedBox(height: 2),
-              Text(
-                '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
-                style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: AppColors.primaryOnDark,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 15,
-                    ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      ],
+          const SizedBox(width: 8),
+          // Load value column
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  l10n.marketplaceLoadValue,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.inkTextSecondary,
+                    fontSize: 9,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '₹${LoadCardDarkHeader._formatAmount(totalLoadValue)}',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.primaryOnDark,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                      ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(width: 8),
+          // Profit/loss column
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  costEstimate.isProfitable ? l10n.marketplaceEstProfit : l10n.marketplaceEstLoss,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.inkTextSecondary,
+                    fontSize: 9,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Text(
+                  '₹${LoadCardDarkHeader._formatAmount(costEstimate.netProfit.abs())}',
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.primaryOnDark,
+                        fontWeight: FontWeight.w800,
+                        fontSize: 18,
+                      ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
