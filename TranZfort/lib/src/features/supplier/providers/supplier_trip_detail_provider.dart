@@ -47,10 +47,13 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
   }
 
   Future<void> load() async {
+    print('🔍 [SupplierTripDetailController] load() called for tripId: $_tripId');
     state = state.copyWith(isLoading: true, clearFailure: true);
     final result = await _repository.fetchTripDetail(_tripId);
+    print('   Result type: ${result.runtimeType}');
     result.when(
       success: (detail) {
+        print('   ✅ Load successful, detail: ${detail != null}');
         state = state.copyWith(
           detail: detail,
           isLoading: false,
@@ -58,6 +61,9 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
         );
       },
       failure: (failure) {
+        print('   ❌ Load failed: $failure');
+        print('   Failure type: ${failure.runtimeType}');
+        print('   Failure message: ${failure.toString()}');
         state = state.copyWith(
           isLoading: false,
           failure: failure,

@@ -165,17 +165,35 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
     required String supplierId,
     required String tripId,
   }) async {
+    print('🔍 [SupabaseSupplierTripsBackend] fetchTripDetailConsolidated() called');
+    print('   supplierId: $supplierId');
+    print('   tripId: $tripId');
+    
     if (_client == null) {
+      print('   ❌ Client is null, throwing AuthException');
       throw const AuthException('Session unavailable');
     }
 
-    return _client.rpc(
-      'get_supplier_trip_detail',
-      params: <String, dynamic>{
-        'p_trip_id': tripId,
-        'p_supplier_id': supplierId,
-      },
-    ) as Map<String, dynamic>?;
+    try {
+      print('   Calling RPC get_supplier_trip_detail...');
+      final response = await _client.rpc(
+        'get_supplier_trip_detail',
+        params: <String, dynamic>{
+          'p_trip_id': tripId,
+          'p_supplier_id': supplierId,
+        },
+      ) as Map<String, dynamic>?;
+      print('   RPC response: ${response != null}');
+      if (response != null) {
+        print('   Response keys: ${response.keys.toList()}');
+      }
+      return response;
+    } catch (error, stackTrace) {
+      print('   ❌ RPC call failed: $error');
+      print('   Error type: ${error.runtimeType}');
+      print('   Stack trace: $stackTrace');
+      rethrow;
+    }
   }
 
   @override
