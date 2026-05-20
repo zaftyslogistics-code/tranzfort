@@ -22,8 +22,8 @@ class LoadInfoChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fg = accentColor ?? (level == LoadChipLevel.primary
-        ? AppColors.textPrimary
-        : AppColors.textSecondary);
+        ? AppColors.inkTextPrimary
+        : AppColors.inkTextSecondary);
 
     return Container(
       padding: level == LoadChipLevel.primary

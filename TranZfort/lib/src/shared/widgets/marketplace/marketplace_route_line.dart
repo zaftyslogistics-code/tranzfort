@@ -50,7 +50,7 @@ class MarketplaceRouteLine extends StatelessWidget {
               children: [
                 Icon(
                   Icons.arrow_forward_rounded,
-                  color: AppColors.textPrimary.withValues(alpha: 0.6),
+                  color: AppColors.inkTextPrimary.withValues(alpha: 0.6),
                   size: 24,
                 ),
               ],
@@ -95,7 +95,7 @@ class _LocationBlock extends StatelessWidget {
         Text(
           label,
           style: AppTypography.labelMicro.copyWith(
-            color: AppColors.textSecondary,
+            color: AppColors.inkTextSecondary,
             fontSize: 10,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
@@ -108,7 +108,7 @@ class _LocationBlock extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: AppColors.textPrimary,
+                color: AppColors.inkTextPrimary,
                 fontWeight: FontWeight.w700,
                 fontSize: 17,
               ),
@@ -120,7 +120,7 @@ class _LocationBlock extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: AppTypography.bodySecondary.copyWith(
-                color: AppColors.textSecondary,
+                color: AppColors.inkTextSecondary,
                 fontSize: 12,
               ),
         ),

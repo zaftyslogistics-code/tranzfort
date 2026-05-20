@@ -162,7 +162,7 @@ class _SupplierStatusRow extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppColors.textPrimary,
+                      color: AppColors.inkTextPrimary,
                       fontWeight: FontWeight.w700,
                       fontSize: 17, // Increased from 14 (20% bigger)
                     ),
@@ -177,7 +177,7 @@ class _SupplierStatusRow extends StatelessWidget {
                     Text(
                       age!,
                       style: AppTypography.labelMicro.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColors.inkTextSecondary,
                         fontSize: 11,
                       ),
                     ),
@@ -218,7 +218,7 @@ class _CompactStatusChip extends StatelessWidget {
       child: Text(
         label,
         style: AppTypography.labelMicro.copyWith(
-          color: AppColors.textPrimary,
+          color: AppColors.inkTextPrimary,
           fontSize: 10,
           fontWeight: FontWeight.w700,
         ),

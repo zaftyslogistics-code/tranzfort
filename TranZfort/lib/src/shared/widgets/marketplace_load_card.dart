@@ -187,14 +187,14 @@ class MarketplaceLoadCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.phone_outlined,
-                                color: AppColors.textPrimary,
+                                color: AppColors.inkTextPrimary,
                                 size: 20,
                               ),
                               const SizedBox(width: AppSpacing.sm),
                               Text(
                                 l10n.commonCallAction,
                                 style: TextStyle(
-                                  color: AppColors.textPrimary,
+                                  color: AppColors.inkTextPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -220,14 +220,14 @@ class MarketplaceLoadCard extends StatelessWidget {
                             children: [
                               Icon(
                                 Icons.info_outline,
-                                color: AppColors.textPrimary,
+                                color: AppColors.inkTextPrimary,
                                 size: 20,
                               ),
                               const SizedBox(width: AppSpacing.sm),
                               Text(
                                 l10n.commonViewDetailsAction,
                                 style: TextStyle(
-                                  color: AppColors.textPrimary,
+                                  color: AppColors.inkTextPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -254,7 +254,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                               Text(
                                 l10n.commonChatLabel,
                                 style: TextStyle(
-                                  color: AppColors.textPrimary,
+                                  color: AppColors.inkTextPrimary,
                                   fontWeight: FontWeight.w600,
                                   fontSize: 14,
                                 ),
@@ -262,7 +262,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                               const SizedBox(width: AppSpacing.sm),
                               Icon(
                                 Icons.chat_bubble_outline,
-                                color: AppColors.textPrimary,
+                                color: AppColors.inkTextPrimary,
                                 size: 20,
                               ),
                             ],
@@ -349,13 +349,13 @@ class _InlineMetaItem extends StatelessWidget {
         Icon(
           icon,
           size: 14,
-          color: accentColor ?? AppColors.textSecondary,
+          color: accentColor ?? AppColors.inkTextSecondary,
         ),
         const SizedBox(width: 4),
         Text(
           label,
           style: AppTypography.label.copyWith(
-            color: accentColor ?? AppColors.textSecondary,
+            color: accentColor ?? AppColors.inkTextSecondary,
             fontSize: 12,
           ),
         ),
