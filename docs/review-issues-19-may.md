@@ -1065,9 +1065,212 @@ git checkout backup-before-merge
 
 ---
 
-**Document Version:** 11.0
-**Last Updated:** May 20, 2026 (Evening Session - All Issues Resolved)
-**Author:** Cascade AI Assistant
+## Supplier Trip Detail Flicker Fix — May 20, 2026 (Final Session)
 
-**Summary:**
-All 3 problematic pages (Trucker Trips, Supplier My Loads, Supplier Trips) are now working. The blank screen issue was resolved by using screen files from the feature branch with RPC backend files. The "pod_uploaded" enum error was fixed by filtering it from supplier trips stages. Supplier trip detail RPC is now working correctly for notification clicks.
+**Date:** May 20, 2026
+**Time:** 5:00pm - 6:30pm UTC+05:30
+**Status:** ✅ RESOLVED - Main branch working, Play-store-readiness needs safe integration
+
+### Background
+
+After resolving the blank screen issues, user reported a new issue: "Unable to load supplier trip detail" flicker on the supplier trip detail page. The page would show a loading state, then flicker between loading and error states rapidly.
+
+### Investigation
+
+**Root Cause Identified:**
+1. **Missing await on RPC call** in `supplier_trip_repository_backend.dart`
+   - Line 172: `_client.rpc()` was called without `await`
+   - This caused the method to return `PostgrestFilterBuilder` instead of the actual data
+   - The backend tried to cast the builder as `Map<String, dynamic>?` which failed
+
+2. **No minimum loading duration**
+   - Provider would immediately transition from loading to failure/success
+   - This caused a visible flicker as the UI rapidly changed states
+
+### Fixes Applied
+
+**Branch:** `backup-before-dark-borders`
+
+**Fix 1: Added await to RPC call**
+```dart
+// Before:
+final result = _client.rpc('get_supplier_trip_detail', params: {...});
+
+// After:
+final result = await _client.rpc('get_supplier_trip_detail', params: {...});
+```
+
+**Fix 2: Added 300ms minimum loading duration**
+- Applied to `supplier_trip_detail_provider.dart`
+- Applied to `load_detail_provider.dart` (for all detail providers)
+- Applied to `trucker_trip_detail_provider.dart`
+- Applied to `trucker_load_detail_provider.dart`
+- Delay applies to BOTH success and failure paths
+- Prevents UI flicker by ensuring minimum loading time
+
+**Fix 3: Added debug logging (later removed)**
+- Added comprehensive logging to trace state transitions
+- Added RPC timing and result logging
+- Removed after confirming fix worked
+
+### Merge Attempt to Main
+
+**Attempted:** Merge `feature/play-store-readiness-2026-05-16` into main
+**Result:** ❌ BROKEN PAGES
+
+**What Went Wrong:**
+1. **Missing pod_uploaded filter** - play-store-readiness had removed this critical filter
+2. **Missing marketplace widget system** - play-store-readiness lacked UI/UX fixes
+3. **Missing content cards fixes** - play-store-readiness had old content_cards.dart
+4. **Conflicting changes** - Too many differences between branches
+
+**Impact:**
+- Supplier my loads page broke
+- Supplier trips page broke
+- Trucker trips page broke
+- User reported: "we spent more than 40 hours fixing these issues, and it's again introduced"
+
+### Recovery
+
+**Action:** Reset main to `backup-before-dark-borders` (working state)
+```bash
+git checkout main
+git reset --hard backup-before-dark-borders
+git push origin main --force
+```
+
+**Result:** ✅ App working again
+
+### What's on backup-before-dark-borders (Working State)
+
+**UI/UX Fixes:**
+- ✅ Marketplace widget system (marketplace_dark_header, marketplace_route_line, marketplace_chips)
+- ✅ Content cards fixes (dark background, inkText colors, explicit text colors)
+- ✅ AppRadius import fixes
+- ✅ MarketplaceLoadCard isolated widget system
+
+**Backend Fixes:**
+- ✅ RPC await fix for supplier trip detail
+- ✅ 300ms minimum loading duration (all detail providers)
+- ✅ pod_uploaded filter (prevents database enum errors)
+- ✅ No debug logging (clean production code)
+
+**Commits on backup-before-dark-borders:**
+- `27e2f80` - fix: Add await to supplier trip detail RPC call and add minimum loading duration
+- `0402afc` - fix: Add 300ms minimum loading duration to detail providers
+- `980e796` - debug: Add comprehensive logging to supplier trip detail loading (later removed)
+- `ea0d019` - fix: Use inkText colors for marketplace dark background
+- `65ffa38` - fix: Fix import paths and AppRadius.chip references
+- `2c3565c` - feat: Update MarketplaceLoadCard to use isolated marketplace widgets
+- `840b1be` - feat: Create isolated marketplace widget system
+- `88527b3` - fix: Apply Phase 1 root cause fixes to content_cards.dart
+
+### What's on feature/play-store-readiness-2026-05-16
+
+**Important Work (101+ commits):**
+- P0: Security fixes (remove .env, use --dart-define)
+- P1: Crash safety helpers, safe casts, safe DateTime parsing
+- P2: Localization (error codes, ARB keys)
+- P3: RPC migration (chat, notifications, fleet RPCs)
+- P4: Realtime message merge, pagination fixes
+- P5: Firebase Crashlytics setup
+
+**Missing from play-store-readiness:**
+- ❌ Marketplace widget system
+- ❌ Content cards fixes
+- ❌ pod_uploaded filter
+- ❌ RPC await fix for supplier trip detail
+- ❌ Minimum loading duration
+
+### Recommended Strategy for Play-Store Readiness Integration
+
+**Goal:** Safely integrate P0-P5 fixes from play-store-readiness into main without breaking working UI/UX
+
+**Approach:** Keep main stable, work on play-store-readiness separately
+
+**Step 1: Add missing fixes to play-store-readiness**
+1. Add marketplace widget system to play-store-readiness
+   - Copy marketplace/ folder from backup-before-dark-borders
+   - Copy content_cards.dart from backup-before-dark-borders
+   - Add commonFromLabel/commonToLabel localization keys
+
+2. Add pod_uploaded filter to play-store-readiness
+   - Update supplier_trip_repository.dart to filter pod_uploaded
+   - This is critical for database enum compatibility
+
+3. Add RPC await fix to play-store-readiness
+   - Update supplier_trip_repository_backend.dart
+   - Add await to get_supplier_trip_detail RPC call
+
+4. Add minimum loading duration to play-store-readiness
+   - Update all detail providers
+   - Ensure 300ms delay on both success and failure paths
+
+**Step 2: Test play-store-readiness thoroughly**
+- Build APK from play-store-readiness
+- Test all pages:
+  - Supplier my loads
+  - Supplier trips
+  - Trucker trips
+  - Supplier trip detail
+  - Marketplace
+- Verify no regressions
+
+**Step 3: Merge to main only when ready**
+- Once play-store-readiness is fully tested and working
+- Merge to main
+- Build final APK
+- Deploy
+
+**Benefits of This Approach:**
+- ✅ Main stays stable and production-ready
+- ✅ Can iterate on play-store-readiness without risk
+- ✅ Clear separation: main = stable, play-store-readiness = development
+- ✅ When ready, one clean merge
+- ✅ No risk of breaking production
+
+**Alternative (NOT recommended):**
+- Cherry-picking P0-P5 fixes to main
+  - Risk of breaking working UI/UX
+  - Complex conflict resolution
+  - Hard to track what's merged vs not
+
+### Branch State Summary
+
+**main:** ✅ Working (reset to backup-before-dark-borders)
+- Commit: `27e2f80`
+- Status: Production-ready
+- Has: UI/UX fixes + RPC await + minimum loading duration + pod_uploaded filter
+- Missing: P0-P5 play-store-readiness fixes
+
+**backup-before-dark-borders:** ✅ Working (source of truth for UI/UX)
+- Commit: `27e2f80`
+- Status: Reference branch for working UI/UX
+- Has: All working fixes
+
+**feature/play-store-readiness-2026-05-16:** ⏳ Needs work
+- Status: Has P0-P5 fixes but missing critical UI/UX fixes
+- Needs: Marketplace widgets, content cards, pod_uploaded filter, RPC await, minimum loading duration
+- Strategy: Add missing fixes, test thoroughly, then merge to main
+
+### Lessons Learned
+
+1. **Never merge without testing:** Attempting to merge play-store-readiness without testing broke production
+2. **Branch isolation is critical:** Keeping main stable while working on feature branch prevents production issues
+3. **UI/UX fixes are critical:** The marketplace widget system and content cards fixes were essential for the app to work
+4. **Small incremental changes:** Large merges are risky; better to add fixes incrementally and test
+5. **Backup branches are essential:** backup-before-dark-borders saved us from a broken state
+
+### Next Steps
+
+1. ✅ Main is stable and working
+2. ⏳ Add missing fixes to play-store-readiness (marketplace widgets, pod_uploaded filter, RPC await, minimum loading duration)
+3. ⏳ Test play-store-readiness thoroughly
+4. ⏳ Merge to main only when ready
+5. ⏳ Document final merge in this file
+
+---
+
+**Document Version:** 12.0
+**Last Updated:** May 20, 2026 (Final Session - Main stable, Play-store-readiness strategy defined)
+**Author:** Cascade AI Assistant
