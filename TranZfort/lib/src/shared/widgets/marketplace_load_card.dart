@@ -7,10 +7,8 @@ import '../../core/theme/app_typography.dart';
 import '../../l10n/app_localizations.dart';
 import '../../features/trucker/data/trip_costing_service.dart';
 import '../../features/trucker/data/trucker_marketplace_repository.dart';
-import 'layout_components.dart';
-import 'load_card_dark_header.dart';
-
-// AppRadius is defined in app_spacing.dart
+import 'marketplace/marketplace_dark_header.dart';
+import 'marketplace/marketplace_chips.dart';
 
 class MarketplaceLoadCard extends StatelessWidget {
   final MarketplaceLoadItem load;
@@ -91,7 +89,7 @@ class MarketplaceLoadCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // ── Dark Header (150-170px max) ──
-              LoadCardDarkHeader(
+              MarketplaceDarkHeader(
                 supplierName: load.supplierName ?? 'Supplier',
                 supplierId: load.supplierId,
                 supplierInitial: supplierInitial,
@@ -167,7 +165,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                   ],
                 ),
               ),
-              // ── Footer: Call/Message split action row ──
+              // ── Footer: Call/Details/Chat split action row ──
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -178,7 +176,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: onCall,
-                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
                         child: Container(
                           height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerLeft,
@@ -210,8 +208,41 @@ class MarketplaceLoadCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: InkWell(
+                        onTap: onViewDetails,
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
+                        child: Container(
+                          height: 48, // Increased from 44px to meet AppTouchTarget.min
+                          alignment: Alignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.info_outline,
+                                color: AppColors.inkTextPrimary,
+                                size: 20,
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Text(
+                                l10n.commonViewDetailsAction,
+                                style: TextStyle(
+                                  color: AppColors.inkTextPrimary,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    const VerticalDivider(
+                      width: 1,
+                      color: AppColors.divider,
+                    ),
+                    Expanded(
+                      child: InkWell(
                         onTap: onChat,
-                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
                         child: Container(
                           height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerRight,
