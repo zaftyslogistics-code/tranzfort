@@ -49,12 +49,17 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
     
-    // Add minimum loading duration to prevent flickering
+    // Add minimum loading duration to prevent UI flicker
     final startTime = DateTime.now();
 
     final result = await _repository.fetchTripDetail(_tripId);
     await result.when(
       success: (detail) async {
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           detail: detail,
           isLoading: false,
@@ -77,10 +82,7 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
   }
 }
 
-final supplierTripDetailProvider = StateNotifierProvider
+final supplierTripDetailProvider = StateNotifierProvider.autoDispose
     .family<SupplierTripDetailController, SupplierTripDetailState, String>((ref, tripId) {
-  ref.onDispose(() {
-    // Optional cleanup if needed
-  });
   return SupplierTripDetailController(ref.watch(supplierTripsRepositoryProvider), tripId);
 });

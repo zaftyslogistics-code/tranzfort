@@ -96,10 +96,10 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
     
-    AppLogger.info('Loading details - loadId: ${state.loadId}', scope: 'load_detail');
-
-    // Add minimum loading duration to prevent flickering
+    // Add minimum loading duration to prevent UI flicker
     final startTime = DateTime.now();
+    
+    AppLogger.info('Loading details - loadId: ${state.loadId}', scope: 'load_detail');
 
     final detailResult = await _repository.getLoadDetail(state.loadId);
     if (detailResult.isFailure) {
@@ -122,53 +122,54 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
     AppLogger.info('getLoadDetail success', scope: 'load_detail');
 
     final bookingsResult = await _repository.getBookingRequests(state.loadId);
-    await bookingsResult.when(
-      success: (bookingRequests) async {
+    if (bookingsResult.isFailure) {
+      AppLogger.warning(
+        'getBookingRequests failed',
+        scope: 'load_detail',
+        error: bookingsResult.failureOrNull,
+      );
+      // Ensure minimum loading duration to prevent UI flicker
+      final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+      if (elapsed < 300) {
+        await Future.delayed(Duration(milliseconds: 300 - elapsed));
+      }
+      state = state.copyWith(
+        isLoading: false,
+        detail: detailResult.valueOrNull,
+        failure: bookingsResult.failureOrNull,
+      );
+      return;
+    }
+    AppLogger.info(
+      'getBookingRequests success - ${bookingsResult.valueOrNull?.length} bookings',
+      scope: 'load_detail',
+    );
+
+    final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
+    await linkedTripsResult.when(
+      success: (linkedTrips) async {
         AppLogger.info(
-          'getBookingRequests success - ${bookingRequests.length} bookings',
+          'getLinkedTrips success - ${linkedTrips.length} trips',
           scope: 'load_detail',
         );
-
-        final linkedTripsResult = await _repository.getLinkedTrips(state.loadId);
-        await linkedTripsResult.when(
-          success: (linkedTrips) async {
-            AppLogger.info(
-              'getLinkedTrips success - ${linkedTrips.length} trips',
-              scope: 'load_detail',
-            );
-            state = state.copyWith(
-              detail: detailResult.valueOrNull,
-              bookingRequests: bookingRequests,
-              linkedTrips: linkedTrips,
-              isLoading: false,
-              clearFailure: true,
-            );
-          },
-          failure: (failure) async {
-            AppLogger.warning(
-              'getLinkedTrips failed',
-              scope: 'load_detail',
-              error: failure,
-            );
-            // Ensure minimum loading duration to prevent UI flicker
-            final elapsed = DateTime.now().difference(startTime).inMilliseconds;
-            if (elapsed < 300) {
-              await Future.delayed(Duration(milliseconds: 300 - elapsed));
-            }
-            state = state.copyWith(
-              isLoading: false,
-              detail: detailResult.valueOrNull,
-              bookingRequests: bookingRequests,
-              failure: failure,
-            );
-          },
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
+        state = state.copyWith(
+          detail: detailResult.valueOrNull,
+          bookingRequests: bookingsResult.valueOrNull ?? const <LoadBookingRequest>[],
+          linkedTrips: linkedTrips,
+          isLoading: false,
+          clearFailure: true,
         );
       },
       failure: (failure) async {
         AppLogger.warning(
-          'getBookingRequests failed',
+          'getLinkedTrips failed',
           scope: 'load_detail',
-          error: bookingsResult.failureOrNull,
+          error: failure,
         );
         // Ensure minimum loading duration to prevent UI flicker
         final elapsed = DateTime.now().difference(startTime).inMilliseconds;
@@ -178,7 +179,8 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
         state = state.copyWith(
           isLoading: false,
           detail: detailResult.valueOrNull,
-          failure: bookingsResult.failureOrNull,
+          bookingRequests: bookingsResult.valueOrNull ?? const <LoadBookingRequest>[],
+          failure: failure,
         );
       },
     );
@@ -269,10 +271,6 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
   }
 }
 
-final loadDetailProvider = StateNotifierProvider
-    .family<LoadDetailController, LoadDetailState, String>((ref, loadId) {
-  ref.onDispose(() {
-    // Optional cleanup if needed
-  });
+final loadDetailProvider = StateNotifierProvider.autoDispose.family<LoadDetailController, LoadDetailState, String>((ref, loadId) {
   return LoadDetailController(ref.watch(supplierLoadRepositoryProvider), loadId);
 });

@@ -83,17 +83,31 @@ class TruckerLoadDetailController extends StateNotifier<TruckerLoadDetailState> 
 
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true, clearActionFailure: true);
+    
+    // Add minimum loading duration to prevent UI flicker
+    final startTime = DateTime.now();
+    
     final detailResult = await _repository.fetchLoadDetail(state.loadId);
     if (detailResult.isFailure) {
+      // Ensure minimum loading duration to prevent UI flicker
+      final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+      if (elapsed < 300) {
+        await Future.delayed(Duration(milliseconds: 300 - elapsed));
+      }
       state = state.copyWith(isLoading: false, failure: detailResult.failureOrNull, approvedTrucks: const <TruckerApprovedTruck>[]);
       return;
     }
 
     final trucksResult = await _repository.fetchApprovedTrucks();
-    trucksResult.when(
-      success: (trucks) {
+    await trucksResult.when(
+      success: (trucks) async {
         final detail = detailResult.valueOrNull!;
         final selectedTruckId = _preferredTruckId(trucks, detail);
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           detail: detail,
           approvedTrucks: trucks,
@@ -102,7 +116,12 @@ class TruckerLoadDetailController extends StateNotifier<TruckerLoadDetailState> 
           clearFailure: true,
         );
       },
-      failure: (failure) {
+      failure: (failure) async {
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           detail: detailResult.valueOrNull,
           approvedTrucks: const <TruckerApprovedTruck>[],
