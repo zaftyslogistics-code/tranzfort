@@ -2007,6 +2007,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'picked_up': 'पिक किया गया',
       'in_transit': 'रास्ते में',
       'delivered': 'डिलीवर किया गया',
+      'pod_uploaded': 'POD अपलोड किया गया',
       'proof_submitted': 'प्रूफ जमा किया गया',
       'completed': 'पूर्ण',
       'disputed': 'विवादित',

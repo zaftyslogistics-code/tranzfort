@@ -2005,6 +2005,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'picked_up': 'Picked up',
       'in_transit': 'In transit',
       'delivered': 'Delivered',
+      'pod_uploaded': 'POD uploaded',
       'proof_submitted': 'Proof submitted',
       'completed': 'Completed',
       'disputed': 'Disputed',

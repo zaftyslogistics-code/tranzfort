@@ -3246,7 +3246,7 @@ abstract class AppLocalizations {
   /// No description provided for @tripStageValue.
   ///
   /// In en, this message translates to:
-  /// **'{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} proof_submitted {Proof submitted} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}'**
+  /// **'{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} pod_uploaded {POD uploaded} proof_submitted {Proof submitted} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}'**
   String tripStageValue(String stage);
 
   /// No description provided for @proofStatusValue.
