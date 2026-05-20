@@ -460,6 +460,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonCallAction => 'कॉल';
 
   @override
+  String get commonFromLabel => 'से';
+
+  @override
+  String get commonToLabel => 'तक';
+
+  @override
   String chatReportSourceLabel(Object source) {
     return 'Chat - $source';
   }

@@ -184,6 +184,8 @@
   },
   "chatTitleFallback": "बातचीत",
   "commonCallAction": "कॉल",
+  "commonFromLabel": "से",
+  "commonToLabel": "तक",
   "commonReportSpamOrAbuseAction": "स्पैम या दुरुपयोग रिपोर्ट करें",
   "chatReportSourceLabel": "Chat - {source}",
   "@chatReportSourceLabel": {

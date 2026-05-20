@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_spacing.dart';
-import '../../core/theme/app_typography.dart';
-import '../../l10n/app_localizations.dart';
-import '../../features/trucker/data/trip_costing_service.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../core/theme/app_typography.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../features/trucker/data/trip_costing_service.dart';
 import '../avatar_widget.dart';
 import 'marketplace_route_line.dart';
 
@@ -209,7 +209,7 @@ class _CompactStatusChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       decoration: BoxDecoration(
         color: AppColors.primary.withValues(alpha: 0.2),
-        borderRadius: BorderRadius.circular(AppRadius.chip),
+        borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: AppColors.primary.withValues(alpha: 0.4),
           width: 1,
@@ -235,7 +235,7 @@ class _SuperLoadPill extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
       decoration: BoxDecoration(
         color: AppColors.superLoadBg,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
+        borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: AppColors.superLoadText.withValues(alpha: 0.25),
           width: 0.5,
@@ -287,7 +287,7 @@ class _MoneyRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       decoration: BoxDecoration(
         gradient: AppColors.heroCta,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
+        borderRadius: BorderRadius.circular(20.0),
         border: Border.all(
           color: AppColors.primary.withValues(alpha: 0.4),
           width: 1,

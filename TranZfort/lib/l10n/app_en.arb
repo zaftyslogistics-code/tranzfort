@@ -184,6 +184,8 @@
   },
   "chatTitleFallback": "Conversation",
   "commonCallAction": "Call",
+  "commonFromLabel": "FROM",
+  "commonToLabel": "TO",
   "chatReportSourceLabel": "Chat - {source}",
   "@chatReportSourceLabel": {
     "description": "Label for reporting chat source. Placeholder {source} is the chat context source.",

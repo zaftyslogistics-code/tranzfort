@@ -878,6 +878,18 @@ abstract class AppLocalizations {
   /// **'Call'**
   String get commonCallAction;
 
+  /// No description provided for @commonFromLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'FROM'**
+  String get commonFromLabel;
+
+  /// No description provided for @commonToLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TO'**
+  String get commonToLabel;
+
   /// Label for reporting chat source. Placeholder {source} is the chat context source.
   ///
   /// In en, this message translates to:

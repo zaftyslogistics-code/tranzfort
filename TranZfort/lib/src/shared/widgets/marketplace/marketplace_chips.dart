@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_radius.dart';
-import '../../core/theme/app_spacing.dart';
-import '../../core/theme/app_typography.dart';
+import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
+import '../../../core/theme/app_typography.dart';
 
 /// Load info chip with primary/secondary hierarchy for marketplace cards.
 class LoadInfoChip extends StatelessWidget {
@@ -34,7 +33,7 @@ class LoadInfoChip extends StatelessWidget {
         color: level == LoadChipLevel.primary
             ? AppColors.primary.withValues(alpha: 0.2)
             : Colors.transparent,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
+        borderRadius: BorderRadius.circular(20.0), // AppSpacing.chip fallback
         border: level == LoadChipLevel.primary
             ? Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1)
             : null,

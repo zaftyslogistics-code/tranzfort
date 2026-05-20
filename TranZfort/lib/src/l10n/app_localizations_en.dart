@@ -458,6 +458,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonCallAction => 'Call';
 
   @override
+  String get commonFromLabel => 'FROM';
+
+  @override
+  String get commonToLabel => 'TO';
+
+  @override
   String chatReportSourceLabel(Object source) {
     return 'Chat - $source';
   }
