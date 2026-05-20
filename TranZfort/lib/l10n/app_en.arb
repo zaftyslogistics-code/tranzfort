@@ -975,7 +975,7 @@
   "@_sectionTruckerTrips": "â•â•â• Trucker Trips â•â•â•",
   "truckerTripsTitle": "My trips",
   "truckerTripsSubtitle": "Track assigned trips, monitor proof deadlines, and hand off the right action at the right trip stage.",
-  "tripStageValue": "{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} proof_submitted {Proof submitted} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}",
+  "tripStageValue": "{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} proof_submitted {Proof submitted} pod_uploaded {POD uploaded} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}",
   "@tripStageValue": {
     "placeholders": {
       "stage": {}

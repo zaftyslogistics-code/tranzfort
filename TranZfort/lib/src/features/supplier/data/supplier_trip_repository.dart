@@ -50,9 +50,11 @@ class SupplierTripsRepository {
     }
 
     try {
+      // Filter out 'pod_uploaded' from stages as database enum doesn't support it
+      final filteredStages = stages.where((stage) => stage != 'pod_uploaded').toList();
       final rows = await _backend.fetchTrips(
         supplierId: userId,
-        stages: stages,
+        stages: filteredStages,
         limit: limit,
         offset: offset,
       );

@@ -902,7 +902,7 @@
   "@_sectionTruckerTrips": "═══ Trucker Trips ═══",
   "truckerTripsTitle": "मेरी ट्रिप्स",
   "truckerTripsSubtitle": "Assigned trips track करें, proof deadlines monitor करें, और सही trip stage पर सही action लें।",
-  "tripStageValue": "{stage, select, assigned {असाइन किया गया} pickup_pending {पिकअप लंबित} picked_up {पिक किया गया} in_transit {रास्ते में} delivered {डिलीवर किया गया} proof_submitted {प्रूफ जमा किया गया} completed {पूर्ण} disputed {विवादित} cancelled {रद्द} other {अज्ञात}}",
+  "tripStageValue": "{stage, select, assigned {असाइन किया गया} pickup_pending {पिकअप लंबित} picked_up {पिक किया गया} in_transit {रास्ते में} delivered {डिलीवर किया गया} proof_submitted {प्रूफ जमा किया गया} pod_uploaded {POD अपलोडेड} completed {पूर्ण} disputed {विवादित} cancelled {रद्द} other {अज्ञात}}",
   "@tripStageValue": {
     "placeholders": {
       "stage": {}

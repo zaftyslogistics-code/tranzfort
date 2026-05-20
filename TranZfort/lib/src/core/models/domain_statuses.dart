@@ -5,6 +5,7 @@ enum TripStage {
   inTransit('in_transit'),
   delivered('delivered'),
   proofSubmitted('proof_submitted'),
+  podUploaded('pod_uploaded'),
   disputed('disputed'),
   completed('completed'),
   cancelled('cancelled');
