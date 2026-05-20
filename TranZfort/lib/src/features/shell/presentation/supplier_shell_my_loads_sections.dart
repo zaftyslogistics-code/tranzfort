@@ -152,7 +152,7 @@ List<Widget> _buildMyLoadsSlivers(
                 ? (!hasResolvedSupplierProfile
                       ? l10n.navSupport
                       : canPostLoads
-                      ? l10n.supplierDashboardPostLoadAction
+                      ? l10n.commonPostLoadAction
                       : l10n.supplierCompleteVerification)
                 : l10n.supplierMyLoadsOpenActiveLoads,
             onAction: () => context.go(
@@ -196,7 +196,7 @@ List<Widget> _buildMyLoadsSlivers(
               WarningBlock(
                 title: l10n.supplierMyLoadsMoreUnavailableTitle,
                 message: l10n.supplierMyLoadsPaginationFailureMessage,
-                action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+                action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
               ),
             if (state.failure != null && state.hasMore) const SizedBox(height: AppSpacing.md),
             if (state.hasMore)
@@ -270,7 +270,7 @@ class _SupplierLoadListCard extends StatelessWidget {
       case 'filled_outside_app':
         return l10n.supplierLoadCardViewHistory;
       default:
-        return l10n.supplierLoadCardViewDetails;
+        return l10n.supplierLoadCardViewHistory;
     }
   }
 }

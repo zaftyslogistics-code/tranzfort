@@ -27,13 +27,6 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
         .eq('trucker_id', truckerId)
         .inFilter('stage', stages);
 
-    if (limit > 0) {
-      query = query.limit(limit);
-    }
-    if (offset > 0) {
-      query = query.range(offset, offset + limit - 1);
-    }
-
     final response = await query;
     if (response is List) {
       return response.whereType<Map<String, dynamic>>().toList(growable: false);
