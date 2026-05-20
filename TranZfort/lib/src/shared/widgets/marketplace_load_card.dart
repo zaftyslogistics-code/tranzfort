@@ -10,8 +10,6 @@ import '../../features/trucker/data/trucker_marketplace_repository.dart';
 import 'marketplace/marketplace_dark_header.dart';
 import 'marketplace/marketplace_chips.dart';
 
-// AppRadius is defined in app_spacing.dart
-
 class MarketplaceLoadCard extends StatelessWidget {
   final MarketplaceLoadItem load;
   final TripCostingService tripCostingService;
@@ -69,7 +67,7 @@ class MarketplaceLoadCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onViewDetails,
-        borderRadius: BorderRadius.circular(AppRadius.card),
+        borderRadius: BorderRadius.circular(AppSpacing.card),
         child: Ink(
           decoration: BoxDecoration(
             gradient: const LinearGradient(
@@ -80,7 +78,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                 AppColors.inkMid,
               ],
             ),
-            borderRadius: BorderRadius.circular(AppRadius.card),
+            borderRadius: BorderRadius.circular(AppSpacing.card),
             boxShadow: AppShadows.elevation2,
             border: Border.all(
               color: AppColors.divider,
@@ -178,7 +176,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: onCall,
-                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
                         child: Container(
                           height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerLeft,
@@ -211,7 +209,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: onViewDetails,
-                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
                         child: Container(
                           height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.center,
@@ -244,7 +242,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                     Expanded(
                       child: InkWell(
                         onTap: onChat,
-                        borderRadius: BorderRadius.circular(AppRadius.button),
+                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
                         child: Container(
                           height: 48, // Increased from 44px to meet AppTouchTarget.min
                           alignment: Alignment.centerRight,
