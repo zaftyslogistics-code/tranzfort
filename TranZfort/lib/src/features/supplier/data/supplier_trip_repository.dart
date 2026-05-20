@@ -144,18 +144,12 @@ class SupplierTripsRepository {
 
   Future<Result<SupplierTripDetail>> fetchTripDetail(String tripId) async {
     final userId = _currentUserId();
-    print('🔍 [SupplierTripsRepository] fetchTripDetail() called');
-    print('   tripId: $tripId');
-    print('   userId: $userId');
-    
     if (userId == null) {
-      print('   ❌ userId is null, returning UnauthorizedFailure');
       return const Failure<SupplierTripDetail>(UnauthorizedFailure());
     }
 
     final normalizedTripId = tripId.trim();
     if (normalizedTripId.isEmpty) {
-      print('   ❌ tripId is empty, returning ValidationFailure');
       return const Failure<SupplierTripDetail>(
         ValidationFailure(
           message: 'Trip id is required',
@@ -165,33 +159,23 @@ class SupplierTripsRepository {
     }
 
     try {
-      print('   Calling fetchTripDetailConsolidated...');
       final consolidated = await _backend.fetchTripDetailConsolidated(
         supplierId: userId,
         tripId: normalizedTripId,
       );
-      print('   RPC returned: ${consolidated != null}');
-      
       if (consolidated == null) {
-        print('   ❌ RPC returned null, returning NotFoundFailure');
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
       final tripMap = consolidated['trip'] as Map<String, dynamic>?;
-      print('   tripMap exists: ${tripMap != null}');
-      
       if (tripMap == null) {
-        print('   ❌ tripMap is null, returning NotFoundFailure');
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
       final podPath = (tripMap['pod_document_path'] ?? '').toString().trim();
       final lrPath = (tripMap['lr_document_path'] ?? '').toString().trim();
-      print('   podPath: $podPath, lrPath: $lrPath');
-      
       final podSignedUrl = podPath.isEmpty ? null : await _backend.createProofSignedUrl(podPath);
       final lrSignedUrl = lrPath.isEmpty ? null : await _backend.createProofSignedUrl(lrPath);
-      print('   podSignedUrl: ${podSignedUrl != null}, lrSignedUrl: ${lrSignedUrl != null}');
 
       return Success<SupplierTripDetail>(
         _mapTripDetailConsolidated(
@@ -202,9 +186,6 @@ class SupplierTripsRepository {
         ),
       );
     } catch (error, stackTrace) {
-      print('   ❌ Exception caught: $error');
-      print('   Error type: ${error.runtimeType}');
-      print('   Stack trace: $stackTrace');
       return Failure<SupplierTripDetail>(_mapError(error, stackTrace));
     }
   }

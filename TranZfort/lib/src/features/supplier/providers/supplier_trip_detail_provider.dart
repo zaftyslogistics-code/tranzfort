@@ -47,23 +47,31 @@ class SupplierTripDetailController extends StateNotifier<SupplierTripDetailState
   }
 
   Future<void> load() async {
-    print('🔍 [SupplierTripDetailController] load() called for tripId: $_tripId');
     state = state.copyWith(isLoading: true, clearFailure: true);
+    
+    // Add minimum loading duration to prevent UI flicker
+    final startTime = DateTime.now();
+
     final result = await _repository.fetchTripDetail(_tripId);
-    print('   Result type: ${result.runtimeType}');
-    result.when(
-      success: (detail) {
-        print('   ✅ Load successful, detail: ${detail != null}');
+    await result.when(
+      success: (detail) async {
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           detail: detail,
           isLoading: false,
           clearFailure: true,
         );
       },
-      failure: (failure) {
-        print('   ❌ Load failed: $failure');
-        print('   Failure type: ${failure.runtimeType}');
-        print('   Failure message: ${failure.toString()}');
+      failure: (failure) async {
+        // Ensure minimum loading duration to prevent UI flicker
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(
           isLoading: false,
           failure: failure,
