@@ -287,21 +287,21 @@ class StandardListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // If legacy leading widget is provided, use legacy style
     if (leading != null) {
-      return Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
+      return Container(
+        decoration: BoxDecoration(
+          color: AppColors.cardSurface,
           borderRadius: BorderRadius.circular(AppRadius.card),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: AppColors.cardSurface,
-              borderRadius: BorderRadius.circular(AppRadius.card),
-              boxShadow: AppShadows.card,
-              border: Border.all(
-                color: AppColors.primaryDark.withValues(alpha: 0.5),
-                width: 1.2,
-              ),
-            ),
+          boxShadow: AppShadows.card,
+          border: Border.all(
+            color: AppColors.divider,
+            width: 1.2,
+          ),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(AppRadius.card),
             child: Stack(
               children: [
                 Positioned(
@@ -336,9 +336,19 @@ class StandardListCard extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(title, style: Theme.of(context).textTheme.titleMedium),
+                                Text(
+                                  title,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppColors.textPrimary,
+                                  ),
+                                ),
                                 const SizedBox(height: AppSpacing.xs),
-                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                                Text(
+                                  subtitle,
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -365,21 +375,21 @@ class StandardListCard extends StatelessWidget {
     // If useLegacyStyle is explicitly true
     if (useLegacyStyle) {
       // Legacy style with 4px left bar (backward compatibility)
-      return Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
+      return Container(
+        decoration: BoxDecoration(
+          color: AppColors.cardSurface,
           borderRadius: BorderRadius.circular(AppRadius.card),
-          child: Ink(
-            decoration: BoxDecoration(
-              color: AppColors.cardSurface,
-              borderRadius: BorderRadius.circular(AppRadius.card),
-              boxShadow: AppShadows.card,
-              border: Border.all(
-                color: AppColors.primaryDark.withValues(alpha: 0.5),
-                width: 1.2,
-              ),
-            ),
+          boxShadow: AppShadows.card,
+          border: Border.all(
+            color: AppColors.divider,
+            width: 1.2,
+          ),
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: onTap,
+            borderRadius: BorderRadius.circular(AppRadius.card),
             child: Stack(
               children: [
                 Positioned(
@@ -410,9 +420,19 @@ class StandardListCard extends StatelessWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(title, style: Theme.of(context).textTheme.titleMedium),
+                                Text(
+                                  title,
+                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                                    color: AppColors.textPrimary,
+                                  ),
+                                ),
                                 const SizedBox(height: AppSpacing.xs),
-                                Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                                Text(
+                                  subtitle,
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textSecondary,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -437,18 +457,18 @@ class StandardListCard extends StatelessWidget {
     }
 
     // Phase 4: LeadingIconChip style
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.surfaceBase,
         borderRadius: BorderRadius.circular(AppRadius.card),
-        child: Ink(
-          decoration: BoxDecoration(
-            color: AppColors.surfaceBase,
-            borderRadius: BorderRadius.circular(AppRadius.card),
-            boxShadow: AppShadows.elevation2,
-            border: Border.all(color: AppColors.divider),
-          ),
+        boxShadow: AppShadows.elevation2,
+        border: Border.all(color: AppColors.divider),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppRadius.card),
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
@@ -477,9 +497,19 @@ class StandardListCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(title, style: Theme.of(context).textTheme.titleMedium),
+                          Text(
+                            title,
+                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                              color: AppColors.textPrimary,
+                            ),
+                          ),
                           const SizedBox(height: AppSpacing.xs),
-                          Text(subtitle, style: Theme.of(context).textTheme.bodyMedium),
+                          Text(
+                            subtitle,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.textSecondary,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -514,13 +544,23 @@ class DetailSectionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.canvas,
+        borderRadius: BorderRadius.circular(12),
+        boxShadow: AppShadows.card,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: AppColors.textPrimary,
+              ),
+            ),
             const SizedBox(height: AppSpacing.md),
             ...children,
           ],
