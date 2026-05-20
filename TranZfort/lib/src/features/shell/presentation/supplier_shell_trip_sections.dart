@@ -92,7 +92,7 @@ class _SupplierTripsBody extends StatelessWidget {
             ? l10n.supplierTripsEmptyActiveSubtitle
             : l10n.supplierTripsEmptyCompletedSubtitle,
         actionLabel: state.selectedTab == SupplierTripsTab.active
-            ? l10n.commonPostLoadAction
+            ? l10n.commonOpenMyLoadsAction
             : l10n.supplierTripsEmptyCompletedAction,
         onAction: () => context.go(
           state.selectedTab == SupplierTripsTab.active ? AppRoutes.myLoadsPath : AppRoutes.supplierTripsPath,

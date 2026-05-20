@@ -52,12 +52,12 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
                   FilterChipBar(
                     items: [
                       FilterChipItem(
-                        label: l10n.supplierMyLoadsTabActive,
+                        label: l10n.commonActiveLabel,
                         selected: state.selectedTab == MyLoadsTab.active,
                         onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
                       ),
                       FilterChipItem(
-                        label: l10n.supplierMyLoadsTabCompleted,
+                        label: l10n.commonCompletedLabel,
                         selected: state.selectedTab == MyLoadsTab.completed,
                         onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
                       ),
@@ -123,7 +123,7 @@ List<Widget> _buildMyLoadsSlivers(
           child: WarningBlock(
             title: l10n.supplierMyLoadsLoadFailureTitle,
             message: l10n.supplierMyLoadsFailureMessage,
-            action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
+            action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
           ),
         ),
       ),
@@ -150,7 +150,7 @@ List<Widget> _buildMyLoadsSlivers(
                 : l10n.supplierMyLoadsEmptyCompletedSubtitle,
             actionLabel: state.selectedTab == MyLoadsTab.active
                 ? (!hasResolvedSupplierProfile
-                      ? l10n.navSupport
+                      ? l10n.commonSupportLabel
                       : canPostLoads
                       ? l10n.commonPostLoadAction
                       : l10n.supplierCompleteVerification)
@@ -226,7 +226,7 @@ class _SupplierLoadListCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} > ${load.destinationLabel}',
+      title: '${load.originLabel} to ${load.destinationLabel}',
       subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
       trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(
@@ -270,7 +270,7 @@ class _SupplierLoadListCard extends StatelessWidget {
       case 'filled_outside_app':
         return l10n.supplierLoadCardViewHistory;
       default:
-        return l10n.supplierLoadCardViewHistory;
+        return l10n.commonViewDetailsAction;
     }
   }
 }
