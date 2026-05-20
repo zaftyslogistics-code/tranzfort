@@ -25,8 +25,7 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
           'id, load_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, origin_lat, origin_lng, destination_label, destination_lat, destination_lng, material), trucks(truck_number)',
         )
         .eq('trucker_id', truckerId)
-        .inFilter('stage', stages)
-        .order('assigned_at', ascending: false);
+        .inFilter('stage', stages);
 
     if (limit > 0) {
       query = query.limit(limit);
@@ -36,7 +35,11 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     }
 
     final response = await query;
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    if (response is List) {
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    } else {
+      return const <Map<String, dynamic>>[];
+    }
   }
 
   @override
@@ -236,10 +239,10 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     );
     if (response is List && response.isNotEmpty && response.first is Map<String, dynamic>) {
       return response.first as Map<String, dynamic>;
-    }
-    if (response is Map<String, dynamic>) {
+    } else if (response is Map<String, dynamic>) {
       return response;
+    } else {
+      return null;
     }
-    return null;
   }
 }

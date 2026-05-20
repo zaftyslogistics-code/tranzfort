@@ -52,12 +52,12 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
                   FilterChipBar(
                     items: [
                       FilterChipItem(
-                        label: l10n.commonActiveLabel,
+                        label: l10n.supplierMyLoadsTabActive,
                         selected: state.selectedTab == MyLoadsTab.active,
                         onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
                       ),
                       FilterChipItem(
-                        label: l10n.commonCompletedLabel,
+                        label: l10n.supplierMyLoadsTabCompleted,
                         selected: state.selectedTab == MyLoadsTab.completed,
                         onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
                       ),
@@ -123,7 +123,7 @@ List<Widget> _buildMyLoadsSlivers(
           child: WarningBlock(
             title: l10n.supplierMyLoadsLoadFailureTitle,
             message: l10n.supplierMyLoadsFailureMessage,
-            action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
+            action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
           ),
         ),
       ),
@@ -150,9 +150,9 @@ List<Widget> _buildMyLoadsSlivers(
                 : l10n.supplierMyLoadsEmptyCompletedSubtitle,
             actionLabel: state.selectedTab == MyLoadsTab.active
                 ? (!hasResolvedSupplierProfile
-                      ? l10n.commonSupportLabel
+                      ? l10n.navSupport
                       : canPostLoads
-                      ? l10n.commonPostLoadAction
+                      ? l10n.supplierDashboardPostLoadAction
                       : l10n.supplierCompleteVerification)
                 : l10n.supplierMyLoadsOpenActiveLoads,
             onAction: () => context.go(
@@ -196,7 +196,7 @@ List<Widget> _buildMyLoadsSlivers(
               WarningBlock(
                 title: l10n.supplierMyLoadsMoreUnavailableTitle,
                 message: l10n.supplierMyLoadsPaginationFailureMessage,
-                action: OutlineButton(label: l10n.commonRetryAction, onPressed: onRetry),
+                action: OutlineButton(label: l10n.commonRetry, onPressed: onRetry),
               ),
             if (state.failure != null && state.hasMore) const SizedBox(height: AppSpacing.md),
             if (state.hasMore)
@@ -226,7 +226,7 @@ class _SupplierLoadListCard extends StatelessWidget {
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} to ${load.destinationLabel}',
+      title: '${load.originLabel} > ${load.destinationLabel}',
       subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
       trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
       footer: Column(
@@ -270,7 +270,7 @@ class _SupplierLoadListCard extends StatelessWidget {
       case 'filled_outside_app':
         return l10n.supplierLoadCardViewHistory;
       default:
-        return l10n.commonViewDetailsAction;
+        return l10n.supplierLoadCardViewDetails;
     }
   }
 }
