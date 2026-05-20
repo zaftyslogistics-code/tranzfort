@@ -47,10 +47,14 @@ class SupplierTripsRepository {
       return const Failure<List<SupplierTrip>>(UnauthorizedFailure());
     }
 
+    // Remove 'pod_uploaded' from stages since database enum doesn't support it
+    // This is a temporary fix until database migration adds the enum value
+    final filteredStages = stages.where((stage) => stage != 'pod_uploaded').toList();
+
     try {
       final rows = await _backend.fetchTrips(
         supplierId: userId,
-        stages: stages,
+        stages: filteredStages,
         limit: limit,
         offset: offset,
       );
