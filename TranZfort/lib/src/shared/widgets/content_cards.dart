@@ -35,7 +35,7 @@ class HeroActionCard extends StatelessWidget {
         padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
         decoration: BoxDecoration(
           color: AppColors.inkSurface,
-          borderRadius: BorderRadius.circular(AppSpacing.hero),
+          borderRadius: BorderRadius.circular(AppRadius.hero),
           boxShadow: AppShadows.elevation3,
         ),
         child: Stack(
@@ -43,7 +43,7 @@ class HeroActionCard extends StatelessWidget {
             // Gradient overlays
             Positioned.fill(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppSpacing.hero),
+                borderRadius: BorderRadius.circular(AppRadius.hero),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: AppColors.heroDark,
@@ -53,7 +53,7 @@ class HeroActionCard extends StatelessWidget {
             ),
             Positioned.fill(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppSpacing.hero),
+                borderRadius: BorderRadius.circular(AppRadius.hero),
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: AppColors.heroDarkGlow,
@@ -103,7 +103,7 @@ class HeroActionCard extends StatelessWidget {
       padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
       decoration: BoxDecoration(
         gradient: AppColors.heroCardWash,
-        borderRadius: BorderRadius.circular(AppSpacing.card),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         boxShadow: AppShadows.hero,
         border: Border.all(color: AppColors.divider),
       ),
@@ -152,7 +152,7 @@ class StatCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppSpacing.card),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         border: Border.all(
           color: AppColors.primaryDark.withValues(alpha: 0.5),
           width: 1.2,
@@ -198,7 +198,7 @@ class StatCard extends StatelessWidget {
                         ),
                         decoration: BoxDecoration(
                           color: AppColors.successBg,
-                          borderRadius: BorderRadius.circular(AppSpacing.chip),
+                          borderRadius: BorderRadius.circular(AppRadius.chip),
                         ),
                         child: Text(
                           delta!,
@@ -240,8 +240,8 @@ class StatCard extends StatelessWidget {
             height: 24,
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(AppSpacing.card),
-                bottomRight: Radius.circular(AppSpacing.card),
+                bottomLeft: Radius.circular(AppRadius.card),
+                bottomRight: Radius.circular(AppRadius.card),
               ),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -290,7 +290,7 @@ class StandardListCard extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           color: AppColors.cardSurface,
-          borderRadius: BorderRadius.circular(AppSpacing.card),
+          borderRadius: BorderRadius.circular(AppRadius.card),
           boxShadow: AppShadows.card,
           border: Border.all(
             color: AppColors.primaryDark.withValues(alpha: 0.5),
@@ -301,7 +301,7 @@ class StandardListCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(AppSpacing.card),
+            borderRadius: BorderRadius.circular(AppRadius.card),
             child: Stack(
               children: [
                 Positioned(
@@ -313,8 +313,8 @@ class StandardListCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: accent,
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(AppSpacing.card),
-                        bottomLeft: Radius.circular(AppSpacing.card),
+                        topLeft: Radius.circular(AppRadius.card),
+                        bottomLeft: Radius.circular(AppRadius.card),
                       ),
                     ),
                   ),
@@ -378,7 +378,7 @@ class StandardListCard extends StatelessWidget {
       return Container(
         decoration: BoxDecoration(
           color: AppColors.cardSurface,
-          borderRadius: BorderRadius.circular(AppSpacing.card),
+          borderRadius: BorderRadius.circular(AppRadius.card),
           boxShadow: AppShadows.card,
           border: Border.all(
             color: AppColors.primaryDark.withValues(alpha: 0.5),
@@ -389,7 +389,7 @@ class StandardListCard extends StatelessWidget {
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(AppSpacing.card),
+            borderRadius: BorderRadius.circular(AppRadius.card),
             child: Stack(
               children: [
                 Positioned(
@@ -401,8 +401,8 @@ class StandardListCard extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: accent,
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(AppSpacing.card),
-                        bottomLeft: Radius.circular(AppSpacing.card),
+                        topLeft: Radius.circular(AppRadius.card),
+                        bottomLeft: Radius.circular(AppRadius.card),
                       ),
                     ),
                   ),
@@ -460,7 +460,7 @@ class StandardListCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.surfaceBase,
-        borderRadius: BorderRadius.circular(AppSpacing.card),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         boxShadow: AppShadows.elevation2,
         border: Border.all(
           color: AppColors.primaryDark.withValues(alpha: 0.5),
@@ -471,7 +471,7 @@ class StandardListCard extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(AppSpacing.card),
+          borderRadius: BorderRadius.circular(AppRadius.card),
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
             child: Column(
@@ -487,7 +487,7 @@ class StandardListCard extends StatelessWidget {
                         height: 48,
                         decoration: BoxDecoration(
                           color: accent.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppSpacing.iconChip),
+                          borderRadius: BorderRadius.circular(AppRadius.iconChip),
                         ),
                         child: Icon(
                           leadingIcon,
@@ -594,7 +594,7 @@ class WarningBlock extends StatelessWidget {
       padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
       decoration: BoxDecoration(
         color: AppColors.warningBg,
-        borderRadius: BorderRadius.circular(AppSpacing.card),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         border: Border.all(color: AppColors.warning.withValues(alpha: 0.25)),
       ),
       child: Column(

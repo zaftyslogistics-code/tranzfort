@@ -67,7 +67,7 @@ class MarketplaceLoadCard extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: onViewDetails,
-        borderRadius: BorderRadius.circular(AppSpacing.card),
+        borderRadius: BorderRadius.circular(AppRadius.card),
         child: Ink(
           decoration: BoxDecoration(
             gradient: const LinearGradient(
@@ -78,7 +78,7 @@ class MarketplaceLoadCard extends StatelessWidget {
                 AppColors.inkMid,
               ],
             ),
-            borderRadius: BorderRadius.circular(AppSpacing.card),
+            borderRadius: BorderRadius.circular(AppRadius.card),
             boxShadow: AppShadows.elevation2,
             border: Border.all(
               color: AppColors.divider,
