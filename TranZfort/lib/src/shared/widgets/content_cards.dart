@@ -293,7 +293,7 @@ class StandardListCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.card),
           boxShadow: AppShadows.card,
           border: Border.all(
-            color: AppColors.divider,
+            color: AppColors.primaryDark.withValues(alpha: 0.5),
             width: 1.2,
           ),
         ),
@@ -381,7 +381,7 @@ class StandardListCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.card),
           boxShadow: AppShadows.card,
           border: Border.all(
-            color: AppColors.divider,
+            color: AppColors.primaryDark.withValues(alpha: 0.5),
             width: 1.2,
           ),
         ),
@@ -462,7 +462,10 @@ class StandardListCard extends StatelessWidget {
         color: AppColors.surfaceBase,
         borderRadius: BorderRadius.circular(AppRadius.card),
         boxShadow: AppShadows.elevation2,
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(
+          color: AppColors.primaryDark.withValues(alpha: 0.5),
+          width: 1.2,
+        ),
       ),
       child: Material(
         color: Colors.transparent,
