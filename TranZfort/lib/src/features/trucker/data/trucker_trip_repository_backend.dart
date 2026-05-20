@@ -1,6 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../../../core/constants/lifecycle_status_constants.dart';
 import 'trucker_trip_repository_models.dart';
 
 class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
@@ -15,23 +14,53 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     int limit = 15,
     int offset = 0,
   }) async {
+    print('🔍 [SupabaseTruckerTripsBackend] fetchTrips() called');
+    print('   truckerId: $truckerId');
+    print('   stages: $stages');
+    print('   limit: $limit');
+    print('   offset: $offset');
+
     if (_client == null) {
+      print('❌ [SupabaseTruckerTripsBackend] Client is null');
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client
-        .from('trips')
-        .select(
-          'id, load_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, origin_lat, origin_lng, destination_label, destination_lat, destination_lng, material), trucks(truck_number)',
-        )
-        .eq('trucker_id', truckerId)
-        .inFilter('stage', stages);
+    print('   Calling RPC: get_trucker_trips');
+    print('   Parameters: p_trucker_id=$truckerId, p_stage_filter=${stages.isEmpty ? null : stages}, p_limit=$limit, p_offset=$offset');
 
-    final response = await query;
-    if (response is List) {
-      return response.whereType<Map<String, dynamic>>().toList(growable: false);
-    } else {
-      return const <Map<String, dynamic>>[];
+    try {
+      final response = await _client.rpc(
+        'get_trucker_trips',
+        params: <String, dynamic>{
+          'p_trucker_id': truckerId,
+          'p_stage_filter': stages.isEmpty ? null : stages,
+          'p_limit': limit,
+          'p_offset': offset,
+        },
+      );
+
+      print('   RPC response type: ${response.runtimeType}');
+      print('   RPC response: $response');
+
+      if (response is List) {
+        print('   ✅ RPC returned List with ${response.length} items');
+        if (response.isNotEmpty) {
+          print('   First item type: ${response.first.runtimeType}');
+          if (response.first is Map) {
+            print('   First item keys: ${(response.first as Map).keys.toList()}');
+          }
+        }
+        return List<Map<String, dynamic>>.from(response);
+      } else {
+        print('   ⚠️  RPC returned non-List type: ${response.runtimeType}');
+        print('   Response value: $response');
+        return const <Map<String, dynamic>>[];
+      }
+    } catch (error, stackTrace) {
+      print('   ❌ RPC call failed: $error');
+      print('   Error type: ${error.runtimeType}');
+      print('   Stack trace: $stackTrace');
+      rethrow;
     }
   }
 
@@ -44,16 +73,18 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('trips')
-        .select(
-          'id, load_id, supplier_id, truck_id, stage, assigned_at, started_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_snapshot_source, material, pickup_date), trucks(truck_number, body_type, tyres)',
-        )
-        .eq('trucker_id', truckerId)
-        .eq('id', tripId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_trip_detail',
+      params: <String, dynamic>{
+        'p_trip_id': tripId,
+        'p_trucker_id': truckerId,
+      },
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -116,15 +147,18 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('trips')
-        .update(<String, dynamic>{
-          'lr_document_path': lrPath,
-        })
-        .eq('id', tripId)
-        .inFilter('stage', TripStages.allowsLrUpload)
-        .select('id')
-        .maybeSingle();
+    final response = await _client.rpc(
+      'update_trip_lr',
+      params: <String, dynamic>{
+        'p_trip_id': tripId,
+        'p_lr_document_path': lrPath,
+      },
+    );
+
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -160,12 +194,18 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('ratings')
-        .select('id, score, comment, created_at')
-        .eq('reviewer_id', reviewerId)
-        .eq('load_id', loadId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_own_rating',
+      params: <String, dynamic>{
+        'p_reviewer_id': reviewerId,
+        'p_load_id': loadId,
+      },
+    );
+
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -194,13 +234,15 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('profiles')
-        .select('id, full_name, verification_status, mobile')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_public_profile',
+      params: <String, dynamic>{'p_profile_id': supplierId},
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -209,13 +251,15 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('suppliers')
-        .select('id, company_name')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_supplier_extension',
+      params: <String, dynamic>{'p_supplier_id': supplierId},
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -232,10 +276,10 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     );
     if (response is List && response.isNotEmpty && response.first is Map<String, dynamic>) {
       return response.first as Map<String, dynamic>;
-    } else if (response is Map<String, dynamic>) {
-      return response;
-    } else {
-      return null;
     }
+    if (response is Map<String, dynamic>) {
+      return response;
+    }
+    return null;
   }
 }

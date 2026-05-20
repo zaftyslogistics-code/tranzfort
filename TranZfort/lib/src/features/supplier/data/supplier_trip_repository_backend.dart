@@ -14,28 +14,56 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
     int limit = 15,
     int offset = 0,
   }) async {
+    print('🔍 [SupabaseSupplierTripsBackend] fetchTrips() called');
+    print('   supplierId: $supplierId');
+    print('   stages: $stages');
+    print('   limit: $limit');
+    print('   offset: $offset');
+
     if (_client == null) {
+      print('❌ [SupabaseSupplierTripsBackend] Client is null');
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client
-        .from('trips')
-        .select(
-          'id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material)',
-        )
-        .eq('supplier_id', supplierId)
-        .inFilter('stage', stages)
-        .order('assigned_at', ascending: false);
+    print('   Using DIRECT TABLE READ (not RPC)');
+    print('   Table: trips');
+    print('   Query: SELECT id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material) WHERE supplier_id=$supplierId AND stage IN ($stages) ORDER BY assigned_at DESC LIMIT $limit OFFSET $offset');
 
-    if (limit > 0) {
-      query = query.limit(limit);
-    }
-    if (offset > 0) {
-      query = query.range(offset, offset + limit - 1);
-    }
+    try {
+      var query = _client
+          .from('trips')
+          .select(
+            'id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material)',
+          )
+          .eq('supplier_id', supplierId)
+          .inFilter('stage', stages)
+          .order('assigned_at', ascending: false);
 
-    final response = await query;
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+      if (limit > 0) {
+        query = query.limit(limit);
+      }
+      if (offset > 0) {
+        query = query.range(offset, offset + limit - 1);
+      }
+
+      final response = await query;
+      print('   ✅ Query returned ${response.length} rows');
+      print('   Response type: ${response.runtimeType}');
+      if (response.isNotEmpty) {
+        print('   First row type: ${response.first.runtimeType}');
+        if (response.first is Map) {
+          print('   First row keys: ${(response.first as Map).keys.toList()}');
+        }
+      }
+      final filtered = response.whereType<Map<String, dynamic>>().toList(growable: false);
+      print('   ✅ Filtered to ${filtered.length} Map rows');
+      return filtered;
+    } catch (error, stackTrace) {
+      print('   ❌ Query failed: $error');
+      print('   Error type: ${error.runtimeType}');
+      print('   Stack trace: $stackTrace');
+      rethrow;
+    }
   }
 
   @override
