@@ -9,6 +9,8 @@ import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/tts_utterance_utils.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
@@ -189,7 +191,7 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final onboardingState = ref.watch(onboardingControllerProvider);
-    final ttsSummary = '${l10n.onboardingChooseRoleTitle}. ${l10n.onboardingRoleQuestion}. ${l10n.onboardingRoleSubtitle}';
+    final ttsSummary = limitTtsSentences(TtsLocalizations.of(context).ttsOnboardingChooseRole);
     return PopScope(
       canPop: !_hasUnsavedChanges(),
       onPopInvokedWithResult: (didPop, result) async {

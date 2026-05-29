@@ -12,6 +12,8 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
+import '../../../l10n/tts_localizations.dart' show lookupTtsLocalizations;
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
@@ -287,6 +289,14 @@ class _NotificationRow extends ConsumerWidget {
           : FontWeight.w600,
     );
 
+    final audioLanguage = ref.watch(ttsAudioLanguageProvider);
+    final rowUtterance = ref.read(notificationTtsServiceProvider).utteranceForRow(
+          notification,
+          role: role,
+          languageCode: audioLanguage,
+        );
+    final ttsL10n = lookupTtsLocalizations(Localizations.localeOf(context));
+
     return InkWell(
       borderRadius: BorderRadius.circular(AppRadius.card),
       onTap: () async {
@@ -374,6 +384,11 @@ class _NotificationRow extends ConsumerWidget {
                 ],
               ),
             ),
+            if (rowUtterance.trim().isNotEmpty)
+              TtsCardSpeakerButton(
+                message: rowUtterance,
+                tooltip: ttsL10n.ttsNotificationRowHint,
+              ),
           ],
         ),
       ),

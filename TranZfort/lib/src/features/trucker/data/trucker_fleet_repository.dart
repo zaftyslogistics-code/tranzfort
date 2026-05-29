@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
+import '../../../core/utils/rpc_response_parser.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/map_readers.dart';
@@ -181,11 +182,12 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       },
     );
     
-    if (response is List) {
-      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isNotEmpty) {
+      return rows;
     }
-    if (response is Map && response['trucks'] is List) {
-      return (response['trucks'] as List).whereType<Map<String, dynamic>>().toList(growable: false);
+    if (response == null || (response is List && response.isEmpty)) {
+      return const <Map<String, dynamic>>[];
     }
 
     throw const ServerFailure(message: 'Invalid response format from get_trucker_fleet RPC');

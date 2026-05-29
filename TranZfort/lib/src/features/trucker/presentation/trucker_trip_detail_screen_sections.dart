@@ -27,6 +27,21 @@ class _TruckerTripDetailBody extends ConsumerWidget {
       destinationLng: detail.destinationLng,
       destinationLabel: detail.destinationLabel,
     );
+    final ttsL10n = TtsLocalizations.of(context);
+    final tripTts = const TripDetailTtsBuilder();
+    final stageLabel = _localizedTripStage(l10n, detail.stage);
+    final proofLabel = _localizedProofStatus(l10n, detail);
+    final overviewTts = tripTts.buildTruckerOverview(
+      detail: detail,
+      tts: ttsL10n,
+      stageLabel: stageLabel,
+      proofLabel: proofLabel,
+    );
+    final nextStepTts = tripTts.buildTruckerNextStep(
+      tts: ttsL10n,
+      stepTitle: nextStep.$1,
+      stepDetail: nextStep.$2,
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,6 +85,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
         const SizedBox(height: 16),
         DetailSectionCard(
           title: l10n.commonNextStepTitle,
+          ttsMessage: nextStepTts,
           children: [
             Text(nextStep.$1, style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: 8),
@@ -385,6 +401,7 @@ class _TruckerTripDetailBody extends ConsumerWidget {
         const SizedBox(height: 16),
         DetailSectionCard(
           title: l10n.commonRouteAndScheduleTitle,
+          ttsMessage: overviewTts,
           children: [
             Text(l10n.truckerTripDetailOriginLabel(detail.originLabel)),
             const SizedBox(height: 4),

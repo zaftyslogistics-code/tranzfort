@@ -177,6 +177,12 @@
   "supplierLoadCardRouteTitle": "{origin} se {destination}",
   "marketplaceLoadPickupToday": "आज पिकअप",
   "marketplaceLoadPickupTomorrow": "कल पिकअप",
+  "marketplaceLoadPickupOnDate": "पिकअप {dateLabel}",
+  "@marketplaceLoadPickupOnDate": {
+    "placeholders": {
+      "dateLabel": {}
+    }
+  },
   "supplierLoadCardPickupDate": "Pickup {value}",
   "supplierLoadCardTrucks": "{booked}/{needed} ट्रक बुक हुए",
   "supplierLoadCardTrackLoad": "लोड ट्रैक करें",
@@ -358,6 +364,13 @@
   "chatSendAction": "भेजें",
   "@_sectionCommonVoice": "═══ Common Voice & TTS ═══",
   "commonHearSummary": "सारांश सुनें",
+  "ttsReadAllSectionsAction": "सभी सेक्शन सुनें",
+  "ttsReplayLastAction": "फिर से सुनें",
+  "ttsReplayLastEmptyMessage": "अभी कुछ नहीं है। पहले किसी कार्ड या सेक्शन पर स्पीकर दबाएँ।",
+  "ttsSpeechRateTitle": "बोलने की गति",
+  "ttsSpeechRateHelper": "आवाज़ कितनी तेज़ बोले, यह समायोजित करें।",
+  "ttsVoiceSettingsActionsTitle": "कार्रवाई",
+  "ttsVoiceSettingsRefreshVoices": "आवाज़ें रिफ्रेश करें",
   "commonVoiceMuted": "इस डिवाइस पर आवाज मार्गदर्शन म्यूट है।",
   "commonVoiceUnavailable": "अभी आवाज मार्गदर्शन उपलब्ध नहीं है।",
   "@_sectionNotifications": "═══ Notifications ═══",

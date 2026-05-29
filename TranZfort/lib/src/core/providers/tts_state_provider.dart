@@ -9,6 +9,9 @@ import 'tts_audio_language_provider.dart';
 /// This is managed by the service and consumed by UI components
 final ttsSpeakingProvider = StateProvider<bool>((ref) => false);
 
+/// Last manually spoken utterance (card/section/read-all).
+final ttsLastUtteranceProvider = StateProvider<String?>((ref) => null);
+
 /// Global TTS muted state - persists across sessions via SharedPreferences
 /// Key: 'tts_muted'
 final ttsMutedProvider = StateNotifierProvider<TtsMutedNotifier, bool>((ref) {
@@ -42,6 +45,7 @@ class TtsPlaybackController {
       return ContextualTtsOutcome.skipped;
     }
 
+    _ref.read(ttsLastUtteranceProvider.notifier).state = normalized;
     _ref.read(ttsSpeakingProvider.notifier).state = true;
     try {
       return await _ref.read(contextualTtsServiceProvider).speakSummary(

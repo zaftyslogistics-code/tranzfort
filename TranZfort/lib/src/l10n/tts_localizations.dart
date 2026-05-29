@@ -205,6 +205,126 @@ abstract class TtsLocalizations {
   /// In en, this message translates to:
   /// **'Booking approved. Head to pickup.'**
   String get ttsBookingApproved;
+
+  /// No description provided for @ttsLoadDetailTruckRequirementsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck requirements.'**
+  String get ttsLoadDetailTruckRequirementsTitle;
+
+  /// No description provided for @ttsLoadDetailPerTruckWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Weight per truck {tonnes} tonnes.'**
+  String ttsLoadDetailPerTruckWeight(Object tonnes);
+
+  /// No description provided for @ttsLoadDetailStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status {status}.'**
+  String ttsLoadDetailStatus(Object status);
+
+  /// No description provided for @ttsLoadDetailMaterialWeight.
+  ///
+  /// In en, this message translates to:
+  /// **'Material {material}, total {tonnes} tonnes.'**
+  String ttsLoadDetailMaterialWeight(Object material, Object tonnes);
+
+  /// No description provided for @ttsLoadDetailTrucksBooked.
+  ///
+  /// In en, this message translates to:
+  /// **'{booked} of {needed} trucks booked.'**
+  String ttsLoadDetailTrucksBooked(Object booked, Object needed);
+
+  /// No description provided for @ttsTripDetailRouteStage.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip {route}. Stage {stage}.'**
+  String ttsTripDetailRouteStage(Object route, Object stage);
+
+  /// No description provided for @ttsTripDetailTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck {truckNumber}.'**
+  String ttsTripDetailTruck(Object truckNumber);
+
+  /// No description provided for @ttsTripDetailProofStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Proof status {status}.'**
+  String ttsTripDetailProofStatus(Object status);
+
+  /// No description provided for @ttsTripDetailNextStepTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Next step.'**
+  String get ttsTripDetailNextStepTitle;
+
+  /// No description provided for @ttsFindLoadsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} loads available.'**
+  String ttsFindLoadsIntro(Object count);
+
+  /// No description provided for @ttsFindLoadsFilteredIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} loads match your filters.'**
+  String ttsFindLoadsFilteredIntro(Object count);
+
+  /// No description provided for @ttsOnboardingChooseRole.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your role. Are you a trucker or a supplier?'**
+  String get ttsOnboardingChooseRole;
+
+  /// No description provided for @ttsOnboardingCompleteProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Complete your profile. Enter your details to continue.'**
+  String get ttsOnboardingCompleteProfile;
+
+  /// No description provided for @ttsAuthWelcomeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to TranZfort. Sign in or create an account to continue.'**
+  String get ttsAuthWelcomeShort;
+
+  /// No description provided for @ttsVerificationStepPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Step one. Upload a clear profile photo.'**
+  String get ttsVerificationStepPhoto;
+
+  /// No description provided for @ttsVerificationStepIdentity.
+  ///
+  /// In en, this message translates to:
+  /// **'Step two. Enter Aadhaar and PAN details and upload documents.'**
+  String get ttsVerificationStepIdentity;
+
+  /// No description provided for @ttsVerificationStepTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Step three. Enter truck number, capacity, and upload the RC document.'**
+  String get ttsVerificationStepTruck;
+
+  /// No description provided for @ttsVerificationStepBusiness.
+  ///
+  /// In en, this message translates to:
+  /// **'Step three. Enter company and business licence details and capture location.'**
+  String get ttsVerificationStepBusiness;
+
+  /// No description provided for @ttsVerificationStepReview.
+  ///
+  /// In en, this message translates to:
+  /// **'Review step. Confirm all details and accept terms before submit.'**
+  String get ttsVerificationStepReview;
+
+  /// No description provided for @ttsNotificationRowHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Listen to notification'**
+  String get ttsNotificationRowHint;
 }
 
 class _TtsLocalizationsDelegate

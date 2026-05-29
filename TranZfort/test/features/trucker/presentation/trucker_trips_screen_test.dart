@@ -8,6 +8,7 @@ import 'package:tranzfort/src/features/trucker/data/trucker_trip_repository.dart
 import 'package:tranzfort/src/features/trucker/presentation/trucker_trips_screen.dart';
 import 'package:tranzfort/src/features/trucker/providers/trucker_trips_provider.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+import 'package:tranzfort/src/l10n/tts_localizations.dart';
 
 import '../../../core/mocks.dart';
 
@@ -87,7 +88,10 @@ Widget _buildRoutedApp(TruckerTripsState state) {
       truckerTripsProvider.overrideWith((ref) => _TestTruckerTripsController(state)),
     ],
     child: MaterialApp.router(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: [
+        ...AppLocalizations.localizationsDelegates,
+        ...TtsLocalizations.localizationsDelegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
     ),

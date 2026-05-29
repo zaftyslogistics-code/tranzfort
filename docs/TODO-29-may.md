@@ -1,14 +1,14 @@
 # TODO — 29 May 2026
 
 **Date:** 2026-05-29  
-**Updated:** 2026-05-29 (pre-TTS QA sign-off)  
-**Status:** Active — pre-TTS baseline **verified** on device; TTS (§C) in progress  
-**Priority:** Play Store upload + `main` merge → continue TTS (§C)  
+**Updated:** 2026-05-30 (§H agent track complete; human ship gate open)  
+**Status:** Active — **§H code complete** (rebuild APK for `20260530130000`); **ship gate** = Play internal + merge  
+**Priority:** Play Store internal (§A) → merge (§R) → device smoke → TTS polish (§C)  
 **Working branch:** `feature/play-store-readiness-2026-05-16` (all TTS + readiness work here — no separate TTS branch)  
 **Branch baseline:** `main` (play-store readiness merged)  
 **Remote Supabase:** `jgtgdfhdtjhidywpautk` (`TranZfort/build-apk.bat`)
 
-**Related docs:** [TASK-completed-29-may.md](./TASK-completed-29-may.md) · [TTS-29-may.md](./TTS-29-may.md) · [TODO-24-april.md](./TODO-24-april.md) (checklist style reference)
+**Related docs:** [TASK-completed-29-may.md](./TASK-completed-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-29-may.md](./TTS-29-may.md) · [TODO-24-april.md](./TODO-24-april.md) · [review-18-may.md](./review-18-may.md) (audit) · [TODO-review-16-may-expanded.md](./TODO-review-16-may-expanded.md) (P3 RPC migration / CTO plan)
 
 ---
 
@@ -32,9 +32,11 @@
 | B — Release QA (manual) | 42 | 4 | §B |
 | E — Admin app | 9 | 0 | §E |
 | R — Release gate | 0 | 3 | §R |
-| C — TTS expansion | 56 | 41 | §C |
+| C — TTS expansion | 88 | 9 | §C |
 | D — Localization hygiene | 1 | 11 | §D |
 | F — Docs & repo | 1 | 5 | §F |
+| G — Post mobile test (30 May) | 12 | 1 | §G |
+| H — RPC-first & security alignment | 34 | 0 | §H |
 
 *B counts exclude TTS-only rows (B-6.3, B-6.8–B-6.10) — covered under §C.*
 
@@ -42,7 +44,24 @@
 
 All work **before §C (TTS expansion)** has been **tested on device and is working**, including verification, trips/loads, notifications, uploads, Admin queue, and §B core flows.
 
-**Still open:** Play Console internal track (§A-5.6–7), merge feature branch → `main` (§R), and remaining §C TTS items.
+**Still open (human):** Play Console (§A-5.6–7); merge → `main` (§R); §G-2.6 device spot-check; rebuild APK after `20260530130000`; optional §C/D polish.
+
+### CTO decision — 30 May 2026 (device: supplier + trucker trips OK)
+
+| Phase | When | What | Owner |
+|-------|------|------|-------|
+| **1 — Ship** | Now | Internal Play track (A-5.6–7), merge feature branch → `main` (R-1–2), quick Messages flicker check (G-2.6) | Human |
+| **2 — Align (no ship block)** | This week | Finish §H-2.4 trucker load detail RPC; fix `get_public_profile` param (`p_user_id`); verification/profile RPC (§H-3) | Agent |
+| **3 — Harden** | Before wide rollout | F16 parse/cast sweeps (H-6.3–6.5); chat/notifications inventory (H-4) | Agent |
+| **4 — Polish** | Post internal | TTS device regression (§C-6), localization hygiene (§D) | Mixed |
+
+**Locked:** No direct `trips`/`loads` table reads for list/detail when an RPC exists. **F16-001/002 already satisfied** in tree (dart-define only; no `.env` in APK assets).
+
+**Deferred (not blocking internal):** Full chat table→RPC migration; `USE_RPC_MIGRATION` flag (H-7.3).
+
+### Post mobile test sign-off (team, 2026-05-30)
+
+Core flows after TTS pass look **fine on device**. New work queued in **§G**: default **Hindi** for UI + spoken voice from auth onward, and **Messages/chat** list flicker (same class of fix as §Z-1).
 
 ---
 
@@ -349,19 +368,19 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 
 - [x] B-6.1 Notifications badge count sane
 - [x] B-6.2 Open notification → correct deep link screen
-- [ ] B-6.3 Booking approved/rejected notification TTS phrase (trucker, HI) — §C-3.3 / C-6.7
+- [x] B-6.3 Booking approved/rejected notification TTS phrase (trucker, HI) — §C-3.3 / C-6.7
 - [x] B-6.4 Chat list + open thread — send text message
 - [x] B-6.5 Chat voice record (if in scope) — no regression
 - [x] B-6.6 Profile screen — hear summary button works
 - [x] B-6.7 Settings — hear summary button works
-- [ ] B-6.8 App bar mute (`TtsActionButton`) stops auto screen speech — §C-6.4
-- [ ] B-6.9 Voice settings — pick Hindi voice + test — §C-6
-- [ ] B-6.10 Voice settings — pick English voice + test — §C-6
+- [ ] B-6.8 App bar mute (`TtsActionButton`) stops auto screen speech — verify on device (§C-6.4)
+- [ ] B-6.9 Voice settings — pick Hindi voice + test — verify on device (§C-6)
+- [ ] B-6.10 Voice settings — pick English voice + test — verify on device (§C-6)
 - [x] B-6.11 Support / report issue — submit ticket (minimal)
 
 ---
 
-## C. TTS expansion — in progress
+## C. TTS expansion — code complete (device QA pending)
 
 **Design:** [TTS-29-may.md](./TTS-29-may.md)  
 **Codegen:** `TranZfort/tool/gen_tts_l10n.ps1` (app + TTS ARBs)
@@ -459,59 +478,59 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 
 - [x] C-2.4.1 Move `Pickup Today` from `marketplace_load_card.dart` → `app_*.arb`
 - [x] C-2.4.2 Move `Pickup Tomorrow` → `app_*.arb`
-- [ ] C-2.4.3 Move month abbreviations or use `DateFormat` + l10n
+- [x] C-2.4.3 Move month abbreviations or use `DateFormat` + l10n
 - [x] C-2.4.4 Mirror pickup strings in `tts_*.arb` for speech
 
 ### C-3 Phase 2 — Detail screens & notifications
 
 #### C-3.1 Load detail
 
-- [ ] C-3.1.1 `LoadDetailTtsBuilder` — section: route & price
-- [ ] C-3.1.2 Section: material & weight
-- [ ] C-3.1.3 Section: truck requirements
-- [ ] C-3.1.4 Trucker load detail — speaker per `DetailSectionCard` header
-- [ ] C-3.1.5 Supplier load detail — same pattern
-- [ ] C-3.1.6 Optional “Read all sections” button (concat with 500 char cap)
+- [x] C-3.1.1 `LoadDetailTtsBuilder` — section: route & price
+- [x] C-3.1.2 Section: material & weight
+- [x] C-3.1.3 Section: truck requirements
+- [x] C-3.1.4 Trucker load detail — speaker per `DetailSectionCard` header
+- [x] C-3.1.5 Supplier load detail — same pattern
+- [x] C-3.1.6 Optional “Read all sections” button (concat with 500 char cap)
 
 #### C-3.2 Trip detail
 
-- [ ] C-3.2.1 Trip detail builder — route + stage
-- [ ] C-3.2.2 Section: proof / POD / LR status (trucker)
-- [ ] C-3.2.3 Section: payment / documents (supplier)
-- [ ] C-3.2.4 Speakers on high-priority sections first
+- [x] C-3.2.1 Trip detail builder — route + stage
+- [x] C-3.2.2 Section: proof / POD / LR status (trucker) — in overview utterance
+- [ ] C-3.2.3 Section: payment / documents (supplier) — deferred
+- [x] C-3.2.4 Speakers on high-priority sections first
 
 #### C-3.3 Notifications
 
 - [x] C-3.3.1 Move booking phrases from `notification_tts_service.dart` → `tts_*.arb`
 - [x] C-3.3.2 Support approved + rejected via `ttsBookingApproved` / `ttsBookingRejected`
 - [x] C-3.3.3 Match notification title case-insensitively + `bookingUpdate` type
-- [ ] C-3.3.4 Optional per-row speaker on notification tile
+- [x] C-3.3.4 Optional per-row speaker on notification tile
 
 #### C-3.4 Screen-level summaries
 
 - [x] C-3.4.1 Deleted unused `TruckerTtsSummaries` (screen summaries use `TtsScreenSummaryEffect` + ARB over time)
 - [x] C-3.4.2 Deleted unused `SupplierTtsSummaries`
-- [ ] C-3.4.3 Find Loads tab: richer summary than tab title only (product approval)
-- [ ] C-3.4.4 Filter-aware intro: “{count} loads mili” when filters applied
+- [x] C-3.4.3 Find Loads tab: richer summary than tab title only (product approval)
+- [x] C-3.4.4 Filter-aware intro: “{count} loads mili” when filters applied
 
 ### C-4 Phase 3 — Forms & verification
 
-- [ ] C-4.1 Onboarding: one `tts_onboarding_roleStep` ARB key (remove 3-title concat)
-- [ ] C-4.2 Onboarding: one key per profile completion step
-- [ ] C-4.3 Auth welcome: max 2 sentences auto-play
-- [ ] C-4.4 Post load wizard: TTS per step title + required fields list
+- [x] C-4.1 Onboarding: one `tts_onboarding_roleStep` ARB key (remove 3-title concat)
+- [x] C-4.2 Onboarding: one key per profile completion step
+- [x] C-4.3 Auth welcome: max 2 sentences auto-play
+- [x] C-4.4 Post load wizard: TTS per step title + required fields list (hero summary)
 - [ ] C-4.5 Wire `tts_focus_field.dart` on post load numeric fields (optional)
-- [ ] C-4.6 Verification step 1 photo — spoken instructions
-- [ ] C-4.7 Verification step 2 identity — spoken requirements
-- [ ] C-4.8 Verification step 3 truck/business — spoken requirements
-- [ ] C-4.9 Verification review — spoken checklist before submit
+- [x] C-4.6 Verification step 1 photo — spoken instructions
+- [x] C-4.7 Verification step 2 identity — spoken requirements
+- [x] C-4.8 Verification step 3 truck/business — spoken requirements
+- [x] C-4.9 Verification review — spoken checklist before submit
 - [ ] C-4.10 Supplier public profile — wire screen summary or remove speaker
 - [ ] C-4.11 Trucker public profile — same
 
 ### C-5 Phase 4 — Polish
 
-- [ ] C-5.1 Replay last utterance button (settings or long-press speaker)
-- [ ] C-5.2 Speech rate slider in voice settings (restore if removed)
+- [x] C-5.1 Replay last utterance button (settings or long-press speaker)
+- [x] C-5.2 Speech rate slider in voice settings (restore if removed)
 - [ ] C-5.3 Analytics event `tts_play` with `surface`, `lang`, `muted`
 - [ ] C-5.4 QA device: Samsung mid-range
 - [ ] C-5.5 QA device: Xiaomi / Redmi
@@ -529,6 +548,115 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 - [ ] C-6.6 Load missing optional fields — short utterance still valid
 - [ ] C-6.7 Booking notification spoken from ARB
 - [ ] C-6.8 Long “read all” — truncates gracefully at ~500 chars
+
+---
+
+## G. Post mobile test follow-ups — all `[x]` (2026-05-30)
+
+*Hindi default for new installs + Messages/chat load stabilization (§Z-1 pattern).*
+
+### G-1 Hindi as default language (UI text + voice, from auth)
+
+- [x] G-1.1 **Product lock:** Default = `hi` for new installs (`kDefaultAppLanguageCode`).
+- [x] G-1.2 `AppLocaleController` — resolves `hi` when no saved/profile language.
+- [x] G-1.3 First launch persists `app_language` = `hi`.
+- [x] G-1.4 `tts_audio_language` — defaults `hi`, follows UI via `syncFromUiLocale` when no override.
+- [x] G-1.5 Auth + onboarding — Hindi via app locale (no separate flash; `MaterialApp` uses `hi` until initialized).
+- [x] G-1.6 Onboarding — same locale pipeline as auth.
+- [x] G-1.7 EN toggle unchanged (`language_toggle_action`, settings).
+
+**Code:** `app_locale_providers.dart`, `tts_audio_language_provider.dart`, `auth_models.dart`, `main.dart`, `test/core/providers/app_locale_default_test.dart`.
+
+### G-2 Messages / chat flicker (parity with §Z-1)
+
+- [x] G-2.1 Reproduced on device (reported); fix applied in code.
+- [x] G-2.2 `InboxController` — debounced errors + `hasResolvedInitialLoad` + min loading 300ms.
+- [x] G-2.3 `ConversationMessagesController` — same flags + min loading on initial fetch.
+- [x] G-2.4 `shell_messages_screen.dart` — shimmer until `hasResolvedInitialLoad`.
+- [x] G-2.5 `chat_screen.dart` + `_ChatMessagesBody` — shimmer until thread resolved.
+- [ ] G-2.6 Device regression: Messages ↔ Trips ↔ Notifications — **verify on next build** (human).
+
+**Code:** `chat_providers.dart`, `shell_messages_screen.dart`, `chat_screen.dart`, `chat_message_sections.dart`.
+
+---
+
+## H. RPC-first & data-access alignment (security plan) — **code complete** `[x]`
+
+*Follow the coherent plan from [TODO-review-16-may-expanded.md](./TODO-review-16-may-expanded.md) (CTO principle **#4**: RPC-first migration) and [review-18-may.md](./review-18-may.md) (Phase 12 repository pattern, Phase 13 RPC + RLS).*
+
+**Do not** bypass RPC with direct `trips` / `loads` table reads for list/detail flows that have (or should have) a `SECURITY DEFINER` function. Realtime `.stream()` on RLS tables and Storage signed URLs are **allowed**.
+
+### H-0 Locked rules (do not regress)
+
+| Rule | Meaning |
+|------|---------|
+| **RPC for business data** | List/detail/actions that encode ownership, stage filters, or joins → Postgres RPC with `auth.uid()` checks |
+| **No client-side security** | Do not rely on RLS alone for trips/loads lists; RLS is defense-in-depth only |
+| **Dart contract** | `Repository` → `*Backend` → `_client.rpc()`; map with `parseRpcJsonbRowList` / `safeMap` for JSONB |
+| **Errors surface** | Backend rethrows RPC failures (see review-18 **F2-001**); provider debounces empty-state vs error |
+| **Exceptions** | Realtime streams (`profiles`, `notifications`, `conversations`); Storage buckets; diesel lookup (low risk) |
+
+### H-1 Trips — supplier/trucker parity `[x]` code + DB (verify on device)
+
+- [x] H-1.1 SQL: `get_trucker_trips` — join `trucks` (not `truckers`); `t.stage::text = ANY(...)`; caller = `auth.uid()` (`20260529100000`, `20260529150000`)
+- [x] H-1.2 SQL: `get_supplier_trips` — same pattern (`20260529160000`); pushed remote
+- [x] H-1.3 `SupabaseTruckerTripsBackend.fetchTrips` — RPC-only `get_trucker_trips` + `parseRpcJsonbRowList`
+- [x] H-1.4 `SupabaseSupplierTripsBackend.fetchTrips` — RPC-only `get_supplier_trips` (removed `.from('trips')`)
+- [x] H-1.5 Supplier trips: `fetchOwnRating` → `get_own_rating`; `fetchTruckerProfile` → `get_public_profile`; legacy `fetchTripDetail` → `get_supplier_trip_detail` slice (no table read)
+- [x] H-1.6 `trucker_trips_provider` / `supplier_trips_provider` — auth-gated initial load (session ready before RPC)
+- [x] H-1.7 `test/core/utils/rpc_response_parser_test.dart`
+- [x] H-1.8 **Human:** Trucker Trips — active + completed tabs load (verified 2026-05-30 install)
+- [x] H-1.9 **Human:** Supplier Trips — active + completed tabs load (verified 2026-05-30 install)
+- [x] H-1.10 **SQL:** `p3_rpc_smoke_test.sql` includes `get_supplier_trips`, `get_trucker_trips`, `get_trucker_load_detail`
+
+### H-2 Loads & marketplace (mostly aligned — audit only)
+
+- [x] H-2.1 Supplier My Loads — `get_supplier_loads_list` / `get_supplier_load_detail` RPC (P3.2)
+- [x] H-2.2 Supplier linked trips on load detail — `get_supplier_linked_trips` RPC
+- [x] H-2.3 Trucker Find Loads — consolidated marketplace feed RPC
+- [x] H-2.4a Trucker load detail — `get_trucker_load_detail` + `get_public_profile` + `get_supplier_extension` (`20260530100000`, `trucker_load_detail_repository.dart`)
+- [x] H-2.4b Trucker load detail — `get_trucker_fleet` + `get_trucker_latest_booking_for_load` (`20260530110000`; fleet RPC extended with truck_models mileage fields)
+- [x] H-2.5 Trucker marketplace — `get_supplier_contact_mobile` RPC (replaces `profiles` read for call supplier)
+
+### H-3 Verification & profiles (high — direct table reads remain)
+
+- [x] H-3.1a Verification **reads** — `get_verification_profile`, `get_supplier_verification_extension`, `get_trucker_truck_verification_counts` (`20260530110000`)
+- [x] H-3.1b Verification **writes** — `patch_verification_profile_fields` / `patch_verification_supplier_fields` (`20260530120000`)
+- [x] H-3.2 `supplier_profile_repository.dart` / `trucker_profile_repository.dart` — `get_current_user_profile` + workspace RPCs; business/dl updates via RPC
+- [x] H-3.3 `auth_repository_profile_ops.dart` — fetch via `get_current_user_profile`; `profiles` **stream** kept for realtime (documented in §H-0 exceptions)
+
+### H-4 Chat & notifications (hybrid — document then narrow table use)
+
+- [x] H-4.1 Notifications fetch/count/mark — RPC (`get_notifications`, unread count, mark read)
+- [x] H-4.2 Notifications — documented in [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) (stream required for realtime)
+- [x] H-4.3 Chat — inventory + profile paths → RPC; load/booking/message peek reads documented as deferred
+- [x] H-4.4 Chat — `parseRpcJsonbRowList` + throw on bad RPC shape (inbox + messages)
+
+### H-5 RPC contract hygiene (agent)
+
+- [x] H-5.1 Roll `parseRpcJsonbRowList` into JSONB list RPC backends (supplier loads, fleet, chat, trips)
+- [x] H-5.2 `supplier_load_repository_backend` — rethrow on failure; non-list → `FormatException` (not `[]`)
+- [x] H-5.3 Rollback stub `20260530130100_rollback_get_supplier_trips.sql.archived` (manual apply only)
+- [x] H-5.4 Smoke script §6 for `get_supplier_trips` / `get_trucker_trips` shape (`p3_rpc_smoke_test.sql`)
+
+### H-6 Security release blockers (review-18 addendum F16 — **before wide rollout**)
+
+- [x] H-6.1 **Critical:** Remove `.env` from `pubspec.yaml` assets (**F16-001**) — already absent
+- [x] H-6.2 **High:** dart-define-only Supabase config (**F16-002**) — `supabase_config.dart` has no dotenv fallback
+- [x] H-6.3 **High:** No `DateTime.parse` in `lib/` (uses `safeParseDateTime` / `DateTime.tryParse` per P1.1)
+- [x] H-6.4 **High:** Trip/dashboard/load-detail/dispute paths use `safeMap` / `parseRpcJsonbRowList` (remaining `as` only in non-repo UI/location helpers)
+- [x] H-6.5 Medium: Profile repos return `UnauthorizedFailure` when `userId == null` on fetch/update (verified)
+
+### H-7 Docs & tracking
+
+- [x] H-7.1 P3.4.9 + P3.4.10 marked in `TODO-review-16-may-expanded.md`
+- [x] H-7.2 [TASK-completed-29-may.md](./TASK-completed-29-may.md) updated
+- [x] H-7.3 `USE_RPC_MIGRATION` — **not implemented**; documented in DATA-ACCESS-ALIGNMENT + P3.0.4 note
+
+**Anti-patterns (explicitly rejected):**
+
+- Using `.from('trips').select(...)` because an RPC was broken — fix the SQL/RPC instead.
+- Duplicating trucker “table read fallback” pattern from a bad incident — both roles use RPC list functions.
 
 ---
 
@@ -594,7 +722,16 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 | 2026-05-29 | A-1.7, D-5 | Verification wizard unit tests; TTS ARB guide |
 | 2026-05-29 | §A, §B, §E | Team sign-off: pre-TTS flows tested & working on device |
 | 2026-05-29 | §R, A-5.6–7 | **Still open:** Play Console internal + merge to `main` |
-| | | |
+| 2026-05-30 | §G | Mobile smoke OK; queued Hindi default (auth+) + Messages/chat flicker |
+| 2026-05-30 | §G-1–G-2.5 | Hindi default + chat flicker implemented in code |
+| 2026-05-30 | §H-1.1–H-1.7 | Trips RPC parity: trucker/supplier list SQL + Dart backends; no direct trips table read |
+| 2026-05-30 | §H | Alignment track added; review-18 + P3 plan cross-linked |
+| 2026-05-30 | §H-1.8–1.10, CTO | Device sign-off: supplier + trucker trips OK; ship plan locked |
+| 2026-05-30 | §H-2.4a, H-6.1–2 | `get_trucker_load_detail` migration; load detail RPC; F16 config already clean |
+| 2026-05-30 | §H-2.4b, H-3.1a | Fleet/booking + verification read RPCs (`20260530110000`) |
+| 2026-05-30 | §H-3.1b–3.3 | Verification patch RPCs + workspace profile RPCs (`20260530120000`) |
+| 2026-05-30 | §H-2.5–H-7 | Marketplace contact RPC, chat/notifications docs, parser hygiene, F16 sweeps, tracking docs |
+| 2026-05-30 | `20260530130000` | `get_supplier_contact_mobile` pushed remote |
 | | | |
 
 ---
@@ -610,10 +747,13 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 | # | Tasks | Owner | Blocks |
 |---|--------|-------|--------|
 | 1 | ~~**A-1.7** Verification unit tests~~ | Agent | Done (`verification_wizard_unit_test.dart`) |
-| 2 | **A-4** Confirm 3 migrations on target Supabase (`db push` / dashboard) | Human + Agent SQL checklist | Release |
-| 3 | **A-5.1–A-5.3** `build-apk.bat` + install smoke | Human | Play upload |
-| 4 | ~~Fix remaining red tests (notifications routing)~~ | Agent | Done |
-| 5 | ~~**C-1.2.3** Voice language settings~~ | Agent | Done |
+| 2 | **A-4** Confirm migrations on target Supabase incl. §H trips RPCs (`db push` / dashboard) | Human + Agent SQL checklist | Release |
+| 3 | **H-1.8–H-1.10** Trips list device + SQL smoke (trucker + supplier) | Human | §H sign-off |
+| 4 | **A-5.1–A-5.3** `build-apk.bat` + install smoke | Human | Play upload |
+| 5 | ~~Fix remaining red tests (notifications routing)~~ | Agent | Done |
+| 6 | ~~**C-1.2.3** Voice language settings~~ | Agent | Done |
+| 7 | ~~**G-1** Hindi default UI + TTS from auth~~ | Agent | Done |
+| 8 | ~~**G-2** Messages/chat flicker~~ | Agent | Done (verify G-2.6 on device) |
 
 ### Sprint 2 — Play Store proof — *mostly done; release gate open*
 
@@ -644,7 +784,16 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 | 3 | **C-5** Polish (replay, rate slider, analytics) |
 | 4 | **C-6** TTS regression pass on 2 physical devices |
 
-### Sprint 5 — Hygiene & close (ongoing)
+### Sprint 5 — RPC-first alignment (parallel / post internal track) — *agent + human*
+
+| # | Tasks |
+|---|--------|
+| 1 | **H-2.4** Trucker load detail → RPC (highest remaining table-read surface) |
+| 2 | **H-3.1–H-3.2** Verification + profile backends → RPC |
+| 3 | **H-5.1–H-5.4** RPC parser + contract hygiene |
+| 4 | **H-6.1–H-6.4** F16 security blockers before production widen |
+
+### Sprint 6 — Hygiene & close (ongoing)
 
 | # | Tasks |
 |---|--------|
@@ -662,11 +811,13 @@ All work **before §C (TTS expansion)** has been **tested on device and is worki
 
 ## Quick priority (active queue)
 
-1. [ ] **A-5.6–A-5.7** — Play Console internal testing + release notes  
-2. [ ] **R-1–R-2** — merge `feature/play-store-readiness-2026-05-16` → `main`, push  
-3. [ ] **C-3.1–C-3.2** — detail screen TTS (agent, on feature branch)  
-4. [ ] **C-6** — device TTS regression (B-6.3, B-6.8–B-6.10) after TTS slices land  
-5. [ ] **A-1.4–A-1.6** — post-v1 polish only if needed  
+1. [ ] **A-5.6–A-5.7** — Play Console internal testing + release notes (**you**)  
+2. [ ] **R-1–R-2** — merge `feature/play-store-readiness-2026-05-16` → `main`, push (**you**)  
+3. [ ] **Rebuild APK** — `build-apk.bat` (includes `20260530130000` contact-mobile RPC)  
+4. [ ] **G-2.6** — Device: Messages ↔ Trips ↔ Notifications flicker check (**you**)  
+5. [ ] **Smoke** — Verification draft save + supplier/trucker profile settings (**you**, when ready)  
+6. [ ] **C-6 / B-6.8–10** — TTS device regression (optional)  
+7. [ ] **F-4–F-5** — Commit docs to git if desired (`git add -f docs/`) (**you**)  
 
 ---
 

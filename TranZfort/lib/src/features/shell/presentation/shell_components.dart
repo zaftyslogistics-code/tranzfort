@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../core/navigation/app_routes.dart';
 import '../../../core/navigation/route_metadata_helper.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/tts_action_button.dart';
+
+/// Pops when the router has a stack entry; otherwise [context.go] to dashboard.
+///
+/// Avoids [Navigator.pop] on routes opened via [GoRouter.go], which crashes.
+void popShellDetailRoute(BuildContext context) {
+  if (context.canPop()) {
+    context.pop();
+    return;
+  }
+
+  final location = GoRouterState.of(context).matchedLocation;
+  if (location == AppRoutes.supplierVerificationPath ||
+      location.startsWith('${AppRoutes.supplierVerificationPath}/')) {
+    context.go(AppRoutes.supplierDashboardPath);
+    return;
+  }
+  if (location == AppRoutes.truckerVerificationPath ||
+      location.startsWith('${AppRoutes.truckerVerificationPath}/')) {
+    context.go(AppRoutes.truckerDashboardPath);
+  }
+}
 
 class DetailPageScaffold extends StatelessWidget {
   final String title;
@@ -40,7 +63,7 @@ class DetailPageScaffold extends StatelessWidget {
         leading: shouldShowBackArrow
             ? IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () => Navigator.of(context).pop(),
+                onPressed: () => popShellDetailRoute(context),
               )
             : null,
         actions: [

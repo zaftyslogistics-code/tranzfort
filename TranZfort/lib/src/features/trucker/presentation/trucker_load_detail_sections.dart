@@ -60,6 +60,12 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
       destinationLng: detail.destinationLng,
       destinationLabel: detail.summary.destinationLabel,
     );
+    final ttsL10n = TtsLocalizations.of(context);
+    final loadTts = const LoadDetailTtsBuilder();
+    final overviewTts = loadTts.buildTruckerOverview(detail: detail, tts: ttsL10n, ui: l10n);
+    final truckRequirementsTts =
+        loadTts.buildTruckerTruckRequirements(detail: detail, tts: ttsL10n, ui: l10n);
+    final readAllTts = loadTts.buildTruckerAll(detail: detail, tts: ttsL10n, ui: l10n);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,6 +82,8 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: AppSpacing.sectionGap),
+        TtsReadAllButton(message: readAllTts),
+        const SizedBox(height: AppSpacing.sm),
         _LoadRoutePriceSection(
           l10n: l10n,
           detail: detail,
@@ -87,6 +95,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           formatDate: _formatDate,
           anyMatch: anyMatch,
           isSuperLoad: detail.summary.isSuperLoad,
+          ttsMessage: overviewTts,
         ),
         if (hasRoutePreview) ...[
           const SizedBox(height: AppSpacing.sectionGap),
@@ -106,6 +115,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
         const SizedBox(height: AppSpacing.sectionGap),
         DetailSectionCard(
           title: l10n.truckerLoadDetailTruckRequirementTitle,
+          ttsMessage: truckRequirementsTts,
           children: [
             Wrap(
               spacing: AppSpacing.xs,

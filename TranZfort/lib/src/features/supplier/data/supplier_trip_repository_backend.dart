@@ -1,5 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/utils/rpc_response_parser.dart';
+import '../../../core/utils/type_safety.dart';
 import 'supplier_trip_repository_models.dart';
 
 class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
@@ -18,24 +20,22 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client
-        .from('trips')
-        .select(
-          'id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, material)',
-        )
-        .eq('supplier_id', supplierId)
-        .inFilter('stage', stages)
-        .order('assigned_at', ascending: false);
+    final filteredStages = stages
+        .map((stage) => stage.trim().toLowerCase())
+        .where((stage) => stage.isNotEmpty && stage != 'pod_uploaded')
+        .toList(growable: false);
 
-    if (limit > 0) {
-      query = query.limit(limit);
-    }
-    if (offset > 0) {
-      query = query.range(offset, offset + limit - 1);
-    }
+    final response = await _client.rpc(
+      'get_supplier_trips',
+      params: <String, dynamic>{
+        'p_supplier_id': supplierId,
+        'p_stage_filter': filteredStages.isEmpty ? null : filteredStages,
+        'p_limit': limit,
+        'p_offset': offset,
+      },
+    );
 
-    final response = await query;
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    return parseRpcJsonbRowList(response);
   }
 
   @override
@@ -43,20 +43,34 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
     required String supplierId,
     required String tripId,
   }) async {
+    final consolidated = await fetchTripDetailConsolidated(
+      supplierId: supplierId,
+      tripId: tripId,
+    );
+    return safeMap(consolidated?['trip']);
+  }
+
+  @override
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({
+    required String supplierId,
+    required String tripId,
+  }) async {
     if (_client == null) {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('trips')
-        .select(
-          'id, load_id, trucker_id, truck_id, stage, assigned_at, delivered_at, pod_uploaded_at, completed_at, lr_document_path, pod_document_path, load_snapshot_summary, loads(origin_label, destination_label, route_distance_km, route_duration_minutes, pickup_date), trucks(truck_number, body_type, tyres)',
-        )
-        .eq('supplier_id', supplierId)
-        .eq('id', tripId)
-        .maybeSingle();
+    final result = await _client.rpc(
+      'get_supplier_trip_detail',
+      params: <String, dynamic>{
+        'p_trip_id': tripId,
+        'p_supplier_id': supplierId,
+      },
+    );
 
-    return response;
+    if (result is Map<String, dynamic> && result.isNotEmpty) {
+      return result;
+    }
+    return null;
   }
 
   @override
@@ -65,7 +79,15 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client.from('profiles').select('id, full_name, mobile, verification_status, avatar_url, profile_photo_document_path').eq('id', truckerId).maybeSingle();
+    final response = await _client.rpc(
+      'get_public_profile',
+      params: <String, dynamic>{'p_user_id': truckerId},
+    );
+
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -77,12 +99,18 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('ratings')
-        .select('id, score, comment, created_at')
-        .eq('reviewer_id', reviewerId)
-        .eq('load_id', loadId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_own_rating',
+      params: <String, dynamic>{
+        'p_reviewer_id': reviewerId,
+        'p_load_id': loadId,
+      },
+    );
+
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -133,25 +161,6 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
   }
 
   @override
-  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({
-    required String supplierId,
-    required String tripId,
-  }) async {
-    if (_client == null) {
-      throw const AuthException('Session unavailable');
-    }
-
-    final result = await _client.rpc(
-      'get_supplier_trip_detail',
-      params: <String, dynamic>{
-        'p_trip_id': tripId,
-        'p_supplier_id': supplierId,
-      },
-    );
-    return result as Map<String, dynamic>?;
-  }
-
-  @override
   Future<Map<String, dynamic>?> fetchTripDisputeSummary({
     required String tripId,
   }) async {
@@ -163,13 +172,11 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       'get_trip_dispute_summary',
       params: <String, dynamic>{'p_trip_id': tripId},
     );
-    if (response is List && response.isNotEmpty && response.first is Map<String, dynamic>) {
-      return response.first as Map<String, dynamic>;
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isNotEmpty) {
+      return rows.first;
     }
-    if (response is Map<String, dynamic>) {
-      return response;
-    }
-    return null;
+    return safeMap(response);
   }
 
   @override

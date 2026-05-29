@@ -103,7 +103,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final appConfig = ref.watch(appConfigProvider);
     final authScreenState = ref.watch(authScreenControllerProvider);
-    final ttsSummary = '${l10n.authWelcomeTitle}. ${l10n.authWelcomeSubtitle}';
+    final ttsSummary = limitTtsSentences(TtsLocalizations.of(context).ttsAuthWelcomeShort);
     return Scaffold(
       backgroundColor: AppColors.canvas,
       body: Stack(

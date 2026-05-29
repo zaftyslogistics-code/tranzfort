@@ -12,6 +12,7 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import '../../../core/utils/type_safety.dart';
+import '../../../core/utils/type_safety.dart';
 import 'supplier_trip_repository_models.dart';
 import 'supplier_trip_repository_backend.dart';
 
@@ -303,8 +304,8 @@ class SupplierTripsRepository {
 
   SupplierTrip _mapTrip(Map<String, dynamic> map) {
     final snapshot = map['load_snapshot_summary'];
-    final snapshotMap = snapshot is Map<String, dynamic> ? snapshot : <String, dynamic>{};
-    final loadMap = map['loads'] is Map<String, dynamic> ? map['loads'] as Map<String, dynamic> : <String, dynamic>{};
+    final snapshotMap = safeMap(snapshot) ?? <String, dynamic>{};
+    final loadMap = safeMap(map['loads']) ?? <String, dynamic>{};
     final origin = (snapshotMap['origin_label'] ?? loadMap['origin_label'] ?? 'Load').toString();
     final destination = (snapshotMap['destination_label'] ?? loadMap['destination_label'] ?? '').toString();
     final material = (snapshotMap['material'] ?? loadMap['material'] ?? 'Material pending').toString();
@@ -332,18 +333,10 @@ class SupplierTripsRepository {
     required String? podSignedUrl,
     required String? lrSignedUrl,
   }) {
-    final loadSnapshot = consolidated['load_snapshot'] is Map<String, dynamic>
-        ? consolidated['load_snapshot'] as Map<String, dynamic>
-        : <String, dynamic>{};
-    final truckMap = consolidated['truck'] is Map<String, dynamic>
-        ? consolidated['truck'] as Map<String, dynamic>
-        : <String, dynamic>{};
-    final truckerProfile = consolidated['trucker_profile'] is Map<String, dynamic>
-        ? consolidated['trucker_profile'] as Map<String, dynamic>
-        : <String, dynamic>{};
-    final disputeSummary = consolidated['dispute_summary'] is Map<String, dynamic>
-        ? consolidated['dispute_summary'] as Map<String, dynamic>
-        : null;
+    final loadSnapshot = safeMap(consolidated['load_snapshot']) ?? <String, dynamic>{};
+    final truckMap = safeMap(consolidated['truck']) ?? <String, dynamic>{};
+    final truckerProfile = safeMap(consolidated['trucker_profile']) ?? <String, dynamic>{};
+    final disputeSummary = safeMap(consolidated['dispute_summary']);
 
     final origin = (loadSnapshot['origin_label'] ?? 'Load').toString();
     final destination = (loadSnapshot['destination_label'] ?? '').toString();

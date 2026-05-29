@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
+import '../../../core/providers/app_state_providers.dart';
 import '../data/trucker_trip_repository.dart';
 
 enum TruckerTripsTab {
@@ -55,8 +56,10 @@ class TruckerTripsController extends StateNotifier<TruckerTripsState> {
   final TruckerTripsRepository _repository;
   Timer? _errorDebounceTimer;
 
-  TruckerTripsController(this._repository) : super(TruckerTripsState.initial()) {
-    load();
+  TruckerTripsController(this._repository, {bool autoLoad = true}) : super(TruckerTripsState.initial()) {
+    if (autoLoad) {
+      load();
+    }
   }
 
   void _scheduleErrorDisplay(AppFailure failure) {
@@ -117,6 +120,34 @@ class TruckerTripsController extends StateNotifier<TruckerTripsState> {
   }
 }
 
+typedef _TruckerTripsAuthGate = ({bool isResolved, bool hasSession, String? userId});
+
+final _truckerTripsAuthGateProvider = Provider<_TruckerTripsAuthGate>((ref) {
+  final auth = ref.watch(currentAuthStateProvider);
+  final userId = ref.watch(supabaseClientProvider)?.auth.currentUser?.id;
+  return (isResolved: auth.isResolved, hasSession: auth.hasSession, userId: userId);
+});
+
+bool _truckerTripsCanFetch(_TruckerTripsAuthGate gate) {
+  return gate.isResolved && gate.hasSession && gate.userId != null;
+}
+
 final truckerTripsProvider = StateNotifierProvider.autoDispose<TruckerTripsController, TruckerTripsState>((ref) {
-  return TruckerTripsController(ref.watch(truckerTripsRepositoryProvider));
+  final repository = ref.watch(truckerTripsRepositoryProvider);
+  final gate = ref.watch(_truckerTripsAuthGateProvider);
+  final canFetch = _truckerTripsCanFetch(gate);
+  final controller = TruckerTripsController(repository, autoLoad: canFetch);
+
+  ref.listen<_TruckerTripsAuthGate>(_truckerTripsAuthGateProvider, (previous, next) {
+    final wasReady = previous != null && _truckerTripsCanFetch(previous);
+    final isReady = _truckerTripsCanFetch(next);
+    if (!isReady || wasReady) {
+      return;
+    }
+    if (controller.state.trips.isEmpty) {
+      unawaited(controller.load());
+    }
+  });
+
+  return controller;
 });

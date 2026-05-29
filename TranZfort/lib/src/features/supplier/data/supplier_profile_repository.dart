@@ -92,13 +92,16 @@ class SupabaseSupplierProfileBackend implements SupplierProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('profiles')
-        .select('id, full_name, mobile, email, verification_status')
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read supplier profile');
+    }
 
-    return response;
+    final response = await _client.rpc('get_current_user_profile');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -107,13 +110,16 @@ class SupabaseSupplierProfileBackend implements SupplierProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('suppliers')
-        .select('id, company_name, business_licence_number, gst_number, total_loads_posted, active_loads_count')
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read supplier workspace profile');
+    }
 
-    return response;
+    final response = await _client.rpc('get_supplier_workspace_profile');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -125,7 +131,19 @@ class SupabaseSupplierProfileBackend implements SupplierProfileBackend {
       throw const AuthException('Supplier session is not available');
     }
 
-    await _client.from('suppliers').update(values).eq('id', userId);
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to update supplier profile');
+    }
+
+    await _client.rpc(
+      'update_supplier_business_fields',
+      params: <String, dynamic>{
+        'p_company_name': (values['company_name'] ?? '').toString(),
+        'p_business_licence_number': values['business_licence_number'],
+        'p_gst_number': values['gst_number'],
+      },
+    );
   }
 }
 

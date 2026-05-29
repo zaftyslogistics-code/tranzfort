@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_locale_providers.dart';
+
 const ttsAudioLanguagePreferenceKey = 'tts_audio_language';
 
 /// Spoken-language preference (`en` | `hi`). Defaults to UI locale until user overrides.
@@ -11,7 +13,7 @@ final ttsAudioLanguageProvider =
 });
 
 class TtsAudioLanguageNotifier extends StateNotifier<String> {
-  TtsAudioLanguageNotifier() : super('en') {
+  TtsAudioLanguageNotifier() : super(kDefaultAppLanguageCode) {
     _load();
   }
 
@@ -27,6 +29,9 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
     if (saved != null) {
       _followsAppLocale = false;
       state = saved;
+    } else {
+      _followsAppLocale = true;
+      state = kDefaultAppLanguageCode;
     }
     _loaded = true;
   }
@@ -66,7 +71,7 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
   }
 
   Future<void> clearOverride() async {
-    await followAppLocale(const Locale('en'));
+    await followAppLocale(const Locale(kDefaultAppLanguageCode));
   }
 
   static String? normalizeLanguageCode(String? code) {

@@ -150,7 +150,7 @@ void main() {
         'load-1',
       );
 
-      await Future<void>.delayed(Duration.zero);
+      await controller.load();
 
       expect(controller.state.detail, isNotNull);
       expect(controller.state.approvedTrucks, hasLength(2));
@@ -165,7 +165,7 @@ void main() {
         'load-1',
       );
 
-      await Future<void>.delayed(Duration.zero);
+      await controller.load();
       controller.selectTruck('truck-match');
       final result = await controller.submitBookingRequest();
 

@@ -17,6 +17,8 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/tts_utterance_utils.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';

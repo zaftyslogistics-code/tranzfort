@@ -1,5 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/utils/rpc_response_parser.dart';
+import '../../../core/utils/type_safety.dart';
 import 'trucker_trip_repository_models.dart';
 
 class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
@@ -18,20 +20,23 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
+    // P3.4.1 — list trips via SECURITY DEFINER RPC (no direct trips table read).
+    final filteredStages = stages
+        .map((stage) => stage.trim().toLowerCase())
+        .where((stage) => stage.isNotEmpty && stage != 'pod_uploaded')
+        .toList(growable: false);
+
     final response = await _client.rpc(
       'get_trucker_trips',
       params: <String, dynamic>{
         'p_trucker_id': truckerId,
-        'p_stage_filter': stages.isEmpty ? null : stages,
+        'p_stage_filter': filteredStages.isEmpty ? null : filteredStages,
         'p_limit': limit,
         'p_offset': offset,
       },
     );
 
-    if (response is List) {
-      return List<Map<String, dynamic>>.from(response);
-    }
-    return const <Map<String, dynamic>>[];
+    return parseRpcJsonbRowList(response);
   }
 
   @override
@@ -206,7 +211,7 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
 
     final response = await _client.rpc(
       'get_public_profile',
-      params: <String, dynamic>{'p_profile_id': supplierId},
+      params: <String, dynamic>{'p_user_id': supplierId},
     );
 
     if (response is Map<String, dynamic> && response.isNotEmpty) {
@@ -244,12 +249,10 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
       'get_trip_dispute_summary',
       params: <String, dynamic>{'p_trip_id': tripId},
     );
-    if (response is List && response.isNotEmpty && response.first is Map<String, dynamic>) {
-      return response.first as Map<String, dynamic>;
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isNotEmpty) {
+      return rows.first;
     }
-    if (response is Map<String, dynamic>) {
-      return response;
-    }
-    return null;
+    return safeMap(response);
   }
 }

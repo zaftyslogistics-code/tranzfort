@@ -160,6 +160,8 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
       },
       child: DetailPageScaffold(
         title: l10n.supplierPostLoadHeroTitle,
+        ttsSummary: '${l10n.supplierPostLoadHeroTitle}. ${l10n.supplierPostLoadHeroSubtitle}',
+        ttsScreenKey: AppRoutes.postLoadPath,
         children: [
         HeroActionCard(
           title: l10n.supplierPostLoadHeroTitle == l10n.commonPostLoadAction

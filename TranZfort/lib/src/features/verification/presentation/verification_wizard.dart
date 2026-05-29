@@ -6,6 +6,9 @@ import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../../core/widgets/tts_screen_summary_effect.dart';
+import '../../tts/data/verification_step_tts_builder.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../providers/verification_wizard_provider.dart';
 import '../providers/verification_wizard_state.dart';
@@ -71,19 +74,25 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
     );
 
     if (state.isAlreadyVerified) {
-      return _AlreadyVerifiedView(homePath: homePath);
+      return _VerificationRoutePopHandler(
+        homePath: homePath,
+        child: _AlreadyVerifiedView(homePath: homePath),
+      );
     }
 
     // Pending - show status
     if (state.isPending) {
-      return _PendingStatusView(homePath: homePath);
+      return _VerificationRoutePopHandler(
+        homePath: homePath,
+        child: _PendingStatusView(homePath: homePath),
+      );
     }
 
     return PopScope(
-      canPop: state.currentStepIndex == 0,
+      canPop: false,
       onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
-        
+
         if (state.currentStepIndex > 0) {
           final shouldPop = await _showBackDialog(context, ref, state);
           if (shouldPop && mounted) {
@@ -119,8 +128,18 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
             ),
           ],
         ),
-        body: SafeArea(
-          child: _buildStepContent(state),
+        body: Stack(
+          children: [
+            SafeArea(child: _buildStepContent(state)),
+            TtsScreenSummaryEffect(
+              summary: const VerificationStepTtsBuilder().build(
+                step: state.currentStep,
+                isTrucker: state.isTrucker,
+                tts: TtsLocalizations.of(context),
+              ),
+              screenKey: 'verification-wizard:${state.currentStep.name}',
+            ),
+          ],
         ),
       ),
     );
@@ -194,6 +213,29 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
     );
 
     return shouldExit ?? false;
+  }
+}
+
+/// Intercepts system back when there is no Navigator stack (go_router `go`).
+class _VerificationRoutePopHandler extends StatelessWidget {
+  final String homePath;
+  final Widget child;
+
+  const _VerificationRoutePopHandler({
+    required this.homePath,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (didPop) return;
+        context.go(homePath);
+      },
+      child: child,
+    );
   }
 }
 

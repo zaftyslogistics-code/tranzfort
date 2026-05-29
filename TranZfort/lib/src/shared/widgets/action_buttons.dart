@@ -108,6 +108,7 @@ class OutlineButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
+  final Widget? icon;
 
   const OutlineButton({
     super.key,
@@ -115,6 +116,7 @@ class OutlineButton extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.height = 52,
+    this.icon,
   });
 
   @override
@@ -134,7 +136,20 @@ class OutlineButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.button),
         border: Border.all(color: AppColors.primary, width: 1.5),
       ),
-      child: Text(label, style: textStyle),
+      child: icon == null
+          ? Text(label, style: textStyle)
+          : Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconTheme(
+                  data: IconThemeData(color: AppColors.primary, size: 20),
+                  child: icon!,
+                ),
+                const SizedBox(width: 8),
+                Text(label, style: textStyle),
+              ],
+            ),
     );
   }
 }

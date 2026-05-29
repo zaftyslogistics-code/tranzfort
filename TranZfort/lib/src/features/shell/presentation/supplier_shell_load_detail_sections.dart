@@ -18,6 +18,9 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/load_detail_tts_builder.dart';
+import '../../../shared/widgets/tts_read_all_button.dart';
 import '../../../features/support/providers/support_compose_providers.dart';
 import 'shell_components.dart';
 import 'supplier_shell_dashboard_sections.dart';
@@ -46,8 +49,23 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
       );
     }
 
+    final ttsL10n = detail != null ? TtsLocalizations.of(context) : null;
+    final statusLabel = detail != null
+        ? localizedSupplierDashboardLoadStatus(l10n, detail.summary.status)
+        : '';
+    final readAllMessage = detail != null && ttsL10n != null
+        ? const LoadDetailTtsBuilder().buildSupplierAll(
+            detail: detail,
+            tts: ttsL10n,
+            ui: l10n,
+            statusLabel: statusLabel,
+          )
+        : null;
+
     return DetailPageScaffold(
       title: l10n.supplierLoadDetailScreenTitle,
+      ttsSummary: readAllMessage,
+      ttsScreenKey: 'supplier-load-detail:$loadId',
       children: [
         if (state.isLoading) const LoadingShimmer(height: 120, itemCount: 4),
         if (!state.isLoading && state.failure != null && detail == null)
@@ -56,6 +74,8 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
             onRetry: () => ref.read(loadDetailProvider(loadId).notifier).load(),
           ),
         if (!state.isLoading && detail != null) ...[
+              TtsReadAllButton(message: readAllMessage ?? ''),
+              const SizedBox(height: AppSpacing.sectionGap),
               HeroActionCard(
                 title: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
@@ -237,6 +257,14 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
               ),
           DetailSectionCard(
             title: l10n.commonRouteAndScheduleTitle,
+            ttsMessage: ttsL10n != null
+                ? const LoadDetailTtsBuilder().buildSupplierRouteAndPrice(
+                    detail: detail,
+                    tts: ttsL10n,
+                    ui: l10n,
+                    statusLabel: statusLabel,
+                  )
+                : null,
             children: [
               Text(
                 l10n.supplierLoadDetailOriginCity(
@@ -286,6 +314,12 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
           ),
           DetailSectionCard(
             title: l10n.supplierLoadDetailCargoAndRequirementsTitle,
+            ttsMessage: ttsL10n != null
+                ? const LoadDetailTtsBuilder().buildSupplierMaterialAndTrucks(
+                    detail: detail,
+                    tts: ttsL10n,
+                  )
+                : null,
             children: [
               Text(l10n.supplierLoadDetailMaterial(detail.summary.material)),
               const SizedBox(height: AppSpacing.xs),

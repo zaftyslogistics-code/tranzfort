@@ -162,7 +162,7 @@ class _TruckerTripCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context);
-    final ttsL10n = TtsLocalizations.of(context);
+    final ttsL10n = lookupTtsLocalizations(Localizations.localeOf(context));
     final palette = statusPaletteFor(trip.stage);
     final stageLabel = _localizedTruckerTripsStage(l10n, trip.stage);
     final utterance = const TripListCardTtsBuilder().build(

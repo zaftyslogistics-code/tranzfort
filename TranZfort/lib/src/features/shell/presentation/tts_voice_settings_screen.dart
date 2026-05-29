@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/providers/tts_settings_provider.dart';
+import '../../../core/providers/tts_state_provider.dart';
 import '../../../core/services/tts_voice_model.dart';
 import '../../../core/services/tts_voice_selection_provider.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -10,7 +12,37 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/tts_voice_list_item.dart';
 import '../../../shared/widgets/tts_voice_test_button.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
 import 'shell_components.dart';
+
+class _SpeechRateSection extends ConsumerWidget {
+  const _SpeechRateSection();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final settings = ref.watch(ttsSettingsProvider);
+    return SectionCard(
+      title: l10n.ttsSpeechRateTitle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(l10n.ttsSpeechRateHelper, style: Theme.of(context).textTheme.bodySmall),
+          Slider(
+            value: settings.speechRate,
+            min: 0.2,
+            max: 1.0,
+            divisions: 16,
+            label: settings.speechRate.toStringAsFixed(2),
+            onChanged: settings.isLoading
+                ? null
+                : (value) => ref.read(ttsSettingsProvider.notifier).setSpeechRate(value),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 /// Screen for selecting TTS voices for Hindi and English.
 class TtsVoiceSettingsScreen extends ConsumerWidget {
@@ -68,14 +100,35 @@ class TtsVoiceSettingsScreen extends ConsumerWidget {
             onSelectVoice: (voice) => _handleVoiceSelection(context, ref, 'en', voice),
           ),
           const SizedBox(height: AppSpacing.sectionGap),
+          _SpeechRateSection(),
+          const SizedBox(height: AppSpacing.sectionGap),
           SectionCard(
-            title: 'Actions',
-            child: SizedBox(
-              width: double.infinity,
-              child: OutlineButton(
-                label: 'Refresh Voices',
-                onPressed: () => ref.read(ttsVoiceSelectionProvider.notifier).refreshVoices(),
-              ),
+            title: AppLocalizations.of(context).ttsVoiceSettingsActionsTitle,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                OutlineButton(
+                  label: AppLocalizations.of(context).ttsReplayLastAction,
+                  icon: const Icon(Icons.replay_outlined),
+                  onPressed: () {
+                    final last = ref.read(ttsLastUtteranceProvider);
+                    if (last == null || last.trim().isEmpty) {
+                      AppSnackbar.show(
+                        context: context,
+                        message: AppLocalizations.of(context).ttsReplayLastEmptyMessage,
+                        variant: AppSnackbarVariant.info,
+                      );
+                      return;
+                    }
+                    TtsCardSpeakerButton.speak(context, ref, last);
+                  },
+                ),
+                const SizedBox(height: AppSpacing.sm),
+                OutlineButton(
+                  label: AppLocalizations.of(context).ttsVoiceSettingsRefreshVoices,
+                  onPressed: () => ref.read(ttsVoiceSelectionProvider.notifier).refreshVoices(),
+                ),
+              ],
             ),
           ),
         ],

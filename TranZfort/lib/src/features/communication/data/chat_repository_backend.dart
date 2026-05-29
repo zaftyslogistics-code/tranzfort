@@ -1,9 +1,9 @@
-import 'dart:convert';
-
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/rpc_response_parser.dart';
+import '../../../core/utils/type_safety.dart';
 import 'chat_repository_models.dart';
 
 abstract class ChatBackend {
@@ -92,17 +92,14 @@ class SupabaseChatBackend implements ChatBackend {
     }
 
     final response = await _client.rpc('get_current_user_conversation_summaries');
-    
-    // Handle both List and JSONB string formats
-    if (response is List) {
-      return response.whereType<Map<String, dynamic>>().toList(growable: false);
-    } else if (response is String) {
-      final decoded = jsonDecode(response);
-      if (decoded is List) {
-        return decoded.whereType<Map<String, dynamic>>().toList(growable: false);
-      }
+
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
+      throw const ServerFailure(
+        message: 'Invalid response format from get_current_user_conversation_summaries RPC',
+      );
     }
-    return const <Map<String, dynamic>>[];
+    return rows;
   }
 
   @override
@@ -139,12 +136,12 @@ class SupabaseChatBackend implements ChatBackend {
       },
     );
     
-    if (response is! List) {
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
       throw const ServerFailure(message: 'Invalid response format from get_conversation_messages RPC');
     }
-    
-    // Reverse to ascending order for display (RPC returns DESC, display needs ASC)
-    return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
+
+    return rows.reversed.toList(growable: false);
   }
 
   @override
@@ -170,12 +167,12 @@ class SupabaseChatBackend implements ChatBackend {
       },
     );
     
-    if (response is! List) {
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
       throw const ServerFailure(message: 'Invalid response format from get_conversation_messages RPC');
     }
-    
-    // Reverse to ascending order for display (RPC returns DESC, display needs ASC)
-    return response.whereType<Map<String, dynamic>>().toList(growable: false).reversed.toList();
+
+    return rows.reversed.toList(growable: false);
   }
 
   @override
@@ -250,11 +247,16 @@ class SupabaseChatBackend implements ChatBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('profiles')
-        .select('id, full_name, mobile, verification_status')
-        .eq('id', profileId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_public_profile',
+      params: <String, dynamic>{'p_user_id': profileId},
+    );
+
+    final map = safeMap(response);
+    if (map == null || map.isEmpty) {
+      return null;
+    }
+    return map;
   }
 
   @override
@@ -263,11 +265,16 @@ class SupabaseChatBackend implements ChatBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('suppliers')
-        .select('id, company_name')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_supplier_extension',
+      params: <String, dynamic>{'p_supplier_id': supplierId},
+    );
+
+    final map = safeMap(response);
+    if (map == null || map.isEmpty) {
+      return null;
+    }
+    return map;
   }
 
   @override

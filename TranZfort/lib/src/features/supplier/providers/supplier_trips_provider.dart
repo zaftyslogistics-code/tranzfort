@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
+import '../../../core/providers/app_state_providers.dart';
 import '../data/supplier_trip_repository.dart';
 
 enum SupplierTripsTab {
@@ -55,8 +56,10 @@ class SupplierTripsController extends StateNotifier<SupplierTripsState> {
   final SupplierTripsRepository _repository;
   Timer? _errorDebounceTimer;
 
-  SupplierTripsController(this._repository) : super(SupplierTripsState.initial()) {
-    load();
+  SupplierTripsController(this._repository, {bool autoLoad = true}) : super(SupplierTripsState.initial()) {
+    if (autoLoad) {
+      load();
+    }
   }
 
   void _scheduleErrorDisplay(AppFailure failure) {
@@ -117,6 +120,34 @@ class SupplierTripsController extends StateNotifier<SupplierTripsState> {
   }
 }
 
+typedef _SupplierTripsAuthGate = ({bool isResolved, bool hasSession, String? userId});
+
+final _supplierTripsAuthGateProvider = Provider<_SupplierTripsAuthGate>((ref) {
+  final auth = ref.watch(currentAuthStateProvider);
+  final userId = ref.watch(supabaseClientProvider)?.auth.currentUser?.id;
+  return (isResolved: auth.isResolved, hasSession: auth.hasSession, userId: userId);
+});
+
+bool _supplierTripsCanFetch(_SupplierTripsAuthGate gate) {
+  return gate.isResolved && gate.hasSession && gate.userId != null;
+}
+
 final supplierTripsProvider = StateNotifierProvider.autoDispose<SupplierTripsController, SupplierTripsState>((ref) {
-  return SupplierTripsController(ref.watch(supplierTripsRepositoryProvider));
+  final repository = ref.watch(supplierTripsRepositoryProvider);
+  final gate = ref.watch(_supplierTripsAuthGateProvider);
+  final canFetch = _supplierTripsCanFetch(gate);
+  final controller = SupplierTripsController(repository, autoLoad: canFetch);
+
+  ref.listen<_SupplierTripsAuthGate>(_supplierTripsAuthGateProvider, (previous, next) {
+    final wasReady = previous != null && _supplierTripsCanFetch(previous);
+    final isReady = _supplierTripsCanFetch(next);
+    if (!isReady || wasReady) {
+      return;
+    }
+    if (controller.state.trips.isEmpty) {
+      unawaited(controller.load());
+    }
+  });
+
+  return controller;
 });

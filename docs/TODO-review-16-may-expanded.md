@@ -252,8 +252,9 @@ String safeString(dynamic value) {
     - Document how to run integration tests in Flutter
   
 - [x] **P3.0.4** Set up feature flag or environment variable for RPC migration
-  - **Decision:** Use environment variable for simplicity (no feature flag library dependency)
-  - **Environment Variable:** `USE_RPC_MIGRATION` (boolean, defaults to false)
+  - **Decision (May 30):** `USE_RPC_MIGRATION` **not implemented** — RPC paths are always on; see [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) H-7.3
+  - **Original plan:** Use environment variable for simplicity (no feature flag library dependency)
+  - **Environment Variable:** `USE_RPC_MIGRATION` (boolean, defaults to false) — **superseded**
   - **Implementation:**
     - Add `USE_RPC_MIGRATION` to `lib/core/config/app_config.dart`
     - Read via `const bool.fromEnvironment('USE_RPC_MIGRATION', defaultValue: false)`
@@ -556,13 +557,14 @@ String safeString(dynamic value) {
   - ✅ Add error handling for RPC failures
   - ⏭️ Add unit test for new implementation (deferred to P3.9.2)
   
-- [ ] **P3.4.9** E2E test trucker trip flows after RPC migration
+- [x] **P3.4.9** E2E test trucker trip flows after RPC migration — **device sign-off 2026-05-30** (active + completed tabs)
   - Test my trips list with pagination
   - Test trip detail view
   - Test LR upload during pickup
   - Test trip status transitions
   - Test supplier rating display
   - Verify no regressions compared to direct table reads
+- [x] **P3.4.10** Supplier trips parity — `get_supplier_trips` + `SupabaseSupplierTripsBackend` RPC list (**2026-05-30**, device sign-off)
 
 ### P3.5 — Fleet RPCs
 

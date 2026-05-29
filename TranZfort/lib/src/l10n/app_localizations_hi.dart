@@ -536,6 +536,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get marketplaceLoadPickupTomorrow => 'कल पिकअप';
 
   @override
+  String marketplaceLoadPickupOnDate(Object dateLabel) {
+    return 'पिकअप $dateLabel';
+  }
+
+  @override
   String supplierLoadCardPickupDate(Object value) {
     return 'Pickup $value';
   }
@@ -948,6 +953,28 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get commonHearSummary => 'सारांश सुनें';
+
+  @override
+  String get ttsReadAllSectionsAction => 'सभी सेक्शन सुनें';
+
+  @override
+  String get ttsReplayLastAction => 'फिर से सुनें';
+
+  @override
+  String get ttsReplayLastEmptyMessage =>
+      'अभी कुछ नहीं है। पहले किसी कार्ड या सेक्शन पर स्पीकर दबाएँ।';
+
+  @override
+  String get ttsSpeechRateTitle => 'बोलने की गति';
+
+  @override
+  String get ttsSpeechRateHelper => 'आवाज़ कितनी तेज़ बोले, यह समायोजित करें।';
+
+  @override
+  String get ttsVoiceSettingsActionsTitle => 'कार्रवाई';
+
+  @override
+  String get ttsVoiceSettingsRefreshVoices => 'आवाज़ें रिफ्रेश करें';
 
   @override
   String get commonVoiceMuted => 'इस डिवाइस पर आवाज मार्गदर्शन म्यूट है।';

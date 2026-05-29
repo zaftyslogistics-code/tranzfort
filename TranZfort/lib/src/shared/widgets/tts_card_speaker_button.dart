@@ -21,7 +21,7 @@ class TtsCardSpeakerButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final ttsL10n = TtsLocalizations.of(context);
+    final ttsL10n = lookupTtsLocalizations(Localizations.localeOf(context));
     final resolvedTooltip = tooltip ?? ttsL10n.ttsListenToLoadHint;
 
     return IconButton(
@@ -29,7 +29,7 @@ class TtsCardSpeakerButton extends ConsumerWidget {
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
       tooltip: resolvedTooltip,
-      onPressed: () => _speak(context, ref),
+      onPressed: () => speak(context, ref, message),
       icon: Icon(
         Icons.volume_up_rounded,
         size: 22,
@@ -38,7 +38,7 @@ class TtsCardSpeakerButton extends ConsumerWidget {
     );
   }
 
-  Future<void> _speak(BuildContext context, WidgetRef ref) async {
+  static Future<void> speak(BuildContext context, WidgetRef ref, String message) async {
     final normalized = message.trim();
     if (normalized.isEmpty) {
       return;
@@ -60,6 +60,7 @@ class TtsCardSpeakerButton extends ConsumerWidget {
       return;
     }
 
+    ref.read(ttsLastUtteranceProvider.notifier).state = normalized;
     await ref.read(ttsPlaybackControllerProvider).stop();
 
     final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(

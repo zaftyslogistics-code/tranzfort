@@ -10,6 +10,8 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/rpc_response_parser.dart';
+import '../../../core/utils/type_safety.dart';
 import 'trucker_marketplace_repository.dart';
 
 class TruckerApprovedTruck {
@@ -36,9 +38,7 @@ class TruckerApprovedTruck {
   });
 
   factory TruckerApprovedTruck.fromMap(Map<String, dynamic> map) {
-    final model = map['truck_models'] is Map<String, dynamic>
-        ? map['truck_models'] as Map<String, dynamic>
-        : <String, dynamic>{};
+    final model = safeMap(map['truck_models']) ?? <String, dynamic>{};
     return TruckerApprovedTruck(
       id: (map['id'] ?? '').toString(),
       truckNumber: (map['truck_number'] ?? '').toString(),
@@ -209,15 +209,15 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('loads')
-        .select(
-          'id, supplier_id, parent_load_id, origin_label, origin_city, origin_state, origin_lat, origin_lng, destination_label, destination_city, destination_state, destination_lat, destination_lng, route_distance_km, route_duration_minutes, route_polyline, route_snapshot_source, material, weight_tonnes, required_body_type, required_tyres, trucks_needed, trucks_booked, price_amount, price_type, advance_percentage, pickup_date, status, is_super_load, super_status, assigned_trucker_id, assigned_truck_id, published_at, created_at, updated_at',
-        )
-        .eq('id', loadId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_trucker_load_detail',
+      params: <String, dynamic>{'p_load_id': loadId},
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -226,13 +226,15 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('profiles')
-        .select('id, full_name, verification_status, avatar_url, profile_photo_document_path')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_public_profile',
+      params: <String, dynamic>{'p_user_id': supplierId},
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -241,13 +243,15 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('suppliers')
-        .select('id, company_name')
-        .eq('id', supplierId)
-        .maybeSingle();
+    final response = await _client.rpc(
+      'get_supplier_extension',
+      params: <String, dynamic>{'p_supplier_id': supplierId},
+    );
 
-    return response;
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -256,14 +260,19 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('trucks')
-        .select('id, truck_number, body_type, tyres, capacity_tonnes, truck_models(axles, payload_kg, mileage_empty_kmpl, mileage_loaded_kmpl)')
-        .eq('owner_id', truckerId)
-        .eq('status', 'verified')
-        .order('truck_number');
+    final response = await _client.rpc(
+      'get_trucker_fleet',
+      params: <String, dynamic>{
+        'p_user_id': truckerId,
+        'p_limit': 100,
+        'p_offset': 0,
+      },
+    );
 
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    final rows = parseRpcJsonbRowList(response);
+    return rows
+        .where((row) => (row['status'] ?? '').toString() == 'verified')
+        .toList(growable: false);
   }
 
   @override
@@ -272,15 +281,15 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('booking_requests')
-        .select('id, truck_id, status, decision_reason, created_at, decided_at')
-        .eq('trucker_id', truckerId)
-        .eq('load_id', loadId)
-        .order('created_at', ascending: false)
-        .limit(1);
+    final response = await _client.rpc(
+      'get_trucker_latest_booking_for_load',
+      params: <String, dynamic>{'p_load_id': loadId},
+    );
 
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return <Map<String, dynamic>>[response];
+    }
+    return const <Map<String, dynamic>>[];
   }
 
   @override
@@ -352,7 +361,8 @@ class TruckerLoadDetailRepository {
           supplier: TruckerSupplierSummary(
             id: supplierId,
             fullName: (supplierProfile['full_name'] ?? 'Supplier').toString(),
-            companyName: nullableString(supplierExtension?['company_name']),
+            companyName: nullableString(supplierExtension?['company_name']) ??
+                nullableString(supplierProfile['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
             avatarUrl: nullableString(supplierProfile['avatar_url']) ?? nullableString(supplierProfile['profile_photo_document_path']),
           ),

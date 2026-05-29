@@ -10,7 +10,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'src/core/config/supabase_config.dart';
 import 'src/core/logger/app_logger.dart';
 import 'src/core/navigation/app_router.dart';
-import 'src/core/providers/app_locale_providers.dart';
+import 'src/core/providers/app_locale_providers.dart' show appLocaleProvider, kDefaultAppLanguageCode;
 import 'src/core/providers/tts_audio_language_provider.dart';
 import 'src/core/providers/connectivity_provider.dart';
 import 'src/core/providers/app_state_providers.dart';
@@ -216,6 +216,9 @@ class TranZfortApp extends ConsumerWidget {
     final router = ref.watch(appRouterProvider);
     final localeState = ref.watch(appLocaleProvider);
     ref.listen(appLocaleProvider, (previous, next) {
+      if (!next.isInitialized) {
+        return;
+      }
       ref.read(ttsAudioLanguageProvider.notifier).syncFromUiLocale(next.locale);
     });
     ref.listen<String?>(pendingPushRouteProvider, (previous, next) {
@@ -240,7 +243,9 @@ class TranZfortApp extends ConsumerWidget {
           ),
         );
       },
-      locale: localeState.locale,
+      locale: localeState.isInitialized
+          ? localeState.locale
+          : const Locale(kDefaultAppLanguageCode),
       localizationsDelegates: const [
         ...AppLocalizations.localizationsDelegates,
         ...TtsLocalizations.localizationsDelegates,

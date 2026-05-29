@@ -149,7 +149,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
       _lastRenderedMessageCount = renderedMessages.length;
       WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
     }
-    if (!_didMarkRead && !messagesState.isLoading && messagesState.failure == null) {
+    if (!_didMarkRead &&
+        messagesState.hasResolvedInitialLoad &&
+        !messagesState.isLoading &&
+        messagesState.failure == null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (!mounted) {
           return;
@@ -261,7 +264,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                 Expanded(
                   child: Builder(
                     builder: (context) {
-                      if (inboxState.isLoading && conversation == null) {
+                      if ((!inboxState.hasResolvedInitialLoad || inboxState.isLoading) &&
+                          conversation == null) {
                         return const Padding(
                           padding: EdgeInsets.all(AppSpacing.lg),
                           child: LoadingShimmer(height: 88, itemCount: 4),
@@ -309,6 +313,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                               scrollController: _scrollController,
                               renderedMessages: renderedMessages,
                               isLoading: messagesState.isLoading,
+                              hasResolvedInitialLoad: messagesState.hasResolvedInitialLoad,
                               isLoadingOlder: messagesState.isLoadingOlder,
                               hasMoreOlderMessages: messagesState.hasMoreOlderMessages,
                               failure: messagesState.failure,

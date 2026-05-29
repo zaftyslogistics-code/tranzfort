@@ -24,6 +24,9 @@ import '../data/trucker_trip_repository.dart';
 import '../providers/trucker_trip_action_provider.dart';
 import '../providers/trucker_trip_detail_provider.dart';
 import '../providers/trucker_trip_rating_provider.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/trip_detail_tts_builder.dart';
+import '../../tts/data/tts_utterance_utils.dart';
 
 part 'trucker_trip_detail_screen_sections.dart';
 part 'trucker_trip_detail_screen_rating.dart';
@@ -44,8 +47,22 @@ class TruckerTripDetailScreen extends ConsumerWidget {
     final state = ref.watch(truckerTripDetailProvider(tripId));
     final detail = state.detail;
 
+    final ttsL10n = detail != null ? TtsLocalizations.of(context) : null;
+    final tripTtsSummary = detail != null && ttsL10n != null
+        ? joinTtsClauses([
+            const TripDetailTtsBuilder().buildTruckerOverview(
+              detail: detail,
+              tts: ttsL10n,
+              stageLabel: _localizedTripStage(l10n, detail.stage),
+              proofLabel: _localizedProofStatus(l10n, detail),
+            ),
+          ])
+        : null;
+
     return DetailPageScaffold(
       title: l10n.truckerTripDetailTitle,
+      ttsSummary: tripTtsSummary,
+      ttsScreenKey: 'trucker-trip-detail:$tripId',
       children: [
         if (state.isLoading) const LoadingShimmer(height: 120, itemCount: 4),
         if (!state.isLoading && state.failure is NotFoundFailure && detail == null)

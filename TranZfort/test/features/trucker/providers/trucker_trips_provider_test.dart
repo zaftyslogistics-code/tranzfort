@@ -96,7 +96,7 @@ void main() {
       ),
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(const Duration(milliseconds: 350));
 
     expect(controller.state.selectedTab, TruckerTripsTab.active);
     expect(controller.state.trips, hasLength(1));
@@ -114,7 +114,7 @@ void main() {
       ),
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(const Duration(milliseconds: 350));
     await controller.selectTab(TruckerTripsTab.completed);
 
     expect(controller.state.selectedTab, TruckerTripsTab.completed);
@@ -128,7 +128,7 @@ void main() {
       TruckerTripsRepository(backend, () => 'trucker-1'),
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(const Duration(milliseconds: 350));
 
     expect(controller.state.failure, isA<ServerFailure>());
     expect(controller.state.isLoading, isFalse);

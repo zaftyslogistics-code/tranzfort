@@ -9,6 +9,8 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/tts_utterance_utils.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
@@ -453,7 +455,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
     final AppLocalizations l10n = AppLocalizations.of(context);
     final profile = ref.watch(currentProfileProvider).valueOrNull;
     final onboardingState = ref.watch(onboardingControllerProvider);
-    final ttsSummary = '${l10n.onboardingCompleteProfileTitle}. ${l10n.onboardingCompleteProfileHeading}. ${l10n.onboardingCompleteProfileSubtitle}';
+    final ttsSummary = limitTtsSentences(TtsLocalizations.of(context).ttsOnboardingCompleteProfile);
 
     return PopScope(
       canPop: !_hasUnsavedChanges(),

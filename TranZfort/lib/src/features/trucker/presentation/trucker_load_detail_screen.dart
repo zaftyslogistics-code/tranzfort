@@ -30,6 +30,10 @@ import '../data/trucker_load_share_service.dart';
 import '../data/trucker_profile_repository.dart';
 import '../providers/trucker_load_detail_provider.dart';
 import '../providers/trucker_providers.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/load_detail_tts_builder.dart';
+import '../../../shared/widgets/tts_read_all_button.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
 
 part 'trucker_load_detail_sections.dart';
 part 'trucker_load_detail_shared.dart';
@@ -54,8 +58,15 @@ class TruckerLoadDetailScreen extends ConsumerWidget {
     final tripCostingService = ref.watch(tripCostingServiceProvider);
     final shareService = ref.watch(truckerLoadShareServiceProvider);
 
+    final ttsL10n = detail != null ? TtsLocalizations.of(context) : null;
+    final readAllMessage = detail != null && ttsL10n != null
+        ? const LoadDetailTtsBuilder().buildTruckerAll(detail: detail, tts: ttsL10n, ui: l10n)
+        : null;
+
     return DetailPageScaffold(
       title: l10n.truckerLoadDetailTitle,
+      ttsSummary: readAllMessage,
+      ttsScreenKey: 'trucker-load-detail:$loadId',
       bottomWidget: !state.isLoading && detail != null
           ? _StickyBookingBar(loadId: loadId)
           : null,

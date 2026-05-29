@@ -13,11 +13,13 @@ class ChatErrorCodes {
 
 class InboxState {
   final bool isLoading;
+  final bool hasResolvedInitialLoad;
   final List<ConversationPreview> conversations;
   final AppFailure? failure;
 
   const InboxState({
     required this.isLoading,
+    required this.hasResolvedInitialLoad,
     required this.conversations,
     required this.failure,
   });
@@ -25,6 +27,7 @@ class InboxState {
   factory InboxState.initial() {
     return const InboxState(
       isLoading: true,
+      hasResolvedInitialLoad: false,
       conversations: <ConversationPreview>[],
       failure: null,
     );
@@ -32,12 +35,14 @@ class InboxState {
 
   InboxState copyWith({
     bool? isLoading,
+    bool? hasResolvedInitialLoad,
     List<ConversationPreview>? conversations,
     AppFailure? failure,
     bool? clearFailure,
   }) {
     return InboxState(
       isLoading: isLoading ?? this.isLoading,
+      hasResolvedInitialLoad: hasResolvedInitialLoad ?? this.hasResolvedInitialLoad,
       conversations: conversations ?? this.conversations,
       failure: clearFailure == true ? null : failure ?? this.failure,
     );
@@ -65,6 +70,7 @@ class ChatMessageGroup {
 
 class ConversationMessagesState {
   final bool isLoading;
+  final bool hasResolvedInitialLoad;
   final bool isLoadingOlder;
   final List<ChatMessage> messages;
   final bool hasMoreOlderMessages;
@@ -72,6 +78,7 @@ class ConversationMessagesState {
 
   const ConversationMessagesState({
     required this.isLoading,
+    required this.hasResolvedInitialLoad,
     required this.isLoadingOlder,
     required this.messages,
     required this.hasMoreOlderMessages,
@@ -81,6 +88,7 @@ class ConversationMessagesState {
   factory ConversationMessagesState.initial() {
     return const ConversationMessagesState(
       isLoading: true,
+      hasResolvedInitialLoad: false,
       isLoadingOlder: false,
       messages: <ChatMessage>[],
       hasMoreOlderMessages: true,
@@ -90,6 +98,7 @@ class ConversationMessagesState {
 
   ConversationMessagesState copyWith({
     bool? isLoading,
+    bool? hasResolvedInitialLoad,
     bool? isLoadingOlder,
     List<ChatMessage>? messages,
     bool? hasMoreOlderMessages,
@@ -98,6 +107,7 @@ class ConversationMessagesState {
   }) {
     return ConversationMessagesState(
       isLoading: isLoading ?? this.isLoading,
+      hasResolvedInitialLoad: hasResolvedInitialLoad ?? this.hasResolvedInitialLoad,
       isLoadingOlder: isLoadingOlder ?? this.isLoadingOlder,
       messages: messages ?? this.messages,
       hasMoreOlderMessages: hasMoreOlderMessages ?? this.hasMoreOlderMessages,
@@ -157,34 +167,83 @@ class SendMessageState {
 }
 
 class InboxController extends StateNotifier<InboxState> {
+  static const Duration _minLoadingDuration = Duration(milliseconds: 300);
+  static const Duration _errorDebounceDuration = Duration(milliseconds: 500);
+
   final ChatRepository _repository;
+  Timer? _errorDebounceTimer;
 
   InboxController(this._repository) : super(InboxState.initial()) {
     load();
   }
 
+  void _scheduleErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(_errorDebounceDuration, () {
+      if (!mounted) {
+        return;
+      }
+      if (state.conversations.isEmpty) {
+        state = state.copyWith(
+          failure: failure,
+          isLoading: false,
+          hasResolvedInitialLoad: true,
+        );
+      }
+    });
+  }
+
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
+  }
+
+  Future<void> _ensureMinLoadingDuration(DateTime startTime) async {
+    final elapsed = DateTime.now().difference(startTime);
+    if (elapsed < _minLoadingDuration) {
+      await Future.delayed(_minLoadingDuration - elapsed);
+    }
+  }
+
   Future<void> load() async {
-    state = state.copyWith(isLoading: true, clearFailure: true);
+    final startTime = DateTime.now();
+    state = state.copyWith(isLoading: true, hasResolvedInitialLoad: false, clearFailure: true);
     final result = await _repository.getConversations();
+    await _ensureMinLoadingDuration(startTime);
+    if (!mounted) {
+      return;
+    }
     result.when(
       success: (conversations) {
+        _cancelErrorDisplay();
         state = state.copyWith(
           isLoading: false,
+          hasResolvedInitialLoad: true,
           conversations: conversations,
           clearFailure: true,
         );
       },
       failure: (failure) {
+        _scheduleErrorDisplay(failure);
         state = state.copyWith(
           isLoading: false,
-          failure: failure,
+          hasResolvedInitialLoad: true,
         );
       },
     );
   }
+
+  @override
+  void dispose() {
+    _errorDebounceTimer?.cancel();
+    super.dispose();
+  }
 }
 
 class ConversationMessagesController extends StateNotifier<ConversationMessagesState> {
+  static const Duration _minLoadingDuration = Duration(milliseconds: 300);
+  static const Duration _errorDebounceDuration = Duration(seconds: 2);
+
   final ChatRepository _repository;
   final String _conversationId;
   StreamSubscription<Result<List<ChatMessage>>>? _subscription;
@@ -197,10 +256,16 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   void _scheduleErrorDisplay(AppFailure failure) {
     _errorDebounceTimer?.cancel();
-    _errorDebounceTimer = Timer(const Duration(seconds: 2), () {
-      // Only show error if we still have no messages after debounce
+    _errorDebounceTimer = Timer(_errorDebounceDuration, () {
+      if (!mounted) {
+        return;
+      }
       if (state.messages.isEmpty) {
-        state = state.copyWith(failure: failure);
+        state = state.copyWith(
+          failure: failure,
+          isLoading: false,
+          hasResolvedInitialLoad: true,
+        );
       }
     });
   }
@@ -208,6 +273,13 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
   void _cancelErrorDisplay() {
     _errorDebounceTimer?.cancel();
     _errorDebounceTimer = null;
+  }
+
+  Future<void> _ensureMinLoadingDuration(DateTime startTime) async {
+    final elapsed = DateTime.now().difference(startTime);
+    if (elapsed < _minLoadingDuration) {
+      await Future.delayed(_minLoadingDuration - elapsed);
+    }
   }
 
   /// Merges realtime messages with existing messages by ID
@@ -261,30 +333,40 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
           final merged = _mergeMessages(state.messages, messages);
           state = state.copyWith(
             isLoading: false,
+            hasResolvedInitialLoad: true,
             messages: merged,
             clearFailure: true,
           );
         },
         failure: (failure) {
           _scheduleErrorDisplay(failure);
-          state = state.copyWith(isLoading: false);
+          state = state.copyWith(
+            isLoading: false,
+            hasResolvedInitialLoad: true,
+          );
         },
       );
     });
   }
 
   Future<void> load() async {
-    state = state.copyWith(isLoading: true, clearFailure: true);
+    final startTime = DateTime.now();
+    state = state.copyWith(isLoading: true, hasResolvedInitialLoad: false, clearFailure: true);
     // P0.6: Use paginated query with limit to prevent loading all messages at once
     final result = await _repository.getMessagesPaginated(
       _conversationId,
       limit: 50,
     );
+    await _ensureMinLoadingDuration(startTime);
+    if (!mounted) {
+      return;
+    }
     result.when(
       success: (messages) {
         _cancelErrorDisplay();
         state = state.copyWith(
           isLoading: false,
+          hasResolvedInitialLoad: true,
           messages: messages,
           hasMoreOlderMessages: messages.length >= 50,
           clearFailure: true,
@@ -292,7 +374,10 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
       },
       failure: (failure) {
         _scheduleErrorDisplay(failure);
-        state = state.copyWith(isLoading: false);
+        state = state.copyWith(
+          isLoading: false,
+          hasResolvedInitialLoad: true,
+        );
       },
     );
   }

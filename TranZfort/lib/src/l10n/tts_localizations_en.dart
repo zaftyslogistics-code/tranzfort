@@ -90,4 +90,90 @@ class TtsLocalizationsEn extends TtsLocalizations {
 
   @override
   String get ttsBookingApproved => 'Booking approved. Head to pickup.';
+
+  @override
+  String get ttsLoadDetailTruckRequirementsTitle => 'Truck requirements.';
+
+  @override
+  String ttsLoadDetailPerTruckWeight(Object tonnes) {
+    return 'Weight per truck $tonnes tonnes.';
+  }
+
+  @override
+  String ttsLoadDetailStatus(Object status) {
+    return 'Status $status.';
+  }
+
+  @override
+  String ttsLoadDetailMaterialWeight(Object material, Object tonnes) {
+    return 'Material $material, total $tonnes tonnes.';
+  }
+
+  @override
+  String ttsLoadDetailTrucksBooked(Object booked, Object needed) {
+    return '$booked of $needed trucks booked.';
+  }
+
+  @override
+  String ttsTripDetailRouteStage(Object route, Object stage) {
+    return 'Trip $route. Stage $stage.';
+  }
+
+  @override
+  String ttsTripDetailTruck(Object truckNumber) {
+    return 'Truck $truckNumber.';
+  }
+
+  @override
+  String ttsTripDetailProofStatus(Object status) {
+    return 'Proof status $status.';
+  }
+
+  @override
+  String get ttsTripDetailNextStepTitle => 'Next step.';
+
+  @override
+  String ttsFindLoadsIntro(Object count) {
+    return '$count loads available.';
+  }
+
+  @override
+  String ttsFindLoadsFilteredIntro(Object count) {
+    return '$count loads match your filters.';
+  }
+
+  @override
+  String get ttsOnboardingChooseRole =>
+      'Choose your role. Are you a trucker or a supplier?';
+
+  @override
+  String get ttsOnboardingCompleteProfile =>
+      'Complete your profile. Enter your details to continue.';
+
+  @override
+  String get ttsAuthWelcomeShort =>
+      'Welcome to TranZfort. Sign in or create an account to continue.';
+
+  @override
+  String get ttsVerificationStepPhoto =>
+      'Step one. Upload a clear profile photo.';
+
+  @override
+  String get ttsVerificationStepIdentity =>
+      'Step two. Enter Aadhaar and PAN details and upload documents.';
+
+  @override
+  String get ttsVerificationStepTruck =>
+      'Step three. Enter truck number, capacity, and upload the RC document.';
+
+  @override
+  String get ttsVerificationStepBusiness =>
+      'Step three. Enter company and business licence details and capture location.';
+
+  @override
+  String get ttsVerificationStepReview =>
+      'Review step. Confirm all details and accept terms before submit.';
+
+  @override
+  String get ttsNotificationRowHint => 'Listen to notification';
 }

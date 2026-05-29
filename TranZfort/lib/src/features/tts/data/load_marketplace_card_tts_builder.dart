@@ -10,6 +10,7 @@ class LoadMarketplaceCardTtsBuilder {
     required MarketplaceLoadItem load,
     required TtsLocalizations tts,
     required AppLocalizations ui,
+    String? pickupDateLabel,
   }) {
     final parts = <String>[
       tts.ttsLoadCardRoute(_cleanCity(load.originCity), _cleanCity(load.destinationCity)),
@@ -17,7 +18,7 @@ class LoadMarketplaceCardTtsBuilder {
         tts.ttsLoadCardMaterial(load.material.trim()),
       ..._truckClauses(load, tts, ui),
       _rateClause(load, tts),
-      _pickupClause(load, tts),
+      _pickupClause(load, tts, pickupDateLabel: pickupDateLabel),
       if (load.advancePercentage > 0)
         tts.ttsLoadCardAdvance('${load.advancePercentage}'),
     ];
@@ -67,7 +68,11 @@ class LoadMarketplaceCardTtsBuilder {
     return tts.ttsLoadCardRateFixed(amount);
   }
 
-  String _pickupClause(MarketplaceLoadItem load, TtsLocalizations tts) {
+  String _pickupClause(
+    MarketplaceLoadItem load,
+    TtsLocalizations tts, {
+    String? pickupDateLabel,
+  }) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final pickupDay = DateTime(
@@ -82,8 +87,13 @@ class LoadMarketplaceCardTtsBuilder {
     if (daysUntil == 1) {
       return tts.ttsLoadCardPickupTomorrow;
     }
-    final label = '${load.pickupDate.day}/${load.pickupDate.month}';
-    return tts.ttsLoadCardPickupOnDate(label);
+    final label = (pickupDateLabel ?? '').trim();
+    if (label.isNotEmpty) {
+      return tts.ttsLoadCardPickupOnDate(label);
+    }
+    return tts.ttsLoadCardPickupOnDate(
+      '${load.pickupDate.day}/${load.pickupDate.month}/${load.pickupDate.year}',
+    );
   }
 
   static String _cleanCity(String city) => city.trim();

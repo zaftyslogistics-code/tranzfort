@@ -36,6 +36,36 @@ class NotificationTtsService {
     );
   }
 
+  /// Short utterance for a notification row speaker (title + body, or booking phrase).
+  String utteranceForRow(
+    AppNotification notification, {
+    required AppUserRole role,
+    required String languageCode,
+  }) {
+    if (role == AppUserRole.trucker) {
+      final booking = _bookingPhrase(notification, languageCode: languageCode);
+      if (booking != null) {
+        return booking;
+      }
+    }
+    final title = (notification.titleText ?? '').trim();
+    final body = (notification.bodyText ?? '').trim();
+    return joinNotificationUtterance(title, body);
+  }
+
+  static String joinNotificationUtterance(String title, String body) {
+    if (title.isEmpty && body.isEmpty) {
+      return '';
+    }
+    if (title.isEmpty) {
+      return body;
+    }
+    if (body.isEmpty) {
+      return title;
+    }
+    return '$title. $body';
+  }
+
   String? _bookingPhrase(
     AppNotification notification, {
     required String languageCode,

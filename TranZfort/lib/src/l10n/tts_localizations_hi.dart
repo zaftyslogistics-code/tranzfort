@@ -91,4 +91,90 @@ class TtsLocalizationsHi extends TtsLocalizations {
   @override
   String get ttsBookingApproved =>
       'Booking manjoor ho gaya. Pickup ki taraf chalein.';
+
+  @override
+  String get ttsLoadDetailTruckRequirementsTitle => 'Truck ki zaroorat.';
+
+  @override
+  String ttsLoadDetailPerTruckWeight(Object tonnes) {
+    return 'Har truck par $tonnes ton.';
+  }
+
+  @override
+  String ttsLoadDetailStatus(Object status) {
+    return 'Status $status.';
+  }
+
+  @override
+  String ttsLoadDetailMaterialWeight(Object material, Object tonnes) {
+    return 'Maal $material, kul $tonnes ton.';
+  }
+
+  @override
+  String ttsLoadDetailTrucksBooked(Object booked, Object needed) {
+    return '$booked mein se $needed truck book.';
+  }
+
+  @override
+  String ttsTripDetailRouteStage(Object route, Object stage) {
+    return 'Trip $route. Stage $stage.';
+  }
+
+  @override
+  String ttsTripDetailTruck(Object truckNumber) {
+    return 'Truck $truckNumber.';
+  }
+
+  @override
+  String ttsTripDetailProofStatus(Object status) {
+    return 'Proof status $status.';
+  }
+
+  @override
+  String get ttsTripDetailNextStepTitle => 'Agla step.';
+
+  @override
+  String ttsFindLoadsIntro(Object count) {
+    return '$count load uplabdh.';
+  }
+
+  @override
+  String ttsFindLoadsFilteredIntro(Object count) {
+    return 'Filter par $count load mili.';
+  }
+
+  @override
+  String get ttsOnboardingChooseRole =>
+      'Apna role chunein. Aap trucker hain ya supplier?';
+
+  @override
+  String get ttsOnboardingCompleteProfile =>
+      'Profile poori karein. Aage badhne ke liye details bharein.';
+
+  @override
+  String get ttsAuthWelcomeShort =>
+      'TranZfort mein aapka swagat hai. Aage badhne ke liye sign in karein.';
+
+  @override
+  String get ttsVerificationStepPhoto =>
+      'Pehla step. Saaf profile photo upload karein.';
+
+  @override
+  String get ttsVerificationStepIdentity =>
+      'Doosra step. Aadhaar aur PAN details aur documents upload karein.';
+
+  @override
+  String get ttsVerificationStepTruck =>
+      'Teesra step. Truck number, capacity aur RC document upload karein.';
+
+  @override
+  String get ttsVerificationStepBusiness =>
+      'Teesra step. Company aur licence details aur location capture karein.';
+
+  @override
+  String get ttsVerificationStepReview =>
+      'Review step. Submit se pehle sab details aur terms confirm karein.';
+
+  @override
+  String get ttsNotificationRowHint => 'Notification sunein';
 }

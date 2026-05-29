@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/type_safety.dart';
 
 class TruckerDashboardStats {
   final int activeBids;
@@ -62,13 +63,8 @@ class SupabaseTruckerDashboardBackend implements TruckerDashboardBackend {
       params: {'p_trucker_id': truckerId},
     );
 
-    // RPC returns JSONB, handle both Map and String formats
-    final Map<String, dynamic> row;
-    if (response is Map<String, dynamic>) {
-      row = response;
-    } else if (response is String) {
-      row = jsonDecode(response) as Map<String, dynamic>;
-    } else {
+    final row = safeMap(response) ?? (response is String ? safeMap(jsonDecode(response)) : null);
+    if (row == null || row.isEmpty) {
       throw const ServerFailure(message: 'Unexpected dashboard response format');
     }
 

@@ -4,6 +4,7 @@ import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
+import 'tts_card_speaker_button.dart';
 
 class HeroActionCard extends StatelessWidget {
   final String title;
@@ -540,15 +541,18 @@ class StandardListCard extends StatelessWidget {
 class DetailSectionCard extends StatelessWidget {
   final String title;
   final List<Widget> children;
+  final String? ttsMessage;
 
   const DetailSectionCard({
     super.key,
     required this.title,
     required this.children,
+    this.ttsMessage,
   });
 
   @override
   Widget build(BuildContext context) {
+    final spokenMessage = ttsMessage?.trim();
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardSurface,
@@ -561,11 +565,20 @@ class DetailSectionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: AppColors.textPrimary,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                ),
+                if (spokenMessage != null && spokenMessage.isNotEmpty)
+                  TtsCardSpeakerButton(message: spokenMessage),
+              ],
             ),
             const SizedBox(height: AppSpacing.md),
             ...children,

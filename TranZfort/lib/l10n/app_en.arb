@@ -181,6 +181,12 @@
   },
   "marketplaceLoadPickupToday": "Pickup Today",
   "marketplaceLoadPickupTomorrow": "Pickup Tomorrow",
+  "marketplaceLoadPickupOnDate": "Pickup {dateLabel}",
+  "@marketplaceLoadPickupOnDate": {
+    "placeholders": {
+      "dateLabel": {}
+    }
+  },
   "supplierLoadCardPickupDate": "Pickup {value}",
   "supplierLoadCardTrucks": "{booked}/{needed} trucks booked",
   "supplierLoadCardTrackLoad": "Track load",
@@ -368,6 +374,13 @@
   "chatSendAction": "Send",
   "@_sectionCommonVoice": "â•â•â• Common Voice & TTS â•â•â•",
   "commonHearSummary": "Hear summary",
+  "ttsReadAllSectionsAction": "Read all sections",
+  "ttsReplayLastAction": "Replay last",
+  "ttsReplayLastEmptyMessage": "Nothing to replay yet. Tap a speaker on a card or section first.",
+  "ttsSpeechRateTitle": "Speech rate",
+  "ttsSpeechRateHelper": "Adjust how fast the voice reads aloud.",
+  "ttsVoiceSettingsActionsTitle": "Actions",
+  "ttsVoiceSettingsRefreshVoices": "Refresh voices",
   "commonVoiceMuted": "Voice guidance is muted on this device.",
   "commonVoiceUnavailable": "Voice guidance is unavailable right now.",
   "@_sectionNotifications": "â•â•â• Notifications â•â•â•",

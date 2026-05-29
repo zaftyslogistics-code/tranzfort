@@ -19,6 +19,8 @@ import '../data/supplier_trip_repository.dart';
 import '../providers/supplier_trip_action_provider.dart';
 import '../providers/supplier_trip_detail_provider.dart';
 import '../providers/supplier_trip_rating_provider.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/trip_detail_tts_builder.dart';
 
 class SupplierTripDetailScreen extends ConsumerWidget {
   final String tripId;
@@ -34,8 +36,20 @@ class SupplierTripDetailScreen extends ConsumerWidget {
     final state = ref.watch(supplierTripDetailProvider(tripId));
     final detail = state.detail;
 
+    final ttsL10n = detail != null ? TtsLocalizations.of(context) : null;
+    final tripTtsSummary = detail != null && ttsL10n != null
+        ? const TripDetailTtsBuilder().buildSupplierDetailOverview(
+            detail: detail,
+            tts: ttsL10n,
+            stageLabel: _localizedSupplierTripStage(l10n, detail.stage),
+            proofLabel: _supplierTripProofLabel(l10n, detail),
+          )
+        : null;
+
     return DetailPageScaffold(
       title: l10n.supplierTripDetailTitle,
+      ttsSummary: tripTtsSummary,
+      ttsScreenKey: 'supplier-trip-detail:$tripId',
       children: [
         if (state.isLoading) const LoadingShimmer(height: 120, itemCount: 4),
         if (!state.isLoading && state.failure is NotFoundFailure && detail == null)
@@ -76,6 +90,21 @@ String _localizedSupplierTripVerificationStatus(AppLocalizations l10n, String st
 
 String _localizedSupplierTripStage(AppLocalizations l10n, String stage) {
   return l10n.tripStageValue(stage.trim().toLowerCase());
+}
+
+String _supplierTripProofLabel(AppLocalizations l10n, SupplierTripDetail detail) {
+  final hasPod = (detail.podDocumentPath ?? '').trim().isNotEmpty || detail.podSignedUrl != null;
+  final hasLr = (detail.lrDocumentPath ?? '').trim().isNotEmpty || detail.lrSignedUrl != null;
+  final normalized = hasPod
+      ? 'pod_uploaded'
+      : hasLr
+          ? 'lr_uploaded'
+          : switch (detail.stage.trim().toLowerCase()) {
+              'delivered' => 'awaiting_pod',
+              'proof_submitted' => 'proof_submitted',
+              _ => 'proof_pending',
+            };
+  return l10n.proofStatusValue(normalized);
 }
 
 class _CompletedTripRatingSection extends ConsumerStatefulWidget {
@@ -249,6 +278,13 @@ class _SupplierTripDetailBody extends ConsumerWidget {
     final l10n = AppLocalizations.of(context);
     final actionState = ref.watch(supplierTripActionProvider(detail.id));
     final confirmAllowed = detail.stage == 'proof_submitted';
+    final ttsL10n = TtsLocalizations.of(context);
+    final overviewTts = const TripDetailTtsBuilder().buildSupplierDetailOverview(
+      detail: detail,
+      tts: ttsL10n,
+      stageLabel: _localizedSupplierTripStage(l10n, detail.stage),
+      proofLabel: _supplierTripProofLabel(l10n, detail),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -485,6 +521,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
         const SizedBox(height: 16),
         DetailSectionCard(
           title: l10n.commonRouteAndScheduleTitle,
+          ttsMessage: overviewTts,
           children: [
             Text(l10n.supplierTripDetailOriginLabel(detail.originLabel)),
             const SizedBox(height: 4),

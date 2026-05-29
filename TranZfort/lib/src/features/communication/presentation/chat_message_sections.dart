@@ -4,6 +4,7 @@ class _ChatMessagesBody extends StatelessWidget {
   final ScrollController scrollController;
   final List<_RenderedChatMessage> renderedMessages;
   final bool isLoading;
+  final bool hasResolvedInitialLoad;
   final bool isLoadingOlder;
   final bool hasMoreOlderMessages;
   final AppFailure? failure;
@@ -14,6 +15,7 @@ class _ChatMessagesBody extends StatelessWidget {
     required this.scrollController,
     required this.renderedMessages,
     required this.isLoading,
+    required this.hasResolvedInitialLoad,
     this.isLoadingOlder = false,
     this.hasMoreOlderMessages = false,
     required this.failure,
@@ -24,7 +26,7 @@ class _ChatMessagesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
-    if (isLoading) {
+    if (!hasResolvedInitialLoad || isLoading) {
       return const Padding(
         padding: EdgeInsets.all(AppSpacing.lg),
         child: LoadingShimmer(height: 72, itemCount: 5),

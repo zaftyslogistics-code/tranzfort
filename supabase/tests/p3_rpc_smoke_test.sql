@@ -11,7 +11,19 @@ WHERE proname IN (
   'get_supplier_loads_list',
   'get_supplier_load_detail',
   'get_supplier_linked_trips',
+  'get_supplier_trips',
   'get_trucker_trips',
+  'get_trucker_load_detail',
+  'get_trucker_latest_booking_for_load',
+  'get_verification_profile',
+  'get_supplier_verification_extension',
+  'get_trucker_truck_verification_counts',
+  'get_supplier_workspace_profile',
+  'get_trucker_workspace_profile',
+  'patch_verification_profile_fields',
+  'patch_verification_supplier_fields',
+  'update_supplier_business_fields',
+  'update_trucker_dl_number',
   'get_trip_detail',
   'update_trip_lr',
   'get_own_rating',
@@ -44,3 +56,8 @@ SELECT prosrc
 FROM pg_proc 
 WHERE proname = 'get_support_ticket_messages';
 -- Should contain: created_at < p_before_created_at OR (created_at = p_before_created_at AND id < ...)
+
+-- 6. get_supplier_trips / get_trucker_trips shape (authenticated trucker/supplier session)
+-- SELECT jsonb_array_length(COALESCE(get_supplier_trips(auth.uid(), ARRAY['assigned','in_transit']::text[], 5, 0), '[]'::jsonb));
+-- SELECT jsonb_array_length(COALESCE(get_trucker_trips(auth.uid(), ARRAY['assigned','in_transit']::text[], 5, 0), '[]'::jsonb));
+-- Expected: JSON array; each element has id, load_id, stage, origin_city, destination_city (or equivalent keys per migration)

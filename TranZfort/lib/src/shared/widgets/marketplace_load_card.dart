@@ -42,10 +42,12 @@ class MarketplaceLoadCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final ttsL10n = TtsLocalizations.of(context);
+    final pickupDateLabel = MaterialLocalizations.of(context).formatMediumDate(load.pickupDate);
     final loadUtterance = const LoadMarketplaceCardTtsBuilder().build(
       load: load,
       tts: ttsL10n,
       ui: l10n,
+      pickupDateLabel: pickupDateLabel,
     );
     final tonnes = load.weightTonnes % 1 == 0
         ? load.weightTonnes.toStringAsFixed(0)
@@ -316,18 +318,8 @@ class MarketplaceLoadCard extends ConsumerWidget {
     if (daysUntil == 1) {
       return l10n.marketplaceLoadPickupTomorrow;
     }
-    if (daysUntil > 0 && daysUntil <= 7) {
-      return 'Pickup ${pickupDate.day} ${_getMonthAbbreviation(pickupDate.month)}';
-    }
-    return '${pickupDate.day} ${_getMonthAbbreviation(pickupDate.month)}';
-  }
-
-  String _getMonthAbbreviation(int month) {
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ];
-    return months[month - 1];
+    final dateLabel = MaterialLocalizations.of(context).formatMediumDate(pickupDate);
+    return l10n.marketplaceLoadPickupOnDate(dateLabel);
   }
 
   static String _localizedBodyType(AppLocalizations l10n, String? bodyType) {

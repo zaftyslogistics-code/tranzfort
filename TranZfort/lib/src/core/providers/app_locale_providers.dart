@@ -9,6 +9,9 @@ import 'app_state_providers.dart';
 
 const _appLanguagePreferenceKey = 'app_language';
 
+/// Default UI language for new installs (India / low-literacy launch).
+const String kDefaultAppLanguageCode = 'hi';
+
 class AppLocaleState {
   final Locale locale;
   final bool isInitialized;
@@ -24,7 +27,7 @@ class AppLocaleState {
 
   factory AppLocaleState.initial() {
     return const AppLocaleState(
-      locale: Locale('en'),
+      locale: Locale(kDefaultAppLanguageCode),
       isInitialized: false,
       isSaving: false,
       failure: null,
@@ -63,10 +66,13 @@ class AppLocaleController extends StateNotifier<AppLocaleState> {
     final preferences = await SharedPreferences.getInstance();
     final savedLanguageCode = _normalizeLanguageCode(preferences.getString(_appLanguagePreferenceKey));
     final profileLanguageCode = _normalizeLanguageCode(_profileLanguageCode);
-    // Default to 'en' (English) to align with UserProfile.preferredLanguage default
-    final resolvedLanguageCode = savedLanguageCode ?? profileLanguageCode ?? 'en';
+    final resolvedLanguageCode =
+        savedLanguageCode ?? profileLanguageCode ?? kDefaultAppLanguageCode;
     if (savedLanguageCode == null) {
-      await preferences.setString(_appLanguagePreferenceKey, profileLanguageCode ?? 'en');
+      await preferences.setString(
+        _appLanguagePreferenceKey,
+        profileLanguageCode ?? kDefaultAppLanguageCode,
+      );
     }
     if (!mounted) {
       return;

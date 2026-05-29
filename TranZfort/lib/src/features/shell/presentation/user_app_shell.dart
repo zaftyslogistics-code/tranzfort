@@ -15,6 +15,9 @@ import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../notifications/providers/notification_providers.dart';
+import '../../trucker/providers/find_loads_provider.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/find_loads_tab_tts_builder.dart';
 
 class UserAppShell extends ConsumerStatefulWidget {
   final String currentLocation;
@@ -42,6 +45,12 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     final currentIndex = _resolveIndex(widget.currentLocation, tabs);
     final currentTab = tabs[currentIndex];
     final topLevel = _isTopLevel(widget.currentLocation, tabs);
+    final tabTtsSummary = _tabTtsSummary(
+      context: context,
+      role: widget.role,
+      currentTab: currentTab,
+      fallback: currentTab.title,
+    );
     final shouldProtectBack = _shouldProtectBackButton(widget.currentLocation, tabs);
     final unreadNotificationCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
 
@@ -52,6 +61,13 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
       canPop: canPop,
       onPopInvokedWithResult: (didPop, result) {
         if (didPop) return;
+
+        if (_isVerificationRoute(_normalizeRoute(widget.currentLocation))) {
+          context.go(AppRoutes.homeForRole(
+            widget.role == AppUserRole.supplier ? 'supplier' : 'trucker',
+          ));
+          return;
+        }
 
         // Handle back button on top-level routes
         if (shouldProtectBack) {
@@ -121,7 +137,7 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
             ),
             if (topLevel)
               TtsScreenSummaryEffect(
-                summary: currentTab.title,
+                summary: tabTtsSummary,
                 screenKey: '${widget.role.name}:${currentTab.route}',
               ),
           ],
@@ -266,6 +282,15 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     return isTabRoute || isNotifications;
   }
 
+  bool _isVerificationRoute(String normalizedLocation) {
+    final supplier = _normalizeRoute(AppRoutes.supplierVerificationPath);
+    final trucker = _normalizeRoute(AppRoutes.truckerVerificationPath);
+    return normalizedLocation == supplier ||
+        normalizedLocation == trucker ||
+        normalizedLocation.startsWith('$supplier/') ||
+        normalizedLocation.startsWith('$trucker/');
+  }
+
   int _resolveIndex(String location, List<_ShellTab> tabs) {
     final normalizedLocation = _normalizeRoute(location);
     final index = tabs.indexWhere((tab) => tab.matchesLocation(normalizedLocation));
@@ -280,6 +305,23 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     return location.endsWith('/') && location.length > 1
         ? location.substring(0, location.length - 1)
         : location;
+  }
+
+  String _tabTtsSummary({
+    required BuildContext context,
+    required AppUserRole role,
+    required _ShellTab currentTab,
+    required String fallback,
+  }) {
+    if (role != AppUserRole.trucker || currentTab.route != AppRoutes.findLoadsPath) {
+      return fallback;
+    }
+    final findLoadsState = ref.watch(findLoadsProvider);
+    if (findLoadsState.isInitialLoading) {
+      return fallback;
+    }
+    final tts = TtsLocalizations.of(context);
+    return const FindLoadsTabTtsBuilder().build(state: findLoadsState, tts: tts);
   }
 }
 

@@ -11,6 +11,7 @@ class _LoadRoutePriceSection extends StatelessWidget {
   final String Function(BuildContext, DateTime) formatDate;
   final bool anyMatch;
   final bool isSuperLoad;
+  final String? ttsMessage;
 
   const _LoadRoutePriceSection({
     required this.l10n,
@@ -23,6 +24,7 @@ class _LoadRoutePriceSection extends StatelessWidget {
     required this.formatDate,
     required this.anyMatch,
     required this.isSuperLoad,
+    this.ttsMessage,
   });
 
   @override
@@ -51,16 +53,25 @@ class _LoadRoutePriceSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  routeLabel,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                    letterSpacing: -0.3,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        routeLabel,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                          letterSpacing: -0.3,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    if ((ttsMessage ?? '').trim().isNotEmpty)
+                      TtsCardSpeakerButton(message: ttsMessage!.trim()),
+                  ],
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Wrap(

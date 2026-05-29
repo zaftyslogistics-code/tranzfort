@@ -21,7 +21,7 @@ class UserProfile {
     required this.mobile,
     required this.email,
     required this.roleType,
-    this.preferredLanguage = 'en',
+    this.preferredLanguage = 'hi',
     required this.isBanned,
     required this.accountDeletionStatus,
     required this.trustSafetyStatus,
@@ -90,9 +90,9 @@ class UserProfile {
       return normalized;
     }
     if (normalized.isNotEmpty) {
-      AppLogger.warning('Unexpected language value, defaulting to en', scope: 'auth', error: normalized);
+      AppLogger.warning('Unexpected language value, defaulting to hi', scope: 'auth', error: normalized);
     }
-    return 'en';
+    return 'hi';
   }
 }
 

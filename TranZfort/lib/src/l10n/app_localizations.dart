@@ -1046,6 +1046,12 @@ abstract class AppLocalizations {
   /// **'Pickup Tomorrow'**
   String get marketplaceLoadPickupTomorrow;
 
+  /// No description provided for @marketplaceLoadPickupOnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup {dateLabel}'**
+  String marketplaceLoadPickupOnDate(Object dateLabel);
+
   /// No description provided for @supplierLoadCardPickupDate.
   ///
   /// In en, this message translates to:
@@ -1765,6 +1771,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hear summary'**
   String get commonHearSummary;
+
+  /// No description provided for @ttsReadAllSectionsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Read all sections'**
+  String get ttsReadAllSectionsAction;
+
+  /// No description provided for @ttsReplayLastAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Replay last'**
+  String get ttsReplayLastAction;
+
+  /// No description provided for @ttsReplayLastEmptyMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing to replay yet. Tap a speaker on a card or section first.'**
+  String get ttsReplayLastEmptyMessage;
+
+  /// No description provided for @ttsSpeechRateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Speech rate'**
+  String get ttsSpeechRateTitle;
+
+  /// No description provided for @ttsSpeechRateHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Adjust how fast the voice reads aloud.'**
+  String get ttsSpeechRateHelper;
+
+  /// No description provided for @ttsVoiceSettingsActionsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions'**
+  String get ttsVoiceSettingsActionsTitle;
+
+  /// No description provided for @ttsVoiceSettingsRefreshVoices.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh voices'**
+  String get ttsVoiceSettingsRefreshVoices;
 
   /// No description provided for @commonVoiceMuted.
   ///

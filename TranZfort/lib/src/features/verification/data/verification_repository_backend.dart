@@ -29,14 +29,16 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('profiles')
-        .select(
-          // P0.7: last4 only; pan_number kept as fallback for rows not yet backfilled
-          'id, user_role_type, verification_status, verification_rejection_reason, verification_feedback_json, aadhaar_last4, aadhaar_front_document_path, aadhaar_back_document_path, pan_last4, pan_number, pan_document_path, profile_photo_document_path',
-        )
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read verification profile');
+    }
+
+    final response = await _client.rpc('get_verification_profile');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -45,13 +47,16 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return _client
-        .from('suppliers')
-        .select(
-          'id, company_name, business_licence_document_path, gst_certificate_document_path, verification_location_city, verification_location_state, verification_location_lat, verification_location_lng, business_licence_number, gst_number',
-        )
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read supplier verification data');
+    }
+
+    final response = await _client.rpc('get_supplier_verification_extension');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -60,8 +65,8 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client.from('trucks').select('id').eq('owner_id', userId).eq('status', 'verified');
-    return response.length;
+    final counts = await _fetchTruckVerificationCounts(userId);
+    return counts['approved_count'] ?? 0;
   }
 
   @override
@@ -70,15 +75,35 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client.from('trucks').select('id, status, rc_document_path').eq('owner_id', userId);
-    return response
-        .whereType<Map<String, dynamic>>()
-        .where(
-          (row) =>
-              (VerificationDetail.nullableString(row['rc_document_path']) ?? '').isNotEmpty &&
-              (row['status'] ?? '').toString().trim().toLowerCase() != 'archived',
-        )
-        .length;
+    final counts = await _fetchTruckVerificationCounts(userId);
+    return counts['verification_ready_count'] ?? 0;
+  }
+
+  Future<Map<String, int>> _fetchTruckVerificationCounts(String userId) async {
+    final currentUserId = _client!.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read truck verification counts');
+    }
+
+    final response = await _client!.rpc('get_trucker_truck_verification_counts');
+    if (response is! Map<String, dynamic>) {
+      return const {'approved_count': 0, 'verification_ready_count': 0};
+    }
+
+    return {
+      'approved_count': _readCount(response['approved_count']),
+      'verification_ready_count': _readCount(response['verification_ready_count']),
+    };
+  }
+
+  static int _readCount(Object? value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    return int.tryParse(value?.toString() ?? '') ?? 0;
   }
 
   @override
@@ -87,7 +112,19 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Verification session is not available');
     }
 
-    await _client.from('profiles').update(values).eq('id', userId);
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to update verification profile');
+    }
+
+    if (values.isEmpty) {
+      return;
+    }
+
+    await _client.rpc(
+      'patch_verification_profile_fields',
+      params: <String, dynamic>{'p_patch': values},
+    );
   }
 
   @override
@@ -96,7 +133,19 @@ class SupabaseVerificationBackend implements VerificationBackend {
       throw const AuthException('Verification session is not available');
     }
 
-    await _client.from('suppliers').update(values).eq('id', userId);
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to update supplier verification data');
+    }
+
+    if (values.isEmpty) {
+      return;
+    }
+
+    await _client.rpc(
+      'patch_verification_supplier_fields',
+      params: <String, dynamic>{'p_patch': values},
+    );
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../../core/logger/app_logger.dart';
+import '../../../core/utils/rpc_response_parser.dart';
 import 'supplier_load_models.dart';
 
 abstract class SupplierLoadBackend {
@@ -83,15 +84,16 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
         },
       );
 
-      AppLogger.info('fetchMyLoads: RPC response type: ${response.runtimeType}', scope: 'supplier_load_backend');
-
-      if (response is List) {
-        AppLogger.info('fetchMyLoads: RPC returned ${response.length} rows', scope: 'supplier_load_backend');
-        return List<Map<String, dynamic>>.from(response);
+      final rows = parseRpcJsonbRowList(response);
+      AppLogger.info('fetchMyLoads: RPC returned ${rows.length} rows', scope: 'supplier_load_backend');
+      if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
+        AppLogger.error(
+          'fetchMyLoads: unexpected RPC response type: ${response.runtimeType}',
+          scope: 'supplier_load_backend',
+        );
+        throw FormatException('Unexpected get_supplier_loads_list response: ${response.runtimeType}');
       }
-      
-      AppLogger.warning('fetchMyLoads: RPC returned non-list: ${response.runtimeType}', scope: 'supplier_load_backend');
-      return const <Map<String, dynamic>>[];
+      return rows;
     } catch (error, stackTrace) {
       AppLogger.error('fetchMyLoads: RPC call failed', scope: 'supplier_load_backend', error: error, stackTrace: stackTrace);
       rethrow;
@@ -144,13 +146,12 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       
       AppLogger.info('[fetchBookingRequests] RPC returned response type: ${response.runtimeType}');
       
-      if (response is List) {
-        AppLogger.info('[fetchBookingRequests] RPC returned ${response.length} rows');
-        return List<Map<String, dynamic>>.from(response);
-      } else {
-        AppLogger.warning('[fetchBookingRequests] RPC returned non-list response: $response');
-        return [];
+      final rows = parseRpcJsonbRowList(response);
+      AppLogger.info('[fetchBookingRequests] RPC returned ${rows.length} rows');
+      if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
+        throw FormatException('Unexpected get_supplier_booking_requests response: ${response.runtimeType}');
       }
+      return rows;
     } catch (error, stackTrace) {
       AppLogger.error('[fetchBookingRequests] ERROR: $error');
       AppLogger.error('   Error type: ${error.runtimeType}');
@@ -182,10 +183,11 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       },
     );
 
-    if (response is List) {
-      return List<Map<String, dynamic>>.from(response);
+    final rows = parseRpcJsonbRowList(response);
+    if (rows.isEmpty && response != null && response is! List && response.toString().trim().isNotEmpty) {
+      throw FormatException('Unexpected get_supplier_linked_trips response: ${response.runtimeType}');
     }
-    return const <Map<String, dynamic>>[];
+    return rows;
   }
 
   @override

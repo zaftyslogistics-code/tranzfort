@@ -209,7 +209,8 @@ class ContextualTtsService {
           }
         }
         
-        await setSpeechRate(defaultSpeechRate);
+        final savedRate = preferences.getDouble('tts_speech_rate');
+        await setSpeechRate(savedRate ?? defaultSpeechRate);
         _isSpeaking = true;
         await _speak(sanitizedMessage);
         completion.complete(ContextualTtsOutcome.spoken);

@@ -7,6 +7,8 @@ import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/providers/tts_audio_language_provider.dart';
+import '../../../core/providers/tts_state_provider.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -81,6 +83,26 @@ class SettingsScreen extends ConsumerWidget {
                   value: localizedRoleTypeLabel(l10n, profile!.roleType),
                 ),
               ],
+              const SizedBox(height: AppSpacing.sm),
+              SizedBox(
+                width: double.infinity,
+                child: OutlineButton(
+                  label: l10n.ttsReplayLastAction,
+                  icon: const Icon(Icons.replay_outlined),
+                  onPressed: () {
+                    final last = ref.read(ttsLastUtteranceProvider);
+                    if (last == null || last.trim().isEmpty) {
+                      AppSnackbar.show(
+                        context: context,
+                        message: l10n.ttsReplayLastEmptyMessage,
+                        variant: AppSnackbarVariant.info,
+                      );
+                      return;
+                    }
+                    TtsCardSpeakerButton.speak(context, ref, last);
+                  },
+                ),
+              ),
               const SizedBox(height: AppSpacing.sm),
               SizedBox(
                 width: double.infinity,

@@ -535,6 +535,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get marketplaceLoadPickupTomorrow => 'Pickup Tomorrow';
 
   @override
+  String marketplaceLoadPickupOnDate(Object dateLabel) {
+    return 'Pickup $dateLabel';
+  }
+
+  @override
   String supplierLoadCardPickupDate(Object value) {
     return 'Pickup $value';
   }
@@ -947,6 +952,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get commonHearSummary => 'Hear summary';
+
+  @override
+  String get ttsReadAllSectionsAction => 'Read all sections';
+
+  @override
+  String get ttsReplayLastAction => 'Replay last';
+
+  @override
+  String get ttsReplayLastEmptyMessage =>
+      'Nothing to replay yet. Tap a speaker on a card or section first.';
+
+  @override
+  String get ttsSpeechRateTitle => 'Speech rate';
+
+  @override
+  String get ttsSpeechRateHelper => 'Adjust how fast the voice reads aloud.';
+
+  @override
+  String get ttsVoiceSettingsActionsTitle => 'Actions';
+
+  @override
+  String get ttsVoiceSettingsRefreshVoices => 'Refresh voices';
 
   @override
   String get commonVoiceMuted => 'Voice guidance is muted on this device.';

@@ -81,13 +81,16 @@ class SupabaseTruckerProfileBackend implements TruckerProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('profiles')
-        .select('id, full_name, mobile, email, verification_status')
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read trucker profile');
+    }
 
-    return response;
+    final response = await _client.rpc('get_current_user_profile');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -96,13 +99,16 @@ class SupabaseTruckerProfileBackend implements TruckerProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('truckers')
-        .select('id, dl_number, rating, total_trips, completed_trips')
-        .eq('id', userId)
-        .maybeSingle();
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read trucker workspace profile');
+    }
 
-    return response;
+    final response = await _client.rpc('get_trucker_workspace_profile');
+    if (response is Map<String, dynamic> && response.isNotEmpty) {
+      return response;
+    }
+    return null;
   }
 
   @override
@@ -111,13 +117,34 @@ class SupabaseTruckerProfileBackend implements TruckerProfileBackend {
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client.from('trucks').select('id').eq('owner_id', userId);
-    if (statuses.isNotEmpty) {
-      query = query.inFilter('status', statuses);
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to read truck counts');
     }
 
-    final response = await query;
-    return response.length;
+    final response = await _client.rpc('get_trucker_truck_verification_counts');
+    if (response is! Map<String, dynamic>) {
+      return 0;
+    }
+
+    if (statuses.isEmpty) {
+      return _readCount(response['total_count']);
+    }
+    if (statuses.length == 1 && statuses.first == 'verified') {
+      return _readCount(response['approved_count']);
+    }
+
+    return 0;
+  }
+
+  static int _readCount(Object? value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    return int.tryParse(value?.toString() ?? '') ?? 0;
   }
 
   @override
@@ -126,7 +153,19 @@ class SupabaseTruckerProfileBackend implements TruckerProfileBackend {
       throw const AuthException('Trucker session is not available');
     }
 
-    await _client.from('truckers').update(values).eq('id', userId);
+    final currentUserId = _client.auth.currentUser?.id;
+    if (currentUserId == null || currentUserId != userId) {
+      throw const AuthException('Not authorized to update trucker profile');
+    }
+
+    if (values.containsKey('dl_number')) {
+      await _client.rpc(
+        'update_trucker_dl_number',
+        params: <String, dynamic>{
+          'p_dl_number': values['dl_number']?.toString(),
+        },
+      );
+    }
   }
 }
 
