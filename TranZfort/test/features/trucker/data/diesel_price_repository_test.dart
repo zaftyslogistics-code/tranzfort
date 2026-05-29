@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:tranzfort/src/core/config/app_config.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
 import 'package:tranzfort/src/features/trucker/data/diesel_price_repository.dart';
 
@@ -55,7 +56,21 @@ void main() {
       final repository = DieselPriceRepository(_FakeDieselPriceBackend());
 
       final lookup = await repository.lookupPricePerLitre(null);
-      expect(lookup, 90);
+      expect(lookup, AppConfig.defaultDieselPricePerLitre);
+    });
+
+    test('estimateDieselPricePerLitre floors legacy map values below AppConfig default', () {
+      const map = {'maharashtra': 90.0, 'goa': 105.0};
+
+      expect(
+        DieselPriceRepository.estimateDieselPricePerLitre(map, 'Maharashtra'),
+        AppConfig.defaultDieselPricePerLitre,
+      );
+      expect(DieselPriceRepository.estimateDieselPricePerLitre(map, 'Goa'), 105.0);
+      expect(
+        DieselPriceRepository.estimateDieselPricePerLitre(map, null),
+        AppConfig.defaultDieselPricePerLitre,
+      );
     });
 
     test('maps network errors', () async {

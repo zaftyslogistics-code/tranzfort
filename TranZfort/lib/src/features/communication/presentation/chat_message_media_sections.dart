@@ -98,7 +98,7 @@ class _MapCardMessageContent extends ConsumerWidget {
     final distanceKm = _payloadDouble(payload, const ['route_distance_km', 'distance_km']);
     final weightTonnes = _payloadDouble(payload, const ['weight_tonnes']);
     final originState = _payloadString(payload, const ['origin_state']);
-    final dieselPrice = dieselPriceMap[(originState ?? '').trim().toLowerCase()];
+    final dieselPrice = DieselPriceRepository.estimateDieselPricePerLitre(dieselPriceMap, originState);
     final computedTripCost = tripCostingService.estimate(
       distanceKm: distanceKm,
       loadWeightTonnes: weightTonnes,

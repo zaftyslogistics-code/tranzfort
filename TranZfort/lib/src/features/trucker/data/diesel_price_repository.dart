@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
@@ -17,7 +18,10 @@ class DieselPriceEntry {
 
   factory DieselPriceEntry.fromMap(Map<String, dynamic> map) {
     final raw = map['price_per_litre'];
-    final price = raw is num ? raw.toDouble() : double.tryParse((raw ?? '90').toString()) ?? 90;
+    final fallback = AppConfig.defaultDieselPricePerLitre;
+    final price = raw is num
+        ? raw.toDouble()
+        : double.tryParse((raw ?? '$fallback').toString()) ?? fallback;
     return DieselPriceEntry(
       state: (map['state'] ?? '').toString(),
       pricePerLitre: price,
@@ -75,11 +79,28 @@ class DieselPriceRepository {
   Future<double> lookupPricePerLitre(String? state) async {
     final normalized = (state ?? '').trim().toLowerCase();
     if (normalized.isEmpty) {
-      return 90;
+      return AppConfig.defaultDieselPricePerLitre;
     }
 
     final result = await fetchPriceMap();
-    return result.valueOrNull?[normalized] ?? 90;
+    return result.valueOrNull?[normalized] ?? AppConfig.defaultDieselPricePerLitre;
+  }
+
+  /// Diesel price for trip earnings estimates.
+  ///
+  /// Uses [AppConfig.defaultDieselPricePerLitre] when state is unknown or the reference
+  /// table still has legacy values below the product default.
+  static double estimateDieselPricePerLitre(Map<String, double> priceMap, String? originState) {
+    final configured = AppConfig.defaultDieselPricePerLitre;
+    final key = (originState ?? '').trim().toLowerCase();
+    if (key.isEmpty) {
+      return configured;
+    }
+    final fromMap = priceMap[key];
+    if (fromMap == null) {
+      return configured;
+    }
+    return fromMap < configured ? configured : fromMap;
   }
 
   AppFailure _mapError(Object error, StackTrace stackTrace) =>

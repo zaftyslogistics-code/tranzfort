@@ -26,7 +26,10 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     final selectedTruck = state.approvedTrucks.where((truck) => truck.id == state.selectedTruckId).firstOrNull;
     final anyMatch = state.approvedTrucks.any((truck) => truckMatchesLoad(truck, detail.summary));
     final selectedTruckMatches = selectedTruck != null && truckMatchesLoad(selectedTruck, detail.summary);
-    final dieselPrice = dieselPriceMap[(detail.originState ?? '').trim().toLowerCase()];
+    final dieselPrice = DieselPriceRepository.estimateDieselPricePerLitre(
+      dieselPriceMap,
+      detail.originState,
+    );
     final localizedPickupDate = MaterialLocalizations.of(context).formatMediumDate(detail.summary.pickupDate);
     final sharePayload = shareService.buildPayload(l10n, localizedPickupDate, detail);
     final routeSnapshot = detail.routeSnapshot;

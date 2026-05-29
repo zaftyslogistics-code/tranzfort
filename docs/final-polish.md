@@ -1,8 +1,8 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-29 (FP-2 dark detail + Find Loads ink UI)  
-**Status:** **FP-0 + FP-1 + FP-3 complete**; **FP-2 in progress** (map removed, dark ink sections, costing/TTS polish); **FP-4** pending  
+**Updated:** 2026-05-29 (FP-2 complete; FP-4 deferred)  
+**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-4 deferred** (dashboard filters); release tail (QA, Play, l10n) pending  
 **Git branch:** `final-polish` (from latest `main`)  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
 **Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
@@ -214,7 +214,7 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 
 **Still open (non-blocking):** FP-3.8 filter TTS copy, FP-3.9 a11y hints, remaining widget test overflow cases
 
-### FP-2 — Load detail (**in progress** — dark ink + maps)
+### FP-2 — Load detail (**done** — dark ink + maps + costing)
 
 | File | Change |
 |------|--------|
@@ -224,14 +224,19 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 | `load_detail_tts_builder.dart` | Hero TTS = overview + chat hint only (no duplicate truck block) |
 | `drive_time_estimate.dart` | Drive time in **days** @ 300 km/day |
 | `trip_costing_service` + `app_config.dart` | Default diesel **₹100/L**; fixed vs per-ton fare in estimate |
+| `diesel_price_repository.dart` | `estimateDieselPricePerLitre` floors legacy DB values below ₹100/L |
 | `google_maps_open_button.dart` | Teal inset maps button matching fare panel |
 | `profile_avatar_merge.dart` | Supplier avatar on detail + public profile |
+| `polish_ui_responsive_smoke_test.dart` | 320dp filter bar responsive smoke |
 
-**Still open:** FP-2.4 spacing audit, FP-2.8–2.9 device QA / detail widget tests
+**Signed off:** device QA (maps, booking, TTS, earnings @ ₹100/L, responsive filter bar).
 
-### Not started
+### Deferred
 
-- **FP-4** — dashboard `MarketplaceFilterBar`
+- **FP-4** — dashboard `MarketplaceFilterBar` (post–final-polish merge)
+
+### Not started (release tail)
+
 - Ship gate, full device QA matrix, Play upload
 
 ---
@@ -243,8 +248,8 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 | Theme helpers | **FP-0** | `AppDecorations` + `BrandAccentChip` | **Done** |
 | Marketplace load card | **FP-1** | Full-bleed card, price+facts row, TTS header | **Done** |
 | Find Loads filters | **FP-3** | Dark ink hero/tabs/pinned; Any + conditional tyres | **Done** |
-| Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | Not started |
-| Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **In progress** |
+| Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **Done** |
+| Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | **Deferred** |
 
 ---
 
@@ -434,12 +439,12 @@ Coordinates present?
 | FP-2.1 | Remove in-app map | Delete `_LoadRouteMapSection`; remove `flutter_map` + `latlong2` from pubspec | [x] |
 | FP-2.2 | Enhance route hero | Ink gradient v2; distance/drive-days row; fare inset; compact arc | [x] |
 | FP-2.3 | Maps CTA | `GoogleMapsOpenButton` teal inset | [x] |
-| FP-2.4 | Section spacing audit | `AppSpacing.lg` horizontal; consistent `sectionGap` between cards | [ ] |
+| FP-2.4 | Section spacing audit | `AppSpacing.lg` horizontal; consistent `sectionGap` between cards | [x] |
 | FP-2.5 | Keep costing block | ₹100/L diesel; fixed vs per-ton; drive days helper | [x] |
 | FP-2.6 | Dark ink body sections | Truck req, supplier, next step via `useInkGradient` | [x] |
 | FP-2.7 | TTS dedupe | Hero/speaker skips truck-requirements repeat | [x] |
-| FP-2.8 | Update tests | `drive_time_estimate_test`, `trip_costing_service_test` | [x] partial |
-| FP-2.9 | Device QA | External maps; booking + TTS regression | [ ] |
+| FP-2.8 | Update tests | `drive_time_estimate_test`, `trip_costing_service_test`, `diesel_price_repository_test`, responsive smoke | [x] |
+| FP-2.9 | Device QA | External maps; booking + TTS regression; ₹100/L earnings | [x] |
 
 ### Files to touch
 
@@ -454,7 +459,7 @@ Coordinates present?
 - [x] No `FlutterMap` on trucker load detail.
 - [x] Coordinates present → Google Maps launch via inset CTA.
 - [x] Dark ink sections for truck requirements, supplier, next step, earnings.
-- [ ] All detail chips and booking flows — device verify.
+- [x] All detail chips and booking flows — device verify.
 - [x] TTS hero without duplicate truck-requirements block.
 
 ---
@@ -535,7 +540,9 @@ Coordinates present?
 
 ---
 
-## FP-4 — Trucker dashboard “Find loads” widget
+## FP-4 — Trucker dashboard “Find loads” widget — **deferred**
+
+> **Decision (2026-05-29):** Ship `final-polish` without dashboard filter embed. Revisit on a follow-up branch after merge to `main`.
 
 ### Current implementation
 
@@ -709,11 +716,11 @@ Dashboard                          Find Loads tab
 | 0 | **FP-0** AppDecorations | **Done** |
 | 1 | **FP-1** Load card | **Done** |
 | 2 | **FP-3** Find Loads filters | **Done** |
-| 3 | **FP-4** Dashboard filters | Not started |
-| 4 | **FP-2** Load detail | **In progress** (dark ink, costing, TTS) |
-| 5 | **G-2.6, B-6.8–10, C-6** | QA pass |
-| 6 | **D-4, D-7–D-8** | l10n hygiene |
-| 7 | **A-5.6–7, F-4–5** | Play upload + docs commit |
+| 3 | **FP-2** Load detail | **Done** |
+| 4 | **G-2.6, B-6.8–10, C-6** | QA pass |
+| — | **FP-4** Dashboard filters | **Deferred** (post-merge) |
+| 5 | **D-4, D-7–D-8** | l10n hygiene |
+| 6 | **A-5.6–7, F-4–5** | Play upload + docs commit |
 
 ---
 
@@ -769,6 +776,7 @@ Dashboard                          Find Loads tab
 | 2026-05-30 | Device QA sign-off FP-0/FP-1/FP-3; doc marked complete |
 | 2026-05-29 | FP-2: remove in-app map; dark ink route hero + body sections; earnings ₹100/L; drive days; TTS dedupe; supplier avatar merge |
 | 2026-05-29 | Find Loads dark ink pass: hero/tabs/pinned filter; Any chip; conditional tyres; dark dropdowns; gap to cards reduced |
+| 2026-05-29 | FP-2 complete: diesel ₹100/L floor + migration; device QA sign-off; FP-4 dashboard filters deferred |
 
 ---
 

@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tranzfort/src/features/trucker/data/diesel_price_repository.dart';
 import 'package:tranzfort/src/features/trucker/data/trip_costing_service.dart';
 
 void main() {
@@ -39,7 +40,22 @@ void main() {
 
       expect(estimate, isNotNull);
       expect(estimate!.totalLoadValue, 50000);
+      expect(estimate.dieselPricePerLitre, 100);
       expect(estimate.netProfit, closeTo(50000 - estimate.totalExpense, 0.001));
+    });
+
+    test('legacy diesel map value below default is raised for estimates', () {
+      final estimate = service.estimate(
+        distanceKm: 600,
+        loadWeightTonnes: 20,
+        dieselPricePerLitre: DieselPriceRepository.estimateDieselPricePerLitre(
+          const {'maharashtra': 90.0},
+          'Maharashtra',
+        ),
+      );
+
+      expect(estimate, isNotNull);
+      expect(estimate!.dieselPricePerLitre, 100);
     });
 
     test('multiplies per-ton rate by load weight', () {
