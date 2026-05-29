@@ -188,10 +188,67 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
   final ChatRepository _repository;
   final String _conversationId;
   StreamSubscription<Result<List<ChatMessage>>>? _subscription;
+  Timer? _errorDebounceTimer;
 
   ConversationMessagesController(this._repository, this._conversationId)
       : super(ConversationMessagesState.initial()) {
     _start();
+  }
+
+  void _scheduleErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(const Duration(seconds: 2), () {
+      // Only show error if we still have no messages after debounce
+      if (state.messages.isEmpty) {
+        state = state.copyWith(failure: failure);
+      }
+    });
+  }
+
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
+  }
+
+  /// Merges realtime messages with existing messages by ID
+  /// - Preserves paginated older messages
+  /// - Updates existing messages with new data (read-state changes)
+  /// - Adds new messages from realtime stream
+  /// - Handles optimistic message replacement
+  List<ChatMessage> _mergeMessages(List<ChatMessage> existing, List<ChatMessage> realtime) {
+    final existingMap = <String, ChatMessage>{};
+    for (final msg in existing) {
+      existingMap[msg.id] = msg;
+    }
+
+    final realtimeMap = <String, ChatMessage>{};
+    for (final msg in realtime) {
+      realtimeMap[msg.id] = msg;
+    }
+
+    // Start with realtime messages (they're the source of truth for recent messages)
+    final merged = <ChatMessage>[];
+    final mergedIds = <String>{};
+
+    // Add realtime messages (newest first, as they come from stream)
+    for (final msg in realtime) {
+      merged.add(msg);
+      mergedIds.add(msg.id);
+    }
+
+    // Add older paginated messages that aren't in realtime stream
+    // These are messages loaded via loadOlderMessages()
+    for (final msg in existing) {
+      if (!mergedIds.contains(msg.id)) {
+        merged.add(msg);
+        mergedIds.add(msg.id);
+      }
+    }
+
+    // Sort by created_at descending (newest first)
+    merged.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+    return merged;
   }
 
   Future<void> _start() async {
@@ -199,17 +256,18 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
     _subscription = _repository.watchMessages(_conversationId).listen((result) {
       result.when(
         success: (messages) {
+          _cancelErrorDisplay();
+          // Merge realtime messages with existing paginated history
+          final merged = _mergeMessages(state.messages, messages);
           state = state.copyWith(
             isLoading: false,
-            messages: messages,
+            messages: merged,
             clearFailure: true,
           );
         },
         failure: (failure) {
-          state = state.copyWith(
-            isLoading: false,
-            failure: failure,
-          );
+          _scheduleErrorDisplay(failure);
+          state = state.copyWith(isLoading: false);
         },
       );
     });
@@ -217,9 +275,14 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   Future<void> load() async {
     state = state.copyWith(isLoading: true, clearFailure: true);
-    final result = await _repository.getMessages(_conversationId);
+    // P0.6: Use paginated query with limit to prevent loading all messages at once
+    final result = await _repository.getMessagesPaginated(
+      _conversationId,
+      limit: 50,
+    );
     result.when(
       success: (messages) {
+        _cancelErrorDisplay();
         state = state.copyWith(
           isLoading: false,
           messages: messages,
@@ -228,10 +291,8 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
         );
       },
       failure: (failure) {
-        state = state.copyWith(
-          isLoading: false,
-          failure: failure,
-        );
+        _scheduleErrorDisplay(failure);
+        state = state.copyWith(isLoading: false);
       },
     );
   }
@@ -282,6 +343,7 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   @override
   void dispose() {
+    _errorDebounceTimer?.cancel();
     _subscription?.cancel();
     super.dispose();
   }
@@ -298,8 +360,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
-        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
-        BusinessRuleFailure(message: 'Another message is already being sent.'),
+        BusinessRuleFailure(message: ChatErrorCodes.messageAlreadyBeingSent),
       );
     }
 
@@ -336,8 +397,7 @@ class SendMessageController extends StateNotifier<SendMessageState> {
   }) async {
     if (state.isSending) {
       return const Failure<String>(
-        // TODO: Map to ChatErrorCodes.messageAlreadyBeingSent in UI layer
-        BusinessRuleFailure(message: 'Another message is already being sent.'),
+        BusinessRuleFailure(message: ChatErrorCodes.messageAlreadyBeingSent),
       );
     }
 

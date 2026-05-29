@@ -249,18 +249,21 @@ class SupabaseNotificationBackend implements NotificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    var query = _client
-        .from('notifications')
-        .select(
-          'id, notification_type, notification_priority, title_text, body_text, related_load_id, related_trip_id, related_case_id, action_route_hint, is_read, read_at, created_at',
-        )
-        .eq('target_profile_id', userId);
-
-    if (before != null) {
-      query = query.lt('created_at', before.toUtc().toIso8601String());
+    // Use RPC for notification fetching
+    final response = await _client.rpc(
+      'get_notifications',
+      params: {
+        'p_user_id': userId,
+        'p_limit': limit,
+        'p_before_created_at': before?.toUtc().toIso8601String(),
+        'p_before_id': null, // TODO: Add composite cursor support if needed
+      },
+    );
+    
+    if (response is! List) {
+      throw const ServerFailure(message: 'Invalid response format from get_notifications RPC');
     }
-
-    final response = await query.order('created_at', ascending: false).limit(limit);
+    
     return response.whereType<Map<String, dynamic>>().toList(growable: false);
   }
 
@@ -283,13 +286,19 @@ class SupabaseNotificationBackend implements NotificationBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('notifications')
-        .select('id')
-        .eq('target_profile_id', userId)
-        .eq('is_read', false);
-
-    return response.length;
+    // Use RPC for unread count
+    final response = await _client.rpc(
+      'get_unread_notification_count',
+      params: {
+        'p_user_id': userId,
+      },
+    );
+    
+    if (response is! int) {
+      throw const ServerFailure(message: 'Invalid response format from get_unread_notification_count RPC');
+    }
+    
+    return response;
   }
 
   @override

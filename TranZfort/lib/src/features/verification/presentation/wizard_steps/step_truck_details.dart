@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../../core/error/app_failure.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -12,6 +11,7 @@ import '../../providers/verification_wizard_provider.dart';
 import '../../providers/verification_wizard_state.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
+import '../components/verification_wizard_upload_feedback.dart';
 import '../components/wizard_progress_bar.dart';
 
 class StepTruckDetails extends ConsumerWidget {
@@ -110,7 +110,7 @@ class StepTruckDetails extends ConsumerWidget {
               isRequired: true,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.truckRc,
               icon: Icons.description_outlined,
-              onTap: () => _uploadRc(context, controller),
+              onTap: () => _uploadRc(context, ref, controller),
               onClear: controller.clearTruckRc,
             ),
             const SizedBox(height: AppSpacing.lg),
@@ -123,18 +123,17 @@ class StepTruckDetails extends ConsumerWidget {
               isRequired: false,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.truckPhoto,
               icon: Icons.local_shipping_outlined,
-              onTap: () => _uploadPhoto(context, controller),
+              onTap: () => _uploadPhoto(context, ref, controller),
               onClear: controller.clearTruckPhoto,
             ),
-            if (state.error != null) ...[
-              const SizedBox(height: AppSpacing.md),
+            if (state.fieldErrors['rcDocument'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
               Text(
-                _getErrorMessage(state.error!, l10n),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.error,
-                ),
+                state.fieldErrors['rcDocument']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
               ),
             ],
+            VerificationWizardUploadErrorBanner(error: state.error),
             const SizedBox(height: AppSpacing.xl),
             
             StepActions(
@@ -149,18 +148,40 @@ class StepTruckDetails extends ConsumerWidget {
     );
   }
 
-  Future<void> _uploadRc(BuildContext context, VerificationWizardController controller) async {
+  Future<void> _uploadRc(BuildContext context, WidgetRef ref, VerificationWizardController controller) async {
+    final l10n = AppLocalizations.of(context);
     final source = await _showImageSourcePicker(context);
-    if (source != null) {
-      await controller.uploadTruckRcDocument(source);
-    }
+    if (source == null) return;
+
+    final result = await controller.uploadTruckRcDocument(source);
+    if (!context.mounted) return;
+
+    final updated = ref.read(verificationWizardProvider);
+    showVerificationWizardUploadResultSnackBar(
+      context,
+      result: result,
+      l10n: l10n,
+      documentAttached: (updated.draft.truck?.rcDocumentPath ?? '').isNotEmpty,
+      successMessage: l10n.verificationWizardReviewRcUploaded,
+    );
   }
 
-  Future<void> _uploadPhoto(BuildContext context, VerificationWizardController controller) async {
+  Future<void> _uploadPhoto(BuildContext context, WidgetRef ref, VerificationWizardController controller) async {
+    final l10n = AppLocalizations.of(context);
     final source = await _showImageSourcePicker(context);
-    if (source != null) {
-      await controller.uploadTruckPhoto(source);
-    }
+    if (source == null) return;
+
+    final result = await controller.uploadTruckPhoto(source);
+    if (!context.mounted) return;
+
+    final updated = ref.read(verificationWizardProvider);
+    showVerificationWizardUploadResultSnackBar(
+      context,
+      result: result,
+      l10n: l10n,
+      documentAttached: (updated.draft.truck?.truckPhotoPath ?? '').isNotEmpty,
+      successMessage: l10n.verificationWizardReviewTruckPhotoUploaded,
+    );
   }
 
   Future<ImageSource?> _showImageSourcePicker(BuildContext context) async {
@@ -184,18 +205,6 @@ class StepTruckDetails extends ConsumerWidget {
     };
   }
 
-  String _getErrorMessage(AppFailure error, AppLocalizations l10n) {
-    if (error is BusinessRuleFailure) {
-      return error.message;
-    }
-    if (error is ValidationFailure) {
-      return l10n.verificationWizardValidationError;
-    }
-    if (error is UnauthorizedFailure) {
-      return l10n.verificationWizardUnauthorizedError;
-    }
-    return l10n.verificationWizardUnknownError;
-  }
 }
 
 void _noopImageSourceSelection(ImageSource _) {}

@@ -7,6 +7,7 @@ class _FleetBackend implements TruckerFleetBackend {
   Map<String, dynamic>? updatedValues;
   String? updatedTruckId;
   String? updatedOwnerId;
+  String? archivedTruckId;
 
   @override
   Future<Map<String, dynamic>> createTruck(Map<String, dynamic> values) async {
@@ -24,6 +25,11 @@ class _FleetBackend implements TruckerFleetBackend {
     updatedOwnerId = ownerId;
     updatedTruckId = truckId;
     updatedValues = values;
+  }
+
+  @override
+  Future<void> archiveTruck(String truckId) async {
+    archivedTruckId = truckId;
   }
 
   @override

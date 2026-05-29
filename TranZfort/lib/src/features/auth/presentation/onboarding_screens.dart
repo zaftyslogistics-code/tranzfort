@@ -129,19 +129,20 @@ class _RoleSelectionScreenState extends ConsumerState<RoleSelectionScreen> {
       return true;
     }
 
+    final l10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Selection?'),
-        content: const Text('You have selected a role. Do you want to discard it?'),
+        title: Text(l10n.onboardingDiscardRoleTitle),
+        content: Text(l10n.onboardingDiscardRoleMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(l10n.commonDiscardAction),
           ),
         ],
       ),

@@ -38,13 +38,13 @@ double? _payloadDouble(Map<String, dynamic>? payload, List<String> keys) {
   return null;
 }
 
-String _formatCurrencyCompact(double value) {
-  return NumberFormat.currency(locale: 'en_IN', symbol: '₹', decimalDigits: 0).format(value);
+String _formatCurrencyCompact(double value, AppLocalizations l10n) {
+  return NumberFormat.currency(locale: l10n.localeName, symbol: '₹', decimalDigits: 0).format(value);
 }
 
-String _formatTonnesCompact(double value) {
+String _formatTonnesCompact(double value, AppLocalizations l10n) {
   final formatted = value % 1 == 0 ? value.toStringAsFixed(0) : value.toStringAsFixed(1);
-  return '${formatted}T';
+  return l10n.chatTonnesCompact(formatted);
 }
 
 Uri? _externalUri(String? raw) {
@@ -127,7 +127,8 @@ Uri? _callUri(String? mobile) {
 }
 
 String _formatTimestamp(DateTime value) {
-  final hour = value.hour.toString().padLeft(2, '0');
-  final minute = value.minute.toString().padLeft(2, '0');
+  final local = value.toLocal();
+  final hour = local.hour.toString().padLeft(2, '0');
+  final minute = local.minute.toString().padLeft(2, '0');
   return '$hour:$minute';
 }

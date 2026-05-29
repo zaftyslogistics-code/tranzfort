@@ -81,10 +81,13 @@ class SupplierLoadRepository {
   Future<Result<LoadDetail>> getLoadDetail(String id) async {
     final userId = _currentUserId();
     if (userId == null) {
+      AppLogger.warning('getLoadDetail: User ID is null', scope: 'supplier_load_repo');
       return const Failure<LoadDetail>(UnauthorizedFailure());
     }
 
-    if (id.trim().isEmpty) {
+    final normalizedId = id.trim();
+    if (normalizedId.isEmpty) {
+      AppLogger.warning('getLoadDetail: Load ID is empty', scope: 'supplier_load_repo');
       return const Failure<LoadDetail>(
         ValidationFailure(
           message: 'Load id is required',
@@ -93,14 +96,19 @@ class SupplierLoadRepository {
       );
     }
 
+    AppLogger.debug('getLoadDetail: loadId=$normalizedId, supplierId=$userId', scope: 'supplier_load_repo');
+
     try {
-      final row = await _backend.fetchLoadDetail(supplierId: userId, loadId: id.trim());
+      final row = await _backend.fetchLoadDetail(supplierId: userId, loadId: normalizedId);
       if (row == null) {
+        AppLogger.warning('getLoadDetail: RPC returned null for loadId=$normalizedId', scope: 'supplier_load_repo');
         return const Failure<LoadDetail>(NotFoundFailure());
       }
 
+      AppLogger.debug('getLoadDetail: Success for loadId=$normalizedId', scope: 'supplier_load_repo');
       return Success<LoadDetail>(LoadDetailDto.fromMap(row).toDomain());
     } catch (error, stackTrace) {
+      AppLogger.error('getLoadDetail: Failed for loadId=$normalizedId', scope: 'supplier_load_repo', error: error, stackTrace: stackTrace);
       return Failure<LoadDetail>(_mapError(error, stackTrace));
     }
   }

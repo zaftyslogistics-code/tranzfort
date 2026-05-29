@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
-
 Future<T?> showAppBottomSheet<T>({
   required BuildContext context,
   required String title,
@@ -90,6 +90,7 @@ class FilterChipBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SizedBox(
       height: 40,
       child: ListView.separated(
@@ -99,7 +100,7 @@ class FilterChipBar extends StatelessWidget {
         itemBuilder: (context, index) {
           if (onReset != null && index == items.length) {
             return ActionChip(
-              label: const Text('Reset'),
+              label: Text(l10n.truckerFindLoadsResetFiltersAction),
               onPressed: onReset,
             );
           }
@@ -138,12 +139,15 @@ class QuickActionGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final crossAxisCount = screenWidth > 600 ? 3 : (screenWidth > 400 ? 2 : 2);
+    
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: items.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: crossAxisCount,
         crossAxisSpacing: AppSpacing.md,
         mainAxisSpacing: AppSpacing.md,
         childAspectRatio: 1.5,

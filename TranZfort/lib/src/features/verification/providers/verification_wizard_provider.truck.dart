@@ -47,94 +47,93 @@ extension VerificationWizardTruck on VerificationWizardController {
   }
 
   Future<Result<void>> uploadTruckRcDocument(ImageSource source) async {
-    _setState(state.copyWith(
-      uploadingDocumentType: VerificationDocumentType.truckRc,
-      clearError: true,
-    ));
-
-    if (_currentUserId == null) {
-      final failure = UnauthorizedFailure();
-      _setState(
-        state.copyWith(
-          clearUploadingDocumentType: true,
-          error: failure,
-        ),
-        persistDraft: false,
-      );
-      return Failure(failure);
-    }
-
-    final result = await _uploadHelper.uploadTruckRcDocument(source: source);
-
-    if (result.isSuccess) {
-      final truck = state.draft.truck ?? TruckDraft();
-      _setState(state.copyWith(
-        draft: state.draft.copyWith(
-          truck: truck.copyWith(rcDocumentPath: result.valueOrNull),
-        ),
-        clearUploadingDocumentType: true,
-        clearFieldError: 'rcDocument',
-      ));
-    } else {
-      _setState(
-        state.copyWith(
-          clearUploadingDocumentType: true,
-          error: result.failureOrNull,
-        ),
-        persistDraft: false,
-      );
-    }
-
-    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
+    return _uploadTruckDocument(
+      type: VerificationDocumentType.truckRc,
+      source: source,
+      fieldKey: 'rcDocument',
+      applyPath: (path) {
+        final truck = state.draft.truck ?? TruckDraft();
+        _setState(
+          state.copyWith(
+            draft: state.draft.copyWith(
+              truck: truck.copyWith(rcDocumentPath: path),
+            ),
+          ),
+          persistDraft: false,
+        );
+      },
+    );
   }
 
   Future<Result<void>> uploadTruckPhoto(ImageSource source) async {
-    _setState(state.copyWith(
-      uploadingDocumentType: VerificationDocumentType.truckPhoto,
-      clearError: true,
-    ));
+    return _uploadTruckDocument(
+      type: VerificationDocumentType.truckPhoto,
+      source: source,
+      fieldKey: 'truckPhoto',
+      applyPath: (path) {
+        final truck = state.draft.truck ?? TruckDraft();
+        _setState(
+          state.copyWith(
+            draft: state.draft.copyWith(
+              truck: truck.copyWith(truckPhotoPath: path),
+            ),
+          ),
+          persistDraft: false,
+        );
+      },
+    );
+  }
+
+  Future<Result<void>> _uploadTruckDocument({
+    required VerificationDocumentType type,
+    required ImageSource source,
+    required String fieldKey,
+    required void Function(String? path) applyPath,
+  }) async {
+    _setState(
+      state.copyWith(
+        uploadingDocumentType: type,
+        clearError: true,
+        clearFieldError: fieldKey,
+      ),
+      persistDraft: false,
+    );
 
     if (_currentUserId == null) {
-      final failure = UnauthorizedFailure();
+      const failure = UnauthorizedFailure();
       _setState(
         state.copyWith(
           clearUploadingDocumentType: true,
           error: failure,
+          fieldErrors: {...state.fieldErrors, fieldKey: failure.message},
         ),
         persistDraft: false,
       );
-      return Failure(failure);
+      return const Failure(failure);
     }
 
-    final result = await _uploadHelper.uploadTruckPhoto(source: source);
+    final result = type == VerificationDocumentType.truckRc
+        ? await _uploadHelper.uploadTruckRcDocument(source: source)
+        : await _uploadHelper.uploadTruckPhoto(source: source);
 
-    if (result.isSuccess) {
-      final truck = state.draft.truck ?? TruckDraft();
-      _setState(state.copyWith(
-        draft: state.draft.copyWith(
-          truck: truck.copyWith(truckPhotoPath: result.valueOrNull),
-        ),
-        clearUploadingDocumentType: true,
-      ));
-    } else {
-      _setState(
-        state.copyWith(
-          clearUploadingDocumentType: true,
-          error: result.failureOrNull,
-        ),
-        persistDraft: false,
-      );
-    }
+    _applyDocumentUploadResult(
+      result: result,
+      wizardFieldKey: fieldKey,
+      applyPath: applyPath,
+    );
 
-    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
+    return result.isSuccess && (result.valueOrNull ?? '').trim().isNotEmpty
+        ? const Success(null)
+        : Failure(result.failureOrNull ?? const ValidationFailure(message: 'Document upload failed'));
   }
 
   void clearTruckRc() {
     final truck = state.draft.truck ?? TruckDraft();
     _setState(state.copyWith(
       draft: state.draft.copyWith(
-        truck: truck.copyWith(rcDocumentPath: null),
+        truck: truck.copyWith(clearRcDocument: true),
       ),
+      clearFieldError: 'rcDocument',
     ));
   }
 
@@ -142,8 +141,9 @@ extension VerificationWizardTruck on VerificationWizardController {
     final truck = state.draft.truck ?? TruckDraft();
     _setState(state.copyWith(
       draft: state.draft.copyWith(
-        truck: truck.copyWith(truckPhotoPath: null),
+        truck: truck.copyWith(clearTruckPhoto: true),
       ),
+      clearFieldError: 'truckPhoto',
     ));
   }
 }

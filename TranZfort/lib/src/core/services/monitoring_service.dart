@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import '../logger/app_logger.dart';
+
 /// Monitoring service for tracking navigation events
 /// 
 /// This service tracks:
@@ -125,7 +127,7 @@ class MonitoringService {
 
   void _logEvent(NavigationEvent event) {
     if (kDebugMode) {
-      print('[MonitoringService] ${event.type.name}: ${event.data}');
+      AppLogger.debug('${event.type.name}: ${event.data}', scope: 'monitoring');
     }
   }
 }

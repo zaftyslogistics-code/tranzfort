@@ -66,13 +66,9 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     final result = await repository.updateRoleSelection(role);
     
     if (result.isSuccess) {
-      final extensionResult = await repository.provisionRoleExtension(role);
-      if (extensionResult.isFailure) {
-        state = const OnboardingState(isSubmitting: false);
-        return const Failure<void>(
-          BusinessRuleFailure(message: roleWorkspaceFailureCode),
-        );
-      }
+      // Note: The upsert_current_user_profile RPC already handles role extension
+      // atomically (inserts into suppliers/truckers table based on role).
+      // No separate provisionRoleExtension call needed - this was the source of F1-006.
       final refreshed = await _refreshAuthState();
       if (!refreshed) {
         state = const OnboardingState(isSubmitting: false, authRefreshTimedOut: true);
@@ -88,6 +84,8 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     required String fullName,
     required String mobile,
     required bool termsAccepted,
+    String? city,
+    String? regionState,
     double? latitude,
     double? longitude,
   }) async {
@@ -101,6 +99,8 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     final updateResult = await repository.updateProfile(
       fullName: fullName,
       mobile: mobile,
+      city: city,
+      state: regionState,
       latitude: latitude,
       longitude: longitude,
     );

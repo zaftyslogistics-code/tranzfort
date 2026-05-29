@@ -235,8 +235,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
     ImageSource source,
     String profileId,
   ) async {
-    // TODO: Implement multiple attachment upload after ticket creation
-    // For now, attachments can be added after ticket is created via reply
+    // Attachments can be added after ticket is created via reply
     AppSnackbar.show(
       context: context,
       message: 'Please add attachments after creating the ticket',
@@ -282,10 +281,10 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
 
   String _categoryLabel(AppLocalizations l10n, String category) {
     return switch (category.trim().toLowerCase()) {
-      'spam_or_scam' => l10n.reportIssueCategorySpamOrScamLabel,
-      'abusive_behavior' => l10n.reportIssueCategoryAbusiveBehaviorLabel,
-      'fake_payout_proof' => l10n.reportIssueCategoryFakePayoutProofLabel,
-      'non_payment' => l10n.reportIssueCategoryNonPaymentLabel,
+      'spam_or_scam' => l10n.reportIssueCategorySpamOrScam,
+      'abusive_behavior' => l10n.reportIssueCategoryAbusiveBehavior,
+      'fake_payout_proof' => l10n.reportIssueCategoryFakePayoutProof,
+      'non_payment' => l10n.reportIssueCategoryNonPayment,
       _ => category.trim().replaceAll('_', ' '),
     };
   }

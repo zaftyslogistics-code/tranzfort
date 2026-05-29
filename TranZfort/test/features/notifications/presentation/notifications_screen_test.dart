@@ -315,6 +315,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -353,6 +354,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -379,6 +381,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -408,6 +411,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: const <AppNotification>[],
       ),
@@ -424,6 +428,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: const <AppNotification>[],
       ),
@@ -444,6 +449,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: const <AppNotification>[],
       ),
@@ -464,6 +470,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: true,
         notifications: [
           _notification(
@@ -489,6 +496,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: const <AppNotification>[],
         failure: const ServerFailure(message: 'Unable to load notifications'),
@@ -509,6 +517,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -536,6 +545,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -573,6 +583,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -606,6 +617,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           _notification(
@@ -632,6 +644,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -666,6 +679,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -700,6 +714,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -734,6 +749,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -768,6 +784,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(
@@ -802,6 +819,7 @@ void main() {
     final controller = _TestNotificationsController(
       NotificationsState.initial().copyWith(
         isLoading: false,
+        hasResolvedInitialLoad: true,
         hasMore: false,
         notifications: [
           AppNotification(

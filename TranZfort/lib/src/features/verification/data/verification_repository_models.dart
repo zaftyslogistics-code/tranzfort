@@ -10,6 +10,7 @@ class VerificationDetail {
   final String? aadhaarFrontDocumentPath;
   final String? aadhaarBackDocumentPath;
   final String? panNumber;
+  final String? panLast4; // P0.7: Added panLast4 field
   final String? panDocumentPath;
   final String? profilePhotoDocumentPath;
   final String? businessLicenceNumber;
@@ -35,6 +36,7 @@ class VerificationDetail {
     required this.aadhaarFrontDocumentPath,
     required this.aadhaarBackDocumentPath,
     required this.panNumber,
+    required this.panLast4, // P0.7: Added panLast4 parameter
     required this.panDocumentPath,
     required this.profilePhotoDocumentPath,
     required this.businessLicenceNumber,
@@ -60,7 +62,12 @@ class VerificationDetail {
   bool get hasApprovedTruckRequirement => !isTrucker || approvedTruckCount > 0;
   bool get hasVerificationReadyTruckRequirement => !isTrucker || verificationReadyTruckCount > 0;
   bool get hasSupplierCompanyName => !isSupplier || (companyName ?? '').trim().isNotEmpty;
-  bool get hasIdentityNumbers => (aadhaarNumber ?? '').trim().isNotEmpty && (panNumber ?? '').trim().isNotEmpty;
+  bool get hasIdentityNumbers {
+    final aadhaarOk = (aadhaarNumber ?? '').trim().length == 12 ||
+        (aadhaarLast4 ?? '').trim().length == 4;
+    final panOk = (panNumber ?? '').trim().length >= 4 || (panLast4 ?? '').trim().length == 4;
+    return aadhaarOk && panOk;
+  }
   bool get hasSupplierBusinessNumbers => !isSupplier || (businessLicenceNumber ?? '').trim().isNotEmpty;
   bool get hasVerificationLocation =>
       (verificationLocationCity ?? '').trim().isNotEmpty && verificationLatitude != null && verificationLongitude != null;
@@ -185,11 +192,13 @@ class VerificationDetail {
       role: role,
       verificationStatus: (profileMap['verification_status'] ?? 'unverified').toString(),
       rejectionReason: nullableString(profileMap['verification_rejection_reason']),
-      aadhaarNumber: nullableString(profileMap['aadhaar_number']),
+      // P0.7 Simplified: Full numbers no longer stored in profiles, set to empty
+      aadhaarNumber: '', // Full number not stored anymore
       aadhaarLast4: nullableString(profileMap['aadhaar_last4']),
       aadhaarFrontDocumentPath: nullableString(profileMap['aadhaar_front_document_path']),
       aadhaarBackDocumentPath: nullableString(profileMap['aadhaar_back_document_path']),
-      panNumber: nullableString(profileMap['pan_number']),
+      panNumber: '', // Full number not stored anymore
+      panLast4: nullableString(profileMap['pan_last4']) ?? _last4FromPan(profileMap['pan_number']),
       panDocumentPath: nullableString(profileMap['pan_document_path']),
       profilePhotoDocumentPath: nullableString(profileMap['profile_photo_document_path']),
       businessLicenceNumber: nullableString(supplierMap?['business_licence_number']),
@@ -201,8 +210,8 @@ class VerificationDetail {
       companyName: nullableString(supplierMap?['company_name']),
       verificationLocationCity: nullableString(supplierMap?['verification_location_city']),
       verificationLocationState: nullableString(supplierMap?['verification_location_state']),
-      verificationLatitude: readDouble(supplierMap?['verification_location_lat']),
-      verificationLongitude: readDouble(supplierMap?['verification_location_lng']),
+      verificationLatitude: readDoubleNullable(supplierMap?['verification_location_lat']),
+      verificationLongitude: readDoubleNullable(supplierMap?['verification_location_lng']),
       reviewFeedback: VerificationReviewFeedback.fromJson(profileMap['verification_feedback_json']),
     );
   }
@@ -212,13 +221,18 @@ class VerificationDetail {
     return raw.isEmpty ? null : raw;
   }
 
-  static double? readDouble(Object? value) {
-    if (value == null) {
+  static String? _last4FromPan(Object? panValue) {
+    final pan = nullableString(panValue);
+    if (pan == null || pan.length < 4) {
       return null;
     }
+    return pan.substring(pan.length - 4);
+  }
+
+  static double? readDouble(Object? value) {
     if (value is num) {
       return value.toDouble();
     }
-    return double.tryParse(value.toString());
+    return double.tryParse((value ?? '0').toString());
   }
 }

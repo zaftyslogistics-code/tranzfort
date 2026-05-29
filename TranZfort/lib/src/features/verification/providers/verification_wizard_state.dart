@@ -125,6 +125,7 @@ class VerificationWizardState {
     bool? clearFieldErrors,
     String? clearFieldError,
     bool? termsAccepted,
+    bool? isResubmission,
     String? verificationStatus,
   }) {
     final newFieldErrors = <String, String>{
@@ -151,7 +152,7 @@ class VerificationWizardState {
       error: clearError == true ? null : error ?? this.error,
       fieldErrors: newFieldErrors,
       role: role,
-      isResubmission: isResubmission,
+      isResubmission: isResubmission ?? this.isResubmission,
       termsAccepted: termsAccepted ?? this.termsAccepted,
       verificationStatus: verificationStatus ?? this.verificationStatus,
     );

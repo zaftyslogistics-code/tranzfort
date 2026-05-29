@@ -12,6 +12,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
+  String get commonFromLabel => 'से';
+
+  @override
+  String get commonToLabel => 'तक';
+
+  @override
   String get authGoogleFailureMessage =>
       'अभी Google से continue नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें या उसकी जगह email sign-in इस्तेमाल करें।';
 
@@ -115,6 +121,277 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get authPasswordUseDifferentEmailAction =>
       'कोई दूसरा email इस्तेमाल करें';
+
+  @override
+  String get authErrorEmailRequired => 'Email आवश्यक है';
+
+  @override
+  String get authErrorEmailInvalid => 'कृपया एक वैध email दर्ज करें';
+
+  @override
+  String get authErrorPasswordRequired => 'Password आवश्यक है';
+
+  @override
+  String get authErrorPasswordTooShort =>
+      'Password कम से कम 8 characters का होना चाहिए';
+
+  @override
+  String get authErrorUserNotFound => 'User नहीं मिला';
+
+  @override
+  String get authErrorWrongPassword => 'गलत password';
+
+  @override
+  String get authErrorEmailAlreadyInUse => 'Email पहले से registered है';
+
+  @override
+  String get authErrorWeakPassword => 'Password बहुत कमजोर है';
+
+  @override
+  String get authRoleRequired => 'जारी रखने के लिए एक मान्य भूमिका चुनें';
+
+  @override
+  String get authNameTooShort => 'अपना पूरा नाम दर्ज करें';
+
+  @override
+  String get authMobileRequired => 'एक मान्य मोबाइल नंबर दर्ज करें';
+
+  @override
+  String get authLanguageUnsupported => 'एक समर्थित भाषा चुनें';
+
+  @override
+  String get authUnexpectedResponse =>
+      'खाता हटाने अनुरोध से अप्रत्याशित प्रतिक्रिया प्रारूप';
+
+  @override
+  String get authGoogleNotConfigured =>
+      'Google sign-in configured नहीं है। App environment में GOOGLE_WEB_CLIENT_ID सेट करें और फिर कोशिश करें।';
+
+  @override
+  String get authGoogleSignInCancelled =>
+      'Google sign in cancel हो गया। फिर कोशिश करें।';
+
+  @override
+  String get authGoogleTokenFetchFailed =>
+      'Google sign-in token लाने में असमर्थ। फिर कोशिश करें।';
+
+  @override
+  String get onboardingDiscardRoleTitle => 'Role selection छोड़ें?';
+
+  @override
+  String get onboardingDiscardRoleMessage => 'आपका चयनित role खो जाएगा';
+
+  @override
+  String get onboardingDiscardChangesTitle => 'Changes छोड़ें?';
+
+  @override
+  String get onboardingDiscardChangesMessage => 'आपका unsaved changes खो जाएगा';
+
+  @override
+  String get locationServicesDisabled => 'Location services बंद हैं';
+
+  @override
+  String get locationPermissionRequired => 'Location permission आवश्यक है';
+
+  @override
+  String get locationPermissionDenied => 'Location permission denied हो गया';
+
+  @override
+  String get locationEnableGps => 'GPS enable करें';
+
+  @override
+  String get locationEnableServicesMessage =>
+      'Current location capture करने के लिए location services (GPS) enable करें।';
+
+  @override
+  String get locationGrantPermissionMessage =>
+      'Current location capture करने के लिए location permission grant करें।';
+
+  @override
+  String get locationOpenSettings => 'Settings खोलें';
+
+  @override
+  String get locationPermissionDeniedForeverMessage =>
+      'Location permission permanently denied हो गया। App settings में enable करें।';
+
+  @override
+  String get searchYourLocation => 'अपनी location खोजें';
+
+  @override
+  String get useCurrentLocation => 'Current location इस्तेमाल करें';
+
+  @override
+  String get addManually => 'Manually जोड़ें';
+
+  @override
+  String get clearLocation => 'Location साफ करें';
+
+  @override
+  String get locationLabel => 'स्थान';
+
+  @override
+  String get locationNotAdded => 'कोई स्थान नहीं जोड़ा गया';
+
+  @override
+  String get locationCapturing => 'कैप्चरिंग...';
+
+  @override
+  String get routePreviewInvalidError => 'Route preview load नहीं हो सका';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'प्रोफाइल लोड करने में विफल';
+
+  @override
+  String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialLabel => 'Material specify करें';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialHint =>
+      'जैसे, Fruits, Iron Ore, Bricks';
+
+  @override
+  String get supplierPostLoadMaterialCoal => 'कोयला';
+
+  @override
+  String get supplierPostLoadMaterialSteel => 'स्टील';
+
+  @override
+  String get supplierPostLoadMaterialCement => 'सीमेंट';
+
+  @override
+  String get supplierPostLoadMaterialGrains => 'अनाज';
+
+  @override
+  String get supplierPostLoadMaterialFertilizer => 'खाद';
+
+  @override
+  String get supplierPostLoadMaterialMachinery => 'मशीनरी';
+
+  @override
+  String get supplierPostLoadMaterialOther => 'अन्य';
+
+  @override
+  String get supplierPostLoadBodyTypeAny => 'कोई भी';
+
+  @override
+  String get supplierPostLoadBodyTypeOpen => 'खुला';
+
+  @override
+  String get supplierPostLoadBodyTypeContainer => 'कंटेनर';
+
+  @override
+  String get supplierPostLoadBodyTypeTrailer => 'ट्रेलर';
+
+  @override
+  String get supplierPostLoadBodyTypeTanker => 'टैंकर';
+
+  @override
+  String get supplierPostLoadBodyTypeRefrigerated => 'रेफ्रिजरेटेड';
+
+  @override
+  String get postLoadValidationCustomMaterialRequired =>
+      'कृपया material specify करें';
+
+  @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'लोड जमा करना पहले से प्रगति पर है';
+
+  @override
+  String get truckerFleetValidationTruckNumber =>
+      'एक वैध truck number दर्ज करें';
+
+  @override
+  String get truckerFleetValidationTyreCount => 'एक वैध tyre count चुनें';
+
+  @override
+  String get truckerFleetValidationCapacityTonnes =>
+      'Capacity 0 और 100 tonnes के बीच होनी चाहिए';
+
+  @override
+  String get truckerFleetValidationRcDocument => 'RC document आवश्यक है';
+
+  @override
+  String get truckerFleetErrorTruckNotFound => 'चयनित truck नहीं मिला';
+
+  @override
+  String get truckerFleetErrorSaveAlreadyInProgress =>
+      'Truck save पहले से ही progress में है';
+
+  @override
+  String get truckerFleetErrorValidationFailed =>
+      'highlighted truck details को सुधारें';
+
+  @override
+  String get truckerFleetBodyTypeOpen => 'खुला';
+
+  @override
+  String get truckerFleetBodyTypeContainer => 'कंटेनर';
+
+  @override
+  String get truckerFleetBodyTypeTrailer => 'ट्रेलर';
+
+  @override
+  String get truckerFleetBodyTypeTanker => 'टैंकर';
+
+  @override
+  String get truckerFleetBodyTypeRefrigerated => 'रेफ्रिजरेटेड';
+
+  @override
+  String chatTonnesCompact(Object value) {
+    return '${value}T';
+  }
+
+  @override
+  String get verificationCompleteAllFields => 'सभी आवश्यक फ़ील्ड पूरी करें';
+
+  @override
+  String get verificationLocationSourceManualCityEntry =>
+      'मैन्युअल रूप से जोड़ा गया';
+
+  @override
+  String get verificationLocationSourceGoogleGeocode =>
+      'GPS के माध्यम से कैप्चर किया गया';
+
+  @override
+  String get verificationLocationSourceOfflineNearestCity => 'ऑफ़लाइन स्थान';
+
+  @override
+  String get supportCategoryGeneral => 'सामान्य';
+
+  @override
+  String get supportCategoryAccount => 'खाता';
+
+  @override
+  String get supportCategoryLoad => 'लोड';
+
+  @override
+  String get supportCategoryTrip => 'यात्रा';
+
+  @override
+  String get supportCategoryPayment => 'भुगतान';
+
+  @override
+  String get supportCategoryTechnical => 'तकनीकल';
+
+  @override
+  String get supportCategoryOther => 'अन्य';
+
+  @override
+  String get reportIssueCategorySpamOrScam => 'स्पैम या घोटाला';
+
+  @override
+  String get reportIssueCategoryFakePayoutProof => 'फर्जी payout प्रूफ';
+
+  @override
+  String get reportIssueCategoryNonPayment => 'गैर-भुगतान';
+
+  @override
+  String get reportIssueCategoryAbusiveBehavior => 'दुर्व्यवहार';
+
+  @override
+  String get reportIssueContextSourceLabel => 'वर्तमान बातचीत या यात्रा संदर्भ';
 
   @override
   String get onboardingSelectRoleError =>
@@ -1176,7 +1453,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String supportActiveTicketCount(Object count, Object s) {
-    return '$count ticket$s';
+    return '$count टिकट$s';
   }
 
   @override
@@ -2015,6 +2292,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'delivered': 'डिलीवर किया गया',
       'pod_uploaded': 'POD अपलोड किया गया',
       'proof_submitted': 'प्रूफ जमा किया गया',
+      'pod_uploaded': 'POD अपलोडेड',
       'completed': 'पूर्ण',
       'disputed': 'विवादित',
       'cancelled': 'रद्द',
@@ -5083,7 +5361,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailRoutePriceSummaryTitle => 'मार्ग और कीमत सारांश';
 
   @override
-  String get truckerLoadDetailRouteMapTitle => 'Route map';
+  String get truckerLoadDetailRouteMapTitle => 'रूट मैप';
 
   @override
   String truckerLoadDetailPickupLabel(Object pickupDate) {
@@ -5125,17 +5403,17 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String truckerLoadDetailPerTruckWeightLabel(Object weight) {
-    return 'Per truck: ${weight}T';
+    return 'प्रति ट्रक: ${weight}T';
   }
 
   @override
   String truckerLoadDetailCapacityRangeLabel(Object maxT, Object minT) {
-    return 'Acceptable truck: ${minT}T – ${maxT}T';
+    return 'स्वीकार्य ट्रक: ${minT}T – ${maxT}T';
   }
 
   @override
   String truckerLoadDetailSlotsOpenLabel(Object count) {
-    return '$count slots open';
+    return '$count स्लॉट खुले';
   }
 
   @override
@@ -5983,29 +6261,29 @@ class AppLocalizationsHi extends AppLocalizations {
       'अनुमान ₹11/किमी टोल, ₹5/किमी ड्राइवर, ₹2/किमी अन्य के आधार पर हैं। वास्तविक लागत भिन्न हो सकती है।';
 
   @override
-  String get truckerLoadDetailEarningsEstimateTitle => 'TRIP EARNINGS ESTIMATE';
+  String get truckerLoadDetailEarningsEstimateTitle => 'ट्रिप कमाई अनुमान';
 
   @override
-  String get truckerLoadDetailTotalFareLabel => 'TOTAL FARE (LOAD VALUE)';
+  String get truckerLoadDetailTotalFareLabel => 'कुल किराया (लोड मूल्य)';
 
   @override
-  String get truckerLoadDetailTotalExpenseLabel => 'TOTAL EXPENSE';
+  String get truckerLoadDetailTotalExpenseLabel => 'कुल खर्च';
 
   @override
-  String get truckerLoadDetailEstimatedNetProfitLabel => 'ESTIMATED NET PROFIT';
+  String get truckerLoadDetailEstimatedNetProfitLabel => 'अनुमानित शुद्ध लाभ';
 
   @override
-  String get truckerLoadDetailEstimatedNetLossLabel => 'ESTIMATED NET LOSS';
+  String get truckerLoadDetailEstimatedNetLossLabel => 'अनुमानित शुद्ध हानि';
 
   @override
   String get truckerLoadDetailNetProfitSubtitle =>
-      'After all expenses deducted from total fare';
+      'कुल किराये से सभी खर्चों को काटने के बाद';
 
   @override
-  String get truckerLoadDetailNetLossSubtitle => 'Expenses exceed total fare';
+  String get truckerLoadDetailNetLossSubtitle => 'खर्च कुल किराये से अधिक हैं';
 
   @override
-  String get truckerLoadDetailCostBreakdownLabel => 'COST BREAKDOWN';
+  String get truckerLoadDetailCostBreakdownLabel => 'लागत विवरण';
 
   @override
   String get trustScoreTitle => 'विश्वास और समीक्षाएं';
@@ -6087,7 +6365,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String replyDialogHint(String name) {
-    return '$name को अपना जवाब लिखें...';
+    return '$name को अपना उत्तर लिखें...';
   }
 
   @override
@@ -6124,12 +6402,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get publicProfileScreenTitle => 'प्रोफाइल';
 
   @override
-  String get publicProfileLoadErrorTitle => 'प्रोफाइल लोड करने में विफल';
-
-  @override
-  String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
-
-  @override
   String get truckerProfileTitle => 'ट्रकर प्रोफाइल';
 
   @override
@@ -6163,32 +6435,12 @@ class AppLocalizationsHi extends AppLocalizations {
       'इस डिवाइस पर कोई अंग्रेज़ी आवाज़ उपलब्ध नहीं है।';
 
   @override
-  String get authRoleRequired => 'जारी रखने के लिए एक मान्य भूमिका चुनें';
-
-  @override
-  String get authNameTooShort => 'अपना पूरा नाम दर्ज करें';
-
-  @override
-  String get authMobileRequired => 'एक मान्य मोबाइल नंबर दर्ज करें';
-
-  @override
-  String get authLanguageUnsupported => 'एक समर्थित भाषा चुनें';
-
-  @override
-  String get authUnexpectedResponse =>
-      'खाता हटाने अनुरोध से अप्रत्याशित प्रतिक्रिया प्रारूप';
-
-  @override
   String get supplierRatingAlreadySubmitting =>
       'आपकी रेटिंग पहले ही जमा की जा रही है';
 
   @override
   String get supplierTripActionAlreadyInProgress =>
       'एक अन्य सप्लायर ट्रिप कार्रवाई पहले से प्रगति पर है';
-
-  @override
-  String get supplierLoadSubmissionAlreadyInProgress =>
-      'लोड जमा करना पहले से प्रगति पर है';
 
   @override
   String get truckerRatingAlreadySubmitting =>

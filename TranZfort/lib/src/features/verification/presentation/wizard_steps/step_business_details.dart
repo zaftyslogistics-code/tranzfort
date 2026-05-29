@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/error/result.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -14,6 +15,7 @@ import '../../providers/verification_wizard_state.dart';
 import '../components/city_search_sheet.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
+import '../components/verification_wizard_upload_feedback.dart';
 import '../components/wizard_progress_bar.dart';
 
 class StepBusinessDetails extends ConsumerWidget {
@@ -77,6 +79,7 @@ class StepBusinessDetails extends ConsumerWidget {
               icon: Icons.business_center_outlined,
               onTap: () => _uploadDocument(
                 context,
+                ref,
                 controller,
                 VerificationDocumentType.businessLicence,
               ),
@@ -92,6 +95,7 @@ class StepBusinessDetails extends ConsumerWidget {
               onGstNumberChanged: controller.updateGstNumber,
               onUpload: () => _uploadDocument(
                 context,
+                ref,
                 controller,
                 VerificationDocumentType.gstCertificate,
               ),
@@ -108,6 +112,21 @@ class StepBusinessDetails extends ConsumerWidget {
               onClear: controller.clearLocation,
               fieldError: state.fieldErrors['location'],
             ),
+            if (state.fieldErrors['businessLicense'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                state.fieldErrors['businessLicense']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+              ),
+            ],
+            if (state.fieldErrors['gstCertificate'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                state.fieldErrors['gstCertificate']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+              ),
+            ],
+            VerificationWizardUploadErrorBanner(error: state.error),
             const SizedBox(height: AppSpacing.xl),
             
             StepActions(
@@ -124,9 +143,11 @@ class StepBusinessDetails extends ConsumerWidget {
 
   Future<void> _uploadDocument(
     BuildContext context,
+    WidgetRef ref,
     VerificationWizardController controller,
     VerificationDocumentType type,
   ) async {
+    final l10n = AppLocalizations.of(context);
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (_) => const ImageSourcePicker(
@@ -136,11 +157,30 @@ class StepBusinessDetails extends ConsumerWidget {
 
     if (source == null) return;
 
+    final Result<void> result;
+    final String label;
     if (type == VerificationDocumentType.businessLicence) {
-      await controller.uploadBusinessLicense(source);
+      result = await controller.uploadBusinessLicense(source);
+      label = l10n.verificationWizardLicenseDocumentLabel;
     } else {
-      await controller.uploadGstCertificate(source);
+      result = await controller.uploadGstCertificate(source);
+      label = l10n.verificationDocTypeGstCertificate;
     }
+
+    if (!context.mounted) return;
+
+    final updated = ref.read(verificationWizardProvider);
+    final attached = type == VerificationDocumentType.businessLicence
+        ? (updated.draft.businessLicensePath ?? '').isNotEmpty
+        : (updated.draft.gstCertificatePath ?? '').isNotEmpty;
+
+    showVerificationWizardUploadResultSnackBar(
+      context,
+      result: result,
+      l10n: l10n,
+      documentAttached: attached,
+      successMessage: l10n.verificationDocumentUploadedSuccess(label),
+    );
   }
 
   Future<void> _handleLocationCapture(BuildContext context, WidgetRef ref) async {
@@ -440,9 +480,7 @@ class _LocationDisplay extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.xs),
         Text(
-          location.source == 'gps'
-              ? l10n.verificationWizardCapturedViaGps
-              : l10n.verificationWizardAddedManually,
+          _localizedLocationSourceLabel(l10n, location.source),
           style: theme.textTheme.bodySmall?.copyWith(
             color: AppColors.textMuted,
           ),
@@ -497,4 +535,14 @@ class _LocationEmpty extends StatelessWidget {
       ],
     );
   }
+}
+
+String _localizedLocationSourceLabel(AppLocalizations l10n, String source) {
+  final normalized = source.trim().toLowerCase();
+  return switch (normalized) {
+    'manual_city_entry' => l10n.verificationLocationSourceManualCityEntry,
+    'google_geocode' => l10n.verificationLocationSourceGoogleGeocode,
+    'offline_nearest_city' => l10n.verificationLocationSourceOfflineNearestCity,
+    _ => l10n.verificationWizardAddedManually,
+  };
 }

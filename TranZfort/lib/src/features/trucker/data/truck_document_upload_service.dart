@@ -62,7 +62,11 @@ class TruckDocumentUploadService {
       );
     }
 
-    final mimeType = file.mimeType;
+    final mimeType = ImageUploadServiceDefaults.resolveImageMimeType(
+      file,
+      bytes,
+      allowedMimeTypes: allowedMimeTypes,
+    );
     if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
       return const RcDocumentValidationResult.invalid(
         'RC document must be a JPEG or PNG image. Please select a valid image file.',

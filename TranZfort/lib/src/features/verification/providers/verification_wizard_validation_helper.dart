@@ -1,5 +1,6 @@
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/validators.dart';
+import '../../../l10n/app_localizations.dart';
 import 'verification_wizard_state.dart';
 
 /// Helper class for validation logic in the verification wizard.
@@ -12,8 +13,16 @@ class VerificationWizardValidationHelper {
   /// Validates all required fields for the verification wizard.
   /// Returns an error message string if validation fails, null if all valid.
   /// Also returns a map of field-specific errors.
-  ValidationResult validateAll(VerificationDraft draft) {
+  ValidationResult validateAll(
+    VerificationDraft draft, {
+    required bool termsAccepted,
+    AppLocalizations? l10n,
+  }) {
     final errors = <String, String>{};
+
+    if (!termsAccepted) {
+      errors['terms'] = 'You must accept the terms and conditions to submit';
+    }
 
     if (draft.profilePhotoPath?.isEmpty ?? true) {
       errors['profilePhoto'] = 'Profile photo is required';
@@ -66,7 +75,7 @@ class VerificationWizardValidationHelper {
 
     if (errors.isNotEmpty) {
       return ValidationResult.failure(
-        message: 'Please complete all required fields',
+        message: l10n?.verificationCompleteAllFields ?? 'Please complete all required fields',
         fieldErrors: errors,
       );
     }

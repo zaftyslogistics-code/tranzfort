@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
@@ -46,7 +47,9 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
                 children: [
                   Text(
                     l10n.supplierMyLoadsSubtitle,
-                    style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   FilterChipBar(
@@ -234,12 +237,16 @@ class _SupplierLoadListCard extends StatelessWidget {
         children: [
           Text(
             l10n.supplierLoadCardPickupDate(formatSupplierShortDate(context, load.pickupDate)),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.supplierLoadCardTrucks('${load.trucksBooked}', '${load.trucksNeeded}'),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
             const SizedBox(height: AppSpacing.sm),

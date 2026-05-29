@@ -1,18 +1,20 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// DEBUG: Check conversation RPC (unit test, no device needed)
 void main() {
-  group('DEBUG: Conversation RPC', () {
-    test('Check get_current_user_conversation_summaries RPC', () async {
-      await dotenv.load(fileName: '.env');
-      
-      await Supabase.initialize(
-        url: dotenv.env['SUPABASE_URL']!,
-        anonKey: dotenv.env['SUPABASE_ANON_KEY']!,
-      );
+  final supabaseUrl = const String.fromEnvironment('SUPABASE_URL', defaultValue: '');
+  final supabaseAnonKey = const String.fromEnvironment('SUPABASE_ANON_KEY', defaultValue: '');
+  
+  group(
+    'DEBUG: Conversation RPC',
+    () {
+      test('Check get_current_user_conversation_summaries RPC', () async {
+        await Supabase.initialize(
+          url: supabaseUrl,
+          anonKey: supabaseAnonKey,
+        );
 
       final client = Supabase.instance.client;
 
@@ -55,5 +57,5 @@ void main() {
 
       expect(true, isTrue);
     });
-  });
+  }, skip: supabaseUrl.isEmpty || supabaseAnonKey.isEmpty ? 'SUPABASE_URL and SUPABASE_ANON_KEY required (run with --dart-define)' : null);
 }

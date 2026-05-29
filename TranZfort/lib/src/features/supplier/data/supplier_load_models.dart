@@ -1,3 +1,4 @@
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 
 class CreateLoadDto {
@@ -256,11 +257,11 @@ class LoadBookingRequest {
       truckId: (map['truck_id'] ?? '').toString(),
       status: (map['status'] ?? 'submitted').toString(),
       decisionReason: _nullableString(map['decision_reason']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
       decidedAt: _readDateTime(map['decided_at']),
       truckerName: _nullableString(map['trucker_name']),
       truckerVerificationStatus: _nullableString(map['trucker_verification_status']),
-      truckerRating: _readDouble(map['trucker_rating']),
+      truckerRating: readDouble(map['trucker_rating']),
       truckerAvatarUrl: _nullableString(map['trucker_avatar_url']),
       truckNumber: _nullableString(map['truck_number']),
       truckBodyType: _nullableString(map['truck_body_type']),
@@ -335,7 +336,7 @@ class LinkedTrip {
       stage: (map['stage'] ?? 'assigned').toString(),
       truckerId: (map['trucker_id'] ?? '').toString(),
       truckId: (map['truck_id'] ?? '').toString(),
-      assignedAt: DateTime.parse((map['assigned_at'] ?? '').toString()),
+      assignedAt: safeParseDateTime(map['assigned_at']) ?? DateTime.now(),
       deliveredAt: _readDateTime(map['delivered_at']),
       podUploadedAt: _readDateTime(map['pod_uploaded_at']),
       completedAt: _readDateTime(map['completed_at']),
@@ -391,12 +392,12 @@ class LoadDetailDto {
       summary: LoadListItemDto.fromMap(map),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: map['origin_state']?.toString(),
-      originLat: _readDouble(map['origin_lat']),
-      originLng: _readDouble(map['origin_lng']),
+      originLat: readDoubleNullable(map['origin_lat']),
+      originLng: readDoubleNullable(map['origin_lng']),
       destinationCity: (map['destination_city'] ?? '').toString(),
       destinationState: map['destination_state']?.toString(),
-      destinationLat: _readDouble(map['destination_lat']),
-      destinationLng: _readDouble(map['destination_lng']),
+      destinationLat: readDoubleNullable(map['destination_lat']),
+      destinationLng: readDoubleNullable(map['destination_lng']),
       routeDistanceKm: _readDouble(map['route_distance_km']),
       routeDurationMinutes: LoadListItemDto._readInt(map['route_duration_minutes']) == 0 && map['route_duration_minutes'] == null
           ? null
@@ -429,22 +430,11 @@ class LoadDetailDto {
       parentLoadId: parentLoadId,
       assignedTruckerId: assignedTruckerId,
       assignedTruckId: assignedTruckId,
-      createdAt: DateTime.parse(createdAt),
-      updatedAt: DateTime.parse(updatedAt),
+      createdAt: safeParseDateTime(createdAt) ?? DateTime.now(),
+      updatedAt: safeParseDateTime(updatedAt) ?? DateTime.now(),
       bookingRequest: null,
       linkedTrips: const [],
     );
-  }
-
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-
-    return double.tryParse(value.toString());
   }
 }
 
@@ -517,13 +507,13 @@ class LoadListItemDto {
       trucksBooked: trucksBooked,
       priceAmount: priceAmount.toDouble(),
       priceType: priceType,
-      pickupDate: DateTime.parse(pickupDate),
+      pickupDate: safeParseDateTime(pickupDate) ?? DateTime.now(),
       status: status,
       requiredBodyType: requiredBodyType,
       requiredTyres: requiredTyres,
       isSuperLoad: isSuperLoad,
       superStatus: superStatus,
-      publishedAt: publishedAt == null || publishedAt!.isEmpty ? null : DateTime.parse(publishedAt!),
+      publishedAt: publishedAt == null || publishedAt!.isEmpty ? null : safeParseDateTime(publishedAt),
     );
   }
 
@@ -576,5 +566,5 @@ DateTime? _readDateTime(Object? value) {
   if (raw == null) {
     return null;
   }
-  return DateTime.parse(raw);
+  return safeParseDateTime(raw);
 }

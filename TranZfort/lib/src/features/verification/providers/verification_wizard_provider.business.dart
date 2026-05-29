@@ -46,44 +46,54 @@ extension VerificationWizardBusiness on VerificationWizardController {
     required VerificationDocumentType type,
     required ImageSource source,
   }) async {
-    _setState(state.copyWith(uploadingDocumentType: type, clearError: true));
-
-    final result = await _uploadHelper.uploadBusinessDoc(type: type, source: source);
-
-    if (result.isSuccess) {
-      final path = result.valueOrNull;
-      if (type == VerificationDocumentType.businessLicence) {
-        _setState(state.copyWith(
-          draft: state.draft.copyWith(businessLicensePath: path),
-        ));
-      } else {
-        _setState(state.copyWith(
-          draft: state.draft.copyWith(gstCertificatePath: path),
-        ));
-      }
-    } else {
-      _setState(
-        state.copyWith(error: result.failureOrNull),
-        persistDraft: false,
-      );
-    }
+    final fieldKey = type == VerificationDocumentType.businessLicence
+        ? 'businessLicense'
+        : 'gstCertificate';
 
     _setState(
-      state.copyWith(clearUploadingDocumentType: true),
-      persistDraft: result.isSuccess,
+      state.copyWith(
+        uploadingDocumentType: type,
+        clearError: true,
+        clearFieldError: fieldKey,
+      ),
+      persistDraft: false,
     );
-    return result.isSuccess ? const Success(null) : Failure(result.failureOrNull!);
+
+    final result = await _uploadHelper.uploadBusinessDoc(type: type, source: source);
+    _applyDocumentUploadResult(
+      result: result,
+      wizardFieldKey: fieldKey,
+      applyPath: (path) {
+        if (type == VerificationDocumentType.businessLicence) {
+          _setState(
+            state.copyWith(draft: state.draft.copyWith(businessLicensePath: path)),
+            persistDraft: false,
+          );
+        } else {
+          _setState(
+            state.copyWith(draft: state.draft.copyWith(gstCertificatePath: path)),
+            persistDraft: false,
+          );
+        }
+      },
+    );
+
+    return result.isSuccess && (result.valueOrNull ?? '').trim().isNotEmpty
+        ? const Success(null)
+        : Failure(result.failureOrNull ?? const ValidationFailure(message: 'Document upload failed'));
   }
 
   void clearBusinessLicense() {
     _setState(state.copyWith(
-      draft: state.draft.copyWith(businessLicensePath: null),
+      draft: state.draft.copyWith(clearBusinessLicense: true),
+      clearFieldError: 'businessLicense',
     ));
   }
 
   void clearGstCertificate() {
     _setState(state.copyWith(
-      draft: state.draft.copyWith(gstCertificatePath: null),
+      draft: state.draft.copyWith(clearGstCertificate: true),
+      clearFieldError: 'gstCertificate',
     ));
   }
 }

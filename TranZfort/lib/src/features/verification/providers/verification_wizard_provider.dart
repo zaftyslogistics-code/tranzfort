@@ -10,6 +10,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../trucker/data/truck_document_upload_service.dart';
 import '../../trucker/data/trucker_fleet_repository.dart';
 import '../data/verification_document_upload_service.dart';
@@ -26,6 +27,8 @@ part 'verification_wizard_provider.truck.dart';
 part 'verification_wizard_provider.business.dart';
 part 'verification_wizard_provider.location.dart';
 part 'verification_wizard_provider.submit.dart';
+part 'verification_wizard_provider.upload_handlers.dart';
+part 'verification_wizard_field_errors.dart';
 
 class VerificationWizardController extends StateNotifier<VerificationWizardState> {
   final VerificationRepository _repository;
@@ -88,7 +91,7 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
   final truckUploadService = ref.watch(truckDocumentUploadServiceProvider);
   final locationService = ref.watch(verificationLocationServiceProvider);
   final client = ref.watch(supabaseClientProvider);
-  final verificationState = ref.watch(verificationProvider);
+  final verificationDetail = ref.read(verificationProvider).detail;
 
   TruckerFleetRepository? fleetRepo;
   if (role == AppUserRole.trucker) {
@@ -106,6 +109,6 @@ final verificationWizardProvider = StateNotifierProvider.autoDispose<
     role: role,
     fleetRepository: fleetRepo,
     currentUserId: client?.auth.currentUser?.id,
-    initialDetail: verificationState.detail,
+    initialDetail: verificationDetail,
   );
 });

@@ -41,8 +41,9 @@ class AppColors {
 
   // ─── Text ───
   static const Color textPrimary = Color(0xFF1C1917);
-  static const Color textSecondary = Color(0xFF57534E);
-  static const Color textMuted = Color(0xFF8A8481);
+  static const Color textSecondary = Color(0xFF44403C); // Darkened for WCAG AA compliance
+  static const Color textMuted = Color(0xFF57534E); // Moved from secondary for better contrast
+  static const Color textTertiary = Color(0xFF78716C); // New: very muted elements
   static const Color textOnPrimary = Color(0xFFFFFFFF);
   static const Color textOnDisabled = Color(0xFF6B6560);
 
@@ -53,7 +54,8 @@ class AppColors {
   static const Color inkBorder = Color(0xFF2A3B37); // subtle dividers on dark surfaces
   static const Color inkTextPrimary = Color(0xFFFFFFFF);
   static const Color inkTextSecondary = Color(0xFFA8BAB6); // teal-tinted muted for dark bg
-  static const Color inkTextMuted = Color(0xFF6B807B);
+  static const Color inkTextMuted = Color(0xFFA8BAB6); // Use secondary color for better contrast
+  static const Color inkTextTertiary = Color(0xFF6B807B); // New: very muted elements
   static const Color inkTextOnAccent = Color(0xFF0A1614); // text inside bright teal pills on dark
 
   // ─── Semantic Status ───

@@ -3,8 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/logger/app_logger.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import '../../../core/utils/map_readers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TruckerCitySuggestion {
@@ -91,7 +92,7 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
   }
 
   Future<List<TruckerCitySuggestion>> _searchGoogleCities(String query) async {
-    final apiKey = dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
+    final apiKey = AppConfig.googleMapsApiKey;
     if (apiKey.isEmpty) {
       AppLogger.warning('[TruckerLocationSearch] Google Maps API key is empty');
       return const [];
@@ -165,8 +166,8 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
             return TruckerCitySuggestion(
               city: cityName,
               state: stateName,
-              lat: _readDouble(city['lat']),
-              lng: _readDouble(city['lng']),
+              lat: readDoubleNullable(city['lat']),
+              lng: readDoubleNullable(city['lng']),
               placeId: null,
               source: 'offline_asset',
             );
@@ -213,13 +214,6 @@ class NetworkTruckerCitySearchService implements TruckerCitySearchService {
     } finally {
       client.close(force: true);
     }
-  }
-
-  double? _readDouble(Object? value) {
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse((value ?? '').toString());
   }
 
   String _readCityName(Map<String, dynamic> city) {

@@ -7,6 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../core/utils/map_readers.dart';
 import '../../../../l10n/app_localizations.dart';
 
 // Uses existing TruckerCitySuggestion and service pattern
@@ -297,8 +298,8 @@ class AssetCitySearchService implements CitySearchService {
       final scoreCompare = b.score.compareTo(a.score);
       if (scoreCompare != 0) return scoreCompare;
       
-      final popA = a.city['population'] as int? ?? 0;
-      final popB = b.city['population'] as int? ?? 0;
+      final popA = readInt(a.city['population']);
+      final popB = readInt(b.city['population']);
       return popB.compareTo(popA);
     });
 
@@ -331,7 +332,7 @@ class AssetCitySearchService implements CitySearchService {
       state: (city['state'] ?? '').toString(),
       lat: _readDouble(city['lat']),
       lng: _readDouble(city['lng']),
-      population: city['population'] as int?,
+      population: readInt(city['population']),
     );
   }
 

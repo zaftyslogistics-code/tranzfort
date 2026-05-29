@@ -34,6 +34,7 @@ class DetailPageScaffold extends StatelessWidget {
     final shouldShowBackArrow = showBackArrow ?? RouteMetadataHelper.shouldShowBackArrow(context);
     
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         title: Text(title),
         leading: shouldShowBackArrow

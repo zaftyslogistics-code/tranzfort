@@ -32,7 +32,8 @@ class SupabaseVerificationBackend implements VerificationBackend {
     return _client
         .from('profiles')
         .select(
-          'id, user_role_type, verification_status, verification_rejection_reason, verification_feedback_json, aadhaar_number, aadhaar_last4, aadhaar_front_document_path, aadhaar_back_document_path, pan_number, pan_document_path, profile_photo_document_path',
+          // P0.7: last4 only; pan_number kept as fallback for rows not yet backfilled
+          'id, user_role_type, verification_status, verification_rejection_reason, verification_feedback_json, aadhaar_last4, aadhaar_front_document_path, aadhaar_back_document_path, pan_last4, pan_number, pan_document_path, profile_photo_document_path',
         )
         .eq('id', userId)
         .maybeSingle();

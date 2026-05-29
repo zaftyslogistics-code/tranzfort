@@ -190,22 +190,7 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
     // Compute grouping metadata
     for (var i = 0; i < rendered.length; i++) {
       final current = rendered[i];
-      final next = i < rendered.length - 1 ? rendered[i + 1] : null;
       final prev = i > 0 ? rendered[i - 1] : null;
-
-      // Check if next message is from same sender within 2 minutes
-      if (next != null &&
-          current.message.isFromCurrentUser == next.message.isFromCurrentUser &&
-          next.message.createdAt.difference(current.message.createdAt).inMinutes < 2) {
-        // Hide timestamp on current message
-        rendered[i] = _RenderedChatMessage(
-          message: current.message,
-          isSending: current.isSending,
-          showTimestamp: false,
-          showDateDivider: current.showDateDivider,
-          dateLabel: current.dateLabel,
-        );
-      }
 
       // Check for day change - show date divider
       if (prev == null ||

@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../l10n/app_localizations.dart';
 import '../data/truck_document_upload_service.dart';
 import '../data/trucker_fleet_repository.dart';
 
@@ -15,11 +16,11 @@ class TruckerFleetErrorCodes {
 }
 
 const List<String> truckerFleetBodyTypes = <String>[
-  'Open',
-  'Container',
-  'Trailer',
-  'Tanker',
-  'Refrigerated',
+  'open',
+  'container',
+  'trailer',
+  'tanker',
+  'refrigerated',
 ];
 
 const List<int> truckerFleetTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];
@@ -269,21 +270,19 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     return _repository.getRcDocumentPreviewUrl(truck.rcDocumentPath);
   }
 
-  Future<Result<void>> save() async {
+  Future<Result<void>> save([AppLocalizations? l10n]) async {
     if (state.isSaving) {
       return const Failure<void>(
-        // TODO: Map to TruckerFleetErrorCodes.saveAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Truck save is already in progress.'),
+        BusinessRuleFailure(message: TruckerFleetErrorCodes.saveAlreadyInProgress),
       );
     }
 
-    final fieldErrors = _validate();
+    final fieldErrors = _validate(l10n);
     if (fieldErrors.isNotEmpty) {
       state = state.copyWith(fieldErrors: fieldErrors, clearActionFailure: true);
       return Failure<void>(
         ValidationFailure(
-          // TODO: Map to TruckerFleetErrorCodes.validationFailed in UI layer
-          message: 'Please correct the highlighted truck details.',
+          message: TruckerFleetErrorCodes.validationFailed,
           fieldErrors: fieldErrors,
         ),
       );
@@ -302,8 +301,7 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
       final existingTruck = state.editingTruck;
       if (existingTruck == null) {
         result = const Failure<void>(
-          // TODO: Map to TruckerFleetErrorCodes.truckNotFound in UI layer
-          NotFoundFailure(message: 'The selected truck was not found.'),
+          NotFoundFailure(message: TruckerFleetErrorCodes.truckNotFound),
         );
       } else {
         result = await _repository.updateTruck(
@@ -352,21 +350,21 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     return result;
   }
 
-  Map<String, String> _validate() {
+  Map<String, String> _validate(AppLocalizations? l10n) {
     final errors = <String, String>{};
     if (state.truckNumberDraft.trim().length < 6) {
-      errors['truck_number'] = 'Enter a valid truck number.';
+      errors['truck_number'] = l10n?.truckerFleetValidationTruckNumber ?? '';
     }
     final tyres = int.tryParse(state.tyresDraft.trim());
     if (tyres == null || !truckerFleetTyreOptions.contains(tyres)) {
-      errors['tyres'] = 'Select a valid tyre count.';
+      errors['tyres'] = l10n?.truckerFleetValidationTyreCount ?? '';
     }
     final capacityTonnes = double.tryParse(state.capacityTonnesDraft.trim());
     if (capacityTonnes == null || capacityTonnes <= 0 || capacityTonnes > 100) {
-      errors['capacity_tonnes'] = 'Capacity must be between 0 and 100 tonnes.';
+      errors['capacity_tonnes'] = l10n?.truckerFleetValidationCapacityTonnes ?? '';
     }
     if ((state.rcDocumentPathDraft ?? '').trim().isEmpty) {
-      errors['rc_document_path'] = 'RC document is required.';
+      errors['rc_document_path'] = l10n?.truckerFleetValidationRcDocument ?? '';
     }
     return errors;
   }

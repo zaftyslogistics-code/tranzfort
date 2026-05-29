@@ -1,3 +1,4 @@
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 
 class MessageDto {
@@ -37,7 +38,7 @@ class MessageDto {
       structuredPayload: payload is Map<String, dynamic> ? payload : null,
       isRead: map['is_read'] == true,
       readAt: readDate(map['read_at']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
     );
   }
 

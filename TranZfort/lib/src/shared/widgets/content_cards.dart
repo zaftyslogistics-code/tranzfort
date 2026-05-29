@@ -512,6 +512,8 @@ class StandardListCard extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                               color: AppColors.textSecondary,
                             ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
                           ),
                         ],
                       ),
@@ -549,8 +551,9 @@ class DetailSectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.canvas,
-        borderRadius: BorderRadius.circular(12),
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: AppColors.divider),
         boxShadow: AppShadows.card,
       ),
       child: Padding(

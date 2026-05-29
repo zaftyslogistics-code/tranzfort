@@ -23,19 +23,20 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
       return true;
     }
 
+    final l10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Changes?'),
-        content: const Text('You have unsaved changes. Do you want to discard them?'),
+        title: Text(l10n.onboardingDiscardChangesTitle),
+        content: Text(l10n.onboardingDiscardChangesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(l10n.commonDiscardAction),
           ),
         ],
       ),
@@ -90,8 +91,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
 
-    final emailPattern = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-    if (!emailPattern.hasMatch(email)) {
+    if (!Validators.isValidEmail(email)) {
       AppSnackbar.show(
         context: context,
         message: l10n.authPasswordInvalidEmailMessage,
@@ -100,7 +100,7 @@ class _EmailPasswordAuthScreenState extends ConsumerState<EmailPasswordAuthScree
       return;
     }
 
-    if (password.trim().length < 8) {
+    if (!Validators.isValidPassword(password)) {
       AppSnackbar.show(
         context: context,
         message: l10n.authPasswordTooShortMessage,

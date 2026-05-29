@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -13,9 +14,36 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
+import '../data/auth_repository_profile_ops.dart';
 import '../providers/auth_providers.dart';
 import '../../verification/data/verification_location_service.dart' as location_service;
 import '../../supplier/data/supplier_location_services.dart';
+
+String _onboardingProfileSaveFailureMessage(AppLocalizations l10n, AppFailure? failure) {
+  if (failure is BusinessRuleFailure &&
+      failure.message == OnboardingController.termsAcceptanceRequiredCode) {
+    return l10n.onboardingTermsAcceptance;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.roleRequired) {
+    return l10n.onboardingRoleSaveFailure;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.nameTooShort) {
+    return l10n.onboardingProfileSaveFailure;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.mobileRequired) {
+    return l10n.onboardingProfileSaveFailure;
+  }
+  if (failure is ConflictFailure) {
+    return failure.message;
+  }
+  if (failure is ServerFailure && failure.message.trim().isNotEmpty) {
+    return failure.message;
+  }
+  return l10n.onboardingProfileSaveFailure;
+}
 
 class ProfileCompletionScreen extends ConsumerStatefulWidget {
   const ProfileCompletionScreen({super.key});
@@ -87,19 +115,20 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       return true;
     }
 
+    final l10n = AppLocalizations.of(context);
     final result = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Discard Changes?'),
-        content: const Text('You have unsaved profile changes. Do you want to discard them?'),
+        title: Text(l10n.onboardingDiscardChangesTitle),
+        content: Text(l10n.onboardingDiscardChangesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Discard'),
+            child: Text(l10n.commonDiscardAction),
           ),
         ],
       ),
@@ -113,6 +142,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           fullName: _nameController.text,
           mobile: _mobileController.text,
           termsAccepted: _termsAccepted,
+          city: _city,
+          regionState: _state,
           latitude: _latitude,
           longitude: _longitude,
         );
@@ -125,9 +156,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       final failure = updateResult.failureOrNull;
       AppSnackbar.show(
         context: context,
-        message: failure is BusinessRuleFailure && failure.message == OnboardingController.termsAcceptanceRequiredCode
-            ? l10n.onboardingTermsAcceptance
-            : l10n.onboardingProfileSaveFailure,
+        message: _onboardingProfileSaveFailureMessage(l10n, failure),
         variant: AppSnackbarVariant.error,
       );
       return;
@@ -215,15 +244,16 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showLocationServiceDisabledDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Services Disabled'),
-        content: const Text('Please enable location services (GPS) to capture your current location.'),
+        title: Text(l10n.locationServicesDisabled),
+        content: Text(l10n.locationEnableServicesMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () async {
@@ -235,7 +265,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 _handleCaptureLocation();
               }
             },
-            child: const Text('Enable GPS'),
+            child: Text(l10n.locationEnableGps),
           ),
         ],
       ),
@@ -243,19 +273,21 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showPermissionDeniedDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Permission Required'),
-        content: const Text('Please grant location permission to capture your current location.'),
+        title: Text(l10n.locationPermissionRequired),
+        content: Text(l10n.locationGrantPermissionMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
+            // ignore: use_build_context_synchronously
             onPressed: () async {
-              // ignore: use_build_context_synchronously
+              final snackbarContext = context;
               Navigator.pop(context);
               final granted = await Geolocator.requestPermission();
               if (granted == LocationPermission.whileInUse || granted == LocationPermission.always) {
@@ -265,7 +297,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
               } else if (granted == LocationPermission.denied) {
                 if (!mounted) return;
                 AppSnackbar.show(
-                  context: context,
+                  // ignore: use_build_context_synchronously
+                  context: snackbarContext,
                   message: 'Permission denied. Please try again.',
                   variant: AppSnackbarVariant.error,
                 );
@@ -279,22 +312,23 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   }
 
   void _showPermissionDeniedForeverDialog() {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Location Permission Denied'),
-        content: const Text('Location permission was permanently denied. Please enable it in app settings.'),
+        title: Text(l10n.locationPermissionDenied),
+        content: Text(l10n.locationPermissionDeniedForeverMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(l10n.commonCancelAction),
           ),
           TextButton(
             onPressed: () async {
               Navigator.pop(context);
               await Geolocator.openAppSettings();
             },
-            child: const Text('Open Settings'),
+            child: Text(l10n.locationOpenSettings),
           ),
         ],
       ),
@@ -304,8 +338,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   Future<void> _handleManualLocation() async {
     final l10n = AppLocalizations.of(context);
     final searchController = TextEditingController();
-    // ignore: unused_local_variable
-    PlaceSuggestion? selectedSuggestion;
     List<PlaceSuggestion> suggestions = [];
     bool isSearching = false;
 
@@ -313,7 +345,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       context: context,
       builder: (context) => StatefulBuilder(
         builder: (context, setDialogState) => AlertDialog(
-          title: const Text('Search your location'),
+          title: Text(l10n.searchYourLocation),
           content: SizedBox(
             width: double.maxFinite,
             child: Column(
@@ -372,7 +404,6 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                               ? Text(l10n.commonSuggestionSourceGooglePlaces)
                               : Text(l10n.commonSuggestionSourceOffline),
                           onTap: () {
-                            setDialogState(() => selectedSuggestion = suggestion);
                             Navigator.pop(context, suggestion);
                           },
                         );
@@ -493,14 +524,14 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade300),
+                    border: Border.all(color: AppColors.divider),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Location',
+                        l10n.locationLabel,
                         style: Theme.of(context).textTheme.titleSmall,
                       ),
                       const SizedBox(height: 8),
@@ -508,15 +539,15 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                         Text(
                           '$_city, $_state',
                           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: Colors.green.shade700,
+                                color: AppColors.success,
                                 fontWeight: FontWeight.w500,
                               ),
                         )
                       else
                         Text(
-                          'No location added',
+                          l10n.locationNotAdded,
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: Colors.grey.shade600,
+                                color: AppColors.textMuted,
                               ),
                         ),
                       const SizedBox(height: 12),
@@ -526,7 +557,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                             child: OutlinedButton.icon(
                               onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
                               icon: const Icon(Icons.location_on, size: 18),
-                              label: Text(_isCapturingLocation ? 'Capturing...' : 'Use current location'),
+                              label: Text(_isCapturingLocation ? l10n.locationCapturing : l10n.useCurrentLocation),
                               style: OutlinedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
@@ -537,7 +568,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                             child: OutlinedButton.icon(
                               onPressed: _isCapturingLocation ? null : _handleManualLocation,
                               icon: const Icon(Icons.edit_location, size: 18),
-                              label: const Text('Add manually'),
+                              label: Text(l10n.addManually),
                               style: OutlinedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                               ),
@@ -545,20 +576,25 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                           ),
                         ],
                       ),
-                      if (_city != null && _state != null) ...[
-                        const SizedBox(height: 8),
-                        TextButton(
-                          onPressed: _isCapturingLocation ? null : () {
-                            setState(() {
-                              _city = null;
-                              _state = null;
-                              _latitude = null;
-                              _longitude = null;
-                            });
-                          },
-                          child: const Text('Clear location', style: TextStyle(fontSize: 12)),
+                      if (_city != null && _state != null)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: TextButton.icon(
+                            onPressed: _isCapturingLocation ? null : () {
+                              setState(() {
+                                _city = null;
+                                _state = null;
+                                _latitude = null;
+                                _longitude = null;
+                              });
+                            },
+                            icon: const Icon(Icons.clear, size: 16),
+                            label: Text(l10n.clearLocation),
+                            style: ButtonStyle(
+                              textStyle: WidgetStateProperty.all(TextStyle(fontSize: 12)),
+                            ),
+                          ),
                         ),
-                      ],
                     ],
                   ),
                 ),

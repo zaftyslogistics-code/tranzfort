@@ -3,9 +3,11 @@ import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+
+import '../../../core/config/app_config.dart';
+import '../../../core/utils/map_readers.dart';
 
 class VerificationLocation {
   final String city;
@@ -114,8 +116,8 @@ class VerificationLocationService {
       break;
     }
 
-    final latitude = _readDouble(matchedCity?['lat']);
-    final longitude = _readDouble(matchedCity?['lng']);
+    final latitude = readDoubleNullable(matchedCity?['lat']);
+    final longitude = readDoubleNullable(matchedCity?['lng']);
 
     // Validate coordinates - reject 0,0 or null coordinates
     if (latitude == null || longitude == null || latitude == 0 || longitude == 0) {
@@ -205,8 +207,8 @@ class VerificationLocationService {
     Map<String, dynamic>? nearest;
     double? bestDistanceKm;
     for (final city in searchCities) {
-      final cityLat = _readDouble(city['lat']);
-      final cityLng = _readDouble(city['lng']);
+      final cityLat = readDoubleNullable(city['lat']);
+      final cityLng = readDoubleNullable(city['lng']);
       if (cityLat == null || cityLng == null) {
         continue;
       }
@@ -280,16 +282,6 @@ class VerificationLocationService {
     return null;
   }
 
-  static double? _readDouble(Object? value) {
-    if (value == null) {
-      return null;
-    }
-    if (value is num) {
-      return value.toDouble();
-    }
-    return double.tryParse(value.toString());
-  }
-
   static double _distanceKm(double lat1, double lon1, double lat2, double lon2) {
     const earthRadiusKm = 6371.0;
     final dLat = _degreesToRadians(lat2 - lat1);
@@ -308,11 +300,7 @@ class VerificationLocationService {
   }
 
   static String _readGoogleMapsApiKey() {
-    try {
-      return dotenv.env['GOOGLE_MAPS_API_KEY']?.trim() ?? '';
-    } catch (_) {
-      return '';
-    }
+    return AppConfig.googleMapsApiKey;
   }
 
   static Future<Position> _defaultGetCurrentPosition() {

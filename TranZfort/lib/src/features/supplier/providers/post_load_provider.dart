@@ -15,22 +15,22 @@ class PostLoadErrorCodes {
 }
 
 const List<String> postLoadMaterials = <String>[
-  'Coal',
-  'Steel',
-  'Cement',
-  'Grains',
-  'Fertilizer',
-  'Machinery',
-  'Other',
+  'coal',
+  'steel',
+  'cement',
+  'grains',
+  'fertilizer',
+  'machinery',
+  'other',
 ];
 
 const List<String> postLoadBodyTypes = <String>[
-  'Any',
-  'Open',
-  'Container',
-  'Trailer',
-  'Tanker',
-  'Refrigerated',
+  'any',
+  'open',
+  'container',
+  'trailer',
+  'tanker',
+  'refrigerated',
 ];
 
 const List<int> postLoadTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];
@@ -387,8 +387,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
   Future<Result<String>> submit([AppLocalizations? l10n]) async {
     if (state.isSubmitting) {
       return const Failure<String>(
-        // TODO: Map to PostLoadErrorCodes.submissionAlreadyInProgress in UI layer
-        BusinessRuleFailure(message: 'Load submission is already in progress'),
+        BusinessRuleFailure(message: PostLoadErrorCodes.submissionAlreadyInProgress),
       );
     }
 
@@ -429,7 +428,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeDurationMinutes: state.routePreview?.durationMinutes,
       routePolyline: null,
       routeSnapshotSource: state.routePreview?.source,
-      material: state.material == 'Other' ? state.customMaterial.trim() : state.material,
+      material: state.material == 'other' ? state.customMaterial.trim() : state.material,
       weightTonnes: double.parse(state.weightTonnes.trim()),
       requiredBodyType: state.bodyType == 'Any' ? null : state.bodyType,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),
@@ -453,48 +452,48 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     final errors = <String, String>{};
 
     if (state.originCity.trim().isEmpty) {
-      errors['origin_city'] = l10n?.postLoadValidationOriginCityRequired ?? 'Origin city is required';
+      errors['origin_city'] = l10n?.postLoadValidationOriginCityRequired ?? '';
     }
     if (state.originLocation.trim().isEmpty) {
-      errors['origin_label'] = l10n?.postLoadValidationOriginLocationRequired ?? 'Origin location is required';
+      errors['origin_label'] = l10n?.postLoadValidationOriginLocationRequired ?? '';
     }
     if (state.destinationCity.trim().isEmpty) {
-      errors['destination_city'] = l10n?.postLoadValidationDestinationCityRequired ?? 'Destination city is required';
+      errors['destination_city'] = l10n?.postLoadValidationDestinationCityRequired ?? '';
     }
     if (state.destinationLocation.trim().isEmpty) {
-      errors['destination_label'] = l10n?.postLoadValidationDestinationLocationRequired ?? 'Destination location is required';
+      errors['destination_label'] = l10n?.postLoadValidationDestinationLocationRequired ?? '';
     }
     if (state.material.trim().isEmpty) {
-      errors['material'] = l10n?.postLoadValidationMaterialRequired ?? 'Material is required';
+      errors['material'] = l10n?.postLoadValidationMaterialRequired ?? '';
     }
-    if (state.material == 'Other' && state.customMaterial.trim().isEmpty) {
-      errors['custom_material'] = 'Please specify the material';
+    if (state.material == 'other' && state.customMaterial.trim().isEmpty) {
+      errors['custom_material'] = l10n?.postLoadValidationCustomMaterialRequired ?? '';
     }
 
     final weight = double.tryParse(state.weightTonnes.trim());
     if (weight == null || weight <= 0 || weight > 100) {
-      errors['weight_tonnes'] = l10n?.postLoadValidationWeightRange ?? 'Weight must be between 0 and 100 tonnes';
+      errors['weight_tonnes'] = l10n?.postLoadValidationWeightRange ?? '';
     }
 
     final trucksNeeded = int.tryParse(state.trucksNeeded.trim());
     if (trucksNeeded == null || trucksNeeded < 1) {
-      errors['trucks_needed'] = l10n?.postLoadValidationTrucksNeeded ?? 'At least one truck is required';
+      errors['trucks_needed'] = l10n?.postLoadValidationTrucksNeeded ?? '';
     }
 
     final price = double.tryParse(state.priceAmount.trim());
     if (price == null || price <= 0) {
-      errors['price_amount'] = l10n?.postLoadValidationPricePositive ?? 'Price must be greater than zero';
+      errors['price_amount'] = l10n?.postLoadValidationPricePositive ?? '';
     }
 
     if (state.priceType != 'fixed' && state.priceType != 'per_ton') {
-      errors['price_type'] = l10n?.postLoadValidationPriceType ?? 'Invalid price type';
+      errors['price_type'] = l10n?.postLoadValidationPriceType ?? '';
     }
 
     final today = DateTime.now();
     final normalizedToday = DateTime(today.year, today.month, today.day);
     final normalizedPickup = DateTime(state.pickupDate.year, state.pickupDate.month, state.pickupDate.day);
     if (normalizedPickup.isBefore(normalizedToday)) {
-      errors['pickup_date'] = l10n?.postLoadValidationPickupDatePast ?? 'Pickup date cannot be in the past';
+      errors['pickup_date'] = l10n?.postLoadValidationPickupDatePast ?? '';
     }
 
     return errors;

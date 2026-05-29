@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/map_readers.dart';
 
 part 'verification_repository_backend.dart';
 part 'verification_repository_feedback_models.dart';
@@ -21,7 +22,7 @@ class VerificationRepository {
   Future<Result<VerificationDetail?>> fetchCurrentDetail() async {
     final userId = _currentUserId();
     if (userId == null) {
-      return const Success<VerificationDetail?>(null);
+      return const Failure<VerificationDetail?>(UnauthorizedFailure());
     }
 
     try {
@@ -90,10 +91,11 @@ class VerificationRepository {
         );
       }
 
+      final panLast4 = normalizedPan.substring(normalizedPan.length - 4);
       await _backend.updateProfileFields(userId, {
-        'aadhaar_number': normalizedAadhaar,
         'aadhaar_last4': normalizedAadhaar.substring(normalizedAadhaar.length - 4),
-        'pan_number': normalizedPan,
+        'pan_last4': panLast4,
+        'pan_number': panLast4,
       });
       if (rawRole == 'supplier') {
         await _backend.updateSupplierFields(userId, {

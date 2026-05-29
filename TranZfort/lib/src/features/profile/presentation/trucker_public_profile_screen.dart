@@ -183,6 +183,7 @@ class TruckerPublicProfileScreen extends ConsumerWidget {
 
   Widget _buildErrorState(BuildContext context, AppFailure failure, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
+    final l10n = AppLocalizations.of(context);
 
     return Center(
       child: Padding(
@@ -197,7 +198,7 @@ class TruckerPublicProfileScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Failed to load profile',
+              l10n.publicProfileLoadErrorTitle,
               style: Theme.of(context).textTheme.titleLarge,
             ),
             const SizedBox(height: 8),

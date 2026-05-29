@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/error/result.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/form_inputs.dart';
@@ -10,6 +11,7 @@ import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
+import '../components/verification_wizard_upload_feedback.dart';
 import '../components/wizard_progress_bar.dart';
 
 class StepIdentityDocuments extends ConsumerWidget {
@@ -68,6 +70,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               icon: Icons.document_scanner_outlined,
               onTap: () => _uploadDocument(
                 context,
+                ref,
                 controller,
                 VerificationDocumentType.aadhaarFront,
               ),
@@ -84,6 +87,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               icon: Icons.document_scanner_outlined,
               onTap: () => _uploadDocument(
                 context,
+                ref,
                 controller,
                 VerificationDocumentType.aadhaarBack,
               ),
@@ -114,11 +118,34 @@ class StepIdentityDocuments extends ConsumerWidget {
               icon: Icons.credit_card_outlined,
               onTap: () => _uploadDocument(
                 context,
+                ref,
                 controller,
                 VerificationDocumentType.pan,
               ),
               onClear: () => controller.clearIdentityDoc(VerificationDocumentType.pan),
             ),
+            if (state.fieldErrors['aadhaarFront'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                state.fieldErrors['aadhaarFront']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+              ),
+            ],
+            if (state.fieldErrors['aadhaarBack'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                state.fieldErrors['aadhaarBack']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+              ),
+            ],
+            if (state.fieldErrors['panDocument'] != null) ...[
+              const SizedBox(height: AppSpacing.sm),
+              Text(
+                state.fieldErrors['panDocument']!,
+                style: TextStyle(color: Theme.of(context).colorScheme.error, fontSize: 12),
+              ),
+            ],
+            VerificationWizardUploadErrorBanner(error: state.error),
             const SizedBox(height: AppSpacing.xl),
             
             StepActions(
@@ -145,9 +172,11 @@ class StepIdentityDocuments extends ConsumerWidget {
 
   Future<void> _uploadDocument(
     BuildContext context,
+    WidgetRef ref,
     VerificationWizardController controller,
     VerificationDocumentType type,
   ) async {
+    final l10n = AppLocalizations.of(context);
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (_) => const ImageSourcePicker(
@@ -157,19 +186,42 @@ class StepIdentityDocuments extends ConsumerWidget {
 
     if (source == null) return;
 
+    final Result<void> result;
+    final String label;
     switch (type) {
       case VerificationDocumentType.aadhaarFront:
-        await controller.uploadAadhaarFront(source);
+        result = await controller.uploadAadhaarFront(source);
+        label = l10n.verificationDocTypeAadhaarFront;
         break;
       case VerificationDocumentType.aadhaarBack:
-        await controller.uploadAadhaarBack(source);
+        result = await controller.uploadAadhaarBack(source);
+        label = l10n.verificationDocTypeAadhaarBack;
         break;
       case VerificationDocumentType.pan:
-        await controller.uploadPan(source);
+        result = await controller.uploadPan(source);
+        label = l10n.verificationWizardPanDocumentLabel;
         break;
       default:
-        break;
+        return;
     }
+
+    if (!context.mounted) return;
+
+    final updated = ref.read(verificationWizardProvider);
+    final attached = switch (type) {
+      VerificationDocumentType.aadhaarFront => (updated.draft.aadhaarFrontPath ?? '').isNotEmpty,
+      VerificationDocumentType.aadhaarBack => (updated.draft.aadhaarBackPath ?? '').isNotEmpty,
+      VerificationDocumentType.pan => (updated.draft.panDocumentPath ?? '').isNotEmpty,
+      _ => false,
+    };
+
+    showVerificationWizardUploadResultSnackBar(
+      context,
+      result: result,
+      l10n: l10n,
+      documentAttached: attached,
+      successMessage: l10n.verificationDocumentUploadedSuccess(label),
+    );
   }
 }
 

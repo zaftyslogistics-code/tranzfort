@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_trip_repository.dart';
@@ -30,7 +31,9 @@ class SupplierTripsScreen extends ConsumerWidget {
           children: [
             Text(
               l10n.supplierTripsSectionSubtitle,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
             const SizedBox(height: AppSpacing.md),
             FilterChipBar(
@@ -133,12 +136,16 @@ class _SupplierTripCard extends StatelessWidget {
         children: [
           Text(
             l10n.supplierTripsAssignedLabel(formatSupplierDateTime(context, trip.assignedAt)),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.supplierTripsTruckerTruckLabel(shortId(trip.truckerId), shortId(trip.truckId)),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           const SizedBox(height: AppSpacing.sm),
           TextActionButton(

@@ -45,7 +45,6 @@ class TripStages {
     'picked_up',
     'in_transit',
     'delivered',
-    'pod_uploaded',
     'proof_submitted',
     'disputed',
   ];
@@ -67,10 +66,10 @@ class TripStages {
     'in_transit': 4,
     'delivered': 5,
     'pod_uploaded': 6,
-    'proof_submitted': 7,
-    'completed': 8,
+    'proof_submitted': 6,
+    'completed': 7,
     'disputed': 6,
-    'cancelled': 8,
+    'cancelled': 7,
   };
 }
 

@@ -5,13 +5,15 @@ import 'package:path/path.dart';
 import 'dart:convert';
 
 import '../models/mutation_queue.dart';
+import '../logger/app_logger.dart';
+import '../utils/type_safety.dart';
 import 'mutation_queue_encryption.dart';
 import 'mutation_queue_sanitizer.dart';
 
 class MutationQueueDatabase {
   static const String _databaseName = 'mutation_queue.db';
   static const String _tableName = 'mutations';
-  static const int _databaseVersion = 2;
+  static const int _databaseVersion = 3;
 
   static final MutationQueueDatabase _instance = MutationQueueDatabase._internal();
   factory MutationQueueDatabase() => _instance;
@@ -78,6 +80,16 @@ class MutationQueueDatabase {
     if (oldVersion < 2) {
       await db.execute('ALTER TABLE $_tableName ADD COLUMN schema_version INTEGER NOT NULL DEFAULT 1');
     }
+    if (oldVersion < 3) {
+      // Add timestamp_ms column for integer-based timestamps (P0.4)
+      await db.execute('ALTER TABLE $_tableName ADD COLUMN timestamp_ms INTEGER');
+      
+      // Note: The timestamp column is TEXT with ISO8601 format
+      // We cannot reliably convert it to milliseconds in SQL across all SQLite versions
+      // The fromJson() method handles both int (new) and string (legacy) formats
+      // Existing data will continue to work with string timestamps
+      // New data will use integer timestamps via toJson()
+    }
   }
 
   Future<void> close() async {
@@ -107,11 +119,13 @@ class MutationQueueDatabase {
 
   Future<QueuedMutation?> dequeue() async {
     final db = await database;
+    // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) ASC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'status = ?',
       whereArgs: ['pending'],
-      orderBy: 'timestamp ASC',
+      orderBy: orderBy,
       limit: 1,
     );
 
@@ -150,11 +164,13 @@ class MutationQueueDatabase {
 
   Future<List<QueuedMutation>> getPending() async {
     final db = await database;
+    // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) ASC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'status = ? OR status = ?',
       whereArgs: ['pending', 'retrying'],
-      orderBy: 'timestamp ASC',
+      orderBy: orderBy,
     );
 
     final results = <QueuedMutation>[];
@@ -167,11 +183,13 @@ class MutationQueueDatabase {
 
   Future<List<QueuedMutation>> getByUserId(String userId) async {
     final db = await database;
+    // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) DESC';
     final List<Map<String, dynamic>> maps = await db.query(
       _tableName,
       where: 'user_id = ?',
       whereArgs: [userId],
-      orderBy: 'timestamp DESC',
+      orderBy: orderBy,
     );
 
     final results = <QueuedMutation>[];
@@ -268,19 +286,56 @@ class MutationQueueDatabase {
   }
 
   Future<QueuedMutation?> _decryptMutation(Map<String, dynamic> map) async {
+    final mutationId = safeString(map['id']);
+    
     if (_encryption == null) {
-      return QueuedMutation.fromJson(map);
+      try {
+        return QueuedMutation.fromJson(map);
+      } catch (error) {
+        AppLogger.warning(
+          'Mutation queue: Failed to parse mutation (no encryption)',
+          scope: 'mutation_queue',
+          error: error,
+        );
+        return null;
+      }
     }
+    
     try {
-      final payload = map['payload'] as String;
+      final payload = safeString(map['payload']);
       final decrypted = await _encryption!.decrypt(payload);
       if (decrypted != null) {
         map['payload'] = decrypted;
       }
     } catch (_) {
-      // If decryption fails, the payload may be unencrypted (legacy data)
-      // Return as-is so legacy mutations can still be processed
+      // Decryption failed - try to parse as plaintext JSON (legacy data)
+      try {
+        final payload = safeString(map['payload']);
+        jsonDecode(payload); // Validate it's valid JSON
+        // If valid JSON, it's unencrypted legacy data - use as-is
+        AppLogger.info(
+          'Mutation queue: Using unencrypted legacy payload for mutation $mutationId',
+          scope: 'mutation_queue',
+        );
+      } catch (_) {
+        // Payload is encrypted/corrupted and cannot be parsed
+        AppLogger.warning(
+          'Mutation queue: Skipping corrupted mutation $mutationId (payload cannot be decrypted or parsed)',
+          scope: 'mutation_queue',
+        );
+        return null;
+      }
     }
-    return QueuedMutation.fromJson(map);
+    
+    try {
+      return QueuedMutation.fromJson(map);
+    } catch (error) {
+      AppLogger.warning(
+        'Mutation queue: Failed to parse mutation $mutationId after decryption',
+        scope: 'mutation_queue',
+        error: error,
+      );
+      return null;
+    }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/config/app_config.dart';
+
 class TripCostEstimate {
   final double dieselCost;
   final double tollCost;
@@ -37,13 +39,14 @@ class TripCostEstimate {
 }
 
 class TripCostingService {
-  // ─── Phase 5 Cost Constants ───
-  static const double defaultDieselPricePerLitre = 90; // ₹90/L default
-  static const double defaultMileageKmpl = 2.5; // 2.5 km/L average
-  static const int defaultAxles = 4;
-  static const double tollPerKm = 11; // Phase 5: ₹11/km realistic highway toll
-  static const double driverCostPerKm = 5; // ₹5/km: driver allowance + batta + food
-  static const double miscCostPerKm = 2; // ₹2/km: maintenance/misc/tyre wear
+  // ─── Cost Constants (from AppConfig) ───
+  // These can be overridden via --dart-define for different regions/market conditions
+  static double get defaultDieselPricePerLitre => AppConfig.defaultDieselPricePerLitre;
+  static double get defaultMileageKmpl => AppConfig.defaultMileageKmpl;
+  static int get defaultAxles => AppConfig.defaultAxles;
+  static double get tollPerKm => AppConfig.tollPerKm;
+  static double get driverCostPerKm => AppConfig.driverCostPerKm;
+  static double get miscCostPerKm => AppConfig.miscCostPerKm;
 
   const TripCostingService();
 

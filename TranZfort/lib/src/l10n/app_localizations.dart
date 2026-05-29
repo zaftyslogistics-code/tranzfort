@@ -104,6 +104,18 @@ abstract class AppLocalizations {
   /// **'TranZfort'**
   String get appTitle;
 
+  /// No description provided for @commonFromLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'FROM'**
+  String get commonFromLabel;
+
+  /// No description provided for @commonToLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TO'**
+  String get commonToLabel;
+
   /// No description provided for @authGoogleFailureMessage.
   ///
   /// In en, this message translates to:
@@ -283,6 +295,510 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Use a different email'**
   String get authPasswordUseDifferentEmailAction;
+
+  /// No description provided for @authErrorEmailRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Email is required'**
+  String get authErrorEmailRequired;
+
+  /// No description provided for @authErrorEmailInvalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get authErrorEmailInvalid;
+
+  /// No description provided for @authErrorPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is required'**
+  String get authErrorPasswordRequired;
+
+  /// No description provided for @authErrorPasswordTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Password must be at least 8 characters'**
+  String get authErrorPasswordTooShort;
+
+  /// No description provided for @authErrorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'User not found'**
+  String get authErrorUserNotFound;
+
+  /// No description provided for @authErrorWrongPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect password'**
+  String get authErrorWrongPassword;
+
+  /// No description provided for @authErrorEmailAlreadyInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'Email already registered'**
+  String get authErrorEmailAlreadyInUse;
+
+  /// No description provided for @authErrorWeakPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Password is too weak'**
+  String get authErrorWeakPassword;
+
+  /// No description provided for @authRoleRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid role to continue'**
+  String get authRoleRequired;
+
+  /// No description provided for @authNameTooShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name'**
+  String get authNameTooShort;
+
+  /// No description provided for @authMobileRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid mobile number'**
+  String get authMobileRequired;
+
+  /// No description provided for @authLanguageUnsupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a supported language'**
+  String get authLanguageUnsupported;
+
+  /// No description provided for @authUnexpectedResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected response format from account deletion request'**
+  String get authUnexpectedResponse;
+
+  /// No description provided for @authGoogleNotConfigured.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.'**
+  String get authGoogleNotConfigured;
+
+  /// No description provided for @authGoogleSignInCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Google sign in was cancelled. Please try again.'**
+  String get authGoogleSignInCancelled;
+
+  /// No description provided for @authGoogleTokenFetchFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to fetch Google sign-in token. Please try again.'**
+  String get authGoogleTokenFetchFailed;
+
+  /// No description provided for @onboardingDiscardRoleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard role selection?'**
+  String get onboardingDiscardRoleTitle;
+
+  /// No description provided for @onboardingDiscardRoleMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your selected role will be lost'**
+  String get onboardingDiscardRoleMessage;
+
+  /// No description provided for @onboardingDiscardChangesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard changes?'**
+  String get onboardingDiscardChangesTitle;
+
+  /// No description provided for @onboardingDiscardChangesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Your unsaved changes will be lost'**
+  String get onboardingDiscardChangesMessage;
+
+  /// No description provided for @locationServicesDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Location services are disabled'**
+  String get locationServicesDisabled;
+
+  /// No description provided for @locationPermissionRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission is required'**
+  String get locationPermissionRequired;
+
+  /// No description provided for @locationPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was denied'**
+  String get locationPermissionDenied;
+
+  /// No description provided for @locationEnableGps.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable GPS'**
+  String get locationEnableGps;
+
+  /// No description provided for @locationEnableServicesMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enable location services (GPS) to capture your current location.'**
+  String get locationEnableServicesMessage;
+
+  /// No description provided for @locationGrantPermissionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please grant location permission to capture your current location.'**
+  String get locationGrantPermissionMessage;
+
+  /// No description provided for @locationOpenSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Settings'**
+  String get locationOpenSettings;
+
+  /// No description provided for @locationPermissionDeniedForeverMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Location permission was permanently denied. Please enable it in app settings.'**
+  String get locationPermissionDeniedForeverMessage;
+
+  /// No description provided for @searchYourLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Search your location'**
+  String get searchYourLocation;
+
+  /// No description provided for @useCurrentLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Use current location'**
+  String get useCurrentLocation;
+
+  /// No description provided for @addManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Add manually'**
+  String get addManually;
+
+  /// No description provided for @clearLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear location'**
+  String get clearLocation;
+
+  /// No description provided for @locationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Location'**
+  String get locationLabel;
+
+  /// No description provided for @locationNotAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'No location added'**
+  String get locationNotAdded;
+
+  /// No description provided for @locationCapturing.
+  ///
+  /// In en, this message translates to:
+  /// **'Capturing...'**
+  String get locationCapturing;
+
+  /// No description provided for @routePreviewInvalidError.
+  ///
+  /// In en, this message translates to:
+  /// **'Unable to load route preview'**
+  String get routePreviewInvalidError;
+
+  /// No description provided for @publicProfileLoadErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load profile'**
+  String get publicProfileLoadErrorTitle;
+
+  /// No description provided for @publicProfileNotFoundTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile not found'**
+  String get publicProfileNotFoundTitle;
+
+  /// No description provided for @supplierPostLoadSpecifyMaterialLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Specify Material'**
+  String get supplierPostLoadSpecifyMaterialLabel;
+
+  /// No description provided for @supplierPostLoadSpecifyMaterialHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., Fruits, Iron Ore, Bricks'**
+  String get supplierPostLoadSpecifyMaterialHint;
+
+  /// No description provided for @supplierPostLoadMaterialCoal.
+  ///
+  /// In en, this message translates to:
+  /// **'Coal'**
+  String get supplierPostLoadMaterialCoal;
+
+  /// No description provided for @supplierPostLoadMaterialSteel.
+  ///
+  /// In en, this message translates to:
+  /// **'Steel'**
+  String get supplierPostLoadMaterialSteel;
+
+  /// No description provided for @supplierPostLoadMaterialCement.
+  ///
+  /// In en, this message translates to:
+  /// **'Cement'**
+  String get supplierPostLoadMaterialCement;
+
+  /// No description provided for @supplierPostLoadMaterialGrains.
+  ///
+  /// In en, this message translates to:
+  /// **'Grains'**
+  String get supplierPostLoadMaterialGrains;
+
+  /// No description provided for @supplierPostLoadMaterialFertilizer.
+  ///
+  /// In en, this message translates to:
+  /// **'Fertilizer'**
+  String get supplierPostLoadMaterialFertilizer;
+
+  /// No description provided for @supplierPostLoadMaterialMachinery.
+  ///
+  /// In en, this message translates to:
+  /// **'Machinery'**
+  String get supplierPostLoadMaterialMachinery;
+
+  /// No description provided for @supplierPostLoadMaterialOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get supplierPostLoadMaterialOther;
+
+  /// No description provided for @supplierPostLoadBodyTypeAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get supplierPostLoadBodyTypeAny;
+
+  /// No description provided for @supplierPostLoadBodyTypeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get supplierPostLoadBodyTypeOpen;
+
+  /// No description provided for @supplierPostLoadBodyTypeContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get supplierPostLoadBodyTypeContainer;
+
+  /// No description provided for @supplierPostLoadBodyTypeTrailer.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer'**
+  String get supplierPostLoadBodyTypeTrailer;
+
+  /// No description provided for @supplierPostLoadBodyTypeTanker.
+  ///
+  /// In en, this message translates to:
+  /// **'Tanker'**
+  String get supplierPostLoadBodyTypeTanker;
+
+  /// No description provided for @supplierPostLoadBodyTypeRefrigerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Refrigerated'**
+  String get supplierPostLoadBodyTypeRefrigerated;
+
+  /// No description provided for @postLoadValidationCustomMaterialRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Please specify the material'**
+  String get postLoadValidationCustomMaterialRequired;
+
+  /// No description provided for @supplierLoadSubmissionAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Load submission is already in progress'**
+  String get supplierLoadSubmissionAlreadyInProgress;
+
+  /// No description provided for @truckerFleetValidationTruckNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid truck number'**
+  String get truckerFleetValidationTruckNumber;
+
+  /// No description provided for @truckerFleetValidationTyreCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a valid tyre count'**
+  String get truckerFleetValidationTyreCount;
+
+  /// No description provided for @truckerFleetValidationCapacityTonnes.
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity must be between 0 and 100 tonnes'**
+  String get truckerFleetValidationCapacityTonnes;
+
+  /// No description provided for @truckerFleetValidationRcDocument.
+  ///
+  /// In en, this message translates to:
+  /// **'RC document is required'**
+  String get truckerFleetValidationRcDocument;
+
+  /// No description provided for @truckerFleetErrorTruckNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'The selected truck was not found'**
+  String get truckerFleetErrorTruckNotFound;
+
+  /// No description provided for @truckerFleetErrorSaveAlreadyInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck save is already in progress'**
+  String get truckerFleetErrorSaveAlreadyInProgress;
+
+  /// No description provided for @truckerFleetErrorValidationFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Please correct the highlighted truck details'**
+  String get truckerFleetErrorValidationFailed;
+
+  /// No description provided for @truckerFleetBodyTypeOpen.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get truckerFleetBodyTypeOpen;
+
+  /// No description provided for @truckerFleetBodyTypeContainer.
+  ///
+  /// In en, this message translates to:
+  /// **'Container'**
+  String get truckerFleetBodyTypeContainer;
+
+  /// No description provided for @truckerFleetBodyTypeTrailer.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer'**
+  String get truckerFleetBodyTypeTrailer;
+
+  /// No description provided for @truckerFleetBodyTypeTanker.
+  ///
+  /// In en, this message translates to:
+  /// **'Tanker'**
+  String get truckerFleetBodyTypeTanker;
+
+  /// No description provided for @truckerFleetBodyTypeRefrigerated.
+  ///
+  /// In en, this message translates to:
+  /// **'Refrigerated'**
+  String get truckerFleetBodyTypeRefrigerated;
+
+  /// No description provided for @chatTonnesCompact.
+  ///
+  /// In en, this message translates to:
+  /// **'{value}T'**
+  String chatTonnesCompact(Object value);
+
+  /// No description provided for @verificationCompleteAllFields.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete all required fields'**
+  String get verificationCompleteAllFields;
+
+  /// No description provided for @verificationLocationSourceManualCityEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Added manually'**
+  String get verificationLocationSourceManualCityEntry;
+
+  /// No description provided for @verificationLocationSourceGoogleGeocode.
+  ///
+  /// In en, this message translates to:
+  /// **'Captured via GPS'**
+  String get verificationLocationSourceGoogleGeocode;
+
+  /// No description provided for @verificationLocationSourceOfflineNearestCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline location'**
+  String get verificationLocationSourceOfflineNearestCity;
+
+  /// No description provided for @supportCategoryGeneral.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get supportCategoryGeneral;
+
+  /// No description provided for @supportCategoryAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get supportCategoryAccount;
+
+  /// No description provided for @supportCategoryLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'Load'**
+  String get supportCategoryLoad;
+
+  /// No description provided for @supportCategoryTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip'**
+  String get supportCategoryTrip;
+
+  /// No description provided for @supportCategoryPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get supportCategoryPayment;
+
+  /// No description provided for @supportCategoryTechnical.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical'**
+  String get supportCategoryTechnical;
+
+  /// No description provided for @supportCategoryOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Other'**
+  String get supportCategoryOther;
+
+  /// No description provided for @reportIssueCategorySpamOrScam.
+  ///
+  /// In en, this message translates to:
+  /// **'Spam or scam'**
+  String get reportIssueCategorySpamOrScam;
+
+  /// No description provided for @reportIssueCategoryFakePayoutProof.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake payout proof'**
+  String get reportIssueCategoryFakePayoutProof;
+
+  /// No description provided for @reportIssueCategoryNonPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Non-payment'**
+  String get reportIssueCategoryNonPayment;
+
+  /// No description provided for @reportIssueCategoryAbusiveBehavior.
+  ///
+  /// In en, this message translates to:
+  /// **'Abusive behavior'**
+  String get reportIssueCategoryAbusiveBehavior;
+
+  /// No description provided for @reportIssueContextSourceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current conversation or trip context'**
+  String get reportIssueContextSourceLabel;
 
   /// No description provided for @onboardingSelectRoleError.
   ///
@@ -877,18 +1393,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Call'**
   String get commonCallAction;
-
-  /// No description provided for @commonFromLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'FROM'**
-  String get commonFromLabel;
-
-  /// No description provided for @commonToLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'TO'**
-  String get commonToLabel;
 
   /// Label for reporting chat source. Placeholder {source} is the chat context source.
   ///
@@ -3258,7 +3762,7 @@ abstract class AppLocalizations {
   /// No description provided for @tripStageValue.
   ///
   /// In en, this message translates to:
-  /// **'{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} pod_uploaded {POD uploaded} proof_submitted {Proof submitted} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}'**
+  /// **'{stage, select, assigned {Assigned} pickup_pending {Pickup pending} picked_up {Picked up} in_transit {In transit} delivered {Delivered} proof_submitted {Proof submitted} pod_uploaded {POD uploaded} completed {Completed} disputed {Disputed} cancelled {Cancelled} other {Unknown}}'**
   String tripStageValue(String stage);
 
   /// No description provided for @proofStatusValue.
@@ -9536,18 +10040,6 @@ abstract class AppLocalizations {
   /// **'Profile'**
   String get publicProfileScreenTitle;
 
-  /// No description provided for @publicProfileLoadErrorTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Failed to load profile'**
-  String get publicProfileLoadErrorTitle;
-
-  /// No description provided for @publicProfileNotFoundTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Profile not found'**
-  String get publicProfileNotFoundTitle;
-
   /// No description provided for @truckerProfileTitle.
   ///
   /// In en, this message translates to:
@@ -9608,36 +10100,6 @@ abstract class AppLocalizations {
   /// **'No English voices available on this device.'**
   String get ttsNoEnglishVoices;
 
-  /// No description provided for @authRoleRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a valid role to continue'**
-  String get authRoleRequired;
-
-  /// No description provided for @authNameTooShort.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter your full name'**
-  String get authNameTooShort;
-
-  /// No description provided for @authMobileRequired.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter a valid mobile number'**
-  String get authMobileRequired;
-
-  /// No description provided for @authLanguageUnsupported.
-  ///
-  /// In en, this message translates to:
-  /// **'Select a supported language'**
-  String get authLanguageUnsupported;
-
-  /// No description provided for @authUnexpectedResponse.
-  ///
-  /// In en, this message translates to:
-  /// **'Unexpected response format from account deletion request'**
-  String get authUnexpectedResponse;
-
   /// No description provided for @supplierRatingAlreadySubmitting.
   ///
   /// In en, this message translates to:
@@ -9649,12 +10111,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Another supplier trip action is already in progress'**
   String get supplierTripActionAlreadyInProgress;
-
-  /// No description provided for @supplierLoadSubmissionAlreadyInProgress.
-  ///
-  /// In en, this message translates to:
-  /// **'Load submission is already in progress'**
-  String get supplierLoadSubmissionAlreadyInProgress;
 
   /// No description provided for @truckerRatingAlreadySubmitting.
   ///

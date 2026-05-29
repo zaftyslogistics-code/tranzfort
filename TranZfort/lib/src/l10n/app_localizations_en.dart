@@ -12,6 +12,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'TranZfort';
 
   @override
+  String get commonFromLabel => 'FROM';
+
+  @override
+  String get commonToLabel => 'TO';
+
+  @override
   String get authGoogleFailureMessage =>
       'We could not continue with Google right now. Retry shortly or use email sign-in instead.';
 
@@ -114,6 +120,278 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get authPasswordUseDifferentEmailAction => 'Use a different email';
+
+  @override
+  String get authErrorEmailRequired => 'Email is required';
+
+  @override
+  String get authErrorEmailInvalid => 'Please enter a valid email';
+
+  @override
+  String get authErrorPasswordRequired => 'Password is required';
+
+  @override
+  String get authErrorPasswordTooShort =>
+      'Password must be at least 8 characters';
+
+  @override
+  String get authErrorUserNotFound => 'User not found';
+
+  @override
+  String get authErrorWrongPassword => 'Incorrect password';
+
+  @override
+  String get authErrorEmailAlreadyInUse => 'Email already registered';
+
+  @override
+  String get authErrorWeakPassword => 'Password is too weak';
+
+  @override
+  String get authRoleRequired => 'Select a valid role to continue';
+
+  @override
+  String get authNameTooShort => 'Enter your full name';
+
+  @override
+  String get authMobileRequired => 'Enter a valid mobile number';
+
+  @override
+  String get authLanguageUnsupported => 'Select a supported language';
+
+  @override
+  String get authUnexpectedResponse =>
+      'Unexpected response format from account deletion request';
+
+  @override
+  String get authGoogleNotConfigured =>
+      'Google sign-in is not configured. Set GOOGLE_WEB_CLIENT_ID in the app environment and retry.';
+
+  @override
+  String get authGoogleSignInCancelled =>
+      'Google sign in was cancelled. Please try again.';
+
+  @override
+  String get authGoogleTokenFetchFailed =>
+      'Unable to fetch Google sign-in token. Please try again.';
+
+  @override
+  String get onboardingDiscardRoleTitle => 'Discard role selection?';
+
+  @override
+  String get onboardingDiscardRoleMessage => 'Your selected role will be lost';
+
+  @override
+  String get onboardingDiscardChangesTitle => 'Discard changes?';
+
+  @override
+  String get onboardingDiscardChangesMessage =>
+      'Your unsaved changes will be lost';
+
+  @override
+  String get locationServicesDisabled => 'Location services are disabled';
+
+  @override
+  String get locationPermissionRequired => 'Location permission is required';
+
+  @override
+  String get locationPermissionDenied => 'Location permission was denied';
+
+  @override
+  String get locationEnableGps => 'Enable GPS';
+
+  @override
+  String get locationEnableServicesMessage =>
+      'Please enable location services (GPS) to capture your current location.';
+
+  @override
+  String get locationGrantPermissionMessage =>
+      'Please grant location permission to capture your current location.';
+
+  @override
+  String get locationOpenSettings => 'Open Settings';
+
+  @override
+  String get locationPermissionDeniedForeverMessage =>
+      'Location permission was permanently denied. Please enable it in app settings.';
+
+  @override
+  String get searchYourLocation => 'Search your location';
+
+  @override
+  String get useCurrentLocation => 'Use current location';
+
+  @override
+  String get addManually => 'Add manually';
+
+  @override
+  String get clearLocation => 'Clear location';
+
+  @override
+  String get locationLabel => 'Location';
+
+  @override
+  String get locationNotAdded => 'No location added';
+
+  @override
+  String get locationCapturing => 'Capturing...';
+
+  @override
+  String get routePreviewInvalidError => 'Unable to load route preview';
+
+  @override
+  String get publicProfileLoadErrorTitle => 'Failed to load profile';
+
+  @override
+  String get publicProfileNotFoundTitle => 'Profile not found';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialLabel => 'Specify Material';
+
+  @override
+  String get supplierPostLoadSpecifyMaterialHint =>
+      'e.g., Fruits, Iron Ore, Bricks';
+
+  @override
+  String get supplierPostLoadMaterialCoal => 'Coal';
+
+  @override
+  String get supplierPostLoadMaterialSteel => 'Steel';
+
+  @override
+  String get supplierPostLoadMaterialCement => 'Cement';
+
+  @override
+  String get supplierPostLoadMaterialGrains => 'Grains';
+
+  @override
+  String get supplierPostLoadMaterialFertilizer => 'Fertilizer';
+
+  @override
+  String get supplierPostLoadMaterialMachinery => 'Machinery';
+
+  @override
+  String get supplierPostLoadMaterialOther => 'Other';
+
+  @override
+  String get supplierPostLoadBodyTypeAny => 'Any';
+
+  @override
+  String get supplierPostLoadBodyTypeOpen => 'Open';
+
+  @override
+  String get supplierPostLoadBodyTypeContainer => 'Container';
+
+  @override
+  String get supplierPostLoadBodyTypeTrailer => 'Trailer';
+
+  @override
+  String get supplierPostLoadBodyTypeTanker => 'Tanker';
+
+  @override
+  String get supplierPostLoadBodyTypeRefrigerated => 'Refrigerated';
+
+  @override
+  String get postLoadValidationCustomMaterialRequired =>
+      'Please specify the material';
+
+  @override
+  String get supplierLoadSubmissionAlreadyInProgress =>
+      'Load submission is already in progress';
+
+  @override
+  String get truckerFleetValidationTruckNumber => 'Enter a valid truck number';
+
+  @override
+  String get truckerFleetValidationTyreCount => 'Select a valid tyre count';
+
+  @override
+  String get truckerFleetValidationCapacityTonnes =>
+      'Capacity must be between 0 and 100 tonnes';
+
+  @override
+  String get truckerFleetValidationRcDocument => 'RC document is required';
+
+  @override
+  String get truckerFleetErrorTruckNotFound =>
+      'The selected truck was not found';
+
+  @override
+  String get truckerFleetErrorSaveAlreadyInProgress =>
+      'Truck save is already in progress';
+
+  @override
+  String get truckerFleetErrorValidationFailed =>
+      'Please correct the highlighted truck details';
+
+  @override
+  String get truckerFleetBodyTypeOpen => 'Open';
+
+  @override
+  String get truckerFleetBodyTypeContainer => 'Container';
+
+  @override
+  String get truckerFleetBodyTypeTrailer => 'Trailer';
+
+  @override
+  String get truckerFleetBodyTypeTanker => 'Tanker';
+
+  @override
+  String get truckerFleetBodyTypeRefrigerated => 'Refrigerated';
+
+  @override
+  String chatTonnesCompact(Object value) {
+    return '${value}T';
+  }
+
+  @override
+  String get verificationCompleteAllFields =>
+      'Please complete all required fields';
+
+  @override
+  String get verificationLocationSourceManualCityEntry => 'Added manually';
+
+  @override
+  String get verificationLocationSourceGoogleGeocode => 'Captured via GPS';
+
+  @override
+  String get verificationLocationSourceOfflineNearestCity => 'Offline location';
+
+  @override
+  String get supportCategoryGeneral => 'General';
+
+  @override
+  String get supportCategoryAccount => 'Account';
+
+  @override
+  String get supportCategoryLoad => 'Load';
+
+  @override
+  String get supportCategoryTrip => 'Trip';
+
+  @override
+  String get supportCategoryPayment => 'Payment';
+
+  @override
+  String get supportCategoryTechnical => 'Technical';
+
+  @override
+  String get supportCategoryOther => 'Other';
+
+  @override
+  String get reportIssueCategorySpamOrScam => 'Spam or scam';
+
+  @override
+  String get reportIssueCategoryFakePayoutProof => 'Fake payout proof';
+
+  @override
+  String get reportIssueCategoryNonPayment => 'Non-payment';
+
+  @override
+  String get reportIssueCategoryAbusiveBehavior => 'Abusive behavior';
+
+  @override
+  String get reportIssueContextSourceLabel =>
+      'Current conversation or trip context';
 
   @override
   String get onboardingSelectRoleError =>
@@ -2013,6 +2291,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'delivered': 'Delivered',
       'pod_uploaded': 'POD uploaded',
       'proof_submitted': 'Proof submitted',
+      'pod_uploaded': 'POD uploaded',
       'completed': 'Completed',
       'disputed': 'Disputed',
       'cancelled': 'Cancelled',
@@ -6110,12 +6389,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get publicProfileScreenTitle => 'Profile';
 
   @override
-  String get publicProfileLoadErrorTitle => 'Failed to load profile';
-
-  @override
-  String get publicProfileNotFoundTitle => 'Profile not found';
-
-  @override
   String get truckerProfileTitle => 'Trucker Profile';
 
   @override
@@ -6149,32 +6422,12 @@ class AppLocalizationsEn extends AppLocalizations {
       'No English voices available on this device.';
 
   @override
-  String get authRoleRequired => 'Select a valid role to continue';
-
-  @override
-  String get authNameTooShort => 'Enter your full name';
-
-  @override
-  String get authMobileRequired => 'Enter a valid mobile number';
-
-  @override
-  String get authLanguageUnsupported => 'Select a supported language';
-
-  @override
-  String get authUnexpectedResponse =>
-      'Unexpected response format from account deletion request';
-
-  @override
   String get supplierRatingAlreadySubmitting =>
       'Your rating is already being submitted';
 
   @override
   String get supplierTripActionAlreadyInProgress =>
       'Another supplier trip action is already in progress';
-
-  @override
-  String get supplierLoadSubmissionAlreadyInProgress =>
-      'Load submission is already in progress';
 
   @override
   String get truckerRatingAlreadySubmitting =>

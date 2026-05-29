@@ -11,6 +11,7 @@ import 'package:crypto/crypto.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/date_parser.dart';
 
 /// Attachment metadata model
 class TicketAttachmentMetadata {
@@ -68,9 +69,9 @@ class TicketAttachmentMetadata {
       maxRetries: map['max_retries'] as int? ?? 3,
       scanStatus: map['scan_status'] as String,
       scanResult: map['scan_result'] as String?,
-      scannedAt: map['scanned_at'] != null ? DateTime.parse(map['scanned_at'] as String) : null,
-      createdAt: DateTime.parse(map['created_at'] as String),
-      updatedAt: DateTime.parse(map['updated_at'] as String),
+      scannedAt: safeParseDateTime(map['scanned_at']),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
+      updatedAt: safeParseDateTime(map['updated_at']) ?? DateTime.now(),
     );
   }
 }

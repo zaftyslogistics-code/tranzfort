@@ -108,8 +108,8 @@ class TruckerFleetTruck {
   factory TruckerFleetTruck.fromMap(Map<String, dynamic> map) {
     final modelMap = map['truck_models'];
     final resolvedModelMap = modelMap is Map<String, dynamic> ? modelMap : <String, dynamic>{};
-    final make = _nullableString(resolvedModelMap['make']);
-    final model = _nullableString(resolvedModelMap['model']);
+    final make = nullableString(resolvedModelMap['make']);
+    final model = nullableString(resolvedModelMap['model']);
     final modelLabel = switch ((make, model)) {
       (final String makeValue?, final String modelValue?) => '$makeValue $modelValue',
       (final String makeValue?, null) => makeValue,
@@ -119,19 +119,19 @@ class TruckerFleetTruck {
 
     return TruckerFleetTruck(
       id: (map['id'] ?? '').toString(),
-      truckModelId: _nullableString(map['truck_model_id']),
+      truckModelId: nullableString(map['truck_model_id']),
       truckNumber: (map['truck_number'] ?? '').toString(),
       bodyType: (map['body_type'] ?? '').toString(),
-      tyres: _readInt(map['tyres']),
-      capacityTonnes: _readDouble(map['capacity_tonnes']),
-      rcDocumentPath: _nullableString(map['rc_document_path']),
+      tyres: readInt(map['tyres']),
+      capacityTonnes: readDouble(map['capacity_tonnes']),
+      rcDocumentPath: nullableString(map['rc_document_path']),
       status: TruckerFleetTruckStatusX.fromDatabase((map['status'] ?? 'unknown').toString()),
-      rejectionReason: _nullableString(map['rejection_reason']),
+      rejectionReason: nullableString(map['rejection_reason']),
       reviewFeedback: TruckerFleetReviewFeedback.fromJson(map['verification_feedback_json']),
       modelLabel: modelLabel,
-      verifiedAt: _readDate(map['verified_at']),
-      createdAt: _readDate(map['created_at']) ?? DateTime.now(),
-      updatedAt: _readDate(map['updated_at']) ?? DateTime.now(),
+      verifiedAt: readDate(map['verified_at']),
+      createdAt: readDate(map['created_at']) ?? DateTime.now(),
+      updatedAt: readDate(map['updated_at']) ?? DateTime.now(),
     );
   }
 }
@@ -151,6 +151,8 @@ abstract class TruckerFleetBackend {
     required Map<String, dynamic> values,
   });
 
+  Future<void> archiveTruck(String truckId);
+
   Future<String?> getSignedUrl(String storagePath, {int expiresInSeconds = 300});
 }
 
@@ -169,16 +171,24 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Session unavailable');
     }
 
-    final response = await _client
-        .from('trucks')
-        .select(
-          'id, truck_model_id, truck_number, body_type, tyres, capacity_tonnes, rc_document_path, status, rejection_reason, verification_feedback_json, verified_at, created_at, updated_at, truck_models(make, model)',
-        )
-        .eq('owner_id', ownerId)
-        .order('created_at', ascending: false)
-        .range(offset, offset + limit - 1);
+    // Use RPC for fleet fetching
+    final response = await _client.rpc(
+      'get_trucker_fleet',
+      params: {
+        'p_user_id': ownerId,
+        'p_limit': limit,
+        'p_offset': offset,
+      },
+    );
+    
+    if (response is List) {
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    }
+    if (response is Map && response['trucks'] is List) {
+      return (response['trucks'] as List).whereType<Map<String, dynamic>>().toList(growable: false);
+    }
 
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    throw const ServerFailure(message: 'Invalid response format from get_trucker_fleet RPC');
   }
 
   @override
@@ -201,8 +211,27 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Trucker session is not available');
     }
 
-    final response = await _client.from('trucks').insert(values).select('id').single();
-    return response;
+    // Use RPC for truck creation
+    final response = await _client.rpc(
+      'add_truck',
+      params: {
+        'p_truck_number': values['truck_number'],
+        'p_body_type': values['body_type'],
+        'p_tyres': values['tyres'],
+        'p_capacity_tonnes': values['capacity_tonnes'],
+        'p_rc_document_path': values['rc_document_path'],
+      },
+    );
+
+    if (response is Map) {
+      return Map<String, dynamic>.from(response);
+    }
+    final truckId = (response ?? '').toString().trim();
+    if (truckId.isNotEmpty) {
+      return <String, dynamic>{'id': truckId};
+    }
+
+    throw const ServerFailure(message: 'Invalid response format from add_truck RPC');
   }
 
   @override
@@ -215,7 +244,33 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       throw const AuthException('Trucker session is not available');
     }
 
-    await _client.from('trucks').update(values).eq('owner_id', ownerId).eq('id', truckId);
+    // Use RPC for truck update
+    await _client.rpc(
+      'update_truck',
+      params: {
+        'p_truck_id': truckId,
+        'p_truck_number': values['truck_number'],
+        'p_body_type': values['body_type'],
+        'p_tyres': values['tyres'],
+        'p_capacity_tonnes': values['capacity_tonnes'],
+        'p_rc_document_path': values['rc_document_path'],
+      },
+    );
+  }
+
+  @override
+  Future<void> archiveTruck(String truckId) async {
+    if (_client == null) {
+      throw const AuthException('Trucker session is not available');
+    }
+
+    // Use RPC for truck archiving
+    await _client.rpc(
+      'archive_truck',
+      params: {
+        'p_truck_id': truckId,
+      },
+    );
   }
 }
 
@@ -260,11 +315,7 @@ class TruckerFleetRepository {
       return const Failure<void>(UnauthorizedFailure());
     }
     try {
-      await _backend.updateTruck(
-        ownerId: userId,
-        truckId: truckId,
-        values: {'status': TruckerFleetTruckStatus.archived.databaseValue},
-      );
+      await _backend.archiveTruck(truckId);
       return const Success<void>(null);
     } catch (error, stackTrace) {
       return Failure<void>(_mapError(error, stackTrace));
@@ -391,36 +442,6 @@ class TruckerFleetRepository {
     }
     return mapSupabaseError(error, stackTrace);
   }
-}
-
-int _readInt(Object? value) {
-  if (value is int) {
-    return value;
-  }
-  return int.tryParse((value ?? '0').toString()) ?? 0;
-}
-
-double _readDouble(Object? value) {
-  if (value is num) {
-    return value.toDouble();
-  }
-  return double.tryParse((value ?? '0').toString()) ?? 0;
-}
-
-DateTime? _readDate(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return DateTime.tryParse(raw);
-}
-
-String? _nullableString(Object? value) {
-  final raw = (value ?? '').toString().trim();
-  if (raw.isEmpty) {
-    return null;
-  }
-  return raw;
 }
 
 final truckerFleetRepositoryProvider = Provider<TruckerFleetRepository>((ref) {

@@ -3,6 +3,8 @@
 
   "@_sectionCommon": "═══ Common & App ═══",
   "appTitle": "TranZfort",
+  "commonFromLabel": "से",
+  "commonToLabel": "तक",
 
   "@_sectionSplash": "═══ Splash & Device Setup ═══",
   "@_sectionAuth": "═══ Auth ═══",
@@ -46,6 +48,90 @@
   "authPasswordResendVerificationFailureMessage": "अभी verification email फिर नहीं भेजा जा सका। थोड़ी देर बाद फिर कोशिश करें या कोई दूसरा email इस्तेमाल करें।",
   "commonBackToSignInAction": "Sign in पर वापस जाएँ",
   "authPasswordUseDifferentEmailAction": "कोई दूसरा email इस्तेमाल करें",
+  "authErrorEmailRequired": "Email आवश्यक है",
+  "authErrorEmailInvalid": "कृपया एक वैध email दर्ज करें",
+  "authErrorPasswordRequired": "Password आवश्यक है",
+  "authErrorPasswordTooShort": "Password कम से कम 8 characters का होना चाहिए",
+  "authErrorUserNotFound": "User नहीं मिला",
+  "authErrorWrongPassword": "गलत password",
+  "authErrorEmailAlreadyInUse": "Email पहले से registered है",
+  "authErrorWeakPassword": "Password बहुत कमजोर है",
+  "authRoleRequired": "Role आवश्यक है",
+  "authNameTooShort": "Name बहुत छोटा है",
+  "authMobileRequired": "Mobile number आवश्यक है",
+  "authLanguageUnsupported": "Language supported नहीं है",
+  "authUnexpectedResponse": "Server से unexpected response",
+  "authGoogleNotConfigured": "Google sign-in configured नहीं है। App environment में GOOGLE_WEB_CLIENT_ID सेट करें और फिर कोशिश करें।",
+  "authGoogleSignInCancelled": "Google sign in cancel हो गया। फिर कोशिश करें।",
+  "authGoogleTokenFetchFailed": "Google sign-in token लाने में असमर्थ। फिर कोशिश करें।",
+  "onboardingDiscardRoleTitle": "Role selection छोड़ें?",
+  "onboardingDiscardRoleMessage": "आपका चयनित role खो जाएगा",
+  "onboardingDiscardChangesTitle": "Changes छोड़ें?",
+  "onboardingDiscardChangesMessage": "आपका unsaved changes खो जाएगा",
+  "locationServicesDisabled": "Location services बंद हैं",
+  "locationPermissionRequired": "Location permission आवश्यक है",
+  "locationPermissionDenied": "Location permission denied हो गया",
+  "locationEnableGps": "GPS enable करें",
+  "locationEnableServicesMessage": "Current location capture करने के लिए location services (GPS) enable करें।",
+  "locationGrantPermissionMessage": "Current location capture करने के लिए location permission grant करें।",
+  "locationOpenSettings": "Settings खोलें",
+  "locationPermissionDeniedForeverMessage": "Location permission permanently denied हो गया। App settings में enable करें।",
+  "searchYourLocation": "अपनी location खोजें",
+  "useCurrentLocation": "Current location इस्तेमाल करें",
+  "addManually": "Manually जोड़ें",
+  "clearLocation": "Location साफ करें",
+  "locationLabel": "स्थान",
+  "locationNotAdded": "कोई स्थान नहीं जोड़ा गया",
+  "locationCapturing": "कैप्चरिंग...",
+  "routePreviewInvalidError": "Route preview load नहीं हो सका",
+  "publicProfileLoadErrorTitle": "Profile load करने में error",
+  "publicProfileNotFoundTitle": "Profile नहीं मिला",
+  "supplierPostLoadSpecifyMaterialLabel": "Material specify करें",
+  "supplierPostLoadSpecifyMaterialHint": "जैसे, Fruits, Iron Ore, Bricks",
+  "supplierPostLoadMaterialCoal": "कोयला",
+  "supplierPostLoadMaterialSteel": "स्टील",
+  "supplierPostLoadMaterialCement": "सीमेंट",
+  "supplierPostLoadMaterialGrains": "अनाज",
+  "supplierPostLoadMaterialFertilizer": "खाद",
+  "supplierPostLoadMaterialMachinery": "मशीनरी",
+  "supplierPostLoadMaterialOther": "अन्य",
+  "supplierPostLoadBodyTypeAny": "कोई भी",
+  "supplierPostLoadBodyTypeOpen": "खुला",
+  "supplierPostLoadBodyTypeContainer": "कंटेनर",
+  "supplierPostLoadBodyTypeTrailer": "ट्रेलर",
+  "supplierPostLoadBodyTypeTanker": "टैंकर",
+  "supplierPostLoadBodyTypeRefrigerated": "रेफ्रिजरेटेड",
+  "postLoadValidationCustomMaterialRequired": "कृपया material specify करें",
+  "supplierLoadSubmissionAlreadyInProgress": "Load submission already in progress में है",
+  "truckerFleetValidationTruckNumber": "एक वैध truck number दर्ज करें",
+  "truckerFleetValidationTyreCount": "एक वैध tyre count चुनें",
+  "truckerFleetValidationCapacityTonnes": "Capacity 0 और 100 tonnes के बीच होनी चाहिए",
+  "truckerFleetValidationRcDocument": "RC document आवश्यक है",
+  "truckerFleetErrorTruckNotFound": "चयनित truck नहीं मिला",
+  "truckerFleetErrorSaveAlreadyInProgress": "Truck save पहले से ही progress में है",
+  "truckerFleetErrorValidationFailed": "highlighted truck details को सुधारें",
+  "truckerFleetBodyTypeOpen": "खुला",
+  "truckerFleetBodyTypeContainer": "कंटेनर",
+  "truckerFleetBodyTypeTrailer": "ट्रेलर",
+  "truckerFleetBodyTypeTanker": "टैंकर",
+  "truckerFleetBodyTypeRefrigerated": "रेफ्रिजरेटेड",
+  "chatTonnesCompact": "{value}T",
+  "verificationCompleteAllFields": "सभी आवश्यक फ़ील्ड पूरी करें",
+  "verificationLocationSourceManualCityEntry": "मैन्युअल रूप से जोड़ा गया",
+  "verificationLocationSourceGoogleGeocode": "GPS के माध्यम से कैप्चर किया गया",
+  "verificationLocationSourceOfflineNearestCity": "ऑफ़लाइन स्थान",
+  "supportCategoryGeneral": "सामान्य",
+  "supportCategoryAccount": "खाता",
+  "supportCategoryLoad": "लोड",
+  "supportCategoryTrip": "यात्रा",
+  "supportCategoryPayment": "भुगतान",
+  "supportCategoryTechnical": "तकनीकल",
+  "supportCategoryOther": "अन्य",
+  "reportIssueCategorySpamOrScam": "स्पैम या घोटाला",
+  "reportIssueCategoryFakePayoutProof": "फर्जी payout प्रूफ",
+  "reportIssueCategoryNonPayment": "गैर-भुगतान",
+  "reportIssueCategoryAbusiveBehavior": "दुर्व्यवहार",
+  "reportIssueContextSourceLabel": "वर्तमान बातचीत या यात्रा संदर्भ",
   "@_sectionOnboarding": "═══ Onboarding ═══",
   "onboardingSelectRoleError": "चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।",
   "onboardingRoleWorkspaceFailure": "अभी आपका role workspace तैयार नहीं हो सका। अपना role फिर चुनकर थोड़ी देर बाद फिर कोशिश करें।",
@@ -184,8 +270,6 @@
   },
   "chatTitleFallback": "बातचीत",
   "commonCallAction": "कॉल",
-  "commonFromLabel": "से",
-  "commonToLabel": "तक",
   "commonReportSpamOrAbuseAction": "स्पैम या दुरुपयोग रिपोर्ट करें",
   "chatReportSourceLabel": "Chat - {source}",
   "@chatReportSourceLabel": {
@@ -818,7 +902,7 @@
   "@_sectionTruckerTrips": "═══ Trucker Trips ═══",
   "truckerTripsTitle": "मेरी ट्रिप्स",
   "truckerTripsSubtitle": "Assigned trips track करें, proof deadlines monitor करें, और सही trip stage पर सही action लें।",
-  "tripStageValue": "{stage, select, assigned {असाइन किया गया} pickup_pending {पिकअप लंबित} picked_up {पिक किया गया} in_transit {रास्ते में} delivered {डिलीवर किया गया} pod_uploaded {POD अपलोड किया गया} proof_submitted {प्रूफ जमा किया गया} completed {पूर्ण} disputed {विवादित} cancelled {रद्द} other {अज्ञात}}",
+  "tripStageValue": "{stage, select, assigned {असाइन किया गया} pickup_pending {पिकअप लंबित} picked_up {पिक किया गया} in_transit {रास्ते में} delivered {डिलीवर किया गया} proof_submitted {प्रूफ जमा किया गया} pod_uploaded {POD अपलोडेड} completed {पूर्ण} disputed {विवादित} cancelled {रद्द} other {अज्ञात}}",
   "@tripStageValue": {
     "placeholders": {
       "stage": {}
@@ -2489,5 +2573,63 @@
   "verificationLocationCaptureOnlySupplier": "वेरिफिकेशन लोकेशन कैप्चर केवल सप्लायर वेरिफिकेशन के लिए उपलब्ध है",
   "verificationLocationCaptureFailed": "अभी आपका वेरिफिकेशन स्थान कैप्चर नहीं किया जा सका। लोकेशन सेवाएँ जांचें और पुनः प्रयास करें",
   "verificationCityRequired": "वेरिफिकेशन शहर आवश्यक है",
-  "verificationSubmissionBlocked": "वेरिफिकेशन जमा करना अवरुद्ध है"
+  "verificationSubmissionBlocked": "वेरिफिकेशन जमा करना अवरुद्ध है",
+  
+  "@_sectionChatPreviews": "═══ Chat Message Previews ═══",
+  "@_sectionReportSource": "═══ Report Source ═══",
+  "@_sectionReviewsAndProfile": "═══ Reviews & Public Profile ═══",
+  "@_sectionPublicProfile": "=== Public Profile ===",
+  "@_sectionReplyDialog": "=== Reply Dialog ===",
+  "@_sectionReviewPrompt": "=== Review Prompt Sheet ===",
+  
+  "supportActiveTicketCount": "{count} टिकट{s}",
+  "@supportActiveTicketCount": {
+    "description": "Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.",
+    "placeholders": {
+      "count": {},
+      "s": {}
+    }
+  },
+  
+  "truckerFleetBodyTypeOption": "{value}",
+  "@truckerFleetBodyTypeOption": {
+    "placeholders": {
+      "value": {}
+    }
+  },
+  
+  "verificationTitleTrucker": "ट्रकर वेरिफिकेशन",
+  
+  "truckerLoadDetailRouteMapTitle": "रूट मैप",
+  "truckerLoadDetailPerTruckWeightLabel": "प्रति ट्रक: {weight}T",
+  "truckerLoadDetailCapacityRangeLabel": "स्वीकार्य ट्रक: {minT}T – {maxT}T",
+  "truckerLoadDetailSlotsOpenLabel": "{count} स्लॉट खुले",
+  "truckerLoadDetailEarningsEstimateTitle": "ट्रिप कमाई अनुमान",
+  "truckerLoadDetailTotalFareLabel": "कुल किराया (लोड मूल्य)",
+  "truckerLoadDetailTotalExpenseLabel": "कुल खर्च",
+  "truckerLoadDetailEstimatedNetProfitLabel": "अनुमानित शुद्ध लाभ",
+  "truckerLoadDetailEstimatedNetLossLabel": "अनुमानित शुद्ध हानि",
+  "truckerLoadDetailNetProfitSubtitle": "कुल किराये से सभी खर्चों को काटने के बाद",
+  "truckerLoadDetailNetLossSubtitle": "खर्च कुल किराये से अधिक हैं",
+  "truckerLoadDetailCostBreakdownLabel": "लागत विवरण",
+  
+  "replyDialogHint": "{name} को अपना उत्तर लिखें...",
+  "@replyDialogHint": {
+    "description": "Hint text in the reply text field with placeholder for reviewer name.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  
+  "reviewPromptSubtitle": "{name} के साथ आपका अनुभव कैसा रहा?",
+  "@reviewPromptSubtitle": {
+    "description": "Subtitle asking about the experience with the other user.",
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  }
 }

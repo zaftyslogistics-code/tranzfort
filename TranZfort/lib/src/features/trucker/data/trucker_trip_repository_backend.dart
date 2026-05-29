@@ -14,54 +14,24 @@ class SupabaseTruckerTripsBackend implements TruckerTripsBackend {
     int limit = 15,
     int offset = 0,
   }) async {
-    print('🔍 [SupabaseTruckerTripsBackend] fetchTrips() called');
-    print('   truckerId: $truckerId');
-    print('   stages: $stages');
-    print('   limit: $limit');
-    print('   offset: $offset');
-
     if (_client == null) {
-      print('❌ [SupabaseTruckerTripsBackend] Client is null');
       throw const AuthException('Session unavailable');
     }
 
-    print('   Calling RPC: get_trucker_trips');
-    print('   Parameters: p_trucker_id=$truckerId, p_stage_filter=${stages.isEmpty ? null : stages}, p_limit=$limit, p_offset=$offset');
+    final response = await _client.rpc(
+      'get_trucker_trips',
+      params: <String, dynamic>{
+        'p_trucker_id': truckerId,
+        'p_stage_filter': stages.isEmpty ? null : stages,
+        'p_limit': limit,
+        'p_offset': offset,
+      },
+    );
 
-    try {
-      final response = await _client.rpc(
-        'get_trucker_trips',
-        params: <String, dynamic>{
-          'p_trucker_id': truckerId,
-          'p_stage_filter': stages.isEmpty ? null : stages,
-          'p_limit': limit,
-          'p_offset': offset,
-        },
-      );
-
-      print('   RPC response type: ${response.runtimeType}');
-      print('   RPC response: $response');
-
-      if (response is List) {
-        print('   ✅ RPC returned List with ${response.length} items');
-        if (response.isNotEmpty) {
-          print('   First item type: ${response.first.runtimeType}');
-          if (response.first is Map) {
-            print('   First item keys: ${(response.first as Map).keys.toList()}');
-          }
-        }
-        return List<Map<String, dynamic>>.from(response);
-      } else {
-        print('   ⚠️  RPC returned non-List type: ${response.runtimeType}');
-        print('   Response value: $response');
-        return const <Map<String, dynamic>>[];
-      }
-    } catch (error, stackTrace) {
-      print('   ❌ RPC call failed: $error');
-      print('   Error type: ${error.runtimeType}');
-      print('   Stack trace: $stackTrace');
-      rethrow;
+    if (response is List) {
+      return List<Map<String, dynamic>>.from(response);
     }
+    return const <Map<String, dynamic>>[];
   }
 
   @override

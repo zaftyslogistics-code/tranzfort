@@ -256,14 +256,14 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
 
   String _label(AppLocalizations l10n, String value) {
     return switch (value.trim().toLowerCase()) {
-      'general' => l10n.supportComposeCategoryGeneral,
-      'account' => l10n.supportComposeCategoryAccount,
-      'load' => l10n.supportComposeCategoryLoad,
-      'trip' => l10n.supportComposeCategoryTrip,
-      'payment' => l10n.supportComposeCategoryPayment,
-      'technical' => l10n.supportComposeCategoryTechnical,
-      'other' => l10n.supportComposeCategoryOther,
-      _ => l10n.supportComposeCategoryOther,
+      'general' => l10n.supportCategoryGeneral,
+      'account' => l10n.supportCategoryAccount,
+      'load' => l10n.supportCategoryLoad,
+      'trip' => l10n.supportCategoryTrip,
+      'payment' => l10n.supportCategoryPayment,
+      'technical' => l10n.supportCategoryTechnical,
+      'other' => l10n.supportCategoryOther,
+      _ => l10n.supportCategoryOther,
     };
   }
 

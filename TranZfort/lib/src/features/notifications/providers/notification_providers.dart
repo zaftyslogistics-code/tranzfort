@@ -8,6 +8,7 @@ import '../data/notification_repository.dart';
 
 class NotificationsState {
   final bool isLoading;
+  final bool hasResolvedInitialLoad;
   final bool isLoadingMore;
   final bool hasMore;
   final List<AppNotification> notifications;
@@ -15,6 +16,7 @@ class NotificationsState {
 
   const NotificationsState({
     required this.isLoading,
+    required this.hasResolvedInitialLoad,
     required this.isLoadingMore,
     required this.hasMore,
     required this.notifications,
@@ -24,6 +26,7 @@ class NotificationsState {
   factory NotificationsState.initial() {
     return const NotificationsState(
       isLoading: true,
+      hasResolvedInitialLoad: false,
       isLoadingMore: false,
       hasMore: true,
       notifications: <AppNotification>[],
@@ -33,6 +36,7 @@ class NotificationsState {
 
   NotificationsState copyWith({
     bool? isLoading,
+    bool? hasResolvedInitialLoad,
     bool? isLoadingMore,
     bool? hasMore,
     List<AppNotification>? notifications,
@@ -41,6 +45,7 @@ class NotificationsState {
   }) {
     return NotificationsState(
       isLoading: isLoading ?? this.isLoading,
+      hasResolvedInitialLoad: hasResolvedInitialLoad ?? this.hasResolvedInitialLoad,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       hasMore: hasMore ?? this.hasMore,
       notifications: notifications ?? this.notifications,
@@ -51,58 +56,136 @@ class NotificationsState {
 
 class NotificationsController extends StateNotifier<NotificationsState> {
   static const int _pageSize = 20;
+  static const Duration _minLoadingDuration = Duration(milliseconds: 300);
+  static const Duration _errorDebounceDuration = Duration(milliseconds: 500);
 
   final NotificationRepository _repository;
   StreamSubscription<Result<List<AppNotification>>>? _subscription;
+  Timer? _errorDebounceTimer;
+  bool _initialFetchCompleted = false;
+  bool _awaitingStreamAfterEmptyLoad = false;
 
-  NotificationsController(this._repository) : super(NotificationsState.initial()) {
-    _start();
+  NotificationsController(
+    this._repository, {
+    bool startWatch = true,
+  }) : super(NotificationsState.initial()) {
+    if (startWatch) {
+      _start();
+    }
   }
 
-  Future<void> _start() async {
-    await load();
-    _subscription = _repository.watchNotifications().listen((result) {
-      result.when(
-        success: (notifications) {
-          state = state.copyWith(
-            isLoading: false,
-            isLoadingMore: false,
-            notifications: _mergeNotifications(
-              incoming: notifications,
-              existing: state.notifications,
-            ),
-            hasMore: state.hasMore || notifications.length >= _pageSize,
-            clearFailure: true,
-          );
-        },
-        failure: (failure) {
-          state = state.copyWith(
-            isLoading: false,
-            isLoadingMore: false,
-            failure: failure,
-          );
-        },
-      );
+  void _scheduleErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(_errorDebounceDuration, () {
+      if (!mounted) {
+        return;
+      }
+      if (state.notifications.isEmpty) {
+        state = state.copyWith(
+          failure: failure,
+          isLoading: false,
+          hasResolvedInitialLoad: true,
+        );
+      }
     });
   }
 
-  Future<void> load() async {
-    state = state.copyWith(isLoading: true, clearFailure: true);
-    final result = await _repository.getNotifications(limit: _pageSize);
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
+  }
+
+  void _resolveWithNotifications(List<AppNotification> notifications) {
+    _awaitingStreamAfterEmptyLoad = false;
+    _cancelErrorDisplay();
+    state = state.copyWith(
+      isLoading: false,
+      hasResolvedInitialLoad: true,
+      notifications: notifications,
+      hasMore: notifications.length >= _pageSize,
+      clearFailure: true,
+    );
+  }
+
+  Future<void> _ensureMinLoadingDuration(DateTime startTime) async {
+    final elapsed = DateTime.now().difference(startTime);
+    if (elapsed < _minLoadingDuration) {
+      await Future.delayed(_minLoadingDuration - elapsed);
+    }
+  }
+
+  Future<void> _start() async {
+    _subscription = _repository.watchNotifications().listen(_handleStreamResult);
+    await load();
+  }
+
+  void _handleStreamResult(Result<List<AppNotification>> result) {
     result.when(
       success: (notifications) {
+        final merged = _mergeNotifications(
+          incoming: notifications,
+          existing: state.notifications,
+        );
+        if (!state.hasResolvedInitialLoad) {
+          final canResolveFromStream = merged.isNotEmpty ||
+              (_initialFetchCompleted && _awaitingStreamAfterEmptyLoad);
+          if (canResolveFromStream) {
+            _resolveWithNotifications(merged);
+          }
+          return;
+        }
+        _cancelErrorDisplay();
         state = state.copyWith(
           isLoading: false,
-          notifications: notifications,
-          hasMore: notifications.length >= _pageSize,
+          isLoadingMore: false,
+          notifications: merged,
+          hasMore: state.hasMore || notifications.length >= _pageSize,
           clearFailure: true,
         );
       },
       failure: (failure) {
+        if (state.hasResolvedInitialLoad && state.notifications.isNotEmpty) {
+          return;
+        }
+        _scheduleErrorDisplay(failure);
+      },
+    );
+  }
+
+  Future<void> load() async {
+    _cancelErrorDisplay();
+    _initialFetchCompleted = false;
+    _awaitingStreamAfterEmptyLoad = false;
+    state = state.copyWith(
+      isLoading: true,
+      hasResolvedInitialLoad: false,
+      clearFailure: true,
+    );
+    final startTime = DateTime.now();
+
+    final result = await _repository.getNotifications(limit: _pageSize);
+    await result.when(
+      success: (notifications) async {
+        _initialFetchCompleted = true;
+        await _ensureMinLoadingDuration(startTime);
+        if (notifications.isNotEmpty) {
+          _resolveWithNotifications(notifications);
+          return;
+        }
+        // Empty fetch may race the realtime stream; wait for stream before empty UI.
+        _awaitingStreamAfterEmptyLoad = true;
         state = state.copyWith(
-          isLoading: false,
-          failure: failure,
+          isLoading: true,
+          hasResolvedInitialLoad: false,
+          notifications: notifications,
+          hasMore: false,
+          clearFailure: true,
         );
+      },
+      failure: (failure) async {
+        _initialFetchCompleted = true;
+        await _ensureMinLoadingDuration(startTime);
+        _scheduleErrorDisplay(failure);
       },
     );
   }
@@ -195,6 +278,7 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 
   @override
   void dispose() {
+    _errorDebounceTimer?.cancel();
     _subscription?.cancel();
     super.dispose();
   }
@@ -216,7 +300,7 @@ class NotificationsController extends StateNotifier<NotificationsState> {
 }
 
 final notificationsProvider =
-    StateNotifierProvider.autoDispose<NotificationsController, NotificationsState>((ref) {
+    StateNotifierProvider<NotificationsController, NotificationsState>((ref) {
   return NotificationsController(ref.watch(notificationRepositoryProvider));
 });
 

@@ -6,6 +6,7 @@ import '../error/app_failure.dart';
 import '../logger/app_logger.dart';
 import '../../features/auth/data/auth_repository.dart';
 import '../services/avatar_url_service.dart';
+import '../services/crash_reporting_service.dart';
 
 enum AppUserRole {
   supplier,
@@ -261,4 +262,32 @@ final avatarUrlServiceProvider = Provider<AvatarUrlService>((ref) {
   });
   
   return service;
+});
+
+/// Provider for Crashlytics user identifier management
+/// Automatically sets user identifier on login and clears on logout
+final crashlyticsUserIdentifierProvider = Provider<void>((ref) {
+  final crashlytics = ref.watch(crashReportingServiceProvider);
+  
+  // Listen to auth state changes and update Crashlytics user identifier
+  ref.listen(currentAuthStateProvider, (previous, next) async {
+    final previousSession = previous?.hasSession ?? false;
+    final currentSession = next.hasSession;
+    
+    if (!previousSession && currentSession) {
+      // User logged in - set user identifier
+      final session = Supabase.instance.client.auth.currentSession;
+      // ignore: invalid_null_aware_operator
+      final userId = session?.user?.id;
+      if (userId != null && userId.isNotEmpty) {
+        await crashlytics.setUserIdentifier(userId);
+        await crashlytics.setCustomKey('user_role', next.role.name);
+        AppLogger.info('Crashlytics user identifier set', scope: 'crashlytics');
+      }
+    } else if (previousSession && !currentSession) {
+      // User logged out - clear user identifier
+      await crashlytics.setUserIdentifier('');
+      AppLogger.info('Crashlytics user identifier cleared', scope: 'crashlytics');
+    }
+  });
 });

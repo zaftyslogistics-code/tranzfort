@@ -92,9 +92,9 @@ class _MapCardMessageContent extends ConsumerWidget {
     final route = _payloadString(payload, const ['route_label', 'route', 'title']) ?? message.textBody ?? l10n.chatRouteSummaryFallback;
     final material = _payloadString(payload, const ['material']);
     final weight = _payloadString(payload, const ['weight', 'weight_label']) ??
-        (_payloadDouble(payload, const ['weight_tonnes']) == null ? null : _formatTonnesCompact(_payloadDouble(payload, const ['weight_tonnes'])!));
+        (_payloadDouble(payload, const ['weight_tonnes']) == null ? null : _formatTonnesCompact(_payloadDouble(payload, const ['weight_tonnes'])!, l10n));
     final price = _payloadString(payload, const ['price', 'price_label']) ??
-        (_payloadDouble(payload, const ['price_amount']) == null ? null : _formatCurrencyCompact(_payloadDouble(payload, const ['price_amount'])!));
+        (_payloadDouble(payload, const ['price_amount']) == null ? null : _formatCurrencyCompact(_payloadDouble(payload, const ['price_amount'])!, l10n));
     final distanceKm = _payloadDouble(payload, const ['route_distance_km', 'distance_km']);
     final weightTonnes = _payloadDouble(payload, const ['weight_tonnes']);
     final originState = _payloadString(payload, const ['origin_state']);
@@ -105,7 +105,7 @@ class _MapCardMessageContent extends ConsumerWidget {
       dieselPricePerLitre: dieselPrice,
     );
     final tripCost = _payloadString(payload, const ['trip_cost', 'trip_cost_label', 'estimated_trip_cost']) ??
-        (computedTripCost == null ? null : _formatCurrencyCompact(computedTripCost.totalCost));
+        (computedTripCost == null ? null : _formatCurrencyCompact(computedTripCost.totalCost, l10n));
     final resolvedLoadId = _payloadString(payload, const ['load_id']) ?? loadId;
     final uri = _externalUriFromPayload(payload, const ['route_url', 'google_maps_url', 'maps_url', 'url']);
     return _InfoMessageCard(

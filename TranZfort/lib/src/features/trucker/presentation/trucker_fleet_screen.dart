@@ -117,7 +117,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                   .map(
                     (bodyType) => DropdownMenuItem<String>(
                       value: bodyType,
-                      child: Text(l10n.truckerFleetBodyTypeOption(bodyType)),
+                      child: Text(_localizedBodyTypeLabel(l10n, bodyType)),
                     ),
                   )
                   .toList(growable: false),
@@ -209,7 +209,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                 onPressed: state.isSaving
                     ? null
                     : () async {
-                        final result = await ref.read(truckerFleetProvider.notifier).save();
+                        final result = await ref.read(truckerFleetProvider.notifier).save(l10n);
                         if (!context.mounted) {
                           return;
                         }
@@ -276,6 +276,7 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
                     _FleetTruckCard(
                       truck: state.trucks[index],
                       onEdit: () => ref.read(truckerFleetProvider.notifier).startEdit(state.trucks[index]),
+                      localizedBodyTypeLabel: _localizedBodyTypeLabel,
                     ),
                     if (index != state.trucks.length - 1) const SizedBox(height: AppSpacing.md),
                   ],
@@ -322,15 +323,29 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
       ),
     );
   }
+
+  String _localizedBodyTypeLabel(AppLocalizations l10n, String value) {
+    final normalized = value.trim().toLowerCase();
+    return switch (normalized) {
+      'open' => l10n.truckerFleetBodyTypeOpen,
+      'container' => l10n.truckerFleetBodyTypeContainer,
+      'trailer' => l10n.truckerFleetBodyTypeTrailer,
+      'tanker' => l10n.truckerFleetBodyTypeTanker,
+      'refrigerated' => l10n.truckerFleetBodyTypeRefrigerated,
+      _ => value,
+    };
+  }
 }
 
 class _FleetTruckCard extends StatelessWidget {
   final TruckerFleetTruck truck;
   final VoidCallback onEdit;
+  final String Function(AppLocalizations, String) localizedBodyTypeLabel;
 
   const _FleetTruckCard({
     required this.truck,
     required this.onEdit,
+    required this.localizedBodyTypeLabel,
   });
 
   @override
@@ -343,7 +358,7 @@ class _FleetTruckCard extends StatelessWidget {
       accent: statusPaletteFor(truck.status.databaseValue).foreground,
       title: truck.truckNumber,
       subtitle: l10n.truckerFleetTruckCardSubtitle(
-        l10n.truckerFleetBodyTypeOption(truck.bodyType),
+        localizedBodyTypeLabel(l10n, truck.bodyType),
         truck.tyres,
         capacityLabel,
       ),

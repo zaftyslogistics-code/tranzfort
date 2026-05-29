@@ -1,3 +1,4 @@
+import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 
 enum SupportTicketStatus {
@@ -81,8 +82,8 @@ class SupportTicketDto {
       relatedLoadId: nullableString(map['related_load_id']),
       relatedTripId: nullableString(map['related_trip_id']),
       resolutionSummary: nullableString(map['resolution_summary']),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
-      updatedAt: DateTime.parse((map['updated_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
+      updatedAt: safeParseDateTime(map['updated_at']) ?? DateTime.now(),
       resolvedAt: readDate(map['resolved_at']),
     );
   }
@@ -132,7 +133,7 @@ class SupportTicketMessageDto {
       messageBody: nullableString(map['message_body']),
       attachmentPath: nullableString(map['attachment_path']),
       visibilityClass: (map['visibility_class'] ?? 'visible').toString(),
-      createdAt: DateTime.parse((map['created_at'] ?? '').toString()),
+      createdAt: safeParseDateTime(map['created_at']) ?? DateTime.now(),
     );
   }
 

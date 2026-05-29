@@ -134,7 +134,7 @@ class CurvedArcRoute extends StatelessWidget {
                         style: AppTypography.labelMicro.copyWith(
                           color: textMuted,
                           letterSpacing: 1.1,
-                          fontSize: 9,
+                          fontSize: 11, // Increased from 9px for readability
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -159,7 +159,7 @@ class CurvedArcRoute extends StatelessWidget {
                                 color: textMuted,
                                 fontWeight: FontWeight.w500,
                                 height: 1.0,
-                                fontSize: 10,
+                                fontSize: 12, // Increased from 10px for readability
                               ),
                         ),
                       ],
@@ -177,7 +177,7 @@ class CurvedArcRoute extends StatelessWidget {
                         style: AppTypography.labelMicro.copyWith(
                           color: textMuted,
                           letterSpacing: 1.1,
-                          fontSize: 9,
+                          fontSize: 11, // Increased from 9px for readability
                         ),
                       ),
                       const SizedBox(height: 2),
@@ -204,7 +204,7 @@ class CurvedArcRoute extends StatelessWidget {
                                 color: textMuted,
                                 fontWeight: FontWeight.w500,
                                 height: 1.0,
-                                fontSize: 10,
+                                fontSize: 12, // Increased from 10px for readability
                               ),
                         ),
                       ],
