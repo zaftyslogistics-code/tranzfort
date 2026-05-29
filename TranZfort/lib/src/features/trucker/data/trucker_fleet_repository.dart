@@ -181,11 +181,14 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
       },
     );
     
-    if (response is! List) {
-      throw const ServerFailure(message: 'Invalid response format from get_trucker_fleet RPC');
+    if (response is List) {
+      return response.whereType<Map<String, dynamic>>().toList(growable: false);
     }
-    
-    return response.whereType<Map<String, dynamic>>().toList(growable: false);
+    if (response is Map && response['trucks'] is List) {
+      return (response['trucks'] as List).whereType<Map<String, dynamic>>().toList(growable: false);
+    }
+
+    throw const ServerFailure(message: 'Invalid response format from get_trucker_fleet RPC');
   }
 
   @override
@@ -219,12 +222,16 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
         'p_rc_document_path': values['rc_document_path'],
       },
     );
-    
-    if (response is! Map) {
-      throw const ServerFailure(message: 'Invalid response format from add_truck RPC');
+
+    if (response is Map) {
+      return Map<String, dynamic>.from(response);
     }
-    
-    return response as Map<String, dynamic>;
+    final truckId = (response ?? '').toString().trim();
+    if (truckId.isNotEmpty) {
+      return <String, dynamic>{'id': truckId};
+    }
+
+    throw const ServerFailure(message: 'Invalid response format from add_truck RPC');
   }
 
   @override

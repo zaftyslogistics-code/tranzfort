@@ -87,6 +87,7 @@ class VerificationDraft {
     final t = truck;
     return t != null &&
         t.truckNumber.isNotEmpty &&
+        t.capacityTonnes > 0 &&
         (t.rcDocumentPath?.isNotEmpty ?? false);
   }
   
@@ -175,21 +176,35 @@ class VerificationDraft {
     String? gstNumber,
     String? gstCertificatePath,
     WizardLocation? location,
+    bool clearProfilePhoto = false,
+    bool clearAadhaarNumber = false,
+    bool clearAadhaarFront = false,
+    bool clearAadhaarBack = false,
+    bool clearPanNumber = false,
+    bool clearPanDocument = false,
+    bool clearTruck = false,
+    bool clearCompanyName = false,
+    bool clearBusinessLicenseNumber = false,
+    bool clearBusinessLicense = false,
+    bool clearGstNumber = false,
+    bool clearGstCertificate = false,
+    bool clearLocation = false,
   }) {
     return VerificationDraft(
-      profilePhotoPath: profilePhotoPath ?? this.profilePhotoPath,
-      aadhaarNumber: aadhaarNumber ?? this.aadhaarNumber,
-      aadhaarFrontPath: aadhaarFrontPath ?? this.aadhaarFrontPath,
-      aadhaarBackPath: aadhaarBackPath ?? this.aadhaarBackPath,
-      panNumber: panNumber ?? this.panNumber,
-      panDocumentPath: panDocumentPath ?? this.panDocumentPath,
-      truck: truck ?? this.truck,
-      companyName: companyName ?? this.companyName,
-      businessLicenseNumber: businessLicenseNumber ?? this.businessLicenseNumber,
-      businessLicensePath: businessLicensePath ?? this.businessLicensePath,
-      gstNumber: gstNumber ?? this.gstNumber,
-      gstCertificatePath: gstCertificatePath ?? this.gstCertificatePath,
-      location: location ?? this.location,
+      profilePhotoPath: clearProfilePhoto ? null : (profilePhotoPath ?? this.profilePhotoPath),
+      aadhaarNumber: clearAadhaarNumber ? null : (aadhaarNumber ?? this.aadhaarNumber),
+      aadhaarFrontPath: clearAadhaarFront ? null : (aadhaarFrontPath ?? this.aadhaarFrontPath),
+      aadhaarBackPath: clearAadhaarBack ? null : (aadhaarBackPath ?? this.aadhaarBackPath),
+      panNumber: clearPanNumber ? null : (panNumber ?? this.panNumber),
+      panDocumentPath: clearPanDocument ? null : (panDocumentPath ?? this.panDocumentPath),
+      truck: clearTruck ? null : (truck ?? this.truck),
+      companyName: clearCompanyName ? null : (companyName ?? this.companyName),
+      businessLicenseNumber:
+          clearBusinessLicenseNumber ? null : (businessLicenseNumber ?? this.businessLicenseNumber),
+      businessLicensePath: clearBusinessLicense ? null : (businessLicensePath ?? this.businessLicensePath),
+      gstNumber: clearGstNumber ? null : (gstNumber ?? this.gstNumber),
+      gstCertificatePath: clearGstCertificate ? null : (gstCertificatePath ?? this.gstCertificatePath),
+      location: clearLocation ? null : (location ?? this.location),
     );
   }
 }
@@ -218,14 +233,16 @@ class TruckDraft {
     double? capacityTonnes,
     String? rcDocumentPath,
     String? truckPhotoPath,
+    bool clearRcDocument = false,
+    bool clearTruckPhoto = false,
   }) {
     return TruckDraft(
       truckNumber: truckNumber ?? this.truckNumber,
       bodyType: bodyType ?? this.bodyType,
       tyres: tyres ?? this.tyres,
       capacityTonnes: capacityTonnes ?? this.capacityTonnes,
-      rcDocumentPath: rcDocumentPath ?? this.rcDocumentPath,
-      truckPhotoPath: truckPhotoPath ?? this.truckPhotoPath,
+      rcDocumentPath: clearRcDocument ? null : (rcDocumentPath ?? this.rcDocumentPath),
+      truckPhotoPath: clearTruckPhoto ? null : (truckPhotoPath ?? this.truckPhotoPath),
     );
   }
 

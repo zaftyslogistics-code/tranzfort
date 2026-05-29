@@ -58,10 +58,13 @@ class TruckerTripDetailController extends StateNotifier<TruckerTripDetailState> 
     final result = await _repository.fetchTripDetail(state.tripId);
     await result.when(
       success: (detail) async {
+        final elapsed = DateTime.now().difference(startTime).inMilliseconds;
+        if (elapsed < 300) {
+          await Future.delayed(Duration(milliseconds: 300 - elapsed));
+        }
         state = state.copyWith(detail: detail, isLoading: false, clearFailure: true);
       },
       failure: (failure) async {
-        // Ensure minimum loading duration to prevent UI flicker
         final elapsed = DateTime.now().difference(startTime).inMilliseconds;
         if (elapsed < 300) {
           await Future.delayed(Duration(milliseconds: 300 - elapsed));

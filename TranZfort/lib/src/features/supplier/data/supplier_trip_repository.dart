@@ -11,6 +11,7 @@ import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/type_safety.dart';
 import 'supplier_trip_repository_models.dart';
 import 'supplier_trip_repository_backend.dart';
 
@@ -170,7 +171,7 @@ class SupplierTripsRepository {
         return const Failure<SupplierTripDetail>(NotFoundFailure());
       }
 
-      final tripMap = consolidated['trip'] as Map<String, dynamic>?;
+      final tripMap = safeMap(consolidated['trip']);
       if (tripMap == null) {
         AppLogger.warning('Trip detail missing trip map: tripId=$normalizedTripId', scope: 'supplier_trips');
         return const Failure<SupplierTripDetail>(NotFoundFailure());

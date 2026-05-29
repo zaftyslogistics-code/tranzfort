@@ -59,11 +59,12 @@ class AuthProfileRepository {
 
       final response = await _client.rpc('get_current_user_profile').timeout(const Duration(seconds: 8));
 
-      if (response == null || (response is Map<String, dynamic> && response.isEmpty)) {
+      final payload = safeMap(response);
+      if (payload == null || payload.isEmpty) {
         return const Success<UserProfile?>(null);
       }
 
-      return Success<UserProfile?>(UserProfile.fromMap(response as Map<String, dynamic>));
+      return Success<UserProfile?>(UserProfile.fromMap(payload));
     } catch (error, stackTrace) {
       return Failure<UserProfile?>(mapAuthError(error, stackTrace));
     }
@@ -106,6 +107,8 @@ class AuthProfileRepository {
     String? roleValue,
     String? fullName,
     String? mobile,
+    String? city,
+    String? state,
     double? latitude,
     double? longitude,
     bool recordTerms = false,
@@ -121,11 +124,15 @@ class AuthProfileRepository {
 
     final trimmedName = fullName?.trim();
     final trimmedMobile = mobile?.trim();
+    final trimmedCity = city?.trim();
+    final trimmedState = state?.trim();
     final hasGpsCoordinates = latitude != null && longitude != null;
     final rpcParams = <String, dynamic>{
       'p_user_role_type': roleValue,
       'p_full_name': trimmedName == null || trimmedName.isEmpty ? null : trimmedName,
       'p_mobile': trimmedMobile == null || trimmedMobile.isEmpty ? null : trimmedMobile,
+      'p_city': trimmedCity == null || trimmedCity.isEmpty ? null : trimmedCity,
+      'p_state': trimmedState == null || trimmedState.isEmpty ? null : trimmedState,
       'p_location_lat': latitude,
       'p_location_lng': longitude,
       'p_location_source': hasGpsCoordinates ? 'gps' : null,
@@ -201,9 +208,26 @@ class AuthProfileRepository {
     }
   }
 
+  String? _roleValueFromProfileAndMetadata(UserProfile? profile) {
+    final fromProfile = profile?.roleType?.trim();
+    if (fromProfile != null && fromProfile.isNotEmpty) {
+      return fromProfile;
+    }
+
+    final user = _client?.auth.currentUser;
+    final metadata = user?.userMetadata ?? const <String, dynamic>{};
+    final fromMetadata = (metadata['user_role'] ?? metadata['role'])?.toString().trim();
+    if (fromMetadata != null && fromMetadata.isNotEmpty) {
+      return fromMetadata;
+    }
+    return null;
+  }
+
   Future<Result<void>> updateProfile({
     required String fullName,
     required String mobile,
+    String? city,
+    String? state,
     double? latitude,
     double? longitude,
   }) async {
@@ -236,18 +260,41 @@ class AuthProfileRepository {
       );
     }
 
+    final profileResult = await getCurrentProfile();
+    if (profileResult.isFailure) {
+      return Failure<void>(profileResult.failureOrNull!);
+    }
+
+    final roleValue = _roleValueFromProfileAndMetadata(profileResult.valueOrNull);
+    if (roleValue == null) {
+      return const Failure<void>(
+        ValidationFailure(
+          message: AuthProfileErrorCodes.roleRequired,
+          fieldErrors: {'role': AuthProfileErrorCodes.roleRequired},
+        ),
+      );
+    }
+
     final upsertResult = await _upsertCurrentUserProfile(
+      roleValue: roleValue,
       fullName: trimmedName,
       mobile: trimmedMobile,
+      city: city,
+      state: state,
       latitude: latitude,
       longitude: longitude,
-      recordTerms: true,
+      recordTerms: false,
     );
     if (upsertResult.isFailure) {
       return upsertResult;
     }
 
-    return _syncCurrentUserMetadata(onboardingComplete: true);
+    final consentResult = await recordTermsAcceptance();
+    if (consentResult.isFailure) {
+      return consentResult;
+    }
+
+    return _syncCurrentUserMetadata(onboardingComplete: true, roleValue: roleValue);
   }
 
   Future<Result<void>> updatePreferredLanguage(String languageCode) async {

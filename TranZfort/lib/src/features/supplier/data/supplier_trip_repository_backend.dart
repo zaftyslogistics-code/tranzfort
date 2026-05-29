@@ -141,13 +141,14 @@ class SupabaseSupplierTripsBackend implements SupplierTripsBackend {
       throw const AuthException('Session unavailable');
     }
 
-    return await _client.rpc(
+    final result = await _client.rpc(
       'get_supplier_trip_detail',
       params: <String, dynamic>{
         'p_trip_id': tripId,
         'p_supplier_id': supplierId,
       },
-    ) as Map<String, dynamic>?;
+    );
+    return result as Map<String, dynamic>?;
   }
 
   @override

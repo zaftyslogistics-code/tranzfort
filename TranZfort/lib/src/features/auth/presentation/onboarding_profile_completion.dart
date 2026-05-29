@@ -14,9 +14,36 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
+import '../data/auth_repository_profile_ops.dart';
 import '../providers/auth_providers.dart';
 import '../../verification/data/verification_location_service.dart' as location_service;
 import '../../supplier/data/supplier_location_services.dart';
+
+String _onboardingProfileSaveFailureMessage(AppLocalizations l10n, AppFailure? failure) {
+  if (failure is BusinessRuleFailure &&
+      failure.message == OnboardingController.termsAcceptanceRequiredCode) {
+    return l10n.onboardingTermsAcceptance;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.roleRequired) {
+    return l10n.onboardingRoleSaveFailure;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.nameTooShort) {
+    return l10n.onboardingProfileSaveFailure;
+  }
+  if (failure is ValidationFailure &&
+      failure.message == AuthProfileErrorCodes.mobileRequired) {
+    return l10n.onboardingProfileSaveFailure;
+  }
+  if (failure is ConflictFailure) {
+    return failure.message;
+  }
+  if (failure is ServerFailure && failure.message.trim().isNotEmpty) {
+    return failure.message;
+  }
+  return l10n.onboardingProfileSaveFailure;
+}
 
 class ProfileCompletionScreen extends ConsumerStatefulWidget {
   const ProfileCompletionScreen({super.key});
@@ -115,6 +142,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           fullName: _nameController.text,
           mobile: _mobileController.text,
           termsAccepted: _termsAccepted,
+          city: _city,
+          regionState: _state,
           latitude: _latitude,
           longitude: _longitude,
         );
@@ -127,9 +156,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
       final failure = updateResult.failureOrNull;
       AppSnackbar.show(
         context: context,
-        message: failure is BusinessRuleFailure && failure.message == OnboardingController.termsAcceptanceRequiredCode
-            ? l10n.onboardingTermsAcceptance
-            : l10n.onboardingProfileSaveFailure,
+        message: _onboardingProfileSaveFailureMessage(l10n, failure),
         variant: AppSnackbarVariant.error,
       );
       return;

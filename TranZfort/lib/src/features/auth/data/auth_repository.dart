@@ -251,12 +251,16 @@ class AuthRepository {
   Future<Result<void>> updateProfile({
     required String fullName,
     required String mobile,
+    String? city,
+    String? state,
     double? latitude,
     double? longitude,
   }) =>
       profileOps.updateProfile(
         fullName: fullName,
         mobile: mobile,
+        city: city,
+        state: state,
         latitude: latitude,
         longitude: longitude,
       );

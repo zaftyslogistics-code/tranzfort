@@ -63,28 +63,28 @@ class MarketplaceLoadCard extends StatelessWidget {
       fixedPriceAmount: isPerTon ? null : load.priceAmount,
     );
 
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onViewDetails,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.inkSurface,
+            AppColors.inkMid,
+          ],
+        ),
         borderRadius: BorderRadius.circular(AppRadius.card),
-        child: Ink(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                AppColors.inkSurface,
-                AppColors.inkMid,
-              ],
-            ),
-            borderRadius: BorderRadius.circular(AppRadius.card),
-            boxShadow: AppShadows.elevation2,
-            border: Border.all(
-              color: AppColors.divider,
-              width: 0.75,
-            ),
-          ),
+        boxShadow: AppShadows.elevation2,
+        border: Border.all(
+          color: AppColors.divider,
+          width: 0.75,
+        ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onViewDetails,
+          borderRadius: BorderRadius.circular(AppRadius.card),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

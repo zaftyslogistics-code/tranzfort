@@ -12,6 +12,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/image_upload_service.dart';
 import 'verification_repository.dart';
 
 class VerificationDocumentValidationResult {
@@ -65,7 +66,7 @@ class VerificationDocumentUploadService {
       );
     }
 
-    final mimeType = file.mimeType;
+    final mimeType = ImageUploadServiceDefaults.resolveImageMimeType(file, bytes, allowedMimeTypes: allowedMimeTypes);
     if (mimeType == null || !allowedMimeTypes.contains(mimeType)) {
       return const VerificationDocumentValidationResult.invalid(
         'Document must be a JPEG or PNG image. Please select a valid image file.',
@@ -281,6 +282,7 @@ class VerificationDocumentUploadService {
     decodeImageFromList(bytes, completer.complete);
     return completer.future;
   }
+
 }
 
 final verificationDocumentUploadServiceProvider = Provider<VerificationDocumentUploadService>((ref) {

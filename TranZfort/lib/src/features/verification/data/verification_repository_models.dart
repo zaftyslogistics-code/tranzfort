@@ -62,7 +62,12 @@ class VerificationDetail {
   bool get hasApprovedTruckRequirement => !isTrucker || approvedTruckCount > 0;
   bool get hasVerificationReadyTruckRequirement => !isTrucker || verificationReadyTruckCount > 0;
   bool get hasSupplierCompanyName => !isSupplier || (companyName ?? '').trim().isNotEmpty;
-  bool get hasIdentityNumbers => (aadhaarNumber ?? '').trim().isNotEmpty && (panNumber ?? '').trim().isNotEmpty;
+  bool get hasIdentityNumbers {
+    final aadhaarOk = (aadhaarNumber ?? '').trim().length == 12 ||
+        (aadhaarLast4 ?? '').trim().length == 4;
+    final panOk = (panNumber ?? '').trim().length >= 4 || (panLast4 ?? '').trim().length == 4;
+    return aadhaarOk && panOk;
+  }
   bool get hasSupplierBusinessNumbers => !isSupplier || (businessLicenceNumber ?? '').trim().isNotEmpty;
   bool get hasVerificationLocation =>
       (verificationLocationCity ?? '').trim().isNotEmpty && verificationLatitude != null && verificationLongitude != null;
@@ -193,7 +198,7 @@ class VerificationDetail {
       aadhaarFrontDocumentPath: nullableString(profileMap['aadhaar_front_document_path']),
       aadhaarBackDocumentPath: nullableString(profileMap['aadhaar_back_document_path']),
       panNumber: '', // Full number not stored anymore
-      panLast4: nullableString(profileMap['pan_last4']),
+      panLast4: nullableString(profileMap['pan_last4']) ?? _last4FromPan(profileMap['pan_number']),
       panDocumentPath: nullableString(profileMap['pan_document_path']),
       profilePhotoDocumentPath: nullableString(profileMap['profile_photo_document_path']),
       businessLicenceNumber: nullableString(supplierMap?['business_licence_number']),
@@ -214,6 +219,14 @@ class VerificationDetail {
   static String? nullableString(Object? value) {
     final raw = (value ?? '').toString().trim();
     return raw.isEmpty ? null : raw;
+  }
+
+  static String? _last4FromPan(Object? panValue) {
+    final pan = nullableString(panValue);
+    if (pan == null || pan.length < 4) {
+      return null;
+    }
+    return pan.substring(pan.length - 4);
   }
 
   static double? readDouble(Object? value) {

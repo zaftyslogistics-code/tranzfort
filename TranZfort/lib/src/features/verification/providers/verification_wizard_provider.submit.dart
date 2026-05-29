@@ -33,12 +33,14 @@ extension VerificationWizardSubmit on VerificationWizardController {
     final detail = _initialDetail;
     if (detail != null) {
       final detailDraft = VerificationDraft.fromDetail(detail);
+      final isRejected = detail.verificationStatus.trim().toLowerCase() == 'rejected';
       _setState(
         state.copyWith(
           draft: persistedDraft == null
               ? detailDraft
               : detailDraft.mergeMissingFrom(state.draft),
           isLoading: false,
+          isResubmission: isRejected,
           verificationStatus: detail.verificationStatus.toLowerCase(),
         ),
         persistDraft: false,
@@ -46,6 +48,58 @@ extension VerificationWizardSubmit on VerificationWizardController {
     } else {
       _setState(state.copyWith(isLoading: false), persistDraft: false);
     }
+
+    await _verificationHydrateTruckFromFleet();
+  }
+
+  Future<void> _verificationHydrateTruckFromFleet() async {
+    final fleetRepository = _fleetRepository;
+    if (!state.isTrucker || fleetRepository == null) {
+      return;
+    }
+
+    final trucksResult = await fleetRepository.getMyTrucks();
+    if (trucksResult.isFailure) {
+      return;
+    }
+
+    final trucks = trucksResult.valueOrNull ?? const <TruckerFleetTruck>[];
+    TruckerFleetTruck? fleetTruck;
+    for (final t in trucks) {
+      if (t.status != TruckerFleetTruckStatus.archived &&
+          t.truckNumber.trim().isNotEmpty &&
+          (t.rcDocumentPath ?? '').trim().isNotEmpty &&
+          t.capacityTonnes > 0) {
+        fleetTruck = t;
+        break;
+      }
+    }
+    if (fleetTruck == null) {
+      return;
+    }
+
+    final draftTruck = state.draft.truck;
+    final truckDraft = TruckDraft(
+      truckNumber: (draftTruck?.truckNumber ?? '').trim().isNotEmpty
+          ? draftTruck!.truckNumber
+          : fleetTruck.truckNumber,
+      bodyType: (draftTruck?.bodyType ?? '').trim().isNotEmpty
+          ? draftTruck!.bodyType
+          : fleetTruck.bodyType,
+      tyres: draftTruck?.tyres ?? fleetTruck.tyres,
+      capacityTonnes: (draftTruck?.capacityTonnes ?? 0) > 0
+          ? draftTruck!.capacityTonnes
+          : fleetTruck.capacityTonnes,
+      rcDocumentPath: (draftTruck?.rcDocumentPath ?? '').trim().isNotEmpty
+          ? draftTruck!.rcDocumentPath
+          : fleetTruck.rcDocumentPath,
+      truckPhotoPath: draftTruck?.truckPhotoPath,
+    );
+
+    _setState(
+      state.copyWith(draft: state.draft.copyWith(truck: truckDraft)),
+      persistDraft: false,
+    );
   }
 
   // ─── Submit ───
@@ -72,14 +126,19 @@ extension VerificationWizardSubmit on VerificationWizardController {
     try {
       final saveResult = await _verificationSaveDraftData();
       if (saveResult.isFailure) {
+        final failure = saveResult.failureOrNull!;
         _setState(
           state.copyWith(
             isSubmitting: false,
-            error: saveResult.failureOrNull,
+            error: failure,
+            fieldErrors: {
+              ...state.fieldErrors,
+              ...mapRepositoryFailureToWizardFields(failure, wizardFieldKey: 'submit'),
+            },
           ),
           persistDraft: false,
         );
-        return Failure(saveResult.failureOrNull!);
+        return Failure(failure);
       }
 
       final submitResult = await _repository.submitForReview(
@@ -139,15 +198,18 @@ extension VerificationWizardSubmit on VerificationWizardController {
     }
 
     if (state.isTrucker && draft.truck != null && _fleetRepository != null) {
-      final truckResult = await _fleetRepository.createTruck(
-        truckNumber: draft.truck!.truckNumber,
-        bodyType: draft.truck!.bodyType,
-        tyres: draft.truck!.tyres,
-        capacityTonnes: draft.truck!.capacityTonnes,
-        rcDocumentPath: draft.truck!.rcDocumentPath ?? '',
-      );
-      if (truckResult.isFailure) {
-        return truckResult;
+      final hasReadyTruck = await _verificationFleetHasReadyTruck(draft.truck!);
+      if (!hasReadyTruck) {
+        final truckResult = await _fleetRepository.createTruck(
+          truckNumber: draft.truck!.truckNumber,
+          bodyType: draft.truck!.bodyType,
+          tyres: draft.truck!.tyres,
+          capacityTonnes: draft.truck!.capacityTonnes,
+          rcDocumentPath: draft.truck!.rcDocumentPath ?? '',
+        );
+        if (truckResult.isFailure) {
+          return truckResult;
+        }
       }
     }
 
@@ -155,8 +217,34 @@ extension VerificationWizardSubmit on VerificationWizardController {
   }
 
   // ─── Validation ───
+  Future<bool> _verificationFleetHasReadyTruck(TruckDraft draft) async {
+    final fleetRepository = _fleetRepository;
+    if (fleetRepository == null) {
+      return false;
+    }
+
+    final trucksResult = await fleetRepository.getMyTrucks();
+    if (trucksResult.isFailure) {
+      return false;
+    }
+
+    final normalizedNumber = draft.truckNumber.trim().toUpperCase();
+    final trucks = trucksResult.valueOrNull ?? const <TruckerFleetTruck>[];
+    return trucks.any(
+      (t) =>
+          t.status != TruckerFleetTruckStatus.archived &&
+          t.truckNumber.trim().toUpperCase() == normalizedNumber &&
+          (t.rcDocumentPath ?? '').trim().isNotEmpty &&
+          t.capacityTonnes > 0,
+    );
+  }
+
   String? _verificationValidateAll([AppLocalizations? l10n]) {
-    final result = _validationHelper.validateAll(state.draft, l10n);
+    final result = _validationHelper.validateAll(
+      state.draft,
+      termsAccepted: state.termsAccepted,
+      l10n: l10n,
+    );
     if (!result.isValid) {
       _setState(state.copyWith(fieldErrors: result.fieldErrors), persistDraft: false);
       return result.errorMessage;

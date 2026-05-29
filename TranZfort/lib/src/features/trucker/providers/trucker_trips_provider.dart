@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
@@ -47,24 +49,55 @@ class TruckerTripsState {
 }
 
 class TruckerTripsController extends StateNotifier<TruckerTripsState> {
+  static const Duration _minLoadingDuration = Duration(milliseconds: 300);
+  static const Duration _errorDebounceDuration = Duration(milliseconds: 300);
+
   final TruckerTripsRepository _repository;
+  Timer? _errorDebounceTimer;
 
   TruckerTripsController(this._repository) : super(TruckerTripsState.initial()) {
     load();
   }
 
+  void _scheduleErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(_errorDebounceDuration, () {
+      if (state.trips.isEmpty && !state.isLoading) {
+        state = state.copyWith(failure: failure);
+      }
+    });
+  }
+
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
+  }
+
+  Future<void> _ensureMinLoadingDuration(DateTime startTime) async {
+    final elapsed = DateTime.now().difference(startTime);
+    if (elapsed < _minLoadingDuration) {
+      await Future.delayed(_minLoadingDuration - elapsed);
+    }
+  }
+
   Future<void> load() async {
+    _cancelErrorDisplay();
     state = state.copyWith(isLoading: true, clearFailure: true);
+    final startTime = DateTime.now();
     final stages = state.selectedTab == TruckerTripsTab.active
         ? TruckerTripsRepository.activeStages
         : TruckerTripsRepository.completedStages;
     final result = await _repository.fetchTrips(stages);
-    result.when(
-      success: (value) {
+    await result.when(
+      success: (value) async {
+        _cancelErrorDisplay();
+        await _ensureMinLoadingDuration(startTime);
         state = state.copyWith(trips: value, isLoading: false, clearFailure: true);
       },
-      failure: (failure) {
-        state = state.copyWith(isLoading: false, failure: failure);
+      failure: (failure) async {
+        await _ensureMinLoadingDuration(startTime);
+        _scheduleErrorDisplay(failure);
+        state = state.copyWith(isLoading: false);
       },
     );
   }
@@ -75,6 +108,12 @@ class TruckerTripsController extends StateNotifier<TruckerTripsState> {
     }
     state = state.copyWith(selectedTab: tab);
     await load();
+  }
+
+  @override
+  void dispose() {
+    _errorDebounceTimer?.cancel();
+    super.dispose();
   }
 }
 

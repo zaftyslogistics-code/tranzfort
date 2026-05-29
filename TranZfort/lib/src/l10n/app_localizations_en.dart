@@ -2284,6 +2284,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'in_transit': 'In transit',
       'delivered': 'Delivered',
       'proof_submitted': 'Proof submitted',
+      'pod_uploaded': 'POD uploaded',
       'completed': 'Completed',
       'disputed': 'Disputed',
       'cancelled': 'Cancelled',

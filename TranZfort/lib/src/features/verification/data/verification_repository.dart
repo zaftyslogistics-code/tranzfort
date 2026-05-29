@@ -91,10 +91,11 @@ class VerificationRepository {
         );
       }
 
+      final panLast4 = normalizedPan.substring(normalizedPan.length - 4);
       await _backend.updateProfileFields(userId, {
-        // P0.7 Simplified: Only write last4 to profiles, not full numbers
         'aadhaar_last4': normalizedAadhaar.substring(normalizedAadhaar.length - 4),
-        'pan_last4': normalizedPan.substring(normalizedPan.length - 4),
+        'pan_last4': panLast4,
+        'pan_number': panLast4,
       });
       if (rawRole == 'supplier') {
         await _backend.updateSupplierFields(userId, {

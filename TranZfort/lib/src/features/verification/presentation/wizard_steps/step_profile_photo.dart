@@ -8,6 +8,7 @@ import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
+import '../components/verification_wizard_upload_feedback.dart';
 import '../components/wizard_progress_bar.dart';
 
 class StepProfilePhoto extends ConsumerWidget {
@@ -46,7 +47,7 @@ class StepProfilePhoto extends ConsumerWidget {
             isRequired: true,
             isUploading: state.uploadingDocumentType == VerificationDocumentType.profilePhoto,
             icon: Icons.person_outline,
-            onTap: () => _showImageSourcePicker(context, controller),
+            onTap: () => _showImageSourcePicker(context, ref, controller),
             onClear: controller.clearProfilePhoto,
             qualityChecks: const [
               QualityCheck(label: 'Face detected', passed: true),
@@ -63,6 +64,7 @@ class StepProfilePhoto extends ConsumerWidget {
               ),
             ),
           ],
+          VerificationWizardUploadErrorBanner(error: state.error),
           const SizedBox(height: AppSpacing.xl),
           StepActions(
             onContinue: state.canProceed ? controller.nextStep : null,
@@ -76,8 +78,10 @@ class StepProfilePhoto extends ConsumerWidget {
 
   Future<void> _showImageSourcePicker(
     BuildContext context,
+    WidgetRef ref,
     VerificationWizardController controller,
   ) async {
+    final l10n = AppLocalizations.of(context);
     final source = await showModalBottomSheet<ImageSource>(
       context: context,
       builder: (_) => const ImageSourcePicker(
@@ -85,9 +89,23 @@ class StepProfilePhoto extends ConsumerWidget {
       ),
     );
 
-    if (source != null) {
-      await controller.uploadProfilePhoto(source);
+    if (source == null) {
+      return;
     }
+
+    final result = await controller.uploadProfilePhoto(source);
+    if (!context.mounted) {
+      return;
+    }
+
+    final updated = ref.read(verificationWizardProvider);
+    showVerificationWizardUploadResultSnackBar(
+      context,
+      result: result,
+      l10n: l10n,
+      documentAttached: updated.draft.hasProfilePhoto,
+      successMessage: l10n.verificationWizardReviewProfileUploaded,
+    );
   }
 }
 

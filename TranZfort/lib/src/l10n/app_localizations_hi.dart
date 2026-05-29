@@ -2285,6 +2285,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'in_transit': 'रास्ते में',
       'delivered': 'डिलीवर किया गया',
       'proof_submitted': 'प्रूफ जमा किया गया',
+      'pod_uploaded': 'POD अपलोडेड',
       'completed': 'पूर्ण',
       'disputed': 'विवादित',
       'cancelled': 'रद्द',

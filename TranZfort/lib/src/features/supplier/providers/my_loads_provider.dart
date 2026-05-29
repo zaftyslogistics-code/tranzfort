@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/lifecycle_status_constants.dart';
@@ -64,14 +66,40 @@ class MyLoadsState {
 }
 
 class MyLoadsController extends StateNotifier<MyLoadsState> {
+  static const Duration _minLoadingDuration = Duration(milliseconds: 300);
+  static const Duration _errorDebounceDuration = Duration(milliseconds: 300);
+
   final SupplierLoadRepository _repository;
   static const int _pageSize = 20;
+  Timer? _errorDebounceTimer;
 
   MyLoadsController(this._repository) : super(MyLoadsState.initial()) {
     loadInitial();
   }
 
+  void _scheduleInitialErrorDisplay(AppFailure failure) {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = Timer(_errorDebounceDuration, () {
+      if (state.loads.isEmpty && !state.isInitialLoading) {
+        state = state.copyWith(failure: failure);
+      }
+    });
+  }
+
+  void _cancelErrorDisplay() {
+    _errorDebounceTimer?.cancel();
+    _errorDebounceTimer = null;
+  }
+
+  Future<void> _ensureMinLoadingDuration(DateTime startTime) async {
+    final elapsed = DateTime.now().difference(startTime);
+    if (elapsed < _minLoadingDuration) {
+      await Future.delayed(_minLoadingDuration - elapsed);
+    }
+  }
+
   Future<void> loadInitial() async {
+    _cancelErrorDisplay();
     state = state.copyWith(
       isInitialLoading: true,
       isLoadingMore: false,
@@ -81,9 +109,12 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
       clearFailure: true,
     );
 
+    final startTime = DateTime.now();
     final result = await _repository.getMyLoads(_filtersFor(state.selectedTab), page: 1);
-    result.when(
-      success: (value) {
+    await result.when(
+      success: (value) async {
+        _cancelErrorDisplay();
+        await _ensureMinLoadingDuration(startTime);
         state = state.copyWith(
           loads: value,
           isInitialLoading: false,
@@ -92,10 +123,11 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
           clearFailure: true,
         );
       },
-      failure: (failure) {
+      failure: (failure) async {
+        await _ensureMinLoadingDuration(startTime);
+        _scheduleInitialErrorDisplay(failure);
         state = state.copyWith(
           isInitialLoading: false,
-          failure: failure,
           hasMore: false,
         );
       },
@@ -144,6 +176,12 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
           ? LoadStatuses.supplierViewActive
           : LoadStatuses.completed,
     );
+  }
+
+  @override
+  void dispose() {
+    _errorDebounceTimer?.cancel();
+    super.dispose();
   }
 }
 

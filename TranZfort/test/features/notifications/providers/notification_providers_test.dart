@@ -97,6 +97,9 @@ Map<String, dynamic> _notificationRow(
   };
 }
 
+/// Covers min loading + error debounce in [NotificationsController].
+const Duration _notificationsLoadSettleDelay = Duration(milliseconds: 600);
+
 void main() {
   test('notifications provider loads initial notifications and merges realtime updates', () async {
     final backend = _FakeNotificationBackend()
@@ -114,7 +117,7 @@ void main() {
       await backend.streamController.close();
     });
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
 
     expect(container.read(notificationsProvider).notifications, hasLength(1));
     expect(container.read(unreadNotificationCountProvider), 1);
@@ -123,7 +126,7 @@ void main() {
       _notificationRow('notification-2', createdAt: '2026-03-10T10:00:00.000Z'),
       _notificationRow('notification-1'),
     ]);
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
 
     final state = container.read(notificationsProvider);
     expect(state.notifications.first.id, 'notification-2');
@@ -153,12 +156,12 @@ void main() {
 
     expect(await container.read(shellUnreadNotificationCountProvider.future), 3);
     expect(seenValues, contains(3));
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
 
     backend.unreadCount = 1;
-    backend.streamController.add([_notificationRow('notification-1', isRead: true)]);
+    backend.streamController.add([_notificationRow('notification-1', isRead: false)]);
     for (var attempt = 0; attempt < 10; attempt++) {
-      await Future<void>.delayed(Duration.zero);
+      await Future<void>.delayed(_notificationsLoadSettleDelay);
       if (seenValues.contains(1)) {
         break;
       }
@@ -193,7 +196,7 @@ void main() {
       await backend.streamController.close();
     });
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
     expect(container.read(notificationsProvider).notifications, hasLength(20));
 
     await container.read(notificationsProvider.notifier).loadMore();
@@ -208,7 +211,7 @@ void main() {
           createdAt: '2026-03-10T${itemNumber.toString().padLeft(2, '0')}:00:00.000Z',
         ),
     ]);
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
 
     final state = container.read(notificationsProvider);
     expect(state.notifications.first.id, 'notification-22');
@@ -225,12 +228,14 @@ void main() {
         notificationRepositoryProvider.overrideWithValue(repository),
       ],
     );
+    final subscription = container.listen(notificationsProvider, (_, _) {});
     addTearDown(() async {
+      subscription.close();
       container.dispose();
       await backend.streamController.close();
     });
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
     final result = await container.read(notificationsProvider.notifier).markRead('notification-1');
 
     expect(result.isSuccess, isTrue);
@@ -251,12 +256,14 @@ void main() {
         notificationRepositoryProvider.overrideWithValue(repository),
       ],
     );
+    final subscription = container.listen(notificationsProvider, (_, _) {});
     addTearDown(() async {
+      subscription.close();
       container.dispose();
       await backend.streamController.close();
     });
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
     final result = await container.read(notificationsProvider.notifier).markAllRead();
 
     expect(result.isSuccess, isTrue);
@@ -272,6 +279,7 @@ void main() {
           (ref) => _TestNotificationsController(
             NotificationsState.initial().copyWith(
               isLoading: false,
+              hasResolvedInitialLoad: true,
               notifications: [
                 _notification('notification-1', isRead: false),
                 _notification('notification-2', isRead: true),
@@ -297,12 +305,14 @@ void main() {
         notificationRepositoryProvider.overrideWithValue(repository),
       ],
     );
+    final subscription = container.listen(notificationsProvider, (_, _) {});
     addTearDown(() async {
+      subscription.close();
       container.dispose();
       await backend.streamController.close();
     });
 
-    await Future<void>.delayed(Duration.zero);
+    await Future<void>.delayed(_notificationsLoadSettleDelay);
 
     final result = await container.read(notificationsProvider.notifier).markRead('notification-1');
 
@@ -313,7 +323,10 @@ void main() {
 
 class _TestNotificationsController extends NotificationsController {
   _TestNotificationsController(NotificationsState state)
-      : super(NotificationRepository(_NoopNotificationBackend(), () => 'user-1')) {
+      : super(
+          NotificationRepository(_NoopNotificationBackend(), () => 'user-1'),
+          startWatch: false,
+        ) {
     this.state = state;
   }
 }

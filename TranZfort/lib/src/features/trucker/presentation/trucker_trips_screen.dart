@@ -30,7 +30,9 @@ class TruckerTripsScreen extends ConsumerWidget {
           children: [
             Text(
               l10n.truckerTripsSubtitle,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: AppColors.textSecondary,
+              ),
             ),
             const SizedBox(height: AppSpacing.md),
             FilterChipBar(
@@ -177,9 +179,19 @@ class _TruckerTripCard extends StatelessWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          Text(_localizedTruckerTripsTimeContext(context, l10n, trip), style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            _localizedTruckerTripsTimeContext(context, l10n, trip),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
           const SizedBox(height: AppSpacing.xs),
-          Text(l10n.truckerTripsTruckLabel(trip.truckNumber), style: Theme.of(context).textTheme.bodySmall),
+          Text(
+            l10n.truckerTripsTruckLabel(trip.truckNumber),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: AppColors.textSecondary,
+            ),
+          ),
         ],
       ),
       onTap: () => context.push('${AppRoutes.tripDetailPath}/${trip.id}'),

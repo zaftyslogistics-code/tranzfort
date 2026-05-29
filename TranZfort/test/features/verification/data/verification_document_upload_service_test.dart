@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
+import 'package:tranzfort/src/core/services/image_upload_service.dart';
 import 'package:tranzfort/src/features/verification/data/verification_document_upload_service.dart';
 import 'package:tranzfort/src/features/verification/data/verification_repository.dart';
 
@@ -70,6 +71,15 @@ void main() {
 
     expect(result.isSuccess, isTrue);
     expect(result.valueOrNull, isNull);
+  });
+
+  test('resolveImageMimeType accepts jpeg gallery picks without mimeType', () {
+    final bytes = Uint8List.fromList([0xFF, 0xD8, 0xFF, 0xE0]);
+    final file = XFile.fromData(bytes, name: 'profile.jpg');
+
+    final mime = ImageUploadServiceDefaults.resolveImageMimeType(file, bytes);
+
+    expect(mime, 'image/jpeg');
   });
 
   test('verification upload service writes deterministic storage path for supplier business licence', () async {

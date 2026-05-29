@@ -126,7 +126,7 @@ class _NotificationsBody extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final languageCode = ref.watch(appLocaleProvider).locale.languageCode;
-    if (state.isLoading) {
+    if (!state.hasResolvedInitialLoad || state.isLoading) {
       return const Padding(
         padding: EdgeInsets.all(AppSpacing.lg),
         child: LoadingShimmer(height: 96, itemCount: 4),
