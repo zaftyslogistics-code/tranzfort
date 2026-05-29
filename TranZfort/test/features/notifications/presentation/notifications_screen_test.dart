@@ -281,6 +281,10 @@ Widget _buildRoutedApp(
         builder: (context, state) => const Text('Trucker dashboard'),
       ),
       GoRoute(
+        path: '${AppRoutes.supportPath}/:ticketId',
+        builder: (context, state) => Text('Support ${state.pathParameters['ticketId']}'),
+      ),
+      GoRoute(
         path: AppRoutes.supplierDashboardPath,
         builder: (context, state) => const Text('Supplier dashboard'),
       ),
@@ -851,6 +855,6 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(controller.lastMarkedId, 'notification-1');
-    expect(find.text('Trucker dashboard'), findsOneWidget);
+    expect(find.text('Support ticket-1'), findsOneWidget);
   });
 }

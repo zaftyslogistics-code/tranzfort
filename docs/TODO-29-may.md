@@ -1,7 +1,7 @@
 # TODO — 29 May 2026
 
 **Date:** 2026-05-29  
-**Updated:** 2026-05-29  
+**Updated:** 2026-05-29 (CTO roadmap + Sprint 1)  
 **Status:** Active  
 **Priority:** Play Store release readiness → TTS expansion  
 **Working branch:** `feature/play-store-readiness-2026-05-16` (all TTS + readiness work here — no separate TTS branch)  
@@ -30,7 +30,7 @@
 | Z — Completed 29 May | 68 | 0 | §Z |
 | A — Play Store follow-up | 0 | 42 | §A |
 | B — Release QA (manual) | 4 | 38 | §B |
-| C — TTS expansion | 52 | 45 | §C |
+| C — TTS expansion | 56 | 41 | §C |
 | D — Localization hygiene | 0 | 12 | §D |
 | E — Admin app | 0 | 9 | §E |
 | F — Docs & repo | 1 | 5 | §F |
@@ -366,7 +366,7 @@
 - [x] C-0.3 **D-2** Approved: list cards = manual speaker only (no auto-read all cards)
 - [x] C-0.4 **D-3** Approved: separate `tts_audio_language` preference
 - [x] C-0.5 **D-4** Approved: skip profit estimate in load card TTS by default
-- [ ] C-0.6 **D-5** Decision: wire vs delete `TtsAnnounce`, `DashboardAutoSpeakEffect`, `TruckerTtsSummaries`, `SupplierTtsSummaries`
+- [x] C-0.6 **D-5** Decision: **delete** unwired `TtsAnnounce`, `DashboardAutoSpeakEffect`, `TruckerTtsSummaries`, `SupplierTtsSummaries` (superseded by ARB + card speakers)
 - [ ] C-0.7 Create tracking issue / milestone in GitHub (optional)
 
 ### C-1 Phase 0 — Foundation
@@ -383,7 +383,7 @@
 
 - [x] C-1.2.1 Add `tts_audio_language` key in SharedPreferences
 - [x] C-1.2.2 `TtsAudioLanguageProvider` — default mirrors UI locale
-- [ ] C-1.2.3 Settings UI: “Voice language” / “बोलने की भाषा” toggle or dropdown
+- [x] C-1.2.3 Settings UI: “Voice language” / “बोलने की भाषा” dropdown (follow app / EN / HI)
 - [x] C-1.2.4 `TtsPlaybackController` reads audio language (not only UI locale)
 
 #### C-1.3 Utterance builder — marketplace load
@@ -482,8 +482,8 @@
 
 #### C-3.4 Screen-level summaries
 
-- [ ] C-3.4.1 Replace `TruckerTtsSummaries` hardcoded map with ARB + screen registry **or** delete file
-- [ ] C-3.4.2 Replace `SupplierTtsSummaries` similarly
+- [x] C-3.4.1 Deleted unused `TruckerTtsSummaries` (screen summaries use `TtsScreenSummaryEffect` + ARB over time)
+- [x] C-3.4.2 Deleted unused `SupplierTtsSummaries`
 - [ ] C-3.4.3 Find Loads tab: richer summary than tab title only (product approval)
 - [ ] C-3.4.4 Filter-aware intro: “{count} loads mili” when filters applied
 
@@ -574,19 +574,82 @@
 | 2026-05-29 | Z-1–Z-9 | Play-store readiness merged to `main`; see §Z |
 | 2026-05-29 | F-1–F-3 | Planning docs created |
 | 2026-05-29 | C-1 (WIP) | TTS Phase 0 started on `feature/play-store-readiness-2026-05-16` (reverted mistaken `feature/tts-expansion-2026-05-29` branch) |
+| 2026-05-29 | C-1, C-2, C-3.3 | Phase 0–1 lists + notification ARB; pushed `9d8f8c2` |
+| 2026-05-29 | C-1.2.3, C-0.6, C-3.4.1–2 | Spoken-language settings; deleted dead TTS widgets; CTO roadmap in §Quick priority |
 | | | |
 | | | |
 
 ---
 
-## Quick priority (what to do next)
+## CTO execution plan (complete all pending)
 
-1. [ ] **A-1.1** – **A-1.3** Resubmit + Admin queue verification  
-2. [ ] **A-4** Confirm migrations on target Supabase  
-3. [ ] **A-5** / **B** APK build + full manual QA  
-4. [ ] **C-0** Lock TTS architecture decisions  
-5. [ ] **C-1** Marketplace load card speaker (highest user value)  
-6. [ ] **C-2** → **C-6** TTS rollout  
+**Goal:** Play Store internal track with stable verification + usable TTS for low-literacy truckers.  
+**Branch:** `feature/play-store-readiness-2026-05-16` only.  
+**Rule:** Agent marks `[x]` only for code merged + tests green; human marks `[x]` for device/Admin/Play Console items.
+
+### Sprint 1 — Ship gate (now → 2 days) — *engineering*
+
+| # | Tasks | Owner | Blocks |
+|---|--------|-------|--------|
+| 1 | **A-1.7** Verification unit tests (draft clear, terms, field map, skip duplicate truck) | Agent | Confidence for resubmit |
+| 2 | **A-4** Confirm 3 migrations on target Supabase (`db push` / dashboard) | Human + Agent SQL checklist | Release |
+| 3 | **A-5.1–A-5.3** `build-apk.bat` + install smoke | Human | Play upload |
+| 4 | Fix remaining red tests (notifications routing) | Agent | CI |
+| 5 | ~~**C-1.2.3** Voice language settings~~ | Agent | Done |
+
+### Sprint 2 — Play Store proof (3–5 days) — *human-led, agent supports*
+
+| # | Tasks | Owner |
+|---|--------|-------|
+| 1 | **A-1.1–A-1.3** Resubmit-after-reject + Admin queue spot-check (**E-1–E-9**) | Human (Admin + 2 test accounts) |
+| 2 | **A-2** Trips/loads smoke (supplier + trucker cold open, no flicker) | Human |
+| 3 | **A-3** Upload + notification device QA | Human |
+| 4 | **B-1–B-6** Full release QA matrix (use §B as script) | Human |
+| 5 | **A-5.6–A-5.7** Play Console internal + release notes | Human |
+
+**Product decisions (block A-1.4 / A-1.5):** Default = **defer** `company_name` + `profile_photo` server-required until post-launch unless reject rate high. Truck photo = **UI-only** for v1 (document in A-1.5.4).
+
+### Sprint 3 — TTS value (1 week) — *agent*
+
+| # | Tasks |
+|---|--------|
+| 1 | **C-3.1–C-3.2** Load + trip **detail** section speakers |
+| 2 | **C-2.4.3** Pickup dates via `DateFormat` + l10n |
+| 3 | **C-3.3.4** (optional) Notification row speaker |
+| 4 | **D-4, D-5** Top card interpolation fixes + `app` vs `tts` ARB doc |
+
+### Sprint 4 — TTS depth (2 weeks) — *agent + spot QA*
+
+| # | Tasks |
+|---|--------|
+| 1 | **C-4** Onboarding / verification / post-load spoken guidance |
+| 2 | **C-3.4.3–4** Richer Find Loads tab summary (product copy in ARB) |
+| 3 | **C-5** Polish (replay, rate slider, analytics) |
+| 4 | **C-6** TTS regression pass on 2 physical devices |
+
+### Sprint 5 — Hygiene & close (ongoing)
+
+| # | Tasks |
+|---|--------|
+| 1 | **D-1–D-12** Localization audit (non-blocking for Play) |
+| 2 | **F-4–F-6** Docs force-add or un-ignore `docs/` |
+| 3 | **A-1.4–A-1.6**, **C-1.5.1–2**, **C-5.8** — only if time before wider rollout |
+
+### Deferred / won’t do for v1
+
+- **C-1.5.1–1.5.2** `TtsIconButton` / `TtsSpeakableCard` — `TtsCardSpeakerButton` is the standard; skip unless design requests wrapper.
+- **C-2.3.2** Stop TTS when card scrolls off-screen — skip (route change stop is enough).
+- **D-6, D-9, D-10** — post-launch engineering hygiene.
+
+---
+
+## Quick priority (active queue)
+
+1. [ ] **A-1.7** + **A-4** + **A-5.2** — automated tests, migrations, APK build  
+2. [ ] **A-1.1–A-1.3** + **E-*** — Admin + resubmit manual path  
+3. [ ] **B** — full manual QA script (§B) on release APK  
+4. [ ] **C-3.1–C-3.2** — detail screen TTS (next code sprint)  
+5. [ ] **C-4** → **C-6** — forms + polish + device TTS QA  
 
 ---
 

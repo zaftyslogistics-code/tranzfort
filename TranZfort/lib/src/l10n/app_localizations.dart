@@ -3466,6 +3466,54 @@ abstract class AppLocalizations {
   /// **'Saving language preference...'**
   String get settingsLanguageSaving;
 
+  /// No description provided for @settingsTtsLanguageLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Spoken language'**
+  String get settingsTtsLanguageLabel;
+
+  /// No description provided for @settingsTtsLanguageHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Language used when you tap the speaker on cards and notifications.'**
+  String get settingsTtsLanguageHelper;
+
+  /// No description provided for @settingsTtsLanguageFollowApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Same as app language'**
+  String get settingsTtsLanguageFollowApp;
+
+  /// No description provided for @settingsTtsLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English (spoken)'**
+  String get settingsTtsLanguageEnglish;
+
+  /// No description provided for @settingsTtsLanguageHindi.
+  ///
+  /// In en, this message translates to:
+  /// **'Hindi (spoken)'**
+  String get settingsTtsLanguageHindi;
+
+  /// No description provided for @settingsTtsLanguageSavedEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'Spoken language set to English'**
+  String get settingsTtsLanguageSavedEnglish;
+
+  /// No description provided for @settingsTtsLanguageSavedHindi.
+  ///
+  /// In en, this message translates to:
+  /// **'Spoken language set to Hindi'**
+  String get settingsTtsLanguageSavedHindi;
+
+  /// No description provided for @settingsTtsLanguageSavedFollowApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Spoken language follows app language'**
+  String get settingsTtsLanguageSavedFollowApp;
+
   /// Welcome message on trucker dashboard. Placeholder {fullName} is the user's full name.
   ///
   /// In en, this message translates to:

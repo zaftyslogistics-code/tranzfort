@@ -6,6 +6,7 @@ import '../../../core/logger/app_logger.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -71,6 +72,8 @@ class SettingsScreen extends ConsumerWidget {
                       },
               ),
               const SizedBox(height: AppSpacing.sm),
+              const _TtsLanguagePreferenceDropdown(),
+              const SizedBox(height: AppSpacing.sm),
               if ((profile?.roleType ?? '').trim().isNotEmpty) ...[
                 const SizedBox(height: AppSpacing.sm),
                 InfoRow(
@@ -84,8 +87,9 @@ class SettingsScreen extends ConsumerWidget {
                 child: OutlineButton(
                   label: l10n.commonHearSummary,
                   onPressed: () async {
+                    final audioLanguage = ref.read(ttsAudioLanguageProvider);
                     final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
-                          languageCode: localeState.locale.languageCode,
+                          languageCode: audioLanguage,
                           message: settingsTtsSummary(
                             context: context,
                             languageCode: localeState.locale.languageCode,
@@ -237,6 +241,64 @@ class _PushNotificationSettingsCard extends ConsumerWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class _TtsLanguagePreferenceDropdown extends ConsumerWidget {
+  const _TtsLanguagePreferenceDropdown();
+
+  static const _followAppValue = 'follow';
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context);
+    final localeState = ref.watch(appLocaleProvider);
+    final audioNotifier = ref.read(ttsAudioLanguageProvider.notifier);
+    final followsApp = audioNotifier.followsAppLocale;
+    final dropdownValue = followsApp ? _followAppValue : ref.watch(ttsAudioLanguageProvider);
+
+    return AppDropdown<String>(
+      label: l10n.settingsTtsLanguageLabel,
+      value: dropdownValue,
+      helperText: l10n.settingsTtsLanguageHelper,
+      items: [
+        DropdownMenuItem(
+          value: _followAppValue,
+          child: Text(l10n.settingsTtsLanguageFollowApp),
+        ),
+        DropdownMenuItem(
+          value: 'en',
+          child: Text(l10n.settingsTtsLanguageEnglish),
+        ),
+        DropdownMenuItem(
+          value: 'hi',
+          child: Text(l10n.settingsTtsLanguageHindi),
+        ),
+      ],
+      onChanged: (value) async {
+        if (value == null) {
+          return;
+        }
+        if (value == _followAppValue) {
+          await audioNotifier.followAppLocale(localeState.locale);
+        } else {
+          await audioNotifier.setLanguageCode(value);
+        }
+        if (!context.mounted) {
+          return;
+        }
+        final message = switch (value) {
+          _followAppValue => l10n.settingsTtsLanguageSavedFollowApp,
+          'hi' => l10n.settingsTtsLanguageSavedHindi,
+          _ => l10n.settingsTtsLanguageSavedEnglish,
+        };
+        AppSnackbar.show(
+          context: context,
+          message: message,
+          variant: AppSnackbarVariant.success,
+        );
+      },
     );
   }
 }

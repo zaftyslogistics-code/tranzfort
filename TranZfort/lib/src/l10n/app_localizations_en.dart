@@ -2063,6 +2063,33 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsLanguageSaving => 'Saving language preference...';
 
   @override
+  String get settingsTtsLanguageLabel => 'Spoken language';
+
+  @override
+  String get settingsTtsLanguageHelper =>
+      'Language used when you tap the speaker on cards and notifications.';
+
+  @override
+  String get settingsTtsLanguageFollowApp => 'Same as app language';
+
+  @override
+  String get settingsTtsLanguageEnglish => 'English (spoken)';
+
+  @override
+  String get settingsTtsLanguageHindi => 'Hindi (spoken)';
+
+  @override
+  String get settingsTtsLanguageSavedEnglish =>
+      'Spoken language set to English';
+
+  @override
+  String get settingsTtsLanguageSavedHindi => 'Spoken language set to Hindi';
+
+  @override
+  String get settingsTtsLanguageSavedFollowApp =>
+      'Spoken language follows app language';
+
+  @override
   String truckerDashboardWelcomeBack(Object fullName) {
     return 'Welcome back, $fullName';
   }

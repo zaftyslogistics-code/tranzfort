@@ -16,12 +16,16 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
   }
 
   bool _loaded = false;
+  bool _followsAppLocale = true;
+
   bool get isLoaded => _loaded;
+  bool get followsAppLocale => _followsAppLocale;
 
   Future<void> _load() async {
     final prefs = await SharedPreferences.getInstance();
     final saved = normalizeLanguageCode(prefs.getString(ttsAudioLanguagePreferenceKey));
     if (saved != null) {
+      _followsAppLocale = false;
       state = saved;
     }
     _loaded = true;
@@ -33,6 +37,7 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
     if (prefs.containsKey(ttsAudioLanguagePreferenceKey)) {
       return;
     }
+    _followsAppLocale = true;
     final normalized = normalizeLanguageCode(locale.languageCode);
     if (normalized != null) {
       state = normalized;
@@ -46,12 +51,22 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
     }
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(ttsAudioLanguagePreferenceKey, normalized);
+    _followsAppLocale = false;
     state = normalized;
   }
 
-  Future<void> clearOverride() async {
+  Future<void> followAppLocale(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(ttsAudioLanguagePreferenceKey);
+    _followsAppLocale = true;
+    final normalized = normalizeLanguageCode(locale.languageCode);
+    if (normalized != null) {
+      state = normalized;
+    }
+  }
+
+  Future<void> clearOverride() async {
+    await followAppLocale(const Locale('en'));
   }
 
   static String? normalizeLanguageCode(String? code) {
