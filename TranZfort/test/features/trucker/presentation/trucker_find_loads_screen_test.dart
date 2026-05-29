@@ -13,9 +13,11 @@ import 'package:tranzfort/src/features/trucker/data/trucker_load_detail_reposito
 import 'package:tranzfort/src/features/trucker/data/trucker_city_search_service.dart';
 import 'package:tranzfort/src/features/trucker/data/trucker_marketplace_repository.dart';
 import 'package:tranzfort/src/features/trucker/presentation/trucker_find_loads_screen.dart';
+import 'package:tranzfort/src/features/trucker/presentation/widgets/marketplace_filter_bar.dart';
 import 'package:tranzfort/src/features/trucker/providers/find_loads_provider.dart';
 import 'package:tranzfort/src/features/trucker/providers/trucker_load_detail_provider.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
+import 'package:tranzfort/src/l10n/tts_localizations.dart';
 
 // Mock classes for testing
 class _FakeAuthRepository extends AuthRepository {
@@ -230,10 +232,13 @@ Widget _buildApp(FindLoadsState state) {
       truckerApprovedTrucksProvider.overrideWith((ref) async => const <TruckerApprovedTruck>[]),
       dieselPriceMapProvider.overrideWith((ref) async => const <String, double>{}),
     ],
-    child: const MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+    child: MaterialApp(
+      localizationsDelegates: [
+        ...AppLocalizations.localizationsDelegates,
+        ...TtsLocalizations.localizationsDelegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(body: TruckerFindLoadsScreen()),
+      home: const Scaffold(body: TruckerFindLoadsScreen()),
     ),
   );
 }
@@ -248,10 +253,13 @@ Widget _buildAppWithController(_TestFindLoadsController controller) {
       truckerApprovedTrucksProvider.overrideWith((ref) async => const <TruckerApprovedTruck>[]),
       dieselPriceMapProvider.overrideWith((ref) async => const <String, double>{}),
     ],
-    child: const MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+    child: MaterialApp(
+      localizationsDelegates: [
+        ...AppLocalizations.localizationsDelegates,
+        ...TtsLocalizations.localizationsDelegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
-      home: Scaffold(body: TruckerFindLoadsScreen()),
+      home: const Scaffold(body: TruckerFindLoadsScreen()),
     ),
   );
 }
@@ -283,7 +291,10 @@ Widget _buildRoutedApp(FindLoadsState state) {
       dieselPriceMapProvider.overrideWith((ref) async => const <String, double>{}),
     ],
     child: MaterialApp.router(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: [
+        ...AppLocalizations.localizationsDelegates,
+        ...TtsLocalizations.localizationsDelegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
     ),
@@ -539,7 +550,7 @@ void main() {
     );
   });
 
-  testWidgets('collapses filters on downward scroll and restores on upward scroll', (tester) async {
+  testWidgets('collapses hero and tabs on downward scroll and restores on scroll to top', (tester) async {
     final oldOnError = FlutterError.onError;
     FlutterError.onError = (details) {
       if (details.toString().contains('overflowed')) return;
@@ -559,13 +570,19 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('All Loads'), findsOneWidget);
+    expect(find.text('Origin city'), findsOneWidget);
 
-    await tester.drag(find.byType(Scrollable).first, const Offset(0, -500));
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, -600));
     await tester.pumpAndSettle();
 
-    await tester.drag(find.byType(Scrollable).first, const Offset(0, 1200));
+    expect(find.text('All Loads'), findsNothing);
+    expect(find.text('Origin city'), findsNothing);
+    expect(find.byType(MarketplaceFilterBar), findsOneWidget);
+
+    await tester.drag(find.byType(Scrollable).first, const Offset(0, 800));
     await tester.pumpAndSettle();
 
     expect(find.text('All Loads'), findsOneWidget);
+    expect(find.text('Origin city'), findsOneWidget);
   });
 }

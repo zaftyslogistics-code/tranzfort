@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_spacing.dart';
-import '../../../core/theme/app_typography.dart';
+
+export '../../../core/theme/app_decorations.dart' show BrandAccentChip;
 
 /// Load info chip with primary/secondary hierarchy for marketplace cards.
+///
+/// Primary chips use [BrandAccentChip] (brand gradient). Secondary chips are text-only.
 class LoadInfoChip extends StatelessWidget {
   final IconData? icon;
   final String label;
@@ -21,45 +24,26 @@ class LoadInfoChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final fg = accentColor ?? (level == LoadChipLevel.primary
-        ? AppColors.inkTextPrimary
-        : AppColors.inkTextSecondary);
+    if (level == LoadChipLevel.primary) {
+      return BrandAccentChip(
+        label: label,
+        icon: icon,
+        compact: true,
+      );
+    }
 
-    return Container(
-      padding: level == LoadChipLevel.primary
-          ? const EdgeInsets.symmetric(horizontal: 12, vertical: 8)
-          : const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: level == LoadChipLevel.primary
-            ? AppColors.primary.withValues(alpha: 0.2)
-            : Colors.transparent,
-        borderRadius: BorderRadius.circular(20.0), // AppSpacing.chip fallback
-        border: level == LoadChipLevel.primary
-            ? Border.all(color: AppColors.primary.withValues(alpha: 0.4), width: 1)
-            : null,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(
-              icon,
-              size: level == LoadChipLevel.primary ? 16 : 14,
-              color: fg,
+      child: Text(
+        label,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: accentColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 11,
             ),
-            const SizedBox(width: 4),
-          ],
-          Text(
-            label,
-            style: AppTypography.label.copyWith(
-                  color: fg,
-                  fontWeight: level == LoadChipLevel.primary
-                      ? FontWeight.w700
-                      : FontWeight.w600,
-                  fontSize: 12, // Minimum 12px for decision-critical content
-                ),
-          ),
-        ],
       ),
     );
   }

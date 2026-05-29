@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/theme/app_colors.dart';
-import '../../core/theme/app_shadows.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
 import '../../l10n/app_localizations.dart';
-import '../../features/trucker/data/trip_costing_service.dart';
 import '../../features/trucker/data/trucker_marketplace_repository.dart';
 import '../../features/tts/data/load_marketplace_card_tts_builder.dart';
 import '../../l10n/tts_localizations.dart';
 import 'marketplace/marketplace_dark_header.dart';
-import 'marketplace/marketplace_chips.dart';
+import 'marketplace/marketplace_price_fact_row.dart';
 import 'tts_card_speaker_button.dart';
 
 class MarketplaceLoadCard extends ConsumerWidget {
   final MarketplaceLoadItem load;
-  final TripCostingService tripCostingService;
-  final double? dieselPrice;
   final VoidCallback? onViewDetails;
   final VoidCallback? onChat;
   final VoidCallback? onCall;
@@ -28,8 +25,6 @@ class MarketplaceLoadCard extends ConsumerWidget {
   const MarketplaceLoadCard({
     super.key,
     required this.load,
-    required this.tripCostingService,
-    this.dieselPrice,
     this.onViewDetails,
     this.onChat,
     this.onCall,
@@ -49,114 +44,52 @@ class MarketplaceLoadCard extends ConsumerWidget {
       ui: l10n,
       pickupDateLabel: pickupDateLabel,
     );
-    final tonnes = load.weightTonnes % 1 == 0
-        ? load.weightTonnes.toStringAsFixed(0)
-        : load.weightTonnes.toStringAsFixed(1);
-    final routeSnapshot = load.routeSnapshot;
-    final minCapacity = load.derivedMinTruckCapacityTonnes;
-    final maxCapacity = load.derivedMaxTruckCapacityTonnes;
-    
-    // Task C: Show only truck capacity range
-    // If capacity range is available, show min-max
-    // Otherwise show actual load weight as fallback
-    final weightLabel = minCapacity != null && maxCapacity != null
-        ? '${minCapacity.toStringAsFixed(0)}-${maxCapacity.toStringAsFixed(0)}T'
-        : tonnes;
+    final tyreLabel = formatMarketplaceTyreLabel(load.requiredTyres);
 
-    final isPerTon = load.priceType == 'per_ton';
-    final totalLoadValue = isPerTon
-        ? load.priceAmount * load.weightTonnes
-        : load.priceAmount;
-    final costEstimate = tripCostingService.estimate(
-      distanceKm: routeSnapshot?.distanceKm,
-      loadWeightTonnes: load.weightTonnes,
-      dieselPricePerLitre: dieselPrice,
-      priceAmountPerTonne: isPerTon ? load.priceAmount : null,
-      fixedPriceAmount: isPerTon ? null : load.priceAmount,
-    );
-
-    return Container(
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            AppColors.inkSurface,
-            AppColors.inkMid,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        boxShadow: AppShadows.elevation2,
-        border: Border.all(
-          color: AppColors.divider,
-          width: 0.75,
-        ),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onViewDetails,
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // ── Dark Header (150-170px max) ──
-              MarketplaceDarkHeader(
-                supplierName: load.supplierName ?? 'Supplier',
-                supplierId: load.supplierId,
-                supplierInitial: supplierInitial,
-                supplierAvatarUrl: supplierAvatarUrl,
-                age: _relativeAge(load.createdAt),
-                status: load.status,
-                isSuperLoad: load.isSuperLoad,
-                originCity: load.originCity,
-                originState: load.originState ?? '',
-                destinationCity: load.destinationCity,
-                destinationState: load.destinationState ?? '',
-                totalLoadValue: totalLoadValue,
-                costEstimate: costEstimate,
-                priceAmount: load.priceAmount,
-                priceType: load.priceType,
-                onSupplierTap: onSupplierTap,
-                headerTrailing: TtsCardSpeakerButton(message: loadUtterance),
-              ),
-              // ── Dark Section: Load/truck details only ──
-              Padding(
-                padding: const EdgeInsets.fromLTRB(
-                  16,
-                  12,
-                  16,
-                  8,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ── Primary chips: material, weight, body type ──
-                    LoadChipWrap(
-                      spacing: AppSpacing.xs,
-                      runSpacing: AppSpacing.xs,
-                      chips: [
-                        LoadInfoChip(
-                          icon: Icons.inventory_2_outlined,
-                          label: load.material,
-                          level: LoadChipLevel.primary,
-                        ),
-                        LoadInfoChip(
-                          icon: Icons.scale_outlined,
-                          label: weightLabel,
-                          level: LoadChipLevel.primary,
-                        ),
-                        LoadInfoChip(
-                          icon: Icons.local_shipping_outlined,
-                          label: _localizedBodyType(l10n, load.requiredBodyType),
-                          level: LoadChipLevel.primary,
-                        ),
-                      ],
+    return DecoratedBox(
+      decoration: AppDecorations.brandGradientBorderOuter(),
+      child: Padding(
+        padding: const EdgeInsets.all(AppDecorations.brandGradientBorderWidth),
+        child: DecoratedBox(
+          decoration: AppDecorations.marketplaceCardSurface(),
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: onViewDetails,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MarketplaceDarkHeader(
+                    supplierName: load.supplierName ?? 'Supplier',
+                    supplierId: load.supplierId,
+                    supplierInitial: supplierInitial,
+                    supplierAvatarUrl: supplierAvatarUrl,
+                    age: _relativeAge(load.createdAt),
+                    isSuperLoad: load.isSuperLoad,
+                    originCity: load.originCity,
+                    originState: load.originState ?? '',
+                    destinationCity: load.destinationCity,
+                    destinationState: load.destinationState ?? '',
+                    onSupplierTap: onSupplierTap,
+                    headerTrailing: TtsCardSpeakerButton(message: loadUtterance),
+                  ),
+                  MarketplacePriceFactRow(
+                    priceAmount: load.priceAmount,
+                    priceType: load.priceType,
+                    material: load.material,
+                    bodyTypeLabel: _localizedBodyType(l10n, load.requiredBodyType),
+                    tyreLabel: tyreLabel.isEmpty ? null : tyreLabel,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.lg,
+                      AppSpacing.xs,
+                      AppSpacing.lg,
+                      AppSpacing.sm,
                     ),
-                    const SizedBox(height: 8),
-                    // ── Secondary inline metadata ──
-                    Wrap(
+                    child: Wrap(
                       spacing: AppSpacing.sm,
+                      runSpacing: AppSpacing.xs,
                       children: [
                         _InlineMetaItem(
                           icon: Icons.calendar_today_outlined,
@@ -175,116 +108,53 @@ class MarketplaceLoadCard extends ConsumerWidget {
                           ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.lg,
+                      vertical: AppSpacing.xs,
+                    ),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: _FooterAction(
+                            icon: Icons.phone_outlined,
+                            label: l10n.commonCallAction,
+                            alignment: Alignment.centerLeft,
+                            onTap: onCall,
+                          ),
+                        ),
+                        const VerticalDivider(
+                          width: 1,
+                          color: AppColors.divider,
+                        ),
+                        Expanded(
+                          child: _FooterAction(
+                            icon: Icons.info_outline,
+                            label: l10n.commonViewDetailsAction,
+                            alignment: Alignment.center,
+                            onTap: onViewDetails,
+                          ),
+                        ),
+                        const VerticalDivider(
+                          width: 1,
+                          color: AppColors.divider,
+                        ),
+                        Expanded(
+                          child: _FooterAction(
+                            icon: Icons.chat_bubble_outline,
+                            label: l10n.commonChatLabel,
+                            alignment: Alignment.centerRight,
+                            iconAfterLabel: true,
+                            onTap: onChat,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              // ── Footer: Call/Details/Chat split action row ──
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: onCall,
-                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
-                        child: Container(
-                          height: 48, // Increased from 44px to meet AppTouchTarget.min
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.phone_outlined,
-                                color: AppColors.inkTextPrimary,
-                                size: 20,
-                              ),
-                              const SizedBox(width: AppSpacing.sm),
-                              Text(
-                                l10n.commonCallAction,
-                                style: TextStyle(
-                                  color: AppColors.inkTextPrimary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const VerticalDivider(
-                      width: 1,
-                      color: AppColors.divider,
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: onViewDetails,
-                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
-                        child: Container(
-                          height: 48, // Increased from 44px to meet AppTouchTarget.min
-                          alignment: Alignment.center,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.info_outline,
-                                color: AppColors.inkTextPrimary,
-                                size: 20,
-                              ),
-                              const SizedBox(width: AppSpacing.sm),
-                              Text(
-                                l10n.commonViewDetailsAction,
-                                style: TextStyle(
-                                  color: AppColors.inkTextPrimary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    const VerticalDivider(
-                      width: 1,
-                      color: AppColors.divider,
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: onChat,
-                        borderRadius: BorderRadius.circular(14.0), // AppSpacing.button
-                        child: Container(
-                          height: 48, // Increased from 44px to meet AppTouchTarget.min
-                          alignment: Alignment.centerRight,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Text(
-                                l10n.commonChatLabel,
-                                style: TextStyle(
-                                  color: AppColors.inkTextPrimary,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(width: AppSpacing.sm),
-                              Icon(
-                                Icons.chat_bubble_outline,
-                                color: AppColors.inkTextPrimary,
-                                size: 20,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ),
       ),
@@ -331,7 +201,70 @@ class MarketplaceLoadCard extends ConsumerWidget {
   }
 }
 
-/// Inline metadata item for secondary information.
+class _FooterAction extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Alignment alignment;
+  final VoidCallback? onTap;
+  final bool iconAfterLabel;
+
+  const _FooterAction({
+    required this.icon,
+    required this.label,
+    required this.alignment,
+    this.onTap,
+    this.iconAfterLabel = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 40,
+        alignment: alignment,
+        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xs),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: _mainAxisAlignment,
+          children: [
+            if (!iconAfterLabel) ...[
+              Icon(icon, color: AppColors.inkTextPrimary, size: 18),
+              const SizedBox(width: AppSpacing.xs),
+            ],
+            Flexible(
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(
+                  color: AppColors.inkTextPrimary,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            if (iconAfterLabel) ...[
+              const SizedBox(width: AppSpacing.xs),
+              Icon(icon, color: AppColors.inkTextPrimary, size: 18),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  MainAxisAlignment get _mainAxisAlignment {
+    if (alignment == Alignment.centerLeft) {
+      return MainAxisAlignment.start;
+    }
+    if (alignment == Alignment.centerRight) {
+      return MainAxisAlignment.end;
+    }
+    return MainAxisAlignment.center;
+  }
+}
+
 class _InlineMetaItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -350,15 +283,15 @@ class _InlineMetaItem extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 14,
+          size: 12,
           color: accentColor ?? AppColors.inkTextSecondary,
         ),
-        const SizedBox(width: 4),
+        const SizedBox(width: AppSpacing.xs),
         Text(
           label,
           style: AppTypography.label.copyWith(
             color: accentColor ?? AppColors.inkTextSecondary,
-            fontSize: 12,
+            fontSize: 11,
           ),
         ),
       ],

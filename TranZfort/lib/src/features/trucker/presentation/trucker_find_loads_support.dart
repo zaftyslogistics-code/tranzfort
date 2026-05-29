@@ -1,14 +1,21 @@
 part of 'trucker_find_loads_screen.dart';
 
-class _FindLoadsTabsHeader extends StatelessWidget {
+/// Pinned header height: truck-type row (+ tyre row when Open).
+double _pinnedTruckFilterHeight(MarketplaceSearchFilters filters) {
+  var height = 56.0;
+  if (filters.truckBodyType.trim().toLowerCase() == 'open') {
+    height += 36.0;
+  }
+  return height;
+}
+
+class _FindLoadsFeedTabs extends StatelessWidget {
   final FindLoadsState state;
-  final VoidCallback onReset;
   final VoidCallback onSelectAll;
   final VoidCallback onSelectSuperLoads;
 
-  const _FindLoadsTabsHeader({
+  const _FindLoadsFeedTabs({
     required this.state,
-    required this.onReset,
     required this.onSelectAll,
     required this.onSelectSuperLoads,
   });
@@ -27,41 +34,62 @@ class _FindLoadsTabsHeader extends StatelessWidget {
           horizontal: AppSpacing.sm,
           vertical: AppSpacing.xs,
         ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 36,
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _LoadFeedTabButton(
-                      label: l10n.truckerFindLoadsAllLoadsTab,
-                      selected: state.selectedTab == FindLoadsTab.all,
-                      onTap: onSelectAll,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.xs),
-                  Expanded(
-                    child: _LoadFeedTabButton(
-                      label: l10n.truckerFindLoadsSuperLoadsTab,
-                      selected: state.selectedTab == FindLoadsTab.superLoads,
-                      onTap: onSelectSuperLoads,
-                    ),
-                  ),
-                ],
+        child: SizedBox(
+          height: 36,
+          child: Row(
+            children: [
+              Expanded(
+                child: _LoadFeedTabButton(
+                  label: l10n.truckerFindLoadsAllLoadsTab,
+                  selected: state.selectedTab == FindLoadsTab.all,
+                  onTap: onSelectAll,
+                ),
               ),
-            ),
-            if (state.filters.hasActiveFilters) ...[
-              const SizedBox(height: AppSpacing.xs),
-              _ActiveFilterSummary(
-                filters: state.filters,
-                resultCount: state.loads.length,
-                onReset: onReset,
+              const SizedBox(width: AppSpacing.xs),
+              Expanded(
+                child: _LoadFeedTabButton(
+                  label: l10n.truckerFindLoadsSuperLoadsTab,
+                  selected: state.selectedTab == FindLoadsTab.superLoads,
+                  onTap: onSelectSuperLoads,
+                ),
               ),
             ],
-          ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _PinnedTruckFilterBar extends StatelessWidget {
+  final MarketplaceSearchFilters filters;
+  final ValueChanged<String> onBodyTypeChanged;
+  final ValueChanged<int> onTyreToggled;
+
+  const _PinnedTruckFilterBar({
+    required this.filters,
+    required this.onBodyTypeChanged,
+    required this.onTyreToggled,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: AppColors.cardSurface,
+        borderRadius: BorderRadius.circular(AppRadius.card),
+        border: Border.all(color: AppColors.divider),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppSpacing.sm,
+          vertical: AppSpacing.xs,
+        ),
+        child: MarketplaceFilterBar(
+          selectedBodyType: filters.truckBodyType,
+          selectedTyres: filters.tyres,
+          onBodyTypeChanged: onBodyTypeChanged,
+          onTyreToggled: onTyreToggled,
         ),
       ),
     );
@@ -135,9 +163,12 @@ class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
       decoration: const BoxDecoration(
         gradient: AppColors.canvasWash,
       ),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: child,
+      child: SizedBox(
+        height: height,
+        child: Align(
+          alignment: Alignment.center,
+          child: child,
+        ),
       ),
     );
   }
@@ -145,60 +176,6 @@ class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   bool shouldRebuild(covariant _PinnedHeaderDelegate oldDelegate) {
     return height != oldDelegate.height || child != oldDelegate.child;
-  }
-}
-
-String _localizedBodyType(AppLocalizations l10n, String? bodyType) {
-  final normalized = (bodyType ?? '').trim().toLowerCase();
-  if (normalized.isEmpty) {
-    return l10n.truckerFindLoadsAnyBodyFallback;
-  }
-  return l10n.truckerFindLoadsBodyTypeValue(normalized);
-}
-
-class _ActiveFilterSummary extends StatelessWidget {
-  final MarketplaceSearchFilters filters;
-  final int resultCount;
-  final VoidCallback onReset;
-
-  const _ActiveFilterSummary({
-    required this.filters,
-    required this.resultCount,
-    required this.onReset,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context);
-    final pieces = <String>[
-      if (filters.originCity.trim().isNotEmpty) l10n.truckerFindLoadsSummaryFrom(filters.originCity),
-      if (filters.destinationCity.trim().isNotEmpty) l10n.truckerFindLoadsSummaryTo(filters.destinationCity),
-      if (filters.material.trim().isNotEmpty) filters.material,
-      if (filters.truckBodyType.trim().isNotEmpty) _localizedBodyType(l10n, filters.truckBodyType),
-      if (filters.tyres.isNotEmpty) l10n.truckerFindLoadsSummaryTyres(filters.tyres.join('/')),
-      if (filters.minPrice != null || filters.maxPrice != null)
-        l10n.truckerFindLoadsSummaryPriceRange(
-          filters.minPrice?.toStringAsFixed(0) ?? '0',
-          filters.maxPrice?.toStringAsFixed(0) ?? '∞',
-        ),
-      if (filters.superLoadsOnly) l10n.truckerFindLoadsSummarySuperLoads,
-    ];
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          pieces.isEmpty
-              ? l10n.truckerFindLoadsSummaryAllLoads(resultCount)
-              : l10n.truckerFindLoadsSummaryFiltered(pieces.join(' - '), resultCount),
-          style: Theme.of(context).textTheme.bodyMedium,
-        ),
-        if (filters.hasActiveFilters) ...[
-          const SizedBox(height: AppSpacing.sm),
-          TextActionButton(label: l10n.truckerFindLoadsResetFiltersAction, onPressed: onReset),
-        ],
-      ],
-    );
   }
 }
 
@@ -240,16 +217,12 @@ class _AdvancedFiltersSheet extends StatefulWidget {
 }
 
 class _AdvancedFiltersSheetState extends State<_AdvancedFiltersSheet> {
-  late String _bodyType;
-  late List<int> _tyres;
   late TextEditingController _minPriceController;
   late TextEditingController _maxPriceController;
 
   @override
   void initState() {
     super.initState();
-    _bodyType = widget.initialFilters.truckBodyType;
-    _tyres = List<int>.from(widget.initialFilters.tyres);
     _minPriceController = TextEditingController(text: widget.initialFilters.minPrice?.toStringAsFixed(0) ?? '');
     _maxPriceController = TextEditingController(text: widget.initialFilters.maxPrice?.toStringAsFixed(0) ?? '');
   }
@@ -263,46 +236,10 @@ class _AdvancedFiltersSheetState extends State<_AdvancedFiltersSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppDropdown<String>(
-          label: l10n.truckerFindLoadsTruckBodyTypeLabel,
-          value: _bodyType.isEmpty ? null : _bodyType,
-          items: [
-            DropdownMenuItem(value: 'Open', child: Text(l10n.truckerFindLoadsBodyTypeValue('open'))),
-            DropdownMenuItem(value: 'Trailer', child: Text(l10n.truckerFindLoadsBodyTypeValue('trailer'))),
-            DropdownMenuItem(value: 'Container', child: Text(l10n.truckerFindLoadsBodyTypeValue('container'))),
-            DropdownMenuItem(value: 'Tanker', child: Text(l10n.truckerFindLoadsBodyTypeValue('tanker'))),
-          ],
-          onChanged: (value) => setState(() => _bodyType = value ?? ''),
-        ),
-        const SizedBox(height: AppSpacing.md),
-        Text(l10n.truckerFindLoadsTyreRequirementTitle, style: Theme.of(context).textTheme.titleSmall),
-        const SizedBox(height: AppSpacing.sm),
-        Wrap(
-          spacing: AppSpacing.sm,
-          runSpacing: AppSpacing.sm,
-          children: [
-            for (final tyre in const [6, 10, 12, 14, 18])
-              FilterChip(
-                label: Text('$tyre'),
-                selected: _tyres.contains(tyre),
-                onSelected: (_) {
-                  setState(() {
-                    if (_tyres.contains(tyre)) {
-                      _tyres.remove(tyre);
-                    } else {
-                      _tyres.add(tyre);
-                      _tyres.sort();
-                    }
-                  });
-                },
-              ),
-          ],
-        ),
-        const SizedBox(height: AppSpacing.md),
         AppTextField(
           controller: _minPriceController,
           label: l10n.truckerFindLoadsMinPriceLabel,
@@ -320,8 +257,6 @@ class _AdvancedFiltersSheetState extends State<_AdvancedFiltersSheet> {
           onPressed: () {
             Navigator.of(context).pop(
               widget.initialFilters.copyWith(
-                truckBodyType: _bodyType,
-                tyres: _tyres,
                 minPrice: double.tryParse(_minPriceController.text.trim()),
                 maxPrice: double.tryParse(_maxPriceController.text.trim()),
               ),
@@ -334,8 +269,6 @@ class _AdvancedFiltersSheetState extends State<_AdvancedFiltersSheet> {
           onPressed: () {
             Navigator.of(context).pop(
               widget.initialFilters.copyWith(
-                truckBodyType: '',
-                tyres: const <int>[],
                 minPrice: null,
                 maxPrice: null,
               ),

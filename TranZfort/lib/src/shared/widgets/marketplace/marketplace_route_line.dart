@@ -110,7 +110,7 @@ class _LocationBlock extends StatelessWidget {
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 color: AppColors.inkTextPrimary,
                 fontWeight: FontWeight.w700,
-                fontSize: 17,
+                fontSize: 19,
               ),
         ),
         const SizedBox(height: 1),
@@ -121,7 +121,7 @@ class _LocationBlock extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
           style: AppTypography.bodySecondary.copyWith(
                 color: AppColors.inkTextSecondary,
-                fontSize: 12,
+                fontSize: 10,
               ),
         ),
       ],
