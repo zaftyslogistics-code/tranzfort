@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
@@ -62,6 +63,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
   bool _isRecordingVoice = false;
   int _recordingElapsedSeconds = 0;
   bool _showNewMessagePill = false;
+  bool _showScrollToBottomFab = false;
   final List<_PendingChatMessage> _pendingMessages = <_PendingChatMessage>[];
   Timer? _recordingTimer;
   Timer? _newMessagePillTimer;
@@ -90,6 +92,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
 
   void updateShowNewMessagePill(bool value) => _showNewMessagePill = value;
 
+  bool get showScrollToBottomFab => _showScrollToBottomFab;
+
+  void updateShowScrollToBottomFab(bool value) => _showScrollToBottomFab = value;
+
   Timer? get newMessagePillTimer => _newMessagePillTimer;
 
   void updateNewMessagePillTimer(Timer? value) => _newMessagePillTimer = value;
@@ -99,11 +105,34 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
     super.initState();
     _voiceMessageService = ref.read(voiceMessageServiceProvider);
     _messageController = TextEditingController();
-    _scrollController = ScrollController();
+    _scrollController = ScrollController()..addListener(_handleChatScroll);
+  }
+
+  void _handleChatScroll() {
+    if (!_scrollController.hasClients) {
+      return;
+    }
+    final distance = _scrollController.position.maxScrollExtent - _scrollController.position.pixels;
+    if (distance <= 160) {
+      if (_showNewMessagePill || _showScrollToBottomFab) {
+        setState(() {
+          _showNewMessagePill = false;
+          _showScrollToBottomFab = false;
+        });
+        _newMessagePillTimer?.cancel();
+      }
+      return;
+    }
+    if (!_showNewMessagePill && !_showScrollToBottomFab) {
+      setState(() {
+        _showScrollToBottomFab = true;
+      });
+    }
   }
 
   @override
   void dispose() {
+    _scrollController.removeListener(_handleChatScroll);
     _messageController.dispose();
     _scrollController.dispose();
     _recordingTimer?.cancel();
@@ -119,7 +148,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
       final nextId = next.lastSentMessageId;
       if (nextId != null && nextId != previousId) {
         _messageController.clear();
-        _scrollToBottom();
+        _scrollToBottom(force: true);
       }
       if (previous?.failure != next.failure && next.failure != null && mounted) {
         AppSnackbar.show(
@@ -147,7 +176,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
     final renderedMessages = _buildRenderedMessages(messagesState.messages);
     if (_lastRenderedMessageCount != renderedMessages.length) {
       _lastRenderedMessageCount = renderedMessages.length;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+      final fromSelf = renderedMessages.lastOrNull?.message.isFromCurrentUser ?? false;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom(force: fromSelf));
     }
     if (!_didMarkRead &&
         messagesState.hasResolvedInitialLoad &&
@@ -321,6 +351,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                               onLoadOlder: () async {
                                 await ref.read(conversationMessagesProvider(widget.conversationId).notifier).loadOlderMessages();
                               },
+                              onRetry: () async {
+                                await ref.read(conversationMessagesProvider(widget.conversationId).notifier).load();
+                              },
+                              onQuickReply: truckerChatBlocked
+                                  ? null
+                                  : (text) {
+                                      _messageController.text = text;
+                                      _messageController.selection = TextSelection.collapsed(offset: text.length);
+                                    },
+                              onLongPressText: truckerChatBlocked
+                                  ? null
+                                  : (text) => _showTextMessageActions(context, text),
                             ),
                           ),
                           if (truckerChatBlocked)
@@ -355,6 +397,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                       onVoiceAction: truckerChatBlocked || hasText || sendState.isSending
                           ? null
                           : () => _toggleVoiceRecording(context),
+                      onVoiceLongPressStart: truckerChatBlocked || hasText || sendState.isSending
+                          ? null
+                          : () => _startVoiceRecording(context),
+                      onVoiceLongPressEnd: truckerChatBlocked || sendState.isSending
+                          ? null
+                          : () => _stopAndSendVoiceRecording(context),
                     );
                   },
                 ),
@@ -379,13 +427,38 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                         borderRadius: BorderRadius.circular(AppRadius.chip),
                         boxShadow: AppShadows.elevation2,
                       ),
-                      child: Text(
-                        l10n.chatNewMessage,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: AppColors.textPrimary,
-                              fontWeight: FontWeight.w500,
-                            ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            l10n.chatNewMessage,
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  color: AppColors.textPrimary,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          const SizedBox(width: AppSpacing.xs),
+                          Icon(Icons.keyboard_arrow_down, size: 18, color: AppColors.primary),
+                        ],
                       ),
+                    ),
+                  ),
+                ),
+              ),
+            if (_showScrollToBottomFab && !_showNewMessagePill)
+              Positioned(
+                bottom: AppSpacing.xxxl + AppSpacing.lg,
+                right: AppSpacing.lg,
+                child: Material(
+                  color: AppColors.cardSurface,
+                  elevation: 2,
+                  shape: const CircleBorder(),
+                  child: InkWell(
+                    customBorder: const CircleBorder(),
+                    onTap: () => _scrollToBottom(force: true),
+                    child: Padding(
+                      padding: const EdgeInsets.all(AppSpacing.sm),
+                      child: Icon(Icons.keyboard_arrow_down, color: AppColors.primary),
                     ),
                   ),
                 ),

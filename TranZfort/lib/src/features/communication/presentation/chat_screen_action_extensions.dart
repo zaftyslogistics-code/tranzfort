@@ -28,7 +28,7 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
     state.setState(() {
       state.pendingMessages.add(pendingMessage);
     });
-    _scrollToBottom();
+    _scrollToBottom(force: true);
 
     final result = await ref.read(sendMessageProvider.notifier).sendTextMessage(
           conversationId: widget.conversationId,
@@ -64,7 +64,7 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         messageCount: messageCount,
       );
     }
-    _scrollToBottom();
+    _scrollToBottom(force: true);
   }
 
   Future<void> _toggleVoiceRecording(BuildContext context) async {
@@ -172,7 +172,37 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         messageCount: messageCount,
       );
     }
-    _scrollToBottom();
+    _scrollToBottom(force: true);
+  }
+
+  Future<void> _showTextMessageActions(BuildContext context, String text) async {
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.copy_outlined),
+                title: Text(l10n.chatCopyMessageAction),
+                onTap: () {
+                  Clipboard.setData(ClipboardData(text: text));
+                  Navigator.of(sheetContext).pop();
+                  AppSnackbar.show(
+                    context: context,
+                    message: l10n.chatMessageCopiedToast,
+                    variant: AppSnackbarVariant.success,
+                  );
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   List<_RenderedChatMessage> _buildRenderedMessages(List<ChatMessage> persistedMessages) {
@@ -224,8 +254,28 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
           showTimestamp: current.showTimestamp,
           showDateDivider: true,
           dateLabel: dateLabel,
+          isFirstInGroup: current.isFirstInGroup,
+          isLastInGroup: current.isLastInGroup,
         );
       }
+    }
+
+    for (var i = 0; i < rendered.length; i++) {
+      final current = rendered[i];
+      final prev = i > 0 ? rendered[i - 1] : null;
+      final next = i < rendered.length - 1 ? rendered[i + 1] : null;
+      final groupsWithPrev = prev != null && _canGroupChatMessages(prev.message, current.message);
+      final groupsWithNext = next != null && _canGroupChatMessages(current.message, next.message);
+
+      rendered[i] = _RenderedChatMessage(
+        message: current.message,
+        isSending: current.isSending,
+        showDateDivider: current.showDateDivider,
+        dateLabel: current.dateLabel,
+        isFirstInGroup: !groupsWithPrev,
+        isLastInGroup: !groupsWithNext,
+        showTimestamp: !groupsWithNext || current.isSending,
+      );
     }
 
     return rendered;
@@ -372,45 +422,44 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
 
   void _scrollToBottom({bool force = false}) {
     final state = this as _ChatScreenState;
-    if (!state.scrollController.hasClients) {
-      return;
+
+    void performScroll() {
+      if (!state.scrollController.hasClients) {
+        return;
+      }
+
+      final position = state.scrollController.position;
+      final maxScroll = position.maxScrollExtent;
+      final distance = maxScroll - position.pixels;
+      const threshold = 160.0;
+
+      if (!force && distance > threshold) {
+        setState(() {
+          state.updateShowNewMessagePill(true);
+          state.updateShowScrollToBottomFab(false);
+        });
+        state.newMessagePillTimer?.cancel();
+        return;
+      }
+
+      state.scrollController.animateTo(
+        maxScroll,
+        duration: const Duration(milliseconds: 220),
+        curve: Curves.easeOut,
+      );
+
+      if (state.showNewMessagePill || state.showScrollToBottomFab) {
+        setState(() {
+          state.updateShowNewMessagePill(false);
+          state.updateShowScrollToBottomFab(false);
+        });
+        state.newMessagePillTimer?.cancel();
+      }
     }
-    
-    final position = state.scrollController.position;
-    final maxScroll = position.maxScrollExtent;
-    final currentScroll = position.pixels;
-    final threshold = 100.0;
-    
-    // If scrolled up more than threshold and not forcing, show pill instead of scrolling
-    if (!force && (maxScroll - currentScroll) > threshold) {
-      setState(() {
-        state.updateShowNewMessagePill(true);
-      });
-      // Auto-dismiss after 3 seconds
-      state.newMessagePillTimer?.cancel();
-      state.updateNewMessagePillTimer(Timer(const Duration(seconds: 3), () {
-        if (mounted) {
-          setState(() {
-            state.updateShowNewMessagePill(false);
-          });
-        }
-      }));
-      return;
-    }
-    
-    // Scroll to bottom
-    state.scrollController.animateTo(
-      maxScroll,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeOut,
-    );
-    
-    // Hide pill if visible
-    if (state.showNewMessagePill) {
-      setState(() {
-        state.updateShowNewMessagePill(false);
-      });
-      state.newMessagePillTimer?.cancel();
-    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      performScroll();
+      WidgetsBinding.instance.addPostFrameCallback((_) => performScroll());
+    });
   }
 }

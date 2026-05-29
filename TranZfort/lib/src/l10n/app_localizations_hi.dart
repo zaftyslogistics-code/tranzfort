@@ -881,8 +881,32 @@ class AppLocalizationsHi extends AppLocalizations {
   String get chatNoMessagesTitle => 'अभी कोई संदेश नहीं है';
 
   @override
-  String get chatNoMessagesSubtitle =>
-      'यह बातचीत शुरू करने के लिए संदेश भेजें।';
+  String get chatNoMessagesSubtitle => 'इस लोड के बारे में संदेश से शुरू करें।';
+
+  @override
+  String get chatQuickReplyAvailable => 'क्या यह लोड अभी उपलब्ध है?';
+
+  @override
+  String get chatQuickReplyCallMe => 'कृपया मुझे कॉल करें';
+
+  @override
+  String get chatQuickReplyShareTruck =>
+      'मेरे ट्रक का विवरण साझा कर रहा/रही हूँ';
+
+  @override
+  String get chatLoadOlderMessages => 'पुराने संदेश लोड करें';
+
+  @override
+  String get chatScrollToLatest => 'नवीनतम संदेश';
+
+  @override
+  String get chatCopyMessageAction => 'संदेश कॉपी करें';
+
+  @override
+  String get chatMessageCopiedToast => 'संदेश कॉपी हो गया';
+
+  @override
+  String get chatMessagesRetryAction => 'फिर से कोशिश करें';
 
   @override
   String get commonSystemUpdateLabel => 'सिस्टम अपडेट';

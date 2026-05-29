@@ -1637,8 +1637,56 @@ abstract class AppLocalizations {
   /// No description provided for @chatNoMessagesSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Send a message to start this conversation.'**
+  /// **'Start with a message about this load.'**
   String get chatNoMessagesSubtitle;
+
+  /// No description provided for @chatQuickReplyAvailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Is this load still available?'**
+  String get chatQuickReplyAvailable;
+
+  /// No description provided for @chatQuickReplyCallMe.
+  ///
+  /// In en, this message translates to:
+  /// **'Please call me'**
+  String get chatQuickReplyCallMe;
+
+  /// No description provided for @chatQuickReplyShareTruck.
+  ///
+  /// In en, this message translates to:
+  /// **'Sharing my truck details'**
+  String get chatQuickReplyShareTruck;
+
+  /// No description provided for @chatLoadOlderMessages.
+  ///
+  /// In en, this message translates to:
+  /// **'Load older messages'**
+  String get chatLoadOlderMessages;
+
+  /// No description provided for @chatScrollToLatest.
+  ///
+  /// In en, this message translates to:
+  /// **'Latest messages'**
+  String get chatScrollToLatest;
+
+  /// No description provided for @chatCopyMessageAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy message'**
+  String get chatCopyMessageAction;
+
+  /// No description provided for @chatMessageCopiedToast.
+  ///
+  /// In en, this message translates to:
+  /// **'Message copied'**
+  String get chatMessageCopiedToast;
+
+  /// No description provided for @chatMessagesRetryAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get chatMessagesRetryAction;
 
   /// No description provided for @commonSystemUpdateLabel.
   ///

@@ -1,9 +1,9 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-29 (FP-2 complete; FP-4 deferred)  
-**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-4 deferred** (dashboard filters); release tail (QA, Play, l10n) pending  
-**Git branch:** `final-polish` (from latest `main`)  
+**Updated:** 2026-05-29 (FP-5 chat UX — paused; resume tomorrow)  
+**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat UX — device QA pending); **FP-4 deferred**; release tail pending  
+**Git branch:** `final-polish` — pushed to `origin`  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
 **Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
 
@@ -235,6 +235,30 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 
 - **FP-4** — dashboard `MarketplaceFilterBar` (post–final-polish merge)
 
+### FP-5 — Chat UX polish (**in progress**)
+
+Source: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvement (CI-1–CI-14).
+
+| # | Task | Status |
+|---|------|--------|
+| FP-5.1 / CI-1 | WhatsApp edge alignment (receiver left, sender right) | [x] |
+| FP-5.2 / CI-2 | Screen-based bubble max width (76%, 420px cap) | [x] |
+| FP-5.3 / CI-3 | Asymmetric bubble corners | [x] |
+| FP-5.4 / CI-4 | Consecutive message grouping + tighter spacing | [x] |
+| FP-5.5 / CI-5 | Reliable scroll-to-latest (double post-frame) | [x] |
+| FP-5.6 / CI-6 | List bottom anchor padding | [x] |
+| FP-5.7 / CI-7 | Persistent new-message pill + arrow | [x] |
+| FP-5.8 / CI-8 | Scroll-to-bottom FAB when reading history | [x] |
+| FP-5.9 / CI-9 | Long-press mic to record (tap fallback kept) | [x] |
+| FP-5.10 / CI-10 | Composer capsule + top shadow | [x] |
+| FP-5.11 / CI-11 | Long-press text → copy sheet | [x] |
+| FP-5.12 / CI-12 | Compact text bubble padding | [x] |
+| FP-5.13 / CI-13 | Load-older compact pill | [x] |
+| FP-5.14 / CI-14 | Empty state quick-reply chips + error retry | [x] |
+| FP-5.15 | Device QA + chat widget tests | [ ] |
+
+**Files:** `chat_screen.dart`, `chat_message_sections.dart`, `chat_screen_sections.dart`, `chat_screen_action_extensions.dart`, `app_en.arb`, `app_hi.arb`
+
 ### Not started (release tail)
 
 - Ship gate, full device QA matrix, Play upload
@@ -249,6 +273,7 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 | Marketplace load card | **FP-1** | Full-bleed card, price+facts row, TTS header | **Done** |
 | Find Loads filters | **FP-3** | Dark ink hero/tabs/pinned; Any + conditional tyres | **Done** |
 | Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **Done** |
+| Chat UX polish | **FP-5** | Centered lane, scroll, composer, grouping | **In progress** |
 | Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | **Deferred** |
 
 ---
@@ -540,6 +565,49 @@ Coordinates present?
 
 ---
 
+## FP-5 — Chat UX polish (CI-1–CI-14)
+
+Ref: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvement
+
+### Product direction
+
+- Center conversation like **WhatsApp**: other party **far left**, you **far right** (small edge inset only).
+- **Group** consecutive same-sender messages with tighter vertical spacing.
+- **Scroll-to-latest** must be reliable after send/receive; persistent new-message pill when reading history.
+- **Composer:** capsule input, long-press mic, circular send button.
+- **Empty / error:** quick-reply chips; retry on load failure.
+
+### Task breakdown
+
+| # | Task | Detail | Status |
+|---|------|--------|--------|
+| FP-5.1 | Edge-aligned bubbles | Receiver `Align.centerLeft`, sender `Align.centerRight`; 8px screen inset | [x] |
+| FP-5.2 | Screen-based bubble width | `min((screen - inset) * 0.76, 420)` | [x] |
+| FP-5.3 | Asymmetric bubble shape | 18px corners, 6px tail on sender side | [x] |
+| FP-5.4 | Message grouping | 4px within group, 10px between senders; timestamp on last | [x] |
+| FP-5.5 | Scroll-to-latest | Double post-frame scroll; force on own send | [x] |
+| FP-5.6 | Bottom list padding | Extra 16px below last bubble | [x] |
+| FP-5.7 | New-message pill | Persistent until tap/scroll near bottom; ↓ icon | [x] |
+| FP-5.8 | Scroll-down FAB | Shown when scrolled up without new messages | [x] |
+| FP-5.9 | Long-press voice | Hold mic → record, release → send; tap fallback | [x] |
+| FP-5.10 | Composer polish | Top shadow, rounded input capsule, disable while sending | [x] |
+| FP-5.11 | Long-press actions | Copy text via bottom sheet | [x] |
+| FP-5.12 | Text padding | 12×10 for text; full pad for cards/voice | [x] |
+| FP-5.13 | Load older pill | Compact centered chip instead of plain text button | [x] |
+| FP-5.14 | Empty + error UX | Quick-reply chips; retry on messages load failure | [x] |
+| FP-5.15 | Tests + device QA | Chat screen/widget tests; manual thread QA | [ ] |
+
+### Acceptance criteria
+
+- [x] Sender/receiver bubbles readable inside centered lane (not extreme edges).
+- [x] Own message scrolls into view immediately after send.
+- [x] Incoming messages auto-scroll only when user is near bottom.
+- [x] Persistent pill/FAB when reading older messages.
+- [x] Voice, map card, truck card, document, system types still render.
+- [ ] Device QA on supplier + trucker threads.
+
+---
+
 ## FP-4 — Trucker dashboard “Find loads” widget — **deferred**
 
 > **Decision (2026-05-29):** Ship `final-polish` without dashboard filter embed. Revisit on a follow-up branch after merge to `main`.
@@ -717,10 +785,11 @@ Dashboard                          Find Loads tab
 | 1 | **FP-1** Load card | **Done** |
 | 2 | **FP-3** Find Loads filters | **Done** |
 | 3 | **FP-2** Load detail | **Done** |
-| 4 | **G-2.6, B-6.8–10, C-6** | QA pass |
+| 4 | **FP-5** Chat UX polish | **In progress** |
+| 5 | **G-2.6, B-6.8–10, C-6** | QA pass |
 | — | **FP-4** Dashboard filters | **Deferred** (post-merge) |
-| 5 | **D-4, D-7–D-8** | l10n hygiene |
-| 6 | **A-5.6–7, F-4–5** | Play upload + docs commit |
+| 6 | **D-4, D-7–D-8** | l10n hygiene |
+| 7 | **A-5.6–7, F-4–5** | Play upload + docs commit |
 
 ---
 
@@ -777,6 +846,38 @@ Dashboard                          Find Loads tab
 | 2026-05-29 | FP-2: remove in-app map; dark ink route hero + body sections; earnings ₹100/L; drive days; TTS dedupe; supplier avatar merge |
 | 2026-05-29 | Find Loads dark ink pass: hero/tabs/pinned filter; Any chip; conditional tyres; dark dropdowns; gap to cards reduced |
 | 2026-05-29 | FP-2 complete: diesel ₹100/L floor + migration; device QA sign-off; FP-4 dashboard filters deferred |
+| 2026-05-29 | FP-5 chat UX polish: grouping, scroll/FAB/pill, composer, quick replies; WhatsApp edge alignment (receiver left / sender right) |
+| 2026-05-29 | **Session pause** — branch pushed; resume FP-5.15 device QA + release tail |
+
+---
+
+## Resume tomorrow (2026-05-30+)
+
+### Done this session
+
+- [x] FP-2 signed off (diesel ₹100/L, dark ink load detail)
+- [x] FP-5 CI-1–CI-14 implemented in code (chat lane → **WhatsApp edge align**, grouping, scroll, composer, empty/error UX)
+- [x] Branch committed + pushed to `origin/final-polish`
+
+### Pick up here
+
+| Priority | Task | Notes |
+|----------|------|--------|
+| 1 | **FP-5.15** device QA | Supplier + trucker chat: send/receive scroll, pill/FAB, long-press mic, map/voice cards, quick-reply chips |
+| 2 | Apply diesel migration | `20260529120100_update_diesel_prices_to_100.sql` on remote Supabase if not applied |
+| 3 | Release QA matrix | G-2.6, B-6.8–10, C-6 from carry-over section |
+| 4 | `build-apk.bat` → Play internal | A-5.6–7 after QA sign-off |
+| 5 | PR `final-polish` → `main` | After device QA green |
+
+### Deferred (post-merge)
+
+- **FP-4** — dashboard `MarketplaceFilterBar`
+- **P7.7** — full bot chat (`phase-07-communication-chat-bot.md`)
+
+### Known test gaps (non-blocking)
+
+- `chat_screen_test.dart` — Supabase init in harness
+- `trucker_find_loads_screen_test.dart` — 4 overflow/harness failures
 
 ---
 

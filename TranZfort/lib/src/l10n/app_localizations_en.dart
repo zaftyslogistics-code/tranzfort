@@ -879,8 +879,31 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chatNoMessagesTitle => 'No messages yet';
 
   @override
-  String get chatNoMessagesSubtitle =>
-      'Send a message to start this conversation.';
+  String get chatNoMessagesSubtitle => 'Start with a message about this load.';
+
+  @override
+  String get chatQuickReplyAvailable => 'Is this load still available?';
+
+  @override
+  String get chatQuickReplyCallMe => 'Please call me';
+
+  @override
+  String get chatQuickReplyShareTruck => 'Sharing my truck details';
+
+  @override
+  String get chatLoadOlderMessages => 'Load older messages';
+
+  @override
+  String get chatScrollToLatest => 'Latest messages';
+
+  @override
+  String get chatCopyMessageAction => 'Copy message';
+
+  @override
+  String get chatMessageCopiedToast => 'Message copied';
+
+  @override
+  String get chatMessagesRetryAction => 'Retry';
 
   @override
   String get commonSystemUpdateLabel => 'System update';

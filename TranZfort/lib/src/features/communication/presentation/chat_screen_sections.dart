@@ -184,6 +184,8 @@ class _ChatComposer extends StatefulWidget {
   final int recordingElapsedSeconds;
   final VoidCallback? onSend;
   final VoidCallback? onVoiceAction;
+  final VoidCallback? onVoiceLongPressStart;
+  final VoidCallback? onVoiceLongPressEnd;
 
   const _ChatComposer({
     required this.controller,
@@ -192,6 +194,8 @@ class _ChatComposer extends StatefulWidget {
     required this.recordingElapsedSeconds,
     required this.onSend,
     required this.onVoiceAction,
+    this.onVoiceLongPressStart,
+    this.onVoiceLongPressEnd,
   });
 
   @override
@@ -222,91 +226,115 @@ class _ChatComposerState extends State<_ChatComposer> {
       duration: const Duration(milliseconds: 180),
       curve: Curves.easeOut,
       padding: EdgeInsets.only(bottom: bottomInset),
-      child: Container(
+      child: DecoratedBox(
         decoration: BoxDecoration(
           color: AppColors.cardSurface,
-          borderRadius: BorderRadius.circular(AppRadius.input),
-          border: Border.all(color: AppColors.divider),
+          boxShadow: AppShadows.elevation1,
+          border: Border(top: BorderSide(color: AppColors.divider.withValues(alpha: 0.8))),
         ),
-        padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.md, AppSpacing.lg, AppSpacing.lg),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Expanded(
-              child: TextField(
-                controller: widget.controller,
-                decoration: InputDecoration(
-                  hintText: l10n.chatTypeMessageHint,
-                  hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.zero,
-                ),
-                maxLines: 4,
-              ),
-            ),
-            const SizedBox(width: AppSpacing.md),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 180),
-              transitionBuilder: (child, animation) {
-                return ScaleTransition(
-                  scale: animation,
-                  child: child,
-                );
-              },
-              child: !hasText
-                  ? SizedBox(
-                      width: 48,
-                      height: 48,
-                      child: IconButton(
-                        onPressed: widget.onVoiceAction,
-                        icon: Icon(widget.isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
-                        tooltip: widget.isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.sm, AppSpacing.md, AppSpacing.md),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Expanded(
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.surfaceTint,
+                    borderRadius: BorderRadius.circular(24),
+                    border: Border.all(color: AppColors.divider.withValues(alpha: 0.6)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                    child: TextField(
+                      controller: widget.controller,
+                      enabled: !widget.isSending,
+                      decoration: InputDecoration(
+                        hintText: l10n.chatTypeMessageHint,
+                        hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted),
+                        border: InputBorder.none,
+                        contentPadding: const EdgeInsets.symmetric(vertical: 10),
                       ),
-                    )
-                  : GestureDetector(
-                      onTapDown: (_) => _scaleDown(),
-                      onTapUp: (_) => _scaleUp(),
-                      onTapCancel: () => _scaleUp(),
-                      child: AnimatedScale(
-                        scale: _sendButtonScale,
-                        duration: const Duration(milliseconds: 100),
-                        child: Container(
-                          width: 48,
-                          height: 48,
-                          decoration: const BoxDecoration(
-                            gradient: AppColors.heroCta,
-                            shape: BoxShape.circle,
-                          ),
+                      maxLines: 4,
+                      minLines: 1,
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 180),
+                transitionBuilder: (child, animation) {
+                  return ScaleTransition(
+                    scale: animation,
+                    child: child,
+                  );
+                },
+                child: !hasText
+                    ? SizedBox(
+                        key: const ValueKey('mic'),
+                        width: 48,
+                        height: 48,
+                        child: GestureDetector(
+                          onLongPressStart: widget.onVoiceLongPressStart == null
+                              ? null
+                              : (_) => widget.onVoiceLongPressStart!(),
+                          onLongPressEnd: widget.onVoiceLongPressEnd == null
+                              ? null
+                              : (_) => widget.onVoiceLongPressEnd!(),
                           child: IconButton(
-                            onPressed: widget.isSending ? null : widget.onSend,
-                            icon: const Icon(Icons.send, color: AppColors.textOnPrimary),
-                            tooltip: l10n.chatSendAction,
+                            onPressed: widget.onVoiceAction,
+                            icon: Icon(widget.isRecordingVoice ? Icons.stop_circle_outlined : Icons.mic_none),
+                            tooltip: widget.isRecordingVoice ? l10n.chatStopRecordingTooltip : l10n.chatVoiceRecordingTooltip,
+                          ),
+                        ),
+                      )
+                    : GestureDetector(
+                        key: const ValueKey('send'),
+                        onTapDown: (_) => _scaleDown(),
+                        onTapUp: (_) => _scaleUp(),
+                        onTapCancel: () => _scaleUp(),
+                        child: AnimatedScale(
+                          scale: _sendButtonScale,
+                          duration: const Duration(milliseconds: 100),
+                          child: Container(
+                            width: 48,
+                            height: 48,
+                            decoration: const BoxDecoration(
+                              gradient: AppColors.heroCta,
+                              shape: BoxShape.circle,
+                            ),
+                            child: IconButton(
+                              onPressed: widget.isSending ? null : widget.onSend,
+                              icon: const Icon(Icons.send, color: AppColors.textOnPrimary),
+                              tooltip: l10n.chatSendAction,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-            ),
-            if (!hasText && widget.isRecordingVoice) ...[
-              const SizedBox(width: AppSpacing.sm),
-              Row(
-                children: [
-                  Container(
-                    width: 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: AppColors.error,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.xs),
-                  Text(
-                    _formatDuration(widget.recordingElapsedSeconds),
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.error),
-                  ),
-                ],
               ),
+              if (!hasText && widget.isRecordingVoice) ...[
+                const SizedBox(width: AppSpacing.sm),
+                Row(
+                  children: [
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: AppColors.error,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    const SizedBox(width: AppSpacing.xs),
+                    Text(
+                      _formatDuration(widget.recordingElapsedSeconds),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.error),
+                    ),
+                  ],
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
