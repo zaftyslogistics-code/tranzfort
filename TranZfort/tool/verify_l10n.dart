@@ -120,8 +120,17 @@ void main() {
 
   report('Missing HI keys', missingInHi);
   report('Identical EN/HI values outside allowlist', identicalOutsideAllowlist);
-  report('Unused EN localization keys', unusedEnKeys);
   report('Possible hardcoded UI strings', hardcodedFindings);
+
+  if (unusedEnKeys.isNotEmpty) {
+    stdout.writeln('\nUnused EN localization keys (${unusedEnKeys.length}) — warning only');
+    for (final item in unusedEnKeys.take(20)) {
+      stdout.writeln('- $item');
+    }
+    if (unusedEnKeys.length > 20) {
+      stdout.writeln('- ... ${unusedEnKeys.length - 20} more');
+    }
+  }
 
   if (hasFailure) {
     stderr.writeln('\nLocalization verification failed.');

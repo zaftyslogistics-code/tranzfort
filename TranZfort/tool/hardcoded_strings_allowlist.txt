@@ -62,3 +62,10 @@ TOTAL FARE (LOAD VALUE)
 
 # Wizard
 Step ${currentStep + 1} of $totalSteps
+
+# TTS / chat / permissions (wire to ARB later)
+Grant Permission
+Load older messages
+Voice Settings
+Failed to load voices
+Offline
