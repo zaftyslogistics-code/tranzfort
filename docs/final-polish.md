@@ -1,8 +1,8 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-30 (FP-0 / FP-1 / FP-3 signed off)  
-**Status:** **FP-0 + FP-1 + FP-3 complete** on `final-polish` (device QA passed); **FP-2 / FP-4** pending  
+**Updated:** 2026-05-29 (FP-2 dark detail + Find Loads ink UI)  
+**Status:** **FP-0 + FP-1 + FP-3 complete**; **FP-2 in progress** (map removed, dark ink sections, costing/TTS polish); **FP-4** pending  
 **Git branch:** `final-polish` (from latest `main`)  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
 **Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
@@ -185,24 +185,26 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 - Gradient background on footer actions (tried → **reverted** per product)
 - Weight/capacity chip on price row (material + body + **tyres** only)
 
-### FP-3 — Find Loads filters (**done**)
+### FP-3 — Find Loads filters (**done** + dark ink pass)
 
 | File | Change |
 |------|--------|
-| `presentation/widgets/marketplace_filter_bar.dart` | **New:** truck type + conditional tyre row; chip row vertically centered |
-| `trucker_find_loads_support.dart` | `_FindLoadsFeedTabs` (scroll); `_PinnedTruckFilterBar` (pinned); `_pinnedTruckFilterHeight` 56px (+36 Open) |
-| `trucker_find_loads_screen.dart` | Scrollable hero (origin/dest/material/sort) + tabs; **pinned truck filter only** |
-| `find_loads_provider.dart` | Clear tyres when body type ≠ Open |
-| `trucker_find_loads_screen_test.dart` | Scroll-collapse test; TTS localizations in test harness |
+| `presentation/widgets/marketplace_filter_bar.dart` | **Any** chip (default); body types; **tyres when a specific type selected** (hidden for Any); counts from `truckerFleetTyreOptions` (6–22) |
+| `trucker_find_loads_support.dart` | Dark ink tabs + pinned bar (full-bleed gradient border); `_pinnedTruckFilterHeight` 44px / 78px |
+| `trucker_find_loads_screen.dart` | Dark ink hero (`useInkGradient`); dark search fields + **sort dropdown**; minimal gap to load cards |
+| `find_loads_provider.dart` | Clear tyres when body type = Any (empty) |
+| `app_decorations.dart` | `inkHeroCard`, `inkFilterChip`, `inkAccentInset` helpers |
+| `form_inputs.dart` | `AppSearchField` / `AppDropdown` **`onDarkSurface`** |
+| `content_cards.dart` | `HeroActionCard.useInkGradient`; `DetailSectionCard.useInkGradient` |
 
 **Find Loads layout (at top — as built)**
 
 ```
 ┌─────────────────────────────────────────────┐
-│ Find Loads hero (origin/dest, material, sort)│  ← scrolls away
-│ [ All loads ] [ Super loads ]                │  ← scrolls away
+│ FIND LOADS hero (dark ink, origin/dest…)     │  ← scrolls away
+│ [ All loads ] [ Super loads ]  (dark tabs)   │  ← scrolls away
 ├─────────────────────────────────────────────┤
-│ PINNED: [Open][Container][Trailer][Tanker]…  │  ← truck + tyres only; vertically centered
+│ PINNED: [Any][Open][Container]…            │  ← full-bleed; tyres row if type ≠ Any
 ├─────────────────────────────────────────────┤
 │ LOAD CARD (edge-to-edge)                     │
 └─────────────────────────────────────────────┘
@@ -212,9 +214,23 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 
 **Still open (non-blocking):** FP-3.8 filter TTS copy, FP-3.9 a11y hints, remaining widget test overflow cases
 
+### FP-2 — Load detail (**in progress** — dark ink + maps)
+
+| File | Change |
+|------|--------|
+| `trucker_load_detail_primary_sections.dart` | Compact route hero v2 (ink gradient, fare panel, fact grid, arc, Google Maps CTA) |
+| `trucker_load_detail_shared.dart` | `_EarningsEstimateCard`; `_InkDetailFactChip` / `_InkDetailMetricTile`; dark status pills |
+| `trucker_load_detail_sections.dart` | Ink sections: truck requirements, supplier, trip-cost unavailable |
+| `load_detail_tts_builder.dart` | Hero TTS = overview + chat hint only (no duplicate truck block) |
+| `drive_time_estimate.dart` | Drive time in **days** @ 300 km/day |
+| `trip_costing_service` + `app_config.dart` | Default diesel **₹100/L**; fixed vs per-ton fare in estimate |
+| `google_maps_open_button.dart` | Teal inset maps button matching fare panel |
+| `profile_avatar_merge.dart` | Supplier avatar on detail + public profile |
+
+**Still open:** FP-2.4 spacing audit, FP-2.8–2.9 device QA / detail widget tests
+
 ### Not started
 
-- **FP-2** — load detail map removal + layout
 - **FP-4** — dashboard `MarketplaceFilterBar`
 - Ship gate, full device QA matrix, Play upload
 
@@ -226,9 +242,9 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 |------|-----|---------|--------|
 | Theme helpers | **FP-0** | `AppDecorations` + `BrandAccentChip` | **Done** |
 | Marketplace load card | **FP-1** | Full-bleed card, price+facts row, TTS header | **Done** |
-| Find Loads filters | **FP-3** | Scroll hero + tabs; pinned truck/tyre only | **Done** |
+| Find Loads filters | **FP-3** | Dark ink hero/tabs/pinned; Any + conditional tyres | **Done** |
 | Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | Not started |
-| Load detail | **FP-2** | Remove map; external maps only | Not started |
+| Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **In progress** |
 
 ---
 
@@ -320,21 +336,24 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 
 ## FP-2 — Trucker load detail page (layout + maps)
 
-### Current implementation
+### Current implementation (2026-05-29)
 
 | Piece | Location | Role today |
 |-------|----------|------------|
-| Screen | `trucker_load_detail_screen.dart` | `ShellScrollView` / sections |
-| Hero route + price | `trucker_load_detail_primary_sections.dart` → `_LoadRoutePriceSection` | Dark gradient, price 32px, badges, Open in Google Maps |
-| In-app map | `trucker_load_detail_sections.dart` → `_LoadRouteMapSection` | **`FlutterMap`** + OSM tiles, polyline, **220px** |
-| Maps launcher | `core/services/maps_launcher_service.dart` | `buildDirectionsUri` / `launchDirectionsUri` |
-| Chips | `_DetailFactChip` in sections | Material, body, tyres, weight — reuse |
-| Costing | Trip cost / profit in primary sections | **Keep** — right place for profit |
+| Screen | `trucker_load_detail_screen.dart` | Reduced top padding; hero TTS via `buildTruckerHeroSummary` |
+| Hero route + price | `_LoadRoutePriceSection` | Ink gradient v2; fare teal inset; distance + **drive days**; compact arc; Google Maps |
+| In-app map | — | **Removed** (`flutter_map` / `latlong2` dropped from pubspec) |
+| Maps launcher | `google_maps_open_button.dart` | Teal inset button; `MapsLauncherService` |
+| Truck requirements | `DetailSectionCard.useInkGradient` | Horizontal fact pills + 2-col metric tiles |
+| Costing | `_EarningsEstimateCard` | Ink gradient; ₹100/L default; fixed vs per-ton load value |
+| Supplier | Ink section + `profile_avatar_merge` | Verified pill; chat |
+| Next step | `_LoadNextStepSection` | Ink section; **dark truck dropdown** |
+| TTS | `load_detail_tts_builder.dart` | No duplicate truck-requirements read on hero |
 
 ### Product direction
 
-- **Remove** embedded `_LoadRouteMapSection` (grep other `FlutterMap` usages before dropping package).
-- **Keep** external navigation: Google Maps + system maps picker via `MapsLauncherService`.
+- **Remove** embedded `_LoadRouteMapSection` (`FlutterMap` removed from app — **`flutter_map` / `latlong2` dropped from `pubspec.yaml`**).
+- **Maps:** **Google Maps only** via `MapsLauncherService.buildDirectionsUri` + `commonOpenInGoogleMapsAction`. No “Open in Maps” system picker, no in-app tile map.
 - **Redesign** vertical hierarchy: route hero → fact chips → truck match / booking → costing → supplier.
 - Reuse existing chips, `DetailSectionCard`, `StatusChip` — **no new data fields**.
 - Consistent horizontal padding: `AppSpacing.lg`.
@@ -359,7 +378,7 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 │ │ ─────────────────────────────────────── │ │
 │ │ 📍 1,420 km  ·  ⏱ ~22 hr                │ │  ← distance / duration row
 │ │                                         │ │
-│ │ [🗺 Google Maps]  [🧭 Open in Maps]     │ │  ← icon button row (primary CTAs)
+│ │ [🗺 Open in Google Maps]                    │ │  ← single CTA when coords exist
 │ └─────────────────────────────────────────┘ │
 │                                             │
 │   (NO FlutterMap block — removed)           │
@@ -394,9 +413,9 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 ├─────────────────────────────────────────────┤
 │  📍 842 km          ⏱ ~14 hr               │
 ├─────────────────────────────────────────────┤
-│ ┌─────────────┐  ┌─────────────┐           │
-│ │ Google Maps │  │ Open Maps  │           │  ← equal-width outline buttons
-│ └─────────────┘  └─────────────┘           │
+│ ┌─────────────┐                              │
+│ │ Google Maps │                              │  ← single outline/full-width button
+│ └─────────────┘                              │
 └─────────────────────────────────────────────┘
 ```
 
@@ -404,23 +423,23 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 
 ```
 Coordinates present?
-  ├─ yes → show both CTAs; tap launches URI / system picker
-  └─ no  → hide map row; route text only
+  ├─ yes → show **Open in Google Maps** (external URI)
+  └─ no  → hide maps button; route text + distance only
 ```
 
 ### Task breakdown
 
 | # | Task | Detail | Status |
 |---|------|--------|--------|
-| FP-2.1 | Remove in-app map | Delete `_LoadRouteMapSection` usage + widget; remove 220px block | [ ] |
-| FP-2.2 | Enhance route hero | Add distance/duration row under price; tighten badge wrap | [ ] |
-| FP-2.3 | Maps CTA row | Two icon buttons: Google Maps + Open in Maps (existing launcher) | [ ] |
+| FP-2.1 | Remove in-app map | Delete `_LoadRouteMapSection`; remove `flutter_map` + `latlong2` from pubspec | [x] |
+| FP-2.2 | Enhance route hero | Ink gradient v2; distance/drive-days row; fare inset; compact arc | [x] |
+| FP-2.3 | Maps CTA | `GoogleMapsOpenButton` teal inset | [x] |
 | FP-2.4 | Section spacing audit | `AppSpacing.lg` horizontal; consistent `sectionGap` between cards | [ ] |
-| FP-2.5 | Keep costing block | Verify trip estimate + profit unchanged after map removal | [ ] |
-| FP-2.6 | Grep `FlutterMap` | Confirm no other trucker screens need package; document if kept | [ ] |
-| FP-2.7 | `route_preview_screen.dart` | Confirm out of scope unless linked from detail | [ ] |
-| FP-2.8 | Update tests | `trucker_load_detail_screen_test.dart` — no map finder | [ ] |
-| FP-2.9 | Device QA | External maps opens; booking + TTS regression | [ ] |
+| FP-2.5 | Keep costing block | ₹100/L diesel; fixed vs per-ton; drive days helper | [x] |
+| FP-2.6 | Dark ink body sections | Truck req, supplier, next step via `useInkGradient` | [x] |
+| FP-2.7 | TTS dedupe | Hero/speaker skips truck-requirements repeat | [x] |
+| FP-2.8 | Update tests | `drive_time_estimate_test`, `trip_costing_service_test` | [x] partial |
+| FP-2.9 | Device QA | External maps; booking + TTS regression | [ ] |
 
 ### Files to touch
 
@@ -432,33 +451,33 @@ Coordinates present?
 
 ### Acceptance criteria
 
-- [ ] No `FlutterMap` on trucker load detail.
-- [ ] Coordinates present → Google Maps / system maps launch.
-- [ ] All detail chips and booking flows work.
-- [ ] No new chips or API fields.
-- [ ] TTS “read all” + section speakers work.
+- [x] No `FlutterMap` on trucker load detail.
+- [x] Coordinates present → Google Maps launch via inset CTA.
+- [x] Dark ink sections for truck requirements, supplier, next step, earnings.
+- [ ] All detail chips and booking flows — device verify.
+- [x] TTS hero without duplicate truck-requirements block.
 
 ---
 
 ## FP-3 — Find Loads header filters (truck type + tyres) — **done**
 
-### Current implementation (as of 2026-05-30)
+### Current implementation (2026-05-29)
 
 | Piece | Location | Role |
 |-------|----------|------|
-| Screen | `trucker_find_loads_screen.dart` | Scrollable hero + tabs; **pinned truck filter only** |
-| Hero | `HeroActionCard` in screen | Origin/dest search, material, sort; price-only advanced sheet |
-| Filter bar | `marketplace_filter_bar.dart` | Truck type + conditional tyres; chips vertically centered |
-| Tabs | `_FindLoadsFeedTabs` | All loads / Super loads — **scroll away** |
-| Pinned | `_PinnedTruckFilterBar` | Truck + tyres only; `_pinnedTruckFilterHeight` 56px (+36 Open) |
-| Provider | `find_loads_provider.dart` | Clears tyres when body ≠ Open |
+| Screen | `trucker_find_loads_screen.dart` | Dark ink hero + tabs; pinned truck filter; tight gap to cards |
+| Hero | `HeroActionCard` (`useInkGradient`) | Origin/dest/material; dark **sort dropdown** |
+| Filter bar | `marketplace_filter_bar.dart` | **[Any]** (default) + body types; tyres when type ≠ Any |
+| Tabs | `_FindLoadsFeedTabs` | All / Super — dark ink, full-bleed, scroll away |
+| Pinned | `_PinnedTruckFilterBar` | Full-bleed ink; 44px (Any) / 78px (+ tyres) |
+| Provider | `find_loads_provider.dart` | Clears tyres when body type = Any |
 
 ### Product direction (shipped)
 
-1. **Truck-type filter** pinned while scrolling: Open · Container · Trailer · Tanker (+ tyres when Open).
-2. **Find Loads hero** (origin/dest/material/sort) scrolls away on feed scroll; returns at top.
-3. **All / Super** tabs scroll with hero (not pinned).
-4. **Advanced sheet:** min/max price only — body + tyres in pinned bar.
+1. **Truck-type filter** pinned: **Any** (default) · Open · Container · Trailer · Tanker.
+2. **Tyre row** visible only when a **specific** body type is selected (not Any); counts from fleet DB list (6, 10, 12, 14, 16, 18, 22).
+3. **Find Loads hero** (dark ink) scrolls away; **All / Super** tabs scroll with hero.
+4. **Advanced sheet:** min/max price only.
 
 ### Layout wire (at top)
 
@@ -467,7 +486,8 @@ Coordinates present?
 │ Find Loads hero (origin/dest, material)     │
 │ [ All loads ] [ Super loads ]               │
 ├─────────────────────────────────────────────┤
-│ PINNED: [Open][Container][Trailer][Tanker]… │
+│ PINNED: [Any][Open][Container][Trailer]…    │
+│         (tyres row if type ≠ Any)           │
 ├─────────────────────────────────────────────┤
 │ LOAD CARD                                    │
 └─────────────────────────────────────────────┘
@@ -477,7 +497,8 @@ Coordinates present?
 
 ```
 ┌─────────────────────────────────────────────┐
-│ PINNED: [Open][Container][Trailer][Tanker]… │
+│ PINNED: [Any][Open][Container][Trailer]…    │
+│         (tyres row if type ≠ Any)           │
 ├─────────────────────────────────────────────┤
 │ LOAD CARD                                    │
 └─────────────────────────────────────────────┘
@@ -489,8 +510,10 @@ Coordinates present?
 |---|------|--------|--------|
 | FP-3.1 | Extract `MarketplaceFilterBar` | Shared widget under `presentation/widgets/` | [x] |
 | FP-3.2 | Wire pinned truck filter | Provider callbacks; separate from tabs | [x] |
-| FP-3.3 | Clear tyres on body change | `find_loads_provider.updateFilters` when body ≠ Open | [x] |
-| FP-3.4 | Fix pinned header height | 56px (+36 Open tyres); vertically centered in slot | [x] |
+| FP-3.3 | Clear tyres on Any | `find_loads_provider` clears tyres when body type empty | [x] |
+| FP-3.4 | Fix pinned header height | 44px (Any) / 78px (+ tyres); top-aligned | [x] |
+| FP-3.12 | Dark ink UI | Hero, tabs, pinned bar match load-detail ink gradient | [x] |
+| FP-3.13 | Any chip + tyre rules | Any default; tyres for specific types only; fleet tyre list | [x] |
 | FP-3.5 | Scroll-hide behavior | Hero + tabs scroll; truck filter pinned | [x] |
 | FP-3.6 | Restore search hero | Scrollable origin/dest/material/sort; price-only advanced sheet | [x] |
 | FP-3.7 | Remove active filter summary | No extra row under tabs | [x] |
@@ -502,7 +525,9 @@ Coordinates present?
 ### Acceptance criteria
 
 - [x] Truck type visible without opening bottom sheet.
-- [x] Tyre filter visible only for **Open**.
+- [x] **Any** default; tyre filter visible for specific body types only.
+- [x] Tyre counts match `truckerFleetTyreOptions` (6–22).
+- [x] Dark ink hero, tabs, pinned filter; dark sort dropdown.
 - [x] Filters apply to feed via existing RPC params.
 - [x] Hero + tabs scroll away; truck filter stays pinned.
 - [x] Super loads tab works.
@@ -685,7 +710,7 @@ Dashboard                          Find Loads tab
 | 1 | **FP-1** Load card | **Done** |
 | 2 | **FP-3** Find Loads filters | **Done** |
 | 3 | **FP-4** Dashboard filters | Not started |
-| 4 | **FP-2** Load detail | Not started |
+| 4 | **FP-2** Load detail | **In progress** (dark ink, costing, TTS) |
 | 5 | **G-2.6, B-6.8–10, C-6** | QA pass |
 | 6 | **D-4, D-7–D-8** | l10n hygiene |
 | 7 | **A-5.6–7, F-4–5** | Play upload + docs commit |
@@ -742,6 +767,8 @@ Dashboard                          Find Loads tab
 | 2026-05-30 | FP-3 scroll header: hero + tabs scroll; truck filter pinned; chip vertical center |
 | 2026-05-30 | FP-1 polish: drop Active status chip; TTS top-right; avatar/name +20% |
 | 2026-05-30 | Device QA sign-off FP-0/FP-1/FP-3; doc marked complete |
+| 2026-05-29 | FP-2: remove in-app map; dark ink route hero + body sections; earnings ₹100/L; drive days; TTS dedupe; supplier avatar merge |
+| 2026-05-29 | Find Loads dark ink pass: hero/tabs/pinned filter; Any chip; conditional tyres; dark dropdowns; gap to cards reduced |
 
 ---
 

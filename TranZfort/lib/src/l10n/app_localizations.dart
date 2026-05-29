@@ -6665,6 +6665,24 @@ abstract class AppLocalizations {
   /// **'Open in Google Maps'**
   String get commonOpenInGoogleMapsAction;
 
+  /// No description provided for @commonCompactDistanceKm.
+  ///
+  /// In en, this message translates to:
+  /// **'{distance} km'**
+  String commonCompactDistanceKm(Object distance);
+
+  /// No description provided for @commonDurationMinutesShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min'**
+  String commonDurationMinutesShort(Object minutes);
+
+  /// No description provided for @commonDurationDaysShort.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} days'**
+  String commonDurationDaysShort(Object count);
+
   /// No description provided for @truckerTripDetailReportSourceLabel.
   ///
   /// In en, this message translates to:
@@ -8519,6 +8537,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Route and price summary'**
   String get truckerLoadDetailRoutePriceSummaryTitle;
+
+  /// No description provided for @truckerLoadDetailFactDistanceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'DISTANCE'**
+  String get truckerLoadDetailFactDistanceLabel;
+
+  /// No description provided for @truckerLoadDetailFactDriveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'DRIVE'**
+  String get truckerLoadDetailFactDriveLabel;
+
+  /// No description provided for @truckerLoadDetailFactRouteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'ROUTE'**
+  String get truckerLoadDetailFactRouteLabel;
+
+  /// No description provided for @truckerLoadDetailFactWeightLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'WEIGHT'**
+  String get truckerLoadDetailFactWeightLabel;
+
+  /// No description provided for @truckerLoadDetailFactTrucksLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'TRUCKS'**
+  String get truckerLoadDetailFactTrucksLabel;
+
+  /// No description provided for @truckerLoadDetailFactCapacityLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'CAPACITY'**
+  String get truckerLoadDetailFactCapacityLabel;
+
+  /// No description provided for @truckerLoadDetailFactSlotsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'OPEN SLOTS'**
+  String get truckerLoadDetailFactSlotsLabel;
 
   /// No description provided for @truckerLoadDetailRouteMapTitle.
   ///

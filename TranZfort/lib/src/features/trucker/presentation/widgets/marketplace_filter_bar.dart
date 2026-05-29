@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_decorations.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../providers/trucker_fleet_provider.dart';
 
 /// Truck-type-first filter bar for Find Loads (FP-3 / FP-4).
 ///
-/// Shows body-type segments and a conditional tyre row when Open is selected.
+/// Shows Any + body-type segments and tyre counts from fleet options.
 class MarketplaceFilterBar extends StatelessWidget {
   static const truckBodyTypes = <String>['Open', 'Container', 'Trailer', 'Tanker'];
-  static const tyreCounts = <int>[6, 10, 12, 14, 18];
 
   final String selectedBodyType;
   final List<int> selectedTyres;
   final ValueChanged<String> onBodyTypeChanged;
   final ValueChanged<int> onTyreToggled;
+  final bool onDarkSurface;
 
   const MarketplaceFilterBar({
     super.key,
@@ -22,9 +24,10 @@ class MarketplaceFilterBar extends StatelessWidget {
     required this.selectedTyres,
     required this.onBodyTypeChanged,
     required this.onTyreToggled,
+    this.onDarkSurface = false,
   });
 
-  bool get _showTyreRow => selectedBodyType.trim().toLowerCase() == 'open';
+  bool get _showTyreRow => selectedBodyType.trim().isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +41,20 @@ class MarketplaceFilterBar extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
+              _BodyTypeChip(
+                label: l10n.commonAnyLabel,
+                icon: Icons.apps_outlined,
+                selected: selectedBodyType.isEmpty,
+                onDarkSurface: onDarkSurface,
+                onTap: () => onBodyTypeChanged(''),
+              ),
+              const SizedBox(width: AppSpacing.xs),
               for (final bodyType in truckBodyTypes) ...[
                 _BodyTypeChip(
                   label: l10n.truckerFindLoadsBodyTypeValue(bodyType.toLowerCase()),
                   icon: _bodyTypeIcon(bodyType),
                   selected: selectedBodyType == bodyType,
+                  onDarkSurface: onDarkSurface,
                   onTap: () {
                     if (selectedBodyType == bodyType) {
                       onBodyTypeChanged('');
@@ -62,10 +74,11 @@ class MarketplaceFilterBar extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
-                for (final count in tyreCounts) ...[
+                for (final count in truckerFleetTyreOptions) ...[
                   _TyreChip(
                     count: count,
                     selected: selectedTyres.contains(count),
+                    onDarkSurface: onDarkSurface,
                     onTap: () => onTyreToggled(count),
                   ),
                   const SizedBox(width: AppSpacing.xs),
@@ -98,18 +111,57 @@ class _BodyTypeChip extends StatelessWidget {
   final String label;
   final IconData icon;
   final bool selected;
+  final bool onDarkSurface;
   final VoidCallback onTap;
 
   const _BodyTypeChip({
     required this.label,
     required this.icon,
     required this.selected,
+    required this.onDarkSurface,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    if (onDarkSurface) {
+      final accent = AppColors.primaryOnDark;
+      final iconColor = selected ? accent : AppColors.inkTextSecondary;
+      final textColor = selected ? accent : AppColors.inkTextPrimary;
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppRadius.chip),
+          child: Ink(
+            decoration: AppDecorations.inkFilterChip(selected: selected),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(icon, size: 16, color: iconColor),
+                  const SizedBox(width: 4),
+                  Text(
+                    label,
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      color: textColor,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Material(
       color: selected ? AppColors.primary : Colors.transparent,
       shape: RoundedRectangleBorder(
@@ -155,17 +207,60 @@ class _BodyTypeChip extends StatelessWidget {
 class _TyreChip extends StatelessWidget {
   final int count;
   final bool selected;
+  final bool onDarkSurface;
   final VoidCallback onTap;
 
   const _TyreChip({
     required this.count,
     required this.selected,
+    required this.onDarkSurface,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    if (onDarkSurface) {
+      final accent = AppColors.secondaryOnDark;
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppRadius.chip),
+          child: Ink(
+            decoration: AppDecorations.inkFilterChip(
+              selected: selected,
+              accent: accent,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.tire_repair_outlined,
+                    size: 14,
+                    color: selected ? accent : AppColors.inkTextSecondary,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '$count',
+                    style: theme.textTheme.labelMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: selected ? accent : AppColors.inkTextPrimary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return FilterChip(
       label: Text('$count'),
       selected: selected,

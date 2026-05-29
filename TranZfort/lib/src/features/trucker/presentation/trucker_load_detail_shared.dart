@@ -1,40 +1,106 @@
 part of 'trucker_load_detail_screen.dart';
 
-class _DetailFactChip extends StatelessWidget {
+class _InkDetailFactChip extends StatelessWidget {
   final IconData icon;
   final String text;
+  final Color accent;
 
-  const _DetailFactChip({
+  const _InkDetailFactChip({
     required this.icon,
     required this.text,
+    this.accent = AppColors.primaryOnDark,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minHeight: 28),
+      constraints: const BoxConstraints(minHeight: 32),
       padding: const EdgeInsets.symmetric(
         horizontal: AppSpacing.sm,
         vertical: AppSpacing.xs,
       ),
       decoration: BoxDecoration(
-        color: AppColors.subtleSurface,
+        color: accent.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(color: AppColors.divider),
+        border: Border.all(color: accent.withValues(alpha: 0.3)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 14, color: AppColors.textSecondary),
+          Icon(icon, size: 14, color: accent),
           const SizedBox(width: AppSpacing.xs),
           Flexible(
             child: Text(
               text,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                    color: AppColors.textSecondary,
+                    color: AppColors.inkTextPrimary,
                     fontWeight: FontWeight.w600,
                   ),
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _InkDetailMetricTile extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final String value;
+  final Color accent;
+
+  const _InkDetailMetricTile({
+    required this.icon,
+    required this.label,
+    required this.value,
+    required this.accent,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.sm,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.inkDeep,
+        borderRadius: BorderRadius.circular(AppRadius.iconChip),
+        border: Border.all(color: AppColors.inkBorder, width: 0.5),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 13, color: accent),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.inkTextMuted,
+                    fontSize: 9.5,
+                    letterSpacing: 1.0,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 4),
+          Text(
+            value,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: AppColors.inkTextPrimary,
+                  fontWeight: FontWeight.w700,
+                ),
           ),
         ],
       ),
@@ -519,9 +585,52 @@ class _CostBreakdownTile extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             value,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: AppColors.inkTextPrimary,
                   fontWeight: FontWeight.w700,
+                ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _RouteDarkStatusPill extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color accent;
+
+  const _RouteDarkStatusPill({
+    required this.icon,
+    required this.label,
+    required this.accent,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        color: accent.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(AppRadius.iconChip),
+        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: accent),
+          const SizedBox(width: AppSpacing.xs),
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                  color: accent,
+                  fontWeight: FontWeight.w600,
                 ),
           ),
         ],
@@ -562,43 +671,4 @@ void _startChat(BuildContext context, WidgetRef ref, String loadId, TruckerLoadD
       );
     },
   );
-}
-
-/// Calculate estimated drive time in minutes based on 300km per day.
-/// Formula: (distanceKm / 300) * 1440 (1440 = 24 hours × 60 minutes)
-int _calculateDriveTimeMinutes(double distanceKm) {
-  if (distanceKm <= 0) return 0;
-  final days = distanceKm / 300;
-  return (days * 1440).round();
-}
-
-/// Format drive time in a human-readable format (days and hours).
-/// Example: 2880 minutes -> "2 days", 2160 minutes -> "1 day 12 hours", 120 minutes -> "2 hours"
-String _formatDriveTime(int minutes) {
-  if (minutes <= 0) return '0 min';
-  if (minutes < 60) return '$minutes min';
-  
-  final hours = minutes / 60;
-  if (hours < 24) {
-    final h = hours.floor();
-    final m = (minutes % 60).floor();
-    if (m == 0) return '${h}h';
-    return '${h}h ${m}m';
-  }
-  
-  final days = hours / 24;
-  final d = days.floor();
-  final remainingHours = (hours % 24).floor();
-  final remainingMinutes = (minutes % 60).floor();
-  
-  if (remainingHours == 0 && remainingMinutes == 0) {
-    return '$d day${d == 1 ? '' : 's'}';
-  }
-  if (remainingHours > 0 && remainingMinutes == 0) {
-    return '${d}day${d == 1 ? '' : 's'} ${remainingHours}h';
-  }
-  if (remainingHours == 0 && remainingMinutes > 0) {
-    return '${d}day${d == 1 ? '' : 's'} ${remainingMinutes}m';
-  }
-  return '${d}day${d == 1 ? '' : 's'} ${remainingHours}h ${remainingMinutes}m';
 }

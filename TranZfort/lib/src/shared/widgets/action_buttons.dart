@@ -159,6 +159,7 @@ class TextActionButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double height;
+  final bool onDarkSurface;
 
   const TextActionButton({
     super.key,
@@ -166,15 +167,17 @@ class TextActionButton extends StatelessWidget {
     this.onPressed,
     this.isLoading = false,
     this.height = 44, // Phase 4: reduced from 48
+    this.onDarkSurface = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final color = onDarkSurface ? AppColors.primaryOnDark : AppColors.primary;
     return _ActionButtonFrame(
       height: height,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: AppColors.primary,
+      foregroundColor: color,
       decoration: BoxDecoration(
         color: Colors.transparent,
         borderRadius: BorderRadius.circular(AppRadius.button),
@@ -182,7 +185,7 @@ class TextActionButton extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-              color: AppColors.primary,
+              color: color,
               decoration: TextDecoration.none, // Phase 4: no default underline
             ),
       ),

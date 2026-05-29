@@ -4219,6 +4219,21 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonOpenInGoogleMapsAction => 'गूगल मैप्स में खोलें';
 
   @override
+  String commonCompactDistanceKm(Object distance) {
+    return '$distance किमी';
+  }
+
+  @override
+  String commonDurationMinutesShort(Object minutes) {
+    return '$minutes मिन';
+  }
+
+  @override
+  String commonDurationDaysShort(Object count) {
+    return '$count din';
+  }
+
+  @override
   String truckerTripDetailReportSourceLabel(
     Object destinationLabel,
     Object originLabel,
@@ -5416,6 +5431,27 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerLoadDetailRoutePriceSummaryTitle => 'मार्ग और कीमत सारांश';
+
+  @override
+  String get truckerLoadDetailFactDistanceLabel => 'दूरी';
+
+  @override
+  String get truckerLoadDetailFactDriveLabel => 'ड्राइव';
+
+  @override
+  String get truckerLoadDetailFactRouteLabel => 'मार्ग';
+
+  @override
+  String get truckerLoadDetailFactWeightLabel => 'वज़न';
+
+  @override
+  String get truckerLoadDetailFactTrucksLabel => 'ट्रक';
+
+  @override
+  String get truckerLoadDetailFactCapacityLabel => 'क्षमता';
+
+  @override
+  String get truckerLoadDetailFactSlotsLabel => 'खाली स्लॉट';
 
   @override
   String get truckerLoadDetailRouteMapTitle => 'रूट मैप';

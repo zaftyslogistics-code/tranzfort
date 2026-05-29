@@ -1900,6 +1900,24 @@
   "truckerTripDetailPodUploadedSuccess": "POD uploaded successfully. Supplier confirmation is now pending.",
   "truckerTripDetailCallSupplierAction": "Call Supplier",
   "commonOpenInGoogleMapsAction": "Open in Google Maps",
+  "commonCompactDistanceKm": "{distance} km",
+  "@commonCompactDistanceKm": {
+    "placeholders": {
+      "distance": {}
+    }
+  },
+  "commonDurationMinutesShort": "{minutes} min",
+  "@commonDurationMinutesShort": {
+    "placeholders": {
+      "minutes": {}
+    }
+  },
+  "commonDurationDaysShort": "{count} days",
+  "@commonDurationDaysShort": {
+    "placeholders": {
+      "count": {}
+    }
+  },
   "truckerTripDetailReportSourceLabel": "Trucker trip - {originLabel} to {destinationLabel}",
   "truckerTripDetailReviewCountdownTitle": "Delivery review countdown",
   "truckerTripDetailReviewCountdownMessage": "Supplier confirmation is pending. This trip auto-completes 48 hours after POD upload if no action is taken.",
@@ -2214,6 +2232,13 @@
   "truckerLoadDetailMaterialSummary": "{material} - {weightTonnes}T - Advance {advancePercentage}%",
   "truckerLoadDetailSuperLoadGuarantee": "Super Load - Payment Guarantee",
   "truckerLoadDetailRoutePriceSummaryTitle": "Route and price summary",
+  "truckerLoadDetailFactDistanceLabel": "DISTANCE",
+  "truckerLoadDetailFactDriveLabel": "DRIVE",
+  "truckerLoadDetailFactRouteLabel": "ROUTE",
+  "truckerLoadDetailFactWeightLabel": "WEIGHT",
+  "truckerLoadDetailFactTrucksLabel": "TRUCKS",
+  "truckerLoadDetailFactCapacityLabel": "CAPACITY",
+  "truckerLoadDetailFactSlotsLabel": "OPEN SLOTS",
   "truckerLoadDetailRouteMapTitle": "Route map",
   "truckerLoadDetailPickupLabel": "Pickup: {pickupDate}",
   "truckerLoadDetailPriceLabel": "Price: ₹{priceAmount} - {priceType}",

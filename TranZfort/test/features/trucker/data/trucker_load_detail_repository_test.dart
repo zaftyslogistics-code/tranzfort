@@ -137,6 +137,31 @@ void main() {
       expect(truckMatchesLoad(trucksResult.valueOrNull!.first, detailResult.valueOrNull!.summary), isTrue);
     });
 
+    test('prefers profile photo path when avatar_url is missing', () async {
+      final backend = _FakeTruckerLoadDetailBackend()
+        ..loadRow = {
+          ..._loadRow(),
+          'supplier_avatar_url': null,
+          'supplier_photo_path': 'profiles/supplier-1/photo.jpg',
+        }
+        ..supplierProfile = {
+          'id': 'supplier-1',
+          'full_name': 'Amit Supplier',
+          'verification_status': 'verified',
+          'profile_photo_document_path': 'profiles/supplier-1/photo.jpg',
+        }
+        ..supplierExtension = {
+          'id': 'supplier-1',
+          'company_name': 'Amit Logistics',
+        };
+      final repository = TruckerLoadDetailRepository(backend, () => 'trucker-1');
+
+      final result = await repository.fetchLoadDetail('load-1');
+
+      expect(result.isSuccess, isTrue);
+      expect(result.valueOrNull?.supplier.avatarUrl, 'profiles/supplier-1/photo.jpg');
+    });
+
     test('returns not found for non-visible status', () async {
       final backend = _FakeTruckerLoadDetailBackend()
         ..loadRow = _loadRow(status: 'draft')

@@ -230,8 +230,11 @@ class MarketplaceLoadItem {
     return maxs.isEmpty ? null : maxs.reduce((a, b) => a > b ? a : b);
   }
 
-  /// Per-truck weight this load expects.
-  double get perTruckWeightTonnes => weightTonnes / trucksNeeded;
+  /// Posted load weight in tonnes (per truck booking).
+  double get loadWeightTonnes => weightTonnes;
+
+  /// @deprecated Use [loadWeightTonnes]. Kept for legacy callers.
+  double get perTruckWeightTonnes => weightTonnes;
 
   // Private helpers removed - using shared map_readers.dart helpers where applicable
   // _readTyres remains as it's used internally

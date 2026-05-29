@@ -5,6 +5,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/profile_avatar_merge.dart';
 import 'public_profile_models.dart';
 
 // R-003: Error codes for localization (UI should map these to AppLocalizations)
@@ -49,12 +50,16 @@ class SupabasePublicProfileBackend implements PublicProfileBackend {
 
     final response = await _client.rpc('get_public_profile', params: params);
 
-    if (response is Map<String, dynamic>) {
-      return response;
+    if (response is! Map<String, dynamic>) {
+      throw FormatException(
+        'Unexpected RPC response type for get_public_profile: ${response.runtimeType}',
+      );
     }
 
-    throw FormatException(
-      'Unexpected RPC response type for get_public_profile: ${response.runtimeType}',
+    return mergeProfileAvatarFields(
+      client: _client,
+      userId: userId,
+      profile: Map<String, dynamic>.from(response),
     );
   }
 

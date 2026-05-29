@@ -91,6 +91,7 @@
   "@ttsLoadDetailMaterialWeight": { "placeholders": { "material": {}, "tonnes": {} } },
   "ttsLoadDetailTrucksBooked": "{booked} of {needed} trucks booked.",
   "@ttsLoadDetailTrucksBooked": { "placeholders": { "booked": {}, "needed": {} } },
+  "ttsLoadDetailChatOrBookHint": "Chat with the supplier or book this load.",
   "ttsTripDetailRouteStage": "Trip {route}. Stage {stage}.",
   "@ttsTripDetailRouteStage": { "placeholders": { "route": {}, "stage": {} } },
   "ttsTripDetailTruck": "Truck {truckNumber}.",

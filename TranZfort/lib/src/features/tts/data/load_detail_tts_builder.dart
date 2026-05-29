@@ -34,7 +34,10 @@ class LoadDetailTtsBuilder {
     return joinTtsClauses([
       tts.ttsLoadDetailTruckRequirementsTitle,
       tts.ttsLoadCardMaterial(load.material.trim()),
-      tts.ttsLoadDetailPerTruckWeight(_formatTonnes(load.perTruckWeightTonnes)),
+      tts.ttsLoadDetailMaterialWeight(
+        load.material.trim(),
+        _formatTonnes(load.weightTonnes),
+      ),
       if (minCap != null && maxCap != null)
         tts.ttsLoadCardTruckCapacityTonnes(_formatTonnes(minCap), _formatTonnes(maxCap)),
       tts.ttsLoadCardTruckTyres(minTyres, maxTyres),
@@ -45,15 +48,23 @@ class LoadDetailTtsBuilder {
     ]);
   }
 
-  String buildTruckerAll({
+  String buildTruckerHeroSummary({
     required TruckerLoadDetail detail,
     required TtsLocalizations tts,
     required AppLocalizations ui,
   }) {
     return joinTtsClauses([
       buildTruckerOverview(detail: detail, tts: tts, ui: ui),
-      buildTruckerTruckRequirements(detail: detail, tts: tts, ui: ui),
+      tts.ttsLoadDetailChatOrBookHint,
     ]);
+  }
+
+  String buildTruckerAll({
+    required TruckerLoadDetail detail,
+    required TtsLocalizations tts,
+    required AppLocalizations ui,
+  }) {
+    return buildTruckerHeroSummary(detail: detail, tts: tts, ui: ui);
   }
 
   String buildSupplierRouteAndPrice({

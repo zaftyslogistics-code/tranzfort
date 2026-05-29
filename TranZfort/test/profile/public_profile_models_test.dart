@@ -115,6 +115,23 @@ void main() {
       expect(profile.isNewTrucker, true);
       expect(profile.newUserBadge, 'New Trucker');
     });
+
+    test('fromMap uses profile photo path when avatar_url is missing', () {
+      final map = {
+        'id': 'user-789',
+        'full_name': 'Photo Supplier',
+        'role': 'supplier',
+        'verification_status': 'verified',
+        'profile_photo_document_path': 'profiles/user-789/photo.jpg',
+        'trust_scores': {'avg_rating': 0, 'review_count': 0},
+        'role_specific': {},
+        'is_self': false,
+      };
+
+      final profile = PublicProfile.fromMap(map);
+
+      expect(profile.avatarUrl, 'profiles/user-789/photo.jpg');
+    });
   });
 
   group('PublicTruckPreview', () {

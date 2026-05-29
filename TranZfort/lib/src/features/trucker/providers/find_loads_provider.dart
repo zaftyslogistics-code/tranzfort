@@ -143,7 +143,7 @@ class FindLoadsController extends StateNotifier<FindLoadsState> {
   }
 
   Future<void> updateFilters(MarketplaceSearchFilters filters) async {
-    final normalized = filters.truckBodyType.trim().toLowerCase() != 'open'
+    final normalized = filters.truckBodyType.trim().isEmpty
         ? filters.copyWith(tyres: const <int>[])
         : filters;
     state = state.copyWith(filters: normalized);

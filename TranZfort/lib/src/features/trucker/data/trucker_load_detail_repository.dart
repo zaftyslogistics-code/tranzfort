@@ -10,6 +10,7 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/profile_avatar_merge.dart';
 import '../../../core/utils/rpc_response_parser.dart';
 import '../../../core/utils/type_safety.dart';
 import 'trucker_marketplace_repository.dart';
@@ -174,8 +175,7 @@ bool truckMatchesLoad(TruckerApprovedTruck truck, MarketplaceLoadItem load) {
   final normalizedBodyType = truck.bodyType.trim().toLowerCase();
   final bodyMatches = requiredBodyType == null || requiredBodyType.isEmpty || normalizedBodyType == requiredBodyType;
   final tyreMatches = load.requiredTyres.isEmpty || load.requiredTyres.contains(truck.tyres);
-  final perTruckWeight = load.weightTonnes / load.trucksNeeded;
-  final capacityMatches = truck.capacityTonnes >= perTruckWeight;
+  final capacityMatches = truck.capacityTonnes >= load.weightTonnes;
   return bodyMatches && tyreMatches && capacityMatches;
 }
 
@@ -226,15 +226,25 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
       throw const AuthException('Session unavailable');
     }
 
+    final viewerId = _client.auth.currentUser?.id;
     final response = await _client.rpc(
       'get_public_profile',
-      params: <String, dynamic>{'p_user_id': supplierId},
+      params: <String, dynamic>{
+        'p_user_id': supplierId,
+        'p_viewer_id': viewerId,
+      },
     );
 
+    Map<String, dynamic>? profile;
     if (response is Map<String, dynamic> && response.isNotEmpty) {
-      return response;
+      profile = Map<String, dynamic>.from(response);
     }
-    return null;
+
+    return mergeProfileAvatarFields(
+      client: _client,
+      userId: supplierId,
+      profile: profile,
+    );
   }
 
   @override
@@ -364,7 +374,7 @@ class TruckerLoadDetailRepository {
             companyName: nullableString(supplierExtension?['company_name']) ??
                 nullableString(supplierProfile['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
-            avatarUrl: nullableString(supplierProfile['avatar_url']) ?? nullableString(supplierProfile['profile_photo_document_path']),
+            avatarUrl: SupplierInfo.fromMap(supplierProfile).avatarUrl,
           ),
           originCity: (loadRow['origin_city'] ?? '').toString(),
           originState: nullableString(loadRow['origin_state']),

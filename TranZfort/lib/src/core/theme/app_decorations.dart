@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
+import 'app_shadows.dart';
 import 'app_spacing.dart';
 
 /// Shared brand gradient decorations for cards and chips.
@@ -43,6 +44,55 @@ class AppDecorations {
     return BoxDecoration(
       color: backgroundColor,
       borderRadius: _insetRadius(borderRadius, width),
+    );
+  }
+
+  /// Load-detail / earnings card gradient (inkSurface → inkMid → inkDeep).
+  static const LinearGradient inkHeroGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      AppColors.inkSurface,
+      AppColors.inkMid,
+      AppColors.inkDeep,
+    ],
+  );
+
+  /// Dark hero card matching load detail route + earnings widgets.
+  static BoxDecoration inkHeroCard({
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(AppRadius.hero)),
+  }) {
+    return BoxDecoration(
+      gradient: inkHeroGradient,
+      borderRadius: borderRadius,
+      boxShadow: AppShadows.elevation3,
+    );
+  }
+
+  /// Teal-tinted inset panel on dark surfaces (fare / profit panels).
+  static BoxDecoration inkAccentInset({
+    Color accent = AppColors.primaryOnDark,
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(AppRadius.card)),
+  }) {
+    return BoxDecoration(
+      color: accent.withValues(alpha: 0.12),
+      borderRadius: borderRadius,
+      border: Border.all(color: accent.withValues(alpha: 0.3)),
+    );
+  }
+
+  /// Filter chip on dark ink surfaces.
+  static BoxDecoration inkFilterChip({
+    required bool selected,
+    Color accent = AppColors.primaryOnDark,
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(AppRadius.chip)),
+  }) {
+    return BoxDecoration(
+      color: selected ? accent.withValues(alpha: 0.15) : AppColors.inkDeep,
+      borderRadius: borderRadius,
+      border: Border.all(
+        color: selected ? accent.withValues(alpha: 0.45) : AppColors.inkBorder,
+      ),
     );
   }
 

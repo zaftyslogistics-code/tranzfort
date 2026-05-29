@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:latlong2/latlong.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
@@ -20,10 +18,10 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
-import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/avatar_widget.dart';
 import '../../../shared/widgets/curved_arc_route.dart';
 import '../data/diesel_price_repository.dart';
+import '../data/drive_time_estimate.dart';
 import '../data/trip_costing_service.dart';
 import '../data/trucker_load_detail_repository.dart';
 import '../data/trucker_load_share_service.dart';
@@ -32,8 +30,8 @@ import '../providers/trucker_load_detail_provider.dart';
 import '../providers/trucker_providers.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/load_detail_tts_builder.dart';
-import '../../../shared/widgets/tts_read_all_button.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
+import '../../../shared/widgets/google_maps_open_button.dart';
 
 part 'trucker_load_detail_sections.dart';
 part 'trucker_load_detail_shared.dart';
@@ -60,13 +58,14 @@ class TruckerLoadDetailScreen extends ConsumerWidget {
 
     final ttsL10n = detail != null ? TtsLocalizations.of(context) : null;
     final readAllMessage = detail != null && ttsL10n != null
-        ? const LoadDetailTtsBuilder().buildTruckerAll(detail: detail, tts: ttsL10n, ui: l10n)
+        ? const LoadDetailTtsBuilder().buildTruckerHeroSummary(detail: detail, tts: ttsL10n, ui: l10n)
         : null;
 
     return DetailPageScaffold(
       title: l10n.truckerLoadDetailTitle,
       ttsSummary: readAllMessage,
       ttsScreenKey: 'trucker-load-detail:$loadId',
+      scrollPaddingTop: AppSpacing.sm,
       bottomWidget: !state.isLoading && detail != null
           ? _StickyBookingBar(loadId: loadId)
           : null,

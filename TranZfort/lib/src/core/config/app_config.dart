@@ -17,7 +17,7 @@ class AppConfig {
 
   /// Default diesel price per litre in INR (₹)
   static double get defaultDieselPricePerLitre =>
-      double.tryParse(const String.fromEnvironment('DEFAULT_DIESEL_PRICE', defaultValue: '90')) ?? 90;
+      double.tryParse(const String.fromEnvironment('DEFAULT_DIESEL_PRICE', defaultValue: '100')) ?? 100;
 
   /// Default vehicle mileage in km per litre
   static double get defaultMileageKmpl =>

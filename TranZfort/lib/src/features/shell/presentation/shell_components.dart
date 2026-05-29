@@ -37,6 +37,7 @@ class DetailPageScaffold extends StatelessWidget {
   final String? ttsScreenKey;
   final bool? showBackArrow;
   final Widget? bottomWidget;
+  final double? scrollPaddingTop;
 
   const DetailPageScaffold({
     super.key,
@@ -46,6 +47,7 @@ class DetailPageScaffold extends StatelessWidget {
     this.ttsScreenKey,
     this.showBackArrow,
     this.bottomWidget,
+    this.scrollPaddingTop,
   });
 
   @override
@@ -75,6 +77,7 @@ class DetailPageScaffold extends StatelessWidget {
         children: [
           ShellScrollView(
             bottomWidgetHeight: bottomWidget != null ? AppSpacing.bottomNavSafe + 80 : null,
+            paddingTop: scrollPaddingTop,
             children: children,
           ),
           TtsScreenSummaryEffect(
@@ -99,8 +102,14 @@ class DetailPageScaffold extends StatelessWidget {
 class ShellScrollView extends StatelessWidget {
   final List<Widget> children;
   final double? bottomWidgetHeight;
+  final double? paddingTop;
 
-  const ShellScrollView({super.key, required this.children, this.bottomWidgetHeight});
+  const ShellScrollView({
+    super.key,
+    required this.children,
+    this.bottomWidgetHeight,
+    this.paddingTop,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +117,7 @@ class ShellScrollView extends StatelessWidget {
     return SingleChildScrollView(
       padding: EdgeInsets.fromLTRB(
         AppSpacing.lg,
-        AppSpacing.xl,
+        paddingTop ?? AppSpacing.xl,
         AppSpacing.lg,
         bottomPadding + AppSpacing.xl,
       ),

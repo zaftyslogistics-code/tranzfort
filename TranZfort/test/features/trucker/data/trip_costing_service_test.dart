@@ -23,10 +23,35 @@ void main() {
       );
 
       expect(estimate, isNotNull);
-      expect(estimate?.dieselPricePerLitre, 90);
+      expect(estimate?.dieselPricePerLitre, 100);
       expect(estimate?.mileageUsed, 2.5);
       expect(estimate?.tollPlazas, 10);
       expect(estimate?.totalCost, greaterThan(0));
+    });
+
+    test('uses fixed price directly for fixed-price loads', () {
+      final estimate = service.estimate(
+        distanceKm: 600,
+        loadWeightTonnes: 20,
+        dieselPricePerLitre: 100,
+        fixedPriceAmount: 50000,
+      );
+
+      expect(estimate, isNotNull);
+      expect(estimate!.totalLoadValue, 50000);
+      expect(estimate.netProfit, closeTo(50000 - estimate.totalExpense, 0.001));
+    });
+
+    test('multiplies per-ton rate by load weight', () {
+      final estimate = service.estimate(
+        distanceKm: 600,
+        loadWeightTonnes: 20,
+        dieselPricePerLitre: 100,
+        priceAmountPerTonne: 2500,
+      );
+
+      expect(estimate, isNotNull);
+      expect(estimate!.totalLoadValue, 50000);
     });
 
     test('interpolates mileage when truck model data is available', () {
@@ -42,7 +67,7 @@ void main() {
 
       expect(estimate, isNotNull);
       expect(estimate!.mileageUsed, closeTo(4.5, 0.001));
-      expect(estimate.tollCost, 1400);
+      expect(estimate.tollCost, 3300);
       expect(estimate.compactLabel, startsWith('⛽ Est. Cost: ₹'));
     });
   });

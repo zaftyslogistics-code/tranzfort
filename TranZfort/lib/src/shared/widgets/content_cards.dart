@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
@@ -14,6 +15,8 @@ class HeroActionCard extends StatelessWidget {
   final Widget? primaryAction;
   final bool compact;
   final bool useDarkTheme; // Phase 4: use dark radial mesh
+  final bool useInkGradient; // Load-detail style ink gradient (earnings card)
+  final IconData? titleIcon;
 
   const HeroActionCard({
     super.key,
@@ -24,6 +27,8 @@ class HeroActionCard extends StatelessWidget {
     this.primaryAction,
     this.compact = false,
     this.useDarkTheme = false,
+    this.useInkGradient = false,
+    this.titleIcon,
   });
 
   @override
@@ -31,7 +36,70 @@ class HeroActionCard extends StatelessWidget {
     final hasSubtitle = subtitle.trim().isNotEmpty;
 
     if (useDarkTheme) {
-      // Phase 4 Dark Hero
+      if (useInkGradient) {
+        return Container(
+          padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
+          decoration: AppDecorations.inkHeroCard(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryOnDark.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(AppRadius.iconChip),
+                    ),
+                    child: Icon(
+                      titleIcon ?? Icons.search_outlined,
+                      color: AppColors.primaryOnDark,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title.toUpperCase(),
+                          style: AppTypography.labelMicro.copyWith(
+                            color: AppColors.primaryOnDark,
+                            letterSpacing: 1.3,
+                          ),
+                        ),
+                        if (hasSubtitle) ...[
+                          const SizedBox(height: 2),
+                          Text(
+                            subtitle,
+                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                  color: AppColors.inkTextSecondary,
+                                ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              if (leading != null) ...[
+                const SizedBox(height: AppSpacing.md),
+                leading!,
+              ],
+              SizedBox(height: compact ? AppSpacing.md : AppSpacing.lg),
+              child,
+              if (primaryAction != null) ...[
+                SizedBox(height: compact ? AppSpacing.md : AppSpacing.xl),
+                primaryAction!,
+              ],
+            ],
+          ),
+        );
+      }
+
+      // Phase 4 Dark Hero (radial mesh)
       return Container(
         padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
         decoration: BoxDecoration(
@@ -41,7 +109,6 @@ class HeroActionCard extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            // Gradient overlays
             Positioned.fill(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppRadius.hero),
@@ -62,7 +129,6 @@ class HeroActionCard extends StatelessWidget {
                 ),
               ),
             ),
-            // Content
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -542,17 +608,70 @@ class DetailSectionCard extends StatelessWidget {
   final String title;
   final List<Widget> children;
   final String? ttsMessage;
+  final bool useInkGradient;
+  final IconData? sectionIcon;
 
   const DetailSectionCard({
     super.key,
     required this.title,
     required this.children,
     this.ttsMessage,
+    this.useInkGradient = false,
+    this.sectionIcon,
   });
 
   @override
   Widget build(BuildContext context) {
     final spokenMessage = ttsMessage?.trim();
+
+    if (useInkGradient) {
+      return Container(
+        width: double.infinity,
+        decoration: AppDecorations.inkHeroCard(
+          borderRadius: BorderRadius.circular(AppRadius.hero),
+        ),
+        padding: const EdgeInsets.all(AppSpacing.lg),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (sectionIcon != null) ...[
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.primaryOnDark.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(AppRadius.iconChip),
+                    ),
+                    child: Icon(
+                      sectionIcon,
+                      color: AppColors.primaryOnDark,
+                      size: 18,
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                ],
+                Expanded(
+                  child: Text(
+                    title.toUpperCase(),
+                    style: AppTypography.labelMicro.copyWith(
+                      color: AppColors.primaryOnDark,
+                      letterSpacing: 1.3,
+                    ),
+                  ),
+                ),
+                if (spokenMessage != null && spokenMessage.isNotEmpty)
+                  TtsCardSpeakerButton(message: spokenMessage),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.md),
+            ...children,
+          ],
+        ),
+      );
+    }
+
     return Container(
       decoration: BoxDecoration(
         color: AppColors.cardSurface,

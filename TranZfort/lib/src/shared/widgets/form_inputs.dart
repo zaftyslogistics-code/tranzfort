@@ -64,6 +64,7 @@ class AppDropdown<T> extends StatelessWidget {
   final List<DropdownMenuItem<T>> items;
   final ValueChanged<T?>? onChanged;
   final String? helperText;
+  final bool onDarkSurface;
 
   const AppDropdown({
     super.key,
@@ -72,21 +73,60 @@ class AppDropdown<T> extends StatelessWidget {
     required this.items,
     this.onChanged,
     this.helperText,
+    this.onDarkSurface = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(AppRadius.input);
+    final borderSide = onDarkSurface
+        ? BorderSide(color: AppColors.inkBorder)
+        : const BorderSide(color: AppColors.divider);
+    final focusedBorderSide = onDarkSurface
+        ? BorderSide(color: AppColors.primaryOnDark, width: 1.5)
+        : const BorderSide(color: AppColors.primary, width: 1.5);
+
     return InputDecorator(
       decoration: InputDecoration(
         labelText: label,
         helperText: helperText,
+        labelStyle: onDarkSurface
+            ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.inkTextSecondary)
+            : null,
+        helperStyle: onDarkSurface
+            ? Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextMuted)
+            : null,
+        filled: onDarkSurface,
+        fillColor: onDarkSurface ? AppColors.inkDeep : null,
+        enabledBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: borderSide),
+        focusedBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: focusedBorderSide),
+        border: OutlineInputBorder(borderRadius: borderRadius, borderSide: borderSide),
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<T>(
           value: value,
           isExpanded: true,
           borderRadius: BorderRadius.circular(AppRadius.input),
-          items: items,
+          dropdownColor: onDarkSurface ? AppColors.inkMid : null,
+          iconEnabledColor: onDarkSurface ? AppColors.primaryOnDark : null,
+          style: onDarkSurface
+              ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.inkTextPrimary)
+              : null,
+          items: onDarkSurface
+              ? items
+                  .map(
+                    (item) => DropdownMenuItem<T>(
+                      value: item.value,
+                      child: DefaultTextStyle(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              color: AppColors.inkTextPrimary,
+                            ),
+                        child: item.child,
+                      ),
+                    ),
+                  )
+                  .toList()
+              : items,
           onChanged: onChanged,
         ),
       ),
@@ -157,6 +197,7 @@ class AppSearchField extends StatelessWidget {
   final String hintText;
   final ValueChanged<String>? onChanged;
   final VoidCallback? onClear;
+  final bool onDarkSurface;
 
   const AppSearchField({
     super.key,
@@ -164,22 +205,49 @@ class AppSearchField extends StatelessWidget {
     this.hintText = 'Search',
     this.onChanged,
     this.onClear,
+    this.onDarkSurface = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final borderRadius = BorderRadius.circular(AppRadius.input);
+    final borderSide = onDarkSurface
+        ? BorderSide(color: AppColors.inkBorder)
+        : const BorderSide(color: AppColors.divider);
+    final focusedBorderSide = onDarkSurface
+        ? BorderSide(color: AppColors.primaryOnDark, width: 1.5)
+        : const BorderSide(color: AppColors.primary, width: 1.5);
+
     return TextField(
       controller: controller,
       onChanged: onChanged,
+      style: onDarkSurface
+          ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.inkTextPrimary)
+          : null,
+      cursorColor: onDarkSurface ? AppColors.primaryOnDark : null,
       decoration: InputDecoration(
         hintText: hintText,
-        prefixIcon: const Icon(Icons.search),
+        hintStyle: onDarkSurface
+            ? Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.inkTextSecondary)
+            : null,
+        filled: onDarkSurface,
+        fillColor: onDarkSurface ? AppColors.inkDeep : null,
+        prefixIcon: Icon(
+          Icons.search,
+          color: onDarkSurface ? AppColors.primaryOnDark : null,
+        ),
         suffixIcon: onClear == null
             ? null
             : IconButton(
                 onPressed: onClear,
-                icon: const Icon(Icons.close),
+                icon: Icon(
+                  Icons.close,
+                  color: onDarkSurface ? AppColors.inkTextSecondary : null,
+                ),
               ),
+        enabledBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: borderSide),
+        focusedBorder: OutlineInputBorder(borderRadius: borderRadius, borderSide: focusedBorderSide),
+        border: OutlineInputBorder(borderRadius: borderRadius, borderSide: borderSide),
       ),
     );
   }

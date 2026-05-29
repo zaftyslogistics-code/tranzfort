@@ -40,7 +40,7 @@ class _LocationMessageContent extends StatelessWidget {
       icon: Icons.location_on_outlined,
       title: label,
       subtitle: uri == null ? l10n.chatMapPreviewUnavailable : uri.toString(),
-      actionLabel: uri == null ? null : l10n.chatOpenInMapsAction,
+      actionLabel: uri == null ? null : l10n.commonOpenInGoogleMapsAction,
       onAction: uri == null
           ? null
           : () async {

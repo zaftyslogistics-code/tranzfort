@@ -4,7 +4,6 @@ class _LoadRoutePriceSection extends StatelessWidget {
   final AppLocalizations l10n;
   final TruckerLoadDetail detail;
   final dynamic routeSnapshot;
-  final bool hasRoutePreview;
   final Uri? mapsUri;
   final String routeLabel;
   final MapsLauncherService mapsLauncher;
@@ -17,7 +16,6 @@ class _LoadRoutePriceSection extends StatelessWidget {
     required this.l10n,
     required this.detail,
     required this.routeSnapshot,
-    required this.hasRoutePreview,
     required this.mapsUri,
     required this.routeLabel,
     required this.mapsLauncher,
@@ -30,8 +28,12 @@ class _LoadRoutePriceSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final distanceKm = routeSnapshot?.distanceKm;
-    final calculatedDurationMin = distanceKm != null ? _calculateDriveTimeMinutes(distanceKm) : null;
-    final durationLabel = calculatedDurationMin != null ? _formatDriveTime(calculatedDurationMin) : null;
+    final driveDaysLabel = distanceKm != null
+        ? l10n.commonDurationDaysShort(DriveTimeEstimate.formatDayCount(DriveTimeEstimate.estimateDays(distanceKm)))
+        : null;
+    final pickupDateLabel = formatDate(context, detail.summary.pickupDate);
+    final priceTypeLabel = _localizedLoadPriceType(l10n, detail.summary.priceType);
+    final routeStatesLabel = _compactRouteStatesLabel(detail);
 
     return Container(
       width: double.infinity,
@@ -39,168 +41,212 @@ class _LoadRoutePriceSection extends StatelessWidget {
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF0A2220), Color(0xFF0A1614)],
+          colors: [AppColors.inkSurface, AppColors.inkMid, AppColors.inkDeep],
         ),
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: AppShadows.hero,
+        borderRadius: BorderRadius.circular(AppRadius.hero),
+        boxShadow: AppShadows.elevation3,
       ),
+      padding: const EdgeInsets.all(AppSpacing.lg),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Route label + badges header
-          Padding(
-            padding: const EdgeInsets.fromLTRB(AppSpacing.lg, AppSpacing.lg, AppSpacing.lg, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: AppColors.primaryOnDark.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(AppRadius.iconChip),
+                ),
+                child: const Icon(
+                  Icons.alt_route_outlined,
+                  color: AppColors.primaryOnDark,
+                  size: 18,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Text(
-                        routeLabel,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.white,
-                          letterSpacing: -0.3,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                    Text(
+                      l10n.truckerLoadDetailRoutePriceSummaryTitle,
+                      style: AppTypography.labelMicro.copyWith(
+                        color: AppColors.primaryOnDark,
+                        letterSpacing: 1.3,
                       ),
                     ),
-                    if ((ttsMessage ?? '').trim().isNotEmpty)
-                      TtsCardSpeakerButton(message: ttsMessage!.trim()),
+                    const SizedBox(height: 2),
+                    Text(
+                      routeLabel,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            color: AppColors.inkTextPrimary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ],
                 ),
-                const SizedBox(height: AppSpacing.sm),
-                Wrap(
-                  spacing: AppSpacing.sm,
-                  runSpacing: AppSpacing.sm,
-                  children: [
-                    if (anyMatch)
-                      StatusBadge(
-                        label: l10n.truckerLoadDetailTruckMatchAvailable,
-                        icon: Icons.verified_outlined,
-                        palette: const StatusPalette(
-                          foreground: AppColors.success,
-                          background: AppColors.successBg,
-                        ),
-                      ),
-                    if (isSuperLoad)
-                      StatusBadge(
-                        label: l10n.truckerLoadDetailSuperLoadGuarantee,
-                        icon: Icons.workspace_premium_outlined,
-                        palette: const StatusPalette(
-                          foreground: AppColors.superLoadText,
-                          background: AppColors.superLoadBg,
-                        ),
-                      ),
-                  ],
-                ),
+              ),
+              if ((ttsMessage ?? '').trim().isNotEmpty)
+                TtsCardSpeakerButton(message: ttsMessage!.trim()),
+            ],
+          ),
+          if (anyMatch || isSuperLoad) ...[
+            const SizedBox(height: AppSpacing.sm),
+            Wrap(
+              spacing: AppSpacing.sm,
+              runSpacing: AppSpacing.sm,
+              children: [
+                if (isSuperLoad)
+                  _RouteDarkStatusPill(
+                    icon: Icons.workspace_premium_outlined,
+                    label: l10n.truckerLoadDetailSuperLoadGuarantee,
+                    accent: AppColors.secondaryOnDark,
+                  ),
+                if (anyMatch)
+                  _RouteDarkStatusPill(
+                    icon: Icons.verified_outlined,
+                    label: l10n.truckerLoadDetailTruckMatchAvailable,
+                    accent: AppColors.primaryOnDark,
+                  ),
               ],
             ),
-          ),
-          // Price + pickup header
-          Padding(
-            padding: const EdgeInsets.all(AppSpacing.lg),
+          ],
+          const SizedBox(height: AppSpacing.md),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              color: AppColors.primaryOnDark.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(AppRadius.card),
+              border: Border.all(
+                color: AppColors.primaryOnDark.withValues(alpha: 0.3),
+                width: 1,
+              ),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  l10n.truckerLoadDetailPriceLabel(
-                    detail.summary.priceAmount.toStringAsFixed(0),
-                    _localizedLoadPriceType(l10n, detail.summary.priceType),
-                  ),
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.white,
-                    letterSpacing: -0.5,
+                  l10n.truckerLoadDetailTotalFareLabel,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: AppColors.primaryOnDark,
+                    letterSpacing: 1.1,
                   ),
                 ),
-                const SizedBox(height: AppSpacing.sm),
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppSpacing.sm,
-                    vertical: AppSpacing.xs,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF1C2A27),
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: const Color(0xFF2A3B37), width: 1),
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      const Icon(Icons.event, size: 14, color: Color(0xFF2DD4BF)),
-                      const SizedBox(width: AppSpacing.xs),
-                      Text(
-                        formatDate(context, detail.summary.pickupDate),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Color(0xFFA8BAB6),
-                        ),
+                const SizedBox(height: 4),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '₹${detail.summary.priceAmount.toStringAsFixed(0)}',
+                      style: AppTypography.displayHero.copyWith(
+                        color: AppColors.primaryOnDark,
+                        fontSize: 28,
                       ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(width: AppSpacing.sm),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 4),
+                      child: Text(
+                        priceTypeLabel,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                              color: AppColors.inkTextSecondary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                Row(
+                  children: [
+                    Icon(Icons.event_outlined, size: 14, color: AppColors.inkTextSecondary),
+                    const SizedBox(width: AppSpacing.xs),
+                    Text(
+                      l10n.truckerLoadDetailPickupLabel(pickupDateLabel),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: AppColors.inkTextSecondary,
+                          ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          // Curved arc route visualization
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: CurvedArcRoute.hero(
-              origin: detail.originCity,
-              destination: detail.destinationCity,
-              originSubtitle: detail.originState,
-              destinationSubtitle: detail.destinationState,
-              distanceLabel: distanceKm != null ? '${distanceKm.toStringAsFixed(0)} km' : null,
-              durationLabel: durationLabel,
-            ),
-          ),
           const SizedBox(height: AppSpacing.md),
-          // Distance and duration chips
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-            child: Wrap(
-              spacing: AppSpacing.sm,
-              runSpacing: AppSpacing.sm,
+          if (distanceKm != null || driveDaysLabel != null)
+            Row(
               children: [
                 if (distanceKm != null)
-                  _DarkChip(
-                    icon: Icons.straighten,
-                    text: l10n.truckerLoadDetailDistanceLabel(distanceKm.toStringAsFixed(1)),
+                  Expanded(
+                    child: _CostBreakdownTile(
+                      icon: Icons.straighten_outlined,
+                      label: l10n.truckerLoadDetailFactDistanceLabel,
+                      value: l10n.commonCompactDistanceKm(distanceKm.toStringAsFixed(0)),
+                      accent: AppColors.primaryOnDark,
+                    ),
                   ),
-                if (durationLabel != null)
-                  _DarkChip(
-                    icon: Icons.schedule,
-                    text: 'Est. drive time: $durationLabel',
+                if (distanceKm != null && driveDaysLabel != null) const SizedBox(width: AppSpacing.sm),
+                if (driveDaysLabel != null)
+                  Expanded(
+                    child: _CostBreakdownTile(
+                      icon: Icons.schedule_outlined,
+                      label: l10n.truckerLoadDetailFactDriveLabel,
+                      value: driveDaysLabel,
+                      accent: AppColors.secondaryOnDark,
+                    ),
                   ),
               ],
             ),
-          ),
-          const SizedBox(height: AppSpacing.lg),
-          // Open in Maps button
-          if (mapsUri != null)
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-              child: SizedBox(
-                width: double.infinity,
-                child: OutlineButton(
-                  label: l10n.commonOpenInGoogleMapsAction,
-                  onPressed: () async {
-                    await mapsLauncher.launchDirectionsUri(mapsUri!);
-                  },
-                ),
-              ),
+          if (routeStatesLabel.isNotEmpty) ...[
+            const SizedBox(height: AppSpacing.sm),
+            _CostBreakdownTile(
+              icon: Icons.map_outlined,
+              label: l10n.truckerLoadDetailFactRouteLabel,
+              value: routeStatesLabel,
+              accent: AppColors.info,
             ),
+          ],
           const SizedBox(height: AppSpacing.md),
+          CurvedArcRoute(
+            origin: detail.originCity,
+            destination: detail.destinationCity,
+            originSubtitle: detail.originState,
+            destinationSubtitle: detail.destinationState,
+            onDarkSurface: true,
+            height: 80,
+          ),
+          if (mapsUri != null) ...[
+            const SizedBox(height: AppSpacing.md),
+            GoogleMapsOpenButton(
+              label: l10n.commonOpenInGoogleMapsAction,
+              onPressed: () async {
+                await mapsLauncher.launchDirectionsUri(mapsUri!);
+              },
+            ),
+          ],
         ],
       ),
     );
+  }
+
+  static String _compactRouteStatesLabel(TruckerLoadDetail detail) {
+    final from = (detail.originState ?? detail.originCity).trim();
+    final to = (detail.destinationState ?? detail.destinationCity).trim();
+    if (from.isEmpty && to.isEmpty) {
+      return '';
+    }
+    if (from.isEmpty) {
+      return to;
+    }
+    if (to.isEmpty) {
+      return from;
+    }
+    return '$from → $to';
   }
 }
 
@@ -245,15 +291,26 @@ class _LoadNextStepSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final inkLabel = Theme.of(context).textTheme.titleSmall?.copyWith(
+          color: AppColors.inkTextPrimary,
+          fontWeight: FontWeight.w700,
+        );
+    final inkBody = Theme.of(context).textTheme.bodyMedium?.copyWith(
+          color: AppColors.inkTextSecondary,
+        );
+
     return DetailSectionCard(
+      useInkGradient: true,
+      sectionIcon: Icons.play_circle_outline,
       title: l10n.commonNextStepTitle,
       children: [
         if (detail.latestBookingRequest != null)
-          StatusBadge(
+          _RouteDarkStatusPill(
+            icon: Icons.assignment_turned_in_outlined,
             label: l10n.truckerLoadDetailBookingStatusLabel(
               _localizedBookingRequestStatus(l10n, detail.latestBookingRequest!.status),
             ),
-            icon: Icons.assignment_turned_in_outlined,
+            accent: AppColors.secondaryOnDark,
           ),
         if (detail.latestBookingRequest?.decisionReason != null) ...[
           const SizedBox(height: AppSpacing.sm),
@@ -277,75 +334,80 @@ class _LoadNextStepSection extends ConsumerWidget {
           ),
         ],
         const SizedBox(height: AppSpacing.md),
-        Text(
-          l10n.truckerLoadDetailApprovedTruckLabel,
-          style: Theme.of(context).textTheme.titleSmall,
-        ),
+        Text(l10n.truckerLoadDetailApprovedTruckLabel, style: inkLabel),
         const SizedBox(height: AppSpacing.sm),
-        if (hasSingleApprovedTruck && selectedTruck != null) ...[
-          StatusBadge(
-            label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck!.truckNumber),
-            icon: Icons.local_shipping_outlined,
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppSpacing.md),
+          decoration: BoxDecoration(
+            color: AppColors.inkDeep,
+            borderRadius: BorderRadius.circular(AppRadius.card),
+            border: Border.all(color: AppColors.inkBorder),
           ),
-          const SizedBox(height: AppSpacing.sm),
-          Text(
-            l10n.truckerLoadDetailSelectedTruckSummary(
-              selectedTruck!.bodyType,
-              selectedTruck!.truckNumber,
-              selectedTruck!.tyres,
-            ),
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ] else if (state.approvedTrucks.isNotEmpty)
-          AppDropdown<String>(
-            label: l10n.truckerLoadDetailApprovedTruckLabel,
-            value: state.selectedTruckId,
-            items: [
-              for (final truck in state.approvedTrucks)
-                DropdownMenuItem(
-                  value: truck.id,
-                  child: Text(
-                    l10n.truckerLoadDetailTruckOptionLabel(
-                      truck.truckNumber,
-                      truck.bodyType,
-                      truck.tyres,
-                    ),
-                  ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (hasSingleApprovedTruck && selectedTruck != null) ...[
+                _RouteDarkStatusPill(
+                  icon: Icons.local_shipping_outlined,
+                  label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck!.truckNumber),
+                  accent: AppColors.primaryOnDark,
                 ),
-            ],
-            onChanged: (value) => ref.read(truckerLoadDetailProvider(loadId).notifier).selectTruck(value),
-          ),
-        if (hasNoApprovedTrucks) ...[
-          Text(l10n.truckerLoadDetailNoApprovedTrucksAvailable),
-          const SizedBox(height: AppSpacing.md),
-          OutlineButton(
-            label: l10n.truckerLoadDetailAddTruckFirstAction,
-            onPressed: () async {
-              final goToFleet = await confirmGoToFleet(context, l10n);
-              if (goToFleet == true && context.mounted) {
-                context.go(AppRoutes.fleetPath);
-              }
-            },
-          ),
-        ],
-        if (selectedTruck != null) ...[
-          const SizedBox(height: AppSpacing.md),
-          StatusBadge(
-            label: selectedTruckMatches
-                ? l10n.truckerLoadDetailSelectedTruckMatches
-                : l10n.truckerLoadDetailSelectedTruckMayNotMatch,
-            icon: selectedTruckMatches ? Icons.check_circle_outline : Icons.info_outline,
-            palette: selectedTruckMatches
-                ? const StatusPalette(
-                    foreground: AppColors.success,
-                    background: AppColors.successBg,
-                  )
-                : const StatusPalette(
-                    foreground: AppColors.warning,
-                    background: AppColors.warningBg,
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  l10n.truckerLoadDetailSelectedTruckSummary(
+                    selectedTruck!.bodyType,
+                    selectedTruck!.truckNumber,
+                    selectedTruck!.tyres,
                   ),
+                  style: inkBody,
+                ),
+              ] else if (state.approvedTrucks.isNotEmpty)
+                AppDropdown<String>(
+                  label: l10n.truckerLoadDetailApprovedTruckLabel,
+                  value: state.selectedTruckId,
+                  onDarkSurface: true,
+                  items: [
+                    for (final truck in state.approvedTrucks)
+                      DropdownMenuItem(
+                        value: truck.id,
+                        child: Text(
+                          l10n.truckerLoadDetailTruckOptionLabel(
+                            truck.truckNumber,
+                            truck.bodyType,
+                            truck.tyres,
+                          ),
+                        ),
+                      ),
+                  ],
+                  onChanged: (value) => ref.read(truckerLoadDetailProvider(loadId).notifier).selectTruck(value),
+                ),
+              if (hasNoApprovedTrucks) ...[
+                Text(l10n.truckerLoadDetailNoApprovedTrucksAvailable, style: inkBody),
+                const SizedBox(height: AppSpacing.md),
+                OutlineButton(
+                  label: l10n.truckerLoadDetailAddTruckFirstAction,
+                  onPressed: () async {
+                    final goToFleet = await confirmGoToFleet(context, l10n);
+                    if (goToFleet == true && context.mounted) {
+                      context.go(AppRoutes.fleetPath);
+                    }
+                  },
+                ),
+              ],
+              if (selectedTruck != null) ...[
+                const SizedBox(height: AppSpacing.md),
+                _RouteDarkStatusPill(
+                  icon: selectedTruckMatches ? Icons.check_circle_outline : Icons.info_outline,
+                  label: selectedTruckMatches
+                      ? l10n.truckerLoadDetailSelectedTruckMatches
+                      : l10n.truckerLoadDetailSelectedTruckMayNotMatch,
+                  accent: selectedTruckMatches ? AppColors.primaryOnDark : AppColors.secondaryOnDark,
+                ),
+              ],
+            ],
           ),
-        ],
+        ),
         const SizedBox(height: AppSpacing.md),
         _StartConversationButton(
           supplierId: detail.supplierId,
@@ -358,8 +420,11 @@ class _LoadNextStepSection extends ConsumerWidget {
           children: [
             Expanded(
               child: TextButton.icon(
-                icon: const Icon(Icons.share_outlined, size: 18),
-                label: Text(l10n.truckerLoadDetailShareLoadAction),
+                icon: const Icon(Icons.share_outlined, size: 18, color: AppColors.primaryOnDark),
+                label: Text(
+                  l10n.truckerLoadDetailShareLoadAction,
+                  style: const TextStyle(color: AppColors.primaryOnDark),
+                ),
                 onPressed: () async {
                   final action = await showAppBottomSheet<String>(
                     context: context,
@@ -407,8 +472,11 @@ class _LoadNextStepSection extends ConsumerWidget {
             ),
             Expanded(
               child: TextButton.icon(
-                icon: const Icon(Icons.flag_outlined, size: 18),
-                label: Text(l10n.commonReportSpamOrAbuseAction),
+                icon: const Icon(Icons.flag_outlined, size: 18, color: AppColors.primaryOnDark),
+                label: Text(
+                  l10n.commonReportSpamOrAbuseAction,
+                  style: const TextStyle(color: AppColors.primaryOnDark),
+                ),
                 onPressed: () => context.push(
                   AppRoutes.reportIssuePath,
                   extra: ReportIssueContext(
@@ -532,45 +600,5 @@ class _StickyBookingBar extends ConsumerWidget {
           'Add and approve at least one truck before booking this load.';
     }
     return null;
-  }
-}
-
-class _DarkChip extends StatelessWidget {
-  final IconData icon;
-  final String text;
-
-  const _DarkChip({
-    required this.icon,
-    required this.text,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xFF1C2A27),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFF2A3B37), width: 1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: const Color(0xFF2DD4BF)),
-          const SizedBox(width: AppSpacing.xs),
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-              color: Color(0xFFA8BAB6),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 }

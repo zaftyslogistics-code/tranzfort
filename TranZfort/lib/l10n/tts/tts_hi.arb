@@ -21,6 +21,7 @@
   "ttsLoadDetailStatus": "Status {status}.",
   "ttsLoadDetailMaterialWeight": "Maal {material}, kul {tonnes} ton.",
   "ttsLoadDetailTrucksBooked": "{booked} mein se {needed} truck book.",
+  "ttsLoadDetailChatOrBookHint": "Supplier se chat karein ya load book karein.",
   "ttsTripDetailRouteStage": "Trip {route}. Stage {stage}.",
   "ttsTripDetailTruck": "Truck {truckNumber}.",
   "ttsTripDetailProofStatus": "Proof status {status}.",

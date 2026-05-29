@@ -115,6 +115,10 @@ class TtsLocalizationsEn extends TtsLocalizations {
   }
 
   @override
+  String get ttsLoadDetailChatOrBookHint =>
+      'Chat with the supplier or book this load.';
+
+  @override
   String ttsTripDetailRouteStage(Object route, Object stage) {
     return 'Trip $route. Stage $stage.';
   }

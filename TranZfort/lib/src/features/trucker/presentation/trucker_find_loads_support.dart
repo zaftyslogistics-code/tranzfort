@@ -1,12 +1,21 @@
 part of 'trucker_find_loads_screen.dart';
 
-/// Pinned header height: truck-type row (+ tyre row when Open).
+/// Pinned header height: body-type row (+ tyre row when a specific type is selected).
 double _pinnedTruckFilterHeight(MarketplaceSearchFilters filters) {
-  var height = 56.0;
-  if (filters.truckBodyType.trim().toLowerCase() == 'open') {
-    height += 36.0;
+  if (filters.truckBodyType.trim().isEmpty) {
+    return 44.0;
   }
-  return height;
+  return 78.0;
+}
+
+Widget _marketplaceBleedFrame({required Widget child}) {
+  return DecoratedBox(
+    decoration: AppDecorations.brandGradientBorderOuter(),
+    child: Padding(
+      padding: const EdgeInsets.all(AppDecorations.brandGradientBorderWidth),
+      child: child,
+    ),
+  );
 }
 
 class _FindLoadsFeedTabs extends StatelessWidget {
@@ -23,15 +32,13 @@ class _FindLoadsFeedTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.divider),
-      ),
-      child: Padding(
+    return _marketplaceBleedFrame(
+      child: Container(
+        decoration: AppDecorations.inkHeroCard(
+          borderRadius: BorderRadius.zero,
+        ),
         padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.sm,
+          horizontal: AppSpacing.lg,
           vertical: AppSpacing.xs,
         ),
         child: SizedBox(
@@ -42,6 +49,7 @@ class _FindLoadsFeedTabs extends StatelessWidget {
                 child: _LoadFeedTabButton(
                   label: l10n.truckerFindLoadsAllLoadsTab,
                   selected: state.selectedTab == FindLoadsTab.all,
+                  onDarkSurface: true,
                   onTap: onSelectAll,
                 ),
               ),
@@ -50,6 +58,7 @@ class _FindLoadsFeedTabs extends StatelessWidget {
                 child: _LoadFeedTabButton(
                   label: l10n.truckerFindLoadsSuperLoadsTab,
                   selected: state.selectedTab == FindLoadsTab.superLoads,
+                  onDarkSurface: true,
                   onTap: onSelectSuperLoads,
                 ),
               ),
@@ -74,20 +83,21 @@ class _PinnedTruckFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.divider),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.sm,
-          vertical: AppSpacing.xs,
+    return _marketplaceBleedFrame(
+      child: Container(
+        decoration: AppDecorations.inkHeroCard(
+          borderRadius: BorderRadius.zero,
+        ),
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          2,
+          AppSpacing.lg,
+          2,
         ),
         child: MarketplaceFilterBar(
           selectedBodyType: filters.truckBodyType,
           selectedTyres: filters.tyres,
+          onDarkSurface: true,
           onBodyTypeChanged: onBodyTypeChanged,
           onTyreToggled: onTyreToggled,
         ),
@@ -99,17 +109,48 @@ class _PinnedTruckFilterBar extends StatelessWidget {
 class _LoadFeedTabButton extends StatelessWidget {
   final String label;
   final bool selected;
+  final bool onDarkSurface;
   final VoidCallback onTap;
 
   const _LoadFeedTabButton({
     required this.label,
     required this.selected,
+    this.onDarkSurface = false,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    if (onDarkSurface) {
+      final accent = selected ? AppColors.primaryOnDark : AppColors.inkTextSecondary;
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(AppRadius.chip),
+          child: Ink(
+            decoration: AppDecorations.inkFilterChip(selected: selected),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+                child: Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.labelMedium?.copyWith(
+                    color: accent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Material(
       color: selected ? AppColors.primary : Colors.transparent,
       shape: RoundedRectangleBorder(
@@ -159,14 +200,12 @@ class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: AppColors.canvasWash,
-      ),
+    return ColoredBox(
+      color: AppColors.canvas,
       child: SizedBox(
         height: height,
         child: Align(
-          alignment: Alignment.center,
+          alignment: Alignment.topCenter,
           child: child,
         ),
       ),

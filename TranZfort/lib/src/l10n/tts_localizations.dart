@@ -236,6 +236,12 @@ abstract class TtsLocalizations {
   /// **'{booked} of {needed} trucks booked.'**
   String ttsLoadDetailTrucksBooked(Object booked, Object needed);
 
+  /// No description provided for @ttsLoadDetailChatOrBookHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with the supplier or book this load.'**
+  String get ttsLoadDetailChatOrBookHint;
+
   /// No description provided for @ttsTripDetailRouteStage.
   ///
   /// In en, this message translates to:
