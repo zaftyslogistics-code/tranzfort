@@ -1,0 +1,19 @@
+{
+  "@@locale": "hi",
+  "ttsListenToLoadHint": "लोड की जानकारी सुनें",
+  "ttsLoadCardRoute": "{origin} se {destination} jaane wali load.",
+  "ttsLoadCardMaterial": "Maal {material}.",
+  "ttsLoadCardTruckTyres": "Truck {minTyres} se {maxTyres} chakka chahiye.",
+  "ttsLoadCardTruckCapacityTonnes": "Truck {minTonnes} se {maxTonnes} ton capacity.",
+  "ttsLoadCardBodyType": "Body type {bodyType}.",
+  "ttsLoadCardRatePerTon": "Bhada {amount} rupaye prati ton.",
+  "ttsLoadCardRateFixed": "Poori load ka bhada {amount} rupaye.",
+  "ttsLoadCardPickupToday": "Pickup aaj.",
+  "ttsLoadCardPickupTomorrow": "Pickup kal.",
+  "ttsLoadCardPickupOnDate": "Pickup {dateLabel}.",
+  "ttsLoadCardAdvance": "Advance {percent} percent.",
+  "ttsSupplierLoadListSummary": "{origin} se {destination} load. Maal {material}. {weightTonnes} ton. Bhada {amount} rupaye. Status {status}.",
+  "ttsTripCardSummary": "Trip {route}. Maal {material}. Stage {stage}. Truck {truckNumber}.",
+  "ttsBookingRejected": "Booking reject ho gaya. Doosra load dhundein.",
+  "ttsBookingApproved": "Booking manjoor ho gaya. Pickup ki taraf chalein."
+}

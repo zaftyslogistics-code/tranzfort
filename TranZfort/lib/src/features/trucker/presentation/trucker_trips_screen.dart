@@ -12,6 +12,9 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/trip_list_card_tts_builder.dart';
 import '../data/trucker_trip_repository.dart';
 import '../providers/trucker_trips_provider.dart';
 
@@ -151,21 +154,37 @@ String _localizedTruckerTripsTimeContext(BuildContext context, AppLocalizations 
   return l10n.truckerTripsTimeContextAssigned(_formatTruckerTripsDate(context, trip.assignedAt));
 }
 
-class _TruckerTripCard extends StatelessWidget {
+class _TruckerTripCard extends ConsumerWidget {
   final TruckerTrip trip;
 
   const _TruckerTripCard({required this.trip});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final palette = statusPaletteFor(trip.stage);
+    final stageLabel = _localizedTruckerTripsStage(l10n, trip.stage);
+    final utterance = const TripListCardTtsBuilder().build(
+      tts: ttsL10n,
+      routeLabel: trip.routeLabel,
+      material: trip.material,
+      stageLabel: stageLabel,
+      truckNumber: trip.truckNumber,
+    );
 
     return StandardListCard(
       accent: palette.foreground,
       title: trip.routeLabel,
       subtitle: '${trip.material} - ${_localizedTruckerTripsProofStatus(l10n, trip)}',
-      trailing: StatusChip(label: _localizedTruckerTripsStage(l10n, trip.stage)),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TtsCardSpeakerButton(message: utterance),
+          const SizedBox(width: 4),
+          StatusChip(label: stageLabel),
+        ],
+      ),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

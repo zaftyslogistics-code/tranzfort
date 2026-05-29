@@ -525,6 +525,17 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierMyLoadsLoadMore => 'और loads लोड करें';
 
   @override
+  String supplierLoadCardRouteTitle(Object origin, Object destination) {
+    return '$origin se $destination';
+  }
+
+  @override
+  String get marketplaceLoadPickupToday => 'आज पिकअप';
+
+  @override
+  String get marketplaceLoadPickupTomorrow => 'कल पिकअप';
+
+  @override
   String supplierLoadCardPickupDate(Object value) {
     return 'Pickup $value';
   }

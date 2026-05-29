@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../services/contextual_tts_service.dart';
+import 'tts_audio_language_provider.dart';
 
 /// Global TTS speaking state - true when TTS is currently speaking
 /// This is managed by the service and consumed by UI components
@@ -44,7 +45,10 @@ class TtsPlaybackController {
     _ref.read(ttsSpeakingProvider.notifier).state = true;
     try {
       return await _ref.read(contextualTtsServiceProvider).speakSummary(
-            languageCode: Localizations.localeOf(context).languageCode,
+            languageCode: resolveTtsLanguageCode(
+              context: context,
+              audioLanguageCode: _ref.read(ttsAudioLanguageProvider),
+            ),
             message: normalized,
           );
     } finally {

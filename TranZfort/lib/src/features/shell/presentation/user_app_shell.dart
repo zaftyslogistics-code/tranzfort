@@ -7,6 +7,7 @@ import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
+import '../../../core/widgets/tts_stop_on_route_change.dart';
 import '../../../shared/widgets/avatar_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
@@ -114,7 +115,10 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
         drawer: UserAppDrawer(role: widget.role),
         body: Stack(
           children: [
-            widget.child,
+            TtsStopOnRouteChange(
+              routeKey: widget.currentLocation,
+              child: widget.child,
+            ),
             if (topLevel)
               TtsScreenSummaryEffect(
                 summary: currentTab.title,

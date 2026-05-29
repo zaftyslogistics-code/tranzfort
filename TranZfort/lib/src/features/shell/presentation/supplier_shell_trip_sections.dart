@@ -13,6 +13,9 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/trip_list_card_tts_builder.dart';
 import 'shell_components.dart';
 import 'supplier_shell_shared_helpers.dart';
 
@@ -114,23 +117,39 @@ class _SupplierTripsBody extends StatelessWidget {
   }
 }
 
-class _SupplierTripCard extends StatelessWidget {
+class _SupplierTripCard extends ConsumerWidget {
   final SupplierTrip trip;
 
   const _SupplierTripCard({required this.trip});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final palette = statusPaletteFor(trip.stage);
     final tripPath = '${AppRoutes.tripDetailPath}/${trip.id}';
     final proofStatus = localizedSupplierProofStatus(l10n, trip);
+    final stageLabel = localizedSupplierTripStage(l10n, trip.stage);
+    final utterance = const TripListCardTtsBuilder().build(
+      tts: ttsL10n,
+      routeLabel: trip.routeLabel,
+      material: trip.material,
+      stageLabel: stageLabel,
+      truckNumber: shortId(trip.truckId),
+    );
 
     return StandardListCard(
       accent: palette.foreground,
       title: trip.routeLabel,
       subtitle: '${trip.material} - $proofStatus',
-      trailing: StatusChip(label: localizedSupplierTripStage(l10n, trip.stage)),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TtsCardSpeakerButton(message: utterance),
+          const SizedBox(width: 4),
+          StatusChip(label: stageLabel),
+        ],
+      ),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

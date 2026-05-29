@@ -524,6 +524,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierMyLoadsLoadMore => 'Load more loads';
 
   @override
+  String supplierLoadCardRouteTitle(Object origin, Object destination) {
+    return '$origin to $destination';
+  }
+
+  @override
+  String get marketplaceLoadPickupToday => 'Pickup Today';
+
+  @override
+  String get marketplaceLoadPickupTomorrow => 'Pickup Tomorrow';
+
+  @override
   String supplierLoadCardPickupDate(Object value) {
     return 'Pickup $value';
   }

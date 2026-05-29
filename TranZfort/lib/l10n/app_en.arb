@@ -172,6 +172,15 @@
   "supplierMyLoadsPaginationFailureMessage": "We could not load more supplier loads right now. Retry shortly to refresh the latest load history.",
   "supplierMyLoadsLoadingMore": "Loading more loads...",
   "supplierMyLoadsLoadMore": "Load more loads",
+  "supplierLoadCardRouteTitle": "{origin} to {destination}",
+  "@supplierLoadCardRouteTitle": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "marketplaceLoadPickupToday": "Pickup Today",
+  "marketplaceLoadPickupTomorrow": "Pickup Tomorrow",
   "supplierLoadCardPickupDate": "Pickup {value}",
   "supplierLoadCardTrucks": "{booked}/{needed} trucks booked",
   "supplierLoadCardTrackLoad": "Track load",

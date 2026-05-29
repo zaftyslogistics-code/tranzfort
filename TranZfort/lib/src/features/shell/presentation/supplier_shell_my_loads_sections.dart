@@ -15,6 +15,9 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
+import '../../../l10n/tts_localizations.dart';
+import '../../tts/data/supplier_load_list_card_tts_builder.dart';
 import 'supplier_shell_shared_helpers.dart';
 
 class SupplierMyLoadsScreen extends ConsumerWidget {
@@ -214,24 +217,38 @@ List<Widget> _buildMyLoadsSlivers(
   ];
 }
 
-class _SupplierLoadListCard extends StatelessWidget {
+class _SupplierLoadListCard extends ConsumerWidget {
   final Load load;
 
   const _SupplierLoadListCard({required this.load});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final palette = statusPaletteFor(load.status);
+    final statusLabel = localizedSupplierDashboardLoadStatus(l10n, load.status);
     final tonnes = load.weightTonnes % 1 == 0
         ? load.weightTonnes.toStringAsFixed(0)
         : load.weightTonnes.toStringAsFixed(1);
+    final utterance = const SupplierLoadListCardTtsBuilder().build(
+      load: load,
+      tts: ttsL10n,
+      statusLabel: statusLabel,
+    );
 
     return StandardListCard(
       accent: palette.foreground,
-      title: '${load.originLabel} to ${load.destinationLabel}',
+      title: l10n.supplierLoadCardRouteTitle(load.originLabel, load.destinationLabel),
       subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
-      trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TtsCardSpeakerButton(message: utterance),
+          const SizedBox(width: 4),
+          StatusChip(label: statusLabel),
+        ],
+      ),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

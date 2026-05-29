@@ -163,7 +163,11 @@ class _FakeNotificationTtsService extends NotificationTtsService {
         );
 
   @override
-  Future<void> speakNotificationOpen(AppNotification notification, AppUserRole role) async {
+  Future<void> speakNotificationOpen({
+    required AppNotification notification,
+    required AppUserRole role,
+    required String audioLanguageCode,
+  }) async {
     lastNotification = notification;
     lastRole = role;
   }

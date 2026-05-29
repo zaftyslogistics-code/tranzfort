@@ -1,0 +1,85 @@
+{
+  "@@locale": "en",
+  "ttsListenToLoadHint": "Listen to load details",
+  "ttsLoadCardRoute": "Load from {origin} to {destination}.",
+  "@ttsLoadCardRoute": {
+    "placeholders": {
+      "origin": {},
+      "destination": {}
+    }
+  },
+  "ttsLoadCardMaterial": "Material {material}.",
+  "@ttsLoadCardMaterial": {
+    "placeholders": {
+      "material": {}
+    }
+  },
+  "ttsLoadCardTruckTyres": "Truck from {minTyres} to {maxTyres} wheels required.",
+  "@ttsLoadCardTruckTyres": {
+    "placeholders": {
+      "minTyres": {},
+      "maxTyres": {}
+    }
+  },
+  "ttsLoadCardTruckCapacityTonnes": "Truck capacity from {minTonnes} to {maxTonnes} tonnes.",
+  "@ttsLoadCardTruckCapacityTonnes": {
+    "placeholders": {
+      "minTonnes": {},
+      "maxTonnes": {}
+    }
+  },
+  "ttsLoadCardBodyType": "Body type {bodyType}.",
+  "@ttsLoadCardBodyType": {
+    "placeholders": {
+      "bodyType": {}
+    }
+  },
+  "ttsLoadCardRatePerTon": "Rate {amount} rupees per ton.",
+  "@ttsLoadCardRatePerTon": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "ttsLoadCardRateFixed": "Fixed rate {amount} rupees for the load.",
+  "@ttsLoadCardRateFixed": {
+    "placeholders": {
+      "amount": {}
+    }
+  },
+  "ttsLoadCardPickupToday": "Pickup today.",
+  "ttsLoadCardPickupTomorrow": "Pickup tomorrow.",
+  "ttsLoadCardPickupOnDate": "Pickup on {dateLabel}.",
+  "@ttsLoadCardPickupOnDate": {
+    "placeholders": {
+      "dateLabel": {}
+    }
+  },
+  "ttsLoadCardAdvance": "Advance {percent} percent.",
+  "@ttsLoadCardAdvance": {
+    "placeholders": {
+      "percent": {}
+    }
+  },
+  "ttsSupplierLoadListSummary": "Load {origin} to {destination}. Material {material}. {weightTonnes} tonnes. Rate {amount} rupees. Status {status}.",
+  "@ttsSupplierLoadListSummary": {
+    "placeholders": {
+      "origin": {},
+      "destination": {},
+      "material": {},
+      "weightTonnes": {},
+      "amount": {},
+      "status": {}
+    }
+  },
+  "ttsTripCardSummary": "Trip {route}. Material {material}. Stage {stage}. Truck {truckNumber}.",
+  "@ttsTripCardSummary": {
+    "placeholders": {
+      "route": {},
+      "material": {},
+      "stage": {},
+      "truckNumber": {}
+    }
+  },
+  "ttsBookingRejected": "Booking was rejected. Look for another load.",
+  "ttsBookingApproved": "Booking approved. Head to pickup."
+}

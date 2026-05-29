@@ -1028,6 +1028,24 @@ abstract class AppLocalizations {
   /// **'Load more loads'**
   String get supplierMyLoadsLoadMore;
 
+  /// No description provided for @supplierLoadCardRouteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{origin} to {destination}'**
+  String supplierLoadCardRouteTitle(Object origin, Object destination);
+
+  /// No description provided for @marketplaceLoadPickupToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Today'**
+  String get marketplaceLoadPickupToday;
+
+  /// No description provided for @marketplaceLoadPickupTomorrow.
+  ///
+  /// In en, this message translates to:
+  /// **'Pickup Tomorrow'**
+  String get marketplaceLoadPickupTomorrow;
+
   /// No description provided for @supplierLoadCardPickupDate.
   ///
   /// In en, this message translates to:

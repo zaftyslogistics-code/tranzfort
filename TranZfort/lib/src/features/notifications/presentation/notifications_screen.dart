@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_colors.dart';
@@ -293,7 +294,11 @@ class _NotificationRow extends ConsumerWidget {
           await ref.read(notificationsProvider.notifier).markRead(notification.id);
         }
 
-        await ref.read(notificationTtsServiceProvider).speakNotificationOpen(notification, role);
+        await ref.read(notificationTtsServiceProvider).speakNotificationOpen(
+          notification: notification,
+          role: role,
+          audioLanguageCode: ref.read(ttsAudioLanguageProvider),
+        );
 
         if (!context.mounted) {
           return;

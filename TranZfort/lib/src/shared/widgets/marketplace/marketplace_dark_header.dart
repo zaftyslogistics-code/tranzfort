@@ -34,6 +34,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
   final double priceAmount;
   final String priceType;
   final VoidCallback? onSupplierTap;
+  final Widget? headerTrailing;
 
   const MarketplaceDarkHeader({
     super.key,
@@ -53,12 +54,11 @@ class MarketplaceDarkHeader extends StatelessWidget {
     required this.priceAmount,
     required this.priceType,
     this.onSupplierTap,
+    this.headerTrailing,
   });
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(
         16,
@@ -79,6 +79,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
             status: status,
             isSuperLoad: isSuperLoad,
             onSupplierTap: onSupplierTap,
+            headerTrailing: headerTrailing,
           ),
           const SizedBox(height: 8),
           // Row B: Integrated Route Line (70-78px)
@@ -124,6 +125,7 @@ class _SupplierStatusRow extends StatelessWidget {
   final String status;
   final bool isSuperLoad;
   final VoidCallback? onSupplierTap;
+  final Widget? headerTrailing;
 
   const _SupplierStatusRow({
     required this.supplierName,
@@ -134,6 +136,7 @@ class _SupplierStatusRow extends StatelessWidget {
     required this.status,
     this.isSuperLoad = false,
     this.onSupplierTap,
+    this.headerTrailing,
   });
 
   @override
@@ -186,7 +189,10 @@ class _SupplierStatusRow extends StatelessWidget {
             ],
           ),
         ),
-        const SizedBox(width: 8),
+        if (headerTrailing != null) ...[
+          headerTrailing!,
+          const SizedBox(width: 4),
+        ],
         _CompactStatusChip(label: _localizedLoadStatus(l10n, status)),
       ],
     );

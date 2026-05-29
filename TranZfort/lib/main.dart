@@ -11,11 +11,13 @@ import 'src/core/config/supabase_config.dart';
 import 'src/core/logger/app_logger.dart';
 import 'src/core/navigation/app_router.dart';
 import 'src/core/providers/app_locale_providers.dart';
+import 'src/core/providers/tts_audio_language_provider.dart';
 import 'src/core/providers/connectivity_provider.dart';
 import 'src/core/providers/app_state_providers.dart';
 import 'src/core/theme/app_colors.dart';
 import 'src/core/theme/app_theme.dart';
 import 'src/l10n/app_localizations.dart';
+import 'src/l10n/tts_localizations.dart';
 import 'src/features/notifications/data/push_token_service.dart';
 import 'src/features/notifications/data/push_runtime_service.dart';
 import 'src/shared/widgets/feedback_components.dart';
@@ -213,6 +215,9 @@ class TranZfortApp extends ConsumerWidget {
     ref.watch(crashlyticsUserIdentifierProvider); // Initialize Crashlytics user identifier tracking
     final router = ref.watch(appRouterProvider);
     final localeState = ref.watch(appLocaleProvider);
+    ref.listen(appLocaleProvider, (previous, next) {
+      ref.read(ttsAudioLanguageProvider.notifier).syncFromUiLocale(next.locale);
+    });
     ref.listen<String?>(pendingPushRouteProvider, (previous, next) {
       if (next == null || next.isEmpty) {
         return;
@@ -236,7 +241,10 @@ class TranZfortApp extends ConsumerWidget {
         );
       },
       locale: localeState.locale,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      localizationsDelegates: const [
+        ...AppLocalizations.localizationsDelegates,
+        ...TtsLocalizations.localizationsDelegates,
+      ],
       supportedLocales: AppLocalizations.supportedLocales,
       routerConfig: router,
     );
