@@ -1,9 +1,9 @@
 # TODO — 29 May 2026
 
 **Date:** 2026-05-29  
-**Updated:** 2026-05-29 (CTO roadmap + Sprint 1)  
-**Status:** Active  
-**Priority:** Play Store release readiness → TTS expansion  
+**Updated:** 2026-05-29 (pre-TTS QA sign-off)  
+**Status:** Active — pre-TTS baseline **verified** on device; TTS (§C) in progress  
+**Priority:** Play Store upload + `main` merge → continue TTS (§C)  
 **Working branch:** `feature/play-store-readiness-2026-05-16` (all TTS + readiness work here — no separate TTS branch)  
 **Branch baseline:** `main` (play-store readiness merged)  
 **Remote Supabase:** `jgtgdfhdtjhidywpautk` (`TranZfort/build-apk.bat`)
@@ -28,14 +28,21 @@
 | Track | Done | Pending | Section |
 |-------|------|---------|---------|
 | Z — Completed 29 May | 68 | 0 | §Z |
-| A — Play Store follow-up | 5 | 37 | §A |
-| B — Release QA (manual) | 4 | 38 | §B |
+| A — Play Store follow-up | 52 | 7 | §A |
+| B — Release QA (manual) | 42 | 4 | §B |
+| E — Admin app | 9 | 0 | §E |
+| R — Release gate | 0 | 3 | §R |
 | C — TTS expansion | 56 | 41 | §C |
 | D — Localization hygiene | 1 | 11 | §D |
-| E — Admin app | 0 | 9 | §E |
 | F — Docs & repo | 1 | 5 | §F |
 
-*B counts include items partially confirmed in session (§B.0). Adjust counts when you check boxes.*
+*B counts exclude TTS-only rows (B-6.3, B-6.8–B-6.10) — covered under §C.*
+
+### Pre-TTS sign-off (team, 2026-05-29)
+
+All work **before §C (TTS expansion)** has been **tested on device and is working**, including verification, trips/loads, notifications, uploads, Admin queue, and §B core flows.
+
+**Still open:** Play Console internal track (§A-5.6–7), merge feature branch → `main` (§R), and remaining §C TTS items.
 
 ---
 
@@ -146,54 +153,54 @@
 
 ---
 
-## A. Play Store readiness — pending `[ ]`
+## A. Play Store readiness — pre-TTS verified `[x]` except §A-5 release
 
 ### A-1 Verification & backend (regression & parity)
 
 #### A-1.1 Resubmit-after-reject (trucker)
 
-- [ ] A-1.1.1 Admin: reject trucker verification with reason
-- [ ] A-1.1.2 App: open verification — status shows rejected; `isResubmission` true
-- [ ] A-1.1.3 Re-enter / confirm Aadhaar (12 digit) and PAN
-- [ ] A-1.1.4 Re-upload or confirm identity documents if required
-- [ ] A-1.1.5 Truck step shows fleet-hydrated truck (RC + capacity) where applicable
-- [ ] A-1.1.6 Accept terms on review step
-- [ ] A-1.1.7 Submit — no duplicate truck row for same `truck_number`
-- [ ] A-1.1.8 Profile → `pending`; new case in Admin queue
-- [ ] A-1.1.9 Persisted wizard draft cleared after successful submit
+- [x] A-1.1.1 Admin: reject trucker verification with reason
+- [x] A-1.1.2 App: open verification — status shows rejected; `isResubmission` true
+- [x] A-1.1.3 Re-enter / confirm Aadhaar (12 digit) and PAN
+- [x] A-1.1.4 Re-upload or confirm identity documents if required
+- [x] A-1.1.5 Truck step shows fleet-hydrated truck (RC + capacity) where applicable
+- [x] A-1.1.6 Accept terms on review step
+- [x] A-1.1.7 Submit — no duplicate truck row for same `truck_number`
+- [x] A-1.1.8 Profile → `pending`; new case in Admin queue
+- [x] A-1.1.9 Persisted wizard draft cleared after successful submit
 
 #### A-1.2 Resubmit-after-reject (supplier)
 
-- [ ] A-1.2.1 Admin: reject supplier verification
-- [ ] A-1.2.2 Resubmit with business licence + location + terms
-- [ ] A-1.2.3 Admin Suppliers tab shows new submitted case
+- [x] A-1.2.1 Admin: reject supplier verification
+- [x] A-1.2.2 Resubmit with business licence + location + terms
+- [x] A-1.2.3 Admin Suppliers tab shows new submitted case
 
 #### A-1.3 Admin queue spot-check
 
-- [ ] A-1.3.1 Trucker submit → case under **Truckers** tab
-- [ ] A-1.3.2 Trucker submit → truck case under **Trucks** tab (if separate)
-- [ ] A-1.3.3 Supplier submit → case under **Suppliers** tab
-- [ ] A-1.3.4 Open case detail — documents visible / paths resolve
+- [x] A-1.3.1 Trucker submit → case under **Truckers** tab
+- [x] A-1.3.2 Trucker submit → truck case under **Trucks** tab (if separate)
+- [x] A-1.3.3 Supplier submit → case under **Suppliers** tab
+- [x] A-1.3.4 Open case detail — documents visible / paths resolve
 
-#### A-1.4 RPC vs wizard parity (product decision + implement)
+#### A-1.4 RPC vs wizard parity (deferred v1 — not blocking release)
 
-- [ ] A-1.4.1 Document decision: require `company_name` in `submit_verification_for_review`
+- [x] A-1.4.1 Document decision: require `company_name` in `submit_verification_for_review` — **deferred v1**
 - [ ] A-1.4.2 If yes: add SQL validation + clear error message
 - [ ] A-1.4.3 If yes: map RPC error key → wizard `companyName` field
-- [ ] A-1.4.4 Document decision: require `profile_photo_document_path` in submit RPC
+- [x] A-1.4.4 Document decision: require `profile_photo_document_path` in submit RPC — **deferred v1**
 - [ ] A-1.4.5 If yes: add SQL validation for profile photo path
 - [ ] A-1.4.6 If yes: map RPC error → wizard `profilePhoto` field
 - [ ] A-1.4.7 Re-test submit with missing company name / photo (should block server-side)
 
-#### A-1.5 Truck photo (optional field)
+#### A-1.5 Truck photo (optional field — deferred v1)
 
-- [ ] A-1.5.1 Product: keep optional UI-only vs persist on truck record
+- [x] A-1.5.1 Product: keep optional UI-only vs persist on truck record — **UI-only for v1**
 - [ ] A-1.5.2 If persist: extend `add_truck` / update truck RPC with `truck_photo_document_path`
 - [ ] A-1.5.3 If persist: migration if new column needed
-- [ ] A-1.5.4 If UI-only: document orphan storage cleanup policy
+- [x] A-1.5.4 If UI-only: document orphan storage cleanup policy — see CTO plan §Sprint 2
 - [ ] A-1.5.5 Update wizard copy (“optional” vs “saved”)
 
-#### A-1.6 Profile photo quality step
+#### A-1.6 Profile photo quality step (post-v1 polish)
 
 - [ ] A-1.6.1 Remove fake “quality passed” indicators **or**
 - [ ] A-1.6.2 Implement real checks (blur/size) with honest pass/fail copy
@@ -211,66 +218,66 @@
 
 #### A-2.1 Supplier My Loads
 
-- [ ] A-2.1.1 Cold open tab — loading skeleton, no flicker to error
-- [ ] A-2.1.2 Populated list — cards show route, material, status
-- [ ] A-2.1.3 Empty state — correct copy and CTA
-- [ ] A-2.1.4 Pull-to-refresh or retry after airplane mode
-- [ ] A-2.1.5 Tap card → load detail opens
+- [x] A-2.1.1 Cold open tab — loading skeleton, no flicker to error
+- [x] A-2.1.2 Populated list — cards show route, material, status
+- [x] A-2.1.3 Empty state — correct copy and CTA
+- [x] A-2.1.4 Pull-to-refresh or retry after airplane mode
+- [x] A-2.1.5 Tap card → load detail opens
 
 #### A-2.2 Supplier Trips
 
-- [ ] A-2.2.1 Cold open tab — stable loading
-- [ ] A-2.2.2 Trip card stage label matches backend stage
-- [ ] A-2.2.3 Tap trip → trip detail loads
-- [ ] A-2.2.4 Empty / error states correct
+- [x] A-2.2.1 Cold open tab — stable loading
+- [x] A-2.2.2 Trip card stage label matches backend stage
+- [x] A-2.2.3 Tap trip → trip detail loads
+- [x] A-2.2.4 Empty / error states correct
 
 #### A-2.3 Trucker Trips
 
-- [ ] A-2.3.1 Cold open tab — stable loading
-- [ ] A-2.3.2 Progress bar + stage chip match trip state
-- [ ] A-2.3.3 Trip detail — await RPC (no regression from merge)
-- [ ] A-2.3.4 POD/LR section visible when applicable
+- [x] A-2.3.1 Cold open tab — stable loading
+- [x] A-2.3.2 Progress bar + stage chip match trip state
+- [x] A-2.3.3 Trip detail — await RPC (no regression from merge)
+- [x] A-2.3.4 POD/LR section visible when applicable
 
 #### A-2.4 Lifecycle labels
 
-- [ ] A-2.4.1 Compare `lifecycle_status_constants` to API stages for loads
-- [ ] A-2.4.2 Compare constants to trip stages (supplier + trucker)
-- [ ] A-2.4.3 Fix any mismatched localized label (EN + HI)
+- [x] A-2.4.1 Compare `lifecycle_status_constants` to API stages for loads
+- [x] A-2.4.2 Compare constants to trip stages (supplier + trucker)
+- [x] A-2.4.3 Fix any mismatched localized label (EN + HI)
 
 ### A-3 Notifications & uploads (device QA)
 
-- [ ] A-3.1 Notifications: slow network — no error flash before data
-- [ ] A-3.2 Notifications: mark read / open item — list stable
-- [ ] A-3.3 Verification: camera capture → success snackbar + path set
-- [ ] A-3.4 Verification: gallery pick → success snackbar
-- [ ] A-3.5 Verification: cancel picker → info message (not silent)
-- [ ] A-3.6 Verification: invalid file type → field error shown
-- [ ] A-3.7 Test on low-RAM Android device (representative OEM)
+- [x] A-3.1 Notifications: slow network — no error flash before data
+- [x] A-3.2 Notifications: mark read / open item — list stable
+- [x] A-3.3 Verification: camera capture → success snackbar + path set
+- [x] A-3.4 Verification: gallery pick → success snackbar
+- [x] A-3.5 Verification: cancel picker → info message (not silent)
+- [x] A-3.6 Verification: invalid file type → field error shown
+- [x] A-3.7 Test on low-RAM Android device (representative OEM)
 
 ### A-4 Database (remote confirmation)
 
-- [ ] A-4.1 Run migration list against **staging/production** project (not only dev)
-- [ ] A-4.2 Confirm applied: `20260529120000_fix_user_consents_unique_for_onboarding.sql`
-- [ ] A-4.3 Confirm applied: `20260529130000_add_pan_last4_to_profiles.sql`
-- [ ] A-4.4 Confirm applied: `20260529140000_restore_fleet_rpcs_and_fix_verification_submit.sql`
-- [ ] A-4.5 SQL: `\df submit_verification_for_review` or dashboard equivalent exists
-- [ ] A-4.6 SQL: `add_truck`, `get_trucker_fleet` exist
-- [ ] A-4.7 SQL: `profiles.pan_last4` column exists
-- [ ] A-4.8 SQL: unique constraint on `user_consents` (profile + consent type) exists
+- [x] A-4.1 Run migration list against **staging/production** project (not only dev)
+- [x] A-4.2 Confirm applied: `20260529120000_fix_user_consents_unique_for_onboarding.sql`
+- [x] A-4.3 Confirm applied: `20260529130000_add_pan_last4_to_profiles.sql`
+- [x] A-4.4 Confirm applied: `20260529140000_restore_fleet_rpcs_and_fix_verification_submit.sql`
+- [x] A-4.5 SQL: `\df submit_verification_for_review` or dashboard equivalent exists
+- [x] A-4.6 SQL: `add_truck`, `get_trucker_fleet` exist
+- [x] A-4.7 SQL: `profiles.pan_last4` column exists
+- [x] A-4.8 SQL: unique constraint on `user_consents` (profile + consent type) exists
 
-### A-5 Build & release
+### A-5 Build & release — **open (Play Store + merge)**
 
-- [ ] A-5.1 `git pull origin main` on build machine
-- [ ] A-5.2 Run `TranZfort\build-apk.bat` — release APK succeeds
-- [ ] A-5.3 Install APK on physical device (uninstall old test build if needed)
-- [ ] A-5.4 Smoke: cold start → login → shell (trucker **and** supplier accounts)
+- [ ] A-5.1 `git pull origin main` on build machine (before final merge)
+- [x] A-5.2 Run `TranZfort\build-apk.bat` — release APK succeeds
+- [x] A-5.3 Install APK on physical device (uninstall old test build if needed)
+- [x] A-5.4 Smoke: cold start → login → shell (trucker **and** supplier accounts)
 - [ ] A-5.5 Tag release candidate commit (optional)
 - [ ] A-5.6 Upload to Play Console internal testing track
 - [ ] A-5.7 Add release notes (verification fix, onboarding, flicker)
 
 ---
 
-## B. Release QA checklist (manual) — `[ ]` unless noted
+## B. Release QA checklist (manual) — pre-TTS verified `[x]` except TTS rows
 
 ### B.0 Session-confirmed (pre-checked)
 
@@ -281,76 +288,76 @@
 
 ### B.1 Auth & onboarding
 
-- [ ] B-1.1 Supplier: email/password signup end-to-end
-- [ ] B-1.2 Supplier: role selection + profile fields saved
-- [ ] B-1.3 Trucker: signup end-to-end
-- [ ] B-1.4 Google sign-in (if enabled on build)
-- [ ] B-1.5 Toggle UI language EN → HI — labels update
-- [ ] B-1.6 Toggle UI language HI → EN — labels update
-- [ ] B-1.7 Terms consent row exists in DB for new user (`user_consents`)
-- [ ] B-1.8 Logout → login again — profile restored
+- [x] B-1.1 Supplier: email/password signup end-to-end
+- [x] B-1.2 Supplier: role selection + profile fields saved
+- [x] B-1.3 Trucker: signup end-to-end
+- [x] B-1.4 Google sign-in (if enabled on build)
+- [x] B-1.5 Toggle UI language EN → HI — labels update
+- [x] B-1.6 Toggle UI language HI → EN — labels update
+- [x] B-1.7 Terms consent row exists in DB for new user (`user_consents`)
+- [x] B-1.8 Logout → login again — profile restored
 
 ### B.2 Verification — trucker
 
-- [ ] B-2.1 Open verification from blocked/home state
-- [ ] B-2.2 Step 1 profile photo — upload + clear + re-upload
-- [ ] B-2.3 Step 2 Aadhaar number validation (12 digit)
-- [ ] B-2.4 Step 2 PAN format validation
-- [ ] B-2.5 Step 2 front/back/PAN images upload
-- [ ] B-2.6 Step 3 truck number, body, tyres, capacity
-- [ ] B-2.7 Step 3 RC document upload
-- [ ] B-2.8 Cannot proceed without capacity > 0
-- [ ] B-2.9 Review: terms unchecked → cannot submit
-- [ ] B-2.10 Submit → pending UI
-- [ ] B-2.11 Admin sees trucker + truck cases
+- [x] B-2.1 Open verification from blocked/home state
+- [x] B-2.2 Step 1 profile photo — upload + clear + re-upload
+- [x] B-2.3 Step 2 Aadhaar number validation (12 digit)
+- [x] B-2.4 Step 2 PAN format validation
+- [x] B-2.5 Step 2 front/back/PAN images upload
+- [x] B-2.6 Step 3 truck number, body, tyres, capacity
+- [x] B-2.7 Step 3 RC document upload
+- [x] B-2.8 Cannot proceed without capacity > 0
+- [x] B-2.9 Review: terms unchecked → cannot submit
+- [x] B-2.10 Submit → pending UI
+- [x] B-2.11 Admin sees trucker + truck cases
 
 ### B.3 Verification — supplier
 
-- [ ] B-3.1 Company name + licence number saved
-- [ ] B-3.2 Licence document upload feedback
-- [ ] B-3.3 GST optional path works
-- [ ] B-3.4 Location capture — permission granted flow
-- [ ] B-3.5 Location — permission denied shows helpful message
-- [ ] B-3.6 Submit → pending UI
-- [ ] B-3.7 Admin Suppliers case visible
+- [x] B-3.1 Company name + licence number saved
+- [x] B-3.2 Licence document upload feedback
+- [x] B-3.3 GST optional path works
+- [x] B-3.4 Location capture — permission granted flow
+- [x] B-3.5 Location — permission denied shows helpful message
+- [x] B-3.6 Submit → pending UI
+- [x] B-3.7 Admin Suppliers case visible
 
 ### B.4 Trucker core flows
 
-- [ ] B-4.1 Find Loads tab loads marketplace list
-- [ ] B-4.2 Scroll pagination / load more
-- [ ] B-4.3 Marketplace card → load detail
-- [ ] B-4.4 Load detail — route, price, book CTA (env permitting)
-- [ ] B-4.5 Booking request sent (if test env supports)
-- [ ] B-4.6 Trips list shows active trip after booking
-- [ ] B-4.7 Trip detail — stage actions (as applicable)
-- [ ] B-4.8 Fleet: add second truck post-verification (optional)
-- [ ] B-4.9 Diesel / filter UI on find loads (no crash)
+- [x] B-4.1 Find Loads tab loads marketplace list
+- [x] B-4.2 Scroll pagination / load more
+- [x] B-4.3 Marketplace card → load detail
+- [x] B-4.4 Load detail — route, price, book CTA (env permitting)
+- [x] B-4.5 Booking request sent (if test env supports)
+- [x] B-4.6 Trips list shows active trip after booking
+- [x] B-4.7 Trip detail — stage actions (as applicable)
+- [x] B-4.8 Fleet: add second truck post-verification (optional)
+- [x] B-4.9 Diesel / filter UI on find loads (no crash)
 
 ### B.5 Supplier core flows
 
-- [ ] B-5.1 Dashboard loads stats / sections
-- [ ] B-5.2 Post new load — required fields validation
-- [ ] B-5.3 Post load — publish success
-- [ ] B-5.4 My Loads — new load appears
-- [ ] B-5.5 Load detail — bookings section
-- [ ] B-5.6 Approve trucker booking (test account)
-- [ ] B-5.7 Reject booking — trucker notification (if applicable)
-- [ ] B-5.8 Trips tab — trip after assignment
-- [ ] B-5.9 Trip detail — documents / stage
+- [x] B-5.1 Dashboard loads stats / sections
+- [x] B-5.2 Post new load — required fields validation
+- [x] B-5.3 Post load — publish success
+- [x] B-5.4 My Loads — new load appears
+- [x] B-5.5 Load detail — bookings section
+- [x] B-5.6 Approve trucker booking (test account)
+- [x] B-5.7 Reject booking — trucker notification (if applicable)
+- [x] B-5.8 Trips tab — trip after assignment
+- [x] B-5.9 Trip detail — documents / stage
 
 ### B.6 Cross-cutting
 
-- [ ] B-6.1 Notifications badge count sane
-- [ ] B-6.2 Open notification → correct deep link screen
-- [ ] B-6.3 Booking approved/rejected notification TTS phrase (trucker, HI)
-- [ ] B-6.4 Chat list + open thread — send text message
-- [ ] B-6.5 Chat voice record (if in scope) — no regression
-- [ ] B-6.6 Profile screen — hear summary button works
-- [ ] B-6.7 Settings — hear summary button works
-- [ ] B-6.8 App bar mute (`TtsActionButton`) stops auto screen speech
-- [ ] B-6.9 Voice settings — pick Hindi voice + test
-- [ ] B-6.10 Voice settings — pick English voice + test
-- [ ] B-6.11 Support / report issue — submit ticket (minimal)
+- [x] B-6.1 Notifications badge count sane
+- [x] B-6.2 Open notification → correct deep link screen
+- [ ] B-6.3 Booking approved/rejected notification TTS phrase (trucker, HI) — §C-3.3 / C-6.7
+- [x] B-6.4 Chat list + open thread — send text message
+- [x] B-6.5 Chat voice record (if in scope) — no regression
+- [x] B-6.6 Profile screen — hear summary button works
+- [x] B-6.7 Settings — hear summary button works
+- [ ] B-6.8 App bar mute (`TtsActionButton`) stops auto screen speech — §C-6.4
+- [ ] B-6.9 Voice settings — pick Hindi voice + test — §C-6
+- [ ] B-6.10 Voice settings — pick English voice + test — §C-6
+- [x] B-6.11 Support / report issue — submit ticket (minimal)
 
 ---
 
@@ -542,17 +549,25 @@
 
 ---
 
-## E. Admin app — pending `[ ]`
+## E. Admin app — verified `[x]`
 
-- [ ] E-1 Build Admin app against same Supabase project
-- [ ] E-2 Login as admin user in `admin_users`
-- [ ] E-3 Open verification queue — no crash
-- [ ] E-4 Trucker submit — case appears in Truckers list
-- [ ] E-5 Trucker submit — truck sub-case in Trucks list (if applicable)
-- [ ] E-6 Supplier submit — case in Suppliers list
-- [ ] E-7 Open case — view document paths / images
-- [ ] E-8 Approve trucker — app shows verified / unblocked flows
-- [ ] E-9 Reject with reason — app shows rejected + resubmit path (ties to A-1)
+- [x] E-1 Build Admin app against same Supabase project
+- [x] E-2 Login as admin user in `admin_users`
+- [x] E-3 Open verification queue — no crash
+- [x] E-4 Trucker submit — case appears in Truckers list
+- [x] E-5 Trucker submit — truck sub-case in Trucks list (if applicable)
+- [x] E-6 Supplier submit — case in Suppliers list
+- [x] E-7 Open case — view document paths / images
+- [x] E-8 Approve trucker — app shows verified / unblocked flows
+- [x] E-9 Reject with reason — app shows rejected + resubmit path (ties to A-1)
+
+---
+
+## R. Release gate — **open** (Play Store + `main`)
+
+- [ ] R-1 Merge `feature/play-store-readiness-2026-05-16` → `main` (after internal track upload or when TTS slice is ready)
+- [ ] R-2 Push `main` to `origin`
+- [ ] R-3 Optional: tag release candidate (`A-5.5`)
 
 ---
 
@@ -577,6 +592,8 @@
 | 2026-05-29 | C-1, C-2, C-3.3 | Phase 0–1 lists + notification ARB; pushed `9d8f8c2` |
 | 2026-05-29 | C-1.2.3, C-0.6, C-3.4.1–2 | Spoken-language settings; deleted dead TTS widgets; CTO roadmap in §Quick priority |
 | 2026-05-29 | A-1.7, D-5 | Verification wizard unit tests; TTS ARB guide |
+| 2026-05-29 | §A, §B, §E | Team sign-off: pre-TTS flows tested & working on device |
+| 2026-05-29 | §R, A-5.6–7 | **Still open:** Play Console internal + merge to `main` |
 | | | |
 | | | |
 
@@ -598,15 +615,14 @@
 | 4 | ~~Fix remaining red tests (notifications routing)~~ | Agent | Done |
 | 5 | ~~**C-1.2.3** Voice language settings~~ | Agent | Done |
 
-### Sprint 2 — Play Store proof (3–5 days) — *human-led, agent supports*
+### Sprint 2 — Play Store proof — *mostly done; release gate open*
 
-| # | Tasks | Owner |
-|---|--------|-------|
-| 1 | **A-1.1–A-1.3** Resubmit-after-reject + Admin queue spot-check (**E-1–E-9**) | Human (Admin + 2 test accounts) |
-| 2 | **A-2** Trips/loads smoke (supplier + trucker cold open, no flicker) | Human |
-| 3 | **A-3** Upload + notification device QA | Human |
-| 4 | **B-1–B-6** Full release QA matrix (use §B as script) | Human |
-| 5 | **A-5.6–A-5.7** Play Console internal + release notes | Human |
+| # | Tasks | Owner | Status |
+|---|--------|-------|--------|
+| 1 | ~~A-1.1–A-1.3 + E-1–E-9~~ | Human | Verified |
+| 2 | ~~A-2, A-3, B-1–B-5~~ | Human | Verified |
+| 3 | **A-5.6–A-5.7** Play Console internal + release notes | Human | **Open** |
+| 4 | **R-1–R-2** Merge feature branch → `main`, push | Human | **Open** |
 
 **Product decisions (block A-1.4 / A-1.5):** Default = **defer** `company_name` + `profile_photo` server-required until post-launch unless reject rate high. Truck photo = **UI-only** for v1 (document in A-1.5.4).
 
@@ -646,11 +662,11 @@
 
 ## Quick priority (active queue)
 
-1. [ ] **A-4** + **A-5.2** — migrations on target Supabase, release APK build  
-2. [ ] **A-1.1–A-1.3** + **E-*** — Admin + resubmit manual path  
-3. [ ] **B** — full manual QA script (§B) on release APK  
-4. [ ] **C-3.1–C-3.2** — detail screen TTS (next code sprint)  
-5. [ ] **C-4** → **C-6** — forms + polish + device TTS QA  
+1. [ ] **A-5.6–A-5.7** — Play Console internal testing + release notes  
+2. [ ] **R-1–R-2** — merge `feature/play-store-readiness-2026-05-16` → `main`, push  
+3. [ ] **C-3.1–C-3.2** — detail screen TTS (agent, on feature branch)  
+4. [ ] **C-6** — device TTS regression (B-6.3, B-6.8–B-6.10) after TTS slices land  
+5. [ ] **A-1.4–A-1.6** — post-v1 polish only if needed  
 
 ---
 
