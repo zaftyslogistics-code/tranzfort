@@ -4,6 +4,7 @@ enum TripStage {
   pickedUp('picked_up'),
   inTransit('in_transit'),
   delivered('delivered'),
+  podUploaded('pod_uploaded'),
   proofSubmitted('proof_submitted'),
   podUploaded('pod_uploaded'),
   disputed('disputed'),

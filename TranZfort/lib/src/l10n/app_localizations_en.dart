@@ -752,6 +752,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commonCallAction => 'Call';
 
   @override
+  String get commonFromLabel => 'FROM';
+
+  @override
+  String get commonToLabel => 'TO';
+
+  @override
   String chatReportSourceLabel(Object source) {
     return 'Chat - $source';
   }
@@ -2348,6 +2354,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'picked_up': 'Picked up',
       'in_transit': 'In transit',
       'delivered': 'Delivered',
+      'pod_uploaded': 'POD uploaded',
       'proof_submitted': 'Proof submitted',
       'pod_uploaded': 'POD uploaded',
       'completed': 'Completed',

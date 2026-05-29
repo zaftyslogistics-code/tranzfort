@@ -60,7 +60,6 @@ class TruckerTripsRepository {
   Future<Result<List<TruckerTrip>>> fetchTrips(
     List<String> stages, {
     int limit = 15,
-    int offset = 0,
   }) async {
     final userId = _currentUserId();
     if (userId == null) {
@@ -72,7 +71,6 @@ class TruckerTripsRepository {
         truckerId: userId,
         stages: stages,
         limit: limit,
-        offset: offset,
       );
       return Success<List<TruckerTrip>>(
         rows.map(_mapTrip).toList(growable: false),

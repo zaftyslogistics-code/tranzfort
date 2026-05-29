@@ -12,7 +12,6 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import '../../../core/utils/type_safety.dart';
-import '../../../core/utils/type_safety.dart';
 import 'supplier_trip_repository_models.dart';
 import 'supplier_trip_repository_backend.dart';
 
@@ -52,7 +51,6 @@ class SupplierTripsRepository {
     }
 
     try {
-      // Filter out 'pod_uploaded' from stages as database enum doesn't support it
       final filteredStages = stages.where((stage) => stage != 'pod_uploaded').toList();
       final rows = await _backend.fetchTrips(
         supplierId: userId,

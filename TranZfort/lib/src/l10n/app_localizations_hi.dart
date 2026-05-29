@@ -753,6 +753,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonCallAction => 'कॉल';
 
   @override
+  String get commonFromLabel => 'से';
+
+  @override
+  String get commonToLabel => 'तक';
+
+  @override
   String chatReportSourceLabel(Object source) {
     return 'Chat - $source';
   }
@@ -2348,6 +2354,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'picked_up': 'पिक किया गया',
       'in_transit': 'रास्ते में',
       'delivered': 'डिलीवर किया गया',
+      'pod_uploaded': 'POD अपलोड किया गया',
       'proof_submitted': 'प्रूफ जमा किया गया',
       'pod_uploaded': 'POD अपलोडेड',
       'completed': 'पूर्ण',
