@@ -33,7 +33,7 @@ extension VerificationWizardSubmit on VerificationWizardController {
     final detail = _initialDetail;
     if (detail != null) {
       final detailDraft = VerificationDraft.fromDetail(detail);
-      final isRejected = detail.verificationStatus.trim().toLowerCase() == 'rejected';
+      final isRejected = isVerificationResubmission(detail.verificationStatus);
       _setState(
         state.copyWith(
           draft: persistedDraft == null
@@ -228,15 +228,8 @@ extension VerificationWizardSubmit on VerificationWizardController {
       return false;
     }
 
-    final normalizedNumber = draft.truckNumber.trim().toUpperCase();
     final trucks = trucksResult.valueOrNull ?? const <TruckerFleetTruck>[];
-    return trucks.any(
-      (t) =>
-          t.status != TruckerFleetTruckStatus.archived &&
-          t.truckNumber.trim().toUpperCase() == normalizedNumber &&
-          (t.rcDocumentPath ?? '').trim().isNotEmpty &&
-          t.capacityTonnes > 0,
-    );
+    return fleetHasReadyTruckForDraft(trucks: trucks, draft: draft);
   }
 
   String? _verificationValidateAll([AppLocalizations? l10n]) {

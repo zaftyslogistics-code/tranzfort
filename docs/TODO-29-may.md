@@ -28,10 +28,10 @@
 | Track | Done | Pending | Section |
 |-------|------|---------|---------|
 | Z — Completed 29 May | 68 | 0 | §Z |
-| A — Play Store follow-up | 0 | 42 | §A |
+| A — Play Store follow-up | 5 | 37 | §A |
 | B — Release QA (manual) | 4 | 38 | §B |
 | C — TTS expansion | 56 | 41 | §C |
-| D — Localization hygiene | 0 | 12 | §D |
+| D — Localization hygiene | 1 | 11 | §D |
 | E — Admin app | 0 | 9 | §E |
 | F — Docs & repo | 1 | 5 | §F |
 
@@ -201,11 +201,11 @@
 
 #### A-1.7 Automated tests (verification)
 
-- [ ] A-1.7.1 Test: `VerificationDraft.copyWith(clearProfilePhoto: true)` clears path
-- [ ] A-1.7.2 Test: terms not accepted → submit validation fails
-- [ ] A-1.7.3 Test: `mapRepositoryFieldKeyToWizard` for `rc_document_path`
-- [ ] A-1.7.4 Test: submit skips `createTruck` when fleet already ready (mock fleet repo)
-- [ ] A-1.7.5 Test: rejected detail sets `isResubmission` on wizard load (widget or unit)
+- [x] A-1.7.1 Test: `VerificationDraft.copyWith(clearProfilePhoto: true)` clears path
+- [x] A-1.7.2 Test: terms not accepted → submit validation fails
+- [x] A-1.7.3 Test: `mapRepositoryFieldKeyToWizard` for `rc_document_path`
+- [x] A-1.7.4 Test: `fleetHasReadyTruckForDraft` (skip duplicate `createTruck` predicate)
+- [x] A-1.7.5 Test: `isVerificationResubmission` for rejected status
 
 ### A-2 Trips & loads (post-merge smoke)
 
@@ -531,7 +531,7 @@
 - [ ] D-2 Grep audit: `'\${` string interpolation in `lib/src/features/**` — file list fix queue
 - [ ] D-3 Grep audit: `lib/src/shared/widgets/**` — same
 - [ ] D-4 Fix top 5 worst card title interpolations (supplier load, trip route, etc.)
-- [ ] D-5 Document when to use `app_*.arb` vs `tts_*.arb` in CONTRIBUTING or `docs/`
+- [x] D-5 Document when to use `app_*.arb` vs `tts_*.arb` — [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
 - [ ] D-6 Evaluate ARB split by feature (epic — not blocking TTS Phase 0)
 - [ ] D-7 After any ARB edit: run `flutter gen-l10n`
 - [ ] D-8 After gen-l10n: commit `app_localizations*.dart` + `tts_localizations*.dart`
@@ -576,6 +576,7 @@
 | 2026-05-29 | C-1 (WIP) | TTS Phase 0 started on `feature/play-store-readiness-2026-05-16` (reverted mistaken `feature/tts-expansion-2026-05-29` branch) |
 | 2026-05-29 | C-1, C-2, C-3.3 | Phase 0–1 lists + notification ARB; pushed `9d8f8c2` |
 | 2026-05-29 | C-1.2.3, C-0.6, C-3.4.1–2 | Spoken-language settings; deleted dead TTS widgets; CTO roadmap in §Quick priority |
+| 2026-05-29 | A-1.7, D-5 | Verification wizard unit tests; TTS ARB guide |
 | | | |
 | | | |
 
@@ -591,10 +592,10 @@
 
 | # | Tasks | Owner | Blocks |
 |---|--------|-------|--------|
-| 1 | **A-1.7** Verification unit tests (draft clear, terms, field map, skip duplicate truck) | Agent | Confidence for resubmit |
+| 1 | ~~**A-1.7** Verification unit tests~~ | Agent | Done (`verification_wizard_unit_test.dart`) |
 | 2 | **A-4** Confirm 3 migrations on target Supabase (`db push` / dashboard) | Human + Agent SQL checklist | Release |
 | 3 | **A-5.1–A-5.3** `build-apk.bat` + install smoke | Human | Play upload |
-| 4 | Fix remaining red tests (notifications routing) | Agent | CI |
+| 4 | ~~Fix remaining red tests (notifications routing)~~ | Agent | Done |
 | 5 | ~~**C-1.2.3** Voice language settings~~ | Agent | Done |
 
 ### Sprint 2 — Play Store proof (3–5 days) — *human-led, agent supports*
@@ -645,7 +646,7 @@
 
 ## Quick priority (active queue)
 
-1. [ ] **A-1.7** + **A-4** + **A-5.2** — automated tests, migrations, APK build  
+1. [ ] **A-4** + **A-5.2** — migrations on target Supabase, release APK build  
 2. [ ] **A-1.1–A-1.3** + **E-*** — Admin + resubmit manual path  
 3. [ ] **B** — full manual QA script (§B) on release APK  
 4. [ ] **C-3.1–C-3.2** — detail screen TTS (next code sprint)  

@@ -19,6 +19,8 @@ import '../data/verification_repository.dart';
 import 'verification_wizard_upload_helper.dart';
 import 'verification_wizard_validation_helper.dart';
 
+import 'verification_fleet_ready_match.dart';
+import 'verification_resubmission.dart';
 import 'verification_wizard_state.dart';
 
 part 'verification_wizard_provider.navigation.dart';
