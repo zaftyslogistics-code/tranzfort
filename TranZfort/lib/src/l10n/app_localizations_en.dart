@@ -175,10 +175,11 @@ class AppLocalizationsEn extends AppLocalizations {
       'Unable to fetch Google sign-in token. Please try again.';
 
   @override
-  String get onboardingDiscardRoleTitle => 'Discard role selection?';
+  String get onboardingDiscardRoleTitle => 'Go back without saving?';
 
   @override
-  String get onboardingDiscardRoleMessage => 'Your selected role will be lost';
+  String get onboardingDiscardRoleMessage =>
+      'Your choice will be lost. Tap Find Loads or Post a Load again when you return.';
 
   @override
   String get onboardingDiscardChangesTitle => 'Discard changes?';
@@ -395,39 +396,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get onboardingSelectRoleError =>
-      'Select whether you are joining as a supplier or trucker.';
+      'Please tap Find Loads or Post a Load to continue.';
 
   @override
   String get onboardingRoleWorkspaceFailure =>
-      'We could not prepare your role workspace right now. Retry shortly after selecting your role again.';
+      'We could not prepare your workspace right now. Try selecting your option again shortly.';
 
   @override
   String get onboardingRoleSaveFailure =>
-      'We could not save your role right now. Retry shortly.';
+      'We could not save your choice right now. Retry shortly.';
 
   @override
-  String get onboardingChooseRoleTitle => 'Choose role';
+  String get onboardingChooseRoleTitle => 'Get started';
 
   @override
-  String get onboardingRoleQuestion => 'Which role fits your work?';
+  String get onboardingRoleQuestion =>
+      'Do you want to find loads or post a load?';
 
   @override
   String get onboardingRoleSubtitle =>
-      'Your role decides the tools, dashboard, and workflows TranZfort will prepare for you.';
+      'Choose what you do. Tap Find Loads to search for work, or Post a Load to list goods that need trucks.';
 
   @override
-  String get onboardingSupplierTitle => 'Supplier';
+  String get onboardingSupplierTitle => 'Post a Load';
 
   @override
   String get onboardingSupplierSubtitle =>
-      'Post loads, review bookings, manage trips, and track delivery follow-through.';
+      'Bhada post kare. I have goods to send and need trucks.';
 
   @override
-  String get onboardingTruckerTitle => 'Trucker';
+  String get onboardingTruckerTitle => 'Find Loads';
 
   @override
   String get onboardingTruckerSubtitle =>
-      'Find loads, manage fleet readiness, and execute active trips from one place.';
+      'Bhada khoje. I drive a truck and look for loads to carry.';
 
   @override
   String get onboardingContinue => 'Continue';
@@ -2143,6 +2145,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String truckerDashboardWelcomeBack(Object fullName) {
     return 'Welcome back, $fullName';
   }
+
+  @override
+  String truckerDashboardHeroGreeting(Object fullName) {
+    return 'Namaste, $fullName';
+  }
+
+  @override
+  String get truckerDashboardSearchLoadsAction => 'Search loads';
+
+  @override
+  String get truckerDashboardFiltersOnFindLoadsHint =>
+      'Truck type and filters on Find Loads tab';
 
   @override
   String get truckerDashboardTitle => 'Trucker Dashboard';

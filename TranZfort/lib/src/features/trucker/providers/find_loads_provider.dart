@@ -8,6 +8,18 @@ enum FindLoadsTab {
   superLoads,
 }
 
+class MarketplaceRoutePrefill {
+  final String originCity;
+  final String destinationCity;
+
+  const MarketplaceRoutePrefill({
+    required this.originCity,
+    required this.destinationCity,
+  });
+}
+
+final marketplaceRoutePrefillProvider = StateProvider<MarketplaceRoutePrefill?>((ref) => null);
+
 class FindLoadsState {
   final FindLoadsTab selectedTab;
   final MarketplaceSearchFilters filters;
@@ -74,7 +86,10 @@ class FindLoadsState {
 class FindLoadsController extends StateNotifier<FindLoadsState> {
   final TruckerMarketplaceRepository _repository;
 
-  FindLoadsController(this._repository) : super(FindLoadsState.initial()) {
+  FindLoadsController(
+    this._repository, {
+    MarketplaceSearchFilters initialFilters = const MarketplaceSearchFilters(),
+  }) : super(FindLoadsState.initial().copyWith(filters: initialFilters)) {
     loadInitial();
   }
 
@@ -163,5 +178,18 @@ class FindLoadsController extends StateNotifier<FindLoadsState> {
 }
 
 final findLoadsProvider = StateNotifierProvider.autoDispose<FindLoadsController, FindLoadsState>((ref) {
-  return FindLoadsController(ref.watch(truckerMarketplaceRepositoryProvider));
+  final prefill = ref.read(marketplaceRoutePrefillProvider);
+  if (prefill != null) {
+    ref.read(marketplaceRoutePrefillProvider.notifier).state = null;
+  }
+  final initialFilters = prefill != null
+      ? MarketplaceSearchFilters(
+          originCity: prefill.originCity,
+          destinationCity: prefill.destinationCity,
+        )
+      : const MarketplaceSearchFilters();
+  return FindLoadsController(
+    ref.watch(truckerMarketplaceRepositoryProvider),
+    initialFilters: initialFilters,
+  );
 });

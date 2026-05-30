@@ -476,6 +476,15 @@ class SupplierDashboardScreen extends ConsumerWidget {
     final List<Widget>? topBannerSection = topBanner == null ? null : <Widget>[topBanner];
 
     return ShellScrollView(
+      onRefresh: () async {
+        ref.invalidate(supplierDashboardProvider);
+        ref.invalidate(supplierProfileProvider);
+        ref.invalidate(supplierRecentLoadsProvider);
+        await Future.wait([
+          ref.read(supplierDashboardProvider.future),
+          ref.read(supplierProfileProvider.future),
+        ]);
+      },
       children: [
         ...?topBannerSection,
         HeroActionCard(

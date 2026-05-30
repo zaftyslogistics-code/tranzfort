@@ -1,11 +1,11 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-29 (FP-6 load card light experiment)  
-**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat QA pending); **FP-6 experiment** (light load card); **FP-4 deferred**  
+**Updated:** 2026-05-30 (FP-13 dashboard route-search hero; FP-10 pull-to-refresh; FP-11 notification badge; FP-12 dark ink heroes; FP-9 truck wizard TTS)  
+**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat QA pending); **FP-6 kept**; **FP-7 code complete** (device QA pending); **FP-8 code complete**; **FP-9 code complete** (device Hindi TTS QA pending); **FP-10 + FP-11 + FP-12 + FP-13 code complete** (device QA pending); **FP-4 deferred** (body/tyre filter bar on dashboard — superseded for route by FP-13); **Voice (Speaker) system deferred**  
 **Git branch:** `final-polish` — pushed to `origin`  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
-**Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
+**Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md) · **[hindi-improvement.md](./hindi-improvement.md)** (FP-9 spec)
 
 ---
 
@@ -56,7 +56,7 @@ Do **not** mix unrelated Play Console or Supabase migration work on this branch 
 | **Theme** | `app_theme.dart` | Material defaults (inputs use **solid** primary focus border — not gradient) |
 | **Cards** | `shared/widgets/content_cards.dart` | `HeroActionCard`, `StandardListCard`, `DetailSectionCard`, `StatCard` |
 | **Status** | `shared/widgets/status_components.dart` | `StatusChip` — **semantic** colors (active=green, pending=amber, etc.) |
-| **Actions** | `shared/widgets/action_buttons.dart` | `GradientButton` = **filled** `heroCta` (correct brand use today) |
+| **Actions** | `shared/widgets/action_buttons.dart` | **`PrimaryButton`** = filled `heroCta` + white label (`AppTypography.button`); **`GradientButton`** delegates to `PrimaryButton` |
 | **Marketplace** | `shared/widgets/marketplace/*`, `app_decorations.dart` | `BrandAccentChip`, `MarketplacePriceFactRow`, `StatusChip` on card |
 
 Source comments point to `docs/38-ui-ux-color-typography-and-elevation-system.md` and `docs/39-ui-ux-layout-spacing-and-component-composition.md` (design intent lives there even if files are gitignored).
@@ -65,9 +65,10 @@ Source comments point to `docs/38-ui-ux-color-typography-and-elevation-system.md
 
 | Widget | Pattern |
 |--------|---------|
-| `GradientButton` | Filled `AppColors.heroCta` + shadow |
+| `PrimaryButton` / `GradientButton` | Filled `AppColors.heroCta` + `AppShadows.heroCta` + **`AppTypography.button`** (white) |
 | Dark `HeroActionCard` | `heroDark` + `heroDarkGlow` radial wash (not border) |
 | Light `HeroActionCard` | Subtle `heroCardWash` fill + `divider` border |
+| Onboarding role cards | `BrandGradientBorder` + light card fill (FP-7) |
 
 ### What was teal-only (fixed on `final-polish`)
 
@@ -190,7 +191,7 @@ Card gap: use `AppSpacing.cardGap` (12) between full-bleed cards — not side in
 | File | Change |
 |------|--------|
 | `presentation/widgets/marketplace_filter_bar.dart` | **Any** chip (default); body types; **tyres when a specific type selected** (hidden for Any); counts from `truckerFleetTyreOptions` (6–22) |
-| `trucker_find_loads_support.dart` | Dark ink tabs + pinned bar (full-bleed gradient border); `_pinnedTruckFilterHeight` 44px / 78px |
+| `trucker_find_loads_support.dart` | Dark ink tabs + pinned bar (full-bleed gradient border); `_pinnedTruckFilterHeight` 53px / 94px (+20%) |
 | `trucker_find_loads_screen.dart` | Dark ink hero (`useInkGradient`); dark search fields + **sort dropdown**; minimal gap to load cards |
 | `find_loads_provider.dart` | Clear tyres when body type = Any (empty) |
 | `app_decorations.dart` | `inkHeroCard`, `inkFilterChip`, `inkAccentInset` helpers |
@@ -259,6 +260,168 @@ Source: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvem
 
 **Files:** `chat_screen.dart`, `chat_message_sections.dart`, `chat_screen_sections.dart`, `chat_screen_action_extensions.dart`, `app_en.arb`, `app_hi.arb`
 
+### FP-7 — Auth onboarding plain language + UI (**code complete**)
+
+| File | Change |
+|------|--------|
+| `onboarding_screens.dart` | Find Loads card first; `BrandGradientBorder` on role cards; `GradientButton` Continue |
+| `app_en.arb`, `app_hi.arb` | Plain-language headings, card titles, errors, discard dialog (no trucker/supplier jargon) |
+| `tts/tts_en.arb`, `tts/tts_hi.arb` | `ttsOnboardingChooseRole` — load dhoondhna / post karna (not “trucker/supplier”) |
+| `tool/gen_tts_l10n.ps1` | **Required** after TTS ARB edits — regenerates `tts_localizations_*.dart` (separate from app `gen-l10n`) |
+
+**Copy (shipped)**
+
+| Surface | EN | HI |
+|---------|----|----|
+| Question | Do you want to find loads or post a load? | भाड़ा खोजना है या पोस्ट करना है? |
+| Find Loads card | Find Loads — Bhada khoje | भाड़ा खोजें |
+| Post a Load card | Post a Load — Bhada post kare | भाड़ा पोस्ट करें |
+| TTS (HI) | Apna role chunein. Load dhoondhna hai ya load post karna hai? … | (Roman Hindi in `tts_hi.arb`) |
+
+**UI polish**
+
+- Role cards: `BrandGradientBorder`; per-card `TtsCardSpeakerButton` (Find Loads / Post Load)
+- **Continue:** brand gradient fill + **white** label (matches Book This Load)
+- Profile step: `OnboardingFieldSection` (gradient border + field speakers); enlarged inputs; single scroll (keyboard no longer hides name field)
+
+**Open:** FP-7.4 device QA (EN + HI + TTS auto-read)
+
+### FP-8 — Primary CTA gradient unification (**code complete**)
+
+Unified all trucker-facing **primary** CTAs to match **Book This Load** (`GradientButton` reference).
+
+| File | Change |
+|------|--------|
+| `action_buttons.dart` | `PrimaryButton` → `heroCta` gradient + `AppTypography.button` (white); `_ActionButtonFrame` forces light `DefaultTextStyle`; `GradientButton` → delegates to `PrimaryButton` |
+| `trucker_route_preview_screen.dart` | Open in Google Maps → **`OutlineButton`** (utility — excluded) |
+| `chat_screen_action_extensions.dart` | Reject booking confirm → **`DestructiveButton`** |
+| `step_business_details.dart` | Open Settings (GPS) → **`OutlineButton`** |
+
+**Now gradient (via `PrimaryButton` / `GradientButton`)**
+
+- Find Loads: Apply filters, empty-state CTAs
+- Load detail: Book This Load, confirm-booking dialogs, Open fleet dialog, system share sheet
+- Fleet: Save truck, Take photo (camera) in bottom sheet
+- Trip detail: stage advance, Upload POD, Take photo sheet
+- Chat: Approve booking (inline + dialog)
+- Verification / support / reviews / auth: submit & continue actions
+- Onboarding: Continue, Save and continue
+
+**Explicitly NOT gradient (utility / secondary)**
+
+- Open in Google Maps (`OutlineButton` or `GoogleMapsOpenButton` inset on dark cards)
+- Call supplier, chat, LR upload, retry, gallery picker, WhatsApp share
+- Reject booking dialog (`DestructiveButton`)
+
+### FP-9 — Hindi language & TTS improvements (**code complete**)
+
+**Spec:** [hindi-improvement.md](./hindi-improvement.md)
+
+| Phase | Task | Status |
+|-------|------|--------|
+| 1 | Devanagari rewrite of `tts/tts_hi.arb` + regen via `gen_tts_l10n.ps1` | [x] |
+| 1 | Conversational simplification of 15+ keys in `app_hi.arb` | [x] |
+| 2 | `DocumentUploadBox` optional `ttsMessage` + verification wizard speakers | [x] |
+| 2 | Aadhaar/PAN field TTS on identity step | [x] |
+| 2 | Conversational shell tab summaries (`user_app_shell.dart`) | [x] |
+| 3 | `TtsTermLocalizer` for material/body type in TTS builders | [x] |
+| 3 | Load detail truck requirements + trip estimate section speakers | [x] |
+| 3 | Load detail truck requirements + trip estimate section speakers | [x] |
+| 3 | Incoming chat text bubble on-demand TTS | [x] |
+| 2+ | **Truck verification wizard** — speakers on truck number, body type, tyres, capacity, RC, truck photo | [x] |
+
+**New TTS keys (truck wizard):** `ttsFieldTruckNumberInputDescription`, `ttsFieldTruckBodyTypeDescription`, `ttsFieldTruckTyresDescription`, `ttsFieldTruckCapacityInputDescription`, `ttsFieldUploadTruckPhotoPrompt`
+
+**Files:** `tts_hi.arb`, `tts_en.arb`, `app_hi.arb`, `tts_term_localizer.dart`, `load_*_tts_builder.dart`, `document_upload_box.dart`, `step_identity_documents.dart`, `step_truck_details.dart`, `step_profile_photo.dart`, `user_app_shell.dart`, `trucker_load_detail_sections.dart`, `trucker_load_detail_shared.dart`, `marketplace_load_card.dart`, `chat_message_sections.dart`, `onboarding_screens.dart`, `onboarding_profile_completion.dart`, `onboarding_ui_widgets.dart`
+
+**Open:** FP-9 device QA — Hindi TTS on marketplace card, load detail sections, verification uploads (identity + **truck step**), tab auto-read (B-6.9)
+
+### FP-10 — Pull-to-refresh (**code complete**)
+
+| Screen | Mechanism | File |
+|--------|-----------|------|
+| Trucker dashboard | `ShellScrollView.onRefresh` → `ref.invalidate` dashboard + profile | `trucker_dashboard_screen.dart` |
+| Supplier dashboard | Same → dashboard + profile + recent loads | `supplier_shell_dashboard_sections.dart` |
+| Find Loads (marketplace) | `RefreshIndicator` on `CustomScrollView` → `loadInitial()` | `trucker_find_loads_screen.dart` |
+| Trucker trips | `ShellScrollView.onRefresh` → `truckerTripsProvider.load()` | `trucker_trips_screen.dart` |
+| Supplier trips | Same pattern | `supplier_shell_trip_sections.dart` |
+| Notifications | `RefreshIndicator` on list → `notificationsProvider.load()` | `notifications_screen.dart` |
+| Supplier My Loads | Already had `RefreshIndicator` (unchanged) | `supplier_shell_my_loads_sections.dart` |
+
+**Shared:** `ShellScrollView` now accepts optional `onRefresh` and uses `AlwaysScrollableScrollPhysics` so pull works on short pages.
+
+**Open:** FP-10.1 device QA — pull on dashboard + Find Loads + notifications
+
+### FP-11 — Notification badge count fix (**code complete**)
+
+**Problem:** Bell showed stale count (e.g. 2) after tapping a notification — list updated optimistically but badge lagged or stuck.
+
+**Root cause:** `shellUnreadNotificationCountProvider` counted unread rows from Supabase realtime stream (incomplete snapshot), diverging from RPC total and from `notificationsProvider` optimistic `markRead`.
+
+**Fixes:**
+
+| Change | File |
+|--------|------|
+| `watchUnreadCount()` re-fetches authoritative RPC on each table change (not row-count from stream) | `notification_repository.dart` |
+| Stream merge preserves local `isRead: true` when realtime is briefly stale | `notification_providers.dart` |
+| `ref.invalidate(shellUnreadNotificationCountProvider)` after mark read / mark all read | `notifications_screen.dart` |
+| Notifications overview uses same provider as shell bell (single source of truth) | `notifications_screen.dart` |
+
+**Open:** FP-11.1 device QA — 2 unread → tap one → bell drops to 1 immediately (G-2.6 adjacent)
+
+### FP-12 — Dark ink hero headers (**code complete**)
+
+Align list/detail screen **top widgets** with load-detail dark ink pattern: `HeroActionCard(useDarkTheme: true, useInkGradient: true)` + `StatusBadge` / `FilterChipBar` chips.
+
+**Reference:** Find Loads hero + load detail `_LoadRoutePriceSection` / `_InkDetailFactChip`.
+
+| Screen | Was | Now | File |
+|--------|-----|-----|------|
+| Trucker Trips | Light `DetailSectionCard` | Dark ink hero + filter chips | `trucker_trips_screen.dart` |
+| Notifications | Light `SectionCard` | Dark ink hero + unread/high-priority badges | `notifications_screen.dart` |
+| Profile | Light `SectionCard` only | Dark ink hero + readiness badges; detail rows below | `shell_profile_screen.dart` |
+| Settings | Light `SectionCard` only | Dark ink hero (UI + voice language chips) | `shell_settings_screen.dart` |
+| Supplier My Loads | Light header | Dark ink hero + Active/Completed tabs | `supplier_shell_my_loads_sections.dart` |
+| Supplier Trips | Light header | Dark ink hero + filter chips | `supplier_shell_trip_sections.dart` |
+| Post Load | Light hero | Dark ink hero | `post_load_screen.dart` |
+| Supplier Load Detail | Light hero | Dark ink hero + status badges | `supplier_shell_load_detail_sections.dart` |
+
+**Already dark (unchanged):** Trucker/supplier dashboard, Find Loads, Messages, Fleet, Trip detail, Support, Chat context banner, Trucker load detail.
+
+**Left light / special (intentional):** Verification status banners (`VerificationBanner`), Route Preview (plain title), wizard step headers.
+
+**Open:** FP-12.1 visual QA on 360dp — trips, notifications, profile, settings, supplier lists
+
+### FP-13 — Dashboard route-search hero (**code complete**)
+
+Replace the trucker dashboard welcome poster with a **route search home** — same dark ink hero as Find Loads, but **From | To only** (no body type, tyres, or advanced filters on dashboard).
+
+**Product direction:**
+
+| Element | Was | Now |
+|---------|-----|-----|
+| Hero role | Large “Welcome back” + text badges + duplicate Find Loads CTA | Route search + single “Search loads” CTA |
+| Greeting | Dominant title | Secondary subtitle — “Namaste, {name}” |
+| Trust | Full `StatusBadge` text | Compact icon chips (verified ✓ + truck count) with tooltips |
+| Search | None on dashboard | `MarketplaceRouteSearchFields` — origin/destination + city suggestions |
+| CTA | Full-width Find Loads in hero | “Search loads” / “Load khojein” → Find Loads tab with route prefilled |
+| Filters hint | — | “Truck type and filters on Find Loads tab” (11px) |
+| Quick Actions | Unchanged | Find Loads, Fleet, Trips, Chat grid below hero |
+
+**Implementation:**
+
+| Change | File |
+|--------|------|
+| Dashboard hero widget (greeting, trust row, route fields, CTA) | `widgets/dashboard_route_search_hero.dart` |
+| Shared From \| To search + suggestions | `widgets/marketplace_route_search_fields.dart`, `widgets/city_suggestion_list.dart` |
+| Route prefill across tab navigation (`autoDispose` safe) | `find_loads_provider.dart` — `marketplaceRoutePrefillProvider` |
+| Dashboard screen wiring | `trucker_dashboard_screen.dart` |
+| l10n | `truckerDashboardHeroGreeting`, `truckerDashboardSearchLoadsAction`, `truckerDashboardFiltersOnFindLoadsHint` |
+
+**Open:** FP-13.1 device QA — enter origin/dest on dashboard → tap Search loads → Find Loads tab shows fields + filtered feed; trust tooltips readable on 360dp
+
+**Deferred (separate epic):** Voice (Speaker) system — Stop, Replay, persistent Mute, voice strip in app bar (not FP-13)
+
 ### Not started (release tail)
 
 - Ship gate, full device QA matrix, Play upload
@@ -274,8 +437,15 @@ Source: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvem
 | Find Loads filters | **FP-3** | Dark ink hero/tabs/pinned; Any + conditional tyres | **Done** |
 | Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **Done** |
 | Chat UX polish | **FP-5** | Centered lane, scroll, composer, grouping | **In progress** |
-| Load card light theme | **FP-6** | Light surface + brand gradient border (experiment) | **Experiment** |
-| Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | **Deferred** |
+| Load card light theme | **FP-6** | Light surface + brand gradient border | **Kept** |
+| Onboarding plain language | **FP-7** | Bhada khoje / post kare; brand cards + gradient Continue | **Code complete** (QA pending) |
+| Primary CTA gradient | **FP-8** | `PrimaryButton` = heroCta + white text app-wide | **Code complete** |
+| Hindi TTS + l10n | **FP-9** | Devanagari TTS, conversational HI, verification/load/chat speakers | **Code complete** (QA pending) |
+| Pull-to-refresh | **FP-10** | Dashboard, Find Loads, trips, notifications | **Code complete** |
+| Notification badge | **FP-11** | Bell count sync with mark-read | **Code complete** |
+| Dark ink heroes | **FP-12** | List screen top widgets match load-detail style | **Code complete** |
+| Dashboard route search | **FP-13** | Dashboard hero = From/To search + prefill Find Loads | **Code complete** |
+| Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard (body/tyres) | **Deferred** — route covered by FP-13 |
 
 ---
 
@@ -500,7 +670,7 @@ Coordinates present?
 | Hero | `HeroActionCard` (`useInkGradient`) | Origin/dest/material; dark **sort dropdown** |
 | Filter bar | `marketplace_filter_bar.dart` | **[Any]** (default) + body types; tyres when type ≠ Any |
 | Tabs | `_FindLoadsFeedTabs` | All / Super — dark ink, full-bleed, scroll away |
-| Pinned | `_PinnedTruckFilterBar` | Full-bleed ink; 44px (Any) / 78px (+ tyres) |
+| Pinned | `_PinnedTruckFilterBar` | Full-bleed ink; 53px (Any) / 94px (+ tyres) |
 | Provider | `find_loads_provider.dart` | Clears tyres when body type = Any |
 
 ### Product direction (shipped)
@@ -542,7 +712,7 @@ Coordinates present?
 | FP-3.1 | Extract `MarketplaceFilterBar` | Shared widget under `presentation/widgets/` | [x] |
 | FP-3.2 | Wire pinned truck filter | Provider callbacks; separate from tabs | [x] |
 | FP-3.3 | Clear tyres on Any | `find_loads_provider` clears tyres when body type empty | [x] |
-| FP-3.4 | Fix pinned header height | 44px (Any) / 78px (+ tyres); top-aligned | [x] |
+| FP-3.4 | Fix pinned header height | 53px (Any) / 94px (+ tyres); +20% for tyre row | [x] |
 | FP-3.12 | Dark ink UI | Hero, tabs, pinned bar match load-detail ink gradient | [x] |
 | FP-3.13 | Any chip + tyre rules | Any default; tyres for specific types only; fleet tyre list | [x] |
 | FP-3.5 | Scroll-hide behavior | Hero + tabs scroll; truck filter pinned | [x] |
@@ -566,9 +736,9 @@ Coordinates present?
 
 ---
 
-## FP-6 — Marketplace load card light theme (**experiment**)
+## FP-6 — Marketplace load card light theme (**kept**)
 
-> **Revert:** set `AppDecorations.marketplaceLoadCardLightExperiment = false` in `app_decorations.dart` (one flag restores dark ink card).
+> **Decision (2026-05-30):** Device review approved light card on Find Loads feed. Revert anytime: `AppDecorations.marketplaceLoadCardLightExperiment = false`.
 
 Ref: FP-1 shipped dark ink card; `docs/loadpost-ui-ux.md` original spec used light `surfaceBase` + divider.
 
@@ -598,16 +768,132 @@ Ref: FP-1 shipped dark ink card; `docs/loadpost-ui-ux.md` original spec used lig
 | FP-6.1 | Centralized light fill + text helpers in `AppDecorations` | [x] |
 | FP-6.2 | `marketplaceCardFill()` switch on experiment flag | [x] |
 | FP-6.3 | `onDarkSurface` on header, route, price row, footer, TTS | [x] |
-| FP-6.4 | Device QA — light card on Find Loads feed (EN/HI) | [ ] |
-| FP-6.5 | Keep or revert experiment | [ ] |
+| FP-6.4 | Device QA — light card on Find Loads feed (EN/HI) | [x] |
+| FP-6.5 | Keep or revert experiment | [x] keep |
 
 ### Acceptance criteria
 
 - [x] Brand gradient border unchanged on full-bleed card.
 - [x] Light fill uses `AppColors.cardSurface` (not ad-hoc hex).
 - [x] All card text/icons respect `onDarkSurface` / centralized color helpers.
-- [ ] Readable on Find Loads dark ink hero + pinned filter background.
-- [ ] Revert is one boolean flip with no other file edits.
+- [x] Readable on Find Loads dark ink hero + pinned filter background.
+- [x] Revert is one boolean flip with no other file edits.
+
+### FP-3 follow-up — pinned truck filter height (+20%)
+
+| Change | Was | Now |
+|--------|-----|-----|
+| Pinned height (Any) | 44px | **53px** |
+| Pinned height (+ tyres) | 78px | **94px** |
+| Tyre row gap | `AppSpacing.xs` | **`AppSpacing.sm`** |
+| Tyre chip padding / icon | xs / 14px | **5px vertical / 16px icon** |
+
+Files: `trucker_find_loads_support.dart`, `marketplace_filter_bar.dart`
+
+---
+
+## FP-7 — Auth onboarding plain language (**code complete**)
+
+Ref: `RoleSelectionScreen` — first choice after sign-in for new users.
+
+### Problem
+
+“Trucker / Supplier / role / workflows” jargon is unclear for many drivers and load owners.
+
+### Product direction (shipped in copy)
+
+| Old label | New label (EN) | New label (HI) |
+|-----------|------------------|----------------|
+| Trucker | **Find Loads** (+ Bhada khoje hint) | **भाड़ा खोजें** |
+| Supplier | **Post a Load** (+ Bhada post kare hint) | **भाड़ा पोस्ट करें** |
+| Choose role | **Get started** / find vs post question | **शुरू करें** / **भाड़ा खोजना है या पोस्ट करना है?** |
+| TTS (HI) | — | *Apna role chunein. Load dhoondhna hai ya load post karna hai?* |
+
+### UI (shipped)
+
+```
+┌─────────────────────────────────────────────┐
+│ Get started                          [TTS]  │
+│ Do you want to find loads or post a load?   │
+│ Tap the option that matches your work…      │
+├─────────────────────────────────────────────┤
+│ ┌─ gradient border ─────────────────────┐   │
+│ │ 🚛 Find Loads                         │   │  ← first (most truckers)
+│ │    Bhada khoje — …                    │   │
+│ └───────────────────────────────────────┘   │
+│ ┌─ gradient border ─────────────────────┐   │
+│ │ 📦 Post a Load                        │   │
+│ │    Bhada post kare — …                │   │
+│ └───────────────────────────────────────┘   │
+│ ┌───────────────────────────────────────┐   │
+│ │         Continue  (gradient + white)    │   │
+│ └───────────────────────────────────────┘   │
+└─────────────────────────────────────────────┘
+```
+
+### Task breakdown
+
+| # | Task | Status |
+|---|------|--------|
+| FP-7.1 | Plain-language ARB (EN + HI) for role cards, headings, errors, discard dialog | [x] |
+| FP-7.2 | TTS `ttsOnboardingChooseRole` (EN + HI) — load find/post not trucker/supplier | [x] |
+| FP-7.2b | Regenerate TTS Dart via `tool/gen_tts_l10n.ps1` (fixes stale “trucker hain ya supplier”) | [x] |
+| FP-7.3 | UI: Find Loads card first; `BrandGradientBorder`; icon chips; spacing/semantics | [x] |
+| FP-7.3b | Continue + profile Save: `GradientButton` / `PrimaryButton` with white label | [x] |
+| FP-7.4 | Device QA — low-literacy walkthrough EN + HI (cards + TTS) | [ ] |
+| FP-7.5 | Optional: per-card TTS on tap | [ ] |
+
+### Files
+
+- `onboarding_screens.dart`, `onboarding_profile_completion.dart`
+- `app_en.arb`, `app_hi.arb`, `tts/tts_en.arb`, `tts/tts_hi.arb`
+- `app_decorations.dart` (`BrandGradientBorder`)
+- `action_buttons.dart` (Continue styling — see FP-8)
+
+---
+
+## FP-8 — Primary CTA gradient unification (**code complete**)
+
+Ref: **Book This Load** on trucker load detail — teal→orange fill, white label.
+
+### Problem
+
+Mixed primary styles: solid teal `PrimaryButton` vs gradient `GradientButton`; onboarding Continue label could inherit dark theme text.
+
+### Shipped
+
+| Change | Detail |
+|--------|--------|
+| `PrimaryButton` | `AppColors.heroCta` gradient + `AppShadows.heroCta` |
+| Label color | `AppTypography.button` (`textOnPrimary` / white) |
+| Frame | `_ActionButtonFrame` wraps label in `DefaultTextStyle` + `IconTheme` so parent theme cannot override |
+| `GradientButton` | Thin delegate to `PrimaryButton` (single implementation) |
+
+### Exclusions (stay outline / destructive / custom)
+
+| Pattern | Widget |
+|---------|--------|
+| Open in Google Maps | `OutlineButton` or `GoogleMapsOpenButton` |
+| Open Settings (GPS dialogs) | `OutlineButton` |
+| Reject booking confirm | `DestructiveButton` |
+| Secondary actions | `OutlineButton`, `TextActionButton` |
+
+### Task breakdown
+
+| # | Task | Status |
+|---|------|--------|
+| FP-8.1 | Unify `PrimaryButton` gradient + white typography | [x] |
+| FP-8.2 | `GradientButton` → delegate to `PrimaryButton` | [x] |
+| FP-8.3 | Demote utility primaries (Maps route preview, GPS settings) | [x] |
+| FP-8.4 | Reject booking → `DestructiveButton` | [x] |
+| FP-8.5 | Device spot-check: onboarding Continue, Book This Load, fleet save, trip POD | [ ] |
+
+### Files
+
+- `lib/src/shared/widgets/action_buttons.dart`
+- `trucker_route_preview_screen.dart`
+- `chat_screen_action_extensions.dart`
+- `wizard_steps/step_business_details.dart`
 
 ---
 
@@ -832,10 +1118,12 @@ Dashboard                          Find Loads tab
 | 2 | **FP-3** Find Loads filters | **Done** |
 | 3 | **FP-2** Load detail | **Done** |
 | 4 | **FP-5** Chat UX polish | **In progress** |
-| 5 | **G-2.6, B-6.8–10, C-6** | QA pass |
+| 5 | **FP-6** Light load card | **Kept** |
+| 6 | **FP-7 / FP-8** Onboarding + primary CTA | **Code complete** (device QA pending) |
+| 7 | **G-2.6, B-6.8–10, C-6** | QA pass |
 | — | **FP-4** Dashboard filters | **Deferred** (post-merge) |
-| 6 | **D-4, D-7–D-8** | l10n hygiene |
-| 7 | **A-5.6–7, F-4–5** | Play upload + docs commit |
+| 8 | **D-4, D-7–D-8** | l10n hygiene |
+| 9 | **A-5.6–7, F-4–5** | Play upload + docs commit |
 
 ---
 
@@ -846,7 +1134,8 @@ Dashboard                          Find Loads tab
 | Command | Scope |
 |---------|--------|
 | `dart tool/verify_l10n.dart` | ARB parity, unused keys |
-| `flutter gen-l10n` | Regenerate after ARB edits (see Notes) |
+| `flutter gen-l10n` | Regenerate app l10n after `app_*.arb` edits |
+| `powershell tool/gen_tts_l10n.ps1` | Regenerate TTS l10n after `tts_*.arb` edits (FP-7) |
 | `flutter test test/features/tts/load_marketplace_card_tts_builder_test.dart` | Card TTS |
 | `flutter test test/features/trucker/presentation/trucker_find_loads_screen_test.dart` | Find Loads UI — **see Notes** |
 | `flutter test test/.../trucker_load_detail_screen_test.dart` | Detail after FP-2 |
@@ -859,6 +1148,12 @@ Dashboard                          Find Loads tab
 3. **Load detail:** no in-app map; external maps; booking unchanged.
 4. **TTS:** speaker on card + detail sections; HI + EN.
 5. **Nav regression:** Messages / Trips / Notifications (G-2.6).
+6. **Onboarding (FP-7):** role cards readable EN/HI; TTS says load find/post not trucker/supplier; Continue white on gradient; profile step scrollable with field speakers.
+7. **Primary CTAs (FP-8):** Book This Load, fleet save, trip stage button — all gradient + white label; Maps stays outline/inset.
+8. **Hindi TTS (FP-9):** marketplace card + load detail sections + verification wizard (identity **and truck step**) in HI voice.
+9. **Pull-to-refresh (FP-10):** dashboard + Find Loads + notifications pull down reloads data.
+10. **Notifications (FP-11):** tap notification → bell count decrements without lag.
+11. **Dark heroes (FP-12):** Trips, Notifications, Profile, Settings tops match dark ink chip style.
 
 ### Regression
 
@@ -895,36 +1190,66 @@ Dashboard                          Find Loads tab
 | 2026-05-29 | FP-5 chat UX polish: grouping, scroll/FAB/pill, composer, quick replies; WhatsApp edge alignment (receiver left / sender right) |
 | 2026-05-29 | **Session pause** — branch pushed; resume FP-5.15 device QA + release tail |
 | 2026-05-29 | FP-6 experiment: light marketplace load card + brand gradient border (revert via `marketplaceLoadCardLightExperiment`) |
+| 2026-05-30 | FP-6 kept after device review; FP-3 pinned filter +20%; FP-7 onboarding plain language (Bhada khoje / post kare) |
+| 2026-05-30 | FP-7 UI: `BrandGradientBorder` role cards; gradient Continue; TTS regen via `gen_tts_l10n.ps1` |
+| 2026-05-30 | FP-8: `PrimaryButton` unified to heroCta gradient + white `AppTypography.button`; utility CTAs demoted |
+| 2026-05-30 | FP-9: Devanagari `tts_hi.arb`; conversational `app_hi.arb`; verification/load-detail/chat TTS speakers; shell tab summaries — see [hindi-improvement.md](./hindi-improvement.md) |
+| 2026-05-30 | FP-9b: Truck verification wizard TTS — number, body type, tyres, capacity, RC, truck photo speakers |
+| 2026-05-30 | FP-7: onboarding profile scroll/keyboard fix; `OnboardingFieldSection` + enlarged fields; per-card TTS on role cards |
+| 2026-05-30 | FP-10: pull-to-refresh on trucker/supplier dashboard, Find Loads, trips, notifications; `ShellScrollView.onRefresh` |
+| 2026-05-30 | FP-11: notification bell count — RPC-based unread stream, merge fix, invalidate on mark read |
+| 2026-05-30 | FP-12: dark ink `HeroActionCard` top headers on trips, notifications, profile, settings, supplier my loads/trips/post load/load detail |
+| 2026-05-30 | FP-13: trucker dashboard route-search hero — Namaste greeting, icon trust row, From/To fields, Search loads CTA, `marketplaceRoutePrefillProvider` |
 
 ---
 
-## Resume tomorrow (2026-05-30+)
+## Resume (latest)
 
-### Done this session
+### Done on branch `final-polish` (not yet merged to `main`)
 
-- [x] FP-2 signed off (diesel ₹100/L, dark ink load detail)
-- [x] FP-5 CI-1–CI-14 implemented in code (chat lane → **WhatsApp edge align**, grouping, scroll, composer, empty/error UX)
-- [x] Branch committed + pushed to `origin/final-polish`
+- [x] FP-0–FP-3 — marketplace card, Find Loads filters, load detail dark ink
+- [x] FP-2 — diesel ₹100/L, external maps, earnings card
+- [x] FP-5 CI-1–CI-14 — chat grouping, scroll, composer, quick replies, incoming message TTS (FP-9)
+- [x] FP-6 — light load card + brand gradient border **kept**
+- [x] FP-7 — onboarding plain language; brand gradient role cards; gradient Continue; profile field speakers + scroll fix
+- [x] FP-8 — unified `PrimaryButton` / `GradientButton` heroCta + white label
+- [x] FP-9 — Hindi Devanagari TTS, conversational `app_hi.arb`, verification identity + **truck** speakers, load detail/chat TTS, shell tab summaries — [hindi-improvement.md](./hindi-improvement.md)
+- [x] FP-10 — pull-to-refresh (dashboard, Find Loads, trips, notifications)
+- [x] FP-11 — notification bell count sync with mark-read
+- [x] FP-12 — dark ink hero headers on remaining list/detail screen tops
+- [x] FP-13 — dashboard route-search hero (From/To + prefill Find Loads)
+- [ ] **Commit + push** full batch
+- [ ] Device QA sign-off (see pick-up table below)
 
 ### Pick up here
 
 | Priority | Task | Notes |
 |----------|------|--------|
-| 1 | **FP-5.15** device QA | Supplier + trucker chat: send/receive scroll, pill/FAB, long-press mic, map/voice cards, quick-reply chips |
-| 2 | Apply diesel migration | `20260529120100_update_diesel_prices_to_100.sql` on remote Supabase if not applied |
-| 3 | Release QA matrix | G-2.6, B-6.8–10, C-6 from carry-over section |
-| 4 | `build-apk.bat` → Play internal | A-5.6–7 after QA sign-off |
-| 5 | PR `final-polish` → `main` | After device QA green |
+| 1 | **Push** FP-7 through FP-13 batch | After commit on `final-polish` |
+| 2 | **FP-13.1** device QA | Dashboard route search → Find Loads prefill |
+| 3 | **FP-10.1** device QA | Pull refresh on dashboard + Find Loads |
+| 4 | **FP-11.1** device QA | Notification bell decrements on tap (2 → 1) |
+| 5 | **FP-12.1** device QA | Dark ink heroes on trips, notifications, profile, settings |
+| 6 | **FP-9 / B-6.9** device QA | Hindi TTS: marketplace, load detail, verification (identity + truck), tab auto-read |
+| 7 | **FP-5.15** device QA | Supplier + trucker chat threads |
+| 8 | **FP-7.4 / FP-8.5** | Onboarding EN/HI + primary button spot-check |
+| 9 | Apply diesel migration | `20260529120100_update_diesel_prices_to_100.sql` |
+| 10 | Release QA matrix | G-2.6, B-6.8–10, C-6 |
+| 11 | `build-apk.bat` → Play internal | After QA sign-off |
+| 12 | PR `final-polish` → `main` | After device QA green |
 
 ### Deferred (post-merge)
 
-- **FP-4** — dashboard `MarketplaceFilterBar`
+- **FP-4** — dashboard body/tyre `MarketplaceFilterBar` (route search shipped as FP-13)
+- **Voice (Speaker) system** — Stop, Replay, persistent Mute, expanded app-bar controls
 - **P7.7** — full bot chat (`phase-07-communication-chat-bot.md`)
+- **FP-12 follow-up** — dark ink on verification status banners, route preview (if product wants)
 
 ### Known test gaps (non-blocking)
 
 - `chat_screen_test.dart` — Supabase init in harness
 - `trucker_find_loads_screen_test.dart` — 4 overflow/harness failures
+- TTS builder tests updated for Devanagari (`test/features/tts/`) — passing
 
 ---
 
@@ -932,7 +1257,34 @@ Dashboard                          Find Loads tab
 
 ### Design system compliance
 
-All marketplace gradient styling goes through **`AppDecorations`** / **`BrandAccentChip`**. List cards do **not** show load status — use **`StatusChip`** on detail/trips/admin only. Do not add ad-hoc gradient `BoxDecoration`s in feature screens.
+All marketplace gradient styling goes through **`AppDecorations`** / **`BrandAccentChip`**. Primary filled CTAs go through **`PrimaryButton`** / **`GradientButton`** in `action_buttons.dart` — do not hand-roll gradient buttons in feature screens. List cards do **not** show load status — use **`StatusChip`** on detail/trips/admin only.
+
+### TTS l10n regen (FP-7 / FP-9)
+
+TTS strings live in `lib/l10n/tts/*.arb` and compile to `lib/src/l10n/tts_localizations_*.dart` via a **separate** config (`l10n_tts.yaml`). After editing TTS ARB:
+
+```powershell
+cd TranZfort
+powershell -ExecutionPolicy Bypass -File tool/gen_tts_l10n.ps1
+```
+
+App UI strings still use `flutter gen-l10n` only. Stale TTS Dart caused onboarding to speak old “trucker hain ya supplier” copy until regen (FP-7.2b).
+
+### Pull-to-refresh (FP-10)
+
+Use `ShellScrollView(onRefresh: ...)` for tab screens built on a single scroll column. For `CustomScrollView` feeds (Find Loads), wrap with `RefreshIndicator` + `AlwaysScrollableScrollPhysics`.
+
+### Notification badge (FP-11)
+
+Shell bell uses `shellUnreadNotificationCountProvider` (RPC + realtime). After any `markRead` / `markAllRead`, invalidate that provider — do not count unread from stream row snapshots alone.
+
+### Dark ink heroes (FP-12)
+
+List screen tops: `HeroActionCard(useDarkTheme: true, useInkGradient: true, titleIcon: ...)` with `FilterChipBar` or `StatusBadge` chips in `child`. Match Find Loads / load detail — do not add one-off ink `BoxDecoration`s in feature files.
+
+### Dashboard route search (FP-13)
+
+Trucker dashboard hero is a **route search home**, not a welcome poster. Reuse `MarketplaceRouteSearchFields` for From/To; navigate via `marketplaceRoutePrefillProvider` so Find Loads receives origin/destination after tab switch (`findLoadsProvider` is `autoDispose`). Body type and tyre filters stay on Find Loads only.
 
 ### Widget tests
 

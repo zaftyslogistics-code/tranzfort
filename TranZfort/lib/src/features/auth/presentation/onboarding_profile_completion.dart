@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_spacing.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../l10n/tts_localizations.dart';
@@ -18,6 +19,7 @@ import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../data/auth_repository_profile_ops.dart';
 import '../providers/auth_providers.dart';
+import 'onboarding_ui_widgets.dart';
 import '../../verification/data/verification_location_service.dart' as location_service;
 import '../../supplier/data/supplier_location_services.dart';
 
@@ -455,7 +457,8 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
     final AppLocalizations l10n = AppLocalizations.of(context);
     final profile = ref.watch(currentProfileProvider).valueOrNull;
     final onboardingState = ref.watch(onboardingControllerProvider);
-    final ttsSummary = limitTtsSentences(TtsLocalizations.of(context).ttsOnboardingCompleteProfile);
+    final ttsL10n = TtsLocalizations.of(context);
+    final ttsSummary = limitTtsSentences(ttsL10n.ttsOnboardingCompleteProfile);
 
     return PopScope(
       canPop: !_hasUnsavedChanges(),
@@ -484,6 +487,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
         }
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           title: Text(l10n.onboardingCompleteProfileTitle),
           actions: const [
@@ -494,139 +498,152 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
         body: SafeArea(
           child: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(24),
+              SingleChildScrollView(
+                padding: EdgeInsets.fromLTRB(
+                  AppSpacing.xl,
+                  AppSpacing.xl,
+                  AppSpacing.xl,
+                  AppSpacing.xl + MediaQuery.viewInsetsOf(context).bottom,
+                ),
+                keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                Text(
-                  l10n.onboardingCompleteProfileHeading,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  l10n.onboardingCompleteProfileSubtitle,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                const SizedBox(height: 24),
-                AppTextField(
-                  controller: _nameController,
-                  label: l10n.onboardingFullNameLabel,
-                  hintText: l10n.onboardingFullNameHint,
-                ),
-                const SizedBox(height: 16),
-                AppTextField(
-                  controller: _mobileController,
-                  label: l10n.onboardingMobileLabel,
-                  hintText: profile?.mobile?.isNotEmpty == true ? profile!.mobile : '+91XXXXXXXXXX',
-                  keyboardType: TextInputType.phone,
-                ),
-                const SizedBox(height: 16),
-                // Location capture section
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.divider),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.locationLabel,
-                        style: Theme.of(context).textTheme.titleSmall,
+                    Text(
+                      l10n.onboardingCompleteProfileHeading,
+                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    Text(
+                      l10n.onboardingCompleteProfileSubtitle,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
+                    ),
+                    const SizedBox(height: AppSpacing.xl),
+                    OnboardingFieldSection(
+                      label: l10n.onboardingFullNameLabel,
+                      ttsMessage: ttsL10n.ttsOnboardingProfileFullName,
+                      child: AppTextField(
+                        controller: _nameController,
+                        hintText: l10n.onboardingFullNameHint,
+                        enlarged: true,
+                        scrollPadding: const EdgeInsets.only(bottom: 160),
                       ),
-                      const SizedBox(height: 8),
-                      if (_city != null && _state != null)
-                        Text(
-                          '$_city, $_state',
-                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                color: AppColors.success,
-                                fontWeight: FontWeight.w500,
-                              ),
-                        )
-                      else
-                        Text(
-                          l10n.locationNotAdded,
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                color: AppColors.textMuted,
-                              ),
-                        ),
-                      const SizedBox(height: 12),
-                      Row(
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    OnboardingFieldSection(
+                      label: l10n.onboardingMobileLabel,
+                      ttsMessage: ttsL10n.ttsOnboardingProfileMobile,
+                      child: AppTextField(
+                        controller: _mobileController,
+                        hintText: profile?.mobile?.isNotEmpty == true ? profile!.mobile : '+91XXXXXXXXXX',
+                        keyboardType: TextInputType.phone,
+                        enlarged: true,
+                        scrollPadding: const EdgeInsets.only(bottom: 160),
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    OnboardingFieldSection(
+                      label: l10n.locationLabel,
+                      ttsMessage: ttsL10n.ttsOnboardingProfileLocation,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
-                              icon: const Icon(Icons.location_on, size: 18),
-                              label: Text(_isCapturingLocation ? l10n.locationCapturing : l10n.useCurrentLocation),
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
+                          if (_city != null && _state != null)
+                            Text(
+                              '$_city, $_state',
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: AppColors.success,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                            )
+                          else
+                            Text(
+                              l10n.locationNotAdded,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textMuted,
+                                  ),
+                            ),
+                          const SizedBox(height: AppSpacing.md),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: OutlineButton(
+                                  label: _isCapturingLocation ? l10n.locationCapturing : l10n.useCurrentLocation,
+                                  onPressed: _isCapturingLocation ? null : _handleCaptureLocation,
+                                  height: 48,
+                                ),
+                              ),
+                              const SizedBox(width: AppSpacing.sm),
+                              Expanded(
+                                child: OutlineButton(
+                                  label: l10n.addManually,
+                                  onPressed: _isCapturingLocation ? null : _handleManualLocation,
+                                  height: 48,
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (_city != null && _state != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: AppSpacing.sm),
+                              child: Align(
+                                alignment: Alignment.centerLeft,
+                                child: TextActionButton(
+                                  label: l10n.clearLocation,
+                                  height: 40,
+                                  onPressed: _isCapturingLocation
+                                      ? null
+                                      : () {
+                                          setState(() {
+                                            _city = null;
+                                            _state = null;
+                                            _latitude = null;
+                                            _longitude = null;
+                                          });
+                                        },
+                                ),
                               ),
                             ),
-                          ),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: OutlinedButton.icon(
-                              onPressed: _isCapturingLocation ? null : _handleManualLocation,
-                              icon: const Icon(Icons.edit_location, size: 18),
-                              label: Text(l10n.addManually),
-                              style: OutlinedButton.styleFrom(
-                                padding: const EdgeInsets.symmetric(vertical: 12),
-                              ),
-                            ),
-                          ),
                         ],
                       ),
-                      if (_city != null && _state != null)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8),
-                          child: TextButton.icon(
-                            onPressed: _isCapturingLocation ? null : () {
-                              setState(() {
-                                _city = null;
-                                _state = null;
-                                _latitude = null;
-                                _longitude = null;
-                              });
-                            },
-                            icon: const Icon(Icons.clear, size: 16),
-                            label: Text(l10n.clearLocation),
-                            style: ButtonStyle(
-                              textStyle: WidgetStateProperty.all(TextStyle(fontSize: 12)),
+                    ),
+                    const SizedBox(height: AppSpacing.lg),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Checkbox(
+                            value: _termsAccepted,
+                            onChanged: (value) => setState(() => _termsAccepted = value ?? false),
+                          ),
+                        ),
+                        const SizedBox(width: AppSpacing.sm),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () => setState(() => _termsAccepted = !_termsAccepted),
+                            child: Text(
+                              l10n.onboardingTermsAcceptance,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.textSecondary,
+                                    height: 1.35,
+                                  ),
                             ),
                           ),
                         ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 24,
-                      height: 24,
-                      child: Checkbox(
-                        value: _termsAccepted,
-                        onChanged: (value) => setState(() => _termsAccepted = value ?? false),
-                      ),
+                      ],
                     ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: GestureDetector(
-                        onTap: () => setState(() => _termsAccepted = !_termsAccepted),
-                        child: Text(l10n.onboardingTermsAcceptance),
-                      ),
+                    const SizedBox(height: AppSpacing.xl),
+                    GradientButton(
+                      label: l10n.onboardingSaveAndContinue,
+                      onPressed: _submit,
+                      isLoading: onboardingState.isSubmitting,
                     ),
-                  ],
-                ),
-                const Spacer(),
-                PrimaryButton(
-                  label: l10n.onboardingSaveAndContinue,
-                  onPressed: _submit,
-                  isLoading: onboardingState.isSubmitting,
-                ),
                   ],
                 ),
               ),

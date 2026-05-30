@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
+import '../../core/theme/app_typography.dart';
 
 class GradientButton extends StatelessWidget {
   final String label;
@@ -20,17 +21,11 @@ class GradientButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _ActionButtonFrame(
-      height: height,
+    return PrimaryButton(
+      label: label,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: Colors.white,
-      decoration: BoxDecoration(
-        gradient: AppColors.heroCta,
-        borderRadius: BorderRadius.circular(AppRadius.button),
-        boxShadow: AppShadows.heroCta,
-      ),
-      child: Text(label, style: Theme.of(context).textTheme.labelLarge),
+      height: height,
     );
   }
 }
@@ -71,30 +66,28 @@ class PrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final backgroundColor = AppColors.primary;
-    final textColor = AppColors.inkTextOnAccent;
-    final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-      color: textColor,
-    );
+    final textStyle = AppTypography.button;
 
     return _ActionButtonFrame(
       height: height,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: textColor,
+      foregroundColor: AppColors.textOnPrimary,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        gradient: AppColors.heroCta,
         borderRadius: BorderRadius.circular(AppRadius.button),
-        boxShadow: AppShadows.elevation4,
+        boxShadow: AppShadows.heroCta,
       ),
-      pressedShadow: AppShadows.elevation2, // Phase 4: drop to elevation2 on press
       child: icon == null
           ? Text(label, style: textStyle)
           : Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                icon!,
+                IconTheme(
+                  data: const IconThemeData(color: AppColors.textOnPrimary, size: 20),
+                  child: icon!,
+                ),
                 const SizedBox(width: 8),
                 Text(label, style: textStyle),
               ],
@@ -295,7 +288,13 @@ class _ActionButtonFrameState extends State<_ActionButtonFrame> {
                         )
                       : Padding(
                           padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                          child: widget.child,
+                          child: DefaultTextStyle(
+                            style: AppTypography.button.copyWith(color: widget.foregroundColor),
+                            child: IconTheme(
+                              data: IconThemeData(color: widget.foregroundColor, size: 20),
+                              child: widget.child,
+                            ),
+                          ),
                         ),
                 ),
               ),

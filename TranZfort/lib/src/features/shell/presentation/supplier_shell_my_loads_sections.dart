@@ -45,31 +45,27 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
               AppSpacing.sectionGap,
             ),
             sliver: SliverToBoxAdapter(
-              child: DetailSectionCard(
+              child: HeroActionCard(
                 title: l10n.supplierMyLoadsTitle,
-                children: [
-                  Text(
-                    l10n.supplierMyLoadsSubtitle,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: AppColors.textSecondary,
+                subtitle: l10n.supplierMyLoadsSubtitle,
+                compact: true,
+                useDarkTheme: true,
+                useInkGradient: true,
+                titleIcon: Icons.inventory_2_outlined,
+                child: FilterChipBar(
+                  items: [
+                    FilterChipItem(
+                      label: l10n.commonActiveLabel,
+                      selected: state.selectedTab == MyLoadsTab.active,
+                      onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
                     ),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  FilterChipBar(
-                    items: [
-                      FilterChipItem(
-                        label: l10n.commonActiveLabel,
-                        selected: state.selectedTab == MyLoadsTab.active,
-                        onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
-                      ),
-                      FilterChipItem(
-                        label: l10n.commonCompletedLabel,
-                        selected: state.selectedTab == MyLoadsTab.completed,
-                        onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
-                      ),
-                    ],
-                  ),
-                ],
+                    FilterChipItem(
+                      label: l10n.commonCompletedLabel,
+                      selected: state.selectedTab == MyLoadsTab.completed,
+                      onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

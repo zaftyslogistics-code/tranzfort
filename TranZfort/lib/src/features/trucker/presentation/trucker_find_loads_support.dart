@@ -1,11 +1,12 @@
 part of 'trucker_find_loads_screen.dart';
 
 /// Pinned header height: body-type row (+ tyre row when a specific type is selected).
+/// Heights include ink card padding; +20% vs original 44 / 78 for tyre row breathing room.
 double _pinnedTruckFilterHeight(MarketplaceSearchFilters filters) {
   if (filters.truckBodyType.trim().isEmpty) {
-    return 44.0;
+    return 53.0;
   }
-  return 78.0;
+  return 94.0;
 }
 
 Widget _marketplaceBleedFrame({required Widget child}) {
@@ -90,9 +91,9 @@ class _PinnedTruckFilterBar extends StatelessWidget {
         ),
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.lg,
-          2,
+          3,
           AppSpacing.lg,
-          2,
+          3,
         ),
         child: MarketplaceFilterBar(
           selectedBodyType: filters.truckBodyType,

@@ -214,8 +214,12 @@ class _TruckerLoadDetailFailureBlock extends StatelessWidget {
 /// Phase 5: Premium dark earnings card with big profit headline + cost breakdown grid.
 class _EarningsEstimateCard extends StatelessWidget {
   final TripCostEstimate tripCost;
+  final String? ttsMessage;
 
-  const _EarningsEstimateCard({required this.tripCost});
+  const _EarningsEstimateCard({
+    required this.tripCost,
+    this.ttsMessage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -277,6 +281,11 @@ class _EarningsEstimateCard extends StatelessWidget {
                   ],
                 ),
               ),
+              if (ttsMessage != null && ttsMessage!.trim().isNotEmpty)
+                TtsCardSpeakerButton(
+                  message: ttsMessage!,
+                  onDarkSurface: true,
+                ),
             ],
           ),
           const SizedBox(height: AppSpacing.lg),

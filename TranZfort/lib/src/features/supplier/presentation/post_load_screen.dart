@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../shell/presentation/shell_components.dart';
@@ -168,9 +169,15 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
               ? l10n.supplierPostLoadHeroSubtitle
               : l10n.supplierPostLoadHeroTitle,
           subtitle: l10n.supplierPostLoadHeroSubtitle,
+          compact: true,
+          useDarkTheme: true,
+          useInkGradient: true,
+          titleIcon: Icons.add_box_outlined,
           child: Text(
             l10n.supplierPostLoadHeroHelper,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: AppColors.inkTextSecondary,
+                ),
           ),
         ),
         if (postingBlocked)

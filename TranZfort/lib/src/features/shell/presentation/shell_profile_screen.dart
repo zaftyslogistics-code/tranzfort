@@ -49,6 +49,39 @@ class ProfileScreen extends ConsumerWidget {
             ),
           )
         else ...[
+          HeroActionCard(
+            title: profile?.fullName.trim().isNotEmpty == true ? profile!.fullName : l10n.commonProfileLabel,
+            subtitle: roleLabel,
+            compact: true,
+            useDarkTheme: true,
+            useInkGradient: true,
+            titleIcon: Icons.person_outline,
+            child: Wrap(
+              spacing: AppSpacing.md,
+              runSpacing: AppSpacing.md,
+              children: [
+                StatusBadge(
+                  label: authState.isProfileComplete
+                      ? l10n.profileCompletenessComplete
+                      : l10n.profileCompletenessNeedsUpdates,
+                  icon: Icons.verified_user_outlined,
+                  palette: authState.isProfileComplete
+                      ? const StatusPalette(
+                          foreground: AppColors.success,
+                          background: AppColors.successBg,
+                        )
+                      : const StatusPalette(
+                          foreground: AppColors.warning,
+                          background: AppColors.warningBg,
+                        ),
+                ),
+                StatusBadge(
+                  label: localizedAccountState(l10n, profile?.accountDeletionStatus ?? 'active'),
+                  icon: Icons.shield_outlined,
+                ),
+              ],
+            ),
+          ),
           SectionCard(
             title: l10n.profileSummaryTitle,
             child: Column(
@@ -57,7 +90,6 @@ class ProfileScreen extends ConsumerWidget {
                 InfoRow(label: l10n.profilePhoneLabel, value: (profile?.mobile ?? '').trim().isNotEmpty ? profile!.mobile! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileEmailLabel, value: (profile?.email ?? '').trim().isNotEmpty ? profile!.email! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileRoleLabel, value: roleLabel),
-                // Location display - removed as city/state fields no longer exist in UserProfile
               ],
             ),
           ),

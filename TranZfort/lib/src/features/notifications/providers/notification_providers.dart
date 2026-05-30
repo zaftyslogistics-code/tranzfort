@@ -291,6 +291,12 @@ class NotificationsController extends StateNotifier<NotificationsState> {
       for (final notification in existing) notification.id: notification,
     };
     for (final notification in incoming) {
+      final prior = mergedById[notification.id];
+      if (prior != null && prior.isRead && !notification.isRead) {
+        // Keep local read state if realtime stream is briefly stale.
+        mergedById[notification.id] = prior;
+        continue;
+      }
       mergedById[notification.id] = notification;
     }
     final merged = mergedById.values.toList(growable: false)

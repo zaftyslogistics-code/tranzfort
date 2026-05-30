@@ -1,6 +1,7 @@
 import '../../../l10n/app_localizations.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../trucker/data/trucker_marketplace_repository.dart';
+import 'tts_term_localizer.dart';
 
 /// Builds natural-language utterances for [MarketplaceLoadItem] cards (not UI headlines).
 class LoadMarketplaceCardTtsBuilder {
@@ -11,12 +12,17 @@ class LoadMarketplaceCardTtsBuilder {
     required TtsLocalizations tts,
     required AppLocalizations ui,
     String? pickupDateLabel,
+    String languageCode = 'en',
   }) {
+    final material = TtsTermLocalizer.material(
+      load.material.trim(),
+      languageCode: languageCode,
+      ui: ui,
+    );
     final parts = <String>[
       tts.ttsLoadCardRoute(_cleanCity(load.originCity), _cleanCity(load.destinationCity)),
-      if (load.material.trim().isNotEmpty)
-        tts.ttsLoadCardMaterial(load.material.trim()),
-      ..._truckClauses(load, tts, ui),
+      if (material.isNotEmpty) tts.ttsLoadCardMaterial(material),
+      ..._truckClauses(load, tts, ui, languageCode),
       _rateClause(load, tts),
       _pickupClause(load, tts, pickupDateLabel: pickupDateLabel),
       if (load.advancePercentage > 0)
@@ -29,6 +35,7 @@ class LoadMarketplaceCardTtsBuilder {
     MarketplaceLoadItem load,
     TtsLocalizations tts,
     AppLocalizations ui,
+    String languageCode,
   ) {
     final clauses = <String>[];
     final tyres = load.requiredTyres.toList()..sort();
@@ -53,7 +60,7 @@ class LoadMarketplaceCardTtsBuilder {
     if (bodyType.isNotEmpty) {
       clauses.add(
         tts.ttsLoadCardBodyType(
-          ui.truckerFindLoadsBodyTypeValue(bodyType.toLowerCase()),
+          TtsTermLocalizer.bodyType(bodyType, languageCode: languageCode, ui: ui),
         ),
       );
     }

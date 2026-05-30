@@ -28,32 +28,29 @@ class SupplierTripsScreen extends ConsumerWidget {
     final state = ref.watch(supplierTripsProvider);
 
     return ShellScrollView(
+      onRefresh: () => ref.read(supplierTripsProvider.notifier).load(),
       children: [
-        DetailSectionCard(
+        HeroActionCard(
           title: l10n.supplierTripsSectionTitle,
-          children: [
-            Text(
-              l10n.supplierTripsSectionSubtitle,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+          subtitle: l10n.supplierTripsSectionSubtitle,
+          compact: true,
+          useDarkTheme: true,
+          useInkGradient: true,
+          titleIcon: Icons.alt_route_outlined,
+          child: FilterChipBar(
+            items: [
+              FilterChipItem(
+                label: l10n.commonActiveLabel,
+                selected: state.selectedTab == SupplierTripsTab.active,
+                onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.active),
               ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            FilterChipBar(
-              items: [
-                FilterChipItem(
-                  label: l10n.commonActiveLabel,
-                  selected: state.selectedTab == SupplierTripsTab.active,
-                  onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.active),
-                ),
-                FilterChipItem(
-                  label: l10n.commonCompletedLabel,
-                  selected: state.selectedTab == SupplierTripsTab.completed,
-                  onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.completed),
-                ),
-              ],
-            ),
-          ],
+              FilterChipItem(
+                label: l10n.commonCompletedLabel,
+                selected: state.selectedTab == SupplierTripsTab.completed,
+                onTap: () => ref.read(supplierTripsProvider.notifier).selectTab(SupplierTripsTab.completed),
+              ),
+            ],
+          ),
         ),
         _SupplierTripsBody(
           state: state,

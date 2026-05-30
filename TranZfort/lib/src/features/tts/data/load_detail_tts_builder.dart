@@ -3,6 +3,7 @@ import '../../../l10n/tts_localizations.dart';
 import '../../supplier/data/supplier_load_models.dart';
 import '../../trucker/data/trucker_load_detail_repository.dart';
 import 'load_marketplace_card_tts_builder.dart';
+import 'tts_term_localizer.dart';
 import 'tts_utterance_utils.dart';
 
 class LoadDetailTtsBuilder {
@@ -12,11 +13,13 @@ class LoadDetailTtsBuilder {
     required TruckerLoadDetail detail,
     required TtsLocalizations tts,
     required AppLocalizations ui,
+    String languageCode = 'en',
   }) {
     return const LoadMarketplaceCardTtsBuilder().build(
       load: detail.summary,
       tts: tts,
       ui: ui,
+      languageCode: languageCode,
     );
   }
 
@@ -24,8 +27,14 @@ class LoadDetailTtsBuilder {
     required TruckerLoadDetail detail,
     required TtsLocalizations tts,
     required AppLocalizations ui,
+    String languageCode = 'en',
   }) {
     final load = detail.summary;
+    final material = TtsTermLocalizer.material(
+      load.material.trim(),
+      languageCode: languageCode,
+      ui: ui,
+    );
     final tyres = load.requiredTyres.toList()..sort();
     final minTyres = tyres.isEmpty ? ui.commonAnyLabel : '${tyres.first}';
     final maxTyres = tyres.isEmpty ? ui.commonAnyLabel : '${tyres.last}';
@@ -33,9 +42,9 @@ class LoadDetailTtsBuilder {
     final maxCap = load.derivedMaxTruckCapacityTonnes;
     return joinTtsClauses([
       tts.ttsLoadDetailTruckRequirementsTitle,
-      tts.ttsLoadCardMaterial(load.material.trim()),
+      tts.ttsLoadCardMaterial(material),
       tts.ttsLoadDetailMaterialWeight(
-        load.material.trim(),
+        material,
         _formatTonnes(load.weightTonnes),
       ),
       if (minCap != null && maxCap != null)
@@ -43,18 +52,30 @@ class LoadDetailTtsBuilder {
       tts.ttsLoadCardTruckTyres(minTyres, maxTyres),
       if ((load.requiredBodyType ?? '').trim().isNotEmpty)
         tts.ttsLoadCardBodyType(
-          ui.truckerFindLoadsBodyTypeValue(load.requiredBodyType!.trim().toLowerCase()),
+          TtsTermLocalizer.bodyType(
+            load.requiredBodyType!.trim(),
+            languageCode: languageCode,
+            ui: ui,
+          ),
         ),
     ]);
+  }
+
+  String buildTruckerTripEstimate({
+    required double estimatedProfit,
+    required TtsLocalizations tts,
+  }) {
+    return tts.ttsLoadDetailTripEstimate(_formatAmount(estimatedProfit.abs()));
   }
 
   String buildTruckerHeroSummary({
     required TruckerLoadDetail detail,
     required TtsLocalizations tts,
     required AppLocalizations ui,
+    String languageCode = 'en',
   }) {
     return joinTtsClauses([
-      buildTruckerOverview(detail: detail, tts: tts, ui: ui),
+      buildTruckerOverview(detail: detail, tts: tts, ui: ui, languageCode: languageCode),
       tts.ttsLoadDetailChatOrBookHint,
     ]);
   }
@@ -63,8 +84,9 @@ class LoadDetailTtsBuilder {
     required TruckerLoadDetail detail,
     required TtsLocalizations tts,
     required AppLocalizations ui,
+    String languageCode = 'en',
   }) {
-    return buildTruckerHeroSummary(detail: detail, tts: tts, ui: ui);
+    return buildTruckerHeroSummary(detail: detail, tts: tts, ui: ui, languageCode: languageCode);
   }
 
   String buildSupplierRouteAndPrice({

@@ -53,7 +53,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(utterance, contains('Mumbai se Delhi'));
+    expect(utterance, contains('Mumbai से Delhi'));
     expect(utterance, contains('Coal'));
   });
 

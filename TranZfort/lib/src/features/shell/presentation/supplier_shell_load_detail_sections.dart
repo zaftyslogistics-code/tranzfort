@@ -81,6 +81,9 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
                   formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),
+                useDarkTheme: true,
+                useInkGradient: true,
+                titleIcon: Icons.local_shipping_outlined,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

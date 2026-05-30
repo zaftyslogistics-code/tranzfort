@@ -31,7 +31,7 @@ class NotificationsScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final state = ref.watch(notificationsProvider);
-    final unreadCount = ref.watch(unreadNotificationCountProvider);
+    final unreadCount = ref.watch(shellUnreadNotificationCountProvider).valueOrNull ?? 0;
     final highPriorityUnreadCount = state.notifications
         .where((item) => !item.isRead && item.priority == AppNotificationPriority.high)
         .length;
@@ -69,6 +69,7 @@ class NotificationsScreen extends ConsumerWidget {
                           );
                           return;
                         }
+                        ref.invalidate(shellUnreadNotificationCountProvider);
                         ScaffoldMessenger.of(context).showSnackBar(
                           AppSnackbar.build(
                             context: context,
@@ -130,18 +131,36 @@ class _NotificationsBody extends ConsumerWidget {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final languageCode = ref.watch(appLocaleProvider).locale.languageCode;
     if (!state.hasResolvedInitialLoad || state.isLoading) {
-      return const Padding(
-        padding: EdgeInsets.all(AppSpacing.lg),
-        child: LoadingShimmer(height: 96, itemCount: 4),
+      return RefreshIndicator(
+        onRefresh: () => ref.read(notificationsProvider.notifier).load(),
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: const [
+            SizedBox(height: 120),
+            Padding(
+              padding: EdgeInsets.all(AppSpacing.lg),
+              child: LoadingShimmer(height: 96, itemCount: 4),
+            ),
+          ],
+        ),
       );
     }
 
     if (state.failure != null && state.notifications.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: WarningBlock(
-          title: l10n.notificationsLoadFailureTitle,
-          message: _notificationsFailureMessage(context),
+      return RefreshIndicator(
+        onRefresh: () => ref.read(notificationsProvider.notifier).load(),
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            const SizedBox(height: 48),
+            Padding(
+              padding: const EdgeInsets.all(AppSpacing.lg),
+              child: WarningBlock(
+                title: l10n.notificationsLoadFailureTitle,
+                message: _notificationsFailureMessage(context),
+              ),
+            ),
+          ],
         ),
       );
     }
@@ -149,93 +168,115 @@ class _NotificationsBody extends ConsumerWidget {
     if (state.notifications.isEmpty) {
       final role = ref.watch(currentAuthStateProvider).role;
       final isSupplier = role == AppUserRole.supplier;
-      return EmptyStateView(
-        icon: Icons.notifications_none_outlined,
-        title: l10n.notificationsEmptyTitle,
-        subtitle: l10n.notificationsEmptySubtitle,
-        actionLabel: isSupplier ? l10n.commonOpenMyLoadsAction : l10n.truckerTripsEmptyActiveAction,
-        onAction: () => context.go(isSupplier ? AppRoutes.myLoadsPath : AppRoutes.findLoadsPath),
+      return RefreshIndicator(
+        onRefresh: () => ref.read(notificationsProvider.notifier).load(),
+        child: ListView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          children: [
+            const SizedBox(height: 48),
+            EmptyStateView(
+              icon: Icons.notifications_none_outlined,
+              title: l10n.notificationsEmptyTitle,
+              subtitle: l10n.notificationsEmptySubtitle,
+              actionLabel: isSupplier ? l10n.commonOpenMyLoadsAction : l10n.truckerTripsEmptyActiveAction,
+              onAction: () => context.go(isSupplier ? AppRoutes.myLoadsPath : AppRoutes.findLoadsPath),
+            ),
+          ],
+        ),
       );
     }
 
     final groupedNotifications = _groupNotifications(context, state.notifications, l10n);
-    return ListView(
-      padding: const EdgeInsets.fromLTRB(
-        AppSpacing.lg,
-        AppSpacing.xl,
-        AppSpacing.lg,
-        AppSpacing.bottomNavSafe + AppSpacing.xl,
-      ),
-      children: [
-        SectionCard(
-          title: l10n.notificationsOverviewTitle,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Wrap(
-                spacing: AppSpacing.md,
-                runSpacing: AppSpacing.md,
-                children: [
-                  StatusBadge(
-                    label: l10n.notificationsUnreadCountLabel(unreadCount),
-                    icon: Icons.notifications_active_outlined,
-                    palette: unreadCount == 0
-                        ? const StatusPalette(
-                            foreground: AppColors.neutral,
-                            background: AppColors.neutralBg,
-                          )
-                        : const StatusPalette(
-                            foreground: AppColors.info,
-                            background: AppColors.infoBg,
-                          ),
-                  ),
-                  StatusBadge(
-                    label: l10n.notificationsHighPriorityCountLabel(highPriorityUnreadCount),
-                    icon: Icons.priority_high_outlined,
-                    palette: highPriorityUnreadCount == 0
-                        ? const StatusPalette(
-                            foreground: AppColors.neutral,
-                            background: AppColors.neutralBg,
-                          )
-                        : const StatusPalette(
-                            foreground: AppColors.warning,
-                            background: AppColors.warningBg,
-                          ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: AppSpacing.md),
-              SizedBox(
-                width: double.infinity,
-                child: OutlineButton(
-                  label: l10n.commonHearSummary,
-                  onPressed: () async {
-                    final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
-                          languageCode: languageCode,
-                          message: _notificationsTtsSummary(
-                            context: context,
-                            languageCode: languageCode,
-                            unreadCount: unreadCount,
-                            highPriorityUnreadCount: highPriorityUnreadCount,
-                          ),
-                        );
-                    if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
-                      return;
-                    }
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      AppSnackbar.build(
-                        context: context,
-                        message: outcome == ContextualTtsOutcome.muted ? l10n.commonVoiceMuted : l10n.commonVoiceUnavailable,
-                        variant: outcome == ContextualTtsOutcome.muted ? AppSnackbarVariant.info : AppSnackbarVariant.error,
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+    return RefreshIndicator(
+      onRefresh: () => ref.read(notificationsProvider.notifier).load(),
+      child: ListView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          AppSpacing.xl,
+          AppSpacing.lg,
+          AppSpacing.bottomNavSafe + AppSpacing.xl,
         ),
-        for (final group in groupedNotifications) ...[
+        children: [
+          HeroActionCard(
+            title: l10n.notificationsOverviewTitle,
+            subtitle: '',
+            compact: true,
+            useDarkTheme: true,
+            useInkGradient: true,
+            titleIcon: Icons.notifications_outlined,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Wrap(
+                  spacing: AppSpacing.md,
+                  runSpacing: AppSpacing.md,
+                  children: [
+                    StatusBadge(
+                      label: l10n.notificationsUnreadCountLabel(unreadCount),
+                      icon: Icons.notifications_active_outlined,
+                      palette: unreadCount == 0
+                          ? const StatusPalette(
+                              foreground: AppColors.neutral,
+                              background: AppColors.neutralBg,
+                            )
+                          : const StatusPalette(
+                              foreground: AppColors.info,
+                              background: AppColors.infoBg,
+                            ),
+                    ),
+                    StatusBadge(
+                      label: l10n.notificationsHighPriorityCountLabel(highPriorityUnreadCount),
+                      icon: Icons.priority_high_outlined,
+                      palette: highPriorityUnreadCount == 0
+                          ? const StatusPalette(
+                              foreground: AppColors.neutral,
+                              background: AppColors.neutralBg,
+                            )
+                          : const StatusPalette(
+                              foreground: AppColors.warning,
+                              background: AppColors.warningBg,
+                            ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSpacing.md),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlineButton(
+                    label: l10n.commonHearSummary,
+                    onPressed: () async {
+                      final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
+                            languageCode: languageCode,
+                            message: _notificationsTtsSummary(
+                              context: context,
+                              languageCode: languageCode,
+                              unreadCount: unreadCount,
+                              highPriorityUnreadCount: highPriorityUnreadCount,
+                            ),
+                          );
+                      if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
+                        return;
+                      }
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        AppSnackbar.build(
+                          context: context,
+                          message: outcome == ContextualTtsOutcome.muted
+                              ? l10n.commonVoiceMuted
+                              : l10n.commonVoiceUnavailable,
+                          variant: outcome == ContextualTtsOutcome.muted
+                              ? AppSnackbarVariant.info
+                              : AppSnackbarVariant.error,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sectionGap),
+          for (final group in groupedNotifications) ...[
           SectionCard(
             title: group.label,
             child: Column(
@@ -264,6 +305,7 @@ class _NotificationsBody extends ConsumerWidget {
             ),
           ),
       ],
+      ),
     );
   }
 
@@ -301,7 +343,10 @@ class _NotificationRow extends ConsumerWidget {
       borderRadius: BorderRadius.circular(AppRadius.card),
       onTap: () async {
         if (!notification.isRead) {
-          await ref.read(notificationsProvider.notifier).markRead(notification.id);
+          final result = await ref.read(notificationsProvider.notifier).markRead(notification.id);
+          if (result.isSuccess) {
+            ref.invalidate(shellUnreadNotificationCountProvider);
+          }
         }
 
         await ref.read(notificationTtsServiceProvider).speakNotificationOpen(

@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../data/document_url_service.dart';
 
@@ -19,6 +20,7 @@ class DocumentUploadBox extends ConsumerWidget {
   final VoidCallback onTap;
   final VoidCallback? onClear;
   final List<QualityCheck> qualityChecks;
+  final String? ttsMessage;
 
   const DocumentUploadBox({
     super.key,
@@ -31,6 +33,7 @@ class DocumentUploadBox extends ConsumerWidget {
     required this.onTap,
     this.onClear,
     this.qualityChecks = const [],
+    this.ttsMessage,
   });
 
   @override
@@ -43,22 +46,35 @@ class DocumentUploadBox extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              label,
-              style: theme.textTheme.bodyMedium?.copyWith(
-                fontWeight: FontWeight.w500,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  if (!isRequired) ...[
+                    const SizedBox(height: 2),
+                    Text(
+                      '(${l10n.verificationDocumentStatusValue('optional')})',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: AppColors.textMuted,
+                      ),
+                    ),
+                  ],
+                ],
               ),
             ),
-            if (!isRequired) ...[
-              const SizedBox(width: 4),
-              Text(
-                '(${l10n.verificationDocumentStatusValue('optional')})',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: AppColors.textMuted,
-                ),
+            if (ttsMessage != null && ttsMessage!.trim().isNotEmpty)
+              TtsCardSpeakerButton(
+                message: ttsMessage!,
+                onDarkSurface: false,
               ),
-            ],
           ],
         ),
         if (subtitle != null) ...[

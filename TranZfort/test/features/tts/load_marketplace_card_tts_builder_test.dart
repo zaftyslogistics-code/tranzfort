@@ -61,6 +61,7 @@ void main() {
               load: sampleLoad,
               tts: TtsLocalizations.of(context)!,
               ui: AppLocalizations.of(context)!,
+              languageCode: 'hi',
             );
             return const SizedBox.shrink();
           },
@@ -69,9 +70,9 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(utterance, contains('Mumbai se Delhi'));
-    expect(utterance, contains('Maal Coal'));
-    expect(utterance, contains('Bhada 1000 rupaye prati ton'));
+    expect(utterance, contains('Mumbai से Delhi'));
+    expect(utterance, contains('माल'));
+    expect(utterance, contains('भाड़ा 1000 रुपये प्रति टन'));
     expect(utterance, isNot(contains('per_ton')));
   });
 
@@ -97,6 +98,7 @@ void main() {
               load: sampleLoad,
               tts: TtsLocalizations.of(context)!,
               ui: AppLocalizations.of(context)!,
+              languageCode: 'en',
             );
             return const SizedBox.shrink();
           },

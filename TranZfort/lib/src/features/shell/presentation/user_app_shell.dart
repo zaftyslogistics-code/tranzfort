@@ -15,7 +15,10 @@ import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../auth/data/auth_repository.dart';
 import '../../notifications/providers/notification_providers.dart';
+import '../../communication/providers/chat_providers.dart';
+import '../../supplier/providers/supplier_providers.dart';
 import '../../trucker/providers/find_loads_provider.dart';
+import '../../trucker/providers/trucker_providers.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/find_loads_tab_tts_builder.dart';
 
@@ -313,15 +316,65 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
     required _ShellTab currentTab,
     required String fallback,
   }) {
-    if (role != AppUserRole.trucker || currentTab.route != AppRoutes.findLoadsPath) {
-      return fallback;
-    }
-    final findLoadsState = ref.watch(findLoadsProvider);
-    if (findLoadsState.isInitialLoading) {
-      return fallback;
-    }
     final tts = TtsLocalizations.of(context);
-    return const FindLoadsTabTtsBuilder().build(state: findLoadsState, tts: tts);
+
+    if (role == AppUserRole.trucker && currentTab.route == AppRoutes.findLoadsPath) {
+      final findLoadsState = ref.watch(findLoadsProvider);
+      if (findLoadsState.isInitialLoading) {
+        return fallback;
+      }
+      return const FindLoadsTabTtsBuilder().build(state: findLoadsState, tts: tts);
+    }
+
+    if (role == AppUserRole.trucker && currentTab.route == AppRoutes.truckerDashboardPath) {
+      final dashboardState = ref.watch(truckerDashboardProvider).valueOrNull;
+      if (dashboardState == null) {
+        return fallback;
+      }
+      return tts.ttsShellTruckerDashboardIntro(
+        '${dashboardState.approvedTrucks}',
+        '${dashboardState.inTransitTrips}',
+      );
+    }
+
+    if (role == AppUserRole.supplier && currentTab.route == AppRoutes.supplierDashboardPath) {
+      final dashboardState = ref.watch(supplierDashboardProvider).valueOrNull;
+      if (dashboardState == null) {
+        return fallback;
+      }
+      return tts.ttsShellSupplierDashboardIntro(
+        '${dashboardState.activeLoads}',
+        '${dashboardState.pendingBookings}',
+      );
+    }
+
+    if (currentTab.route == AppRoutes.messagesPath) {
+      final unreadCount = ref.watch(unreadConversationCountProvider).valueOrNull ?? 0;
+      return tts.ttsShellMessagesIntro('$unreadCount');
+    }
+
+    if (currentTab.route == AppRoutes.tripsPath) {
+      if (role == AppUserRole.trucker) {
+        final dashboardState = ref.watch(truckerDashboardProvider).valueOrNull;
+        if (dashboardState == null) {
+          return fallback;
+        }
+        return tts.ttsShellTripsIntro(
+          '${dashboardState.upcomingTrips}',
+          '${dashboardState.inTransitTrips}',
+        );
+      }
+      final supplierState = ref.watch(supplierDashboardProvider).valueOrNull;
+      if (supplierState == null) {
+        return fallback;
+      }
+      return tts.ttsShellTripsIntro(
+        '${supplierState.pendingBookings}',
+        '${supplierState.inTransitTrips}',
+      );
+    }
+
+    return fallback;
   }
 }
 

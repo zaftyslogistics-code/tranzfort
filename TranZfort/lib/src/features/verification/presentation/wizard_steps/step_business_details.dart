@@ -223,7 +223,7 @@ class StepBusinessDetails extends ConsumerWidget {
                 onPressed: () => Navigator.pop(context, false),
                 child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               ),
-              PrimaryButton(
+              OutlineButton(
                 onPressed: () => Navigator.pop(context, true),
                 label: l10n.verificationWizardOpenSettingsAction,
               ),
@@ -245,7 +245,7 @@ class StepBusinessDetails extends ConsumerWidget {
                 onPressed: () => Navigator.pop(context, false),
                 child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
               ),
-              PrimaryButton(
+              OutlineButton(
                 onPressed: () => Navigator.pop(context, true),
                 label: l10n.verificationWizardOpenSettingsAction,
               ),

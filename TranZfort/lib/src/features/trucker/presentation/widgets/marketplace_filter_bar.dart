@@ -69,7 +69,7 @@ class MarketplaceFilterBar extends StatelessWidget {
           ),
         ),
         if (_showTyreRow) ...[
-          const SizedBox(height: AppSpacing.xs),
+          const SizedBox(height: AppSpacing.sm),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -235,14 +235,14 @@ class _TyreChip extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppSpacing.sm,
-                vertical: AppSpacing.xs,
+                vertical: 5,
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(
                     Icons.tire_repair_outlined,
-                    size: 14,
+                    size: 16,
                     color: selected ? accent : AppColors.inkTextSecondary,
                   ),
                   const SizedBox(width: 4),

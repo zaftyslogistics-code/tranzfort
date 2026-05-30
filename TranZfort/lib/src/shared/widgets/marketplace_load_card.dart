@@ -43,6 +43,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
       tts: ttsL10n,
       ui: l10n,
       pickupDateLabel: pickupDateLabel,
+      languageCode: Localizations.localeOf(context).languageCode,
     );
     final tyreLabel = formatMarketplaceTyreLabel(load.requiredTyres);
 

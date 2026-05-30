@@ -320,46 +320,63 @@ class _ChatMessageBubble extends StatelessWidget {
       isFirstInGroup: isFirstInGroup,
       isLastInGroup: isLastInGroup,
     );
+    final textBody = (message.textBody ?? '').trim();
+    final showTextSpeaker = !message.isFromCurrentUser &&
+        message.type == ChatMessageType.text &&
+        textBody.isNotEmpty;
 
     return Align(
       alignment: message.isFromCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-      child: Column(
-        crossAxisAlignment: message.isFromCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      child: Row(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          AnimatedOpacity(
-            opacity: isSending ? 0.7 : 1.0,
-            duration: const Duration(milliseconds: 200),
-            child: ConstrainedBox(
-              constraints: BoxConstraints(maxWidth: _chatBubbleMaxWidth(context)),
-              child: _buildBubbleContent(background, borderRadius),
-            ),
-          ),
-          if (showTimestamp) ...[
-            const SizedBox(height: AppSpacing.xs),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  isSending ? l10n.chatSendingLabel : _formatTimestamp(message.createdAt),
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+          Column(
+            crossAxisAlignment: message.isFromCurrentUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              AnimatedOpacity(
+                opacity: isSending ? 0.7 : 1.0,
+                duration: const Duration(milliseconds: 200),
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: _chatBubbleMaxWidth(context)),
+                  child: _buildBubbleContent(background, borderRadius),
                 ),
-                if (message.isFromCurrentUser) ...[
-                  const SizedBox(width: AppSpacing.xs),
-                  if (isSending)
-                    const SizedBox(
-                      width: 12,
-                      height: 12,
-                      child: CircularProgressIndicator(strokeWidth: 2),
-                    )
-                  else
-                    Icon(
-                      message.isRead ? Icons.done_all : Icons.done,
-                      size: 14,
-                      color: message.isRead ? AppColors.primary : AppColors.textMuted,
+              ),
+              if (showTimestamp) ...[
+                const SizedBox(height: AppSpacing.xs),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      isSending ? l10n.chatSendingLabel : _formatTimestamp(message.createdAt),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
                     ),
-                ],
+                    if (message.isFromCurrentUser) ...[
+                      const SizedBox(width: AppSpacing.xs),
+                      if (isSending)
+                        const SizedBox(
+                          width: 12,
+                          height: 12,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      else
+                        Icon(
+                          message.isRead ? Icons.done_all : Icons.done,
+                          size: 14,
+                          color: message.isRead ? AppColors.primary : AppColors.textMuted,
+                        ),
+                    ],
+                  ],
+                ),
               ],
+            ],
+          ),
+          if (showTextSpeaker) ...[
+            const SizedBox(width: AppSpacing.xs),
+            TtsCardSpeakerButton(
+              message: textBody,
+              onDarkSurface: false,
             ),
           ],
         ],

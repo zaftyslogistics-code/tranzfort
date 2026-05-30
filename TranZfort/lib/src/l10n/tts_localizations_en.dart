@@ -119,6 +119,11 @@ class TtsLocalizationsEn extends TtsLocalizations {
       'Chat with the supplier or book this load.';
 
   @override
+  String ttsLoadDetailTripEstimate(Object amount) {
+    return 'Estimated profit on this trip is about $amount rupees.';
+  }
+
+  @override
   String ttsTripDetailRouteStage(Object route, Object stage) {
     return 'Trip $route. Stage $stage.';
   }
@@ -148,11 +153,29 @@ class TtsLocalizationsEn extends TtsLocalizations {
 
   @override
   String get ttsOnboardingChooseRole =>
-      'Choose your role. Are you a trucker or a supplier?';
+      'Choose what you do. Do you want to find loads or post a load? Tap Find Loads, bhada khoje, to search for loads to carry. Tap Post a Load, bhada post kare, to list goods that need trucks.';
+
+  @override
+  String get ttsOnboardingFindLoadsCard =>
+      'If you drive a truck and want to find loads to carry, choose Find Loads, bhada khoje. You will see loads looking for trucks.';
+
+  @override
+  String get ttsOnboardingPostLoadCard =>
+      'If you have goods to send and need trucks, choose Post a Load, bhada post kare. You can list your load here.';
 
   @override
   String get ttsOnboardingCompleteProfile =>
-      'Complete your profile. Enter your details to continue.';
+      'Complete your profile. Enter your name, mobile number, and location to continue.';
+
+  @override
+  String get ttsOnboardingProfileFullName => 'Enter your full name.';
+
+  @override
+  String get ttsOnboardingProfileMobile => 'Enter your mobile number.';
+
+  @override
+  String get ttsOnboardingProfileLocation =>
+      'Add your city location. Use current location or search manually.';
 
   @override
   String get ttsAuthWelcomeShort =>
@@ -177,6 +200,79 @@ class TtsLocalizationsEn extends TtsLocalizations {
   @override
   String get ttsVerificationStepReview =>
       'Review step. Confirm all details and accept terms before submit.';
+
+  @override
+  String get ttsFieldUploadAadhaarFrontPrompt =>
+      'Upload a clear photo of the front side of your Aadhaar card. Name and number must be visible.';
+
+  @override
+  String get ttsFieldUploadAadhaarBackPrompt =>
+      'Upload a clear photo of the back side of your Aadhaar card.';
+
+  @override
+  String get ttsFieldUploadPanPrompt =>
+      'Upload a clear photo of your PAN card. All four corners and your photo must be visible.';
+
+  @override
+  String get ttsFieldUploadRcPrompt =>
+      'Upload a clear photo of your vehicle RC book or registration certificate.';
+
+  @override
+  String get ttsFieldUploadProfilePhotoPrompt =>
+      'Upload a clear photo of your face. Make sure your face is fully visible.';
+
+  @override
+  String get ttsFieldAadhaarInputDescription =>
+      'Enter your twelve-digit Aadhaar number here.';
+
+  @override
+  String get ttsFieldPanInputDescription => 'Enter your PAN card number here.';
+
+  @override
+  String get ttsFieldTruckNumberInputDescription =>
+      'Enter your vehicle registration number here, as printed on your RC book.';
+
+  @override
+  String get ttsFieldTruckBodyTypeDescription =>
+      'Choose your truck body type, such as open, closed, or container.';
+
+  @override
+  String get ttsFieldTruckTyresDescription =>
+      'Select how many tyres your truck has. This helps match suitable loads.';
+
+  @override
+  String get ttsFieldTruckCapacityInputDescription =>
+      'Enter how many tonnes of weight your truck can carry.';
+
+  @override
+  String get ttsFieldUploadTruckPhotoPrompt =>
+      'You may upload a clear side photo of your truck. This is optional but helpful.';
+
+  @override
+  String ttsShellTruckerDashboardIntro(
+    Object approvedTrucks,
+    Object inTransitTrips,
+  ) {
+    return 'Dashboard. You have $approvedTrucks approved trucks and $inTransitTrips trips in transit.';
+  }
+
+  @override
+  String ttsShellSupplierDashboardIntro(
+    Object activeLoads,
+    Object pendingBookings,
+  ) {
+    return 'Supplier dashboard. You have $activeLoads active loads and $pendingBookings pending booking requests.';
+  }
+
+  @override
+  String ttsShellMessagesIntro(Object unreadCount) {
+    return 'Messages. You have $unreadCount new messages.';
+  }
+
+  @override
+  String ttsShellTripsIntro(Object upcomingTrips, Object inTransitTrips) {
+    return 'Your trips. $upcomingTrips upcoming and $inTransitTrips in transit.';
+  }
 
   @override
   String get ttsNotificationRowHint => 'Listen to notification';

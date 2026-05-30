@@ -395,13 +395,13 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingDiscardRoleTitle.
   ///
   /// In en, this message translates to:
-  /// **'Discard role selection?'**
+  /// **'Go back without saving?'**
   String get onboardingDiscardRoleTitle;
 
   /// No description provided for @onboardingDiscardRoleMessage.
   ///
   /// In en, this message translates to:
-  /// **'Your selected role will be lost'**
+  /// **'Your choice will be lost. Tap Find Loads or Post a Load again when you return.'**
   String get onboardingDiscardRoleMessage;
 
   /// No description provided for @onboardingDiscardChangesTitle.
@@ -803,61 +803,61 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingSelectRoleError.
   ///
   /// In en, this message translates to:
-  /// **'Select whether you are joining as a supplier or trucker.'**
+  /// **'Please tap Find Loads or Post a Load to continue.'**
   String get onboardingSelectRoleError;
 
   /// No description provided for @onboardingRoleWorkspaceFailure.
   ///
   /// In en, this message translates to:
-  /// **'We could not prepare your role workspace right now. Retry shortly after selecting your role again.'**
+  /// **'We could not prepare your workspace right now. Try selecting your option again shortly.'**
   String get onboardingRoleWorkspaceFailure;
 
   /// No description provided for @onboardingRoleSaveFailure.
   ///
   /// In en, this message translates to:
-  /// **'We could not save your role right now. Retry shortly.'**
+  /// **'We could not save your choice right now. Retry shortly.'**
   String get onboardingRoleSaveFailure;
 
   /// No description provided for @onboardingChooseRoleTitle.
   ///
   /// In en, this message translates to:
-  /// **'Choose role'**
+  /// **'Get started'**
   String get onboardingChooseRoleTitle;
 
   /// No description provided for @onboardingRoleQuestion.
   ///
   /// In en, this message translates to:
-  /// **'Which role fits your work?'**
+  /// **'Do you want to find loads or post a load?'**
   String get onboardingRoleQuestion;
 
   /// No description provided for @onboardingRoleSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Your role decides the tools, dashboard, and workflows TranZfort will prepare for you.'**
+  /// **'Choose what you do. Tap Find Loads to search for work, or Post a Load to list goods that need trucks.'**
   String get onboardingRoleSubtitle;
 
   /// No description provided for @onboardingSupplierTitle.
   ///
   /// In en, this message translates to:
-  /// **'Supplier'**
+  /// **'Post a Load'**
   String get onboardingSupplierTitle;
 
   /// No description provided for @onboardingSupplierSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Post loads, review bookings, manage trips, and track delivery follow-through.'**
+  /// **'Bhada post kare. I have goods to send and need trucks.'**
   String get onboardingSupplierSubtitle;
 
   /// No description provided for @onboardingTruckerTitle.
   ///
   /// In en, this message translates to:
-  /// **'Trucker'**
+  /// **'Find Loads'**
   String get onboardingTruckerTitle;
 
   /// No description provided for @onboardingTruckerSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Find loads, manage fleet readiness, and execute active trips from one place.'**
+  /// **'Bhada khoje. I drive a truck and look for loads to carry.'**
   String get onboardingTruckerSubtitle;
 
   /// No description provided for @onboardingContinue.
@@ -3615,6 +3615,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Welcome back, {fullName}'**
   String truckerDashboardWelcomeBack(Object fullName);
+
+  /// Secondary greeting on dashboard route-search hero.
+  ///
+  /// In en, this message translates to:
+  /// **'Namaste, {fullName}'**
+  String truckerDashboardHeroGreeting(Object fullName);
+
+  /// No description provided for @truckerDashboardSearchLoadsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Search loads'**
+  String get truckerDashboardSearchLoadsAction;
+
+  /// No description provided for @truckerDashboardFiltersOnFindLoadsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Truck type and filters on Find Loads tab'**
+  String get truckerDashboardFiltersOnFindLoadsHint;
 
   /// No description provided for @truckerDashboardTitle.
   ///

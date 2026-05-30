@@ -103,18 +103,21 @@ class ShellScrollView extends StatelessWidget {
   final List<Widget> children;
   final double? bottomWidgetHeight;
   final double? paddingTop;
+  final Future<void> Function()? onRefresh;
 
   const ShellScrollView({
     super.key,
     required this.children,
     this.bottomWidgetHeight,
     this.paddingTop,
+    this.onRefresh,
   });
 
   @override
   Widget build(BuildContext context) {
     final bottomPadding = bottomWidgetHeight ?? AppSpacing.bottomNavSafe;
-    return SingleChildScrollView(
+    final scrollView = SingleChildScrollView(
+      physics: onRefresh != null ? const AlwaysScrollableScrollPhysics() : null,
       padding: EdgeInsets.fromLTRB(
         AppSpacing.lg,
         paddingTop ?? AppSpacing.xl,
@@ -132,6 +135,10 @@ class ShellScrollView extends StatelessWidget {
         ],
       ),
     );
+    if (onRefresh == null) {
+      return scrollView;
+    }
+    return RefreshIndicator(onRefresh: onRefresh!, child: scrollView);
   }
 }
 

@@ -5,7 +5,9 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../l10n/tts_localizations.dart';
 import '../../../../shared/widgets/form_inputs.dart';
+import '../../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../../providers/verification_wizard_state.dart';
@@ -20,6 +22,7 @@ class StepTruckDetails extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final state = ref.watch(verificationWizardProvider);
     final controller = ref.read(verificationWizardProvider.notifier);
     final truck = state.draft.truck ?? TruckDraft();
@@ -57,37 +60,47 @@ class StepTruckDetails extends ConsumerWidget {
               initialValue: truck.truckNumber,
               onChanged: controller.updateTruckNumber,
               errorText: state.fieldErrors['truckNumber'],
+              suffixIcon: TtsCardSpeakerButton(
+                message: ttsL10n.ttsFieldTruckNumberInputDescription,
+                onDarkSurface: false,
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             
             // Body Type
-            AppDropdown<String>(
+            _SpeakableDropdownField(
               label: l10n.verificationWizardBodyTypeLabel,
-              value: truck.bodyType,
-              items: [
-                'open',
-                'closed',
-                'container',
-                'flatbed',
-                'tanker',
-                'refrigerated',
-              ].map((type) => DropdownMenuItem(
-                value: type,
-                child: Text(_getBodyTypeLabel(l10n, type)),
-              )).toList(),
-              onChanged: (v) => controller.updateTruckBodyType(v!),
+              ttsMessage: ttsL10n.ttsFieldTruckBodyTypeDescription,
+              child: AppDropdown<String>(
+                value: truck.bodyType,
+                items: [
+                  'open',
+                  'closed',
+                  'container',
+                  'flatbed',
+                  'tanker',
+                  'refrigerated',
+                ].map((type) => DropdownMenuItem(
+                  value: type,
+                  child: Text(_getBodyTypeLabel(l10n, type)),
+                )).toList(),
+                onChanged: (v) => controller.updateTruckBodyType(v!),
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             
             // Tyres
-            AppDropdown<int>(
+            _SpeakableDropdownField(
               label: l10n.verificationWizardTyresLabel,
-              value: truck.tyres,
-              items: [6, 10, 12, 14, 16, 18, 22].map((count) => DropdownMenuItem(
-                value: count,
-                child: Text('$count ${l10n.verificationWizardTyresLabel.toLowerCase()}'),
-              )).toList(),
-              onChanged: (v) => controller.updateTruckTyres(v!),
+              ttsMessage: ttsL10n.ttsFieldTruckTyresDescription,
+              child: AppDropdown<int>(
+                value: truck.tyres,
+                items: [6, 10, 12, 14, 16, 18, 22].map((count) => DropdownMenuItem(
+                  value: count,
+                  child: Text('$count ${l10n.verificationWizardTyresLabel.toLowerCase()}'),
+                )).toList(),
+                onChanged: (v) => controller.updateTruckTyres(v!),
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             
@@ -99,6 +112,10 @@ class StepTruckDetails extends ConsumerWidget {
               initialValue: truck.capacityTonnes > 0 ? truck.capacityTonnes.toString() : '',
               onChanged: controller.updateTruckCapacity,
               errorText: state.fieldErrors['capacityTonnes'],
+              suffixIcon: TtsCardSpeakerButton(
+                message: ttsL10n.ttsFieldTruckCapacityInputDescription,
+                onDarkSurface: false,
+              ),
             ),
             const SizedBox(height: AppSpacing.xl),
             
@@ -110,6 +127,7 @@ class StepTruckDetails extends ConsumerWidget {
               isRequired: true,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.truckRc,
               icon: Icons.description_outlined,
+              ttsMessage: ttsL10n.ttsFieldUploadRcPrompt,
               onTap: () => _uploadRc(context, ref, controller),
               onClear: controller.clearTruckRc,
             ),
@@ -123,6 +141,7 @@ class StepTruckDetails extends ConsumerWidget {
               isRequired: false,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.truckPhoto,
               icon: Icons.local_shipping_outlined,
+              ttsMessage: ttsL10n.ttsFieldUploadTruckPhotoPrompt,
               onTap: () => _uploadPhoto(context, ref, controller),
               onClear: controller.clearTruckPhoto,
             ),
@@ -208,6 +227,46 @@ class StepTruckDetails extends ConsumerWidget {
 }
 
 void _noopImageSourceSelection(ImageSource _) {}
+
+class _SpeakableDropdownField extends StatelessWidget {
+  final String label;
+  final String ttsMessage;
+  final Widget child;
+
+  const _SpeakableDropdownField({
+    required this.label,
+    required this.ttsMessage,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Text(
+                label,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
+              ),
+            ),
+            TtsCardSpeakerButton(
+              message: ttsMessage,
+              onDarkSurface: false,
+            ),
+          ],
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        child,
+      ],
+    );
+  }
+}
 
 class _InfoBanner extends StatelessWidget {
   final String message;

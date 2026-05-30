@@ -176,10 +176,11 @@ class AppLocalizationsHi extends AppLocalizations {
       'Google sign-in token लाने में असमर्थ। फिर कोशिश करें।';
 
   @override
-  String get onboardingDiscardRoleTitle => 'Role selection छोड़ें?';
+  String get onboardingDiscardRoleTitle => 'बिना सेव किए वापस जाएँ?';
 
   @override
-  String get onboardingDiscardRoleMessage => 'आपका चयनित role खो जाएगा';
+  String get onboardingDiscardRoleMessage =>
+      'आपकी पसंद खो जाएगी। वापस आकर फिर भाड़ा खोजें या भाड़ा पोस्ट करें चुनें।';
 
   @override
   String get onboardingDiscardChangesTitle => 'Changes छोड़ें?';
@@ -201,21 +202,21 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get locationEnableServicesMessage =>
-      'Current location capture करने के लिए location services (GPS) enable करें।';
+      'अपनी सही लोकेशन डालने के लिए मोबाइल का जीपीएस (GPS) चालू करें।';
 
   @override
   String get locationGrantPermissionMessage =>
-      'Current location capture करने के लिए location permission grant करें।';
+      'लोकेशन डालने के लिए ऐप को परमिशन (अनुमति) दें।';
 
   @override
   String get locationOpenSettings => 'Settings खोलें';
 
   @override
   String get locationPermissionDeniedForeverMessage =>
-      'Location permission permanently denied हो गया। App settings में enable करें।';
+      'लोकेशन परमिशन हमेशा के लिए बंद है। कृपया मोबाइल सेटिंग्स में जाकर इसे चालू करें।';
 
   @override
-  String get searchYourLocation => 'अपनी location खोजें';
+  String get searchYourLocation => 'अपना शहर या जगह खोजें';
 
   @override
   String get useCurrentLocation => 'Current location इस्तेमाल करें';
@@ -245,11 +246,12 @@ class AppLocalizationsHi extends AppLocalizations {
   String get publicProfileNotFoundTitle => 'प्रोफाइल नहीं मिली';
 
   @override
-  String get supplierPostLoadSpecifyMaterialLabel => 'Material specify करें';
+  String get supplierPostLoadSpecifyMaterialLabel =>
+      'सामान या माल का नाम लिखें';
 
   @override
   String get supplierPostLoadSpecifyMaterialHint =>
-      'जैसे, Fruits, Iron Ore, Bricks';
+      'जैसे: कोयला, सीमेंट, गिट्टी, फल या सब्ज़ी';
 
   @override
   String get supplierPostLoadMaterialCoal => 'कोयला';
@@ -310,7 +312,8 @@ class AppLocalizationsHi extends AppLocalizations {
       'Capacity 0 और 100 tonnes के बीच होनी चाहिए';
 
   @override
-  String get truckerFleetValidationRcDocument => 'RC document आवश्यक है';
+  String get truckerFleetValidationRcDocument =>
+      'गाड़ी का आर सी (RC) फोटो अपलोड करना ज़रूरी है';
 
   @override
   String get truckerFleetErrorTruckNotFound => 'चयनित truck नहीं मिला';
@@ -395,39 +398,39 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get onboardingSelectRoleError =>
-      'चुनें कि आप supplier के रूप में जुड़ रहे हैं या trucker के रूप में।';
+      'कृपया भाड़ा खोजें या भाड़ा पोस्ट करें चुनें।';
 
   @override
   String get onboardingRoleWorkspaceFailure =>
-      'अभी आपका role workspace तैयार नहीं हो सका। अपना role फिर चुनकर थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपका खाता तैयार नहीं हो सका। विकल्प फिर चुनकर थोड़ी देर बाद कोशिश करें।';
 
   @override
   String get onboardingRoleSaveFailure =>
-      'अभी आपका role save नहीं हो सका। थोड़ी देर बाद फिर कोशिश करें।';
+      'अभी आपकी पसंद सेव नहीं हो सकी। थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get onboardingChooseRoleTitle => 'Role चुनें';
+  String get onboardingChooseRoleTitle => 'शुरू करें';
 
   @override
-  String get onboardingRoleQuestion => 'आपके काम के लिए कौन-सा role सही है?';
+  String get onboardingRoleQuestion => 'भाड़ा खोजना है या पोस्ट करना है?';
 
   @override
   String get onboardingRoleSubtitle =>
-      'आपकी भूमिका तय करेगी कि TranZfort आपके लिए कौन-से tools, डैशबोर्ड और workflows तैयार करेगा।';
+      'अपना काम चुनें। भार ढूँढने के लिए पहला विकल्प, भार डालने के लिए दूसरा विकल्प।';
 
   @override
-  String get onboardingSupplierTitle => 'सप्लायर';
+  String get onboardingSupplierTitle => 'भाड़ा पोस्ट करें';
 
   @override
   String get onboardingSupplierSubtitle =>
-      'लोड्स पोस्ट करें, बुकिंग्स रिव्यू करें, ट्रिप्स मैनेज करें और डिलीवरी फॉलो-थ्रू ट्रैक करें।';
+      'माल भेजना है। भार डालकर ट्रक ढूँढें।';
 
   @override
-  String get onboardingTruckerTitle => 'ट्रकर';
+  String get onboardingTruckerTitle => 'भाड़ा खोजें';
 
   @override
   String get onboardingTruckerSubtitle =>
-      'लोड्स खोजें, फ्लीट रेडिनेस मैनेज करें और सक्रिय ट्रिप्स एक जगह से चलाएँ।';
+      'ट्रक चलाते हैं। भार खोजने के लिए यहाँ टैप करें।';
 
   @override
   String get onboardingContinue => 'आगे बढ़ें';
@@ -586,7 +589,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierDashboardStatsActiveLoadsLabel => 'सक्रिय लोड्स';
 
   @override
-  String get supplierDashboardStatsPendingBookingsLabel => 'लंबित बुकिंग्स';
+  String get supplierDashboardStatsPendingBookingsLabel =>
+      'रुकी हुई बुकिंग अनुरोध';
 
   @override
   String get supplierDashboardStatsInTransitTripsLabel => 'चल रही ट्रिप्स';
@@ -805,10 +809,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get commonDiscardAction => 'छोड़ें';
 
   @override
-  String get chatActionApprove => 'स्वीकृत करें';
+  String get chatActionApprove => 'अप्रूव करें (मंजूर)';
 
   @override
-  String get chatActionReject => 'अस्वीकृत करें';
+  String get chatActionReject => 'रिजेक्ट करें (अस्वीकार)';
 
   @override
   String get chatBookingApprovedSuccess => 'Booking approve हो गई!';
@@ -2146,6 +2150,18 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String truckerDashboardHeroGreeting(Object fullName) {
+    return 'नमस्ते, $fullName';
+  }
+
+  @override
+  String get truckerDashboardSearchLoadsAction => 'Load khojein';
+
+  @override
+  String get truckerDashboardFiltersOnFindLoadsHint =>
+      'Truck type aur filters Find Loads tab par milenge';
+
+  @override
   String get truckerDashboardTitle => 'ट्रकर डैशबोर्ड';
 
   @override
@@ -2574,7 +2590,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'Truck सफलतापूर्वक update हो गया';
 
   @override
-  String get truckerFleetTruckAddedSuccess => 'Truck सफलतापूर्वक जोड़ दिया गया';
+  String get truckerFleetTruckAddedSuccess => 'आपका ट्रक जोड़ दिया गया है।';
 
   @override
   String get truckerFleetMyTrucksTitle => 'मेरे ट्रक';
@@ -3952,7 +3968,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी वह verification document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get verificationStatusVerified => 'सत्यापित';
+  String get verificationStatusVerified => 'जांच पूरी (वेरिफाइड)';
 
   @override
   String get verificationStatusRejected => 'अस्वीकृत';
@@ -4041,12 +4057,12 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String verificationLockedStatusValue(String status) {
     String _temp0 = intl.Intl.selectLogic(status, {
-      'verified_title': 'सत्यापित',
-      'pending_title': 'समीक्षा के अंतर्गत',
+      'verified_title': 'जांच पूरी (वेरिफाइड)',
+      'pending_title': 'जांच चल रही है',
       'verified_message':
           'आपकी verification approve हो चुकी है। अभी किसी action की ज़रूरत नहीं है।',
       'pending_message':
-          'आपके documents review में हैं। Review पूरी होने पर आपको notify किया जाएगा।',
+          'आपके कागज जांचे जा रहे हैं। जांच पूरी होने पर आपको मैसेज भेज दिया जाएगा।',
       'other': 'अज्ञात',
     });
     return '$_temp0';
@@ -5639,7 +5655,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerLoadDetailNoApprovedTrucksAvailable =>
-      'अभी तक कोई अनुमोदित ट्रक उपलब्ध नहीं है।';
+      'कोई वेरिफाइड ट्रक नहीं मिला। कृपया पहले अपना ट्रक वेरिफाइड करवाएं।';
 
   @override
   String get truckerLoadDetailAddTruckFirstAction => 'पहले एक ट्रक जोड़ें';
@@ -5675,7 +5691,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerLoadDetailWhatsAppUnavailableMessage =>
-      'इस डिवाइस पर व्हाट्सएप उपलब्ध नहीं है। इसके बजाय सिस्टम साझा का उपयोग करें।';
+      'आपके मोबाइल पर व्हाट्सएप नहीं मिला। कृपया किसी दूसरी ऐप से शेयर करें।';
 
   @override
   String truckerLoadDetailReportSourceLabel(Object routeLabel) {
@@ -5684,7 +5700,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerLoadDetailVerificationRequiredMessage =>
-      'लोड बुक करने या सप्लायर चैट शुरू करने से पहले ट्रकर सत्यापन पूरा करें। सत्यापन के लिए अनुमोदित पहचान दस्तावेज और प्रोफ़ाइल समीक्षा आवश्यक है।';
+      'लोड बुक करने या चैट शुरू करने से पहले अपना वेरिफिकेशन (पहचान जांच) पूरा करें। इसके लिए आधार, पैन कार्ड और प्रोफाइल फोटो की जांच ज़रूरी है।';
 
   @override
   String get truckerLoadDetailTruckApprovalRequiredMessage =>
@@ -6400,7 +6416,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailNetLossSubtitle => 'खर्च कुल किराये से अधिक हैं';
 
   @override
-  String get truckerLoadDetailCostBreakdownLabel => 'लागत विवरण';
+  String get truckerLoadDetailCostBreakdownLabel => 'खर्चे का हिसाब';
 
   @override
   String get trustScoreTitle => 'विश्वास और समीक्षाएं';
@@ -6461,7 +6477,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get reviewsRetryMessage =>
-      'कृपया नवीनतम समीक्षाएं लोड करने के लिए पुनः प्रयास करें।';
+      'रेटिंग और रिव्यू लोड नहीं हो पा रहे हैं। कृपया दोबारा कोशिश करें।';
 
   @override
   String get reviewsNoReviewsYet => 'अभी तक कोई समीक्षा नहीं';
@@ -6478,7 +6494,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get replyDialogDescription =>
-      'आप इस समीक्षा का एक बार जवाब दे सकते हैं। आपकी प्रतिक्रिया आपकी प्रोफ़ाइल देखने वाले सभी को दिखाई देगी।';
+      'आप इस रिव्यू का सिर्फ एक बार जवाब दे सकते हैं। आपका जवाब आपकी प्रोफाइल देखने वाले सभी लोगों को दिखेगा।';
 
   @override
   String replyDialogHint(String name) {
@@ -6613,7 +6629,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get chatVoiceNoActiveRecording =>
-      'इस वार्तालाप के लिए कोई सक्रिय वॉइस रिकॉर्डिंग उपलब्ध नहीं है';
+      'इस चैट में कोई रिकॉर्डिंग नहीं मिली';
 
   @override
   String get chatMessageAlreadyBeingSent =>

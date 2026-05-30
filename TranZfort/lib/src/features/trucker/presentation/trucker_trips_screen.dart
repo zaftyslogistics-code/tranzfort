@@ -27,32 +27,29 @@ class TruckerTripsScreen extends ConsumerWidget {
     final state = ref.watch(truckerTripsProvider);
 
     return ShellScrollView(
+      onRefresh: () => ref.read(truckerTripsProvider.notifier).load(),
       children: [
-        DetailSectionCard(
+        HeroActionCard(
           title: l10n.truckerTripsTitle,
-          children: [
-            Text(
-              l10n.truckerTripsSubtitle,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: AppColors.textSecondary,
+          subtitle: l10n.truckerTripsSubtitle,
+          compact: true,
+          useDarkTheme: true,
+          useInkGradient: true,
+          titleIcon: Icons.alt_route_outlined,
+          child: FilterChipBar(
+            items: [
+              FilterChipItem(
+                label: l10n.commonActiveLabel,
+                selected: state.selectedTab == TruckerTripsTab.active,
+                onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.active),
               ),
-            ),
-            const SizedBox(height: AppSpacing.md),
-            FilterChipBar(
-              items: [
-                FilterChipItem(
-                  label: l10n.commonActiveLabel,
-                  selected: state.selectedTab == TruckerTripsTab.active,
-                  onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.active),
-                ),
-                FilterChipItem(
-                  label: l10n.commonCompletedLabel,
-                  selected: state.selectedTab == TruckerTripsTab.completed,
-                  onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.completed),
-                ),
-              ],
-            ),
-          ],
+              FilterChipItem(
+                label: l10n.commonCompletedLabel,
+                selected: state.selectedTab == TruckerTripsTab.completed,
+                onTap: () => ref.read(truckerTripsProvider.notifier).selectTab(TruckerTripsTab.completed),
+              ),
+            ],
+          ),
         ),
         _TruckerTripsBody(
           state: state,

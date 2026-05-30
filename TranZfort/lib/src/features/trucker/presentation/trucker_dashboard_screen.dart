@@ -15,6 +15,7 @@ import '../../shell/presentation/shell_components.dart';
 import '../data/trucker_dashboard_repository.dart';
 import '../data/trucker_profile_repository.dart';
 import '../providers/trucker_providers.dart';
+import 'widgets/dashboard_route_search_hero.dart';
 
 class TruckerDashboardScreen extends ConsumerWidget {
   const TruckerDashboardScreen({super.key});
@@ -29,19 +30,17 @@ class TruckerDashboardScreen extends ConsumerWidget {
     final List<Widget>? topBannerSection = topBanner == null ? null : <Widget>[topBanner];
 
     return ShellScrollView(
+      onRefresh: () async {
+        ref.invalidate(truckerDashboardProvider);
+        ref.invalidate(truckerProfileProvider);
+        await Future.wait([
+          ref.read(truckerDashboardProvider.future),
+          ref.read(truckerProfileProvider.future),
+        ]);
+      },
       children: [
         ...?topBannerSection,
-        HeroActionCard(
-          title: _heroTitle(profile, l10n),
-          subtitle: '',
-          compact: true,
-          useDarkTheme: true,
-          primaryAction: GradientButton(
-            label: l10n.shellTitleFindLoads,
-            onPressed: () => context.go(AppRoutes.findLoadsPath),
-          ),
-          child: _HeroSummary(profile: profile),
-        ),
+        DashboardRouteSearchHero(profile: profile),
         DetailSectionCard(
           title: l10n.commonDashboardOverviewTitle,
           children: [
@@ -97,15 +96,6 @@ class TruckerDashboardScreen extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  String _heroTitle(TruckerProfile? profile, AppLocalizations l10n) {
-    final fullName = profile?.fullName.trim() ?? '';
-    if (fullName.isNotEmpty) {
-      return l10n.truckerDashboardWelcomeBack(fullName);
-    }
-
-    return l10n.truckerDashboardTitle;
   }
 
   Widget? _buildTopBanner(
@@ -247,46 +237,6 @@ class _CompactDashboardBanner extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _HeroSummary extends StatelessWidget {
-  final TruckerProfile? profile;
-
-  const _HeroSummary({required this.profile});
-
-  @override
-  Widget build(BuildContext context) {
-    final AppLocalizations l10n = AppLocalizations.of(context);
-    final verificationLabel = _localizedTruckerDashboardVerificationStatus(
-      l10n,
-      profile?.verificationStatus,
-    );
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Wrap(
-          spacing: AppSpacing.sm,
-          runSpacing: AppSpacing.sm,
-          children: [
-            StatusBadge(
-              label: verificationLabel,
-              icon: Icons.verified_outlined,
-            ),
-            if ((profile?.approvedTrucks ?? 0) > 0)
-              StatusBadge(
-                label: l10n.truckerDashboardApprovedTruckCount(profile!.approvedTrucks),
-                icon: Icons.local_shipping_outlined,
-                palette: const StatusPalette(
-                  foreground: AppColors.primary,
-                  background: AppColors.neutralBg,
-                ),
-              ),
-          ],
-        ),
-      ],
     );
   }
 }

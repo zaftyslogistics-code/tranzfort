@@ -6,7 +6,9 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/error/result.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../l10n/tts_localizations.dart';
 import '../../../../shared/widgets/form_inputs.dart';
+import '../../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
@@ -20,6 +22,7 @@ class StepIdentityDocuments extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final state = ref.watch(verificationWizardProvider);
     final controller = ref.read(verificationWizardProvider.notifier);
 
@@ -58,6 +61,10 @@ class StepIdentityDocuments extends ConsumerWidget {
               ],
               onChanged: (v) => controller.updateAadhaarNumber(v.replaceAll(' ', '')),
               errorText: state.fieldErrors['aadhaarNumber'],
+              suffixIcon: TtsCardSpeakerButton(
+                message: ttsL10n.ttsFieldAadhaarInputDescription,
+                onDarkSurface: false,
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             
@@ -68,6 +75,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               isRequired: true,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.aadhaarFront,
               icon: Icons.document_scanner_outlined,
+              ttsMessage: ttsL10n.ttsFieldUploadAadhaarFrontPrompt,
               onTap: () => _uploadDocument(
                 context,
                 ref,
@@ -85,6 +93,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               isRequired: true,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.aadhaarBack,
               icon: Icons.document_scanner_outlined,
+              ttsMessage: ttsL10n.ttsFieldUploadAadhaarBackPrompt,
               onTap: () => _uploadDocument(
                 context,
                 ref,
@@ -106,6 +115,10 @@ class StepIdentityDocuments extends ConsumerWidget {
               ],
               onChanged: controller.updatePanNumber,
               errorText: state.fieldErrors['panNumber'],
+              suffixIcon: TtsCardSpeakerButton(
+                message: ttsL10n.ttsFieldPanInputDescription,
+                onDarkSurface: false,
+              ),
             ),
             const SizedBox(height: AppSpacing.lg),
             
@@ -116,6 +129,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               isRequired: true,
               isUploading: state.uploadingDocumentType == VerificationDocumentType.pan,
               icon: Icons.credit_card_outlined,
+              ttsMessage: ttsL10n.ttsFieldUploadPanPrompt,
               onTap: () => _uploadDocument(
                 context,
                 ref,

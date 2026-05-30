@@ -18,6 +18,8 @@ class AppTextField extends StatelessWidget {
   final ValueChanged<String>? onChanged;
   final Widget? suffixIcon;
   final List<TextInputFormatter>? inputFormatters;
+  final bool enlarged;
+  final EdgeInsets scrollPadding;
 
   const AppTextField({
     super.key,
@@ -34,10 +36,16 @@ class AppTextField extends StatelessWidget {
     this.onChanged,
     this.suffixIcon,
     this.inputFormatters,
+    this.enlarged = false,
+    this.scrollPadding = const EdgeInsets.all(20),
   });
 
   @override
   Widget build(BuildContext context) {
+    final enlargedStyle = enlarged
+        ? Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w500)
+        : null;
+
     return TextFormField(
       controller: controller,
       initialValue: controller == null ? initialValue : null,
@@ -46,6 +54,8 @@ class AppTextField extends StatelessWidget {
       maxLines: obscureText ? 1 : maxLines,
       onChanged: onChanged,
       inputFormatters: inputFormatters,
+      style: enlargedStyle,
+      scrollPadding: scrollPadding,
       decoration: InputDecoration(
         labelText: label,
         hintText: hintText,
@@ -53,6 +63,9 @@ class AppTextField extends StatelessWidget {
         helperText: helperText,
         errorText: errorText,
         suffixIcon: suffixIcon,
+        contentPadding: enlarged
+            ? const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.lg)
+            : null,
       ),
     );
   }

@@ -96,9 +96,12 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
 
     return Stack(
       children: [
-        CustomScrollView(
-          controller: _scrollController,
-          slivers: [
+        RefreshIndicator(
+          onRefresh: () => ref.read(findLoadsProvider.notifier).loadInitial(),
+          child: CustomScrollView(
+            controller: _scrollController,
+            physics: const AlwaysScrollableScrollPhysics(),
+            slivers: [
             SliverPadding(
               padding: const EdgeInsets.fromLTRB(
                 AppSpacing.lg,
@@ -366,6 +369,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                 ),
               ),
           ],
+          ),
         ),
         if (_showScrollToTop)
           Positioned(

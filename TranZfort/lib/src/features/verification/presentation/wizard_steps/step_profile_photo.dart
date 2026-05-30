@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../l10n/tts_localizations.dart';
 import '../../data/verification_repository.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
@@ -17,6 +18,7 @@ class StepProfilePhoto extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
+    final ttsL10n = TtsLocalizations.of(context);
     final state = ref.watch(verificationWizardProvider);
     final controller = ref.read(verificationWizardProvider.notifier);
     
@@ -47,6 +49,7 @@ class StepProfilePhoto extends ConsumerWidget {
             isRequired: true,
             isUploading: state.uploadingDocumentType == VerificationDocumentType.profilePhoto,
             icon: Icons.person_outline,
+            ttsMessage: ttsL10n.ttsFieldUploadProfilePhotoPrompt,
             onTap: () => _showImageSourcePicker(context, ref, controller),
             onClear: controller.clearProfilePhoto,
             qualityChecks: const [

@@ -242,6 +242,12 @@ abstract class TtsLocalizations {
   /// **'Chat with the supplier or book this load.'**
   String get ttsLoadDetailChatOrBookHint;
 
+  /// No description provided for @ttsLoadDetailTripEstimate.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated profit on this trip is about {amount} rupees.'**
+  String ttsLoadDetailTripEstimate(Object amount);
+
   /// No description provided for @ttsTripDetailRouteStage.
   ///
   /// In en, this message translates to:
@@ -281,14 +287,44 @@ abstract class TtsLocalizations {
   /// No description provided for @ttsOnboardingChooseRole.
   ///
   /// In en, this message translates to:
-  /// **'Choose your role. Are you a trucker or a supplier?'**
+  /// **'Choose what you do. Do you want to find loads or post a load? Tap Find Loads, bhada khoje, to search for loads to carry. Tap Post a Load, bhada post kare, to list goods that need trucks.'**
   String get ttsOnboardingChooseRole;
+
+  /// No description provided for @ttsOnboardingFindLoadsCard.
+  ///
+  /// In en, this message translates to:
+  /// **'If you drive a truck and want to find loads to carry, choose Find Loads, bhada khoje. You will see loads looking for trucks.'**
+  String get ttsOnboardingFindLoadsCard;
+
+  /// No description provided for @ttsOnboardingPostLoadCard.
+  ///
+  /// In en, this message translates to:
+  /// **'If you have goods to send and need trucks, choose Post a Load, bhada post kare. You can list your load here.'**
+  String get ttsOnboardingPostLoadCard;
 
   /// No description provided for @ttsOnboardingCompleteProfile.
   ///
   /// In en, this message translates to:
-  /// **'Complete your profile. Enter your details to continue.'**
+  /// **'Complete your profile. Enter your name, mobile number, and location to continue.'**
   String get ttsOnboardingCompleteProfile;
+
+  /// No description provided for @ttsOnboardingProfileFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your full name.'**
+  String get ttsOnboardingProfileFullName;
+
+  /// No description provided for @ttsOnboardingProfileMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your mobile number.'**
+  String get ttsOnboardingProfileMobile;
+
+  /// No description provided for @ttsOnboardingProfileLocation.
+  ///
+  /// In en, this message translates to:
+  /// **'Add your city location. Use current location or search manually.'**
+  String get ttsOnboardingProfileLocation;
 
   /// No description provided for @ttsAuthWelcomeShort.
   ///
@@ -325,6 +361,108 @@ abstract class TtsLocalizations {
   /// In en, this message translates to:
   /// **'Review step. Confirm all details and accept terms before submit.'**
   String get ttsVerificationStepReview;
+
+  /// No description provided for @ttsFieldUploadAadhaarFrontPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear photo of the front side of your Aadhaar card. Name and number must be visible.'**
+  String get ttsFieldUploadAadhaarFrontPrompt;
+
+  /// No description provided for @ttsFieldUploadAadhaarBackPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear photo of the back side of your Aadhaar card.'**
+  String get ttsFieldUploadAadhaarBackPrompt;
+
+  /// No description provided for @ttsFieldUploadPanPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear photo of your PAN card. All four corners and your photo must be visible.'**
+  String get ttsFieldUploadPanPrompt;
+
+  /// No description provided for @ttsFieldUploadRcPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear photo of your vehicle RC book or registration certificate.'**
+  String get ttsFieldUploadRcPrompt;
+
+  /// No description provided for @ttsFieldUploadProfilePhotoPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload a clear photo of your face. Make sure your face is fully visible.'**
+  String get ttsFieldUploadProfilePhotoPrompt;
+
+  /// No description provided for @ttsFieldAadhaarInputDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your twelve-digit Aadhaar number here.'**
+  String get ttsFieldAadhaarInputDescription;
+
+  /// No description provided for @ttsFieldPanInputDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your PAN card number here.'**
+  String get ttsFieldPanInputDescription;
+
+  /// No description provided for @ttsFieldTruckNumberInputDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your vehicle registration number here, as printed on your RC book.'**
+  String get ttsFieldTruckNumberInputDescription;
+
+  /// No description provided for @ttsFieldTruckBodyTypeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose your truck body type, such as open, closed, or container.'**
+  String get ttsFieldTruckBodyTypeDescription;
+
+  /// No description provided for @ttsFieldTruckTyresDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Select how many tyres your truck has. This helps match suitable loads.'**
+  String get ttsFieldTruckTyresDescription;
+
+  /// No description provided for @ttsFieldTruckCapacityInputDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter how many tonnes of weight your truck can carry.'**
+  String get ttsFieldTruckCapacityInputDescription;
+
+  /// No description provided for @ttsFieldUploadTruckPhotoPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'You may upload a clear side photo of your truck. This is optional but helpful.'**
+  String get ttsFieldUploadTruckPhotoPrompt;
+
+  /// No description provided for @ttsShellTruckerDashboardIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Dashboard. You have {approvedTrucks} approved trucks and {inTransitTrips} trips in transit.'**
+  String ttsShellTruckerDashboardIntro(
+    Object approvedTrucks,
+    Object inTransitTrips,
+  );
+
+  /// No description provided for @ttsShellSupplierDashboardIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier dashboard. You have {activeLoads} active loads and {pendingBookings} pending booking requests.'**
+  String ttsShellSupplierDashboardIntro(
+    Object activeLoads,
+    Object pendingBookings,
+  );
+
+  /// No description provided for @ttsShellMessagesIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Messages. You have {unreadCount} new messages.'**
+  String ttsShellMessagesIntro(Object unreadCount);
+
+  /// No description provided for @ttsShellTripsIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Your trips. {upcomingTrips} upcoming and {inTransitTrips} in transit.'**
+  String ttsShellTripsIntro(Object upcomingTrips, Object inTransitTrips);
 
   /// No description provided for @ttsNotificationRowHint.
   ///

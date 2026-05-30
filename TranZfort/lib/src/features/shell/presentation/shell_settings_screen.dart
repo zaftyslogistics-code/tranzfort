@@ -10,12 +10,14 @@ import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/providers/tts_state_provider.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../core/services/contextual_tts_service.dart';
+import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
+import '../../../shared/widgets/status_components.dart';
 import '../../notifications/data/push_runtime_service.dart';
 import 'shell_account_helpers.dart';
 import 'shell_components.dart';
@@ -33,6 +35,36 @@ class SettingsScreen extends ConsumerWidget {
     return DetailPageScaffold(
       title: l10n.settingsTitle,
       children: [
+        HeroActionCard(
+          title: l10n.settingsTitle,
+          subtitle: l10n.settingsPreferencesTitle,
+          compact: true,
+          useDarkTheme: true,
+          useInkGradient: true,
+          titleIcon: Icons.settings_outlined,
+          child: Wrap(
+            spacing: AppSpacing.md,
+            runSpacing: AppSpacing.md,
+            children: [
+              StatusBadge(
+                label: localeState.locale.languageCode == 'hi'
+                    ? l10n.settingsLanguageHindi
+                    : l10n.settingsLanguageEnglish,
+                icon: Icons.translate_outlined,
+              ),
+              StatusBadge(
+                label: ref.watch(ttsAudioLanguageProvider) == 'hi'
+                    ? l10n.settingsLanguageHindi
+                    : l10n.settingsLanguageEnglish,
+                icon: Icons.record_voice_over_outlined,
+                palette: const StatusPalette(
+                  foreground: AppColors.info,
+                  background: AppColors.infoBg,
+                ),
+              ),
+            ],
+          ),
+        ),
         SectionCard(
           title: l10n.settingsPreferencesTitle,
           child: Column(

@@ -399,13 +399,10 @@ class NotificationRepository {
       return;
     }
 
-    // Compute count directly from stream data to avoid N+1 queries
-    await for (final rows in _backend.watchNotifications(userId: userId)) {
+    // Re-fetch authoritative RPC count whenever the notifications table changes.
+    await for (final _ in _backend.watchNotifications(userId: userId)) {
       try {
-        final unreadCount = rows.where((row) {
-          final isRead = row['is_read'] as bool? ?? false;
-          return !isRead;
-        }).length;
+        final unreadCount = await _backend.fetchUnreadCount(userId: userId);
         yield Success<int>(unreadCount);
       } catch (error, stackTrace) {
         yield Failure<int>(_mapError(error, stackTrace));

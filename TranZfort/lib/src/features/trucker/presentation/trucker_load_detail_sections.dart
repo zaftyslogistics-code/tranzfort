@@ -65,7 +65,25 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     );
     final ttsL10n = TtsLocalizations.of(context);
     final loadTts = const LoadDetailTtsBuilder();
-    final heroTts = loadTts.buildTruckerHeroSummary(detail: detail, tts: ttsL10n, ui: l10n);
+    final languageCode = Localizations.localeOf(context).languageCode;
+    final heroTts = loadTts.buildTruckerHeroSummary(
+      detail: detail,
+      tts: ttsL10n,
+      ui: l10n,
+      languageCode: languageCode,
+    );
+    final truckReqTts = loadTts.buildTruckerTruckRequirements(
+      detail: detail,
+      tts: ttsL10n,
+      ui: l10n,
+      languageCode: languageCode,
+    );
+    final tripEstimateTts = tripCost == null
+        ? null
+        : loadTts.buildTruckerTripEstimate(
+            estimatedProfit: tripCost.netProfit,
+            tts: ttsL10n,
+          );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,6 +116,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
           useInkGradient: true,
           sectionIcon: Icons.local_shipping_outlined,
           title: l10n.truckerLoadDetailTruckRequirementTitle,
+          ttsMessage: truckReqTts,
           children: [
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
@@ -198,7 +217,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
             ],
           )
         else
-          _EarningsEstimateCard(tripCost: tripCost),
+          _EarningsEstimateCard(tripCost: tripCost, ttsMessage: tripEstimateTts),
         const SizedBox(height: AppSpacing.sectionGap),
         DetailSectionCard(
           useInkGradient: true,
