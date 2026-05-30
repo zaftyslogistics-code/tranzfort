@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
@@ -23,6 +24,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
   final String destinationState;
   final VoidCallback? onSupplierTap;
   final Widget? headerTrailing;
+  final bool onDarkSurface;
 
   const MarketplaceDarkHeader({
     super.key,
@@ -38,6 +40,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
     required this.destinationState,
     this.onSupplierTap,
     this.headerTrailing,
+    this.onDarkSurface = true,
   });
 
   @override
@@ -61,6 +64,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
             isSuperLoad: isSuperLoad,
             onSupplierTap: onSupplierTap,
             headerTrailing: headerTrailing,
+            onDarkSurface: onDarkSurface,
           ),
           const SizedBox(height: AppSpacing.xs),
           MarketplaceRouteLine(
@@ -68,6 +72,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
             originState: originState,
             destinationCity: destinationCity,
             destinationState: destinationState,
+            onDarkSurface: onDarkSurface,
           ),
         ],
       ),
@@ -84,6 +89,7 @@ class _SupplierRow extends StatelessWidget {
   final bool isSuperLoad;
   final VoidCallback? onSupplierTap;
   final Widget? headerTrailing;
+  final bool onDarkSurface;
 
   const _SupplierRow({
     required this.supplierName,
@@ -94,10 +100,13 @@ class _SupplierRow extends StatelessWidget {
     required this.isSuperLoad,
     this.onSupplierTap,
     this.headerTrailing,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final nameColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface);
+    final mutedColor = AppDecorations.marketplaceCardTextSecondary(onDarkSurface: onDarkSurface);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -121,7 +130,7 @@ class _SupplierRow extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      color: AppColors.inkTextPrimary,
+                      color: nameColor,
                       fontWeight: FontWeight.w700,
                       fontSize: MarketplaceDarkHeader._supplierNameFontSize,
                     ),
@@ -136,7 +145,7 @@ class _SupplierRow extends StatelessWidget {
                     Text(
                       age!,
                       style: AppTypography.labelMicro.copyWith(
-                        color: AppColors.inkTextSecondary,
+                        color: mutedColor,
                         fontSize: 10,
                       ),
                     ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/theme/app_decorations.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -12,6 +11,7 @@ class MarketplacePriceFactRow extends StatelessWidget {
   final String material;
   final String bodyTypeLabel;
   final String? tyreLabel;
+  final bool onDarkSurface;
 
   const MarketplacePriceFactRow({
     super.key,
@@ -20,11 +20,13 @@ class MarketplacePriceFactRow extends StatelessWidget {
     required this.material,
     required this.bodyTypeLabel,
     this.tyreLabel,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final priceColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface);
     final isPerTon = priceType == 'per_ton';
     final priceLabel = isPerTon
         ? '₹${priceAmount.toStringAsFixed(0)}/T'
@@ -43,7 +45,7 @@ class MarketplacePriceFactRow extends StatelessWidget {
           Text(
             priceLabel,
             style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                  color: AppColors.inkTextPrimary,
+                  color: priceColor,
                   fontWeight: FontWeight.w800,
                   fontSize: 21,
                 ),

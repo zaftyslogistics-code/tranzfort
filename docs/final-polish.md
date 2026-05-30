@@ -1,8 +1,8 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-29 (FP-5 chat UX — paused; resume tomorrow)  
-**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat UX — device QA pending); **FP-4 deferred**; release tail pending  
+**Updated:** 2026-05-29 (FP-6 load card light experiment)  
+**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat QA pending); **FP-6 experiment** (light load card); **FP-4 deferred**  
 **Git branch:** `final-polish` — pushed to `origin`  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
 **Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md)
@@ -274,6 +274,7 @@ Source: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvem
 | Find Loads filters | **FP-3** | Dark ink hero/tabs/pinned; Any + conditional tyres | **Done** |
 | Load detail | **FP-2** | Map removed; dark ink sections; costing/TTS | **Done** |
 | Chat UX polish | **FP-5** | Centered lane, scroll, composer, grouping | **In progress** |
+| Load card light theme | **FP-6** | Light surface + brand gradient border (experiment) | **Experiment** |
 | Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard | **Deferred** |
 
 ---
@@ -565,6 +566,51 @@ Coordinates present?
 
 ---
 
+## FP-6 — Marketplace load card light theme (**experiment**)
+
+> **Revert:** set `AppDecorations.marketplaceLoadCardLightExperiment = false` in `app_decorations.dart` (one flag restores dark ink card).
+
+Ref: FP-1 shipped dark ink card; `docs/loadpost-ui-ux.md` original spec used light `surfaceBase` + divider.
+
+### What FP-1 shipped (before experiment)
+
+| Piece | Detail |
+|-------|--------|
+| Shell | `brandGradientBorderOuter` — teal→orange **1.2px stroke** (unchanged) |
+| Fill | `marketplaceCardSurface()` — dark ink gradient (`inkSurface` → `inkMid`) |
+| Text | `inkTextPrimary` / `inkTextSecondary` throughout header, route, price, footer |
+| Chips | `BrandAccentChip` mini row (material, body, tyres) — unchanged |
+| Layout | Full-bleed in Find Loads; no status chip; TTS top-right |
+
+### Experiment change
+
+| Piece | Dark (default) | Light experiment |
+|-------|----------------|------------------|
+| Fill | `marketplaceCardSurface()` | `marketplaceCardLightSurface()` — `cardSurface` + `elevation1` |
+| Text | `inkText*` | `textPrimary` / `textSecondary` via `AppDecorations.marketplaceCardText*` |
+| Border | Brand gradient outer | **Same** — `brandGradientBorderOuter` |
+| Toggle | — | `AppDecorations.marketplaceLoadCardLightExperiment` |
+
+### Task breakdown
+
+| # | Task | Status |
+|---|------|--------|
+| FP-6.1 | Centralized light fill + text helpers in `AppDecorations` | [x] |
+| FP-6.2 | `marketplaceCardFill()` switch on experiment flag | [x] |
+| FP-6.3 | `onDarkSurface` on header, route, price row, footer, TTS | [x] |
+| FP-6.4 | Device QA — light card on Find Loads feed (EN/HI) | [ ] |
+| FP-6.5 | Keep or revert experiment | [ ] |
+
+### Acceptance criteria
+
+- [x] Brand gradient border unchanged on full-bleed card.
+- [x] Light fill uses `AppColors.cardSurface` (not ad-hoc hex).
+- [x] All card text/icons respect `onDarkSurface` / centralized color helpers.
+- [ ] Readable on Find Loads dark ink hero + pinned filter background.
+- [ ] Revert is one boolean flip with no other file edits.
+
+---
+
 ## FP-5 — Chat UX polish (CI-1–CI-14)
 
 Ref: `docs/TODO&Progress/phase-07-communication-chat-bot.md` § Chat-Improvement
@@ -848,6 +894,7 @@ Dashboard                          Find Loads tab
 | 2026-05-29 | FP-2 complete: diesel ₹100/L floor + migration; device QA sign-off; FP-4 dashboard filters deferred |
 | 2026-05-29 | FP-5 chat UX polish: grouping, scroll/FAB/pill, composer, quick replies; WhatsApp edge alignment (receiver left / sender right) |
 | 2026-05-29 | **Session pause** — branch pushed; resume FP-5.15 device QA + release tail |
+| 2026-05-29 | FP-6 experiment: light marketplace load card + brand gradient border (revert via `marketplaceLoadCardLightExperiment`) |
 
 ---
 

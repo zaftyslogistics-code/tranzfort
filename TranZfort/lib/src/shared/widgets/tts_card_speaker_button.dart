@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/providers/tts_audio_language_provider.dart';
 import '../../core/providers/tts_state_provider.dart';
 import '../../core/services/contextual_tts_service.dart';
-import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/tts_localizations.dart';
 
@@ -12,11 +12,13 @@ import '../../l10n/tts_localizations.dart';
 class TtsCardSpeakerButton extends ConsumerWidget {
   final String message;
   final String? tooltip;
+  final bool onDarkSurface;
 
   const TtsCardSpeakerButton({
     super.key,
     required this.message,
     this.tooltip,
+    this.onDarkSurface = true,
   });
 
   @override
@@ -33,7 +35,8 @@ class TtsCardSpeakerButton extends ConsumerWidget {
       icon: Icon(
         Icons.volume_up_rounded,
         size: 22,
-        color: AppColors.inkTextPrimary.withValues(alpha: 0.9),
+        color: AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface)
+            .withValues(alpha: 0.9),
       ),
     );
   }

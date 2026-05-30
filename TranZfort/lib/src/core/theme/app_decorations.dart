@@ -96,6 +96,43 @@ class AppDecorations {
     );
   }
 
+  /// FP-6 experiment: light marketplace load card surface (revert by setting false).
+  static const bool marketplaceLoadCardLightExperiment = true;
+
+  /// Primary text on marketplace load card (respects [marketplaceLoadCardLightExperiment]).
+  static Color marketplaceCardTextPrimary({bool? onDarkSurface}) {
+    final onDark = onDarkSurface ?? !marketplaceLoadCardLightExperiment;
+    return onDark ? AppColors.inkTextPrimary : AppColors.textPrimary;
+  }
+
+  /// Secondary text on marketplace load card (respects light experiment flag).
+  static Color marketplaceCardTextSecondary({bool? onDarkSurface}) {
+    final onDark = onDarkSurface ?? !marketplaceLoadCardLightExperiment;
+    return onDark ? AppColors.inkTextSecondary : AppColors.textSecondary;
+  }
+
+  /// Inner fill for marketplace load cards (dark ink default; light when experiment on).
+  static BoxDecoration marketplaceCardFill({
+    BorderRadius borderRadius = BorderRadius.zero,
+    bool? useLightSurface,
+  }) {
+    final light = useLightSurface ?? marketplaceLoadCardLightExperiment;
+    return light
+        ? marketplaceCardLightSurface(borderRadius: borderRadius)
+        : marketplaceCardSurface(borderRadius: borderRadius);
+  }
+
+  /// Light marketplace card fill — white surface with light elevation (brand stroke is outer).
+  static BoxDecoration marketplaceCardLightSurface({
+    BorderRadius borderRadius = BorderRadius.zero,
+  }) {
+    return BoxDecoration(
+      color: AppColors.cardSurface,
+      borderRadius: borderRadius,
+      boxShadow: AppShadows.elevation1,
+    );
+  }
+
   /// Dark marketplace card fill (matches existing ink gradient top color).
   static BoxDecoration marketplaceCardSurface({
     BorderRadius borderRadius = BorderRadius.zero,

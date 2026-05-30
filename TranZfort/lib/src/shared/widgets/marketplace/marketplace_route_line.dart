@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_typography.dart';
 import '../../../l10n/app_localizations.dart';
 
@@ -17,6 +17,7 @@ class MarketplaceRouteLine extends StatelessWidget {
   final String originState;
   final String destinationCity;
   final String destinationState;
+  final bool onDarkSurface;
 
   const MarketplaceRouteLine({
     super.key,
@@ -24,11 +25,14 @@ class MarketplaceRouteLine extends StatelessWidget {
     required this.originState,
     required this.destinationCity,
     required this.destinationState,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final arrowColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface)
+        .withValues(alpha: 0.6);
     
     return SizedBox(
       height: 60,
@@ -41,6 +45,7 @@ class MarketplaceRouteLine extends StatelessWidget {
               city: originCity,
               state: originState,
               isOrigin: true,
+              onDarkSurface: onDarkSurface,
             ),
           ),
           // Center: flexible space + arrow icon + flexible space
@@ -50,7 +55,7 @@ class MarketplaceRouteLine extends StatelessWidget {
               children: [
                 Icon(
                   Icons.arrow_forward_rounded,
-                  color: AppColors.inkTextPrimary.withValues(alpha: 0.6),
+                  color: arrowColor,
                   size: 24,
                 ),
               ],
@@ -63,6 +68,7 @@ class MarketplaceRouteLine extends StatelessWidget {
               city: destinationCity,
               state: destinationState,
               isOrigin: false,
+              onDarkSurface: onDarkSurface,
             ),
           ),
         ],
@@ -77,16 +83,20 @@ class _LocationBlock extends StatelessWidget {
   final String city;
   final String state;
   final bool isOrigin;
+  final bool onDarkSurface;
 
   const _LocationBlock({
     required this.label,
     required this.city,
     required this.state,
     required this.isOrigin,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface);
+    final secondaryColor = AppDecorations.marketplaceCardTextSecondary(onDarkSurface: onDarkSurface);
     return Column(
       crossAxisAlignment: isOrigin ? CrossAxisAlignment.start : CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +105,7 @@ class _LocationBlock extends StatelessWidget {
         Text(
           label,
           style: AppTypography.labelMicro.copyWith(
-            color: AppColors.inkTextSecondary,
+            color: secondaryColor,
             fontSize: 10,
             fontWeight: FontWeight.w600,
             letterSpacing: 0.5,
@@ -108,7 +118,7 @@ class _LocationBlock extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: AppColors.inkTextPrimary,
+                color: primaryColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 19,
               ),
@@ -120,7 +130,7 @@ class _LocationBlock extends StatelessWidget {
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: AppTypography.bodySecondary.copyWith(
-                color: AppColors.inkTextSecondary,
+                color: secondaryColor,
                 fontSize: 10,
               ),
         ),

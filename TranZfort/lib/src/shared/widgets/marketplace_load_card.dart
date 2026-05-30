@@ -51,7 +51,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.all(AppDecorations.brandGradientBorderWidth),
         child: DecoratedBox(
-          decoration: AppDecorations.marketplaceCardSurface(),
+          decoration: AppDecorations.marketplaceCardFill(),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
@@ -60,6 +60,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MarketplaceDarkHeader(
+                    onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                     supplierName: load.supplierName ?? 'Supplier',
                     supplierId: load.supplierId,
                     supplierInitial: supplierInitial,
@@ -71,9 +72,13 @@ class MarketplaceLoadCard extends ConsumerWidget {
                     destinationCity: load.destinationCity,
                     destinationState: load.destinationState ?? '',
                     onSupplierTap: onSupplierTap,
-                    headerTrailing: TtsCardSpeakerButton(message: loadUtterance),
+                    headerTrailing: TtsCardSpeakerButton(
+                      message: loadUtterance,
+                      onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                    ),
                   ),
                   MarketplacePriceFactRow(
+                    onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                     priceAmount: load.priceAmount,
                     priceType: load.priceType,
                     material: load.material,
@@ -94,17 +99,20 @@ class MarketplaceLoadCard extends ConsumerWidget {
                         _InlineMetaItem(
                           icon: Icons.calendar_today_outlined,
                           label: _formatPickupDate(context, load.pickupDate),
+                          onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                         ),
                         if (load.advancePercentage > 0)
                           _InlineMetaItem(
                             icon: Icons.account_balance_wallet_outlined,
                             label: '${load.advancePercentage}% adv',
                             accentColor: AppColors.info,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                         if (load.trucksNeeded > 1)
                           _InlineMetaItem(
                             icon: Icons.local_shipping_outlined,
                             label: '${load.trucksBooked}/${load.trucksNeeded}',
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                       ],
                     ),
@@ -122,6 +130,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                             label: l10n.commonCallAction,
                             alignment: Alignment.centerLeft,
                             onTap: onCall,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                         ),
                         const VerticalDivider(
@@ -134,6 +143,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                             label: l10n.commonViewDetailsAction,
                             alignment: Alignment.center,
                             onTap: onViewDetails,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                         ),
                         const VerticalDivider(
@@ -147,6 +157,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                             alignment: Alignment.centerRight,
                             iconAfterLabel: true,
                             onTap: onChat,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                         ),
                       ],
@@ -207,6 +218,7 @@ class _FooterAction extends StatelessWidget {
   final Alignment alignment;
   final VoidCallback? onTap;
   final bool iconAfterLabel;
+  final bool onDarkSurface;
 
   const _FooterAction({
     required this.icon,
@@ -214,10 +226,12 @@ class _FooterAction extends StatelessWidget {
     required this.alignment,
     this.onTap,
     this.iconAfterLabel = false,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final textColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface);
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -229,7 +243,7 @@ class _FooterAction extends StatelessWidget {
           mainAxisAlignment: _mainAxisAlignment,
           children: [
             if (!iconAfterLabel) ...[
-              Icon(icon, color: AppColors.inkTextPrimary, size: 18),
+              Icon(icon, color: textColor, size: 18),
               const SizedBox(width: AppSpacing.xs),
             ],
             Flexible(
@@ -237,8 +251,8 @@ class _FooterAction extends StatelessWidget {
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
-                  color: AppColors.inkTextPrimary,
+                style: TextStyle(
+                  color: textColor,
                   fontWeight: FontWeight.w600,
                   fontSize: 12,
                 ),
@@ -246,7 +260,7 @@ class _FooterAction extends StatelessWidget {
             ),
             if (iconAfterLabel) ...[
               const SizedBox(width: AppSpacing.xs),
-              Icon(icon, color: AppColors.inkTextPrimary, size: 18),
+              Icon(icon, color: textColor, size: 18),
             ],
           ],
         ),
@@ -269,28 +283,31 @@ class _InlineMetaItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final Color? accentColor;
+  final bool onDarkSurface;
 
   const _InlineMetaItem({
     required this.icon,
     required this.label,
     this.accentColor,
+    this.onDarkSurface = true,
   });
 
   @override
   Widget build(BuildContext context) {
+    final defaultColor = AppDecorations.marketplaceCardTextSecondary(onDarkSurface: onDarkSurface);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           icon,
           size: 12,
-          color: accentColor ?? AppColors.inkTextSecondary,
+          color: accentColor ?? defaultColor,
         ),
         const SizedBox(width: AppSpacing.xs),
         Text(
           label,
           style: AppTypography.label.copyWith(
-            color: accentColor ?? AppColors.inkTextSecondary,
+            color: accentColor ?? defaultColor,
             fontSize: 11,
           ),
         ),
