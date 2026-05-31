@@ -14,6 +14,7 @@ enum MyLoadsTab {
 
 class MyLoadsState {
   final MyLoadsTab selectedTab;
+  final String searchQuery;
   final List<Load> loads;
   final bool isInitialLoading;
   final bool isLoadingMore;
@@ -23,6 +24,7 @@ class MyLoadsState {
 
   const MyLoadsState({
     required this.selectedTab,
+    required this.searchQuery,
     required this.loads,
     required this.isInitialLoading,
     required this.isLoadingMore,
@@ -34,6 +36,7 @@ class MyLoadsState {
   factory MyLoadsState.initial() {
     return const MyLoadsState(
       selectedTab: MyLoadsTab.active,
+      searchQuery: '',
       loads: <Load>[],
       isInitialLoading: true,
       isLoadingMore: false,
@@ -45,6 +48,7 @@ class MyLoadsState {
 
   MyLoadsState copyWith({
     MyLoadsTab? selectedTab,
+    String? searchQuery,
     List<Load>? loads,
     bool? isInitialLoading,
     bool? isLoadingMore,
@@ -55,6 +59,7 @@ class MyLoadsState {
   }) {
     return MyLoadsState(
       selectedTab: selectedTab ?? this.selectedTab,
+      searchQuery: searchQuery ?? this.searchQuery,
       loads: loads ?? this.loads,
       isInitialLoading: isInitialLoading ?? this.isInitialLoading,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
@@ -70,10 +75,16 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
   static const Duration _errorDebounceDuration = Duration(milliseconds: 300);
 
   final SupplierLoadRepository _repository;
-  static const int _pageSize = 20;
+  final int _pageSize;
+  static const Duration _searchDebounceDuration = Duration(milliseconds: 350);
   Timer? _errorDebounceTimer;
+  Timer? _searchDebounceTimer;
 
-  MyLoadsController(this._repository) : super(MyLoadsState.initial()) {
+  MyLoadsController(
+    this._repository, {
+    int pageSize = 20,
+  })  : _pageSize = pageSize,
+        super(MyLoadsState.initial()) {
     loadInitial();
   }
 
@@ -143,6 +154,34 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
     await loadInitial();
   }
 
+  void updateSearchQuery(String query) {
+    final normalized = query.trim();
+    if (normalized == state.searchQuery) {
+      return;
+    }
+    state = state.copyWith(searchQuery: normalized);
+    _searchDebounceTimer?.cancel();
+    _searchDebounceTimer = Timer(_searchDebounceDuration, () {
+      unawaited(loadInitial());
+    });
+  }
+
+  void clearSearchQuery() {
+    if (state.searchQuery.isEmpty) {
+      return;
+    }
+    _searchDebounceTimer?.cancel();
+    state = state.copyWith(searchQuery: '');
+    unawaited(loadInitial());
+  }
+
+  /// Immediate search reload (used by tests; UI uses debounced [updateSearchQuery]).
+  Future<void> applySearchQueryNow(String query) async {
+    _searchDebounceTimer?.cancel();
+    state = state.copyWith(searchQuery: query.trim());
+    await loadInitial();
+  }
+
   Future<void> loadMore() async {
     if (state.isInitialLoading || state.isLoadingMore || !state.hasMore) {
       return;
@@ -175,12 +214,14 @@ class MyLoadsController extends StateNotifier<MyLoadsState> {
       statuses: tab == MyLoadsTab.active
           ? LoadStatuses.supplierViewActive
           : LoadStatuses.completed,
+      searchQuery: state.searchQuery,
     );
   }
 
   @override
   void dispose() {
     _errorDebounceTimer?.cancel();
+    _searchDebounceTimer?.cancel();
     super.dispose();
   }
 }

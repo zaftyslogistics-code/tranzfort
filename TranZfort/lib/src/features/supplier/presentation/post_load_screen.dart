@@ -205,7 +205,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         if (dailyLimitReached)
           WarningBlock(
             title: l10n.supplierPostLoadPostingBlockedTitle,
-            message: l10n.postLoadDailyLimitReached(quota!.loadsDailyLimit),
+            message: l10n.postLoadDailyLimitReached(quota.loadsDailyLimit),
           ),
         if (postingGatingMessage != null && !dailyLimitReached)
           WarningBlock(

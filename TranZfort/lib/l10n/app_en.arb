@@ -173,6 +173,7 @@
   "supplierMyLoadsPaginationFailureMessage": "We could not load more supplier loads right now. Retry shortly to refresh the latest load history.",
   "supplierMyLoadsLoadingMore": "Loading more loads...",
   "supplierMyLoadsLoadMore": "Load more loads",
+  "supplierMyLoadsSearchHint": "Search material, city, or route",
   "supplierLoadCardRouteTitle": "{origin} to {destination}",
   "@supplierLoadCardRouteTitle": {
     "placeholders": {

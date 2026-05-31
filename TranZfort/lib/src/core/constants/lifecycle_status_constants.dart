@@ -23,7 +23,6 @@ class LoadStatuses {
   static const List<String> supplierViewActive = <String>[
     'draft',
     'active',
-    'booked',
     'assigned_partial',
     'assigned_full',
     'in_transit',

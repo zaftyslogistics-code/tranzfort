@@ -17,6 +17,7 @@ import '../../../features/supplier/providers/supplier_providers.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
@@ -24,11 +25,24 @@ import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/supplier_load_list_card_tts_builder.dart';
 import 'supplier_shell_shared_helpers.dart';
 
-class SupplierMyLoadsScreen extends ConsumerWidget {
+class SupplierMyLoadsScreen extends ConsumerStatefulWidget {
   const SupplierMyLoadsScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SupplierMyLoadsScreen> createState() => _SupplierMyLoadsScreenState();
+}
+
+class _SupplierMyLoadsScreenState extends ConsumerState<SupplierMyLoadsScreen> {
+  final TextEditingController _searchController = TextEditingController();
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(myLoadsProvider);
     final supplierProfileAsync = ref.watch(supplierProfileProvider);
@@ -56,17 +70,33 @@ class SupplierMyLoadsScreen extends ConsumerWidget {
                 useDarkTheme: true,
                 useInkGradient: true,
                 titleIcon: Icons.inventory_2_outlined,
-                child: FilterChipBar(
-                  items: [
-                    FilterChipItem(
-                      label: l10n.commonActiveLabel,
-                      selected: state.selectedTab == MyLoadsTab.active,
-                      onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    FilterChipBar(
+                      items: [
+                        FilterChipItem(
+                          label: l10n.commonActiveLabel,
+                          selected: state.selectedTab == MyLoadsTab.active,
+                          onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.active),
+                        ),
+                        FilterChipItem(
+                          label: l10n.commonCompletedLabel,
+                          selected: state.selectedTab == MyLoadsTab.completed,
+                          onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
+                        ),
+                      ],
                     ),
-                    FilterChipItem(
-                      label: l10n.commonCompletedLabel,
-                      selected: state.selectedTab == MyLoadsTab.completed,
-                      onTap: () => ref.read(myLoadsProvider.notifier).selectTab(MyLoadsTab.completed),
+                    const SizedBox(height: AppSpacing.md),
+                    AppSearchField(
+                      controller: _searchController,
+                      hintText: l10n.supplierMyLoadsSearchHint,
+                      onDarkSurface: true,
+                      onChanged: ref.read(myLoadsProvider.notifier).updateSearchQuery,
+                      onClear: () {
+                        _searchController.clear();
+                        ref.read(myLoadsProvider.notifier).clearSearchQuery();
+                      },
                     ),
                   ],
                 ),

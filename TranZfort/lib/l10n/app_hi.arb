@@ -175,6 +175,7 @@
   "supplierMyLoadsPaginationFailureMessage": "अभी और supplier loads लोड नहीं हो सके। Latest load history refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
   "supplierMyLoadsLoadingMore": "और loads लोड हो रही हैं...",
   "supplierMyLoadsLoadMore": "और loads लोड करें",
+  "supplierMyLoadsSearchHint": "सामग्री, शहर या रूट खोजें",
   "supplierLoadCardRouteTitle": "{origin} se {destination}",
   "marketplaceLoadPickupToday": "आज पिकअप",
   "marketplaceLoadPickupTomorrow": "कल पिकअप",

@@ -1034,6 +1034,12 @@ abstract class AppLocalizations {
   /// **'Load more loads'**
   String get supplierMyLoadsLoadMore;
 
+  /// No description provided for @supplierMyLoadsSearchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search material, city, or route'**
+  String get supplierMyLoadsSearchHint;
+
   /// No description provided for @supplierLoadCardRouteTitle.
   ///
   /// In en, this message translates to:

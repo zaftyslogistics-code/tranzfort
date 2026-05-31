@@ -532,6 +532,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierMyLoadsLoadMore => 'और loads लोड करें';
 
   @override
+  String get supplierMyLoadsSearchHint => 'सामग्री, शहर या रूट खोजें';
+
+  @override
   String supplierLoadCardRouteTitle(Object origin, Object destination) {
     return '$origin se $destination';
   }

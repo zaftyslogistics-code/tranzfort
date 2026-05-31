@@ -113,6 +113,12 @@ class SupplierTripsController extends StateNotifier<SupplierTripsState> {
     await load();
   }
 
+  void loadIfEmpty() {
+    if (state.trips.isEmpty && !state.isLoading) {
+      unawaited(load());
+    }
+  }
+
   @override
   void dispose() {
     _errorDebounceTimer?.cancel();
@@ -144,9 +150,7 @@ final supplierTripsProvider = StateNotifierProvider.autoDispose<SupplierTripsCon
     if (!isReady || wasReady) {
       return;
     }
-    if (controller.state.trips.isEmpty) {
-      unawaited(controller.load());
-    }
+    controller.loadIfEmpty();
   });
 
   return controller;

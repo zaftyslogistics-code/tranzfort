@@ -40,7 +40,9 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
     if (error != null) {
       throw error!;
     }
-    final key = filters.statuses.join('|');
+    final statusKey = filters.statuses.join('|');
+    final searchKey = filters.hasSearchQuery ? '|q:${filters.searchQuery!.trim().toLowerCase()}' : '';
+    final key = '$statusKey$searchKey';
     final pages = pagesByStatusKey[key] ?? const <List<Map<String, dynamic>>>[];
     if (page - 1 >= pages.length) {
       return const <Map<String, dynamic>>[];
@@ -53,6 +55,9 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
 
   @override
   Future<void> rejectBookingRequest(String bookingId, {String? reason}) async {}
+
+  @override
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params) async => 'load-clone';
 }
 
 Map<String, dynamic> _loadRow(String id, String status) {
@@ -76,25 +81,42 @@ Map<String, dynamic> _loadRow(String id, String status) {
   };
 }
 
+Future<void> _waitForInitialLoad(MyLoadsController controller) async {
+  for (var attempt = 0; attempt < 40; attempt++) {
+    if (!controller.state.isInitialLoading) {
+      return;
+    }
+    await Future<void>.delayed(const Duration(milliseconds: 50));
+  }
+}
+
 void main() {
   test('my loads provider loads active tab initially and paginates', () async {
     final backend = _FakeSupplierLoadBackend({
-      LoadStatuses.active.join('|'): [
+      LoadStatuses.supplierViewActive.join('|'): [
         [_loadRow('load-1', 'active')],
         [_loadRow('load-2', 'assigned_partial')],
       ],
     });
     final controller = MyLoadsController(
       SupplierLoadRepository(backend, () => 'supplier-1', pageSize: 1),
+      pageSize: 1,
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await _waitForInitialLoad(controller);
 
     expect(controller.state.selectedTab, MyLoadsTab.active);
     expect(controller.state.loads, hasLength(1));
     expect(controller.state.loads.first.id, 'load-1');
+    expect(controller.state.hasMore, isTrue);
 
     await controller.loadMore();
+    for (var attempt = 0; attempt < 40; attempt++) {
+      if (!controller.state.isLoadingMore) {
+        break;
+      }
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
 
     expect(controller.state.loads, hasLength(2));
     expect(controller.state.loads.last.id, 'load-2');
@@ -102,7 +124,7 @@ void main() {
 
   test('my loads provider switches tabs and reloads completed items', () async {
     final backend = _FakeSupplierLoadBackend({
-      LoadStatuses.active.join('|'): [
+      LoadStatuses.supplierViewActive.join('|'): [
         [_loadRow('load-1', 'active')],
       ],
       LoadStatuses.completed.join('|'): [
@@ -111,9 +133,10 @@ void main() {
     });
     final controller = MyLoadsController(
       SupplierLoadRepository(backend, () => 'supplier-1', pageSize: 1),
+      pageSize: 1,
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await _waitForInitialLoad(controller);
     await controller.selectTab(MyLoadsTab.completed);
 
     expect(controller.state.selectedTab, MyLoadsTab.completed);
@@ -121,14 +144,38 @@ void main() {
     expect(controller.state.loads.first.status, 'completed');
   });
 
+  test('my loads provider debounces search and reloads with query filter', () async {
+    final backend = _FakeSupplierLoadBackend({
+      '${LoadStatuses.supplierViewActive.join('|')}': [
+        [_loadRow('load-1', 'active')],
+      ],
+      '${LoadStatuses.supplierViewActive.join('|')}|q:coal': [
+        [_loadRow('load-coal', 'active')],
+      ],
+    });
+    final controller = MyLoadsController(
+      SupplierLoadRepository(backend, () => 'supplier-1', pageSize: 20),
+      pageSize: 20,
+    );
+
+    await _waitForInitialLoad(controller);
+    await controller.applySearchQueryNow('coal');
+
+    expect(controller.state.searchQuery, 'coal');
+    expect(controller.state.loads, hasLength(1));
+    expect(controller.state.loads.first.id, 'load-coal');
+  });
+
   test('my loads provider surfaces repository failure', () async {
     final backend = _FakeSupplierLoadBackend({})
       ..error = Exception('network issue');
     final controller = MyLoadsController(
       SupplierLoadRepository(backend, () => 'supplier-1', pageSize: 1),
+      pageSize: 1,
     );
 
-    await Future<void>.delayed(Duration.zero);
+    await _waitForInitialLoad(controller);
+    await Future<void>.delayed(const Duration(milliseconds: 350));
 
     expect(controller.state.failure, isA<ServerFailure>());
     expect(controller.state.isInitialLoading, isFalse);

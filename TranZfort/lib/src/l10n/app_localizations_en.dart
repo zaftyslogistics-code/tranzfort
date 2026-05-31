@@ -529,6 +529,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierMyLoadsLoadMore => 'Load more loads';
 
   @override
+  String get supplierMyLoadsSearchHint => 'Search material, city, or route';
+
+  @override
   String supplierLoadCardRouteTitle(Object origin, Object destination) {
     return '$origin to $destination';
   }
