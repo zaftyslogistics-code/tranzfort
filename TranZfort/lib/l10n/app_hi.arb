@@ -1165,6 +1165,7 @@
   "truckerFindLoadsSortPickupDate": "पिकअप तिथि",
   "truckerFindLoadsAllLoadsTab": "सभी लोड्स",
   "truckerFindLoadsSuperLoadsTab": "सुपर लोड्स",
+  "marketplaceSuperLoadBadgeLabel": "SUPER",
   "truckerFindLoadsLoadFailureTitle": "Freight लोड नहीं हो सकी",
   "truckerFindLoadsLoadFailureMessage": "अभी marketplace freight लोड नहीं हो सकी। Latest load search results refresh करने के लिए थोड़ी देर बाद फिर कोशिश करें।",
   "truckerFindLoadsEmptyTitle": "कोई load नहीं मिली",

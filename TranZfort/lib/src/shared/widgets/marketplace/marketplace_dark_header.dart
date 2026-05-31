@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/theme/app_decorations.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
 import '../avatar_widget.dart';
@@ -19,7 +18,6 @@ class MarketplaceDarkHeader extends StatelessWidget {
   final String? supplierAvatarUrl;
   final String? supplierProfilePhotoPath;
   final String? age;
-  final bool isSuperLoad;
   final String originCity;
   final String originState;
   final String destinationCity;
@@ -36,7 +34,6 @@ class MarketplaceDarkHeader extends StatelessWidget {
     this.supplierAvatarUrl,
     this.supplierProfilePhotoPath,
     this.age,
-    this.isSuperLoad = false,
     required this.originCity,
     required this.originState,
     required this.destinationCity,
@@ -65,7 +62,6 @@ class MarketplaceDarkHeader extends StatelessWidget {
             supplierAvatarUrl: supplierAvatarUrl,
             supplierProfilePhotoPath: supplierProfilePhotoPath,
             age: age,
-            isSuperLoad: isSuperLoad,
             onSupplierTap: onSupplierTap,
             headerTrailing: headerTrailing,
             onDarkSurface: onDarkSurface,
@@ -91,7 +87,6 @@ class _SupplierRow extends StatelessWidget {
   final String? supplierAvatarUrl;
   final String? supplierProfilePhotoPath;
   final String? age;
-  final bool isSuperLoad;
   final VoidCallback? onSupplierTap;
   final Widget? headerTrailing;
   final bool onDarkSurface;
@@ -103,7 +98,6 @@ class _SupplierRow extends StatelessWidget {
     this.supplierAvatarUrl,
     this.supplierProfilePhotoPath,
     this.age,
-    required this.isSuperLoad,
     this.onSupplierTap,
     this.headerTrailing,
     this.onDarkSurface = true,
@@ -146,58 +140,19 @@ class _SupplierRow extends StatelessWidget {
                       fontSize: MarketplaceDarkHeader._supplierNameFontSize,
                     ),
               ),
-              Row(
-                children: [
-                  if (isSuperLoad) ...[
-                    _SuperLoadPill(),
-                    const SizedBox(width: AppSpacing.xs),
-                  ],
-                  if (age != null)
-                    Text(
-                      age!,
-                      style: AppTypography.labelMicro.copyWith(
-                        color: mutedColor,
-                        fontSize: 10,
-                      ),
-                    ),
-                ],
-              ),
+              if (age != null)
+                Text(
+                  age!,
+                  style: AppTypography.labelMicro.copyWith(
+                    color: mutedColor,
+                    fontSize: 10,
+                  ),
+                ),
             ],
           ),
         ),
         ?headerTrailing,
       ],
-    );
-  }
-}
-
-class _SuperLoadPill extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-      decoration: BoxDecoration(
-        color: AppColors.superLoadBg,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        border: Border.all(
-          color: AppColors.superLoadText.withValues(alpha: 0.25),
-          width: 0.5,
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(Icons.workspace_premium, size: 10, color: AppColors.superLoadText),
-          const SizedBox(width: 2),
-          Text(
-            'SUPER',
-            style: AppTypography.labelMicro.copyWith(
-              color: AppColors.superLoadText,
-              fontSize: 9,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

@@ -4667,6 +4667,12 @@ abstract class AppLocalizations {
   /// **'Super Loads'**
   String get truckerFindLoadsSuperLoadsTab;
 
+  /// No description provided for @marketplaceSuperLoadBadgeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'SUPER'**
+  String get marketplaceSuperLoadBadgeLabel;
+
   /// No description provided for @truckerFindLoadsLoadFailureTitle.
   ///
   /// In en, this message translates to:

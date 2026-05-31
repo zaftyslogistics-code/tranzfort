@@ -10,6 +10,7 @@ import '../../features/trucker/data/trucker_marketplace_repository.dart';
 import '../../features/tts/data/load_marketplace_card_tts_builder.dart';
 import '../../l10n/tts_localizations.dart';
 import 'marketplace/marketplace_dark_header.dart';
+import 'marketplace/marketplace_super_load_header_chip.dart';
 import 'marketplace/marketplace_price_fact_row.dart';
 import 'tts_card_speaker_button.dart';
 
@@ -68,16 +69,17 @@ class MarketplaceLoadCard extends ConsumerWidget {
                     supplierAvatarUrl: supplierAvatarUrl ?? load.supplierAvatarUrl,
                     supplierProfilePhotoPath: load.supplierPhotoPath,
                     age: _relativeAge(load.createdAt),
-                    isSuperLoad: load.isSuperLoad,
                     originCity: load.originCity,
                     originState: load.originState ?? '',
                     destinationCity: load.destinationCity,
                     destinationState: load.destinationState ?? '',
                     onSupplierTap: onSupplierTap,
-                    headerTrailing: TtsCardSpeakerButton(
-                      message: loadUtterance,
-                      onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
-                    ),
+                    headerTrailing: load.isSuperLoad
+                        ? MarketplaceSuperLoadHeaderChip(message: loadUtterance)
+                        : TtsCardSpeakerButton(
+                            message: loadUtterance,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                          ),
                   ),
                   MarketplacePriceFactRow(
                     onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,

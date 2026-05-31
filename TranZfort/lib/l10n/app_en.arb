@@ -1256,6 +1256,7 @@
   "truckerFindLoadsSortPickupDate": "Pickup Date",
   "truckerFindLoadsAllLoadsTab": "All Loads",
   "truckerFindLoadsSuperLoadsTab": "Super Loads",
+  "marketplaceSuperLoadBadgeLabel": "SUPER",
   "truckerFindLoadsLoadFailureTitle": "Unable to load freight",
   "truckerFindLoadsLoadFailureMessage": "We could not load marketplace freight right now. Retry shortly to refresh the latest load search results.",
   "truckerFindLoadsEmptyTitle": "No loads found",

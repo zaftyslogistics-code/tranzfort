@@ -2874,6 +2874,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerFindLoadsSuperLoadsTab => 'सुपर लोड्स';
 
   @override
+  String get marketplaceSuperLoadBadgeLabel => 'SUPER';
+
+  @override
   String get truckerFindLoadsLoadFailureTitle => 'Freight लोड नहीं हो सकी';
 
   @override
