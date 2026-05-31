@@ -250,15 +250,12 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                 ),
               ),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.only(bottom: 1),
-              sliver: SliverToBoxAdapter(
+            SliverToBoxAdapter(
                 child: _FindLoadsFeedTabs(
                   state: state,
                   onSelectAll: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.all),
                   onSelectSuperLoads: () => ref.read(findLoadsProvider.notifier).selectTab(FindLoadsTab.superLoads),
                 ),
-              ),
             ),
             SliverPersistentHeader(
               pinned: true,

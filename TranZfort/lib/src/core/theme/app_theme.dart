@@ -57,11 +57,29 @@ class AppTheme {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.textOnPrimary,
+          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.5),
+          disabledForegroundColor: AppColors.textOnPrimary.withValues(alpha: 0.7),
           minimumSize: const Size(double.infinity, 52),
+          elevation: 0,
+          shadowColor: Colors.transparent,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.button),
           ),
-          textStyle: AppTypography.button,
+          textStyle: AppTypography.button.copyWith(color: AppColors.textOnPrimary),
+        ),
+      ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.textOnPrimary,
+          disabledBackgroundColor: AppColors.primary.withValues(alpha: 0.5),
+          disabledForegroundColor: AppColors.textOnPrimary.withValues(alpha: 0.7),
+          minimumSize: const Size(double.infinity, 52),
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(AppRadius.button),
+          ),
+          textStyle: AppTypography.button.copyWith(color: AppColors.textOnPrimary),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(

@@ -12,7 +12,25 @@ class AppDecorations {
 
   static const double brandGradientBorderWidth = 1.2;
 
+  /// Rounded corners for in-list marketplace cards (My Loads, My Trips, dashboards).
+  static const BorderRadius marketplaceListCardRadius =
+      BorderRadius.all(Radius.circular(AppRadius.card));
+
+  static BorderRadius get marketplaceListCardInnerRadius =>
+      insetBorderRadius(marketplaceListCardRadius);
+
   static LinearGradient get brandGradient => AppColors.heroCta;
+
+  /// Teal→orange fill for primary CTAs (matches [GradientButton] / dashboard search).
+  static BoxDecoration brandPrimaryButtonDecoration({
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(AppRadius.button)),
+  }) {
+    return BoxDecoration(
+      gradient: brandGradient,
+      borderRadius: borderRadius,
+      boxShadow: AppShadows.heroCta,
+    );
+  }
 
   /// Teal→orange fill for accent chips on dark surfaces (marketplace fact chips).
   static BoxDecoration brandGradientChipDecoration({
@@ -151,6 +169,45 @@ class AppDecorations {
     );
   }
 
+  /// Inset [outer] by [width] for children inside a brand gradient stroke.
+  static BorderRadius insetBorderRadius(
+    BorderRadius outer, {
+    double width = brandGradientBorderWidth,
+  }) =>
+      _insetRadius(outer, width);
+
+  /// Teal→orange stroke with an inset surface child (shell cards, stats, sections).
+  static Widget brandGradientCard({
+    required Widget child,
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(AppRadius.card)),
+    Color? innerColor,
+    BoxDecoration? innerDecoration,
+    List<BoxShadow>? boxShadow,
+  }) {
+    assert(
+      innerColor != null || innerDecoration != null,
+      'Provide innerColor or innerDecoration',
+    );
+    final inset = _insetRadius(borderRadius, brandGradientBorderWidth);
+    final decoration = innerDecoration?.copyWith(borderRadius: inset) ??
+        BoxDecoration(
+          color: innerColor,
+          borderRadius: inset,
+          boxShadow: boxShadow,
+        );
+
+    return DecoratedBox(
+      decoration: brandGradientBorderOuter(borderRadius: borderRadius),
+      child: Padding(
+        padding: const EdgeInsets.all(brandGradientBorderWidth),
+        child: DecoratedBox(
+          decoration: decoration,
+          child: child,
+        ),
+      ),
+    );
+  }
+
   static BorderRadius _insetRadius(BorderRadius radius, double inset) {
     return BorderRadius.only(
       topLeft: Radius.circular(_inset(radius.topLeft.x, inset)),
@@ -212,6 +269,32 @@ class BrandAccentChip extends StatelessWidget {
                 ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// Teal→orange separator between compact load rows (dashboard lists).
+class BrandGradientDivider extends StatelessWidget {
+  final double height;
+  final EdgeInsetsGeometry margin;
+
+  const BrandGradientDivider({
+    super.key,
+    this.height = 1,
+    this.margin = const EdgeInsets.symmetric(vertical: AppSpacing.xs),
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: margin,
+      child: SizedBox(
+        height: height,
+        width: double.infinity,
+        child: const DecoratedBox(
+          decoration: BoxDecoration(gradient: AppColors.heroCta),
+        ),
       ),
     );
   }

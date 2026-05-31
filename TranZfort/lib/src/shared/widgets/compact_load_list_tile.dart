@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../features/supplier/data/load_marketplace_mapping.dart';
 import '../../features/supplier/data/supplier_load_models.dart';
@@ -207,7 +208,7 @@ class CompactLoadList extends StatelessWidget {
       children: [
         for (var index = 0; index < children.length; index++) ...[
           children[index],
-          if (index != children.length - 1) const Divider(height: 1),
+          if (index != children.length - 1) const BrandGradientDivider(),
         ],
       ],
     );

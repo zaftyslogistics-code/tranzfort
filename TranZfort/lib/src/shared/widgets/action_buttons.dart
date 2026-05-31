@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
@@ -73,11 +74,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       isLoading: isLoading,
       foregroundColor: AppColors.textOnPrimary,
-      decoration: BoxDecoration(
-        gradient: AppColors.heroCta,
-        borderRadius: BorderRadius.circular(AppRadius.button),
-        boxShadow: AppShadows.heroCta,
-      ),
+      decoration: AppDecorations.brandPrimaryButtonDecoration(),
       child: icon == null
           ? Text(label, style: textStyle)
           : Row(
@@ -114,35 +111,12 @@ class OutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Phase 4 GhostButton spec
-    final textStyle = Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: AppColors.primary,
-        );
-
-    return _ActionButtonFrame(
-      height: height,
+    return PrimaryButton(
+      label: label,
       onPressed: onPressed,
       isLoading: isLoading,
-      foregroundColor: AppColors.primary,
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: BorderRadius.circular(AppRadius.button),
-        border: Border.all(color: AppColors.primary, width: 1.5),
-      ),
-      child: icon == null
-          ? Text(label, style: textStyle)
-          : Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconTheme(
-                  data: IconThemeData(color: AppColors.primary, size: 20),
-                  child: icon!,
-                ),
-                const SizedBox(width: 8),
-                Text(label, style: textStyle),
-              ],
-            ),
+      height: height,
+      icon: icon,
     );
   }
 }

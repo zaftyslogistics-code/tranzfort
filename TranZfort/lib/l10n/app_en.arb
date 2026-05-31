@@ -948,7 +948,7 @@
   "truckerDashboardLoadFailureTitle": "Unable to load your trucker dashboard",
   "truckerDashboardLoadFailureMessage": "We could not load your trucker dashboard right now. Retry shortly to refresh the latest KPIs and activity summary.",
   "truckerDashboardSetupInProgress": "Setup in progress",
-  "truckerDashboardApprovedTruckCount": "{count, plural, =1 {# approved truck} other {# approved trucks}}",
+  "truckerDashboardApprovedTruckCount": "{count, plural, =1 {1 approved truck} other {{count} approved trucks}}",
   "@truckerDashboardApprovedTruckCount": {
     "placeholders": {
       "count": {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../l10n/app_localizations.dart';
 import '../../core/theme/app_colors.dart';
+import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 Future<T?> showAppBottomSheet<T>({
@@ -154,17 +155,17 @@ class QuickActionGrid extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         final item = items[index];
-        return Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: item.onTap,
-            borderRadius: BorderRadius.circular(AppRadius.card),
-            child: Ink(
-              decoration: BoxDecoration(
-                color: AppColors.cardSurface,
-                borderRadius: BorderRadius.circular(AppRadius.card),
-                border: Border.all(color: AppColors.divider),
-              ),
+        const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+        final insetCard = AppDecorations.insetBorderRadius(cardRadius);
+        return AppDecorations.brandGradientCard(
+          borderRadius: cardRadius,
+          innerColor: AppColors.cardSurface,
+          boxShadow: AppShadows.card,
+          child: Material(
+            color: Colors.transparent,
+            child: InkWell(
+              onTap: item.onTap,
+              borderRadius: insetCard,
               child: Padding(
                 padding: const EdgeInsets.all(AppSpacing.lg),
                 child: Column(

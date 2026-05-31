@@ -3967,7 +3967,7 @@ abstract class AppLocalizations {
   /// No description provided for @truckerDashboardApprovedTruckCount.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1 {# approved truck} other {# approved trucks}}'**
+  /// **'{count, plural, =1 {1 approved truck} other {{count} approved trucks}}'**
   String truckerDashboardApprovedTruckCount(int count);
 
   /// No description provided for @truckerDashboardStatActiveBidsLabel.

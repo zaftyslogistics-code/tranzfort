@@ -4,17 +4,21 @@ part of 'trucker_find_loads_screen.dart';
 /// Heights include ink card padding; +20% vs original 44 / 78 for tyre row breathing room.
 double _pinnedTruckFilterHeight(MarketplaceSearchFilters filters) {
   if (filters.truckBodyType.trim().isEmpty) {
-    return 53.0;
+    return 44.0;
   }
-  return 94.0;
+  return 80.0;
 }
 
+/// Full-bleed ink filter band (tabs + truck filters). Load cards stay edge-to-edge below.
 Widget _marketplaceBleedFrame({required Widget child}) {
   return DecoratedBox(
     decoration: AppDecorations.brandGradientBorderOuter(),
     child: Padding(
       padding: const EdgeInsets.all(AppDecorations.brandGradientBorderWidth),
-      child: child,
+      child: DecoratedBox(
+        decoration: AppDecorations.inkHeroCard(borderRadius: BorderRadius.zero),
+        child: child,
+      ),
     ),
   );
 }
@@ -34,10 +38,7 @@ class _FindLoadsFeedTabs extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return _marketplaceBleedFrame(
-      child: Container(
-        decoration: AppDecorations.inkHeroCard(
-          borderRadius: BorderRadius.zero,
-        ),
+      child: Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.xs,
@@ -85,15 +86,12 @@ class _PinnedTruckFilterBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return _marketplaceBleedFrame(
-      child: Container(
-        decoration: AppDecorations.inkHeroCard(
-          borderRadius: BorderRadius.zero,
-        ),
+      child: Padding(
         padding: const EdgeInsets.fromLTRB(
           AppSpacing.lg,
-          3,
+          4,
           AppSpacing.lg,
-          3,
+          0,
         ),
         child: MarketplaceFilterBar(
           selectedBodyType: filters.truckBodyType,
@@ -202,13 +200,11 @@ class _PinnedHeaderDelegate extends SliverPersistentHeaderDelegate {
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return ColoredBox(
-      color: AppColors.canvas,
+      color: AppColors.inkSurface,
       child: SizedBox(
         height: height,
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: child,
-        ),
+        width: double.infinity,
+        child: child,
       ),
     );
   }

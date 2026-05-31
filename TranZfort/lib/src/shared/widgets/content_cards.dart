@@ -5,7 +5,45 @@ import '../../core/theme/app_decorations.dart';
 import '../../core/theme/app_shadows.dart';
 import '../../core/theme/app_spacing.dart';
 import '../../core/theme/app_typography.dart';
+import 'action_buttons.dart';
 import 'tts_card_speaker_button.dart';
+
+/// Title, subtitle, and optional trailing stacked (avoids vertical letter-wrap in narrow cards).
+List<Widget> _standardListCardTextBlock(
+  BuildContext context, {
+  required String title,
+  required String subtitle,
+  Widget? trailing,
+  Widget? footer,
+}) {
+  return [
+    Text(
+      title,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: AppColors.textPrimary,
+          ),
+    ),
+    const SizedBox(height: AppSpacing.xs),
+    Text(
+      subtitle,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: AppColors.textSecondary,
+          ),
+    ),
+    if (trailing != null) ...[
+      const SizedBox(height: AppSpacing.sm),
+      Align(alignment: Alignment.centerLeft, child: trailing),
+    ],
+    if (footer != null) ...[
+      const SizedBox(height: AppSpacing.md),
+      footer,
+    ],
+  ];
+}
 
 class HeroActionCard extends StatelessWidget {
   final String title;
@@ -40,10 +78,15 @@ class HeroActionCard extends StatelessWidget {
 
     if (useDarkTheme) {
       if (useInkGradient) {
-        return Container(
-          padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
-          decoration: AppDecorations.inkHeroCard(),
-          child: Column(
+        const heroRadius = BorderRadius.all(Radius.circular(AppRadius.hero));
+        return AppDecorations.brandGradientCard(
+          borderRadius: heroRadius,
+          innerDecoration: AppDecorations.inkHeroCard(
+            borderRadius: AppDecorations.insetBorderRadius(heroRadius),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
+            child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
@@ -100,41 +143,39 @@ class HeroActionCard extends StatelessWidget {
                 primaryAction!,
               ],
             ],
+            ),
           ),
         );
       }
 
       // Phase 4 Dark Hero (radial mesh)
-      return Container(
-        padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
-        decoration: BoxDecoration(
-          color: AppColors.inkSurface,
-          borderRadius: BorderRadius.circular(AppRadius.hero),
-          boxShadow: AppShadows.elevation3,
-        ),
-        child: Stack(
-          children: [
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppRadius.hero),
+      const heroRadius = BorderRadius.all(Radius.circular(AppRadius.hero));
+      final insetHero = AppDecorations.insetBorderRadius(heroRadius);
+      return AppDecorations.brandGradientCard(
+        borderRadius: heroRadius,
+        innerColor: AppColors.inkSurface,
+        boxShadow: AppShadows.elevation3,
+        child: ClipRRect(
+          borderRadius: insetHero,
+          child: Stack(
+            children: [
+              Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: AppColors.heroDark,
                   ),
                 ),
               ),
-            ),
-            Positioned.fill(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(AppRadius.hero),
+              Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
                     gradient: AppColors.heroDarkGlow,
                   ),
                 ),
               ),
-            ),
-            Column(
+              Padding(
+                padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
+                child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (leading != null) ...[
@@ -181,22 +222,26 @@ class HeroActionCard extends StatelessWidget {
                   primaryAction!,
                 ],
               ],
-            ),
-          ],
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }
 
     // Original light hero (backward compatibility)
-    return Container(
-      padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
-      decoration: BoxDecoration(
+    const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+    return AppDecorations.brandGradientCard(
+      borderRadius: cardRadius,
+      innerDecoration: BoxDecoration(
         gradient: AppColors.heroCardWash,
-        borderRadius: BorderRadius.circular(AppRadius.card),
+        borderRadius: AppDecorations.insetBorderRadius(cardRadius),
         boxShadow: AppShadows.hero,
-        border: Border.all(color: AppColors.divider),
       ),
-      child: Column(
+      child: Padding(
+        padding: EdgeInsets.all(compact ? AppSpacing.lg : AppSpacing.xl),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (leading != null) ...[
@@ -215,6 +260,7 @@ class HeroActionCard extends StatelessWidget {
             primaryAction!,
           ],
         ],
+        ),
       ),
     );
   }
@@ -238,17 +284,15 @@ class StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(
-          color: AppColors.primaryDark.withValues(alpha: 0.5),
-          width: 1.2,
-        ),
-        boxShadow: AppShadows.elevation2,
-      ),
-      child: Column(
+    const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+    final insetCard = AppDecorations.insetBorderRadius(cardRadius);
+    return AppDecorations.brandGradientCard(
+      borderRadius: cardRadius,
+      innerColor: AppColors.cardSurface,
+      boxShadow: AppShadows.elevation2,
+      child: ClipRRect(
+        borderRadius: insetCard,
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -328,9 +372,9 @@ class StatCard extends StatelessWidget {
           Container(
             height: 24,
             decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(AppRadius.card),
-                bottomRight: Radius.circular(AppRadius.card),
+              borderRadius: BorderRadius.only(
+                bottomLeft: insetCard.bottomLeft,
+                bottomRight: insetCard.bottomRight,
               ),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -343,6 +387,7 @@ class StatCard extends StatelessWidget {
             ),
           ),
         ],
+        ),
       ),
     );
   }
@@ -376,21 +421,17 @@ class StandardListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // If legacy leading widget is provided, use legacy style
     if (leading != null) {
-      return Container(
-        decoration: BoxDecoration(
-          color: AppColors.cardSurface,
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          boxShadow: AppShadows.card,
-          border: Border.all(
-            color: AppColors.primaryDark.withValues(alpha: 0.5),
-            width: 1.2,
-          ),
-        ),
+      const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+      final insetCard = AppDecorations.insetBorderRadius(cardRadius);
+      return AppDecorations.brandGradientCard(
+        borderRadius: cardRadius,
+        innerColor: AppColors.cardSurface,
+        boxShadow: AppShadows.card,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(AppRadius.card),
+            borderRadius: insetCard,
             child: Stack(
               children: [
                 Positioned(
@@ -401,56 +442,33 @@ class StandardListCard extends StatelessWidget {
                     width: 4,
                     decoration: BoxDecoration(
                       color: accent,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(AppRadius.card),
-                        bottomLeft: Radius.circular(AppRadius.card),
+                      borderRadius: BorderRadius.only(
+                        topLeft: insetCard.topLeft,
+                        bottomLeft: insetCard.bottomLeft,
                       ),
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(AppSpacing.lg),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+                  child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (leading != null) ...[
-                            leading!,
-                            const SizedBox(width: AppSpacing.md),
-                          ],
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  title,
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: AppColors.textPrimary,
-                                  ),
-                                ),
-                                const SizedBox(height: AppSpacing.xs),
-                                Text(
-                                  subtitle,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
-                                ),
-                              ],
-                            ),
+                      leading!,
+                      const SizedBox(width: AppSpacing.md),
+                      Expanded(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: _standardListCardTextBlock(
+                            context,
+                            title: title,
+                            subtitle: subtitle,
+                            trailing: trailing,
+                            footer: footer,
                           ),
-                          if (trailing != null) ...[
-                            const SizedBox(width: AppSpacing.md),
-                            trailing!,
-                          ],
-                        ],
+                        ),
                       ),
-                      if (footer != null) ...[
-                        const SizedBox(height: AppSpacing.md),
-                        footer!,
-                      ],
                     ],
                   ),
                 ),
@@ -463,22 +481,17 @@ class StandardListCard extends StatelessWidget {
 
     // If useLegacyStyle is explicitly true
     if (useLegacyStyle) {
-      // Legacy style with 4px left bar (backward compatibility)
-      return Container(
-        decoration: BoxDecoration(
-          color: AppColors.cardSurface,
-          borderRadius: BorderRadius.circular(AppRadius.card),
-          boxShadow: AppShadows.card,
-          border: Border.all(
-            color: AppColors.primaryDark.withValues(alpha: 0.5),
-            width: 1.2,
-          ),
-        ),
+      const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+      final insetCard = AppDecorations.insetBorderRadius(cardRadius);
+      return AppDecorations.brandGradientCard(
+        borderRadius: cardRadius,
+        innerColor: AppColors.cardSurface,
+        boxShadow: AppShadows.card,
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            borderRadius: BorderRadius.circular(AppRadius.card),
+            borderRadius: insetCard,
             child: Stack(
               children: [
                 Positioned(
@@ -489,9 +502,9 @@ class StandardListCard extends StatelessWidget {
                     width: 4,
                     decoration: BoxDecoration(
                       color: accent,
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(AppRadius.card),
-                        bottomLeft: Radius.circular(AppRadius.card),
+                      borderRadius: BorderRadius.only(
+                        topLeft: insetCard.topLeft,
+                        bottomLeft: insetCard.bottomLeft,
                       ),
                     ),
                   ),
@@ -501,41 +514,13 @@ class StandardListCard extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  title,
-                                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    color: AppColors.textPrimary,
-                                  ),
-                                ),
-                                const SizedBox(height: AppSpacing.xs),
-                                Text(
-                                  subtitle,
-                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.textSecondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          if (trailing != null) ...[
-                            const SizedBox(width: AppSpacing.md),
-                            trailing!,
-                          ],
-                        ],
-                      ),
-                      if (footer != null) ...[
-                        const SizedBox(height: AppSpacing.md),
-                        footer!,
-                      ],
-                    ],
+                    children: _standardListCardTextBlock(
+                      context,
+                      title: title,
+                      subtitle: subtitle,
+                      trailing: trailing,
+                      footer: footer,
+                    ),
                   ),
                 ),
               ],
@@ -546,77 +531,50 @@ class StandardListCard extends StatelessWidget {
     }
 
     // Phase 4: LeadingIconChip style
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surfaceBase,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        boxShadow: AppShadows.elevation2,
-        border: Border.all(
-          color: AppColors.primaryDark.withValues(alpha: 0.5),
-          width: 1.2,
-        ),
-      ),
+    const cardRadius = BorderRadius.all(Radius.circular(AppRadius.card));
+    final insetCard = AppDecorations.insetBorderRadius(cardRadius);
+    return AppDecorations.brandGradientCard(
+      borderRadius: cardRadius,
+      innerColor: AppColors.surfaceBase,
+      boxShadow: AppShadows.elevation2,
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(AppRadius.card),
+          borderRadius: insetCard,
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    if (leadingIcon != null)
-                      Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: accent.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppRadius.iconChip),
-                        ),
-                        child: Icon(
-                          leadingIcon,
-                          color: accent,
-                          size: 24,
-                        ),
-                      ),
-                    if (leadingIcon != null) const SizedBox(width: AppSpacing.md),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            title,
-                            style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.textPrimary,
-                            ),
-                          ),
-                          const SizedBox(height: AppSpacing.xs),
-                          Text(
-                            subtitle,
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.textSecondary,
-                            ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
-                        ],
-                      ),
+                if (leadingIcon != null)
+                  Container(
+                    width: 48,
+                    height: 48,
+                    decoration: BoxDecoration(
+                      color: accent.withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppRadius.iconChip),
                     ),
-                    if (trailing != null) ...[
-                      const SizedBox(width: AppSpacing.md),
-                      trailing!,
-                    ],
-                  ],
+                    child: Icon(
+                      leadingIcon,
+                      color: accent,
+                      size: 24,
+                    ),
+                  ),
+                if (leadingIcon != null) const SizedBox(width: AppSpacing.md),
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _standardListCardTextBlock(
+                      context,
+                      title: title,
+                      subtitle: subtitle,
+                      trailing: trailing,
+                      footer: footer,
+                    ),
+                  ),
                 ),
-                if (footer != null) ...[
-                  const SizedBox(height: AppSpacing.md),
-                  footer!,
-                ],
               ],
             ),
           ),
@@ -647,15 +605,17 @@ class DetailSectionCard extends StatelessWidget {
     final spokenMessage = ttsMessage?.trim();
 
     if (useInkGradient) {
-      return Container(
-        width: double.infinity,
-        decoration: AppDecorations.inkHeroCard(
-          borderRadius: BorderRadius.circular(AppRadius.hero),
+      const heroRadius = BorderRadius.all(Radius.circular(AppRadius.hero));
+      return AppDecorations.brandGradientCard(
+        borderRadius: heroRadius,
+        innerDecoration: AppDecorations.inkHeroCard(
+          borderRadius: AppDecorations.insetBorderRadius(heroRadius),
         ),
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.lg),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -689,18 +649,15 @@ class DetailSectionCard extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             ...children,
-          ],
+            ],
+          ),
         ),
       );
     }
 
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.divider),
-        boxShadow: AppShadows.card,
-      ),
+    return AppDecorations.brandGradientCard(
+      innerColor: AppColors.cardSurface,
+      boxShadow: AppShadows.card,
       child: Padding(
         padding: const EdgeInsets.all(AppSpacing.lg),
         child: Column(
@@ -712,9 +669,11 @@ class DetailSectionCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: AppColors.textPrimary,
-                    ),
+                          color: AppColors.textPrimary,
+                        ),
                   ),
                 ),
                 if (spokenMessage != null && spokenMessage.isNotEmpty)
@@ -747,14 +706,11 @@ class WarningBlock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hasMessage = message.trim().isNotEmpty;
-    return Container(
-      padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
-      decoration: BoxDecoration(
-        color: AppColors.warningBg,
-        borderRadius: BorderRadius.circular(AppRadius.card),
-        border: Border.all(color: AppColors.warning.withValues(alpha: 0.25)),
-      ),
-      child: Column(
+    return AppDecorations.brandGradientCard(
+      innerColor: AppColors.warningBg,
+      child: Padding(
+        padding: EdgeInsets.all(compact ? AppSpacing.md : AppSpacing.lg),
+        child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
@@ -777,6 +733,7 @@ class WarningBlock extends StatelessWidget {
             action!,
           ],
         ],
+        ),
       ),
     );
   }
@@ -893,9 +850,9 @@ class EmptyStateIllustration extends StatelessWidget {
             ),
             if (actionLabel != null && onAction != null) ...[
               const SizedBox(height: AppSpacing.xl),
-              ElevatedButton(
+              PrimaryButton(
+                label: actionLabel!,
                 onPressed: onAction,
-                child: Text(actionLabel!),
               ),
             ],
           ],

@@ -247,18 +247,10 @@ class _CompactDashboardBanner extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          OutlinedButton(
+          PrimaryButton(
+            label: actionLabel,
             onPressed: onTap,
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
-              side: BorderSide(color: foreground.withValues(alpha: 0.4)),
-              foregroundColor: foreground,
-              minimumSize: const Size(0, 40),
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              visualDensity: VisualDensity.compact,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(AppRadius.button)),
-            ),
-            child: Text(actionLabel),
+            height: 40,
           ),
         ],
       ),

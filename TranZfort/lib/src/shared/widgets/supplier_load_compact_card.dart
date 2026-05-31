@@ -47,16 +47,20 @@ class SupplierLoadCompactCard extends ConsumerWidget {
     final onDark = !AppDecorations.marketplaceLoadCardLightExperiment;
     final tyreLabel = formatMarketplaceTyreLabel(item.requiredTyres);
 
+    final innerRadius = AppDecorations.marketplaceListCardInnerRadius;
     return DecoratedBox(
-      decoration: AppDecorations.brandGradientBorderOuter(),
+      decoration: AppDecorations.brandGradientBorderOuter(
+        borderRadius: AppDecorations.marketplaceListCardRadius,
+      ),
       child: Padding(
         padding: const EdgeInsets.all(AppDecorations.brandGradientBorderWidth),
         child: DecoratedBox(
-          decoration: AppDecorations.marketplaceCardFill(),
+          decoration: AppDecorations.marketplaceCardFill(borderRadius: innerRadius),
           child: Material(
             color: Colors.transparent,
             child: InkWell(
               onTap: onTap,
+              borderRadius: innerRadius,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

@@ -121,64 +121,60 @@ class _DashboardWelcomeHeader extends StatelessWidget {
     final approvedTrucks = profile.approvedTrucks;
     final trucksLabel = l10n.truckerDashboardApprovedTruckCount(approvedTrucks);
 
-    return Column(
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Expanded(
-              child: Text(
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
                 l10n.truckerDashboardWelcomeLabel,
                 style: lightTitleStyle,
               ),
-            ),
+              if (fullName.isNotEmpty) ...[
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  fullName,
+                  style: lightNameStyle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
+            ],
+          ),
+        ),
+        const SizedBox(width: AppSpacing.sm),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
             _VerificationStatusGlyph(
               verified: verified,
               tooltip: verified
                   ? l10n.verificationStatusVerified
                   : _verificationTooltip(l10n, profile.verificationStatus),
             ),
-          ],
-        ),
-        if (fullName.isNotEmpty) ...[
-          const SizedBox(height: AppSpacing.xs),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: Text(
-                  fullName,
-                  style: lightNameStyle,
+            const SizedBox(height: AppSpacing.xs),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.local_shipping_outlined,
+                  size: 15,
+                  color: approvedTrucks > 0 ? AppColors.primaryOnDark : AppColors.inkTextSecondary,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  trucksLabel,
+                  style: lightMetaStyle,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Flexible(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.local_shipping_outlined,
-                      size: 15,
-                      color: approvedTrucks > 0 ? AppColors.primaryOnDark : AppColors.inkTextSecondary,
-                    ),
-                    const SizedBox(width: 4),
-                    Flexible(
-                      child: Text(
-                        trucksLabel,
-                        style: lightMetaStyle,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.end,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
