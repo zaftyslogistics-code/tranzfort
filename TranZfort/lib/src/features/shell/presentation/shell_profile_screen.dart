@@ -60,22 +60,16 @@ class ProfileScreen extends ConsumerWidget {
               spacing: AppSpacing.md,
               runSpacing: AppSpacing.md,
               children: [
-                StatusBadge(
+                InkDarkStatusPill(
                   label: authState.isProfileComplete
                       ? l10n.profileCompletenessComplete
                       : l10n.profileCompletenessNeedsUpdates,
                   icon: Icons.verified_user_outlined,
-                  palette: authState.isProfileComplete
-                      ? const StatusPalette(
-                          foreground: AppColors.success,
-                          background: AppColors.successBg,
-                        )
-                      : const StatusPalette(
-                          foreground: AppColors.warning,
-                          background: AppColors.warningBg,
-                        ),
+                  accent: authState.isProfileComplete
+                      ? AppColors.primaryOnDark
+                      : AppColors.secondaryOnDark,
                 ),
-                StatusBadge(
+                InkDarkStatusPill(
                   label: localizedAccountState(l10n, profile?.accountDeletionStatus ?? 'active'),
                   icon: Icons.shield_outlined,
                 ),

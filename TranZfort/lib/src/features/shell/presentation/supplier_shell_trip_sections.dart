@@ -39,6 +39,7 @@ class SupplierTripsScreen extends ConsumerWidget {
           useInkGradient: true,
           titleIcon: Icons.alt_route_outlined,
           child: FilterChipBar(
+            onDarkSurface: true,
             items: [
               FilterChipItem(
                 label: l10n.commonActiveLabel,
@@ -159,9 +160,10 @@ class _SupplierTripCard extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          TextActionButton(
+          PrimaryButton(
             label: l10n.supplierTripsTrackTripAction,
             onPressed: () => context.push(tripPath),
+            height: 44,
           ),
         ],
       ),

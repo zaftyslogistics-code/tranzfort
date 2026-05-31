@@ -5,6 +5,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/action_buttons.dart';
 import '../data/review_models.dart';
 import '../data/review_repository.dart';
 import 'widgets/reply_dialog.dart';
@@ -278,10 +279,11 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
                 ),
               ),
               const SizedBox(height: 16),
-              OutlinedButton.icon(
-                onPressed: _loadInitial,
+              PrimaryButton.icon(
+                label: l10n.commonRetryAction,
                 icon: const Icon(Icons.refresh),
-                label: Text(l10n.commonRetryAction),
+                onPressed: _loadInitial,
+                height: 44,
               ),
             ],
           ),
@@ -356,10 +358,11 @@ class _ReviewsSectionState extends ConsumerState<ReviewsSection> {
         else if (_hasMore)
           Padding(
             padding: const EdgeInsets.all(16),
-            child: OutlinedButton.icon(
-              onPressed: _loadMore,
+            child: PrimaryButton.icon(
+              label: l10n.reviewsLoadMore,
               icon: const Icon(Icons.expand_more),
-              label: Text(l10n.reviewsLoadMore),
+              onPressed: _loadMore,
+              height: 44,
             ),
           ),
       ],

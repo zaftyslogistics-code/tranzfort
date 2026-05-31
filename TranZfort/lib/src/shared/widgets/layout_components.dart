@@ -82,11 +82,13 @@ class AppBottomSheet extends StatelessWidget {
 class FilterChipBar extends StatelessWidget {
   final List<FilterChipItem> items;
   final VoidCallback? onReset;
+  final bool onDarkSurface;
 
   const FilterChipBar({
     super.key,
     required this.items,
     this.onReset,
+    this.onDarkSurface = false,
   });
 
   @override
@@ -107,12 +109,59 @@ class FilterChipBar extends StatelessWidget {
           }
 
           final item = items[index];
+          if (onDarkSurface) {
+            return _InkSurfaceFilterChip(
+              label: item.label,
+              selected: item.selected,
+              onTap: item.onTap,
+            );
+          }
           return FilterChip(
             label: Text(item.label),
             selected: item.selected,
             onSelected: (_) => item.onTap(),
           );
         },
+      ),
+    );
+  }
+}
+
+class _InkSurfaceFilterChip extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _InkSurfaceFilterChip({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final accent = AppColors.primaryOnDark;
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        child: Ink(
+          decoration: AppDecorations.inkFilterChip(selected: selected),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.sm,
+              vertical: AppSpacing.xs,
+            ),
+            child: Text(
+              label,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: selected ? accent : AppColors.inkTextPrimary,
+                    fontWeight: FontWeight.w700,
+                  ),
+            ),
+          ),
+        ),
       ),
     );
   }

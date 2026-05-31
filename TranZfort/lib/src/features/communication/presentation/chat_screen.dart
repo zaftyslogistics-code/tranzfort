@@ -23,7 +23,6 @@ import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
-import '../../reviews/utils/review_trigger_helper.dart';
 import '../../supplier/providers/load_detail_provider.dart';
 import '../../support/providers/support_compose_providers.dart';
 import '../../trucker/data/diesel_price_repository.dart';

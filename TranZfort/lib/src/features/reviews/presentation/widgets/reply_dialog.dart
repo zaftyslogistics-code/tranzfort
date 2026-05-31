@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../l10n/app_localizations.dart';
 
 /// Dialog for adding a one-time reply to a review.
@@ -79,9 +80,10 @@ class _ReplyDialogState extends State<ReplyDialog> {
           onPressed: () => Navigator.of(context).pop(),
           child: Text(l10n.commonCancelAction),
         ),
-        FilledButton(
+        PrimaryButton(
+          label: l10n.replyDialogSubmit,
           onPressed: _charCount > 0 ? () => Navigator.of(context).pop(_controller.text.trim()) : null,
-          child: Text(l10n.replyDialogSubmit),
+          height: 44,
         ),
       ],
     );

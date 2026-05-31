@@ -12,7 +12,6 @@ import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/providers/tts_state_provider.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../core/services/contextual_tts_service.dart';
-import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -61,21 +60,17 @@ class SettingsScreen extends ConsumerWidget {
             spacing: AppSpacing.md,
             runSpacing: AppSpacing.md,
             children: [
-              StatusBadge(
+              InkDarkStatusPill(
                 label: localeState.locale.languageCode == 'hi'
                     ? l10n.settingsLanguageHindi
                     : l10n.settingsLanguageEnglish,
                 icon: Icons.translate_outlined,
               ),
-              StatusBadge(
+              InkDarkStatusPill(
                 label: ref.watch(ttsAudioLanguageProvider) == 'hi'
                     ? l10n.settingsLanguageHindi
                     : l10n.settingsLanguageEnglish,
                 icon: Icons.record_voice_over_outlined,
-                palette: const StatusPalette(
-                  foreground: AppColors.info,
-                  background: AppColors.infoBg,
-                ),
               ),
             ],
           ),

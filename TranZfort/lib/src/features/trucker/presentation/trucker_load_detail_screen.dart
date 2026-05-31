@@ -20,6 +20,7 @@ import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/avatar_widget.dart';
 import '../../../shared/widgets/curved_arc_route.dart';
+import '../../../shared/widgets/status_components.dart';
 import '../data/diesel_price_repository.dart';
 import '../data/drive_time_estimate.dart';
 import '../data/trip_costing_service.dart';

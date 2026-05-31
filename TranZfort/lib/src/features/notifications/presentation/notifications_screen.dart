@@ -212,31 +212,16 @@ class _NotificationsBody extends ConsumerWidget {
                   spacing: AppSpacing.md,
                   runSpacing: AppSpacing.md,
                   children: [
-                    StatusBadge(
+                    InkDarkStatusPill(
                       label: l10n.notificationsUnreadCountLabel(unreadCount),
                       icon: Icons.notifications_active_outlined,
-                      palette: unreadCount == 0
-                          ? const StatusPalette(
-                              foreground: AppColors.neutral,
-                              background: AppColors.neutralBg,
-                            )
-                          : const StatusPalette(
-                              foreground: AppColors.info,
-                              background: AppColors.infoBg,
-                            ),
                     ),
-                    StatusBadge(
+                    InkDarkStatusPill(
                       label: l10n.notificationsHighPriorityCountLabel(highPriorityUnreadCount),
                       icon: Icons.priority_high_outlined,
-                      palette: highPriorityUnreadCount == 0
-                          ? const StatusPalette(
-                              foreground: AppColors.neutral,
-                              background: AppColors.neutralBg,
-                            )
-                          : const StatusPalette(
-                              foreground: AppColors.warning,
-                              background: AppColors.warningBg,
-                            ),
+                      accent: highPriorityUnreadCount == 0
+                          ? AppColors.primaryOnDark
+                          : AppColors.secondaryOnDark,
                     ),
                   ],
                 ),

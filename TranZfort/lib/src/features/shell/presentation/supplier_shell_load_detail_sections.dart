@@ -88,7 +88,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 ttsMessage: readAllMessage,
                 wrapInHeroActionCard: true,
                 badges: [
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
                     icon: Icons.local_shipping_outlined,
                   ),
@@ -96,7 +96,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                     isSuperLoad: detail.summary.isSuperLoad,
                     superStatus: detail.summary.superStatus,
                   ))
-                    StatusBadge(
+                    InkDarkStatusPill(
                       label: l10n.supplierDashboardSuperLoadBadge(
                         superLoadStatusLabel(
                           l10n,
@@ -105,23 +105,16 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                         ),
                       ),
                       icon: Icons.workspace_premium_outlined,
-                      palette: const StatusPalette(
-                        foreground: AppColors.superLoadText,
-                        background: AppColors.superLoadBg,
-                      ),
+                      accent: AppColors.secondaryOnDark,
                     ),
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: l10n.supplierDashboardTrucksBooked(
                       detail.summary.trucksBooked,
                       detail.summary.trucksNeeded,
                     ),
                     icon: Icons.inventory_2_outlined,
-                    palette: const StatusPalette(
-                      foreground: AppColors.primary,
-                      background: AppColors.neutralBg,
-                    ),
                   ),
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: localizedLoadMarketplaceStatus(
                       l10n,
                       isOnMarketplace: detail.summary.isOnMarketplace,

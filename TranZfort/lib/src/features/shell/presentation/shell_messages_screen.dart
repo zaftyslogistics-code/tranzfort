@@ -57,19 +57,15 @@ class _ShellMessagesScreenState extends ConsumerState<ShellMessagesScreen> {
             spacing: AppSpacing.md,
             runSpacing: AppSpacing.md,
             children: [
-              StatusBadge(
+              InkDarkStatusPill(
                 label: isSupplier ? l10n.shellMessagesSupplierGroupedInbox : l10n.shellMessagesTruckerFlatInbox,
                 icon: Icons.chat_bubble_outline,
               ),
-              StatusBadge(
+              InkDarkStatusPill(
                 label: l10n.shellMessagesUnreadThreads(
                   inboxState.conversations.where((conversation) => conversation.hasUnread).length,
                 ),
                 icon: Icons.mark_chat_unread_outlined,
-                palette: const StatusPalette(
-                  foreground: AppColors.info,
-                  background: AppColors.infoBg,
-                ),
               ),
             ],
           ),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'action_buttons.dart';
 import '../../core/services/contextual_tts_service.dart';
+import '../../core/theme/app_colors.dart';
 import '../../core/services/tts_voice_model.dart';
 import '../../l10n/app_localizations.dart';
 
@@ -62,30 +64,20 @@ class _TtsVoiceTestButtonState extends ConsumerState<TtsVoiceTestButton> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-
-    return OutlinedButton.icon(
-      onPressed: _isSpeaking ? null : _testVoice,
+    return PrimaryButton.icon(
+      label: _isSpeaking ? 'Speaking...' : 'Test',
       icon: _isSpeaking
-          ? SizedBox(
+          ? const SizedBox(
               width: 16,
               height: 16,
               child: CircularProgressIndicator(
                 strokeWidth: 2,
-                color: theme.colorScheme.primary,
+                color: AppColors.textOnPrimary,
               ),
             )
           : const Icon(Icons.volume_up_outlined, size: 18),
-      label: Text(
-        _isSpeaking ? 'Speaking...' : 'Test',
-        style: theme.textTheme.labelSmall,
-      ),
-      style: OutlinedButton.styleFrom(
-        foregroundColor: theme.colorScheme.primary,
-        side: BorderSide(color: theme.colorScheme.outline),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        minimumSize: const Size(80, 36),
-      ),
+      onPressed: _isSpeaking ? null : _testVoice,
+      height: 36,
     );
   }
 }

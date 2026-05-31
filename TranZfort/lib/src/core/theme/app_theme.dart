@@ -83,14 +83,16 @@ class AppTheme {
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
+        // Legacy fallback — prefer PrimaryButton / OutlineButton (brand gradient).
         style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.primary,
+          foregroundColor: AppColors.textOnPrimary,
+          backgroundColor: AppColors.primary,
           minimumSize: const Size(double.infinity, 52),
-          side: const BorderSide(color: AppColors.primary, width: 1.5),
+          side: BorderSide.none,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.button),
           ),
-          textStyle: AppTypography.button.copyWith(color: AppColors.primary),
+          textStyle: AppTypography.button.copyWith(color: AppColors.textOnPrimary),
         ),
       ),
       textButtonTheme: TextButtonThemeData(

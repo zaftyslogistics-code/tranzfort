@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/logger/app_logger.dart';
 import '../../../../core/navigation/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../shared/widgets/compact_load_list_tile.dart';
 import '../../data/public_profile_models.dart';
 import '../../data/public_profile_repository.dart';
@@ -217,10 +218,11 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
         else if (_hasMore)
           Padding(
             padding: const EdgeInsets.all(16),
-            child: OutlinedButton.icon(
-              onPressed: _loadMore,
+            child: PrimaryButton.icon(
+              label: l10n.commonLoadMoreAction,
               icon: const Icon(Icons.expand_more),
-              label: Text(l10n.commonLoadMoreAction),
+              onPressed: _loadMore,
+              height: 44,
             ),
           ),
       ],

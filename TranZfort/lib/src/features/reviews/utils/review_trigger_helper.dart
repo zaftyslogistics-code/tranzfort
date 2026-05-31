@@ -43,40 +43,6 @@ class ReviewTriggerHelper {
     );
   }
 
-  /// Shows review prompt after chat interaction if criteria met.
-  /// Call this when user has sent 3+ messages in a conversation.
-  static Future<void> maybeShowChatReviewPrompt(
-    BuildContext context,
-    WidgetRef ref, {
-    required String targetUserId,
-    required String targetUserName,
-    required String conversationId,
-    required int messageCount,
-  }) async {
-    // Only show after 3+ messages exchanged
-    if (messageCount < 3) return;
-
-    final canReview = await _canShowPrompt(
-      ref,
-      targetUserId: targetUserId,
-      contextType: 'chat',
-      contextId: conversationId,
-    );
-
-    if (!canReview) return;
-
-    if (context.mounted) {
-      // ignore: use_build_context_synchronously
-      await _showPrompt(
-        context,
-        targetUserId: targetUserId,
-        targetUserName: targetUserName,
-        contextType: 'chat',
-        contextId: conversationId,
-      );
-    }
-  }
-
   /// Shows review prompt after load is closed.
   static Future<void> showLoadClosedReviewPrompt(
     BuildContext context,

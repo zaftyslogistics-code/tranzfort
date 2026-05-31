@@ -121,6 +121,7 @@ class OutlineButton extends StatelessWidget {
   }
 }
 
+/// Text-only tertiary action (links, cancel-adjacent). For CTAs use [PrimaryButton].
 class TextActionButton extends StatelessWidget {
   final String label;
   final VoidCallback? onPressed;

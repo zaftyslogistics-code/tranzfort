@@ -70,19 +70,15 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
             spacing: AppSpacing.sm,
             runSpacing: AppSpacing.sm,
             children: [
-              StatusBadge(
+              InkDarkStatusPill(
                 label: l10n.truckerFleetTruckCount(state.trucks.length),
                 icon: Icons.local_shipping_outlined,
               ),
-              StatusBadge(
+              InkDarkStatusPill(
                 label: l10n.truckerFleetApprovedCount(
                   state.trucks.where((truck) => truck.status == TruckerFleetTruckStatus.verified).length,
                 ),
                 icon: Icons.verified_outlined,
-                palette: const StatusPalette(
-                  foreground: AppColors.success,
-                  background: AppColors.successBg,
-                ),
               ),
             ],
           ),
@@ -399,11 +395,12 @@ class _FleetTruckCard extends StatelessWidget {
             ),
           ],
           const SizedBox(height: AppSpacing.md),
-          TextActionButton(
+          PrimaryButton(
             label: truck.status == TruckerFleetTruckStatus.rejected
                 ? l10n.truckerFleetFixResubmitAction
                 : l10n.truckerFleetEditTruckAction,
             onPressed: onEdit,
+            height: 44,
           ),
         ],
       ),

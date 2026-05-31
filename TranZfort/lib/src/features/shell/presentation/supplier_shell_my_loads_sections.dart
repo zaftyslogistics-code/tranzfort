@@ -77,6 +77,7 @@ class _SupplierMyLoadsScreenState extends ConsumerState<SupplierMyLoadsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     FilterChipBar(
+                      onDarkSurface: true,
                       items: [
                         FilterChipItem(
                           label: l10n.commonActiveLabel,
@@ -318,18 +319,20 @@ class _SupplierLoadListCard extends ConsumerWidget {
           ),
           const SizedBox(height: AppSpacing.md),
           if (!load.isOnMarketplace) ...[
-            TextActionButton(
+            PrimaryButton(
               label: l10n.supplierLoadRepostAction,
               onPressed: () => _openRepostSheet(context, ref, load),
+              height: 44,
             ),
             const SizedBox(height: AppSpacing.sm),
           ],
-          TextActionButton(
+          PrimaryButton(
             label: _primaryActionLabel(context, load.status),
             onPressed: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
+            height: 44,
           ),
           const SizedBox(height: AppSpacing.sm),
-          TextActionButton(
+          PrimaryButton(
             label: l10n.commonReportSpamOrAbuseAction,
             onPressed: () => context.push(
               AppRoutes.reportIssuePath,

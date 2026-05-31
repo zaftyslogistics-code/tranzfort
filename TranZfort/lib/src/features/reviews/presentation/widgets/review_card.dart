@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../shared/widgets/action_buttons.dart';
 import '../../data/review_models.dart';
 import 'reviewer_mini_card.dart';
 import 'star_rating_input.dart';
@@ -193,24 +194,11 @@ class ReviewCard extends StatelessWidget {
   }
 
   Widget _buildReplyButton(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return OutlinedButton.icon(
+    return PrimaryButton.icon(
+      label: 'Reply to this review',
+      icon: const Icon(Icons.reply, size: 18),
       onPressed: onReplyTap,
-      icon: Icon(
-        Icons.reply,
-        size: 18,
-        color: colorScheme.primary,
-      ),
-      label: Text(
-        'Reply to this review',
-        style: TextStyle(color: colorScheme.primary),
-      ),
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-        visualDensity: VisualDensity.compact,
-      ),
+      height: 40,
     );
   }
 

@@ -308,11 +308,11 @@ class _SupplierTripDetailBody extends ConsumerWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: _localizedSupplierTripStage(l10n, detail.stage),
                     icon: Icons.alt_route_outlined,
                   ),
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: _localizedSupplierTripVerificationStatus(l10n, detail.trucker.verificationStatus),
                     icon: Icons.verified_user_outlined,
                   ),

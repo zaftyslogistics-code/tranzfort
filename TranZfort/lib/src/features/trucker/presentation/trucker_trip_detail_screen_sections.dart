@@ -68,15 +68,15 @@ class _TruckerTripDetailBody extends ConsumerWidget {
                 spacing: 8,
                 runSpacing: 8,
                 children: [
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: _localizedTripStage(l10n, detail.stage),
                     icon: Icons.alt_route_outlined,
                   ),
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: _localizedProofStatus(l10n, detail),
                     icon: Icons.fact_check_outlined,
                   ),
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: _localizedVerificationStatus(l10n, detail.supplier.verificationStatus),
                     icon: Icons.verified_outlined,
                   ),

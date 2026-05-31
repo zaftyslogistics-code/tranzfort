@@ -38,6 +38,7 @@ class TruckerTripsScreen extends ConsumerWidget {
           useInkGradient: true,
           titleIcon: Icons.alt_route_outlined,
           child: FilterChipBar(
+            onDarkSurface: true,
             items: [
               FilterChipItem(
                 label: l10n.commonActiveLabel,

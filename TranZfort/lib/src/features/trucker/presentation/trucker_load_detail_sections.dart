@@ -264,7 +264,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                           if (detail.supplier.verificationStatus == 'verified')
                             const PlatformReviewedBadge(compact: true)
                           else
-                            _RouteDarkStatusPill(
+                            InkDarkStatusPill(
                               icon: Icons.business_outlined,
                               label: l10n.truckerLoadDetailSupplierProfile,
                               accent: AppColors.inkTextSecondary,

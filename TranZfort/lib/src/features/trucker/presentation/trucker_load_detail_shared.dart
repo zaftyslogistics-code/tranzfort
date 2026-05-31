@@ -615,47 +615,6 @@ class _CostBreakdownTile extends StatelessWidget {
   }
 }
 
-class _RouteDarkStatusPill extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final Color accent;
-
-  const _RouteDarkStatusPill({
-    required this.icon,
-    required this.label,
-    required this.accent,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppSpacing.sm,
-        vertical: AppSpacing.xs,
-      ),
-      decoration: BoxDecoration(
-        color: accent.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(AppRadius.iconChip),
-        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 14, color: accent),
-          const SizedBox(width: AppSpacing.xs),
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: accent,
-                  fontWeight: FontWeight.w600,
-                ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 void _startChat(BuildContext context, WidgetRef ref, String loadId, TruckerLoadDetail detail) async {
   final l10n = AppLocalizations.of(context);
   final profile = ref.read(truckerProfileProvider).valueOrNull;

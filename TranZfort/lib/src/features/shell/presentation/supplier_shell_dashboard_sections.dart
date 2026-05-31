@@ -166,9 +166,10 @@ class LinkedTripCard extends StatelessWidget {
           const SizedBox(height: AppSpacing.xs),
           Text(l10n.supplierLinkedTripProofLabel(_localizedLinkedTripProofStatus(l10n, trip)), style: Theme.of(context).textTheme.bodySmall),
           const SizedBox(height: AppSpacing.sm),
-          TextActionButton(
+          PrimaryButton(
             label: l10n.supplierLinkedTripTrackAction,
             onPressed: () => context.go(tripPath),
+            height: 44,
           ),
         ],
       ),

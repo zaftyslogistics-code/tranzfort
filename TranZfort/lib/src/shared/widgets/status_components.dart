@@ -117,6 +117,53 @@ class StatusChip extends StatelessWidget {
   }
 }
 
+/// Teal-tinted status pill for dark ink hero cards (load/trip detail reference style).
+class InkDarkStatusPill extends StatelessWidget {
+  final IconData icon;
+  final String label;
+  final Color accent;
+
+  const InkDarkStatusPill({
+    super.key,
+    required this.icon,
+    required this.label,
+    this.accent = AppColors.primaryOnDark,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
+      decoration: BoxDecoration(
+        color: accent.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(AppRadius.iconChip),
+        border: Border.all(color: accent.withValues(alpha: 0.3), width: 1),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 14, color: accent),
+          const SizedBox(width: AppSpacing.xs),
+          Flexible(
+            child: Text(
+              label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: accent,
+                    fontWeight: FontWeight.w600,
+                  ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class StatusBadge extends StatelessWidget {
   final String label;
   final IconData icon;

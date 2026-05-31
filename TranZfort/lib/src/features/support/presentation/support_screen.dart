@@ -11,7 +11,6 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/status_components.dart';
-import '../../auth/data/auth_repository.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../data/support_repository.dart';
 import 'support_compose_widgets.dart';
@@ -81,7 +80,7 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                 spacing: AppSpacing.sm,
                 runSpacing: AppSpacing.sm,
                 children: [
-                  StatusBadge(
+                  InkDarkStatusPill(
                     label: ticketsState.tickets.isEmpty
                         ? l10n.supportNoActiveTickets
                         : l10n.supportActiveTicketCount(
@@ -91,10 +90,9 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
                     icon: Icons.support_agent_outlined,
                   ),
                   if (profile != null)
-                    StatusBadge(
+                    InkDarkStatusPill(
                       label: l10n.supportTrustBadge(_localizedSupportTrustStatus(l10n, profile.trustSafetyStatus)),
                       icon: Icons.verified_user_outlined,
-                      palette: _trustPalette(profile),
                     ),
                 ],
               ),
@@ -148,24 +146,6 @@ class _SupportScreenState extends ConsumerState<SupportScreen> {
         ),
       ],
     );
-  }
-
-  StatusPalette _trustPalette(UserProfile profile) {
-    final trustStatus = profile.trustSafetyStatus.trim().toLowerCase();
-    return switch (trustStatus) {
-      'warned' => const StatusPalette(
-          foreground: AppColors.warning,
-          background: AppColors.warningBg,
-        ),
-      'restricted' || 'suspended' || 'banned' => const StatusPalette(
-          foreground: AppColors.error,
-          background: AppColors.errorBg,
-        ),
-      _ => const StatusPalette(
-          foreground: AppColors.success,
-          background: AppColors.successBg,
-        ),
-    };
   }
 }
 

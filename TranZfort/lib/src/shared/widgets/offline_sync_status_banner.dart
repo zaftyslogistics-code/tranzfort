@@ -5,7 +5,9 @@ import 'package:go_router/go_router.dart';
 import '../../core/navigation/app_routes.dart';
 import '../../core/providers/mutation_queue_processor_provider.dart';
 import '../../core/providers/mutation_queue_provider.dart';
+import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
+import 'action_buttons.dart';
 
 /// Banner showing pending/failed offline mutations with retry and list navigation.
 class OfflineSyncStatusBanner extends ConsumerStatefulWidget {
@@ -142,25 +144,20 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                     icon: const Icon(Icons.close, size: 20),
                                   ),
                                   const SizedBox(width: 4),
-                                  ElevatedButton.icon(
-                                    onPressed: isSyncing ? null : _retryAll,
+                                  PrimaryButton.icon(
+                                    label: l10n.mutationQueueRetryAllAction,
                                     icon: isSyncing
                                         ? const SizedBox(
                                             width: 18,
                                             height: 18,
                                             child: CircularProgressIndicator(
                                               strokeWidth: 2,
-                                              color: Colors.white,
+                                              color: AppColors.textOnPrimary,
                                             ),
                                           )
                                         : const Icon(Icons.refresh, size: 18),
-                                    label: Text(l10n.mutationQueueRetryAllAction),
-                                    style: ElevatedButton.styleFrom(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 12,
-                                        vertical: 8,
-                                      ),
-                                    ),
+                                    onPressed: isSyncing ? null : _retryAll,
+                                    height: 40,
                                   ),
                                 ],
                               ),

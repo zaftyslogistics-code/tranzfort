@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../data/public_profile_models.dart';
@@ -208,13 +209,14 @@ class TruckerPublicProfileScreen extends ConsumerWidget {
               style: TextStyle(color: colorScheme.onSurfaceVariant),
             ),
             const SizedBox(height: 24),
-            FilledButton.icon(
+            PrimaryButton.icon(
               onPressed: () async {
                 ref.invalidate(publicProfileProvider(truckerId));
                 await ref.read(publicProfileProvider(truckerId).future);
               },
               icon: const Icon(Icons.refresh),
-              label: Text(AppLocalizations.of(context).commonRetryAction),
+              label: AppLocalizations.of(context).commonRetryAction,
+              height: 44,
             ),
           ],
         ),

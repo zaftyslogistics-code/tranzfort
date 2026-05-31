@@ -59,13 +59,13 @@ class _LoadRoutePriceSection extends StatelessWidget {
             ttsMessage: ttsMessage,
             badges: [
               if (isSuperLoad)
-                _RouteDarkStatusPill(
+                InkDarkStatusPill(
                   icon: Icons.workspace_premium_outlined,
                   label: l10n.truckerLoadDetailSuperLoadGuarantee,
                   accent: AppColors.secondaryOnDark,
                 ),
               if (anyMatch)
-                _RouteDarkStatusPill(
+                InkDarkStatusPill(
                   icon: Icons.verified_outlined,
                   label: l10n.truckerLoadDetailTruckMatchAvailable,
                   accent: AppColors.primaryOnDark,
@@ -262,7 +262,7 @@ class _LoadNextStepSection extends ConsumerWidget {
       title: l10n.commonNextStepTitle,
       children: [
         if (detail.latestBookingRequest != null)
-          _RouteDarkStatusPill(
+          InkDarkStatusPill(
             icon: Icons.assignment_turned_in_outlined,
             label: l10n.truckerLoadDetailBookingStatusLabel(
               _localizedBookingRequestStatus(l10n, detail.latestBookingRequest!.status),
@@ -305,7 +305,7 @@ class _LoadNextStepSection extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (hasSingleApprovedTruck && selectedTruck != null) ...[
-                _RouteDarkStatusPill(
+                InkDarkStatusPill(
                   icon: Icons.local_shipping_outlined,
                   label: l10n.truckerLoadDetailUsingTruckLabel(selectedTruck!.truckNumber),
                   accent: AppColors.primaryOnDark,
@@ -354,7 +354,7 @@ class _LoadNextStepSection extends ConsumerWidget {
               ],
               if (selectedTruck != null) ...[
                 const SizedBox(height: AppSpacing.md),
-                _RouteDarkStatusPill(
+                InkDarkStatusPill(
                   icon: selectedTruckMatches ? Icons.check_circle_outline : Icons.info_outline,
                   label: selectedTruckMatches
                       ? l10n.truckerLoadDetailSelectedTruckMatches
