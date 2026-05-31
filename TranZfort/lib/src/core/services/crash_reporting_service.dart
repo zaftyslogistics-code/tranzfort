@@ -1,9 +1,7 @@
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../logger/app_logger.dart';
-
-part 'crash_reporting_service.g.dart';
 
 /// Crash reporting service for Firebase Crashlytics
 ///
@@ -12,12 +10,8 @@ part 'crash_reporting_service.g.dart';
 /// - Record custom errors
 /// - Set custom keys for crash context
 /// - Enable/disable crash reporting
-@Riverpod(keepAlive: true)
-class CrashReportingService extends _$CrashReportingService {
-  @override
-  CrashReportingService build() {
-    return CrashReportingService();
-  }
+class CrashReportingService {
+  const CrashReportingService();
 
   /// Set user identifier for better crash grouping
   /// Call this after user authentication
@@ -54,7 +48,7 @@ class CrashReportingService extends _$CrashReportingService {
         stackTrace ?? StackTrace.current,
         fatal: fatal,
       );
-      
+
       // Set custom keys if context provided
       if (context != null) {
         for (final entry in context.entries) {
@@ -86,3 +80,7 @@ class CrashReportingService extends _$CrashReportingService {
     }
   }
 }
+
+final crashReportingServiceProvider = Provider<CrashReportingService>((ref) {
+  return const CrashReportingService();
+});

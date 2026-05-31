@@ -20,6 +20,10 @@ jobs:
           flutter-version-file: TranZfort/pubspec.yaml
           cache: true
 
+      - name: Generate l10n
+        working-directory: TranZfort
+        run: flutter gen-l10n
+
       - name: Run core smoke tests
         working-directory: TranZfort
         run: |
