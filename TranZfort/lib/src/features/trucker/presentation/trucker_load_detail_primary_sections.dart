@@ -552,6 +552,13 @@ class _StickyBookingBar extends ConsumerWidget {
                 material: detail.summary.material,
                 routeLabel: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
                 truckLabel: selectedTruckLabel,
+                supplierTrust: CounterpartyTrustInfo(
+                  displayName: detail.supplier.displayName,
+                  isVerified: detail.supplier.isVerified,
+                  avgRating: detail.supplier.avgRating,
+                  reviewCount: detail.supplier.reviewCount,
+                  totalLoadsPosted: detail.supplier.totalLoadsPosted,
+                ),
               );
               if (!confirmed || !context.mounted) {
                 return;
@@ -561,13 +568,29 @@ class _StickyBookingBar extends ConsumerWidget {
               if (!context.mounted) {
                 return;
               }
-              AppSnackbar.show(
-                context: context,
-                message: result.isSuccess
-                    ? l10n.truckerLoadDetailLoadBookedSuccess
-                    : _bookingSubmitFailureMessage(l10n, result.failureOrNull),
-                variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
-              );
+              if (result.isSuccess) {
+                AppSnackbar.show(
+                  context: context,
+                  message: l10n.truckerLoadDetailLoadBookedSuccess,
+                  variant: AppSnackbarVariant.success,
+                );
+                await showCounterpartyPostBookingTrustSheet(
+                  context: context,
+                  info: CounterpartyTrustInfo(
+                    displayName: detail.supplier.displayName,
+                    isVerified: detail.supplier.isVerified,
+                    avgRating: detail.supplier.avgRating,
+                    reviewCount: detail.supplier.reviewCount,
+                    totalLoadsPosted: detail.supplier.totalLoadsPosted,
+                  ),
+                );
+              } else {
+                AppSnackbar.show(
+                  context: context,
+                  message: _bookingSubmitFailureMessage(l10n, result.failureOrNull),
+                  variant: AppSnackbarVariant.error,
+                );
+              }
             }
           : null,
     );

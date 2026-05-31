@@ -2404,6 +2404,15 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String truckerDashboardBookingActivityBreakdownSubtitle(
+    int submitted,
+    int approved,
+    int rejected,
+  ) {
+    return '$submitted pending · $approved approved · $rejected declined';
+  }
+
+  @override
   String get truckerDashboardTripActivityTitle => 'ट्रिप गतिविधि';
 
   @override
@@ -4049,6 +4058,50 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get counterpartyChecklistOpenFromBookingAction =>
       'काउंटरपार्टी सत्यापन चेकलिस्ट';
+
+  @override
+  String get counterpartyTrustPacketTitle => 'Supplier trust snapshot';
+
+  @override
+  String get counterpartyTrustPacketPostBookingTitle =>
+      'While you wait for supplier review';
+
+  @override
+  String get counterpartyTrustPacketGstinHint =>
+      'TranZfort does not display or store GSTIN. Ask the supplier off-platform to share their GSTIN, then confirm the last 4 characters match the registered company name before large payments.';
+
+  @override
+  String get counterpartyTrustPacketProfileReviewPending =>
+      'Profile review pending';
+
+  @override
+  String counterpartyTrustPacketRating(double rating, int count) {
+    final intl.NumberFormat ratingNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String ratingString = ratingNumberFormat.format(rating);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reviews',
+      one: '1 review',
+    );
+    return '$ratingString ($_temp0)';
+  }
+
+  @override
+  String counterpartyTrustPacketLoadsPosted(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count loads posted',
+      one: '1 load posted',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get counterpartyTrustPacketDismissAction => 'Got it';
 
   @override
   String get reportIssueCategoryFakeListing => 'फर्जी या भ्रामक listing';

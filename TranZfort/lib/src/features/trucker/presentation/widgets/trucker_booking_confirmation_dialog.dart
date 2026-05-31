@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/navigation/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/action_buttons.dart';
+import '../../../../shared/widgets/counterparty_trust_packet.dart';
 import '../../../../core/theme/app_spacing.dart';
 
 Future<bool> showTruckerBookingConfirmationDialog({
@@ -11,6 +12,7 @@ Future<bool> showTruckerBookingConfirmationDialog({
   required String material,
   required String routeLabel,
   required String truckLabel,
+  CounterpartyTrustInfo? supplierTrust,
 }) {
   return showDialog<bool>(
     context: context,
@@ -18,6 +20,7 @@ Future<bool> showTruckerBookingConfirmationDialog({
       material: material,
       routeLabel: routeLabel,
       truckLabel: truckLabel,
+      supplierTrust: supplierTrust,
     ),
   ).then((value) => value == true);
 }
@@ -26,11 +29,13 @@ class _TruckerBookingConfirmationDialog extends StatefulWidget {
   final String material;
   final String routeLabel;
   final String truckLabel;
+  final CounterpartyTrustInfo? supplierTrust;
 
   const _TruckerBookingConfirmationDialog({
     required this.material,
     required this.routeLabel,
     required this.truckLabel,
+    this.supplierTrust,
   });
 
   @override
@@ -57,6 +62,10 @@ class _TruckerBookingConfirmationDialogState extends State<_TruckerBookingConfir
                 widget.truckLabel,
               ),
             ),
+            if (widget.supplierTrust != null) ...[
+              const SizedBox(height: AppSpacing.md),
+              CounterpartyTrustPacket(info: widget.supplierTrust!),
+            ],
             const SizedBox(height: AppSpacing.md),
             Text(
               l10n.truckerBookingOffPlatformPaymentAck,

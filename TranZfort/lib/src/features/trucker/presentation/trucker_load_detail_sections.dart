@@ -279,6 +279,18 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                 ),
               ),
             ),
+            const SizedBox(height: AppSpacing.md),
+            CounterpartyTrustPacket(
+              info: CounterpartyTrustInfo(
+                displayName: detail.supplier.displayName,
+                isVerified: detail.supplier.isVerified,
+                avgRating: detail.supplier.avgRating,
+                reviewCount: detail.supplier.reviewCount,
+                totalLoadsPosted: detail.supplier.totalLoadsPosted,
+              ),
+              postBooking: bookingStatus == 'submitted' || bookingStatus == 'approved',
+              onDarkBackground: true,
+            ),
           ],
         ),
         const SizedBox(height: AppSpacing.sectionGap),
@@ -362,6 +374,13 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
       material: detail.summary.material,
       routeLabel: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
       truckLabel: truckNumber,
+      supplierTrust: CounterpartyTrustInfo(
+        displayName: detail.supplier.displayName,
+        isVerified: detail.supplier.isVerified,
+        avgRating: detail.supplier.avgRating,
+        reviewCount: detail.supplier.reviewCount,
+        totalLoadsPosted: detail.supplier.totalLoadsPosted,
+      ),
     );
   }
 

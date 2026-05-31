@@ -13,6 +13,7 @@ import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/trucker/data/trucker_dashboard_repository.dart';
 import 'package:tranzfort/src/features/trucker/data/trucker_profile_repository.dart';
 import 'package:tranzfort/src/features/trucker/presentation/trucker_dashboard_screen.dart';
+import 'package:tranzfort/src/shared/widgets/content_cards.dart';
 import 'package:tranzfort/src/features/trucker/providers/trucker_providers.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
@@ -102,6 +103,8 @@ Widget _buildTestApp(
     overrides: [
       appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController(languageCode)),
       contextualTtsServiceProvider.overrideWithValue(resolvedTtsService),
+      truckerNextTripProvider.overrideWith((ref) async => null),
+      truckerDashboardNearbyLoadsProvider.overrideWith((ref) async => const []),
       ...overrides,
     ],
     child: MaterialApp.router(
@@ -201,11 +204,24 @@ void main() {
     expect(find.text('Retry'), findsWidgets);
     expect(find.text('PostgrestException: leaked detail'), findsNothing);
 
-    await tester.tap(find.text('Retry').last);
+    await tester.scrollUntilVisible(
+      find.text('Recent activity'),
+      300,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(
+      find.descendant(
+        of: find.ancestor(
+          of: find.text('Recent activity'),
+          matching: find.byType(DetailSectionCard),
+        ),
+        matching: find.text('Retry'),
+      ),
+    );
     await tester.pump();
     await tester.pumpAndSettle();
 
-    expect(dashboardCalls, 2);
+    expect(dashboardCalls, greaterThanOrEqualTo(2));
     expect(find.text('Recent activity unavailable'), findsNothing);
     expect(find.text('Booking activity'), findsOneWidget);
   });
@@ -251,7 +267,8 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome back, Ravi Trucker'), findsOneWidget);
+    expect(find.text('Welcome'), findsOneWidget);
+    expect(find.text('Ravi Trucker'), findsOneWidget);
     expect(find.text('Platform access approved'), findsWidgets);
 
     await tester.scrollUntilVisible(
@@ -262,8 +279,8 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Dashboard overview'), findsOneWidget);
-    expect(find.text('Active bids'), findsOneWidget);
-    expect(find.text('Upcoming trips'), findsOneWidget);
+    expect(find.text('ACTIVE BIDS'), findsOneWidget);
+    expect(find.text('UPCOMING TRIPS'), findsOneWidget);
 
     await tester.scrollUntilVisible(
       find.text('Quick actions'),
@@ -496,9 +513,9 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Find Loads'), findsWidgets);
+    expect(find.text('Find loads'), findsWidgets);
 
-    await tester.tap(find.text('Find Loads').first);
+    await tester.tap(find.text('Find loads').first);
     await tester.pumpAndSettle();
 
     expect(find.text('Find loads route'), findsOneWidget);

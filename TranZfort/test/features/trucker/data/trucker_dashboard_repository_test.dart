@@ -7,6 +7,8 @@ import 'package:tranzfort/src/features/trucker/data/trucker_dashboard_repository
 
 class _FakeTruckerDashboardBackend implements TruckerDashboardBackend {
   int activeBids = 0;
+  int bidsApproved = 0;
+  int bidsRejected = 0;
   int upcomingTrips = 0;
   int inTransitTrips = 0;
   int completedTrips = 0;
@@ -24,6 +26,8 @@ class _FakeTruckerDashboardBackend implements TruckerDashboardBackend {
     }
     return [
       activeBids,
+      bidsApproved,
+      bidsRejected,
       upcomingTrips,
       inTransitTrips,
       completedTrips,
@@ -41,6 +45,8 @@ void main() {
     test('returns dashboard stats from backend counts', () async {
       final backend = _FakeTruckerDashboardBackend()
         ..activeBids = 5
+        ..bidsApproved = 3
+        ..bidsRejected = 1
         ..upcomingTrips = 2
         ..inTransitTrips = 1
         ..completedTrips = 11
@@ -56,6 +62,8 @@ void main() {
       expect(result.isSuccess, isTrue);
       final stats = result.valueOrNull;
       expect(stats?.activeBids, 5);
+      expect(stats?.bidsApproved, 3);
+      expect(stats?.bidsRejected, 1);
       expect(stats?.upcomingTrips, 2);
       expect(stats?.inTransitTrips, 1);
       expect(stats?.completedTrips, 11);

@@ -972,6 +972,14 @@
       }
     }
   },
+  "truckerDashboardBookingActivityBreakdownSubtitle": "{submitted} pending · {approved} approved · {rejected} declined",
+  "@truckerDashboardBookingActivityBreakdownSubtitle": {
+    "placeholders": {
+      "submitted": { "type": "int" },
+      "approved": { "type": "int" },
+      "rejected": { "type": "int" }
+    }
+  },
   "truckerDashboardTripActivityTitle": "Trip activity",
   "truckerDashboardTripActivitySubtitle": "{upcomingTrips} upcoming - {inTransitTrips} in transit - {completedTrips} completed",
   "@truckerDashboardTripActivitySubtitle": {
@@ -1855,6 +1863,24 @@
   "counterpartyChecklistStep4": "Inspect truck documents (RC, driver ID) before loading when possible.",
   "counterpartyChecklistStep5": "Report spam, fake listings, or abuse from load detail or Support if something looks wrong.",
   "counterpartyChecklistOpenFromBookingAction": "Counterparty verification checklist",
+  "counterpartyTrustPacketTitle": "Supplier trust snapshot",
+  "counterpartyTrustPacketPostBookingTitle": "While you wait for supplier review",
+  "counterpartyTrustPacketGstinHint": "TranZfort does not display or store GSTIN. Ask the supplier off-platform to share their GSTIN, then confirm the last 4 characters match the registered company name before large payments.",
+  "counterpartyTrustPacketProfileReviewPending": "Profile review pending",
+  "counterpartyTrustPacketRating": "{rating} ({count, plural, one {1 review} other {{count} reviews}})",
+  "@counterpartyTrustPacketRating": {
+    "placeholders": {
+      "rating": { "type": "double", "format": "decimalPattern" },
+      "count": { "type": "int" }
+    }
+  },
+  "counterpartyTrustPacketLoadsPosted": "{count, plural, one {1 load posted} other {{count} loads posted}}",
+  "@counterpartyTrustPacketLoadsPosted": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "counterpartyTrustPacketDismissAction": "Got it",
   "reportIssueCategoryFakeListing": "Fake or misleading listing",
   "reportIssueCategoryGuidanceFakeListing": "Explain why the listing looks fake or misleading and attach one screenshot that shows the problem.",
   "verificationSubmissionMarketplaceNotice": "TranZfort reviews documents for marketplace access only. We are a load introduction marketplace—not a transport contractor, broker of record, or payment guarantor.",

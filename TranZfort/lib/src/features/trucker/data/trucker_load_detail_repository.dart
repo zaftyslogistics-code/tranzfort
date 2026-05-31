@@ -68,6 +68,9 @@ class TruckerSupplierSummary {
   final String? companyName;
   final String verificationStatus;
   final String? avatarUrl;
+  final double avgRating;
+  final int reviewCount;
+  final int? totalLoadsPosted;
 
   const TruckerSupplierSummary({
     required this.id,
@@ -75,7 +78,20 @@ class TruckerSupplierSummary {
     required this.companyName,
     required this.verificationStatus,
     this.avatarUrl,
+    this.avgRating = 0,
+    this.reviewCount = 0,
+    this.totalLoadsPosted,
   });
+
+  bool get isVerified => verificationStatus.trim().toLowerCase() == 'verified';
+
+  String get displayName {
+    final company = companyName?.trim();
+    if (company != null && company.isNotEmpty) {
+      return company;
+    }
+    return fullName;
+  }
 }
 
 class TruckerBookingRequestSummary {
@@ -366,6 +382,10 @@ class TruckerLoadDetailRepository {
         return const Failure<TruckerLoadDetail>(NotFoundFailure());
       }
 
+      final trustScores = safeMap(supplierProfile['trust_scores']) ?? <String, dynamic>{};
+      final roleSpecific = safeMap(supplierProfile['role_specific']) ?? <String, dynamic>{};
+      final loadsPostedRaw = roleSpecific['total_loads_posted'];
+
       return Success<TruckerLoadDetail>(
         TruckerLoadDetail(
           summary: MarketplaceLoadItem.fromMap(loadRow),
@@ -377,6 +397,9 @@ class TruckerLoadDetailRepository {
                 nullableString(supplierProfile['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
             avatarUrl: SupplierInfo.fromMap(supplierProfile).avatarUrl,
+            avgRating: readDouble(trustScores['avg_rating']),
+            reviewCount: readInt(trustScores['review_count']),
+            totalLoadsPosted: loadsPostedRaw == null ? null : readInt(loadsPostedRaw),
           ),
           originCity: (loadRow['origin_city'] ?? '').toString(),
           originState: nullableString(loadRow['origin_state']),

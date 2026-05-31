@@ -71,7 +71,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
           children: [
             _DashboardStatsSection(
               dashboardAsync: dashboardAsync,
-              onRetry: () => ref.refresh(truckerDashboardProvider),
+              onRetry: () => ref.invalidate(truckerDashboardProvider),
             ),
           ],
         ),
@@ -109,7 +109,7 @@ class TruckerDashboardScreen extends ConsumerWidget {
           children: [
             _RecentActivitySection(
               dashboardAsync: dashboardAsync,
-              onRetry: () => ref.refresh(truckerDashboardProvider),
+              onRetry: () => ref.invalidate(truckerDashboardProvider),
             ),
           ],
         ),
@@ -375,7 +375,7 @@ class _RecentActivitySection extends StatelessWidget {
       );
     }
     final stats = dashboardAsync.valueOrNull ?? const TruckerDashboardStats(activeBids: 0, upcomingTrips: 0, inTransitTrips: 0, completedTrips: 0, totalTrucks: 0, approvedTrucks: 0, pendingTrucks: 0, rejectedTrucks: 0, pendingReapprovalTrucks: 0);
-    final hasActivity = stats.activeBids > 0 || stats.upcomingTrips > 0 || stats.inTransitTrips > 0 || stats.completedTrips > 0 || stats.hasTruckLifecycleAttention;
+    final hasActivity = stats.hasBookingActivity || stats.upcomingTrips > 0 || stats.inTransitTrips > 0 || stats.completedTrips > 0 || stats.hasTruckLifecycleAttention;
     if (!hasActivity) {
       return EmptyStateView(
         icon: Icons.history_outlined,
@@ -388,7 +388,13 @@ class _RecentActivitySection extends StatelessWidget {
         StandardListCard(
           accent: AppColors.secondary,
           title: l10n.truckerDashboardBookingActivityTitle,
-          subtitle: l10n.truckerDashboardBookingActivitySubtitle(stats.activeBids),
+          subtitle: stats.hasBookingActivity
+              ? l10n.truckerDashboardBookingActivityBreakdownSubtitle(
+                  stats.activeBids,
+                  stats.bidsApproved,
+                  stats.bidsRejected,
+                )
+              : l10n.truckerDashboardBookingActivitySubtitle(stats.activeBids),
           trailing: StatusChip(label: l10n.truckerDashboardStatusValue(stats.activeBids > 0 ? 'open' : 'clear')),
         ),
         const SizedBox(height: AppSpacing.md),

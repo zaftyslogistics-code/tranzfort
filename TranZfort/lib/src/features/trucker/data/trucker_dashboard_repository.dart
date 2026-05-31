@@ -11,6 +11,8 @@ import '../../../core/utils/type_safety.dart';
 
 class TruckerDashboardStats {
   final int activeBids;
+  final int bidsApproved;
+  final int bidsRejected;
   final int upcomingTrips;
   final int inTransitTrips;
   final int completedTrips;
@@ -23,6 +25,8 @@ class TruckerDashboardStats {
 
   const TruckerDashboardStats({
     required this.activeBids,
+    this.bidsApproved = 0,
+    this.bidsRejected = 0,
     required this.upcomingTrips,
     required this.inTransitTrips,
     required this.completedTrips,
@@ -35,6 +39,7 @@ class TruckerDashboardStats {
   });
 
   bool get hasApprovedTruck => approvedTrucks > 0;
+  bool get hasBookingActivity => activeBids > 0 || bidsApproved > 0 || bidsRejected > 0;
   bool get hasTruckLifecycleAttention => pendingTrucks > 0 || rejectedTrucks > 0 || pendingReapprovalTrucks > 0;
   bool get isFresh => lastRefreshedAt != null &&
       DateTime.now().difference(lastRefreshedAt!).inMinutes < 5;
@@ -70,6 +75,8 @@ class SupabaseTruckerDashboardBackend implements TruckerDashboardBackend {
 
     return [
       (row['active_bids'] as num?)?.toInt() ?? 0,
+      (row['bids_approved'] as num?)?.toInt() ?? 0,
+      (row['bids_rejected'] as num?)?.toInt() ?? 0,
       (row['upcoming_trips'] as num?)?.toInt() ?? 0,
       (row['in_transit_trips'] as num?)?.toInt() ?? 0,
       (row['completed_trips'] as num?)?.toInt() ?? 0,
@@ -100,14 +107,16 @@ class TruckerDashboardRepository {
       return Success<TruckerDashboardStats>(
         TruckerDashboardStats(
           activeBids: results[0],
-          upcomingTrips: results[1],
-          inTransitTrips: results[2],
-          completedTrips: results[3],
-          totalTrucks: results[4],
-          approvedTrucks: results[5],
-          pendingTrucks: results[6],
-          rejectedTrucks: results[7],
-          pendingReapprovalTrucks: results[8],
+          bidsApproved: results[1],
+          bidsRejected: results[2],
+          upcomingTrips: results[3],
+          inTransitTrips: results[4],
+          completedTrips: results[5],
+          totalTrucks: results[6],
+          approvedTrucks: results[7],
+          pendingTrucks: results[8],
+          rejectedTrucks: results[9],
+          pendingReapprovalTrucks: results[10],
           lastRefreshedAt: DateTime.now(),
         ),
       );

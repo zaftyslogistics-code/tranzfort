@@ -4024,6 +4024,16 @@ abstract class AppLocalizations {
   /// **'{count, plural, one {{count} active bid waiting for supplier review} other {{count} active bids waiting for supplier review}}'**
   String truckerDashboardBookingActivitySubtitle(int count);
 
+  /// No description provided for @truckerDashboardBookingActivityBreakdownSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{submitted} pending · {approved} approved · {rejected} declined'**
+  String truckerDashboardBookingActivityBreakdownSubtitle(
+    int submitted,
+    int approved,
+    int rejected,
+  );
+
   /// No description provided for @truckerDashboardTripActivityTitle.
   ///
   /// In en, this message translates to:
@@ -6451,6 +6461,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Counterparty verification checklist'**
   String get counterpartyChecklistOpenFromBookingAction;
+
+  /// No description provided for @counterpartyTrustPacketTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier trust snapshot'**
+  String get counterpartyTrustPacketTitle;
+
+  /// No description provided for @counterpartyTrustPacketPostBookingTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'While you wait for supplier review'**
+  String get counterpartyTrustPacketPostBookingTitle;
+
+  /// No description provided for @counterpartyTrustPacketGstinHint.
+  ///
+  /// In en, this message translates to:
+  /// **'TranZfort does not display or store GSTIN. Ask the supplier off-platform to share their GSTIN, then confirm the last 4 characters match the registered company name before large payments.'**
+  String get counterpartyTrustPacketGstinHint;
+
+  /// No description provided for @counterpartyTrustPacketProfileReviewPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile review pending'**
+  String get counterpartyTrustPacketProfileReviewPending;
+
+  /// No description provided for @counterpartyTrustPacketRating.
+  ///
+  /// In en, this message translates to:
+  /// **'{rating} ({count, plural, one {1 review} other {{count} reviews}})'**
+  String counterpartyTrustPacketRating(double rating, int count);
+
+  /// No description provided for @counterpartyTrustPacketLoadsPosted.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one {1 load posted} other {{count} loads posted}}'**
+  String counterpartyTrustPacketLoadsPosted(int count);
+
+  /// No description provided for @counterpartyTrustPacketDismissAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Got it'**
+  String get counterpartyTrustPacketDismissAction;
 
   /// No description provided for @reportIssueCategoryFakeListing.
   ///

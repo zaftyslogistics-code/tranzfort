@@ -32,6 +32,7 @@ import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/load_detail_tts_builder.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../shared/widgets/google_maps_open_button.dart';
+import '../../../shared/widgets/counterparty_trust_packet.dart';
 import '../../../shared/widgets/platform_reviewed_badge.dart';
 import 'widgets/trucker_booking_confirmation_dialog.dart';
 
