@@ -6152,6 +6152,54 @@ abstract class AppLocalizations {
   /// **'I confirm that the information and uploaded documents are accurate and ready for verification review.'**
   String get verificationWizardTermsText;
 
+  /// No description provided for @verificationSubmissionMarketplaceNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'TranZfort reviews documents for marketplace access only. We are a load introduction marketplace—not a transport contractor, broker of record, or payment guarantor.'**
+  String get verificationSubmissionMarketplaceNotice;
+
+  /// No description provided for @verificationSubmissionMarketplaceCheckboxLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand this is platform access review, not government KYC, and I will verify counterparties independently before booking or handing over cargo.'**
+  String get verificationSubmissionMarketplaceCheckboxLabel;
+
+  /// No description provided for @verificationSubmissionLearnMoreAction.
+  ///
+  /// In en, this message translates to:
+  /// **'What platform review means'**
+  String get verificationSubmissionLearnMoreAction;
+
+  /// No description provided for @verificationTermsRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'You must accept the terms to submit.'**
+  String get verificationTermsRequiredError;
+
+  /// No description provided for @verificationMarketplaceAckRequiredError.
+  ///
+  /// In en, this message translates to:
+  /// **'You must acknowledge the marketplace notice to submit.'**
+  String get verificationMarketplaceAckRequiredError;
+
+  /// No description provided for @publicProfileVerificationPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Review pending'**
+  String get publicProfileVerificationPending;
+
+  /// No description provided for @publicProfileVerificationRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Review declined'**
+  String get publicProfileVerificationRejected;
+
+  /// No description provided for @publicProfileVerificationUnverified.
+  ///
+  /// In en, this message translates to:
+  /// **'Not reviewed'**
+  String get publicProfileVerificationUnverified;
+
   /// No description provided for @verificationWizardValidationError.
   ///
   /// In en, this message translates to:

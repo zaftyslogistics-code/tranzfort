@@ -3863,6 +3863,35 @@ class AppLocalizationsEn extends AppLocalizations {
       'I confirm that the information and uploaded documents are accurate and ready for verification review.';
 
   @override
+  String get verificationSubmissionMarketplaceNotice =>
+      'TranZfort reviews documents for marketplace access only. We are a load introduction marketplace—not a transport contractor, broker of record, or payment guarantor.';
+
+  @override
+  String get verificationSubmissionMarketplaceCheckboxLabel =>
+      'I understand this is platform access review, not government KYC, and I will verify counterparties independently before booking or handing over cargo.';
+
+  @override
+  String get verificationSubmissionLearnMoreAction =>
+      'What platform review means';
+
+  @override
+  String get verificationTermsRequiredError =>
+      'You must accept the terms to submit.';
+
+  @override
+  String get verificationMarketplaceAckRequiredError =>
+      'You must acknowledge the marketplace notice to submit.';
+
+  @override
+  String get publicProfileVerificationPending => 'Review pending';
+
+  @override
+  String get publicProfileVerificationRejected => 'Review declined';
+
+  @override
+  String get publicProfileVerificationUnverified => 'Not reviewed';
+
+  @override
   String get verificationWizardValidationError =>
       'Please complete the required fields before submitting.';
 

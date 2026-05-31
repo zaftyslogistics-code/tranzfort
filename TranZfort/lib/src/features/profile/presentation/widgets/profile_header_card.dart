@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_shadows.dart';
 import '../../../../core/theme/app_spacing.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/avatar_widget.dart';
+import '../../../../shared/widgets/platform_reviewed_badge.dart';
 import '../../data/public_profile_models.dart';
 
 /// Profile header card displaying user identity with new user states.
@@ -173,30 +175,37 @@ class ProfileHeaderCard extends StatelessWidget {
   }
 
   Widget _buildVerificationChip(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final colorScheme = Theme.of(context).colorScheme;
-    final isVerified = profile.verificationStatus == 'verified';
-    final isPending = profile.verificationStatus == 'pending';
+    final status = profile.verificationStatus.trim().toLowerCase();
 
-    final bgColor = isVerified
-        ? Colors.green.withValues(alpha: 0.1)
-        : isPending
-            ? Colors.orange.withValues(alpha: 0.1)
-            : colorScheme.surfaceContainerHighest;
+    if (status == 'verified') {
+      return const PlatformReviewedBadge(compact: true);
+    }
 
-    final iconColor = isVerified
-        ? Colors.green
-        : isPending
-            ? Colors.orange
-            : colorScheme.onSurfaceVariant;
+    final isPending = status == 'pending';
+    final label = switch (status) {
+      'pending' => l10n.publicProfileVerificationPending,
+      'rejected' => l10n.publicProfileVerificationRejected,
+      _ => l10n.publicProfileVerificationUnverified,
+    };
+
+    final bgColor = isPending
+        ? Colors.orange.withValues(alpha: 0.1)
+        : colorScheme.surfaceContainerHighest;
+
+    final iconColor = isPending
+        ? Colors.orange
+        : colorScheme.onSurfaceVariant;
 
     return Chip(
       avatar: Icon(
-        isVerified ? Icons.verified : Icons.pending_outlined,
+        isPending ? Icons.pending_outlined : Icons.info_outline,
         size: 16,
         color: iconColor,
       ),
       label: Text(
-        profile.verificationBadge,
+        label,
         style: TextStyle(
           fontSize: 12,
           color: iconColor,

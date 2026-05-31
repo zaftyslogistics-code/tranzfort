@@ -84,9 +84,38 @@ void main() {
         ),
       );
 
-      final result = helper.validateAll(draft, termsAccepted: false);
+      final result = helper.validateAll(
+        draft,
+        termsAccepted: false,
+        marketplaceAckAccepted: true,
+      );
       expect(result.isValid, isFalse);
       expect(result.fieldErrors['terms'], isNotEmpty);
+    });
+
+    test('marketplace ack not accepted fails submit validation', () {
+      final helper = VerificationWizardValidationHelper(role: AppUserRole.trucker);
+      final draft = VerificationDraft(
+        profilePhotoPath: 'photo.jpg',
+        aadhaarNumber: '123456789012',
+        panNumber: 'ABCDE1234F',
+        aadhaarFrontPath: 'front.jpg',
+        aadhaarBackPath: 'back.jpg',
+        panDocumentPath: 'pan.jpg',
+        truck: const TruckDraft(
+          truckNumber: 'MH12AB1234',
+          capacityTonnes: 16,
+          rcDocumentPath: 'rc.pdf',
+        ),
+      );
+
+      final result = helper.validateAll(
+        draft,
+        termsAccepted: true,
+        marketplaceAckAccepted: false,
+      );
+      expect(result.isValid, isFalse);
+      expect(result.fieldErrors['marketplaceAck'], isNotEmpty);
     });
   });
 

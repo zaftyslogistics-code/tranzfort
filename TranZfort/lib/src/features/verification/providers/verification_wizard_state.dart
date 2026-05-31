@@ -47,6 +47,7 @@ class VerificationWizardState {
   final AppUserRole role;
   final bool isResubmission;
   final bool termsAccepted;
+  final bool marketplaceAckAccepted;
   final String verificationStatus;
 
   const VerificationWizardState({
@@ -63,6 +64,7 @@ class VerificationWizardState {
     required this.role,
     required this.isResubmission,
     required this.termsAccepted,
+    required this.marketplaceAckAccepted,
     required this.verificationStatus,
   });
 
@@ -81,6 +83,7 @@ class VerificationWizardState {
       role: role,
       isResubmission: false,
       termsAccepted: false,
+      marketplaceAckAccepted: false,
       verificationStatus: 'unverified',
     );
   }
@@ -125,6 +128,7 @@ class VerificationWizardState {
     bool? clearFieldErrors,
     String? clearFieldError,
     bool? termsAccepted,
+    bool? marketplaceAckAccepted,
     bool? isResubmission,
     String? verificationStatus,
   }) {
@@ -154,6 +158,7 @@ class VerificationWizardState {
       role: role,
       isResubmission: isResubmission ?? this.isResubmission,
       termsAccepted: termsAccepted ?? this.termsAccepted,
+      marketplaceAckAccepted: marketplaceAckAccepted ?? this.marketplaceAckAccepted,
       verificationStatus: verificationStatus ?? this.verificationStatus,
     );
   }

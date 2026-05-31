@@ -15,6 +15,10 @@ extension VerificationWizardSubmit on VerificationWizardController {
     _setState(state.copyWith(termsAccepted: value), persistDraft: false);
   }
 
+  void setMarketplaceAckAccepted(bool value) {
+    _setState(state.copyWith(marketplaceAckAccepted: value), persistDraft: false);
+  }
+
   Future<void> saveDraft() async {
     await _verificationPersistDraft(state.draft);
   }
@@ -236,6 +240,7 @@ extension VerificationWizardSubmit on VerificationWizardController {
     final result = _validationHelper.validateAll(
       state.draft,
       termsAccepted: state.termsAccepted,
+      marketplaceAckAccepted: state.marketplaceAckAccepted,
       l10n: l10n,
     );
     if (!result.isValid) {

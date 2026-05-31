@@ -3878,6 +3878,35 @@ class AppLocalizationsHi extends AppLocalizations {
       'मैं पुष्टि करता/करती हूँ कि दी गई जानकारी और अपलोड किए गए दस्तावेज़ सही हैं और वेरिफिकेशन समीक्षा के लिए तैयार हैं।';
 
   @override
+  String get verificationSubmissionMarketplaceNotice =>
+      'TranZfort दस्तावेज़ केवल मार्केटप्लेस एक्सेस समीक्षा के लिए देखता है। हम लोड परिचय मार्केटप्लेस हैं—परिवहन ठेकेदार, ब्रोकर ऑफ रिकॉर्ड या भुगतान गारंटर नहीं।';
+
+  @override
+  String get verificationSubmissionMarketplaceCheckboxLabel =>
+      'मैं समझता/समझती हूँ कि यह प्लेटफ़ॉर्म एक्सेस समीक्षा है, सरकारी KYC नहीं, और बुकिंग या माल सौंपने से पहले मैं स्वतंत्र रूप से काउंटरपार्टी सत्यापित करूँगा/करूँगी।';
+
+  @override
+  String get verificationSubmissionLearnMoreAction =>
+      'प्लेटफ़ॉर्म समीक्षा का अर्थ';
+
+  @override
+  String get verificationTermsRequiredError =>
+      'जमा करने के लिए शर्तें स्वीकार करें।';
+
+  @override
+  String get verificationMarketplaceAckRequiredError =>
+      'जमा करने के लिए मार्केटप्लेस सूचना स्वीकार करें।';
+
+  @override
+  String get publicProfileVerificationPending => 'समीक्षा लंबित';
+
+  @override
+  String get publicProfileVerificationRejected => 'समीक्षा अस्वीकृत';
+
+  @override
+  String get publicProfileVerificationUnverified => 'समीक्षित नहीं';
+
+  @override
   String get verificationWizardValidationError =>
       'जमा करने से पहले कृपया आवश्यक फ़ील्ड पूर्ण करें।';
 

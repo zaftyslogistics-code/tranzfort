@@ -112,15 +112,8 @@ class PublicProfile {
     return location ?? 'Location not set';
   }
 
-  /// Verification badge text.
-  String get verificationBadge {
-    return switch (verificationStatus) {
-      'verified' => 'Verified',
-      'pending' => 'Pending',
-      'rejected' => 'Rejected',
-      _ => 'Unverified',
-    };
-  }
+  /// Verification status key for UI localization (`verified` → platform reviewed badge).
+  String get verificationStatusKey => verificationStatus.trim().toLowerCase();
 
   /// Role-specific badge text.
   String? get newUserBadge {

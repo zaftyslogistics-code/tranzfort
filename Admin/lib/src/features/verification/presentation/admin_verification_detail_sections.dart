@@ -310,7 +310,7 @@ class _AdminVerificationDetailContent extends StatelessWidget {
                       style: FilledButton.styleFrom(backgroundColor: AdminColors.success),
                       child: actionState.isLoading
                           ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                          : const Text('Approve'),
+                          : const Text('Approve access'),
                     ),
                     FilledButton(
                       key: const ValueKey('verification-reject-button'),

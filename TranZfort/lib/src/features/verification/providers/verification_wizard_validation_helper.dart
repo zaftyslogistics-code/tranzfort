@@ -16,12 +16,18 @@ class VerificationWizardValidationHelper {
   ValidationResult validateAll(
     VerificationDraft draft, {
     required bool termsAccepted,
+    required bool marketplaceAckAccepted,
     AppLocalizations? l10n,
   }) {
     final errors = <String, String>{};
 
     if (!termsAccepted) {
-      errors['terms'] = 'You must accept the terms and conditions to submit';
+      errors['terms'] = l10n?.verificationTermsRequiredError ??
+          'You must accept the terms and conditions to submit';
+    }
+    if (!marketplaceAckAccepted) {
+      errors['marketplaceAck'] = l10n?.verificationMarketplaceAckRequiredError ??
+          'You must acknowledge the marketplace notice to submit';
     }
 
     if (draft.profilePhotoPath?.isEmpty ?? true) {

@@ -8,6 +8,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/action_buttons.dart';
+import '../../../../shared/widgets/platform_reviewed_badge.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/step_container.dart';
 import '../components/wizard_progress_bar.dart';
@@ -106,6 +107,12 @@ class StepReviewSubmit extends ConsumerWidget {
               onChanged: (v) => controller.setTermsAccepted(v ?? false),
               error: state.fieldErrors['terms'],
             ),
+            const SizedBox(height: AppSpacing.md),
+            _MarketplaceAckSection(
+              isChecked: state.marketplaceAckAccepted,
+              onChanged: (v) => controller.setMarketplaceAckAccepted(v ?? false),
+              error: state.fieldErrors['marketplaceAck'],
+            ),
             const SizedBox(height: AppSpacing.lg),
             
             // Error display
@@ -123,7 +130,10 @@ class StepReviewSubmit extends ConsumerWidget {
               label: state.isResubmission
                   ? l10n.verificationResubmitForReviewAction
                   : l10n.verificationSubmitForReviewAction,
-              onPressed: state.canProceed && !state.isSubmitting
+              onPressed: state.canProceed &&
+                      state.termsAccepted &&
+                      state.marketplaceAckAccepted &&
+                      !state.isSubmitting
                   ? () => _submit(context, ref, l10n)
                   : null,
               isLoading: state.isSubmitting,
@@ -245,6 +255,72 @@ class _ReviewSection extends StatelessWidget {
           )),
         ],
       ),
+    );
+  }
+}
+
+class _MarketplaceAckSection extends StatelessWidget {
+  final bool isChecked;
+  final ValueChanged<bool?> onChanged;
+  final String? error;
+
+  const _MarketplaceAckSection({
+    required this.isChecked,
+    required this.onChanged,
+    this.error,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.verificationSubmissionMarketplaceNotice,
+          style: theme.textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        Align(
+          alignment: Alignment.centerLeft,
+          child: TextButton(
+            onPressed: () => showPlatformReviewedDisclaimerSheet(context),
+            child: Text(l10n.verificationSubmissionLearnMoreAction),
+          ),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Checkbox(
+              value: isChecked,
+              onChanged: onChanged,
+            ),
+            const SizedBox(width: AppSpacing.xs),
+            Expanded(
+              child: GestureDetector(
+                onTap: () => onChanged(!isChecked),
+                child: Text(
+                  l10n.verificationSubmissionMarketplaceCheckboxLabel,
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ),
+            ),
+          ],
+        ),
+        if (error != null)
+          Padding(
+            padding: const EdgeInsets.only(left: 40),
+            child: Text(
+              error!,
+              style: TextStyle(
+                color: theme.colorScheme.error,
+                fontSize: 12,
+              ),
+            ),
+          ),
+      ],
     );
   }
 }

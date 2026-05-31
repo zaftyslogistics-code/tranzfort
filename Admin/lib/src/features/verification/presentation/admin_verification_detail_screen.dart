@@ -6,6 +6,7 @@ import '../../../core/navigation/admin_routes.dart';
 import '../../../core/repositories/admin_verification_repository.dart';
 import '../../../core/theme/admin_colors.dart';
 import '../providers/admin_verification_providers.dart';
+import 'widgets/admin_verification_approve_dialog.dart';
 
 part 'admin_verification_detail_sections.dart';
 
@@ -87,6 +88,13 @@ class _AdminVerificationDetailScreenState extends ConsumerState<AdminVerificatio
     required AdminVerificationDetail detail,
     required VerificationReviewDecision decision,
   }) async {
+    if (decision == VerificationReviewDecision.approve) {
+      final confirmed = await showAdminVerificationApproveDialog(context);
+      if (!confirmed || !mounted) {
+        return;
+      }
+    }
+
     final rejectionReason = _rejectionReasonController.text.trim();
     if (decision == VerificationReviewDecision.reject && rejectionReason.length < 10) {
       ScaffoldMessenger.of(context)
