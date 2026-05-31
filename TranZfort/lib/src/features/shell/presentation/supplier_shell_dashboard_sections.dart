@@ -9,6 +9,7 @@ import '../../../shared/widgets/avatar_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_dashboard_repository.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/data/supplier_load_repository.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
@@ -181,8 +182,12 @@ class LinkedTripCard extends StatelessWidget {
 
 class _HeroSummary extends StatelessWidget {
   final SupplierProfile? profile;
+  final SupplierDashboardStats? stats;
 
-  const _HeroSummary({required this.profile});
+  const _HeroSummary({
+    required this.profile,
+    this.stats,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -214,6 +219,18 @@ class _HeroSummary extends StatelessWidget {
               ),
           ],
         ),
+        if (stats != null) ...[
+          const SizedBox(height: AppSpacing.sm),
+          Text(
+            l10n.postLoadDailyLimitLabel(
+              stats!.loadsPostedToday,
+              stats!.loadsDailyLimit,
+            ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: AppColors.primaryOnDark,
+                ),
+          ),
+        ],
       ],
     );
   }
@@ -548,7 +565,10 @@ class SupplierDashboardScreen extends ConsumerWidget {
                   : AppRoutes.supplierVerificationPath,
             ),
           ),
-          child: _HeroSummary(profile: profile),
+          child: _HeroSummary(
+            profile: profile,
+            stats: dashboardAsync.valueOrNull,
+          ),
         ),
         DetailSectionCard(
           title: l10n.commonDashboardOverviewTitle,
