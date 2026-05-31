@@ -1589,6 +1589,31 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
+  String get settingsNotificationCategoriesTitle => 'सूचना श्रेणियाँ';
+
+  @override
+  String get settingsNotificationCategoryPush => 'पुश डिलीवरी';
+
+  @override
+  String get settingsNotificationCategoryTrip => 'यात्रा अपडेट';
+
+  @override
+  String get settingsNotificationCategoryChat => 'चैट संदेश';
+
+  @override
+  String get settingsNotificationCategoryBooking => 'लोड बुकिंग';
+
+  @override
+  String get settingsNotificationCategoryLoadStatus => 'लोड स्थिति';
+
+  @override
+  String get settingsNotificationCategorySystem => 'सिस्टम सूचनाएँ';
+
+  @override
+  String get settingsNotificationPreferencesFailure =>
+      'सूचना प्राथमिकताएँ अपडेट नहीं हो सकीं। पुनः प्रयास करें।';
+
+  @override
   String supportActiveTicketCount(Object count, Object s) {
     return '$count टिकट$s';
   }
@@ -2236,6 +2261,30 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get truckerDashboardSearchLoadsAction => 'लोड खोजें';
+
+  @override
+  String get truckerDashboardNextTripTitle => 'अगली यात्रा';
+
+  @override
+  String get truckerDashboardNextTripEmptyTitle => 'अभी कोई सक्रिय यात्रा नहीं';
+
+  @override
+  String get truckerDashboardNextTripEmptySubtitle =>
+      'जब आपको यात्रा असाइन होगी, यहाँ चरण और प्रूफ स्थिति दिखेगी।';
+
+  @override
+  String get truckerDashboardNearbyLoadsTitle => 'आपके लिए लोड';
+
+  @override
+  String get truckerDashboardNearbyLoadsEmptyTitle =>
+      'अभी मार्केटप्लेस लोड नहीं';
+
+  @override
+  String get truckerDashboardNearbyLoadsEmptySubtitle =>
+      'रूट, सामग्री और ट्रक फ़िल्टर खोजने के लिए लोड खोजें खोलें।';
+
+  @override
+  String get truckerDashboardViewAllLoadsAction => 'सभी लोड देखें';
 
   @override
   String get truckerDashboardFiltersOnFindLoadsHint =>

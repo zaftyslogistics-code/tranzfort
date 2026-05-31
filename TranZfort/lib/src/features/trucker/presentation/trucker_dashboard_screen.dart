@@ -16,6 +16,7 @@ import '../data/trucker_dashboard_repository.dart';
 import '../data/trucker_profile_repository.dart';
 import '../providers/trucker_providers.dart';
 import 'widgets/dashboard_route_search_hero.dart';
+import 'widgets/trucker_dashboard_focus_sections.dart';
 
 class TruckerDashboardScreen extends ConsumerWidget {
   const TruckerDashboardScreen({super.key});
@@ -33,14 +34,38 @@ class TruckerDashboardScreen extends ConsumerWidget {
       onRefresh: () async {
         ref.invalidate(truckerDashboardProvider);
         ref.invalidate(truckerProfileProvider);
+        ref.invalidate(truckerNextTripProvider);
+        ref.invalidate(truckerDashboardNearbyLoadsProvider);
         await Future.wait([
           ref.read(truckerDashboardProvider.future),
           ref.read(truckerProfileProvider.future),
+          ref.read(truckerNextTripProvider.future),
+          ref.read(truckerDashboardNearbyLoadsProvider.future),
         ]);
       },
       children: [
         ...?topBannerSection,
         DashboardRouteSearchHero(profile: profile),
+        DetailSectionCard(
+          title: l10n.truckerDashboardNextTripTitle,
+          children: [
+            TruckerDashboardNextTripSection(
+              onRetry: () {
+                ref.invalidate(truckerNextTripProvider);
+              },
+            ),
+          ],
+        ),
+        DetailSectionCard(
+          title: l10n.truckerDashboardNearbyLoadsTitle,
+          children: [
+            TruckerDashboardNearbyLoadsSection(
+              onRetry: () {
+                ref.invalidate(truckerDashboardNearbyLoadsProvider);
+              },
+            ),
+          ],
+        ),
         DetailSectionCard(
           title: l10n.commonDashboardOverviewTitle,
           children: [

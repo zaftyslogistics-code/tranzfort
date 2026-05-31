@@ -1584,6 +1584,31 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get settingsNotificationCategoriesTitle => 'Notification categories';
+
+  @override
+  String get settingsNotificationCategoryPush => 'Push delivery';
+
+  @override
+  String get settingsNotificationCategoryTrip => 'Trip updates';
+
+  @override
+  String get settingsNotificationCategoryChat => 'Chat messages';
+
+  @override
+  String get settingsNotificationCategoryBooking => 'Load booking';
+
+  @override
+  String get settingsNotificationCategoryLoadStatus => 'Load status';
+
+  @override
+  String get settingsNotificationCategorySystem => 'System notices';
+
+  @override
+  String get settingsNotificationPreferencesFailure =>
+      'Could not update notification preferences. Try again.';
+
+  @override
   String supportActiveTicketCount(Object count, Object s) {
     return '$count ticket$s';
   }
@@ -2231,6 +2256,30 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get truckerDashboardSearchLoadsAction => 'Find loads';
+
+  @override
+  String get truckerDashboardNextTripTitle => 'Next trip';
+
+  @override
+  String get truckerDashboardNextTripEmptyTitle => 'No active trip yet';
+
+  @override
+  String get truckerDashboardNextTripEmptySubtitle =>
+      'When you are assigned a trip, it will appear here with stage and proof status.';
+
+  @override
+  String get truckerDashboardNearbyLoadsTitle => 'Loads for you';
+
+  @override
+  String get truckerDashboardNearbyLoadsEmptyTitle =>
+      'No marketplace loads right now';
+
+  @override
+  String get truckerDashboardNearbyLoadsEmptySubtitle =>
+      'Open Find Loads to search routes, materials, and truck filters.';
+
+  @override
+  String get truckerDashboardViewAllLoadsAction => 'Browse all loads';
 
   @override
   String get truckerDashboardFiltersOnFindLoadsHint =>

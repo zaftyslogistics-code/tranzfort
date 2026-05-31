@@ -2748,6 +2748,54 @@ abstract class AppLocalizations {
   /// **'{status, select, allowed {Foreground and opened push flows are enabled when Firebase delivery is configured.} allowed_quietly {Push is allowed quietly. You can promote alerts in the device notification settings if needed.} blocked {Push notifications are blocked. Open your device notification settings for TranZfort to enable alerts again.} not_requested {Push permission has not been requested yet on this device session.} unavailable {Push runtime is unavailable here until Firebase/device support is fully configured.} other {Push runtime is unavailable here until Firebase/device support is fully configured.}}'**
   String settingsPushGuidanceValue(String status);
 
+  /// No description provided for @settingsNotificationCategoriesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification categories'**
+  String get settingsNotificationCategoriesTitle;
+
+  /// No description provided for @settingsNotificationCategoryPush.
+  ///
+  /// In en, this message translates to:
+  /// **'Push delivery'**
+  String get settingsNotificationCategoryPush;
+
+  /// No description provided for @settingsNotificationCategoryTrip.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip updates'**
+  String get settingsNotificationCategoryTrip;
+
+  /// No description provided for @settingsNotificationCategoryChat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat messages'**
+  String get settingsNotificationCategoryChat;
+
+  /// No description provided for @settingsNotificationCategoryBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Load booking'**
+  String get settingsNotificationCategoryBooking;
+
+  /// No description provided for @settingsNotificationCategoryLoadStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Load status'**
+  String get settingsNotificationCategoryLoadStatus;
+
+  /// No description provided for @settingsNotificationCategorySystem.
+  ///
+  /// In en, this message translates to:
+  /// **'System notices'**
+  String get settingsNotificationCategorySystem;
+
+  /// No description provided for @settingsNotificationPreferencesFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update notification preferences. Try again.'**
+  String get settingsNotificationPreferencesFailure;
+
   /// Shows count of active support tickets with pluralization. Placeholder {count} is the ticket count, {s} is plural suffix.
   ///
   /// In en, this message translates to:
@@ -3759,6 +3807,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find loads'**
   String get truckerDashboardSearchLoadsAction;
+
+  /// No description provided for @truckerDashboardNextTripTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Next trip'**
+  String get truckerDashboardNextTripTitle;
+
+  /// No description provided for @truckerDashboardNextTripEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No active trip yet'**
+  String get truckerDashboardNextTripEmptyTitle;
+
+  /// No description provided for @truckerDashboardNextTripEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'When you are assigned a trip, it will appear here with stage and proof status.'**
+  String get truckerDashboardNextTripEmptySubtitle;
+
+  /// No description provided for @truckerDashboardNearbyLoadsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Loads for you'**
+  String get truckerDashboardNearbyLoadsTitle;
+
+  /// No description provided for @truckerDashboardNearbyLoadsEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No marketplace loads right now'**
+  String get truckerDashboardNearbyLoadsEmptyTitle;
+
+  /// No description provided for @truckerDashboardNearbyLoadsEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Find Loads to search routes, materials, and truck filters.'**
+  String get truckerDashboardNearbyLoadsEmptySubtitle;
+
+  /// No description provided for @truckerDashboardViewAllLoadsAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse all loads'**
+  String get truckerDashboardViewAllLoadsAction;
 
   /// No description provided for @truckerDashboardFiltersOnFindLoadsHint.
   ///

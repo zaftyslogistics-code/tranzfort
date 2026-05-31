@@ -21,6 +21,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../notifications/data/push_runtime_service.dart';
+import '../../notifications/presentation/notification_preferences_settings_card.dart';
 import 'shell_account_helpers.dart';
 import 'shell_components.dart';
 
@@ -189,6 +190,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
         ),
         const _PushNotificationSettingsCard(),
+        const NotificationPreferencesSettingsCard(),
         SectionCard(
           title: l10n.settingsLegalTitle,
           child: Column(

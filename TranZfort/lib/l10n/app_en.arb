@@ -623,6 +623,14 @@
       "status": {}
     }
   },
+  "settingsNotificationCategoriesTitle": "Notification categories",
+  "settingsNotificationCategoryPush": "Push delivery",
+  "settingsNotificationCategoryTrip": "Trip updates",
+  "settingsNotificationCategoryChat": "Chat messages",
+  "settingsNotificationCategoryBooking": "Load booking",
+  "settingsNotificationCategoryLoadStatus": "Load status",
+  "settingsNotificationCategorySystem": "System notices",
+  "settingsNotificationPreferencesFailure": "Could not update notification preferences. Try again.",
   "@_sectionSupport": "â•â•â• Support & Disputes â•â•â•",
   "supportActiveTicketCount": "{count} ticket{s}",
   "@supportActiveTicketCount": {
@@ -914,6 +922,13 @@
   },
   "truckerDashboardWelcomeLabel": "Welcome",
   "truckerDashboardSearchLoadsAction": "Find loads",
+  "truckerDashboardNextTripTitle": "Next trip",
+  "truckerDashboardNextTripEmptyTitle": "No active trip yet",
+  "truckerDashboardNextTripEmptySubtitle": "When you are assigned a trip, it will appear here with stage and proof status.",
+  "truckerDashboardNearbyLoadsTitle": "Loads for you",
+  "truckerDashboardNearbyLoadsEmptyTitle": "No marketplace loads right now",
+  "truckerDashboardNearbyLoadsEmptySubtitle": "Open Find Loads to search routes, materials, and truck filters.",
+  "truckerDashboardViewAllLoadsAction": "Browse all loads",
   "truckerDashboardFiltersOnFindLoadsHint": "Truck type and filters on the Find Loads tab",
   "truckerDashboardTitle": "Trucker Dashboard",
   "truckerDashboardQuickActionTripsLabel": "My Trips",
