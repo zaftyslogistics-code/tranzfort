@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/user_consent_service.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
@@ -325,9 +326,10 @@ class SupabaseTruckerLoadDetailBackend implements TruckerLoadDetailBackend {
 
 class TruckerLoadDetailRepository {
   final TruckerLoadDetailBackend _backend;
+  final SupabaseClient? _client;
   final String? Function() _currentUserId;
 
-  const TruckerLoadDetailRepository(this._backend, this._currentUserId);
+  const TruckerLoadDetailRepository(this._backend, this._currentUserId, [this._client]);
 
   Future<Result<TruckerLoadDetail>> fetchLoadDetail(String loadId) async {
     final userId = _currentUserId();
@@ -447,6 +449,10 @@ class TruckerLoadDetailRepository {
         bookingGpsLat: bookingGpsLat,
         bookingGpsLng: bookingGpsLng,
       );
+      await UserConsentService(_client).record(
+        consentType: 'booking_acknowledgement',
+        sourceContext: 'trucker_booking_request',
+      );
       return Success<String>(bookingId);
     } catch (error, stackTrace) {
       return Failure<String>(_mapError(error, stackTrace));
@@ -489,5 +495,6 @@ final truckerLoadDetailRepositoryProvider = Provider<TruckerLoadDetailRepository
   return TruckerLoadDetailRepository(
     SupabaseTruckerLoadDetailBackend(client),
     () => client?.auth.currentUser?.id,
+    client,
   );
 });

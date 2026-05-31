@@ -46,14 +46,19 @@ class VerificationDocumentUploadService {
   final Future<XFile?> Function(ImageSource source) _pickImage;
   final Future<Uint8List> Function(XFile file) _readBytes;
   final Uint8List? Function(Uint8List bytes) _compressImage;
-  final Future<void> Function(SupabaseClient client, String storagePath, Uint8List bytes) _uploadBinary;
+  final Future<void> Function(
+    SupabaseClient client,
+    String bucket,
+    String storagePath,
+    Uint8List bytes,
+  ) _uploadBinary;
 
   VerificationDocumentUploadService(
     this._client, {
     Future<XFile?> Function(ImageSource source)? pickImageFn,
     Future<Uint8List> Function(XFile file)? readBytesFn,
     Uint8List? Function(Uint8List bytes)? compressImageFn,
-    Future<void> Function(SupabaseClient client, String storagePath, Uint8List bytes)? uploadBinaryFn,
+    Future<void> Function(SupabaseClient client, String bucket, String storagePath, Uint8List bytes)? uploadBinaryFn,
   })  : _pickImage = pickImageFn ?? _defaultPickImage,
         _readBytes = readBytesFn ?? _defaultReadBytes,
         _compressImage = compressImageFn ?? _defaultCompressImage,
@@ -142,7 +147,7 @@ class VerificationDocumentUploadService {
       }
 
       final storagePath = '$normalizedProfileId/${_documentFolder(type)}/${_documentFilename(type)}';
-      await _uploadBinary(_client, storagePath, compressedBytes);
+      await _uploadBinary(_client, _storageBucket(type), storagePath, compressedBytes);
       return Success<String?>(storagePath);
     } on StorageException catch (error) {
       return Failure<String?>(
@@ -222,12 +227,19 @@ class VerificationDocumentUploadService {
     return Uint8List.fromList(encoded);
   }
 
+  static String _storageBucket(VerificationDocumentType type) {
+    return type == VerificationDocumentType.profilePhoto
+        ? 'profile-photos'
+        : 'verification-documents';
+  }
+
   static Future<void> _defaultUploadBinary(
     SupabaseClient client,
+    String bucket,
     String storagePath,
     Uint8List bytes,
   ) {
-    return client.storage.from('verification-documents').uploadBinary(
+    return client.storage.from(bucket).uploadBinary(
           storagePath,
           bytes,
           fileOptions: const FileOptions(

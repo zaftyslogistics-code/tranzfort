@@ -37,23 +37,22 @@ class AvatarUrlService {
     return signedUrl;
   }
 
-  /// Generates a signed URL by trying both buckets.
+  /// Generates a signed URL by trying profile-photos then legacy verification bucket.
   Future<String?> _generateSignedUrl(String path) async {
-    try {
-      // Try verification-documents bucket first (for user's own profile)
+    final buckets = path.contains('/profile_photo/')
+        ? const ['profile-photos', 'verification-documents']
+        : const ['verification-documents', 'profile-photos'];
+
+    for (final bucket in buckets) {
       try {
         return await _client!.storage
-            .from('verification-documents')
+            .from(bucket)
             .createSignedUrl(path, _cacheExpirationSeconds);
       } catch (_) {
-        // Fallback to profile-photos bucket (for supplier profiles)
-        return await _client!.storage
-            .from('profile-photos')
-            .createSignedUrl(path, _cacheExpirationSeconds);
+        continue;
       }
-    } catch (_) {
-      return null;
     }
+    return null;
   }
 
   /// Clears the entire cache.

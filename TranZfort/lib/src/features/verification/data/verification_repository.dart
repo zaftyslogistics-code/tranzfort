@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/user_consent_service.dart';
 import '../../../core/utils/map_readers.dart';
 
 part 'verification_repository_backend.dart';
@@ -15,9 +16,10 @@ part 'verification_repository_models.dart';
 
 class VerificationRepository {
   final VerificationBackend _backend;
+  final SupabaseClient? _client;
   final String? Function() _currentUserId;
 
-  const VerificationRepository(this._backend, this._currentUserId);
+  const VerificationRepository(this._backend, this._currentUserId, [this._client]);
 
   Future<Result<VerificationDetail?>> fetchCurrentDetail() async {
     final userId = _currentUserId();
@@ -214,6 +216,20 @@ class VerificationRepository {
     }
 
     try {
+      final consentService = UserConsentService(_client);
+      await consentService.record(
+        consentType: 'verification_data_processing',
+        sourceContext: 'verification_wizard_submit',
+      );
+      await consentService.record(
+        consentType: 'verification_submission',
+        sourceContext: 'verification_wizard_submit',
+      );
+      await consentService.record(
+        consentType: 'marketplace_introduction',
+        sourceContext: 'verification_wizard_submit',
+      );
+
       final caseId = isResubmission
           ? await _backend.resubmitVerificationCase()
           : await _backend.submitVerificationForReview();
@@ -242,5 +258,6 @@ final verificationRepositoryProvider = Provider<VerificationRepository>((ref) {
   return VerificationRepository(
     SupabaseVerificationBackend(client),
     () => client?.auth.currentUser?.id,
+    client,
   );
 });

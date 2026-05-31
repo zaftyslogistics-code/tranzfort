@@ -3,6 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/services/user_consent_service.dart';
 import '../../../core/utils/type_safety.dart';
 import 'auth_error_mapper.dart';
 import 'auth_models.dart';
@@ -338,7 +339,15 @@ class AuthProfileRepository {
     }
 
     try {
-      await _client.rpc('record_user_consent');
+      final consentService = UserConsentService(_client);
+      await consentService.record(
+        consentType: 'terms_of_service',
+        sourceContext: 'onboarding_profile',
+      );
+      await consentService.record(
+        consentType: 'privacy_policy',
+        sourceContext: 'onboarding_profile',
+      );
       return const Success<void>(null);
     } catch (error, stackTrace) {
       return Failure<void>(mapAuthError(error, stackTrace));
