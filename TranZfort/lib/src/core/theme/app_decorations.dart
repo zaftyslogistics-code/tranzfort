@@ -28,7 +28,6 @@ class AppDecorations {
     return BoxDecoration(
       gradient: brandGradient,
       borderRadius: borderRadius,
-      boxShadow: AppShadows.heroCta,
     );
   }
 

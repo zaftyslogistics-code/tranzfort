@@ -11,8 +11,6 @@ class AppShadows {
 
   static List<BoxShadow> get hero => AppColors.heroShadow;
 
-  static List<BoxShadow> get heroCta => AppColors.heroCtaShadow;
-
   static List<BoxShadow> get bottomSheet => AppColors.bottomSheetShadow;
 
   static List<BoxShadow> get raised => AppColors.shadowRaised;
@@ -24,6 +22,4 @@ class AppShadows {
   static List<BoxShadow> get elevation1 => AppColors.elevation1;
   static List<BoxShadow> get elevation2 => AppColors.elevation2;
   static List<BoxShadow> get elevation3 => AppColors.elevation3;
-  static List<BoxShadow> get elevation4 => AppColors.elevation4;
-  static List<BoxShadow> get elevation4Dark => AppColors.elevation4Dark;
 }

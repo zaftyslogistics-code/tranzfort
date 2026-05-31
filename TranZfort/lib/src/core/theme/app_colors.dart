@@ -172,37 +172,10 @@ class AppColors {
         ),
       ]; // hero cards, modals
 
-  static List<BoxShadow> get elevation4 => [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.14),
-          blurRadius: 20,
-          offset: const Offset(0, 48),
-        ),
-        BoxShadow(
-          color: primary.withValues(alpha: 0.18),
-          blurRadius: 0,
-          offset: const Offset(0, 24),
-        ),
-      ]; // floating CTA, selected
-
-  static List<BoxShadow> get elevation4Dark => [
-        BoxShadow(
-          color: Colors.black.withValues(alpha: 0.40),
-          blurRadius: 20,
-          offset: const Offset(0, 48),
-        ),
-        BoxShadow(
-          color: primaryOnDark.withValues(alpha: 0.25),
-          blurRadius: 0,
-          offset: const Offset(0, 24),
-        ),
-      ]; // floating CTA on dark bg
-
   // ─── Legacy Shadow Aliases (for backward compatibility) ───
   static List<BoxShadow> get cardShadow => elevation2;
   static List<BoxShadow> get cardPressedShadow => elevation1;
   static List<BoxShadow> get heroShadow => elevation3;
-  static List<BoxShadow> get heroCtaShadow => elevation4;
   static List<BoxShadow> get bottomSheetShadow => elevation3;
   static List<BoxShadow> get shadowRaised => elevation3;
 

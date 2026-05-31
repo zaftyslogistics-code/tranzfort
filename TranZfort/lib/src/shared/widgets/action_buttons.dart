@@ -227,9 +227,6 @@ class _ActionButtonFrameState extends State<_ActionButtonFrame> {
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onPressed != null && !widget.isLoading;
-    final shadow = _pressed && enabled && widget.pressedShadow != null
-        ? widget.pressedShadow
-        : widget.decoration.boxShadow;
     final borderRadius = widget.decoration.borderRadius is BorderRadius
         ? widget.decoration.borderRadius! as BorderRadius
         : BorderRadius.circular(AppRadius.button);
@@ -237,6 +234,61 @@ class _ActionButtonFrameState extends State<_ActionButtonFrame> {
       boxShadow: const [],
       borderRadius: borderRadius,
     );
+    final shadow = _pressed && enabled && widget.pressedShadow != null
+        ? widget.pressedShadow
+        : widget.decoration.boxShadow;
+    final hasShadow = enabled && shadow != null && shadow.isNotEmpty;
+
+    Widget button = ClipRRect(
+      borderRadius: borderRadius,
+      child: Material(
+        color: Colors.transparent,
+        child: Ink(
+          decoration: fillDecoration,
+          child: InkWell(
+            onTap: enabled ? widget.onPressed : null,
+            onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
+            onTapUp: enabled ? (_) => setState(() => _pressed = false) : null,
+            onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
+            child: SizedBox(
+              height: widget.height,
+              width: double.infinity,
+              child: Center(
+                child: widget.isLoading
+                    ? SizedBox(
+                        width: 18,
+                        height: 18,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(widget.foregroundColor),
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
+                        child: DefaultTextStyle(
+                          style: AppTypography.button.copyWith(color: widget.foregroundColor),
+                          child: IconTheme(
+                            data: IconThemeData(color: widget.foregroundColor, size: 20),
+                            child: widget.child,
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    if (hasShadow) {
+      button = DecoratedBox(
+        decoration: BoxDecoration(
+          borderRadius: borderRadius,
+          boxShadow: shadow,
+        ),
+        child: button,
+      );
+    }
 
     return Opacity(
       opacity: enabled ? 1 : 0.5,
@@ -244,52 +296,7 @@ class _ActionButtonFrameState extends State<_ActionButtonFrame> {
         scale: _pressed && enabled ? 0.97 : 1,
         duration: const Duration(milliseconds: 150), // Phase 4: 150ms ease-out
         curve: Curves.easeOut,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            borderRadius: borderRadius,
-            boxShadow: enabled ? shadow : null,
-          ),
-          child: ClipRRect(
-            borderRadius: borderRadius,
-            child: Material(
-              color: Colors.transparent,
-              child: Ink(
-                decoration: fillDecoration,
-                child: InkWell(
-                  onTap: enabled ? widget.onPressed : null,
-                  onTapDown: enabled ? (_) => setState(() => _pressed = true) : null,
-                  onTapUp: enabled ? (_) => setState(() => _pressed = false) : null,
-                  onTapCancel: enabled ? () => setState(() => _pressed = false) : null,
-                  child: SizedBox(
-                    height: widget.height,
-                    width: double.infinity,
-                    child: Center(
-                      child: widget.isLoading
-                          ? SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
-                                valueColor: AlwaysStoppedAnimation<Color>(widget.foregroundColor),
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-                              child: DefaultTextStyle(
-                                style: AppTypography.button.copyWith(color: widget.foregroundColor),
-                                child: IconTheme(
-                                  data: IconThemeData(color: widget.foregroundColor, size: 20),
-                                  child: widget.child,
-                                ),
-                              ),
-                            ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        child: button,
       ),
     );
   }
