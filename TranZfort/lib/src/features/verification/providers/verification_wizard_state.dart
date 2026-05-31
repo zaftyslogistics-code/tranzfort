@@ -46,6 +46,7 @@ class VerificationWizardState {
   final Map<String, String> fieldErrors;
   final AppUserRole role;
   final bool isResubmission;
+  final bool dataProcessingAccepted;
   final bool termsAccepted;
   final bool marketplaceAckAccepted;
   final String verificationStatus;
@@ -63,6 +64,7 @@ class VerificationWizardState {
     required this.fieldErrors,
     required this.role,
     required this.isResubmission,
+    required this.dataProcessingAccepted,
     required this.termsAccepted,
     required this.marketplaceAckAccepted,
     required this.verificationStatus,
@@ -82,6 +84,7 @@ class VerificationWizardState {
       fieldErrors: const {},
       role: role,
       isResubmission: false,
+      dataProcessingAccepted: false,
       termsAccepted: false,
       marketplaceAckAccepted: false,
       verificationStatus: 'unverified',
@@ -127,6 +130,7 @@ class VerificationWizardState {
     Map<String, String>? fieldErrors,
     bool? clearFieldErrors,
     String? clearFieldError,
+    bool? dataProcessingAccepted,
     bool? termsAccepted,
     bool? marketplaceAckAccepted,
     bool? isResubmission,
@@ -157,6 +161,7 @@ class VerificationWizardState {
       fieldErrors: newFieldErrors,
       role: role,
       isResubmission: isResubmission ?? this.isResubmission,
+      dataProcessingAccepted: dataProcessingAccepted ?? this.dataProcessingAccepted,
       termsAccepted: termsAccepted ?? this.termsAccepted,
       marketplaceAckAccepted: marketplaceAckAccepted ?? this.marketplaceAckAccepted,
       verificationStatus: verificationStatus ?? this.verificationStatus,

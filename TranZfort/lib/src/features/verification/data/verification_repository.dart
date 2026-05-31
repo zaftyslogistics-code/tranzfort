@@ -209,6 +209,22 @@ class VerificationRepository {
     }
   }
 
+  Future<Result<void>> recordVerificationDataProcessingConsent() async {
+    if (_currentUserId() == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+
+    try {
+      await UserConsentService(_client).record(
+        consentType: 'verification_data_processing',
+        sourceContext: 'verification_wizard_intro',
+      );
+      return const Success<void>(null);
+    } catch (error, stackTrace) {
+      return Failure<void>(_mapError(error, stackTrace));
+    }
+  }
+
   Future<Result<String>> submitForReview({required bool isResubmission}) async {
     final userId = _currentUserId();
     if (userId == null) {
@@ -217,10 +233,6 @@ class VerificationRepository {
 
     try {
       final consentService = UserConsentService(_client);
-      await consentService.record(
-        consentType: 'verification_data_processing',
-        sourceContext: 'verification_wizard_submit',
-      );
       await consentService.record(
         consentType: 'verification_submission',
         sourceContext: 'verification_wizard_submit',

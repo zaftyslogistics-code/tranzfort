@@ -56,6 +56,7 @@ class OnboardingState {
 class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
   static const String roleWorkspaceFailureCode = 'onboarding_role_workspace_failure';
   static const String termsAcceptanceRequiredCode = 'onboarding_terms_acceptance_required';
+  static const String privacyAcceptanceRequiredCode = 'onboarding_privacy_acceptance_required';
 
   @override
   OnboardingState build() => const OnboardingState();
@@ -84,6 +85,7 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
     required String fullName,
     required String mobile,
     required bool termsAccepted,
+    required bool privacyAccepted,
     String? city,
     String? regionState,
     double? latitude,
@@ -91,6 +93,9 @@ class OnboardingController extends AutoDisposeNotifier<OnboardingState> {
   }) async {
     if (!termsAccepted) {
       return Failure<void>(BusinessRuleFailure(message: termsAcceptanceRequiredCode));
+    }
+    if (!privacyAccepted) {
+      return Failure<void>(BusinessRuleFailure(message: privacyAcceptanceRequiredCode));
     }
 
     state = const OnboardingState(isSubmitting: true);

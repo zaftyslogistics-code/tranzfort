@@ -461,8 +461,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get onboardingMobileLabel => 'Mobile number';
 
   @override
-  String get onboardingTermsAcceptance =>
-      'By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.';
+  String get onboardingProfileAccuracyNotice =>
+      'Your name and mobile must be accurate for verification and daily operations.';
+
+  @override
+  String get onboardingTermsCheckboxPrefix => 'I agree to the ';
+
+  @override
+  String get onboardingTermsLinkLabel => 'Terms of Service';
+
+  @override
+  String get onboardingPrivacyCheckboxPrefix => 'I have read the ';
+
+  @override
+  String get onboardingPrivacyLinkLabel => 'Privacy Policy';
+
+  @override
+  String get onboardingTermsAcceptanceRequired =>
+      'Accept the Terms of Service to continue.';
+
+  @override
+  String get onboardingPrivacyAcceptanceRequired =>
+      'Confirm you have read the Privacy Policy to continue.';
 
   @override
   String get onboardingSaveAndContinue => 'Save and continue';
@@ -3870,6 +3890,34 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get verificationWizardReviewTimelineMessage =>
       'Review usually completes after the submitted packet is checked by the team.';
+
+  @override
+  String get verificationDataNoticeTitle => 'Verification data';
+
+  @override
+  String get verificationDataNoticeHeading => 'Before you upload documents';
+
+  @override
+  String get verificationDataNoticeBody =>
+      'We collect identity and business documents only to review marketplace access. Documents are stored securely and reviewed by authorized staff.';
+
+  @override
+  String get verificationDataNoticeBullets =>
+      '• Aadhaar and PAN images are used for identity matching\n• Business licence and GST copies apply to suppliers\n• Truck RC and photos apply to truckers\n• You can request account deletion from Settings';
+
+  @override
+  String get verificationDataNoticeCheckboxPrefix =>
+      'I consent to processing my verification documents as described in the ';
+
+  @override
+  String get verificationDataNoticeCheckboxSuffix => '.';
+
+  @override
+  String get verificationDataNoticeContinueAction => 'Continue to verification';
+
+  @override
+  String get verificationDataNoticeFailure =>
+      'Could not save your consent. Try again.';
 
   @override
   String get verificationWizardTermsText =>

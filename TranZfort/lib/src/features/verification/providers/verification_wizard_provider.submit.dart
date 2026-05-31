@@ -11,6 +11,24 @@ extension VerificationWizardSubmit on VerificationWizardController {
     return _verificationSubmit(l10n);
   }
 
+  Future<Result<void>> acknowledgeDataProcessing() async {
+    _setState(state.copyWith(isLoading: true, clearError: true), persistDraft: false);
+    final result = await _repository.recordVerificationDataProcessingConsent();
+    if (result.isFailure) {
+      _setState(
+        state.copyWith(isLoading: false, error: result.failureOrNull),
+        persistDraft: false,
+      );
+      return result;
+    }
+
+    _setState(
+      state.copyWith(isLoading: false, dataProcessingAccepted: true, clearError: true),
+      persistDraft: false,
+    );
+    return result;
+  }
+
   void setTermsAccepted(bool value) {
     _setState(state.copyWith(termsAccepted: value), persistDraft: false);
   }

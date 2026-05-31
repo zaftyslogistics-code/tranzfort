@@ -12,6 +12,7 @@ import '../../tts/data/verification_step_tts_builder.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../providers/verification_wizard_provider.dart';
 import '../providers/verification_wizard_state.dart';
+import 'verification_data_notice_view.dart';
 import 'wizard_steps/step_business_details.dart';
 import 'wizard_steps/step_identity_documents.dart';
 import 'wizard_steps/step_profile_photo.dart';
@@ -86,6 +87,10 @@ class _VerificationWizardState extends ConsumerState<VerificationWizard> {
         homePath: homePath,
         child: _PendingStatusView(homePath: homePath),
       );
+    }
+
+    if (!state.dataProcessingAccepted) {
+      return const VerificationDataNoticeView();
     }
 
     return PopScope(

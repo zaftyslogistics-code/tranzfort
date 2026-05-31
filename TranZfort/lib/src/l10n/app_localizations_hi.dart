@@ -463,8 +463,28 @@ class AppLocalizationsHi extends AppLocalizations {
   String get onboardingMobileLabel => 'मोबाइल नंबर';
 
   @override
-  String get onboardingTermsAcceptance =>
-      'आगे बढ़कर आप पुष्टि करते हैं कि आपकी basic profile details सही हैं और आप platform terms से सहमत हैं।';
+  String get onboardingProfileAccuracyNotice =>
+      'Verification और daily operations के लिए आपका नाम और mobile सही होना चाहिए।';
+
+  @override
+  String get onboardingTermsCheckboxPrefix => 'मैं ';
+
+  @override
+  String get onboardingTermsLinkLabel => 'Terms of Service';
+
+  @override
+  String get onboardingPrivacyCheckboxPrefix => 'मैंने ';
+
+  @override
+  String get onboardingPrivacyLinkLabel => 'Privacy Policy';
+
+  @override
+  String get onboardingTermsAcceptanceRequired =>
+      'आगे बढ़ने के लिए Terms of Service स्वीकार करें।';
+
+  @override
+  String get onboardingPrivacyAcceptanceRequired =>
+      'आगे बढ़ने के लिए Privacy Policy पढ़ने की पुष्टि करें।';
 
   @override
   String get onboardingSaveAndContinue => 'सहेजकर आगे बढ़ें';
@@ -3886,6 +3906,35 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get verificationWizardReviewTimelineMessage =>
       'टीम द्वारा जमा किए गए पैकेट की जांच के बाद समीक्षा सामान्यतः पूरी होती है।';
+
+  @override
+  String get verificationDataNoticeTitle => 'Verification डेटा';
+
+  @override
+  String get verificationDataNoticeHeading => 'दस्तावेज़ अपलोड करने से पहले';
+
+  @override
+  String get verificationDataNoticeBody =>
+      'हम identity और business दस्तावेज़ केवल marketplace access समीक्षा के लिए लेते हैं। दस्तावेज़ सुरक्षित रखे जाते हैं और अधिकृत staff द्वारा देखे जाते हैं।';
+
+  @override
+  String get verificationDataNoticeBullets =>
+      '• Aadhaar और PAN images identity matching के लिए\n• Business licence और GST suppliers के लिए\n• Truck RC और photos truckers के लिए\n• Settings से account deletion का अनुरोध कर सकते हैं';
+
+  @override
+  String get verificationDataNoticeCheckboxPrefix =>
+      'मैं अपने verification दस्तावेज़ों के processing के लिए ';
+
+  @override
+  String get verificationDataNoticeCheckboxSuffix =>
+      ' में वर्णित शर्तों से सहमत हूँ।';
+
+  @override
+  String get verificationDataNoticeContinueAction => 'Verification पर जाएँ';
+
+  @override
+  String get verificationDataNoticeFailure =>
+      'Consent सेव नहीं हो सका। पुनः प्रयास करें।';
 
   @override
   String get verificationWizardTermsText =>

@@ -914,11 +914,47 @@ abstract class AppLocalizations {
   /// **'Mobile number'**
   String get onboardingMobileLabel;
 
-  /// No description provided for @onboardingTermsAcceptance.
+  /// No description provided for @onboardingProfileAccuracyNotice.
   ///
   /// In en, this message translates to:
-  /// **'By continuing, you confirm that your basic profile details are accurate and that you agree to the platform terms.'**
-  String get onboardingTermsAcceptance;
+  /// **'Your name and mobile must be accurate for verification and daily operations.'**
+  String get onboardingProfileAccuracyNotice;
+
+  /// No description provided for @onboardingTermsCheckboxPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the '**
+  String get onboardingTermsCheckboxPrefix;
+
+  /// No description provided for @onboardingTermsLinkLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get onboardingTermsLinkLabel;
+
+  /// No description provided for @onboardingPrivacyCheckboxPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'I have read the '**
+  String get onboardingPrivacyCheckboxPrefix;
+
+  /// No description provided for @onboardingPrivacyLinkLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get onboardingPrivacyLinkLabel;
+
+  /// No description provided for @onboardingTermsAcceptanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Accept the Terms of Service to continue.'**
+  String get onboardingTermsAcceptanceRequired;
+
+  /// No description provided for @onboardingPrivacyAcceptanceRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm you have read the Privacy Policy to continue.'**
+  String get onboardingPrivacyAcceptanceRequired;
 
   /// No description provided for @onboardingSaveAndContinue.
   ///
@@ -6169,6 +6205,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Review usually completes after the submitted packet is checked by the team.'**
   String get verificationWizardReviewTimelineMessage;
+
+  /// No description provided for @verificationDataNoticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verification data'**
+  String get verificationDataNoticeTitle;
+
+  /// No description provided for @verificationDataNoticeHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Before you upload documents'**
+  String get verificationDataNoticeHeading;
+
+  /// No description provided for @verificationDataNoticeBody.
+  ///
+  /// In en, this message translates to:
+  /// **'We collect identity and business documents only to review marketplace access. Documents are stored securely and reviewed by authorized staff.'**
+  String get verificationDataNoticeBody;
+
+  /// No description provided for @verificationDataNoticeBullets.
+  ///
+  /// In en, this message translates to:
+  /// **'• Aadhaar and PAN images are used for identity matching\n• Business licence and GST copies apply to suppliers\n• Truck RC and photos apply to truckers\n• You can request account deletion from Settings'**
+  String get verificationDataNoticeBullets;
+
+  /// No description provided for @verificationDataNoticeCheckboxPrefix.
+  ///
+  /// In en, this message translates to:
+  /// **'I consent to processing my verification documents as described in the '**
+  String get verificationDataNoticeCheckboxPrefix;
+
+  /// No description provided for @verificationDataNoticeCheckboxSuffix.
+  ///
+  /// In en, this message translates to:
+  /// **'.'**
+  String get verificationDataNoticeCheckboxSuffix;
+
+  /// No description provided for @verificationDataNoticeContinueAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue to verification'**
+  String get verificationDataNoticeContinueAction;
+
+  /// No description provided for @verificationDataNoticeFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not save your consent. Try again.'**
+  String get verificationDataNoticeFailure;
 
   /// No description provided for @verificationWizardTermsText.
   ///

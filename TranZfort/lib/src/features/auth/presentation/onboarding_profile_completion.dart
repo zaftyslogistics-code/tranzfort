@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../core/config/app_config.dart';
 import '../../../core/error/app_failure.dart';
+import '../../../core/services/legal_url_launcher.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/theme/app_colors.dart';
@@ -13,6 +15,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/tts_utterance_utils.dart';
 import '../../../shared/widgets/action_buttons.dart';
+import '../../../shared/widgets/legal_consent_checkbox_row.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/tts_action_button.dart';
@@ -26,7 +29,11 @@ import '../../supplier/data/supplier_location_services.dart';
 String _onboardingProfileSaveFailureMessage(AppLocalizations l10n, AppFailure? failure) {
   if (failure is BusinessRuleFailure &&
       failure.message == OnboardingController.termsAcceptanceRequiredCode) {
-    return l10n.onboardingTermsAcceptance;
+    return l10n.onboardingTermsAcceptanceRequired;
+  }
+  if (failure is BusinessRuleFailure &&
+      failure.message == OnboardingController.privacyAcceptanceRequiredCode) {
+    return l10n.onboardingPrivacyAcceptanceRequired;
   }
   if (failure is ValidationFailure &&
       failure.message == AuthProfileErrorCodes.roleRequired) {
@@ -61,6 +68,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   final TextEditingController _mobileController = TextEditingController();
   bool _initialized = false;
   bool _termsAccepted = false;
+  bool _privacyAccepted = false;
   String? _city;
   String? _state;
   double? _latitude;
@@ -71,6 +79,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
   String? _initialName;
   String? _initialMobile;
   bool _initialTermsAccepted = false;
+  bool _initialPrivacyAccepted = false;
   String? _initialCity;
   String? _initialState;
   double? _initialLatitude;
@@ -146,6 +155,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
           fullName: _nameController.text,
           mobile: _mobileController.text,
           termsAccepted: _termsAccepted,
+          privacyAccepted: _privacyAccepted,
           city: _city,
           regionState: _state,
           latitude: _latitude,
@@ -475,6 +485,7 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                 _nameController.text = _initialName ?? '';
                 _mobileController.text = _initialMobile ?? '';
                 _termsAccepted = _initialTermsAccepted;
+                _privacyAccepted = _initialPrivacyAccepted;
                 _city = _initialCity;
                 _state = _initialState;
                 _latitude = _initialLatitude;
@@ -612,31 +623,82 @@ class _ProfileCompletionScreenState extends ConsumerState<ProfileCompletionScree
                       ),
                     ),
                     const SizedBox(height: AppSpacing.lg),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: Checkbox(
-                            value: _termsAccepted,
-                            onChanged: (value) => setState(() => _termsAccepted = value ?? false),
+                    Text(
+                      l10n.onboardingProfileAccuracyNotice,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            color: AppColors.textSecondary,
+                            height: 1.35,
                           ),
-                        ),
-                        const SizedBox(width: AppSpacing.sm),
-                        Expanded(
-                          child: GestureDetector(
-                            onTap: () => setState(() => _termsAccepted = !_termsAccepted),
-                            child: Text(
-                              l10n.onboardingTermsAcceptance,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: AppColors.textSecondary,
-                                    height: 1.35,
-                                  ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    LegalConsentCheckboxRow(
+                      value: _termsAccepted,
+                      onChanged: (value) => setState(() => _termsAccepted = value ?? false),
+                      label: Text.rich(
+                        TextSpan(
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: AppColors.textSecondary,
+                                height: 1.35,
+                              ),
+                          children: [
+                            TextSpan(text: l10n.onboardingTermsCheckboxPrefix),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: GestureDetector(
+                                onTap: () => launchLegalUrl(
+                                  context,
+                                  l10n,
+                                  Uri.parse(AppConfig.termsOfServiceUrl),
+                                ),
+                                child: Text(
+                                  l10n.onboardingTermsLinkLabel,
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        color: Theme.of(context).colorScheme.primary,
+                                        decoration: TextDecoration.underline,
+                                        height: 1.35,
+                                      ),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.sm),
+                    LegalConsentCheckboxRow(
+                      value: _privacyAccepted,
+                      onChanged: (value) => setState(() => _privacyAccepted = value ?? false),
+                      label: Text.rich(
+                        TextSpan(
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color: AppColors.textSecondary,
+                                height: 1.35,
+                              ),
+                          children: [
+                            TextSpan(text: l10n.onboardingPrivacyCheckboxPrefix),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.baseline,
+                              baseline: TextBaseline.alphabetic,
+                              child: GestureDetector(
+                                onTap: () => launchLegalUrl(
+                                  context,
+                                  l10n,
+                                  Uri.parse(AppConfig.privacyPolicyUrl),
+                                ),
+                                child: Text(
+                                  l10n.onboardingPrivacyLinkLabel,
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                        color: Theme.of(context).colorScheme.primary,
+                                        decoration: TextDecoration.underline,
+                                        height: 1.35,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(height: AppSpacing.xl),
                     GradientButton(
