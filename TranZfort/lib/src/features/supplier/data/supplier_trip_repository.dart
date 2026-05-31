@@ -9,6 +9,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import '../../../core/utils/type_safety.dart';
@@ -375,7 +376,10 @@ class SupplierTripsRepository {
         fullName: (truckerProfile['full_name'] ?? 'Trucker').toString(),
         mobile: nullableString(truckerProfile['mobile']),
         verificationStatus: (truckerProfile['verification_status'] ?? 'unknown').toString(),
-        avatarUrl: nullableString(truckerProfile['avatar_url']),
+        avatarUrl: AvatarStoragePath.resolveDisplaySource(
+          avatarUrl: nullableString(truckerProfile['avatar_url']),
+          profilePhotoPath: nullableString(truckerProfile['profile_photo_document_path']),
+        ),
       ),
     );
   }

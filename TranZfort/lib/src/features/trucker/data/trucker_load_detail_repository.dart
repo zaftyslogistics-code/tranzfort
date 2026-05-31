@@ -68,6 +68,7 @@ class TruckerSupplierSummary {
   final String? companyName;
   final String verificationStatus;
   final String? avatarUrl;
+  final String? profilePhotoDocumentPath;
   final double avgRating;
   final int reviewCount;
   final int? totalLoadsPosted;
@@ -78,6 +79,7 @@ class TruckerSupplierSummary {
     required this.companyName,
     required this.verificationStatus,
     this.avatarUrl,
+    this.profilePhotoDocumentPath,
     this.avgRating = 0,
     this.reviewCount = 0,
     this.totalLoadsPosted,
@@ -397,6 +399,8 @@ class TruckerLoadDetailRepository {
                 nullableString(supplierProfile['company_name']),
             verificationStatus: (supplierProfile['verification_status'] ?? 'unverified').toString(),
             avatarUrl: SupplierInfo.fromMap(supplierProfile).avatarUrl,
+            profilePhotoDocumentPath:
+                nullableString(supplierProfile['profile_photo_document_path']),
             avgRating: readDouble(trustScores['avg_rating']),
             reviewCount: readInt(trustScores['review_count']),
             totalLoadsPosted: loadsPostedRaw == null ? null : readInt(loadsPostedRaw),

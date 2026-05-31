@@ -9,20 +9,14 @@ import '../../../shared/widgets/avatar_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_dashboard_repository.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
-import '../../../features/supplier/data/supplier_load_repository.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
-import '../../../core/utils/listing_expiry.dart';
-import '../../../shared/widgets/supplier_load_compact_card.dart';
+import '../../../shared/widgets/compact_load_list_tile.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/platform_reviewed_badge.dart';
 import '../../../shared/widgets/status_components.dart';
-import '../../../features/supplier/data/supplier_load_repost.dart';
-import '../../../features/supplier/presentation/widgets/repost_load_sheet.dart';
-import '../../../features/supplier/providers/my_loads_provider.dart';
-import '../../../features/supplier/providers/post_load_quota_provider.dart';
 import '../../../features/supplier/providers/supplier_providers.dart';
 import 'shell_components.dart';
 import 'supplier_shell_shared_helpers.dart';
@@ -427,106 +421,28 @@ class _RecentLoadsSection extends StatelessWidget {
       );
     }
 
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       children: [
-        for (var index = 0; index < loads.length; index++) ...[
-          _RecentLoadCard(load: loads[index]),
-          if (index != loads.length - 1) const SizedBox(height: AppSpacing.md),
-        ],
-      ],
-    );
-  }
-}
-
-class _RecentLoadCard extends ConsumerWidget {
-  final Load load;
-
-  const _RecentLoadCard({required this.load});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context);
-    final palette = statusPaletteFor(load.status);
-    final supplierId = ref.watch(supplierProfileProvider).valueOrNull?.id ?? '';
-
-    return SupplierLoadCompactCard.fromLoad(
-      load: load,
-      supplierId: supplierId,
-      statusChips: [
-        StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status), palette: palette),
-        StatusChip(
-          label: localizedLoadMarketplaceStatus(
-            l10n,
-            isOnMarketplace: load.isOnMarketplace,
-            trucksBooked: load.trucksBooked,
-            trucksNeeded: load.trucksNeeded,
-          ),
-        ),
-        if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus))
-          StatusBadge(
-            label: l10n.supplierDashboardSuperLoadBadge(
-              superLoadStatusLabel(l10n, load.superStatus, isSuperLoad: load.isSuperLoad),
-            ),
-            icon: Icons.workspace_premium_outlined,
-          ),
-        if (load.isOnMarketplace && isListingExpiringSoon(load.marketplaceVisibleUntil))
-          StatusChip(
-            label: l10n.supplierLoadListingExpiringSoon,
-            palette: const StatusPalette(
-              foreground: AppColors.warning,
-              background: AppColors.warningBg,
-            ),
-          ),
-      ],
-      footer: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            l10n.supplierDashboardTrucksBooked(load.trucksBooked, load.trucksNeeded),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
-          ),
-          const SizedBox(height: AppSpacing.xs),
-          Text(
-            l10n.supplierDashboardLoadPickup(formatSupplierShortDate(context, load.pickupDate)),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
-          ),
-          const SizedBox(height: AppSpacing.md),
-          if (!load.isOnMarketplace) ...[
-            TextActionButton(
-              label: l10n.supplierLoadRepostAction,
-              onPressed: () async {
-                final newLoadId = await showRepostLoadSheet(
-                  context: context,
-                  sourceLoadId: load.id,
-                  onSubmit: (request) =>
-                      ref.read(supplierLoadRepositoryProvider).cloneLoadForRepost(request),
-                );
-                if (!context.mounted || newLoadId == null || newLoadId.isEmpty) {
-                  return;
-                }
-                ref.invalidate(supplierRecentLoadsProvider);
-                ref.invalidate(supplierDashboardProvider);
-                ref.invalidate(myLoadsProvider);
-                ref.invalidate(postLoadQuotaProvider);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  AppSnackbar.build(
-                    context: context,
-                    message: l10n.supplierLoadRepostSuccess,
-                    variant: AppSnackbarVariant.success,
-                  ),
-                );
-                context.push('${AppRoutes.loadDetailPath}/$newLoadId');
-              },
-            ),
-            const SizedBox(height: AppSpacing.sm),
+        CompactLoadList(
+          children: [
+            for (final load in loads)
+              CompactLoadListTile.fromSupplierLoad(
+                context: context,
+                load: load,
+                statusLabel: localizedSupplierDashboardLoadStatus(l10n, load.status),
+                statusColor: CompactLoadListTile.statusColorForLoadStatus(load.status, colorScheme),
+                onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
+              ),
           ],
-          TextActionButton(
-            label: l10n.supplierDashboardOpenLoadsWorkspace,
-            onPressed: () => context.go(AppRoutes.myLoadsPath),
-          ),
-        ],
-      ),
-      onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
+        ),
+        const SizedBox(height: AppSpacing.md),
+        OutlineButton(
+          label: l10n.supplierDashboardOpenLoadsWorkspace,
+          onPressed: () => context.go(AppRoutes.myLoadsPath),
+        ),
+      ],
     );
   }
 }

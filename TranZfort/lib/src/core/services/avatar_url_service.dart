@@ -1,43 +1,66 @@
 import 'dart:collection';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+import '../logger/app_logger.dart';
+import '../utils/avatar_storage_path.dart';
 
 /// Service for creating and caching signed URLs for avatar images.
 /// Uses in-memory LRU cache with 1-hour expiration to reduce network requests.
 class AvatarUrlService {
   final SupabaseClient? _client;
-  
-  // LRU cache: key = storage path, value = (signed URL, expiration timestamp)
+
   final _cache = LRUCache<String, _CacheEntry>(maxSize: 100);
-  
-  static const int _cacheExpirationSeconds = 3600; // 1 hour
+  final Map<String, Future<String?>> _inFlight = <String, Future<String?>>{};
+
+  static const int _cacheExpirationSeconds = 3600;
 
   AvatarUrlService(this._client);
 
-  /// Gets a signed URL for the given storage path.
-  /// Checks cache first, then generates signed URL if not cached or expired.
-  /// Returns null if the client is not available or if the operation fails.
   Future<String?> getSignedUrl(String path) async {
     if (_client == null) {
       return null;
     }
 
-    // Check cache first
-    final cachedEntry = _cache.get(path);
+    final normalized = path.trim();
+    if (normalized.isEmpty) {
+      return null;
+    }
+
+    final cachedEntry = _cache.get(normalized);
     if (cachedEntry != null && !cachedEntry.isExpired) {
       return cachedEntry.url;
     }
 
-    // Generate new signed URL
-    final signedUrl = await _generateSignedUrl(path);
-    if (signedUrl != null) {
-      // Cache the result
-      _cache.put(path, _CacheEntry(signedUrl));
+    final inFlight = _inFlight[normalized];
+    if (inFlight != null) {
+      return inFlight;
     }
 
-    return signedUrl;
+    final future = _resolveSignedUrl(normalized);
+    _inFlight[normalized] = future;
+    try {
+      final signedUrl = await future;
+      if (signedUrl != null) {
+        _cache.put(normalized, _CacheEntry(signedUrl));
+      }
+      return signedUrl;
+    } finally {
+      _inFlight.remove(normalized);
+    }
   }
 
-  /// Generates a signed URL by trying profile-photos then legacy verification bucket.
+  Future<String?> _resolveSignedUrl(String path) async {
+    for (final candidate in AvatarStoragePath.storagePathCandidates(path)) {
+      final signedUrl = await _generateSignedUrl(candidate);
+      if (signedUrl != null) {
+        return signedUrl;
+      }
+    }
+    AppLogger.debug('AvatarUrlService: no signed URL for $path');
+    return null;
+  }
+
   Future<String?> _generateSignedUrl(String path) async {
     final buckets = path.contains('/profile_photo/')
         ? const ['profile-photos', 'verification-documents']
@@ -45,37 +68,31 @@ class AvatarUrlService {
 
     for (final bucket in buckets) {
       try {
-        return await _client!.storage
-            .from(bucket)
-            .createSignedUrl(path, _cacheExpirationSeconds);
-      } catch (_) {
+        return await _client!.storage.from(bucket).createSignedUrl(path, _cacheExpirationSeconds);
+      } catch (error) {
+        AppLogger.debug('AvatarUrlService: $bucket/$path failed: $error');
         continue;
       }
     }
     return null;
   }
 
-  /// Clears the entire cache.
-  /// Should be called on logout to prevent showing stale avatars.
   void clearCache() {
     _cache.clear();
   }
 
-  /// Returns the current cache size for debugging.
   int get cacheSize => _cache.length;
 }
 
-/// Internal cache entry with expiration tracking.
 class _CacheEntry {
   final String url;
   final DateTime expiresAt;
 
-  _CacheEntry(this.url) : expiresAt = DateTime.now().add(const Duration(seconds: 3600));
+  _CacheEntry(this.url) : expiresAt = DateTime.now().add(const Duration(seconds: AvatarUrlService._cacheExpirationSeconds));
 
   bool get isExpired => DateTime.now().isAfter(expiresAt);
 }
 
-/// Simple LRU (Least Recently Used) cache implementation.
 class LRUCache<K, V> {
   final LinkedHashMap<K, V> _storage;
   final int maxSize;
@@ -84,7 +101,6 @@ class LRUCache<K, V> {
 
   V? get(K key) {
     if (_storage.containsKey(key)) {
-      // Move to end (most recently used)
       final value = _storage.remove(key);
       if (value != null) {
         _storage[key] = value;
@@ -96,10 +112,8 @@ class LRUCache<K, V> {
 
   void put(K key, V value) {
     if (_storage.containsKey(key)) {
-      // Update existing: remove and re-add to move to end
       _storage.remove(key);
     } else if (_storage.length >= maxSize) {
-      // Remove least recently used (first item)
       _storage.remove(_storage.keys.first);
     }
     _storage[key] = value;

@@ -239,6 +239,8 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                   children: [
                     UserAvatar(
                       avatarUrl: detail.supplier.avatarUrl ?? detail.summary.supplierAvatarUrl,
+                      profilePhotoPath: detail.supplier.profilePhotoDocumentPath ??
+                          detail.summary.supplierPhotoPath,
                       userId: detail.supplierId,
                       initials: detail.supplier.fullName.isNotEmpty ? detail.supplier.fullName[0].toUpperCase() : 'S',
                       radius: 20,

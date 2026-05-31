@@ -5,11 +5,13 @@ import 'package:shimmer/shimmer.dart';
 
 import '../../core/providers/app_state_providers.dart';
 import '../../core/theme/app_shadows.dart';
+import '../../core/utils/avatar_storage_path.dart';
 
 /// Shared user avatar widget with caching, shimmer loading, and stable Hero tags.
 /// Replaces duplicate _AvatarCircle implementations across the app.
 class UserAvatar extends ConsumerWidget {
   final String? avatarUrl;
+  final String? profilePhotoPath;
   final String? userId;
   final String? initials;
   final double radius;
@@ -21,6 +23,7 @@ class UserAvatar extends ConsumerWidget {
   const UserAvatar({
     super.key,
     this.avatarUrl,
+    this.profilePhotoPath,
     this.userId,
     this.initials,
     required this.radius,
@@ -34,21 +37,26 @@ class UserAvatar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final colorScheme = Theme.of(context).colorScheme;
     final avatarService = ref.watch(avatarUrlServiceProvider);
-    final url = avatarUrl?.trim();
+    final storagePath = AvatarStoragePath.pick(
+      avatarUrl: avatarUrl,
+      profilePhotoPath: profilePhotoPath,
+    );
+    final legacyHttp = AvatarStoragePath.legacyHttpUrl(
+      avatarUrl: avatarUrl,
+      profilePhotoPath: profilePhotoPath,
+    );
 
-    // If no URL provided, show fallback immediately
-    if (url == null || url.isEmpty) {
+    if (legacyHttp != null) {
+      return _buildAvatarWithUrl(context, legacyHttp);
+    }
+
+    if (storagePath == null) {
       return _buildFallback(context, colorScheme);
     }
 
-    // If URL is already HTTP, use CachedNetworkImage directly
-    if (url.startsWith('http')) {
-      return _buildAvatarWithUrl(context, url);
-    }
-
-    // If URL is a storage path, use FutureBuilder to get signed URL
     return FutureBuilder<String?>(
-      future: avatarService.getSignedUrl(url),
+      key: ValueKey(storagePath),
+      future: avatarService.getSignedUrl(storagePath),
       builder: (context, snapshot) {
         final resolvedUrl = snapshot.data;
         if (resolvedUrl == null || resolvedUrl.isEmpty) {
@@ -120,7 +128,6 @@ class UserAvatar extends ConsumerWidget {
   }
 
   Widget _buildFallback(BuildContext context, ColorScheme colorScheme) {
-    // Use custom fallback if provided
     if (fallback != null) {
       return SizedBox(
         width: radius * 2,
@@ -129,8 +136,11 @@ class UserAvatar extends ConsumerWidget {
       );
     }
 
-    // Build default fallback with initials or icon
-    final displayInitials = initials ?? (userId?.substring(0, 1).toUpperCase() ?? '?');
+    final displayInitials = initials ??
+        AvatarStoragePath.initialsFor(
+          displayName: '',
+          userId: userId,
+        );
     final displayColor = fallbackColor ?? colorScheme.primaryContainer;
 
     Widget fallbackWidget = Container(

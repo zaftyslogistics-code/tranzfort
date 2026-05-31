@@ -7,6 +7,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
 import 'chat_repository_conversation_models.dart';
@@ -464,11 +465,15 @@ class ChatRepository {
       supplierName: (row['supplier_name'] ?? 'Supplier').toString(),
       supplierMobile: nullableString(row['supplier_mobile']),
       supplierCompanyName: nullableString(row['supplier_company_name']),
-      supplierAvatarUrl: nullableString(row['supplier_avatar_url']),
+      supplierAvatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: nullableString(row['supplier_avatar_url']),
+      ),
       truckerName: (row['trucker_name'] ?? 'Trucker').toString(),
       truckerMobile: nullableString(row['trucker_mobile']),
       truckDisplayLabel: nullableString(row['truck_display_label']),
-      truckerAvatarUrl: nullableString(row['trucker_avatar_url']),
+      truckerAvatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: nullableString(row['trucker_avatar_url']),
+      ),
       bookingRequestId: nullableString(row['booking_request_id']),
       bookingStatusLabel: nullableString(row['booking_status_label']),
       latestMessagePreview: latestPreview,

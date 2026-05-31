@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/logger/app_logger.dart';
 import '../../../../core/navigation/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/widgets/compact_load_list_tile.dart';
 import '../../data/public_profile_models.dart';
 import '../../data/public_profile_repository.dart';
 
@@ -202,15 +203,11 @@ class _LoadHistorySectionState extends ConsumerState<LoadHistorySection> {
 
     return Column(
       children: [
-        ListView.separated(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: _loads.length,
-          separatorBuilder: (context, index) => const Divider(height: 1),
-          itemBuilder: (context, index) {
-            final load = _loads[index];
-            return _LoadItemTile(load: load);
-          },
+        CompactLoadList(
+          children: [
+            for (final load in _loads)
+              _LoadItemTile(load: load),
+          ],
         ),
         if (_isLoading)
           const Padding(
@@ -239,51 +236,6 @@ class _LoadItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-
-    return ListTile(
-      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      title: Row(
-        children: [
-          Expanded(
-            child: Text(
-              load.routeLabel,
-              style: theme.textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          _buildStatusChip(context),
-        ],
-      ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 4),
-          Text(
-            '${load.material} • ${load.weightTonnes}T',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              color: colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 4),
-          Text(
-            '₹${load.priceAmount.toStringAsFixed(0)} ${load.priceType}',
-            style: theme.textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-              color: colorScheme.primary,
-            ),
-          ),
-        ],
-      ),
-      onTap: () {
-        GoRouter.of(context).push('${AppRoutes.loadDetailPath}/${load.id}');
-      },
-    );
-  }
-
-  Widget _buildStatusChip(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final l10n = AppLocalizations.of(context);
 
@@ -295,20 +247,12 @@ class _LoadItemTile extends StatelessWidget {
       _ => (colorScheme.onSurfaceVariant, load.status),
     };
 
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        label,
-        style: TextStyle(
-          fontSize: 12,
-          color: color,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+    return CompactLoadListTile.fromPublicLoadPreview(
+      context: context,
+      load: load,
+      statusLabel: label,
+      statusColor: color,
+      onTap: () => GoRouter.of(context).push('${AppRoutes.loadDetailPath}/${load.id}'),
     );
   }
 }

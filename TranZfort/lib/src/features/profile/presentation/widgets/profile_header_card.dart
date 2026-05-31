@@ -89,6 +89,7 @@ class ProfileHeaderCard extends StatelessWidget {
 
     return UserAvatar(
       avatarUrl: profile.avatarUrl,
+      profilePhotoPath: profile.profilePhotoDocumentPath,
       userId: profile.id,
       initials: _getInitials(),
       radius: radius,

@@ -1,3 +1,4 @@
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/type_safety.dart';
 
 class PublicProfile {
@@ -5,6 +6,7 @@ class PublicProfile {
   final String id;
   final String fullName;
   final String? avatarUrl;
+  final String? profilePhotoDocumentPath;
   final String? companyName;
   final String? location;
   final String role;
@@ -37,6 +39,7 @@ class PublicProfile {
     required this.id,
     required this.fullName,
     this.avatarUrl,
+    this.profilePhotoDocumentPath,
     this.companyName,
     this.location,
     required this.role,
@@ -67,7 +70,11 @@ class PublicProfile {
     return PublicProfile(
       id: (map['id'] ?? '').toString(),
       fullName: (map['full_name'] ?? '').toString(),
-      avatarUrl: avatarUrl ?? profilePhotoPath,
+      avatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: avatarUrl,
+        profilePhotoPath: profilePhotoPath,
+      ),
+      profilePhotoDocumentPath: profilePhotoPath,
       companyName: _nullableString(map['company_name']),
       location: _nullableString(map['location']),
       role: (map['role'] ?? '').toString(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -16,6 +17,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
   final String supplierId;
   final String? supplierInitial;
   final String? supplierAvatarUrl;
+  final String? supplierProfilePhotoPath;
   final String? age;
   final bool isSuperLoad;
   final String originCity;
@@ -32,6 +34,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
     required this.supplierId,
     this.supplierInitial,
     this.supplierAvatarUrl,
+    this.supplierProfilePhotoPath,
     this.age,
     this.isSuperLoad = false,
     required this.originCity,
@@ -60,6 +63,7 @@ class MarketplaceDarkHeader extends StatelessWidget {
             supplierId: supplierId,
             supplierInitial: supplierInitial,
             supplierAvatarUrl: supplierAvatarUrl,
+            supplierProfilePhotoPath: supplierProfilePhotoPath,
             age: age,
             isSuperLoad: isSuperLoad,
             onSupplierTap: onSupplierTap,
@@ -85,6 +89,7 @@ class _SupplierRow extends StatelessWidget {
   final String supplierId;
   final String? supplierInitial;
   final String? supplierAvatarUrl;
+  final String? supplierProfilePhotoPath;
   final String? age;
   final bool isSuperLoad;
   final VoidCallback? onSupplierTap;
@@ -96,6 +101,7 @@ class _SupplierRow extends StatelessWidget {
     required this.supplierId,
     this.supplierInitial,
     this.supplierAvatarUrl,
+    this.supplierProfilePhotoPath,
     this.age,
     required this.isSuperLoad,
     this.onSupplierTap,
@@ -107,19 +113,24 @@ class _SupplierRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final nameColor = AppDecorations.marketplaceCardTextPrimary(onDarkSurface: onDarkSurface);
     final mutedColor = AppDecorations.marketplaceCardTextSecondary(onDarkSurface: onDarkSurface);
+    final initials = supplierInitial ??
+        AvatarStoragePath.initialsFor(
+          displayName: supplierName,
+          userId: supplierId,
+        );
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        if (supplierInitial != null) ...[
-          UserAvatar(
-            avatarUrl: supplierAvatarUrl,
-            userId: supplierId,
-            initials: supplierInitial,
-            radius: MarketplaceDarkHeader._avatarRadius,
-            onTap: onSupplierTap,
-          ),
-          const SizedBox(width: AppSpacing.xs),
-        ],
+        UserAvatar(
+          avatarUrl: supplierAvatarUrl,
+          profilePhotoPath: supplierProfilePhotoPath,
+          userId: supplierId,
+          initials: initials,
+          radius: MarketplaceDarkHeader._avatarRadius,
+          onTap: onSupplierTap,
+        ),
+        const SizedBox(width: AppSpacing.xs),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

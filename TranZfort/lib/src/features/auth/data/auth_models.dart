@@ -1,5 +1,6 @@
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
+import '../../../core/utils/avatar_storage_path.dart';
 
 class UserProfile {
   final String id;
@@ -64,7 +65,10 @@ class UserProfile {
       trustSafetyStatus: (map['trust_safety_status'] ?? 'normal').toString(),
       trustSafetyReasonSummary: _nullableText(map['ban_reason']),
       dataDeletionRequestedAt: _parseDateTime(map['data_deletion_requested_at']),
-      avatarUrl: avatarUrl ?? verificationPhotoPath,
+      avatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: avatarUrl,
+        profilePhotoPath: verificationPhotoPath,
+      ),
     );
   }
 

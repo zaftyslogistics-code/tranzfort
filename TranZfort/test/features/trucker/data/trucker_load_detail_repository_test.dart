@@ -137,6 +137,31 @@ void main() {
       expect(truckMatchesLoad(trucksResult.valueOrNull!.first, detailResult.valueOrNull!.summary), isTrue);
     });
 
+    test('prefers profile photo path over stale http avatar_url', () async {
+      final backend = _FakeTruckerLoadDetailBackend()
+        ..loadRow = _loadRow()
+        ..supplierProfile = {
+          'id': 'supplier-1',
+          'full_name': 'Amit Supplier',
+          'verification_status': 'verified',
+          'avatar_url': 'https://example.supabase.co/storage/v1/object/public/expired.jpg',
+          'profile_photo_document_path': 'supplier-1/profile_photo/profile_photo.jpg',
+        }
+        ..supplierExtension = {
+          'id': 'supplier-1',
+          'company_name': 'Amit Logistics',
+        };
+      final repository = TruckerLoadDetailRepository(backend, () => 'trucker-1');
+
+      final result = await repository.fetchLoadDetail('load-1');
+
+      expect(result.isSuccess, isTrue);
+      expect(
+        result.valueOrNull?.supplier.avatarUrl,
+        'supplier-1/profile_photo/profile_photo.jpg',
+      );
+    });
+
     test('prefers profile photo path when avatar_url is missing', () async {
       final backend = _FakeTruckerLoadDetailBackend()
         ..loadRow = {

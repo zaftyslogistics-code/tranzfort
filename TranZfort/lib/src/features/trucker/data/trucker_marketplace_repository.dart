@@ -6,6 +6,7 @@ import '../../../core/error/supabase_error_mapper.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/map_readers.dart';
 import '../../../core/utils/type_safety.dart';
 
@@ -25,7 +26,10 @@ class SupplierInfo {
     final profilePhotoPath = safeString(map['profile_photo_document_path']);
     return SupplierInfo(
       name: safeString(map['full_name']),
-      avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : (profilePhotoPath.isNotEmpty ? profilePhotoPath : null),
+      avatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : null,
+        profilePhotoPath: profilePhotoPath.isNotEmpty ? profilePhotoPath : null,
+      ),
     );
   }
 
@@ -35,7 +39,10 @@ class SupplierInfo {
     final photoPath = safeString(summary['supplier_photo_path']);
     return SupplierInfo(
       name: safeString(summary['supplier_name']),
-      avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : (photoPath.isNotEmpty ? photoPath : null),
+      avatarUrl: AvatarStoragePath.resolveDisplaySource(
+        avatarUrl: avatarUrl.isNotEmpty ? avatarUrl : null,
+        profilePhotoPath: photoPath.isNotEmpty ? photoPath : null,
+      ),
     );
   }
 }
@@ -45,6 +52,7 @@ class MarketplaceLoadItem {
   final String supplierId;
   final String? supplierName;
   final String? supplierAvatarUrl;
+  final String? supplierPhotoPath;
   final String originLabel;
   final String originCity;
   final String? originState;
@@ -78,6 +86,7 @@ class MarketplaceLoadItem {
     required this.supplierId,
     this.supplierName,
     this.supplierAvatarUrl,
+    this.supplierPhotoPath,
     required this.originLabel,
     required this.originCity,
     required this.originState,
@@ -110,12 +119,14 @@ class MarketplaceLoadItem {
   MarketplaceLoadItem copyWith({
     String? supplierName,
     String? supplierAvatarUrl,
+    String? supplierPhotoPath,
   }) {
     return MarketplaceLoadItem(
       id: id,
       supplierId: supplierId,
       supplierName: supplierName ?? this.supplierName,
       supplierAvatarUrl: supplierAvatarUrl ?? this.supplierAvatarUrl,
+      supplierPhotoPath: supplierPhotoPath ?? this.supplierPhotoPath,
       originLabel: originLabel,
       originCity: originCity,
       originState: originState,
@@ -152,12 +163,20 @@ class MarketplaceLoadItem {
     final supplierInfo = supplierSummary != null
         ? SupplierInfo.fromRpcSummary(supplierSummary)
         : null;
+    final rawPhotoPath = supplierSummary != null
+        ? safeString(supplierSummary['supplier_photo_path'])
+        : safeString(map['supplier_photo_path']);
+    final rawAvatarUrl = supplierSummary != null
+        ? safeString(supplierSummary['supplier_avatar_url'])
+        : safeString(map['supplier_avatar_url']);
 
     return MarketplaceLoadItem(
       id: (map['id'] ?? '').toString(),
       supplierId: (map['supplier_id'] ?? '').toString(),
       supplierName: supplierInfo?.name ?? nullableString(map['supplier_name']),
-      supplierAvatarUrl: supplierInfo?.avatarUrl ?? nullableString(map['supplier_avatar_url']),
+      supplierAvatarUrl: supplierInfo?.avatarUrl ??
+          (rawAvatarUrl.isNotEmpty ? rawAvatarUrl : null),
+      supplierPhotoPath: rawPhotoPath.isNotEmpty ? rawPhotoPath : null,
       originLabel: (map['origin_label'] ?? '').toString(),
       originCity: (map['origin_city'] ?? '').toString(),
       originState: nullableString(map['origin_state']),

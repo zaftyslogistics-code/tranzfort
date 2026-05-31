@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/navigation/app_routes.dart';
+import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_spacing.dart';
@@ -348,9 +349,10 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                     for (var index = 0; index < state.loads.length; index++) ...[
                       MarketplaceLoadCard(
                         load: state.loads[index],
-                        supplierInitial: state.loads[index].supplierName?.trim().isNotEmpty == true
-                            ? state.loads[index].supplierName!.substring(0, 1).toUpperCase()
-                            : null,
+                        supplierInitial: AvatarStoragePath.initialsFor(
+                          displayName: state.loads[index].supplierName ?? '',
+                          userId: state.loads[index].supplierId,
+                        ),
                         supplierAvatarUrl: state.loads[index].supplierAvatarUrl,
                         onSupplierTap: () => context.push(AppRoutes.publicProfileLocation(state.loads[index].supplierId)),
                         onViewDetails: () => context.push('${AppRoutes.loadDetailPath}/${state.loads[index].id}'),

@@ -1,5 +1,6 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'avatar_storage_path.dart';
 import 'map_readers.dart';
 
 /// Merges avatar storage paths from [profiles] into a public-profile map.
@@ -21,9 +22,17 @@ Future<Map<String, dynamic>?> mergeProfileAvatarFields({
     return null;
   }
 
+  final mergedAvatarUrl =
+      nullableString(profile?['avatar_url']) ?? nullableString(avatarRow?['avatar_url']);
+  final mergedPhotoPath = nullableString(avatarRow?['profile_photo_document_path']) ??
+      nullableString(profile?['profile_photo_document_path']);
+
   return <String, dynamic>{
     ...?profile,
-    'avatar_url': nullableString(profile?['avatar_url']) ?? nullableString(avatarRow?['avatar_url']),
-    'profile_photo_document_path': nullableString(avatarRow?['profile_photo_document_path']),
+    'avatar_url': AvatarStoragePath.resolveDisplaySource(
+      avatarUrl: mergedAvatarUrl,
+      profilePhotoPath: mergedPhotoPath,
+    ),
+    'profile_photo_document_path': mergedPhotoPath,
   };
 }
