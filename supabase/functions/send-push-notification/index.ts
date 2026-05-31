@@ -64,6 +64,12 @@ Deno.serve(async (request: Request) => {
     return jsonResponse({ error: 'Method not allowed' }, 405)
   }
 
+  const dispatchSecret = Deno.env.get('PUSH_DISPATCH_SECRET') ?? ''
+  const providedDispatchSecret = request.headers.get('x-push-dispatch-secret') ?? ''
+  if (!dispatchSecret || providedDispatchSecret !== dispatchSecret) {
+    return jsonResponse({ error: 'Unauthorized' }, 401)
+  }
+
   const supabaseUrl = Deno.env.get('SUPABASE_URL') ?? ''
   const serviceRoleKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
   const fcmServiceAccountJson = Deno.env.get('FCM_SERVICE_ACCOUNT_JSON') ?? ''

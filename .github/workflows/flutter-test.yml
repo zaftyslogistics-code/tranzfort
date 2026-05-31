@@ -1,0 +1,33 @@
+name: Flutter Test
+
+on:
+  push:
+    branches: [main, develop, v1-launch, final-polish]
+  pull_request:
+    branches: [main, develop, v1-launch, final-polish]
+
+jobs:
+  core-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version-file: TranZfort/pubspec.yaml
+          cache: true
+
+      - name: Run core smoke tests
+        working-directory: TranZfort
+        run: |
+          flutter test \
+            test/features/trucker/data/trucker_trip_repository_test.dart \
+            test/features/support/data/support_repository_test.dart \
+            test/features/supplier/data/supplier_load_repository_test.dart \
+            test/features/supplier/data/supplier_trip_repository_test.dart \
+            test/features/notifications/data/notification_repository_test.dart \
+            test/features/verification/providers/verification_wizard_unit_test.dart \
+            test/features/communication/providers/chat_providers_test.dart

@@ -169,12 +169,48 @@ class SendMessageState {
 class InboxController extends StateNotifier<InboxState> {
   static const Duration _minLoadingDuration = Duration(milliseconds: 300);
   static const Duration _errorDebounceDuration = Duration(milliseconds: 500);
+  static const Duration _realtimeFallbackDelay = Duration(milliseconds: 400);
 
   final ChatRepository _repository;
   Timer? _errorDebounceTimer;
+  Timer? _realtimeFallbackTimer;
+  StreamSubscription<Result<List<ConversationPreview>>>? _subscription;
+  var _receivedRealtimeUpdate = false;
 
   InboxController(this._repository) : super(InboxState.initial()) {
-    load();
+    _startRealtime();
+  }
+
+  void _startRealtime() {
+    _subscription = _repository.watchConversations().listen((result) {
+      _receivedRealtimeUpdate = true;
+      _realtimeFallbackTimer?.cancel();
+      result.when(
+        success: (conversations) {
+          _cancelErrorDisplay();
+          state = state.copyWith(
+            isLoading: false,
+            hasResolvedInitialLoad: true,
+            conversations: conversations,
+            clearFailure: true,
+          );
+        },
+        failure: (failure) {
+          _scheduleErrorDisplay(failure);
+          state = state.copyWith(
+            isLoading: false,
+            hasResolvedInitialLoad: true,
+          );
+        },
+      );
+    });
+
+    _realtimeFallbackTimer = Timer(_realtimeFallbackDelay, () {
+      if (!mounted || _receivedRealtimeUpdate) {
+        return;
+      }
+      unawaited(load());
+    });
   }
 
   void _scheduleErrorDisplay(AppFailure failure) {
@@ -243,6 +279,8 @@ class InboxController extends StateNotifier<InboxState> {
   @override
   void dispose() {
     _errorDebounceTimer?.cancel();
+    _realtimeFallbackTimer?.cancel();
+    _subscription?.cancel();
     super.dispose();
   }
 }
@@ -258,7 +296,23 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
 
   ConversationMessagesController(this._repository, this._conversationId)
       : super(ConversationMessagesState.initial()) {
-    _start();
+    _subscription = _repository.watchMessages(_conversationId).listen((result) {
+      result.when(
+        success: (messages) {
+          _cancelErrorDisplay();
+          final merged = _mergeMessages(state.messages, messages);
+          _applyMergedMessages(merged);
+        },
+        failure: (failure) {
+          _scheduleErrorDisplay(failure);
+          state = state.copyWith(
+            isLoading: false,
+            hasResolvedInitialLoad: true,
+          );
+        },
+      );
+    });
+    unawaited(load());
   }
 
   void _scheduleErrorDisplay(AppFailure failure) {
@@ -420,26 +474,6 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
       messages: merged,
       clearFailure: true,
     );
-  }
-
-  Future<void> _start() async {
-    await load();
-    _subscription = _repository.watchMessages(_conversationId).listen((result) {
-      result.when(
-        success: (messages) {
-          _cancelErrorDisplay();
-          final merged = _mergeMessages(state.messages, messages);
-          _applyMergedMessages(merged);
-        },
-        failure: (failure) {
-          _scheduleErrorDisplay(failure);
-          state = state.copyWith(
-            isLoading: false,
-            hasResolvedInitialLoad: true,
-          );
-        },
-      );
-    });
   }
 
   Future<void> load() async {
