@@ -26,6 +26,7 @@ class AppRoutes {
   static const account = 'account';
   static const notifications = 'notifications';
   static const profile = 'profile';
+  static const profileEdit = 'profile-edit';
   static const verification = 'verification';
   static const supplierVerification = 'supplier-verification';
   static const truckerVerification = 'trucker-verification';
@@ -64,6 +65,7 @@ class AppRoutes {
   static const accountPath = '/account';
   static const notificationsPath = '/notifications';
   static const profilePath = '/profile';
+  static const profileEditPath = '/profile/edit';
   static const verificationPath = '/verification';
   static const supplierVerificationPath = '/supplier-verification';
   static const truckerVerificationPath = '/trucker-verification';

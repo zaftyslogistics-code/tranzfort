@@ -2486,6 +2486,42 @@ abstract class AppLocalizations {
   /// **'We could not load your profile right now. Retry shortly from this screen.'**
   String get profileLoadFailureMessage;
 
+  /// No description provided for @profileEditTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profileEditTitle;
+
+  /// No description provided for @profileEditSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update the name and mobile number shown on your account.'**
+  String get profileEditSubtitle;
+
+  /// No description provided for @profileEditAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit name and mobile'**
+  String get profileEditAction;
+
+  /// No description provided for @profileSaveChangesAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profileSaveChangesAction;
+
+  /// No description provided for @profileEditSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated.'**
+  String get profileEditSuccess;
+
+  /// No description provided for @profileEditFailure.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update your profile. Try again.'**
+  String get profileEditFailure;
+
   /// No description provided for @profileSummaryTitle.
   ///
   /// In en, this message translates to:

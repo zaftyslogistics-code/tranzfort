@@ -265,6 +265,12 @@ class AuthRepository {
         longitude: longitude,
       );
 
+  Future<Result<void>> updateProfileDetails({
+    required String fullName,
+    required String mobile,
+  }) =>
+      profileOps.updateProfileDetails(fullName: fullName, mobile: mobile);
+
   Future<Result<void>> updatePreferredLanguage(String languageCode) => profileOps.updatePreferredLanguage(languageCode);
 
   Future<Result<void>> recordTermsAcceptance() => profileOps.recordTermsAcceptance();

@@ -298,6 +298,62 @@ class AuthProfileRepository {
     return _syncCurrentUserMetadata(onboardingComplete: true, roleValue: roleValue);
   }
 
+  /// Updates name and mobile for an already-onboarded user (no consent re-record).
+  Future<Result<void>> updateProfileDetails({
+    required String fullName,
+    required String mobile,
+  }) async {
+    if (_client == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+
+    if (_client.auth.currentUser == null) {
+      return const Failure<void>(UnauthorizedFailure());
+    }
+
+    final trimmedName = fullName.trim();
+    final trimmedMobile = mobile.trim();
+    if (trimmedName.length < 2) {
+      return const Failure<void>(
+        ValidationFailure(
+          message: AuthProfileErrorCodes.nameTooShort,
+          fieldErrors: {'full_name': AuthProfileErrorCodes.nameTooShort},
+        ),
+      );
+    }
+
+    if (trimmedMobile.isEmpty) {
+      return const Failure<void>(
+        ValidationFailure(
+          message: AuthProfileErrorCodes.mobileRequired,
+          fieldErrors: {'mobile': AuthProfileErrorCodes.mobileRequired},
+        ),
+      );
+    }
+
+    final profileResult = await getCurrentProfile();
+    if (profileResult.isFailure) {
+      return Failure<void>(profileResult.failureOrNull!);
+    }
+
+    final roleValue = _roleValueFromProfileAndMetadata(profileResult.valueOrNull);
+    if (roleValue == null) {
+      return const Failure<void>(
+        ValidationFailure(
+          message: AuthProfileErrorCodes.roleRequired,
+          fieldErrors: {'role': AuthProfileErrorCodes.roleRequired},
+        ),
+      );
+    }
+
+    return _upsertCurrentUserProfile(
+      roleValue: roleValue,
+      fullName: trimmedName,
+      mobile: trimmedMobile,
+      recordTerms: false,
+    );
+  }
+
   Future<Result<void>> updatePreferredLanguage(String languageCode) async {
     if (_client == null) {
       return const Failure<void>(UnauthorizedFailure());

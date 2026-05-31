@@ -1,0 +1,25 @@
+name: Supabase Migrations
+
+on:
+  push:
+    branches: [main, develop, v1-launch, final-polish]
+    paths:
+      - 'supabase/migrations/**'
+      - 'scripts/ci/validate_supabase_migrations.sh'
+      - '.github/workflows/supabase-migrations.yml'
+  pull_request:
+    branches: [main, develop, v1-launch, final-polish]
+    paths:
+      - 'supabase/migrations/**'
+      - 'scripts/ci/validate_supabase_migrations.sh'
+      - '.github/workflows/supabase-migrations.yml'
+
+jobs:
+  migration-consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Validate migration filenames and order
+        run: bash scripts/ci/validate_supabase_migrations.sh supabase/migrations

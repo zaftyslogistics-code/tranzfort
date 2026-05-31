@@ -1415,6 +1415,25 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not load your profile right now. Retry shortly from this screen.';
 
   @override
+  String get profileEditTitle => 'Edit profile';
+
+  @override
+  String get profileEditSubtitle =>
+      'Update the name and mobile number shown on your account.';
+
+  @override
+  String get profileEditAction => 'Edit name and mobile';
+
+  @override
+  String get profileSaveChangesAction => 'Save changes';
+
+  @override
+  String get profileEditSuccess => 'Profile updated.';
+
+  @override
+  String get profileEditFailure => 'Could not update your profile. Try again.';
+
+  @override
   String get profileSummaryTitle => 'Profile summary';
 
   @override

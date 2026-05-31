@@ -9,6 +9,7 @@ import '../../features/communication/presentation/chat_screen.dart';
 import '../../features/notifications/presentation/notifications_screen.dart';
 import '../../features/profile/providers/public_profile_providers.dart';
 import '../../features/shell/presentation/delete_account_screen.dart';
+import '../../features/shell/presentation/profile_edit_screen.dart';
 import '../../features/supplier/presentation/post_load_screen.dart';
 import '../../features/supplier/presentation/raise_dispute_screen.dart';
 import '../../features/supplier/presentation/supplier_trip_detail_screen.dart';
@@ -121,6 +122,13 @@ void _initializeRouteMetadata() {
     'showBackArrow': false,
     'requirePopScope': false,
     'testId': 'profile',
+  });
+
+  RouteMetadataHelper.registerMetadata(AppRoutes.profileEditPath, {
+    'type': RouteType.topLevel,
+    'showBackArrow': true,
+    'requirePopScope': false,
+    'testId': 'profile_edit',
   });
 
   RouteMetadataHelper.registerMetadata(AppRoutes.settingsPath, {
@@ -499,6 +507,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.profilePath,
             name: AppRoutes.profile,
             builder: (context, state) => const ProfileScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.profileEditPath,
+            name: AppRoutes.profileEdit,
+            builder: (context, state) => const ProfileEditScreen(),
           ),
           GoRoute(
             path: AppRoutes.verificationPath,

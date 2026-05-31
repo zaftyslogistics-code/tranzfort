@@ -1419,6 +1419,26 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी आपकी profile लोड नहीं हो सकी। थोड़ी देर बाद इसी screen से फिर कोशिश करें।';
 
   @override
+  String get profileEditTitle => 'Profile संपादित करें';
+
+  @override
+  String get profileEditSubtitle =>
+      'अपने account पर दिखने वाला नाम और mobile number अपडेट करें।';
+
+  @override
+  String get profileEditAction => 'नाम और mobile संपादित करें';
+
+  @override
+  String get profileSaveChangesAction => 'बदलाव सेव करें';
+
+  @override
+  String get profileEditSuccess => 'Profile अपडेट हो गई।';
+
+  @override
+  String get profileEditFailure =>
+      'Profile अपडेट नहीं हो सकी। पुनः प्रयास करें।';
+
+  @override
   String get profileSummaryTitle => 'प्रोफ़ाइल सारांश';
 
   @override

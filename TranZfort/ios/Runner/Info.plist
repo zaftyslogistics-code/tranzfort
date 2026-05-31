@@ -47,6 +47,12 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tranzfort uses your location to set your operating city during signup and verification.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Tranzfort uses the camera to capture verification documents, truck photos, and trip proof images.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tranzfort uses your photo library when you choose existing images for verification or trip proof uploads.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Tranzfort uses the microphone for voice messages in chat when you record audio.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

@@ -90,6 +90,14 @@ class ProfileScreen extends ConsumerWidget {
                 InfoRow(label: l10n.profilePhoneLabel, value: (profile?.mobile ?? '').trim().isNotEmpty ? profile!.mobile! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileEmailLabel, value: (profile?.email ?? '').trim().isNotEmpty ? profile!.email! : l10n.profileValueNotProvided),
                 InfoRow(label: l10n.profileRoleLabel, value: roleLabel),
+                const SizedBox(height: AppSpacing.md),
+                SizedBox(
+                  width: double.infinity,
+                  child: OutlineButton(
+                    label: l10n.profileEditAction,
+                    onPressed: () => context.push(AppRoutes.profileEditPath),
+                  ),
+                ),
               ],
             ),
           ),
