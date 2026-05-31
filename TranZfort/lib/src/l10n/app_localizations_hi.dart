@@ -1481,6 +1481,19 @@ class AppLocalizationsHi extends AppLocalizations {
       'इन-ऐप इनबॉक्स और पुश स्थिति नियंत्रण यहाँ उपलब्ध हैं।';
 
   @override
+  String get settingsLegalTitle => 'कानूनी';
+
+  @override
+  String get settingsPrivacyPolicyLabel => 'गोपनीयता नीति';
+
+  @override
+  String get settingsTermsOfServiceLabel => 'सेवा की शर्तें';
+
+  @override
+  String get settingsLegalLinkFailed =>
+      'लिंक नहीं खुल सका। बाद में पुनः प्रयास करें।';
+
+  @override
   String get settingsConnectedSurfacesTitle => 'जुड़े सतह';
 
   @override

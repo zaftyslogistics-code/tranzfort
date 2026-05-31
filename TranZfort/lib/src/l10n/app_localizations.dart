@@ -2598,6 +2598,30 @@ abstract class AppLocalizations {
   /// **'In-app inbox and push status controls are available here.'**
   String get settingsNotificationsValue;
 
+  /// No description provided for @settingsLegalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Legal'**
+  String get settingsLegalTitle;
+
+  /// No description provided for @settingsPrivacyPolicyLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get settingsPrivacyPolicyLabel;
+
+  /// No description provided for @settingsTermsOfServiceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms of Service'**
+  String get settingsTermsOfServiceLabel;
+
+  /// No description provided for @settingsLegalLinkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the link. Try again later.'**
+  String get settingsLegalLinkFailed;
+
   /// No description provided for @settingsConnectedSurfacesTitle.
   ///
   /// In en, this message translates to:

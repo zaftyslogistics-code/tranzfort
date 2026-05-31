@@ -163,12 +163,23 @@ void main() {
     );
     await tester.pumpAndSettle();
 
+    await tester.scrollUntilVisible(find.text('Hear summary'), 120);
     await tester.tap(find.text('Hear summary'));
     await tester.pumpAndSettle();
 
-    expect(ttsService.lastLanguageCode, 'en');
+    expect(ttsService.lastLanguageCode, 'hi');
     expect(ttsService.lastMessage, contains('Settings screen.'));
     expect(ttsService.lastMessage, contains('Language is set to English.'));
+  });
+
+  testWidgets('settings screen shows privacy policy and terms links', (tester) async {
+    await tester.pumpWidget(
+      _buildApp(const PushPermissionSnapshot(PushPermissionStatus.notDetermined)),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Privacy Policy'), findsOneWidget);
+    expect(find.text('Terms of Service'), findsOneWidget);
   });
 
   testWidgets('settings screen connected profile route opens profile', (tester) async {

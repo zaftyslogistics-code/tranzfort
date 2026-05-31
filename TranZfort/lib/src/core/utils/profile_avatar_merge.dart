@@ -11,11 +11,11 @@ Future<Map<String, dynamic>?> mergeProfileAvatarFields({
   required String userId,
   Map<String, dynamic>? profile,
 }) async {
-  final avatarRow = await client
-      .from('profiles')
-      .select('avatar_url, profile_photo_document_path')
-      .eq('id', userId)
-      .maybeSingle();
+  final avatarResponse = await client.rpc(
+    'get_profile_avatar_fields',
+    params: <String, dynamic>{'p_user_id': userId},
+  );
+  final avatarRow = avatarResponse is Map<String, dynamic> ? avatarResponse : null;
 
   if (profile == null && avatarRow == null) {
     return null;

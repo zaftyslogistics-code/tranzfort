@@ -30,4 +30,5 @@ jobs:
             test/features/supplier/data/supplier_trip_repository_test.dart \
             test/features/notifications/data/notification_repository_test.dart \
             test/features/verification/providers/verification_wizard_unit_test.dart \
-            test/features/communication/providers/chat_providers_test.dart
+            test/features/communication/providers/chat_providers_test.dart \
+            test/features/shell/presentation/settings_screen_test.dart

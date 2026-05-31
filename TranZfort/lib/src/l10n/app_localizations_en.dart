@@ -1477,6 +1477,19 @@ class AppLocalizationsEn extends AppLocalizations {
       'In-app inbox and push status controls are available here.';
 
   @override
+  String get settingsLegalTitle => 'Legal';
+
+  @override
+  String get settingsPrivacyPolicyLabel => 'Privacy Policy';
+
+  @override
+  String get settingsTermsOfServiceLabel => 'Terms of Service';
+
+  @override
+  String get settingsLegalLinkFailed =>
+      'Could not open the link. Try again later.';
+
+  @override
   String get settingsConnectedSurfacesTitle => 'Connected surfaces';
 
   @override
