@@ -1,4 +1,17 @@
+import '../../../core/utils/validators.dart';
 import '../data/verification_repository.dart';
+
+String? _coalesceDraftText(String? primary, String? fallback) {
+  final trimmedPrimary = primary?.trim();
+  if (trimmedPrimary != null && trimmedPrimary.isNotEmpty) {
+    return trimmedPrimary;
+  }
+  final trimmedFallback = fallback?.trim();
+  if (trimmedFallback != null && trimmedFallback.isNotEmpty) {
+    return trimmedFallback;
+  }
+  return null;
+}
 
 /// Draft data holder for verification wizard state
 class VerificationDraft {
@@ -62,11 +75,12 @@ class VerificationDraft {
       gstCertificatePath: detail.gstCertificateDocumentPath,
       location: detail.hasVerificationLocation
           ? WizardLocation(
-              city: detail.verificationLocationCity ?? '',
-              state: detail.verificationLocationState,
-              latitude: detail.verificationLatitude ?? 0,
-              longitude: detail.verificationLongitude ?? 0,
-              source: 'existing',
+              city: detail.effectiveLocationCity ?? '',
+              state: detail.effectiveLocationState,
+              latitude: detail.effectiveLocationLatitude ?? 0,
+              longitude: detail.effectiveLocationLongitude ?? 0,
+              source: detail.effectiveLocationSource,
+              locked: detail.isOperatingLocationFromOnboarding,
             )
           : null,
     );
@@ -76,8 +90,8 @@ class VerificationDraft {
   bool get hasProfilePhoto => profilePhotoPath?.isNotEmpty ?? false;
   
   bool get hasIdentityComplete {
-    return (aadhaarNumber?.length == 12) &&
-        (panNumber?.isNotEmpty ?? false) &&
+    return Validators.isValidAadhaar(aadhaarNumber ?? '') &&
+        Validators.isValidPan(panNumber ?? '') &&
         (aadhaarFrontPath?.isNotEmpty ?? false) &&
         (aadhaarBackPath?.isNotEmpty ?? false) &&
         (panDocumentPath?.isNotEmpty ?? false);
@@ -100,18 +114,18 @@ class VerificationDraft {
 
   VerificationDraft mergeMissingFrom(VerificationDraft other) {
     return VerificationDraft(
-      profilePhotoPath: profilePhotoPath ?? other.profilePhotoPath,
-      aadhaarNumber: aadhaarNumber ?? other.aadhaarNumber,
-      aadhaarFrontPath: aadhaarFrontPath ?? other.aadhaarFrontPath,
-      aadhaarBackPath: aadhaarBackPath ?? other.aadhaarBackPath,
-      panNumber: panNumber ?? other.panNumber,
-      panDocumentPath: panDocumentPath ?? other.panDocumentPath,
+      profilePhotoPath: _coalesceDraftText(profilePhotoPath, other.profilePhotoPath),
+      aadhaarNumber: _coalesceDraftText(aadhaarNumber, other.aadhaarNumber),
+      aadhaarFrontPath: _coalesceDraftText(aadhaarFrontPath, other.aadhaarFrontPath),
+      aadhaarBackPath: _coalesceDraftText(aadhaarBackPath, other.aadhaarBackPath),
+      panNumber: _coalesceDraftText(panNumber, other.panNumber),
+      panDocumentPath: _coalesceDraftText(panDocumentPath, other.panDocumentPath),
       truck: truck ?? other.truck,
-      companyName: companyName ?? other.companyName,
-      businessLicenseNumber: businessLicenseNumber ?? other.businessLicenseNumber,
-      businessLicensePath: businessLicensePath ?? other.businessLicensePath,
-      gstNumber: gstNumber ?? other.gstNumber,
-      gstCertificatePath: gstCertificatePath ?? other.gstCertificatePath,
+      companyName: _coalesceDraftText(companyName, other.companyName),
+      businessLicenseNumber: _coalesceDraftText(businessLicenseNumber, other.businessLicenseNumber),
+      businessLicensePath: _coalesceDraftText(businessLicensePath, other.businessLicensePath),
+      gstNumber: _coalesceDraftText(gstNumber, other.gstNumber),
+      gstCertificatePath: _coalesceDraftText(gstCertificatePath, other.gstCertificatePath),
       location: location ?? other.location,
     );
   }
@@ -275,6 +289,7 @@ class WizardLocation {
   final double latitude;
   final double longitude;
   final String source;
+  final bool locked;
 
   const WizardLocation({
     required this.city,
@@ -282,6 +297,7 @@ class WizardLocation {
     required this.latitude,
     required this.longitude,
     required this.source,
+    this.locked = false,
   });
 
   Map<String, dynamic> toJson() {
@@ -291,6 +307,7 @@ class WizardLocation {
       'latitude': latitude,
       'longitude': longitude,
       'source': source,
+      'locked': locked,
     };
   }
 
@@ -301,6 +318,7 @@ class WizardLocation {
       latitude: (json['latitude'] as num?)?.toDouble() ?? 0,
       longitude: (json['longitude'] as num?)?.toDouble() ?? 0,
       source: json['source']?.toString() ?? 'manual',
+      locked: json['locked'] == true,
     );
   }
 }

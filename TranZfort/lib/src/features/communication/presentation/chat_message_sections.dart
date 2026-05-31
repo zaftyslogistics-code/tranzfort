@@ -93,7 +93,7 @@ class _ChatMessagesBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
-    if (!hasResolvedInitialLoad || isLoading) {
+    if ((!hasResolvedInitialLoad || isLoading) && renderedMessages.isEmpty) {
       return const Padding(
         padding: EdgeInsets.all(AppSpacing.lg),
         child: LoadingShimmer(height: 72, itemCount: 5),
@@ -161,6 +161,7 @@ class _ChatMessagesBody extends StatelessWidget {
     return ListView.builder(
       controller: scrollController,
       padding: const EdgeInsets.fromLTRB(_kChatEdgePadding, 0, _kChatEdgePadding, _kChatListBottomPadding),
+      cacheExtent: 720,
       itemCount: renderedMessages.length + (hasMoreOlderMessages || isLoadingOlder ? 1 : 0),
       itemBuilder: (context, index) {
         if (hasMoreOlderMessages || isLoadingOlder) {
@@ -207,43 +208,46 @@ class _ChatMessagesBody extends StatelessWidget {
             ? (rendered.isLastInGroup ? _kChatSenderGap : _kChatGroupGap)
             : 0.0;
 
-        return Column(
-          children: [
-            if (rendered.showDateDivider && rendered.dateLabel != null) ...[
-              Padding(
-                padding: const EdgeInsets.only(top: AppSpacing.md, bottom: AppSpacing.md),
-                child: _ChatLaneScope(
-                  child: Center(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceTint,
-                        borderRadius: BorderRadius.circular(AppRadius.chip),
-                      ),
-                      child: Text(
-                        rendered.dateLabel!,
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+        return KeyedSubtree(
+          key: ValueKey<String>(rendered.message.id),
+          child: Column(
+            children: [
+              if (rendered.showDateDivider && rendered.dateLabel != null) ...[
+                Padding(
+                  padding: const EdgeInsets.only(top: AppSpacing.md, bottom: AppSpacing.md),
+                  child: _ChatLaneScope(
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.xs),
+                        decoration: BoxDecoration(
+                          color: AppColors.surfaceTint,
+                          borderRadius: BorderRadius.circular(AppRadius.chip),
+                        ),
+                        child: Text(
+                          rendered.dateLabel!,
+                          style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textMuted),
+                        ),
                       ),
                     ),
                   ),
                 ),
+              ],
+              _ChatMessageBubble(
+                message: rendered.message,
+                isSending: rendered.isSending,
+                showTimestamp: rendered.showTimestamp,
+                isFirstInGroup: rendered.isFirstInGroup,
+                isLastInGroup: rendered.isLastInGroup,
+                loadId: loadId,
+                onLongPressText: rendered.message.type == ChatMessageType.text &&
+                        (rendered.message.textBody ?? '').trim().isNotEmpty &&
+                        onLongPressText != null
+                    ? () => onLongPressText!(rendered.message.textBody!.trim())
+                    : null,
               ),
+              if (bottomGap > 0) SizedBox(height: bottomGap),
             ],
-            _ChatMessageBubble(
-              message: rendered.message,
-              isSending: rendered.isSending,
-              showTimestamp: rendered.showTimestamp,
-              isFirstInGroup: rendered.isFirstInGroup,
-              isLastInGroup: rendered.isLastInGroup,
-              loadId: loadId,
-              onLongPressText: rendered.message.type == ChatMessageType.text &&
-                      (rendered.message.textBody ?? '').trim().isNotEmpty &&
-                      onLongPressText != null
-                  ? () => onLongPressText!(rendered.message.textBody!.trim())
-                  : null,
-            ),
-            if (bottomGap > 0) SizedBox(height: bottomGap),
-          ],
+          ),
         );
       },
     );
@@ -431,9 +435,19 @@ class _RenderedChatMessage {
 class _PendingChatMessage {
   final String tempId;
   final ChatMessage message;
+  final String? confirmedMessageId;
 
   const _PendingChatMessage({
     required this.tempId,
     required this.message,
+    this.confirmedMessageId,
   });
+
+  _PendingChatMessage copyWithConfirmedId(String confirmedMessageId) {
+    return _PendingChatMessage(
+      tempId: tempId,
+      message: message,
+      confirmedMessageId: confirmedMessageId,
+    );
+  }
 }

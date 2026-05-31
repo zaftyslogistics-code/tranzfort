@@ -10,21 +10,101 @@ import '../../../../l10n/tts_localizations.dart';
 import '../../../../shared/widgets/form_inputs.dart';
 import '../../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../data/verification_repository.dart';
+import '../../providers/verification_wizard_draft.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/document_upload_box.dart';
 import '../components/step_container.dart';
 import '../components/verification_wizard_upload_feedback.dart';
 import '../components/wizard_progress_bar.dart';
 
-class StepIdentityDocuments extends ConsumerWidget {
+class StepIdentityDocuments extends ConsumerStatefulWidget {
   const StepIdentityDocuments({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<StepIdentityDocuments> createState() => _StepIdentityDocumentsState();
+}
+
+class _StepIdentityDocumentsState extends ConsumerState<StepIdentityDocuments> {
+  late final TextEditingController _aadhaarController;
+  late final TextEditingController _panController;
+  String? _syncedAadhaarDraft;
+  String? _syncedPanDraft;
+
+  @override
+  void initState() {
+    super.initState();
+    _aadhaarController = TextEditingController();
+    _panController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _aadhaarController.dispose();
+    _panController.dispose();
+    super.dispose();
+  }
+
+  void _syncControllerFromDraft({
+    required TextEditingController textController,
+    required String? previousDraftValue,
+    required String? nextDraftValue,
+    required String Function(String? value) format,
+    required String Function(String value) normalize,
+  }) {
+    if (identical(previousDraftValue, nextDraftValue) ||
+        normalize(previousDraftValue ?? '') == normalize(nextDraftValue ?? '')) {
+      return;
+    }
+
+    final nextNormalized = normalize(nextDraftValue ?? '');
+    if (normalize(textController.text) == nextNormalized) {
+      return;
+    }
+
+    final previousNormalized = normalize(previousDraftValue ?? '');
+    if (normalize(textController.text) == previousNormalized ||
+        textController.text.isEmpty) {
+      _setControllerText(textController, format(nextDraftValue));
+    }
+  }
+
+  void _setControllerText(TextEditingController controller, String value) {
+    if (controller.text == value) {
+      return;
+    }
+    controller.value = controller.value.copyWith(
+      text: value,
+      selection: TextSelection.collapsed(offset: value.length),
+    );
+  }
+
+  void _syncControllersWithDraft(VerificationDraft draft) {
+    _syncControllerFromDraft(
+      textController: _aadhaarController,
+      previousDraftValue: _syncedAadhaarDraft,
+      nextDraftValue: draft.aadhaarNumber,
+      format: (value) => _formatAadhaar(value) ?? '',
+      normalize: (value) => value.replaceAll(' ', ''),
+    );
+    _syncedAadhaarDraft = draft.aadhaarNumber;
+
+    _syncControllerFromDraft(
+      textController: _panController,
+      previousDraftValue: _syncedPanDraft,
+      nextDraftValue: draft.panNumber,
+      format: (value) => value ?? '',
+      normalize: (value) => value.toUpperCase(),
+    );
+    _syncedPanDraft = draft.panNumber;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final ttsL10n = TtsLocalizations.of(context);
     final state = ref.watch(verificationWizardProvider);
     final controller = ref.read(verificationWizardProvider.notifier);
+    _syncControllersWithDraft(state.draft);
 
     final List<String> stepLabels = [
       l10n.verificationWizardStepPhoto,
@@ -47,19 +127,18 @@ class StepIdentityDocuments extends ConsumerWidget {
               stepLabels: stepLabels,
             ),
             const SizedBox(height: AppSpacing.xl),
-            
-            // Aadhaar Number
+
             AppTextField(
+              controller: _aadhaarController,
               label: l10n.commonAadhaarNumberLabel,
               hintText: '1234 5678 9012',
               keyboardType: TextInputType.number,
-              initialValue: _formatAadhaar(state.draft.aadhaarNumber) ?? '',
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 LengthLimitingTextInputFormatter(12),
                 _AadhaarFormatter(),
               ],
-              onChanged: (v) => controller.updateAadhaarNumber(v.replaceAll(' ', '')),
+              onChanged: (value) => controller.updateAadhaarNumber(value.replaceAll(' ', '')),
               errorText: state.fieldErrors['aadhaarNumber'],
               suffixIcon: TtsCardSpeakerButton(
                 message: ttsL10n.ttsFieldAadhaarInputDescription,
@@ -67,8 +146,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            
-            // Aadhaar Front
+
             DocumentUploadBox(
               label: l10n.verificationDocTypeAadhaarFront,
               documentPath: state.draft.aadhaarFrontPath,
@@ -85,8 +163,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               onClear: () => controller.clearIdentityDoc(VerificationDocumentType.aadhaarFront),
             ),
             const SizedBox(height: AppSpacing.lg),
-            
-            // Aadhaar Back
+
             DocumentUploadBox(
               label: l10n.verificationDocTypeAadhaarBack,
               documentPath: state.draft.aadhaarBackPath,
@@ -103,15 +180,15 @@ class StepIdentityDocuments extends ConsumerWidget {
               onClear: () => controller.clearIdentityDoc(VerificationDocumentType.aadhaarBack),
             ),
             const SizedBox(height: AppSpacing.xl),
-            
-            // PAN Number
+
             AppTextField(
+              controller: _panController,
               label: l10n.commonPanNumberLabel,
               hintText: 'ABCDE1234F',
-              initialValue: state.draft.panNumber ?? '',
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),
                 FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9]')),
+                UpperCaseTextFormatter(),
               ],
               onChanged: controller.updatePanNumber,
               errorText: state.fieldErrors['panNumber'],
@@ -121,8 +198,7 @@ class StepIdentityDocuments extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: AppSpacing.lg),
-            
-            // PAN Document
+
             DocumentUploadBox(
               label: l10n.verificationWizardPanDocumentLabel,
               documentPath: state.draft.panDocumentPath,
@@ -161,7 +237,7 @@ class StepIdentityDocuments extends ConsumerWidget {
             ],
             VerificationWizardUploadErrorBanner(error: state.error),
             const SizedBox(height: AppSpacing.xl),
-            
+
             StepActions(
               onBack: controller.previousStep,
               onContinue: state.canProceed ? controller.nextStep : null,
@@ -249,12 +325,12 @@ class _AadhaarFormatter extends TextInputFormatter {
   ) {
     final text = newValue.text.replaceAll(' ', '');
     final buffer = StringBuffer();
-    
+
     for (var i = 0; i < text.length; i++) {
       if (i > 0 && i % 4 == 0) buffer.write(' ');
       buffer.write(text[i]);
     }
-    
+
     return TextEditingValue(
       text: buffer.toString(),
       selection: TextSelection.collapsed(offset: buffer.length),

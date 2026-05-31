@@ -38,7 +38,7 @@ extension VerificationWizardSubmit on VerificationWizardController {
         state.copyWith(
           draft: persistedDraft == null
               ? detailDraft
-              : detailDraft.mergeMissingFrom(state.draft),
+              : persistedDraft.mergeMissingFrom(detailDraft),
           isLoading: false,
           isResubmission: isRejected,
           verificationStatus: detail.verificationStatus.toLowerCase(),

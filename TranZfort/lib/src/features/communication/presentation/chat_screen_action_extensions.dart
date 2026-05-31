@@ -34,17 +34,22 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
           conversationId: widget.conversationId,
           text: text,
         );
-    _removePendingMessage(pendingMessage.tempId);
     if (!mounted) {
       return;
     }
     if (result.isFailure) {
+      _removePendingMessage(pendingMessage.tempId);
       AppSnackbar.show(
         context: this.context,
         message: _chatTextSendFailureMessage(),
         variant: AppSnackbarVariant.error,
       );
       return;
+    }
+
+    final sentMessageId = result.valueOrNull;
+    if (sentMessageId != null) {
+      _confirmPendingMessage(pendingMessage.tempId, sentMessageId, messagesState: ref.read(conversationMessagesProvider(widget.conversationId)).messages);
     }
     final authState = ref.read(currentAuthStateProvider);
     final inboxState = ref.read(inboxProvider);
@@ -64,7 +69,6 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
         messageCount: messageCount,
       );
     }
-    _scrollToBottom(force: true);
   }
 
   Future<void> _toggleVoiceRecording(BuildContext context) async {
@@ -207,13 +211,19 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
 
   List<_RenderedChatMessage> _buildRenderedMessages(List<ChatMessage> persistedMessages) {
     final state = this as _ChatScreenState;
+    final persistedIds = persistedMessages.map((message) => message.id).toSet();
     final rendered = persistedMessages
         .map((message) => _RenderedChatMessage(message: message, isSending: false))
         .toList(growable: true)
       ..addAll(
-        state.pendingMessages.map(
-          (pending) => _RenderedChatMessage(message: pending.message, isSending: true),
-        ),
+        state.pendingMessages
+            .where((pending) => !_pendingMessageResolved(pending, persistedMessages, persistedIds))
+            .map(
+              (pending) => _RenderedChatMessage(
+                message: pending.message,
+                isSending: pending.confirmedMessageId == null,
+              ),
+            ),
       )
       ..sort((a, b) => a.message.createdAt.compareTo(b.message.createdAt));
 
@@ -288,6 +298,91 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
     }
     state.setState(() {
       state.pendingMessages.removeWhere((pending) => pending.tempId == tempId);
+    });
+  }
+
+  void _confirmPendingMessage(
+    String tempId,
+    String confirmedMessageId, {
+    required List<ChatMessage> messagesState,
+  }) {
+    final state = this as _ChatScreenState;
+    if (!mounted) {
+      return;
+    }
+
+    if (messagesState.any((message) => message.id == confirmedMessageId)) {
+      _removePendingMessage(tempId);
+      return;
+    }
+
+    state.setState(() {
+      final index = state.pendingMessages.indexWhere((pending) => pending.tempId == tempId);
+      if (index == -1) {
+        return;
+      }
+      state.pendingMessages[index] = state.pendingMessages[index].copyWithConfirmedId(confirmedMessageId);
+    });
+  }
+
+  void _schedulePendingMessagePrune(List<ChatMessage> persistedMessages) {
+    final state = this as _ChatScreenState;
+    if (state.pendingMessages.isEmpty) {
+      return;
+    }
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      _pruneResolvedPendingMessages(persistedMessages);
+    });
+  }
+
+  void _pruneResolvedPendingMessages(List<ChatMessage> persistedMessages) {
+    final state = this as _ChatScreenState;
+    if (state.pendingMessages.isEmpty) {
+      return;
+    }
+
+    final persistedIds = persistedMessages.map((message) => message.id).toSet();
+    final resolvedTempIds = state.pendingMessages
+        .where((pending) => _pendingMessageResolved(pending, persistedMessages, persistedIds))
+        .map((pending) => pending.tempId)
+        .toList(growable: false);
+
+    if (resolvedTempIds.isEmpty) {
+      return;
+    }
+
+    state.setState(() {
+      state.pendingMessages.removeWhere((pending) => resolvedTempIds.contains(pending.tempId));
+    });
+  }
+
+  bool _pendingMessageResolved(
+    _PendingChatMessage pending,
+    List<ChatMessage> persistedMessages,
+    Set<String> persistedIds,
+  ) {
+    final confirmedId = pending.confirmedMessageId;
+    if (confirmedId != null && persistedIds.contains(confirmedId)) {
+      return true;
+    }
+
+    final pendingText = (pending.message.textBody ?? '').trim();
+    if (pendingText.isEmpty) {
+      return false;
+    }
+
+    return persistedMessages.any((message) {
+      if (!message.isFromCurrentUser) {
+        return false;
+      }
+      if ((message.textBody ?? '').trim() != pendingText) {
+        return false;
+      }
+      return message.createdAt.difference(pending.message.createdAt).inSeconds.abs() <= 120;
     });
   }
 
@@ -420,11 +515,11 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
     return l10n.chatBookingActionFailureMessage;
   }
 
-  void _scrollToBottom({bool force = false}) {
+  void _scrollToBottom({bool force = false, bool jump = false}) {
     final state = this as _ChatScreenState;
 
-    void performScroll() {
-      if (!state.scrollController.hasClients) {
+    void performScroll({bool allowRetry = true}) {
+      if (!state.mounted || !state.scrollController.hasClients) {
         return;
       }
 
@@ -434,22 +529,31 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
       const threshold = 160.0;
 
       if (!force && distance > threshold) {
-        setState(() {
-          state.updateShowNewMessagePill(true);
-          state.updateShowScrollToBottomFab(false);
-        });
+        if (!state.showNewMessagePill && !state.showScrollToBottomFab) {
+          state.setState(() {
+            state.updateShowNewMessagePill(true);
+            state.updateShowScrollToBottomFab(false);
+          });
+        }
         state.newMessagePillTimer?.cancel();
         return;
       }
 
-      state.scrollController.animateTo(
-        maxScroll,
-        duration: const Duration(milliseconds: 220),
-        curve: Curves.easeOut,
-      );
+      if (jump || distance <= 1) {
+        state.scrollController.jumpTo(maxScroll);
+        if (allowRetry && jump && maxScroll <= 0) {
+          WidgetsBinding.instance.addPostFrameCallback((_) => performScroll(allowRetry: false));
+        }
+      } else {
+        state.scrollController.animateTo(
+          maxScroll,
+          duration: const Duration(milliseconds: 220),
+          curve: Curves.easeOut,
+        );
+      }
 
       if (state.showNewMessagePill || state.showScrollToBottomFab) {
-        setState(() {
+        state.setState(() {
           state.updateShowNewMessagePill(false);
           state.updateShowScrollToBottomFab(false);
         });
@@ -457,9 +561,6 @@ mixin _ChatScreenStateActions on ConsumerState<ChatScreen> {
       }
     }
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      performScroll();
-      WidgetsBinding.instance.addPostFrameCallback((_) => performScroll());
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => performScroll());
   }
 }

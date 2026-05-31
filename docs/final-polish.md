@@ -1,8 +1,8 @@
 # Final polish — trucker marketplace & release tail
 
 **Created:** 2026-05-30  
-**Updated:** 2026-05-30 (FP-13 dashboard route-search hero; FP-10 pull-to-refresh; FP-11 notification badge; FP-12 dark ink heroes; FP-9 truck wizard TTS)  
-**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat QA pending); **FP-6 kept**; **FP-7 code complete** (device QA pending); **FP-8 code complete**; **FP-9 code complete** (device Hindi TTS QA pending); **FP-10 + FP-11 + FP-12 + FP-13 code complete** (device QA pending); **FP-4 deferred** (body/tyre filter bar on dashboard — superseded for route by FP-13); **Voice (Speaker) system deferred**  
+**Updated:** 2026-05-30 (FP-14 operating location / verification; FP-13 dashboard route-search hero; FP-10 pull-to-refresh; FP-11 notification badge; FP-12 dark ink heroes; FP-9 truck wizard TTS)  
+**Status:** **FP-0 + FP-1 + FP-2 + FP-3 complete**; **FP-5 in progress** (chat QA pending); **FP-6 kept**; **FP-7 code complete** (device QA pending); **FP-8 code complete**; **FP-9 code complete** (device Hindi TTS QA pending); **FP-10 + FP-11 + FP-12 + FP-13 code complete** (device QA pending); **FP-14 code complete** (device QA + migration apply pending); **FP-4 deferred** (body/tyre filter bar on dashboard — superseded for route by FP-13); **Voice (Speaker) system deferred**  
 **Git branch:** `final-polish` — pushed to `origin`  
 **Source checklist:** [TODO-29-may.md](./TODO-29-may.md)  
 **Related:** [TTS-29-may.md](./TTS-29-may.md) · [DATA-ACCESS-ALIGNMENT.md](./DATA-ACCESS-ALIGNMENT.md) · [TTS-ARB-GUIDE.md](./TTS-ARB-GUIDE.md) · **[hindi-improvement.md](./hindi-improvement.md)** (FP-9 spec)
@@ -422,6 +422,75 @@ Replace the trucker dashboard welcome poster with a **route search home** — sa
 
 **Deferred (separate epic):** Voice (Speaker) system — Stop, Replay, persistent Mute, voice strip in app bar (not FP-13)
 
+### FP-14 — Operating location & verification (**code complete**)
+
+**Problem:** Onboarding collects city/state/GPS into `profiles`, but supplier verification reads only `suppliers.verification_location_*`. New suppliers are asked for location again; GPS “Use current location” in the wizard manual sheet can double-pop the route (app appears to crash). iOS is missing location usage strings.
+
+**Architecture (locked):**
+
+| Layer | Rule |
+|-------|------|
+| **Canonical** | `profiles.city`, `state`, `location_lat`, `location_lng`, `location_source` — captured once at onboarding (both trucker + supplier) |
+| **Supplier mirror** | `suppliers.verification_location_*` — auto-synced from profile for admin review + legacy RPCs |
+| **Trucker verification** | No location step in wizard (unchanged); profile location used by marketplace/public RPCs |
+| **Supplier verification** | Do **not** re-ask when profile already has coordinates; show read-only “set during signup” |
+
+```mermaid
+flowchart LR
+  O[Onboarding GPS / manual] --> P[profiles operating location]
+  P -->|trigger + upsert sync| S[suppliers.verification_location mirror]
+  P --> T[Trucker flows]
+  S --> A[Admin verification metadata]
+  P --> V[Submit validation COALESCE]
+```
+
+**Trucker vs supplier**
+
+| Role | Onboarding location | Verification wizard | Submit RPC location check |
+|------|---------------------|---------------------|---------------------------|
+| Trucker | Saved to `profiles` | No location step (truck details only) | None (truck + identity only) |
+| Supplier | Saved to `profiles` | Business step shows read-only if profile has coords | Effective location = profile OR supplier mirror |
+
+### Task breakdown
+
+| # | Task | Detail | Status |
+|---|------|--------|--------|
+| FP-14.1 | DB helper `sync_profile_operating_location_to_supplier` | Copy profile city/lat/lng → supplier mirror when profile complete | [x] |
+| FP-14.2 | Profile → supplier trigger | `AFTER INSERT OR UPDATE` on `profiles` city/lat/lng for suppliers | [x] |
+| FP-14.3 | Extend `upsert_current_user_profile` | After onboarding save, sync supplier mirror when role = supplier + location present | [x] |
+| FP-14.4 | Backfill migration | Profile → supplier for rows where profile has location and mirror empty | [x] |
+| FP-14.5 | `submit_verification_for_review` | Call sync before validate; COALESCE profile location in supplier check | [x] |
+| FP-14.6 | Extend `get_verification_profile` RPC | Return `city`, `state`, `location_lat`, `location_lng`, `location_source` | [x] |
+| FP-14.7 | App `VerificationDetail` effective location | `hasVerificationLocation` accepts profile OR supplier; effective city/lat getters | [x] |
+| FP-14.8 | Wizard hydration | `VerificationDraft.fromDetail` pre-fills from effective location (`source: onboarding`) | [x] |
+| FP-14.9 | Supplier business step UX | Read-only location when from onboarding; hide capture/manual/clear | [x] |
+| FP-14.10 | Legacy verification screen | Location card satisfied when profile has coords; hide capture actions | [x] |
+| FP-14.11 | GPS double-pop fix | Remove extra `Navigator.pop` in wizard `onUseCurrentLocation` callback | [x] |
+| FP-14.12 | iOS `Info.plist` | Add `NSLocationWhenInUseUsageDescription` (required for Geolocator) | [x] |
+| FP-14.13 | l10n | `verificationLocationSourceOnboarding` — “Set during signup” / HI | [x] |
+| FP-14.14 | Tests | `VerificationDetail` profile-only location; wizard hydration unit test | [x] |
+| FP-14.15 | Device QA | New supplier signup → verification business step shows location, no re-capture; GPS from manual sheet no crash | [ ] |
+
+### Files
+
+| Area | Files |
+|------|--------|
+| DB | `supabase/migrations/20260530140000_operating_location_sync_and_verification.sql` |
+| RPC | `get_verification_profile` in migration + `20260530120000` superseded by replace |
+| Models | `verification_repository_models.dart`, `verification_wizard_draft.dart` |
+| UI | `step_business_details.dart`, `verification_screen.dart`, `verification_screen_sections.dart` |
+| Platform | `ios/Runner/Info.plist` |
+| l10n | `app_en.arb`, `app_hi.arb` |
+
+### Acceptance criteria
+
+- [ ] New supplier: onboarding location → verification wizard business step shows city (read-only), no GPS/manual capture block
+- [ ] Supplier submit succeeds with profile-only location (mirror synced server-side)
+- [ ] Trucker verification wizard unchanged (no location step)
+- [ ] Admin still reads `verification_location_*` on supplier cases (populated from profile)
+- [ ] Wizard manual sheet “Use current location” does not pop verification route
+- [ ] iOS GPS from onboarding does not terminate app
+
 ### Not started (release tail)
 
 - Ship gate, full device QA matrix, Play upload
@@ -445,6 +514,7 @@ Replace the trucker dashboard welcome poster with a **route search home** — sa
 | Notification badge | **FP-11** | Bell count sync with mark-read | **Code complete** |
 | Dark ink heroes | **FP-12** | List screen top widgets match load-detail style | **Code complete** |
 | Dashboard route search | **FP-13** | Dashboard hero = From/To search + prefill Find Loads | **Code complete** |
+| Operating location / verification | **FP-14** | Profile-canonical location; no duplicate supplier capture; GPS/iOS fixes | **Code complete** |
 | Dashboard Find Loads | **FP-4** | Reuse filter bar on dashboard (body/tyres) | **Deferred** — route covered by FP-13 |
 
 ---
@@ -1199,7 +1269,7 @@ Dashboard                          Find Loads tab
 | 2026-05-30 | FP-10: pull-to-refresh on trucker/supplier dashboard, Find Loads, trips, notifications; `ShellScrollView.onRefresh` |
 | 2026-05-30 | FP-11: notification bell count — RPC-based unread stream, merge fix, invalidate on mark read |
 | 2026-05-30 | FP-12: dark ink `HeroActionCard` top headers on trips, notifications, profile, settings, supplier my loads/trips/post load/load detail |
-| 2026-05-30 | FP-13: trucker dashboard route-search hero — Namaste greeting, icon trust row, From/To fields, Search loads CTA, `marketplaceRoutePrefillProvider` |
+| 2026-05-31 | FP-14: profile-canonical operating location; supplier mirror sync migration; wizard read-only onboarding location; GPS double-pop + iOS plist |
 
 ---
 
@@ -1218,6 +1288,7 @@ Dashboard                          Find Loads tab
 - [x] FP-11 — notification bell count sync with mark-read
 - [x] FP-12 — dark ink hero headers on remaining list/detail screen tops
 - [x] FP-13 — dashboard route-search hero (From/To + prefill Find Loads)
+- [x] FP-14 — operating location sync; supplier verification no duplicate capture; GPS/iOS fixes
 - [ ] **Commit + push** full batch
 - [ ] Device QA sign-off (see pick-up table below)
 
@@ -1225,8 +1296,10 @@ Dashboard                          Find Loads tab
 
 | Priority | Task | Notes |
 |----------|------|--------|
-| 1 | **Push** FP-7 through FP-13 batch | After commit on `final-polish` |
-| 2 | **FP-13.1** device QA | Dashboard route search → Find Loads prefill |
+| 1 | **Apply migration** `20260530140000_operating_location_sync_and_verification.sql` | **Done** — repaired `20260520104304` history; fixed trigger loop |
+| 2 | **FP-14.15** device QA | Supplier signup → verification shows onboarding location read-only |
+| 3 | **Push** FP-7 through FP-14 batch | After commit on `final-polish` |
+| 4 | **FP-13.1** device QA | Dashboard route search → Find Loads prefill |
 | 3 | **FP-10.1** device QA | Pull refresh on dashboard + Find Loads |
 | 4 | **FP-11.1** device QA | Notification bell decrements on tap (2 → 1) |
 | 5 | **FP-12.1** device QA | Dark ink heroes on trips, notifications, profile, settings |

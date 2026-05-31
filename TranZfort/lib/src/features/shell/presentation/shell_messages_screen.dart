@@ -74,7 +74,7 @@ class _ShellMessagesScreenState extends ConsumerState<ShellMessagesScreen> {
             ],
           ),
         ),
-        if (!inboxState.hasResolvedInitialLoad || inboxState.isLoading)
+        if ((!inboxState.hasResolvedInitialLoad || inboxState.isLoading) && inboxState.conversations.isEmpty)
           const LoadingShimmer(height: 96, itemCount: 3)
         else if (inboxState.failure != null && inboxState.conversations.isEmpty)
           WarningBlock(

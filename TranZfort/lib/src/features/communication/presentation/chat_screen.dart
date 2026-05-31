@@ -58,7 +58,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
   late final TextEditingController _messageController;
   late final ScrollController _scrollController;
   late final VoiceMessageService _voiceMessageService;
-  int _lastRenderedMessageCount = 0;
+  String? _lastTailMessageId;
+  bool _didInitialScroll = false;
   bool _didMarkRead = false;
   bool _isBannerExpanded = true;
   bool _isRecordingVoice = false;
@@ -149,7 +150,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
       final nextId = next.lastSentMessageId;
       if (nextId != null && nextId != previousId) {
         _messageController.clear();
-        _scrollToBottom(force: true);
       }
       if (previous?.failure != next.failure && next.failure != null && mounted) {
         AppSnackbar.show(
@@ -175,10 +175,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
     final loadDetailState = conversation != null && isSupplier ? ref.watch(loadDetailProvider(conversation.loadId)) : null;
 
     final renderedMessages = _buildRenderedMessages(messagesState.messages);
-    if (_lastRenderedMessageCount != renderedMessages.length) {
-      _lastRenderedMessageCount = renderedMessages.length;
-      final fromSelf = renderedMessages.lastOrNull?.message.isFromCurrentUser ?? false;
-      WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom(force: fromSelf));
+    _schedulePendingMessagePrune(messagesState.messages);
+
+    final tailMessage = renderedMessages.lastOrNull?.message;
+    final tailId = tailMessage?.id;
+    if (tailId != null && tailId != _lastTailMessageId) {
+      _lastTailMessageId = tailId;
+      final fromSelf = tailMessage?.isFromCurrentUser ?? false;
+      final isInitialOpen = !_didInitialScroll;
+      _didInitialScroll = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _scrollToBottom(force: fromSelf || isInitialOpen, jump: isInitialOpen);
+      });
     }
     if (!_didMarkRead &&
         messagesState.hasResolvedInitialLoad &&
@@ -296,7 +304,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> with _ChatScreenStateAc
                   child: Builder(
                     builder: (context) {
                       if ((!inboxState.hasResolvedInitialLoad || inboxState.isLoading) &&
-                          conversation == null) {
+                          conversation == null &&
+                          inboxState.conversations.isEmpty) {
                         return const Padding(
                           padding: EdgeInsets.all(AppSpacing.lg),
                           child: LoadingShimmer(height: 88, itemCount: 4),

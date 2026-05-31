@@ -358,6 +358,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verificationLocationSourceOfflineNearestCity => 'Offline location';
 
   @override
+  String get verificationLocationSourceOnboarding => 'Set during signup';
+
+  @override
   String get supportCategoryGeneral => 'General';
 
   @override
@@ -2152,11 +2155,14 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get truckerDashboardSearchLoadsAction => 'Search loads';
+  String get truckerDashboardWelcomeLabel => 'Welcome';
+
+  @override
+  String get truckerDashboardSearchLoadsAction => 'Find loads';
 
   @override
   String get truckerDashboardFiltersOnFindLoadsHint =>
-      'Truck type and filters on Find Loads tab';
+      'Truck type and filters on the Find Loads tab';
 
   @override
   String get truckerDashboardTitle => 'Trucker Dashboard';

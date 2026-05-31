@@ -24,6 +24,11 @@ class VerificationDetail {
   final String? verificationLocationState;
   final double? verificationLatitude;
   final double? verificationLongitude;
+  final String? profileLocationCity;
+  final String? profileLocationState;
+  final double? profileLocationLatitude;
+  final double? profileLocationLongitude;
+  final String? profileLocationSource;
   final VerificationReviewFeedback reviewFeedback;
 
   const VerificationDetail({
@@ -50,6 +55,11 @@ class VerificationDetail {
     required this.verificationLocationState,
     required this.verificationLatitude,
     required this.verificationLongitude,
+    required this.profileLocationCity,
+    required this.profileLocationState,
+    required this.profileLocationLatitude,
+    required this.profileLocationLongitude,
+    required this.profileLocationSource,
     required this.reviewFeedback,
   });
 
@@ -69,8 +79,44 @@ class VerificationDetail {
     return aadhaarOk && panOk;
   }
   bool get hasSupplierBusinessNumbers => !isSupplier || (businessLicenceNumber ?? '').trim().isNotEmpty;
-  bool get hasVerificationLocation =>
-      (verificationLocationCity ?? '').trim().isNotEmpty && verificationLatitude != null && verificationLongitude != null;
+  bool get hasSupplierVerificationLocation =>
+      (verificationLocationCity ?? '').trim().isNotEmpty &&
+      verificationLatitude != null &&
+      verificationLongitude != null;
+
+  bool get hasProfileOperatingLocation =>
+      (profileLocationCity ?? '').trim().isNotEmpty &&
+      profileLocationLatitude != null &&
+      profileLocationLongitude != null;
+
+  /// Effective operating location for supplier verification (supplier mirror OR profile from onboarding).
+  bool get hasVerificationLocation => hasSupplierVerificationLocation || hasProfileOperatingLocation;
+
+  String? get effectiveLocationCity =>
+      hasSupplierVerificationLocation ? verificationLocationCity : profileLocationCity;
+
+  String? get effectiveLocationState =>
+      hasSupplierVerificationLocation ? verificationLocationState : profileLocationState;
+
+  double? get effectiveLocationLatitude =>
+      hasSupplierVerificationLocation ? verificationLatitude : profileLocationLatitude;
+
+  double? get effectiveLocationLongitude =>
+      hasSupplierVerificationLocation ? verificationLongitude : profileLocationLongitude;
+
+  String get effectiveLocationSource {
+    if (hasSupplierVerificationLocation) {
+      return 'existing';
+    }
+    final source = (profileLocationSource ?? '').trim().toLowerCase();
+    if (source == 'gps' || source == 'manual') {
+      return 'onboarding';
+    }
+    return 'onboarding';
+  }
+
+  bool get isOperatingLocationFromOnboarding =>
+      !hasSupplierVerificationLocation && hasProfileOperatingLocation;
 
   List<VerificationDocumentType> get visibleDocuments {
     if (isSupplier) {
@@ -192,12 +238,12 @@ class VerificationDetail {
       role: role,
       verificationStatus: (profileMap['verification_status'] ?? 'unverified').toString(),
       rejectionReason: nullableString(profileMap['verification_rejection_reason']),
-      // P0.7 Simplified: Full numbers no longer stored in profiles, set to empty
-      aadhaarNumber: '', // Full number not stored anymore
+      // P0.7: full identity numbers are not stored server-side; wizard collects them locally.
+      aadhaarNumber: null,
       aadhaarLast4: nullableString(profileMap['aadhaar_last4']),
       aadhaarFrontDocumentPath: nullableString(profileMap['aadhaar_front_document_path']),
       aadhaarBackDocumentPath: nullableString(profileMap['aadhaar_back_document_path']),
-      panNumber: '', // Full number not stored anymore
+      panNumber: null,
       panLast4: nullableString(profileMap['pan_last4']) ?? _last4FromPan(profileMap['pan_number']),
       panDocumentPath: nullableString(profileMap['pan_document_path']),
       profilePhotoDocumentPath: nullableString(profileMap['profile_photo_document_path']),
@@ -212,6 +258,11 @@ class VerificationDetail {
       verificationLocationState: nullableString(supplierMap?['verification_location_state']),
       verificationLatitude: readDoubleNullable(supplierMap?['verification_location_lat']),
       verificationLongitude: readDoubleNullable(supplierMap?['verification_location_lng']),
+      profileLocationCity: nullableString(profileMap['city']),
+      profileLocationState: nullableString(profileMap['state']),
+      profileLocationLatitude: readDoubleNullable(profileMap['location_lat']),
+      profileLocationLongitude: readDoubleNullable(profileMap['location_lng']),
+      profileLocationSource: nullableString(profileMap['location_source']),
       reviewFeedback: VerificationReviewFeedback.fromJson(profileMap['verification_feedback_json']),
     );
   }

@@ -57,6 +57,15 @@ class _FakeChatRepository extends ChatRepository {
   Future<Result<List<ChatMessage>>> getMessages(String conversationId) async => initialMessages;
 
   @override
+  Future<Result<List<ChatMessage>>> getMessagesPaginated(
+    String conversationId, {
+    int limit = 50,
+    DateTime? beforeCreatedAt,
+    String? beforeMessageId,
+  }) async =>
+      initialMessages;
+
+  @override
   Stream<Result<List<ChatMessage>>> watchMessages(String conversationId) => messageStreamController.stream;
 
   @override

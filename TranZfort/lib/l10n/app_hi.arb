@@ -120,6 +120,7 @@
   "verificationLocationSourceManualCityEntry": "मैन्युअल रूप से जोड़ा गया",
   "verificationLocationSourceGoogleGeocode": "GPS के माध्यम से कैप्चर किया गया",
   "verificationLocationSourceOfflineNearestCity": "ऑफ़लाइन स्थान",
+  "verificationLocationSourceOnboarding": "साइनअप के दौरान सेट किया गया",
   "supportCategoryGeneral": "सामान्य",
   "supportCategoryAccount": "खाता",
   "supportCategoryLoad": "लोड",
@@ -800,8 +801,9 @@
       "fullName": {}
     }
   },
-  "truckerDashboardSearchLoadsAction": "Load khojein",
-  "truckerDashboardFiltersOnFindLoadsHint": "Truck type aur filters Find Loads tab par milenge",
+  "truckerDashboardWelcomeLabel": "स्वागत है",
+  "truckerDashboardSearchLoadsAction": "लोड खोजें",
+  "truckerDashboardFiltersOnFindLoadsHint": "ट्रक प्रकार और फ़िल्टर 'लोड खोजें' टैब पर मिलेंगे",
   "truckerDashboardTitle": "ट्रकर डैशबोर्ड",
   "truckerDashboardQuickActionTripsLabel": "मेरी ट्रिप्स",
   "truckerDashboardRecentActivityTitle": "हाल की गतिविधि",

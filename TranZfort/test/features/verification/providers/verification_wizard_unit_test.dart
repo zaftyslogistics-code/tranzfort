@@ -5,6 +5,7 @@ import 'package:tranzfort/src/features/trucker/data/trucker_fleet_repository.dar
 import 'package:tranzfort/src/features/verification/data/verification_repository.dart';
 import 'package:tranzfort/src/features/verification/providers/verification_fleet_ready_match.dart';
 import 'package:tranzfort/src/features/verification/providers/verification_resubmission.dart';
+import 'package:tranzfort/src/core/utils/validators.dart';
 import 'package:tranzfort/src/features/verification/providers/verification_wizard_draft.dart';
 import 'package:tranzfort/src/features/verification/providers/verification_wizard_provider.dart';
 import 'package:tranzfort/src/features/verification/providers/verification_wizard_validation_helper.dart';
@@ -15,6 +16,48 @@ void main() {
       const draft = VerificationDraft(profilePhotoPath: 'user/photo.jpg');
       final cleared = draft.copyWith(clearProfilePhoto: true);
       expect(cleared.profilePhotoPath, isNull);
+    });
+
+    test('mergeMissingFrom keeps persisted identity over empty detail placeholders', () {
+      const persisted = VerificationDraft(
+        aadhaarNumber: '123456789012',
+        panNumber: 'ABCDE1234F',
+        aadhaarFrontPath: 'front.jpg',
+        aadhaarBackPath: 'back.jpg',
+        panDocumentPath: 'pan.jpg',
+      );
+      const detail = VerificationDraft(
+        aadhaarNumber: '',
+        panNumber: '',
+      );
+
+      final merged = persisted.mergeMissingFrom(detail);
+
+      expect(merged.aadhaarNumber, '123456789012');
+      expect(merged.panNumber, 'ABCDE1234F');
+      expect(merged.aadhaarFrontPath, 'front.jpg');
+      expect(merged.hasIdentityComplete, isTrue);
+    });
+
+    test('hasIdentityComplete requires valid Aadhaar, PAN, and all identity docs', () {
+      const complete = VerificationDraft(
+        aadhaarNumber: '123456789012',
+        panNumber: 'ABCDE1234F',
+        aadhaarFrontPath: 'front.jpg',
+        aadhaarBackPath: 'back.jpg',
+        panDocumentPath: 'pan.jpg',
+      );
+      expect(complete.hasIdentityComplete, isTrue);
+
+      const invalidPan = VerificationDraft(
+        aadhaarNumber: '123456789012',
+        panNumber: 'ABC',
+        aadhaarFrontPath: 'front.jpg',
+        aadhaarBackPath: 'back.jpg',
+        panDocumentPath: 'pan.jpg',
+      );
+      expect(invalidPan.hasIdentityComplete, isFalse);
+      expect(Validators.isValidPan('ABC'), isFalse);
     });
 
     test('TruckDraft copyWith(clearRcDocument: true) clears RC path', () {
@@ -136,6 +179,58 @@ void main() {
       expect(isVerificationResubmission(detail.verificationStatus), isTrue);
     });
   });
+
+  group('VerificationDetail operating location', () {
+    test('profile-only location satisfies hasVerificationLocation for supplier', () {
+      final detail = VerificationDetail.fromMaps(
+        {
+          'id': 'supplier-1',
+          'user_role_type': 'supplier',
+          'verification_status': 'unverified',
+          'city': 'Mumbai',
+          'state': 'Maharashtra',
+          'location_lat': 19.076,
+          'location_lng': 72.8777,
+          'location_source': 'gps',
+        },
+        {
+          'company_name': 'Acme',
+          'verification_location_city': null,
+          'verification_location_lat': null,
+          'verification_location_lng': null,
+        },
+        approvedTruckCount: 0,
+        verificationReadyTruckCount: 0,
+      );
+
+      expect(detail.hasVerificationLocation, isTrue);
+      expect(detail.isOperatingLocationFromOnboarding, isTrue);
+      expect(detail.effectiveLocationCity, 'Mumbai');
+    });
+
+    test('VerificationDraft hydrates locked onboarding location', () {
+      final detail = VerificationDetail.fromMaps(
+        {
+          'id': 'supplier-1',
+          'user_role_type': 'supplier',
+          'verification_status': 'unverified',
+          'city': 'Delhi',
+          'state': 'Delhi',
+          'location_lat': 28.6139,
+          'location_lng': 77.209,
+          'location_source': 'manual',
+        },
+        const {},
+        approvedTruckCount: 0,
+        verificationReadyTruckCount: 0,
+      );
+
+      final draft = VerificationDraft.fromDetail(detail);
+      expect(draft.location?.city, 'Delhi');
+      expect(draft.location?.locked, isTrue);
+      expect(draft.hasBusinessComplete, isFalse);
+    });
+  });
 }
 
 VerificationDetail _rejectedTruckerDetail() {
@@ -163,6 +258,11 @@ VerificationDetail _rejectedTruckerDetail() {
     verificationLocationState: null,
     verificationLatitude: null,
     verificationLongitude: null,
+    profileLocationCity: null,
+    profileLocationState: null,
+    profileLocationLatitude: null,
+    profileLocationLongitude: null,
+    profileLocationSource: null,
     reviewFeedback: VerificationReviewFeedback(
       summary: null,
       nextStep: null,

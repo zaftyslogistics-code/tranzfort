@@ -344,8 +344,8 @@ class VerificationScreen extends ConsumerWidget {
   }
 
   static String _formatVerificationLocation(VerificationDetail detail) {
-    final state = (detail.verificationLocationState ?? '').trim();
-    final city = (detail.verificationLocationCity ?? '').trim();
+    final state = (detail.effectiveLocationState ?? '').trim();
+    final city = (detail.effectiveLocationCity ?? '').trim();
     if (state.isNotEmpty) {
       return '$city, $state';
     }

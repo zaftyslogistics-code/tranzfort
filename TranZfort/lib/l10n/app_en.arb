@@ -120,6 +120,7 @@
   "verificationLocationSourceManualCityEntry": "Added manually",
   "verificationLocationSourceGoogleGeocode": "Captured via GPS",
   "verificationLocationSourceOfflineNearestCity": "Offline location",
+  "verificationLocationSourceOnboarding": "Set during signup",
   "supportCategoryGeneral": "General",
   "supportCategoryAccount": "Account",
   "supportCategoryLoad": "Load",
@@ -884,8 +885,9 @@
       "fullName": {}
     }
   },
-  "truckerDashboardSearchLoadsAction": "Search loads",
-  "truckerDashboardFiltersOnFindLoadsHint": "Truck type and filters on Find Loads tab",
+  "truckerDashboardWelcomeLabel": "Welcome",
+  "truckerDashboardSearchLoadsAction": "Find loads",
+  "truckerDashboardFiltersOnFindLoadsHint": "Truck type and filters on the Find Loads tab",
   "truckerDashboardTitle": "Trucker Dashboard",
   "truckerDashboardQuickActionTripsLabel": "My Trips",
   "truckerDashboardRecentActivityTitle": "Recent activity",

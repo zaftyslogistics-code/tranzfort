@@ -361,6 +361,10 @@ class AppLocalizationsHi extends AppLocalizations {
   String get verificationLocationSourceOfflineNearestCity => 'ऑफ़लाइन स्थान';
 
   @override
+  String get verificationLocationSourceOnboarding =>
+      'साइनअप के दौरान सेट किया गया';
+
+  @override
   String get supportCategoryGeneral => 'सामान्य';
 
   @override
@@ -2155,11 +2159,14 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get truckerDashboardSearchLoadsAction => 'Load khojein';
+  String get truckerDashboardWelcomeLabel => 'स्वागत है';
+
+  @override
+  String get truckerDashboardSearchLoadsAction => 'लोड खोजें';
 
   @override
   String get truckerDashboardFiltersOnFindLoadsHint =>
-      'Truck type aur filters Find Loads tab par milenge';
+      'ट्रक प्रकार और फ़िल्टर \'लोड खोजें\' टैब पर मिलेंगे';
 
   @override
   String get truckerDashboardTitle => 'ट्रकर डैशबोर्ड';

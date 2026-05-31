@@ -206,10 +206,17 @@ class InboxController extends StateNotifier<InboxState> {
   }
 
   Future<void> load() async {
+    final isBackgroundRefresh = state.hasResolvedInitialLoad && state.conversations.isNotEmpty;
     final startTime = DateTime.now();
-    state = state.copyWith(isLoading: true, hasResolvedInitialLoad: false, clearFailure: true);
+    state = state.copyWith(
+      isLoading: true,
+      hasResolvedInitialLoad: isBackgroundRefresh ? true : false,
+      clearFailure: true,
+    );
     final result = await _repository.getConversations();
-    await _ensureMinLoadingDuration(startTime);
+    if (!isBackgroundRefresh) {
+      await _ensureMinLoadingDuration(startTime);
+    }
     if (!mounted) {
       return;
     }
@@ -323,20 +330,106 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
     return merged;
   }
 
+  bool _messagesSameIdsAndContent(List<ChatMessage> current, List<ChatMessage> merged) {
+    if (current.length != merged.length) {
+      return false;
+    }
+
+    final mergedById = <String, ChatMessage>{
+      for (final message in merged) message.id: message,
+    };
+    if (mergedById.length != merged.length) {
+      return false;
+    }
+
+    for (final currentMessage in current) {
+      final mergedMessage = mergedById[currentMessage.id];
+      if (mergedMessage == null) {
+        return false;
+      }
+      if (currentMessage.type != mergedMessage.type ||
+          currentMessage.textBody != mergedMessage.textBody ||
+          currentMessage.attachmentPath != mergedMessage.attachmentPath ||
+          currentMessage.createdAt != mergedMessage.createdAt ||
+          currentMessage.isFromCurrentUser != mergedMessage.isFromCurrentUser) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /// When only read receipts changed, patch in place and reuse unchanged instances.
+  List<ChatMessage>? _mergeReadStateOnly(List<ChatMessage> current, List<ChatMessage> merged) {
+    if (!_messagesSameIdsAndContent(current, merged)) {
+      return null;
+    }
+
+    final mergedById = <String, ChatMessage>{
+      for (final message in merged) message.id: message,
+    };
+
+    var readStateChanged = false;
+    final patched = <ChatMessage>[];
+    for (final currentMessage in current) {
+      final mergedMessage = mergedById[currentMessage.id]!;
+      if (currentMessage.isRead == mergedMessage.isRead && currentMessage.readAt == mergedMessage.readAt) {
+        patched.add(currentMessage);
+        continue;
+      }
+      readStateChanged = true;
+      patched.add(
+        ChatMessage(
+          id: currentMessage.id,
+          conversationId: currentMessage.conversationId,
+          senderProfileId: currentMessage.senderProfileId,
+          type: currentMessage.type,
+          textBody: currentMessage.textBody,
+          attachmentPath: currentMessage.attachmentPath,
+          structuredPayload: currentMessage.structuredPayload,
+          isRead: mergedMessage.isRead,
+          readAt: mergedMessage.readAt,
+          createdAt: currentMessage.createdAt,
+          isFromCurrentUser: currentMessage.isFromCurrentUser,
+        ),
+      );
+    }
+
+    if (!readStateChanged) {
+      return current;
+    }
+    return patched;
+  }
+
+  void _applyMergedMessages(List<ChatMessage> merged) {
+    final readPatched = _mergeReadStateOnly(state.messages, merged);
+    if (readPatched != null) {
+      if (!identical(readPatched, state.messages)) {
+        state = state.copyWith(
+          isLoading: false,
+          hasResolvedInitialLoad: true,
+          messages: readPatched,
+          clearFailure: true,
+        );
+      }
+      return;
+    }
+
+    state = state.copyWith(
+      isLoading: false,
+      hasResolvedInitialLoad: true,
+      messages: merged,
+      clearFailure: true,
+    );
+  }
+
   Future<void> _start() async {
     await load();
     _subscription = _repository.watchMessages(_conversationId).listen((result) {
       result.when(
         success: (messages) {
           _cancelErrorDisplay();
-          // Merge realtime messages with existing paginated history
           final merged = _mergeMessages(state.messages, messages);
-          state = state.copyWith(
-            isLoading: false,
-            hasResolvedInitialLoad: true,
-            messages: merged,
-            clearFailure: true,
-          );
+          _applyMergedMessages(merged);
         },
         failure: (failure) {
           _scheduleErrorDisplay(failure);
@@ -350,14 +443,21 @@ class ConversationMessagesController extends StateNotifier<ConversationMessagesS
   }
 
   Future<void> load() async {
+    final isBackgroundRefresh = state.hasResolvedInitialLoad && state.messages.isNotEmpty;
     final startTime = DateTime.now();
-    state = state.copyWith(isLoading: true, hasResolvedInitialLoad: false, clearFailure: true);
+    state = state.copyWith(
+      isLoading: true,
+      hasResolvedInitialLoad: isBackgroundRefresh ? true : false,
+      clearFailure: true,
+    );
     // P0.6: Use paginated query with limit to prevent loading all messages at once
     final result = await _repository.getMessagesPaginated(
       _conversationId,
       limit: 50,
     );
-    await _ensureMinLoadingDuration(startTime);
+    if (!isBackgroundRefresh) {
+      await _ensureMinLoadingDuration(startTime);
+    }
     if (!mounted) {
       return;
     }

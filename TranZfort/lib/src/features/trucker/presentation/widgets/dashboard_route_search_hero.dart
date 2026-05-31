@@ -4,10 +4,10 @@ import 'package:go_router/go_router.dart';
 
 import '../../../../core/navigation/app_routes.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/theme/app_decorations.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/action_buttons.dart';
-import '../../../../shared/widgets/content_cards.dart';
 import '../../data/trucker_profile_repository.dart';
 import '../../providers/find_loads_provider.dart';
 import 'marketplace_route_search_fields.dart';
@@ -51,24 +51,24 @@ class _DashboardRouteSearchHeroState extends ConsumerState<DashboardRouteSearchH
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
     final profile = widget.profile;
-    final greeting = _heroGreeting(profile, l10n);
 
-    return HeroActionCard(
-      title: l10n.shellTitleFindLoads,
-      subtitle: greeting,
-      compact: true,
-      useDarkTheme: true,
-      useInkGradient: true,
-      titleIcon: Icons.search_outlined,
-      primaryAction: GradientButton(
-        label: l10n.truckerDashboardSearchLoadsAction,
-        onPressed: _searchLoads,
-      ),
+    return Container(
+      padding: const EdgeInsets.all(AppSpacing.lg),
+      decoration: AppDecorations.inkHeroCard(),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           if (profile != null) ...[
-            _DashboardTrustIconRow(profile: profile),
+            _DashboardWelcomeHeader(profile: profile),
+            const SizedBox(height: AppSpacing.md),
+          ] else ...[
+            Text(
+              l10n.truckerDashboardWelcomeLabel,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: AppColors.inkTextSecondary,
+                    fontWeight: FontWeight.w500,
+                  ),
+            ),
             const SizedBox(height: AppSpacing.md),
           ],
           MarketplaceRouteSearchFields(
@@ -83,45 +83,100 @@ class _DashboardRouteSearchHeroState extends ConsumerState<DashboardRouteSearchH
                   fontSize: 11,
                 ),
           ),
+          const SizedBox(height: AppSpacing.md),
+          GradientButton(
+            label: l10n.truckerDashboardSearchLoadsAction,
+            onPressed: _searchLoads,
+          ),
         ],
       ),
     );
   }
-
-  String _heroGreeting(TruckerProfile? profile, AppLocalizations l10n) {
-    final fullName = profile?.fullName.trim() ?? '';
-    if (fullName.isNotEmpty) {
-      return l10n.truckerDashboardHeroGreeting(fullName);
-    }
-    return '';
-  }
 }
 
-class _DashboardTrustIconRow extends StatelessWidget {
+class _DashboardWelcomeHeader extends StatelessWidget {
   final TruckerProfile profile;
 
-  const _DashboardTrustIconRow({required this.profile});
+  const _DashboardWelcomeHeader({required this.profile});
 
   @override
   Widget build(BuildContext context) {
     final AppLocalizations l10n = AppLocalizations.of(context);
+    final theme = Theme.of(context);
+    final lightTitleStyle = theme.textTheme.titleMedium?.copyWith(
+      color: AppColors.inkTextSecondary,
+      fontWeight: FontWeight.w500,
+    );
+    final lightNameStyle = theme.textTheme.titleMedium?.copyWith(
+      color: AppColors.inkTextPrimary,
+      fontWeight: FontWeight.w600,
+    );
+    final lightMetaStyle = theme.textTheme.bodySmall?.copyWith(
+      color: AppColors.inkTextSecondary,
+      fontWeight: FontWeight.w500,
+    );
+
+    final fullName = profile.fullName.trim();
     final verified = profile.isVerified;
     final approvedTrucks = profile.approvedTrucks;
+    final trucksLabel = l10n.truckerDashboardApprovedTruckCount(approvedTrucks);
 
-    return Row(
+    return Column(
       children: [
-        _TrustIconChip(
-          icon: verified ? Icons.verified : Icons.verified_outlined,
-          color: verified ? AppColors.success : AppColors.inkTextSecondary,
-          tooltip: verified ? l10n.verificationStatusVerified : _verificationTooltip(l10n, profile.verificationStatus),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Expanded(
+              child: Text(
+                l10n.truckerDashboardWelcomeLabel,
+                style: lightTitleStyle,
+              ),
+            ),
+            _VerificationStatusGlyph(
+              verified: verified,
+              tooltip: verified
+                  ? l10n.verificationStatusVerified
+                  : _verificationTooltip(l10n, profile.verificationStatus),
+            ),
+          ],
         ),
-        if (approvedTrucks > 0) ...[
-          const SizedBox(width: AppSpacing.sm),
-          _TrustIconChip(
-            icon: Icons.local_shipping_outlined,
-            color: AppColors.primaryOnDark,
-            tooltip: l10n.truckerDashboardApprovedTruckCount(approvedTrucks),
-            badge: '$approvedTrucks',
+        if (fullName.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  fullName,
+                  style: lightNameStyle,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              const SizedBox(width: AppSpacing.sm),
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.local_shipping_outlined,
+                      size: 15,
+                      color: approvedTrucks > 0 ? AppColors.primaryOnDark : AppColors.inkTextSecondary,
+                    ),
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        trucksLabel,
+                        style: lightMetaStyle,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.end,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ],
       ],
@@ -145,46 +200,25 @@ class _DashboardTrustIconRow extends StatelessWidget {
   }
 }
 
-class _TrustIconChip extends StatelessWidget {
-  final IconData icon;
-  final Color color;
+class _VerificationStatusGlyph extends StatelessWidget {
+  final bool verified;
   final String tooltip;
-  final String? badge;
 
-  const _TrustIconChip({
-    required this.icon,
-    required this.color,
+  const _VerificationStatusGlyph({
+    required this.verified,
     required this.tooltip,
-    this.badge,
   });
 
   @override
   Widget build(BuildContext context) {
+    final color = verified ? AppColors.success : AppColors.inkTextSecondary;
+
     return Tooltip(
       message: tooltip,
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: 6),
-        decoration: BoxDecoration(
-          color: AppColors.primaryOnDark.withValues(alpha: 0.12),
-          borderRadius: BorderRadius.circular(AppRadius.chip),
-          border: Border.all(color: color.withValues(alpha: 0.35)),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(icon, size: 16, color: color),
-            if (badge != null) ...[
-              const SizedBox(width: 4),
-              Text(
-                badge!,
-                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: color,
-                      fontWeight: FontWeight.w700,
-                    ),
-              ),
-            ],
-          ],
-        ),
+      child: Icon(
+        verified ? Icons.verified : Icons.verified_outlined,
+        size: 22,
+        color: color,
       ),
     );
   }

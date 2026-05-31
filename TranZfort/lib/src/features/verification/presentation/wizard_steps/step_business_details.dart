@@ -277,7 +277,6 @@ class StepBusinessDetails extends ConsumerWidget {
           );
         },
         onUseCurrentLocation: () async {
-          Navigator.pop(context);
           await _handleLocationCapture(context, ref);
         },
       ),
@@ -420,7 +419,7 @@ class _LocationSection extends StatelessWidget {
               : hasLocation
                   ? _LocationDisplay(
                       location: location!,
-                      onClear: onClear,
+                      onClear: location!.locked ? null : onClear,
                     )
                   : _LocationEmpty(
                       onCapture: onCapture,
@@ -444,11 +443,11 @@ class _LocationSection extends StatelessWidget {
 
 class _LocationDisplay extends StatelessWidget {
   final WizardLocation location;
-  final VoidCallback onClear;
+  final VoidCallback? onClear;
 
   const _LocationDisplay({
     required this.location,
-    required this.onClear,
+    this.onClear,
   });
 
   @override
@@ -471,11 +470,12 @@ class _LocationDisplay extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.close, size: 18),
-              onPressed: onClear,
-              color: AppColors.textMuted,
-            ),
+            if (onClear != null)
+              IconButton(
+                icon: const Icon(Icons.close, size: 18),
+                onPressed: onClear,
+                color: AppColors.textMuted,
+              ),
           ],
         ),
         const SizedBox(height: AppSpacing.xs),
@@ -540,9 +540,12 @@ class _LocationEmpty extends StatelessWidget {
 String _localizedLocationSourceLabel(AppLocalizations l10n, String source) {
   final normalized = source.trim().toLowerCase();
   return switch (normalized) {
+    'onboarding' => l10n.verificationLocationSourceOnboarding,
     'manual_city_entry' => l10n.verificationLocationSourceManualCityEntry,
     'google_geocode' => l10n.verificationLocationSourceGoogleGeocode,
     'offline_nearest_city' => l10n.verificationLocationSourceOfflineNearestCity,
+    'gps' => l10n.verificationLocationSourceGoogleGeocode,
+    'manual' => l10n.verificationLocationSourceManualCityEntry,
     _ => l10n.verificationWizardAddedManually,
   };
 }

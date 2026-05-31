@@ -728,6 +728,12 @@ abstract class AppLocalizations {
   /// **'Offline location'**
   String get verificationLocationSourceOfflineNearestCity;
 
+  /// No description provided for @verificationLocationSourceOnboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Set during signup'**
+  String get verificationLocationSourceOnboarding;
+
   /// No description provided for @supportCategoryGeneral.
   ///
   /// In en, this message translates to:
@@ -3622,16 +3628,22 @@ abstract class AppLocalizations {
   /// **'Namaste, {fullName}'**
   String truckerDashboardHeroGreeting(Object fullName);
 
+  /// No description provided for @truckerDashboardWelcomeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome'**
+  String get truckerDashboardWelcomeLabel;
+
   /// No description provided for @truckerDashboardSearchLoadsAction.
   ///
   /// In en, this message translates to:
-  /// **'Search loads'**
+  /// **'Find loads'**
   String get truckerDashboardSearchLoadsAction;
 
   /// No description provided for @truckerDashboardFiltersOnFindLoadsHint.
   ///
   /// In en, this message translates to:
-  /// **'Truck type and filters on Find Loads tab'**
+  /// **'Truck type and filters on the Find Loads tab'**
   String get truckerDashboardFiltersOnFindLoadsHint;
 
   /// No description provided for @truckerDashboardTitle.
