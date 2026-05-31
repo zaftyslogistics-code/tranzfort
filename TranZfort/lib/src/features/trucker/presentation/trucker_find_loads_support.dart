@@ -43,29 +43,19 @@ class _FindLoadsFeedTabs extends StatelessWidget {
           horizontal: AppSpacing.lg,
           vertical: AppSpacing.xs,
         ),
-        child: SizedBox(
-          height: 36,
-          child: Row(
-            children: [
-              Expanded(
-                child: _LoadFeedTabButton(
-                  label: l10n.truckerFindLoadsAllLoadsTab,
-                  selected: state.selectedTab == FindLoadsTab.all,
-                  onDarkSurface: true,
-                  onTap: onSelectAll,
-                ),
-              ),
-              const SizedBox(width: AppSpacing.xs),
-              Expanded(
-                child: _LoadFeedTabButton(
-                  label: l10n.truckerFindLoadsSuperLoadsTab,
-                  selected: state.selectedTab == FindLoadsTab.superLoads,
-                  onDarkSurface: true,
-                  onTap: onSelectSuperLoads,
-                ),
-              ),
-            ],
-          ),
+        child: InkSegmentTabBar(
+          items: [
+            FilterChipItem(
+              label: l10n.truckerFindLoadsAllLoadsTab,
+              selected: state.selectedTab == FindLoadsTab.all,
+              onTap: onSelectAll,
+            ),
+            FilterChipItem(
+              label: l10n.truckerFindLoadsSuperLoadsTab,
+              selected: state.selectedTab == FindLoadsTab.superLoads,
+              onTap: onSelectSuperLoads,
+            ),
+          ],
         ),
       ),
     );
@@ -99,83 +89,6 @@ class _PinnedTruckFilterBar extends StatelessWidget {
           onDarkSurface: true,
           onBodyTypeChanged: onBodyTypeChanged,
           onTyreToggled: onTyreToggled,
-        ),
-      ),
-    );
-  }
-}
-
-class _LoadFeedTabButton extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final bool onDarkSurface;
-  final VoidCallback onTap;
-
-  const _LoadFeedTabButton({
-    required this.label,
-    required this.selected,
-    this.onDarkSurface = false,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    if (onDarkSurface) {
-      final accent = selected ? AppColors.primaryOnDark : AppColors.inkTextSecondary;
-      return Material(
-        color: Colors.transparent,
-        child: InkWell(
-          onTap: onTap,
-          borderRadius: BorderRadius.circular(AppRadius.chip),
-          child: Ink(
-            decoration: AppDecorations.inkFilterChip(selected: selected),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-                child: Text(
-                  label,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.labelMedium?.copyWith(
-                    color: accent,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      );
-    }
-
-    return Material(
-      color: selected ? AppColors.primary : Colors.transparent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        side: BorderSide(
-          color: selected ? AppColors.primary : AppColors.textPrimary,
-          width: 1,
-        ),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(AppRadius.chip),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-            child: Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: theme.textTheme.labelMedium?.copyWith(
-                color: selected ? AppColors.textOnPrimary : AppColors.textPrimary,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
         ),
       ),
     );

@@ -93,9 +93,13 @@ class FilterChipBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (onDarkSurface && onReset == null && items.length >= 2 && items.length <= 4) {
+      return InkSegmentTabBar(items: items);
+    }
+
     final l10n = AppLocalizations.of(context);
     return SizedBox(
-      height: 40,
+      height: 36,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: items.length + (onReset == null ? 0 : 1),
@@ -127,6 +131,83 @@ class FilterChipBar extends StatelessWidget {
   }
 }
 
+/// Full-width segmented ink tabs (Find Loads “All loads / Super loads” pattern).
+class InkSegmentTabBar extends StatelessWidget {
+  final List<FilterChipItem> items;
+  final double height;
+
+  const InkSegmentTabBar({
+    super.key,
+    required this.items,
+    this.height = 36,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      child: Row(
+        children: [
+          for (var index = 0; index < items.length; index++) ...[
+            if (index > 0) const SizedBox(width: AppSpacing.xs),
+            Expanded(
+              child: _InkSegmentTab(
+                label: items[index].label,
+                selected: items[index].selected,
+                onTap: items[index].onTap,
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _InkSegmentTab extends StatelessWidget {
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  const _InkSegmentTab({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final accent = selected ? AppColors.primaryOnDark : AppColors.inkTextSecondary;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.chip),
+        child: Ink(
+          decoration: AppDecorations.inkFilterChip(selected: selected),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: theme.textTheme.labelMedium?.copyWith(
+                  color: accent,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _InkSurfaceFilterChip extends StatelessWidget {
   final String label;
   final bool selected;
@@ -148,17 +229,21 @@ class _InkSurfaceFilterChip extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.chip),
         child: Ink(
           decoration: AppDecorations.inkFilterChip(selected: selected),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.sm,
-              vertical: AppSpacing.xs,
-            ),
-            child: Text(
-              label,
-              style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: selected ? accent : AppColors.inkTextPrimary,
-                    fontWeight: FontWeight.w700,
-                  ),
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppSpacing.sm,
+                vertical: AppSpacing.xs,
+              ),
+              child: Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                      color: selected ? accent : AppColors.inkTextPrimary,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
             ),
           ),
         ),

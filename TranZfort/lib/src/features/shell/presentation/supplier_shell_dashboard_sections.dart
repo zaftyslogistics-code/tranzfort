@@ -360,6 +360,7 @@ class _SuperLoadReadinessSection extends StatelessWidget {
         ),
         const SizedBox(height: AppSpacing.md),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: OutlineButton(
@@ -370,6 +371,7 @@ class _SuperLoadReadinessSection extends StatelessWidget {
                         : isPending
                             ? l10n.supplierReviewVerification
                             : l10n.commonOpenVerificationAction,
+                height: 44,
                 onPressed: () => context.go(AppRoutes.supplierVerificationPath),
               ),
             ),
@@ -377,6 +379,7 @@ class _SuperLoadReadinessSection extends StatelessWidget {
             Expanded(
               child: OutlineButton(
                 label: isVerified ? l10n.commonOpenMyLoadsAction : l10n.commonSupportLabel,
+                height: 44,
                 onPressed: () => context.go(isVerified ? AppRoutes.myLoadsPath : AppRoutes.supportPath),
               ),
             ),
