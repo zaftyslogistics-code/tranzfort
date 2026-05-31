@@ -573,6 +573,23 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierRecentLoadsTitle => 'हाल के लोड्स';
 
   @override
+  String get supplierDashboardAttentionTitle => 'आपके ध्यान की ज़रूरत';
+
+  @override
+  String supplierDashboardAttentionMessage(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'समीक्षा के लिए $count लंबित बुकिंग अनुरोध हैं।',
+      one: 'समीक्षा के लिए 1 लंबित बुकिंग अनुरोध है।',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierDashboardAttentionAction => 'लोड देखें';
+
+  @override
   String supplierDashboardWelcomeBack(Object name) {
     return 'फिर से स्वागत है, $name';
   }
@@ -5621,7 +5638,20 @@ class AppLocalizationsHi extends AppLocalizations {
   String get truckerLoadDetailSupplierSummaryTitle => 'सप्लायर सारांश';
 
   @override
-  String get truckerLoadDetailVerifiedSupplier => 'सत्यापित सप्लायर';
+  String get truckerLoadDetailVerifiedSupplier =>
+      'प्लेटफ़ॉर्म समीक्षित सप्लायर';
+
+  @override
+  String get truckerBookingOffPlatformPaymentAck =>
+      'भुगतान सीधे आप और सप्लायर के बीच तय होते हैं। TranZfort माल भाड़ा रोक या गारंटी नहीं करता।';
+
+  @override
+  String get truckerBookingAcknowledgementCheckboxLabel =>
+      'मैं इन बुकिंग शर्तों को समझता/समझती हूँ और स्वीकार करता/करती हूँ';
+
+  @override
+  String get truckerLoadDetailEstimateNotQuoteDisclaimer =>
+      'यात्रा लागत और लाभ के आंकड़े केवल अनुमान हैं, बाध्यकारी कोट नहीं।';
 
   @override
   String get truckerLoadDetailSupplierProfile => 'सप्लायर प्रोफ़ाइल';
@@ -6183,7 +6213,25 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get supplierBookingVerifiedLabel => 'सत्यापित';
+  String get supplierBookingVerifiedLabel => 'प्लेटफ़ॉर्म समीक्षित';
+
+  @override
+  String get platformReviewedBadgeLabel => 'प्लेटफ़ॉर्म समीक्षित';
+
+  @override
+  String get badgeDisclaimerTitle => 'प्लेटफ़ॉर्म समीक्षा सूचना';
+
+  @override
+  String get badgeDisclaimerWhatWeAre =>
+      'TranZfort एक मार्केटप्लेस है जो सप्लायर और ट्रकर को लोड खोजने और परिचय तय करने में मदद करता है।';
+
+  @override
+  String get badgeDisclaimerWhatWeAreNot =>
+      'TranZfort परिवहन ठेकेदार, ब्रोकर ऑफ रिकॉर्ड या भुगतान गारंटर नहीं है। हम ड्राइवरों को नियुक्त नहीं करते और वाहन का मालिक नहीं हैं।';
+
+  @override
+  String get badgeDisclaimerUserMustVerify =>
+      'बुकिंग या माल सौंपने से पहले आपको पहचान, दस्तावेज़, वाहन फ़िट और भुगतान शर्तें स्वतंत्र रूप से सत्यापित करनी होंगी।';
 
   @override
   String supplierBookingRatingLabel(Object rating) {

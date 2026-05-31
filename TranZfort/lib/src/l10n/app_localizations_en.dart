@@ -570,6 +570,23 @@ class AppLocalizationsEn extends AppLocalizations {
   String get supplierRecentLoadsTitle => 'Recent loads';
 
   @override
+  String get supplierDashboardAttentionTitle => 'Needs your attention';
+
+  @override
+  String supplierDashboardAttentionMessage(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'You have $count pending booking requests to review.',
+      one: 'You have 1 pending booking request to review.',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get supplierDashboardAttentionAction => 'Review loads';
+
+  @override
   String supplierDashboardWelcomeBack(Object name) {
     return 'Welcome back, $name';
   }
@@ -5607,7 +5624,19 @@ class AppLocalizationsEn extends AppLocalizations {
   String get truckerLoadDetailSupplierSummaryTitle => 'Supplier summary';
 
   @override
-  String get truckerLoadDetailVerifiedSupplier => 'Verified supplier';
+  String get truckerLoadDetailVerifiedSupplier => 'Platform reviewed supplier';
+
+  @override
+  String get truckerBookingOffPlatformPaymentAck =>
+      'Payments are arranged directly between you and the supplier. TranZfort does not hold, route, or guarantee freight payments.';
+
+  @override
+  String get truckerBookingAcknowledgementCheckboxLabel =>
+      'I understand and accept these booking terms';
+
+  @override
+  String get truckerLoadDetailEstimateNotQuoteDisclaimer =>
+      'Trip cost and profit figures are estimates only, not binding quotes.';
 
   @override
   String get truckerLoadDetailSupplierProfile => 'Supplier profile';
@@ -6167,7 +6196,25 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get supplierBookingVerifiedLabel => 'Verified';
+  String get supplierBookingVerifiedLabel => 'Platform reviewed';
+
+  @override
+  String get platformReviewedBadgeLabel => 'Platform reviewed';
+
+  @override
+  String get badgeDisclaimerTitle => 'Platform review notice';
+
+  @override
+  String get badgeDisclaimerWhatWeAre =>
+      'TranZfort is a marketplace that helps suppliers and truckers discover loads and coordinate introductions.';
+
+  @override
+  String get badgeDisclaimerWhatWeAreNot =>
+      'TranZfort is not a transport contractor, broker of record, or payment guarantor. We do not employ drivers or own vehicles.';
+
+  @override
+  String get badgeDisclaimerUserMustVerify =>
+      'You must independently verify identity, documents, vehicle fit, and payment terms before booking or handing over cargo.';
 
   @override
   String supplierBookingRatingLabel(Object rating) {

@@ -195,6 +195,16 @@
   "supplierLoadCardViewHistory": "View history",
   "commonViewDetailsAction": "View details",
   "supplierRecentLoadsTitle": "Recent loads",
+  "supplierDashboardAttentionTitle": "Needs your attention",
+  "supplierDashboardAttentionMessage": "{count, plural, one {You have 1 pending booking request to review.} other {You have {count} pending booking requests to review.}}",
+  "@supplierDashboardAttentionMessage": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "supplierDashboardAttentionAction": "Review loads",
   "@_sectionSupplierDashboard": "â•â•â• Supplier Dashboard â•â•â•",
   "supplierDashboardWelcomeBack": "Welcome back, {name}",
   "@supplierDashboardWelcomeBack": {
@@ -2286,7 +2296,10 @@
   "truckerLoadDetailTripCostUnavailableTitle": "Trip cost unavailable",
   "truckerLoadDetailTripCostUnavailableMessage": "Distance is unavailable for this load right now, so the trip cost estimate cannot be calculated yet.",
   "truckerLoadDetailSupplierSummaryTitle": "Supplier summary",
-  "truckerLoadDetailVerifiedSupplier": "Verified supplier",
+  "truckerLoadDetailVerifiedSupplier": "Platform reviewed supplier",
+  "truckerBookingOffPlatformPaymentAck": "Payments are arranged directly between you and the supplier. TranZfort does not hold, route, or guarantee freight payments.",
+  "truckerBookingAcknowledgementCheckboxLabel": "I understand and accept these booking terms",
+  "truckerLoadDetailEstimateNotQuoteDisclaimer": "Trip cost and profit figures are estimates only, not binding quotes.",
   "truckerLoadDetailSupplierProfile": "Supplier profile",
   "truckerLoadDetailStatusValue": "{status, select, active {Active} assigned_partial {Assigned partial} unknown {Unknown} other {Unknown}}",
   "@truckerLoadDetailStatusValue": {
@@ -2529,7 +2542,12 @@
       "status": {}
     }
   },
-  "supplierBookingVerifiedLabel": "Verified",
+  "supplierBookingVerifiedLabel": "Platform reviewed",
+  "platformReviewedBadgeLabel": "Platform reviewed",
+  "badgeDisclaimerTitle": "Platform review notice",
+  "badgeDisclaimerWhatWeAre": "TranZfort is a marketplace that helps suppliers and truckers discover loads and coordinate introductions.",
+  "badgeDisclaimerWhatWeAreNot": "TranZfort is not a transport contractor, broker of record, or payment guarantor. We do not employ drivers or own vehicles.",
+  "badgeDisclaimerUserMustVerify": "You must independently verify identity, documents, vehicle fit, and payment terms before booking or handing over cargo.",
   "supplierBookingRatingLabel": "Rating: {rating}",
   "@supplierBookingRatingLabel": {
     "description": "Shows trucker rating. Placeholder {rating} is the numeric rating value.",

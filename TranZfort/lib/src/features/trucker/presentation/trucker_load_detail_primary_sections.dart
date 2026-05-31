@@ -267,7 +267,7 @@ class _LoadNextStepSection extends ConsumerWidget {
   final TruckerLoadShareService shareService;
   final dynamic sharePayload;
   final Future<bool?> Function(BuildContext, AppLocalizations) confirmGoToFleet;
-  final Future<bool?> Function(BuildContext, TruckerLoadDetail, String) confirmBooking;
+  final Future<bool> Function(BuildContext, TruckerLoadDetail, String) confirmBooking;
 
   const _LoadNextStepSection({
     required this.loadId,
@@ -547,30 +547,13 @@ class _StickyBookingBar extends ConsumerWidget {
                 return;
               }
 
-              final confirmed = await showDialog<bool>(
+              final confirmed = await showTruckerBookingConfirmationDialog(
                 context: context,
-                builder: (dialogContext) => AlertDialog(
-                  title: Text(l10n.truckerLoadDetailConfirmBookingTitle),
-                  content: Text(
-                    l10n.truckerLoadDetailConfirmBookingMessage(
-                      detail.summary.material,
-                      '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
-                      selectedTruckLabel,
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.of(dialogContext).pop(false),
-                      child: Text(l10n.commonCancelAction),
-                    ),
-                    PrimaryButton(
-                      label: l10n.truckerLoadDetailBookThisLoadAction,
-                      onPressed: () => Navigator.of(dialogContext).pop(true),
-                    ),
-                  ],
-                ),
+                material: detail.summary.material,
+                routeLabel: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
+                truckLabel: selectedTruckLabel,
               );
-              if (confirmed != true || !context.mounted) {
+              if (!confirmed || !context.mounted) {
                 return;
               }
 

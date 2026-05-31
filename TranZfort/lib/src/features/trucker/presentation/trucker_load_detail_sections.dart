@@ -259,17 +259,14 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                                 ),
                           ),
                           const SizedBox(height: AppSpacing.xs),
-                          _RouteDarkStatusPill(
-                            icon: detail.supplier.verificationStatus == 'verified'
-                                ? Icons.verified_outlined
-                                : Icons.business_outlined,
-                            label: detail.supplier.verificationStatus == 'verified'
-                                ? l10n.truckerLoadDetailVerifiedSupplier
-                                : l10n.truckerLoadDetailSupplierProfile,
-                            accent: detail.supplier.verificationStatus == 'verified'
-                                ? AppColors.primaryOnDark
-                                : AppColors.inkTextSecondary,
-                          ),
+                          if (detail.supplier.verificationStatus == 'verified')
+                            const PlatformReviewedBadge(compact: true)
+                          else
+                            _RouteDarkStatusPill(
+                              icon: Icons.business_outlined,
+                              label: l10n.truckerLoadDetailSupplierProfile,
+                              accent: AppColors.inkTextSecondary,
+                            ),
                         ],
                       ),
                     ),
@@ -355,34 +352,16 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
     );
   }
 
-  Future<bool?> _confirmBooking(
+  Future<bool> _confirmBooking(
     BuildContext context,
     TruckerLoadDetail detail,
     String truckNumber,
   ) {
-    final l10n = AppLocalizations.of(context);
-    return showDialog<bool>(
+    return showTruckerBookingConfirmationDialog(
       context: context,
-      builder: (dialogContext) => AlertDialog(
-        title: Text(l10n.truckerLoadDetailConfirmBookingTitle),
-        content: Text(
-          l10n.truckerLoadDetailConfirmBookingMessage(
-            detail.summary.material,
-            '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
-            truckNumber,
-          ),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(dialogContext).pop(false),
-            child: Text(l10n.commonCancelAction),
-          ),
-          PrimaryButton(
-            label: l10n.truckerLoadDetailBookThisLoadAction,
-            onPressed: () => Navigator.of(dialogContext).pop(true),
-          ),
-        ],
-      ),
+      material: detail.summary.material,
+      routeLabel: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
+      truckLabel: truckNumber,
     );
   }
 

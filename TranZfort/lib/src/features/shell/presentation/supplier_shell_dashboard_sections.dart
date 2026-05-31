@@ -15,6 +15,7 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/platform_reviewed_badge.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../features/supplier/data/supplier_load_repost.dart';
 import '../../../features/supplier/presentation/widgets/repost_load_sheet.dart';
@@ -63,7 +64,6 @@ class BookingRequestCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final truckerMeta = <String>[
-      if (booking.truckerVerificationStatus == 'verified') l10n.supplierBookingVerifiedLabel,
       if (booking.truckerRating != null && booking.truckerRating! > 0)
         l10n.supplierBookingRatingLabel(booking.truckerRating!.toStringAsFixed(1)),
     ].join(' - ');
@@ -94,6 +94,10 @@ class BookingRequestCard extends StatelessWidget {
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (booking.truckerVerificationStatus == 'verified') ...[
+            const PlatformReviewedBadge(compact: true),
+            const SizedBox(height: AppSpacing.xs),
+          ],
           if (truckerMeta.isNotEmpty) ...[
             Text(truckerMeta, style: Theme.of(context).textTheme.bodySmall),
             const SizedBox(height: AppSpacing.xs),
@@ -571,6 +575,15 @@ class SupplierDashboardScreen extends ConsumerWidget {
           ),
         ),
         DetailSectionCard(
+          title: l10n.supplierRecentLoadsTitle,
+          children: [
+            _RecentLoadsSection(
+              recentLoadsAsync: recentLoadsAsync,
+              onRetry: () => ref.refresh(supplierRecentLoadsProvider),
+            ),
+          ],
+        ),
+        DetailSectionCard(
           title: l10n.commonDashboardOverviewTitle,
           children: [
             _DashboardStatsSection(
@@ -579,6 +592,22 @@ class SupplierDashboardScreen extends ConsumerWidget {
             ),
           ],
         ),
+        if ((dashboardAsync.valueOrNull?.pendingBookings ?? 0) > 0)
+          DetailSectionCard(
+            title: l10n.supplierDashboardAttentionTitle,
+            children: [
+              WarningBlock(
+                title: l10n.supplierDashboardAttentionTitle,
+                message: l10n.supplierDashboardAttentionMessage(
+                  dashboardAsync.valueOrNull!.pendingBookings,
+                ),
+                action: OutlineButton(
+                  label: l10n.supplierDashboardAttentionAction,
+                  onPressed: () => context.go(AppRoutes.myLoadsPath),
+                ),
+              ),
+            ],
+          ),
         DetailSectionCard(
           title: l10n.supplierDashboardSuperLoadReadinessTitle,
           children: [
@@ -621,15 +650,6 @@ class SupplierDashboardScreen extends ConsumerWidget {
                   onTap: () => context.go(AppRoutes.notificationsPath),
                 ),
               ],
-            ),
-          ],
-        ),
-        DetailSectionCard(
-          title: l10n.supplierRecentLoadsTitle,
-          children: [
-            _RecentLoadsSection(
-              recentLoadsAsync: recentLoadsAsync,
-              onRetry: () => ref.refresh(supplierRecentLoadsProvider),
             ),
           ],
         ),

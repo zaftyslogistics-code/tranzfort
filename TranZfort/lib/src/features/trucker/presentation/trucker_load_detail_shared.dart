@@ -419,6 +419,14 @@ class _EarningsEstimateCard extends StatelessWidget {
                         color: AppColors.inkTextSecondary,
                       ),
                 ),
+                const SizedBox(height: AppSpacing.xs),
+                Text(
+                  l10n.truckerLoadDetailEstimateNotQuoteDisclaimer,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.inkTextSecondary,
+                        fontStyle: FontStyle.italic,
+                      ),
+                ),
               ],
             ),
           ),

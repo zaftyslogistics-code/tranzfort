@@ -1100,6 +1100,24 @@ abstract class AppLocalizations {
   /// **'Recent loads'**
   String get supplierRecentLoadsTitle;
 
+  /// No description provided for @supplierDashboardAttentionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs your attention'**
+  String get supplierDashboardAttentionTitle;
+
+  /// No description provided for @supplierDashboardAttentionMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one {You have 1 pending booking request to review.} other {You have {count} pending booking requests to review.}}'**
+  String supplierDashboardAttentionMessage(int count);
+
+  /// No description provided for @supplierDashboardAttentionAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Review loads'**
+  String get supplierDashboardAttentionAction;
+
   /// Welcome message on supplier dashboard. Placeholder {name} is the user's display name.
   ///
   /// In en, this message translates to:
@@ -8829,8 +8847,26 @@ abstract class AppLocalizations {
   /// No description provided for @truckerLoadDetailVerifiedSupplier.
   ///
   /// In en, this message translates to:
-  /// **'Verified supplier'**
+  /// **'Platform reviewed supplier'**
   String get truckerLoadDetailVerifiedSupplier;
+
+  /// No description provided for @truckerBookingOffPlatformPaymentAck.
+  ///
+  /// In en, this message translates to:
+  /// **'Payments are arranged directly between you and the supplier. TranZfort does not hold, route, or guarantee freight payments.'**
+  String get truckerBookingOffPlatformPaymentAck;
+
+  /// No description provided for @truckerBookingAcknowledgementCheckboxLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand and accept these booking terms'**
+  String get truckerBookingAcknowledgementCheckboxLabel;
+
+  /// No description provided for @truckerLoadDetailEstimateNotQuoteDisclaimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip cost and profit figures are estimates only, not binding quotes.'**
+  String get truckerLoadDetailEstimateNotQuoteDisclaimer;
 
   /// No description provided for @truckerLoadDetailSupplierProfile.
   ///
@@ -9717,8 +9753,38 @@ abstract class AppLocalizations {
   /// No description provided for @supplierBookingVerifiedLabel.
   ///
   /// In en, this message translates to:
-  /// **'Verified'**
+  /// **'Platform reviewed'**
   String get supplierBookingVerifiedLabel;
+
+  /// No description provided for @platformReviewedBadgeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform reviewed'**
+  String get platformReviewedBadgeLabel;
+
+  /// No description provided for @badgeDisclaimerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Platform review notice'**
+  String get badgeDisclaimerTitle;
+
+  /// No description provided for @badgeDisclaimerWhatWeAre.
+  ///
+  /// In en, this message translates to:
+  /// **'TranZfort is a marketplace that helps suppliers and truckers discover loads and coordinate introductions.'**
+  String get badgeDisclaimerWhatWeAre;
+
+  /// No description provided for @badgeDisclaimerWhatWeAreNot.
+  ///
+  /// In en, this message translates to:
+  /// **'TranZfort is not a transport contractor, broker of record, or payment guarantor. We do not employ drivers or own vehicles.'**
+  String get badgeDisclaimerWhatWeAreNot;
+
+  /// No description provided for @badgeDisclaimerUserMustVerify.
+  ///
+  /// In en, this message translates to:
+  /// **'You must independently verify identity, documents, vehicle fit, and payment terms before booking or handing over cargo.'**
+  String get badgeDisclaimerUserMustVerify;
 
   /// Shows trucker rating. Placeholder {rating} is the numeric rating value.
   ///

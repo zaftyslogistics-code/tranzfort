@@ -191,6 +191,9 @@
   "supplierLoadCardViewHistory": "इतिहास देखें",
   "commonViewDetailsAction": "विवरण देखें",
   "supplierRecentLoadsTitle": "हाल के लोड्स",
+  "supplierDashboardAttentionTitle": "आपके ध्यान की ज़रूरत",
+  "supplierDashboardAttentionMessage": "{count, plural, one {समीक्षा के लिए 1 लंबित बुकिंग अनुरोध है।} other {समीक्षा के लिए {count} लंबित बुकिंग अनुरोध हैं।}}",
+  "supplierDashboardAttentionAction": "लोड देखें",
 
   "@_sectionSupplierDashboard": "═══ Supplier Dashboard ═══",
   "supplierDashboardWelcomeBack": "फिर से स्वागत है, {name}",
@@ -2378,7 +2381,12 @@
       "status": {}
     }
   },
-  "supplierBookingVerifiedLabel": "सत्यापित",
+  "supplierBookingVerifiedLabel": "प्लेटफ़ॉर्म समीक्षित",
+  "platformReviewedBadgeLabel": "प्लेटफ़ॉर्म समीक्षित",
+  "badgeDisclaimerTitle": "प्लेटफ़ॉर्म समीक्षा सूचना",
+  "badgeDisclaimerWhatWeAre": "TranZfort एक मार्केटप्लेस है जो सप्लायर और ट्रकर को लोड खोजने और परिचय तय करने में मदद करता है।",
+  "badgeDisclaimerWhatWeAreNot": "TranZfort परिवहन ठेकेदार, ब्रोकर ऑफ रिकॉर्ड या भुगतान गारंटर नहीं है। हम ड्राइवरों को नियुक्त नहीं करते और वाहन का मालिक नहीं हैं।",
+  "badgeDisclaimerUserMustVerify": "बुकिंग या माल सौंपने से पहले आपको पहचान, दस्तावेज़, वाहन फ़िट और भुगतान शर्तें स्वतंत्र रूप से सत्यापित करनी होंगी।",
   "supplierBookingRatingLabel": "रेटिंग: {rating}",
   "@supplierBookingRatingLabel": {"placeholders": {"rating": {}}},
   "supplierBookingTyres": "{tyres} टायर",
@@ -2586,7 +2594,10 @@
       "truckNumber": {}
     }
   },
-  "truckerLoadDetailVerifiedSupplier": "सत्यापित सप्लायर",
+  "truckerLoadDetailVerifiedSupplier": "प्लेटफ़ॉर्म समीक्षित सप्लायर",
+  "truckerBookingOffPlatformPaymentAck": "भुगतान सीधे आप और सप्लायर के बीच तय होते हैं। TranZfort माल भाड़ा रोक या गारंटी नहीं करता।",
+  "truckerBookingAcknowledgementCheckboxLabel": "मैं इन बुकिंग शर्तों को समझता/समझती हूँ और स्वीकार करता/करती हूँ",
+  "truckerLoadDetailEstimateNotQuoteDisclaimer": "यात्रा लागत और लाभ के आंकड़े केवल अनुमान हैं, बाध्यकारी कोट नहीं।",
   "verificationGpsDisabledMessage": "लोकेशन सेवाएँ बंद हैं। अपना वेरिफिकेशन स्थान कैप्चर करने के लिए कृपया डिवाइस सेटिंग्स में GPS चालू करें।",
   "verificationGpsDisabledTitle": "GPS बंद है",
   "verificationOpenAppSettingsAction": "ऐप सेटिंग्स खोलें",
