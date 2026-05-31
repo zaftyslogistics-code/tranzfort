@@ -112,7 +112,6 @@ String _normalizedSuperLoadStatusValue(String superStatus, {required bool isSupe
     'active' => 'active',
     'rejected' => 'rejected',
     'expired_or_closed' => 'expired_or_closed',
-    _ when isSuperLoad => 'active',
     _ => 'not_requested',
   };
 }

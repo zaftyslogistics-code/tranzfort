@@ -8,6 +8,7 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/services/route_snapshot_service.dart';
 import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/map_readers.dart';
+import '../../../core/utils/super_load_visibility.dart';
 import '../../../core/utils/type_safety.dart';
 
 const int truckerMarketplacePageSize = 20;
@@ -201,7 +202,10 @@ class MarketplaceLoadItem {
       advancePercentage: readInt(map['advance_percentage']),
       pickupDate: readDate(map['pickup_date']) ?? DateTime.now(),
       status: (map['status'] ?? 'active').toString(),
-      isSuperLoad: map['is_super_load'] == true,
+      isSuperLoad: isPublicSuperLoad(
+        isSuperLoad: map['is_super_load'] == true,
+        superStatus: (map['super_status'] ?? 'none').toString(),
+      ),
       superStatus: (map['super_status'] ?? 'none').toString(),
       createdAt: readDate(map['created_at']) ?? DateTime.now(),
     );
