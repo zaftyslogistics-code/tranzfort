@@ -97,7 +97,8 @@ class AppDecorations {
   }
 
   /// FP-6 experiment: light marketplace load card surface (revert by setting false).
-  static const bool marketplaceLoadCardLightExperiment = true;
+  /// v1-launch: dark marketplace cards everywhere (Appendix F).
+  static const bool marketplaceLoadCardLightExperiment = false;
 
   /// Primary text on marketplace load card (respects [marketplaceLoadCardLightExperiment]).
   static Color marketplaceCardTextPrimary({bool? onDarkSurface}) {
