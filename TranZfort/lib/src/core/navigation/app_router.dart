@@ -9,6 +9,7 @@ import '../../features/communication/presentation/chat_screen.dart';
 import '../../features/notifications/presentation/notifications_screen.dart';
 import '../../features/profile/providers/public_profile_providers.dart';
 import '../../features/help/presentation/counterparty_checklist_screen.dart';
+import '../../features/shell/presentation/mutation_queue_screen.dart';
 import '../../features/shell/presentation/delete_account_screen.dart';
 import '../../features/shell/presentation/profile_edit_screen.dart';
 import '../../features/supplier/presentation/post_load_screen.dart';
@@ -584,6 +585,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.counterpartyChecklistPath,
             name: AppRoutes.counterpartyChecklist,
             builder: (context, state) => const CounterpartyChecklistScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.pendingSyncPath,
+            name: AppRoutes.pendingSync,
+            builder: (context, state) => const MutationQueueScreen(),
           ),
           GoRoute(
             path: '${AppRoutes.raiseDisputePath}/:tripId',

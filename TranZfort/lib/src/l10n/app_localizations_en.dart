@@ -6056,6 +6056,99 @@ class AppLocalizationsEn extends AppLocalizations {
   String get offlineSyncExhausted => 'exhausted (max retries)';
 
   @override
+  String get mutationQueueScreenTitle => 'Pending sync';
+
+  @override
+  String get mutationQueueScreenSubtitle =>
+      'Actions saved on this device while offline or after errors. Retry when you are back online.';
+
+  @override
+  String get mutationQueueListTitle => 'Queued actions';
+
+  @override
+  String get mutationQueueEmptyTitle => 'Nothing waiting to sync';
+
+  @override
+  String get mutationQueueEmptySubtitle =>
+      'New offline actions will appear here until they are sent successfully.';
+
+  @override
+  String get mutationQueueLoadFailureMessage =>
+      'Could not load the pending sync queue right now.';
+
+  @override
+  String get mutationQueueRetryAllAction => 'Retry all';
+
+  @override
+  String get mutationQueueViewListAction => 'View queued actions';
+
+  @override
+  String get mutationQueueDismissAction => 'Remove';
+
+  @override
+  String mutationQueueBannerSummary(
+    int pending,
+    int retrying,
+    int failed,
+    int exhausted,
+  ) {
+    return '$pending pending · $retrying retrying · $failed failed · $exhausted exhausted';
+  }
+
+  @override
+  String mutationQueueRetryProgress(int used, int max) {
+    return 'Retries $used of $max';
+  }
+
+  @override
+  String get mutationQueueStatusPending => 'Pending';
+
+  @override
+  String get mutationQueueStatusRetrying => 'Retrying';
+
+  @override
+  String get mutationQueueStatusFailed => 'Failed';
+
+  @override
+  String get mutationQueueStatusExhausted => 'Exhausted';
+
+  @override
+  String get mutationQueueStatusCompleted => 'Completed';
+
+  @override
+  String get mutationQueueTargetLoadBooking => 'Load booking';
+
+  @override
+  String get mutationQueueTargetChatSend => 'Chat message';
+
+  @override
+  String get mutationQueueTargetPodProof => 'POD proof upload';
+
+  @override
+  String get mutationQueueTargetLrProof => 'LR proof upload';
+
+  @override
+  String get mutationQueueTargetProfileUpdate => 'Profile update';
+
+  @override
+  String get mutationQueueTargetSupplierProfile => 'Supplier profile';
+
+  @override
+  String get mutationQueueTargetDispute => 'Dispute';
+
+  @override
+  String get mutationQueueTargetReviewSubmit => 'Review';
+
+  @override
+  String get mutationQueueTargetReviewReply => 'Review reply';
+
+  @override
+  String get mutationQueueTargetNotificationRead => 'Notification read';
+
+  @override
+  String get mutationQueueTargetCustom => 'Other action';
+
+  @override
   String get validationProfilePhotoRequired => 'Profile photo is required';
 
   @override

@@ -11,6 +11,7 @@ import '../../../core/widgets/tts_stop_on_route_change.dart';
 import '../../../shared/widgets/avatar_widget.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/language_toggle_action.dart';
+import '../../../shared/widgets/offline_sync_status_banner.dart';
 import '../../../shared/widgets/tts_action_button.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../auth/data/auth_repository.dart';
@@ -132,17 +133,24 @@ class _UserAppShellState extends ConsumerState<UserAppShell> {
               )
             : null,
         drawer: UserAppDrawer(role: widget.role),
-        body: Stack(
+        body: Column(
           children: [
-            TtsStopOnRouteChange(
-              routeKey: widget.currentLocation,
-              child: widget.child,
-            ),
-            if (topLevel)
-              TtsScreenSummaryEffect(
-                summary: tabTtsSummary,
-                screenKey: '${widget.role.name}:${currentTab.route}',
+            const OfflineSyncStatusBanner(),
+            Expanded(
+              child: Stack(
+                children: [
+                  TtsStopOnRouteChange(
+                    routeKey: widget.currentLocation,
+                    child: widget.child,
+                  ),
+                  if (topLevel)
+                    TtsScreenSummaryEffect(
+                      summary: tabTtsSummary,
+                      screenKey: '${widget.role.name}:${currentTab.route}',
+                    ),
+                ],
               ),
+            ),
           ],
         ),
         bottomNavigationBar: NavigationBar(

@@ -48,6 +48,7 @@ class MutationQueueProcessor {
     _eventController.add(const MutationProcessingEventStarted());
 
     try {
+      await _database.requeueRetryableFailures();
       while (true) {
         final pending = await _database.getPending();
         if (pending.isEmpty) {

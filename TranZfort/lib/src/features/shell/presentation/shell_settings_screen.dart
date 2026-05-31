@@ -223,6 +223,11 @@ class SettingsScreen extends ConsumerWidget {
                 onTap: () => context.go(AppRoutes.notificationsPath),
               ),
               NavListTile(
+                icon: Icons.cloud_sync_outlined,
+                label: l10n.mutationQueueScreenTitle,
+                onTap: () => context.push(AppRoutes.pendingSyncPath),
+              ),
+              NavListTile(
                 icon: Icons.support_agent_outlined,
                 label: l10n.commonSupportLabel,
                 onTap: () => context.go(AppRoutes.supportPath),

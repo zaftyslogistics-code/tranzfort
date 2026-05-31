@@ -162,6 +162,39 @@ class MutationQueueDatabase {
     );
   }
 
+  Future<void> requeueRetryableFailures() async {
+    final db = await database;
+    await db.rawUpdate('''
+      UPDATE $_tableName
+      SET status = ?, last_error = NULL
+      WHERE status = ? AND retry_count < max_retries
+    ''', [MutationStatus.pending.name, MutationStatus.failed.name]);
+  }
+
+  Future<List<QueuedMutation>> getActiveMutations({String? userId}) async {
+    final db = await database;
+    final orderBy = r'COALESCE(timestamp_ms, CAST(strftime("%s", timestamp) * 1000 AS INTEGER)) DESC';
+    final List<Map<String, dynamic>> maps = await db.query(
+      _tableName,
+      where: userId == null
+          ? "status != ?"
+          : 'user_id = ? AND status != ?',
+      whereArgs: userId == null
+          ? [MutationStatus.completed.name]
+          : [userId, MutationStatus.completed.name],
+      orderBy: orderBy,
+    );
+
+    final results = <QueuedMutation>[];
+    for (final map in maps) {
+      final decrypted = await _decryptMutation(map);
+      if (decrypted != null) {
+        results.add(decrypted);
+      }
+    }
+    return results;
+  }
+
   Future<List<QueuedMutation>> getPending() async {
     final db = await database;
     // Use timestamp_ms if available (new format), otherwise fallback to timestamp (legacy format)

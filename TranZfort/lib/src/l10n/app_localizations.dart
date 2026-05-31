@@ -9558,6 +9558,173 @@ abstract class AppLocalizations {
   /// **'exhausted (max retries)'**
   String get offlineSyncExhausted;
 
+  /// No description provided for @mutationQueueScreenTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending sync'**
+  String get mutationQueueScreenTitle;
+
+  /// No description provided for @mutationQueueScreenSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Actions saved on this device while offline or after errors. Retry when you are back online.'**
+  String get mutationQueueScreenSubtitle;
+
+  /// No description provided for @mutationQueueListTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Queued actions'**
+  String get mutationQueueListTitle;
+
+  /// No description provided for @mutationQueueEmptyTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing waiting to sync'**
+  String get mutationQueueEmptyTitle;
+
+  /// No description provided for @mutationQueueEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New offline actions will appear here until they are sent successfully.'**
+  String get mutationQueueEmptySubtitle;
+
+  /// No description provided for @mutationQueueLoadFailureMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the pending sync queue right now.'**
+  String get mutationQueueLoadFailureMessage;
+
+  /// No description provided for @mutationQueueRetryAllAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry all'**
+  String get mutationQueueRetryAllAction;
+
+  /// No description provided for @mutationQueueViewListAction.
+  ///
+  /// In en, this message translates to:
+  /// **'View queued actions'**
+  String get mutationQueueViewListAction;
+
+  /// No description provided for @mutationQueueDismissAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get mutationQueueDismissAction;
+
+  /// No description provided for @mutationQueueBannerSummary.
+  ///
+  /// In en, this message translates to:
+  /// **'{pending} pending · {retrying} retrying · {failed} failed · {exhausted} exhausted'**
+  String mutationQueueBannerSummary(
+    int pending,
+    int retrying,
+    int failed,
+    int exhausted,
+  );
+
+  /// No description provided for @mutationQueueRetryProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Retries {used} of {max}'**
+  String mutationQueueRetryProgress(int used, int max);
+
+  /// No description provided for @mutationQueueStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get mutationQueueStatusPending;
+
+  /// No description provided for @mutationQueueStatusRetrying.
+  ///
+  /// In en, this message translates to:
+  /// **'Retrying'**
+  String get mutationQueueStatusRetrying;
+
+  /// No description provided for @mutationQueueStatusFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get mutationQueueStatusFailed;
+
+  /// No description provided for @mutationQueueStatusExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'Exhausted'**
+  String get mutationQueueStatusExhausted;
+
+  /// No description provided for @mutationQueueStatusCompleted.
+  ///
+  /// In en, this message translates to:
+  /// **'Completed'**
+  String get mutationQueueStatusCompleted;
+
+  /// No description provided for @mutationQueueTargetLoadBooking.
+  ///
+  /// In en, this message translates to:
+  /// **'Load booking'**
+  String get mutationQueueTargetLoadBooking;
+
+  /// No description provided for @mutationQueueTargetChatSend.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat message'**
+  String get mutationQueueTargetChatSend;
+
+  /// No description provided for @mutationQueueTargetPodProof.
+  ///
+  /// In en, this message translates to:
+  /// **'POD proof upload'**
+  String get mutationQueueTargetPodProof;
+
+  /// No description provided for @mutationQueueTargetLrProof.
+  ///
+  /// In en, this message translates to:
+  /// **'LR proof upload'**
+  String get mutationQueueTargetLrProof;
+
+  /// No description provided for @mutationQueueTargetProfileUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile update'**
+  String get mutationQueueTargetProfileUpdate;
+
+  /// No description provided for @mutationQueueTargetSupplierProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Supplier profile'**
+  String get mutationQueueTargetSupplierProfile;
+
+  /// No description provided for @mutationQueueTargetDispute.
+  ///
+  /// In en, this message translates to:
+  /// **'Dispute'**
+  String get mutationQueueTargetDispute;
+
+  /// No description provided for @mutationQueueTargetReviewSubmit.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get mutationQueueTargetReviewSubmit;
+
+  /// No description provided for @mutationQueueTargetReviewReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Review reply'**
+  String get mutationQueueTargetReviewReply;
+
+  /// No description provided for @mutationQueueTargetNotificationRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Notification read'**
+  String get mutationQueueTargetNotificationRead;
+
+  /// No description provided for @mutationQueueTargetCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Other action'**
+  String get mutationQueueTargetCustom;
+
   /// No description provided for @validationProfilePhotoRequired.
   ///
   /// In en, this message translates to:

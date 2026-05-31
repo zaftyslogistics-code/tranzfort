@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../core/providers/mutation_queue_provider.dart';
+import '../../core/navigation/app_routes.dart';
 import '../../core/providers/mutation_queue_processor_provider.dart';
+import '../../core/providers/mutation_queue_provider.dart';
 import '../../l10n/app_localizations.dart';
 
-/// A banner widget that shows sync status for offline operations.
-/// Displays pending and failed mutation counts with retry functionality.
+/// Banner showing pending/failed offline mutations with retry and list navigation.
 class OfflineSyncStatusBanner extends ConsumerStatefulWidget {
   const OfflineSyncStatusBanner({super.key});
 
@@ -53,6 +54,18 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
     super.dispose();
   }
 
+  Future<void> _retryAll() async {
+    ref.read(isSyncingProvider.notifier).setSyncing(true);
+    try {
+      await ref.read(mutationQueueProcessorProvider).processQueue();
+    } finally {
+      if (mounted) {
+        ref.read(isSyncingProvider.notifier).setSyncing(false);
+        bumpMutationQueueRefresh(ref);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
@@ -60,6 +73,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
     final retryingCountAsync = ref.watch(retryingMutationCountProvider);
     final failedCountAsync = ref.watch(failedMutationCountProvider);
     final exhaustedCountAsync = ref.watch(exhaustedMutationCountProvider);
+    final isSyncing = ref.watch(isSyncingProvider);
 
     return pendingCountAsync.when(
       data: (pendingCount) {
@@ -69,13 +83,12 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
               data: (failedCount) {
                 return exhaustedCountAsync.when(
                   data: (exhaustedCount) {
-                    final totalCount = pendingCount + retryingCount + failedCount + exhaustedCount;
-                    
+                    final totalCount = pendingCount + retryingCount + failedCount;
+
                     if (dismissed || totalCount == 0) {
                       return const SizedBox.shrink();
                     }
 
-                    // Show banner if there are any mutations
                     _animationController.forward();
 
                     return SlideTransition(
@@ -83,9 +96,7 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                       child: FadeTransition(
                         opacity: _fadeAnimation,
                         child: Material(
-                          color: totalCount > 0
-                              ? Colors.orange.shade100
-                              : Colors.red.shade100,
+                          color: Colors.orange.shade100,
                           child: SafeArea(
                             bottom: false,
                             child: Padding(
@@ -102,89 +113,55 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                                       crossAxisAlignment: CrossAxisAlignment.start,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        // Show pending count
-                                        if (pendingCount > 0)
-                                          Text(
-                                            '$pendingCount ${l10n.offlineSyncPending}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                ),
+                                        Text(
+                                          l10n.mutationQueueBannerSummary(
+                                            pendingCount,
+                                            retryingCount,
+                                            failedCount,
+                                            exhaustedCount,
                                           ),
-                                        // Show retrying count
-                                        if (retryingCount > 0)
-                                          Text(
-                                            '$retryingCount ${l10n.offlineSyncRetrying}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  fontWeight: FontWeight.w600,
-                                                  fontStyle: FontStyle.italic,
-                                                ),
+                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        TextButton(
+                                          onPressed: () => context.push(AppRoutes.pendingSyncPath),
+                                          style: TextButton.styleFrom(
+                                            padding: EdgeInsets.zero,
+                                            minimumSize: Size.zero,
+                                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                           ),
-                                        // Show failed (non-exhausted) count
-                                        if (failedCount > exhaustedCount)
-                                          Text(
-                                            '${failedCount - exhaustedCount} ${l10n.offlineSyncFailed}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  color: Colors.orange.shade700,
-                                                ),
-                                          ),
-                                        // Show exhausted count
-                                        if (exhaustedCount > 0)
-                                          Text(
-                                            '$exhaustedCount ${l10n.offlineSyncExhausted}',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium
-                                                ?.copyWith(
-                                                  color: Colors.red.shade700,
-                                                ),
-                                          ),
+                                          child: Text(l10n.mutationQueueViewListAction),
+                                        ),
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 12),
-                                  TextButton.icon(
+                                  IconButton(
                                     onPressed: dismiss,
                                     icon: const Icon(Icons.close, size: 20),
-                                    label: const Text(''),
                                   ),
-                                  if (totalCount > 0)
-                                    ElevatedButton.icon(
-                                      onPressed: () {
-                                        final processor = ref.read(mutationQueueProcessorProvider);
-                                        ref.read(isSyncingProvider.notifier).setSyncing(true);
-                                        processor.processQueue().whenComplete(() {
-                                          if (mounted) {
-                                            ref.read(isSyncingProvider.notifier).setSyncing(false);
-                                          }
-                                        });
-                                      },
-                                      icon: ref.watch(isSyncingProvider)
-                                          ? const SizedBox(
-                                              width: 18,
-                                              height: 18,
-                                              child: CircularProgressIndicator(
-                                                strokeWidth: 2,
-                                                color: Colors.white,
-                                              ),
-                                            )
-                                          : const Icon(Icons.refresh, size: 18),
-                                      label: const Text('Retry'),
-                                      style: ElevatedButton.styleFrom(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 12,
-                                          vertical: 8,
-                                        ),
+                                  const SizedBox(width: 4),
+                                  ElevatedButton.icon(
+                                    onPressed: isSyncing ? null : _retryAll,
+                                    icon: isSyncing
+                                        ? const SizedBox(
+                                            width: 18,
+                                            height: 18,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : const Icon(Icons.refresh, size: 18),
+                                    label: Text(l10n.mutationQueueRetryAllAction),
+                                    style: ElevatedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 12,
+                                        vertical: 8,
                                       ),
                                     ),
+                                  ),
                                 ],
                               ),
                             ),
@@ -194,19 +171,19 @@ class _OfflineSyncBannerState extends ConsumerState<OfflineSyncStatusBanner>
                     );
                   },
                   loading: () => const SizedBox.shrink(),
-                  error: (context, error) => const SizedBox.shrink(),
+                  error: (_, __) => const SizedBox.shrink(),
                 );
               },
               loading: () => const SizedBox.shrink(),
-              error: (context, error) => const SizedBox.shrink(),
+              error: (_, __) => const SizedBox.shrink(),
             );
           },
           loading: () => const SizedBox.shrink(),
-          error: (context, error) => const SizedBox.shrink(),
+          error: (_, __) => const SizedBox.shrink(),
         );
       },
       loading: () => const SizedBox.shrink(),
-      error: (context, error) => const SizedBox.shrink(),
+      error: (_, __) => const SizedBox.shrink(),
     );
   }
 

@@ -2436,6 +2436,47 @@
   "offlineSyncRetrying": "retrying",
   "offlineSyncFailed": "failed",
   "offlineSyncExhausted": "exhausted (max retries)",
+  "mutationQueueScreenTitle": "Pending sync",
+  "mutationQueueScreenSubtitle": "Actions saved on this device while offline or after errors. Retry when you are back online.",
+  "mutationQueueListTitle": "Queued actions",
+  "mutationQueueEmptyTitle": "Nothing waiting to sync",
+  "mutationQueueEmptySubtitle": "New offline actions will appear here until they are sent successfully.",
+  "mutationQueueLoadFailureMessage": "Could not load the pending sync queue right now.",
+  "mutationQueueRetryAllAction": "Retry all",
+  "mutationQueueViewListAction": "View queued actions",
+  "mutationQueueDismissAction": "Remove",
+  "mutationQueueBannerSummary": "{pending} pending · {retrying} retrying · {failed} failed · {exhausted} exhausted",
+  "@mutationQueueBannerSummary": {
+    "placeholders": {
+      "pending": {"type": "int"},
+      "retrying": {"type": "int"},
+      "failed": {"type": "int"},
+      "exhausted": {"type": "int"}
+    }
+  },
+  "mutationQueueRetryProgress": "Retries {used} of {max}",
+  "@mutationQueueRetryProgress": {
+    "placeholders": {
+      "used": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  },
+  "mutationQueueStatusPending": "Pending",
+  "mutationQueueStatusRetrying": "Retrying",
+  "mutationQueueStatusFailed": "Failed",
+  "mutationQueueStatusExhausted": "Exhausted",
+  "mutationQueueStatusCompleted": "Completed",
+  "mutationQueueTargetLoadBooking": "Load booking",
+  "mutationQueueTargetChatSend": "Chat message",
+  "mutationQueueTargetPodProof": "POD proof upload",
+  "mutationQueueTargetLrProof": "LR proof upload",
+  "mutationQueueTargetProfileUpdate": "Profile update",
+  "mutationQueueTargetSupplierProfile": "Supplier profile",
+  "mutationQueueTargetDispute": "Dispute",
+  "mutationQueueTargetReviewSubmit": "Review",
+  "mutationQueueTargetReviewReply": "Review reply",
+  "mutationQueueTargetNotificationRead": "Notification read",
+  "mutationQueueTargetCustom": "Other action",
   "validationProfilePhotoRequired": "Profile photo is required",
   "validationAadhaarRequired": "Aadhaar number is required",
   "validationTruckNumberRequired": "Truck number is required",

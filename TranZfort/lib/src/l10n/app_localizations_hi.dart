@@ -6074,6 +6074,99 @@ class AppLocalizationsHi extends AppLocalizations {
   String get offlineSyncExhausted => 'समाप्त (अधिकतम पुनः प्रयास)';
 
   @override
+  String get mutationQueueScreenTitle => 'लंबित सिंक';
+
+  @override
+  String get mutationQueueScreenSubtitle =>
+      'ऑफ़लाइन या त्रुटि के बाद इस डिवाइस पर सहेजी गई कार्रवाइयाँ। ऑनलाइन होने पर पुनः प्रयास करें।';
+
+  @override
+  String get mutationQueueListTitle => 'कतारबद्ध कार्रवाइयाँ';
+
+  @override
+  String get mutationQueueEmptyTitle => 'सिंक के लिए कुछ नहीं';
+
+  @override
+  String get mutationQueueEmptySubtitle =>
+      'नई ऑफ़लाइन कार्रवाइयाँ सफलतापूर्वक भेजे जाने तक यहाँ दिखेंगी।';
+
+  @override
+  String get mutationQueueLoadFailureMessage =>
+      'लंबित सिंक कतार अभी लोड नहीं हो सकी।';
+
+  @override
+  String get mutationQueueRetryAllAction => 'सभी पुनः प्रयास';
+
+  @override
+  String get mutationQueueViewListAction => 'कतारबद्ध कार्रवाइयाँ देखें';
+
+  @override
+  String get mutationQueueDismissAction => 'हटाएँ';
+
+  @override
+  String mutationQueueBannerSummary(
+    int pending,
+    int retrying,
+    int failed,
+    int exhausted,
+  ) {
+    return '$pending लंबित · $retrying पुनः प्रयास · $failed विफल · $exhausted समाप्त';
+  }
+
+  @override
+  String mutationQueueRetryProgress(int used, int max) {
+    return 'पुनः प्रयास $used/$max';
+  }
+
+  @override
+  String get mutationQueueStatusPending => 'लंबित';
+
+  @override
+  String get mutationQueueStatusRetrying => 'पुनः प्रयास';
+
+  @override
+  String get mutationQueueStatusFailed => 'विफल';
+
+  @override
+  String get mutationQueueStatusExhausted => 'समाप्त';
+
+  @override
+  String get mutationQueueStatusCompleted => 'पूर्ण';
+
+  @override
+  String get mutationQueueTargetLoadBooking => 'लोड बुकिंग';
+
+  @override
+  String get mutationQueueTargetChatSend => 'चैट संदेश';
+
+  @override
+  String get mutationQueueTargetPodProof => 'POD प्रूफ अपलोड';
+
+  @override
+  String get mutationQueueTargetLrProof => 'LR प्रूफ अपलोड';
+
+  @override
+  String get mutationQueueTargetProfileUpdate => 'प्रोफ़ाइल अपडेट';
+
+  @override
+  String get mutationQueueTargetSupplierProfile => 'सप्लायर प्रोफ़ाइल';
+
+  @override
+  String get mutationQueueTargetDispute => 'विवाद';
+
+  @override
+  String get mutationQueueTargetReviewSubmit => 'समीक्षा';
+
+  @override
+  String get mutationQueueTargetReviewReply => 'समीक्षा उत्तर';
+
+  @override
+  String get mutationQueueTargetNotificationRead => 'सूचना पढ़ी';
+
+  @override
+  String get mutationQueueTargetCustom => 'अन्य कार्रवाई';
+
+  @override
   String get validationProfilePhotoRequired => 'प्रोफाइल फोटो आवश्यक है';
 
   @override
