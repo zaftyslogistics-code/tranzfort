@@ -3943,6 +3943,54 @@ class AppLocalizationsEn extends AppLocalizations {
       'I confirm that the information and uploaded documents are accurate and ready for verification review.';
 
   @override
+  String get marketplaceIntroBannerTitle => 'Marketplace introduction';
+
+  @override
+  String get marketplaceIntroBannerMessage =>
+      'TranZfort introduces loads and truckers only. We do not guarantee payment, delivery, or counterparty identity. Verify the other party independently before booking or handing over cargo.';
+
+  @override
+  String get marketplaceIntroBannerDismissAction => 'I understand';
+
+  @override
+  String get counterpartyChecklistTitle => 'Verify your counterparty';
+
+  @override
+  String get counterpartyChecklistSubtitle =>
+      'Use this checklist before you book a load or hand over cargo.';
+
+  @override
+  String get counterpartyChecklistStep1 =>
+      'Confirm the supplier or trucker name and mobile number match the in-app profile.';
+
+  @override
+  String get counterpartyChecklistStep2 =>
+      'Ask for business proof (GSTIN, company name) outside the app if the deal value is high.';
+
+  @override
+  String get counterpartyChecklistStep3 =>
+      'Agree payment terms in writing before dispatch—TranZfort does not hold or guarantee payments.';
+
+  @override
+  String get counterpartyChecklistStep4 =>
+      'Inspect truck documents (RC, driver ID) before loading when possible.';
+
+  @override
+  String get counterpartyChecklistStep5 =>
+      'Report spam, fake listings, or abuse from load detail or Support if something looks wrong.';
+
+  @override
+  String get counterpartyChecklistOpenFromBookingAction =>
+      'Counterparty verification checklist';
+
+  @override
+  String get reportIssueCategoryFakeListing => 'Fake or misleading listing';
+
+  @override
+  String get reportIssueCategoryGuidanceFakeListing =>
+      'Explain why the listing looks fake or misleading and attach one screenshot that shows the problem.';
+
+  @override
   String get verificationSubmissionMarketplaceNotice =>
       'TranZfort reviews documents for marketplace access only. We are a load introduction marketplace—not a transport contractor, broker of record, or payment guarantor.';
 

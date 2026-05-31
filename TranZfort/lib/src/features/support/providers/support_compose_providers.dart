@@ -19,6 +19,7 @@ const List<String> supportTicketCategories = <String>[
 
 const List<String> reportIssueCategories = <String>[
   'spam_or_scam',
+  'fake_listing',
   'fake_payout_proof',
   'non_payment',
   'abusive_behavior',

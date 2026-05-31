@@ -8,6 +8,7 @@ import '../../features/auth/presentation/onboarding_profile_completion.dart';
 import '../../features/communication/presentation/chat_screen.dart';
 import '../../features/notifications/presentation/notifications_screen.dart';
 import '../../features/profile/providers/public_profile_providers.dart';
+import '../../features/help/presentation/counterparty_checklist_screen.dart';
 import '../../features/shell/presentation/delete_account_screen.dart';
 import '../../features/shell/presentation/profile_edit_screen.dart';
 import '../../features/supplier/presentation/post_load_screen.dart';
@@ -578,6 +579,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             path: AppRoutes.deleteAccountPath,
             name: AppRoutes.deleteAccount,
             builder: (context, state) => const DeleteAccountScreen(),
+          ),
+          GoRoute(
+            path: AppRoutes.counterpartyChecklistPath,
+            name: AppRoutes.counterpartyChecklist,
+            builder: (context, state) => const CounterpartyChecklistScreen(),
           ),
           GoRoute(
             path: '${AppRoutes.raiseDisputePath}/:tripId',

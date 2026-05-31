@@ -6296,6 +6296,84 @@ abstract class AppLocalizations {
   /// **'I confirm that the information and uploaded documents are accurate and ready for verification review.'**
   String get verificationWizardTermsText;
 
+  /// No description provided for @marketplaceIntroBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Marketplace introduction'**
+  String get marketplaceIntroBannerTitle;
+
+  /// No description provided for @marketplaceIntroBannerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'TranZfort introduces loads and truckers only. We do not guarantee payment, delivery, or counterparty identity. Verify the other party independently before booking or handing over cargo.'**
+  String get marketplaceIntroBannerMessage;
+
+  /// No description provided for @marketplaceIntroBannerDismissAction.
+  ///
+  /// In en, this message translates to:
+  /// **'I understand'**
+  String get marketplaceIntroBannerDismissAction;
+
+  /// No description provided for @counterpartyChecklistTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Verify your counterparty'**
+  String get counterpartyChecklistTitle;
+
+  /// No description provided for @counterpartyChecklistSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this checklist before you book a load or hand over cargo.'**
+  String get counterpartyChecklistSubtitle;
+
+  /// No description provided for @counterpartyChecklistStep1.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm the supplier or trucker name and mobile number match the in-app profile.'**
+  String get counterpartyChecklistStep1;
+
+  /// No description provided for @counterpartyChecklistStep2.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask for business proof (GSTIN, company name) outside the app if the deal value is high.'**
+  String get counterpartyChecklistStep2;
+
+  /// No description provided for @counterpartyChecklistStep3.
+  ///
+  /// In en, this message translates to:
+  /// **'Agree payment terms in writing before dispatch—TranZfort does not hold or guarantee payments.'**
+  String get counterpartyChecklistStep3;
+
+  /// No description provided for @counterpartyChecklistStep4.
+  ///
+  /// In en, this message translates to:
+  /// **'Inspect truck documents (RC, driver ID) before loading when possible.'**
+  String get counterpartyChecklistStep4;
+
+  /// No description provided for @counterpartyChecklistStep5.
+  ///
+  /// In en, this message translates to:
+  /// **'Report spam, fake listings, or abuse from load detail or Support if something looks wrong.'**
+  String get counterpartyChecklistStep5;
+
+  /// No description provided for @counterpartyChecklistOpenFromBookingAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Counterparty verification checklist'**
+  String get counterpartyChecklistOpenFromBookingAction;
+
+  /// No description provided for @reportIssueCategoryFakeListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Fake or misleading listing'**
+  String get reportIssueCategoryFakeListing;
+
+  /// No description provided for @reportIssueCategoryGuidanceFakeListing.
+  ///
+  /// In en, this message translates to:
+  /// **'Explain why the listing looks fake or misleading and attach one screenshot that shows the problem.'**
+  String get reportIssueCategoryGuidanceFakeListing;
+
   /// No description provided for @verificationSubmissionMarketplaceNotice.
   ///
   /// In en, this message translates to:

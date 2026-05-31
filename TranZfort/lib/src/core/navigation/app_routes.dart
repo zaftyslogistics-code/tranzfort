@@ -38,6 +38,7 @@ class AppRoutes {
   static const reportIssue = 'report-issue';
   static const raiseDispute = 'raise-dispute';
   static const deleteAccount = 'delete-account';
+  static const counterpartyChecklist = 'counterparty-checklist';
   static const publicProfile = 'public-profile';
 
   static const splashPath = '/splash';
@@ -77,6 +78,7 @@ class AppRoutes {
   static const reportIssuePath = '/report-issue';
   static const raiseDisputePath = '/raise-dispute';
   static const deleteAccountPath = '/delete-account';
+  static const counterpartyChecklistPath = '/help/counterparty-checklist';
 
   static String publicProfileLocation(String userId) {
     return publicProfilePath.replaceAll(':userId', userId);

@@ -3961,6 +3961,54 @@ class AppLocalizationsHi extends AppLocalizations {
       'मैं पुष्टि करता/करती हूँ कि दी गई जानकारी और अपलोड किए गए दस्तावेज़ सही हैं और वेरिफिकेशन समीक्षा के लिए तैयार हैं।';
 
   @override
+  String get marketplaceIntroBannerTitle => 'Marketplace परिचय';
+
+  @override
+  String get marketplaceIntroBannerMessage =>
+      'TranZfort केवल लोड और ट्रकर को जोड़ता है। भुगतान, डिलीवरी या पहचान की गारंटी नहीं देता। बुकिंग या माल सौंपने से पहले काउंटरपार्टी स्वतंत्र रूप से सत्यापित करें।';
+
+  @override
+  String get marketplaceIntroBannerDismissAction => 'मैं समझ गया/गई';
+
+  @override
+  String get counterpartyChecklistTitle => 'काउंटरपार्टी सत्यापित करें';
+
+  @override
+  String get counterpartyChecklistSubtitle =>
+      'लोड बुक करने या माल सौंपने से पहले यह चेकलिस्ट देखें।';
+
+  @override
+  String get counterpartyChecklistStep1 =>
+      'सप्लायर/ट्रकर का नाम और mobile ऐप प्रोफ़ाइल से मेल खाता है, यह पुष्टि करें।';
+
+  @override
+  String get counterpartyChecklistStep2 =>
+      'बड़े सौदे में GSTIN और कंपनी नाम जैसा बिज़नेस प्रूफ ऐप के बाहर माँगें।';
+
+  @override
+  String get counterpartyChecklistStep3 =>
+      'डिस्पैच से पहले भुगतान शर्तें लिखित में तय करें—TranZfort भुगतान होल्ड या गारंटी नहीं करता।';
+
+  @override
+  String get counterpartyChecklistStep4 =>
+      'संभव हो तो लोडिंग से पहले ट्रक दस्तावेज़ (RC, ड्राइवर ID) देखें।';
+
+  @override
+  String get counterpartyChecklistStep5 =>
+      'कुछ गलत लगे तो load detail या Support से spam, fake listing या abuse रिपोर्ट करें।';
+
+  @override
+  String get counterpartyChecklistOpenFromBookingAction =>
+      'काउंटरपार्टी सत्यापन चेकलिस्ट';
+
+  @override
+  String get reportIssueCategoryFakeListing => 'फर्जी या भ्रामक listing';
+
+  @override
+  String get reportIssueCategoryGuidanceFakeListing =>
+      'बताएँ listing क्यों fake या भ्रामक लगती है और एक screenshot संलग्न करें।';
+
+  @override
   String get verificationSubmissionMarketplaceNotice =>
       'TranZfort दस्तावेज़ केवल मार्केटप्लेस एक्सेस समीक्षा के लिए देखता है। हम लोड परिचय मार्केटप्लेस हैं—परिवहन ठेकेदार, ब्रोकर ऑफ रिकॉर्ड या भुगतान गारंटर नहीं।';
 

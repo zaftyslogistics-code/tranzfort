@@ -12,6 +12,8 @@ import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
+import '../../../shared/widgets/marketplace_intro_banner.dart';
+import '../../../core/services/marketplace_intro_preferences.dart';
 import '../data/supplier_profile_repository.dart';
 import '../data/supplier_location_services.dart';
 import '../providers/my_loads_provider.dart';
@@ -169,6 +171,9 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         ttsSummary: '${l10n.supplierPostLoadHeroTitle}. ${l10n.supplierPostLoadHeroSubtitle}',
         ttsScreenKey: AppRoutes.postLoadPath,
         children: [
+        const MarketplaceIntroBanner(
+          surface: MarketplaceIntroSurface.supplierPostLoad,
+        ),
         HeroActionCard(
           title: l10n.supplierPostLoadHeroTitle == l10n.commonPostLoadAction
               ? l10n.supplierPostLoadHeroSubtitle

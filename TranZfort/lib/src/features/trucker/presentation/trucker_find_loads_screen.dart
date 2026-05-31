@@ -13,7 +13,9 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/marketplace_intro_banner.dart';
 import '../../../shared/widgets/marketplace_load_card.dart';
+import '../../../core/services/marketplace_intro_preferences.dart';
 import '../../communication/data/chat_repository.dart';
 import '../data/trucker_city_search_service.dart';
 import '../data/trucker_marketplace_repository.dart';
@@ -106,6 +108,19 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
               padding: const EdgeInsets.fromLTRB(
                 AppSpacing.lg,
                 AppSpacing.xl,
+                AppSpacing.lg,
+                0,
+              ),
+              sliver: const SliverToBoxAdapter(
+                child: MarketplaceIntroBanner(
+                  surface: MarketplaceIntroSurface.truckerFindLoads,
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.fromLTRB(
+                AppSpacing.lg,
+                AppSpacing.md,
                 AppSpacing.lg,
                 AppSpacing.sm,
               ),

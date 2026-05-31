@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/navigation/app_routes.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/action_buttons.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -70,6 +72,13 @@ class _TruckerBookingConfirmationDialogState extends State<_TruckerBookingConfir
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               controlAffinity: ListTileControlAffinity.leading,
+            ),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: TextButton(
+                onPressed: () => context.push(AppRoutes.counterpartyChecklistPath),
+                child: Text(l10n.counterpartyChecklistOpenFromBookingAction),
+              ),
             ),
           ],
         ),

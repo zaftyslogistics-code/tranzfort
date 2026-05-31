@@ -14,6 +14,7 @@ import '../../../features/supplier/providers/post_load_quota_provider.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../features/supplier/providers/my_loads_provider.dart';
 import '../../../features/supplier/providers/supplier_providers.dart';
+import '../../../features/support/providers/support_compose_providers.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
@@ -322,6 +323,21 @@ class _SupplierLoadListCard extends ConsumerWidget {
           TextActionButton(
             label: _primaryActionLabel(context, load.status),
             onPressed: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          TextActionButton(
+            label: l10n.commonReportSpamOrAbuseAction,
+            onPressed: () => context.push(
+              AppRoutes.reportIssuePath,
+              extra: ReportIssueContext(
+                initialCategory: 'fake_listing',
+                relatedLoadId: load.id,
+                relatedTripId: '',
+                sourceLabel: l10n.reportSourceSupplierLoad(
+                  '${load.originLabel} > ${load.destinationLabel}',
+                ),
+              ),
+            ),
           ),
         ],
       ),

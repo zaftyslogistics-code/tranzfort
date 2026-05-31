@@ -226,6 +226,11 @@ class SettingsScreen extends ConsumerWidget {
                 onTap: () => context.go(AppRoutes.supportPath),
               ),
               NavListTile(
+                icon: Icons.fact_check_outlined,
+                label: l10n.counterpartyChecklistTitle,
+                onTap: () => context.push(AppRoutes.counterpartyChecklistPath),
+              ),
+              NavListTile(
                 icon: Icons.delete_outline,
                 label: l10n.navDeleteAccount,
                 onTap: () => context.go(AppRoutes.deleteAccountPath),

@@ -282,6 +282,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
   String _categoryLabel(AppLocalizations l10n, String category) {
     return switch (category.trim().toLowerCase()) {
       'spam_or_scam' => l10n.reportIssueCategorySpamOrScam,
+      'fake_listing' => l10n.reportIssueCategoryFakeListing,
       'abusive_behavior' => l10n.reportIssueCategoryAbusiveBehavior,
       'fake_payout_proof' => l10n.reportIssueCategoryFakePayoutProof,
       'non_payment' => l10n.reportIssueCategoryNonPayment,
@@ -292,6 +293,7 @@ class _ReportIssueScreenState extends ConsumerState<ReportIssueScreen> {
   String _categoryGuidance(AppLocalizations l10n, String category) {
     return switch (category.trim().toLowerCase()) {
       'spam_or_scam' => l10n.reportIssueCategoryGuidanceSpamOrScam,
+      'fake_listing' => l10n.reportIssueCategoryGuidanceFakeListing,
       'abusive_behavior' => l10n.reportIssueCategoryGuidanceAbusiveBehavior,
       'fake_payout_proof' => l10n.reportIssueCategoryGuidanceFakePayoutProof,
       'non_payment' => l10n.reportIssueCategoryGuidanceNonPayment,
