@@ -93,8 +93,8 @@ void main() {
     final result = await repository.fetchTripDetail('trip-1');
 
     expect(result.isSuccess, isTrue);
-    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra > Mumbai, Maharashtra');
-    expect(result.valueOrNull?.supplier.fullName, 'Amit Supplier');
+    expect(result.valueOrNull?.routeLabel, 'Chandrapur, Maharashtra to Mumbai, Maharashtra');
+    expect(result.valueOrNull?.supplier.fullName, 'Test Supplier');
     expect(result.valueOrNull?.truckBodyType, 'Open');
   });
 
