@@ -210,7 +210,7 @@ void main() {
     expect(find.text('Proof documents'), findsOneWidget);
     expect(find.text('Confirm Delivery'), findsOneWidget);
     expect(find.text('Dispute POD'), findsOneWidget);
-    expect(find.text('Verified'), findsOneWidget);
+    expect(find.text('Platform access approved'), findsOneWidget);
     expect(find.text('Body type: Open'), findsOneWidget);
     expect(find.text('Trucker: Ravi Trucker'), findsOneWidget);
   });

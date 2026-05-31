@@ -475,7 +475,7 @@ void main() {
     expect(find.text('Upload POD'), findsOneWidget);
     expect(find.text('Upload POD Photo'), findsOneWidget);
     expect(find.text('Call Supplier'), findsOneWidget);
-    expect(find.text('Verified'), findsOneWidget);
+    expect(find.text('Platform access approved'), findsOneWidget);
     expect(find.text('Truck and supplier'), findsOneWidget);
     expect(find.text('Body type: Open'), findsOneWidget);
     expect(find.text('Supplier: Amit Supplier'), findsOneWidget);

@@ -1437,7 +1437,7 @@
   "supplierCompleteSetupTitle": "Complete your supplier setup",
   "supplierCompleteSetupMessage": "Complete supplier verification and add your company details before using the full supplier workspace.",
   "supplierCompleteVerification": "Complete verification",
-  "supplierDashboardSuperLoadVerificationComplete": "Verification complete",
+  "supplierDashboardSuperLoadVerificationComplete": "Platform access approved",
   "supplierDashboardSuperLoadBusinessLicenceOnFile": "Business licence on file",
   "supplierDashboardSuperLoadBusinessLicenceMissing": "Business licence missing",
   "supplierDashboardSuperLoadCompanyAgeUnavailable": "Company-age readiness unavailable in current app data",
@@ -1852,7 +1852,10 @@
     }
   },
   "verificationDocumentUploadFailureMessage": "We could not upload that verification document right now. Try another image or retry shortly.",
-  "verificationStatusVerified": "Verified",
+  "verificationStatusVerified": "Platform access approved",
+  "@verificationStatusVerified": {
+    "description": "Own-account verification status (not the counterparty Platform reviewed badge)."
+  },
   "verificationStatusRejected": "Rejected",
   "verificationStatusUnverified": "Unverified",
   "verificationPacketDetailsSectionTitle": "Verification packet details",
@@ -1880,7 +1883,7 @@
   "verificationNotSubmittedSupplierMessage": "Upload Aadhaar, PAN, profile photo, and business licence before submitting supplier verification.",
   "verificationNotSubmittedTruckerMessage": "Upload Aadhaar, PAN, profile photo, and ensure at least one approved truck exists before submitting trucker verification.",
   "verificationLockedStatusSectionTitle": "Verification status",
-  "verificationLockedStatusValue": "{status, select, verified_title {Verified} pending_title {Under review} verified_message {Your verification has been approved. No action is needed right now.} pending_message {Your documents are being reviewed. You will be notified once the review is complete.} other {Unknown}}",
+  "verificationLockedStatusValue": "{status, select, verified_title {Platform access approved} pending_title {Under review} verified_message {Your documents passed platform access review. No action is needed right now.} pending_message {Your documents are being reviewed. You will be notified once the review is complete.} other {Unknown}}",
   "@verificationLockedStatusValue": {
     "placeholders": {
       "status": {}

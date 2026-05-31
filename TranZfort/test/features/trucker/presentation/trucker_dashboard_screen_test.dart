@@ -252,7 +252,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Welcome back, Ravi Trucker'), findsOneWidget);
-    expect(find.text('Verified'), findsWidgets);
+    expect(find.text('Platform access approved'), findsWidgets);
 
     await tester.scrollUntilVisible(
       find.text('Dashboard overview'),
@@ -297,7 +297,7 @@ void main() {
 
     expect(find.text('Readiness and next steps'), findsOneWidget);
     expect(find.text('Verification status'), findsOneWidget);
-    expect(find.text('Verified'), findsWidgets);
+    expect(find.text('Platform access approved'), findsWidgets);
     expect(find.text('Fleet readiness'), findsOneWidget);
     expect(find.textContaining('Truck lifecycle attention:'), findsOneWidget);
   });
@@ -997,7 +997,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    expect(find.text('Verified'), findsWidgets);
+    expect(find.text('Platform access approved'), findsWidgets);
     expect(find.text('Verification status'), findsOneWidget);
   });
 

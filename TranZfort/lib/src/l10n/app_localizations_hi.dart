@@ -3151,7 +3151,8 @@ class AppLocalizationsHi extends AppLocalizations {
   String get supplierCompleteVerification => 'सत्यापन पूरा करें';
 
   @override
-  String get supplierDashboardSuperLoadVerificationComplete => 'सत्यापन पूर्ण';
+  String get supplierDashboardSuperLoadVerificationComplete =>
+      'प्लेटफ़ॉर्म एक्सेस स्वीकृत';
 
   @override
   String get supplierDashboardSuperLoadBusinessLicenceOnFile =>
@@ -4024,7 +4025,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी वह verification document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
-  String get verificationStatusVerified => 'जांच पूरी (वेरिफाइड)';
+  String get verificationStatusVerified => 'प्लेटफ़ॉर्म एक्सेस स्वीकृत';
 
   @override
   String get verificationStatusRejected => 'अस्वीकृत';
@@ -4113,10 +4114,10 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String verificationLockedStatusValue(String status) {
     String _temp0 = intl.Intl.selectLogic(status, {
-      'verified_title': 'जांच पूरी (वेरिफाइड)',
+      'verified_title': 'प्लेटफ़ॉर्म एक्सेस स्वीकृत',
       'pending_title': 'जांच चल रही है',
       'verified_message':
-          'आपकी verification approve हो चुकी है। अभी किसी action की ज़रूरत नहीं है।',
+          'आपके दस्तावेज़ों की प्लेटफ़ॉर्म एक्सेस समीक्षा पूरी हो गई है। अभी किसी कार्रवाई की ज़रूरत नहीं है।',
       'pending_message':
           'आपके कागज जांचे जा रहे हैं। जांच पूरी होने पर आपको मैसेज भेज दिया जाएगा।',
       'other': 'अज्ञात',

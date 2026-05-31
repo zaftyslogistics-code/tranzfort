@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_shadows.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../shared/widgets/avatar_widget.dart';
 import '../../../../shared/widgets/platform_reviewed_badge.dart';
+import '../../../../shared/widgets/status_components.dart';
 import '../../data/public_profile_models.dart';
 
 /// Profile header card displaying user identity with new user states.
@@ -180,6 +182,16 @@ class ProfileHeaderCard extends StatelessWidget {
     final status = profile.verificationStatus.trim().toLowerCase();
 
     if (status == 'verified') {
+      if (profile.isSelf) {
+        return StatusBadge(
+          label: l10n.verificationStatusVerified,
+          icon: Icons.verified_user_outlined,
+          palette: const StatusPalette(
+            foreground: AppColors.success,
+            background: AppColors.successBg,
+          ),
+        );
+      }
       return const PlatformReviewedBadge(compact: true);
     }
 

@@ -1337,7 +1337,7 @@
   "supplierCompleteSetupTitle": "अपना सप्लायर सेटअप पूरा करें",
   "supplierCompleteSetupMessage": "Full supplier workspace use करने से पहले supplier verification पूरी करें और अपनी company details जोड़ें।",
   "supplierCompleteVerification": "सत्यापन पूरा करें",
-  "supplierDashboardSuperLoadVerificationComplete": "सत्यापन पूर्ण",
+  "supplierDashboardSuperLoadVerificationComplete": "प्लेटफ़ॉर्म एक्सेस स्वीकृत",
   "supplierDashboardSuperLoadBusinessLicenceOnFile": "व्यवसाय लाइसेंस दर्ज है",
   "supplierDashboardSuperLoadBusinessLicenceMissing": "व्यवसाय लाइसेंस अनुपस्थित है",
   "supplierDashboardSuperLoadBadge": "सुपर लोड - {status}",
@@ -1749,7 +1749,7 @@
     }
   },
   "verificationDocumentUploadFailureMessage": "अभी वह verification document upload नहीं हो सकी। कोई दूसरी image आज़माएँ या थोड़ी देर बाद फिर कोशिश करें।",
-  "verificationStatusVerified": "जांच पूरी (वेरिफाइड)",
+  "verificationStatusVerified": "प्लेटफ़ॉर्म एक्सेस स्वीकृत",
   "verificationStatusRejected": "अस्वीकृत",
   "verificationStatusUnverified": "असत्यापित",
   "verificationPacketDetailsSectionTitle": "Verification packet विवरण",
@@ -1777,7 +1777,7 @@
   "verificationNotSubmittedSupplierMessage": "Supplier verification submit करने से पहले Aadhaar, PAN, profile photo और business licence upload करें।",
   "verificationNotSubmittedTruckerMessage": "Trucker verification submit करने से पहले Aadhaar, PAN, profile photo upload करें और सुनिश्चित करें कि कम-से-कम एक approved truck मौजूद हो।",
   "verificationLockedStatusSectionTitle": "वेरिफिकेशन स्थिति",
-  "verificationLockedStatusValue": "{status, select, verified_title {जांच पूरी (वेरिफाइड)} pending_title {जांच चल रही है} verified_message {आपकी verification approve हो चुकी है। अभी किसी action की ज़रूरत नहीं है।} pending_message {आपके कागज जांचे जा रहे हैं। जांच पूरी होने पर आपको मैसेज भेज दिया जाएगा।} other {अज्ञात}}",
+  "verificationLockedStatusValue": "{status, select, verified_title {प्लेटफ़ॉर्म एक्सेस स्वीकृत} pending_title {जांच चल रही है} verified_message {आपके दस्तावेज़ों की प्लेटफ़ॉर्म एक्सेस समीक्षा पूरी हो गई है। अभी किसी कार्रवाई की ज़रूरत नहीं है।} pending_message {आपके कागज जांचे जा रहे हैं। जांच पूरी होने पर आपको मैसेज भेज दिया जाएगा।} other {अज्ञात}}",
   "@verificationLockedStatusValue": {
     "placeholders": {
       "status": {}

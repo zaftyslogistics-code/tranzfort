@@ -3144,7 +3144,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get supplierDashboardSuperLoadVerificationComplete =>
-      'Verification complete';
+      'Platform access approved';
 
   @override
   String get supplierDashboardSuperLoadBusinessLicenceOnFile =>
@@ -4011,7 +4011,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not upload that verification document right now. Try another image or retry shortly.';
 
   @override
-  String get verificationStatusVerified => 'Verified';
+  String get verificationStatusVerified => 'Platform access approved';
 
   @override
   String get verificationStatusRejected => 'Rejected';
@@ -4099,10 +4099,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String verificationLockedStatusValue(String status) {
     String _temp0 = intl.Intl.selectLogic(status, {
-      'verified_title': 'Verified',
+      'verified_title': 'Platform access approved',
       'pending_title': 'Under review',
       'verified_message':
-          'Your verification has been approved. No action is needed right now.',
+          'Your documents passed platform access review. No action is needed right now.',
       'pending_message':
           'Your documents are being reviewed. You will be notified once the review is complete.',
       'other': 'Unknown',

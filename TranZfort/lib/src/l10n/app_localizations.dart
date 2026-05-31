@@ -5075,7 +5075,7 @@ abstract class AppLocalizations {
   /// No description provided for @supplierDashboardSuperLoadVerificationComplete.
   ///
   /// In en, this message translates to:
-  /// **'Verification complete'**
+  /// **'Platform access approved'**
   String get supplierDashboardSuperLoadVerificationComplete;
 
   /// No description provided for @supplierDashboardSuperLoadBusinessLicenceOnFile.
@@ -6404,10 +6404,10 @@ abstract class AppLocalizations {
   /// **'We could not upload that verification document right now. Try another image or retry shortly.'**
   String get verificationDocumentUploadFailureMessage;
 
-  /// No description provided for @verificationStatusVerified.
+  /// Own-account verification status (not the counterparty Platform reviewed badge).
   ///
   /// In en, this message translates to:
-  /// **'Verified'**
+  /// **'Platform access approved'**
   String get verificationStatusVerified;
 
   /// No description provided for @verificationStatusRejected.
@@ -6533,7 +6533,7 @@ abstract class AppLocalizations {
   /// No description provided for @verificationLockedStatusValue.
   ///
   /// In en, this message translates to:
-  /// **'{status, select, verified_title {Verified} pending_title {Under review} verified_message {Your verification has been approved. No action is needed right now.} pending_message {Your documents are being reviewed. You will be notified once the review is complete.} other {Unknown}}'**
+  /// **'{status, select, verified_title {Platform access approved} pending_title {Under review} verified_message {Your documents passed platform access review. No action is needed right now.} pending_message {Your documents are being reviewed. You will be notified once the review is complete.} other {Unknown}}'**
   String verificationLockedStatusValue(String status);
 
   /// No description provided for @verificationSubmitLockedFooter.
