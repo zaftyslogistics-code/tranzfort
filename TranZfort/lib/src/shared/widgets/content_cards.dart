@@ -17,6 +17,7 @@ class HeroActionCard extends StatelessWidget {
   final bool useDarkTheme; // Phase 4: use dark radial mesh
   final bool useInkGradient; // Load-detail style ink gradient (earnings card)
   final IconData? titleIcon;
+  final String? ttsMessage;
 
   const HeroActionCard({
     super.key,
@@ -29,11 +30,13 @@ class HeroActionCard extends StatelessWidget {
     this.useDarkTheme = false,
     this.useInkGradient = false,
     this.titleIcon,
+    this.ttsMessage,
   });
 
   @override
   Widget build(BuildContext context) {
     final hasSubtitle = subtitle.trim().isNotEmpty;
+    final spokenMessage = ttsMessage?.trim();
 
     if (useDarkTheme) {
       if (useInkGradient) {
@@ -82,6 +85,8 @@ class HeroActionCard extends StatelessWidget {
                       ],
                     ),
                   ),
+                  if (spokenMessage != null && spokenMessage.isNotEmpty)
+                    TtsCardSpeakerButton(message: spokenMessage),
                 ],
               ),
               if (leading != null) ...[
@@ -136,22 +141,39 @@ class HeroActionCard extends StatelessWidget {
                   leading!,
                   SizedBox(height: compact ? AppSpacing.md : AppSpacing.lg),
                 ],
-                Text(
-                  title,
-                  style: (compact ? Theme.of(context).textTheme.titleMedium : Theme.of(context).textTheme.titleLarge)?.copyWith(
-                        color: AppColors.inkTextPrimary,
-                        fontWeight: FontWeight.w700,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            title,
+                            style: (compact
+                                    ? Theme.of(context).textTheme.titleMedium
+                                    : Theme.of(context).textTheme.titleLarge)
+                                ?.copyWith(
+                              color: AppColors.inkTextPrimary,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          if (hasSubtitle) ...[
+                            const SizedBox(height: AppSpacing.sm),
+                            Text(
+                              subtitle,
+                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColors.inkTextSecondary,
+                                  ),
+                            ),
+                          ],
+                        ],
                       ),
+                    ),
+                    if (spokenMessage != null && spokenMessage.isNotEmpty)
+                      TtsCardSpeakerButton(message: spokenMessage),
+                  ],
                 ),
-                if (hasSubtitle) ...[
-                  const SizedBox(height: AppSpacing.sm),
-                  Text(
-                    subtitle,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: AppColors.inkTextSecondary,
-                        ),
-                  ),
-                ],
                 SizedBox(height: compact ? AppSpacing.md : AppSpacing.xl),
                 child,
                 if (primaryAction != null) ...[

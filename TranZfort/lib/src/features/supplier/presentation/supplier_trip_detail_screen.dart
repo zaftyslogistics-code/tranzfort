@@ -294,6 +294,7 @@ class _SupplierTripDetailBody extends ConsumerWidget {
           title: detail.material,
           subtitle: l10n.supplierTripDetailHeroSubtitle(detail.truckNumber),
           useDarkTheme: true,
+          ttsMessage: overviewTts,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -528,7 +529,6 @@ class _SupplierTripDetailBody extends ConsumerWidget {
         const SizedBox(height: 16),
         DetailSectionCard(
           title: l10n.commonRouteAndScheduleTitle,
-          ttsMessage: overviewTts,
           children: [
             Text(l10n.supplierTripDetailOriginLabel(detail.originLabel)),
             const SizedBox(height: 4),

@@ -66,6 +66,7 @@ class LoadDetailHero extends StatelessWidget {
       useDarkTheme: true,
       useInkGradient: true,
       titleIcon: titleIcon,
+      ttsMessage: ttsMessage,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

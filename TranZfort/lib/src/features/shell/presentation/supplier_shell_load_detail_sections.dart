@@ -27,7 +27,6 @@ import '../../../shared/widgets/load_detail_hero.dart';
 import '../../../shared/widgets/load_lifecycle_timeline.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/load_detail_tts_builder.dart';
-import '../../../shared/widgets/tts_read_all_button.dart';
 import '../../../features/support/providers/support_compose_providers.dart';
 import 'shell_components.dart';
 import 'supplier_shell_dashboard_sections.dart';
@@ -81,13 +80,12 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
             onRetry: () => ref.read(loadDetailProvider(loadId).notifier).load(),
           ),
         if (!state.isLoading && detail != null) ...[
-              TtsReadAllButton(message: readAllMessage ?? ''),
-              const SizedBox(height: AppSpacing.sectionGap),
               LoadDetailHero(
                 routeLine: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
                   formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),
+                ttsMessage: readAllMessage,
                 wrapInHeroActionCard: true,
                 badges: [
                   StatusBadge(
