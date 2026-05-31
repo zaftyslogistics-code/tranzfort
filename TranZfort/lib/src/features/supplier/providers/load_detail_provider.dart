@@ -16,6 +16,7 @@ class LoadDetailState {
   final bool isCancelling;
   final bool isClosingFilledOutsideApp;
   final bool isReposting;
+  final bool isRequestingSuperLoad;
   final String? approvingBookingId;
   final String? rejectingBookingId;
   final AppFailure? failure;
@@ -46,6 +47,7 @@ class LoadDetailState {
       isCancelling: false,
       isClosingFilledOutsideApp: false,
       isReposting: false,
+      isRequestingSuperLoad: false,
       approvingBookingId: null,
       rejectingBookingId: null,
       failure: null,
@@ -80,6 +82,7 @@ class LoadDetailState {
       isCancelling: isCancelling ?? this.isCancelling,
       isClosingFilledOutsideApp: isClosingFilledOutsideApp ?? this.isClosingFilledOutsideApp,
       isReposting: isReposting ?? this.isReposting,
+      isRequestingSuperLoad: isRequestingSuperLoad ?? this.isRequestingSuperLoad,
       approvingBookingId: clearApprovingBookingId == true
           ? null
           : approvingBookingId ?? this.approvingBookingId,
@@ -272,6 +275,23 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
     }
 
     state = state.copyWith(clearRejectingBookingId: true, clearActionFailure: true);
+    await load();
+    return result;
+  }
+
+  Future<Result<void>> requestSuperLoad() async {
+    if (state.isRequestingSuperLoad) {
+      return const Failure<void>(BusinessRuleFailure(message: 'Super Load request is already in progress'));
+    }
+
+    state = state.copyWith(isRequestingSuperLoad: true, clearActionFailure: true);
+    final result = await _repository.requestSuperLoad(state.loadId);
+    if (result.isFailure) {
+      state = state.copyWith(isRequestingSuperLoad: false, actionFailure: result.failureOrNull);
+      return result;
+    }
+
+    state = state.copyWith(isRequestingSuperLoad: false, clearActionFailure: true);
     await load();
     return result;
   }

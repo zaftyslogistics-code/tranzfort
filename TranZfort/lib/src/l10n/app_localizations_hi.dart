@@ -6299,6 +6299,26 @@ class AppLocalizationsHi extends AppLocalizations {
       'यह लोड अभी बंद नहीं हो सका। कृपया फिर प्रयास करें।';
 
   @override
+  String get supplierLoadDetailRequestSuperLoadAction => 'सुपर लोड अनुरोध करें';
+
+  @override
+  String get supplierLoadDetailRequestSuperLoadSuccess =>
+      'सुपर लोड अनुरोध एडमिन समीक्षा के लिए जमा हो गया।';
+
+  @override
+  String get supplierLoadDetailRequestSuperLoadDialogTitle =>
+      'सुपर लोड समीक्षा अनुरोध करें?';
+
+  @override
+  String supplierLoadDetailRequestSuperLoadDialogMessage(
+    Object material,
+    Object origin,
+    Object destination,
+  ) {
+    return '$material ($origin → $destination) को सुपर लोड एडमिन समीक्षा के लिए जमा करें। समीक्षा के दौरान लोड विवरण स्थिर रखें।';
+  }
+
+  @override
   String supplierLoadDetailOriginCity(Object value) {
     return 'मूल शहर: $value';
   }

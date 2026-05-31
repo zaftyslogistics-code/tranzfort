@@ -6280,6 +6280,26 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not close this load right now. Please try again.';
 
   @override
+  String get supplierLoadDetailRequestSuperLoadAction => 'Request Super Load';
+
+  @override
+  String get supplierLoadDetailRequestSuperLoadSuccess =>
+      'Super Load request submitted for admin review.';
+
+  @override
+  String get supplierLoadDetailRequestSuperLoadDialogTitle =>
+      'Request Super Load review?';
+
+  @override
+  String supplierLoadDetailRequestSuperLoadDialogMessage(
+    Object material,
+    Object origin,
+    Object destination,
+  ) {
+    return 'Submit $material ($origin → $destination) for Super Load admin review. Keep load details stable while review is in progress.';
+  }
+
+  @override
   String supplierLoadDetailOriginCity(Object value) {
     return 'Origin city: $value';
   }

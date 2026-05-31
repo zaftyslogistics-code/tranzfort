@@ -9936,6 +9936,34 @@ abstract class AppLocalizations {
   /// **'Could not close this load right now. Please try again.'**
   String get supplierLoadCloseFailureMessage;
 
+  /// No description provided for @supplierLoadDetailRequestSuperLoadAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Super Load'**
+  String get supplierLoadDetailRequestSuperLoadAction;
+
+  /// No description provided for @supplierLoadDetailRequestSuperLoadSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Super Load request submitted for admin review.'**
+  String get supplierLoadDetailRequestSuperLoadSuccess;
+
+  /// No description provided for @supplierLoadDetailRequestSuperLoadDialogTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request Super Load review?'**
+  String get supplierLoadDetailRequestSuperLoadDialogTitle;
+
+  /// No description provided for @supplierLoadDetailRequestSuperLoadDialogMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Submit {material} ({origin} → {destination}) for Super Load admin review. Keep load details stable while review is in progress.'**
+  String supplierLoadDetailRequestSuperLoadDialogMessage(
+    Object material,
+    Object origin,
+    Object destination,
+  );
+
   /// Label showing origin city. Placeholder {value} is the city name.
   ///
   /// In en, this message translates to:

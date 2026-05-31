@@ -38,6 +38,8 @@ abstract class SupplierLoadBackend {
   Future<String> approveBookingRequest(String bookingId);
 
   Future<void> rejectBookingRequest(String bookingId, {String? reason});
+
+  Future<void> requestSuperLoad(String loadId);
 }
 
 class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
@@ -240,5 +242,14 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
       'reject_booking_request',
       params: {'p_booking_id': bookingId, 'p_reason': reason},
     );
+  }
+
+  @override
+  Future<void> requestSuperLoad(String loadId) async {
+    if (_client == null) {
+      throw const AuthException('Supplier session is not available');
+    }
+
+    await _client.rpc('request_super_load', params: <String, dynamic>{'p_load_id': loadId});
   }
 }

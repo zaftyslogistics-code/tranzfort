@@ -21,6 +21,7 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
   String? approvedBookingId;
   String? rejectedBookingId;
   String? rejectedBookingReason;
+  String? superLoadRequestedId;
   Map<String, dynamic>? cloneParams;
   String cloneResult = 'load-clone-1';
 
@@ -56,6 +57,14 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
       throw error!;
     }
     closedLoadId = loadId;
+  }
+
+  @override
+  Future<void> requestSuperLoad(String loadId) async {
+    if (error != null) {
+      throw error!;
+    }
+    superLoadRequestedId = loadId;
   }
 
   @override
@@ -397,6 +406,16 @@ void main() {
       expect(closeResult.isSuccess, isTrue);
       expect(backend.cancelledLoadId, 'load-1');
       expect(backend.closedLoadId, 'load-2');
+    });
+
+    test('requestSuperLoad passes through success', () async {
+      final backend = _FakeSupplierLoadBackend();
+      final repository = SupplierLoadRepository(backend, () => 'supplier-1');
+
+      final result = await repository.requestSuperLoad('load-1');
+
+      expect(result.isSuccess, isTrue);
+      expect(backend.superLoadRequestedId, 'load-1');
     });
 
     test('getBookingRequests and getLinkedTrips map related detail data', () async {

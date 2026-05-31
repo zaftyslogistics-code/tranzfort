@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/models/domain_statuses.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -85,6 +86,21 @@ String localizedSupplierProofStatus(AppLocalizations l10n, SupplierTrip trip) {
 
 bool hasSuperLoadState({required bool isSuperLoad, required String superStatus}) {
   return isSuperLoad || superStatus.trim().toLowerCase() != 'none';
+}
+
+bool canRequestSuperLoad(LoadDetail detail) {
+  final parentId = detail.parentLoadId?.trim() ?? '';
+  if (parentId.isNotEmpty) {
+    return false;
+  }
+
+  final status = LoadStatus.fromDatabase(detail.summary.status);
+  if (status != LoadStatus.active) {
+    return false;
+  }
+
+  final superStatus = detail.summary.superStatus.trim().toLowerCase();
+  return superStatus == 'none' || superStatus == 'rejected';
 }
 
 String _normalizedSuperLoadStatusValue(String superStatus, {required bool isSuperLoad}) {

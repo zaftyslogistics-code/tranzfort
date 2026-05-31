@@ -2510,6 +2510,17 @@
   "supplierLoadDetailCloseFilledOutsideAction": "Close as filled outside app",
   "supplierLoadDetailClosedFilledOutsideSuccess": "Load marked as filled outside the app",
   "supplierLoadCloseFailureMessage": "Could not close this load right now. Please try again.",
+  "supplierLoadDetailRequestSuperLoadAction": "Request Super Load",
+  "supplierLoadDetailRequestSuperLoadSuccess": "Super Load request submitted for admin review.",
+  "supplierLoadDetailRequestSuperLoadDialogTitle": "Request Super Load review?",
+  "supplierLoadDetailRequestSuperLoadDialogMessage": "Submit {material} ({origin} → {destination}) for Super Load admin review. Keep load details stable while review is in progress.",
+  "@supplierLoadDetailRequestSuperLoadDialogMessage": {
+    "placeholders": {
+      "material": {},
+      "origin": {},
+      "destination": {}
+    }
+  },
   "supplierLoadDetailOriginCity": "Origin city: {value}",
   "@supplierLoadDetailOriginCity": {
     "description": "Label showing origin city. Placeholder {value} is the city name.",

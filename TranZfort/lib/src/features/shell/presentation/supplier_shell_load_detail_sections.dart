@@ -182,6 +182,35 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                       superStatus: detail.summary.superStatus,
                     ),
                   ],
+                  if (canRequestSuperLoad(detail)) ...[
+                    const SizedBox(height: AppSpacing.md),
+                    PrimaryButton(
+                      label: l10n.supplierLoadDetailRequestSuperLoadAction,
+                      isLoading: state.isRequestingSuperLoad,
+                      onPressed: state.isRequestingSuperLoad
+                          ? null
+                          : () async {
+                              final confirmed = await _confirmRequestSuperLoad(context, detail);
+                              if (confirmed != true || !context.mounted) {
+                                return;
+                              }
+                              final result =
+                                  await ref.read(loadDetailProvider(loadId).notifier).requestSuperLoad();
+                              if (!context.mounted) {
+                                return;
+                              }
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                AppSnackbar.build(
+                                  context: context,
+                                  message: result.isSuccess
+                                      ? l10n.supplierLoadDetailRequestSuperLoadSuccess
+                                      : l10n.supplierLoadActionFailureMessage,
+                                  variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
+                                ),
+                              );
+                            },
+                    ),
+                  ],
                   if (state.actionFailure != null) ...[
                     const SizedBox(height: AppSpacing.md),
                     WarningBlock(
@@ -540,6 +569,33 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
     return status == LoadStatus.active ||
         status == LoadStatus.assignedPartial ||
         status == LoadStatus.assignedFull;
+  }
+
+  Future<bool?> _confirmRequestSuperLoad(BuildContext context, LoadDetail detail) {
+    final l10n = AppLocalizations.of(context);
+    return showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.supplierLoadDetailRequestSuperLoadDialogTitle),
+        content: Text(
+          l10n.supplierLoadDetailRequestSuperLoadDialogMessage(
+            detail.summary.material,
+            detail.summary.originLabel,
+            detail.summary.destinationLabel,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.commonCancelAction),
+          ),
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.supplierLoadDetailRequestSuperLoadAction),
+          ),
+        ],
+      ),
+    );
   }
 
   Future<bool?> _confirmApproveBooking(

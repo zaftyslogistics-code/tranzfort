@@ -228,6 +228,13 @@ class SupplierLoadRepository {
     );
   }
 
+  Future<Result<void>> requestSuperLoad(String id) async {
+    return _mutateLoad(
+      id: id,
+      action: (loadId) => _backend.requestSuperLoad(loadId),
+    );
+  }
+
   Future<Result<String>> approveBookingRequest(String bookingId) async {
     final userId = _currentUserId();
     if (userId == null) {

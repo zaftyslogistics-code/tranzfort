@@ -2396,6 +2396,17 @@
   "supplierLoadDetailCloseFilledOutsideAction": "ऐप के बाहर भरा हुआ दिखाकर बंद करें",
   "supplierLoadDetailClosedFilledOutsideSuccess": "लोड को ऐप के बाहर भरा हुआ चिन्हित किया गया",
   "supplierLoadCloseFailureMessage": "यह लोड अभी बंद नहीं हो सका। कृपया फिर प्रयास करें।",
+  "supplierLoadDetailRequestSuperLoadAction": "सुपर लोड अनुरोध करें",
+  "supplierLoadDetailRequestSuperLoadSuccess": "सुपर लोड अनुरोध एडमिन समीक्षा के लिए जमा हो गया।",
+  "supplierLoadDetailRequestSuperLoadDialogTitle": "सुपर लोड समीक्षा अनुरोध करें?",
+  "supplierLoadDetailRequestSuperLoadDialogMessage": "{material} ({origin} → {destination}) को सुपर लोड एडमिन समीक्षा के लिए जमा करें। समीक्षा के दौरान लोड विवरण स्थिर रखें।",
+  "@supplierLoadDetailRequestSuperLoadDialogMessage": {
+    "placeholders": {
+      "material": {},
+      "origin": {},
+      "destination": {}
+    }
+  },
   "supplierLoadDetailOriginCity": "मूल शहर: {value}",
   "@supplierLoadDetailOriginCity": {"placeholders": {"value": {}}},
   "supplierLoadDetailOriginPoint": "मूल स्थान: {value}",
