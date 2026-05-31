@@ -2151,6 +2151,9 @@
   "truckerLoadDetailActionFailureTitle": "कार्रवाई उपलब्ध नहीं है",
   "truckerLoadDetailActionFailureMessage": "नवीनतम लोड कार्रवाई अभी पूरी नहीं हो सकी। वर्तमान बुकिंग स्थिति की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।",
   "truckerLoadDetailBookingSubmitFailureMessage": "अभी यह बुकिंग अनुरोध सबमिट नहीं हो सका। चुने गए ट्रक की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।",
+  "truckerLoadDetailTruckLoadMismatchMessage": "यह ट्रक लोड की ज़रूरतों (बॉडी टाइप, टायर या क्षमता) से मेल नहीं खाता। कोई दूसरा ट्रक चुनें।",
+  "truckerLoadDetailBookingAlreadySubmittedMessage": "आप इस लोड के लिए पहले ही बुकिंग अनुरोध भेज चुके हैं।",
+  "truckerLoadDetailLoadNotAvailableMessage": "यह लोड अब बुकिंग के लिए उपलब्ध नहीं है।",
   "truckerLoadDetailHeroSubtitle": "पिकअप {pickupDate}",
   "@truckerLoadDetailHeroSubtitle": {
     "placeholders": {
@@ -2607,6 +2610,12 @@
   "postLoadListingDurationHelper": "सभी ट्रक बुक होने या समय समाप्त होने तक लिस्टिंग रहेगी।",
   "postLoadDailyLimitLabel": "आज की पोस्ट: {current} / {max}",
   "postLoadDailyLimitReached": "आज की पोस्ट सीमा ({max}) पूरी हो गई। कल (IST) फिर कोशिश करें।",
+  "loadMarketplaceStatusOnFeed": "Find Loads पर",
+  "loadMarketplaceStatusHiddenTime": "लिस्टिंग समाप्त",
+  "loadMarketplaceStatusFull": "सभी ट्रक बुक",
+  "supplierLoadRepostAction": "लोड दोबारा पोस्ट करें",
+  "supplierLoadRepostSheetTitle": "इस लोड को दोबारा पोस्ट करें",
+  "supplierLoadRepostSuccess": "लोड दोबारा पोस्ट हो गया। यह फिर Find Loads पर है।",
   "@_sectionTTS": "=== TTS Settings ===",
   "ttsHindiVoice": "हिंदी आवाज़",
   "ttsEnglishVoice": "अंग्रेज़ी आवाज़",

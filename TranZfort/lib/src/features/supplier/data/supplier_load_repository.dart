@@ -9,6 +9,7 @@ import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../../../core/providers/app_state_providers.dart';
 import 'supplier_load_models.dart';
+import 'supplier_load_repost.dart';
 import 'supplier_load_repository_backend.dart';
 
 export 'supplier_load_repository_backend.dart';
@@ -37,6 +38,20 @@ class SupplierLoadRepository {
 
     try {
       final loadId = await _backend.createLoad(dto.toRpcParams());
+      return Success<String>(loadId);
+    } catch (error, stackTrace) {
+      return Failure<String>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<String>> cloneLoadForRepost(RepostLoadRequest request) async {
+    final userId = _currentUserId();
+    if (userId == null) {
+      return const Failure<String>(UnauthorizedFailure());
+    }
+
+    try {
+      final loadId = await _backend.cloneLoadForRepost(request.toRpcParams());
       return Success<String>(loadId);
     } catch (error, stackTrace) {
       return Failure<String>(_mapError(error, stackTrace));

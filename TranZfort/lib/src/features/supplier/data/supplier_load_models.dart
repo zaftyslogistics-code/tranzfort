@@ -135,6 +135,9 @@ class Load {
   final bool isSuperLoad;
   final String superStatus;
   final DateTime? publishedAt;
+  final bool isOnMarketplace;
+  final DateTime? marketplaceVisibleUntil;
+  final String? listingDuration;
 
   const Load({
     required this.id,
@@ -153,6 +156,9 @@ class Load {
     required this.isSuperLoad,
     required this.superStatus,
     required this.publishedAt,
+    this.isOnMarketplace = false,
+    this.marketplaceVisibleUntil,
+    this.listingDuration,
   });
 }
 
@@ -459,6 +465,9 @@ class LoadListItemDto {
   final bool isSuperLoad;
   final String superStatus;
   final String? publishedAt;
+  final bool isOnMarketplace;
+  final String? marketplaceVisibleUntil;
+  final String? listingDuration;
 
   const LoadListItemDto({
     required this.id,
@@ -477,6 +486,9 @@ class LoadListItemDto {
     required this.isSuperLoad,
     required this.superStatus,
     required this.publishedAt,
+    this.isOnMarketplace = false,
+    this.marketplaceVisibleUntil,
+    this.listingDuration,
   });
 
   factory LoadListItemDto.fromMap(Map<String, dynamic> map) {
@@ -497,6 +509,9 @@ class LoadListItemDto {
       isSuperLoad: map['is_super_load'] == true,
       superStatus: (map['super_status'] ?? 'none').toString(),
       publishedAt: map['published_at']?.toString(),
+      isOnMarketplace: map['is_on_marketplace'] == true,
+      marketplaceVisibleUntil: map['marketplace_visible_until']?.toString(),
+      listingDuration: map['listing_duration']?.toString(),
     );
   }
 
@@ -518,6 +533,11 @@ class LoadListItemDto {
       isSuperLoad: isSuperLoad,
       superStatus: superStatus,
       publishedAt: publishedAt == null || publishedAt!.isEmpty ? null : safeParseDateTime(publishedAt),
+      isOnMarketplace: isOnMarketplace,
+      marketplaceVisibleUntil: marketplaceVisibleUntil == null || marketplaceVisibleUntil!.isEmpty
+          ? null
+          : safeParseDateTime(marketplaceVisibleUntil),
+      listingDuration: listingDuration,
     );
   }
 

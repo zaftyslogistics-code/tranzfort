@@ -1,3 +1,4 @@
+import '../../../l10n/app_localizations.dart';
 import 'load_listing_duration.dart';
 
 /// Phase C scaffold: clone repost request (P1-12).
@@ -19,4 +20,20 @@ class RepostLoadRequest {
         'p_pickup_date': pickupDate.toIso8601String().split('T').first,
         'p_listing_duration': listingDuration.rpcValue,
       };
+}
+
+/// Localized marketplace visibility label for supplier load surfaces.
+String localizedLoadMarketplaceStatus(
+  AppLocalizations l10n, {
+  required bool isOnMarketplace,
+  required int trucksBooked,
+  required int trucksNeeded,
+}) {
+  if (isOnMarketplace) {
+    return l10n.loadMarketplaceStatusOnFeed;
+  }
+  if (trucksBooked >= trucksNeeded) {
+    return l10n.loadMarketplaceStatusFull;
+  }
+  return l10n.loadMarketplaceStatusHiddenTime;
 }

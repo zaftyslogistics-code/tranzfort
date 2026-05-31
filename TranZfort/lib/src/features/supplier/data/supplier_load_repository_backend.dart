@@ -7,6 +7,8 @@ import 'supplier_load_models.dart';
 abstract class SupplierLoadBackend {
   Future<String> createLoad(Map<String, dynamic> params);
 
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params);
+
   Future<List<Map<String, dynamic>>> fetchMyLoads({
     required String supplierId,
     required LoadFilters filters,
@@ -50,6 +52,16 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     }
 
     final response = await _client.rpc('create_load', params: params);
+    return response.toString();
+  }
+
+  @override
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params) async {
+    if (_client == null) {
+      throw const AuthException('Supplier session is not available');
+    }
+
+    final response = await _client.rpc('clone_load_for_repost', params: params);
     return response.toString();
   }
 

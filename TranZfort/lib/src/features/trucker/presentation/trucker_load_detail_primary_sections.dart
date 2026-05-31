@@ -582,7 +582,7 @@ class _StickyBookingBar extends ConsumerWidget {
                 context: context,
                 message: result.isSuccess
                     ? l10n.truckerLoadDetailLoadBookedSuccess
-                    : _bookingSubmitFailureMessage(l10n),
+                    : _bookingSubmitFailureMessage(l10n, result.failureOrNull),
                 variant: result.isSuccess ? AppSnackbarVariant.success : AppSnackbarVariant.error,
               );
             }

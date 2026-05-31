@@ -5434,6 +5434,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'We could not submit this booking request right now. Review the selected truck and retry shortly.';
 
   @override
+  String get truckerLoadDetailTruckLoadMismatchMessage =>
+      'This truck does not match the load requirements (body type, tyres, or capacity). Choose a different truck.';
+
+  @override
+  String get truckerLoadDetailBookingAlreadySubmittedMessage =>
+      'You already submitted a booking request for this load.';
+
+  @override
+  String get truckerLoadDetailLoadNotAvailableMessage =>
+      'This load is no longer available for booking.';
+
+  @override
   String truckerLoadDetailHeroSubtitle(Object pickupDate) {
     return 'Pickup $pickupDate';
   }
@@ -6570,6 +6582,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String postLoadDailyLimitReached(int max) {
     return 'You have reached today\'s post limit ($max loads). Try again tomorrow (IST).';
   }
+
+  @override
+  String get loadMarketplaceStatusOnFeed => 'On Find Loads';
+
+  @override
+  String get loadMarketplaceStatusHiddenTime => 'Listing ended';
+
+  @override
+  String get loadMarketplaceStatusFull => 'All trucks booked';
+
+  @override
+  String get supplierLoadRepostAction => 'Repost load';
+
+  @override
+  String get supplierLoadRepostSheetTitle => 'Repost this load';
+
+  @override
+  String get supplierLoadRepostSuccess =>
+      'Load reposted. It is live on Find Loads again.';
 
   @override
   String get ttsHindiVoice => 'Hindi Voice';

@@ -104,7 +104,19 @@ String _loadActionFailureMessage(AppLocalizations l10n) {
   return l10n.truckerLoadDetailActionFailureMessage;
 }
 
-String _bookingSubmitFailureMessage(AppLocalizations l10n) {
+String _bookingSubmitFailureMessage(AppLocalizations l10n, AppFailure? failure) {
+  if (failure is BusinessRuleFailure) {
+    final normalized = failure.message.trim().toLowerCase();
+    if (normalized.contains('truck_load_mismatch')) {
+      return l10n.truckerLoadDetailTruckLoadMismatchMessage;
+    }
+    if (normalized.contains('already booked')) {
+      return l10n.truckerLoadDetailBookingAlreadySubmittedMessage;
+    }
+    if (normalized.contains('load not available') || normalized.contains('fully booked')) {
+      return l10n.truckerLoadDetailLoadNotAvailableMessage;
+    }
+  }
   return l10n.truckerLoadDetailBookingSubmitFailureMessage;
 }
 

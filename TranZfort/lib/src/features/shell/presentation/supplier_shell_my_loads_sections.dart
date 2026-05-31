@@ -7,6 +7,9 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/data/supplier_load_repost.dart';
+import '../../../features/supplier/presentation/widgets/repost_load_sheet.dart';
+import '../../../features/supplier/providers/post_load_quota_provider.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../features/supplier/providers/my_loads_provider.dart';
 import '../../../features/supplier/providers/supplier_providers.dart';
@@ -261,6 +264,15 @@ class _SupplierLoadListCard extends ConsumerWidget {
               color: AppColors.textSecondary,
             ),
           ),
+          const SizedBox(height: AppSpacing.xs),
+          StatusChip(
+            label: localizedLoadMarketplaceStatus(
+              l10n,
+              isOnMarketplace: load.isOnMarketplace,
+              trucksBooked: load.trucksBooked,
+              trucksNeeded: load.trucksNeeded,
+            ),
+          ),
           if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
             const SizedBox(height: AppSpacing.sm),
             SuperLoadStatusBlock(
@@ -269,6 +281,13 @@ class _SupplierLoadListCard extends ConsumerWidget {
             ),
           ],
           const SizedBox(height: AppSpacing.md),
+          if (!load.isOnMarketplace) ...[
+            TextActionButton(
+              label: l10n.supplierLoadRepostAction,
+              onPressed: () => _openRepostSheet(context, ref, load),
+            ),
+            const SizedBox(height: AppSpacing.sm),
+          ],
           TextActionButton(
             label: _primaryActionLabel(context, load.status),
             onPressed: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
@@ -277,6 +296,30 @@ class _SupplierLoadListCard extends ConsumerWidget {
       ),
       onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
     );
+  }
+
+  Future<void> _openRepostSheet(BuildContext context, WidgetRef ref, Load load) async {
+    final l10n = AppLocalizations.of(context);
+    final newLoadId = await showRepostLoadSheet(
+      context: context,
+      sourceLoadId: load.id,
+      onSubmit: (request) => ref.read(supplierLoadRepositoryProvider).cloneLoadForRepost(request),
+    );
+    if (!context.mounted || newLoadId == null || newLoadId.isEmpty) {
+      return;
+    }
+    ref.invalidate(myLoadsProvider);
+    ref.invalidate(supplierRecentLoadsProvider);
+    ref.invalidate(supplierDashboardProvider);
+    ref.invalidate(postLoadQuotaProvider);
+    ScaffoldMessenger.of(context).showSnackBar(
+      AppSnackbar.build(
+        context: context,
+        message: l10n.supplierLoadRepostSuccess,
+        variant: AppSnackbarVariant.success,
+      ),
+    );
+    context.push('${AppRoutes.loadDetailPath}/$newLoadId');
   }
 
   String _primaryActionLabel(BuildContext context, String status) {

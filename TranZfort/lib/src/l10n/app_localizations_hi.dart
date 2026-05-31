@@ -5452,6 +5452,18 @@ class AppLocalizationsHi extends AppLocalizations {
       'अभी यह बुकिंग अनुरोध सबमिट नहीं हो सका। चुने गए ट्रक की समीक्षा करें और थोड़ी देर बाद फिर कोशिश करें।';
 
   @override
+  String get truckerLoadDetailTruckLoadMismatchMessage =>
+      'यह ट्रक लोड की ज़रूरतों (बॉडी टाइप, टायर या क्षमता) से मेल नहीं खाता। कोई दूसरा ट्रक चुनें।';
+
+  @override
+  String get truckerLoadDetailBookingAlreadySubmittedMessage =>
+      'आप इस लोड के लिए पहले ही बुकिंग अनुरोध भेज चुके हैं।';
+
+  @override
+  String get truckerLoadDetailLoadNotAvailableMessage =>
+      'यह लोड अब बुकिंग के लिए उपलब्ध नहीं है।';
+
+  @override
   String truckerLoadDetailHeroSubtitle(Object pickupDate) {
     return 'पिकअप $pickupDate';
   }
@@ -6586,6 +6598,25 @@ class AppLocalizationsHi extends AppLocalizations {
   String postLoadDailyLimitReached(int max) {
     return 'आज की पोस्ट सीमा ($max) पूरी हो गई। कल (IST) फिर कोशिश करें।';
   }
+
+  @override
+  String get loadMarketplaceStatusOnFeed => 'Find Loads पर';
+
+  @override
+  String get loadMarketplaceStatusHiddenTime => 'लिस्टिंग समाप्त';
+
+  @override
+  String get loadMarketplaceStatusFull => 'सभी ट्रक बुक';
+
+  @override
+  String get supplierLoadRepostAction => 'लोड दोबारा पोस्ट करें';
+
+  @override
+  String get supplierLoadRepostSheetTitle => 'इस लोड को दोबारा पोस्ट करें';
+
+  @override
+  String get supplierLoadRepostSuccess =>
+      'लोड दोबारा पोस्ट हो गया। यह फिर Find Loads पर है।';
 
   @override
   String get ttsHindiVoice => 'हिंदी आवाज़';

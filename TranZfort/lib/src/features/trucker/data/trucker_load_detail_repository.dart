@@ -472,6 +472,9 @@ class TruckerLoadDetailRepository {
       if (normalized.contains('load not available') || normalized.contains('fully booked')) {
         return BusinessRuleFailure(message: error.message.trim(), debugInfo: error.details?.toString());
       }
+      if (normalized.contains('truck_load_mismatch')) {
+        return const BusinessRuleFailure(message: 'truck_load_mismatch');
+      }
     }
     return mapSupabaseError(error, stackTrace);
   }

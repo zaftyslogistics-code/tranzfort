@@ -2245,6 +2245,9 @@
   "truckerLoadDetailActionFailureTitle": "Action unavailable",
   "truckerLoadDetailActionFailureMessage": "The latest load action could not be completed right now. Review the current load details and retry shortly.",
   "truckerLoadDetailBookingSubmitFailureMessage": "We could not submit this booking request right now. Review the selected truck and retry shortly.",
+  "truckerLoadDetailTruckLoadMismatchMessage": "This truck does not match the load requirements (body type, tyres, or capacity). Choose a different truck.",
+  "truckerLoadDetailBookingAlreadySubmittedMessage": "You already submitted a booking request for this load.",
+  "truckerLoadDetailLoadNotAvailableMessage": "This load is no longer available for booking.",
   "truckerLoadDetailHeroSubtitle": "Pickup {pickupDate}",
   "truckerLoadDetailPriceBadge": "₹{priceAmount} - {priceType}",
   "truckerLoadDetailTruckMatchAvailable": "Truck match available",
@@ -2757,6 +2760,12 @@
     }
   },
   "postLoadDailyLimitReached": "You have reached today's post limit ({max} loads). Try again tomorrow (IST).",
+  "loadMarketplaceStatusOnFeed": "On Find Loads",
+  "loadMarketplaceStatusHiddenTime": "Listing ended",
+  "loadMarketplaceStatusFull": "All trucks booked",
+  "supplierLoadRepostAction": "Repost load",
+  "supplierLoadRepostSheetTitle": "Repost this load",
+  "supplierLoadRepostSuccess": "Load reposted. It is live on Find Loads again.",
   "@postLoadDailyLimitReached": {
     "placeholders": {
       "max": {"type": "int"}

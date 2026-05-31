@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:tranzfort/src/core/error/app_failure.dart';
+import 'package:tranzfort/src/features/supplier/data/load_listing_duration.dart';
 import 'package:tranzfort/src/features/supplier/data/supplier_load_models.dart';
+import 'package:tranzfort/src/features/supplier/data/supplier_load_repost.dart';
 import 'package:tranzfort/src/features/supplier/data/supplier_load_repository.dart';
 
 class _FakeSupplierLoadBackend implements SupplierLoadBackend {
@@ -19,6 +21,17 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
   String? approvedBookingId;
   String? rejectedBookingId;
   String? rejectedBookingReason;
+  Map<String, dynamic>? cloneParams;
+  String cloneResult = 'load-clone-1';
+
+  @override
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params) async {
+    if (error != null) {
+      throw error!;
+    }
+    cloneParams = params;
+    return cloneResult;
+  }
 
   @override
   Future<String> createLoad(Map<String, dynamic> params) async {
@@ -261,10 +274,10 @@ void main() {
       expect(result.valueOrNull, 'load-1');
       expect(backend.createdParams?['p_material'], 'Coal');
       expect(backend.createdParams?['p_trucks_needed'], 2);
-      expect(backend.createdParams?['p_price_type'], 'negotiable');
+      expect(backend.createdParams?['p_price_type'], 'per_ton');
     });
 
-    test('createLoad accepts legacy negotiable price type for compatibility', () async {
+    test('createLoad rejects legacy negotiable price type', () async {
       final backend = _FakeSupplierLoadBackend();
       final repository = SupplierLoadRepository(backend, () => 'supplier-1');
       final dto = CreateLoadDto(
@@ -295,8 +308,8 @@ void main() {
 
       final result = await repository.createLoad(dto);
 
-      expect(result.isSuccess, isTrue);
-      expect(backend.createdParams?['p_price_type'], 'negotiable');
+      expect(result.isFailure, isTrue);
+      expect(result.failureOrNull, isA<ValidationFailure>());
     });
 
     test('createLoad rejects invalid payloads', () async {
@@ -481,6 +494,23 @@ void main() {
 
       expect(result.isFailure, isTrue);
       expect(result.failureOrNull, isA<PermissionFailure>());
+    });
+
+    test('cloneLoadForRepost calls backend with repost params', () async {
+      final backend = _FakeSupplierLoadBackend();
+      final repository = SupplierLoadRepository(backend, () => 'supplier-1');
+      final request = RepostLoadRequest(
+        sourceLoadId: 'load-1',
+        pickupDate: DateTime(2026, 7, 1),
+        listingDuration: LoadListingDuration.days7,
+      );
+
+      final result = await repository.cloneLoadForRepost(request);
+
+      expect(result.isSuccess, isTrue);
+      expect(result.valueOrNull, 'load-clone-1');
+      expect(backend.cloneParams?['p_source_load_id'], 'load-1');
+      expect(backend.cloneParams?['p_listing_duration'], '7_days');
     });
   });
 }

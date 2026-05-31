@@ -37,7 +37,40 @@ class _FakeTripsBackend implements SupplierTripsBackend {
   }
 
   @override
-  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({required String supplierId, required String tripId}) async => null;
+  Future<Map<String, dynamic>?> fetchTripDetailConsolidated({
+    required String supplierId,
+    required String tripId,
+  }) async {
+    if (error != null) {
+      throw error!;
+    }
+    if (detailRow == null) {
+      return null;
+    }
+    final row = detailRow!;
+    final loadSnapshot = row['load_snapshot_summary'] as Map<String, dynamic>? ??
+        row['loads'] as Map<String, dynamic>? ??
+        <String, dynamic>{};
+    final truckerId = (row['trucker_id'] ?? 'trucker-1').toString();
+    return {
+      'trip': {
+        'id': row['id'],
+        'load_id': row['load_id'],
+        'trucker_id': row['trucker_id'],
+        'truck_id': row['truck_id'],
+        'stage': row['stage'],
+        'assigned_at': row['assigned_at'],
+        'delivered_at': row['delivered_at'],
+        'pod_uploaded_at': row['pod_uploaded_at'],
+        'completed_at': row['completed_at'],
+        'lr_document_path': row['lr_document_path'],
+        'pod_document_path': row['pod_document_path'],
+      },
+      'load_snapshot': loadSnapshot,
+      'truck': row['trucks'] ?? <String, dynamic>{},
+      'trucker_profile': await fetchTruckerProfile(truckerId),
+    };
+  }
 
   @override
   Future<Map<String, dynamic>?> fetchTruckerProfile(String truckerId) async => {

@@ -4,6 +4,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/logger/app_logger.dart';
 import '../data/supplier_load_models.dart';
+import '../data/supplier_load_repost.dart';
 import '../data/supplier_load_repository.dart';
 
 class LoadDetailState {
@@ -14,6 +15,7 @@ class LoadDetailState {
   final bool isLoading;
   final bool isCancelling;
   final bool isClosingFilledOutsideApp;
+  final bool isReposting;
   final String? approvingBookingId;
   final String? rejectingBookingId;
   final AppFailure? failure;
@@ -27,6 +29,7 @@ class LoadDetailState {
     required this.isLoading,
     required this.isCancelling,
     required this.isClosingFilledOutsideApp,
+    required this.isReposting,
     required this.approvingBookingId,
     required this.rejectingBookingId,
     required this.failure,
@@ -42,6 +45,7 @@ class LoadDetailState {
       isLoading: true,
       isCancelling: false,
       isClosingFilledOutsideApp: false,
+      isReposting: false,
       approvingBookingId: null,
       rejectingBookingId: null,
       failure: null,
@@ -57,6 +61,7 @@ class LoadDetailState {
     bool? isLoading,
     bool? isCancelling,
     bool? isClosingFilledOutsideApp,
+    bool? isReposting,
     String? approvingBookingId,
     bool? clearApprovingBookingId,
     String? rejectingBookingId,
@@ -74,6 +79,7 @@ class LoadDetailState {
       isLoading: isLoading ?? this.isLoading,
       isCancelling: isCancelling ?? this.isCancelling,
       isClosingFilledOutsideApp: isClosingFilledOutsideApp ?? this.isClosingFilledOutsideApp,
+      isReposting: isReposting ?? this.isReposting,
       approvingBookingId: clearApprovingBookingId == true
           ? null
           : approvingBookingId ?? this.approvingBookingId,
@@ -267,6 +273,20 @@ class LoadDetailController extends StateNotifier<LoadDetailState> {
 
     state = state.copyWith(clearRejectingBookingId: true, clearActionFailure: true);
     await load();
+    return result;
+  }
+
+  Future<Result<String>> repostLoad(RepostLoadRequest request) async {
+    if (state.isReposting) {
+      return const Failure<String>(BusinessRuleFailure(message: 'Repost is already in progress'));
+    }
+
+    state = state.copyWith(isReposting: true, clearActionFailure: true);
+    final result = await _repository.cloneLoadForRepost(request);
+    state = state.copyWith(
+      isReposting: false,
+      actionFailure: result.failureOrNull,
+    );
     return result;
   }
 }

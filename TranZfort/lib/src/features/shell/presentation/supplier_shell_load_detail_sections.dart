@@ -11,7 +11,12 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../features/supplier/data/supplier_load_models.dart';
+import '../../../features/supplier/data/supplier_load_repost.dart';
 import '../../../features/supplier/providers/load_detail_provider.dart';
+import '../../../features/supplier/presentation/widgets/repost_load_sheet.dart';
+import '../../../features/supplier/providers/my_loads_provider.dart';
+import '../../../features/supplier/providers/post_load_quota_provider.dart';
+import '../../../features/supplier/providers/supplier_providers.dart';
 import '../../../features/reviews/utils/review_trigger_helper.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
@@ -123,6 +128,15 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                             foreground: AppColors.primary,
                             background: AppColors.neutralBg,
                           ),
+                        ),
+                        StatusBadge(
+                          label: localizedLoadMarketplaceStatus(
+                            l10n,
+                            isOnMarketplace: detail.summary.isOnMarketplace,
+                            trucksBooked: detail.summary.trucksBooked,
+                            trucksNeeded: detail.summary.trucksNeeded,
+                          ),
+                          icon: Icons.storefront_outlined,
                         ),
                       ],
                     ),
@@ -244,6 +258,39 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                             },
                     ),
                   const SizedBox(height: AppSpacing.md),
+                  if (!detail.summary.isOnMarketplace)
+                    OutlineButton(
+                      label: l10n.supplierLoadRepostAction,
+                      isLoading: state.isReposting,
+                      onPressed: state.isReposting
+                          ? null
+                          : () async {
+                              final newLoadId = await showRepostLoadSheet(
+                                context: context,
+                                sourceLoadId: detail.summary.id,
+                                onSubmit: (request) =>
+                                    ref.read(loadDetailProvider(loadId).notifier).repostLoad(request),
+                              );
+                              if (!context.mounted) {
+                                return;
+                              }
+                              if (newLoadId != null && newLoadId.isNotEmpty) {
+                                ref.invalidate(myLoadsProvider);
+                                ref.invalidate(supplierRecentLoadsProvider);
+                                ref.invalidate(supplierDashboardProvider);
+                                ref.invalidate(postLoadQuotaProvider);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  AppSnackbar.build(
+                                    context: context,
+                                    message: l10n.supplierLoadRepostSuccess,
+                                    variant: AppSnackbarVariant.success,
+                                  ),
+                                );
+                                context.go('${AppRoutes.loadDetailPath}/$newLoadId');
+                              }
+                            },
+                    ),
+                  if (!detail.summary.isOnMarketplace) const SizedBox(height: AppSpacing.md),
                   OutlineButton(
                     label: l10n.commonReportSpamOrAbuseAction,
                     onPressed: () => context.push(

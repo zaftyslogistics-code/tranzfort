@@ -189,6 +189,18 @@ void main() {
       expect(result.failureOrNull, isA<ConflictFailure>());
     });
 
+    test('maps truck_load_mismatch to business rule failure', () async {
+      final backend = _FakeTruckerLoadDetailBackend()
+        ..submitError = const PostgrestException(message: 'truck_load_mismatch');
+      final repository = TruckerLoadDetailRepository(backend, () => 'trucker-1');
+
+      final result = await repository.submitBookingRequest('load-1', 'truck-1');
+
+      expect(result.isFailure, isTrue);
+      expect(result.failureOrNull, isA<BusinessRuleFailure>());
+      expect((result.failureOrNull as BusinessRuleFailure).message, 'truck_load_mismatch');
+    });
+
     test('passes booking gps coordinates when provided', () async {
       final backend = _FakeTruckerLoadDetailBackend();
       final repository = TruckerLoadDetailRepository(backend, () => 'trucker-1');

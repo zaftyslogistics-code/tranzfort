@@ -15,6 +15,10 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../features/supplier/data/supplier_load_repost.dart';
+import '../../../features/supplier/presentation/widgets/repost_load_sheet.dart';
+import '../../../features/supplier/providers/my_loads_provider.dart';
+import '../../../features/supplier/providers/post_load_quota_provider.dart';
 import '../../../features/supplier/providers/supplier_providers.dart';
 import 'shell_components.dart';
 import 'supplier_shell_shared_helpers.dart';
@@ -411,13 +415,13 @@ class _RecentLoadsSection extends StatelessWidget {
   }
 }
 
-class _RecentLoadCard extends StatelessWidget {
+class _RecentLoadCard extends ConsumerWidget {
   final Load load;
 
   const _RecentLoadCard({required this.load});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final palette = statusPaletteFor(load.status);
     final tonnes = load.weightTonnes % 1 == 0
@@ -441,6 +445,15 @@ class _RecentLoadCard extends StatelessWidget {
             l10n.supplierDashboardLoadPickup(formatSupplierShortDate(context, load.pickupDate)),
             style: Theme.of(context).textTheme.bodySmall,
           ),
+          const SizedBox(height: AppSpacing.xs),
+          StatusChip(
+            label: localizedLoadMarketplaceStatus(
+              l10n,
+              isOnMarketplace: load.isOnMarketplace,
+              trucksBooked: load.trucksBooked,
+              trucksNeeded: load.trucksNeeded,
+            ),
+          ),
           if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
             const SizedBox(height: AppSpacing.sm),
             SuperLoadStatusBlock(
@@ -449,6 +462,35 @@ class _RecentLoadCard extends StatelessWidget {
             ),
           ],
           const SizedBox(height: AppSpacing.md),
+          if (!load.isOnMarketplace) ...[
+            TextActionButton(
+              label: l10n.supplierLoadRepostAction,
+              onPressed: () async {
+                final newLoadId = await showRepostLoadSheet(
+                  context: context,
+                  sourceLoadId: load.id,
+                  onSubmit: (request) =>
+                      ref.read(supplierLoadRepositoryProvider).cloneLoadForRepost(request),
+                );
+                if (!context.mounted || newLoadId == null || newLoadId.isEmpty) {
+                  return;
+                }
+                ref.invalidate(supplierRecentLoadsProvider);
+                ref.invalidate(supplierDashboardProvider);
+                ref.invalidate(myLoadsProvider);
+                ref.invalidate(postLoadQuotaProvider);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  AppSnackbar.build(
+                    context: context,
+                    message: l10n.supplierLoadRepostSuccess,
+                    variant: AppSnackbarVariant.success,
+                  ),
+                );
+                context.push('${AppRoutes.loadDetailPath}/$newLoadId');
+              },
+            ),
+            const SizedBox(height: AppSpacing.sm),
+          ],
           TextActionButton(
             label: l10n.supplierDashboardOpenLoadsWorkspace,
             onPressed: () => context.go(AppRoutes.myLoadsPath),

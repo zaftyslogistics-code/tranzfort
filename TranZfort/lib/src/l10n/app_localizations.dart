@@ -8576,6 +8576,24 @@ abstract class AppLocalizations {
   /// **'We could not submit this booking request right now. Review the selected truck and retry shortly.'**
   String get truckerLoadDetailBookingSubmitFailureMessage;
 
+  /// No description provided for @truckerLoadDetailTruckLoadMismatchMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This truck does not match the load requirements (body type, tyres, or capacity). Choose a different truck.'**
+  String get truckerLoadDetailTruckLoadMismatchMessage;
+
+  /// No description provided for @truckerLoadDetailBookingAlreadySubmittedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'You already submitted a booking request for this load.'**
+  String get truckerLoadDetailBookingAlreadySubmittedMessage;
+
+  /// No description provided for @truckerLoadDetailLoadNotAvailableMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This load is no longer available for booking.'**
+  String get truckerLoadDetailLoadNotAvailableMessage;
+
   /// No description provided for @truckerLoadDetailHeroSubtitle.
   ///
   /// In en, this message translates to:
@@ -10369,6 +10387,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'You have reached today\'s post limit ({max} loads). Try again tomorrow (IST).'**
   String postLoadDailyLimitReached(int max);
+
+  /// No description provided for @loadMarketplaceStatusOnFeed.
+  ///
+  /// In en, this message translates to:
+  /// **'On Find Loads'**
+  String get loadMarketplaceStatusOnFeed;
+
+  /// No description provided for @loadMarketplaceStatusHiddenTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing ended'**
+  String get loadMarketplaceStatusHiddenTime;
+
+  /// No description provided for @loadMarketplaceStatusFull.
+  ///
+  /// In en, this message translates to:
+  /// **'All trucks booked'**
+  String get loadMarketplaceStatusFull;
+
+  /// No description provided for @supplierLoadRepostAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Repost load'**
+  String get supplierLoadRepostAction;
+
+  /// No description provided for @supplierLoadRepostSheetTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Repost this load'**
+  String get supplierLoadRepostSheetTitle;
+
+  /// No description provided for @supplierLoadRepostSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Load reposted. It is live on Find Loads again.'**
+  String get supplierLoadRepostSuccess;
 
   /// No description provided for @ttsHindiVoice.
   ///
