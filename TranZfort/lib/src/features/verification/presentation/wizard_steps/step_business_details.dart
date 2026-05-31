@@ -343,6 +343,7 @@ class _OptionalGstSectionState extends State<_OptionalGstSection> {
                 children: [
                   AppTextField(
                     label: l10n.commonGstNumberLabel,
+                    helperText: l10n.verificationFieldPurposeGst,
                     hintText: '22AAAAA0000A1Z5',
                     initialValue: widget.gstNumber ?? '',
                     onChanged: widget.onGstNumberChanged,

@@ -93,11 +93,12 @@ class VerificationRepository {
         );
       }
 
+      final aadhaarLast4 = normalizedAadhaar.substring(normalizedAadhaar.length - 4);
       final panLast4 = normalizedPan.substring(normalizedPan.length - 4);
       await _backend.updateProfileFields(userId, {
-        'aadhaar_last4': normalizedAadhaar.substring(normalizedAadhaar.length - 4),
+        'aadhaar_last4': aadhaarLast4,
         'pan_last4': panLast4,
-        'pan_number': panLast4,
+        'pan_number': 'XXXXXX$panLast4',
       });
       if (rawRole == 'supplier') {
         await _backend.updateSupplierFields(userId, {

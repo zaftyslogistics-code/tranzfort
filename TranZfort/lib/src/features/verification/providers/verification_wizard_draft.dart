@@ -17,9 +17,12 @@ String? _coalesceDraftText(String? primary, String? fallback) {
 class VerificationDraft {
   final String? profilePhotoPath;
   final String? aadhaarNumber;
+  /// Server-stored last 4 when the user has not re-entered full Aadhaar this session.
+  final String? aadhaarLast4;
   final String? aadhaarFrontPath;
   final String? aadhaarBackPath;
   final String? panNumber;
+  final String? panLast4;
   final String? panDocumentPath;
   final TruckDraft? truck;
   final String? companyName;
@@ -32,9 +35,11 @@ class VerificationDraft {
   const VerificationDraft({
     this.profilePhotoPath,
     this.aadhaarNumber,
+    this.aadhaarLast4,
     this.aadhaarFrontPath,
     this.aadhaarBackPath,
     this.panNumber,
+    this.panLast4,
     this.panDocumentPath,
     this.truck,
     this.companyName,
@@ -64,9 +69,11 @@ class VerificationDraft {
     return VerificationDraft(
       profilePhotoPath: detail.profilePhotoDocumentPath,
       aadhaarNumber: detail.aadhaarNumber,
+      aadhaarLast4: detail.aadhaarLast4,
       aadhaarFrontPath: detail.aadhaarFrontDocumentPath,
       aadhaarBackPath: detail.aadhaarBackDocumentPath,
       panNumber: detail.panNumber,
+      panLast4: detail.panLast4,
       panDocumentPath: detail.panDocumentPath,
       companyName: detail.companyName,
       businessLicenseNumber: detail.businessLicenceNumber,
@@ -116,9 +123,11 @@ class VerificationDraft {
     return VerificationDraft(
       profilePhotoPath: _coalesceDraftText(profilePhotoPath, other.profilePhotoPath),
       aadhaarNumber: _coalesceDraftText(aadhaarNumber, other.aadhaarNumber),
+      aadhaarLast4: _coalesceDraftText(aadhaarLast4, other.aadhaarLast4),
       aadhaarFrontPath: _coalesceDraftText(aadhaarFrontPath, other.aadhaarFrontPath),
       aadhaarBackPath: _coalesceDraftText(aadhaarBackPath, other.aadhaarBackPath),
       panNumber: _coalesceDraftText(panNumber, other.panNumber),
+      panLast4: _coalesceDraftText(panLast4, other.panLast4),
       panDocumentPath: _coalesceDraftText(panDocumentPath, other.panDocumentPath),
       truck: truck ?? other.truck,
       companyName: _coalesceDraftText(companyName, other.companyName),
@@ -134,9 +143,11 @@ class VerificationDraft {
     return <String, dynamic>{
       'profilePhotoPath': profilePhotoPath,
       'aadhaarNumber': aadhaarNumber,
+      'aadhaarLast4': aadhaarLast4,
       'aadhaarFrontPath': aadhaarFrontPath,
       'aadhaarBackPath': aadhaarBackPath,
       'panNumber': panNumber,
+      'panLast4': panLast4,
       'panDocumentPath': panDocumentPath,
       'truck': truck?.toJson(),
       'companyName': companyName,
@@ -154,9 +165,11 @@ class VerificationDraft {
     return VerificationDraft(
       profilePhotoPath: json['profilePhotoPath']?.toString(),
       aadhaarNumber: json['aadhaarNumber']?.toString(),
+      aadhaarLast4: json['aadhaarLast4']?.toString(),
       aadhaarFrontPath: json['aadhaarFrontPath']?.toString(),
       aadhaarBackPath: json['aadhaarBackPath']?.toString(),
       panNumber: json['panNumber']?.toString(),
+      panLast4: json['panLast4']?.toString(),
       panDocumentPath: json['panDocumentPath']?.toString(),
       truck: rawTruck is Map<String, dynamic>
           ? TruckDraft.fromJson(rawTruck)
@@ -179,9 +192,11 @@ class VerificationDraft {
   VerificationDraft copyWith({
     String? profilePhotoPath,
     String? aadhaarNumber,
+    String? aadhaarLast4,
     String? aadhaarFrontPath,
     String? aadhaarBackPath,
     String? panNumber,
+    String? panLast4,
     String? panDocumentPath,
     TruckDraft? truck,
     String? companyName,
@@ -207,9 +222,11 @@ class VerificationDraft {
     return VerificationDraft(
       profilePhotoPath: clearProfilePhoto ? null : (profilePhotoPath ?? this.profilePhotoPath),
       aadhaarNumber: clearAadhaarNumber ? null : (aadhaarNumber ?? this.aadhaarNumber),
+      aadhaarLast4: aadhaarLast4 ?? this.aadhaarLast4,
       aadhaarFrontPath: clearAadhaarFront ? null : (aadhaarFrontPath ?? this.aadhaarFrontPath),
       aadhaarBackPath: clearAadhaarBack ? null : (aadhaarBackPath ?? this.aadhaarBackPath),
       panNumber: clearPanNumber ? null : (panNumber ?? this.panNumber),
+      panLast4: panLast4 ?? this.panLast4,
       panDocumentPath: clearPanDocument ? null : (panDocumentPath ?? this.panDocumentPath),
       truck: clearTruck ? null : (truck ?? this.truck),
       companyName: clearCompanyName ? null : (companyName ?? this.companyName),

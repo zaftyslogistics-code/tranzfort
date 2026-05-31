@@ -3811,6 +3811,18 @@ class AppLocalizationsEn extends AppLocalizations {
       'Add Aadhaar and PAN details with document uploads.';
 
   @override
+  String get verificationFieldPurposeAadhaar =>
+      'Used only for platform access review. We store the last 4 digits and document images—not your full number on our servers.';
+
+  @override
+  String get verificationFieldPurposePan =>
+      'Used to confirm identity during platform access review. Only a masked value is shown back to you after submit.';
+
+  @override
+  String get verificationFieldPurposeGst =>
+      'Optional. Helps suppliers show business registration; verify GSTIN off-platform before large payments.';
+
+  @override
   String get verificationWizardPanDocumentLabel => 'PAN document';
 
   @override

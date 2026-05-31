@@ -1,16 +1,36 @@
-# tranzfort
+# TranZfort (Flutter)
 
-A new Flutter project.
+Marketplace app for suppliers and truckers. **Branch:** `v1-launch`.
 
-## Getting Started
+## Repo layout
 
-This project is a starting point for a Flutter application.
+| Path | Purpose |
+|------|---------|
+| `TranZfort/` | Main Flutter app (this package) |
+| `Admin/` | Admin Flutter app |
+| `supabase/migrations/` | **Source of truth** for database schema |
+| `website/public/` | Privacy + Terms HTML for P0-11 |
+| `backend/` | Legacy snapshots only — do not apply; use `supabase db push` |
 
-A few resources to get you started if this is your first Flutter project:
+`old-app-archived/` is excluded from git (see root `.gitignore`).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Android IDs
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **applicationId** `com.tranzfort.app` — Play Store / Firebase
+- **namespace** `com.tranzfort.tranzfort` — Kotlin `MainActivity` package (intentional split; documented in `android/app/build.gradle.kts`)
+
+## Supabase
+
+From repo root: `supabase db push`
+
+## Admin secrets
+
+Use `--dart-define` / CI secrets for Admin Supabase keys. Do not commit `.env`. See `Admin/README.md`.
+
+## Tests
+
+```bash
+cd TranZfort
+flutter test test/core/utils/sensitive_identifier_display_test.dart
+# CI core smoke — see .github/workflows/flutter-test.yml
+```

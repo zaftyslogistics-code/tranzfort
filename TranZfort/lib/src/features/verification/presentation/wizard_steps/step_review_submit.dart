@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../core/error/app_failure.dart';
+import '../../../../core/utils/sensitive_identifier_display.dart';
 import '../../../../core/navigation/app_routes.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_spacing.dart';
@@ -12,14 +13,6 @@ import '../../../../shared/widgets/platform_reviewed_badge.dart';
 import '../../providers/verification_wizard_provider.dart';
 import '../components/step_container.dart';
 import '../components/wizard_progress_bar.dart';
-
-/// Masks sensitive data for display (PII minimization)
-String _maskSensitiveData(String? value, {int visibleChars = 4}) {
-  if (value == null || value.isEmpty) return '-';
-  if (value.length <= visibleChars) return value;
-  final masked = '*' * (value.length - visibleChars);
-  return masked + value.substring(value.length - visibleChars);
-}
 
 class StepReviewSubmit extends ConsumerWidget {
   const StepReviewSubmit({super.key});
@@ -67,8 +60,8 @@ class StepReviewSubmit extends ConsumerWidget {
               title: l10n.verificationWizardReviewIdentity,
               isComplete: draft.hasIdentityComplete,
               details: [
-                '${l10n.commonAadhaarNumberLabel}: ${_maskSensitiveData(draft.aadhaarNumber)}',
-                '${l10n.commonPanNumberLabel}: ${_maskSensitiveData(draft.panNumber)}',
+                '${l10n.commonAadhaarNumberLabel}: ${SensitiveIdentifierDisplay.maskedAadhaar(fullDigits: draft.aadhaarNumber, last4: draft.aadhaarLast4)}',
+                '${l10n.commonPanNumberLabel}: ${SensitiveIdentifierDisplay.maskedPan(fullValue: draft.panNumber, last4: draft.panLast4)}',
                 if (draft.hasIdentityComplete)
                   l10n.verificationWizardReviewDocumentsUploaded,
               ],
@@ -93,9 +86,9 @@ class StepReviewSubmit extends ConsumerWidget {
                 isComplete: draft.hasBusinessComplete,
                 details: [
                   '${l10n.commonCompanyNameLabel}: ${draft.companyName ?? '-'}',
-                  '${l10n.verificationWizardReviewLicenseNumber}: ${draft.businessLicenseNumber ?? '-'}',
+                  '${l10n.verificationWizardReviewLicenseNumber}: ${SensitiveIdentifierDisplay.maskedLast4(draft.businessLicenseNumber)}',
                   if (draft.gstNumber?.isNotEmpty ?? false)
-                    '${l10n.commonGstNumberLabel}: ${draft.gstNumber}',
+                    '${l10n.commonGstNumberLabel}: ${SensitiveIdentifierDisplay.maskedGstin(draft.gstNumber)}',
                   '${l10n.verificationWizardReviewLocation}: ${draft.location?.city ?? '-'}',
                 ],
               ),

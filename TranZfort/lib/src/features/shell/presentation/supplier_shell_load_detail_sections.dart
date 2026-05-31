@@ -23,6 +23,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/load_detail_hero.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/load_detail_tts_builder.dart';
 import '../../../shared/widgets/tts_read_all_button.dart';
@@ -81,71 +82,59 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
         if (!state.isLoading && detail != null) ...[
               TtsReadAllButton(message: readAllMessage ?? ''),
               const SizedBox(height: AppSpacing.sectionGap),
-              HeroActionCard(
-                title: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
+              LoadDetailHero(
+                routeLine: '${detail.summary.originLabel} to ${detail.summary.destinationLabel}',
                 subtitle: l10n.supplierLoadDetailHeroSubtitle(
                   formatSupplierShortDate(context, detail.summary.pickupDate),
                 ),
-                useDarkTheme: true,
-                useInkGradient: true,
-                titleIcon: Icons.local_shipping_outlined,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Wrap(
-                      spacing: AppSpacing.sm,
-                      runSpacing: AppSpacing.sm,
-                      children: [
-                        StatusBadge(
-                          label: localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
-                          icon: Icons.local_shipping_outlined,
-                        ),
-                        if (hasSuperLoadState(
+                wrapInHeroActionCard: true,
+                badges: [
+                  StatusBadge(
+                    label: localizedSupplierDashboardLoadStatus(l10n, detail.summary.status),
+                    icon: Icons.local_shipping_outlined,
+                  ),
+                  if (hasSuperLoadState(
+                    isSuperLoad: detail.summary.isSuperLoad,
+                    superStatus: detail.summary.superStatus,
+                  ))
+                    StatusBadge(
+                      label: l10n.supplierDashboardSuperLoadBadge(
+                        superLoadStatusLabel(
+                          l10n,
+                          detail.summary.superStatus,
                           isSuperLoad: detail.summary.isSuperLoad,
-                          superStatus: detail.summary.superStatus,
-                        ))
-                          StatusBadge(
-                            label: l10n.supplierDashboardSuperLoadBadge(
-                              superLoadStatusLabel(
-                                l10n,
-                                detail.summary.superStatus,
-                                isSuperLoad: detail.summary.isSuperLoad,
-                              ),
-                            ),
-                            icon: Icons.workspace_premium_outlined,
-                            palette: const StatusPalette(
-                              foreground: AppColors.superLoadText,
-                              background: AppColors.superLoadBg,
-                            ),
-                          ),
-                        StatusBadge(
-                          label: l10n.supplierDashboardTrucksBooked(
-                            detail.summary.trucksBooked,
-                            detail.summary.trucksNeeded,
-                          ),
-                          icon: Icons.inventory_2_outlined,
-                          palette: const StatusPalette(
-                            foreground: AppColors.primary,
-                            background: AppColors.neutralBg,
-                          ),
                         ),
-                        StatusBadge(
-                          label: localizedLoadMarketplaceStatus(
-                            l10n,
-                            isOnMarketplace: detail.summary.isOnMarketplace,
-                            trucksBooked: detail.summary.trucksBooked,
-                            trucksNeeded: detail.summary.trucksNeeded,
-                          ),
-                          icon: Icons.storefront_outlined,
-                        ),
-                      ],
+                      ),
+                      icon: Icons.workspace_premium_outlined,
+                      palette: const StatusPalette(
+                        foreground: AppColors.superLoadText,
+                        background: AppColors.superLoadBg,
+                      ),
                     ),
-                    const SizedBox(height: AppSpacing.lg),
-                    Text(
-                      '${detail.summary.material} - ₹${detail.summary.priceAmount.toStringAsFixed(0)} - ${localizedSupplierPriceType(l10n, detail.summary.priceType)}',
-                      style: Theme.of(context).textTheme.bodyLarge,
+                  StatusBadge(
+                    label: l10n.supplierDashboardTrucksBooked(
+                      detail.summary.trucksBooked,
+                      detail.summary.trucksNeeded,
                     ),
-                  ],
+                    icon: Icons.inventory_2_outlined,
+                    palette: const StatusPalette(
+                      foreground: AppColors.primary,
+                      background: AppColors.neutralBg,
+                    ),
+                  ),
+                  StatusBadge(
+                    label: localizedLoadMarketplaceStatus(
+                      l10n,
+                      isOnMarketplace: detail.summary.isOnMarketplace,
+                      trucksBooked: detail.summary.trucksBooked,
+                      trucksNeeded: detail.summary.trucksNeeded,
+                    ),
+                    icon: Icons.storefront_outlined,
+                  ),
+                ],
+                factsLine: Text(
+                  '${detail.summary.material} - ₹${detail.summary.priceAmount.toStringAsFixed(0)} - ${localizedSupplierPriceType(l10n, detail.summary.priceType)}',
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
               ),
               if (state.failure != null) ...[

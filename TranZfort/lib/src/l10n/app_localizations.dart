@@ -6060,6 +6060,24 @@ abstract class AppLocalizations {
   /// **'Add Aadhaar and PAN details with document uploads.'**
   String get verificationWizardIdentitySubtitle;
 
+  /// No description provided for @verificationFieldPurposeAadhaar.
+  ///
+  /// In en, this message translates to:
+  /// **'Used only for platform access review. We store the last 4 digits and document images—not your full number on our servers.'**
+  String get verificationFieldPurposeAadhaar;
+
+  /// No description provided for @verificationFieldPurposePan.
+  ///
+  /// In en, this message translates to:
+  /// **'Used to confirm identity during platform access review. Only a masked value is shown back to you after submit.'**
+  String get verificationFieldPurposePan;
+
+  /// No description provided for @verificationFieldPurposeGst.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional. Helps suppliers show business registration; verify GSTIN off-platform before large payments.'**
+  String get verificationFieldPurposeGst;
+
   /// No description provided for @verificationWizardPanDocumentLabel.
   ///
   /// In en, this message translates to:

@@ -131,6 +131,7 @@ class _StepIdentityDocumentsState extends ConsumerState<StepIdentityDocuments> {
             AppTextField(
               controller: _aadhaarController,
               label: l10n.commonAadhaarNumberLabel,
+              helperText: l10n.verificationFieldPurposeAadhaar,
               hintText: '1234 5678 9012',
               keyboardType: TextInputType.number,
               inputFormatters: [
@@ -184,6 +185,7 @@ class _StepIdentityDocumentsState extends ConsumerState<StepIdentityDocuments> {
             AppTextField(
               controller: _panController,
               label: l10n.commonPanNumberLabel,
+              helperText: l10n.verificationFieldPurposePan,
               hintText: 'ABCDE1234F',
               inputFormatters: [
                 LengthLimitingTextInputFormatter(10),

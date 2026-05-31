@@ -3824,6 +3824,18 @@ class AppLocalizationsHi extends AppLocalizations {
       'दस्तावेज़ अपलोड के साथ आधार और पैन विवरण जोड़ें।';
 
   @override
+  String get verificationFieldPurposeAadhaar =>
+      'केवल प्लेटफ़ॉर्म एक्सेस समीक्षा के लिए। हम अंतिम 4 अंक और दस्तावेज़ छवियाँ संग्रहीत करते हैं—पूरा नंबर सर्वर पर नहीं।';
+
+  @override
+  String get verificationFieldPurposePan =>
+      'प्लेटफ़ॉर्म एक्सेस समीक्षा के लिए पहचान पुष्टि। सबमिट के बाद केवल मास्क्ड मान दिखाया जाता है।';
+
+  @override
+  String get verificationFieldPurposeGst =>
+      'वैकल्पिक। व्यापार पंजीकरण; बड़े भुगतान से पहले GSTIN ऐप के बाहर सत्यापित करें।';
+
+  @override
   String get verificationWizardPanDocumentLabel => 'पैन दस्तावेज़';
 
   @override

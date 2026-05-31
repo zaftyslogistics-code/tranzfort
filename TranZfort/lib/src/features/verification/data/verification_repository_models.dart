@@ -244,7 +244,8 @@ class VerificationDetail {
       aadhaarFrontDocumentPath: nullableString(profileMap['aadhaar_front_document_path']),
       aadhaarBackDocumentPath: nullableString(profileMap['aadhaar_back_document_path']),
       panNumber: null,
-      panLast4: nullableString(profileMap['pan_last4']) ?? _last4FromPan(profileMap['pan_number']),
+      panLast4: nullableString(profileMap['pan_last4']) ??
+          _last4FromPan(profileMap['pan_number_masked'] ?? profileMap['pan_number']),
       panDocumentPath: nullableString(profileMap['pan_document_path']),
       profilePhotoDocumentPath: nullableString(profileMap['profile_photo_document_path']),
       businessLicenceNumber: nullableString(supplierMap?['business_licence_number']),

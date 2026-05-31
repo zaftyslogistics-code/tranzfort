@@ -17,6 +17,7 @@ if (hasReleaseKeystore) {
 }
 
 android {
+    // Kotlin package / R class namespace (MainActivity). Store listing ID is applicationId below.
     namespace = "com.tranzfort.tranzfort"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
@@ -33,6 +34,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // Play Console application id (differs from namespace — see TranZfort/README.md).
         applicationId = "com.tranzfort.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.

@@ -50,71 +50,28 @@ class _LoadRoutePriceSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.primaryOnDark.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(AppRadius.iconChip),
+          LoadDetailHero(
+            headerOnly: true,
+            routeLine: routeLabel,
+            subtitle: '',
+            eyebrowLabel: l10n.truckerLoadDetailRoutePriceSummaryTitle,
+            titleIcon: Icons.alt_route_outlined,
+            ttsMessage: ttsMessage,
+            badges: [
+              if (isSuperLoad)
+                _RouteDarkStatusPill(
+                  icon: Icons.workspace_premium_outlined,
+                  label: l10n.truckerLoadDetailSuperLoadGuarantee,
+                  accent: AppColors.secondaryOnDark,
                 ),
-                child: const Icon(
-                  Icons.alt_route_outlined,
-                  color: AppColors.primaryOnDark,
-                  size: 18,
+              if (anyMatch)
+                _RouteDarkStatusPill(
+                  icon: Icons.verified_outlined,
+                  label: l10n.truckerLoadDetailTruckMatchAvailable,
+                  accent: AppColors.primaryOnDark,
                 ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.truckerLoadDetailRoutePriceSummaryTitle,
-                      style: AppTypography.labelMicro.copyWith(
-                        color: AppColors.primaryOnDark,
-                        letterSpacing: 1.3,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      routeLabel,
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: AppColors.inkTextPrimary,
-                            fontWeight: FontWeight.w700,
-                          ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
-              if ((ttsMessage ?? '').trim().isNotEmpty)
-                TtsCardSpeakerButton(message: ttsMessage!.trim()),
             ],
           ),
-          if (anyMatch || isSuperLoad) ...[
-            const SizedBox(height: AppSpacing.sm),
-            Wrap(
-              spacing: AppSpacing.sm,
-              runSpacing: AppSpacing.sm,
-              children: [
-                if (isSuperLoad)
-                  _RouteDarkStatusPill(
-                    icon: Icons.workspace_premium_outlined,
-                    label: l10n.truckerLoadDetailSuperLoadGuarantee,
-                    accent: AppColors.secondaryOnDark,
-                  ),
-                if (anyMatch)
-                  _RouteDarkStatusPill(
-                    icon: Icons.verified_outlined,
-                    label: l10n.truckerLoadDetailTruckMatchAvailable,
-                    accent: AppColors.primaryOnDark,
-                  ),
-              ],
-            ),
-          ],
           const SizedBox(height: AppSpacing.md),
           Container(
             width: double.infinity,
