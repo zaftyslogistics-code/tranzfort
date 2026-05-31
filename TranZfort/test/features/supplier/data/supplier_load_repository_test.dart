@@ -172,6 +172,8 @@ void main() {
         'is_super_load': false,
         'super_status': 'none',
         'published_at': '2026-03-08T12:00:00.000Z',
+        'is_on_marketplace': true,
+        'marketplace_visible_until': '2026-06-30T00:00:00.000Z',
       });
 
       final load = dto.toDomain();
@@ -179,6 +181,7 @@ void main() {
       expect(load.id, 'load-1');
       expect(load.requiredTyres, [10, 12]);
       expect(load.status, 'active');
+      expect(load.isOnMarketplace, isTrue);
     });
 
     test('LoadDetailDto maps backend payload to detail domain', () {
@@ -375,6 +378,7 @@ void main() {
             'is_super_load': false,
             'super_status': 'none',
             'published_at': '2026-03-08T12:00:00.000Z',
+            'is_on_marketplace': true,
           },
         ];
       final repository = SupplierLoadRepository(backend, () => 'supplier-1');
@@ -384,6 +388,7 @@ void main() {
       expect(result.isSuccess, isTrue);
       expect(result.valueOrNull, hasLength(1));
       expect(result.valueOrNull?.first.material, 'Coal');
+      expect(result.valueOrNull?.first.isOnMarketplace, isTrue);
     });
 
     test('getLoadDetail returns notFound when missing', () async {

@@ -83,7 +83,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                     priceAmount: load.priceAmount,
                     priceType: load.priceType,
                     material: load.material,
-                    bodyTypeLabel: _localizedBodyType(l10n, load.requiredBodyType),
+                    bodyTypeLabel: localizeBodyType(l10n, load.requiredBodyType),
                     tyreLabel: tyreLabel.isEmpty ? null : tyreLabel,
                   ),
                   Padding(
@@ -204,7 +204,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
     return l10n.marketplaceLoadPickupOnDate(dateLabel);
   }
 
-  static String _localizedBodyType(AppLocalizations l10n, String? bodyType) {
+  static String localizeBodyType(AppLocalizations l10n, String? bodyType) {
     final normalized = (bodyType ?? '').trim();
     if (normalized.isEmpty) {
       return l10n.truckerFindLoadsAnyBodyFallback;

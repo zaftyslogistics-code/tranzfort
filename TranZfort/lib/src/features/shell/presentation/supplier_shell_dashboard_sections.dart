@@ -13,6 +13,7 @@ import '../../../features/supplier/data/supplier_load_repository.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/supplier_load_compact_card.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/platform_reviewed_badge.dart';
@@ -445,43 +446,41 @@ class _RecentLoadCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
     final palette = statusPaletteFor(load.status);
-    final tonnes = load.weightTonnes % 1 == 0
-        ? load.weightTonnes.toStringAsFixed(0)
-        : load.weightTonnes.toStringAsFixed(1);
+    final supplierId = ref.watch(supplierProfileProvider).valueOrNull?.id ?? '';
 
-    return StandardListCard(
-      accent: palette.foreground,
-      title: '${load.originLabel} to ${load.destinationLabel}',
-      subtitle: '${load.material} - ${tonnes}T - ${localizedSupplierPriceType(l10n, load.priceType)}',
-      trailing: StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status)),
+    return SupplierLoadCompactCard.fromLoad(
+      load: load,
+      supplierId: supplierId,
+      statusChips: [
+        StatusChip(label: localizedSupplierDashboardLoadStatus(l10n, load.status), palette: palette),
+        StatusChip(
+          label: localizedLoadMarketplaceStatus(
+            l10n,
+            isOnMarketplace: load.isOnMarketplace,
+            trucksBooked: load.trucksBooked,
+            trucksNeeded: load.trucksNeeded,
+          ),
+        ),
+        if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus))
+          StatusBadge(
+            label: l10n.supplierDashboardSuperLoadBadge(
+              superLoadStatusLabel(l10n, load.superStatus, isSuperLoad: load.isSuperLoad),
+            ),
+            icon: Icons.workspace_premium_outlined,
+          ),
+      ],
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             l10n.supplierDashboardTrucksBooked(load.trucksBooked, load.trucksNeeded),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.supplierDashboardLoadPickup(formatSupplierShortDate(context, load.pickupDate)),
-            style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
           ),
-          const SizedBox(height: AppSpacing.xs),
-          StatusChip(
-            label: localizedLoadMarketplaceStatus(
-              l10n,
-              isOnMarketplace: load.isOnMarketplace,
-              trucksBooked: load.trucksBooked,
-              trucksNeeded: load.trucksNeeded,
-            ),
-          ),
-          if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
-            const SizedBox(height: AppSpacing.sm),
-            SuperLoadStatusBlock(
-              isSuperLoad: load.isSuperLoad,
-              superStatus: load.superStatus,
-            ),
-          ],
           const SizedBox(height: AppSpacing.md),
           if (!load.isOnMarketplace) ...[
             TextActionButton(

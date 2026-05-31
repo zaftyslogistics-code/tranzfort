@@ -101,7 +101,7 @@ class ChatRepository {
     // This avoids mapping failures from incomplete realtime row shapes.
     await for (final _ in _backend
         .watchConversations(userId: userId, role: role)
-        .debounce(const Duration(milliseconds: 300))) {
+        .debounce(const Duration(milliseconds: 500))) {
       try {
         final rows = await _backend.fetchConversations(userId: userId, role: role);
         final previews = await _mapConversationRows(rows, currentUserId: userId);
@@ -121,7 +121,7 @@ class ChatRepository {
 
     await for (final _ in _backend
         .watchConversations(userId: userId, role: _currentUserRole())
-        .debounce(const Duration(milliseconds: 300))) {
+        .debounce(const Duration(milliseconds: 500))) {
       try {
         final count = await _backend.fetchUnreadConversationCount();
         yield Success<int>(count);

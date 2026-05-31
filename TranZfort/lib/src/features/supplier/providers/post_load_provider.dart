@@ -6,6 +6,7 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../l10n/app_localizations.dart';
 import '../data/load_listing_duration.dart';
+import '../../../core/models/load_body_types.dart';
 import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
 import '../data/supplier_location_services.dart';
@@ -26,14 +27,7 @@ const List<String> postLoadMaterials = <String>[
   'other',
 ];
 
-const List<String> postLoadBodyTypes = <String>[
-  'any',
-  'open',
-  'container',
-  'trailer',
-  'tanker',
-  'refrigerated',
-];
+const List<String> postLoadBodyTypes = LoadBodyTypes.selectable;
 
 const List<int> postLoadTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];
 const List<int> postLoadTruckShortcuts = <int>[1, 5, 10, 25];
@@ -445,7 +439,7 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeSnapshotSource: state.routePreview?.source,
       material: state.material == 'other' ? state.customMaterial.trim() : state.material,
       weightTonnes: double.parse(state.weightTonnes.trim()),
-      requiredBodyType: _normalizeBodyType(state.bodyType),
+      requiredBodyType: LoadBodyTypes.toDatabaseValue(state.bodyType),
       listingDuration: state.listingDuration,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),
       trucksNeeded: int.parse(state.trucksNeeded.trim()),
@@ -521,14 +515,6 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       next.remove(key);
     }
     return next;
-  }
-
-  String? _normalizeBodyType(String value) {
-    final normalized = value.trim().toLowerCase();
-    if (normalized.isEmpty || normalized == 'any') {
-      return null;
-    }
-    return value;
   }
 
   Future<void> _refreshRoutePreview() async {

@@ -10131,6 +10131,12 @@ abstract class AppLocalizations {
   /// **'Could not refresh bookings or trips right now. Please retry.'**
   String get supplierLoadSupportFailureMessage;
 
+  /// No description provided for @supplierLoadDetailLifecycleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Load lifecycle'**
+  String get supplierLoadDetailLifecycleTitle;
+
   /// No description provided for @supplierLoadDetailStatusAndActionsTitle.
   ///
   /// In en, this message translates to:

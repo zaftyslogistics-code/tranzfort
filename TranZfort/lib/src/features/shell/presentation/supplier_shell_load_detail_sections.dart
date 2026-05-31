@@ -24,6 +24,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/load_detail_hero.dart';
+import '../../../shared/widgets/load_lifecycle_timeline.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../../tts/data/load_detail_tts_builder.dart';
 import '../../../shared/widgets/tts_read_all_button.dart';
@@ -147,6 +148,12 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                   ),
                 ),
               ],
+              DetailSectionCard(
+                title: l10n.supplierLoadDetailLifecycleTitle,
+                children: [
+                  LoadLifecycleTimeline(currentStatus: detail.summary.status),
+                ],
+              ),
               DetailSectionCard(
                 title: l10n.supplierLoadDetailStatusAndActionsTitle,
                 children: [

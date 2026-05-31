@@ -2454,6 +2454,7 @@
   },
   "supplierLoadDetailLinkedExecutionUnavailableTitle": "लिंक्ड निष्पादन डेटा उपलब्ध नहीं है",
   "supplierLoadSupportFailureMessage": "बुकिंग या ट्रिप अभी रिफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।",
+  "supplierLoadDetailLifecycleTitle": "लोड जीवनचक्र",
   "supplierLoadDetailStatusAndActionsTitle": "स्थिति और कार्रवाई",
   "supplierLoadDetailCurrentStatus": "वर्तमान स्थिति: {status}",
   "@supplierLoadDetailCurrentStatus": {

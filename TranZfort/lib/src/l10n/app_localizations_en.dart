@@ -6411,6 +6411,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Could not refresh bookings or trips right now. Please retry.';
 
   @override
+  String get supplierLoadDetailLifecycleTitle => 'Load lifecycle';
+
+  @override
   String get supplierLoadDetailStatusAndActionsTitle => 'Status and actions';
 
   @override

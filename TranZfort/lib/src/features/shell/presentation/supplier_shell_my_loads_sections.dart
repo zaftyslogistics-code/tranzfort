@@ -17,6 +17,7 @@ import '../../../features/supplier/providers/supplier_providers.dart';
 import '../../../features/support/providers/support_compose_providers.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
+import '../../../shared/widgets/supplier_load_compact_card.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
@@ -259,59 +260,53 @@ class _SupplierLoadListCard extends ConsumerWidget {
     final ttsL10n = TtsLocalizations.of(context);
     final palette = statusPaletteFor(load.status);
     final statusLabel = localizedSupplierDashboardLoadStatus(l10n, load.status);
-    final tonnes = load.weightTonnes % 1 == 0
-        ? load.weightTonnes.toStringAsFixed(0)
-        : load.weightTonnes.toStringAsFixed(1);
     final utterance = const SupplierLoadListCardTtsBuilder().build(
       load: load,
       tts: ttsL10n,
       statusLabel: statusLabel,
     );
+    final supplierId = ref.watch(supplierProfileProvider).valueOrNull?.id ?? '';
 
-    return StandardListCard(
-      accent: palette.foreground,
-      title: l10n.supplierLoadCardRouteTitle(load.originLabel, load.destinationLabel),
-      subtitle: '${load.material} - ${tonnes}T - ₹${load.priceAmount.toStringAsFixed(0)}',
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TtsCardSpeakerButton(message: utterance),
-          const SizedBox(width: 4),
-          StatusChip(label: statusLabel),
-        ],
-      ),
+    return SupplierLoadCompactCard.fromLoad(
+      load: load,
+      supplierId: supplierId,
+      statusChips: [
+        StatusChip(label: statusLabel, palette: palette),
+        StatusChip(
+          label: localizedLoadMarketplaceStatus(
+            l10n,
+            isOnMarketplace: load.isOnMarketplace,
+            trucksBooked: load.trucksBooked,
+            trucksNeeded: load.trucksNeeded,
+          ),
+        ),
+        if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus))
+          StatusBadge(
+            label: l10n.supplierDashboardSuperLoadBadge(
+              superLoadStatusLabel(l10n, load.superStatus, isSuperLoad: load.isSuperLoad),
+            ),
+            icon: Icons.workspace_premium_outlined,
+          ),
+      ],
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            l10n.supplierLoadCardPickupDate(formatSupplierShortDate(context, load.pickupDate)),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  l10n.supplierLoadCardPickupDate(formatSupplierShortDate(context, load.pickupDate)),
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
+                ),
+              ),
+              TtsCardSpeakerButton(message: utterance, onDarkSurface: true),
+            ],
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.supplierLoadCardTrucks('${load.trucksBooked}', '${load.trucksNeeded}'),
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
           ),
-          const SizedBox(height: AppSpacing.xs),
-          StatusChip(
-            label: localizedLoadMarketplaceStatus(
-              l10n,
-              isOnMarketplace: load.isOnMarketplace,
-              trucksBooked: load.trucksBooked,
-              trucksNeeded: load.trucksNeeded,
-            ),
-          ),
-          if (hasSuperLoadState(isSuperLoad: load.isSuperLoad, superStatus: load.superStatus)) ...[
-            const SizedBox(height: AppSpacing.sm),
-            SuperLoadStatusBlock(
-              isSuperLoad: load.isSuperLoad,
-              superStatus: load.superStatus,
-            ),
-          ],
           const SizedBox(height: AppSpacing.md),
           if (!load.isOnMarketplace) ...[
             TextActionButton(

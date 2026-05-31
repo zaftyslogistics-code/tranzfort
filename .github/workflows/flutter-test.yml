@@ -24,6 +24,9 @@ jobs:
         working-directory: TranZfort
         run: |
           flutter test \
+            test/core/models/load_body_types_test.dart \
+            test/core/utils/sensitive_identifier_display_test.dart \
+            test/features/supplier/data/load_marketplace_mapping_test.dart \
             test/features/trucker/data/trucker_trip_repository_test.dart \
             test/features/support/data/support_repository_test.dart \
             test/features/supplier/data/supplier_load_repository_test.dart \

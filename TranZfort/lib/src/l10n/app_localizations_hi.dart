@@ -6429,6 +6429,9 @@ class AppLocalizationsHi extends AppLocalizations {
       'बुकिंग या ट्रिप अभी रिफ्रेश नहीं हुई। कृपया फिर से प्रयास करें।';
 
   @override
+  String get supplierLoadDetailLifecycleTitle => 'लोड जीवनचक्र';
+
+  @override
   String get supplierLoadDetailStatusAndActionsTitle => 'स्थिति और कार्रवाई';
 
   @override

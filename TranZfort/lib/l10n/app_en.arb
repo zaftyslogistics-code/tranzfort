@@ -2567,6 +2567,7 @@
   },
   "supplierLoadDetailLinkedExecutionUnavailableTitle": "Linked execution data unavailable",
   "supplierLoadSupportFailureMessage": "Could not refresh bookings or trips right now. Please retry.",
+  "supplierLoadDetailLifecycleTitle": "Load lifecycle",
   "supplierLoadDetailStatusAndActionsTitle": "Status and actions",
   "supplierLoadDetailCurrentStatus": "Current status: {status}",
   "@supplierLoadDetailCurrentStatus": {
