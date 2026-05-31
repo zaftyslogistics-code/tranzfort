@@ -17,7 +17,9 @@ import '../providers/support_compose_providers.dart';
 import '../providers/support_providers.dart';
 
 class CreateSupportTicketScreen extends ConsumerStatefulWidget {
-  const CreateSupportTicketScreen({super.key});
+  final SupportTicketComposeContext? composeContext;
+
+  const CreateSupportTicketScreen({super.key, this.composeContext});
 
   @override
   ConsumerState<CreateSupportTicketScreen> createState() => _CreateSupportTicketScreenState();
@@ -31,6 +33,10 @@ class _CreateSupportTicketScreenState extends ConsumerState<CreateSupportTicketS
   @override
   void initState() {
     super.initState();
+    final composeContext = widget.composeContext;
+    if (composeContext != null) {
+      ref.read(createSupportTicketProvider.notifier).applyComposeContext(composeContext);
+    }
     final state = ref.read(createSupportTicketProvider);
     _loadIdController = TextEditingController(text: state.relatedLoadId);
     _tripIdController = TextEditingController(text: state.relatedTripId);

@@ -565,7 +565,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: AppRoutes.createSupportTicketPath,
             name: AppRoutes.createSupportTicket,
-            builder: (context, state) => const CreateSupportTicketScreen(),
+            builder: (context, state) => CreateSupportTicketScreen(
+              composeContext: state.extra is SupportTicketComposeContext
+                  ? state.extra as SupportTicketComposeContext
+                  : null,
+            ),
           ),
           GoRoute(
             path: AppRoutes.reportIssuePath,

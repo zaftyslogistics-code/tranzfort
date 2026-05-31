@@ -1915,6 +1915,10 @@
       "count": {}
     }
   },
+  "truckerTripDetailSupportEscalationTitle": "ट्रिप सहायता",
+  "truckerTripDetailSupportEscalationMessage": "ट्रकर्स डिलीवरी, प्रूफ या भुगतान समस्याएँ सहायता टिकट के जरिए एस्केलेट करते हैं। यह ट्रिप स्वचालित रूप से लिंक होती है ताकि ऑपरेशन पूरा टाइमलाइन देख सके।",
+  "truckerTripDetailSupportEscalationProofSubmittedHint": "प्रूफ समीक्षा के दौरान सप्लायर औपचारिक POD विवाद उठा सकता है। जवाब देने के लिए लिंक किए गए सहायता टिकट का उपयोग करें—अलग ट्रकर विवाद फॉर्म नहीं है।",
+  "truckerTripDetailDisputeOpenSupportAction": "लिंक किया सहायता टिकट खोलें",
   "truckerTripDetailReportSourceLabel": "ट्रकर ट्रिप - {originLabel} से {destinationLabel}",
   "truckerTripDetailReviewCountdownTitle": "डिलीवरी समीक्षा काउंटडाउन",
   "truckerTripDetailReviewCountdownMessage": "Supplier confirmation pending है। अगर कोई action नहीं ली जाती, तो POD upload के 48 घंटे बाद यह trip auto-complete हो जाती है।",

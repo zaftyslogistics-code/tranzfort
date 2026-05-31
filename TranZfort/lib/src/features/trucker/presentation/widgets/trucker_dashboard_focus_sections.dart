@@ -161,10 +161,15 @@ class _DashboardNearbyLoadCard extends StatelessWidget {
         ? '₹${load.priceAmount.toStringAsFixed(0)}/ton'
         : '₹${load.priceAmount.toStringAsFixed(0)} fixed';
 
+    final AppLocalizations l10n = AppLocalizations.of(context);
+    final trucksLabel = load.trucksNeeded > 1
+        ? ' · ${l10n.supplierDashboardTrucksBooked(load.trucksBooked, load.trucksNeeded)}'
+        : '';
+
     return StandardListCard(
       accent: load.isSuperLoad ? AppColors.secondary : AppColors.primary,
       title: '${load.originCity} → ${load.destinationCity}',
-      subtitle: '${load.material} · $rateLabel',
+      subtitle: '${load.material} · $rateLabel$trucksLabel',
       trailing: load.isSuperLoad ? const StatusChip(label: 'Super') : null,
       onTap: () => context.push('${AppRoutes.loadDetailPath}/${load.id}'),
     );

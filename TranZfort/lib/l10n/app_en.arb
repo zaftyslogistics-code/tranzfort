@@ -2011,6 +2011,10 @@
       "count": {}
     }
   },
+  "truckerTripDetailSupportEscalationTitle": "Trip support",
+  "truckerTripDetailSupportEscalationMessage": "Truckers escalate delivery, proof, or payment problems through support tickets. This trip is linked automatically so operations can review the full timeline.",
+  "truckerTripDetailSupportEscalationProofSubmittedHint": "Suppliers may raise a formal POD dispute while proof is under review. Use your linked support ticket to respond—there is no separate trucker dispute form.",
+  "truckerTripDetailDisputeOpenSupportAction": "Open linked support ticket",
   "truckerTripDetailReportSourceLabel": "Trucker trip - {originLabel} to {destinationLabel}",
   "truckerTripDetailReviewCountdownTitle": "Delivery review countdown",
   "truckerTripDetailReviewCountdownMessage": "Supplier confirmation is pending. This trip auto-completes 48 hours after POD upload if no action is taken.",

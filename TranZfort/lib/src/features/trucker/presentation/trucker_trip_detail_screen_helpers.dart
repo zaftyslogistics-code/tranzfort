@@ -1,5 +1,21 @@
 part of 'trucker_trip_detail_screen.dart';
 
+bool truckerTripShowsSupportEscalation(String stage) {
+  final normalized = stage.trim().toLowerCase();
+  return normalized != 'completed' && normalized != 'cancelled' && normalized != 'disputed';
+}
+
+void openTruckerTripSupportTicket(BuildContext context, TruckerTripDetail detail) {
+  context.push(
+    AppRoutes.createSupportTicketPath,
+    extra: SupportTicketComposeContext(
+      category: 'trip',
+      relatedLoadId: detail.loadId,
+      relatedTripId: detail.id,
+    ),
+  );
+}
+
 Uri? _tripDetailCallUri(String? mobile) {
   final normalized = (mobile ?? '').trim();
   if (normalized.isEmpty) {

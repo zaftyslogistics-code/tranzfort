@@ -248,6 +248,13 @@ class _TruckerTripDetailBody extends ConsumerWidget {
                     await mapsLauncher.launchDirectionsUri(mapsUri);
                   },
                 ),
+              if (truckerTripShowsSupportEscalation(detail.stage)) ...[
+                const SizedBox(height: 12),
+                OutlineButton(
+                  label: l10n.supportCreateTicketAction,
+                  onPressed: () => openTruckerTripSupportTicket(context, detail),
+                ),
+              ],
               const SizedBox(height: 12),
               OutlineButton(
                 label: l10n.commonReportSpamOrAbuseAction,
@@ -263,6 +270,32 @@ class _TruckerTripDetailBody extends ConsumerWidget {
                     ),
                   ),
                 ),
+              ),
+            ],
+          ),
+        ],
+        if (truckerTripShowsSupportEscalation(detail.stage)) ...[
+          const SizedBox(height: 16),
+          DetailSectionCard(
+            title: l10n.truckerTripDetailSupportEscalationTitle,
+            children: [
+              Text(
+                l10n.truckerTripDetailSupportEscalationMessage,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+              if (detail.stage == 'proof_submitted') ...[
+                const SizedBox(height: 8),
+                Text(
+                  l10n.truckerTripDetailSupportEscalationProofSubmittedHint,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                ),
+              ],
+              const SizedBox(height: 12),
+              PrimaryButton(
+                label: l10n.supportCreateTicketAction,
+                onPressed: () => openTruckerTripSupportTicket(context, detail),
               ),
             ],
           ),
@@ -334,9 +367,9 @@ class _TruckerTripDetailBody extends ConsumerWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
               const SizedBox(height: 12),
-              OutlineButton(
-                label: l10n.commonSupportLabel,
-                onPressed: () => context.push(AppRoutes.supportPath),
+              PrimaryButton(
+                label: l10n.truckerTripDetailDisputeOpenSupportAction,
+                onPressed: () => openTruckerTripSupportTicket(context, detail),
               ),
             ],
           ),

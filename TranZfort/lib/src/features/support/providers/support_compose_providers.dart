@@ -38,6 +38,18 @@ const String supportReplyValidationFailureCode = 'support_reply_validation';
 const String supportReplyMessageTooShortCode = 'support_reply_message_too_short';
 const String supportReplyAttachmentFinalizeFailureCode = 'support_reply_attachment_finalize_failed';
 
+class SupportTicketComposeContext {
+  final String category;
+  final String relatedLoadId;
+  final String relatedTripId;
+
+  const SupportTicketComposeContext({
+    required this.category,
+    required this.relatedLoadId,
+    required this.relatedTripId,
+  });
+}
+
 class ReportIssueContext {
   final String initialCategory;
   final String relatedLoadId;
@@ -198,6 +210,17 @@ class CreateSupportTicketController extends StateNotifier<CreateSupportTicketSta
   final SupportAttachmentUploadService _attachmentService;
 
   CreateSupportTicketController(this._repository, this._attachmentService) : super(CreateSupportTicketState.initial());
+
+  void applyComposeContext(SupportTicketComposeContext context) {
+    state = state.copyWith(
+      category: context.category,
+      relatedLoadId: context.relatedLoadId,
+      relatedTripId: context.relatedTripId,
+      clearFailure: true,
+      clearCreatedTicketId: true,
+      fieldErrors: const <String, String>{},
+    );
+  }
 
   void setCategory(String? value) {
     if (value == null) {

@@ -7145,6 +7145,30 @@ abstract class AppLocalizations {
   /// **'{count} days'**
   String commonDurationDaysShort(Object count);
 
+  /// No description provided for @truckerTripDetailSupportEscalationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Trip support'**
+  String get truckerTripDetailSupportEscalationTitle;
+
+  /// No description provided for @truckerTripDetailSupportEscalationMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Truckers escalate delivery, proof, or payment problems through support tickets. This trip is linked automatically so operations can review the full timeline.'**
+  String get truckerTripDetailSupportEscalationMessage;
+
+  /// No description provided for @truckerTripDetailSupportEscalationProofSubmittedHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Suppliers may raise a formal POD dispute while proof is under review. Use your linked support ticket to respond—there is no separate trucker dispute form.'**
+  String get truckerTripDetailSupportEscalationProofSubmittedHint;
+
+  /// No description provided for @truckerTripDetailDisputeOpenSupportAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Open linked support ticket'**
+  String get truckerTripDetailDisputeOpenSupportAction;
+
   /// No description provided for @truckerTripDetailReportSourceLabel.
   ///
   /// In en, this message translates to:

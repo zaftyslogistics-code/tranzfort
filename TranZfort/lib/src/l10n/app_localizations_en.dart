@@ -4490,6 +4490,21 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get truckerTripDetailSupportEscalationTitle => 'Trip support';
+
+  @override
+  String get truckerTripDetailSupportEscalationMessage =>
+      'Truckers escalate delivery, proof, or payment problems through support tickets. This trip is linked automatically so operations can review the full timeline.';
+
+  @override
+  String get truckerTripDetailSupportEscalationProofSubmittedHint =>
+      'Suppliers may raise a formal POD dispute while proof is under review. Use your linked support ticket to respond—there is no separate trucker dispute form.';
+
+  @override
+  String get truckerTripDetailDisputeOpenSupportAction =>
+      'Open linked support ticket';
+
+  @override
   String truckerTripDetailReportSourceLabel(
     Object destinationLabel,
     Object originLabel,
