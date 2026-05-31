@@ -4919,6 +4919,12 @@ abstract class AppLocalizations {
   /// **'Route distance and duration could not be derived right now. You can still continue with manual city-based posting.'**
   String get supplierPostLoadRoutePreviewUnavailableMessage;
 
+  /// No description provided for @supplierLoadListingExpiringSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Ending soon'**
+  String get supplierLoadListingExpiringSoon;
+
   /// No description provided for @supplierPostLoadCargoDetailsTitle.
   ///
   /// In en, this message translates to:

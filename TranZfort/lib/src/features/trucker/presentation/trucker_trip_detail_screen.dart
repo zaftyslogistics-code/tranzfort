@@ -19,6 +19,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/trip_route_header.dart';
 import '../data/trucker_profile_repository.dart';
 import '../providers/trucker_providers.dart';
 import '../data/trucker_trip_repository.dart';

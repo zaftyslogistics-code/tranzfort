@@ -340,6 +340,14 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     state = state.copyWith(selectedTyres: next, clearSubmissionFailure: true, clearLastCreatedLoadId: true);
   }
 
+  void setSelectedTyres(List<int> tyres) {
+    state = state.copyWith(
+      selectedTyres: tyres.toSet(),
+      clearSubmissionFailure: true,
+      clearLastCreatedLoadId: true,
+    );
+  }
+
   void setTrucksNeeded(String value) {
     state = state.copyWith(
       trucksNeeded: value,

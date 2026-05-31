@@ -15,6 +15,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/trip_route_header.dart';
 import '../data/supplier_trip_repository.dart';
 import '../providers/supplier_trip_action_provider.dart';
 import '../providers/supplier_trip_detail_provider.dart';
@@ -290,12 +291,18 @@ class _SupplierTripDetailBody extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeroActionCard(
-          title: detail.routeLabel,
+          title: detail.material,
           subtitle: l10n.supplierTripDetailHeroSubtitle(detail.truckNumber),
           useDarkTheme: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              TripRouteHeader(
+                routeLabel: detail.routeLabel,
+                originLabel: detail.originLabel,
+                destinationLabel: detail.destinationLabel,
+              ),
+              const SizedBox(height: AppSpacing.md),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,

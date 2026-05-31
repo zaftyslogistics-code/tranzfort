@@ -1359,6 +1359,7 @@
   },
   "supplierPostLoadRoutePreviewUnavailableTitle": "Route preview unavailable",
   "supplierPostLoadRoutePreviewUnavailableMessage": "Route distance and duration could not be derived right now. You can still continue with manual city-based posting.",
+  "supplierLoadListingExpiringSoon": "Ending soon",
   "supplierPostLoadCargoDetailsTitle": "Cargo details",
   "supplierPostLoadMaterialLabel": "Material",
   "supplierPostLoadWeightLabel": "Weight (tonnes)",

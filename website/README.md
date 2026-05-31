@@ -7,9 +7,10 @@ Static pages for in-app URLs:
 
 ## Deploy options
 
-1. **Cloudflare Pages / Netlify / Vercel:** set publish directory to `website/public`.
-2. **Nginx:** `location = /privacy { try_files /privacy.html =404; }` (same for `/terms`).
-3. **S3 + CloudFront:** upload both HTML files; map object keys to paths.
+1. **Netlify:** repo includes `website/netlify.toml` (publish `public`) + `public/_redirects` for `/privacy` and `/terms`.
+2. **Cloudflare Pages / Vercel:** set publish directory to `website/public`.
+3. **Nginx:** `location = /privacy { try_files /privacy.html =404; }` (same for `/terms`).
+4. **S3 + CloudFront:** upload both HTML files; map object keys to paths.
 
 Before Play upload: replace Grievance Officer placeholders in `privacy.html` and jurisdiction in `terms.html`.
 

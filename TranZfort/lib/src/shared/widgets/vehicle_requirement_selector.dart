@@ -10,12 +10,14 @@ class VehicleRequirementSelector extends StatelessWidget {
   final String label;
   final String value;
   final ValueChanged<String?> onChanged;
+  final List<String> bodyTypes;
 
   const VehicleRequirementSelector({
     super.key,
     required this.label,
     required this.value,
     required this.onChanged,
+    this.bodyTypes = LoadBodyTypes.selectable,
   });
 
   @override
@@ -25,7 +27,7 @@ class VehicleRequirementSelector extends StatelessWidget {
     return AppDropdown<String>(
       label: label,
       value: value,
-      items: LoadBodyTypes.selectable
+      items: bodyTypes
           .map(
             (bodyType) => DropdownMenuItem<String>(
               value: bodyType,
@@ -65,10 +67,17 @@ class VehicleTyreSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+
     return Wrap(
       spacing: AppSpacing.sm,
       runSpacing: AppSpacing.sm,
       children: [
+        FilterChip(
+          label: Text(l10n.commonAnyLabel),
+          selected: selectedTyres.isEmpty,
+          onSelected: (_) => onChanged(const []),
+        ),
         for (final tyres in options)
           FilterChip(
             label: Text('$tyres'),

@@ -13,6 +13,7 @@ import '../../../features/supplier/data/supplier_load_repository.dart';
 import '../../../features/supplier/data/supplier_profile_repository.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
+import '../../../core/utils/listing_expiry.dart';
 import '../../../shared/widgets/supplier_load_compact_card.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/layout_components.dart';
@@ -467,6 +468,14 @@ class _RecentLoadCard extends ConsumerWidget {
               superLoadStatusLabel(l10n, load.superStatus, isSuperLoad: load.isSuperLoad),
             ),
             icon: Icons.workspace_premium_outlined,
+          ),
+        if (load.isOnMarketplace && isListingExpiringSoon(load.marketplaceVisibleUntil))
+          StatusChip(
+            label: l10n.supplierLoadListingExpiringSoon,
+            palette: const StatusPalette(
+              foreground: AppColors.warning,
+              background: AppColors.warningBg,
+            ),
           ),
       ],
       footer: Column(

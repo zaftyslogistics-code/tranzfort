@@ -3035,6 +3035,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Route distance and duration could not be derived right now. You can still continue with manual city-based posting.';
 
   @override
+  String get supplierLoadListingExpiringSoon => 'Ending soon';
+
+  @override
   String get supplierPostLoadCargoDetailsTitle => 'Cargo details';
 
   @override

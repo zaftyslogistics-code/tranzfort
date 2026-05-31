@@ -10,6 +10,7 @@ import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
 import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
+import '../../../shared/widgets/trip_compact_card.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
@@ -170,42 +171,27 @@ class _TruckerTripCard extends ConsumerWidget {
       truckNumber: trip.truckNumber,
     );
 
-    return StandardListCard(
-      accent: palette.foreground,
-      title: trip.routeLabel,
-      subtitle: '${trip.material} - ${_localizedTruckerTripsProofStatus(l10n, trip)}',
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TtsCardSpeakerButton(message: utterance),
-          const SizedBox(width: 4),
-          StatusChip(label: stageLabel),
-        ],
-      ),
+    return TripCompactCard(
+      routeLabel: trip.routeLabel,
+      subtitle: '${trip.material} · ${_localizedTruckerTripsProofStatus(l10n, trip)}',
+      stageLabel: stageLabel,
+      stagePalette: palette,
+      progressValue: trip.progressValue,
+      headerTrailing: TtsCardSpeakerButton(message: utterance, onDarkSurface: true),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(999),
-            child: LinearProgressIndicator(
-              value: trip.progressValue,
-              minHeight: 6,
-              backgroundColor: AppColors.neutralBg,
-              valueColor: AlwaysStoppedAnimation<Color>(palette.foreground),
-            ),
-          ),
-          const SizedBox(height: AppSpacing.sm),
           Text(
             _localizedTruckerTripsTimeContext(context, l10n, trip),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.inkTextSecondary,
             ),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(
             l10n.truckerTripsTruckLabel(trip.truckNumber),
             style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColors.textSecondary,
+              color: AppColors.inkTextSecondary,
             ),
           ),
         ],

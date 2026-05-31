@@ -102,6 +102,29 @@ class MarketplaceLoadCard extends ConsumerWidget {
                           label: _formatPickupDate(context, load.pickupDate),
                           onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                         ),
+                        if (load.routeDistanceKm != null && load.routeDistanceKm! > 0)
+                          _InlineMetaItem(
+                            icon: Icons.route_outlined,
+                            label: '${load.routeDistanceKm!.toStringAsFixed(0)} km',
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                          ),
+                        _InlineMetaItem(
+                          icon: Icons.inventory_2_outlined,
+                          label: load.material,
+                          onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                        ),
+                        if (load.requiredBodyType != null && load.requiredBodyType!.trim().isNotEmpty)
+                          _InlineMetaItem(
+                            icon: Icons.local_shipping_outlined,
+                            label: localizeBodyType(l10n, load.requiredBodyType),
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                          ),
+                        if (tyreLabel.isNotEmpty)
+                          _InlineMetaItem(
+                            icon: Icons.tire_repair_outlined,
+                            label: tyreLabel,
+                            onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
+                          ),
                         if (load.advancePercentage > 0)
                           _InlineMetaItem(
                             icon: Icons.account_balance_wallet_outlined,

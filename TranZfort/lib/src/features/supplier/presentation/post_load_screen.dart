@@ -13,6 +13,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/marketplace_intro_banner.dart';
+import '../../../shared/widgets/vehicle_requirement_selector.dart';
 import '../../../core/services/marketplace_intro_preferences.dart';
 import '../data/supplier_profile_repository.dart';
 import '../data/supplier_location_services.dart';
@@ -367,38 +368,22 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         DetailSectionCard(
           title: l10n.supplierPostLoadVehicleRequirementsTitle,
           children: [
-            AppDropdown<String>(
+            VehicleRequirementSelector(
               label: l10n.supplierPostLoadTruckBodyTypeLabel,
               value: state.bodyType,
-              items: postLoadBodyTypes
-                  .map(
-                    (bodyType) => DropdownMenuItem<String>(
-                      value: bodyType,
-                      child: Text(_localizedBodyTypeLabel(l10n, bodyType)),
-                    ),
-                  )
-                  .toList(growable: false),
-              onChanged: ref.read(postLoadProvider.notifier).setBodyType,
+              onChanged: (value) {
+                if (value != null) {
+                  ref.read(postLoadProvider.notifier).setBodyType(value);
+                }
+              },
             ),
             const SizedBox(height: AppSpacing.md),
             Text(l10n.supplierPostLoadTyreRequirementTitle, style: Theme.of(context).textTheme.titleSmall),
             const SizedBox(height: AppSpacing.sm),
-            Wrap(
-              spacing: AppSpacing.sm,
-              runSpacing: AppSpacing.sm,
-              children: [
-                FilterChip(
-                  label: Text(l10n.commonAnyLabel),
-                  selected: state.selectedTyres.isEmpty,
-                  onSelected: (_) => ref.read(postLoadProvider.notifier).toggleTyre(null),
-                ),
-                for (final tyre in postLoadTyreOptions)
-                  FilterChip(
-                    label: Text('$tyre'),
-                    selected: state.selectedTyres.contains(tyre),
-                    onSelected: (_) => ref.read(postLoadProvider.notifier).toggleTyre(tyre),
-                  ),
-              ],
+            VehicleTyreSelector(
+              selectedTyres: state.selectedTyres.toList(),
+              options: postLoadTyreOptions,
+              onChanged: ref.read(postLoadProvider.notifier).setSelectedTyres,
             ),
             const SizedBox(height: AppSpacing.md),
             Text(l10n.supplierPostLoadTrucksNeededTitle, style: Theme.of(context).textTheme.titleSmall),

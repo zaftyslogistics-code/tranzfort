@@ -10,6 +10,8 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
+import '../../../shared/widgets/vehicle_meta_chips.dart';
+import '../../../shared/widgets/vehicle_requirement_selector.dart';
 import '../../../shared/widgets/status_components.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../../../core/error/app_failure.dart';
@@ -110,18 +112,15 @@ class _TruckerFleetScreenState extends ConsumerState<TruckerFleetScreen> {
               onChanged: ref.read(truckerFleetProvider.notifier).updateTruckNumber,
             ),
             const SizedBox(height: AppSpacing.md),
-            AppDropdown<String>(
+            VehicleRequirementSelector(
               label: l10n.truckerFleetBodyTypeLabel,
               value: state.bodyTypeDraft,
-              items: truckerFleetBodyTypes
-                  .map(
-                    (bodyType) => DropdownMenuItem<String>(
-                      value: bodyType,
-                      child: Text(_localizedBodyTypeLabel(l10n, bodyType)),
-                    ),
-                  )
-                  .toList(growable: false),
-              onChanged: ref.read(truckerFleetProvider.notifier).updateBodyType,
+              bodyTypes: truckerFleetBodyTypes,
+              onChanged: (bodyType) {
+                if (bodyType != null) {
+                  ref.read(truckerFleetProvider.notifier).updateBodyType(bodyType);
+                }
+              },
             ),
             const SizedBox(height: AppSpacing.md),
             AppDropdown<String>(
@@ -366,6 +365,8 @@ class _FleetTruckCard extends StatelessWidget {
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          VehicleMetaChips(bodyType: truck.bodyType, tyres: truck.tyres),
+          const SizedBox(height: AppSpacing.sm),
           if ((truck.modelLabel ?? '').trim().isNotEmpty)
             Text(
               l10n.truckerFleetModelLabel(truck.modelLabel!),

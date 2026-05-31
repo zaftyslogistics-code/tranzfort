@@ -1266,6 +1266,7 @@
   },
   "supplierPostLoadRoutePreviewUnavailableTitle": "मार्ग पूर्वावलोकन अनुपलब्ध",
   "supplierPostLoadRoutePreviewUnavailableMessage": "अभी route distance और duration derive नहीं हो सके। आप manual city-based posting के साथ फिर भी आगे बढ़ सकते हैं।",
+  "supplierLoadListingExpiringSoon": "जल्द समाप्त",
   "supplierPostLoadCargoDetailsTitle": "कार्गो विवरण",
   "supplierPostLoadMaterialLabel": "सामग्री",
   "supplierPostLoadWeightLabel": "वजन (टन)",

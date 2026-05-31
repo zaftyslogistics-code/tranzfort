@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/models/load_body_types.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_decorations.dart';
 import '../../../../core/theme/app_spacing.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../shared/widgets/marketplace_load_card.dart';
 import '../../providers/trucker_fleet_provider.dart';
 
 /// Truck-type-first filter bar for Find Loads (FP-3 / FP-4).
 ///
 /// Shows Any + body-type segments and tyre counts from fleet options.
 class MarketplaceFilterBar extends StatelessWidget {
-  static const truckBodyTypes = <String>['Open', 'Container', 'Trailer', 'Tanker'];
-
   final String selectedBodyType;
   final List<int> selectedTyres;
   final ValueChanged<String> onBodyTypeChanged;
@@ -49,14 +49,14 @@ class MarketplaceFilterBar extends StatelessWidget {
                 onTap: () => onBodyTypeChanged(''),
               ),
               const SizedBox(width: AppSpacing.xs),
-              for (final bodyType in truckBodyTypes) ...[
+              for (final bodyType in LoadBodyTypes.filterChipTypes) ...[
                 _BodyTypeChip(
-                  label: l10n.truckerFindLoadsBodyTypeValue(bodyType.toLowerCase()),
+                  label: MarketplaceLoadCard.localizeBodyType(l10n, bodyType),
                   icon: _bodyTypeIcon(bodyType),
-                  selected: selectedBodyType == bodyType,
+                  selected: selectedBodyType.toLowerCase() == bodyType,
                   onDarkSurface: onDarkSurface,
                   onTap: () {
-                    if (selectedBodyType == bodyType) {
+                    if (selectedBodyType.toLowerCase() == bodyType) {
                       onBodyTypeChanged('');
                     } else {
                       onBodyTypeChanged(bodyType);

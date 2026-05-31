@@ -19,6 +19,15 @@ class LoadBodyTypes {
     refrigerated,
   ];
 
+  /// Find-loads filter chips (DB lowercase enum; excludes [any]).
+  static const List<String> filterChipTypes = [
+    open,
+    container,
+    trailer,
+    tanker,
+    refrigerated,
+  ];
+
   @Deprecated('Use selectable')
   static List<String> get postLoadBodyTypes => selectable;
 

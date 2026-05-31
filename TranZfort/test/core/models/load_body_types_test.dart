@@ -11,4 +11,9 @@ void main() {
     expect(LoadBodyTypes.selectable, contains('refrigerated'));
     expect(LoadBodyTypes.selectable.first, 'any');
   });
+
+  test('filterChipTypes excludes any and uses lowercase', () {
+    expect(LoadBodyTypes.filterChipTypes, isNot(contains(LoadBodyTypes.any)));
+    expect(LoadBodyTypes.filterChipTypes.first, 'open');
+  });
 }

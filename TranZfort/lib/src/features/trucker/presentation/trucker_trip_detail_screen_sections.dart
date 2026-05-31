@@ -47,12 +47,22 @@ class _TruckerTripDetailBody extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         HeroActionCard(
-          title: detail.routeLabel,
+          title: detail.material,
           subtitle: l10n.truckerTripDetailHeroSubtitle(detail.truckNumber),
           useDarkTheme: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              TripRouteHeader(
+                routeLabel: detail.routeLabel,
+                originLabel: detail.originLabel,
+                destinationLabel: detail.destinationLabel,
+                originCity: detail.originCity,
+                originState: detail.originState,
+                destinationCity: detail.destinationCity,
+                destinationState: detail.destinationState,
+              ),
+              const SizedBox(height: 16),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,

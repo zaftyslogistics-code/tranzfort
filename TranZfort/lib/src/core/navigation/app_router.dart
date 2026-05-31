@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../features/auth/presentation/auth_screens.dart';
 import '../../features/auth/presentation/onboarding_screens.dart';
 import '../../features/auth/presentation/onboarding_profile_completion.dart';
@@ -672,9 +673,9 @@ class _PublicProfileRouteErrorScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
-      // TODO(l10n): Add publicProfileScreenTitle key (Phase 4)
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: Text(l10n.publicProfileScreenTitle)),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -683,9 +684,8 @@ class _PublicProfileRouteErrorScreen extends StatelessWidget {
             children: [
               const Icon(Icons.error_outline, size: 64),
               const SizedBox(height: 16),
-              // TODO(l10n): Add publicProfileLoadErrorTitle key (Phase 4)
               Text(
-                'Failed to load profile',
+                l10n.publicProfileLoadErrorTitle,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 8),
@@ -706,9 +706,9 @@ class _PublicProfileRouteNotFoundScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Scaffold(
-      // TODO(l10n): Add publicProfileScreenTitle key (Phase 4)
-      appBar: AppBar(title: const Text('Profile')),
+      appBar: AppBar(title: Text(l10n.publicProfileScreenTitle)),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24),
@@ -717,9 +717,8 @@ class _PublicProfileRouteNotFoundScreen extends StatelessWidget {
             children: [
               const Icon(Icons.person_off_outlined, size: 64),
               const SizedBox(height: 16),
-              // TODO(l10n): Add publicProfileNotFoundTitle key (Phase 4)
               Text(
-                'Profile not found',
+                l10n.publicProfileNotFoundTitle,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
             ],
