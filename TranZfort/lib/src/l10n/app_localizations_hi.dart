@@ -6562,6 +6562,32 @@ class AppLocalizationsHi extends AppLocalizations {
       'आपके असहेजित लोड विवरण हैं। क्या आप उन्हें छोड़ना चाहते हैं?';
 
   @override
+  String get postLoadListingDurationLabel => 'Find Loads पर लिस्टिंग';
+
+  @override
+  String get postLoadListingDuration48h => '48 घंटे';
+
+  @override
+  String get postLoadListingDuration7d => '7 दिन';
+
+  @override
+  String get postLoadListingDuration30d => '30 दिन';
+
+  @override
+  String get postLoadListingDurationHelper =>
+      'सभी ट्रक बुक होने या समय समाप्त होने तक लिस्टिंग रहेगी।';
+
+  @override
+  String postLoadDailyLimitLabel(int current, int max) {
+    return 'आज की पोस्ट: $current / $max';
+  }
+
+  @override
+  String postLoadDailyLimitReached(int max) {
+    return 'आज की पोस्ट सीमा ($max) पूरी हो गई। कल (IST) फिर कोशिश करें।';
+  }
+
+  @override
   String get ttsHindiVoice => 'हिंदी आवाज़';
 
   @override

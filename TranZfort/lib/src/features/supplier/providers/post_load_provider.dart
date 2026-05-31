@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../l10n/app_localizations.dart';
+import '../data/load_listing_duration.dart';
 import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
 import '../data/supplier_location_services.dart';
@@ -12,6 +13,7 @@ import '../data/supplier_location_services.dart';
 // S-004: Error codes for localization (UI should map these to AppLocalizations)
 class PostLoadErrorCodes {
   static const String submissionAlreadyInProgress = 'supplier.load_submission_already_in_progress';
+  static const String dailyPostLimitReached = 'daily_post_limit_reached';
 }
 
 const List<String> postLoadMaterials = <String>[
@@ -59,6 +61,7 @@ class PostLoadState {
   final String priceType;
   final double advancePercentage;
   final DateTime pickupDate;
+  final LoadListingDuration listingDuration;
   final Map<String, String> fieldErrors;
   final bool isSubmitting;
   final AppFailure? submissionFailure;
@@ -87,6 +90,7 @@ class PostLoadState {
     required this.priceType,
     required this.advancePercentage,
     required this.pickupDate,
+    required this.listingDuration,
     required this.fieldErrors,
     required this.isSubmitting,
     required this.submissionFailure,
@@ -118,6 +122,7 @@ class PostLoadState {
       priceType: 'per_ton',
       advancePercentage: 80,
       pickupDate: DateTime(today.year, today.month, today.day),
+      listingDuration: LoadListingDuration.defaultDuration,
       fieldErrors: const <String, String>{},
       isSubmitting: false,
       submissionFailure: null,
@@ -151,6 +156,7 @@ class PostLoadState {
     String? priceType,
     double? advancePercentage,
     DateTime? pickupDate,
+    LoadListingDuration? listingDuration,
     Map<String, String>? fieldErrors,
     bool? isSubmitting,
     AppFailure? submissionFailure,
@@ -181,6 +187,7 @@ class PostLoadState {
       priceType: priceType ?? this.priceType,
       advancePercentage: advancePercentage ?? this.advancePercentage,
       pickupDate: pickupDate ?? this.pickupDate,
+      listingDuration: listingDuration ?? this.listingDuration,
       fieldErrors: fieldErrors ?? this.fieldErrors,
       isSubmitting: isSubmitting ?? this.isSubmitting,
       submissionFailure: clearSubmissionFailure == true ? null : submissionFailure ?? this.submissionFailure,
@@ -384,6 +391,14 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     );
   }
 
+  void setListingDuration(LoadListingDuration value) {
+    state = state.copyWith(
+      listingDuration: value,
+      clearSubmissionFailure: true,
+      clearLastCreatedLoadId: true,
+    );
+  }
+
   Future<Result<String>> submit([AppLocalizations? l10n]) async {
     if (state.isSubmitting) {
       return const Failure<String>(
@@ -430,7 +445,8 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeSnapshotSource: state.routePreview?.source,
       material: state.material == 'other' ? state.customMaterial.trim() : state.material,
       weightTonnes: double.parse(state.weightTonnes.trim()),
-      requiredBodyType: state.bodyType == 'Any' ? null : state.bodyType,
+      requiredBodyType: _normalizeBodyType(state.bodyType),
+      listingDuration: state.listingDuration,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),
       trucksNeeded: int.parse(state.trucksNeeded.trim()),
       priceAmount: double.parse(state.priceAmount.trim()),
@@ -505,6 +521,14 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       next.remove(key);
     }
     return next;
+  }
+
+  String? _normalizeBodyType(String value) {
+    final normalized = value.trim().toLowerCase();
+    if (normalized.isEmpty || normalized == 'any') {
+      return null;
+    }
+    return value;
   }
 
   Future<void> _refreshRoutePreview() async {

@@ -2744,6 +2744,24 @@
   "@_sectionPostLoad": "=== Post Load ===",
   "postLoadDiscardTitle": "Discard Changes?",
   "postLoadDiscardMessage": "You have unsaved load details. Do you want to discard them?",
+  "postLoadListingDurationLabel": "Listing on Find Loads",
+  "postLoadListingDuration48h": "48 hours",
+  "postLoadListingDuration7d": "7 days",
+  "postLoadListingDuration30d": "30 days",
+  "postLoadListingDurationHelper": "Load stays visible until all trucks are booked or this period ends.",
+  "postLoadDailyLimitLabel": "Posts today: {current} / {max}",
+  "@postLoadDailyLimitLabel": {
+    "placeholders": {
+      "current": {"type": "int"},
+      "max": {"type": "int"}
+    }
+  },
+  "postLoadDailyLimitReached": "You have reached today's post limit ({max} loads). Try again tomorrow (IST).",
+  "@postLoadDailyLimitReached": {
+    "placeholders": {
+      "max": {"type": "int"}
+    }
+  },
   "@_sectionTTS": "=== TTS Settings ===",
   "ttsHindiVoice": "Hindi Voice",
   "ttsEnglishVoice": "English Voice",

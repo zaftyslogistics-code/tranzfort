@@ -13,6 +13,9 @@ class SupplierDashboardStats {
   final int pendingBookings;
   final int inTransitTrips;
   final int completedTrips;
+  final int loadsPostedToday;
+  final int loadsDailyLimit;
+  final int loadsRemainingToday;
   final DateTime? lastRefreshedAt;
 
   const SupplierDashboardStats({
@@ -20,6 +23,9 @@ class SupplierDashboardStats {
     required this.pendingBookings,
     required this.inTransitTrips,
     required this.completedTrips,
+    this.loadsPostedToday = 0,
+    this.loadsDailyLimit = 20,
+    this.loadsRemainingToday = 20,
     this.lastRefreshedAt,
   });
 
@@ -77,6 +83,9 @@ class SupabaseSupplierDashboardBackend implements SupplierDashboardBackend {
       safeCount('pending_bookings'),
       safeCount('in_transit_trips'),
       safeCount('completed_trips'),
+      safeCount('loads_posted_today'),
+      safeCount('loads_daily_limit'),
+      safeCount('loads_remaining_today'),
     ];
   }
 }
@@ -102,6 +111,9 @@ class SupplierDashboardRepository {
           pendingBookings: results[1],
           inTransitTrips: results[2],
           completedTrips: results[3],
+          loadsPostedToday: results.length > 4 ? results[4] : 0,
+          loadsDailyLimit: results.length > 5 ? results[5] : 20,
+          loadsRemainingToday: results.length > 6 ? results[6] : 20,
           lastRefreshedAt: DateTime.now(),
         ),
       );

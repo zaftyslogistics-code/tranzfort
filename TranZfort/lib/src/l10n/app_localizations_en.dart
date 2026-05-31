@@ -6546,6 +6546,32 @@ class AppLocalizationsEn extends AppLocalizations {
       'You have unsaved load details. Do you want to discard them?';
 
   @override
+  String get postLoadListingDurationLabel => 'Listing on Find Loads';
+
+  @override
+  String get postLoadListingDuration48h => '48 hours';
+
+  @override
+  String get postLoadListingDuration7d => '7 days';
+
+  @override
+  String get postLoadListingDuration30d => '30 days';
+
+  @override
+  String get postLoadListingDurationHelper =>
+      'Load stays visible until all trucks are booked or this period ends.';
+
+  @override
+  String postLoadDailyLimitLabel(int current, int max) {
+    return 'Posts today: $current / $max';
+  }
+
+  @override
+  String postLoadDailyLimitReached(int max) {
+    return 'You have reached today\'s post limit ($max loads). Try again tomorrow (IST).';
+  }
+
+  @override
   String get ttsHindiVoice => 'Hindi Voice';
 
   @override

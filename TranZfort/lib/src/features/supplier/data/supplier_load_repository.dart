@@ -373,12 +373,16 @@ class SupplierLoadRepository {
     if (error is PostgrestException) {
       final message = error.message.trim();
       final normalized = message.toLowerCase();
+      if (normalized.contains('daily_post_limit_reached')) {
+        return const BusinessRuleFailure(message: 'daily_post_limit_reached');
+      }
       if (normalized.contains('cannot be cancelled') ||
           normalized.contains('cannot be closed') ||
           normalized.contains('booking not in submitted state') ||
           normalized.contains('already booked') ||
           normalized.contains('not available') ||
-          normalized.contains('not a supplier')) {
+          normalized.contains('not a supplier') ||
+          normalized.contains('supplier verification required')) {
         return BusinessRuleFailure(message: message, debugInfo: error.details?.toString());
       }
     }

@@ -1,5 +1,6 @@
 import '../../../core/utils/date_parser.dart';
 import '../../../core/utils/map_readers.dart';
+import 'load_listing_duration.dart';
 
 class CreateLoadDto {
   final String originLabel;
@@ -25,6 +26,7 @@ class CreateLoadDto {
   final String priceType;
   final int? advancePercentage;
   final DateTime pickupDate;
+  final LoadListingDuration listingDuration;
 
   const CreateLoadDto({
     required this.originLabel,
@@ -50,6 +52,7 @@ class CreateLoadDto {
     required this.priceType,
     required this.advancePercentage,
     required this.pickupDate,
+    this.listingDuration = LoadListingDuration.defaultDuration,
   });
 
   Map<String, dynamic> toRpcParams() {
@@ -77,6 +80,7 @@ class CreateLoadDto {
       'p_price_type': backendPriceType(priceType),
       'p_advance_percentage': advancePercentage,
       'p_pickup_date': pickupDate.toIso8601String().split('T').first,
+      'p_listing_duration': listingDuration.rpcValue,
     };
   }
 

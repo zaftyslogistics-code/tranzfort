@@ -16,7 +16,9 @@ import '../data/supplier_profile_repository.dart';
 import '../data/supplier_location_services.dart';
 import '../providers/my_loads_provider.dart';
 import '../providers/post_load_provider.dart';
+import '../providers/post_load_quota_provider.dart';
 import '../providers/supplier_providers.dart';
+import 'widgets/post_load_listing_section.dart';
 
 class PostLoadScreen extends ConsumerStatefulWidget {
   const PostLoadScreen({super.key});
@@ -138,11 +140,14 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(postLoadProvider);
+    final quotaAsync = ref.watch(postLoadQuotaProvider);
+    final quota = quotaAsync.valueOrNull;
     final supplierProfileAsync = ref.watch(supplierProfileProvider);
     final supplierProfile = supplierProfileAsync.valueOrNull;
     final profileFailure = supplierAsyncFailure(supplierProfileAsync);
     final postingGatingMessage = _postingGatingMessage(supplierProfileAsync, l10n);
-    final postingBlocked = postingGatingMessage != null;
+    final dailyLimitReached = quota != null && !quota.canPostToday && !quota.verificationRequired;
+    final postingBlocked = postingGatingMessage != null || dailyLimitReached;
     final profileUnavailable = !supplierProfileAsync.isLoading && !supplierProfileAsync.hasError && supplierProfile == null;
 
     return PopScope(
@@ -173,14 +178,36 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
           useDarkTheme: true,
           useInkGradient: true,
           titleIcon: Icons.add_box_outlined,
-          child: Text(
-            l10n.supplierPostLoadHeroHelper,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: AppColors.inkTextSecondary,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                l10n.supplierPostLoadHeroHelper,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: AppColors.inkTextSecondary,
+                    ),
+              ),
+              if (quota != null) ...[
+                const SizedBox(height: AppSpacing.sm),
+                Text(
+                  l10n.postLoadDailyLimitLabel(
+                    quota.loadsPostedToday,
+                    quota.loadsDailyLimit,
+                  ),
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color: AppColors.primaryOnDark,
+                      ),
                 ),
+              ],
+            ],
           ),
         ),
-        if (postingBlocked)
+        if (dailyLimitReached)
+          WarningBlock(
+            title: l10n.supplierPostLoadPostingBlockedTitle,
+            message: l10n.postLoadDailyLimitReached(quota!.loadsDailyLimit),
+          ),
+        if (postingGatingMessage != null && !dailyLimitReached)
           WarningBlock(
             title: l10n.supplierPostLoadPostingBlockedTitle,
             message: postingGatingMessage,
@@ -445,6 +472,15 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
           ],
         ),
         DetailSectionCard(
+          title: l10n.postLoadListingDurationLabel,
+          children: [
+            PostLoadListingSection(
+              selectedDuration: state.listingDuration,
+              onDurationChanged: ref.read(postLoadProvider.notifier).setListingDuration,
+            ),
+          ],
+        ),
+        DetailSectionCard(
           title: l10n.supplierPostLoadReviewSummaryTitle,
           children: [
             Text(
@@ -501,6 +537,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
                     ref.invalidate(myLoadsProvider);
                     ref.invalidate(supplierRecentLoadsProvider);
                     ref.invalidate(supplierDashboardProvider);
+                    ref.invalidate(postLoadQuotaProvider);
                     messenger.showSnackBar(
                       AppSnackbar.build(
                         context: context,
@@ -602,6 +639,10 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   String _localizedSubmissionErrorMessage(AppLocalizations l10n, AppFailure failure) {
     if (failure.message == PostLoadErrorCodes.submissionAlreadyInProgress) {
       return l10n.supplierLoadSubmissionAlreadyInProgress;
+    }
+    if (failure.message == PostLoadErrorCodes.dailyPostLimitReached ||
+        failure.message.contains('daily_post_limit_reached')) {
+      return l10n.postLoadDailyLimitReached(20);
     }
     return failure.message;
   }

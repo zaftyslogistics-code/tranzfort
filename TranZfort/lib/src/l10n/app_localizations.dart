@@ -10328,6 +10328,48 @@ abstract class AppLocalizations {
   /// **'You have unsaved load details. Do you want to discard them?'**
   String get postLoadDiscardMessage;
 
+  /// No description provided for @postLoadListingDurationLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Listing on Find Loads'**
+  String get postLoadListingDurationLabel;
+
+  /// No description provided for @postLoadListingDuration48h.
+  ///
+  /// In en, this message translates to:
+  /// **'48 hours'**
+  String get postLoadListingDuration48h;
+
+  /// No description provided for @postLoadListingDuration7d.
+  ///
+  /// In en, this message translates to:
+  /// **'7 days'**
+  String get postLoadListingDuration7d;
+
+  /// No description provided for @postLoadListingDuration30d.
+  ///
+  /// In en, this message translates to:
+  /// **'30 days'**
+  String get postLoadListingDuration30d;
+
+  /// No description provided for @postLoadListingDurationHelper.
+  ///
+  /// In en, this message translates to:
+  /// **'Load stays visible until all trucks are booked or this period ends.'**
+  String get postLoadListingDurationHelper;
+
+  /// No description provided for @postLoadDailyLimitLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Posts today: {current} / {max}'**
+  String postLoadDailyLimitLabel(int current, int max);
+
+  /// No description provided for @postLoadDailyLimitReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You have reached today\'s post limit ({max} loads). Try again tomorrow (IST).'**
+  String postLoadDailyLimitReached(int max);
+
   /// No description provided for @ttsHindiVoice.
   ///
   /// In en, this message translates to:
