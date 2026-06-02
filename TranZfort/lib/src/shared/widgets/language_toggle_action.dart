@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers/app_locale_providers.dart';
+import '../../core/providers/tts_audio_language_provider.dart';
 import '../../core/providers/app_state_providers.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
@@ -44,6 +45,8 @@ class LanguageToggleAction extends ConsumerWidget {
         );
 
         if (result.isSuccess) {
+          // Keep spoken language aligned with UI when user toggles EN/हिं.
+          await ref.read(ttsAudioLanguageProvider.notifier).followAppLocale(Locale(newLang));
           ref.invalidate(authStateProvider);
         }
       },

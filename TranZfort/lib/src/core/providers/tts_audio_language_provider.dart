@@ -6,7 +6,7 @@ import 'app_locale_providers.dart';
 
 const ttsAudioLanguagePreferenceKey = 'tts_audio_language';
 
-/// Spoken-language preference (`en` | `hi`). Defaults to UI locale until user overrides.
+/// Spoken-language preference (`en` | `hi`). Defaults to UI [appLanguagePreferenceKey] until user overrides in Settings.
 final ttsAudioLanguageProvider =
     StateNotifierProvider<TtsAudioLanguageNotifier, String>((ref) {
   return TtsAudioLanguageNotifier();
@@ -31,12 +31,14 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
       state = saved;
     } else {
       _followsAppLocale = true;
-      state = kDefaultAppLanguageCode;
+      // Match UI language on disk — avoid resetting to `en` after async locale sync (race).
+      final appLang = normalizeLanguageCode(prefs.getString(appLanguagePreferenceKey));
+      state = appLang ?? kDefaultAppLanguageCode;
     }
     _loaded = true;
   }
 
-  /// Sync from UI locale when no explicit override is stored.
+  /// Sync from UI locale when no explicit TTS override is stored.
   Future<void> syncFromUiLocale(Locale locale) async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.containsKey(ttsAudioLanguagePreferenceKey)) {
@@ -71,14 +73,18 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
   }
 
   Future<void> clearOverride() async {
-    await followAppLocale(const Locale(kDefaultAppLanguageCode));
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(ttsAudioLanguagePreferenceKey);
+    _followsAppLocale = true;
+    final appLang = normalizeLanguageCode(prefs.getString(appLanguagePreferenceKey));
+    state = appLang ?? kDefaultAppLanguageCode;
   }
 
   static String? normalizeLanguageCode(String? code) {
     final raw = (code ?? '').trim().toLowerCase();
     return switch (raw) {
-      'hi' || 'hi-in' => 'hi',
-      'en' || 'en-gb' || 'en-us' => 'en',
+      'hi' || 'hi-in' || 'hi_in' => 'hi',
+      'en' || 'en-gb' || 'en-us' || 'en-in' || 'en_in' => 'en',
       _ => null,
     };
   }
@@ -93,5 +99,8 @@ String resolveTtsLanguageCode({
   if (normalized != null) {
     return normalized;
   }
-  return Localizations.localeOf(context).languageCode;
+  return TtsAudioLanguageNotifier.normalizeLanguageCode(
+        Localizations.localeOf(context).languageCode,
+      ) ??
+      'en';
 }

@@ -178,7 +178,11 @@ class _TruckerTripCard extends ConsumerWidget {
       stageLabel: stageLabel,
       stagePalette: palette,
       progressValue: trip.progressValue,
-      headerTrailing: TtsCardSpeakerButton(message: utterance, onDarkSurface: true),
+      headerTrailing: TtsCardSpeakerButton(
+        message: utterance,
+        playbackKey: 'trucker_trip:${trip.id}',
+        onDarkSurface: true,
+      ),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

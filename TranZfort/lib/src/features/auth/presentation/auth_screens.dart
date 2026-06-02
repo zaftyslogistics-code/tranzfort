@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/error/app_failure.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/theme/app_colors.dart';
+import '../../../core/theme/app_decorations.dart';
 import '../../../core/theme/app_shadows.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../core/theme/app_typography.dart';
@@ -61,14 +61,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     final hasSeenSplash = preferences.getBool('has_seen_splash') ?? false;
 
     if (!hasSeenSplash) {
-      await _contextualTtsService.speakSummary(
-            languageCode: ui.PlatformDispatcher.instance.locale.languageCode,
-            message: l10n.authTtsSplashWelcome,
-          );
       await preferences.setBool('has_seen_splash', true);
-    } else {
-      await Future<void>.delayed(const Duration(milliseconds: 150));
     }
+    await Future<void>.delayed(const Duration(milliseconds: 150));
 
     await _routeAfterSplash();
   }

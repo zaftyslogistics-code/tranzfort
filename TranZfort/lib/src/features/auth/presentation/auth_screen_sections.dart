@@ -12,11 +12,7 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscurePassword = true;
   bool _isForgotPasswordLoading = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  bool _showEmailSignIn = false;
 
   Future<void> _continueWithGoogle() async {
     final result = await ref.read(authScreenControllerProvider.notifier).signInWithGoogle();
@@ -104,223 +100,159 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
     final appConfig = ref.watch(appConfigProvider);
     final authScreenState = ref.watch(authScreenControllerProvider);
     final ttsSummary = limitTtsSentences(TtsLocalizations.of(context).ttsAuthWelcomeShort);
+
     return Scaffold(
       backgroundColor: AppColors.canvas,
       body: Stack(
         children: [
-          // ─── Dark hero banner (top third) ───
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.38,
-              decoration: BoxDecoration(
-                gradient: AppColors.heroDark,
-              ),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  gradient: AppColors.heroDarkGlow,
-                ),
-              ),
-            ),
-          ),
-          // ─── Content ───
           SafeArea(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 440),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const SizedBox(height: 16),
-                    // ── Brand logo + welcome on dark hero ──
+                    const SizedBox(height: 24),
                     Center(
                       child: Container(
-                        padding: const EdgeInsets.all(12),
+                        width: 112,
+                        height: 112,
+                        padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppRadius.hero),
-                          border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
+                          color: AppColors.surfaceBase,
+                          shape: BoxShape.circle,
+                          border: Border.all(color: AppColors.divider),
+                          boxShadow: AppShadows.elevation2,
                         ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(12),
+                        child: ClipOval(
                           child: Image.asset(
-                            'assets/images/main-logo-transparent.png',
-                            height: 64,
-                            errorBuilder: (context, error, stackTrace) =>
-                                const Icon(Icons.local_shipping_outlined, size: 56, color: Colors.white),
+                            'assets/images/icon.png',
+                            fit: BoxFit.contain,
+                            errorBuilder: (context, error, stackTrace) => Icon(
+                              Icons.local_shipping_outlined,
+                              size: 48,
+                              color: AppColors.primary,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     Text(
-                      l10n.authWelcomeTitle,
-                      style: AppTypography.displayHero.copyWith(
-                        color: AppColors.inkTextPrimary,
-                        fontSize: 30,
-                        letterSpacing: -0.6,
+                      l10n.appTitle,
+                      style: AppTypography.pageTitle.copyWith(
+                        color: AppColors.textPrimary,
+                        fontWeight: FontWeight.w700,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 8),
                     Text(
                       l10n.authWelcomeSubtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColors.inkTextSecondary,
-                            height: 1.5,
+                            color: AppColors.textMuted,
+                            height: 1.4,
                           ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 28),
-                    // ── Primary Sign-In Card (lifts out of hero onto light canvas) ──
-                    Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: AppColors.surfaceBase,
-                        borderRadius: BorderRadius.circular(AppRadius.hero),
-                        boxShadow: AppShadows.elevation3,
-                        border: Border.all(color: AppColors.divider),
+                    const SizedBox(height: 32),
+                    if (!appConfig.isSupabaseConfigured) ...[
+                      WarningBlock(
+                        title: l10n.authConfigIncompleteTitle,
+                        message: l10n.authConfigIncompleteSignInMessage,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          if (!appConfig.isSupabaseConfigured) ...[
-                            WarningBlock(
-                              title: l10n.authConfigIncompleteTitle,
-                              message: l10n.authConfigIncompleteSignInMessage,
-                            ),
-                            const SizedBox(height: 16),
-                          ],
-                          // Recommended banner
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                                decoration: BoxDecoration(
-                                  color: AppColors.primaryChipBg,
-                                  borderRadius: BorderRadius.circular(AppRadius.chip),
-                                ),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.bolt, size: 12, color: AppColors.primary),
-                                    const SizedBox(width: 4),
-                                    Text(
-                                      l10n.authRecommendedChip,
-                                      style: AppTypography.labelMicro.copyWith(
-                                        color: AppColors.primaryChipText,
-                                        fontSize: 10,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const Spacer(),
-                              Text(
-                                l10n.authFastestMostSecure,
-                                style: AppTypography.labelMicro.copyWith(
-                                  color: AppColors.textMuted,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 12),
-                          // Big prominent Google sign-in: the Google wordmark
-                          // fills most of the card from left to right so the
-                          // one-tap path is visually dominant.
-                          GoogleSignInButton(
-                            label: l10n.authContinueWithGoogle,
-                            onPressed: _continueWithGoogle,
-                            isLoading: authScreenState.isLoading,
-                          ),
-                          const SizedBox(height: 10),
-                          // Trust row
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.lock_outline, size: 14, color: AppColors.success),
-                              const SizedBox(width: 6),
-                              Text(
-                                l10n.authOneTapNoPasswordSecure,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textMuted,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      const SizedBox(height: 16),
+                    ],
+                    GoogleSignInButton(
+                      continueWithLabel: l10n.authContinueWith,
+                      semanticLabel: l10n.authContinueWithGoogle,
+                      onPressed: _continueWithGoogle,
+                      isLoading: authScreenState.isLoading,
                     ),
                     const SizedBox(height: 20),
-                    // ── Divider: "or sign in with email" ──
                     Row(
                       children: [
-                        Expanded(child: Divider(color: AppColors.divider)),
+                        const Expanded(child: Divider(color: AppColors.divider)),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
-                            l10n.authOrWithEmail.toUpperCase(),
-                            style: AppTypography.labelMicro.copyWith(
-                              color: AppColors.textMuted,
-                              letterSpacing: 1.2,
-                            ),
+                            l10n.authOrWithEmail,
+                            style: AppTypography.caption.copyWith(color: AppColors.textMuted),
                           ),
                         ),
-                        Expanded(child: Divider(color: AppColors.divider)),
+                        const Expanded(child: Divider(color: AppColors.divider)),
                       ],
-                    ),
-                    const SizedBox(height: 20),
-                    // ── Email + password (de-emphasized) ──
-                    AppTextField(
-                      controller: _emailController,
-                      label: l10n.profileEmailLabel,
-                      keyboardType: TextInputType.emailAddress,
-                      hintText: l10n.authEmailHint,
                     ),
                     const SizedBox(height: 12),
-                    AppTextField(
-                      controller: _passwordController,
-                      label: l10n.authPasswordLabel,
-                      hintText: l10n.authPasswordHint,
-                      obscureText: _obscurePassword,
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                          size: 20,
-                        ),
-                        onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    OutlineButton(
-                      label: l10n.authPasswordSignInAction,
-                      onPressed: _signInWithEmail,
-                      isLoading: authScreenState.isLoading,
-                      height: 48,
+                    TextActionButton(
+                      label: l10n.authSignInWithEmail,
+                      onPressed: () => setState(() => _showEmailSignIn = !_showEmailSignIn),
                     ),
                     const SizedBox(height: 8),
-                    Wrap(
-                      alignment: WrapAlignment.spaceBetween,
-                      runSpacing: 4,
-                      spacing: 12,
-                      children: [
-                        TextActionButton(
-                          label: l10n.authPasswordSwitchToSignUp,
-                          onPressed: () => context.go(AppRoutes.authPasswordPath),
-                        ),
-                        _isForgotPasswordLoading
-                            ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2))
-                            : TextActionButton(
-                                label: l10n.authForgotPasswordAction,
-                                onPressed: _forgotPassword,
-                              ),
-                      ],
+                    TextActionButton(
+                      label: l10n.authPasswordSwitchToSignUp,
+                      onPressed: () => context.go(AppRoutes.authPasswordPath),
                     ),
+                    if (_showEmailSignIn) ...[
+                      const SizedBox(height: 20),
+                      AppDecorations.brandGradientCard(
+                        innerColor: AppColors.surfaceBase,
+                        borderRadius: BorderRadius.circular(AppRadius.card),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              AppTextField(
+                                controller: _emailController,
+                                label: l10n.profileEmailLabel,
+                                keyboardType: TextInputType.emailAddress,
+                                hintText: l10n.authEmailHint,
+                              ),
+                              const SizedBox(height: 12),
+                              AppTextField(
+                                controller: _passwordController,
+                                label: l10n.authPasswordLabel,
+                                hintText: l10n.authPasswordHint,
+                                obscureText: _obscurePassword,
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+                                    size: 20,
+                                  ),
+                                  onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              PrimaryButton(
+                                label: l10n.authPasswordSignInAction,
+                                onPressed: _signInWithEmail,
+                                isLoading: authScreenState.isLoading,
+                              ),
+                              const SizedBox(height: 8),
+                              Wrap(
+                                alignment: WrapAlignment.spaceBetween,
+                                runSpacing: 4,
+                                spacing: 12,
+                                children: [
+                                  _isForgotPasswordLoading
+                                      ? const SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(strokeWidth: 2),
+                                        )
+                                      : TextActionButton(
+                                          label: l10n.authForgotPasswordAction,
+                                          onPressed: _forgotPassword,
+                                        ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                     const SizedBox(height: 24),
                   ],
                 ),
@@ -331,27 +263,15 @@ class _AuthEntryScreenState extends ConsumerState<AuthEntryScreen> {
             summary: ttsSummary,
             screenKey: AppRoutes.authPath,
           ),
-          // Voice + language controls in top-right (last children for tap priority).
-          // Language toggle is surfaced here so new users can switch English/Hindi
-          // before signing in — the onboarding flow intentionally keeps the rest
-          // of the top-bar minimal.
           Positioned(
             top: MediaQuery.of(context).padding.top + 8,
             right: 8,
-            child: Material(
-              color: Colors.transparent,
-              child: Theme(
-                data: Theme.of(context).copyWith(
-                  iconTheme: const IconThemeData(color: Colors.white),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: const [
-                    TtsActionButton(),
-                    LanguageToggleAction(),
-                  ],
-                ),
-              ),
+            child: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TtsActionButton(),
+                LanguageToggleAction(),
+              ],
             ),
           ),
         ],

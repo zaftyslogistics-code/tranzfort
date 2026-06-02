@@ -156,7 +156,10 @@ class _InkHeroHeader extends StatelessWidget {
               ),
             ),
             if ((ttsMessage ?? '').trim().isNotEmpty)
-              TtsCardSpeakerButton(message: ttsMessage!.trim()),
+              TtsCardSpeakerButton(
+                message: ttsMessage!.trim(),
+                playbackKey: 'detail_hero:${routeLine.trim()}',
+              ),
           ],
         ),
         if (badges.isNotEmpty) ...[

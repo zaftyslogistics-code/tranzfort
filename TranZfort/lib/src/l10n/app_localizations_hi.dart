@@ -25,8 +25,13 @@ class AppLocalizationsHi extends AppLocalizations {
   String get authWelcomeTitle => 'TranZfort में आपका स्वागत है';
 
   @override
-  String get authWelcomeSubtitle =>
-      'अपने सप्लायर या ट्रकर कार्यक्षेत्र में जाने के लिए Google या email sign-in चुनें।';
+  String get authWelcomeSubtitle => 'लोड और ट्रक, एक जगह।';
+
+  @override
+  String get authContinueWith => 'इसके साथ जारी रखें';
+
+  @override
+  String get authSignInWithEmail => 'ईमेल से साइन इन करें';
 
   @override
   String get authEmailHint => 'you@example.com';
@@ -42,7 +47,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get authContinueWithGoogle => 'Google से continue करें';
 
   @override
-  String get authOrWithEmail => 'या ईमेल से जारी रखें';
+  String get authOrWithEmail => 'या';
 
   @override
   String get authPasswordTitle => 'Email और password';
@@ -1025,6 +1030,9 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get commonHearSummary => 'सारांश सुनें';
+
+  @override
+  String get commonStopListening => 'सुनना बंद करें';
 
   @override
   String get ttsReadAllSectionsAction => 'सभी सेक्शन सुनें';

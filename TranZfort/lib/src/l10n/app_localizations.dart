@@ -131,8 +131,20 @@ abstract class AppLocalizations {
   /// No description provided for @authWelcomeSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Choose Google or email sign-in to continue into your supplier or trucker workspace.'**
+  /// **'Loads & trucks, one place.'**
   String get authWelcomeSubtitle;
+
+  /// No description provided for @authContinueWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue with'**
+  String get authContinueWith;
+
+  /// No description provided for @authSignInWithEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with email'**
+  String get authSignInWithEmail;
 
   /// No description provided for @authEmailHint.
   ///
@@ -161,7 +173,7 @@ abstract class AppLocalizations {
   /// No description provided for @authOrWithEmail.
   ///
   /// In en, this message translates to:
-  /// **'Or continue with email'**
+  /// **'or'**
   String get authOrWithEmail;
 
   /// No description provided for @authPasswordTitle.
@@ -1885,6 +1897,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hear summary'**
   String get commonHearSummary;
+
+  /// No description provided for @commonStopListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop listening'**
+  String get commonStopListening;
 
   /// No description provided for @ttsReadAllSectionsAction.
   ///

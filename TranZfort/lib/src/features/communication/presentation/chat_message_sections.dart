@@ -380,6 +380,7 @@ class _ChatMessageBubble extends StatelessWidget {
             const SizedBox(width: AppSpacing.xs),
             TtsCardSpeakerButton(
               message: textBody,
+              playbackKey: 'chat:${message.id}',
               onDarkSurface: false,
             ),
           ],

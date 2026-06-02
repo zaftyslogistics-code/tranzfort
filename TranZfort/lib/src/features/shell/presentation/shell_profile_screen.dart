@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
-import '../../../core/services/contextual_tts_service.dart';
+import '../../../shared/widgets/tts_card_speaker_button.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -120,23 +122,18 @@ class ProfileScreen extends ConsumerWidget {
                   width: double.infinity,
                   child: OutlineButton(
                     label: l10n.commonHearSummary,
-                    onPressed: () async {
-                      final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
+                    onPressed: () {
+                      unawaited(
+                        TtsCardSpeakerButton.speak(
+                          context,
+                          ref,
+                          profileTtsSummary(
+                            context: context,
                             languageCode: languageCode,
-                            message: profileTtsSummary(
-                              context: context,
-                              languageCode: languageCode,
-                              roleLabel: roleLabel,
-                              profile: profile,
-                            ),
-                          );
-                      if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
-                        return;
-                      }
-                      AppSnackbar.show(
-                        context: context,
-                        message: outcome == ContextualTtsOutcome.muted ? l10n.commonVoiceMuted : l10n.commonVoiceUnavailable,
-                        variant: outcome == ContextualTtsOutcome.muted ? AppSnackbarVariant.info : AppSnackbarVariant.error,
+                            roleLabel: roleLabel,
+                            profile: profile,
+                          ),
+                        ),
                       );
                     },
                   ),

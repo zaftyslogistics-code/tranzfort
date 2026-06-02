@@ -44,6 +44,7 @@ class OnboardingFieldSection extends ConsumerWidget {
                 ),
                 TtsCardSpeakerButton(
                   message: ttsMessage,
+                  playbackKey: 'onboarding_section:${label.trim()}',
                   onDarkSurface: false,
                 ),
               ],

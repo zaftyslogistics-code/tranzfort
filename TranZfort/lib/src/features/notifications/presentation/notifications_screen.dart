@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +9,6 @@ import '../../../core/providers/app_locale_providers.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/widgets/tts_screen_summary_effect.dart';
-import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
@@ -230,28 +231,17 @@ class _NotificationsBody extends ConsumerWidget {
                   width: double.infinity,
                   child: OutlineButton(
                     label: l10n.commonHearSummary,
-                    onPressed: () async {
-                      final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
+                    onPressed: () {
+                      unawaited(
+                        TtsCardSpeakerButton.speak(
+                          context,
+                          ref,
+                          _notificationsTtsSummary(
+                            context: context,
                             languageCode: languageCode,
-                            message: _notificationsTtsSummary(
-                              context: context,
-                              languageCode: languageCode,
-                              unreadCount: unreadCount,
-                              highPriorityUnreadCount: highPriorityUnreadCount,
-                            ),
-                          );
-                      if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
-                        return;
-                      }
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        AppSnackbar.build(
-                          context: context,
-                          message: outcome == ContextualTtsOutcome.muted
-                              ? l10n.commonVoiceMuted
-                              : l10n.commonVoiceUnavailable,
-                          variant: outcome == ContextualTtsOutcome.muted
-                              ? AppSnackbarVariant.info
-                              : AppSnackbarVariant.error,
+                            unreadCount: unreadCount,
+                            highPriorityUnreadCount: highPriorityUnreadCount,
+                          ),
                         ),
                       );
                     },
@@ -417,6 +407,7 @@ class _NotificationRow extends ConsumerWidget {
             if (rowUtterance.trim().isNotEmpty)
               TtsCardSpeakerButton(
                 message: rowUtterance,
+                playbackKey: 'notification:${notification.id}',
                 tooltip: ttsL10n.ttsNotificationRowHint,
               ),
           ],

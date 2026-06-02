@@ -355,6 +355,7 @@ class _RoleCard extends ConsumerWidget {
                   ),
                   TtsCardSpeakerButton(
                     message: ttsMessage,
+                    playbackKey: 'onboarding_tile:${title.trim()}',
                     onDarkSurface: false,
                   ),
                   const SizedBox(width: AppSpacing.xs),

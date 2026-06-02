@@ -2,63 +2,91 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/providers/tts_state_provider.dart';
+import '../../core/services/contextual_tts_service.dart';
 import '../../core/theme/app_colors.dart';
 import '../../l10n/app_localizations.dart';
+import 'tts_listen_icon.dart';
 
-/// Voice assistant mute toggle for the app bar.
+/// App-bar control: tap to play/stop the current screen summary; long-press to turn voice off.
 ///
-/// Behaviour (persistent across sessions via [ttsMutedProvider], key
-/// `tts_muted`):
-/// - **Unmuted (default)** → every screen auto-plays its TTS summary via
-///   [TtsScreenSummaryEffect]. Icon shows a solid speaker.
-/// - **Muted** → any current speech is stopped and auto-play is suppressed
-///   on every screen until the user taps again to unmute. Icon shows a
-///   struck-through speaker.
-///
-/// No replay action — unmuting simply restores auto-play for subsequent
-/// screens; it does not re-speak the current screen.
+/// Does not auto-play on navigation ([TtsScreenSummaryEffect.autoPlay] is false).
 class TtsActionButton extends ConsumerWidget {
   const TtsActionButton({super.key});
+  static const _screenPlaybackKey = 'tts:screen-summary';
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final isMuted = ref.watch(ttsMutedProvider);
-    final tooltip = isMuted ? l10n.commonTurnVoiceOn : l10n.commonMuteVoice;
+    ref.watch(ttsSpeakingProvider);
+    ref.watch(ttsLastUtteranceProvider);
+    ref.watch(ttsMutedProvider);
+
+    final playback = ref.read(ttsPlaybackControllerProvider);
+    final isMuted = ref.read(ttsMutedProvider);
+    final summary = playback.screenSummaryFor(context);
+    final isPlayingScreen = summary != null &&
+        playback.isPlayingMessage(
+          summary,
+          playbackKey: _screenPlaybackKey,
+        );
+
+    final tooltip = isMuted
+        ? l10n.commonTurnVoiceOn
+        : isPlayingScreen
+            ? l10n.commonStopListening
+            : l10n.commonHearSummary;
 
     return IconButton(
       tooltip: tooltip,
-      onPressed: () => _handleTap(ref, isMuted),
-      icon: _VoiceIcon(isMuted: isMuted),
+      onPressed: () => _onTap(context, ref, summary),
+      onLongPress: () => _onLongPress(ref),
+      icon: summary == null
+          ? Icon(
+              isMuted ? Icons.volume_off_rounded : Icons.play_circle_outline,
+              size: 26,
+              color: _iconColor(context, isMuted: isMuted),
+            )
+          : TtsListenIcon(
+              message: summary,
+              playbackKey: _screenPlaybackKey,
+              size: 26,
+              color: _iconColor(context, isMuted: isMuted),
+              onDarkSurface: false,
+            ),
     );
   }
 
-  Future<void> _handleTap(WidgetRef ref, bool isMuted) async {
-    final mutedNotifier = ref.read(ttsMutedProvider.notifier);
-    if (isMuted) {
-      // Unmute — subsequent screens will auto-play again. No replay here.
-      await mutedNotifier.setMuted(false);
+  Color _iconColor(BuildContext context, {required bool isMuted}) {
+    final base = IconTheme.of(context).color ?? AppColors.primary;
+    return isMuted ? base.withValues(alpha: 0.55) : base;
+  }
+
+  Future<void> _onTap(BuildContext context, WidgetRef ref, String? summary) async {
+    final playback = ref.read(ttsPlaybackControllerProvider);
+    if (summary == null) {
+      if (ref.read(ttsMutedProvider)) {
+        await ref.read(ttsMutedProvider.notifier).setMuted(false);
+      }
       return;
     }
-    // Mute — stop any speech in flight and suppress auto-play everywhere.
-    await ref.read(ttsPlaybackControllerProvider).stop();
-    await mutedNotifier.setMuted(true);
-  }
-}
 
-class _VoiceIcon extends StatelessWidget {
-  final bool isMuted;
-
-  const _VoiceIcon({required this.isMuted});
-
-  @override
-  Widget build(BuildContext context) {
-    final baseColor = IconTheme.of(context).color ?? AppColors.primary;
-    // Single static glyph per state — no pulsing, no replay affordance.
-    return Icon(
-      isMuted ? Icons.volume_off_rounded : Icons.volume_up_rounded,
-      size: 26,
-      color: isMuted ? baseColor.withValues(alpha: 0.6) : baseColor,
+    final outcome = await playback.listenToggle(
+      context: context,
+      message: summary,
+      playbackKey: _screenPlaybackKey,
     );
+    if (!context.mounted) {
+      return;
+    }
+    if (outcome == ContextualTtsOutcome.unavailable) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context).commonVoiceUnavailable)),
+      );
+    }
+  }
+
+  Future<void> _onLongPress(WidgetRef ref) async {
+    await ref.read(ttsPlaybackControllerProvider).stop();
+    await ref.read(ttsMutedProvider.notifier).setMuted(true);
   }
 }

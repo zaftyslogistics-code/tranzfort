@@ -91,7 +91,7 @@ class ContextualTtsService {
 
   /// Filters voices for the given language code and prioritizes offline voices.
   /// Returns a filtered and sorted list of voices.
-  /// - Filters for Hindi (hi-IN) or English (en-GB/en-US) voices
+  /// - Filters for Hindi (hi-IN) or English (en-IN/en-US) voices
   /// - Prioritizes offline voices at the top of the list
   /// - Returns empty list if no voices match the language
   List<TtsVoice> filterVoicesForLanguage(List<TtsVoice> voices, String languageCode) {
@@ -121,8 +121,15 @@ class ContextualTtsService {
   TtsVoice? getBestVoiceForLanguage(List<TtsVoice> voices, String languageCode) {
     final filtered = filterVoicesForLanguage(voices, languageCode);
     if (filtered.isEmpty) return null;
-    
-    // Return the first voice (already sorted with offline first)
+
+    // Prefer India locale voices when available (hi-IN / en-IN).
+    final indiaLocale = languageCode == 'hi' ? 'hi-in' : 'en-in';
+    for (final voice in filtered) {
+      if (voice.locale.toLowerCase().replaceAll('_', '-').contains(indiaLocale)) {
+        return voice;
+      }
+    }
+
     return filtered.first;
   }
 
@@ -197,15 +204,23 @@ class ContextualTtsService {
         // Load persisted voice ID for the language
         final persistedVoiceId = await loadSelectedVoiceId(languageCode);
         
-        // Set language
         await setLanguage(languageCode);
-        
-        // Set voice if persisted
+
         if (persistedVoiceId != null) {
           try {
             await _setVoice({'name': persistedVoiceId});
           } catch (_) {
             // Silently fail if voice is unavailable - will use default voice
+          }
+        } else {
+          final voices = await getVoices();
+          final best = getBestVoiceForLanguage(voices, languageCode);
+          if (best != null) {
+            try {
+              await _setVoice({'name': best.voiceId});
+            } catch (_) {
+              // Fall back to engine default for hi-IN / en-IN
+            }
           }
         }
         
@@ -224,10 +239,9 @@ class ContextualTtsService {
   }
 
   String _voiceLanguage(String languageCode) {
-    // Hindi -> hi-IN, all other languages -> en-GB (UK English per product direction).
-    // The device TTS engine gracefully falls back to another voice
-    // if the requested locale isn't installed (e.g. en-US if en-GB is missing).
-    return languageCode.trim().toLowerCase() == 'hi' ? 'hi-IN' : 'en-GB';
+    // Hindi -> hi-IN, English -> en-IN (Indian English; aligns with STT).
+    // The device TTS engine gracefully falls back if en-IN is missing.
+    return languageCode.trim().toLowerCase() == 'hi' ? 'hi-IN' : 'en-IN';
   }
 
   String _sanitizeMessage(String message) {
@@ -260,6 +274,9 @@ class ContextualTtsService {
 
 final contextualTtsServiceProvider = Provider<ContextualTtsService>((ref) {
   final tts = FlutterTts();
+  // Keep speak() future pending until utterance actually completes so
+  // UI play/pause state can reflect real playback.
+  tts.awaitSpeakCompletion(true);
   final service = ContextualTtsService(
     setLanguageFn: tts.setLanguage,
     setSpeechRateFn: tts.setSpeechRate,

@@ -8,6 +8,7 @@ import '../../../core/theme/app_typography.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../l10n/tts_localizations.dart';
 import '../tts_card_speaker_button.dart';
+import '../tts_listen_icon.dart';
 
 /// Brand-gradient Super Load badge + white TTS speaker for marketplace card header (top-right).
 class MarketplaceSuperLoadHeaderChip extends ConsumerWidget {
@@ -77,10 +78,11 @@ class MarketplaceSuperLoadHeaderChip extends ConsumerWidget {
                 ),
                 tooltip: ttsL10n.ttsListenToLoadHint,
                 onPressed: () => TtsCardSpeakerButton.speak(context, ref, message),
-                icon: const Icon(
-                  Icons.volume_up_rounded,
+                icon: TtsListenIcon(
+                  message: message,
                   size: 18,
                   color: AppColors.textOnPrimary,
+                  onDarkSurface: true,
                 ),
               ),
             ],

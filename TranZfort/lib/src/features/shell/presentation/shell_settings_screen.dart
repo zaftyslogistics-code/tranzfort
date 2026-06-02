@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -11,7 +13,6 @@ import '../../../core/providers/app_state_providers.dart';
 import '../../../core/providers/tts_audio_language_provider.dart';
 import '../../../core/providers/tts_state_provider.dart';
 import '../../../shared/widgets/tts_card_speaker_button.dart';
-import '../../../core/services/contextual_tts_service.dart';
 import '../../../core/theme/app_spacing.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../shared/widgets/action_buttons.dart';
@@ -150,24 +151,18 @@ class SettingsScreen extends ConsumerWidget {
                 width: double.infinity,
                 child: OutlineButton(
                   label: l10n.commonHearSummary,
-                  onPressed: () async {
-                    final audioLanguage = ref.read(ttsAudioLanguageProvider);
-                    final outcome = await ref.read(contextualTtsServiceProvider).speakSummary(
-                          languageCode: audioLanguage,
-                          message: settingsTtsSummary(
-                            context: context,
-                            languageCode: localeState.locale.languageCode,
-                            selectedLanguageCode: localeState.locale.languageCode,
-                            roleType: profile?.roleType,
-                          ),
-                        );
-                    if (!context.mounted || outcome == ContextualTtsOutcome.spoken || outcome == ContextualTtsOutcome.skipped) {
-                      return;
-                    }
-                    AppSnackbar.show(
-                      context: context,
-                      message: outcome == ContextualTtsOutcome.muted ? l10n.commonVoiceMuted : l10n.commonVoiceUnavailable,
-                      variant: outcome == ContextualTtsOutcome.muted ? AppSnackbarVariant.info : AppSnackbarVariant.error,
+                  onPressed: () {
+                    unawaited(
+                      TtsCardSpeakerButton.speak(
+                        context,
+                        ref,
+                        settingsTtsSummary(
+                          context: context,
+                          languageCode: localeState.locale.languageCode,
+                          selectedLanguageCode: localeState.locale.languageCode,
+                          roleType: profile?.roleType,
+                        ),
+                      ),
                     );
                   },
                 ),

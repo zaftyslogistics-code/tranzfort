@@ -309,7 +309,11 @@ class _SupplierLoadListCard extends ConsumerWidget {
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.inkTextSecondary),
                 ),
               ),
-              TtsCardSpeakerButton(message: utterance, onDarkSurface: true),
+              TtsCardSpeakerButton(
+                message: utterance,
+                playbackKey: 'supplier_load:${load.id}',
+                onDarkSurface: true,
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.xs),

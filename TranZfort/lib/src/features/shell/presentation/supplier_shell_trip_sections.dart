@@ -142,7 +142,11 @@ class _SupplierTripCard extends ConsumerWidget {
       subtitle: '${trip.material} · $proofStatus',
       stageLabel: stageLabel,
       stagePalette: palette,
-      headerTrailing: TtsCardSpeakerButton(message: utterance, onDarkSurface: true),
+      headerTrailing: TtsCardSpeakerButton(
+        message: utterance,
+        playbackKey: 'supplier_trip:${trip.id}',
+        onDarkSurface: true,
+      ),
       footer: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

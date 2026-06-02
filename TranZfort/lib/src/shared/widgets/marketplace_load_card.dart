@@ -78,6 +78,7 @@ class MarketplaceLoadCard extends ConsumerWidget {
                         ? MarketplaceSuperLoadHeaderChip(message: loadUtterance)
                         : TtsCardSpeakerButton(
                             message: loadUtterance,
+                            playbackKey: 'marketplace_load:${load.id}',
                             onDarkSurface: !AppDecorations.marketplaceLoadCardLightExperiment,
                           ),
                   ),

@@ -7,10 +7,11 @@ import '../error/app_failure.dart';
 import '../error/result.dart';
 import 'app_state_providers.dart';
 
-const _appLanguagePreferenceKey = 'app_language';
+/// SharedPreferences key for UI language (`en` | `hi`).
+const appLanguagePreferenceKey = 'app_language';
 
-/// Default UI language for new installs (India / low-literacy launch).
-const String kDefaultAppLanguageCode = 'hi';
+/// Default UI language for new installs (English first; Hindi via toggle).
+const String kDefaultAppLanguageCode = 'en';
 
 class AppLocaleState {
   final Locale locale;
@@ -64,13 +65,13 @@ class AppLocaleController extends StateNotifier<AppLocaleState> {
 
   Future<void> _loadInitialLocale() async {
     final preferences = await SharedPreferences.getInstance();
-    final savedLanguageCode = _normalizeLanguageCode(preferences.getString(_appLanguagePreferenceKey));
+    final savedLanguageCode = _normalizeLanguageCode(preferences.getString(appLanguagePreferenceKey));
     final profileLanguageCode = _normalizeLanguageCode(_profileLanguageCode);
     final resolvedLanguageCode =
         savedLanguageCode ?? profileLanguageCode ?? kDefaultAppLanguageCode;
     if (savedLanguageCode == null) {
       await preferences.setString(
-        _appLanguagePreferenceKey,
+        appLanguagePreferenceKey,
         profileLanguageCode ?? kDefaultAppLanguageCode,
       );
     }
@@ -108,7 +109,7 @@ class AppLocaleController extends StateNotifier<AppLocaleState> {
     );
 
     final preferences = await SharedPreferences.getInstance();
-    await preferences.setString(_appLanguagePreferenceKey, normalizedLanguageCode);
+    await preferences.setString(appLanguagePreferenceKey, normalizedLanguageCode);
     final result = await _authRepository.updatePreferredLanguage(normalizedLanguageCode);
 
     if (!mounted) {

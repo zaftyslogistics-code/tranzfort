@@ -13,7 +13,7 @@ class TtsScreenSummaryEffect extends ConsumerStatefulWidget {
     super.key,
     required this.summary,
     this.screenKey,
-    this.autoPlay = true,
+    this.autoPlay = false,
   });
 
   @override
@@ -24,25 +24,27 @@ class _TtsScreenSummaryEffectState extends ConsumerState<TtsScreenSummaryEffect>
   String? _lastSummary;
   String? _lastAnnouncedKey;
   late final StateController<TtsSummaryBuilder?> _summaryController;
+  late final StateController<String?> _ownerKeyController;
+  String? _instanceKey;
 
   @override
   void initState() {
     super.initState();
     _summaryController = ref.read(ttsScreenSummaryProvider.notifier);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _syncSummary();
-      _announceIfNeeded();
-    });
+    _ownerKeyController = ref.read(ttsScreenSummaryOwnerKeyProvider.notifier);
+    _instanceKey = widget.screenKey ?? '';
+    // Sync immediately to avoid stale summary being used on fast navigation.
+    _syncSummary();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _announceIfNeeded());
   }
 
   @override
   void didUpdateWidget(covariant TtsScreenSummaryEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.summary != widget.summary || oldWidget.screenKey != widget.screenKey || oldWidget.autoPlay != widget.autoPlay) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        _syncSummary();
-        _announceIfNeeded();
-      });
+      _instanceKey = widget.screenKey ?? '';
+      _syncSummary();
+      WidgetsBinding.instance.addPostFrameCallback((_) => _announceIfNeeded());
     }
   }
 
@@ -56,6 +58,8 @@ class _TtsScreenSummaryEffectState extends ConsumerState<TtsScreenSummaryEffect>
     }
     _lastSummary = normalized;
     _summaryController.state = normalized.isEmpty ? null : (_) => normalized;
+    final ownerKey = (widget.screenKey ?? '').trim();
+    _ownerKeyController.state = ownerKey.isEmpty ? null : ownerKey;
   }
 
   Future<void> _announceIfNeeded() async {
@@ -78,9 +82,19 @@ class _TtsScreenSummaryEffectState extends ConsumerState<TtsScreenSummaryEffect>
 
   @override
   void dispose() {
+    // Avoid clearing a newer screen's summary (race on fast navigation).
+    final capturedKey = _instanceKey;
     scheduleMicrotask(() {
       try {
-        _summaryController.state = null;
+        final currentOwnerKey = _ownerKeyController.state;
+        if (capturedKey == null || capturedKey.isEmpty || currentOwnerKey == null) {
+          return;
+        }
+        // Clear only if this instance still owns the current summary.
+        if (currentOwnerKey == capturedKey) {
+          _summaryController.state = null;
+          _ownerKeyController.state = null;
+        }
       } catch (_) {
         return;
       }
