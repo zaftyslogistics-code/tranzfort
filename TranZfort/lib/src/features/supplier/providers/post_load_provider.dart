@@ -287,8 +287,8 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       return;
     }
 
-    // Clear customMaterial when switching away from "Other"
-    final shouldClearCustom = value != 'Other';
+    // Clear customMaterial when switching away from "other" (normalized key).
+    final shouldClearCustom = value != 'other';
     state = state.copyWith(
       material: value,
       customMaterial: shouldClearCustom ? '' : null,
