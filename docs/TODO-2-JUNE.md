@@ -10,13 +10,13 @@
 
 If LOADPOST-2 implementation becomes unstable and we decide to scrap the entire program work, rollback to:
 
-- **Rollback baseline commit:** `40d6961`
-- **Reason:** Last known stable state before LOADPOST-2 feature implementation slices.
+- **Rollback checkpoint commit:** `d6ccdd6`
+- **Reason:** Captures agreed LOADPOST-2 planning docs + guardrails + immediate stabilization fix, before implementation slices.
 
 Recommended rollback command (only when explicitly approved):
 
 ```bash
-git reset --hard 40d6961
+git reset --hard d6ccdd6
 ```
 
 Use this only as a full scrap fallback. Prefer slice-level revert first.
