@@ -4802,7 +4802,7 @@ abstract class AppLocalizations {
   /// No description provided for @truckerFindLoadsBodyTypeValue.
   ///
   /// In en, this message translates to:
-  /// **'{type, select, open {Open} trailer {Trailer} container {Container} tanker {Tanker} other {Unknown}}'**
+  /// **'{type, select, open {Open} trailer {Trailer} container {Container} tanker {Tanker} refrigerated {Refrigerated} other {Unknown}}'**
   String truckerFindLoadsBodyTypeValue(String type);
 
   /// No description provided for @truckerFindLoadsTyreRequirementTitle.
@@ -9621,6 +9621,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pickup date cannot be in the past'**
   String get postLoadValidationPickupDatePast;
+
+  /// No description provided for @postLoadValidationVehicleRequirementsRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a vehicle category'**
+  String get postLoadValidationVehicleRequirementsRequired;
+
+  /// No description provided for @postLoadValidationVehicleConfigurationRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least one vehicle configuration'**
+  String get postLoadValidationVehicleConfigurationRequired;
 
   /// No description provided for @settingsRoleSentenceHi.
   ///

@@ -9,6 +9,7 @@ Future<T?> showAppBottomSheet<T>({
   required BuildContext context,
   required String title,
   required Widget child,
+  bool onDarkSurface = false,
 }) {
   return showModalBottomSheet<T>(
     context: context,
@@ -17,6 +18,7 @@ Future<T?> showAppBottomSheet<T>({
     builder: (sheetContext) {
       return AppBottomSheet(
         title: title,
+        onDarkSurface: onDarkSurface,
         child: child,
       );
     },
@@ -26,23 +28,36 @@ Future<T?> showAppBottomSheet<T>({
 class AppBottomSheet extends StatelessWidget {
   final String title;
   final Widget child;
+  final bool onDarkSurface;
 
   const AppBottomSheet({
     super.key,
     required this.title,
     required this.child,
+    this.onDarkSurface = false,
   });
 
   @override
   Widget build(BuildContext context) {
+    final titleStyle = onDarkSurface
+        ? Theme.of(context).textTheme.titleMedium?.copyWith(color: AppColors.inkTextPrimary)
+        : Theme.of(context).textTheme.titleMedium;
+    final closeColor = onDarkSurface ? AppColors.inkTextPrimary : null;
+
     return Container(
-      decoration: BoxDecoration(
-        color: AppColors.cardSurface,
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppRadius.bottomSheet),
-        ),
-        boxShadow: AppShadows.bottomSheet,
-      ),
+      decoration: onDarkSurface
+          ? AppDecorations.inkHeroCard(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(AppRadius.bottomSheet),
+              ),
+            )
+          : BoxDecoration(
+              color: AppColors.cardSurface,
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(AppRadius.bottomSheet),
+              ),
+              boxShadow: AppShadows.bottomSheet,
+            ),
       child: SafeArea(
         top: false,
         child: Padding(
@@ -59,11 +74,11 @@ class AppBottomSheet extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: Text(title, style: Theme.of(context).textTheme.titleMedium),
+                    child: Text(title, style: titleStyle),
                   ),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close),
+                    icon: Icon(Icons.close, color: closeColor),
                   ),
                 ],
               ),

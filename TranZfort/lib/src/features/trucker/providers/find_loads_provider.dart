@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/error/app_failure.dart';
+import '../../supplier/data/supplier_load_repository.dart';
 import '../data/trucker_marketplace_repository.dart';
 
 enum FindLoadsTab {
@@ -192,4 +193,13 @@ final findLoadsProvider = StateNotifierProvider.autoDispose<FindLoadsController,
     ref.watch(truckerMarketplaceRepositoryProvider),
     initialFilters: initialFilters,
   );
+});
+
+final findLoadsVehicleCatalogProvider = FutureProvider.autoDispose<VehicleCatalog>((ref) async {
+  final repository = ref.watch(truckerMarketplaceRepositoryProvider);
+  final result = await repository.getVehicleCatalog();
+  if (result.isFailure) {
+    throw Exception(result.failureOrNull?.message ?? 'Failed to load vehicle catalog');
+  }
+  return result.valueOrNull!;
 });

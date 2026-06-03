@@ -23,6 +23,15 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
   }
 
   @override
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params) async => 'load-clone-1';
+
+  @override
+  Future<void> requestSuperLoad(String loadId) async {}
+
+  @override
+  Future<List<Map<String, dynamic>>> searchMaterials({required String query, int limit = 12}) async => const [];
+
+  @override
   Future<void> cancelLoad(String loadId) async {}
 
   @override
@@ -86,6 +95,7 @@ void main() {
     expect(result.failureOrNull, isA<ValidationFailure>());
     expect(controller.state.fieldErrors, contains('origin_city'));
     expect(controller.state.fieldErrors, contains('price_amount'));
+    expect(controller.state.fieldErrors, contains('vehicle_requirements'));
   });
 
   test('post load provider searches and selects route suggestions', () async {
@@ -145,6 +155,7 @@ void main() {
     controller.setWeightTonnes('22');
     controller.setTrucksNeeded('2');
     controller.setPriceAmount('54000');
+    controller.selectMaterial(const MaterialSuggestion(code: 'coal', label: 'Coal'));
     await controller.selectOriginSuggestion(
       const PlaceSuggestion(
         label: 'Chandrapur, Maharashtra',
@@ -167,6 +178,11 @@ void main() {
         source: 'google_places',
       ),
     );
+    controller.setVehicleRequirements(
+      categoryCode: 'open_truck',
+      bodyStyleCodes: const <String>['half_body'],
+      configurationCodes: const <String>['open_12w_half_15_22t'],
+    );
 
     final result = await controller.submit();
 
@@ -174,6 +190,7 @@ void main() {
     expect(controller.state.lastCreatedLoadId, 'load-42');
     expect(backend.createParams?['p_origin_city'], 'Chandrapur');
     expect(backend.createParams?['p_price_amount'], 54000.0);
+    expect(backend.createParams?['p_material_code'], 'coal');
   });
 
   test('post load provider prevents double submit and surfaces failure state', () async {
@@ -189,6 +206,7 @@ void main() {
     controller.setWeightTonnes('22');
     controller.setTrucksNeeded('2');
     controller.setPriceAmount('54000');
+    controller.selectMaterial(const MaterialSuggestion(code: 'coal', label: 'Coal'));
     await controller.selectOriginSuggestion(
       const PlaceSuggestion(
         label: 'Chandrapur, Maharashtra',
@@ -210,6 +228,11 @@ void main() {
         placeId: 'dest-1',
         source: 'google_places',
       ),
+    );
+    controller.setVehicleRequirements(
+      categoryCode: 'open_truck',
+      bodyStyleCodes: const <String>['half_body'],
+      configurationCodes: const <String>['open_12w_half_15_22t'],
     );
 
     final firstSubmit = controller.submit();

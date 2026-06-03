@@ -12,6 +12,9 @@ bool fleetHasReadyTruckForDraft({
         t.status != TruckerFleetTruckStatus.archived &&
         t.truckNumber.trim().toUpperCase() == normalizedNumber &&
         (t.rcDocumentPath ?? '').trim().isNotEmpty &&
+        (t.vehicleCategoryCode ?? '').trim().isNotEmpty &&
+        (t.vehicleBodyStyleCode ?? '').trim().isNotEmpty &&
+        (t.configurationCode ?? '').trim().isNotEmpty &&
         t.capacityTonnes > 0,
   );
 }

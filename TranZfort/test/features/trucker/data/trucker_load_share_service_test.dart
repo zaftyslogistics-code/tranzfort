@@ -76,15 +76,15 @@ void main() {
 
     final payload = service.buildPayload(l10n, localizedPickupDate, _detail(priceType: 'per_ton'));
 
-    expect(payload.subject, 'TranZfort Load load-1');
+    expect(payload.subject, 'TranZfort load: Chandrapur > Mumbai');
     expect(payload.text, contains('TranZfort load: Chandrapur > Mumbai'));
     expect(payload.text, contains('Material: Coal'));
-    expect(payload.text, contains('Weight: 22 tonnes'));
-    expect(payload.text, contains('Truck: Open - 10/12 tyres'));
+    expect(payload.text, contains('Weight: 22T'));
+    expect(payload.text, contains('Truck: Open - 10W/12W tyres'));
     expect(payload.text, contains('Pickup 12 Mar 2026'));
     expect(payload.text, contains('Price: ₹54000 - Per Ton'));
     expect(payload.text, contains('Super Load - Payment Guarantee'));
-    expect(payload.text, contains('Load reference: load-1'));
+    expect(payload.text, contains('In app: /load-detail/load-1'));
     expect(payload.text, isNot(contains('Amit Supplier')));
     expect(payload.text, isNot(contains('+91')));
     expect(payload.whatsappUri.toString(), contains('wa.me'));

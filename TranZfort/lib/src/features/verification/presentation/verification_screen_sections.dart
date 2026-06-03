@@ -609,33 +609,60 @@ class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSe
                 onChanged: ref.read(truckerFleetProvider.notifier).updateTruckNumber,
               ),
               const SizedBox(height: AppSpacing.md),
-              AppDropdown<String>(
-                label: l10n.truckerFleetBodyTypeLabel,
-                value: fleetState.bodyTypeDraft,
-                items: truckerFleetBodyTypes
-                    .map(
-                      (bodyType) => DropdownMenuItem<String>(
-                        value: bodyType,
-                        child: Text(l10n.truckerFleetBodyTypeOption(bodyType)),
+              _VerificationTruckRequirementTile(
+                summaryLabel: ref.watch(truckerFleetVehicleCatalogProvider).maybeWhen(
+                      data: (catalog) => vehicleRequirementSummaryLabel(
+                        catalog: catalog,
+                        selection: VehicleRequirementSelection(
+                          categoryCode: fleetState.vehicleCategoryCodeDraft,
+                          bodyStyleCodes: fleetState.vehicleBodyStyleCodeDraft == null
+                              ? const <String>[]
+                              : <String>[fleetState.vehicleBodyStyleCodeDraft!],
+                          configurationCodes: fleetState.configurationCodeDraft == null
+                              ? const <String>[]
+                              : <String>[fleetState.configurationCodeDraft!],
+                        ),
+                        l10n: l10n,
                       ),
-                    )
-                    .toList(growable: false),
-                onChanged: ref.read(truckerFleetProvider.notifier).updateBodyType,
-              ),
-              const SizedBox(height: AppSpacing.md),
-              AppDropdown<String>(
-                label: l10n.truckerFleetTyresLabel,
-                value: fleetState.tyresDraft,
-                items: truckerFleetTyreOptions
-                    .map(
-                      (tyres) => DropdownMenuItem<String>(
-                        value: '$tyres',
-                        child: Text(l10n.truckerFleetTyresOption(tyres)),
+                      orElse: () => l10n.truckerFleetBodyTypeOption(fleetState.bodyTypeDraft),
+                    ),
+                onEdit: () async {
+                  final catalog = ref.read(truckerFleetVehicleCatalogProvider).valueOrNull;
+                  if (catalog == null) {
+                    AppSnackbar.show(
+                      context: context,
+                      message: 'Loading vehicle catalog...',
+                      variant: AppSnackbarVariant.info,
+                    );
+                    return;
+                  }
+                  final selection = await showAppBottomSheet<VehicleRequirementSelection>(
+                    context: context,
+                    title: l10n.truckerFleetBodyTypeLabel,
+                    onDarkSurface: true,
+                    child: VehicleCatalogSelectorSheet(
+                      catalog: catalog,
+                      initialSelection: VehicleRequirementSelection(
+                        categoryCode: fleetState.vehicleCategoryCodeDraft,
+                        bodyStyleCodes: fleetState.vehicleBodyStyleCodeDraft == null
+                            ? const <String>[]
+                            : <String>[fleetState.vehicleBodyStyleCodeDraft!],
+                        configurationCodes: fleetState.configurationCodeDraft == null
+                            ? const <String>[]
+                            : <String>[fleetState.configurationCodeDraft!],
                       ),
-                    )
-                    .toList(growable: false),
-                onChanged: ref.read(truckerFleetProvider.notifier).updateTyres,
-                helperText: fleetState.fieldErrors['tyres'],
+                      onDarkSurface: true,
+                      embedInParentSheet: true,
+                    ),
+                  );
+                  if (!context.mounted || selection == null) {
+                    return;
+                  }
+                  ref.read(truckerFleetProvider.notifier).applyVehicleCatalogSelection(
+                        selection: selection,
+                        catalog: catalog,
+                      );
+                },
               ),
               const SizedBox(height: AppSpacing.md),
               AppTextField(
@@ -766,5 +793,48 @@ class _TruckerInlineTruckSectionState extends ConsumerState<TruckerInlineTruckSe
         selection: TextSelection.collapsed(offset: state.capacityTonnesDraft.length),
       );
     }
+  }
+}
+
+class _VerificationTruckRequirementTile extends StatelessWidget {
+  final String summaryLabel;
+  final VoidCallback onEdit;
+
+  const _VerificationTruckRequirementTile({
+    required this.summaryLabel,
+    required this.onEdit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onEdit,
+      borderRadius: BorderRadius.circular(AppRadius.input),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(AppSpacing.md),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(AppRadius.input),
+          border: Border.all(color: AppColors.divider),
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                summaryLabel,
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+              ),
+            ),
+            TextButton.icon(
+              onPressed: onEdit,
+              icon: const Icon(Icons.tune_rounded, size: 16),
+              label: const Text('Edit'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

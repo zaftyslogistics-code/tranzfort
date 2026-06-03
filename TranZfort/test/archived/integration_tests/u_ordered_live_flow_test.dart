@@ -289,6 +289,7 @@ void main() {
             routePolyline: null,
             routeSnapshotSource: 'live_probe',
             material: 'Coal',
+            materialCode: 'coal',
             weightTonnes: 5,
             requiredBodyType: null,
             requiredTyres: null,

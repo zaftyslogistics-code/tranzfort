@@ -24,6 +24,7 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
   String? superLoadRequestedId;
   Map<String, dynamic>? cloneParams;
   String cloneResult = 'load-clone-1';
+  List<Map<String, dynamic>> materialSearchResults = const [];
 
   @override
   Future<String> cloneLoadForRepost(Map<String, dynamic> params) async {
@@ -41,6 +42,14 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
     }
     createdParams = params;
     return createLoadResult;
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> searchMaterials({required String query, int limit = 12}) async {
+    if (error != null) {
+      throw error!;
+    }
+    return materialSearchResults;
   }
 
   @override
@@ -141,6 +150,7 @@ CreateLoadDto _sampleCreateLoadDto() {
     routePolyline: 'encoded',
     routeSnapshotSource: 'google',
     material: 'Coal',
+    materialCode: 'coal',
     weightTonnes: 22,
     requiredBodyType: 'open',
     requiredTyres: const [10, 12],
@@ -308,6 +318,7 @@ void main() {
         routePolyline: _sampleCreateLoadDto().routePolyline,
         routeSnapshotSource: _sampleCreateLoadDto().routeSnapshotSource,
         material: _sampleCreateLoadDto().material,
+        materialCode: _sampleCreateLoadDto().materialCode,
         weightTonnes: _sampleCreateLoadDto().weightTonnes,
         requiredBodyType: _sampleCreateLoadDto().requiredBodyType,
         requiredTyres: _sampleCreateLoadDto().requiredTyres,
@@ -341,6 +352,7 @@ void main() {
         routePolyline: null,
         routeSnapshotSource: null,
         material: '',
+        materialCode: '',
         weightTonnes: 0,
         requiredBodyType: null,
         requiredTyres: null,

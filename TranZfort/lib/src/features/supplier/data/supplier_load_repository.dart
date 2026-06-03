@@ -14,6 +14,130 @@ import 'supplier_load_repository_backend.dart';
 
 export 'supplier_load_repository_backend.dart';
 
+class MaterialCatalogItem {
+  final String code;
+  final String nameEn;
+  final String? nameHi;
+  final String? groupCode;
+
+  const MaterialCatalogItem({
+    required this.code,
+    required this.nameEn,
+    required this.nameHi,
+    required this.groupCode,
+  });
+
+  factory MaterialCatalogItem.fromMap(Map<String, dynamic> map) {
+    final code = (map['code'] ?? '').toString().trim();
+    final nameEn = (map['name_en'] ?? '').toString().trim();
+    return MaterialCatalogItem(
+      code: code,
+      nameEn: nameEn,
+      nameHi: (map['name_hi'] as String?)?.trim(),
+      groupCode: (map['group_code'] as String?)?.trim(),
+    );
+  }
+}
+
+class VehicleCategoryCatalogItem {
+  final String code;
+  final String nameEn;
+  final String? nameHi;
+  final String uiMode;
+
+  const VehicleCategoryCatalogItem({
+    required this.code,
+    required this.nameEn,
+    required this.nameHi,
+    required this.uiMode,
+  });
+
+  factory VehicleCategoryCatalogItem.fromMap(Map<String, dynamic> map) {
+    return VehicleCategoryCatalogItem(
+      code: (map['code'] ?? '').toString().trim(),
+      nameEn: (map['name_en'] ?? '').toString().trim(),
+      nameHi: (map['name_hi'] as String?)?.trim(),
+      uiMode: (map['ui_mode'] ?? '').toString().trim(),
+    );
+  }
+}
+
+class VehicleBodyStyleCatalogItem {
+  final String categoryCode;
+  final String code;
+  final String nameEn;
+  final String? nameHi;
+
+  const VehicleBodyStyleCatalogItem({
+    required this.categoryCode,
+    required this.code,
+    required this.nameEn,
+    required this.nameHi,
+  });
+
+  factory VehicleBodyStyleCatalogItem.fromMap(Map<String, dynamic> map) {
+    return VehicleBodyStyleCatalogItem(
+      categoryCode: (map['category_code'] ?? '').toString().trim(),
+      code: (map['code'] ?? '').toString().trim(),
+      nameEn: (map['name_en'] ?? '').toString().trim(),
+      nameHi: (map['name_hi'] as String?)?.trim(),
+    );
+  }
+}
+
+class VehicleConfigurationCatalogItem {
+  final String code;
+  final String categoryCode;
+  final String? bodyStyleCode;
+  final String labelEn;
+  final String? labelHi;
+  final int? wheelsW;
+  final String? lengthFt;
+  final double? loadingTonMin;
+  final double? loadingTonMax;
+  final bool isSpecial;
+
+  const VehicleConfigurationCatalogItem({
+    required this.code,
+    required this.categoryCode,
+    required this.bodyStyleCode,
+    required this.labelEn,
+    required this.labelHi,
+    required this.wheelsW,
+    required this.lengthFt,
+    required this.loadingTonMin,
+    required this.loadingTonMax,
+    required this.isSpecial,
+  });
+
+  factory VehicleConfigurationCatalogItem.fromMap(Map<String, dynamic> map) {
+    return VehicleConfigurationCatalogItem(
+      code: (map['code'] ?? '').toString().trim(),
+      categoryCode: (map['category_code'] ?? '').toString().trim(),
+      bodyStyleCode: (map['body_style_code'] as String?)?.trim(),
+      labelEn: (map['label_en'] ?? '').toString().trim(),
+      labelHi: (map['label_hi'] as String?)?.trim(),
+      wheelsW: int.tryParse((map['wheels_w'] ?? '').toString()),
+      lengthFt: (map['length_ft'] as String?)?.trim(),
+      loadingTonMin: double.tryParse((map['loading_ton_min'] ?? '').toString()),
+      loadingTonMax: double.tryParse((map['loading_ton_max'] ?? '').toString()),
+      isSpecial: map['is_special'] == true,
+    );
+  }
+}
+
+class VehicleCatalog {
+  final List<VehicleCategoryCatalogItem> categories;
+  final List<VehicleBodyStyleCatalogItem> bodyStyles;
+  final List<VehicleConfigurationCatalogItem> configurations;
+
+  const VehicleCatalog({
+    required this.categories,
+    required this.bodyStyles,
+    required this.configurations,
+  });
+}
+
 class SupplierLoadRepository {
   final SupplierLoadBackend _backend;
   final String? Function() _currentUserId;
@@ -41,6 +165,64 @@ class SupplierLoadRepository {
       return Success<String>(loadId);
     } catch (error, stackTrace) {
       return Failure<String>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<List<MaterialCatalogItem>>> searchMaterials(
+    String query, {
+    int limit = 12,
+  }) async {
+    final normalized = query.trim();
+    if (normalized.length < 2) {
+      return const Success<List<MaterialCatalogItem>>(<MaterialCatalogItem>[]);
+    }
+
+    try {
+      final rows = await _backend.searchMaterials(
+        query: normalized,
+        limit: limit,
+      );
+      final materials = rows
+          .map(MaterialCatalogItem.fromMap)
+          .where((item) => item.code.isNotEmpty && item.nameEn.isNotEmpty)
+          .toList(growable: false);
+      return Success<List<MaterialCatalogItem>>(materials);
+    } catch (error, stackTrace) {
+      return Failure<List<MaterialCatalogItem>>(_mapError(error, stackTrace));
+    }
+  }
+
+  Future<Result<VehicleCatalog>> getVehicleCatalog() async {
+    try {
+      if (_backend is! SupabaseSupplierLoadBackend) {
+        return const Failure<VehicleCatalog>(
+          BusinessRuleFailure(message: 'Vehicle catalog backend is unavailable'),
+        );
+      }
+      final payload = await (_backend as SupabaseSupplierLoadBackend).getVehicleCatalog();
+      final categoriesRaw = payload['categories'] as List? ?? const <dynamic>[];
+      final bodyStylesRaw = payload['body_styles'] as List? ?? const <dynamic>[];
+      final configurationsRaw = payload['configurations'] as List? ?? const <dynamic>[];
+      final catalog = VehicleCatalog(
+        categories: categoriesRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleCategoryCatalogItem.fromMap)
+            .where((item) => item.code.isNotEmpty && item.nameEn.isNotEmpty)
+            .toList(growable: false),
+        bodyStyles: bodyStylesRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleBodyStyleCatalogItem.fromMap)
+            .where((item) => item.categoryCode.isNotEmpty && item.code.isNotEmpty)
+            .toList(growable: false),
+        configurations: configurationsRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleConfigurationCatalogItem.fromMap)
+            .where((item) => item.code.isNotEmpty && item.categoryCode.isNotEmpty)
+            .toList(growable: false),
+      );
+      return Success<VehicleCatalog>(catalog);
+    } catch (error, stackTrace) {
+      return Failure<VehicleCatalog>(_mapError(error, stackTrace));
     }
   }
 
@@ -336,10 +518,10 @@ class SupplierLoadRepository {
       );
     }
 
-    if (dto.material.trim().isEmpty) {
+    if (dto.materialCode.trim().isEmpty) {
       return const ValidationFailure(
-        message: 'Enter a material type',
-        fieldErrors: {'material': 'Material is required'},
+        message: 'Select a material from suggestions',
+        fieldErrors: {'material_code': 'Material selection is required'},
       );
     }
 

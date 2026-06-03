@@ -15,6 +15,7 @@ import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/status_components.dart';
+import '../../../shared/widgets/vehicle_catalog_selector.dart';
 import '../../shell/presentation/shell_components.dart';
 import '../../trucker/providers/trucker_fleet_provider.dart';
 import '../data/verification_repository.dart';

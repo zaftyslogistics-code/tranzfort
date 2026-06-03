@@ -13,7 +13,7 @@ import '../../../shared/widgets/content_cards.dart';
 import '../../../shared/widgets/feedback_components.dart';
 import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/marketplace_intro_banner.dart';
-import '../../../shared/widgets/vehicle_requirement_selector.dart';
+import '../../../shared/widgets/vehicle_catalog_selector.dart';
 import '../../../core/services/marketplace_intro_preferences.dart';
 import '../data/supplier_profile_repository.dart';
 import '../data/supplier_location_services.dart';
@@ -35,6 +35,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   late final TextEditingController _originLocationController;
   late final TextEditingController _destinationCityController;
   late final TextEditingController _destinationLocationController;
+  late final TextEditingController _materialController;
   late final TextEditingController _weightController;
   late final TextEditingController _trucksController;
   late final TextEditingController _priceController;
@@ -45,12 +46,15 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   late final String _initialDestinationCity;
   late final String _initialDestinationLocation;
   late final String _initialWeight;
+  late final String _initialVehicleCategoryCode;
+  late final List<String> _initialBodyStyleCodes;
+  late final List<String> _initialConfigurationCodes;
   late final String _initialTrucks;
   late final String _initialPrice;
   late final String _initialMaterial;
-  late final String _initialCustomMaterial;
+  late final String _initialMaterialCode;
   late final String _initialBodyType;
-  late final Set<String> _initialTyres;
+  late final Set<int> _initialTyres;
   late final String _initialPriceType;
   late final double _initialAdvancePercentage;
   late final DateTime? _initialPickupDate;
@@ -63,6 +67,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     _originLocationController = TextEditingController(text: state.originLocation);
     _destinationCityController = TextEditingController(text: state.destinationCity);
     _destinationLocationController = TextEditingController(text: state.destinationLocation);
+    _materialController = TextEditingController(text: state.material);
     _weightController = TextEditingController(text: state.weightTonnes);
     _trucksController = TextEditingController(text: state.trucksNeeded);
     _priceController = TextEditingController(text: state.priceAmount);
@@ -73,10 +78,13 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     _initialDestinationCity = state.destinationCity;
     _initialDestinationLocation = state.destinationLocation;
     _initialWeight = state.weightTonnes;
+    _initialVehicleCategoryCode = state.requiredVehicleCategoryCode;
+    _initialBodyStyleCodes = List<String>.from(state.requiredBodyStyleCodes);
+    _initialConfigurationCodes = List<String>.from(state.requiredConfigurationCodes);
     _initialTrucks = state.trucksNeeded;
     _initialPrice = state.priceAmount;
     _initialMaterial = state.material;
-    _initialCustomMaterial = state.customMaterial;
+    _initialMaterialCode = state.materialCode;
     _initialBodyType = state.bodyType;
     _initialTyres = Set.from(state.selectedTyres);
     _initialPriceType = state.priceType;
@@ -91,10 +99,13 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         _destinationCityController.text != _initialDestinationCity ||
         _destinationLocationController.text != _initialDestinationLocation ||
         _weightController.text != _initialWeight ||
+        state.requiredVehicleCategoryCode != _initialVehicleCategoryCode ||
+        state.requiredBodyStyleCodes.join('|') != _initialBodyStyleCodes.join('|') ||
+        state.requiredConfigurationCodes.join('|') != _initialConfigurationCodes.join('|') ||
         _trucksController.text != _initialTrucks ||
         _priceController.text != _initialPrice ||
         state.material != _initialMaterial ||
-        state.customMaterial != _initialCustomMaterial ||
+        state.materialCode != _initialMaterialCode ||
         state.bodyType != _initialBodyType ||
         state.selectedTyres.length != _initialTyres.length ||
         state.priceType != _initialPriceType ||
@@ -133,6 +144,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     _originLocationController.dispose();
     _destinationCityController.dispose();
     _destinationLocationController.dispose();
+    _materialController.dispose();
     _weightController.dispose();
     _trucksController.dispose();
     _priceController.dispose();
@@ -143,7 +155,14 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final state = ref.watch(postLoadProvider);
+    if (_materialController.text != state.material) {
+      _materialController.value = TextEditingValue(
+        text: state.material,
+        selection: TextSelection.collapsed(offset: state.material.length),
+      );
+    }
     final quotaAsync = ref.watch(postLoadQuotaProvider);
+    final vehicleCatalogAsync = ref.watch(postLoadVehicleCatalogProvider);
     final quota = quotaAsync.valueOrNull;
     final supplierProfileAsync = ref.watch(supplierProfileProvider);
     final supplierProfile = supplierProfileAsync.valueOrNull;
@@ -334,27 +353,26 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         DetailSectionCard(
           title: l10n.supplierPostLoadCargoDetailsTitle,
           children: [
-            AppDropdown<String>(
+            AppTextField(
+              controller: _materialController,
               label: l10n.supplierPostLoadMaterialLabel,
-              value: state.material,
-              items: postLoadMaterials
-                  .map((material) => DropdownMenuItem<String>(
-                        value: material,
-                        child: Text(_localizedMaterialLabel(l10n, material)),
-                      ))
-                  .toList(growable: false),
-              onChanged: ref.read(postLoadProvider.notifier).setMaterial,
+              hintText: 'Type material (e.g. Plastic)',
+              errorText: state.fieldErrors['material_code'],
+              onChanged: (value) => ref.read(postLoadProvider.notifier).searchMaterial(value),
+              suffixIcon: state.materialCode.isEmpty
+                  ? null
+                  : IconButton(
+                      onPressed: ref.read(postLoadProvider.notifier).clearMaterialSelection,
+                      icon: const Icon(Icons.close),
+                    ),
             ),
             const SizedBox(height: AppSpacing.md),
-            if (state.material == 'other') ...[
-              AppTextField(
-                label: l10n.supplierPostLoadSpecifyMaterialLabel,
-                hintText: l10n.supplierPostLoadSpecifyMaterialHint,
-                errorText: state.fieldErrors['custom_material'],
-                onChanged: ref.read(postLoadProvider.notifier).setCustomMaterial,
+            if (state.isSearchingMaterials) const LinearProgressIndicator(),
+            if (state.materialSuggestions.isNotEmpty)
+              _MaterialSuggestionList(
+                suggestions: state.materialSuggestions,
+                onSelected: ref.read(postLoadProvider.notifier).selectMaterial,
               ),
-              const SizedBox(height: AppSpacing.md),
-            ],
             AppTextField(
               controller: _weightController,
               label: l10n.supplierPostLoadWeightLabel,
@@ -368,22 +386,42 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
         DetailSectionCard(
           title: l10n.supplierPostLoadVehicleRequirementsTitle,
           children: [
-            VehicleRequirementSelector(
-              label: l10n.supplierPostLoadTruckBodyTypeLabel,
-              value: state.bodyType,
-              onChanged: (value) {
-                if (value != null) {
-                  ref.read(postLoadProvider.notifier).setBodyType(value);
+            _VehicleRequirementSummaryTile(
+              summary: vehicleCatalogAsync.when(
+                data: (catalog) => vehicleRequirementSummaryLabel(
+                  catalog: catalog,
+                  l10n: l10n,
+                  selection: VehicleRequirementSelection(
+                    categoryCode: state.requiredVehicleCategoryCode,
+                    bodyStyleCodes: state.requiredBodyStyleCodes,
+                    configurationCodes: state.requiredConfigurationCodes,
+                  ),
+                ),
+                loading: () => _vehicleRequirementSummary(l10n, state),
+                error: (_, __) => _vehicleRequirementSummary(l10n, state),
+              ),
+              errorText: state.fieldErrors['vehicle_requirements'],
+              onEdit: () async {
+                final catalog = vehicleCatalogAsync.valueOrNull;
+                if (catalog == null) {
+                  return;
+                }
+                final selection = await showVehicleCatalogBottomSheet(
+                  context: context,
+                  catalog: catalog,
+                  initialSelection: VehicleRequirementSelection(
+                    categoryCode: state.requiredVehicleCategoryCode,
+                    bodyStyleCodes: state.requiredBodyStyleCodes,
+                    configurationCodes: state.requiredConfigurationCodes,
+                  ),
+                );
+                if (selection != null && mounted) {
+                  ref.read(postLoadProvider.notifier).applyVehicleCatalogSelection(
+                        selection: selection,
+                        catalog: catalog,
+                      );
                 }
               },
-            ),
-            const SizedBox(height: AppSpacing.md),
-            Text(l10n.supplierPostLoadTyreRequirementTitle, style: Theme.of(context).textTheme.titleSmall),
-            const SizedBox(height: AppSpacing.sm),
-            VehicleTyreSelector(
-              selectedTyres: state.selectedTyres.toList(),
-              options: postLoadTyreOptions,
-              onChanged: ref.read(postLoadProvider.notifier).setSelectedTyres,
             ),
             const SizedBox(height: AppSpacing.md),
             Text(l10n.supplierPostLoadTrucksNeededTitle, style: Theme.of(context).textTheme.titleSmall),
@@ -483,7 +521,7 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
             const SizedBox(height: AppSpacing.sm),
             Text(
               l10n.supplierPostLoadCargoSummary(
-                _localizedMaterialLabel(l10n, state.material),
+                state.material.isEmpty ? '--' : state.material,
                 state.weightTonnes.isEmpty ? '--' : state.weightTonnes,
                 state.trucksNeeded,
               ),
@@ -599,20 +637,6 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
     };
   }
 
-  String _localizedMaterialLabel(AppLocalizations l10n, String value) {
-    final normalized = value.trim().toLowerCase();
-    return switch (normalized) {
-      'coal' => l10n.supplierPostLoadMaterialCoal,
-      'steel' => l10n.supplierPostLoadMaterialSteel,
-      'cement' => l10n.supplierPostLoadMaterialCement,
-      'grains' => l10n.supplierPostLoadMaterialGrains,
-      'fertilizer' => l10n.supplierPostLoadMaterialFertilizer,
-      'machinery' => l10n.supplierPostLoadMaterialMachinery,
-      'other' => l10n.supplierPostLoadMaterialOther,
-      _ => value,
-    };
-  }
-
   String _localizedBodyTypeLabel(AppLocalizations l10n, String value) {
     final normalized = value.trim().toLowerCase();
     return switch (normalized) {
@@ -624,6 +648,16 @@ class _PostLoadScreenState extends ConsumerState<PostLoadScreen> {
       'refrigerated' => l10n.supplierPostLoadBodyTypeRefrigerated,
       _ => value,
     };
+  }
+
+  String _vehicleRequirementSummary(AppLocalizations l10n, PostLoadState state) {
+    final body = _localizedBodyTypeLabel(l10n, state.bodyType);
+    if (state.selectedTyres.isEmpty) {
+      return body;
+    }
+    final tyres = [...state.selectedTyres]..sort();
+    final wheelers = tyres.map((item) => '${item}W').join(', ');
+    return '$body • $wheelers';
   }
 
   String _localizedSubmissionErrorMessage(AppLocalizations l10n, AppFailure failure) {
@@ -675,6 +709,99 @@ class _SuggestionList extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+class _MaterialSuggestionList extends StatelessWidget {
+  final List<MaterialSuggestion> suggestions;
+  final ValueChanged<MaterialSuggestion> onSelected;
+
+  const _MaterialSuggestionList({
+    required this.suggestions,
+    required this.onSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (suggestions.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.sm),
+      child: Column(
+        children: [
+          for (final suggestion in suggestions) ...[
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Text(suggestion.label),
+              onTap: () => onSelected(suggestion),
+            ),
+            if (suggestion != suggestions.last) const Divider(height: 1),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _VehicleRequirementSummaryTile extends StatelessWidget {
+  final String summary;
+  final String? errorText;
+  final VoidCallback onEdit;
+
+  const _VehicleRequirementSummaryTile({
+    required this.summary,
+    this.errorText,
+    required this.onEdit,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final hasError = (errorText ?? '').trim().isNotEmpty;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        InkWell(
+          onTap: onEdit,
+          borderRadius: BorderRadius.circular(AppRadius.input),
+          child: Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(AppSpacing.md),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppRadius.input),
+              border: Border.all(color: hasError ? AppColors.error : AppColors.divider),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    summary,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: AppSpacing.sm),
+                TextButton.icon(
+                  onPressed: onEdit,
+                  icon: const Icon(Icons.tune_rounded, size: 16),
+                  label: const Text('Edit'),
+                ),
+              ],
+            ),
+          ),
+        ),
+        if (hasError) ...[
+          const SizedBox(height: AppSpacing.xs),
+          Text(
+            errorText!,
+            style: theme.textTheme.bodySmall?.copyWith(color: AppColors.error),
+          ),
+        ],
+      ],
     );
   }
 }

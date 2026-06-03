@@ -74,8 +74,12 @@ class TruckerFleetTruck {
   final String? truckModelId;
   final String truckNumber;
   final String bodyType;
+  final String? vehicleCategoryCode;
+  final String? vehicleBodyStyleCode;
+  final String? configurationCode;
   final int tyres;
   final double capacityTonnes;
+  final double? passingTonnes;
   final String? rcDocumentPath;
   final TruckerFleetTruckStatus status;
   final String? rejectionReason;
@@ -90,8 +94,12 @@ class TruckerFleetTruck {
     required this.truckModelId,
     required this.truckNumber,
     required this.bodyType,
+    required this.vehicleCategoryCode,
+    required this.vehicleBodyStyleCode,
+    required this.configurationCode,
     required this.tyres,
     required this.capacityTonnes,
+    required this.passingTonnes,
     required this.rcDocumentPath,
     required this.status,
     required this.rejectionReason,
@@ -123,8 +131,12 @@ class TruckerFleetTruck {
       truckModelId: nullableString(map['truck_model_id']),
       truckNumber: (map['truck_number'] ?? '').toString(),
       bodyType: (map['body_type'] ?? '').toString(),
+      vehicleCategoryCode: nullableString(map['vehicle_category_code']),
+      vehicleBodyStyleCode: nullableString(map['vehicle_body_style_code']),
+      configurationCode: nullableString(map['configuration_code']),
       tyres: readInt(map['tyres']),
       capacityTonnes: readDouble(map['capacity_tonnes']),
+      passingTonnes: readDoubleNullable(map['passing_tonnes']),
       rcDocumentPath: nullableString(map['rc_document_path']),
       status: TruckerFleetTruckStatusX.fromDatabase((map['status'] ?? 'unknown').toString()),
       rejectionReason: nullableString(map['rejection_reason']),
@@ -222,6 +234,10 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
         'p_tyres': values['tyres'],
         'p_capacity_tonnes': values['capacity_tonnes'],
         'p_rc_document_path': values['rc_document_path'],
+        'p_vehicle_category_code': values['vehicle_category_code'],
+        'p_vehicle_body_style_code': values['vehicle_body_style_code'],
+        'p_configuration_code': values['configuration_code'],
+        'p_passing_tonnes': values['passing_tonnes'],
       },
     );
 
@@ -256,6 +272,10 @@ class SupabaseTruckerFleetBackend implements TruckerFleetBackend {
         'p_tyres': values['tyres'],
         'p_capacity_tonnes': values['capacity_tonnes'],
         'p_rc_document_path': values['rc_document_path'],
+        'p_vehicle_category_code': values['vehicle_category_code'],
+        'p_vehicle_body_style_code': values['vehicle_body_style_code'],
+        'p_configuration_code': values['configuration_code'],
+        'p_passing_tonnes': values['passing_tonnes'],
       },
     );
   }
@@ -344,8 +364,12 @@ class TruckerFleetRepository {
   Future<Result<String>> createTruck({
     required String truckNumber,
     required String bodyType,
+    required String? vehicleCategoryCode,
+    required String? vehicleBodyStyleCode,
+    required String? configurationCode,
     required int tyres,
     required double capacityTonnes,
+    required double? passingTonnes,
     required String rcDocumentPath,
   }) async {
     final userId = _currentUserId();
@@ -358,8 +382,12 @@ class TruckerFleetRepository {
         'owner_id': userId,
         'truck_number': truckNumber.trim().toUpperCase(),
         'body_type': bodyType.trim(),
+        'vehicle_category_code': vehicleCategoryCode?.trim(),
+        'vehicle_body_style_code': vehicleBodyStyleCode?.trim(),
+        'configuration_code': configurationCode?.trim(),
         'tyres': tyres,
         'capacity_tonnes': capacityTonnes,
+        'passing_tonnes': passingTonnes,
         'rc_document_path': rcDocumentPath.trim(),
       });
       return Success<String>((response['id'] ?? '').toString());
@@ -372,8 +400,12 @@ class TruckerFleetRepository {
     required TruckerFleetTruck existingTruck,
     required String truckNumber,
     required String bodyType,
+    required String? vehicleCategoryCode,
+    required String? vehicleBodyStyleCode,
+    required String? configurationCode,
     required int tyres,
     required double capacityTonnes,
+    required double? passingTonnes,
     required String rcDocumentPath,
   }) async {
     final userId = _currentUserId();
@@ -390,8 +422,12 @@ class TruckerFleetRepository {
         existingTruck: existingTruck,
         truckNumber: normalizedTruckNumber,
         bodyType: normalizedBodyType,
+        vehicleCategoryCode: vehicleCategoryCode?.trim(),
+        vehicleBodyStyleCode: vehicleBodyStyleCode?.trim(),
+        configurationCode: configurationCode?.trim(),
         tyres: tyres,
         capacityTonnes: capacityTonnes,
+        passingTonnes: passingTonnes,
         rcDocumentPath: normalizedRcPath,
       );
 
@@ -405,8 +441,12 @@ class TruckerFleetRepository {
         values: {
           'truck_number': normalizedTruckNumber,
           'body_type': normalizedBodyType,
+          'vehicle_category_code': vehicleCategoryCode?.trim(),
+          'vehicle_body_style_code': vehicleBodyStyleCode?.trim(),
+          'configuration_code': configurationCode?.trim(),
           'tyres': tyres,
           'capacity_tonnes': capacityTonnes,
+          'passing_tonnes': passingTonnes,
           'rc_document_path': normalizedRcPath,
           'status': nextStatus,
           if (criticalFieldsChanged) ...{
@@ -427,14 +467,22 @@ class TruckerFleetRepository {
     required TruckerFleetTruck existingTruck,
     required String truckNumber,
     required String bodyType,
+    required String? vehicleCategoryCode,
+    required String? vehicleBodyStyleCode,
+    required String? configurationCode,
     required int tyres,
     required double capacityTonnes,
+    required double? passingTonnes,
     required String rcDocumentPath,
   }) {
     return existingTruck.truckNumber != truckNumber ||
         existingTruck.bodyType != bodyType ||
+        (existingTruck.vehicleCategoryCode ?? '') != (vehicleCategoryCode ?? '') ||
+        (existingTruck.vehicleBodyStyleCode ?? '') != (vehicleBodyStyleCode ?? '') ||
+        (existingTruck.configurationCode ?? '') != (configurationCode ?? '') ||
         existingTruck.tyres != tyres ||
         existingTruck.capacityTonnes != capacityTonnes ||
+        (existingTruck.passingTonnes ?? 0) != (passingTonnes ?? 0) ||
         (existingTruck.rcDocumentPath ?? '') != rcDocumentPath;
   }
 

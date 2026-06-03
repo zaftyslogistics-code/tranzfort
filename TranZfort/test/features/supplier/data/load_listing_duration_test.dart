@@ -26,6 +26,7 @@ void main() {
       routePolyline: null,
       routeSnapshotSource: null,
       material: 'steel',
+      materialCode: 'steel',
       weightTonnes: 10,
       requiredBodyType: null,
       requiredTyres: null,

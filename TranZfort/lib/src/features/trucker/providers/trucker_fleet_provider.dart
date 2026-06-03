@@ -5,8 +5,11 @@ import '../../../core/error/app_failure.dart';
 import '../../../core/error/result.dart';
 import '../../../core/providers/app_state_providers.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../shared/widgets/vehicle_catalog_selector.dart';
+import '../../supplier/data/supplier_load_repository.dart';
 import '../data/truck_document_upload_service.dart';
 import '../data/trucker_fleet_repository.dart';
+import '../data/trucker_marketplace_repository.dart';
 
 // T-006: Error codes for localization (UI should map these to AppLocalizations)
 class TruckerFleetErrorCodes {
@@ -34,8 +37,12 @@ class TruckerFleetState {
   final AppFailure? actionFailure;
   final String truckNumberDraft;
   final String bodyTypeDraft;
+  final String vehicleCategoryCodeDraft;
+  final String? vehicleBodyStyleCodeDraft;
+  final String? configurationCodeDraft;
   final String tyresDraft;
   final String capacityTonnesDraft;
+  final String passingTonnesDraft;
   final String? rcDocumentPathDraft;
   final String? editingTruckId;
   final Map<String, String> fieldErrors;
@@ -49,8 +56,12 @@ class TruckerFleetState {
     required this.actionFailure,
     required this.truckNumberDraft,
     required this.bodyTypeDraft,
+    required this.vehicleCategoryCodeDraft,
+    required this.vehicleBodyStyleCodeDraft,
+    required this.configurationCodeDraft,
     required this.tyresDraft,
     required this.capacityTonnesDraft,
+    required this.passingTonnesDraft,
     required this.rcDocumentPathDraft,
     required this.editingTruckId,
     required this.fieldErrors,
@@ -66,8 +77,12 @@ class TruckerFleetState {
       actionFailure: null,
       truckNumberDraft: '',
       bodyTypeDraft: truckerFleetBodyTypes.first,
+      vehicleCategoryCodeDraft: '',
+      vehicleBodyStyleCodeDraft: null,
+      configurationCodeDraft: null,
       tyresDraft: '${truckerFleetTyreOptions[2]}',
       capacityTonnesDraft: '',
+      passingTonnesDraft: '',
       rcDocumentPathDraft: null,
       editingTruckId: null,
       fieldErrors: const <String, String>{},
@@ -85,8 +100,14 @@ class TruckerFleetState {
     bool? clearActionFailure,
     String? truckNumberDraft,
     String? bodyTypeDraft,
+    String? vehicleCategoryCodeDraft,
+    String? vehicleBodyStyleCodeDraft,
+    bool? clearVehicleBodyStyleCodeDraft,
+    String? configurationCodeDraft,
+    bool? clearConfigurationCodeDraft,
     String? tyresDraft,
     String? capacityTonnesDraft,
+    String? passingTonnesDraft,
     String? rcDocumentPathDraft,
     bool? clearRcDocumentPathDraft,
     String? editingTruckId,
@@ -102,8 +123,16 @@ class TruckerFleetState {
       actionFailure: clearActionFailure == true ? null : actionFailure ?? this.actionFailure,
       truckNumberDraft: truckNumberDraft ?? this.truckNumberDraft,
       bodyTypeDraft: bodyTypeDraft ?? this.bodyTypeDraft,
+      vehicleCategoryCodeDraft: vehicleCategoryCodeDraft ?? this.vehicleCategoryCodeDraft,
+      vehicleBodyStyleCodeDraft: clearVehicleBodyStyleCodeDraft == true
+          ? null
+          : vehicleBodyStyleCodeDraft ?? this.vehicleBodyStyleCodeDraft,
+      configurationCodeDraft: clearConfigurationCodeDraft == true
+          ? null
+          : configurationCodeDraft ?? this.configurationCodeDraft,
       tyresDraft: tyresDraft ?? this.tyresDraft,
       capacityTonnesDraft: capacityTonnesDraft ?? this.capacityTonnesDraft,
+      passingTonnesDraft: passingTonnesDraft ?? this.passingTonnesDraft,
       rcDocumentPathDraft: clearRcDocumentPathDraft == true ? null : rcDocumentPathDraft ?? this.rcDocumentPathDraft,
       editingTruckId: clearEditingTruckId == true ? null : editingTruckId ?? this.editingTruckId,
       fieldErrors: fieldErrors ?? this.fieldErrors,
@@ -160,8 +189,12 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     state = state.copyWith(
       truckNumberDraft: '',
       bodyTypeDraft: truckerFleetBodyTypes.first,
+      vehicleCategoryCodeDraft: '',
+      clearVehicleBodyStyleCodeDraft: true,
+      clearConfigurationCodeDraft: true,
       tyresDraft: '${truckerFleetTyreOptions[2]}',
       capacityTonnesDraft: '',
+      passingTonnesDraft: '',
       fieldErrors: const <String, String>{},
       clearRcDocumentPathDraft: true,
       clearEditingTruckId: true,
@@ -173,8 +206,16 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     state = state.copyWith(
       truckNumberDraft: truck.truckNumber,
       bodyTypeDraft: truck.bodyType,
+      vehicleCategoryCodeDraft: truck.vehicleCategoryCode ?? '',
+      vehicleBodyStyleCodeDraft: truck.vehicleBodyStyleCode,
+      configurationCodeDraft: truck.configurationCode,
       tyresDraft: '${truck.tyres}',
       capacityTonnesDraft: truck.capacityTonnes.toStringAsFixed(truck.capacityTonnes.truncateToDouble() == truck.capacityTonnes ? 0 : 1),
+      passingTonnesDraft: (truck.passingTonnes ?? 0) <= 0
+          ? ''
+          : (truck.passingTonnes!.truncateToDouble() == truck.passingTonnes
+              ? truck.passingTonnes!.toStringAsFixed(0)
+              : truck.passingTonnes!.toStringAsFixed(1)),
       rcDocumentPathDraft: truck.rcDocumentPath,
       editingTruckId: truck.id,
       fieldErrors: const <String, String>{},
@@ -195,6 +236,37 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
       return;
     }
     state = state.copyWith(bodyTypeDraft: value, clearActionFailure: true);
+  }
+
+  void applyVehicleCatalogSelection({
+    required VehicleRequirementSelection selection,
+    required VehicleCatalog catalog,
+  }) {
+    final selectedConfig = selection.configurationCodes.isEmpty
+        ? null
+        : catalog.configurations.cast<VehicleConfigurationCatalogItem?>().firstWhere(
+              (item) => item?.code == selection.configurationCodes.first,
+              orElse: () => null,
+            );
+    final selectedBodyStyleCode = selection.bodyStyleCodes.isEmpty ? null : selection.bodyStyleCodes.first;
+    final selectedBodyStyleLabel = selectedBodyStyleCode == null
+        ? null
+        : catalog.bodyStyles.cast<VehicleBodyStyleCatalogItem?>().firstWhere(
+              (item) => item?.code == selectedBodyStyleCode,
+              orElse: () => null,
+            )?.nameEn;
+    state = state.copyWith(
+      vehicleCategoryCodeDraft: selection.categoryCode,
+      vehicleBodyStyleCodeDraft: selectedBodyStyleCode,
+      configurationCodeDraft: selectedConfig?.code,
+      bodyTypeDraft: _mapCatalogBodyStyleToLegacyBodyType(selectedBodyStyleLabel),
+      tyresDraft: selectedConfig?.wheelsW?.toString() ?? state.tyresDraft,
+      passingTonnesDraft: selectedConfig?.loadingTonMax?.toStringAsFixed(
+            selectedConfig.loadingTonMax!.truncateToDouble() == selectedConfig.loadingTonMax ? 0 : 1,
+          ) ??
+          state.passingTonnesDraft,
+      clearActionFailure: true,
+    );
   }
 
   void updateTyres(String? value) {
@@ -294,6 +366,7 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     final bodyType = state.bodyTypeDraft.trim();
     final tyres = int.parse(state.tyresDraft.trim());
     final capacityTonnes = double.parse(state.capacityTonnesDraft.trim());
+    final passingTonnes = double.tryParse(state.passingTonnesDraft.trim());
     final rcDocumentPath = state.rcDocumentPathDraft!.trim();
 
     final Result<void> result;
@@ -308,8 +381,14 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
           existingTruck: existingTruck,
           truckNumber: truckNumber,
           bodyType: bodyType,
+          vehicleCategoryCode: state.vehicleCategoryCodeDraft.trim().isEmpty
+              ? null
+              : state.vehicleCategoryCodeDraft.trim(),
+          vehicleBodyStyleCode: state.vehicleBodyStyleCodeDraft,
+          configurationCode: state.configurationCodeDraft,
           tyres: tyres,
           capacityTonnes: capacityTonnes,
+          passingTonnes: passingTonnes,
           rcDocumentPath: rcDocumentPath,
         );
       }
@@ -317,8 +396,14 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
       final createResult = await _repository.createTruck(
         truckNumber: truckNumber,
         bodyType: bodyType,
+        vehicleCategoryCode: state.vehicleCategoryCodeDraft.trim().isEmpty
+            ? null
+            : state.vehicleCategoryCodeDraft.trim(),
+        vehicleBodyStyleCode: state.vehicleBodyStyleCodeDraft,
+        configurationCode: state.configurationCodeDraft,
         tyres: tyres,
         capacityTonnes: capacityTonnes,
+        passingTonnes: passingTonnes,
         rcDocumentPath: rcDocumentPath,
       );
       result = createResult.when(
@@ -334,8 +419,12 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
           isSaving: false,
           truckNumberDraft: '',
           bodyTypeDraft: truckerFleetBodyTypes.first,
+          vehicleCategoryCodeDraft: '',
+          clearVehicleBodyStyleCodeDraft: true,
+          clearConfigurationCodeDraft: true,
           tyresDraft: '${truckerFleetTyreOptions[2]}',
           capacityTonnesDraft: '',
+          passingTonnesDraft: '',
           clearRcDocumentPathDraft: true,
           clearEditingTruckId: true,
           fieldErrors: const <String, String>{},
@@ -376,6 +465,15 @@ class TruckerFleetController extends StateNotifier<TruckerFleetState> {
     }
     return next;
   }
+
+  String _mapCatalogBodyStyleToLegacyBodyType(String? label) {
+    final normalized = (label ?? '').trim().toLowerCase();
+    if (normalized.contains('container')) return 'container';
+    if (normalized.contains('trailer')) return 'trailer';
+    if (normalized.contains('tanker')) return 'tanker';
+    if (normalized.contains('reefer') || normalized.contains('refrigerated')) return 'refrigerated';
+    return 'open';
+  }
 }
 
 final truckerFleetProvider = StateNotifierProvider.autoDispose<TruckerFleetController, TruckerFleetState>((ref) {
@@ -385,5 +483,14 @@ final truckerFleetProvider = StateNotifierProvider.autoDispose<TruckerFleetContr
     repository,
     uploadService,
     () => ref.watch(supabaseClientProvider)?.auth.currentUser?.id,
+  );
+});
+
+final truckerFleetVehicleCatalogProvider = FutureProvider.autoDispose<VehicleCatalog>((ref) async {
+  final repository = ref.watch(truckerMarketplaceRepositoryProvider);
+  final result = await repository.getVehicleCatalog();
+  return result.when(
+    success: (catalog) => catalog,
+    failure: (failure) => throw failure,
   );
 });

@@ -140,7 +140,7 @@ class _TruckerLoadDetailBody extends ConsumerWidget {
                     text: l10n.truckerLoadDetailTyresLabel(
                       detail.summary.requiredTyres.isEmpty
                           ? l10n.commonAnyLabel
-                          : detail.summary.requiredTyres.join(', '),
+                          : detail.summary.requiredTyres.map((item) => '${item}W').join(', '),
                     ),
                     accent: AppColors.info,
                   ),

@@ -20,8 +20,12 @@ class TruckerApprovedTruck {
   final String id;
   final String truckNumber;
   final String bodyType;
+  final String? vehicleCategoryCode;
+  final String? vehicleBodyStyleCode;
+  final String? configurationCode;
   final int tyres;
   final double capacityTonnes;
+  final double? passingTonnes;
   final int? axles;
   final int? payloadKg;
   final double? mileageEmptyKmpl;
@@ -31,8 +35,12 @@ class TruckerApprovedTruck {
     required this.id,
     required this.truckNumber,
     required this.bodyType,
+    required this.vehicleCategoryCode,
+    required this.vehicleBodyStyleCode,
+    required this.configurationCode,
     required this.tyres,
     required this.capacityTonnes,
+    required this.passingTonnes,
     required this.axles,
     required this.payloadKg,
     required this.mileageEmptyKmpl,
@@ -45,8 +53,12 @@ class TruckerApprovedTruck {
       id: (map['id'] ?? '').toString(),
       truckNumber: (map['truck_number'] ?? '').toString(),
       bodyType: (map['body_type'] ?? '').toString(),
+      vehicleCategoryCode: nullableString(map['vehicle_category_code']),
+      vehicleBodyStyleCode: nullableString(map['vehicle_body_style_code']),
+      configurationCode: nullableString(map['configuration_code']),
       tyres: readInt(map['tyres']),
       capacityTonnes: readDouble(map['capacity_tonnes']),
+      passingTonnes: readDoubleNullable(map['passing_tonnes']),
       axles: _readIntNullable(model['axles']),
       payloadKg: _readIntNullable(model['payload_kg']),
       mileageEmptyKmpl: readDouble(model['mileage_empty_kmpl']),
@@ -190,12 +202,22 @@ class TruckerLoadDetail {
 }
 
 bool truckMatchesLoad(TruckerApprovedTruck truck, MarketplaceLoadItem load) {
+  final requiredCategory = load.requiredVehicleCategoryCode?.trim().toLowerCase();
+  final categoryMatches = requiredCategory == null ||
+      requiredCategory.isEmpty ||
+      (truck.vehicleCategoryCode ?? '').trim().toLowerCase() == requiredCategory;
+  final requiredBodyStyles = load.requiredBodyStyleCodes.map((e) => e.trim().toLowerCase()).where((e) => e.isNotEmpty).toSet();
+  final bodyStyleMatches = requiredBodyStyles.isEmpty ||
+      requiredBodyStyles.contains((truck.vehicleBodyStyleCode ?? '').trim().toLowerCase());
+  final requiredConfigs = load.requiredConfigurationCodes.map((e) => e.trim().toLowerCase()).where((e) => e.isNotEmpty).toSet();
+  final configMatches =
+      requiredConfigs.isEmpty || requiredConfigs.contains((truck.configurationCode ?? '').trim().toLowerCase());
   final requiredBodyType = load.requiredBodyType?.trim().toLowerCase();
   final normalizedBodyType = truck.bodyType.trim().toLowerCase();
   final bodyMatches = requiredBodyType == null || requiredBodyType.isEmpty || normalizedBodyType == requiredBodyType;
   final tyreMatches = load.requiredTyres.isEmpty || load.requiredTyres.contains(truck.tyres);
   final capacityMatches = truck.capacityTonnes >= load.weightTonnes;
-  return bodyMatches && tyreMatches && capacityMatches;
+  return categoryMatches && bodyStyleMatches && configMatches && bodyMatches && tyreMatches && capacityMatches;
 }
 
 abstract class TruckerLoadDetailBackend {

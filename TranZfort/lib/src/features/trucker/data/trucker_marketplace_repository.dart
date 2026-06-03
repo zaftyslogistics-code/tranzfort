@@ -10,6 +10,7 @@ import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/utils/map_readers.dart';
 import '../../../core/utils/super_load_visibility.dart';
 import '../../../core/utils/type_safety.dart';
+import '../../supplier/data/supplier_load_repository.dart';
 
 const int truckerMarketplacePageSize = 20;
 
@@ -71,6 +72,9 @@ class MarketplaceLoadItem {
   final double weightTonnes;
   final String? requiredBodyType;
   final List<int> requiredTyres;
+  final String? requiredVehicleCategoryCode;
+  final List<String> requiredBodyStyleCodes;
+  final List<String> requiredConfigurationCodes;
   final int trucksNeeded;
   final int trucksBooked;
   final double priceAmount;
@@ -105,6 +109,9 @@ class MarketplaceLoadItem {
     required this.weightTonnes,
     required this.requiredBodyType,
     required this.requiredTyres,
+    required this.requiredVehicleCategoryCode,
+    required this.requiredBodyStyleCodes,
+    required this.requiredConfigurationCodes,
     required this.trucksNeeded,
     required this.trucksBooked,
     required this.priceAmount,
@@ -145,6 +152,9 @@ class MarketplaceLoadItem {
       weightTonnes: weightTonnes,
       requiredBodyType: requiredBodyType,
       requiredTyres: requiredTyres,
+      requiredVehicleCategoryCode: requiredVehicleCategoryCode,
+      requiredBodyStyleCodes: requiredBodyStyleCodes,
+      requiredConfigurationCodes: requiredConfigurationCodes,
       trucksNeeded: trucksNeeded,
       trucksBooked: trucksBooked,
       priceAmount: priceAmount,
@@ -195,6 +205,9 @@ class MarketplaceLoadItem {
       weightTonnes: readDoubleNullable(map['weight_tonnes']) ?? 0.0,
       requiredBodyType: nullableString(map['required_body_type']),
       requiredTyres: _readTyres(map['required_tyres']),
+      requiredVehicleCategoryCode: nullableString(map['required_vehicle_category_code']),
+      requiredBodyStyleCodes: _readStringList(map['required_body_style_codes']),
+      requiredConfigurationCodes: _readStringList(map['required_configuration_codes']),
       trucksNeeded: readInt(map['trucks_needed']),
       trucksBooked: readInt(map['trucks_booked']),
       priceAmount: readDoubleNullable(map['price_amount']) ?? 0.0,
@@ -267,6 +280,16 @@ class MarketplaceLoadItem {
     }
     return const <int>[];
   }
+
+  static List<String> _readStringList(Object? value) {
+    if (value is List) {
+      return value
+          .map((item) => item.toString().trim())
+          .where((item) => item.isNotEmpty)
+          .toList(growable: false);
+    }
+    return const <String>[];
+  }
 }
 
 enum MarketplaceSortOption {
@@ -282,6 +305,9 @@ class MarketplaceSearchFilters {
   final String material;
   final String truckBodyType;
   final List<int> tyres;
+  final String vehicleCategoryCode;
+  final List<String> bodyStyleCodes;
+  final List<String> configurationCodes;
   final double? minPrice;
   final double? maxPrice;
   final bool superLoadsOnly;
@@ -293,6 +319,9 @@ class MarketplaceSearchFilters {
     this.material = '',
     this.truckBodyType = '',
     this.tyres = const <int>[],
+    this.vehicleCategoryCode = '',
+    this.bodyStyleCodes = const <String>[],
+    this.configurationCodes = const <String>[],
     this.minPrice,
     this.maxPrice,
     this.superLoadsOnly = false,
@@ -305,6 +334,9 @@ class MarketplaceSearchFilters {
     String? material,
     String? truckBodyType,
     List<int>? tyres,
+    String? vehicleCategoryCode,
+    List<String>? bodyStyleCodes,
+    List<String>? configurationCodes,
     double? minPrice,
     double? maxPrice,
     bool? superLoadsOnly,
@@ -316,6 +348,9 @@ class MarketplaceSearchFilters {
       material: material ?? this.material,
       truckBodyType: truckBodyType ?? this.truckBodyType,
       tyres: tyres ?? this.tyres,
+      vehicleCategoryCode: vehicleCategoryCode ?? this.vehicleCategoryCode,
+      bodyStyleCodes: bodyStyleCodes ?? this.bodyStyleCodes,
+      configurationCodes: configurationCodes ?? this.configurationCodes,
       minPrice: minPrice ?? this.minPrice,
       maxPrice: maxPrice ?? this.maxPrice,
       superLoadsOnly: superLoadsOnly ?? this.superLoadsOnly,
@@ -329,6 +364,9 @@ class MarketplaceSearchFilters {
         material.trim().isNotEmpty ||
         truckBodyType.trim().isNotEmpty ||
         tyres.isNotEmpty ||
+        vehicleCategoryCode.trim().isNotEmpty ||
+        bodyStyleCodes.isNotEmpty ||
+        configurationCodes.isNotEmpty ||
         minPrice != null ||
         maxPrice != null ||
         superLoadsOnly;
@@ -341,6 +379,9 @@ class MarketplaceSearchFilters {
     if (material.trim().isNotEmpty) count += 1;
     if (truckBodyType.trim().isNotEmpty) count += 1;
     if (tyres.isNotEmpty) count += 1;
+    if (vehicleCategoryCode.trim().isNotEmpty) count += 1;
+    if (bodyStyleCodes.isNotEmpty) count += 1;
+    if (configurationCodes.isNotEmpty) count += 1;
     if (minPrice != null || maxPrice != null) count += 1;
     if (superLoadsOnly) count += 1;
     return count;
@@ -388,6 +429,12 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
       throw const AuthException('Session unavailable');
     }
 
+    final catalogFiltersActive = filters.vehicleCategoryCode.trim().isNotEmpty ||
+        filters.bodyStyleCodes.isNotEmpty ||
+        filters.configurationCodes.isNotEmpty;
+
+    final legacyBodyType = filters.truckBodyType.trim().toLowerCase();
+
     // Use consolidated RPC that returns load + supplier summary + ranking metadata in one call
     final response = await _client.rpc(
       'get_marketplace_feed',
@@ -395,11 +442,14 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
         'p_origin_city': _nullableString(filters.originCity.trim()),
         'p_destination_city': _nullableString(filters.destinationCity.trim()),
         'p_material': _nullableString(filters.material.trim()),
-        'p_body_type': _nullableString(filters.truckBodyType.trim()),
+        'p_body_type': catalogFiltersActive ? null : _nullableString(legacyBodyType),
         'p_min_price': filters.minPrice,
         'p_max_price': filters.maxPrice,
         'p_super_loads_only': filters.superLoadsOnly,
         'p_required_tyres': filters.tyres.isEmpty ? null : filters.tyres,
+        'p_required_vehicle_category_code': _nullableString(filters.vehicleCategoryCode.trim()),
+        'p_required_body_style_codes': filters.bodyStyleCodes.isEmpty ? null : filters.bodyStyleCodes,
+        'p_required_configuration_codes': filters.configurationCodes.isEmpty ? null : filters.configurationCodes,
         'p_sort_by': _sortByParam(filters.sortOption),
         'p_page_size': pageSize,
         'p_page': page,
@@ -421,6 +471,17 @@ class SupabaseTruckerMarketplaceBackend implements TruckerMarketplaceBackend {
       page: page,
       pageSize: pageSize,
     );
+  }
+
+  Future<Map<String, dynamic>> getVehicleCatalog() async {
+    if (_client == null) {
+      throw const AuthException('Session unavailable');
+    }
+    final response = await _client.rpc('get_vehicle_catalog');
+    if (response is Map<String, dynamic>) {
+      return response;
+    }
+    return const <String, dynamic>{};
   }
 
   String? _nullableString(String value) {
@@ -493,6 +554,37 @@ class TruckerMarketplaceRepository {
 
   AppFailure _mapError(Object error, StackTrace stackTrace) =>
       mapSupabaseError(error, stackTrace);
+
+  Future<Result<VehicleCatalog>> getVehicleCatalog() async {
+    try {
+      if (_backend is! SupabaseTruckerMarketplaceBackend) {
+        return const Failure<VehicleCatalog>(
+          BusinessRuleFailure(message: 'Vehicle catalog backend is unavailable'),
+        );
+      }
+      final payload = await _backend.getVehicleCatalog();
+      final categoriesRaw = payload['categories'] as List? ?? const <dynamic>[];
+      final bodyStylesRaw = payload['body_styles'] as List? ?? const <dynamic>[];
+      final configurationsRaw = payload['configurations'] as List? ?? const <dynamic>[];
+      final catalog = VehicleCatalog(
+        categories: categoriesRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleCategoryCatalogItem.fromMap)
+            .toList(growable: false),
+        bodyStyles: bodyStylesRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleBodyStyleCatalogItem.fromMap)
+            .toList(growable: false),
+        configurations: configurationsRaw
+            .whereType<Map<String, dynamic>>()
+            .map(VehicleConfigurationCatalogItem.fromMap)
+            .toList(growable: false),
+      );
+      return Success<VehicleCatalog>(catalog);
+    } catch (error, stackTrace) {
+      return Failure<VehicleCatalog>(_mapError(error, stackTrace));
+    }
+  }
 }
 
 final truckerMarketplaceRepositoryProvider = Provider<TruckerMarketplaceRepository>((ref) {

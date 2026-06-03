@@ -8,8 +8,9 @@ import 'package:tranzfort/src/core/providers/app_locale_providers.dart';
 import 'package:tranzfort/src/core/services/contextual_tts_service.dart';
 import 'package:tranzfort/src/features/auth/data/auth_repository.dart';
 import 'package:tranzfort/src/features/notifications/data/push_runtime_service.dart';
-import 'package:tranzfort/src/features/shell/presentation/shell_destinations.dart';
 import 'package:tranzfort/src/core/providers/app_state_providers.dart';
+import 'package:tranzfort/src/core/providers/tts_audio_language_provider.dart';
+import 'package:tranzfort/src/features/shell/presentation/shell_destinations.dart';
 import 'package:tranzfort/src/l10n/app_localizations.dart';
 
 class _FakeAuthRepository extends AuthRepository {
@@ -21,13 +22,18 @@ class _FixedAppLocaleController extends AppLocaleController {
       : super(
           _FakeAuthRepository(),
           profileLanguageCode: languageCode,
-        ) {
-    state = state.copyWith(
-      locale: Locale(languageCode),
-      isInitialized: true,
-      clearFailure: true,
-    );
-  }
+          initialState: AppLocaleState(
+            locale: Locale(languageCode),
+            isInitialized: true,
+            isSaving: false,
+            failure: null,
+          ),
+          eagerLoad: false,
+        );
+}
+
+class _FixedTtsAudioLanguageNotifier extends TtsAudioLanguageNotifier {
+  _FixedTtsAudioLanguageNotifier(String languageCode) : super.test(languageCode);
 }
 
 class _FakeContextualTtsService extends ContextualTtsService {
@@ -78,6 +84,7 @@ Widget _buildApp(
       pushPermissionSnapshotProvider.overrideWith((ref) async => snapshot),
       contextualTtsServiceProvider.overrideWithValue(resolvedTtsService),
       appLocaleProvider.overrideWith((ref) => _FixedAppLocaleController('en')),
+      ttsAudioLanguageProvider.overrideWith((ref) => _FixedTtsAudioLanguageNotifier('hi')),
     ],
     child: MaterialApp.router(
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -112,6 +119,10 @@ Widget _buildApp(
 }
 
 void main() {
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
   testWidgets('settings screen shows request permission action when push permission is not determined', (
     tester,
   ) async {

@@ -1319,7 +1319,7 @@
   },
   "truckerFindLoadsAdvancedFiltersTitle": "Advanced filters",
   "truckerFindLoadsTruckBodyTypeLabel": "Truck body type",
-  "truckerFindLoadsBodyTypeValue": "{type, select, open {Open} trailer {Trailer} container {Container} tanker {Tanker} other {Unknown}}",
+  "truckerFindLoadsBodyTypeValue": "{type, select, open {Open} trailer {Trailer} container {Container} tanker {Tanker} refrigerated {Refrigerated} other {Unknown}}",
   "@truckerFindLoadsBodyTypeValue": {
     "placeholders": {
       "type": {}
@@ -2454,6 +2454,8 @@
   "postLoadValidationPricePositive": "Enter a valid price greater than zero",
   "postLoadValidationPriceType": "Select a valid price type",
   "postLoadValidationPickupDatePast": "Pickup date cannot be in the past",
+  "postLoadValidationVehicleRequirementsRequired": "Select a vehicle category",
+  "postLoadValidationVehicleConfigurationRequired": "Select at least one vehicle configuration",
   "settingsRoleSentenceHi": "Current role: {roleLabel}.",
   "@settingsRoleSentenceHi": {
     "placeholders": {

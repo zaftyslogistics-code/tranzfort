@@ -33,18 +33,29 @@ class _TtsScreenSummaryEffectState extends ConsumerState<TtsScreenSummaryEffect>
     _summaryController = ref.read(ttsScreenSummaryProvider.notifier);
     _ownerKeyController = ref.read(ttsScreenSummaryOwnerKeyProvider.notifier);
     _instanceKey = widget.screenKey ?? '';
-    // Sync immediately to avoid stale summary being used on fast navigation.
-    _syncSummary();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _announceIfNeeded());
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+      _syncSummary();
+      unawaited(_announceIfNeeded());
+    });
   }
 
   @override
   void didUpdateWidget(covariant TtsScreenSummaryEffect oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.summary != widget.summary || oldWidget.screenKey != widget.screenKey || oldWidget.autoPlay != widget.autoPlay) {
+    if (oldWidget.summary != widget.summary ||
+        oldWidget.screenKey != widget.screenKey ||
+        oldWidget.autoPlay != widget.autoPlay) {
       _instanceKey = widget.screenKey ?? '';
-      _syncSummary();
-      WidgetsBinding.instance.addPostFrameCallback((_) => _announceIfNeeded());
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+        _syncSummary();
+        unawaited(_announceIfNeeded());
+      });
     }
   }
 

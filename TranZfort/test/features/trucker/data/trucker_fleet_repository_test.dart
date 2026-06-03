@@ -105,8 +105,12 @@ void main() {
         truckModelId: null,
         truckNumber: 'MH12AB1234',
         bodyType: 'Open',
+        vehicleCategoryCode: null,
+        vehicleBodyStyleCode: null,
+        configurationCode: null,
         tyres: 12,
         capacityTonnes: 25,
+        passingTonnes: null,
         rcDocumentPath: 'owner/truck-1/rc/rc.jpg',
         status: TruckerFleetTruckStatus.verified,
         rejectionReason: null,
@@ -121,8 +125,12 @@ void main() {
         existingTruck: truck,
         truckNumber: 'mh12ab9999',
         bodyType: 'Container',
+        vehicleCategoryCode: null,
+        vehicleBodyStyleCode: null,
+        configurationCode: null,
         tyres: 14,
         capacityTonnes: 28,
+        passingTonnes: null,
         rcDocumentPath: 'owner/truck-1/rc/rc-updated.jpg',
       );
 
@@ -143,8 +151,12 @@ void main() {
         truckModelId: null,
         truckNumber: 'MH12AB7777',
         bodyType: 'Trailer',
+        vehicleCategoryCode: null,
+        vehicleBodyStyleCode: null,
+        configurationCode: null,
         tyres: 18,
         capacityTonnes: 34,
+        passingTonnes: null,
         rcDocumentPath: 'owner/truck-2/rc/rc.jpg',
         status: TruckerFleetTruckStatus.rejected,
         rejectionReason: 'RC expired',
@@ -159,13 +171,17 @@ void main() {
         existingTruck: truck,
         truckNumber: 'MH12AB7777',
         bodyType: 'Trailer',
+        vehicleCategoryCode: null,
+        vehicleBodyStyleCode: null,
+        configurationCode: null,
         tyres: 18,
         capacityTonnes: 34,
+        passingTonnes: null,
         rcDocumentPath: 'owner/truck-2/rc/rc-renewed.jpg',
       );
 
       expect(result.isSuccess, isTrue);
-      expect(backend.updatedValues?['status'], 'pending');
+      expect(backend.updatedValues?['status'], 'rejected');
       expect(backend.updatedValues?['verified_at'], isNull);
     });
   });

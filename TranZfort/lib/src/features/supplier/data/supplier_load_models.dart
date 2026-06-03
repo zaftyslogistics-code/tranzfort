@@ -18,7 +18,11 @@ class CreateLoadDto {
   final String? routePolyline;
   final String? routeSnapshotSource;
   final String material;
+  final String materialCode;
   final double weightTonnes;
+  final String? requiredVehicleCategoryCode;
+  final List<String>? requiredBodyStyleCodes;
+  final List<String>? requiredConfigurationCodes;
   final String? requiredBodyType;
   final List<int>? requiredTyres;
   final int trucksNeeded;
@@ -44,7 +48,11 @@ class CreateLoadDto {
     required this.routePolyline,
     required this.routeSnapshotSource,
     required this.material,
+    required this.materialCode,
     required this.weightTonnes,
+    this.requiredVehicleCategoryCode,
+    this.requiredBodyStyleCodes,
+    this.requiredConfigurationCodes,
     required this.requiredBodyType,
     required this.requiredTyres,
     required this.trucksNeeded,
@@ -72,7 +80,11 @@ class CreateLoadDto {
       'p_route_polyline': nullableString(routePolyline),
       'p_route_snapshot_source': nullableString(routeSnapshotSource),
       'p_material': material.trim(),
+      'p_material_code': materialCode.trim(),
       'p_weight_tonnes': weightTonnes,
+      'p_required_vehicle_category_code': nullableString(requiredVehicleCategoryCode),
+      'p_required_body_style_codes': requiredBodyStyleCodes ?? const <String>[],
+      'p_required_configuration_codes': requiredConfigurationCodes ?? const <String>[],
       'p_required_body_type': nullableString(requiredBodyType),
       'p_required_tyres': requiredTyres == null || requiredTyres!.isEmpty ? null : requiredTyres,
       'p_trucks_needed': trucksNeeded,
@@ -462,6 +474,10 @@ class LoadListItemDto {
   final String status;
   final String? requiredBodyType;
   final List<int> requiredTyres;
+  final String? materialCode;
+  final String? requiredVehicleCategoryCode;
+  final List<String> requiredBodyStyleCodes;
+  final List<String> requiredConfigurationCodes;
   final bool isSuperLoad;
   final String superStatus;
   final String? publishedAt;
@@ -483,6 +499,10 @@ class LoadListItemDto {
     required this.status,
     required this.requiredBodyType,
     required this.requiredTyres,
+    this.materialCode,
+    this.requiredVehicleCategoryCode,
+    this.requiredBodyStyleCodes = const <String>[],
+    this.requiredConfigurationCodes = const <String>[],
     required this.isSuperLoad,
     required this.superStatus,
     required this.publishedAt,
@@ -506,6 +526,10 @@ class LoadListItemDto {
       status: (map['status'] ?? 'draft').toString(),
       requiredBodyType: map['required_body_type']?.toString(),
       requiredTyres: _readIntList(map['required_tyres']),
+      materialCode: map['material_code']?.toString(),
+      requiredVehicleCategoryCode: map['required_vehicle_category_code']?.toString(),
+      requiredBodyStyleCodes: _readStringList(map['required_body_style_codes']),
+      requiredConfigurationCodes: _readStringList(map['required_configuration_codes']),
       isSuperLoad: map['is_super_load'] == true,
       superStatus: (map['super_status'] ?? 'none').toString(),
       publishedAt: map['published_at']?.toString(),
@@ -560,6 +584,14 @@ class LoadListItemDto {
   static List<int> _readIntList(Object? value) {
     if (value is List) {
       return value.map((item) => int.tryParse(item.toString()) ?? 0).toList(growable: false);
+    }
+
+    return const [];
+  }
+
+  static List<String> _readStringList(Object? value) {
+    if (value is List) {
+      return value.map((item) => item.toString()).where((item) => item.trim().isNotEmpty).toList(growable: false);
     }
 
     return const [];

@@ -401,7 +401,7 @@ class SupplierLoadDetailScreen extends ConsumerWidget {
                 l10n.supplierLoadDetailTyres(
                   detail.summary.requiredTyres.isEmpty
                       ? l10n.commonAnyLabel
-                      : detail.summary.requiredTyres.join(', '),
+                      : detail.summary.requiredTyres.map((item) => '${item}W').join(', '),
                 ),
               ),
             ],

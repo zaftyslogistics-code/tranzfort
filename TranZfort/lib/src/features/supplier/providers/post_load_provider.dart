@@ -10,6 +10,7 @@ import '../../../core/models/load_body_types.dart';
 import '../data/supplier_load_models.dart';
 import '../data/supplier_load_repository.dart';
 import '../data/supplier_location_services.dart';
+import '../../../shared/widgets/vehicle_catalog_selector.dart';
 
 // S-004: Error codes for localization (UI should map these to AppLocalizations)
 class PostLoadErrorCodes {
@@ -17,20 +18,20 @@ class PostLoadErrorCodes {
   static const String dailyPostLimitReached = 'daily_post_limit_reached';
 }
 
-const List<String> postLoadMaterials = <String>[
-  'coal',
-  'steel',
-  'cement',
-  'grains',
-  'fertilizer',
-  'machinery',
-  'other',
-];
-
 const List<String> postLoadBodyTypes = LoadBodyTypes.selectable;
 
 const List<int> postLoadTyreOptions = <int>[6, 10, 12, 14, 16, 18, 22];
 const List<int> postLoadTruckShortcuts = <int>[1, 5, 10, 25];
+
+class MaterialSuggestion {
+  final String code;
+  final String label;
+
+  const MaterialSuggestion({
+    required this.code,
+    required this.label,
+  });
+}
 
 class PostLoadState {
   final String originCity;
@@ -46,8 +47,13 @@ class PostLoadState {
   final bool isResolvingRoute;
   final RoutePreview? routePreview;
   final String material;
-  final String customMaterial;
+  final String materialCode;
+  final List<MaterialSuggestion> materialSuggestions;
+  final bool isSearchingMaterials;
   final String weightTonnes;
+  final String requiredVehicleCategoryCode;
+  final List<String> requiredBodyStyleCodes;
+  final List<String> requiredConfigurationCodes;
   final String bodyType;
   final Set<int> selectedTyres;
   final String trucksNeeded;
@@ -75,8 +81,13 @@ class PostLoadState {
     required this.isResolvingRoute,
     required this.routePreview,
     required this.material,
-    required this.customMaterial,
+    required this.materialCode,
+    required this.materialSuggestions,
+    required this.isSearchingMaterials,
     required this.weightTonnes,
+    required this.requiredVehicleCategoryCode,
+    required this.requiredBodyStyleCodes,
+    required this.requiredConfigurationCodes,
     required this.bodyType,
     required this.selectedTyres,
     required this.trucksNeeded,
@@ -106,9 +117,14 @@ class PostLoadState {
       isSearchingDestination: false,
       isResolvingRoute: false,
       routePreview: null,
-      material: postLoadMaterials.first,
-      customMaterial: '',
+      material: '',
+      materialCode: '',
+      materialSuggestions: const <MaterialSuggestion>[],
+      isSearchingMaterials: false,
       weightTonnes: '',
+      requiredVehicleCategoryCode: '',
+      requiredBodyStyleCodes: const <String>[],
+      requiredConfigurationCodes: const <String>[],
       bodyType: postLoadBodyTypes.first,
       selectedTyres: const <int>{},
       trucksNeeded: '1',
@@ -141,8 +157,13 @@ class PostLoadState {
     RoutePreview? routePreview,
     bool? clearRoutePreview,
     String? material,
-    String? customMaterial,
+    String? materialCode,
+    List<MaterialSuggestion>? materialSuggestions,
+    bool? isSearchingMaterials,
     String? weightTonnes,
+    String? requiredVehicleCategoryCode,
+    List<String>? requiredBodyStyleCodes,
+    List<String>? requiredConfigurationCodes,
     String? bodyType,
     Set<int>? selectedTyres,
     String? trucksNeeded,
@@ -172,8 +193,13 @@ class PostLoadState {
       isResolvingRoute: isResolvingRoute ?? this.isResolvingRoute,
       routePreview: clearRoutePreview == true ? null : routePreview ?? this.routePreview,
       material: material ?? this.material,
-      customMaterial: customMaterial ?? this.customMaterial,
+      materialCode: materialCode ?? this.materialCode,
+      materialSuggestions: materialSuggestions ?? this.materialSuggestions,
+      isSearchingMaterials: isSearchingMaterials ?? this.isSearchingMaterials,
       weightTonnes: weightTonnes ?? this.weightTonnes,
+      requiredVehicleCategoryCode: requiredVehicleCategoryCode ?? this.requiredVehicleCategoryCode,
+      requiredBodyStyleCodes: requiredBodyStyleCodes ?? this.requiredBodyStyleCodes,
+      requiredConfigurationCodes: requiredConfigurationCodes ?? this.requiredConfigurationCodes,
       bodyType: bodyType ?? this.bodyType,
       selectedTyres: selectedTyres ?? this.selectedTyres,
       trucksNeeded: trucksNeeded ?? this.trucksNeeded,
@@ -193,6 +219,7 @@ class PostLoadState {
 class PostLoadController extends StateNotifier<PostLoadState> {
   final SupplierLoadRepository _repository;
   final SupplierLocationService _locationService;
+  Timer? _materialSearchDebounce;
 
   PostLoadController(this._repository, this._locationService) : super(PostLoadState.initial());
 
@@ -282,26 +309,68 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     );
   }
 
-  void setMaterial(String? value) {
-    if (value == null) {
+  Future<void> searchMaterial(String query) async {
+    _materialSearchDebounce?.cancel();
+    state = state.copyWith(
+      material: query,
+      materialCode: '',
+      fieldErrors: _withoutErrors(const <String>['material_code']),
+      clearSubmissionFailure: true,
+      clearLastCreatedLoadId: true,
+    );
+
+    if (query.trim().length < 2) {
+      state = state.copyWith(
+        materialSuggestions: const <MaterialSuggestion>[],
+        isSearchingMaterials: false,
+      );
       return;
     }
 
-    // Clear customMaterial when switching away from "other" (normalized key).
-    final shouldClearCustom = value != 'other';
+    state = state.copyWith(isSearchingMaterials: true);
+    _materialSearchDebounce = Timer(const Duration(milliseconds: 250), () async {
+      final result = await _repository.searchMaterials(query);
+      result.when(
+        success: (items) {
+          state = state.copyWith(
+            isSearchingMaterials: false,
+            materialSuggestions: items
+                .map(
+                  (item) => MaterialSuggestion(
+                    code: item.code,
+                    label: item.nameEn,
+                  ),
+                )
+                .toList(growable: false),
+          );
+        },
+        failure: (_) {
+          state = state.copyWith(
+            isSearchingMaterials: false,
+            materialSuggestions: const <MaterialSuggestion>[],
+          );
+        },
+      );
+    });
+  }
+
+  void selectMaterial(MaterialSuggestion suggestion) {
     state = state.copyWith(
-      material: value,
-      customMaterial: shouldClearCustom ? '' : null,
-      fieldErrors: _withoutErrors(const <String>['material', 'custom_material']),
+      material: suggestion.label,
+      materialCode: suggestion.code,
+      materialSuggestions: const <MaterialSuggestion>[],
+      fieldErrors: _withoutErrors(const <String>['material_code']),
       clearSubmissionFailure: true,
       clearLastCreatedLoadId: true,
     );
   }
 
-  void setCustomMaterial(String value) {
+  void clearMaterialSelection() {
     state = state.copyWith(
-      customMaterial: value,
-      fieldErrors: _withoutErrors(const <String>['custom_material']),
+      material: '',
+      materialCode: '',
+      materialSuggestions: const <MaterialSuggestion>[],
+      fieldErrors: _withoutErrors(const <String>['material_code']),
       clearSubmissionFailure: true,
       clearLastCreatedLoadId: true,
     );
@@ -345,6 +414,48 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       selectedTyres: tyres.toSet(),
       clearSubmissionFailure: true,
       clearLastCreatedLoadId: true,
+    );
+  }
+
+  void setVehicleRequirements({
+    required String categoryCode,
+    required List<String> bodyStyleCodes,
+    required List<String> configurationCodes,
+    VehicleCatalog? catalog,
+  }) {
+    VehicleRequirementLegacyFields? legacy;
+    if (catalog != null && categoryCode.trim().isNotEmpty) {
+      legacy = resolveVehicleRequirementLegacyFields(
+        selection: VehicleRequirementSelection(
+          categoryCode: categoryCode,
+          bodyStyleCodes: bodyStyleCodes,
+          configurationCodes: configurationCodes,
+        ),
+        catalog: catalog,
+      );
+    }
+
+    state = state.copyWith(
+      requiredVehicleCategoryCode: categoryCode,
+      requiredBodyStyleCodes: bodyStyleCodes,
+      requiredConfigurationCodes: configurationCodes,
+      bodyType: legacy?.bodyType ?? state.bodyType,
+      selectedTyres: legacy?.selectedTyres ?? state.selectedTyres,
+      fieldErrors: _withoutErrors(const <String>['vehicle_requirements']),
+      clearSubmissionFailure: true,
+      clearLastCreatedLoadId: true,
+    );
+  }
+
+  void applyVehicleCatalogSelection({
+    required VehicleRequirementSelection selection,
+    required VehicleCatalog catalog,
+  }) {
+    setVehicleRequirements(
+      categoryCode: selection.categoryCode,
+      bodyStyleCodes: selection.bodyStyleCodes,
+      configurationCodes: selection.configurationCodes,
+      catalog: catalog,
     );
   }
 
@@ -445,8 +556,14 @@ class PostLoadController extends StateNotifier<PostLoadState> {
       routeDurationMinutes: state.routePreview?.durationMinutes,
       routePolyline: null,
       routeSnapshotSource: state.routePreview?.source,
-      material: state.material == 'other' ? state.customMaterial.trim() : state.material,
+      material: state.material.trim(),
+      materialCode: state.materialCode.trim(),
       weightTonnes: double.parse(state.weightTonnes.trim()),
+      requiredVehicleCategoryCode: state.requiredVehicleCategoryCode.trim().isEmpty
+          ? null
+          : state.requiredVehicleCategoryCode.trim(),
+      requiredBodyStyleCodes: List<String>.from(state.requiredBodyStyleCodes),
+      requiredConfigurationCodes: List<String>.from(state.requiredConfigurationCodes),
       requiredBodyType: LoadBodyTypes.toDatabaseValue(state.bodyType),
       listingDuration: state.listingDuration,
       requiredTyres: state.selectedTyres.isEmpty ? null : (state.selectedTyres.toList()..sort()),
@@ -481,11 +598,14 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     if (state.destinationLocation.trim().isEmpty) {
       errors['destination_label'] = l10n?.postLoadValidationDestinationLocationRequired ?? '';
     }
-    if (state.material.trim().isEmpty) {
-      errors['material'] = l10n?.postLoadValidationMaterialRequired ?? '';
+    if (state.materialCode.trim().isEmpty) {
+      errors['material_code'] = l10n?.postLoadValidationMaterialRequired ?? '';
     }
-    if (state.material == 'other' && state.customMaterial.trim().isEmpty) {
-      errors['custom_material'] = l10n?.postLoadValidationCustomMaterialRequired ?? '';
+
+    if (state.requiredVehicleCategoryCode.trim().isEmpty) {
+      errors['vehicle_requirements'] = l10n?.postLoadValidationVehicleRequirementsRequired ?? '';
+    } else if (state.requiredConfigurationCodes.isEmpty) {
+      errors['vehicle_requirements'] = l10n?.postLoadValidationVehicleConfigurationRequired ?? '';
     }
 
     final weight = double.tryParse(state.weightTonnes.trim());
@@ -537,6 +657,12 @@ class PostLoadController extends StateNotifier<PostLoadState> {
     final preview = await _locationService.fetchRoutePreview(origin: origin, destination: destination);
     state = state.copyWith(isResolvingRoute: false, routePreview: preview);
   }
+
+  @override
+  void dispose() {
+    _materialSearchDebounce?.cancel();
+    super.dispose();
+  }
 }
 
 final postLoadProvider = StateNotifierProvider.autoDispose<PostLoadController, PostLoadState>((ref) {
@@ -544,4 +670,13 @@ final postLoadProvider = StateNotifierProvider.autoDispose<PostLoadController, P
     ref.watch(supplierLoadRepositoryProvider),
     ref.watch(supplierLocationServiceProvider),
   );
+});
+
+final postLoadVehicleCatalogProvider = FutureProvider.autoDispose<VehicleCatalog>((ref) async {
+  final repository = ref.watch(supplierLoadRepositoryProvider);
+  final result = await repository.getVehicleCatalog();
+  if (result.isFailure) {
+    throw Exception(result.failureOrNull?.message ?? 'Failed to load vehicle catalog');
+  }
+  return result.valueOrNull!;
 });

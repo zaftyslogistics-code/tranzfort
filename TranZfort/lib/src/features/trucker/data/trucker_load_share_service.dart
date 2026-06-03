@@ -40,13 +40,15 @@ class TruckerLoadShareService {
     final requirement = _localizedBodyType(l10n, detail.summary.requiredBodyType);
     final tyreSummary = detail.summary.requiredTyres.isEmpty
         ? l10n.chatTruckTyresLabel(l10n.commonAnyLabel)
-        : l10n.chatTruckTyresLabel(detail.summary.requiredTyres.join('/'));
+        : l10n.chatTruckTyresLabel(
+            detail.summary.requiredTyres.map((item) => '${item}W').join('/'),
+          );
     final superLoadLine = detail.summary.isSuperLoad ? 'Super Load - Payment Guarantee' : null;
     final appLink = '${AppRoutes.loadDetailPath}/${detail.summary.id}';
     final text = [
       'TranZfort load: $routeSummary',
       'Material: ${detail.summary.material}',
-      'Weight: ${_tonnes(detail.summary.weightTonnes)} tonnes',
+      'Weight: ${_tonnes(detail.summary.weightTonnes)}T',
       l10n.supplierLoadCardPickupDate(localizedPickupDate),
       'Truck: $requirement - $tyreSummary',
       l10n.truckerLoadDetailPriceLabel(

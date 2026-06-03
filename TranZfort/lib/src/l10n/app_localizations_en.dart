@@ -2958,6 +2958,7 @@ class AppLocalizationsEn extends AppLocalizations {
       'trailer': 'Trailer',
       'container': 'Container',
       'tanker': 'Tanker',
+      'refrigerated': 'Refrigerated',
       'other': 'Unknown',
     });
     return '$_temp0';
@@ -6114,6 +6115,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get postLoadValidationPickupDatePast =>
       'Pickup date cannot be in the past';
+
+  @override
+  String get postLoadValidationVehicleRequirementsRequired =>
+      'Select a vehicle category';
+
+  @override
+  String get postLoadValidationVehicleConfigurationRequired =>
+      'Select at least one vehicle configuration';
 
   @override
   String settingsRoleSentenceHi(Object roleLabel) {

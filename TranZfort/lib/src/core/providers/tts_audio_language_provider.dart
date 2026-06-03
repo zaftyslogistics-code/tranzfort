@@ -17,6 +17,12 @@ class TtsAudioLanguageNotifier extends StateNotifier<String> {
     _load();
   }
 
+  @visibleForTesting
+  TtsAudioLanguageNotifier.test(String languageCode)
+      : _loaded = true,
+        _followsAppLocale = false,
+        super(languageCode);
+
   bool _loaded = false;
   bool _followsAppLocale = true;
 

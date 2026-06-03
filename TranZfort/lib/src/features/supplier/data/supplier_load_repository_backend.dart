@@ -6,6 +6,10 @@ import 'supplier_load_models.dart';
 
 abstract class SupplierLoadBackend {
   Future<String> createLoad(Map<String, dynamic> params);
+  Future<List<Map<String, dynamic>>> searchMaterials({
+    required String query,
+    int limit,
+  });
 
   Future<String> cloneLoadForRepost(Map<String, dynamic> params);
 
@@ -55,6 +59,25 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
 
     final response = await _client.rpc('create_load', params: params);
     return response.toString();
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> searchMaterials({
+    required String query,
+    int limit = 12,
+  }) async {
+    if (_client == null) {
+      throw const AuthException('Supplier session is not available');
+    }
+
+    final response = await _client.rpc(
+      'search_materials',
+      params: <String, dynamic>{
+        'p_query': query,
+        'p_limit': limit,
+      },
+    );
+    return parseRpcJsonbRowList(response);
   }
 
   @override
@@ -251,5 +274,16 @@ class SupabaseSupplierLoadBackend implements SupplierLoadBackend {
     }
 
     await _client.rpc('request_super_load', params: <String, dynamic>{'p_load_id': loadId});
+  }
+
+  Future<Map<String, dynamic>> getVehicleCatalog() async {
+    if (_client == null) {
+      throw const AuthException('Supplier session is not available');
+    }
+    final response = await _client.rpc('get_vehicle_catalog');
+    if (response is Map<String, dynamic>) {
+      return response;
+    }
+    return const <String, dynamic>{};
   }
 }

@@ -225,8 +225,12 @@ extension VerificationWizardSubmit on VerificationWizardController {
         final truckResult = await _fleetRepository.createTruck(
           truckNumber: draft.truck!.truckNumber,
           bodyType: draft.truck!.bodyType,
+          vehicleCategoryCode: null,
+          vehicleBodyStyleCode: null,
+          configurationCode: null,
           tyres: draft.truck!.tyres,
           capacityTonnes: draft.truck!.capacityTonnes,
+          passingTonnes: null,
           rcDocumentPath: draft.truck!.rcDocumentPath ?? '',
         );
         if (truckResult.isFailure) {

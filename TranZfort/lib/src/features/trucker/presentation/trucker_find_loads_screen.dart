@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../core/models/load_body_types.dart';
 import '../../../core/navigation/app_routes.dart';
 import '../../../core/utils/avatar_storage_path.dart';
 import '../../../core/theme/app_colors.dart';
@@ -16,13 +17,16 @@ import '../../../shared/widgets/form_inputs.dart';
 import '../../../shared/widgets/layout_components.dart';
 import '../../../shared/widgets/marketplace_intro_banner.dart';
 import '../../../shared/widgets/marketplace_load_card.dart';
+import '../../../shared/widgets/vehicle_catalog_selector.dart';
+import '../../../shared/widgets/vehicle_category_chip_row.dart';
+import 'widgets/marketplace_filter_bar.dart';
 import '../../../core/services/marketplace_intro_preferences.dart';
 import '../../communication/data/chat_repository.dart';
+import '../../supplier/data/supplier_load_repository.dart';
 import '../data/trucker_city_search_service.dart';
 import '../data/trucker_marketplace_repository.dart';
 import '../providers/find_loads_provider.dart';
 import '../providers/trucker_providers.dart';
-import 'widgets/marketplace_filter_bar.dart';
 
 part 'trucker_find_loads_support.dart';
 part 'trucker_find_loads_actions.dart';
@@ -39,7 +43,6 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
   late final TextEditingController _originController;
   late final TextEditingController _destinationController;
   late final TextEditingController _materialController;
-  bool _quickAdvancedExpanded = false;
   bool _showScrollToTop = false;
 
   List<TruckerCitySuggestion> _originSuggestions = const <TruckerCitySuggestion>[];
@@ -96,6 +99,10 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
     final AppLocalizations l10n = AppLocalizations.of(context);
     final state = ref.watch(findLoadsProvider);
     final filters = state.filters;
+    final catalogAsync = ref.watch(findLoadsVehicleCatalogProvider);
+    final advancedBadgeCount = _findLoadsAdvancedFilterBadgeCount(filters);
+    final pinnedLegacyBody = _legacyBodyTypeForPinnedFilter(filters);
+    final showPinnedTyreRow = pinnedLegacyBody.isNotEmpty;
 
     return Stack(
       children: [
@@ -128,7 +135,7 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
               sliver: SliverToBoxAdapter(
                 child: HeroActionCard(
                   title: l10n.shellTitleFindLoads,
-                  subtitle: _quickAdvancedExpanded ? l10n.truckerFindLoadsHeroSubtitle : '',
+                  subtitle: '',
                   compact: true,
                   useDarkTheme: true,
                   useInkGradient: true,
@@ -191,59 +198,11 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
                       ],
                       const SizedBox(height: AppSpacing.sm),
                       TextActionButton(
-                        label: _quickAdvancedExpanded
-                            ? '${l10n.truckerFindLoadsAdvancedFiltersAction} ▲'
-                            : '${l10n.truckerFindLoadsAdvancedFiltersAction} ▼',
+                        label: advancedBadgeCount > 0
+                            ? '${l10n.truckerFindLoadsAdvancedFiltersAction} · $advancedBadgeCount'
+                            : l10n.truckerFindLoadsAdvancedFiltersAction,
                         onDarkSurface: true,
-                        onPressed: () => setState(() => _quickAdvancedExpanded = !_quickAdvancedExpanded),
-                      ),
-                      AnimatedCrossFade(
-                        firstChild: const SizedBox.shrink(),
-                        secondChild: Column(
-                          children: [
-                            const SizedBox(height: AppSpacing.sm),
-                            AppSearchField(
-                              controller: _materialController,
-                              hintText: l10n.truckerFindLoadsMaterialHint,
-                              onDarkSurface: true,
-                              onChanged: (value) => _applyQuickFilters(material: value),
-                              onClear: () {
-                                _materialController.clear();
-                                _applyQuickFilters(material: '');
-                              },
-                            ),
-                            const SizedBox(height: AppSpacing.sm),
-                            AppDropdown<MarketplaceSortOption>(
-                              label: l10n.truckerFindLoadsSortByLabel,
-                              value: filters.sortOption,
-                              onDarkSurface: true,
-                              items: [
-                                DropdownMenuItem(value: MarketplaceSortOption.newest, child: Text(l10n.truckerFindLoadsSortNewest)),
-                                DropdownMenuItem(
-                                  value: MarketplaceSortOption.priceHighToLow,
-                                  child: Text(l10n.truckerFindLoadsSortPriceHighToLow),
-                                ),
-                                DropdownMenuItem(
-                                  value: MarketplaceSortOption.priceLowToHigh,
-                                  child: Text(l10n.truckerFindLoadsSortPriceLowToHigh),
-                                ),
-                                DropdownMenuItem(value: MarketplaceSortOption.pickupDate, child: Text(l10n.truckerFindLoadsSortPickupDate)),
-                              ],
-                              onChanged: (value) {
-                                if (value != null) {
-                                  ref.read(findLoadsProvider.notifier).updateFilters(filters.copyWith(sortOption: value));
-                                }
-                              },
-                            ),
-                            const SizedBox(height: AppSpacing.sm),
-                            OutlineButton(
-                              label: l10n.truckerFindLoadsAdvancedFiltersAction,
-                              onPressed: () => _openAdvancedFilters(context, filters),
-                            ),
-                          ],
-                        ),
-                        crossFadeState: _quickAdvancedExpanded ? CrossFadeState.showSecond : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 180),
+                        onPressed: () => _openAdvancedSearch(context, filters, catalogAsync.valueOrNull),
                       ),
                     ],
                   ),
@@ -259,27 +218,12 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
             ),
             SliverPersistentHeader(
               pinned: true,
-              delegate: _PinnedHeaderDelegate(
-                height: _pinnedTruckFilterHeight(filters),
-                child: _PinnedTruckFilterBar(
-                    filters: filters,
-                    onBodyTypeChanged: (bodyType) {
-                      ref.read(findLoadsProvider.notifier).updateFilters(
-                            filters.copyWith(truckBodyType: bodyType),
-                          );
-                    },
-                    onTyreToggled: (tyreCount) {
-                      final tyres = List<int>.from(filters.tyres);
-                      if (tyres.contains(tyreCount)) {
-                        tyres.remove(tyreCount);
-                      } else {
-                        tyres.add(tyreCount);
-                      }
-                      ref.read(findLoadsProvider.notifier).updateFilters(
-                            filters.copyWith(tyres: tyres),
-                          );
-                    },
-                  ),
+              delegate: _PinnedVehicleFilterHeaderDelegate(
+                showTyreRow: showPinnedTyreRow,
+                child: _LegacyPinnedVehicleFilterBar(
+                  filters: filters,
+                  onFiltersChanged: (next) => ref.read(findLoadsProvider.notifier).updateFilters(next),
+                ),
               ),
             ),
             if (state.isInitialLoading)
@@ -448,11 +392,19 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
         );
   }
 
-  Future<void> _openAdvancedFilters(BuildContext context, MarketplaceSearchFilters filters) async {
+  Future<void> _openAdvancedSearch(
+    BuildContext context,
+    MarketplaceSearchFilters filters,
+    VehicleCatalog? catalog,
+  ) async {
     final result = await showAppBottomSheet<MarketplaceSearchFilters>(
       context: context,
       title: AppLocalizations.of(context).truckerFindLoadsAdvancedFiltersTitle,
-      child: _AdvancedFiltersSheet(initialFilters: filters),
+      onDarkSurface: true,
+      child: _AdvancedSearchSheet(
+        initialFilters: filters,
+        catalog: catalog,
+      ),
     );
 
     if (!mounted || result == null) {
@@ -460,6 +412,9 @@ class _TruckerFindLoadsScreenState extends ConsumerState<TruckerFindLoadsScreen>
     }
 
     ref.read(findLoadsProvider.notifier).updateFilters(result);
+    if (result.material != _materialController.text) {
+      _materialController.text = result.material;
+    }
   }
 }
 

@@ -1228,7 +1228,7 @@
   },
   "truckerFindLoadsAdvancedFiltersTitle": "उन्नत फ़िल्टर",
   "truckerFindLoadsTruckBodyTypeLabel": "ट्रक बॉडी प्रकार",
-  "truckerFindLoadsBodyTypeValue": "{type, select, open {ओपन} trailer {ट्रेलर} container {कंटेनर} tanker {टैंकर} other {अज्ञात}}",
+  "truckerFindLoadsBodyTypeValue": "{type, select, open {ओपन} trailer {ट्रेलर} container {कंटेनर} tanker {टैंकर} refrigerated {रेफ्रिजरेटेड} other {अज्ञात}}",
   "@truckerFindLoadsBodyTypeValue": {
     "placeholders": {
       "type": {}
@@ -2341,6 +2341,8 @@
   "postLoadValidationPricePositive": "शून्य से अधिक सही कीमत दर्ज करें",
   "postLoadValidationPriceType": "सही कीमत प्रकार चुनें",
   "postLoadValidationPickupDatePast": "पिकअप तारीख पिछली नहीं हो सकती",
+  "postLoadValidationVehicleRequirementsRequired": "वाहन श्रेणी चुनें",
+  "postLoadValidationVehicleConfigurationRequired": "कम से कम एक वाहन कॉन्फ़िगरेशन चुनें",
   "settingsRoleSentenceHi": "वर्तमान भूमिका: {roleLabel}।",
   "@settingsRoleSentenceHi": {
     "placeholders": {

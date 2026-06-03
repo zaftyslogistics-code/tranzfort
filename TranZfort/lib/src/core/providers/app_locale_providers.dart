@@ -58,9 +58,13 @@ class AppLocaleController extends StateNotifier<AppLocaleState> {
   AppLocaleController(
     this._authRepository, {
     String? profileLanguageCode,
+    AppLocaleState? initialState,
+    bool eagerLoad = true,
   })  : _profileLanguageCode = profileLanguageCode,
-        super(AppLocaleState.initial()) {
-    _loadInitialLocale();
+        super(initialState ?? AppLocaleState.initial()) {
+    if (eagerLoad) {
+      _loadInitialLocale();
+    }
   }
 
   Future<void> _loadInitialLocale() async {

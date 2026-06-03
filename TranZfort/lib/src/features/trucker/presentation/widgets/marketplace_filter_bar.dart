@@ -101,6 +101,8 @@ class MarketplaceFilterBar extends StatelessWidget {
         return Icons.rv_hookup_outlined;
       case 'tanker':
         return Icons.water_drop_outlined;
+      case 'refrigerated':
+        return Icons.ac_unit_outlined;
       default:
         return Icons.local_shipping_outlined;
     }

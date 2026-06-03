@@ -2968,6 +2968,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'trailer': 'ट्रेलर',
       'container': 'कंटेनर',
       'tanker': 'टैंकर',
+      'refrigerated': 'रेफ्रिजरेटेड',
       'other': 'अज्ञात',
     });
     return '$_temp0';
@@ -6132,6 +6133,14 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get postLoadValidationPickupDatePast =>
       'पिकअप तारीख पिछली नहीं हो सकती';
+
+  @override
+  String get postLoadValidationVehicleRequirementsRequired =>
+      'वाहन श्रेणी चुनें';
+
+  @override
+  String get postLoadValidationVehicleConfigurationRequired =>
+      'कम से कम एक वाहन कॉन्फ़िगरेशन चुनें';
 
   @override
   String settingsRoleSentenceHi(Object roleLabel) {

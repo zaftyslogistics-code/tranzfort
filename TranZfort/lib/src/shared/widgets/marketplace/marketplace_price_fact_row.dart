@@ -89,7 +89,7 @@ String formatMarketplaceTyreLabel(List<int> requiredTyres) {
   }
   final sorted = List<int>.from(requiredTyres)..sort();
   if (sorted.length == 1) {
-    return '${sorted.first}T';
+    return '${sorted.first}W';
   }
-  return sorted.map((t) => '${t}T').join('·');
+  return sorted.map((t) => '${t}W').join('·');
 }

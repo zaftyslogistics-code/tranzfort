@@ -27,6 +27,17 @@ class _FakeSupplierLoadBackend implements SupplierLoadBackend {
   Future<String> createLoad(Map<String, dynamic> params) async => 'load-1';
 
   @override
+  Future<String> cloneLoadForRepost(Map<String, dynamic> params) async => 'load-clone-1';
+
+  @override
+  Future<void> requestSuperLoad(String loadId) async {}
+
+  @override
+  Future<List<Map<String, dynamic>>> searchMaterials({required String query, int limit = 12}) async {
+    return const <Map<String, dynamic>>[];
+  }
+
+  @override
   Future<Map<String, dynamic>?> fetchLoadDetail({required String supplierId, required String loadId}) async => null;
 
   @override
@@ -129,9 +140,11 @@ PostLoadState _readyToSubmitState() {
     destinationCity: 'Mumbai',
     destinationLocation: 'Nhava Sheva Port, Mumbai',
     weightTonnes: '22',
+    material: 'Coal',
+    materialCode: 'coal',
     trucksNeeded: '2',
     priceAmount: '54000',
-    priceType: 'negotiable',
+    priceType: 'per_ton',
     pickupDate: pickupDate,
   );
 }

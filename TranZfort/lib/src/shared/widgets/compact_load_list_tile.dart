@@ -67,7 +67,7 @@ class CompactLoadListTile extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     final rateLabel = load.priceType.trim().toLowerCase() == 'per_ton'
-        ? '₹${load.priceAmount.toStringAsFixed(0)}/ton'
+        ? '₹${load.priceAmount.toStringAsFixed(0)}/T'
         : '₹${load.priceAmount.toStringAsFixed(0)} fixed';
     return CompactLoadListTile(
       routeLabel: '${load.originCity} → ${load.destinationCity}',
@@ -97,7 +97,7 @@ class CompactLoadListTile extends StatelessWidget {
   static String _formatPrice(double amount, String priceType) {
     final normalized = priceType.trim().toLowerCase();
     if (normalized == 'per_ton') {
-      return '₹${amount.toStringAsFixed(0)} per ton';
+      return '₹${amount.toStringAsFixed(0)}/T';
     }
     return '₹${amount.toStringAsFixed(0)} $priceType';
   }
